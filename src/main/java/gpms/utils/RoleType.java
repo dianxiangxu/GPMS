@@ -2,10 +2,6 @@ package gpms.utils;
 
 import gpms.DAL.MongoDBConnector;
 
-import java.util.ArrayList;
-
-import MongoDataBase.MongoDB;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;

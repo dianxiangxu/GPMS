@@ -1,10 +1,6 @@
 package gpms.DAL.test;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
-import MongoDataBase.MongoDB;
+import gpms.DAL.MongoDBConnector;
 import junit.framework.TestCase;
 
 public class MongoDBConnectorTest extends TestCase {
@@ -22,7 +18,7 @@ public class MongoDBConnectorTest extends TestCase {
 	}
 
 	public void testGetMongoDBInstance() {
-		MongoDB mdb = MongoDB.getMongoDBInstance();
+		MongoDBConnector mdb = MongoDBConnector.getMongoDBInstance();
 		assertEquals(mdb, null);
 	}
 

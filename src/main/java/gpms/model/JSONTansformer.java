@@ -11,10 +11,10 @@ public class JSONTansformer {
 		return feeds;
 	}
 
-	public static String RetweetJSONInfo(RetweetObjects messageData) {
-		String retweet = null;
-		Gson gson = new Gson();
-		retweet = gson.toJson(messageData);
-		return retweet;
-	}
+	// public static String RetweetJSONInfo(RetweetObjects messageData) {
+	// String retweet = null;
+	// Gson gson = new Gson();
+	// retweet = gson.toJson(messageData);
+	// return retweet;
+	// }
 }

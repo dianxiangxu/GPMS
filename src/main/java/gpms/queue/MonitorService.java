@@ -1,15 +1,9 @@
-package socialnetworking.queue;
-
-import java.util.ArrayList;
+package gpms.queue;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
-import socialnetworking.library.DataModel;
-
-import com.google.gson.Gson;
 
 @Path("/monitor")
 public class MonitorService {

@@ -1,4 +1,4 @@
-package socialnetworking.queue;
+package gpms.queue;
 
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
