@@ -8,40 +8,37 @@ import com.google.code.morphia.mapping.MappingException;
 import com.google.code.morphia.query.Query;
 import com.mongodb.Mongo;
 
-
 public class BandManagerTestCase extends TestCase {
 
-    Datastore datastore;
+	Datastore datastore;
 
-    @Override
-    protected void setUp() throws Exception {
-        Mongo mongo = new Mongo("localhost");
-        mongo.dropDatabase("bandmanager");
-        Morphia morphia = new Morphia();
+	@Override
+	protected void setUp() throws Exception {
+		Mongo mongo = new Mongo("localhost");
+		mongo.dropDatabase("bandmanager");
+		Morphia morphia = new Morphia();
 
-        morphia.mapPackage("com.bandmanager.model");
-        datastore = morphia.createDatastore(mongo, "bandmanager");
-        datastore.ensureIndexes();
+		morphia.mapPackage("com.bandmanager.model");
+		datastore = morphia.createDatastore(mongo, "bandmanager");
+		datastore.ensureIndexes();
 
-    }
+	}
 
+	public void testCanSaveAndLoadABand() {
+		// Band band = new Band();
+		// band.setName("Love Burger");
+		// band.getMembers().add("Jim");
+		// band.getMembers().add("Joe");
+		// band.getMembers().add("Frank");
+		// band.getMembers().add("Tom");
+		// band.setGenre("Rock");
+		//
+		// datastore.save(band);
+		//
+		// assertEquals(band, datastore.get(Band.class, band.getId()));
 
+	}
 
-	// public void testCanSaveAndLoadABand() {
-	// Band band = new Band();
-	// band.setName("Love Burger");
-	// band.getMembers().add("Jim");
-	// band.getMembers().add("Joe");
-	// band.getMembers().add("Frank");
-	// band.getMembers().add("Tom");
-	// band.setGenre("Rock");
-	//
-	// datastore.save(band);
-	//
-	// assertEquals(band, datastore.get(Band.class, band.getId()));
-	//
-	// }
-	//
 	// public void testCanAddAndDeleteSongsToABand() {
 	// Band band = new Band();
 	// band.setName("Love Burger");
@@ -144,7 +141,5 @@ public class BandManagerTestCase extends TestCase {
 	// band2.setName("Love Burger");
 	// datastore.save(band2);
 	// }
-    
-
 
 }
