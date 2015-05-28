@@ -1,3 +1,5 @@
 https://svn.wso2.org/repos/wso2/trunk/commons/balana/
 
 http://xacmlinfo.org/2012/08/16/balana-the-open-source-xacml-3-0-implementation/
+
+http://stackoverflow.com/questions/5964282/authorisation-rest-service-in-python/8022834#8022834
