@@ -10,7 +10,12 @@ public class DataModel {
 		try {
 			dal = new DataAccessLayer();
 		} catch (Exception e) {
-			throw e;
+			try {
+				throw e;
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

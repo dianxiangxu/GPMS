@@ -1,6 +1,5 @@
 package gpms.accesscontrol;
 
-import accesscontrol.Accesscontrol;
 import junit.framework.TestCase;
 
 public class AccesscontrolTest extends TestCase {
