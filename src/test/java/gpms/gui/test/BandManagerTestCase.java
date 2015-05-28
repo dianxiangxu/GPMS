@@ -14,7 +14,7 @@ public class BandManagerTestCase extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		Mongo mongo = new Mongo("localhost");
+		Mongo mongo = new Mongo("127.0.0.1:27017");
 		mongo.dropDatabase("bandmanager");
 		Morphia morphia = new Morphia();
 
