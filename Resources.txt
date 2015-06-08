@@ -1,0 +1,7 @@
+- Setup the github, Maven, Balana 
+- To learn more about Git and Github:
+https://www.udacity.com/course/viewer?utm_campaign=welcome_ud775&utm_source=sendgrid&utm_medium=email#!/c-ud775/l-2980038599/e-3339608713/m-3339088567
+- Run the Repo code
+- MongoDB setup and get going 
+- Watch videos to learn about Maven and RESTful API concept
+https://www.youtube.com/user/koushks/playlists

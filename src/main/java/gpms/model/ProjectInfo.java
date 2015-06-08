@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 
-import com.google.code.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Id;
 
 public class ProjectInfo extends Proposal {
 	@Id private ObjectId _id;

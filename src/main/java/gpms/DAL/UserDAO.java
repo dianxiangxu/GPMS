@@ -5,8 +5,8 @@ import gpms.model.UserAccount;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoException;
 
 public class UserDAO {
@@ -35,6 +35,7 @@ public class UserDAO {
 	public static void saveUserAccount(UserAccount userAccount)
 			throws UnknownHostException {
 		Morphia morphia = getMorphia();
+		morphia.map(UserAccount.class);
 		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(), DBNAME);
 		ds.save(userAccount);
 	}

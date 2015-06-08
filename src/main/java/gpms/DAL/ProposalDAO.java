@@ -5,8 +5,8 @@ import gpms.model.Proposal;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoException;
 
 public class ProposalDAO {

@@ -2,11 +2,13 @@ package gpms.gui.test;
 
 import junit.framework.TestCase;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.mapping.MappingException;
-import com.google.code.morphia.query.Query;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.mapping.MappingException;
+import org.mongodb.morphia.query.Query;
+
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
 public class BandManagerTestCase extends TestCase {
 
@@ -14,7 +16,7 @@ public class BandManagerTestCase extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		Mongo mongo = new Mongo("127.0.0.1:27017");
+		MongoClient mongo = new MongoClient("127.0.0.1", 27017);
 		mongo.dropDatabase("bandmanager");
 		Morphia morphia = new Morphia();
 

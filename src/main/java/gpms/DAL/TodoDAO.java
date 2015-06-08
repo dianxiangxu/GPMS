@@ -5,8 +5,9 @@ import gpms.model.Todo;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+
 import com.mongodb.MongoException;
 
 public class TodoDAO {
@@ -28,14 +29,16 @@ public class TodoDAO {
 	private static Datastore getDatastore() throws UnknownHostException,
 			MongoException {
 		if (ds == null) {
-			ds = getMorphia().createDatastore(MongoDBConnector.getMongo(), DBNAME);
+			ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
+					DBNAME);
 		}
 		return ds;
 	}
 
 	public static void saveTodo(Todo todo) throws UnknownHostException {
 		Morphia morphia = getMorphia();
-		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(), DBNAME);
+		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(),
+				DBNAME);
 		ds.save(todo);
 	}
 

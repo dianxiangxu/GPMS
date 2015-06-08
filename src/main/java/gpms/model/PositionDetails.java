@@ -1,6 +1,6 @@
 package gpms.model;
 
-import com.google.code.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Id;
 
 public class PositionDetails extends UserAccount {
 	@Id private String _id;

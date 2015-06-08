@@ -3,19 +3,19 @@ package gpms.model;
 import gpms.DAL.ProposalDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.bson.types.ObjectId;
-
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 @Entity(value = ProposalDAO.COLLECTION_NAME)
 public class Proposal {
 	@Id
 	private ObjectId _id;
 	private String _proposalNo;
-	private String _dateReceived;
+	private Date _dateReceived;
 	private String _proposalStatus;
 	@Reference("investigatorInfo")
 	private ArrayList<InvestigatorInfo> _investigatorInfo;
@@ -26,7 +26,7 @@ public class Proposal {
 	@Reference("costShareInfo")
 	private ArrayList<CostShareInfo> _costShareInfo;
 
-	public Proposal(String proposalNo, String dateReceived,
+	public Proposal(String proposalNo, Date dateReceived,
 			String proposalStatus,
 			ArrayList<InvestigatorInfo> investigatorInfo,
 			ArrayList<ProjectInfo> projectInfo,
@@ -45,8 +45,7 @@ public class Proposal {
 
 	}
 
-	public Proposal(String proposalNo, String dateReceived,
-			String proposalStatus) {
+	public Proposal(String proposalNo, Date dateReceived, String proposalStatus) {
 		this._proposalNo = proposalNo;
 		this._dateReceived = dateReceived;
 		this._proposalStatus = proposalStatus;
@@ -73,11 +72,11 @@ public class Proposal {
 		this._proposalNo = _proposalNo;
 	}
 
-	public String get_dateReceived() {
+	public Date get_dateReceived() {
 		return _dateReceived;
 	}
 
-	public void set_dateReceived(String _dateReceived) {
+	public void set_dateReceived(Date _dateReceived) {
 		this._dateReceived = _dateReceived;
 	}
 

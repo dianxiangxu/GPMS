@@ -3,12 +3,16 @@ package gpms.model;
 import java.util.ArrayList;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Reference;
 
 public class InvestigatorInfo extends Proposal {
 	private ObjectId _id;
-	private String _pi;
-	private ArrayList<String> _copi;
-	private ArrayList<String> _seniorPersonnel;
+	@Reference
+	private User _pi;
+	@Reference
+	private ArrayList<User> _copi;
+	@Reference
+	private ArrayList<User> _seniorPersonnel;
 
 	public ObjectId get_id() {
 		return _id;
@@ -18,28 +22,27 @@ public class InvestigatorInfo extends Proposal {
 		this._id = _id;
 	}
 
-	public String get_pi() {
+	public User get_pi() {
 		return _pi;
 	}
 
-	public void set_pi(String _pi) {
+	public void set_pi(User _pi) {
 		this._pi = _pi;
 	}
 
-	public ArrayList<String> get_copi() {
+	public ArrayList<User> get_copi() {
 		return _copi;
 	}
 
-	public void set_copi(ArrayList<String> _copi) {
+	public void set_copi(ArrayList<User> _copi) {
 		this._copi = _copi;
 	}
 
-	public ArrayList<String> get_seniorPersonnel() {
+	public ArrayList<User> get_seniorPersonnel() {
 		return _seniorPersonnel;
 	}
 
-	public void set_seniorPersonnel(ArrayList<String> _seniorPersonnel) {
+	public void set_seniorPersonnel(ArrayList<User> _seniorPersonnel) {
 		this._seniorPersonnel = _seniorPersonnel;
 	}
-
 }

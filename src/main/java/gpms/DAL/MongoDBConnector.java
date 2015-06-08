@@ -7,15 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class MongoDBConnector {
@@ -27,12 +28,13 @@ public class MongoDBConnector {
 	private static final String DBNAME = "todoapp";
 
 	private static Morphia morphia;
-	private static Mongo mongo;
+	private static MongoClient mongo;
 	private static Datastore ds;
 
-	public static Mongo getMongo() throws UnknownHostException, MongoException {
+	public static MongoClient getMongo() throws UnknownHostException,
+			MongoException {
 		if (mongo == null) {
-			mongo = new Mongo("127.0.0.1:27017");
+			mongo = new MongoClient("127.0.0.1", 27017);
 			// Mongo mongo = new Mongo(new
 			// MongoURI("mongodb://localhost/mjormIsFun"));
 			// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
@@ -57,12 +59,22 @@ public class MongoDBConnector {
 		}
 	}
 
-	// For MongoDB
-	@SuppressWarnings("deprecation")
 	public MongoDBConnector(String dataBaseName) throws UnknownHostException,
 			MongoException {
-		connection = new Mongo("127.0.0.1:27017");
-		db = connection.getDB(dataBaseName);
+		if (mongo == null) {
+			mongo = new MongoClient("127.0.0.1", 27017);
+			// Mongo mongo = new Mongo(new
+			// MongoURI("mongodb://localhost/mjormIsFun"));
+			// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
+			// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+
+			Morphia morphia = new Morphia();
+			ds = morphia.createDatastore(mongo, dataBaseName);
+		}
+	}
+
+	public Datastore readDatabase() {
+		return ds;
 	}
 
 	public static MongoDBConnector getMongoDBInstance() {
@@ -72,7 +84,6 @@ public class MongoDBConnector {
 					try {
 						theInstance = new MongoDBConnector(dbName);
 					} catch (UnknownHostException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
