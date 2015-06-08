@@ -70,6 +70,8 @@ public class UserProfileDAO extends UserDAO {
 		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class).field("_id").equal(id);
 		ops = ds.createUpdateOperations(UserProfile.class).set("_firstname", firstName);
 		ds.update(updateQuery, ops);
-		
+	
 	}
+	
+	
 }

@@ -17,14 +17,13 @@ public class UserProfile
 	@Id
 	private ObjectId _id;
 
-	private String _firstname, _middlename, _lastname;
-//	private String 
+	private String firstname, middlename, lastname;
+	//	private String 
 	private ArrayList<PositionDetails> _details;
 	private ArrayList<String> _phoneNumbers;
 	private ArrayList<String> _email;
 
-	@Embedded
-	private UserAccount account;
+//	private UserAccount thisAccount;
 
 
 
@@ -38,15 +37,15 @@ public class UserProfile
 	 * @param email
 	 * @param id
 	 */
-	public UserProfile(String firstname, String middlename, String lastname,
-			ArrayList<PositionDetails> details, String phonenumber,
-			ArrayList<String> email) {
-		this._firstname = firstname;
-		this._middlename = middlename;
-		this._lastname = lastname;
+	public UserProfile(String _firstname, String _middlename, String _lastname,
+			ArrayList<PositionDetails> details, String phoneNumber, String email) 
+	{
+		this.firstname = _firstname;
+		this.middlename = _middlename;
+		this.lastname = _lastname;
 		this._details = details;
-		
-		this._email = email;
+		addNumber(phoneNumber);
+		addEmail(email);
 		//this.set_uid changed from original format, use id's at this time will
 		//not be passed in but created by the system.
 		//		this.set_uid(_id);
@@ -59,10 +58,10 @@ public class UserProfile
 	 * @param middlename Middle Name of the User
 	 * @param lastname Surname of the User
 	 */
-	public UserProfile(String firstname, String middlename, String lastname) {
-		this._firstname = firstname;
-		this._middlename = middlename;
-		this._lastname = lastname;
+	public UserProfile(String _firstname, String _middlename, String _lastname) {
+		this.firstname = _firstname;
+		this.middlename = _middlename;
+		this.lastname = _lastname;
 		//		this.set_uid(_id);
 	}
 
@@ -70,7 +69,8 @@ public class UserProfile
 	/**
 	 * Parameter-less constructor, required for ObjectId creation.
 	 */
-	public UserProfile() {
+	public UserProfile() 
+	{
 
 	}
 
@@ -94,7 +94,7 @@ public class UserProfile
 	 */
 	public String get_firstname() 
 	{
-		return _firstname;
+		return firstname;
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class UserProfile
 	 */
 	public void set_firstname(String _firstname) 
 	{
-		this._firstname = _firstname;
+		firstname = _firstname;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class UserProfile
 	 */
 	public String get_middlename()
 	{
-		return _middlename;
+		return middlename;
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class UserProfile
 	 */
 	public void set_middlename(String _middlename) 
 	{
-		this._middlename = _middlename;
+		middlename = _middlename;
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class UserProfile
 	 */
 	public String get_lastname() 
 	{
-		return _lastname;
+		return lastname;
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class UserProfile
 	 */
 	public void set_lastname(String _lastname) 
 	{
-		this._lastname = _lastname;
+		lastname = _lastname;
 	}
 
 	public ArrayList<PositionDetails> get_details() 
@@ -163,7 +163,7 @@ public class UserProfile
 	{
 		_phoneNumbers.add(number);
 	}
-	
+
 	/**
 	 * 
 	 * @return the array list of phone numbers
@@ -173,9 +173,15 @@ public class UserProfile
 		return _phoneNumbers;
 	}
 
-//	public void set_phonenumber(ArrayList<String> phonenumber) {
-//		_phoneNumber.add(phoneNumber);
-//	}
+	//	public void set_phonenumber(ArrayList<String> phonenumber) {
+	//		_phoneNumber.add(phoneNumber);
+	//	}
+
+
+	public void addEmail(String email)
+	{
+		_email.add(email);
+	}
 
 	/**
 	 * Method for getting email of the user
@@ -185,10 +191,20 @@ public class UserProfile
 		return _email;
 	}
 
-	public void set_email(ArrayList<String> _email) {
-		this._email = _email;
-	}
+	//	public void set_email(ArrayList<String> _email) 
+	//	{
+	//		this._email = _email;
+	//	}
 
+//	/**
+//	 * sets the user account info for this user
+//	 * @param account the account object to be added
+//	 */
+//	public void setUserAccount(UserAccount account)
+//	{
+//		thisAccount = account;
+//	}
+	
 	/**
 	 * @return toString format for user profile, name of user.
 	 */
@@ -197,5 +213,6 @@ public class UserProfile
 		return this.get_firstname() + " " + this.get_middlename() + " "
 				+ this.get_lastname();
 	}
+
 
 }

@@ -35,6 +35,7 @@ public class UserDAO {
 	public static void saveUserAccount(UserAccount userAccount)
 			throws UnknownHostException {
 		Morphia morphia = getMorphia();
+		morphia.map(UserAccount.class);
 		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(), DBNAME);
 		ds.save(userAccount);
 	}

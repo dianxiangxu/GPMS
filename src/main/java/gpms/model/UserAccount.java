@@ -2,6 +2,8 @@ package gpms.model;
 
 import java.util.Date;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import gpms.DAL.UserDAO;
 
 import org.bson.types.ObjectId;
@@ -10,13 +12,13 @@ import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
-//@Entity(value = UserDAO.COLLECTION_NAME)
-@Embedded
+@Entity(value = UserDAO.COLLECTION_NAME)
+
 public class UserAccount {
-//	@Id
-//	private ObjectId _id;
-	private String _username;
-	private String _password;
+	@Id
+	private ObjectId userId;
+	private String username;
+	private String password;
 
 	/**
 	 * Constructor that builds a user account with username/pass/id
@@ -24,22 +26,23 @@ public class UserAccount {
 	 * @param password the password for the user
 	 * @param id the unique id for this person
 	 */
-	public UserAccount(String username, String password, ObjectId id) {
-		this._username = username;
-		this._password = password;
+	public UserAccount(String _username, String _password, ObjectId id) {
+		username = _username;
+		password = _password;
 		// TODO:: encrypt the password
-//		this.set_uid(id);
+		userId = id;
 	}
 
-	public UserAccount(String username) {
-		this._username = username;
-		this._password = "123456789"; // TODO:: user random password generator
+	public UserAccount(String _username) {
+		username = _username;
+		password = "123456789"; // TODO:: user random password generator
 	}
 
 	/**
-	 * Parameter-less constructor creates nothing
+	 * Parameter-less constructor, needed for @id annotation
 	 */
-	public UserAccount() {
+	public UserAccount() 
+	{
 	}
 
 //	public ObjectId get_uid() {
@@ -50,20 +53,29 @@ public class UserAccount {
 //		this._id = _id;
 //	}
 
-	public String get_username() {
-		return _username;
+	
+	public void setId(ObjectId theId)
+	{
+		userId = theId;
+	}
+	
+	public String get_username() 
+	{
+		return username;
 	}
 
-	public void set_username(String _username) {
-		this._username = _username;
+	public void set_username(String _username) 
+	{
+		username = _username;
 	}
 
-	public String get_password() {
-		return _password;
+	public String get_password() 
+	{
+		return password;
 	}
 
 	public void set_password(String _password) {
-		this._password = _password;
+		password = _password;
 	}
 
 	@Override
