@@ -26,7 +26,7 @@ public class MongoDBConnector {
 
 	private static final String DBNAME = "todoapp";
 
-	private static Morphia morphia;
+	private static Morphia morphia = null;
 	private static Mongo mongo;
 	private static Datastore ds;
 
@@ -62,9 +62,16 @@ public class MongoDBConnector {
 	public MongoDBConnector(String dataBaseName) throws UnknownHostException,
 			MongoException {
 		connection = new Mongo("127.0.0.1:27017");
-		db = connection.getDB(dataBaseName);
+//		db = connection.getDB(dataBaseName);
+		Morphia morph = new Morphia();
+		ds = morph.createDatastore(connection, dataBaseName);
 	}
 
+	public Datastore readDatabase()
+	{
+		return ds;
+	}
+	
 	public static MongoDBConnector getMongoDBInstance() {
 		if (connection == null) {
 			synchronized (MongoDBConnector.class) {
