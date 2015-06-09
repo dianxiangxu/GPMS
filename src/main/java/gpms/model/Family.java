@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 /**
@@ -18,6 +18,7 @@ public class Family {
 	@Id
 	private ObjectId id;
 
+	@Property("Sur Name")
 	private String surname;
 
 	@Reference
