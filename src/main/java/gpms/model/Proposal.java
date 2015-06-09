@@ -1,40 +1,51 @@
+//Edited by: Hector C. Ortiz
+
 package gpms.model;
 
-import gpms.dao.BaseEntity;
+import gpms.dao.ProposalDAO;
 
-import java.util.Date;
-
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Id;
+//import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Embedded;
 
-@Entity
-public class Proposal extends BaseEntity {
-	@Property("proposal no")
+//import java.util.ArrayList;
+
+import org.bson.types.ObjectId;
+
+@Entity(value = ProposalDAO.COLLECTION_NAME)
+public class Proposal 
+{
+	@Id
+	private ObjectId proposalId;
 	private String proposalNo;
-	@Property("date received")
-	private Date dateReceived;
-	@Property("proposal status")
+	private String dateReceived;
 	private String proposalStatus;
-	@Embedded("investigator info")
+	@Embedded
 	private InvestigatorInfo investigatorInfo;
-	@Embedded("project info")
+	@Embedded
 	private ProjectInfo projectInfo;
-	@Embedded("sponsor and budget info")
+	@Embedded
 	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
-	@Embedded("cost share info")
+	
+	/*
+	@Embedded
 	private CostShareInfo costShareInfo;
-	@Embedded("university commitments")
+	@Embedded
 	private UniversityCommitments universityCommitments;
-	@Embedded("conflict of interest and commitment info")
+	@Embedded
 	private ConflictOfInterest conflicOfInterest;
-	@Embedded("compliance info")
+	@Embedded
 	private ComplianceInfo complianceInfo;
+	*/
 
-	public Proposal(String proposalNo, Date dateReceived,
-			String proposalStatus, InvestigatorInfo investigatorInfo,
-			ProjectInfo projectInfo, SponsorAndBudgetInfo sponsorAndBudgetInfo,
-			CostShareInfo costShareInfo) {
+	public Proposal(String proposalNo, String dateReceived,
+			String proposalStatus,
+			InvestigatorInfo investigatorInfo,
+			ProjectInfo projectInfo,
+			SponsorAndBudgetInfo sponsorAndBudgetInfo/*,
+			CostShareInfo costShareInfo*/) 
+	{
 		this.proposalNo = proposalNo;
 		this.dateReceived = dateReceived;
 		this.proposalStatus = proposalStatus;
@@ -45,101 +56,100 @@ public class Proposal extends BaseEntity {
 		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
 	}
 
-	public Proposal(String proposalNo, Date dateReceived, String proposalStatus) {
+	public Proposal(String proposalNo, String dateReceived,String proposalStatus)
+	{
 		this.proposalNo = proposalNo;
 		this.dateReceived = dateReceived;
 		this.proposalStatus = proposalStatus;
 	}
 
-	public Proposal() {
+	public Proposal() 
+	{}
 
+	// TODO: add more class object as per document
+	public ObjectId getId() 
+	{
+		return proposalId;
 	}
+
+//	public void set_id(ObjectId _id) {
+//		this._id = _id;
+//	}
+
+	public String getProposalNo() 
+	{
+		return proposalNo;
+	}
+
+	public void setProposalNo(String proposalNo) 
+	{
+		this.proposalNo = proposalNo;
+	}
+
+	public String getDateReceived()
+	{
+		return dateReceived;
+	}
+
+	public void setDateReceived(String dateReceived) 
+	{
+		this.dateReceived = dateReceived;
+	}
+
+	public String getProposalStatus() 
+	{
+		return proposalStatus;
+	}
+
+	public void setProposalStatus(String proposalStatus) 
+	{
+		this.proposalStatus = proposalStatus;
+	}
+
+	public InvestigatorInfo getInvestigatorInfo()
+	{
+		return investigatorInfo;
+	}
+
+	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) 
+	{
+		this.investigatorInfo = investigatorInfo;
+	}
+
+	public ProjectInfo getProjectInfo()
+	{
+		return projectInfo;
+	}
+
+	public void setProjectInfo(ProjectInfo projectInfo) 
+	{
+		this.projectInfo = projectInfo;
+	}
+
+	public SponsorAndBudgetInfo getSponsorAndBudgetInfo()
+	{
+		return sponsorAndBudgetInfo;
+	}
+
+	public void setSponsorAndBudgetInfo(
+			SponsorAndBudgetInfo sponsorAndBudgetInfo)
+	{
+		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
+	}
+
+//	public CostShareInfo getCostShareInfo() 
+//	{
+//		return costShareInfo;
+//	}
+
+//	public void setCostShareInfo(CostShareInfo costShareInfo)
+//	{
+//		this.costShareInfo = costShareInfo;
+//	}
 
 	@Override
 	public String toString() {
 		return this.getProposalNo() + " " + this.getDateReceived() + " "
 				+ this.getProposalStatus();
-	}
-
-	public String getProposalNo() {
-		return proposalNo;
-	}
-
-	public void setProposalNo(String proposalNo) {
-		this.proposalNo = proposalNo;
-	}
-
-	public Date getDateReceived() {
-		return dateReceived;
-	}
-
-	public void setDateReceived(Date dateReceived) {
-		this.dateReceived = dateReceived;
-	}
-
-	public String getProposalStatus() {
-		return proposalStatus;
-	}
-
-	public void setProposalStatus(String proposalStatus) {
-		this.proposalStatus = proposalStatus;
-	}
-
-	public InvestigatorInfo getInvestigatorInfo() {
-		return investigatorInfo;
-	}
-
-	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) {
-		this.investigatorInfo = investigatorInfo;
-	}
-
-	public ProjectInfo getProjectInfo() {
-		return projectInfo;
-	}
-
-	public void setProjectInfo(ProjectInfo projectInfo) {
-		this.projectInfo = projectInfo;
-	}
-
-	public SponsorAndBudgetInfo getSponsorAndBudgetInfo() {
-		return sponsorAndBudgetInfo;
-	}
-
-	public void setSponsorAndBudgetInfo(
-			SponsorAndBudgetInfo sponsorAndBudgetInfo) {
-		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
-	}
-
-	public CostShareInfo getCostShareInfo() {
-		return costShareInfo;
-	}
-
-	public void setCostShareInfo(CostShareInfo costShareInfo) {
-		this.costShareInfo = costShareInfo;
-	}
-
-	public UniversityCommitments getUniversityCommitments() {
-		return universityCommitments;
-	}
-
-	public void setUniversityCommitments(
-			UniversityCommitments universityCommitments) {
-		this.universityCommitments = universityCommitments;
-	}
-
-	public ConflictOfInterest getConflicOfInterest() {
-		return conflicOfInterest;
-	}
-
-	public void setConflicOfInterest(ConflictOfInterest conflicOfInterest) {
-		this.conflicOfInterest = conflicOfInterest;
-	}
-
-	public ComplianceInfo getComplianceInfo() {
-		return complianceInfo;
-	}
-
-	public void setComplianceInfo(ComplianceInfo complianceInfo) {
-		this.complianceInfo = complianceInfo;
 	}
 }

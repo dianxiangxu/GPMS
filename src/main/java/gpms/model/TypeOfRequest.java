@@ -3,53 +3,55 @@
 package gpms.model;
 
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Property;
 
 @Embedded
-public class TypeOfRequest {
-	@Property("pre-proposal")
+public class TypeOfRequest 
+{
 	private boolean isPreProposal;
-	@Property("new proposal")
 	private boolean isNewProposal;
-	@Property("continuation")
 	private boolean isContinuation;
-	@Property("supplement")
 	private boolean isSupplement;
-
-	public TypeOfRequest() {
-	}
-
-	public boolean isPreProposal() {
-		return isPreProposal;
-	}
-
-	public void setPreProposal(boolean isPreProposal) {
+	
+	public TypeOfRequest()
+	{}
+	
+	public void setIsPreProposal(boolean isPreProposal)
+	{
 		this.isPreProposal = isPreProposal;
 	}
-
-	public boolean isNewProposal() {
-		return isNewProposal;
+	
+	public boolean getIsPreProposal()
+	{
+		return isPreProposal;
 	}
-
-	public void setNewProposal(boolean isNewProposal) {
+	
+	public void setIsNewProposal(boolean isNewProposal)
+	{
 		this.isNewProposal = isNewProposal;
 	}
-
-	public boolean isContinuation() {
-		return isContinuation;
+	
+	public boolean getIsNewProposal()
+	{
+		return isNewProposal;
 	}
-
-	public void setContinuation(boolean isContinuation) {
+	
+	public void setIsContinuation(boolean isContinuation)
+	{
 		this.isContinuation = isContinuation;
 	}
-
-	public boolean isSupplement() {
-		return isSupplement;
+	
+	public boolean getIsContinuation()
+	{
+		return isContinuation;
 	}
-
-	public void setSupplement(boolean isSupplement) {
+	
+	public void setIsSupplement(boolean isSupplement)
+	{
 		this.isSupplement = isSupplement;
 	}
-
+	
+	public boolean getIsSupplement()
+	{
+		return isSupplement;
+	}
 }

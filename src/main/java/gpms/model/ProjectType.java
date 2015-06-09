@@ -3,92 +3,103 @@
 package gpms.model;
 
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Property;
 
 @Embedded
-public class ProjectType {
-	@Property("research-basic")
-	private boolean isResearchBasic;
-	@Property("research-applied")
-	private boolean isResearchApplied;
-	@Property("research-development")
-	private boolean isResearchDevelopment;
-	@Property("instruction")
-	private boolean isInstruction;
-	@Property("other sponsored activity")
-	private boolean isOtherSponsoredActivity;
-
-	public ProjectType() {
-		isResearchBasic = true;
+public class ProjectType 
+{
+	private boolean is_research_basic;
+	private boolean is_research_applied;
+	private boolean is_research_development;
+	private boolean is_instruction;
+	private boolean is_other_sposored_activity;
+	
+	public ProjectType()
+	{
+		is_research_basic = true;
 	}
-
-	public void setIsResearchBasic(boolean is_research_basic) {
-		if (!this.isResearchBasic && is_research_basic) {
-			this.isResearchBasic = is_research_basic;
-			isResearchApplied = false;
-			isResearchDevelopment = false;
-			isInstruction = false;
-			isOtherSponsoredActivity = false;
+	
+	public void set_is_research_basic(boolean is_research_basic)
+	{
+		if(!this.is_research_basic && is_research_basic)
+		{
+			this.is_research_basic = is_research_basic;
+			is_research_applied = false;
+			is_research_development = false;
+			is_instruction = false;
+			is_other_sposored_activity = false;
 		}
 	}
-
-	public boolean getIsResearchBasic() {
-		return isResearchBasic;
+	
+	public boolean get_is_research_basic()
+	{
+		return is_research_basic;
 	}
-
-	public void setIsResearchApplied(boolean is_research_applied) {
-		if (!this.isResearchApplied && is_research_applied) {
-			isResearchBasic = false;
-			this.isResearchApplied = is_research_applied;
-			isResearchDevelopment = false;
-			isInstruction = false;
-			isOtherSponsoredActivity = false;
+	
+	public void set_is_research_applied(boolean is_research_applied)
+	{
+		if(!this.is_research_applied && is_research_applied)
+		{
+			is_research_basic = false;
+			this.is_research_applied = is_research_applied;
+			is_research_development = false;
+			is_instruction = false;
+			is_other_sposored_activity = false;
 		}
 	}
-
-	public boolean getIsResearchApplied() {
-		return isResearchApplied;
+	
+	public boolean get_is_research_applied()
+	{
+		return is_research_applied;
 	}
-
-	public void setIsResearchDevelopment(boolean is_research_development) {
-		if (!this.isResearchDevelopment && is_research_development) {
-			isResearchBasic = false;
-			isResearchApplied = false;
-			this.isResearchDevelopment = is_research_development;
-			isInstruction = false;
-			isOtherSponsoredActivity = false;
+	
+	public void set_is_research_development(boolean is_research_development)
+	{
+		if(!this.is_research_development && is_research_development)
+		{
+			is_research_basic = false;
+			is_research_applied = false;
+			this.is_research_development = is_research_development;
+			is_instruction = false;
+			is_other_sposored_activity = false;
 		}
 	}
-
-	public boolean getIsResearchDevelopment() {
-		return isResearchDevelopment;
+	
+	public boolean get_is_research_development()
+	{
+		return is_research_development;
 	}
-
-	public void setIsInstruction(boolean is_instruction) {
-		if (!this.isInstruction && is_instruction) {
-			isResearchBasic = false;
-			isResearchApplied = false;
-			isResearchDevelopment = false;
-			this.isInstruction = is_instruction;
-			isOtherSponsoredActivity = false;
+	
+	public void set_is_instruction(boolean is_instruction)
+	{
+		if(!this.is_instruction && is_instruction)
+		{
+			is_research_basic = false;
+			is_research_applied = false;
+			is_research_development = false;
+			this.is_instruction = is_instruction;
+			is_other_sposored_activity = false;
 		}
 	}
-
-	public boolean getIsInstruction() {
-		return isInstruction;
+	
+	public boolean get_is_instruction()
+	{
+		return is_instruction;
 	}
-
-	public void setIsOtherSponsoredActivity(boolean is_other_sposored_activity) {
-		if (!this.isOtherSponsoredActivity && is_other_sposored_activity) {
-			isResearchBasic = false;
-			isResearchApplied = false;
-			isResearchDevelopment = false;
-			isInstruction = false;
-			this.isOtherSponsoredActivity = is_other_sposored_activity;
+	
+	public void set_is_other_sposored_activity(boolean is_other_sposored_activity)
+	{
+		if(!this.is_other_sposored_activity && is_other_sposored_activity)
+		{
+			is_research_basic = false;
+			is_research_applied = false;
+			is_research_development = false;
+			is_instruction = false;
+			this.is_other_sposored_activity = is_other_sposored_activity;
 		}
 	}
-
-	public boolean getIsOtherSponsoredActivity() {
-		return isOtherSponsoredActivity;
+	
+	public boolean get_is_other_sposored_activity()
+	{
+		return is_other_sposored_activity;
 	}
 }
