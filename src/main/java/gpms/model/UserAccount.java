@@ -1,50 +1,75 @@
+//Edited by: Hector C. Ortiz
+
 package gpms.model;
 
-import java.util.Date;
+//import java.util.Date;
 
-import gpms.dao.BaseEntity;
-import gpms.dao.UserAccountDAO;
+import gpms.DAL.UserDAO;
 
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
 
-@Entity(value = UserAccountDAO.COLLECTION_NAME)
-public class UserAccount extends BaseEntity {
-	private String _username;
-	private String _password;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 
-	public UserAccount(String username, String password) {
-		this._username = username;
-		this._password = password;
+@Entity(value = UserDAO.COLLECTION_NAME)
+public class UserAccount 
+{
+	@Id
+	private ObjectId userId;
+	private String userName;
+	private String password;
+
+	public UserAccount(String userName, String password) 
+	{
+		this.userName = userName;
+		this.password = password;
+		// TODO:: encrypt the password
+		//this.set_uid(id);
 	}
 
-	public UserAccount(String username) {
-		this._username = username;
-		this._password = "123456789"; // TODO:: user random password generator
+	public UserAccount(String userName) 
+	{
+		this.userName = userName;
+		this.password = "123456789"; // TODO:: user random password generator
 	}
 
-	public UserAccount() {
+	public UserAccount() 
+	{
 	}
 
-	public String get_username() {
-		return _username;
+	public ObjectId getUserId() 
+	{
+		return userId;
 	}
 
-	public void set_username(String _username) {
-		this._username = _username;
+//	public void set_uid(ObjectId _id) 
+//	{
+//		this._id = _id;
+//	}
+
+	public String getUserName() 
+	{
+		return userName;
 	}
 
-	public String get_password() {
-		return _password;
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
 	}
 
-	public void set_password(String _password) {
-		this._password = _password;
+	public String getPassword() 
+	{
+		return password;
 	}
 
-	@Override
-	public String toString() {
-		return this.get_username() + " " + this.get_password();
+	public void setPassword(String password) 
+	{
+		this.password = password;
 	}
+
+//	@Override
+//	public String toString()
+//	{
+//		return this.get_user_name() + " " + this.get_password();
+//	}
 }

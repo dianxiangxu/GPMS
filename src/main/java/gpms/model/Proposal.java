@@ -1,55 +1,59 @@
 package gpms.model;
 
-import gpms.dao.BaseEntity;
-import gpms.dao.ProposalDAO;
+import gpms.DAL.ProposalDAO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Reference;
+
+import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Reference;
 
 @Entity(value = ProposalDAO.COLLECTION_NAME)
-public class Proposal extends BaseEntity {
+public class Proposal {
 	@Id
-	private ObjectId _id;
-	private String _proposalNo;
-	private Date _dateReceived;
-	private String _proposalStatus;
-	@Reference("investigatorInfo")
-	private ArrayList<InvestigatorInfo> _investigatorInfo;
-	@Reference("projectInfo")
-	private ArrayList<ProjectInfo> _projectInfo;
-	@Reference("sponsorAndBudgetInfo")
-	private ArrayList<SponsorAndBudgetInfo> _sponsorAndBudgetInfo;
-	@Reference("costShareInfo")
-	private ArrayList<CostShareInfo> _costShareInfo;
+	private ObjectId proposalId;
+	private String proposalNo;
+	private String dateReceived;
+	//private String proposalStatus;
+	@Embedded
+	private InvestigatorInfo investigatorInfo;
+	@Embedded
+	private ProjectInfo projectInfo;
+	@Embedded
+	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
+	@Embedded
+	private CostShareInfo costShareInfo;
+	@Embedded
+	private UniversityCommitments universityCommitments;
+	@Embedded
+	private ConflictOfInterest conflicOfInterest;
+	@Embedded
+	private ComplianceInfo complianceInfo;
 
-	public Proposal(String proposalNo, Date dateReceived,
+	public Proposal(String proposalNo, String dateReceived,
 			String proposalStatus,
-			ArrayList<InvestigatorInfo> investigatorInfo,
-			ArrayList<ProjectInfo> projectInfo,
-			ArrayList<SponsorAndBudgetInfo> sponsorAndBudgetInfo,
-			ArrayList<CostShareInfo> costShareInfo, ObjectId id) {
-		this._proposalNo = proposalNo;
-		this._dateReceived = dateReceived;
-		this._proposalStatus = proposalStatus;
+			InvestigatorInfo investigatorInfo,
+			ProjectInfo projectInfo,
+			SponsorAndBudgetInfo sponsorAndBudgetInfo,
+			CostShareInfo costShareInfo) 
+	{
+		this.proposalNo = proposalNo;
+		this.dateReceived = dateReceived;
+		//this.proposalStatus = proposalStatus;
 
 		// TODO:: need to do in loop of the list object
-		this._investigatorInfo = investigatorInfo;
-		this._projectInfo = projectInfo;
-		this._sponsorAndBudgetInfo = sponsorAndBudgetInfo;
-		this._costShareInfo = costShareInfo;
-		this.set_id(id);
-
+		this.investigatorInfo = investigatorInfo;
+		this.projectInfo = projectInfo;
+		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
 	}
 
-	public Proposal(String proposalNo, Date dateReceived, String proposalStatus) {
-		this._proposalNo = proposalNo;
-		this._dateReceived = dateReceived;
-		this._proposalStatus = proposalStatus;
+	public Proposal(String proposalNo, String dateReceived/*,String proposalStatus*/) {
+		this.proposalNo = proposalNo;
+		this.dateReceived = dateReceived;
+		//this.proposalStatus = proposalStatus;
 	}
 
 	public Proposal() {
@@ -58,26 +62,26 @@ public class Proposal extends BaseEntity {
 
 	// TODO: add more class object as per document
 	public ObjectId get_id() {
-		return _id;
+		return proposalId;
 	}
 
-	public void set_id(ObjectId _id) {
-		this._id = _id;
+//	public void set_id(ObjectId _id) {
+//		this._id = _id;
+//	}
+
+	public String getProposalNo() {
+		return proposalNo;
 	}
 
-	public String get_proposalNo() {
-		return _proposalNo;
+	public void setProposalNo(String proposalNo) {
+		this.proposalNo = proposalNo;
 	}
 
-	public void set_proposalNo(String _proposalNo) {
-		this._proposalNo = _proposalNo;
+	public String getDateReceived() {
+		return dateReceived;
 	}
 
-	public Date get_dateReceived() {
-		return _dateReceived;
-	}
-
-	public void set_dateReceived(Date _dateReceived) {
+	public void set_dateReceived(String _dateReceived) {
 		this._dateReceived = _dateReceived;
 	}
 

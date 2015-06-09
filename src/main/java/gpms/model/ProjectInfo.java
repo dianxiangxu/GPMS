@@ -1,39 +1,43 @@
-package gpms.model;
+//Edited by: Hector C. Ortiz
 
-import gpms.dao.BaseEntity;
+package gpms.model;
 
 import java.util.Date;
 
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Id;
+//import org.bson.types.ObjectId;
 
-public class ProjectInfo extends BaseEntity {
-	private String _projectTitle;
+import com.google.code.morphia.annotations.Embedded;
+//import com.google.code.morphia.annotations.Id;
+
+@Embedded
+public class ProjectInfo
+{
+	private String project_title;
 	// private ArrayList<ProjectType> _projectType;
-	private boolean _researchBasic;
-	private boolean _researchApplied;
-	private boolean _researchDevelopment;
-	private boolean _instruction;
-	private boolean _otherSponsoredActivity;
+	@Embedded
+	private ProjectType project_type;
 	// private ArrayList<RequestType> _requestType;
-	private boolean _preProposal;
-	private boolean _newProposal;
-	private boolean _continuation;
-	private boolean _supplement;
-	private Date _dueDate;
+	@Embedded
+	private TypeOfRequest type_of_request;
+	private Date due_date;
 	// private ArrayList<ProjectPeriod> _projectPeriod;
-	private Date _from;
-	private Date _to;
+	@Embedded
+	private ProjectPeriod project_period;
 	// private ArrayList<ProjectLocation> _projectLocation;
-	private boolean _offCampus;
-	private boolean _onCampus;
+	//private boolean _offCampus;
+	private boolean on_campus;
+	
+	public ProjectInfo()
+	{}
 
-	public String get_projectTitle() {
-		return _projectTitle;
+	public String get_project_title() 
+	{
+		return project_title;
 	}
 
-	public void set_projectTitle(String _projectTitle) {
-		this._projectTitle = _projectTitle;
+	public void set_project_title(String project_title) 
+	{
+		this.project_title = project_title;
 	}
 
 	// public ArrayList<ProjectType> get_projectType() {
@@ -43,45 +47,15 @@ public class ProjectInfo extends BaseEntity {
 	// public void set_projectType(ArrayList<ProjectType> _projectType) {
 	// this._projectType = _projectType;
 	// }
-
-	public boolean is_researchBasic() {
-		return _researchBasic;
+	
+	public void set_project_type(ProjectType project_type)
+	{
+		this.project_type = project_type;
 	}
-
-	public void set_researchBasic(boolean _researchBasic) {
-		this._researchBasic = _researchBasic;
-	}
-
-	public boolean is_researchApplied() {
-		return _researchApplied;
-	}
-
-	public void set_researchApplied(boolean _researchApplied) {
-		this._researchApplied = _researchApplied;
-	}
-
-	public boolean is_researchDevelopment() {
-		return _researchDevelopment;
-	}
-
-	public void set_researchDevelopment(boolean _researchDevelopment) {
-		this._researchDevelopment = _researchDevelopment;
-	}
-
-	public boolean is_instruction() {
-		return _instruction;
-	}
-
-	public void set_instruction(boolean _instruction) {
-		this._instruction = _instruction;
-	}
-
-	public boolean is_otherSponsoredActivity() {
-		return _otherSponsoredActivity;
-	}
-
-	public void set_otherSponsoredActivity(boolean _otherSponsoredActivity) {
-		this._otherSponsoredActivity = _otherSponsoredActivity;
+	
+	public ProjectType get_project_type()
+	{
+		return project_type;
 	}
 
 	//
@@ -92,45 +66,25 @@ public class ProjectInfo extends BaseEntity {
 	// public void set_requestType(ArrayList<RequestType> _requestType) {
 	// this._requestType = _requestType;
 	// }
-
-	public boolean is_preProposal() {
-		return _preProposal;
+	
+	public void set_type_of_request(TypeOfRequest type_of_request)
+	{
+		this.type_of_request = type_of_request;
+	}
+	
+	public TypeOfRequest get_type_of_request()
+	{
+		return type_of_request;
 	}
 
-	public void set_preProposal(boolean _preProposal) {
-		this._preProposal = _preProposal;
+	public Date get_due_date() 
+	{
+		return due_date;
 	}
 
-	public boolean is_newProposal() {
-		return _newProposal;
-	}
-
-	public void set_newProposal(boolean _newProposal) {
-		this._newProposal = _newProposal;
-	}
-
-	public boolean is_continuation() {
-		return _continuation;
-	}
-
-	public void set_continuation(boolean _continuation) {
-		this._continuation = _continuation;
-	}
-
-	public boolean is_supplement() {
-		return _supplement;
-	}
-
-	public void set_supplement(boolean _supplement) {
-		this._supplement = _supplement;
-	}
-
-	public Date get_dueDate() {
-		return _dueDate;
-	}
-
-	public void set_dueDate(Date _dueDate) {
-		this._dueDate = _dueDate;
+	public void set_due_date(Date due_date) 
+	{
+		this.due_date = due_date;
 	}
 
 	// public ArrayList<ProjectPeriod> get_projectPeriod() {
@@ -141,20 +95,14 @@ public class ProjectInfo extends BaseEntity {
 	// this._projectPeriod = _projectPeriod;
 	// }
 
-	public Date get_from() {
-		return _from;
+	public void set_project_period(ProjectPeriod project_period)
+	{
+		this.project_period = project_period;
 	}
-
-	public void set_from(Date _from) {
-		this._from = _from;
-	}
-
-	public Date get_to() {
-		return _to;
-	}
-
-	public void set_to(Date _to) {
-		this._to = _to;
+	
+	public ProjectPeriod get_project_period()
+	{
+		return project_period;
 	}
 
 	// public ArrayList<ProjectLocation> get_projectLocation() {
@@ -166,20 +114,21 @@ public class ProjectInfo extends BaseEntity {
 	// this._projectLocation = _projectLocation;
 	// }
 
-	public boolean is_offCampus() {
-		return _offCampus;
+//	public boolean is_off_campus() {
+//		return off_campus;
+//	}
+//
+//	public void set_off_campus(boolean off_campus) {
+//		this.off_campus = off_campus;
+//	}
+
+	public boolean is_on_campus() 
+	{
+		return on_campus;
 	}
 
-	public void set_offCampus(boolean _offCampus) {
-		this._offCampus = _offCampus;
+	public void set_on_campus(boolean on_campus) 
+	{
+		this.on_campus = on_campus;
 	}
-
-	public boolean is_onCampus() {
-		return _onCampus;
-	}
-
-	public void set_onCampus(boolean _onCampus) {
-		this._onCampus = _onCampus;
-	}
-
 }
