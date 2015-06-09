@@ -16,23 +16,19 @@ public class ProjectInfo {
 	@Property("project title")
 	private String projectTitle;
 
-	@Embedded
-	@Property("project type")
+	@Embedded("project type")
 	private ProjectType projectType;
 
-	@Embedded
-	@Property("type of request")
+	@Embedded("type of request")
 	private TypeOfRequest typeOfRequest;
 
 	@Property("due date")
 	private Date dueDate;
 
-	@Embedded
-	@Property("project period")
+	@Embedded("project period")
 	private ProjectPeriod projectPeriod;
 
-	@Embedded
-	@Property("location of project")
+	@Embedded("location of project")
 	private ProjectLocation projectLocation;
 
 	public ProjectInfo() {

@@ -22,7 +22,7 @@ public class User extends BaseEntity {
 	@Property("Age")
 	private int age;
 
-	@Embedded
+	@Embedded("Address Info")
 	private Address address;
 
 	public User() {

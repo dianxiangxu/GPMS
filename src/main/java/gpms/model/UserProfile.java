@@ -21,15 +21,13 @@ public class UserProfile extends BaseEntity {
 	private String middleName;
 	@Property("last name")
 	private String lastName;
-	@Embedded
-	@Property("details")
+	@Embedded("details")
 	private List<PositionDetails> details = new ArrayList<PositionDetails>();
 	@Property("phone numbers")
 	private List<String> phoneNumbers = new ArrayList<String>();
 	@Property("emails")
 	private List<String> emails = new ArrayList<String>();
-	@Reference
-	@Property("user id")
+	@Reference("user id")
 	private UserAccount userId;
 
 	public UserProfile(String firstName, String middleName, String lastName,
