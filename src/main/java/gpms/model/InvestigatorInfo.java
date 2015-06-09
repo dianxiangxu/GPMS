@@ -1,41 +1,79 @@
+//Edited by: Hector C. Ortiz
+
 package gpms.model;
 
-import gpms.dao.BaseEntity;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import org.mongodb.morphia.annotations.Reference;
+//import org.bson.types.ObjectId;
 
-public class InvestigatorInfo extends BaseEntity {
+import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Reference;
+
+@Embedded
+public class InvestigatorInfo
+{
+	private final int max_co_pi_num = 4;
+	private final int max_senior_personnel_num = 10;
+	
 	@Reference
-	private User _pi;
+	private UserProfile pi;
 	@Reference
-	private List<User> _copi = new ArrayList<User>();
+	private ArrayList<UserProfile> co_pi;
 	@Reference
-	private List<User> _seniorPersonnel = new ArrayList<User>();
+	private ArrayList<UserProfile> senior_personnel;
+	
+	public InvestigatorInfo()
+	{}
 
-	public User get_pi() {
-		return _pi;
+	public UserProfile get_pi() 
+	{
+		return pi;
 	}
 
-	public void set_pi(User _pi) {
-		this._pi = _pi;
+	public void set_pi(UserProfile pi) 
+	{
+		this.pi = pi;
 	}
 
-	public List<User> get_copi() {
-		return _copi;
+	public ArrayList<UserProfile> get_co_pi() 
+	{
+		return co_pi;
+	}
+	
+	public void add_co_pi(UserProfile co_pi)
+	{
+		if(this.co_pi.size() <= max_co_pi_num)
+		{
+			this.co_pi.add(co_pi);
+		}
 	}
 
-	public void set_copi(ArrayList<User> _copi) {
-		this._copi = _copi;
+	public void set_co_pi(ArrayList<UserProfile> co_pi) 
+	{
+		if(co_pi.size() <= max_co_pi_num)
+		{
+			this.co_pi = co_pi;
+		}
 	}
 
-	public List<User> get_seniorPersonnel() {
-		return _seniorPersonnel;
+	public ArrayList<UserProfile> get_senior_personnel()
+	{
+		return senior_personnel;
+	}
+	
+	public void add_senior_personnel(UserProfile senior_personnel)
+	{
+		if(this.senior_personnel.size() <= max_senior_personnel_num)
+		{
+			this.senior_personnel.add(senior_personnel);
+		}
 	}
 
-	public void set_seniorPersonnel(ArrayList<User> _seniorPersonnel) {
-		this._seniorPersonnel = _seniorPersonnel;
+	public void set_senior_personnel(ArrayList<UserProfile> senior_personnel) 
+	{
+		if(senior_personnel.size() <= max_senior_personnel_num)
+		{
+			this.senior_personnel = senior_personnel;
+		}
 	}
 }

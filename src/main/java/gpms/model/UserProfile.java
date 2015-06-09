@@ -1,165 +1,133 @@
+//Edited by: Hector C. Ortiz
+
 package gpms.model;
 
-import gpms.dao.BaseEntity;
-import gpms.dao.UserProfileDAO;
+import gpms.DAL.UserProfileDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Reference;
+import org.bson.types.ObjectId;
+
+import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Reference;
 
 @Entity(value = UserProfileDAO.COLLECTION_NAME)
-public class UserProfile extends BaseEntity {
-	private String _firstname;
-	private String _middlename;
-	private String _lastname;
-	private List<PositionDetails> _details = new ArrayList<PositionDetails>();
-	private List<String> _phoneNumbers = new ArrayList<String>();
-	private List<String> _email = new ArrayList<String>();
+public class UserProfile
+{
+	@Id
+	private ObjectId ProfileId;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	
+	@Embedded
+	private ArrayList<PositionDetails> details;
+	
+	private ArrayList<String> phoneNumber;
+	private ArrayList<String> email;
+	
 	@Reference
-	private User _userid;
+	private UserAccount userId;
 
-	/**
-	 * This creates a profile for a user in the system
-	 * 
-	 * @param firstname
-	 *            First Name of the User
-	 * @param middlename
-	 *            Middle Name of the User
-	 * @param lastname
-	 *            Last Name of the User
-	 * @param details
-	 * @param phonenumber
-	 * @param email
-	 * @param id
-	 */
-	public UserProfile(String _firstname, String _middlename, String _lastname,
-			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
-			ArrayList<String> email) {
-		this._firstname = _firstname;
-		this._middlename = _middlename;
-		this._lastname = _lastname;
-		this._details = details;
-		this._phoneNumbers = phoneNumbers;
-		this._email = email;
+	public UserProfile(String firstName, String middleName, String lastName,
+			ArrayList<PositionDetails> details, ArrayList<String> phoneNumber,
+			ArrayList<String> email, UserAccount userId) 
+	{
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.details = details;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.userId = userId;
 	}
 
-	/**
-	 * Creates a User Profile with only name as parameters
-	 * 
-	 * @param firstname
-	 *            First Name of the User
-	 * @param middlename
-	 *            Middle Name of the User
-	 * @param lastname
-	 *            Surname of the User
-	 */
-	public UserProfile(String _firstname, String _middlename, String _lastname) {
-		this._firstname = _firstname;
-		this._middlename = _middlename;
-		this._lastname = _lastname;
+	public UserProfile(String firstName, String middleName, String lastName) 
+	{
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
 	}
 
-	/**
-	 * Parameter-less constructor, required for ObjectId creation.
-	 */
-	public UserProfile() {
+	public UserProfile() 
+	{}
 
+	public UserAccount getUserId() 
+	{
+		return userId;
 	}
 
-	public String get_firstname() {
-		return _firstname;
+	public String getFirstName() 
+	{
+		return firstName;
 	}
 
-	public void set_firstname(String _firstname) {
-		this._firstname = _firstname;
+	public void setFirstName(String firstName) 
+	{
+		this.firstName = firstName;
 	}
 
-	public String get_middlename() {
-		return _middlename;
+	public String getMiddleName() 
+	{
+		return middleName;
 	}
 
-	public void set_middlename(String _middlename) {
-		this._middlename = _middlename;
+	public void setMiddleName(String middleName) 
+	{
+		this.middleName = middleName;
 	}
 
-	public String get_lastname() {
-		return _lastname;
+	public String getLastName() 
+	{
+		return lastName;
 	}
 
-	public void set_lastname(String _lastname) {
-		this._lastname = _lastname;
+	public void setLastName(String lastName)
+	{
+		this.lastName = lastName;
 	}
 
-	public List<PositionDetails> get_details() {
-		return _details;
+	public ArrayList<PositionDetails> getDetails() 
+	{
+		return details;
 	}
 
-	/**
-	 * Set details
-	 * 
-	 * @param _details
-	 */
-	public void set_details(ArrayList<PositionDetails> _details) {
-		this._details = _details;
+	public void setDetails(ArrayList<PositionDetails> details) 
+	{
+		this.details = details;
 	}
 
-	/**
-	 * Adds a phone number to the list of phone numbers
-	 * 
-	 * @param number
-	 */
-	public void addNumber(String number) {
-		_phoneNumbers.add(number);
+	public ArrayList<String> getPhoneNumber() 
+	{
+		return phoneNumber;
 	}
 
-	/**
-	 * 
-	 * @return the array list of phone numbers
-	 */
-	public List<String> get_phonenumber() {
-		return _phoneNumbers;
+	public void setPhoneNumber(ArrayList<String> phoneNumber) 
+	{
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public void addPhoneNumber(String phone)
+	{
+		this.phoneNumber.add(phone);
 	}
 
-	// public void set_phonenumber(ArrayList<String> phonenumber) {
-	// _phoneNumber.add(phoneNumber);
-	// }
-
-	public void addEmail(String email) {
-		_email.add(email);
+	public ArrayList<String> getEmail() 
+	{
+		return email;
 	}
 
-	/**
-	 * Method for getting email of the user
-	 * 
-	 * @return the email of the user
-	 */
-	public List<String> get_email() {
-		return _email;
+	public void setEmail(ArrayList<String> email) 
+	{
+		this.email = email;
 	}
 
-	// public void set_email(ArrayList<String> _email)
-	// {
-	// this._email = _email;
-	// }
-
-	// /**
-	// * sets the user account info for this user
-	// * @param account the account object to be added
-	// */
-	// public void setUserAccount(UserAccount account)
-	// {
-	// thisAccount = account;
-	// }
-
-	/**
-	 * @return toString format for user profile, name of user.
-	 */
 	@Override
-	public String toString() {
-		return this.get_firstname() + " " + this.get_middlename() + " "
-				+ this.get_lastname();
+	public String toString() 
+	{
+		return this.getFirstName() + " " + this.getMiddleName() + " "
+				+ this.getLastName();
 	}
-
 }
