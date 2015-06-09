@@ -5,135 +5,81 @@ package gpms.model;
 import java.util.Date;
 
 //import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
+
 //import org.mongodb.morphia.annotations.Id;
 
 @Embedded
-public class ProjectInfo
-{
+public class ProjectInfo {
+
+	@Property("project title")
 	private String projectTitle;
-	// private ArrayList<ProjectType> _projectType;
-	@Embedded
-	private ProjectType project_type;
-	// private ArrayList<RequestType> _requestType;
-	@Embedded
-	private TypeOfRequest type_of_request;
-	private Date due_date;
-	// private ArrayList<ProjectPeriod> _projectPeriod;
-	@Embedded
-	private ProjectPeriod project_period;
-	// private ArrayList<ProjectLocation> _projectLocation;
-	//private boolean _offCampus;
-	private boolean on_campus;
 
-	/**
-	 * NonParameter constructor, needed for @id assignment.
-	 */
-	public ProjectInfo()
-	{}
+	@Embedded("project type")
+	private ProjectType projectType;
 
-	public void set_project_title(String project_title) 
-	{
-		projectTitle = project_title;
-	}
-	
-	public String get_project_title() 
-	{
-		return project_title;
+	@Embedded("type of request")
+	private TypeOfRequest typeOfRequest;
+
+	@Property("due date")
+	private Date dueDate;
+
+	@Embedded("project period")
+	private ProjectPeriod projectPeriod;
+
+	@Embedded("location of project")
+	private ProjectLocation projectLocation;
+
+	public ProjectInfo() {
 	}
 
-	
-
-	// public ArrayList<ProjectType> get_projectType() {
-	// return _projectType;
-	// }
-	//
-	// public void set_projectType(ArrayList<ProjectType> _projectType) {
-	// this._projectType = _projectType;
-	// }
-	
-	public void set_project_type(ProjectType project_type)
-	{
-		this.project_type = project_type;
-	}
-	
-	public ProjectType get_project_type()
-	{
-		return project_type;
+	public String getProjectTitle() {
+		return projectTitle;
 	}
 
-	//
-	// public ArrayList<RequestType> get_requestType() {
-	// return _requestType;
-	// }
-	//
-	// public void set_requestType(ArrayList<RequestType> _requestType) {
-	// this._requestType = _requestType;
-	// }
-	
-	public void set_type_of_request(TypeOfRequest type_of_request)
-	{
-		this.type_of_request = type_of_request;
-	}
-	
-	public TypeOfRequest get_type_of_request()
-	{
-		return type_of_request;
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
 	}
 
-	public Date get_due_date() 
-	{
-		return due_date;
+	public ProjectType getProjectType() {
+		return projectType;
 	}
 
-	public void set_due_date(Date due_date) 
-	{
-		this.due_date = due_date;
+	public void setProjectType(ProjectType projectType) {
+		this.projectType = projectType;
 	}
 
-	// public ArrayList<ProjectPeriod> get_projectPeriod() {
-	// return _projectPeriod;
-	// }
-	//
-	// public void set_projectPeriod(ArrayList<ProjectPeriod> _projectPeriod) {
-	// this._projectPeriod = _projectPeriod;
-	// }
-
-	public void set_project_period(ProjectPeriod project_period)
-	{
-		this.project_period = project_period;
-	}
-	
-	public ProjectPeriod get_project_period()
-	{
-		return project_period;
+	public TypeOfRequest getTypeOfRequest() {
+		return typeOfRequest;
 	}
 
-	// public ArrayList<ProjectLocation> get_projectLocation() {
-	// return _projectLocation;
-	// }
-	//
-	// public void set_projectLocation(ArrayList<ProjectLocation>
-	// _projectLocation) {
-	// this._projectLocation = _projectLocation;
-	// }
-
-//	public boolean is_off_campus() {
-//		return off_campus;
-//	}
-//
-//	public void set_off_campus(boolean off_campus) {
-//		this.off_campus = off_campus;
-//	}
-
-	public boolean is_on_campus() 
-	{
-		return on_campus;
+	public void setTypeOfRequest(TypeOfRequest typeOfRequest) {
+		this.typeOfRequest = typeOfRequest;
 	}
 
-	public void set_on_campus(boolean on_campus) 
-	{
-		this.on_campus = on_campus;
+	public Date getDueDate() {
+		return dueDate;
 	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public ProjectPeriod getProjectPeriod() {
+		return projectPeriod;
+	}
+
+	public void setProjectPeriod(ProjectPeriod projectPeriod) {
+		this.projectPeriod = projectPeriod;
+	}
+
+	public ProjectLocation getProjectLocation() {
+		return projectLocation;
+	}
+
+	public void setProjectLocation(ProjectLocation projectLocation) {
+		this.projectLocation = projectLocation;
+	}
+
 }

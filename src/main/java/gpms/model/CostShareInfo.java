@@ -2,34 +2,34 @@
 
 package gpms.model;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
 
 @Embedded
-public class CostShareInfo
-{
-	boolean institutional_committed_cost_share_included;
-	boolean third_party_committed_cost_share_included;
-	
-	public CostShareInfo()
-	{}
-	
-	public void set_institutional_committed_cost_share_included(boolean institutional_committed_cost_share_included)
-	{
-		this.institutional_committed_cost_share_included = institutional_committed_cost_share_included;
+public class CostShareInfo {
+	@Property("institutional committed")
+	boolean institutionalCommitted;
+	@Property("third party committed")
+	boolean thirdPartyCommitted;
+
+	public CostShareInfo() {
 	}
-	
-	public boolean get_institutional_committed_cost_share_included()
-	{
-		return institutional_committed_cost_share_included;
+
+	public boolean isInstitutionalCommitted() {
+		return institutionalCommitted;
 	}
-	
-	public void set_third_party_committed_cost_share_included(boolean third_party_committed_cost_share_included)
-	{
-		this.third_party_committed_cost_share_included = third_party_committed_cost_share_included;
+
+	public void setInstitutionalCommitted(boolean institutionalCommitted) {
+		this.institutionalCommitted = institutionalCommitted;
 	}
-	
-	public boolean get_third_party_committed_cost_share_included()
-	{
-		return third_party_committed_cost_share_included;
+
+	public boolean isThirdPartyCommitted() {
+		return thirdPartyCommitted;
 	}
+
+	public void setThirdPartyCommitted(boolean thirdPartyCommitted) {
+		this.thirdPartyCommitted = thirdPartyCommitted;
+	}
+
 }

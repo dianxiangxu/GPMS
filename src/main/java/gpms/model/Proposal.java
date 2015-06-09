@@ -16,26 +16,19 @@ public class Proposal extends BaseEntity {
 	private Date dateReceived;
 	@Property("proposal status")
 	private String proposalStatus;
-	@Embedded
-	@Property("investigator info")
+	@Embedded("investigator info")
 	private InvestigatorInfo investigatorInfo;
-	@Embedded
-	@Property("project info")
+	@Embedded("project info")
 	private ProjectInfo projectInfo;
-	@Embedded
-	@Property("sponsor and budget info")
+	@Embedded("sponsor and budget info")
 	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
-	@Embedded
-	@Property("cost share info")
+	@Embedded("cost share info")
 	private CostShareInfo costShareInfo;
-	@Embedded
-	@Property("university commitments")
+	@Embedded("university commitments")
 	private UniversityCommitments universityCommitments;
-	@Embedded
-	@Property("conflict of interest and commitment info")
+	@Embedded("conflict of interest and commitment info")
 	private ConflictOfInterest conflicOfInterest;
-	@Embedded
-	@Property("compliance info")
+	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo;
 
 	public Proposal(String proposalNo, Date dateReceived,

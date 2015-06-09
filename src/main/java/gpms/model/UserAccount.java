@@ -6,13 +6,14 @@ package gpms.model;
 
 import gpms.dao.BaseEntity;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Property;
 
 @Entity
 public class UserAccount extends BaseEntity {
-	private ObjectId userId;
+	@Property("username")
 	private String userName;
+	@Property("password")
 	private String password;
 
 	public UserAccount(String userName, String password) {
@@ -26,18 +27,6 @@ public class UserAccount extends BaseEntity {
 		this.userName = userName;
 		this.password = "123456789"; // TODO:: user random password generator
 	}
-
-	public UserAccount() {
-	}
-
-	public ObjectId getUserId() {
-		return userId;
-	}
-
-	// public void set_uid(ObjectId _id)
-	// {
-	// this._id = _id;
-	// }
 
 	public String getUserName() {
 		return userName;
@@ -55,9 +44,11 @@ public class UserAccount extends BaseEntity {
 		this.password = password;
 	}
 
-	// @Override
-	// public String toString()
-	// {
-	// return this.get_user_name() + " " + this.get_password();
-	// }
+	public UserAccount() {
+	}
+
+	@Override
+	public String toString() {
+		return this.getUserName() + " " + this.getPassword();
+	}
 }
