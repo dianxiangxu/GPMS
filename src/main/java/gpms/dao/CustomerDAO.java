@@ -33,4 +33,5 @@ public class CustomerDAO extends BasicDAO<Customer, String> {
 	public List findAll() {
 		return ds.find(Customer.class).asList();
 	}
+	findingLastContain()
 }

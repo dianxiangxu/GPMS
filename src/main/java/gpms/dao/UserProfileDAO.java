@@ -24,7 +24,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	private static Morphia morphia;
 	private static Datastore ds;
 
+<<<<<<< HEAD
+	
+	
+	public UserProfileDAO(MongoClient mongo, Morphia morphia) 
+	{
+=======
 	public UserProfileDAO(MongoClient mongo, Morphia morphia) {
+>>>>>>> 7b677d2c2294232924605fc30a84bb2607653354
 		super(mongo, morphia, DBNAME);
 	}
 

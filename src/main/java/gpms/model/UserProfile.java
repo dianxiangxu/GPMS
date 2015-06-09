@@ -31,6 +31,9 @@ public class UserProfile extends BaseEntity {
 	private List<String> emails = new ArrayList<String>();
 	@Reference("user id")
 	private UserAccount userId;
+	
+	@Property("deleted")
+	private boolean isDeleted = false;
 
 	/**
 	 * Overloaded constructor
