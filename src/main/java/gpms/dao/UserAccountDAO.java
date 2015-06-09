@@ -20,4 +20,5 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).asList();
 	}
+
 }
