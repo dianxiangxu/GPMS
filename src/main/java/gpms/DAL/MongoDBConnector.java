@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -20,6 +22,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class MongoDBConnector {
+	private final static Logger logger = LoggerFactory
+			.getLogger(MongoDBConnector.class);
+
+	private static final int port = 27017;
+	private static final String host = "localhost";
+	private static MongoClient mongo = null;
+
 	static Mongo connection = null;
 	static DB db = null;
 	static MongoDBConnector theInstance = null;
@@ -28,17 +37,22 @@ public class MongoDBConnector {
 	private static final String DBNAME = "todoapp";
 
 	private static Morphia morphia;
-	private static MongoClient mongo;
 	private static Datastore ds;
 
-	public static MongoClient getMongo() throws UnknownHostException,
-			MongoException {
+	public static MongoClient getMongo() {
 		if (mongo == null) {
-			mongo = new MongoClient("127.0.0.1", 27017);
-			// Mongo mongo = new Mongo(new
-			// MongoURI("mongodb://localhost/mjormIsFun"));
-			// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
-			// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+			try {
+				// mongo = new MongoClient("127.0.0.1", 27017);
+				// Mongo mongo = new Mongo(new
+				// MongoURI("mongodb://localhost/mjormIsFun"));
+				// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
+				// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+				mongo = new MongoClient(host, port);
+				logger.debug("New Mongo created with [" + host + "] and ["
+						+ port + "]");
+			} catch (MongoException e) {
+				logger.error(e.getMessage());
+			}
 		}
 		return mongo;
 	}

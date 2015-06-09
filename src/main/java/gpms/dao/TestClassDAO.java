@@ -11,9 +11,8 @@ import org.mongodb.morphia.dao.BasicDAO;
 
 import com.mongodb.MongoClient;
 
-public class GenericMethodsDAO extends BasicDAO<TestClass, String> {
-	protected GenericMethodsDAO(MongoClient mongoClient, Morphia morphia,
-			String dbName) {
+public class TestClassDAO extends BasicDAO<TestClass, String> {
+	public TestClassDAO(MongoClient mongoClient, Morphia morphia, String dbName) {
 		super(mongoClient, morphia, dbName);
 		// super(mongoClient, morphia, "TestDB");
 	}
@@ -64,5 +63,4 @@ public class GenericMethodsDAO extends BasicDAO<TestClass, String> {
 				ds.createUpdateOperations(TestClass.class).set("completed",
 						Boolean.TRUE));
 	}
-
 }
