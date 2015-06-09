@@ -1,3 +1,4 @@
+//Edited by: Hector C. Ortiz
 /**
  * @author Thomas Volz
  */
@@ -7,6 +8,7 @@ package gpms.model;
 import gpms.dao.BaseEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
@@ -15,227 +17,221 @@ import org.mongodb.morphia.annotations.Reference;
 
 @Entity
 public class UserProfile extends BaseEntity {
-
-	@Property("First Name")
+	@Property("first name")
 	private String firstName;
-
-	@Property("Middle Name")
+	@Property("middle name")
 	private String middleName;
-
-	@Property("Last Name")
+	@Property("last name")
 	private String lastName;
-
-	@Embedded
-	@Property("Details")
-	private ArrayList<PositionDetails> details;
-
-	@Property("Phone Number")
-	private ArrayList<String> phoneNumber;
-
-	@Property("Email")
-	private ArrayList<String> email;
-
-	@Reference
+	@Embedded("details")
+	private List<PositionDetails> details = new ArrayList<PositionDetails>();
+	@Property("phone numbers")
+	private List<String> phoneNumbers = new ArrayList<String>();
+	@Property("emails")
+	private List<String> emails = new ArrayList<String>();
+	@Reference("user id")
 	private UserAccount userId;
 
 	/**
 	 * Overloaded constructor
 	 * 
-	 * @param first_Name First Name of the User
-	 * @param middle_Name Middle Name of the User
-	 * @param last_Name Last Name of the User
-	 * @param userDetails List of Job Type / Position
-	 * @param phone_Number Phone Numbers of the User
-	 * @param userEmail Emails of the user
+	 * @param first_Name
+	 *            First Name of the User
+	 * @param middle_Name
+	 *            Middle Name of the User
+	 * @param last_Name
+	 *            Last Name of the User
+	 * @param userDetails
+	 *            List of Job Type / Position
+	 * @param phone_Number
+	 *            Phone Numbers of the User
+	 * @param userEmail
+	 *            Emails of the user
 	 */
-	public UserProfile(String first_Name, String middle_Name, String last_Name,
-			ArrayList<PositionDetails> userDetails, ArrayList<String> phone_Number,
-			ArrayList<String> userEmail) 
-	{
-		firstName = first_Name;
-		middleName = middle_Name;
-		lastName = last_Name;
-		details = userDetails;
-		phoneNumber = phone_Number;
-		email = userEmail;
+	public UserProfile(String firstName, String middleName, String lastName,
+			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
+			ArrayList<String> emails, UserAccount userId) {
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.details = details;
+		this.phoneNumbers = phoneNumbers;
+		this.emails = emails;
+		this.userId = userId;
 	}
 
 	/**
 	 * Constructor for creating user profile with name only
 	 * 
-	 * @param firstName First name of the user
-	 * @param middleName Middle name of the user
-	 * @param lastName Last name of the user
+	 * @param firstName
+	 *            First name of the user
+	 * @param middleName
+	 *            Middle name of the user
+	 * @param lastName
+	 *            Last name of the user
 	 */
-	public UserProfile(String first_Name, String middle_Name, String last_Name) 
-	{
-		firstName = first_Name;
-		middleName = middle_Name;
-		lastName = last_Name;
+	public UserProfile(String firstName, String middleName, String lastName) {
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
 	}
 
 	/**
-	 * Non-Parameterized constructor, needed for @id assignment	
+	 * Non-Parameterized constructor, needed for @id assignment
 	 */
-	public UserProfile() 
-	{
-	}
-
-	/**
-	 * 
-	 * @return the moba generated ID
-	 */
-	public UserAccount getUserId() 
-	{
-		return userId;
+	public UserProfile() {
 	}
 
 	/**
 	 * 
 	 * @return First name of the user
 	 */
-	public String getFirstName() 
-	{
+	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
 	 * Changes the first name of the user
-	 * @param newName the new first name
+	 * 
+	 * @param newName
+	 *            the new first name
 	 */
-	public void setFirstName(String newName) 
-	{
-		firstName = newName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-
 
 	/**
 	 * 
 	 * @return the middle name of the user
 	 */
-	public String getMiddleName() 
-	{
+	public String getMiddleName() {
 		return middleName;
 	}
 
 	/**
 	 * Changes the middle name of the user
-	 * @param newName the new middle name
+	 * 
+	 * @param newName
+	 *            the new middle name
 	 */
-	public void setMiddleName(String newName) 
-	{
-		middleName = newName;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 
 	/**
 	 * 
 	 * @return the last name of the user
 	 */
-	public String getLastName() 
-	{
+	public String getLastName() {
 		return lastName;
 	}
 
 	/**
 	 * Changes the last name of the user
-	 * @param newName the new last name
+	 * 
+	 * @param newName
+	 *            the new last name
 	 */
-	public void setLastName(String newName) 
-	{
-		lastName = newName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
 	 * 
 	 * @return the array list of details
 	 */
-	public ArrayList<PositionDetails> getDetails() 
-	{
+	public List<PositionDetails> getDetails() {
 		return details;
 	}
 
 	/**
 	 * Should not be used
+	 * 
 	 * @param details
 	 */
-	public void setDetails(ArrayList<PositionDetails> theDetails) 
-	{
-		details = theDetails;
+	public void setDetails(List<PositionDetails> details) {
+		this.details = details;
 	}
 
 	/**
 	 * Add a collection of position details to the existing array list
+	 * 
 	 * @param positionDetails
 	 */
-	public void addDetails(PositionDetails positionDetails)
-	{
+	public void addDetails(PositionDetails positionDetails) {
 		details.add(positionDetails);
 	}
-	
+
 	/**
 	 * 
 	 * @return the array list of phone numbers
 	 */
-	public ArrayList<String> getPhoneNumber() 
-	{
-		return phoneNumber;
+	public List<String> getPhoneNumbers() {
+		return phoneNumbers;
 	}
 
 	/**
 	 * Should not be used
+	 * 
 	 * @param phoneNumber
 	 */
-	public void setPhoneNumber(ArrayList<String> phoneNumber) 
-	{
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumbers(List<String> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
 	}
 
 	/**
 	 * 
-	 * @param number the phone number to be added to the list
+	 * @param number
+	 *            the phone number to be added to the list
 	 */
-	public void addPhoneNumber(String number) 
-	{
-		phoneNumber.add(number);
+	public void addPhoneNumber(String number) {
+		phoneNumbers.add(number);
 	}
 
 	/**
 	 * 
 	 * @return the array list of email addresses
 	 */
-	public ArrayList<String> getEmail() 
-	{
-		return email;
+
+	public List<String> getEmails() {
+		return emails;
 	}
 
 	/**
 	 * Should not be used
+	 * 
 	 * @param setEmail
 	 */
-	public void setEmail(ArrayList<String> setEmail) 
-	{
-		email = setEmail;
+	public void setEmails(List<String> emails) {
+		this.emails = emails;
 	}
 
 	/**
 	 * Add an email string to the email array list
-	 * @param addEmail the new email to add
+	 * 
+	 * @param addEmail
+	 *            the new email to add
 	 */
-	public void addEmail(String addEmail)
-	{
-		email.add(addEmail);
+	public void addEmail(String addEmail) {
+		emails.add(addEmail);
 	}
-	
+
+	public UserAccount getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UserAccount userId) {
+		this.userId = userId;
+	}
+
 	/**
 	 * toString returns full user name
+	 * 
 	 * @return full name of the user
 	 */
 	@Override
-	public String toString() 
-	{
-		String userInfo="";
-		userInfo+=firstName + " " + middleName + " " + lastName;
-		return userInfo;
-	
+	public String toString() {
+		return this.getFirstName() + " " + this.getMiddleName() + " "
+				+ this.getLastName();
 	}
 }
