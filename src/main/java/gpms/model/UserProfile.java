@@ -35,17 +35,17 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Overloaded constructor
 	 * 
-	 * @param first_Name
+	 * @param firstName
 	 *            First Name of the User
-	 * @param middle_Name
+	 * @param middleName
 	 *            Middle Name of the User
-	 * @param last_Name
+	 * @param lastName
 	 *            Last Name of the User
-	 * @param userDetails
+	 * @param details
 	 *            List of Job Type / Position
-	 * @param phone_Number
+	 * @param phoneNumbers
 	 *            Phone Numbers of the User
-	 * @param userEmail
+	 * @param emails
 	 *            Emails of the user
 	 */
 	public UserProfile(String firstName, String middleName, String lastName,
