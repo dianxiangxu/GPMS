@@ -11,40 +11,40 @@ import org.mongodb.morphia.annotations.Id;
 
 @Entity(value = UserAccountDAO.COLLECTION_NAME)
 public class UserAccount extends BaseEntity {
-	private String _username;
-	private String _password;
+	private String username;
+	private String password;
 
 	public UserAccount(String username, String password) {
-		this._username = username;
-		this._password = password;
+		this.username = username;
+		this.password = password;
 	}
 
 	public UserAccount(String username) {
-		this._username = username;
-		this._password = "123456789"; // TODO:: user random password generator
+		this.username = username;
+		this.password = "123456789"; // TODO:: user random password generator
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public UserAccount() {
 	}
 
-	public String get_username() {
-		return _username;
-	}
-
-	public void set_username(String _username) {
-		this._username = _username;
-	}
-
-	public String get_password() {
-		return _password;
-	}
-
-	public void set_password(String _password) {
-		this._password = _password;
-	}
-
 	@Override
 	public String toString() {
-		return this.get_username() + " " + this.get_password();
+		return this.getUsername() + " " + this.getPassword();
 	}
 }
