@@ -3,12 +3,11 @@ package gpms.model;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
+
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-import gpms.dao.TodoDAO;
-
-@Entity(value = TodoDAO.COLLECTION_NAME)
+@Entity
 public class Todo {
 
 	private String task;

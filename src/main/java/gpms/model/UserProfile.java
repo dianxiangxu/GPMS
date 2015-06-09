@@ -1,144 +1,110 @@
+//Edited by: Hector C. Ortiz
+
 package gpms.model;
 
 import gpms.dao.BaseEntity;
-import gpms.dao.UserProfileDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
-@Entity(value = UserProfileDAO.COLLECTION_NAME)
+@Entity
 public class UserProfile extends BaseEntity {
-	@Property("first name")
-	private String firstname;
-	@Property("middle name")
-	private String middlename;
-	@Property("last name")
-	private String lastname;
-	@Property("details")
-	private List<PositionDetails> details = new ArrayList<PositionDetails>();
-	@Property("phone numbers")
-	private List<String> phoneNumbers = new ArrayList<String>();
-	@Property("emails")
-	private List<String> emails = new ArrayList<String>();
+	private String firstName;
+	private String middleName;
+	private String lastName;
+
+	@Embedded
+	private ArrayList<PositionDetails> details;
+
+	private ArrayList<String> phoneNumber;
+	private ArrayList<String> email;
+
 	@Reference
-	@Property("user id")
-	private User userid;
+	private UserAccount userId;
 
-	/**
-	 * This creates a profile for a user in the system
-	 * 
-	 * @param firstname
-	 *            First Name of the User
-	 * @param middlename
-	 *            Middle Name of the User
-	 * @param lastname
-	 *            Last Name of the User
-	 * @param details
-	 * @param phonenumber
-	 * @param email
-	 * @param id
-	 */
-	public UserProfile(String firstname, String middlename, String lastname,
-			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
-			ArrayList<String> emails) {
-		this.firstname = firstname;
-		this.middlename = middlename;
-		this.lastname = lastname;
+	public UserProfile(String firstName, String middleName, String lastName,
+			ArrayList<PositionDetails> details, ArrayList<String> phoneNumber,
+			ArrayList<String> email, UserAccount userId) {
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
 		this.details = details;
-		this.phoneNumbers = phoneNumbers;
-		this.emails = emails;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.userId = userId;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public UserProfile(String firstName, String middleName, String lastName) {
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public UserProfile() {
 	}
 
-	public String getMiddlename() {
-		return middlename;
+	public UserAccount getUserId() {
+		return userId;
 	}
 
-	public void setMiddlename(String middlename) {
-		this.middlename = middlename;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public List<PositionDetails> getDetails() {
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public ArrayList<PositionDetails> getDetails() {
 		return details;
 	}
 
-	public void setDetails(List<PositionDetails> details) {
+	public void setDetails(ArrayList<PositionDetails> details) {
 		this.details = details;
 	}
 
-	public List<String> getPhoneNumbers() {
-		return phoneNumbers;
+	public ArrayList<String> getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhoneNumbers(List<String> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
+	public void setPhoneNumber(ArrayList<String> phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public List<String> getEmails() {
-		return emails;
+	public void addPhoneNumber(String phone) {
+		this.phoneNumber.add(phone);
 	}
 
-	public void setEmails(List<String> emails) {
-		this.emails = emails;
+	public ArrayList<String> getEmail() {
+		return email;
 	}
 
-	public User getUserid() {
-		return userid;
+	public void setEmail(ArrayList<String> email) {
+		this.email = email;
 	}
 
-	public void setUserid(User userid) {
-		this.userid = userid;
-	}
-
-	/**
-	 * Creates a User Profile with only name as parameters
-	 * 
-	 * @param firstname
-	 *            First Name of the User
-	 * @param middlename
-	 *            Middle Name of the User
-	 * @param lastname
-	 *            Surname of the User
-	 */
-	public UserProfile(String firstname, String middlename, String lastname) {
-		this.firstname = firstname;
-		this.middlename = middlename;
-		this.lastname = lastname;
-	}
-
-	/**
-	 * Parameter-less constructor, required for ObjectId creation.
-	 */
-	public UserProfile() {
-
-	}
-
-	/**
-	 * @return toString format for user profile, name of user.
-	 */
 	@Override
 	public String toString() {
-		return this.getFirstname() + " " + this.getMiddlename() + " "
-				+ this.getLastname();
+		return this.getFirstName() + " " + this.getMiddleName() + " "
+				+ this.getLastName();
 	}
-
 }
