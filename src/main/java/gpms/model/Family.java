@@ -1,5 +1,7 @@
 package gpms.model;
 
+import gpms.dao.BaseEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +16,7 @@ import org.mongodb.morphia.annotations.Reference;
  * @author shaines
  */
 @Entity
-public class Family {
-	@Id
-	private ObjectId id;
-
+public class Family extends BaseEntity {
 	@Property("Sur Name")
 	private String surname;
 
@@ -47,14 +46,6 @@ public class Family {
 
 	public void setDad(User dad) {
 		this.dad = dad;
-	}
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
 	}
 
 	public User getMom() {

@@ -4,55 +4,52 @@ package gpms.model;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 
 @Embedded
-public class TypeOfRequest 
-{
-	private boolean is_pre_proposal;
-	private boolean is_new_proposal;
-	private boolean is_continuation;
-	private boolean is_supplement;
-	
-	public TypeOfRequest()
-	{}
-	
-	public void set_is_pre_proposal(boolean is_pre_proposal)
-	{
-		this.is_pre_proposal = is_pre_proposal;
+public class TypeOfRequest {
+	@Property("pre-proposal")
+	private boolean isPreProposal;
+	@Property("new proposal")
+	private boolean isNewProposal;
+	@Property("continuation")
+	private boolean isContinuation;
+	@Property("supplement")
+	private boolean isSupplement;
+
+	public TypeOfRequest() {
 	}
-	
-	public boolean get_is_pre_proposal()
-	{
-		return is_pre_proposal;
+
+	public boolean isPreProposal() {
+		return isPreProposal;
 	}
-	
-	public void set_is_new_proposal(boolean is_new_proposal)
-	{
-		this.is_new_proposal = is_new_proposal;
+
+	public void setPreProposal(boolean isPreProposal) {
+		this.isPreProposal = isPreProposal;
 	}
-	
-	public boolean get_is_new_proposal()
-	{
-		return is_new_proposal;
+
+	public boolean isNewProposal() {
+		return isNewProposal;
 	}
-	
-	public void set_is_continuation(boolean is_continuation)
-	{
-		this.is_continuation = is_continuation;
+
+	public void setNewProposal(boolean isNewProposal) {
+		this.isNewProposal = isNewProposal;
 	}
-	
-	public boolean get_is_continuation()
-	{
-		return is_continuation;
+
+	public boolean isContinuation() {
+		return isContinuation;
 	}
-	
-	public void set_is_supplement(boolean is_supplement)
-	{
-		this.is_supplement = is_supplement;
+
+	public void setContinuation(boolean isContinuation) {
+		this.isContinuation = isContinuation;
 	}
-	
-	public boolean get_is_supplement()
-	{
-		return is_supplement;
+
+	public boolean isSupplement() {
+		return isSupplement;
 	}
+
+	public void setSupplement(boolean isSupplement) {
+		this.isSupplement = isSupplement;
+	}
+
 }

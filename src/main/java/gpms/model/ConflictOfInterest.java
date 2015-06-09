@@ -2,41 +2,47 @@
 
 package gpms.model;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
 
 @Embedded
 public class ConflictOfInterest {
 	// c_o_i == conflict_of_interest
-	private boolean financial_c_o_i;
+	@Property("financial COI")
+	private boolean financialCOI;
 	// if financial_c_o_i == true
-	private boolean conflict_disclosed;
+	@Property("conflict disclosed")
+	private boolean conflictDisclosed;
 	// if disclosure_form_change == true, disclosure must be updated
-	private boolean disclosure_form_change;
+	@Property("disclosure form change")
+	private boolean disclosureFormChange;
 
 	public ConflictOfInterest() {
 	}
 
-	public void set_financial_c_o_i(boolean financial_c_o_i) {
-		this.financial_c_o_i = financial_c_o_i;
+	public boolean isFinancialCOI() {
+		return financialCOI;
 	}
 
-	public boolean get_financial_c_o_i() {
-		return financial_c_o_i;
+	public void setFinancialCOI(boolean financialCOI) {
+		this.financialCOI = financialCOI;
 	}
 
-	public void set_conflict_disclosed(boolean conflict_disclosed) {
-		this.conflict_disclosed = conflict_disclosed;
+	public boolean isConflictDisclosed() {
+		return conflictDisclosed;
 	}
 
-	public boolean get_conflict_disclosed() {
-		return conflict_disclosed;
+	public void setConflictDisclosed(boolean conflictDisclosed) {
+		this.conflictDisclosed = conflictDisclosed;
 	}
 
-	public void set_disclosure_form_change(boolean disclosure_form_change) {
-		this.disclosure_form_change = disclosure_form_change;
+	public boolean isDisclosureFormChange() {
+		return disclosureFormChange;
 	}
 
-	public boolean get_disclosure_form_change() {
-		return disclosure_form_change;
+	public void setDisclosureFormChange(boolean disclosureFormChange) {
+		this.disclosureFormChange = disclosureFormChange;
 	}
+
 }

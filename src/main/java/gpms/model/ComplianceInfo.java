@@ -1,6 +1,9 @@
 package gpms.model;
 
-public class ComplianceInfo 
-{
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
+
+@Embedded
+public class ComplianceInfo {
 
 }
