@@ -48,6 +48,19 @@ public class TestClassDAO extends BasicDAO<TestClass, String> {
 		return ds.find(TestClass.class).filter("email = ", email).get();
 	}
 
+	// public List<TestClass> findByUID(Long uId) {
+	// Query<TestClass> query = datastore.createQuery(TestClass.class);
+	// query.and(query.criteria("accounts.name").equal("Personal Account"),
+	// query.criteria("address.number").equal("81"),
+	// query.criteria("name").contains("Bank"));
+	//
+	// QueryResults<TestClass> retrievedTests = testClassDao.find(query);
+	//
+	// Query<TestClass> query = getNewsQuery().field("active").equal(true)
+	// .field("uid").equal(uId);
+	// return query.asList();
+	// }
+
 	public List<TestClass> getOpenTodos() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(TestClass.class).field("completed")

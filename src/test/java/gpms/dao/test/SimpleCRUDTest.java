@@ -73,8 +73,7 @@ public class SimpleCRUDTest {
 		logger.debug("The new count is [" + newCounter + "]");
 
 		assertTrue((counter + 1) == newCounter);
-		// You can use
-		// assertEqual, assertFalse, etc.
+		// You can use assertTrue, assertEqual, assertFalse, etc.
 
 		// List<TestClass> testUsers = testClassDao.findAllTests();
 		// for (TestClass c : testUsers) {

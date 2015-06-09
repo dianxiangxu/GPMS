@@ -16,9 +16,9 @@ public class InvestigatorInfo {
 	@Reference("PI")
 	private UserAccount pi;
 	@Reference("CO-PI")
-	private ArrayList<UserAccount> co_pi;
+	private ArrayList<UserAccount> co_pi = new ArrayList<UserAccount>();
 	@Reference("senior personnel")
-	private ArrayList<UserAccount> seniorPersonnel;
+	private ArrayList<UserAccount> seniorPersonnel = new ArrayList<UserAccount>();
 
 	public InvestigatorInfo() {
 	}

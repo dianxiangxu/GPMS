@@ -17,11 +17,11 @@ public class SponsorAndBudgetInfo {
 	@Property("direct costs")
 	private double directCosts;
 	@Property("F&A costs")
-	private double faCosts;
+	private double FACosts;
 	@Property("total costs")
 	private double totalCosts;
 	@Property("F&A rate")
-	private double faRate;
+	private double FARate;
 
 	public SponsorAndBudgetInfo() {
 	}
@@ -34,6 +34,10 @@ public class SponsorAndBudgetInfo {
 		this.grantingAgency = grantingAgency;
 	}
 
+	public void addGrantingAgency(String agencyName)
+	{
+		this.grantingAgency.add(agencyName);
+	}
 	public double getDirectCosts() {
 		return directCosts;
 	}
@@ -42,12 +46,12 @@ public class SponsorAndBudgetInfo {
 		this.directCosts = directCosts;
 	}
 
-	public double getFaCosts() {
-		return faCosts;
+	public double getFACosts() {
+		return FACosts;
 	}
 
-	public void setFaCosts(double faCosts) {
-		this.faCosts = faCosts;
+	public void setFACosts(double fACosts) {
+		FACosts = fACosts;
 	}
 
 	public double getTotalCosts() {
@@ -58,12 +62,11 @@ public class SponsorAndBudgetInfo {
 		this.totalCosts = totalCosts;
 	}
 
-	public double getFaRate() {
-		return faRate;
+	public double getFARate() {
+		return FARate;
 	}
 
-	public void setFaRate(double faRate) {
-		this.faRate = faRate;
+	public void setFARate(double fARate) {
+		FARate = fARate;
 	}
-
 }
