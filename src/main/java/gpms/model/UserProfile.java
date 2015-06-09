@@ -5,35 +5,42 @@ package gpms.model;
 import gpms.dao.BaseEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity
 public class UserProfile extends BaseEntity {
+
+	@Property("first name")
 	private String firstName;
+	@Property("middle name")
 	private String middleName;
+	@Property("last name")
 	private String lastName;
-
 	@Embedded
-	private ArrayList<PositionDetails> details;
-
-	private ArrayList<String> phoneNumber;
-	private ArrayList<String> email;
-
+	@Property("details")
+	private List<PositionDetails> details = new ArrayList<PositionDetails>();
+	@Property("phone numbers")
+	private List<String> phoneNumbers = new ArrayList<String>();
+	@Property("emails")
+	private List<String> emails = new ArrayList<String>();
 	@Reference
+	@Property("user id")
 	private UserAccount userId;
 
 	public UserProfile(String firstName, String middleName, String lastName,
-			ArrayList<PositionDetails> details, ArrayList<String> phoneNumber,
-			ArrayList<String> email, UserAccount userId) {
+			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
+			ArrayList<String> emails, UserAccount userId) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 		this.details = details;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
+		this.phoneNumbers = phoneNumbers;
+		this.emails = emails;
 		this.userId = userId;
 	}
 
@@ -44,10 +51,6 @@ public class UserProfile extends BaseEntity {
 	}
 
 	public UserProfile() {
-	}
-
-	public UserAccount getUserId() {
-		return userId;
 	}
 
 	public String getFirstName() {
@@ -74,32 +77,36 @@ public class UserProfile extends BaseEntity {
 		this.lastName = lastName;
 	}
 
-	public ArrayList<PositionDetails> getDetails() {
+	public List<PositionDetails> getDetails() {
 		return details;
 	}
 
-	public void setDetails(ArrayList<PositionDetails> details) {
+	public void setDetails(List<PositionDetails> details) {
 		this.details = details;
 	}
 
-	public ArrayList<String> getPhoneNumber() {
-		return phoneNumber;
+	public List<String> getPhoneNumbers() {
+		return phoneNumbers;
 	}
 
-	public void setPhoneNumber(ArrayList<String> phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumbers(List<String> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
 	}
 
-	public void addPhoneNumber(String phone) {
-		this.phoneNumber.add(phone);
+	public List<String> getEmails() {
+		return emails;
 	}
 
-	public ArrayList<String> getEmail() {
-		return email;
+	public void setEmails(List<String> emails) {
+		this.emails = emails;
 	}
 
-	public void setEmail(ArrayList<String> email) {
-		this.email = email;
+	public UserAccount getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UserAccount userId) {
+		this.userId = userId;
 	}
 
 	@Override
