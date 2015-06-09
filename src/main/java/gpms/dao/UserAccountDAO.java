@@ -12,20 +12,11 @@ import org.mongodb.morphia.dao.BasicDAO;
 import com.mongodb.MongoClient;
 
 public class UserAccountDAO extends BasicDAO<UserAccount, String> {
-	private static final String DBNAME = "GPMS";
-	public static final String COLLECTION_NAME = "User Account";
-	private static Morphia morphia;	
-	private static Datastore ds;
-
-
 	public UserAccountDAO(Morphia morphia, MongoClient mongo, String dbName) {
 		super(mongo, morphia, dbName);
 	}
 
-
-
-	public List<UserAccount> getAllUserAccounts() throws UnknownHostException 
-	{
+	public List<UserAccount> getAllUserAccounts() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).asList();
 	}
