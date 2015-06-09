@@ -36,15 +36,17 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		return morphia;
 	}
 
-	public static void saveUserAccount(UserAccount userAccount)
-			throws UnknownHostException {
-		Morphia morphia = getMorphia();
-		morphia.map(UserAccount.class);
-		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(),
-				DBNAME);
-		ds.save(userAccount);
-	}
+//	public static void saveUserAccount(UserAccount userAccount)
+//			throws UnknownHostException {
+//		Morphia morphia = getMorphia();
+//		morphia.map(UserAccount.class);
+//		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(),
+//				DBNAME);
+//		ds.save(userAccount);
+//	}
 
+	
+	
 	public static List<UserAccount> getAllUserAccounts()
 			throws UnknownHostException {
 		return ds.createQuery(UserAccount.class).asList();

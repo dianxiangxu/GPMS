@@ -37,6 +37,9 @@ public class UserProfile extends BaseEntity {
 
 	@Reference
 	private UserAccount userId;
+	
+	@Property("deleted")
+	private boolean isDeleted = false;
 
 	/**
 	 * Overloaded constructor
