@@ -6,38 +6,38 @@ import java.util.Date;
 
 //import org.bson.types.ObjectId;
 
-import com.google.code.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Embedded;
 //import com.google.code.morphia.annotations.Id;
 
 @Embedded
 public class ProjectInfo
 {
-	private String project_title;
+	private String projectTitle;
 	// private ArrayList<ProjectType> _projectType;
 	@Embedded
-	private ProjectType project_type;
+	private ProjectType projectType;
 	// private ArrayList<RequestType> _requestType;
 	@Embedded
-	private TypeOfRequest type_of_request;
-	private Date due_date;
+	private TypeOfRequest typeOfRequest;
+	private Date dueDate;
 	// private ArrayList<ProjectPeriod> _projectPeriod;
 	@Embedded
-	private ProjectPeriod project_period;
+	private ProjectPeriod projectPeriod;
 	// private ArrayList<ProjectLocation> _projectLocation;
 	//private boolean _offCampus;
-	private boolean on_campus;
+	private boolean onCampus;
 	
 	public ProjectInfo()
 	{}
 
-	public String get_project_title() 
+	public String getProjectTitle() 
 	{
-		return project_title;
+		return projectTitle;
 	}
 
-	public void set_project_title(String project_title) 
+	public void setProjectTitle(String projectTitle) 
 	{
-		this.project_title = project_title;
+		this.projectTitle = projectTitle;
 	}
 
 	// public ArrayList<ProjectType> get_projectType() {
@@ -48,14 +48,14 @@ public class ProjectInfo
 	// this._projectType = _projectType;
 	// }
 	
-	public void set_project_type(ProjectType project_type)
+	public void setProjectType(ProjectType projectType)
 	{
-		this.project_type = project_type;
+		this.projectType = projectType;
 	}
 	
-	public ProjectType get_project_type()
+	public ProjectType getProjectType()
 	{
-		return project_type;
+		return projectType;
 	}
 
 	//
@@ -67,24 +67,24 @@ public class ProjectInfo
 	// this._requestType = _requestType;
 	// }
 	
-	public void set_type_of_request(TypeOfRequest type_of_request)
+	public void setTypeOfRequest(TypeOfRequest typeOfRequest)
 	{
-		this.type_of_request = type_of_request;
+		this.typeOfRequest = typeOfRequest;
 	}
 	
-	public TypeOfRequest get_type_of_request()
+	public TypeOfRequest getTypeOfRequest()
 	{
-		return type_of_request;
+		return typeOfRequest;
 	}
 
-	public Date get_due_date() 
+	public Date getDueDate() 
 	{
-		return due_date;
+		return dueDate;
 	}
 
-	public void set_due_date(Date due_date) 
+	public void setDueDate(Date dueDate) 
 	{
-		this.due_date = due_date;
+		this.dueDate = dueDate;
 	}
 
 	// public ArrayList<ProjectPeriod> get_projectPeriod() {
@@ -95,14 +95,14 @@ public class ProjectInfo
 	// this._projectPeriod = _projectPeriod;
 	// }
 
-	public void set_project_period(ProjectPeriod project_period)
+	public void setProjectPeriod(ProjectPeriod projectPeriod)
 	{
-		this.project_period = project_period;
+		this.projectPeriod = projectPeriod;
 	}
 	
-	public ProjectPeriod get_project_period()
+	public ProjectPeriod getProjectPeriod()
 	{
-		return project_period;
+		return projectPeriod;
 	}
 
 	// public ArrayList<ProjectLocation> get_projectLocation() {
@@ -122,13 +122,13 @@ public class ProjectInfo
 //		this.off_campus = off_campus;
 //	}
 
-	public boolean is_on_campus() 
+	public boolean isOnCampus() 
 	{
-		return on_campus;
+		return onCampus;
 	}
 
-	public void set_on_campus(boolean on_campus) 
+	public void setIsOnCampus(boolean onCampus) 
 	{
-		this.on_campus = on_campus;
+		this.onCampus = onCampus;
 	}
 }

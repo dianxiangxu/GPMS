@@ -2,57 +2,56 @@
 
 package gpms.model;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Embedded;
 
 @Embedded
 public class TypeOfRequest 
 {
-	private boolean is_pre_proposal;
-	private boolean is_new_proposal;
-	private boolean is_continuation;
-	private boolean is_supplement;
+	private boolean isPreProposal;
+	private boolean isNewProposal;
+	private boolean isContinuation;
+	private boolean isSupplement;
 	
 	public TypeOfRequest()
 	{}
 	
-	public void set_is_pre_proposal(boolean is_pre_proposal)
+	public void setIsPreProposal(boolean isPreProposal)
 	{
-		this.is_pre_proposal = is_pre_proposal;
+		this.isPreProposal = isPreProposal;
 	}
 	
-	public boolean get_is_pre_proposal()
+	public boolean getIsPreProposal()
 	{
-		return is_pre_proposal;
+		return isPreProposal;
 	}
 	
-	public void set_is_new_proposal(boolean is_new_proposal)
+	public void setIsNewProposal(boolean isNewProposal)
 	{
-		this.is_new_proposal = is_new_proposal;
+		this.isNewProposal = isNewProposal;
 	}
 	
-	public boolean get_is_new_proposal()
+	public boolean getIsNewProposal()
 	{
-		return is_new_proposal;
+		return isNewProposal;
 	}
 	
-	public void set_is_continuation(boolean is_continuation)
+	public void setIsContinuation(boolean isContinuation)
 	{
-		this.is_continuation = is_continuation;
+		this.isContinuation = isContinuation;
 	}
 	
-	public boolean get_is_continuation()
+	public boolean getIsContinuation()
 	{
-		return is_continuation;
+		return isContinuation;
 	}
 	
-	public void set_is_supplement(boolean is_supplement)
+	public void setIsSupplement(boolean isSupplement)
 	{
-		this.is_supplement = is_supplement;
+		this.isSupplement = isSupplement;
 	}
 	
-	public boolean get_is_supplement()
+	public boolean getIsSupplement()
 	{
-		return is_supplement;
+		return isSupplement;
 	}
 }

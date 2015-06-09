@@ -6,8 +6,9 @@ import java.util.ArrayList;
 
 //import org.bson.types.ObjectId;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Reference;
+
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
 public class InvestigatorInfo

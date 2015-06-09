@@ -4,7 +4,7 @@ package gpms.model;
 
 import java.util.Date;
 
-import com.google.code.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Embedded;
 
 @Embedded
 public class ProjectPeriod 
@@ -15,17 +15,17 @@ public class ProjectPeriod
 	public ProjectPeriod()
 	{}
 	
-	public void set_from(Date from)
+	public void setFrom(Date from)
 	{
 		this.from = from;
 	}
 	
-	public Date get_from()
+	public Date getFrom()
 	{
 		return from;
 	}
 	
-	public void set_to(Date to)
+	public void setTo(Date to)
 	{
 		if(to.after(from))
 		{
@@ -33,7 +33,7 @@ public class ProjectPeriod
 		}
 	}
 	
-	public Date get_to()
+	public Date getTo()
 	{
 		return to;
 	}
