@@ -1,6 +1,5 @@
 package gpms.dao;
 
-import gpms.DAL.MongoDBConnector;
 import gpms.model.User;
 import gpms.model.UserProfile;
 
@@ -18,70 +17,19 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserProfileDAO extends BasicDAO<UserProfile, String> {
-	private static final String DBNAME = "GPMS";
-	public static final String COLLECTION_NAME = "userprofile";
-
-	private static Morphia morphia;
-	private static Datastore ds;
-
-	public UserProfileDAO(MongoClient mongo, Morphia morphia) {
-		super(mongo, morphia, DBNAME);
-	}
-
 	public UserProfileDAO(Morphia morphia, MongoClient mongo, String dbName) {
 		super(mongo, morphia, dbName);
 	}
 
-	/**
-	 * Use with sys/out?
-	 * @return a list of all users
-	 */
-	public List findAll() {
-		return ds.find(UserProfile.class).asList();
-	}
-
-	/**
-	 * Filter by age less than the specified age and then order by the age (youngest to oldest)
-	 * @param age 
-	 * @return
-	 */
-	public List findUnderAge(int age) {
-		// Filter by age less than the specified age and then order by the age
-		// (youngest to oldest)
-		return ds.find(User.class).filter("age < ", age).order("age").asList();
+	public List<UserProfile> getAllUserProfiles() throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserProfile.class).asList();
 	}
 
 	public User findByEmail(String email) {
+		Datastore ds = getDatastore();
 		User res = ds.find(User.class).filter("email = ", email).get();
 		return res;
-	}
-
-	private static Morphia getMorphia() throws UnknownHostException,
-			MongoException {
-		if (morphia == null) {
-			morphia = new Morphia().map(UserProfile.class);
-		}
-		return morphia;
-	}
-
-	/**
-	 * saves the user profile in the database
-	 * 
-	 * @param userProfile
-	 *            the user profile to save
-	 * @throws UnknownHostException
-	 */
-	public static void saveUserProfile(UserProfile userProfile)
-			throws UnknownHostException {
-		Morphia morphia = getMorphia();
-		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(),
-				DBNAME);
-		ds.save(userProfile);
-	}
-
-	public static List<UserProfile> getAllUserProfiles()
-			throws UnknownHostException {
-		return ds.createQuery(UserProfile.class).asList();
 	}
 
 	/**
@@ -92,12 +40,13 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 */
-	public static void changeFirstName(ObjectId id, String firstName)
+	public void changeFirstName(ObjectId id, String firstName)
 			throws UnknownHostException, MongoException {
+		Datastore ds = getDatastore();
 		UpdateOperations<UserProfile> ops;
 		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
 				.field("_id").equal(id);
-		ops = ds.createUpdateOperations(UserProfile.class).set("_firstname",
+		ops = ds.createUpdateOperations(UserProfile.class).set("firstname",
 				firstName);
 		ds.update(updateQuery, ops);
 

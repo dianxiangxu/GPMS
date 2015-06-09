@@ -4,6 +4,7 @@ import gpms.model.Family;
 
 import java.util.List;
 
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 
@@ -16,6 +17,7 @@ public class FamilyDao extends BasicDAO<Family, String> {
 
 	public List<Family> findBySurname(String surname) {
 		// Execute the query using the underlying datasource
+		Datastore ds = getDatastore();
 		return ds.find(Family.class).field("surname").equal(surname).asList();
 	}
 }
