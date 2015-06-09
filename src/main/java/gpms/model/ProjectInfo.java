@@ -7,7 +7,7 @@ import java.util.Date;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 
-public class ProjectInfo extends BaseEntity {
+public class ProjectInfo {
 	private String _projectTitle;
 	// private ArrayList<ProjectType> _projectType;
 	private boolean _researchBasic;
