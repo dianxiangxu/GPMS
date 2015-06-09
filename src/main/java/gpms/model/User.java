@@ -34,7 +34,19 @@ public class User extends BaseEntity {
 		this.age = age;
 	}
 
-	public int getAge() {
+	/**
+	 * Create a user with only the first and last name
+	 * @param first first name of user
+	 * @param last last name of user
+	 */
+	public User(String first, String last)
+	{
+		firstName = first;
+		lastName = last;
+	}
+	
+	public int getAge() 
+	{
 		return age;
 	}
 
