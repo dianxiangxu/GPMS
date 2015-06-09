@@ -72,7 +72,6 @@ public class TodoDAO {
 	// }
 
 	public static List<Todo> getAllTodos() throws UnknownHostException {
-
 		Datastore ds = getDatastore();
 		return ds.createQuery(Todo.class).asList();
 
