@@ -2,25 +2,21 @@ package gpms.model;
 
 import java.util.Date;
 
-import gpms.DAL.UserDAO;
+import gpms.dao.BaseEntity;
+import gpms.dao.UserAccountDAO;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity(value = UserDAO.COLLECTION_NAME)
-public class UserAccount {
-	@Id
-	private ObjectId _id;
+@Entity(value = UserAccountDAO.COLLECTION_NAME)
+public class UserAccount extends BaseEntity {
 	private String _username;
 	private String _password;
 
-	public UserAccount(String username, String password, ObjectId id) {
+	public UserAccount(String username, String password) {
 		this._username = username;
 		this._password = password;
-		// TODO:: encrypt the password
-		this.set_uid(id);
 	}
 
 	public UserAccount(String username) {
@@ -29,14 +25,6 @@ public class UserAccount {
 	}
 
 	public UserAccount() {
-	}
-
-	public ObjectId get_uid() {
-		return _id;
-	}
-
-	public void set_uid(ObjectId _id) {
-		this._id = _id;
 	}
 
 	public String get_username() {

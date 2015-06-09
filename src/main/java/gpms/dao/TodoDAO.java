@@ -1,5 +1,6 @@
-package gpms.DAL;
+package gpms.dao;
 
+import gpms.DAL.MongoDBConnector;
 import gpms.model.Todo;
 
 import java.net.UnknownHostException;

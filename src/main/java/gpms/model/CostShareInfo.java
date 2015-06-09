@@ -1,5 +1,7 @@
 package gpms.model;
 
-public class CostShareInfo extends Proposal {
+import gpms.dao.BaseEntity;
+
+public class CostShareInfo extends BaseEntity {
 
 }

@@ -1,26 +1,18 @@
 package gpms.model;
 
+import gpms.dao.BaseEntity;
+
 import java.util.ArrayList;
+import java.util.List;
 
-import org.bson.types.ObjectId;
-
-public class SponsorAndBudgetInfo extends Proposal {
-	private ObjectId _id;
-	private ArrayList<String> _grantingAgency;
+public class SponsorAndBudgetInfo extends BaseEntity {
+	private List<String> _grantingAgency = new ArrayList<String>();
 	private double _directCosts;
 	private double _faCosts;
 	private double _totalCosts;
 	private double _faRate;
 
-	public ObjectId get_id() {
-		return _id;
-	}
-
-	public void set_id(ObjectId _id) {
-		this._id = _id;
-	}
-
-	public ArrayList<String> get_grantingAgency() {
+	public List<String> get_grantingAgency() {
 		return _grantingAgency;
 	}
 

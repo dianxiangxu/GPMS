@@ -1,25 +1,22 @@
 package gpms.model;
 
-import gpms.DAL.UserProfileDAO;
+import gpms.dao.BaseEntity;
+import gpms.dao.UserProfileDAO;
 
 import java.util.ArrayList;
-
-import org.bson.types.ObjectId;
+import java.util.List;
 
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity(value = UserProfileDAO.COLLECTION_NAME)
-public class UserProfile {
-	@Id
-	private ObjectId _id;
+public class UserProfile extends BaseEntity {
 	private String _firstname;
 	private String _middlename;
 	private String _lastname;
-	private ArrayList<PositionDetails> _details;
-	private ArrayList<String> _phoneNumbers;
-	private ArrayList<String> _email;
+	private List<PositionDetails> _details = new ArrayList<PositionDetails>();
+	private List<String> _phoneNumbers = new ArrayList<String>();
+	private List<String> _email = new ArrayList<String>();
 	@Reference
 	private User _userid;
 
@@ -39,15 +36,13 @@ public class UserProfile {
 	 */
 	public UserProfile(String _firstname, String _middlename, String _lastname,
 			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
-			ArrayList<String> email, ObjectId id) {
+			ArrayList<String> email) {
 		this._firstname = _firstname;
 		this._middlename = _middlename;
 		this._lastname = _lastname;
 		this._details = details;
 		this._phoneNumbers = phoneNumbers;
 		this._email = email;
-		this.set_uid(id);
-
 	}
 
 	/**
@@ -64,7 +59,6 @@ public class UserProfile {
 		this._firstname = _firstname;
 		this._middlename = _middlename;
 		this._lastname = _lastname;
-		// this.set_uid(_id);
 	}
 
 	/**
@@ -72,17 +66,6 @@ public class UserProfile {
 	 */
 	public UserProfile() {
 
-	}
-
-	public ObjectId get_uid() {
-		return _id;
-	}
-
-	// /**
-	// * Used for manually setting the id of the user
-	// */
-	public void set_uid(ObjectId _id) {
-		this._id = _id;
 	}
 
 	public String get_firstname() {
@@ -109,7 +92,7 @@ public class UserProfile {
 		this._lastname = _lastname;
 	}
 
-	public ArrayList<PositionDetails> get_details() {
+	public List<PositionDetails> get_details() {
 		return _details;
 	}
 
@@ -135,7 +118,7 @@ public class UserProfile {
 	 * 
 	 * @return the array list of phone numbers
 	 */
-	public ArrayList<String> get_phonenumber() {
+	public List<String> get_phonenumber() {
 		return _phoneNumbers;
 	}
 
@@ -152,7 +135,7 @@ public class UserProfile {
 	 * 
 	 * @return the email of the user
 	 */
-	public ArrayList<String> get_email() {
+	public List<String> get_email() {
 		return _email;
 	}
 

@@ -1,21 +1,14 @@
 package gpms.model;
 
+import gpms.dao.BaseEntity;
+
 import org.mongodb.morphia.annotations.Id;
 
-public class PositionDetails extends UserAccount {
-	@Id private String _id;
+public class PositionDetails extends BaseEntity {
 	private String _positiontype;
 	private String _positiontitle;
 	private String _department;
 	private String _college;
-
-	public String get_id() {
-		return _id;
-	}
-
-	public void set_id(String _id) {
-		this._id = _id;
-	}
 
 	public String get_positiontype() {
 		return _positiontype;

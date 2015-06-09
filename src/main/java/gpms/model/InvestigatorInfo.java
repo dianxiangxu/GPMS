@@ -1,26 +1,19 @@
 package gpms.model;
 
-import java.util.ArrayList;
+import gpms.dao.BaseEntity;
 
-import org.bson.types.ObjectId;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mongodb.morphia.annotations.Reference;
 
-public class InvestigatorInfo extends Proposal {
-	private ObjectId _id;
+public class InvestigatorInfo extends BaseEntity {
 	@Reference
 	private User _pi;
 	@Reference
-	private ArrayList<User> _copi;
+	private List<User> _copi = new ArrayList<User>();
 	@Reference
-	private ArrayList<User> _seniorPersonnel;
-
-	public ObjectId get_id() {
-		return _id;
-	}
-
-	public void set_id(ObjectId _id) {
-		this._id = _id;
-	}
+	private List<User> _seniorPersonnel = new ArrayList<User>();
 
 	public User get_pi() {
 		return _pi;
@@ -30,7 +23,7 @@ public class InvestigatorInfo extends Proposal {
 		this._pi = _pi;
 	}
 
-	public ArrayList<User> get_copi() {
+	public List<User> get_copi() {
 		return _copi;
 	}
 
@@ -38,7 +31,7 @@ public class InvestigatorInfo extends Proposal {
 		this._copi = _copi;
 	}
 
-	public ArrayList<User> get_seniorPersonnel() {
+	public List<User> get_seniorPersonnel() {
 		return _seniorPersonnel;
 	}
 

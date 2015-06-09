@@ -1,6 +1,6 @@
 package gpms.gui;
 
-import gpms.DAL.TodoDAO;
+import gpms.dao.TodoDAO;
 import gpms.model.Todo;
 
 import java.net.UnknownHostException;

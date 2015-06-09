@@ -1,6 +1,7 @@
 package gpms.model;
 
-import gpms.DAL.ProposalDAO;
+import gpms.dao.BaseEntity;
+import gpms.dao.ProposalDAO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +12,7 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity(value = ProposalDAO.COLLECTION_NAME)
-public class Proposal {
+public class Proposal extends BaseEntity {
 	@Id
 	private ObjectId _id;
 	private String _proposalNo;

@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 
 /**
  * Represents a User object
@@ -14,8 +15,11 @@ import org.mongodb.morphia.annotations.Id;
 public class User {
 	@Id
 	private ObjectId id;
+	@Property("first Name")
 	private String firstName;
+	@Property("last Name")
 	private String lastName;
+	@Property("Age")
 	private int age;
 
 	@Embedded

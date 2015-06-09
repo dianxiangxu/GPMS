@@ -1,13 +1,13 @@
 package gpms.model;
 
+import gpms.dao.BaseEntity;
+
 import java.util.Date;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Id;
 
-public class ProjectInfo extends Proposal {
-	@Id private ObjectId _id;
+public class ProjectInfo extends BaseEntity {
 	private String _projectTitle;
 	// private ArrayList<ProjectType> _projectType;
 	private boolean _researchBasic;
@@ -27,14 +27,6 @@ public class ProjectInfo extends Proposal {
 	// private ArrayList<ProjectLocation> _projectLocation;
 	private boolean _offCampus;
 	private boolean _onCampus;
-
-	public ObjectId get_id() {
-		return _id;
-	}
-
-	public void set_id(ObjectId _id) {
-		this._id = _id;
-	}
 
 	public String get_projectTitle() {
 		return _projectTitle;
