@@ -73,16 +73,13 @@ public class SimpleCRUDTest {
 		logger.debug("The new count is [" + newCounter + "]");
 
 		assertTrue((counter + 1) == newCounter);
+		// You can use
+		// assertEqual, assertFalse, etc.
 
-		// fail("Not yet implemented");
-
-		// Using DAO
-
-		//
-		List<TestClass> testUsers = testClassDao.findAllTests();
-		for (TestClass c : testUsers) {
-			System.out.println("TestClass: " + c);
-		}
+		// List<TestClass> testUsers = testClassDao.findAllTests();
+		// for (TestClass c : testUsers) {
+		// System.out.println("TestClass: " + c);
+		// }
 
 		// //
 		// Query<TestClass> query = datastore.createQuery(TestClass.class);
@@ -117,5 +114,4 @@ public class SimpleCRUDTest {
 		// // Query<TestClass> q = datastore.createQuery(TestClass.class);
 		// // datastore.delete(q);
 	}
-
 }
