@@ -24,6 +24,8 @@ public class UserEntryExample
 
 	public static void main (String args[]) throws UnknownHostException
 	{
+		String firstName, middleName, lastName;
+		String userName;
 		//Create the mongo, the morphia, and the datastore objects needed for entry
 		MongoClient mongo = new MongoClient("localhost");
 		Morphia morphia = new Morphia();
@@ -41,7 +43,19 @@ public class UserEntryExample
 		//This will also automatically create a username for the user
 		UserProfileDAO newUserProfileDAO = new UserProfileDAO(mongo, morphia);
 		
-		UserProfile newUser = new UserProfile("");
+		//This starts with a basic 3 name user entry in the database
+		firstName = "Rick";
+		middleName= "Andrew";
+		lastName = "Hunter";
+		UserProfile newUser = new UserProfile(firstName, middleName, lastName);
+		
+//		newUserProfileDAO.save(newUser);
+
+//		System.out.println(firstName.charAt(0));
+		
+//		String firstChar = firstName.indexOf(0);
+//		
+		
 		
 	}
 

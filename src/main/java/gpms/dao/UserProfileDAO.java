@@ -24,7 +24,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	private static Morphia morphia;
 	private static Datastore ds;
 
-<<<<<<< HEAD
+
 	
 	
 	public UserProfileDAO(MongoClient mongo, Morphia morphia) 

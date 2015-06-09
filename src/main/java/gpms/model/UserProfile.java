@@ -19,16 +19,22 @@ import org.mongodb.morphia.annotations.Reference;
 public class UserProfile extends BaseEntity {
 	@Property("first name")
 	private String firstName;
+	
 	@Property("middle name")
 	private String middleName;
+	
 	@Property("last name")
 	private String lastName;
+	
 	@Embedded("details")
 	private List<PositionDetails> details = new ArrayList<PositionDetails>();
+	
 	@Property("phone numbers")
 	private List<String> phoneNumbers = new ArrayList<String>();
+	
 	@Property("emails")
 	private List<String> emails = new ArrayList<String>();
+
 	@Reference("user id")
 	private UserAccount userId;
 	
