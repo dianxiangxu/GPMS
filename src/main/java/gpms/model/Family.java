@@ -15,7 +15,7 @@ import org.mongodb.morphia.annotations.Reference;
  * 
  * @author shaines
  */
-@Entity
+@Entity("What Name Faamily")
 public class Family extends BaseEntity {
 	@Property("Sur Name")
 	private String surname;
