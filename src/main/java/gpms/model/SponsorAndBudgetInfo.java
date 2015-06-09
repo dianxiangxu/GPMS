@@ -1,16 +1,21 @@
 package gpms.model;
 
-import gpms.dao.BaseEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mongodb.morphia.annotations.Property;
+
 public class SponsorAndBudgetInfo {
+	@Property("granting agency")
 	private List<String> grantingAgency = new ArrayList<String>();
+	@Property("direct costs")
 	private double directCosts;
+	@Property("F&A costs")
 	private double faCosts;
+	@Property("total costs")
 	private double totalCosts;
-	private double faRate;
+	@Property("F&A rate")
+	private double faRate;   
 
 	public List<String> getGrantingAgency() {
 		return grantingAgency;

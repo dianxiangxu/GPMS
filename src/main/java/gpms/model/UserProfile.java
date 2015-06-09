@@ -7,18 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity(value = UserProfileDAO.COLLECTION_NAME)
 public class UserProfile extends BaseEntity {
+	@Property("first name")
 	private String firstname;
+	@Property("middle name")
 	private String middlename;
+	@Property("last name")
 	private String lastname;
+	@Property("details")
 	private List<PositionDetails> details = new ArrayList<PositionDetails>();
+	@Property("phone numbers")
 	private List<String> phoneNumbers = new ArrayList<String>();
+	@Property("emails")
 	private List<String> emails = new ArrayList<String>();
 	@Reference
-	private User _userid;
+	@Property("user id")
+	private User userid;
 
 	/**
 	 * This creates a profile for a user in the system
@@ -93,12 +101,12 @@ public class UserProfile extends BaseEntity {
 		this.emails = emails;
 	}
 
-	public User get_userid() {
-		return _userid;
+	public User getUserid() {
+		return userid;
 	}
 
-	public void set_userid(User _userid) {
-		this._userid = _userid;
+	public void setUserid(User userid) {
+		this.userid = userid;
 	}
 
 	/**

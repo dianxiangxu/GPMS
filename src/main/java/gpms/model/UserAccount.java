@@ -1,17 +1,16 @@
 package gpms.model;
 
-import java.util.Date;
-
 import gpms.dao.BaseEntity;
 import gpms.dao.UserAccountDAO;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 
 @Entity(value = UserAccountDAO.COLLECTION_NAME)
 public class UserAccount extends BaseEntity {
+	@Property("username")
 	private String username;
+	@Property("password")
 	private String password;
 
 	public UserAccount(String username, String password) {
