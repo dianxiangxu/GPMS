@@ -3,76 +3,67 @@
 package gpms.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
 
 //import org.bson.types.ObjectId;
 
 @Embedded
-public class SponsorAndBudgetInfo
-{
-	private ArrayList<String> granting_agency;
-	private double direct_costs;
-	private double f_a_costs;
-	private double total_costs;
-	private double f_a_rate;
-	
-	public SponsorAndBudgetInfo()
-	{}
+public class SponsorAndBudgetInfo {
+	@Property("granting agency")
+	private List<String> grantingAgency = new ArrayList<String>();
+	@Property("direct costs")
+	private double directCosts;
+	@Property("F&A costs")
+	private double faCosts;
+	@Property("total costs")
+	private double totalCosts;
+	@Property("F&A rate")
+	private double faRate;
 
-	public ArrayList<String> get_granting_agency() 
-	{
-		return granting_agency;
+	public SponsorAndBudgetInfo() {
 	}
 
-	public void set_granting_agency(ArrayList<String> granting_agency) 
-	{
-		this.granting_agency = granting_agency;
-	}
-	
-	public void add_granting_agency(String agency_name)
-	{
-		this.granting_agency.add(agency_name);
+	public List<String> getGrantingAgency() {
+		return grantingAgency;
 	}
 
-	public double get_direct_costs() 
-	{
-		return direct_costs;
+	public void setGrantingAgency(List<String> grantingAgency) {
+		this.grantingAgency = grantingAgency;
 	}
 
-	public void set_direct_costs(double direct_costs) 
-	{
-		this.direct_costs = direct_costs;
+	public double getDirectCosts() {
+		return directCosts;
 	}
 
-	public double get_f_a_costs()
-	{
-		return f_a_costs;
+	public void setDirectCosts(double directCosts) {
+		this.directCosts = directCosts;
 	}
 
-	public void set_f_a_costs(double f_a_costs)
-	{
-		this.f_a_costs = f_a_costs;
+	public double getFaCosts() {
+		return faCosts;
 	}
 
-	public double get_total_costs()
-	{
-		return total_costs;
+	public void setFaCosts(double faCosts) {
+		this.faCosts = faCosts;
 	}
 
-	public void set_total_costs(double total_costs) 
-	{
-		this.total_costs = total_costs;
+	public double getTotalCosts() {
+		return totalCosts;
 	}
 
-	public double get_f_a_rate()
-	{
-		return f_a_rate;
+	public void setTotalCosts(double totalCosts) {
+		this.totalCosts = totalCosts;
 	}
 
-	public void set_faRate(double f_a_rate) 
-	{
-		this.f_a_rate = f_a_rate;
+	public double getFaRate() {
+		return faRate;
+	}
+
+	public void setFaRate(double faRate) {
+		this.faRate = faRate;
 	}
 
 }

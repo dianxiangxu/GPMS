@@ -2,8 +2,8 @@
 
 package gpms.model;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Id;
 
 @Embedded
 public class ProjectType 
