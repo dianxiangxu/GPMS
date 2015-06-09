@@ -6,126 +6,119 @@ import gpms.dao.ProposalDAO;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
-@Entity(value = ProposalDAO.COLLECTION_NAME)
+@Entity
 public class Proposal extends BaseEntity {
-	@Id
-	private ObjectId _id;
-	private String _proposalNo;
-	private Date _dateReceived;
-	private String _proposalStatus;
-	@Reference("investigatorInfo")
-	private ArrayList<InvestigatorInfo> _investigatorInfo;
-	@Reference("projectInfo")
-	private ArrayList<ProjectInfo> _projectInfo;
-	@Reference("sponsorAndBudgetInfo")
-	private ArrayList<SponsorAndBudgetInfo> _sponsorAndBudgetInfo;
-	@Reference("costShareInfo")
-	private ArrayList<CostShareInfo> _costShareInfo;
+	@Property("proposal no")
+	private String proposalNo;
+	@Property("date received")
+	private Date dateReceived;
+	@Property("proposal status")
+	private String proposalStatus;
+	@Reference
+	@Property("investigator info")
+	private ArrayList<InvestigatorInfo> investigatorInfo;
+	@Reference
+	@Property("project info")
+	private ArrayList<ProjectInfo> projectInfo;
+	@Reference
+	@Property("sponsor and budget info")
+	private ArrayList<SponsorAndBudgetInfo> sponsorAndBudgetInfo;
+	@Reference
+	@Property("cost share info")
+	private ArrayList<CostShareInfo> costShareInfo;
 
 	public Proposal(String proposalNo, Date dateReceived,
 			String proposalStatus,
 			ArrayList<InvestigatorInfo> investigatorInfo,
 			ArrayList<ProjectInfo> projectInfo,
 			ArrayList<SponsorAndBudgetInfo> sponsorAndBudgetInfo,
-			ArrayList<CostShareInfo> costShareInfo, ObjectId id) {
-		this._proposalNo = proposalNo;
-		this._dateReceived = dateReceived;
-		this._proposalStatus = proposalStatus;
+			ArrayList<CostShareInfo> costShareInfo) {
+		this.proposalNo = proposalNo;
+		this.dateReceived = dateReceived;
+		this.proposalStatus = proposalStatus;
 
 		// TODO:: need to do in loop of the list object
-		this._investigatorInfo = investigatorInfo;
-		this._projectInfo = projectInfo;
-		this._sponsorAndBudgetInfo = sponsorAndBudgetInfo;
-		this._costShareInfo = costShareInfo;
-		this.set_id(id);
+		this.investigatorInfo = investigatorInfo;
+		this.projectInfo = projectInfo;
+		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
+		this.costShareInfo = costShareInfo;
 
 	}
 
 	public Proposal(String proposalNo, Date dateReceived, String proposalStatus) {
-		this._proposalNo = proposalNo;
-		this._dateReceived = dateReceived;
-		this._proposalStatus = proposalStatus;
+		this.proposalNo = proposalNo;
+		this.dateReceived = dateReceived;
+		this.proposalStatus = proposalStatus;
 	}
 
 	public Proposal() {
 
 	}
 
-	// TODO: add more class object as per document
-	public ObjectId get_id() {
-		return _id;
-	}
-
-	public void set_id(ObjectId _id) {
-		this._id = _id;
-	}
-
-	public String get_proposalNo() {
-		return _proposalNo;
-	}
-
-	public void set_proposalNo(String _proposalNo) {
-		this._proposalNo = _proposalNo;
-	}
-
-	public Date get_dateReceived() {
-		return _dateReceived;
-	}
-
-	public void set_dateReceived(Date _dateReceived) {
-		this._dateReceived = _dateReceived;
-	}
-
-	public String get_proposalStatus() {
-		return _proposalStatus;
-	}
-
-	public void set_proposalStatus(String _proposalStatus) {
-		this._proposalStatus = _proposalStatus;
-	}
-
-	public ArrayList<InvestigatorInfo> get_investigatorInfo() {
-		return _investigatorInfo;
-	}
-
-	public void set_investigatorInfo(
-			ArrayList<InvestigatorInfo> _investigatorInfo) {
-		this._investigatorInfo = _investigatorInfo;
-	}
-
-	public ArrayList<ProjectInfo> get_projectInfo() {
-		return _projectInfo;
-	}
-
-	public void set_projectInfo(ArrayList<ProjectInfo> _projectInfo) {
-		this._projectInfo = _projectInfo;
-	}
-
-	public ArrayList<SponsorAndBudgetInfo> get_sponsorAndBudgetInfo() {
-		return _sponsorAndBudgetInfo;
-	}
-
-	public void set_sponsorAndBudgetInfo(
-			ArrayList<SponsorAndBudgetInfo> _sponsorAndBudgetInfo) {
-		this._sponsorAndBudgetInfo = _sponsorAndBudgetInfo;
-	}
-
-	public ArrayList<CostShareInfo> get_costShareInfo() {
-		return _costShareInfo;
-	}
-
-	public void set_costShareInfo(ArrayList<CostShareInfo> _costShareInfo) {
-		this._costShareInfo = _costShareInfo;
-	}
-
 	@Override
 	public String toString() {
-		return this.get_proposalNo() + " " + this.get_dateReceived() + " "
-				+ this.get_proposalStatus();
+		return this.getProposalNo() + " " + this.getDateReceived() + " "
+				+ this.getProposalStatus();
+	}
+
+	public String getProposalNo() {
+		return proposalNo;
+	}
+
+	public void setProposalNo(String proposalNo) {
+		this.proposalNo = proposalNo;
+	}
+
+	public Date getDateReceived() {
+		return dateReceived;
+	}
+
+	public void setDateReceived(Date dateReceived) {
+		this.dateReceived = dateReceived;
+	}
+
+	public String getProposalStatus() {
+		return proposalStatus;
+	}
+
+	public void setProposalStatus(String proposalStatus) {
+		this.proposalStatus = proposalStatus;
+	}
+
+	public ArrayList<InvestigatorInfo> getInvestigatorInfo() {
+		return investigatorInfo;
+	}
+
+	public void setInvestigatorInfo(ArrayList<InvestigatorInfo> investigatorInfo) {
+		this.investigatorInfo = investigatorInfo;
+	}
+
+	public ArrayList<ProjectInfo> getProjectInfo() {
+		return projectInfo;
+	}
+
+	public void setProjectInfo(ArrayList<ProjectInfo> projectInfo) {
+		this.projectInfo = projectInfo;
+	}
+
+	public ArrayList<SponsorAndBudgetInfo> getSponsorAndBudgetInfo() {
+		return sponsorAndBudgetInfo;
+	}
+
+	public void setSponsorAndBudgetInfo(
+			ArrayList<SponsorAndBudgetInfo> sponsorAndBudgetInfo) {
+		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
+	}
+
+	public ArrayList<CostShareInfo> getCostShareInfo() {
+		return costShareInfo;
+	}
+
+	public void setCostShareInfo(ArrayList<CostShareInfo> costShareInfo) {
+		this.costShareInfo = costShareInfo;
 	}
 }

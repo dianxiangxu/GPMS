@@ -5,51 +5,50 @@ import gpms.dao.BaseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SponsorAndBudgetInfo extends BaseEntity {
-	private List<String> _grantingAgency = new ArrayList<String>();
-	private double _directCosts;
-	private double _faCosts;
-	private double _totalCosts;
-	private double _faRate;
+public class SponsorAndBudgetInfo {
+	private List<String> grantingAgency = new ArrayList<String>();
+	private double directCosts;
+	private double faCosts;
+	private double totalCosts;
+	private double faRate;
 
-	public List<String> get_grantingAgency() {
-		return _grantingAgency;
+	public List<String> getGrantingAgency() {
+		return grantingAgency;
 	}
 
-	public void set_grantingAgency(ArrayList<String> _grantingAgency) {
-		this._grantingAgency = _grantingAgency;
+	public void setGrantingAgency(List<String> grantingAgency) {
+		this.grantingAgency = grantingAgency;
 	}
 
-	public double get_directCosts() {
-		return _directCosts;
+	public double getDirectCosts() {
+		return directCosts;
 	}
 
-	public void set_directCosts(double _directCosts) {
-		this._directCosts = _directCosts;
+	public void setDirectCosts(double directCosts) {
+		this.directCosts = directCosts;
 	}
 
-	public double get_faCosts() {
-		return _faCosts;
+	public double getFaCosts() {
+		return faCosts;
 	}
 
-	public void set_faCosts(double _faCosts) {
-		this._faCosts = _faCosts;
+	public void setFaCosts(double faCosts) {
+		this.faCosts = faCosts;
 	}
 
-	public double get_totalCosts() {
-		return _totalCosts;
+	public double getTotalCosts() {
+		return totalCosts;
 	}
 
-	public void set_totalCosts(double _totalCosts) {
-		this._totalCosts = _totalCosts;
+	public void setTotalCosts(double totalCosts) {
+		this.totalCosts = totalCosts;
 	}
 
-	public double get_faRate() {
-		return _faRate;
+	public double getFaRate() {
+		return faRate;
 	}
 
-	public void set_faRate(double _faRate) {
-		this._faRate = _faRate;
+	public void setFaRate(double faRate) {
+		this.faRate = faRate;
 	}
-
 }
