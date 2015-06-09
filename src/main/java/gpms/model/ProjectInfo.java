@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Embedded;
 @Embedded
 public class ProjectInfo
 {
-	private String project_title;
+	private String projectTitle;
 	// private ArrayList<ProjectType> _projectType;
 	@Embedded
 	private ProjectType project_type;
@@ -26,19 +26,24 @@ public class ProjectInfo
 	// private ArrayList<ProjectLocation> _projectLocation;
 	//private boolean _offCampus;
 	private boolean on_campus;
-	
+
+	/**
+	 * NonParameter constructor, needed for @id assignment.
+	 */
 	public ProjectInfo()
 	{}
 
+	public void set_project_title(String project_title) 
+	{
+		projectTitle = project_title;
+	}
+	
 	public String get_project_title() 
 	{
 		return project_title;
 	}
 
-	public void set_project_title(String project_title) 
-	{
-		this.project_title = project_title;
-	}
+	
 
 	// public ArrayList<ProjectType> get_projectType() {
 	// return _projectType;

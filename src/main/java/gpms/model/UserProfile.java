@@ -1,4 +1,6 @@
-//Edited by: Hector C. Ortiz
+/**
+ * @author Thomas Volz
+ */
 
 package gpms.model;
 
@@ -8,103 +10,232 @@ import java.util.ArrayList;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity
 public class UserProfile extends BaseEntity {
+
+	@Property("First Name")
 	private String firstName;
+
+	@Property("Middle Name")
 	private String middleName;
+
+	@Property("Last Name")
 	private String lastName;
 
 	@Embedded
+	@Property("Details")
 	private ArrayList<PositionDetails> details;
 
+	@Property("Phone Number")
 	private ArrayList<String> phoneNumber;
+
+	@Property("Email")
 	private ArrayList<String> email;
 
 	@Reference
 	private UserAccount userId;
 
-	public UserProfile(String firstName, String middleName, String lastName,
-			ArrayList<PositionDetails> details, ArrayList<String> phoneNumber,
-			ArrayList<String> email, UserAccount userId) {
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-		this.details = details;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.userId = userId;
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param first_Name First Name of the User
+	 * @param middle_Name Middle Name of the User
+	 * @param last_Name Last Name of the User
+	 * @param userDetails List of Job Type / Position
+	 * @param phone_Number Phone Numbers of the User
+	 * @param userEmail Emails of the user
+	 */
+	public UserProfile(String first_Name, String middle_Name, String last_Name,
+			ArrayList<PositionDetails> userDetails, ArrayList<String> phone_Number,
+			ArrayList<String> userEmail) 
+	{
+		firstName = first_Name;
+		middleName = middle_Name;
+		lastName = last_Name;
+		details = userDetails;
+		phoneNumber = phone_Number;
+		email = userEmail;
 	}
 
-	public UserProfile(String firstName, String middleName, String lastName) {
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
+	/**
+	 * Constructor for creating user profile with name only
+	 * 
+	 * @param firstName First name of the user
+	 * @param middleName Middle name of the user
+	 * @param lastName Last name of the user
+	 */
+	public UserProfile(String first_Name, String middle_Name, String last_Name) 
+	{
+		firstName = first_Name;
+		middleName = middle_Name;
+		lastName = last_Name;
 	}
 
-	public UserProfile() {
+	/**
+	 * Non-Parameterized constructor, needed for @id assignment	
+	 */
+	public UserProfile() 
+	{
 	}
 
-	public UserAccount getUserId() {
+	/**
+	 * 
+	 * @return the moba generated ID
+	 */
+	public UserAccount getUserId() 
+	{
 		return userId;
 	}
 
-	public String getFirstName() {
+	/**
+	 * 
+	 * @return First name of the user
+	 */
+	public String getFirstName() 
+	{
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	/**
+	 * Changes the first name of the user
+	 * @param newName the new first name
+	 */
+	public void setFirstName(String newName) 
+	{
+		firstName = newName;
 	}
 
-	public String getMiddleName() {
+
+	/**
+	 * 
+	 * @return the middle name of the user
+	 */
+	public String getMiddleName() 
+	{
 		return middleName;
 	}
 
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
+	/**
+	 * Changes the middle name of the user
+	 * @param newName the new middle name
+	 */
+	public void setMiddleName(String newName) 
+	{
+		middleName = newName;
 	}
 
-	public String getLastName() {
+	/**
+	 * 
+	 * @return the last name of the user
+	 */
+	public String getLastName() 
+	{
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	/**
+	 * Changes the last name of the user
+	 * @param newName the new last name
+	 */
+	public void setLastName(String newName) 
+	{
+		lastName = newName;
 	}
 
-	public ArrayList<PositionDetails> getDetails() {
+	/**
+	 * 
+	 * @return the array list of details
+	 */
+	public ArrayList<PositionDetails> getDetails() 
+	{
 		return details;
 	}
 
-	public void setDetails(ArrayList<PositionDetails> details) {
-		this.details = details;
+	/**
+	 * Should not be used
+	 * @param details
+	 */
+	public void setDetails(ArrayList<PositionDetails> theDetails) 
+	{
+		details = theDetails;
 	}
 
-	public ArrayList<String> getPhoneNumber() {
+	/**
+	 * Add a collection of position details to the existing array list
+	 * @param positionDetails
+	 */
+	public void addDetails(PositionDetails positionDetails)
+	{
+		details.add(positionDetails);
+	}
+	
+	/**
+	 * 
+	 * @return the array list of phone numbers
+	 */
+	public ArrayList<String> getPhoneNumber() 
+	{
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(ArrayList<String> phoneNumber) {
+	/**
+	 * Should not be used
+	 * @param phoneNumber
+	 */
+	public void setPhoneNumber(ArrayList<String> phoneNumber) 
+	{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public void addPhoneNumber(String phone) {
-		this.phoneNumber.add(phone);
+	/**
+	 * 
+	 * @param number the phone number to be added to the list
+	 */
+	public void addPhoneNumber(String number) 
+	{
+		phoneNumber.add(number);
 	}
 
-	public ArrayList<String> getEmail() {
+	/**
+	 * 
+	 * @return the array list of email addresses
+	 */
+	public ArrayList<String> getEmail() 
+	{
 		return email;
 	}
 
-	public void setEmail(ArrayList<String> email) {
-		this.email = email;
+	/**
+	 * Should not be used
+	 * @param setEmail
+	 */
+	public void setEmail(ArrayList<String> setEmail) 
+	{
+		email = setEmail;
 	}
 
+	/**
+	 * Add an email string to the email array list
+	 * @param addEmail the new email to add
+	 */
+	public void addEmail(String addEmail)
+	{
+		email.add(addEmail);
+	}
+	
+	/**
+	 * toString returns full user name
+	 * @return full name of the user
+	 */
 	@Override
-	public String toString() {
-		return this.getFirstName() + " " + this.getMiddleName() + " "
-				+ this.getLastName();
+	public String toString() 
+	{
+		String userInfo="";
+		userInfo+=firstName + " " + middleName + " " + lastName;
+		return userInfo;
+	
 	}
 }
