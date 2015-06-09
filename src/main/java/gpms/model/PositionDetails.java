@@ -2,54 +2,50 @@
 
 package gpms.model;
 
-//import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.Embedded;
+//import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
 
 @Embedded
-public class PositionDetails
-{
-	private String position_type;
-	private String position_title;
+public class PositionDetails {
+	@Property("position type")
+	private String positionType;
+	@Property("position title")
+	private String positionTitle;
+	@Property("department")
 	private String department;
+	@Property("college")
 	private String college;
 
-	public String get_position_type() 
-	{
-		return position_type;
+	public String getPositionType() {
+		return positionType;
 	}
 
-	public void set_position_type(String position_type) 
-	{
-		this.position_type = position_type;
+	public void setPositionType(String positionType) {
+		this.positionType = positionType;
 	}
 
-	public String get_position_title() 
-	{
-		return position_title;
+	public String getPositionTitle() {
+		return positionTitle;
 	}
 
-	public void set_position_title(String position_title) 
-	{
-		this.position_title = position_title;
+	public void setPositionTitle(String positionTitle) {
+		this.positionTitle = positionTitle;
 	}
 
-	public String get_department() 
-	{
+	public String getDepartment() {
 		return department;
 	}
 
-	public void set_department(String department) 
-	{
+	public void setDepartment(String department) {
 		this.department = department;
 	}
 
-	public String get_college() 
-	{
+	public String getCollege() {
 		return college;
 	}
 
-	public void set_college(String college) 
-	{
+	public void setCollege(String college) {
 		this.college = college;
 	}
 

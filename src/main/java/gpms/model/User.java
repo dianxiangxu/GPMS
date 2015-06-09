@@ -1,5 +1,7 @@
 package gpms.model;
 
+import gpms.dao.BaseEntity;
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Embedded;
@@ -12,9 +14,7 @@ import org.mongodb.morphia.annotations.Property;
  * @author shaines
  */
 @Entity
-public class User {
-	@Id
-	private ObjectId id;
+public class User extends BaseEntity {
 	@Property("first Name")
 	private String firstName;
 	@Property("last Name")
@@ -22,7 +22,7 @@ public class User {
 	@Property("Age")
 	private int age;
 
-	@Embedded
+	@Embedded("Address Info")
 	private Address address;
 
 	public User() {
@@ -32,14 +32,6 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
-	}
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
 	}
 
 	public int getAge() {

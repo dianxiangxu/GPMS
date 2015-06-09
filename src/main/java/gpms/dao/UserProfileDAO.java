@@ -1,7 +1,6 @@
 package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
-import gpms.model.Family;
 import gpms.model.User;
 import gpms.model.UserProfile;
 

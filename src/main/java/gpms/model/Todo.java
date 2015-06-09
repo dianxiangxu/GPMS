@@ -4,12 +4,10 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
-import gpms.DAL.TodoDAO;
-
-@Entity(value = TodoDAO.COLLECTION_NAME)
+@Entity
 public class Todo {
 
 	private String task;
