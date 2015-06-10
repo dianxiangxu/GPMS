@@ -2,7 +2,9 @@ package gpms.dao.test;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
-import gpms.dao.UserAccountDAO;
+import gpms.dao.UserProfileDAO;
+import gpms.model.Address;
+import gpms.model.Family;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
@@ -11,8 +13,10 @@ import gpms.model.ProjectPeriod;
 import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
+import gpms.model.Status;
 import gpms.model.TypeOfRequest;
-import gpms.model.UserAccount;
+import gpms.model.User;
+import gpms.model.UserProfile;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -50,12 +54,19 @@ public class ProposalDAOTest {
 	public void initiate() throws UnknownHostException, MongoException {
 		mongo = MongoDBConnector.getMongo();
 		morphia = new Morphia();
+		// morphia.map(Proposal.class).map(InvestigatorInfo.class)
+		// .map(ProjectType.class);
+		// morphia.map(TypeOfRequest.class).map(ProjectPeriod.class)
+		// .map(SponsorAndBudgetInfo.class);
+		// morphia.map(UserProfile.class).map(PositionDetails.class)
+		// .map(ProjectInfo.class);
+
+		morphia.map(Proposal.class).map(ProjectInfo.class)
+				.map(ProjectType.class).map(TypeOfRequest.class)
+				.map(ProjectPeriod.class).map(ProjectLocation.class);
+		morphia.map(Proposal.class).map(SponsorAndBudgetInfo.class);
 		morphia.map(Proposal.class).map(InvestigatorInfo.class)
-				.map(ProjectType.class);
-		morphia.map(TypeOfRequest.class).map(ProjectPeriod.class)
-				.map(SponsorAndBudgetInfo.class);
-		morphia.map(UserProfile.class).map(PositionDetails.class)
-				.map(ProjectInfo.class);
+				.map(UserProfile.class);
 		pdao = new ProposalDAO(morphia, mongo, dbName);
 		datastore = morphia.createDatastore(mongo, dbName);
 	}
@@ -79,26 +90,26 @@ public class ProposalDAOTest {
 
 		InvestigatorInfo invInf = new InvestigatorInfo();
 
-		UserAccountDAO uaDAO = new UserAccountDAO(morphia, mongo, dbName);
+		UserProfileDAO upDAO = new UserProfileDAO(morphia, mongo, dbName);
 
-		List<UserAccount> uaList = uaDAO.findAll();
+		List<UserProfile> upList = upDAO.findAll();
 
 		System.out.println("Adding Investigator Info from Data Base...");
 
-		for (UserAccount ua : uaList) {
+		for (UserProfile up : upList) {
 			// TODO: check the PI is the user who is adding the Proposal and
 			// Co-PI/ Senior Personnel can be more than 1
 			// I think we need to separate this part as different method cause
 			// Addin User to the Proposal can happen after the proposal has been
 			// already added?
-			if (ua.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-				invInf.set_pi(ua);
-			else if (invInf.get_co_pi().size() <= 4
-					&& ua.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
-				invInf.add_co_pi(ua);
-			else if (invInf.get_senior_personnel().size() <= 10
-					&& ua.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-				invInf.add_senior_personnel(ua);
+			// Also don't add the condition to check hard coded 4 and 10 here we
+			// already checked that in Info class while adding
+			if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+				invInf.setPi(up);
+			else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
+				invInf.addCo_pi(up);
+			else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+				invInf.addSeniorPersonnel(up);
 		}
 
 		System.out.println("Adding project type info...");
@@ -143,6 +154,9 @@ public class ProposalDAOTest {
 		sabi.setFARate(.12);
 
 		prop.setProposalNo("12");
+
+		// TODO: add the enum Status here
+		prop.setProposalStatus(Status.NEW);
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date recievedDate = new Date();

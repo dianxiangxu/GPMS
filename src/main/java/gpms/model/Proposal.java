@@ -15,7 +15,7 @@ public class Proposal extends BaseEntity {
 	@Property("date received")
 	private Date dateReceived;
 	@Property("proposal status")
-	private String proposalStatus;
+	private Status proposalStatus;
 	@Embedded("investigator info")
 	private InvestigatorInfo investigatorInfo;
 	@Embedded("project info")
@@ -32,7 +32,7 @@ public class Proposal extends BaseEntity {
 	private ComplianceInfo complianceInfo;
 
 	public Proposal(String proposalNo, Date dateReceived,
-			String proposalStatus, InvestigatorInfo investigatorInfo,
+			Status proposalStatus, InvestigatorInfo investigatorInfo,
 			ProjectInfo projectInfo, SponsorAndBudgetInfo sponsorAndBudgetInfo,
 			CostShareInfo costShareInfo) {
 		this.proposalNo = proposalNo;
@@ -45,7 +45,7 @@ public class Proposal extends BaseEntity {
 		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
 	}
 
-	public Proposal(String proposalNo, Date dateReceived, String proposalStatus) {
+	public Proposal(String proposalNo, Date dateReceived, Status proposalStatus) {
 		this.proposalNo = proposalNo;
 		this.dateReceived = dateReceived;
 		this.proposalStatus = proposalStatus;
@@ -77,12 +77,12 @@ public class Proposal extends BaseEntity {
 		this.dateReceived = dateReceived;
 	}
 
-	public String getProposalStatus() {
+	public Status getProposalStatus() {
 		return proposalStatus;
 	}
 
-	public void setProposalStatus(String proposalStatus) {
-		this.proposalStatus = proposalStatus;
+	public void setProposalStatus(Status pending) {
+		this.proposalStatus = pending;
 	}
 
 	public InvestigatorInfo getInvestigatorInfo() {

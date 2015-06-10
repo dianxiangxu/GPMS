@@ -3,63 +3,62 @@
 package gpms.model;
 
 import java.util.ArrayList;
+
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
 public class InvestigatorInfo {
-	private final int max_co_pi_num = 4;
-	private final int max_senior_personnel_num = 10;
-
+	private static final int MAX_CO_PI_NUM = 4;
+	private static final int MAX_SENIOR_PERSONNEL_NUM = 10;
 	@Reference("PI")
-	private UserAccount pi;
+	private UserProfile pi;
 	@Reference("CO-PI")
-	private ArrayList<UserAccount> co_pi = new ArrayList<UserAccount>();
+	private ArrayList<UserProfile> co_pi = new ArrayList<UserProfile>();
 	@Reference("senior personnel")
-	private ArrayList<UserAccount> seniorPersonnel = new ArrayList<UserAccount>();
+	private ArrayList<UserProfile> seniorPersonnel = new ArrayList<UserProfile>();
 
 	public InvestigatorInfo() {
 	}
 
-	public UserAccount get_pi() {
+	public UserProfile getPi() {
 		return pi;
 	}
 
-	public void set_pi(UserAccount pi) {
+	public void setPi(UserProfile pi) {
 		this.pi = pi;
 	}
 
-	public ArrayList<UserAccount> get_co_pi() {
+	public ArrayList<UserProfile> getCo_pi() {
 		return co_pi;
 	}
 
-	public void add_co_pi(UserAccount co_pi) {
-		if (this.co_pi.size() <= max_co_pi_num) {
+	public void setCo_pi(ArrayList<UserProfile> co_pi) {
+		this.co_pi = co_pi;
+	}
+
+	// TODO: family.getChildren().add(son); can't we do like this?
+	public void addCo_pi(UserProfile co_pi) {
+		if (this.co_pi.size() <= MAX_CO_PI_NUM) {
 			this.co_pi.add(co_pi);
 		}
 	}
 
-	public void set_co_pi(ArrayList<UserAccount> co_pi) {
-		if (co_pi.size() <= max_co_pi_num) {
-			this.co_pi = co_pi;
-		}
-	}
-
-	public ArrayList<UserAccount> get_senior_personnel() {
+	public ArrayList<UserProfile> getSeniorPersonnel() {
 		return seniorPersonnel;
 	}
 
-	public void add_senior_personnel(UserAccount senior_personnel) {
-		if (this.seniorPersonnel.size() <= max_senior_personnel_num) {
-			this.seniorPersonnel.add(senior_personnel);
+	public void addSeniorPersonnel(UserProfile seniorPersonnel) {
+		if (this.seniorPersonnel.size() <= MAX_SENIOR_PERSONNEL_NUM) {
+			this.seniorPersonnel.add(seniorPersonnel);
 		}
 	}
 
-	public void set_senior_personnel(ArrayList<UserAccount> senior_personnel) {
-		if (senior_personnel.size() <= max_senior_personnel_num) {
-			this.seniorPersonnel = senior_personnel;
+	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
+		if (seniorPersonnel.size() <= MAX_SENIOR_PERSONNEL_NUM) {
+			this.seniorPersonnel = seniorPersonnel;
 		}
 	}
+
 }
