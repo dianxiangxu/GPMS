@@ -44,22 +44,16 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Overloaded constructor
 	 * 
-	 * @param firstName
-	 *            First Name of the User
-	 * @param middleName
-	 *            Middle Name of the User
-	 * @param lastName
-	 *            Last Name of the User
-	 * @param details
-	 *            List of Job Type / Position
-	 * @param phoneNumbers
-	 *            Phone Numbers of the User
-	 * @param emails
-	 *            Emails of the user
+	 * @param firstName First Name of the User
+	 * @param middleName Middle Name of the User
+	 * @param lastName Last Name of the User
+	 * @param details List of Job Type / Position
+	 * @param phoneNumbers Phone Numbers of the User
+	 * @param emails Emails of the user
 	 */
 	public UserProfile(String firstName, String middleName, String lastName,
-			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
-			ArrayList<String> emails, UserAccount userId) {
+			List<PositionDetails> details, List<String> phoneNumbers,
+			List<String> emails, UserAccount userId) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -67,6 +61,7 @@ public class UserProfile extends BaseEntity {
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
 		this.userId = userId;
+		 
 	}
 
 	/**
@@ -88,16 +83,24 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
-	public UserProfile() {
+	public UserProfile() 
+	{
+		firstName = null;
+		middleName = null;
+		lastName = null;
 	}
 
 	/**
 	 * 
 	 * @return First name of the user
 	 */
-	public String getFirstName() {
+	public String getFirstName() 
+	{
 		return firstName;
+
 	}
+	
+	
 
 	/**
 	 * Changes the first name of the user
@@ -105,7 +108,8 @@ public class UserProfile extends BaseEntity {
 	 * @param newName
 	 *            the new first name
 	 */
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName) 
+	{
 		this.firstName = firstName;
 	}
 
@@ -239,8 +243,10 @@ public class UserProfile extends BaseEntity {
 	 * @return full name of the user
 	 */
 	@Override
-	public String toString() {
-		return this.getFirstName() + " " + this.getMiddleName() + " "
-				+ this.getLastName();
+	public String toString() 
+	{
+		String name = firstName + " " + middleName + " " + lastName;
+		return name;
+	
 	}
 }
