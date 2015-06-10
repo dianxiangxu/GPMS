@@ -1,25 +1,16 @@
 package gpms.dao.test;
 
 import static org.junit.Assert.assertTrue;
+import gpms.DAL.MongoDBConnector;
+import gpms.dao.TestClassDAO;
+import gpms.model.TestClass;
 
 import java.net.UnknownHostException;
-import java.util.List;
 
-import gpms.DAL.MongoDBConnector;
-import gpms.dao.CustomerDAO;
-import gpms.dao.TestClassDAO;
-import gpms.model.Address;
-import gpms.model.Customer;
-import gpms.model.TestClass;
-import gpms.model.User;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.QueryResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,14 +37,6 @@ public class SimpleCRUDTest {
 		morphia.map(TestClass.class);
 		testClassDao = new TestClassDAO(mongo, morphia, dbName);
 		datastore = morphia.createDatastore(mongo, dbName);
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test

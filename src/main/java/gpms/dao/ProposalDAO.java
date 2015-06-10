@@ -16,7 +16,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		super(mongo, morphia, dbName);
 	}
 
-	public List<Proposal> getAllProposals() throws UnknownHostException {
+	public List<Proposal> findAll() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class).asList();
 	}

@@ -21,7 +21,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		super(mongo, morphia, dbName);
 	}
 
-	public List<UserProfile> getAllUserProfiles() throws UnknownHostException {
+	public List<UserProfile> findAll() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).asList();
 	}

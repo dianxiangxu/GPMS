@@ -19,8 +19,4 @@ public class CustomerDAO extends BasicDAO<Customer, String> {
 		Datastore ds = getDatastore();
 		return ds.find(Customer.class).asList();
 	}
-//	findingLastContain()
-//	{
-//		
-//	}
 }
