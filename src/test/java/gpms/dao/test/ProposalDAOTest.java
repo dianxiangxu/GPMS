@@ -54,19 +54,19 @@ public class ProposalDAOTest {
 	public void initiate() throws UnknownHostException, MongoException {
 		mongo = MongoDBConnector.getMongo();
 		morphia = new Morphia();
-		// morphia.map(Proposal.class).map(InvestigatorInfo.class)
-		// .map(ProjectType.class);
-		// morphia.map(TypeOfRequest.class).map(ProjectPeriod.class)
-		// .map(SponsorAndBudgetInfo.class);
-		// morphia.map(UserProfile.class).map(PositionDetails.class)
-		// .map(ProjectInfo.class);
-
-		morphia.map(Proposal.class).map(ProjectInfo.class)
-				.map(ProjectType.class).map(TypeOfRequest.class)
-				.map(ProjectPeriod.class).map(ProjectLocation.class);
-		morphia.map(Proposal.class).map(SponsorAndBudgetInfo.class);
 		morphia.map(Proposal.class).map(InvestigatorInfo.class)
-				.map(UserProfile.class);
+				.map(ProjectType.class);
+		morphia.map(TypeOfRequest.class).map(ProjectPeriod.class)
+				.map(SponsorAndBudgetInfo.class);
+		morphia.map(UserProfile.class).map(PositionDetails.class)
+				.map(ProjectInfo.class);
+
+		// morphia.map(Proposal.class).map(ProjectInfo.class)
+		// .map(ProjectType.class).map(TypeOfRequest.class)
+		// .map(ProjectPeriod.class).map(ProjectLocation.class);
+		// morphia.map(Proposal.class).map(SponsorAndBudgetInfo.class);
+		// morphia.map(Proposal.class).map(InvestigatorInfo.class)
+		// .map(UserProfile.class);
 		pdao = new ProposalDAO(morphia, mongo, dbName);
 		datastore = morphia.createDatastore(mongo, dbName);
 	}
@@ -99,17 +99,26 @@ public class ProposalDAOTest {
 		for (UserProfile up : upList) {
 			// TODO: check the PI is the user who is adding the Proposal and
 			// Co-PI/ Senior Personnel can be more than 1
+			// Co-PI/ Senior Personnel need to be IN Array
 			// I think we need to separate this part as different method cause
 			// Addin User to the Proposal can happen after the proposal has been
 			// already added?
 			// Also don't add the condition to check hard coded 4 and 10 here we
 			// already checked that in Info class while adding
-			if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+
+			// if(up.getFirstName() == "Dianxiang")
+			// if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+			// invInf.setPi(up);
+			// else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
+			// invInf.addCo_pi(up);
+			// else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+			// invInf.addSeniorPersonnel(up);
+
+			if (up.getFirstName() == "Dianxiang") {
 				invInf.setPi(up);
-			else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
 				invInf.addCo_pi(up);
-			else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
 				invInf.addSeniorPersonnel(up);
+			}
 		}
 
 		System.out.println("Adding project type info...");
