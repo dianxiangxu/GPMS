@@ -17,18 +17,102 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserProfileDAO extends BasicDAO<UserProfile, String> {
-	public UserProfileDAO(Morphia morphia, MongoClient mongo, String dbName) {
+	
+	private List<UserProfile> userList;
+	
+	public UserProfileDAO(Morphia morphia, MongoClient mongo, String dbName) 
+	{
 		super(mongo, morphia, dbName);
 	}
 
-	public List<UserProfile> findAll() throws UnknownHostException {
+	/**
+	 * 
+	 * @return list of all users in the ds
+	 * @throws UnknownHostException
+	 */
+	public List<UserProfile> findAll() throws UnknownHostException 
+	{
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).asList();
 	}
-
-	public User findByEmail(String email) {
+	
+	/**
+	 * 
+	 * @param firstName first name to search by
+	 * @return list of users matching the first name
+	 */
+	public List<UserProfile> findByFirstName(String firstName) 
+	{
+		//Could not make this work with .find methods.  It threw errors every time.
+		//Had to use a query and createQuery method, and to search by field, seems stable this way
 		Datastore ds = getDatastore();
-		User res = ds.find(User.class).filter("email = ", email).get();
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("first name").equal(firstName);
+		return q.asList();
+	}
+	
+	public List<UserProfile> findByFirstNameIgnoreCase(String firstName) 
+	{
+		//Could not make this work with .find methods.  It threw errors every time.
+		//Had to use a query and createQuery method, and to search by field, seems stable this way
+		Datastore ds = getDatastore();
+		Query<UserProfile> query = ds.createQuery(UserProfile.class);
+		query.criteria("first name").containsIgnoreCase(firstName);
+//		Query<UserProfile> q = ds.createQuery(UserProfile.class).criteria("first name").containsIgnoreCase(firstName);
+		return query.asList();
+	}
+	
+//	/**
+//	 * Returns list sorted by First Name
+//	 * @param firstName
+//	 * @return
+//	 */
+//	public List<UserProfile> sortAllByFirstName(String firstName) 
+//	{
+//		//Could not make this work with .find methods.  It threw errors every time.
+//		//Had to use a query and createQuery method, and to search by field, seems stable this way
+//		Datastore ds = getDatastore();
+//		Query<UserProfile> q = ds.find(UserProfile.class).
+//		return q.asList();
+//	}
+	
+	/**
+	 * Name search for specified name at param
+	 * @param middleName middle name to search for
+	 * @return list of all users in the ds with middleName
+	 */
+	public List<UserProfile> findByMiddleName(String middleName) 
+	{
+		//Could not make this work with .find methods.  It threw errors every time.
+		//Had to use a query and createQuery method, and to search by field, seems stable this way
+		Datastore ds = getDatastore();
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("middle name").equal(middleName);
+		return q.asList();
+	}
+	
+	/**
+	 * Name search for specified name at param
+	 * @param lastName last name to search for
+	 * @return list of all users in the ds with lastName
+	 */
+	public List<UserProfile> findByLastName(String lastName) 
+	{
+		//Could not make this work with .find methods.  It threw errors every time.
+		//Had to use a query and createQuery method, and to search by field, seems stable this way
+		Datastore ds = getDatastore();
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("last name").equal(lastName);
+		return q.asList();
+	}
+
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public UserProfile findByEmail(String email) 
+	{
+		//May be the 
+		Datastore ds = getDatastore();
+		UserProfile res = ds.find(UserProfile.class).filter("email = ", email).get();
 		return res;
 	}
 
@@ -52,4 +136,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 	}
 
+	
+	/**
+	 * Dangerous method, will erase all entries.
+	 * When it works
+	 */
+	public void deleteAll()
+	{
+		Datastore ds = getDatastore();
+		ds.delete(ds.createQuery(UserProfile.class));
+	}
 }

@@ -23,32 +23,36 @@ public class UserAccount extends BaseEntity {
 		// this.set_uid(id);
 	}
 
-	public UserAccount(String userName) {
+	public UserAccount(String userName) 
+	{
 		this.userName = userName;
 		this.password = "123456789"; // TODO:: user random password generator
 	}
 
-	public String getUserName() {
+	public String getUserName() 
+	{
 		return userName;
 	}
 
-	public void setUserName(String userName) {
+	public void setUserName(String userName) 
+	{
 		this.userName = userName;
 	}
 
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password) 
+	{
 		this.password = password;
 	}
 
-	public UserAccount() {
+	public UserAccount() 
+	{
+		
 	}
 
-	@Override
-	public String toString() {
-		return this.getUserName() + " " + this.getPassword();
-	}
+
 }
