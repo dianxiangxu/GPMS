@@ -22,10 +22,6 @@ public abstract class BaseEntity {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
 	public Long getVersion() {
 		return version;
 	}
