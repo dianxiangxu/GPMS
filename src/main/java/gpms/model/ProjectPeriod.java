@@ -34,17 +34,15 @@ public class ProjectPeriod {
 	public void setTo(Date to) {
 		this.to = to;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		String outPut = "";
 		outPut += "From : " + from.toString() + "\n";
 		outPut += "To   : " + to.toString();
 		return outPut;
 	}
 
-	public boolean equals(ProjectPeriod pp)
-	{
+	public boolean equals(ProjectPeriod pp) {
 		return this.from.equals(pp.from) && this.to.equals(pp.to);
 	}
 }

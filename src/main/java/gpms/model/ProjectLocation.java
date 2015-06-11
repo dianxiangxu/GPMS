@@ -26,16 +26,14 @@ public class ProjectLocation {
 		this.onCampus = onCampus;
 	}
 
-	public String toString()
-	{
+	public String toString() {
 		String outPut = "";
 		outPut += "Off-Campus : " + offCampus + "\n";
 		outPut += "On-Campus  : " + onCampus;
 		return outPut;
 	}
-	
-	public boolean equals(ProjectLocation pl)
-	{
+
+	public boolean equals(ProjectLocation pl) {
 		return this.offCampus == pl.offCampus && this.onCampus == pl.onCampus;
 	}
 }
