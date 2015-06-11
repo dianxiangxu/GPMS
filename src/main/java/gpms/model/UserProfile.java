@@ -52,23 +52,22 @@ public class UserProfile extends BaseEntity
 	/**
 	 * Overloaded constructor
 	 * 
-	 * @param firstName
-	 *            First Name of the User
-	 * @param middleName
-	 *            Middle Name of the User
-	 * @param lastName
-	 *            Last Name of the User
-	 * @param details
-	 *            List of Job Type / Position
-	 * @param phoneNumbers
-	 *            Phone Numbers of the User
-	 * @param emails
-	 *            Emails of the user
+	 * @param firstName First Name of the User
+	 * @param middleName Middle Name of the User
+	 * @param lastName Last Name of the User
+	 * @param details List of Job Type / Position
+	 * @param phoneNumbers Phone Numbers of the User
+	 * @param emails Emails of the user
 	 */
 	public UserProfile(String firstName, String middleName, String lastName,
+<<<<<<< HEAD
 			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
 			ArrayList<String> emails, UserAccount userId) 
 	{
+=======
+			List<PositionDetails> details, List<String> phoneNumbers,
+			List<String> emails, UserAccount userId) {
+>>>>>>> 0fbea801f7f6f24c3a7bbfbd759871a1038d48c4
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -76,6 +75,7 @@ public class UserProfile extends BaseEntity
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
 		this.userId = userId;
+		 
 	}
 
 	/**
@@ -94,7 +94,20 @@ public class UserProfile extends BaseEntity
 		this.middleName = middleName;
 		this.lastName = lastName;
 	}
+<<<<<<< HEAD
 	
+=======
+
+	/**
+	 * Non-Parameterized constructor, needed for @id assignment
+	 */
+	public UserProfile() 
+	{
+		firstName = null;
+		middleName = null;
+		lastName = null;
+	}
+>>>>>>> 0fbea801f7f6f24c3a7bbfbd759871a1038d48c4
 
 	/**
 	 * 
@@ -103,7 +116,10 @@ public class UserProfile extends BaseEntity
 	public String getFirstName() 
 	{
 		return firstName;
+
 	}
+	
+	
 
 	/**
 	 * Changes the first name of the user
@@ -263,8 +279,14 @@ public class UserProfile extends BaseEntity
 	@Override
 	public String toString() 
 	{
+<<<<<<< HEAD
 		return this.getFirstName() + " " + this.getMiddleName() + " "
 				+ this.getLastName();
+=======
+		String name = firstName + " " + middleName + " " + lastName;
+		return name;
+	
+>>>>>>> 0fbea801f7f6f24c3a7bbfbd759871a1038d48c4
 	}
 	
 	public boolean equals(UserProfile up)

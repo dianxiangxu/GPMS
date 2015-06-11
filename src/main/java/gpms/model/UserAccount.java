@@ -16,7 +16,10 @@ public class UserAccount extends BaseEntity
 	private String userName;
 	@Property("password")
 	private String password;
+	@Property("is deleted")
+	private Boolean isDeleted;
 
+<<<<<<< HEAD
 	public UserAccount() 
 	{
 		userName = new String();
@@ -25,8 +28,12 @@ public class UserAccount extends BaseEntity
 	
 	public UserAccount(String userName, String password) 
 	{
+=======
+	public UserAccount(String userName, String password, Boolean isDeleted) {
+>>>>>>> 0fbea801f7f6f24c3a7bbfbd759871a1038d48c4
 		this.userName = userName;
 		this.password = password;
+		this.isDeleted = isDeleted;
 		// TODO:: encrypt the password
 		// this.set_uid(id);
 	}
@@ -57,6 +64,7 @@ public class UserAccount extends BaseEntity
 		this.password = password;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public String toString() 
 	{
@@ -67,4 +75,23 @@ public class UserAccount extends BaseEntity
 	{
 		return this.userName.equals(ua.userName) && this.password.equals(ua.password);
 	}
+=======
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public UserAccount() {
+
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+>>>>>>> 0fbea801f7f6f24c3a7bbfbd759871a1038d48c4
 }
