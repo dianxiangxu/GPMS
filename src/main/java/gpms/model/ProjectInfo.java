@@ -11,7 +11,8 @@ import org.mongodb.morphia.annotations.Property;
 //import org.mongodb.morphia.annotations.Id;
 
 @Embedded
-public class ProjectInfo {
+public class ProjectInfo 
+{
 
 	@Property("project title")
 	private String projectTitle;
@@ -31,22 +32,33 @@ public class ProjectInfo {
 	@Embedded("location of project")
 	private ProjectLocation projectLocation;
 
-	public ProjectInfo() {
+	public ProjectInfo() 
+	{
+		projectTitle = new String();
+		projectType = new ProjectType();
+		typeOfRequest = new TypeOfRequest();
+		dueDate = new Date();
+		projectPeriod = new ProjectPeriod();
+		projectLocation = new ProjectLocation();
 	}
 
-	public String getProjectTitle() {
+	public String getProjectTitle()
+	{
 		return projectTitle;
 	}
 
-	public void setProjectTitle(String projectTitle) {
+	public void setProjectTitle(String projectTitle) 
+	{
 		this.projectTitle = projectTitle;
 	}
 
-	public ProjectType getProjectType() {
+	public ProjectType getProjectType() 
+	{
 		return projectType;
 	}
 
-	public void setProjectType(ProjectType projectType) {
+	public void setProjectType(ProjectType projectType) 
+	{
 		this.projectType = projectType;
 	}
 
@@ -81,5 +93,28 @@ public class ProjectInfo {
 	public void setProjectLocation(ProjectLocation projectLocation) {
 		this.projectLocation = projectLocation;
 	}
-
+	
+	public String toString()
+	{
+		String outPut = "";
+		outPut += "Project Title       : " + projectTitle + "\n";
+		outPut += "Project Type        : " + "\n";
+		outPut += projectType.toString() + "\n";
+		outPut += "Type Of Request     : " + "\n";
+		outPut += typeOfRequest.toString() + "\n";
+		outPut += "Due Date            : " + "\n";
+		outPut += dueDate.toString() + "\n";
+		outPut += "Project Period      : " + "\n";
+		outPut += projectPeriod.toString() + "\n";
+		outPut += "Location of Project : " + "\n";
+		outPut += projectLocation.toString();
+		return outPut;
+	}
+	
+	public boolean equals(ProjectInfo pinf)
+	{
+		return this.dueDate.equals(pinf.dueDate) && this.projectLocation.equals(pinf.projectLocation)
+				&& this.projectPeriod.equals(pinf.projectPeriod) && this.projectTitle.equals(pinf.projectTitle)
+				&& this.projectType.equals(pinf.projectType) && this.typeOfRequest.equals(pinf.typeOfRequest);
+	}
 }

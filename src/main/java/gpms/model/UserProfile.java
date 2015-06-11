@@ -18,42 +18,48 @@ import org.mongodb.morphia.annotations.Reference;
 @Entity
 public class UserProfile extends BaseEntity {
 	@Property("first name")
-	private String firstName;
-	
+	private String firstName = new String();
+
 	@Property("middle name")
-	private String middleName;
-	
+	private String middleName = new String();
+
 	@Property("last name")
-	private String lastName;
-	
+	private String lastName = new String();
+
 	@Embedded("details")
 	private List<PositionDetails> details = new ArrayList<PositionDetails>();
-	
+
 	@Property("phone numbers")
 	private List<String> phoneNumbers = new ArrayList<String>();
-	
+
 	@Property("emails")
 	private List<String> emails = new ArrayList<String>();
 
 	@Reference("user id")
-	private UserAccount userId;
-	
+	private UserAccount userId = new UserAccount();
+
 	@Property("deleted")
 	private boolean isDeleted = false;
 
 	/**
 	 * Overloaded constructor
 	 * 
-	 * @param firstName First Name of the User
-	 * @param middleName Middle Name of the User
-	 * @param lastName Last Name of the User
-	 * @param details List of Job Type / Position
-	 * @param phoneNumbers Phone Numbers of the User
-	 * @param emails Emails of the user
+	 * @param firstName
+	 *            First Name of the User
+	 * @param middleName
+	 *            Middle Name of the User
+	 * @param lastName
+	 *            Last Name of the User
+	 * @param details
+	 *            List of Job Type / Position
+	 * @param phoneNumbers
+	 *            Phone Numbers of the User
+	 * @param emails
+	 *            Emails of the user
 	 */
 	public UserProfile(String firstName, String middleName, String lastName,
-			List<PositionDetails> details, List<String> phoneNumbers,
-			List<String> emails, UserAccount userId) {
+			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
+			ArrayList<String> emails, UserAccount userId) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -61,7 +67,7 @@ public class UserProfile extends BaseEntity {
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
 		this.userId = userId;
-		 
+
 	}
 
 	/**
@@ -83,8 +89,7 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
-	public UserProfile() 
-	{
+	public UserProfile() {
 		firstName = null;
 		middleName = null;
 		lastName = null;
@@ -94,13 +99,10 @@ public class UserProfile extends BaseEntity {
 	 * 
 	 * @return First name of the user
 	 */
-	public String getFirstName() 
-	{
+	public String getFirstName() {
 		return firstName;
 
 	}
-	
-	
 
 	/**
 	 * Changes the first name of the user
@@ -108,8 +110,7 @@ public class UserProfile extends BaseEntity {
 	 * @param newName
 	 *            the new first name
 	 */
-	public void setFirstName(String firstName) 
-	{
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -229,12 +230,12 @@ public class UserProfile extends BaseEntity {
 		emails.add(addEmail);
 	}
 
-	public UserAccount getUserId() {
-		return userId;
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
-	public void setUserId(UserAccount userId) {
-		this.userId = userId;
+	public boolean getIsDeleted() {
+		return isDeleted;
 	}
 
 	/**
@@ -243,10 +244,19 @@ public class UserProfile extends BaseEntity {
 	 * @return full name of the user
 	 */
 	@Override
-	public String toString() 
-	{
-		String name = firstName + " " + middleName + " " + lastName;
-		return name;
-	
+	public String toString() {
+		return this.getFirstName() + " " + this.getMiddleName() + " "
+				+ this.getLastName();
+	}
+
+	public boolean equals(UserProfile up) {
+		return this.userId.equals(up.userId)
+				&& this.firstName.equals(up.firstName)
+				&& this.middleName.equals(up.middleName)
+				&& this.lastName.equals(up.lastName)
+				&& this.details.equals(up.details)
+				&& this.phoneNumbers.equals(up.phoneNumbers)
+				&& this.emails.equals(up.emails)
+				&& this.isDeleted == up.isDeleted;
 	}
 }
