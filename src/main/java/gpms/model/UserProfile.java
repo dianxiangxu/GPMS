@@ -15,7 +15,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
-@Entity
+@Entity("userprofile")
 public class UserProfile extends BaseEntity {
 	@Property("first name")
 	private String firstName = new String();

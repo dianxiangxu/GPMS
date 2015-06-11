@@ -1,6 +1,5 @@
 package gpms.dao;
 
-import gpms.model.User;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -17,8 +16,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserProfileDAO extends BasicDAO<UserProfile, String> {
-	
-	private List<UserProfile> userList;
 	
 	public UserProfileDAO(Morphia morphia, MongoClient mongo, String dbName) 
 	{
