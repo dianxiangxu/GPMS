@@ -140,6 +140,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	/**
 	 * Dangerous method, will erase all entries.
 	 * When it works
+	 * Used only for testing, will be removed later
 	 */
 	public void deleteAll()
 	{

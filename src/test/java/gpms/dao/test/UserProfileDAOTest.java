@@ -169,4 +169,14 @@ public class UserProfileDAOTest {
 //		
 //	}
 	
+	@Test
+	public void testPrintAll() throws UnknownHostException
+	{
+//		List<UserProfile> list = new ArrayList<UserProfile>();
+		System.out.println("BEGINNNING TEST: PRINTALL");
+		UserProfileDAO upDAO = new UserProfileDAO(morphia, mongoClient, dbName);
+		List<UserProfile> upList = upDAO.findAll();
+		System.out.println(upList.toString());
+	}
+	
 }
