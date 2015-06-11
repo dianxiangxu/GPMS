@@ -36,7 +36,10 @@ public class UserProfile extends BaseEntity {
 	private List<String> emails = new ArrayList<String>();
 
 	@Reference("user id")
-	private UserAccount userId;
+	private UserAccount userAccount;
+	
+	
+	
 	
 	@Property("deleted")
 	private boolean isDeleted = false;
@@ -60,7 +63,7 @@ public class UserProfile extends BaseEntity {
 		this.details = details;
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
-		this.userId = userId;
+		userAccount = userId;
 		 
 	}
 
@@ -78,6 +81,9 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
+		details = null;
+		phoneNumbers = null;
+		emails = null;
 	}
 
 	/**
@@ -88,6 +94,9 @@ public class UserProfile extends BaseEntity {
 		firstName = null;
 		middleName = null;
 		lastName = null;
+		details = null;
+		phoneNumbers = null;
+		emails = null;
 	}
 
 	/**
@@ -105,8 +114,8 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Changes the first name of the user
 	 * 
-	 * @param newName
-	 *            the new first name
+	 * @param newName the new first name
+	 * 
 	 */
 	public void setFirstName(String firstName) 
 	{
@@ -230,11 +239,11 @@ public class UserProfile extends BaseEntity {
 	}
 
 	public UserAccount getUserId() {
-		return userId;
+		return userAccount;
 	}
 
-	public void setUserId(UserAccount userId) {
-		this.userId = userId;
+	public void setUserId(UserAccount newUserAccount) {
+		userAccount = newUserAccount;
 	}
 
 	/**
