@@ -34,8 +34,9 @@ public class UserAccount extends BaseEntity {
 	}
 
 	public UserAccount() {
-		userName = new String();
-		password = new String();
+		this.userName = new String();
+		this.password = new String();
+		this.isDeleted = false;
 	}
 
 	public UserAccount(String userName, String password, Boolean isDeleted) {

@@ -11,15 +11,12 @@ import org.mongodb.morphia.dao.BasicDAO;
 
 import com.mongodb.MongoClient;
 
-public class ProposalDAO extends BasicDAO<Proposal, String> 
-{
-	public ProposalDAO(Morphia morphia, MongoClient mongo, String dbName) 
-	{
+public class ProposalDAO extends BasicDAO<Proposal, String> {
+	public ProposalDAO(Morphia morphia, MongoClient mongo, String dbName) {
 		super(mongo, morphia, dbName);
 	}
-	
-	public List<Proposal> findAll() throws UnknownHostException 
-	{
+
+	public List<Proposal> findAll() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class).asList();
 	}

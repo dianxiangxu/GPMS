@@ -1,24 +1,23 @@
 package gpms.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import gpms.dao.BaseEntity;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.utils.IndexDirection;
 
 @Entity
-public class TestClass {
-	@Id
-	private ObjectId id;
+public class TestClass extends BaseEntity {
 	@Property("Age")
 	private int age;
 	@Property("Name")
+	@Indexed(value = IndexDirection.ASC, name = "testName")
 	private String name;
 	@Property("Surname")
 	private String surname;
 	@Property("Email")
+	@Indexed(value = IndexDirection.ASC, name = "testEmail", unique = true)
 	private String email;
 	@Property("Is Completed")
 	private Boolean isCompleted = false;
@@ -61,14 +60,6 @@ public class TestClass {
 
 	public void setCompleted(Boolean completed) {
 		this.isCompleted = completed;
-	}
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
 	}
 
 	@Override

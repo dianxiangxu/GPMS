@@ -38,9 +38,6 @@ public class UserProfile extends BaseEntity {
 	@Reference("user id")
 	private UserAccount userId = new UserAccount();
 
-	@Property("deleted")
-	private boolean isDeleted = false;
-
 	/**
 	 * Overloaded constructor
 	 * 
@@ -67,7 +64,6 @@ public class UserProfile extends BaseEntity {
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
 		this.userId = userId;
-
 	}
 
 	/**
@@ -230,12 +226,12 @@ public class UserProfile extends BaseEntity {
 		emails.add(addEmail);
 	}
 
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public UserAccount getUserId() {
+		return userId;
 	}
 
-	public boolean getIsDeleted() {
-		return isDeleted;
+	public void setUserId(UserAccount userId) {
+		this.userId = userId;
 	}
 
 	/**
@@ -256,7 +252,6 @@ public class UserProfile extends BaseEntity {
 				&& this.lastName.equals(up.lastName)
 				&& this.details.equals(up.details)
 				&& this.phoneNumbers.equals(up.phoneNumbers)
-				&& this.emails.equals(up.emails)
-				&& this.isDeleted == up.isDeleted;
+				&& this.emails.equals(up.emails);
 	}
 }
