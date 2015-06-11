@@ -1,13 +1,13 @@
 package gpms.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import gpms.model.UserAccount;
 
 import org.junit.Test;
 
 public class UserAccountTest 
 {
-	UserAccount ua = new UserAccount("Calembo", "cccaaa");
+	UserAccount ua = new UserAccount("Calembo", "cccaaa", false);
 	
 //	@Test
 //	public void testId() 

@@ -1,6 +1,6 @@
 package gpms.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import gpms.model.PositionDetails;
 
 import org.junit.Test;

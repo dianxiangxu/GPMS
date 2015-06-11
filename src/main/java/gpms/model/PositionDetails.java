@@ -18,7 +18,7 @@ public class PositionDetails
 	@Property("college")
 	private String college;
 	
-	PositionDetails()
+	public PositionDetails()
 	{
 		positionType = new String();
 		positionTitle = new String();
