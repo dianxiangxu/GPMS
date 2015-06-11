@@ -7,7 +7,7 @@ import org.mongodb.morphia.annotations.Entity;
 
 import java.util.List;
 
-@Entity
+@Entity("customer")
 public class Customer extends BaseEntity {
 	private String name;
 	private List<Account> accounts;

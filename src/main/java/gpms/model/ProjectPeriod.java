@@ -15,6 +15,8 @@ public class ProjectPeriod {
 	private Date to;
 
 	public ProjectPeriod() {
+		from = new Date();
+		to = new Date();
 	}
 
 	public Date getFrom() {
@@ -33,4 +35,14 @@ public class ProjectPeriod {
 		this.to = to;
 	}
 
+	public String toString() {
+		String outPut = "";
+		outPut += "From : " + from.toString() + "\n";
+		outPut += "To   : " + to.toString();
+		return outPut;
+	}
+
+	public boolean equals(ProjectPeriod pp) {
+		return this.from.equals(pp.from) && this.to.equals(pp.to);
+	}
 }

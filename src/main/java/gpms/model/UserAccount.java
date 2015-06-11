@@ -18,6 +18,12 @@ public class UserAccount extends BaseEntity {
 	@Property("is deleted")
 	private Boolean isDeleted;
 
+	public UserAccount() {
+		this.userName = new String();
+		this.password = new String();
+		this.isDeleted = false;
+	}
+
 	public UserAccount(String userName, String password, Boolean isDeleted) {
 		this.userName = userName;
 		this.password = password;
@@ -47,6 +53,16 @@ public class UserAccount extends BaseEntity {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return this.getUserName() + " " + this.getPassword();
+	}
+
+	public boolean equals(UserAccount ua) {
+		return this.userName.equals(ua.userName)
+				&& this.password.equals(ua.password);
+	}
+
 	public Boolean getIsDeleted() {
 		return isDeleted;
 	}
@@ -54,14 +70,4 @@ public class UserAccount extends BaseEntity {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
-	public UserAccount() {
-
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 }

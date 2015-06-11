@@ -38,10 +38,6 @@ public class CustomerDAOTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
 	public void testAddCustomer() {
 		IndianAddress address = new IndianAddress();
 		address.setNumber("81");

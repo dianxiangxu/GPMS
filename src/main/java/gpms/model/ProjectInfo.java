@@ -32,6 +32,12 @@ public class ProjectInfo {
 	private ProjectLocation projectLocation;
 
 	public ProjectInfo() {
+		projectTitle = new String();
+		projectType = new ProjectType();
+		typeOfRequest = new TypeOfRequest();
+		dueDate = new Date();
+		projectPeriod = new ProjectPeriod();
+		projectLocation = new ProjectLocation();
 	}
 
 	public String getProjectTitle() {
@@ -82,4 +88,28 @@ public class ProjectInfo {
 		this.projectLocation = projectLocation;
 	}
 
+	public String toString() {
+		String outPut = "";
+		outPut += "Project Title       : " + projectTitle + "\n";
+		outPut += "Project Type        : " + "\n";
+		outPut += projectType.toString() + "\n";
+		outPut += "Type Of Request     : " + "\n";
+		outPut += typeOfRequest.toString() + "\n";
+		outPut += "Due Date            : " + "\n";
+		outPut += dueDate.toString() + "\n";
+		outPut += "Project Period      : " + "\n";
+		outPut += projectPeriod.toString() + "\n";
+		outPut += "Location of Project : " + "\n";
+		outPut += projectLocation.toString();
+		return outPut;
+	}
+
+	public boolean equals(ProjectInfo pinf) {
+		return this.dueDate.equals(pinf.dueDate)
+				&& this.projectLocation.equals(pinf.projectLocation)
+				&& this.projectPeriod.equals(pinf.projectPeriod)
+				&& this.projectTitle.equals(pinf.projectTitle)
+				&& this.projectType.equals(pinf.projectType)
+				&& this.typeOfRequest.equals(pinf.typeOfRequest);
+	}
 }

@@ -3,7 +3,6 @@
 package gpms.model;
 
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
 @Embedded
@@ -52,4 +51,19 @@ public class TypeOfRequest {
 		this.isSupplement = isSupplement;
 	}
 
+	public String toString() {
+		String outPut = "";
+		outPut += "pre-proposal : " + isPreProposal + "\n";
+		outPut += "new proposal : " + isNewProposal + "\n";
+		outPut += "continuation : " + isContinuation + "\n";
+		outPut += "supplement   : " + isSupplement;
+		return outPut;
+	}
+
+	public boolean equals(TypeOfRequest tor) {
+		return this.isContinuation == tor.isContinuation
+				&& this.isNewProposal == tor.isNewProposal
+				&& this.isPreProposal == tor.isPreProposal
+				&& this.isSupplement == tor.isSupplement;
+	}
 }

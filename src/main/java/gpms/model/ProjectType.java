@@ -91,4 +91,22 @@ public class ProjectType {
 	public boolean getIsOtherSponsoredActivity() {
 		return isOtherSponsoredActivity;
 	}
+
+	public String toString() {
+		String outPut = "";
+		outPut += "Research-Basic           : " + isResearchBasic + "\n";
+		outPut += "Reseach-Applied          : " + isResearchApplied + "\n";
+		outPut += "Research-Development     : " + isResearchDevelopment + "\n";
+		outPut += "Instruction              : " + isInstruction + "\n";
+		outPut += "Other Sponsored Activity : " + isOtherSponsoredActivity;
+		return outPut;
+	}
+
+	public boolean equals(ProjectType pt) {
+		return this.isResearchBasic == pt.isResearchBasic
+				&& this.isResearchApplied == pt.isResearchApplied
+				&& this.isResearchDevelopment == pt.isResearchDevelopment
+				&& this.isInstruction == pt.isInstruction
+				&& this.isOtherSponsoredActivity == pt.isOtherSponsoredActivity;
+	}
 }
