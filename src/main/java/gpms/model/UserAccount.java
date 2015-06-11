@@ -4,12 +4,17 @@ package gpms.model;
 
 //import java.util.Date;
 
+import gpms.DAL.MongoDBConnector;
 import gpms.dao.BaseEntity;
+import gpms.dao.UserAccountDAO;
 
+import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-@Entity
+import com.mongodb.MongoClient;
+
+@Entity("user")
 public class UserAccount extends BaseEntity {
 	@Property("username")
 	private String userName;
@@ -17,6 +22,16 @@ public class UserAccount extends BaseEntity {
 	private String password;
 	@Property("is deleted")
 	private Boolean isDeleted;
+	
+	public static void main(String[] args)
+	{
+		MongoClient mongo = MongoDBConnector.getMongo();
+		Morphia morphia = new Morphia();
+		UserAccountDAO uaDAO = new UserAccountDAO(morphia, mongo, "GPMS");
+		
+		UserAccount ua = new UserAccount("hector", "hector", false);
+		uaDAO.save(ua);
+	}
 
 	public UserAccount() {
 		userName = new String();

@@ -8,7 +8,7 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-@Entity
+@Entity("proposal test")
 public class Proposal extends BaseEntity {
 	@Property("proposal no")
 	private String proposalNo;
