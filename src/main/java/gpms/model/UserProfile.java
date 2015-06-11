@@ -36,17 +36,13 @@ public class UserProfile extends BaseEntity {
 	private List<String> emails = new ArrayList<String>();
 
 	@Reference("user id")
-<<<<<<< HEAD
 	private UserAccount userAccount;
-	
-	
-	
 	
 	@Property("deleted")
 	private boolean isDeleted = false;
-=======
-	private UserAccount userId = new UserAccount();
->>>>>>> 81a5349cbd938745bbce8c95951c9236c2418665
+
+	
+
 
 	/**
 	 * Overloaded constructor
@@ -73,12 +69,8 @@ public class UserProfile extends BaseEntity {
 		this.details = details;
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
-<<<<<<< HEAD
 		userAccount = userId;
-		 
-=======
-		this.userId = userId;
->>>>>>> 81a5349cbd938745bbce8c95951c9236c2418665
+	
 	}
 
 	/**
@@ -247,7 +239,7 @@ public class UserProfile extends BaseEntity {
 		emails.add(addEmail);
 	}
 
-	public UserAccount getUserId() {
+	public UserAccount getUserAccount() {
 		return userAccount;
 	}
 
@@ -267,7 +259,7 @@ public class UserProfile extends BaseEntity {
 	}
 
 	public boolean equals(UserProfile up) {
-		return this.userId.equals(up.userId)
+		return userAccount.equals(up.getUserAccount())
 				&& this.firstName.equals(up.firstName)
 				&& this.middleName.equals(up.middleName)
 				&& this.lastName.equals(up.lastName)
