@@ -44,7 +44,7 @@ public class ProposalDAOTest {
 	private MongoClient mongo;
 	private Morphia morphia;
 	private ProposalDAO pdao;
-	private final String dbName = "GPMS";
+	private final String dbName = "MDB";
 	//Datastore datastore;
 
 	@Before
@@ -99,13 +99,20 @@ public class ProposalDAOTest {
 			// Also don't add the condition to check hard coded 4 and 10 here we
 			// already checked that in Info class while adding
 
-			 if(up.getFirstName() == "Dianxiang")
-			 if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-			 invInf.setPi(up);
-			 else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
-			 invInf.addCo_pi(up);
-			 else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-			 invInf.addSeniorPersonnel(up);
+			if(up.getUserId().getUserName().equals("xu"))
+			{
+				invInf.setPi(up);
+			}
+			else if(invInf.getCo_pi().size() < 4)
+			{
+				invInf.addCo_pi(up);
+				System.out.println("The amount of co pi is " + invInf.getCo_pi().size());
+			}
+			else
+			{
+				System.out.println("Adding senior personel");
+				invInf.addSeniorPersonnel(up);
+			}
 		}
 
 		System.out.println("Adding project type info...");
