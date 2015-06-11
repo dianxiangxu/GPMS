@@ -9,7 +9,7 @@ import gpms.dao.BaseEntity;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-@Entity
+@Entity("useraccount")
 public class UserAccount extends BaseEntity {
 	@Property("username")
 	private String userName;
