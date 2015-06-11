@@ -69,4 +69,22 @@ public class SponsorAndBudgetInfo {
 	public void setFARate(double fARate) {
 		FARate = fARate;
 	}
+	
+	public String toString()
+	{
+		String outPut = "";
+		outPut += "Granting Agency : " + grantingAgency.toString() + "\n";
+		outPut += "Direct Costs    : " + directCosts + "\n";
+		outPut += "F&A costs       : " + FACosts + "\n";
+		outPut += "Total Costs     : " + totalCosts + "\n";
+		outPut += "F&A rate        : " + FARate;
+		return outPut;
+	}
+	
+	public boolean equals(SponsorAndBudgetInfo sabi)
+	{
+		return this.directCosts == sabi.directCosts && this.FACosts == sabi.FACosts
+				&& this.FARate == sabi.FARate && this.grantingAgency.equals(sabi.grantingAgency)
+				&& this.totalCosts == sabi.totalCosts;
+	}
 }

@@ -3,8 +3,8 @@ package gpms.dao.test;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.Address;
-import gpms.model.Family;
+//import gpms.model.Address;
+//import gpms.model.Family;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
@@ -15,9 +15,9 @@ import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
 import gpms.model.TypeOfRequest;
-import gpms.model.User;
+//import gpms.model.User;
 import gpms.model.UserProfile;
-import gpms.model.UserProfile;
+//import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -45,13 +45,11 @@ public class ProposalDAOTest {
 	private Morphia morphia;
 	private ProposalDAO pdao;
 	private final String dbName = "GPMS";
-	Datastore datastore;
-
-	public ProposalDAOTest() {
-	}
+	//Datastore datastore;
 
 	@Before
-	public void initiate() throws UnknownHostException, MongoException {
+	public void initiate() throws UnknownHostException, MongoException 
+	{
 		mongo = MongoDBConnector.getMongo();
 		morphia = new Morphia();
 		morphia.map(Proposal.class).map(InvestigatorInfo.class)
@@ -60,19 +58,13 @@ public class ProposalDAOTest {
 				.map(SponsorAndBudgetInfo.class);
 		morphia.map(UserProfile.class).map(PositionDetails.class)
 				.map(ProjectInfo.class);
-
-		// morphia.map(Proposal.class).map(ProjectInfo.class)
-		// .map(ProjectType.class).map(TypeOfRequest.class)
-		// .map(ProjectPeriod.class).map(ProjectLocation.class);
-		// morphia.map(Proposal.class).map(SponsorAndBudgetInfo.class);
-		// morphia.map(Proposal.class).map(InvestigatorInfo.class)
-		// .map(UserProfile.class);
 		pdao = new ProposalDAO(morphia, mongo, dbName);
-		datastore = morphia.createDatastore(mongo, dbName);
+		//datastore = morphia.createDatastore(mongo, dbName);
 	}
 
 	@Test
-	public void TestAddProposal() throws UnknownHostException {
+	public void TestAddProposal() throws UnknownHostException 
+	{
 		long counter = pdao.count();
 		logger.debug("The count is [" + counter + "]");
 
@@ -80,7 +72,8 @@ public class ProposalDAOTest {
 
 		System.out.println("Proposals before we start.");
 
-		for (Proposal p : pList) {
+		for (Proposal p : pList) 
+		{
 			System.out.println(p.toString());
 		}
 
@@ -106,19 +99,13 @@ public class ProposalDAOTest {
 			// Also don't add the condition to check hard coded 4 and 10 here we
 			// already checked that in Info class while adding
 
-			// if(up.getFirstName() == "Dianxiang")
-			// if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-			// invInf.setPi(up);
-			// else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
-			// invInf.addCo_pi(up);
-			// else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-			// invInf.addSeniorPersonnel(up);
-
-			if (up.getFirstName() == "Dianxiang") {
-				invInf.setPi(up);
-				invInf.addCo_pi(up);
-				invInf.addSeniorPersonnel(up);
-			}
+			 if(up.getFirstName() == "Dianxiang")
+			 if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+			 invInf.setPi(up);
+			 else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
+			 invInf.addCo_pi(up);
+			 else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
+			 invInf.addSeniorPersonnel(up);
 		}
 
 		System.out.println("Adding project type info...");

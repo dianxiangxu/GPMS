@@ -6,7 +6,8 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
 @Embedded
-public class ProjectType {
+public class ProjectType 
+{
 	@Property("research-basic")
 	private boolean isResearchBasic;
 	@Property("research-applied")
@@ -18,11 +19,13 @@ public class ProjectType {
 	@Property("other sponsored activity")
 	private boolean isOtherSponsoredActivity;
 
-	public ProjectType() {
+	public ProjectType() 
+	{
 		isResearchBasic = true;
 	}
 
-	public void setIsResearchBasic(boolean is_research_basic) {
+	public void setIsResearchBasic(boolean is_research_basic)
+	{
 		if (!this.isResearchBasic && is_research_basic) {
 			this.isResearchBasic = is_research_basic;
 			isResearchApplied = false;
@@ -32,11 +35,13 @@ public class ProjectType {
 		}
 	}
 
-	public boolean getIsResearchBasic() {
+	public boolean getIsResearchBasic()
+	{
 		return isResearchBasic;
 	}
 
-	public void setIsResearchApplied(boolean is_research_applied) {
+	public void setIsResearchApplied(boolean is_research_applied) 
+	{
 		if (!this.isResearchApplied && is_research_applied) {
 			isResearchBasic = false;
 			this.isResearchApplied = is_research_applied;
@@ -46,11 +51,13 @@ public class ProjectType {
 		}
 	}
 
-	public boolean getIsResearchApplied() {
+	public boolean getIsResearchApplied() 
+	{
 		return isResearchApplied;
 	}
 
-	public void setIsResearchDevelopment(boolean is_research_development) {
+	public void setIsResearchDevelopment(boolean is_research_development) 
+	{
 		if (!this.isResearchDevelopment && is_research_development) {
 			isResearchBasic = false;
 			isResearchApplied = false;
@@ -60,11 +67,13 @@ public class ProjectType {
 		}
 	}
 
-	public boolean getIsResearchDevelopment() {
+	public boolean getIsResearchDevelopment() 
+	{
 		return isResearchDevelopment;
 	}
 
-	public void setIsInstruction(boolean is_instruction) {
+	public void setIsInstruction(boolean is_instruction) 
+	{
 		if (!this.isInstruction && is_instruction) {
 			isResearchBasic = false;
 			isResearchApplied = false;
@@ -74,12 +83,15 @@ public class ProjectType {
 		}
 	}
 
-	public boolean getIsInstruction() {
+	public boolean getIsInstruction() 
+	{
 		return isInstruction;
 	}
 
-	public void setIsOtherSponsoredActivity(boolean is_other_sposored_activity) {
-		if (!this.isOtherSponsoredActivity && is_other_sposored_activity) {
+	public void setIsOtherSponsoredActivity(boolean is_other_sposored_activity)
+	{
+		if (!this.isOtherSponsoredActivity && is_other_sposored_activity)
+		{
 			isResearchBasic = false;
 			isResearchApplied = false;
 			isResearchDevelopment = false;
@@ -88,7 +100,26 @@ public class ProjectType {
 		}
 	}
 
-	public boolean getIsOtherSponsoredActivity() {
+	public boolean getIsOtherSponsoredActivity() 
+	{
 		return isOtherSponsoredActivity;
+	}
+	
+	public String toString()
+	{
+		String outPut = "";
+		outPut += "Research-Basic           : " + isResearchBasic + "\n";
+		outPut += "Reseach-Applied          : " + isResearchApplied + "\n";
+		outPut += "Research-Development     : " + isResearchDevelopment + "\n";
+		outPut += "Instruction              : " + isInstruction + "\n";
+		outPut += "Other Sponsored Activity : " + isOtherSponsoredActivity;
+		return outPut;
+	}
+	
+	public boolean equals(ProjectType pt)
+	{
+		return this.isResearchBasic == pt.isResearchBasic && this.isResearchApplied == pt.isResearchApplied
+				&& this.isResearchDevelopment == pt.isResearchDevelopment && this.isInstruction == pt.isInstruction
+				&& this.isOtherSponsoredActivity == pt.isOtherSponsoredActivity;
 	}
 }
