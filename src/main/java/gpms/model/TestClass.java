@@ -21,7 +21,7 @@ public class TestClass {
 	@Property("Email")
 	private String email;
 	@Property("Is Completed")
-	private Boolean completed = false;
+	private Boolean isCompleted = false;
 
 	public int getAge() {
 		return age;
@@ -56,11 +56,11 @@ public class TestClass {
 	}
 
 	public Boolean getCompleted() {
-		return completed;
+		return isCompleted;
 	}
 
 	public void setCompleted(Boolean completed) {
-		this.completed = completed;
+		this.isCompleted = completed;
 	}
 
 	public ObjectId getId() {
