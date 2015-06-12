@@ -33,7 +33,7 @@ public class UserEntryExample {
 
 		// This will create a user to add to the database.
 		// This will also automatically create a username for the user
-		UserProfileDAO newUserProfileDAO = new UserProfileDAO(morphia, mongo,
+		UserProfileDAO newUserProfileDAO = new UserProfileDAO(mongo, morphia,
 				"GPMS");
 
 		// This starts with a basic 3 name user entry in the database
@@ -53,7 +53,7 @@ public class UserEntryExample {
 		userName = firstChar + lastName;
 		userName = userName.toLowerCase();
 		System.out.println(userName);
-		UserAccountDAO newUserAccountDAO = new UserAccountDAO(morphia, mongo,
+		UserAccountDAO newUserAccountDAO = new UserAccountDAO(mongo, morphia,
 				"GPMS");
 
 		UserAccount newUserAccount = new UserAccount(userName);

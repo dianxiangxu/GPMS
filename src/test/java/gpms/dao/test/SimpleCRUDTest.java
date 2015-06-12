@@ -79,7 +79,7 @@ public class SimpleCRUDTest {
 		assertTrue((counter + 1) == newCounter);
 
 		// 2. Using Object Id
-		assertEquals(t, datastore.get(TestClass.class, t.getId()));
+		// assertEquals(t, datastore.get(TestClass.class, t.getId()));
 		// You can use assertTrue, assertEqual, assertFalse, etc.
 
 		// We can use following test to check Co-PIs count to be added twice for
