@@ -10,8 +10,6 @@ import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
 public class InvestigatorInfo {
-	private static final int MAX_CO_PI_NUM = 4;
-	private static final int MAX_SENIOR_PERSONNEL_NUM = 10;
 	@Reference("PI")
 	private UserProfile pi;
 	@Reference("CO-PI")
@@ -51,9 +49,7 @@ public class InvestigatorInfo {
 	}
 
 	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
-		if (seniorPersonnel.size() <= MAX_SENIOR_PERSONNEL_NUM) {
-			this.seniorPersonnel = seniorPersonnel;
-		}
+		this.seniorPersonnel = seniorPersonnel;
 	}
 
 }

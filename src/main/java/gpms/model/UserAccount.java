@@ -8,11 +8,14 @@ import gpms.dao.BaseEntity;
 import gpms.dao.UserAccountDAO;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.utils.IndexDirection;
 
-@Entity(value = UserAccountDAO.COLLECTION_NAME)
+@Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserAccount extends BaseEntity {
 	@Property("username")
+	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
 	private String userName;
 	@Property("password")
 	private String password;

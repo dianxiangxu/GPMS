@@ -13,18 +13,23 @@ import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.utils.IndexDirection;
 
-@Entity(value = UserProfileDAO.COLLECTION_NAME)
+@Entity(value = UserProfileDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserProfile extends BaseEntity {
 	@Property("first name")
+	@Indexed(value = IndexDirection.ASC, name = "firstNameIndex")
 	private String firstName = new String();
 
 	@Property("middle name")
+	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
 	private String middleName = new String();
 
 	@Property("last name")
+	@Indexed(value = IndexDirection.ASC, name = "lastNameIndex")
 	private String lastName = new String();
 
 	@Embedded("details")
@@ -46,6 +51,7 @@ public class UserProfile extends BaseEntity {
 	private Address address;
 
 	@Property("emails")
+	@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
 	private List<String> emails = new ArrayList<String>();
 
 	@Reference("user id")

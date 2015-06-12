@@ -7,7 +7,6 @@ import org.mongodb.morphia.annotations.Property;
 
 @Embedded
 public class UniversityCommitments {
-
 	@Property("new renovated facilities required")
 	private boolean newRenovatedFacilitiesRequired;
 	@Property("rental space required")
