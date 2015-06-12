@@ -36,7 +36,7 @@ public class UserProfile extends BaseEntity {
 	private List<String> emails = new ArrayList<String>();
 
 	@Reference("user id")
-	private UserAccount userId = new UserAccount();
+	private UserAccount userAccount = new UserAccount();
 
 	/**
 	 * Overloaded constructor
@@ -56,14 +56,14 @@ public class UserProfile extends BaseEntity {
 	 */
 	public UserProfile(String firstName, String middleName, String lastName,
 			ArrayList<PositionDetails> details, ArrayList<String> phoneNumbers,
-			ArrayList<String> emails, UserAccount userId) {
+			ArrayList<String> emails, UserAccount userAccount) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 		this.details = details;
 		this.phoneNumbers = phoneNumbers;
 		this.emails = emails;
-		this.userId = userId;
+		this.userAccount = userAccount;
 	}
 
 	/**
@@ -80,6 +80,9 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
+		details = null;
+		phoneNumbers = null;
+		emails = null;
 	}
 
 	/**
@@ -89,6 +92,9 @@ public class UserProfile extends BaseEntity {
 		firstName = null;
 		middleName = null;
 		lastName = null;
+		details = null;
+		phoneNumbers = null;
+		emails = null;
 	}
 
 	/**
@@ -103,8 +109,8 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Changes the first name of the user
 	 * 
-	 * @param newName
-	 *            the new first name
+	 * @param newName the new first name
+	 * 
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -226,12 +232,12 @@ public class UserProfile extends BaseEntity {
 		emails.add(addEmail);
 	}
 
-	public UserAccount getUserId() {
-		return userId;
+	public UserAccount getUserAccount() {
+		return userAccount;
 	}
 
-	public void setUserId(UserAccount userId) {
-		this.userId = userId;
+	public void setUserId(UserAccount newUserAccount) {
+		userAccount = newUserAccount;
 	}
 
 	/**
@@ -242,11 +248,11 @@ public class UserProfile extends BaseEntity {
 	@Override
 	public String toString() {
 		return this.getFirstName() + " " + this.getMiddleName() + " "
-				+ this.getLastName();
+				+ this.getLastName() + " " + this.userAccount.getUserName();
 	}
 
 	public boolean equals(UserProfile up) {
-		return this.userId.equals(up.userId)
+		return this.userAccount.equals(up.getUserAccount())
 				&& this.firstName.equals(up.firstName)
 				&& this.middleName.equals(up.middleName)
 				&& this.lastName.equals(up.lastName)

@@ -3,8 +3,6 @@ package gpms.dao.test;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserProfileDAO;
-//import gpms.model.Address;
-//import gpms.model.Family;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
@@ -15,9 +13,7 @@ import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
 import gpms.model.TypeOfRequest;
-//import gpms.model.User;
 import gpms.model.UserProfile;
-//import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -45,8 +41,11 @@ public class ProposalDAOTest {
 	private Morphia morphia;
 	private ProposalDAO pdao;
 	private final String dbName = "GPMS";
-	//Datastore datastore;
 
+	// Datastore datastore;
+
+	private static final int MAX_CO_PI_NUM = 4;
+	private static final int MAX_SENIOR_PERSONNEL_NUM = 10;
 	@Before
 	public void initiate() throws UnknownHostException, MongoException 
 	{
@@ -86,7 +85,9 @@ public class ProposalDAOTest {
 		UserProfileDAO upDAO = new UserProfileDAO(morphia, mongo, dbName);
 
 		List<UserProfile> upList = upDAO.findAll();
-
+		for (UserProfile up : upList) {
+			System.out.println("Existing UserProfile: " + up.toString());
+		}
 		System.out.println("Adding Investigator Info from Data Base...");
 
 		for (UserProfile up : upList) {
@@ -99,13 +100,20 @@ public class ProposalDAOTest {
 			// Also don't add the condition to check hard coded 4 and 10 here we
 			// already checked that in Info class while adding
 
-			 if(up.getFirstName() == "Dianxiang")
-			 if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-			 invInf.setPi(up);
-			 else if (up.getId().equals("5570dc6ce0d724a4d7f2c1b7"))
-			 invInf.addCo_pi(up);
-			 else if (up.getId().equals("5570cfe1e0d724a4d7f2c1b1"))
-			 invInf.addSeniorPersonnel(up);
+			if(up.getUserId().getUserName().equals("xu"))
+			{
+				invInf.setPi(up);
+			}
+			else if(invInf.getCo_pi().size() <= MAX_CO_PI_NUM)
+			{
+				invInf.addCo_pi(up);
+				System.out.println("The amount of co pi is " + invInf.getCo_pi().size());
+			}
+			else if (prop.getSeniorPersonnel().size() <= MAX_SENIOR_PERSONNEL_NUM)
+			{
+				System.out.println("Adding senior personel");
+				invInf.addSeniorPersonnel(up);
+			}
 		}
 
 		System.out.println("Adding project type info...");
@@ -147,7 +155,7 @@ public class ProposalDAOTest {
 		sabi.setDirectCosts(1500000.00);
 		sabi.setFACosts(100000.00);
 		sabi.setTotalCosts(sabi.getDirectCosts() + sabi.getFACosts());
-		sabi.setFARate(.12);
+		sabi.setFARate(12);
 
 		prop.setProposalNo("12");
 
