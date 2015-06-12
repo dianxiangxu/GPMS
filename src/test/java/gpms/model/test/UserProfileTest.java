@@ -52,37 +52,37 @@ public class UserProfileTest
 		up.addDetails(new PositionDetails());
 		assertTrue((count+1) == up.getDetails().size());
 	}
-	
-	@Test
-	public void testPhoneNumbers() 
-	{
-		List<String> p = new ArrayList<String>();
-		p.add("7875430987");
-		up.setPhoneNumbers(p);
-		assertTrue(up.getPhoneNumbers().equals(p));
-		
-		int count = up.getPhoneNumbers().size();
-		assertTrue(count == 1);			
-		
-		up.addPhoneNumber("09984848");
-		assertTrue((count+1) == up.getPhoneNumbers().size());
-	}
-	
-	@Test
-	public void testEmails() 
-	{
-		List<String> e = new ArrayList<String>();
-		e.add("rew@vd.com");
-		up.setEmails(e);
-		assertTrue(up.getEmails().equals(e));
-		
-		int count = up.getEmails().size();
-		assertTrue(count == 1);			
-		
-		up.addEmail("mkn@ji.com");
-		assertTrue((count+1) == up.getEmails().size());
-	}
-	
+//	
+//	@Test
+//	public void testPhoneNumbers() 
+//	{
+//		List<String> p = new ArrayList<String>();
+//		p.add("7875430987");
+//		up.setPhoneNumbers(p);
+//		assertTrue(up.getPhoneNumbers().equals(p));
+//		
+//		int count = up.getPhoneNumbers().size();
+//		assertTrue(count == 1);			
+//		
+//		up.addPhoneNumber("09984848");
+//		assertTrue((count+1) == up.getPhoneNumbers().size());
+//	}
+//	
+//	@Test
+//	public void testEmails() 
+//	{
+//		List<String> e = new ArrayList<String>();
+//		e.add("rew@vd.com");
+//		up.setEmails(e);
+//		assertTrue(up.getEmails().equals(e));
+//		
+//		int count = up.getEmails().size();
+//		assertTrue(count == 1);			
+//		
+//		up.addEmail("mkn@ji.com");
+//		assertTrue((count+1) == up.getEmails().size());
+//	}
+//	
 	@Test
 	public void testToString()
 	{
