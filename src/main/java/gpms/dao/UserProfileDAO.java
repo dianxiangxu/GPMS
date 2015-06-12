@@ -45,10 +45,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
 						DBNAME);
 			} catch (UnknownHostException | MongoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		ds.ensureIndexes();
 		return ds;
 	}
 
@@ -56,9 +56,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		super(mongo, morphia, dbName);
 	}
 
-//	public UserProfile getUserProfile(ObjectId id) {
-//		return UserProfile;
-//	}
+	// public UserProfile getUserProfile(ObjectId id) {
+	// return UserProfile;
+	// }
 
 	/**
 	 * 
