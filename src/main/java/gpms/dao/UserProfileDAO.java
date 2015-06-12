@@ -1,5 +1,7 @@
 package gpms.dao;
 
+import gpms.DAL.MongoDBConnector;
+import gpms.model.Proposal;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -16,9 +18,35 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserProfileDAO extends BasicDAO<UserProfile, String> {
-	
-	public UserProfileDAO(Morphia morphia, MongoClient mongo, String dbName) 
-	{
+	private static final String DBNAME = "GPMS";
+	public static final String COLLECTION_NAME = "userprofile";
+
+	private static Morphia morphia;
+	private static Datastore ds;
+
+	private static Morphia getMorphia() throws UnknownHostException,
+			MongoException {
+		if (morphia == null) {
+			morphia = new Morphia().map(Proposal.class);
+		}
+		return morphia;
+	}
+
+	@Override
+	public Datastore getDatastore() {
+		if (ds == null) {
+			try {
+				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
+						DBNAME);
+			} catch (UnknownHostException | MongoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ds;
+	}
+
+	public UserProfileDAO(MongoClient mongo, Morphia morphia, String dbName) {
 		super(mongo, morphia, dbName);
 	}
 
@@ -27,76 +55,90 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * @return list of all users in the ds
 	 * @throws UnknownHostException
 	 */
-	public List<UserProfile> findAll() throws UnknownHostException 
-	{
+	public List<UserProfile> findAll() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).asList();
 	}
-	
+
 	/**
 	 * 
-	 * @param firstName first name to search by
+	 * @param firstName
+	 *            first name to search by
 	 * @return list of users matching the first name
 	 */
-	public List<UserProfile> findByFirstName(String firstName) 
-	{
-		//Could not make this work with .find methods.  It threw errors every time.
-		//Had to use a query and createQuery method, and to search by field, seems stable this way
+	public List<UserProfile> findByFirstName(String firstName) {
+		// Could not make this work with .find methods. It threw errors every
+		// time.
+		// Had to use a query and createQuery method, and to search by field,
+		// seems stable this way
 		Datastore ds = getDatastore();
-		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("first name").equal(firstName);
+		Query<UserProfile> q = ds.createQuery(UserProfile.class)
+				.field("first name").equal(firstName);
 		return q.asList();
 	}
-	
-	public List<UserProfile> findByFirstNameIgnoreCase(String firstName) 
-	{
-		//Could not make this work with .find methods.  It threw errors every time.
-		//Had to use a query and createQuery method, and to search by field, seems stable this way
+
+	public List<UserProfile> findByFirstNameIgnoreCase(String firstName) {
+		// Could not make this work with .find methods. It threw errors every
+		// time.
+		// Had to use a query and createQuery method, and to search by field,
+		// seems stable this way
 		Datastore ds = getDatastore();
 		Query<UserProfile> query = ds.createQuery(UserProfile.class);
 		query.criteria("first name").containsIgnoreCase(firstName);
-//		Query<UserProfile> q = ds.createQuery(UserProfile.class).criteria("first name").containsIgnoreCase(firstName);
+		// Query<UserProfile> q =
+		// ds.createQuery(UserProfile.class).criteria("first name").containsIgnoreCase(firstName);
 		return query.asList();
 	}
-	
-//	/**
-//	 * Returns list sorted by First Name
-//	 * @param firstName
-//	 * @return
-//	 */
-//	public List<UserProfile> sortAllByFirstName(String firstName) 
-//	{
-//		//Could not make this work with .find methods.  It threw errors every time.
-//		//Had to use a query and createQuery method, and to search by field, seems stable this way
-//		Datastore ds = getDatastore();
-//		Query<UserProfile> q = ds.find(UserProfile.class).
-//		return q.asList();
-//	}
-	
+
+	// /**
+	// * Returns list sorted by First Name
+	// * @param firstName
+	// * @return
+	// */
+	// public List<UserProfile> sortAllByFirstName(String firstName)
+	// {
+	// //Could not make this work with .find methods. It threw errors every
+	// time.
+	// //Had to use a query and createQuery method, and to search by field,
+	// seems stable this way
+	// Datastore ds = getDatastore();
+	// Query<UserProfile> q = ds.find(UserProfile.class).
+	// return q.asList();
+	// }
+
 	/**
 	 * Name search for specified name at param
-	 * @param middleName middle name to search for
+	 * 
+	 * @param middleName
+	 *            middle name to search for
 	 * @return list of all users in the ds with middleName
 	 */
-	public List<UserProfile> findByMiddleName(String middleName) 
-	{
-		//Could not make this work with .find methods.  It threw errors every time.
-		//Had to use a query and createQuery method, and to search by field, seems stable this way
+	public List<UserProfile> findByMiddleName(String middleName) {
+		// Could not make this work with .find methods. It threw errors every
+		// time.
+		// Had to use a query and createQuery method, and to search by field,
+		// seems stable this way
 		Datastore ds = getDatastore();
-		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("middle name").equal(middleName);
+		Query<UserProfile> q = ds.createQuery(UserProfile.class)
+				.field("middle name").equal(middleName);
 		return q.asList();
 	}
-	
+
 	/**
 	 * Name search for specified name at param
-	 * @param lastName last name to search for
+	 * 
+	 * @param lastName
+	 *            last name to search for
 	 * @return list of all users in the ds with lastName
 	 */
-	public List<UserProfile> findByLastName(String lastName) 
-	{
-		//Could not make this work with .find methods.  It threw errors every time.
-		//Had to use a query and createQuery method, and to search by field, seems stable this way
+	public List<UserProfile> findByLastName(String lastName) {
+		// Could not make this work with .find methods. It threw errors every
+		// time.
+		// Had to use a query and createQuery method, and to search by field,
+		// seems stable this way
 		Datastore ds = getDatastore();
-		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("last name").equal(lastName);
+		Query<UserProfile> q = ds.createQuery(UserProfile.class)
+				.field("last name").equal(lastName);
 		return q.asList();
 	}
 
@@ -105,11 +147,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * @param email
 	 * @return
 	 */
-	public UserProfile findByEmail(String email) 
-	{
-		//May be the 
+	public UserProfile findByEmail(String email) {
+		// May be the
 		Datastore ds = getDatastore();
-		UserProfile res = ds.find(UserProfile.class).filter("email = ", email).get();
+		UserProfile res = ds.find(UserProfile.class).filter("email = ", email)
+				.get();
 		return res;
 	}
 
@@ -133,14 +175,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 	}
 
-	
 	/**
-	 * Dangerous method, will erase all entries.
-	 * When it works
-	 * Used only for testing, will be removed later
+	 * Dangerous method, will erase all entries. When it works Used only for
+	 * testing, will be removed later
 	 */
-	public void deleteAll()
-	{
+	public void deleteAll() {
 		Datastore ds = getDatastore();
 		ds.delete(ds.createQuery(UserProfile.class));
 	}

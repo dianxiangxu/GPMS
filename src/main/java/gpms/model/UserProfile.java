@@ -6,6 +6,7 @@
 package gpms.model;
 
 import gpms.dao.BaseEntity;
+import gpms.dao.UserProfileDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
-@Entity("userprofile")
+@Entity(value = UserProfileDAO.COLLECTION_NAME)
 public class UserProfile extends BaseEntity {
 	@Property("first name")
 	private String firstName = new String();
@@ -109,7 +110,8 @@ public class UserProfile extends BaseEntity {
 	/**
 	 * Changes the first name of the user
 	 * 
-	 * @param newName the new first name
+	 * @param newName
+	 *            the new first name
 	 * 
 	 */
 	public void setFirstName(String firstName) {

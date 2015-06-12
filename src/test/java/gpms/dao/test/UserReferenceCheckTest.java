@@ -34,8 +34,8 @@ public class UserReferenceCheckTest {
 		morphia = new Morphia();
 		morphia.map(UserProfile.class).map(UserAccount.class);
 		datastore = morphia.createDatastore(mongoClient, dbName);
-		newUserAccountDAO = new UserAccountDAO(morphia, mongoClient, dbName);
-		newUserProfileDAO = new UserProfileDAO(morphia, mongoClient, dbName);
+		newUserAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+		newUserProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
 	}
 	
 	@After

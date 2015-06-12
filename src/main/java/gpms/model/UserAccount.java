@@ -5,11 +5,12 @@ package gpms.model;
 //import java.util.Date;
 
 import gpms.dao.BaseEntity;
+import gpms.dao.UserAccountDAO;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-@Entity("useraccount")
+@Entity(value = UserAccountDAO.COLLECTION_NAME)
 public class UserAccount extends BaseEntity {
 	@Property("username")
 	private String userName;

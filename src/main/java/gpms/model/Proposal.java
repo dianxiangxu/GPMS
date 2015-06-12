@@ -1,6 +1,7 @@
 package gpms.model;
 
 import gpms.dao.BaseEntity;
+import gpms.dao.ProposalDAO;
 
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-@Entity("proposal")
+@Entity(value = ProposalDAO.COLLECTION_NAME)
 public class Proposal extends BaseEntity {
 	@Property("proposal no")
 	private String proposalNo;
@@ -23,14 +24,14 @@ public class Proposal extends BaseEntity {
 	@Embedded("sponsor and budget info")
 	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
 
-	// @Embedded("cost share info")
-	// private CostShareInfo costShareInfo;
-	// @Embedded("university commitments")
-	// private UniversityCommitments universityCommitments;
-	// @Embedded("conflict of interest and commitment info")
-	// private ConflictOfInterest conflicOfInterest;
-	// @Embedded("compliance info")
-	// private ComplianceInfo complianceInfo;
+	@Embedded("cost share info")
+	private CostShareInfo costShareInfo;
+	@Embedded("university commitments")
+	private UniversityCommitments universityCommitments;
+	@Embedded("conflict of interest and commitment info")
+	private ConflictOfInterest conflicOfInterest;
+	@Embedded("compliance info")
+	private ComplianceInfo complianceInfo;
 
 	public Proposal(String proposalNo, Date dateReceived,
 			Status proposalStatus, InvestigatorInfo investigatorInfo,
@@ -109,5 +110,38 @@ public class Proposal extends BaseEntity {
 	public void setSponsorAndBudgetInfo(
 			SponsorAndBudgetInfo sponsorAndBudgetInfo) {
 		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
+	}
+
+	public CostShareInfo getCostShareInfo() {
+		return costShareInfo;
+	}
+
+	public void setCostShareInfo(CostShareInfo costShareInfo) {
+		this.costShareInfo = costShareInfo;
+	}
+
+	public UniversityCommitments getUniversityCommitments() {
+		return universityCommitments;
+	}
+
+	public void setUniversityCommitments(
+			UniversityCommitments universityCommitments) {
+		this.universityCommitments = universityCommitments;
+	}
+
+	public ConflictOfInterest getConflicOfInterest() {
+		return conflicOfInterest;
+	}
+
+	public void setConflicOfInterest(ConflictOfInterest conflicOfInterest) {
+		this.conflicOfInterest = conflicOfInterest;
+	}
+
+	public ComplianceInfo getComplianceInfo() {
+		return complianceInfo;
+	}
+
+	public void setComplianceInfo(ComplianceInfo complianceInfo) {
+		this.complianceInfo = complianceInfo;
 	}
 }

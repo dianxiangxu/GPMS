@@ -57,7 +57,7 @@ public class ProposalDAOTest {
 				.map(SponsorAndBudgetInfo.class);
 		morphia.map(UserProfile.class).map(PositionDetails.class)
 				.map(ProjectInfo.class);
-		pdao = new ProposalDAO(morphia, mongo, dbName);
+		pdao = new ProposalDAO(mongo, morphia, dbName);
 		// datastore = morphia.createDatastore(mongo, dbName);
 	}
 
@@ -80,7 +80,7 @@ public class ProposalDAOTest {
 
 		InvestigatorInfo invInf = new InvestigatorInfo();
 
-		UserProfileDAO upDAO = new UserProfileDAO(morphia, mongo, dbName);
+		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, dbName);
 
 		List<UserProfile> upList = upDAO.findAll();
 		for (UserProfile up : upList) {
