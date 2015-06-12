@@ -46,9 +46,9 @@ public class ProposalDAOTest {
 
 	private static final int MAX_CO_PI_NUM = 4;
 	private static final int MAX_SENIOR_PERSONNEL_NUM = 10;
+
 	@Before
-	public void initiate() throws UnknownHostException, MongoException 
-	{
+	public void initiate() throws UnknownHostException, MongoException {
 		mongo = MongoDBConnector.getMongo();
 		morphia = new Morphia();
 		morphia.map(Proposal.class).map(InvestigatorInfo.class)
@@ -58,12 +58,11 @@ public class ProposalDAOTest {
 		morphia.map(UserProfile.class).map(PositionDetails.class)
 				.map(ProjectInfo.class);
 		pdao = new ProposalDAO(morphia, mongo, dbName);
-		//datastore = morphia.createDatastore(mongo, dbName);
+		// datastore = morphia.createDatastore(mongo, dbName);
 	}
 
 	@Test
-	public void TestAddProposal() throws UnknownHostException 
-	{
+	public void TestAddProposal() throws UnknownHostException {
 		long counter = pdao.count();
 		logger.debug("The count is [" + counter + "]");
 
@@ -71,8 +70,7 @@ public class ProposalDAOTest {
 
 		System.out.println("Proposals before we start.");
 
-		for (Proposal p : pList) 
-		{
+		for (Proposal p : pList) {
 			System.out.println(p.toString());
 		}
 
@@ -100,17 +98,13 @@ public class ProposalDAOTest {
 			// Also don't add the condition to check hard coded 4 and 10 here we
 			// already checked that in Info class while adding
 
-			if(up.getUserId().getUserName().equals("xu"))
-			{
+			if (up.getUserAccount().getUserName().equals("sWalsh")) {
 				invInf.setPi(up);
-			}
-			else if(invInf.getCo_pi().size() <= MAX_CO_PI_NUM)
-			{
+			} else if (invInf.getCo_pi().size() <= MAX_CO_PI_NUM) {
 				invInf.addCo_pi(up);
-				System.out.println("The amount of co pi is " + invInf.getCo_pi().size());
-			}
-			else if (prop.getSeniorPersonnel().size() <= MAX_SENIOR_PERSONNEL_NUM)
-			{
+				System.out.println("The amount of co pi is "
+						+ invInf.getCo_pi().size());
+			} else if (invInf.getSeniorPersonnel().size() <= MAX_SENIOR_PERSONNEL_NUM) {
 				System.out.println("Adding senior personel");
 				invInf.addSeniorPersonnel(up);
 			}

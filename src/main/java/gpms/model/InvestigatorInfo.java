@@ -38,11 +38,8 @@ public class InvestigatorInfo {
 		this.co_pi = co_pi;
 	}
 
-	// TODO: family.getChildren().add(son); can't we do like this?
 	public void addCo_pi(UserProfile co_pi) {
-		if (this.co_pi.size() <= MAX_CO_PI_NUM) {
-			this.co_pi.add(co_pi);
-		}
+		this.co_pi.add(co_pi);
 	}
 
 	public ArrayList<UserProfile> getSeniorPersonnel() {
@@ -50,9 +47,7 @@ public class InvestigatorInfo {
 	}
 
 	public void addSeniorPersonnel(UserProfile seniorPersonnel) {
-		if (this.seniorPersonnel.size() <= MAX_SENIOR_PERSONNEL_NUM) {
-			this.seniorPersonnel.add(seniorPersonnel);
-		}
+		this.seniorPersonnel.add(seniorPersonnel);
 	}
 
 	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
