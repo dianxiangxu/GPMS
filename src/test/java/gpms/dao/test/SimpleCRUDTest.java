@@ -1,6 +1,8 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.TestClassDAO;
 import gpms.model.TestClass;
@@ -10,15 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.mapping.MappingException;
 import org.mongodb.morphia.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mongodb.DuplicateKeyException;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -56,6 +59,11 @@ public class SimpleCRUDTest {
 		query = datastore.createQuery(TestClass.class);
 		test = new TestClass();
 		tests = new ArrayList<TestClass>();
+	}
+
+	@After
+	public void terminate() throws UnknownHostException, MongoException {
+		datastore.delete(datastore.createQuery(TestClass.class));
 	}
 
 	@Test
@@ -176,6 +184,7 @@ public class SimpleCRUDTest {
 		assertTrue(0 == totalCount);
 
 		// OR To specify the particular filter record
+		t = new TestClass();
 		t.setName("Milson");
 		t.setSurname("Munakami");
 		t.setEmail("milsonmun@gmail.com");
@@ -234,16 +243,16 @@ public class SimpleCRUDTest {
 		// OR
 		assertNull(datastore.get(TestClass.class, savedId));
 
-		boolean exceptionThrown = false;
-
-		try {
-			datastore.get(TestClass.class, t.getId());
-		} catch (RuntimeException e) {
-			if (e.getCause() instanceof MappingException)
-				exceptionThrown = true;
-		}
-
-		assertTrue(exceptionThrown);
+		// boolean exceptionThrown = false;
+		//
+		// try {
+		// datastore.get(TestClass.class, t.getId());
+		// } catch (RuntimeException e) {
+		// if (e.getCause() instanceof MappingException)
+		// exceptionThrown = true;
+		// }
+		//
+		// assertTrue(exceptionThrown);
 
 		// assertFalse(Boolean.FALSE);
 		// Boolean cached=cache.exists(key);
@@ -258,7 +267,7 @@ public class SimpleCRUDTest {
 		// return false;
 		// }
 		// datastore.exists(savedId);
-
+		t = new TestClass();
 		t.setName("Milson");
 		t.setSurname("Munakami");
 		t.setEmail("milsonmun@gmail.com");
@@ -266,6 +275,7 @@ public class SimpleCRUDTest {
 		t.setCompleted(Boolean.TRUE);
 		testClassDao.save(t);
 
+		t = new TestClass();
 		t.setName("Robinson");
 		t.setSurname("Cruso");
 		t.setEmail("robinhood@hotmail.com");
@@ -277,15 +287,15 @@ public class SimpleCRUDTest {
 
 		// testCanQueryForATest
 		query = datastore.createQuery(TestClass.class).filter("Name = ",
-				"Milson");
+				"Robinson");
 
 		TestClass result = (TestClass) query.asList().get(0);
-		assertEquals(t, result);
+		assertEquals(t.getId(), result.getId());
 
 		query = datastore.createQuery(TestClass.class).field("Name")
 				.equal("Robinson");
 		result = (TestClass) query.asList().get(0);
-		assertEquals(t, result);
+		assertEquals(t.getId(), result.getId());
 
 		// For using Referenced Collection Try this:
 		// query =
@@ -310,7 +320,10 @@ public class SimpleCRUDTest {
 		// Delete Robinson Test User by Id We can even do Iterative Ids delete
 		datastore.delete(TestClass.class, savedId);
 		assertNull(datastore.get(TestClass.class, savedId));
+	}
 
+	@Test(expected = DuplicateKeyException.class)
+	public void testDuplicateUniqueFunctinality() {
 		// testCannotInsertDuplicateTestUsersWithSameEmailButCanEnterWithSameName
 		// need to use : @Indexed(value = IndexDirection.ASC, name =
 		// "testIndexName", unique = true) on Model
@@ -328,6 +341,19 @@ public class SimpleCRUDTest {
 		t2.setEmail("milsonmun@gmail.com");
 		t2.setAge(94);
 		t2.setCompleted(Boolean.TRUE);
+
+		// boolean exceptionThrown = false;
+		//
+		// try {
+		// testClassDao.save(t2);
+		//
+		// } catch (RuntimeException e) {
+		// if (e.getCause() instanceof DuplicateKeyException)
+		// exceptionThrown = true;
+		// }
+		//
+		// assertTrue(exceptionThrown);
+
 		testClassDao.save(t2);
 
 		TestClass t3 = new TestClass();
@@ -338,6 +364,7 @@ public class SimpleCRUDTest {
 		t3.setCompleted(Boolean.TRUE);
 		testClassDao.save(t3);
 
+		TestClass result = (TestClass) query.asList().get(0);
 		// Test the last Test User with same Email is not added!
 		query = datastore.createQuery(TestClass.class).field("Email")
 				.equal("milsonmun@gmail.com");
@@ -349,6 +376,5 @@ public class SimpleCRUDTest {
 				.equal("milsonmun@hotmail.com");
 		result = (TestClass) query.asList().get(0);
 		assertEquals(t3, result);
-
 	}
 }
