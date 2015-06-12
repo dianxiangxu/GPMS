@@ -56,9 +56,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		super(mongo, morphia, dbName);
 	}
 
-	public UserProfile getUserProfile(ObjectId id) {
-		return UserProfile;
-	}
+//	public UserProfile getUserProfile(ObjectId id) {
+//		return UserProfile;
+//	}
 
 	/**
 	 * 
