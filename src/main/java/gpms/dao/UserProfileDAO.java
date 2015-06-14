@@ -2,6 +2,7 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Proposal;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -23,6 +24,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 	private static Morphia morphia;
 	private static Datastore ds;
+	
 
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
@@ -173,6 +175,12 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				firstName);
 		ds.update(updateQuery, ops);
 
+	}
+	
+	public UserProfile findByUserAccountId(ObjectId id)
+	{
+		Datastore ds = getDatastore();
+		return ds.find(UserProfile.class).field("user id.$id").equal(id).get();
 	}
 
 	/**

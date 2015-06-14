@@ -12,10 +12,17 @@ import org.junit.Test;
 
 public class UserProfileTest
 {
-	UserProfile up = new UserProfile();
 	String fName = "Tom";
 	String mName = "Tito";
 	String lName = "Perelman";
+	UserProfile up = new UserProfile(fName, mName, lName);
+	
+	@Test
+	public void testEqulity() 
+	{
+		UserProfile upt = new UserProfile(fName, mName, lName);
+		assertTrue(up.equals(upt));
+	}
 
 	@Test
 	public void testFirstName() 
@@ -86,7 +93,9 @@ public class UserProfileTest
 	@Test
 	public void testToString()
 	{
-		String fullName = fName + " " + mName + " " +lName;
+		//Suppose to have user account name at end, but since in the test has non
+		//just add space.
+		String fullName = fName + " " + mName + " " + lName + " ";
 		up.setFirstName(fName);
 		up.setMiddleName(mName);
 		up.setLastName(lName);

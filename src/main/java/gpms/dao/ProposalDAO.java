@@ -7,6 +7,7 @@ import gpms.model.Todo;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
@@ -33,8 +34,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	public Datastore getDatastore() {
 		if (ds == null) {
 			try {
-				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
-						DBNAME);
+				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(), DBNAME);
 			} catch (UnknownHostException | MongoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -50,5 +50,10 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	public List<Proposal> findAll() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class).asList();
+	}
+	
+	public List<Proposal> proposalByPiId(ObjectId piId) throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).field("investigator info.PI.$id").equal(piId).asList();
 	}
 }

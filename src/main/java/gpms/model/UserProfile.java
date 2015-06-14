@@ -81,21 +81,12 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		details = null;
-		phoneNumbers = null;
-		emails = null;
 	}
 
 	/**
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
 	public UserProfile() {
-		firstName = null;
-		middleName = null;
-		lastName = null;
-		details = null;
-		phoneNumbers = null;
-		emails = null;
 	}
 
 	/**
