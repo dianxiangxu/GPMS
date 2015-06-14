@@ -25,12 +25,12 @@ import com.mongodb.MongoException;
  * MongoDBConnector providing the database connection.
  */
 public class MongoDBConnector {
-	private final static Logger logger = LoggerFactory
+	private static final Logger logger = LoggerFactory
 			.getLogger(MongoDBConnector.class);
 
-	private static final MongoDBConnector INSTANCE = new MongoDBConnector();
+	private static MongoDBConnector instance = new MongoDBConnector();
 
-	private final Datastore ds;
+	private Datastore ds = null;
 	public static final String DB_NAME = "GPMS";
 
 	private static final String host = "localhost";
@@ -45,7 +45,7 @@ public class MongoDBConnector {
 
 	public MongoDBConnector() {
 		try {
-			MongoClient m = new MongoClient(host, port);
+			mongo = new MongoClient(host, port);
 
 		} catch (Exception e) {
 			logger.debug("New Mongo created with [" + host + "] and [" + port
@@ -55,12 +55,14 @@ public class MongoDBConnector {
 	}
 
 	public static MongoDBConnector instance() {
-		return INSTANCE;
+		return instance;
 	}
 
 	public Datastore readDatabase() {
 		return ds;
 	}
+
+	// http://www.pretechsol.com/2012/09/java-mongodb-morphia-connection-example.html
 
 	public static MongoClient getMongo() {
 		if (mongo == null) {
@@ -105,7 +107,7 @@ public class MongoDBConnector {
 			// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
 			// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
 
-			Morphia morphia = new Morphia();
+			morphia = new Morphia();
 			// morphia.mapPackage("gpms.model");
 			ds = morphia.createDatastore(mongo, dataBaseName);
 			ds.ensureIndexes();
@@ -117,14 +119,14 @@ public class MongoDBConnector {
 			synchronized (MongoDBConnector.class) {
 				if (connection == null) {
 					try {
-						INSTANCE = new MongoDBConnector(DB_NAME);
+						instance = new MongoDBConnector(DB_NAME);
 					} catch (UnknownHostException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	public DBCursor find(DBObject ref, DBObject keys, String collName) {
