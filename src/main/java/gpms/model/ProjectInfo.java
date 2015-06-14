@@ -6,7 +6,9 @@ import java.util.Date;
 
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.utils.IndexDirection;
 
 //import org.mongodb.morphia.annotations.Id;
 
@@ -14,6 +16,7 @@ import org.mongodb.morphia.annotations.Property;
 public class ProjectInfo {
 
 	@Property("project title")
+	@Indexed(value = IndexDirection.ASC, name = "proposalTitleIndex", unique = true)
 	private String projectTitle;
 
 	@Embedded("project type")

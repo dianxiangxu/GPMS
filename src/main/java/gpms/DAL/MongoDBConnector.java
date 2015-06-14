@@ -21,23 +21,48 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
+/*
+ * MongoDBConnector providing the database connection.
+ */
 public class MongoDBConnector {
-	private final static Logger logger = LoggerFactory
+	private static final Logger logger = LoggerFactory
 			.getLogger(MongoDBConnector.class);
 
-	private static final int port = 27017;
+	private static MongoDBConnector instance = new MongoDBConnector();
+
+	private Datastore ds = null;
+	public static final String DB_NAME = "GPMS";
+
 	private static final String host = "localhost";
+	private static final int port = 27017;
+
 	private static MongoClient mongo = null;
 
 	static Mongo connection = null;
 	static DB db = null;
-	static MongoDBConnector theInstance = null;
-	private static String dbName = "GPMS";
-
-	private static final String DBNAME = "todoapp";
 
 	private static Morphia morphia;
-	private static Datastore ds;
+
+	public MongoDBConnector() {
+		try {
+			mongo = new MongoClient(host, port);
+
+		} catch (Exception e) {
+			logger.debug("New Mongo created with [" + host + "] and [" + port
+					+ "]");
+			throw new RuntimeException("Error initializing mongo db", e);
+		}
+	}
+
+	public static MongoDBConnector instance() {
+		return instance;
+	}
+
+	public Datastore readDatabase() {
+		return ds;
+	}
+
+	// http://www.pretechsol.com/2012/09/java-mongodb-morphia-connection-example.html
 
 	public static MongoClient getMongo() {
 		if (mongo == null) {
@@ -76,19 +101,17 @@ public class MongoDBConnector {
 	public MongoDBConnector(String dataBaseName) throws UnknownHostException,
 			MongoException {
 		if (mongo == null) {
-			mongo = new MongoClient("127.0.0.1", 27017);
+			mongo = new MongoClient(host, port);
 			// Mongo mongo = new Mongo(new
 			// MongoURI("mongodb://localhost/mjormIsFun"));
 			// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
 			// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
 
-			Morphia morphia = new Morphia();
+			morphia = new Morphia();
+			// morphia.mapPackage("gpms.model");
 			ds = morphia.createDatastore(mongo, dataBaseName);
+			ds.ensureIndexes();
 		}
-	}
-
-	public Datastore readDatabase() {
-		return ds;
 	}
 
 	public static MongoDBConnector getMongoDBInstance() {
@@ -96,14 +119,14 @@ public class MongoDBConnector {
 			synchronized (MongoDBConnector.class) {
 				if (connection == null) {
 					try {
-						theInstance = new MongoDBConnector(dbName);
+						instance = new MongoDBConnector(DB_NAME);
 					} catch (UnknownHostException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-		return theInstance;
+		return instance;
 	}
 
 	public DBCursor find(DBObject ref, DBObject keys, String collName) {

@@ -7,11 +7,14 @@ import java.util.Date;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.utils.IndexDirection;
 
-@Entity(value = ProposalDAO.COLLECTION_NAME)
+@Entity(value = ProposalDAO.COLLECTION_NAME, noClassnameStored = true)
 public class Proposal extends BaseEntity {
 	@Property("proposal no")
+	@Indexed(value = IndexDirection.ASC, name = "proposalNoIndex", unique = true)
 	private String proposalNo;
 	@Property("date received")
 	private Date dateReceived;

@@ -22,6 +22,28 @@ public class TestClass extends BaseEntity {
 	@Property("Is Completed")
 	private Boolean isCompleted = false;
 
+	@Override
+	public boolean equals(Object arg0) {
+		if (!(arg0 instanceof TestClass)) {
+			return false;
+		}
+
+		TestClass that = (TestClass) arg0;
+
+		// Custom equality check here.
+		return this.email.equals(that.email) && this.name.equals(that.name);
+	}
+
+	@Override
+	public int hashCode() {
+		int hashCode = 1;
+
+		hashCode = hashCode * 37 + this.email.hashCode();
+		hashCode = hashCode * 37 + this.name.hashCode();
+
+		return hashCode;
+	}
+
 	public int getAge() {
 		return age;
 	}

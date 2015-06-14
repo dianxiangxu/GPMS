@@ -1,5 +1,11 @@
 package gpms.dao;
 
+/**
+ * @author Thomas Volz
+ * 
+ * @author Milson Munakami
+ */
+
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
@@ -41,16 +47,20 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
 						DBNAME);
 			} catch (UnknownHostException | MongoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		ds.ensureIndexes();
 		return ds;
 	}
 
 	public UserProfileDAO(MongoClient mongo, Morphia morphia, String dbName) {
 		super(mongo, morphia, dbName);
 	}
+
+	// public UserProfile getUserProfile(ObjectId id) {
+	// return UserProfile;
+	// }
 
 	/**
 	 * 
@@ -80,10 +90,12 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	}
 
 	public List<UserProfile> findByFirstNameIgnoreCase(String firstName) {
-		// Could not make this work with .find methods. It threw errors every
-		// time.
-		// Had to use a query and createQuery method, and to search by field,
-		// seems stable this way
+		// This may be the go-to method for searching by name.
+		// Still needs more testing, I believe it may actually look for any
+		// phrase that
+		// contains the given search query, ie: a search of "rIck" would return
+		// both a "RICK" and a "Brick".
+		// But these "similarities" may be preferred
 		Datastore ds = getDatastore();
 		Query<UserProfile> query = ds.createQuery(UserProfile.class);
 		query.criteria("first name").containsIgnoreCase(firstName);
@@ -134,10 +146,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * @return list of all users in the ds with lastName
 	 */
 	public List<UserProfile> findByLastName(String lastName) {
-		// Could not make this work with .find methods. It threw errors every
-		// time.
-		// Had to use a query and createQuery method, and to search by field,
-		// seems stable this way
 		Datastore ds = getDatastore();
 		Query<UserProfile> q = ds.createQuery(UserProfile.class)
 				.field("last name").equal(lastName);
@@ -171,7 +179,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		UpdateOperations<UserProfile> ops;
 		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
 				.field("_id").equal(id);
-		ops = ds.createUpdateOperations(UserProfile.class).set("firstname",
+		ops = ds.createUpdateOperations(UserProfile.class).set("first name",
 				firstName);
 		ds.update(updateQuery, ops);
 
@@ -181,6 +189,42 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	{
 		Datastore ds = getDatastore();
 		return ds.find(UserProfile.class).field("user id.$id").equal(id).get();
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param middleName
+	 * @throws UnknownHostException
+	 * @throws MongoException
+	 */
+	public void changeMiddleName(ObjectId id, String middleName)
+			throws UnknownHostException, MongoException {
+		Datastore ds = getDatastore();
+		UpdateOperations<UserProfile> ops;
+		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
+				.field("_id").equal(id);
+		ops = ds.createUpdateOperations(UserProfile.class).set("middle name",
+				middleName);
+		ds.update(updateQuery, ops);
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param lastName
+	 * @throws UnknownHostException
+	 * @throws MongoException
+	 */
+	public void changeLastName(ObjectId id, String lastName)
+			throws UnknownHostException, MongoException {
+		Datastore ds = getDatastore();
+		UpdateOperations<UserProfile> ops;
+		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
+				.field("_id").equal(id);
+		ops = ds.createUpdateOperations(UserProfile.class).set("last name",
+				lastName);
+		ds.update(updateQuery, ops);
 	}
 
 	/**
