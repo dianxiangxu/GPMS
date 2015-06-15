@@ -19,12 +19,13 @@ import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,123 +61,351 @@ public class ProposalDAOTest {
 		pdao = new ProposalDAO(mongo, morphia, dbName);
 		// datastore = morphia.createDatastore(mongo, dbName);
 	}
-
+	
 	@Test
-	public void TestAddProposal() throws UnknownHostException {
+	public void testRemoveInvestogatorsFromProposal() throws UnknownHostException {
 		long counter = pdao.count();
 		logger.debug("The count is [" + counter + "]");
 
 		List<Proposal> pList = pdao.findAll();
-
-		System.out.println("Proposals before we start.");
-
-		for (Proposal p : pList) {
-			System.out.println(p.toString());
-		}
-
-		System.out.println("Now creating proposal...");
-
-		Proposal prop = new Proposal();
-
-		InvestigatorInfo invInf = new InvestigatorInfo();
-
-		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, dbName);
-
-		List<UserProfile> upList = upDAO.findAll();
-		for (UserProfile up : upList) {
-			System.out.println("Existing UserProfile: " + up.toString());
-		}
-		System.out.println("Adding Investigator Info from Data Base...");
-
-		for (UserProfile up : upList) {
-			// TODO: check the PI is the user who is adding the Proposal and
-			// Co-PI/ Senior Personnel can be more than 1
-			// Co-PI/ Senior Personnel need to be IN Array
-			// I think we need to separate this part as different method cause
-			// Addin User to the Proposal can happen after the proposal has been
-			// already added?
-			// Also don't add the condition to check hard coded 4 and 10 here we
-			// already checked that in Info class while adding
-
-			if (up.getUserAccount().getUserName().equals("sWalsh")) {
-				invInf.setPi(up);
-			} else if (invInf.getCo_pi().size() <= MAX_CO_PI_NUM) {
-				invInf.addCo_pi(up);
-				System.out.println("The amount of co pi is "
-						+ invInf.getCo_pi().size());
-			} else if (invInf.getSeniorPersonnel().size() <= MAX_SENIOR_PERSONNEL_NUM) {
-				System.out.println("Adding senior personel");
-				invInf.addSeniorPersonnel(up);
-			}
-		}
-
-		System.out.println("Adding project type info...");
-
-		ProjectType projType = new ProjectType();
-		projType.setIsResearchApplied(Boolean.TRUE);
-
-		System.out.println("Adding type of requiest info...");
-
-		TypeOfRequest tor = new TypeOfRequest();
-		tor.setPreProposal(Boolean.TRUE);
-
-		System.out.println("Adding project period info...");
-
-		ProjectPeriod pp = new ProjectPeriod();
-		pp.setFrom(new Date());
-		Date to = new Date();
-		pp.setTo(to);
-
-		System.out.println("Configuring all project information...");
-
-		ProjectInfo projInf = new ProjectInfo();
-		projInf.setProjectTitle("Software Security");
-		projInf.setProjectType(projType);
-		projInf.setTypeOfRequest(tor);
-		projInf.setDueDate(new Date());
-		projInf.setProjectPeriod(pp);
-
-		ProjectLocation pl = new ProjectLocation();
-		pl.setOffCampus(Boolean.TRUE);
-		pl.setOnCampus(Boolean.FALSE);
-		projInf.setProjectLocation(pl);
-
-		System.out.println("Adding sponsor and budget info...");
-
-		SponsorAndBudgetInfo sabi = new SponsorAndBudgetInfo();
-		sabi.addGrantingAgency("NFS");
-		sabi.addGrantingAgency("Orocovis");
-		sabi.setDirectCosts(1500000.00);
-		sabi.setFACosts(100000.00);
-		sabi.setTotalCosts(sabi.getDirectCosts() + sabi.getFACosts());
-		sabi.setFARate(12);
-
-		prop.setProposalNo("12");
-
-		// TODO: add the enum Status here
-		prop.setProposalStatus(Status.NEW);
-
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date recievedDate = new Date();
-		try {
-			recievedDate = dateFormat.parse("2015-6-9");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		prop.setDateReceived(recievedDate);
-
-		prop.setInvestigatorInfo(invInf);
-		prop.setProjectInfo(projInf);
-		prop.setSponsorAndBudgetInfo(sabi);
-
-		pdao.save(prop);
-
-		pList = pdao.findAll();
-
-		System.out.println("Proposals after adding new proposal...");
+		int count = 0;
+		Scanner scan = new Scanner(System.in);
+		int index = -1;
+		System.out.println("Select a proposals by index before we start.");
 
 		for (Proposal p : pList) {
-			System.out.println(p.toString());
+			System.out.println(count + " " + p.toString());
 		}
+		
+		do
+		{
+			System.out.println("Please enter index: ");
+			index = scan.nextInt();
+		}while(index < 0 || index > pList.size());
+		
+		Proposal prop = pList.get(index);
+		
+		System.out.println("Geting investigator info...");
+		InvestigatorInfo invInf = prop.getInvestigatorInfo();
+		
+		System.out.println("Geting Co-Pi list...");
+		
+		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
+		
+		System.out.println("Generating Co-Pi list...");
+		
+		count = 0;
+		
+		for(UserProfile userProfile : coPiList)
+		{
+			System.out.println(count + " " + userProfile.toString());
+			count++;
+		}
+		
+		do
+		{
+			System.out.println("Select the one to delete.");
+			index = scan.nextInt();
+		}while(index < 0 || index > coPiList.size());
+		
+		pdao.removeCoPi(prop, index);
+		
+		System.out.println("Geting Senior Personnel list...");
+		
+		ArrayList<UserProfile> seniorPersonnelList = invInf.getSeniorPersonnel();
+		
+		System.out.println("Generating Senior Personnel list...");
+		
+		count = 0;
+		
+		for(UserProfile userProfile : seniorPersonnelList)
+		{
+			System.out.println(count + " " + userProfile.toString());
+			count++;
+		}
+		
+		do
+		{
+			System.out.println("Select the one to delete.");
+			index = scan.nextInt();
+		}while(index < 0 || index > coPiList.size());
+		
+		pdao.removeSeniorPersonnel(prop, index);
+		
+		System.out.println("Geting updated Proposal...");
+		
+		prop = pdao.proposalById(prop.getId());
+		
+		System.out.println("Geting investigator info...");
+		invInf = prop.getInvestigatorInfo();
+		
+		System.out.println("Geting Co-Pi list...");
+		
+		coPiList = invInf.getCo_pi();
+		
+		System.out.println("Generating Co-Pi list...");
+		
+		for(UserProfile userProfile : coPiList)
+		{
+			System.out.println(userProfile.toString());
+		}
+		
+		System.out.println("Geting Senior Personnel list...");
+		
+		seniorPersonnelList = invInf.getSeniorPersonnel();
+		
+		System.out.println("Generating Senior Personnel list...");
+		
+		for(UserProfile userProfile : seniorPersonnelList)
+		{
+			System.out.println(userProfile.toString());
+		}
+
+		//scan.close();
+		
+		System.out.println("Done!");
 	}
+	
+//	@Test
+//	public void testUpdateInvestigatorInProposal() throws UnknownHostException {
+//		long counter = pdao.count();
+//		logger.debug("The count is [" + counter + "]");
+//
+//		List<Proposal> pList = pdao.findAll();
+//		int count = 0;
+//		Scanner scan = new Scanner(System.in);
+//		int index = -1;
+//		String input = "";
+//		System.out.println("Select a proposals by index before we start.");
+//
+//		for (Proposal p : pList) {
+//			System.out.println(count + " " + p.toString());
+//		}
+//		
+//		do
+//		{
+//			System.out.println("Please enter index: ");
+//			index = scan.nextInt();
+//		}while(index < 0 || index > pList.size());
+//		
+//		Proposal prop = pList.get(index);
+//		
+//		System.out.println("Geting investigator info...");
+//		InvestigatorInfo invInf = prop.getInvestigatorInfo();
+//		
+//		System.out.println("Geting Co-Pi list...");
+//		
+//		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
+//		
+//		System.out.println("Generating Co-Pi list...");
+//		
+//		count = 0;
+//		
+//		for(UserProfile userProfile : coPiList)
+//		{
+//			System.out.println(count + " " + userProfile.toString());
+//			count++;
+//		}
+//		
+//		do
+//		{
+//			System.out.println("Select the one to update.");
+//			index = scan.nextInt();
+//		}while(index < 0 || index > coPiList.size());
+//		
+//		UserProfile coPi = coPiList.get(index);
+//		
+//		System.out.println("Selected " + coPi.toString());
+//		//System.out.println("Please enter a new first name: ");
+//		//input = scan.nextLine();
+//		
+//		coPi.setFirstName("Jose");
+//		
+//		pdao.updateCoPi(prop, index, coPi);
+//		
+//		System.out.println("Geting Senior Personnel list...");
+//		
+//		ArrayList<UserProfile> seniorPersonnelList = invInf.getSeniorPersonnel();
+//		
+//		System.out.println("Generating Senior Personnel list...");
+//		
+//		count = 0;
+//		
+//		for(UserProfile userProfile : seniorPersonnelList)
+//		{
+//			System.out.println("This Line");
+//			System.out.println(count + " " + userProfile.toString());
+//			count++;
+//		}
+//		
+//		do
+//		{
+//			System.out.println("Select the one to update.");
+//			index = scan.nextInt();
+//		}while(index < 0 || index > coPiList.size());
+//		
+//		UserProfile seniorPersonnel = coPiList.get(index);
+//		
+//		System.out.println("Selected " + seniorPersonnel.toString());
+//		//System.out.println("Please enter a new first name: ");
+//		//input = scan.nextLine();
+//		
+//		seniorPersonnel.setFirstName("Pepe");
+//		
+//		pdao.updateSeniorPersonnel(prop, index, seniorPersonnel);
+//		
+//		System.out.println("Geting updated Proposal...");
+//		
+//		prop = pdao.proposalById(prop.getId());
+//		
+//		System.out.println("Geting investigator info...");
+//		invInf = prop.getInvestigatorInfo();
+//		
+//		System.out.println("Geting Co-Pi list...");
+//		
+//		coPiList = invInf.getCo_pi();
+//		
+//		System.out.println("Generating Co-Pi list...");
+//		
+//		for(UserProfile userProfile : coPiList)
+//		{
+//			System.out.println(userProfile.toString());
+//		}
+//		
+//		System.out.println("Geting Senior Personnel list...");
+//		
+//		seniorPersonnelList = invInf.getSeniorPersonnel();
+//		
+//		System.out.println("Generating Senior Personnel list...");
+//		
+//		for(UserProfile userProfile : seniorPersonnelList)
+//		{
+//			System.out.println(userProfile.toString());
+//		}
+//
+//		scan.close();
+//		
+//		System.out.println("Done!");
+//	}
+	
+//	@Test
+//	public void TestAddProposal() throws UnknownHostException {
+//		long counter = pdao.count();
+//		logger.debug("The count is [" + counter + "]");
+//
+//		List<Proposal> pList = pdao.findAll();
+//
+//		System.out.println("Proposals before we start.");
+//
+//		for (Proposal p : pList) {
+//			System.out.println(p.toString());
+//		}
+//
+//		System.out.println("Now creating proposal...");
+//
+//		Proposal prop = new Proposal();
+//		
+//		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, dbName);
+//		
+//		ArrayList<UserProfile> coPiList = new ArrayList<UserProfile>();
+//		ArrayList<UserProfile> seniorPersonnelList = new ArrayList<UserProfile>();
+//		List<UserProfile> upList = upDAO.findAll();
+//		for (UserProfile up : upList) {
+//			System.out.println("Existing UserProfile: " + up.toString());
+//		}
+//		System.out.println("Adding Investigator Info from Data Base...");
+//
+//		for (UserProfile up : upList) {
+//			// TODO: check the PI is the user who is adding the Proposal and
+//			// Co-PI/ Senior Personnel can be more than 1
+//			// Co-PI/ Senior Personnel need to be IN Array
+//			// I think we need to separate this part as different method cause
+//			// Addin User to the Proposal can happen after the proposal has been
+//			// already added?
+//			// Also don't add the condition to check hard coded 4 and 10 here we
+//			// already checked that in Info class while adding
+//
+//			if (up.getUserAccount().getUserName().equals("sWalsh")) {
+//				pdao.addPi(prop, up);
+//			} else if (coPiList.size() < MAX_CO_PI_NUM) {
+//				coPiList.add(up);
+//				System.out.println("The amount of co pi is " + coPiList.size());
+//			} else if (seniorPersonnelList.size() < MAX_SENIOR_PERSONNEL_NUM) {
+//				System.out.println("Adding senior personel");
+//				seniorPersonnelList.add(up);
+//			}
+//		}
+//		
+//		pdao.addCoPiList(prop, coPiList);
+//		pdao.addSeniorPersonelList(prop, seniorPersonnelList);
+//
+//		System.out.println("Adding project type info...");
+//
+//		ProjectType projType = new ProjectType();
+//		projType.setIsResearchApplied(Boolean.TRUE);
+//
+//		System.out.println("Adding type of requiest info...");
+//
+//		TypeOfRequest tor = new TypeOfRequest();
+//		tor.setPreProposal(Boolean.TRUE);
+//
+//		System.out.println("Adding project period info...");
+//
+//		ProjectPeriod pp = new ProjectPeriod();
+//		pp.setFrom(new Date());
+//		Date to = new Date();
+//		pp.setTo(to);
+//
+//		System.out.println("Configuring all project information...");
+//
+//		ProjectInfo projInf = new ProjectInfo();
+//		projInf.setProjectTitle("Software Security");
+//		projInf.setProjectType(projType);
+//		projInf.setTypeOfRequest(tor);
+//		projInf.setDueDate(new Date());
+//		projInf.setProjectPeriod(pp);
+//
+//		ProjectLocation pl = new ProjectLocation();
+//		pl.setOffCampus(Boolean.TRUE);
+//		pl.setOnCampus(Boolean.FALSE);
+//		projInf.setProjectLocation(pl);
+//
+//		System.out.println("Adding sponsor and budget info...");
+//
+//		SponsorAndBudgetInfo sabi = new SponsorAndBudgetInfo();
+//		sabi.addGrantingAgency("NFS");
+//		sabi.addGrantingAgency("Orocovis");
+//		sabi.setDirectCosts(1500000.00);
+//		sabi.setFACosts(100000.00);
+//		sabi.setTotalCosts(sabi.getDirectCosts() + sabi.getFACosts());
+//		sabi.setFARate(12);
+//
+//		prop.setProposalNo("12");
+//
+//		// TODO: add the enum Status here
+//		prop.setProposalStatus(Status.NEW);
+//
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		Date recievedDate = new Date();
+//		try {
+//			recievedDate = dateFormat.parse("2015-6-9");
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		prop.setDateReceived(recievedDate);
+//
+//		//prop.setInvestigatorInfo(invInf);
+//		prop.setProjectInfo(projInf);
+//		prop.setSponsorAndBudgetInfo(sabi);
+//
+//		pdao.save(prop);
+//
+//		pList = pdao.findAll();
+//
+//		System.out.println("Proposals after adding new proposal...");
+//
+//		for (Proposal p : pList) {
+//			System.out.println(p.toString());
+//		}
+//	}
 }

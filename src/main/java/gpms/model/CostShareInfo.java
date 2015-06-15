@@ -2,7 +2,6 @@
 
 package gpms.model;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
@@ -32,4 +31,15 @@ public class CostShareInfo {
 		this.thirdPartyCommitted = thirdPartyCommitted;
 	}
 
+	public String toString() {
+		String outPut = "";
+		outPut += "Institutional Committed : " + institutionalCommitted + "\n";
+		outPut += "Third Party Committed   : " + thirdPartyCommitted;
+		return outPut;
+	}
+
+	public boolean equals(CostShareInfo csi) {
+		return this.institutionalCommitted == csi.institutionalCommitted
+				&& this.thirdPartyCommitted == csi.thirdPartyCommitted;
+	}
 }

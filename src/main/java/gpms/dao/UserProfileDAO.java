@@ -8,6 +8,7 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Proposal;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -28,29 +29,30 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public static final String COLLECTION_NAME = "userprofile";
 
 	private static Morphia morphia;
-	private static Datastore ds;
+	//private static Datastore ds;
+	
 
-	private static Morphia getMorphia() throws UnknownHostException,
-			MongoException {
-		if (morphia == null) {
-			morphia = new Morphia().map(Proposal.class);
-		}
-		return morphia;
-	}
+//	private static Morphia getMorphia() throws UnknownHostException,
+//			MongoException {
+//		if (morphia == null) {
+//			morphia = new Morphia().map(Proposal.class);
+//		}
+//		return morphia;
+//	}
 
-	@Override
-	public Datastore getDatastore() {
-		if (ds == null) {
-			try {
-				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
-						DBNAME);
-			} catch (UnknownHostException | MongoException e) {
-				e.printStackTrace();
-			}
-		}
-		ds.ensureIndexes();
-		return ds;
-	}
+//	@Override
+//	public Datastore getDatastore() {
+//		if (ds == null) {
+//			try {
+//				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
+//						DBNAME);
+//			} catch (UnknownHostException | MongoException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		ds.ensureIndexes();
+//		return ds;
+//	}
 
 	public UserProfileDAO(MongoClient mongo, Morphia morphia, String dbName) {
 		super(mongo, morphia, dbName);
@@ -171,8 +173,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 */
-	public void changeFirstName(ObjectId id, String firstName)
-			throws UnknownHostException, MongoException {
+	public void changeFirstName(ObjectId id, String firstName) throws UnknownHostException, MongoException {
 		Datastore ds = getDatastore();
 		UpdateOperations<UserProfile> ops;
 		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
@@ -181,6 +182,13 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				firstName);
 		ds.update(updateQuery, ops);
 
+	}
+	
+	public UserProfile findByUserAccountId(ObjectId id)
+	{
+		Datastore ds = getDatastore();
+		//get user profile, get user account, match user account id to passed id, return user profile
+		return ds.createQuery(UserProfile.class).field("user id.$id").equal(id).get();
 	}
 
 	/**

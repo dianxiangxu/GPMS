@@ -19,6 +19,13 @@ public class UserAccountTest
 //	}
 	
 	@Test
+	public void testIsEqual() 
+	{	
+		UserAccount testua = new UserAccount("Calembo", "cccaaa", false);
+		assertTrue(ua.equals(testua));
+	}
+	
+	@Test
 	public void testUserName() 
 	{	
 		assertTrue(ua.getUserName().equals("Calembo"));
@@ -28,5 +35,11 @@ public class UserAccountTest
 	public void testPassword() 
 	{
 		assertTrue(ua.getPassword().equals("cccaaa"));
+	}
+	
+	@Test
+	public void testIsDeleted() 
+	{
+		assertTrue(ua.getIsDeleted().equals(false));
 	}
 }

@@ -47,8 +47,8 @@ public class UserProfile extends BaseEntity {
 	@Property("additional numbers")
 	private List<String> additionalNumbers = new ArrayList<String>();
 
-	@Property("address")
-	private Address address;
+	@Embedded("address")
+	private Address address = new Address();
 
 	@Property("emails")
 	@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)

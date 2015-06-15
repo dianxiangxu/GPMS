@@ -1,10 +1,13 @@
 package gpms.dao.test;
 
 import static org.junit.Assert.*;
+
+import java.net.UnknownHostException;
+import java.util.List;
+
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.TestClass;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -45,7 +48,7 @@ public class UserReferenceCheckTest {
 	}
 	
 	@Test
-	public void testAddandReference() 
+	public void testAddandReference() throws UnknownHostException 
 	{
 		long count = newUserAccountDAO.count();
 		newUserProfile = new UserProfile("Shane", "Bernthal", "Walsh");
@@ -54,8 +57,69 @@ public class UserReferenceCheckTest {
 		newUserAccountDAO.save(newUserAccount);
 		newUserProfileDAO.save(newUserProfile);
 		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();
 		
-		assertTrue(count+1 == newUserAccountDAO.count());		
+		newUserProfile = new UserProfile("Hector", "Caleb", "Ortiz");
+		newUserAccount = new UserAccount("hOrtiz");
+		newUserProfile.setUserId(newUserAccount);
+		newUserAccountDAO.save(newUserAccount);
+		newUserProfileDAO.save(newUserProfile);
+		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();
+		
+		newUserProfile = new UserProfile("Thomas", "", "Volz");
+		newUserAccount = new UserAccount("tVolz");
+		newUserProfile.setUserId(newUserAccount);
+		newUserAccountDAO.save(newUserAccount);
+		newUserProfileDAO.save(newUserProfile);
+		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();
+		
+		newUserProfile = new UserProfile("Milsen", "", "Muyasaki");
+		newUserAccount = new UserAccount("mMuyasaki");
+		newUserProfile.setUserId(newUserAccount);
+		newUserAccountDAO.save(newUserAccount);
+		newUserProfileDAO.save(newUserProfile);
+		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();
+		
+		newUserProfile = new UserProfile("Diangxian", "", "Xu");
+		newUserAccount= new UserAccount("dXu");
+		newUserProfile.setUserId(newUserAccount);
+		newUserAccountDAO.save(newUserAccount);
+		newUserProfileDAO.save(newUserProfile);
+		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();
+		
+		newUserProfile = new UserProfile("William", "", "Bush");
+		newUserAccount= new UserAccount("wBush");
+		newUserProfile.setUserId(newUserAccount);
+		newUserAccountDAO.save(newUserAccount);
+		newUserProfileDAO.save(newUserProfile);
+		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();
+		
+		newUserProfile = new UserProfile("Turner", "", "Borges");
+		newUserAccount= new UserAccount("tBorges");
+		newUserProfile.setUserId(newUserAccount);
+		newUserAccountDAO.save(newUserAccount);
+		newUserProfileDAO.save(newUserProfile);
+		
+		assertTrue(count+1 == newUserAccountDAO.count());
+		count = newUserAccountDAO.count();	
+		
+		List<UserProfile> upList = newUserProfileDAO.findAll();
+		
+		for(UserProfile up : upList)
+		{
+			System.out.println(up.toString());
+		}
 	}
 
 }
