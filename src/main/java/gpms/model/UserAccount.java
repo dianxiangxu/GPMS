@@ -75,4 +75,14 @@ public class UserAccount extends BaseEntity {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	
+	public void delete()
+	{
+		isDeleted = true;
+	}
+	
+	public void unDelete()
+	{
+		isDeleted = false;
+	}
 }

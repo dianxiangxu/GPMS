@@ -7,6 +7,7 @@ import gpms.model.UserAccount;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
@@ -24,7 +25,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
 		if (morphia == null) {
-			morphia = new Morphia().map(Proposal.class);
+			morphia = new Morphia().map(UserAccount.class);
 		}
 		return morphia;
 	}
@@ -52,6 +53,12 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		return ds.createQuery(UserAccount.class).asList();
 	}
 
+	public UserAccount findByID(ObjectId id)
+	{
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserAccount.class).field("id").equal(id).get();
+	}
+	
 	public UserAccount findByUserName(String userName) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).field("username")

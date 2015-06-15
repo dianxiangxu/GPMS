@@ -11,6 +11,7 @@ import gpms.dao.UserProfileDAO;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
+import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class UserReferenceCheckTest {
 	MongoClient mongoClient;
 	Morphia morphia;
 	Datastore datastore;
-	String dbName = "GPMS";
+	String dbName = "testDB";
 	UserAccountDAO newUserAccountDAO;
 	UserProfileDAO newUserProfileDAO;
 	UserProfile newUserProfile;
@@ -121,5 +122,28 @@ public class UserReferenceCheckTest {
 			System.out.println(up.toString());
 		}
 	}
+	
+//	@Test
+//	public void testGetUserProfileFromAccount()
+//	{
+////		Need to find a user profile whose user account reference id matches a user account id
+//		newUserProfile = new UserProfile("Charles", "Knight", "Dayman");
+//		newUserAccount = new UserAccount("cDayman");
+//		newUserProfile.setUserId(newUserAccount);
+//		newUserAccountDAO.save(newUserAccount);
+//		newUserProfileDAO.save(newUserProfile);
+//		
+//		
+//		UserProfile findUserProfile;
+//		ObjectId checkID;
+//		
+//		checkID = newUserAccount.getId();
+//		findUserProfile = newUserProfileDAO.findByUserID(checkID);
+//		
+//		System.out.println("Found Profile: " + findUserProfile.toString());
+//		
+//	}
 
+	
+	
 }
