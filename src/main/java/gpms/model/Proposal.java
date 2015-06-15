@@ -35,6 +35,8 @@ public class Proposal extends BaseEntity {
 	private ConflictOfInterest conflicOfInterest;
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo;
+	@Property
+	private boolean isDeleted;
 
 	public Proposal(String proposalNo, Date dateReceived,
 			Status proposalStatus, InvestigatorInfo investigatorInfo,
@@ -54,10 +56,25 @@ public class Proposal extends BaseEntity {
 		this.proposalNo = proposalNo;
 		this.dateReceived = dateReceived;
 		this.proposalStatus = proposalStatus;
+		investigatorInfo = new InvestigatorInfo();
+		projectInfo = new ProjectInfo();
+		sponsorAndBudgetInfo = new SponsorAndBudgetInfo();
+		costShareInfo = new CostShareInfo();
+		universityCommitments = new UniversityCommitments();
+		conflicOfInterest = new ConflictOfInterest();
+		complianceInfo = new ComplianceInfo();
 	}
 
 	public Proposal() {
-
+		proposalNo = new String();
+		dateReceived = new Date();
+		investigatorInfo = new InvestigatorInfo();
+		projectInfo = new ProjectInfo();
+		sponsorAndBudgetInfo = new SponsorAndBudgetInfo();
+		costShareInfo = new CostShareInfo();
+		universityCommitments = new UniversityCommitments();
+		conflicOfInterest = new ConflictOfInterest();
+		complianceInfo = new ComplianceInfo();
 	}
 
 	@Override
@@ -146,5 +163,15 @@ public class Proposal extends BaseEntity {
 
 	public void setComplianceInfo(ComplianceInfo complianceInfo) {
 		this.complianceInfo = complianceInfo;
+	}
+	
+	public void setIsDeleted(boolean isDeleted)
+	{
+		this.isDeleted = isDeleted;
+	}
+	
+	public boolean getIsDeleted()
+	{
+		return isDeleted;
 	}
 }

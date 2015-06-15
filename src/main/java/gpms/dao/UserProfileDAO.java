@@ -173,8 +173,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 */
-	public void changeFirstName(ObjectId id, String firstName)
-			throws UnknownHostException, MongoException {
+	public void changeFirstName(ObjectId id, String firstName) throws UnknownHostException, MongoException {
 		Datastore ds = getDatastore();
 		UpdateOperations<UserProfile> ops;
 		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
@@ -188,6 +187,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public UserProfile findByUserAccountId(ObjectId id)
 	{
 		Datastore ds = getDatastore();
+		//get user profile, get user account, match user account id to passed id, return user profile
 		return ds.createQuery(UserProfile.class).field("user id.$id").equal(id).get();
 	}
 
