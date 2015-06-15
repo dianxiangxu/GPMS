@@ -38,20 +38,20 @@ public class UserProfileTest
 		assertTrue(up.getMiddleName().equals(mName));
 	}
 	
-	@Test
-	public void testDetails() 
-	{
-		List<PositionDetails> pdl = new ArrayList<PositionDetails>();
-		pdl.add(new PositionDetails());
-		up.setDetails(pdl);
-		assertTrue(up.getDetails().equals(pdl));
-		
-		int count = up.getDetails().size();
-		assertTrue(count == 1);			
-		
-		up.addDetails(new PositionDetails());
-		assertTrue((count+1) == up.getDetails().size());
-	}
+//	@Test
+//	public void testDetails() 
+//	{
+//		List<PositionDetails> pdl = new ArrayList<PositionDetails>();
+//		pdl.add(new PositionDetails());
+//		up.setDetails(pdl);
+//		assertTrue(up.getDetails().equals(pdl));
+//		
+//		int count = up.getDetails().size();
+//		assertTrue(count == 1);			
+//		
+//		up.addDetails(new PositionDetails());
+//		assertTrue((count+1) == up.getDetails().size());
+//	}
 //	
 //	@Test
 //	public void testPhoneNumbers() 

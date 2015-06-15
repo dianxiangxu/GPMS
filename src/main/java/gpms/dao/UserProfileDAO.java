@@ -33,7 +33,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
 		if (morphia == null) {
-			morphia = new Morphia().map(Proposal.class);
+			morphia = new Morphia().map(UserProfile.class);
 		}
 		return morphia;
 	}
@@ -68,6 +68,17 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public List<UserProfile> findAll() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).asList();
+	}
+
+	public UserProfile findByID(ObjectId id) {
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
+	}
+
+	public UserProfile findByUserID(ObjectId id) {
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserProfile.class).field("user id.id").equal(id)
+				.get();
 	}
 
 	/**

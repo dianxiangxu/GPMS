@@ -47,7 +47,7 @@ public class UserProfile extends BaseEntity {
 	@Property("additional numbers")
 	private List<String> additionalNumbers = new ArrayList<String>();
 
-	@Property("address")
+	@Embedded("address")
 	private Address address;
 
 	@Property("emails")
@@ -56,6 +56,9 @@ public class UserProfile extends BaseEntity {
 
 	@Reference("user id")
 	private UserAccount userAccount = new UserAccount();
+
+	@Property("deleted")
+	private boolean isDeleted = false;
 
 	/**
 	 * Overloaded constructor
@@ -105,19 +108,14 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		details = null;
-		emails = null;
+		
 	}
 
 	/**
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
 	public UserProfile() {
-		firstName = null;
-		middleName = null;
-		lastName = null;
-		details = null;
-		emails = null;
+		
 	}
 
 	/**
@@ -180,18 +178,20 @@ public class UserProfile extends BaseEntity {
 	 * 
 	 * @return the array list of details
 	 */
-	public List<PositionDetails> getDetails() {
+	public List<PositionDetails> getDetailsList() {
 		return details;
 	}
-
+	
 	/**
-	 * Should not be used
-	 * 
-	 * @param details
+	 * Will return a PositionDetails object from the list, for manipulation
+	 * @param index index to find
+	 * @return PositionDetails object to return
 	 */
-	public void setDetails(List<PositionDetails> details) {
-		this.details = details;
+	public PositionDetails getDetails(int index)
+	{
+		return details.get(index);
 	}
+
 
 	/**
 	 * Add a collection of position details to the existing array list
@@ -202,6 +202,12 @@ public class UserProfile extends BaseEntity {
 		details.add(positionDetails);
 	}
 
+	public void deleteDetails(PositionDetails positionDetails)
+	{
+		int deleteInd = details.indexOf(positionDetails);
+		details.remove(deleteInd);
+	}
+	
 	/**
 	 * Adds a new office number to the arraylist
 	 * 
@@ -399,6 +405,20 @@ public class UserProfile extends BaseEntity {
 	}
 
 	/**
+	 * Mark for deletion
+	 */
+	public void delete() {
+		isDeleted = true;
+	}
+
+	/**
+	 * Unmark for deletion, save
+	 */
+	public void unDelete() {
+		isDeleted = false;
+	}
+
+	/**
 	 * toString returns full user name
 	 * 
 	 * @return full name of the user
@@ -406,7 +426,8 @@ public class UserProfile extends BaseEntity {
 	@Override
 	public String toString() {
 		return this.getFirstName() + " " + this.getMiddleName() + " "
-				+ this.getLastName() + " " + this.userAccount.getUserName();
+				+ this.getLastName() + ", Account name: "
+				+ userAccount.getUserName();
 	}
 
 	public boolean equals(UserProfile up) {
