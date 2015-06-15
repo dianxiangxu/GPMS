@@ -29,30 +29,30 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public static final String COLLECTION_NAME = "userprofile";
 
 	private static Morphia morphia;
-	private static Datastore ds;
+	//private static Datastore ds;
 	
 
-	private static Morphia getMorphia() throws UnknownHostException,
-			MongoException {
-		if (morphia == null) {
-			morphia = new Morphia().map(Proposal.class);
-		}
-		return morphia;
-	}
+//	private static Morphia getMorphia() throws UnknownHostException,
+//			MongoException {
+//		if (morphia == null) {
+//			morphia = new Morphia().map(Proposal.class);
+//		}
+//		return morphia;
+//	}
 
-	@Override
-	public Datastore getDatastore() {
-		if (ds == null) {
-			try {
-				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
-						DBNAME);
-			} catch (UnknownHostException | MongoException e) {
-				e.printStackTrace();
-			}
-		}
-		ds.ensureIndexes();
-		return ds;
-	}
+//	@Override
+//	public Datastore getDatastore() {
+//		if (ds == null) {
+//			try {
+//				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
+//						DBNAME);
+//			} catch (UnknownHostException | MongoException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		ds.ensureIndexes();
+//		return ds;
+//	}
 
 	public UserProfileDAO(MongoClient mongo, Morphia morphia, String dbName) {
 		super(mongo, morphia, dbName);
@@ -188,7 +188,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public UserProfile findByUserAccountId(ObjectId id)
 	{
 		Datastore ds = getDatastore();
-		return ds.find(UserProfile.class).field("user id.$id").equal(id).get();
+		return ds.createQuery(UserProfile.class).field("user id.$id").equal(id).get();
 	}
 
 	/**
