@@ -64,7 +64,8 @@ public class UserAccount extends BaseEntity {
 
 	public boolean equals(UserAccount ua) {
 		return this.userName.equals(ua.userName)
-				&& this.password.equals(ua.password);
+				&& this.password.equals(ua.password)
+				&& this.isDeleted == ua.isDeleted;
 	}
 
 	public Boolean getIsDeleted() {

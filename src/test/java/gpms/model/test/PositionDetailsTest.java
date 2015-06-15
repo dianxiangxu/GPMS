@@ -8,6 +8,14 @@ import org.junit.Test;
 public class PositionDetailsTest 
 {
 	PositionDetails pd = new PositionDetails();
+	
+	@Test
+	public void testEquality() 
+	{
+		PositionDetails pdt = new PositionDetails();
+		assertTrue(pd.equals(pdt));
+	}
+	
 	@Test
 	public void testPositionType() 
 	{

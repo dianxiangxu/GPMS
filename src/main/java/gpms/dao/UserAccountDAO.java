@@ -61,7 +61,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	
 	public UserAccount findByUserName(String userName) {
 		Datastore ds = getDatastore();
-		return ds.createQuery(UserAccount.class).field(userName)
+		return ds.createQuery(UserAccount.class).field("username")
 				.equal(userName).get();
 	}
 }
