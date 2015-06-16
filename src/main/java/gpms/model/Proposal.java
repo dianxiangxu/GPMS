@@ -77,11 +77,7 @@ public class Proposal extends BaseEntity {
 		complianceInfo = new ComplianceInfo();
 	}
 
-	@Override
-	public String toString() {
-		return this.getProposalNo() + " " + this.getDateReceived() + " "
-				+ this.getProposalStatus();
-	}
+	
 
 	public String getProposalNo() {
 		return proposalNo;
@@ -96,7 +92,11 @@ public class Proposal extends BaseEntity {
 	}
 
 	public void setDateReceived(Date dateReceived) {
-		this.dateReceived = dateReceived;
+		Date currDate = new Date();
+		if(dateReceived.equals(currDate) || dateReceived.after(currDate))
+		{
+			this.dateReceived = dateReceived;
+		}
 	}
 
 	public Status getProposalStatus() {
@@ -173,5 +173,11 @@ public class Proposal extends BaseEntity {
 	public boolean getIsDeleted()
 	{
 		return isDeleted;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getProposalNo() + " " + this.getDateReceived() + " "
+				+ this.getProposalStatus();
 	}
 }

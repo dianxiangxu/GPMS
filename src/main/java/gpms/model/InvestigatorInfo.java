@@ -51,5 +51,32 @@ public class InvestigatorInfo {
 	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
 		this.seniorPersonnel = seniorPersonnel;
 	}
+	
+	public String toString()
+	{
+		int count = 0;
+		String outPut = "";
+		outPut += "PI               : " + "\n";
+		outPut += pi.toString() + "\n";
+		outPut += "CO-PI            : " + "\n";
+		for(UserProfile coPi : co_pi)
+		{
+			outPut += "Co-Pi number : " + count + "\n";
+			outPut += coPi.toString() + "\n";
+		}
+		count = 0;
+		outPut += "senior personnel : " + "\n";
+		for(UserProfile sp : seniorPersonnel)
+		{
+			outPut += "Senior Personel number : " + count + "\n";
+			outPut += sp.toString() + "\n";
+		}
+		return outPut;
+	}
+	
+	public boolean equals(InvestigatorInfo invInf)
+	{
+		return this.pi.equals(invInf.pi) && this.co_pi.equals(invInf.co_pi) && this.seniorPersonnel.equals(invInf.seniorPersonnel);
+	}
 
 }

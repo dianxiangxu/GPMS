@@ -63,108 +63,173 @@ public class ProposalDAOTest {
 	}
 	
 	@Test
-	public void testRemoveInvestogatorsFromProposal() throws UnknownHostException {
-		long counter = pdao.count();
-		logger.debug("The count is [" + counter + "]");
-
-		List<Proposal> pList = pdao.findAll();
-		int count = 0;
+	public void testCreatingEditingProposal() throws UnknownHostException
+	{
+		Proposal prop;
 		Scanner scan = new Scanner(System.in);
 		int index = -1;
-		System.out.println("Select a proposals by index before we start.");
-
-		for (Proposal p : pList) {
-			System.out.println(count + " " + p.toString());
-		}
+		int count = 0;
+		String input = "";
 		
 		do
 		{
-			System.out.println("Please enter index: ");
-			index = scan.nextInt();
-		}while(index < 0 || index > pList.size());
+			System.out.println("To update existing proposal enter \"E\", ");
+			System.out.println("To create new proposal enter \"N\", ");
+			input = scan.nextLine();
+			input.toUpperCase();
+		}while(input.charAt(0) != 'E' || input.charAt(0) != 'N');
 		
-		Proposal prop = pList.get(index);
-		
-		System.out.println("Geting investigator info...");
-		InvestigatorInfo invInf = prop.getInvestigatorInfo();
-		
-		System.out.println("Geting Co-Pi list...");
-		
-		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
-		
-		System.out.println("Generating Co-Pi list...");
-		
-		count = 0;
-		
-		for(UserProfile userProfile : coPiList)
+		if(input.charAt(0) == 'N')
 		{
-			System.out.println(count + " " + userProfile.toString());
-			count++;
+			prop = new Proposal();
+		}
+		else
+		{
+			List<Proposal> pList = pdao.findAll();
+			for(Proposal p : pList)
+			{
+				System.out.println("Proposal numnber : " + count);
+				System.out.println(p.toString());
+			}
+			
+			do
+			{
+				System.out.println("Please chose a proposal : ");
+				index = scan.nextInt();
+			}while(index < 0 || index > pList.size());
+			prop = pList.get(index);
 		}
 		
+		//proposal number set\edit		
+		System.out.println("Proposal number is : " + prop.getProposalNo());
+		System.out.println("Enter a new number : ");
+		input = scan.nextLine();
+		prop.setProposalNo(input);
+		System.out.println("New proposal number is : " + prop.getProposalNo());
+		
+		//proposal date received set\edit
+		System.out.println("Proposal date received is : " + prop.getDateReceived().toString());
+		System.out.println("Whant to update the date to today? (Y or N) : ");
 		do
 		{
-			System.out.println("Select the one to delete.");
-			index = scan.nextInt();
-		}while(index < 0 || index > coPiList.size());
+			input = scan.nextLine();
+			input.toUpperCase();
+		}while(input.charAt(0)!= 'Y' || input.charAt(0) != 'N');
 		
-		pdao.removeCoPi(prop, index);
-		
-		System.out.println("Geting Senior Personnel list...");
-		
-		ArrayList<UserProfile> seniorPersonnelList = invInf.getSeniorPersonnel();
-		
-		System.out.println("Generating Senior Personnel list...");
-		
-		count = 0;
-		
-		for(UserProfile userProfile : seniorPersonnelList)
+		if(input.charAt(0) == 'Y')
 		{
-			System.out.println(count + " " + userProfile.toString());
-			count++;
+			prop.setDateReceived(new Date());
 		}
+		System.out.println("Proposal date received is : " + prop.getDateReceived().toString());
 		
-		do
-		{
-			System.out.println("Select the one to delete.");
-			index = scan.nextInt();
-		}while(index < 0 || index > coPiList.size());
-		
-		pdao.removeSeniorPersonnel(prop, index);
-		
-		System.out.println("Geting updated Proposal...");
-		
-		prop = pdao.proposalById(prop.getId());
-		
-		System.out.println("Geting investigator info...");
-		invInf = prop.getInvestigatorInfo();
-		
-		System.out.println("Geting Co-Pi list...");
-		
-		coPiList = invInf.getCo_pi();
-		
-		System.out.println("Generating Co-Pi list...");
-		
-		for(UserProfile userProfile : coPiList)
-		{
-			System.out.println(userProfile.toString());
-		}
-		
-		System.out.println("Geting Senior Personnel list...");
-		
-		seniorPersonnelList = invInf.getSeniorPersonnel();
-		
-		System.out.println("Generating Senior Personnel list...");
-		
-		for(UserProfile userProfile : seniorPersonnelList)
-		{
-			System.out.println(userProfile.toString());
-		}
-
-		//scan.close();
-		
-		System.out.println("Done!");
+		//Investigator Information set\edit
+		System.out.println("Investigator Information is : ");
+		System.out.println(prop.getInvestigatorInfo().toString());
 	}
+	
+//	@Test
+//	public void testRemoveInvestogatorsFromProposal() throws UnknownHostException {
+//		long counter = pdao.count();
+//		logger.debug("The count is [" + counter + "]");
+//
+//		List<Proposal> pList = pdao.findAll();
+//		int count = 0;
+//		Scanner scan = new Scanner(System.in);
+//		int index = -1;
+//		System.out.println("Select a proposals by index before we start.");
+//
+//		for (Proposal p : pList) {
+//			System.out.println(count + " " + p.toString());
+//		}
+//		
+//		do
+//		{
+//			System.out.println("Please enter index: ");
+//			index = scan.nextInt();
+//		}while(index < 0 || index > pList.size());
+//		
+//		Proposal prop = pList.get(index);
+//		
+//		System.out.println("Geting investigator info...");
+//		InvestigatorInfo invInf = prop.getInvestigatorInfo();
+//		
+//		System.out.println("Geting Co-Pi list...");
+//		
+//		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
+//		
+//		System.out.println("Generating Co-Pi list...");
+//		
+//		count = 0;
+//		
+//		for(UserProfile userProfile : coPiList)
+//		{
+//			System.out.println(count + " " + userProfile.toString());
+//			count++;
+//		}
+//		
+//		do
+//		{
+//			System.out.println("Select the one to delete.");
+//			index = scan.nextInt();
+//		}while(index < 0 || index > coPiList.size());
+//		
+//		pdao.removeCoPi(prop, index);
+//		
+//		System.out.println("Geting Senior Personnel list...");
+//		
+//		ArrayList<UserProfile> seniorPersonnelList = invInf.getSeniorPersonnel();
+//		
+//		System.out.println("Generating Senior Personnel list...");
+//		
+//		count = 0;
+//		
+//		for(UserProfile userProfile : seniorPersonnelList)
+//		{
+//			System.out.println(count + " " + userProfile.toString());
+//			count++;
+//		}
+//		
+//		do
+//		{
+//			System.out.println("Select the one to delete.");
+//			index = scan.nextInt();
+//		}while(index < 0 || index > coPiList.size());
+//		
+//		pdao.removeSeniorPersonnel(prop, index);
+//		
+//		System.out.println("Geting updated Proposal...");
+//		
+//		prop = pdao.proposalById(prop.getId());
+//		
+//		System.out.println("Geting investigator info...");
+//		invInf = prop.getInvestigatorInfo();
+//		
+//		System.out.println("Geting Co-Pi list...");
+//		
+//		coPiList = invInf.getCo_pi();
+//		
+//		System.out.println("Generating Co-Pi list...");
+//		
+//		for(UserProfile userProfile : coPiList)
+//		{
+//			System.out.println(userProfile.toString());
+//		}
+//		
+//		System.out.println("Geting Senior Personnel list...");
+//		
+//		seniorPersonnelList = invInf.getSeniorPersonnel();
+//		
+//		System.out.println("Generating Senior Personnel list...");
+//		
+//		for(UserProfile userProfile : seniorPersonnelList)
+//		{
+//			System.out.println(userProfile.toString());
+//		}
+//
+//		//scan.close();
+//		
+//		System.out.println("Done!");
+//	}
 	
 //	@Test
 //	public void testUpdateInvestigatorInProposal() throws UnknownHostException {
