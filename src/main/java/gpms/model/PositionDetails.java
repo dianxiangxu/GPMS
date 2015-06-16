@@ -24,7 +24,7 @@ public class PositionDetails {
 		college = new String();
 	}
 
-	PositionDetails(String positionType, String positionTitle,
+	public PositionDetails(String positionType, String positionTitle,
 			String department, String college) {
 		this.positionType = positionType;
 		this.positionTitle = positionTitle;
