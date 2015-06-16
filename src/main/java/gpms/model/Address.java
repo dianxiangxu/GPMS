@@ -13,8 +13,22 @@ public class Address {
 	private String country;
 
 	public Address() {
+		street = "";
+		city = "";
+		state = "";
+		zipcode = "";
+		country = "";
 	}
 
+	public Address(String setStreet, String setCity, String setState, String setZipcode, String setCountry)
+	{
+		street = setStreet;
+		city = setCity;
+		state = setState;
+		zipcode = setZipcode;
+		country = setCountry;
+	}
+	
 	public ObjectId getId() {
 		return id;
 	}
