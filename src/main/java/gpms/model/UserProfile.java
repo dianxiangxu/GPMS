@@ -50,15 +50,16 @@ public class UserProfile extends BaseEntity {
 	@Embedded("address")
 	private Address address;
 
-	@Property("emails")
+	@Property("work email")
 	@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
-	private List<String> emails = new ArrayList<String>();
+	private List<String> workEmails = new ArrayList<String>();
 
+	@Property("personal email")
+	@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
+	private List<String>  personalEmails = new ArrayList<String>();
+	
 	@Reference("user id")
 	private UserAccount userAccount = new UserAccount();
-
-	@Property("deleted")
-	private boolean isDeleted = false;
 
 	/**
 	 * Overloaded constructor
@@ -90,7 +91,7 @@ public class UserProfile extends BaseEntity {
 		homeNumbers = setHomeNumbers;
 		mobileNumbers = setMobileNumbers;
 
-		this.emails = emails;
+		
 		this.userAccount = userAccount;
 	}
 
@@ -382,18 +383,45 @@ public class UserProfile extends BaseEntity {
 	 * @return the array list of email addresses
 	 */
 
-	public List<String> getEmails() {
-		return emails;
+	public List<String> getWorkEmails() {
+		return workEmails;
 	}
 
+	public List<String> getPersonalEmails()
+	{
+		return personalEmails;
+	}
+	
 	/**
 	 * Add an email string to the email array list
 	 * 
 	 * @param addEmail
 	 *            the new email to add
 	 */
-	public void addEmail(String addEmail) {
-		emails.add(addEmail);
+	public void addWorkEmail(String addEmail) {
+		workEmails.add(addEmail);
+	}
+	
+	public void setWorkEmail(String oldEmail, String newEmail)
+	{
+		int index = workEmails.indexOf(oldEmail);
+		workEmails.set(index, newEmail);
+	}
+	
+	public void setPersonalEmail(String oldEmail, String newEmail)
+	{
+		int index = personalEmails.indexOf(oldEmail);
+		personalEmails.set(index, newEmail);
+	}
+	
+	public void addPersonalEmail(String addEmail)
+	{
+		personalEmails.add(addEmail);
+	}
+	
+	public void deleteEmail(List<String> emailString, String deleteEmail) {
+		int index = emailString.indexOf(deleteEmail);
+		emailString.remove(index);
 	}
 
 	public UserAccount getUserAccount() {
@@ -404,20 +432,7 @@ public class UserProfile extends BaseEntity {
 		userAccount = newUserAccount;
 	}
 
-	/**
-	 * Mark for deletion
-	 */
-	public void delete() {
-		isDeleted = true;
-	}
-
-	/**
-	 * Unmark for deletion, save
-	 */
-	public void unDelete() {
-		isDeleted = false;
-	}
-
+	
 	/**
 	 * toString returns full user name
 	 * 
@@ -435,8 +450,8 @@ public class UserProfile extends BaseEntity {
 				&& this.firstName.equals(up.firstName)
 				&& this.middleName.equals(up.middleName)
 				&& this.lastName.equals(up.lastName)
-				&& this.details.equals(up.details)
+				&& this.details.equals(up.details);
 				// && this.phoneNumbers.equals(up.phoneNumbers)
-				&& this.emails.equals(up.emails);
+				
 	}
 }
