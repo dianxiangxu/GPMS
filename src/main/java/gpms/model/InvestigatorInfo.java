@@ -10,8 +10,11 @@ import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
 public class InvestigatorInfo {
+	public final int MAX_NUM_CO_PI = 4;
+	public final int MAX_NUM_SENIOR_PERSONNEL = 10;
+	
 	@Reference("PI")
-	private UserProfile pi;
+	private UserProfile pi = new UserProfile();
 	@Reference("CO-PI")
 	private ArrayList<UserProfile> co_pi = new ArrayList<UserProfile>();
 	@Reference("senior personnel")
@@ -33,10 +36,14 @@ public class InvestigatorInfo {
 	}
 
 	public void setCo_pi(ArrayList<UserProfile> co_pi) {
-		this.co_pi = co_pi;
+		if(co_pi.size() <= MAX_NUM_CO_PI)
+		{
+			this.co_pi = co_pi;
+		}
 	}
 
 	public void addCo_pi(UserProfile co_pi) {
+		if(this.co_pi.size() <= MAX_NUM_CO_PI)
 		this.co_pi.add(co_pi);
 	}
 
@@ -45,11 +52,17 @@ public class InvestigatorInfo {
 	}
 
 	public void addSeniorPersonnel(UserProfile seniorPersonnel) {
-		this.seniorPersonnel.add(seniorPersonnel);
+		if(this.seniorPersonnel.size() < MAX_NUM_SENIOR_PERSONNEL)
+		{
+			this.seniorPersonnel.add(seniorPersonnel);
+		}
 	}
 
 	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
-		this.seniorPersonnel = seniorPersonnel;
+		if(seniorPersonnel.size() < MAX_NUM_SENIOR_PERSONNEL)
+		{
+			this.seniorPersonnel = seniorPersonnel;
+		}
 	}
 	
 	public String toString()
@@ -63,6 +76,7 @@ public class InvestigatorInfo {
 		{
 			outPut += "Co-Pi number : " + count + "\n";
 			outPut += coPi.toString() + "\n";
+			count++;
 		}
 		count = 0;
 		outPut += "senior personnel : " + "\n";
@@ -70,6 +84,7 @@ public class InvestigatorInfo {
 		{
 			outPut += "Senior Personel number : " + count + "\n";
 			outPut += sp.toString() + "\n";
+			count++;
 		}
 		return outPut;
 	}

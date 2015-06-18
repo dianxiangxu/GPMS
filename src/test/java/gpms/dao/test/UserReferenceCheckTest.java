@@ -25,7 +25,7 @@ public class UserReferenceCheckTest {
 	MongoClient mongoClient;
 	Morphia morphia;
 	Datastore datastore;
-	String dbName = "testDB";
+	String dbName = "GPMS";
 	UserAccountDAO newUserAccountDAO;
 	UserProfileDAO newUserProfileDAO;
 	UserProfile newUserProfile;
