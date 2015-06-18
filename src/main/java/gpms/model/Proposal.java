@@ -16,14 +16,19 @@ public class Proposal extends BaseEntity {
 	@Property("proposal no")
 	@Indexed(value = IndexDirection.ASC, name = "proposalNoIndex", unique = true)
 	private String proposalNo;
+	
 	@Property("date received")
 	private Date dateReceived;
+	
 	@Property("proposal status")
-	private Status proposalStatus;
+	private Status proposalStatus = Status.NEW;
+	
 	@Embedded("investigator info")
 	private InvestigatorInfo investigatorInfo;
+	
 	@Embedded("project info")
 	private ProjectInfo projectInfo;
+	
 	@Embedded("sponsor and budget info")
 	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
 
@@ -35,8 +40,8 @@ public class Proposal extends BaseEntity {
 	private ConflictOfInterest conflicOfInterest;
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo;
-	@Property
-	private boolean isDeleted;
+//	@Property
+//	private boolean isDeleted;
 
 	public Proposal(String proposalNo, Date dateReceived,
 			Status proposalStatus, InvestigatorInfo investigatorInfo,
@@ -165,15 +170,15 @@ public class Proposal extends BaseEntity {
 		this.complianceInfo = complianceInfo;
 	}
 	
-	public void setIsDeleted(boolean isDeleted)
-	{
-		this.isDeleted = isDeleted;
-	}
+//	public void setIsDeleted(boolean isDeleted)
+//	{
+//		this.isDeleted = isDeleted;
+//	}
 	
-	public boolean getIsDeleted()
-	{
-		return isDeleted;
-	}
+//	public boolean getIsDeleted()
+//	{
+//		return isDeleted;
+//	}
 	
 	@Override
 	public String toString() {

@@ -16,7 +16,7 @@ import org.mongodb.morphia.utils.IndexDirection;
 public class ProjectInfo {
 
 	@Property("project title")
-	@Indexed(value = IndexDirection.ASC, name = "proposalTitleIndex", unique = true)
+	//@Indexed(value = IndexDirection.ASC, name = "proposalTitleIndex", unique = true)
 	private String projectTitle;
 
 	@Embedded("project type")
