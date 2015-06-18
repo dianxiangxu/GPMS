@@ -91,6 +91,16 @@ public class CRUDTestForUserProfileAndAccount
 		System.out.println(userList.toString());
 		//Let's just grab our guy up front.
 		
+		UserProfile tempUser = userList.get(0);
+		//Let's get his user account and see if we can print out his ID.
+		System.out.println("User Account ID: " + tempUser.getUserAccount().getId());
+		
+		//Let's see if I can assign a temp user to an account here:
+		UserProfile tempReturn = newUserProfileDAO.findByUserAccountID(tempUser.getUserAccount().getId());
+		System.out.println(tempReturn.getFirstName() + " "
+				+ tempReturn.getLastName() + " " + tempReturn.getUserAccount().getUserName());
+		
+		
 	}
 
 }
