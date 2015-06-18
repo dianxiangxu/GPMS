@@ -51,11 +51,11 @@ public class UserProfile extends BaseEntity {
 	private Address address;
 
 	@Property("work email")
-	@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
+	@Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique = true)
 	private List<String> workEmails = new ArrayList<String>();
 
 	@Property("personal email")
-	@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
+	@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
 	private List<String>  personalEmails = new ArrayList<String>();
 	
 	@Reference("user id")
