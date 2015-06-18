@@ -25,7 +25,7 @@ public class UserProfile extends BaseEntity {
 	private String firstName = new String();
 
 	@Property("middle name")
-	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
+//	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
 	private String middleName = new String();
 
 	@Property("last name")
