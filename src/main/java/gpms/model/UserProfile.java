@@ -21,15 +21,15 @@ import org.mongodb.morphia.utils.IndexDirection;
 @Entity(value = UserProfileDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserProfile extends BaseEntity {
 	@Property("first name")
-	//@Indexed(value = IndexDirection.ASC, name = "firstNameIndex")
+	@Indexed(value = IndexDirection.ASC, name = "firstNameIndex")
 	private String firstName = new String();
 
 	@Property("middle name")
-	//@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
+//	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
 	private String middleName = new String();
 
 	@Property("last name")
-	//@Indexed(value = IndexDirection.ASC, name = "lastNameIndex")
+	@Indexed(value = IndexDirection.ASC, name = "lastNameIndex")
 	private String lastName = new String();
 
 	@Embedded("details")
@@ -51,11 +51,11 @@ public class UserProfile extends BaseEntity {
 	private Address address;
 
 	@Property("work email")
-	//@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
+	@Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique = true)
 	private List<String> workEmails = new ArrayList<String>();
 
 	@Property("personal email")
-	//@Indexed(value = IndexDirection.ASC, name = "emailsIndex", unique = true)
+	@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
 	private List<String>  personalEmails = new ArrayList<String>();
 	
 	@Reference("user id")

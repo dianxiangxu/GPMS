@@ -174,61 +174,61 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return res;
 	}
 
-	/**
-	 * Method for changing the first name of a user
-	 * 
-	 * @param userProfile
-	 * @param firstName
-	 * @throws MongoException
-	 * @throws UnknownHostException
-	 */
-	public void changeFirstName(ObjectId id, String firstName)
-			throws UnknownHostException, MongoException {
-		Datastore ds = getDatastore();
-		UpdateOperations<UserProfile> ops;
-		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-				.field("_id").equal(id);
-		ops = ds.createUpdateOperations(UserProfile.class).set("first name",
-				firstName);
-		ds.update(updateQuery, ops);
+//	/**
+//	 * Method for changing the first name of a user
+//	 * 
+//	 * @param userProfile
+//	 * @param firstName
+//	 * @throws MongoException
+//	 * @throws UnknownHostException
+//	 */
+//	public void changeFirstName(ObjectId id, String firstName)
+//			throws UnknownHostException, MongoException {
+//		Datastore ds = getDatastore();
+//		UpdateOperations<UserProfile> ops;
+//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
+//				.field("_id").equal(id);
+//		ops = ds.createUpdateOperations(UserProfile.class).set("first name",
+//				firstName);
+//		ds.update(updateQuery, ops);
+//
+//	}
 
-	}
+//	/**
+//	 * 
+//	 * @param id
+//	 * @param middleName
+//	 * @throws UnknownHostException
+//	 * @throws MongoException
+//	 */
+//	public void changeMiddleName(ObjectId id, String middleName)
+//			throws UnknownHostException, MongoException {
+//		Datastore ds = getDatastore();
+//		UpdateOperations<UserProfile> ops;
+//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
+//				.field("_id").equal(id);
+//		ops = ds.createUpdateOperations(UserProfile.class).set("middle name",
+//				middleName);
+//		ds.update(updateQuery, ops);
+//	}
 
-	/**
-	 * 
-	 * @param id
-	 * @param middleName
-	 * @throws UnknownHostException
-	 * @throws MongoException
-	 */
-	public void changeMiddleName(ObjectId id, String middleName)
-			throws UnknownHostException, MongoException {
-		Datastore ds = getDatastore();
-		UpdateOperations<UserProfile> ops;
-		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-				.field("_id").equal(id);
-		ops = ds.createUpdateOperations(UserProfile.class).set("middle name",
-				middleName);
-		ds.update(updateQuery, ops);
-	}
-
-	/**
-	 * 
-	 * @param id
-	 * @param lastName
-	 * @throws UnknownHostException
-	 * @throws MongoException
-	 */
-	public void changeLastName(ObjectId id, String lastName)
-			throws UnknownHostException, MongoException {
-		Datastore ds = getDatastore();
-		UpdateOperations<UserProfile> ops;
-		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-				.field("_id").equal(id);
-		ops = ds.createUpdateOperations(UserProfile.class).set("last name",
-				lastName);
-		ds.update(updateQuery, ops);
-	}
+//	/**
+//	 * 
+//	 * @param id
+//	 * @param lastName
+//	 * @throws UnknownHostException
+//	 * @throws MongoException
+//	 */
+//	public void changeLastName(ObjectId id, String lastName)
+//			throws UnknownHostException, MongoException {
+//		Datastore ds = getDatastore();
+//		UpdateOperations<UserProfile> ops;
+//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
+//				.field("_id").equal(id);
+//		ops = ds.createUpdateOperations(UserProfile.class).set("last name",
+//				lastName);
+//		ds.update(updateQuery, ops);
+//	}
 
 	/**
 	 * Dangerous method, will erase all entries. When it works Used only for
