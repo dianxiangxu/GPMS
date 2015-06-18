@@ -25,7 +25,7 @@ public class UserProfile extends BaseEntity {
 	private String firstName = new String();
 
 	@Property("middle name")
-	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
+//	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
 	private String middleName = new String();
 
 	@Property("last name")
@@ -51,11 +51,11 @@ public class UserProfile extends BaseEntity {
 	private Address address;
 
 	@Property("work email")
-	//@Indexed(value = IndexDirection.ASC, name = "workEmailIndex", unique = true)
+	@Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique = true)
 	private List<String> workEmails = new ArrayList<String>();
 
 	@Property("personal email")
-	//@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
+	@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
 	private List<String>  personalEmails = new ArrayList<String>();
 	
 	@Reference("user id")
