@@ -31,8 +31,8 @@ import com.mongodb.MongoException;
 
 public class ProposalDAOTest {
 
-	private final static Logger logger = LoggerFactory
-			.getLogger(MongoDBConnector.class);
+	//private final static Logger logger = LoggerFactory
+		//	.getLogger(MongoDBConnector.class);
 
 	private MongoClient mongo;
 	private Morphia morphia;
@@ -73,19 +73,58 @@ public class ProposalDAOTest {
 		
 		List<Proposal> pList = pdao.findAll();
 		
-		for(Proposal p : pList)
+		if(pList.size() > 0)
 		{
-			System.out.println("Proposal numnber : " + count);
-			System.out.println(p.toString());
-			count++;
+			System.out.println("If you wish to create a new Proposal enter \"N\",");
+			System.out.println("If you wish to edit a Proposal enter \"E\"...");
+			do
+			{
+			input = scan.next();
+			}while(input.charAt(0) != 'E' && input.charAt(0) != 'N');
+		}
+		else
+		{
+			input = "N";
 		}
 		
-		do
+		if(input.charAt(0) == 'E')
 		{
-			System.out.println("Please chose a proposal : ");
-			index = scan.nextInt();
-		}while(index < 0 || index > pList.size());
-		prop = pList.get(index);
+			for(Proposal p : pList)
+			{
+				System.out.println("Proposal numnber : " + count);
+				System.out.println(p.toString());
+				count++;
+			}
+			
+			do
+			{
+				System.out.println("Please chose a proposal : ");
+				index = scan.nextInt();
+			}while(index < 0 || index > pList.size());
+			prop = pList.get(index);
+			invInf.setPi(prop.getInvestigatorInfo().getPi());
+			upList.remove(invInf.getPi());
+		}
+		else
+		{
+			prop = new Proposal();
+			System.out.println("Please enter a proposal number : ");
+			input = scan.next();
+			prop.setProposalNo(input);
+			prop.setDateReceived(new Date());
+			count = 0;
+			System.out.println("Please select a PI :");
+			for(UserProfile up : upList)
+			{
+				System.out.println(count++ + " " + up.toString());
+			}
+			do
+			{
+				index = scan.nextInt();
+			}while(index < 0 || index > upList.size());
+			invInf.setPi(upList.get(index));
+			upList.remove(index);
+		}
 		
 		//Investigator Information set\edit
 		System.out.println("Investigator Information is : ");
@@ -179,19 +218,19 @@ public class ProposalDAOTest {
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchBasic(desicion);
-		System.out.println("Please enter if is research-applied :(true or false)");
+		System.out.println("Please enter if is research-applied :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchApplied(desicion);
-		System.out.println("Please enter if is research-development :(true or false)");
+		System.out.println("Please enter if is research-development :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchDevelopment(desicion);
-		System.out.println("Please enter if is instruction :(true or false)");
+		System.out.println("Please enter if is instruction :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsInstruction(desicion);
-		System.out.println("Please enter if is other sponsored activity :(true or false)");
+		System.out.println("Please enter if is other sponsored activity :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsOtherSponsoredActivity(desicion);
@@ -200,19 +239,19 @@ public class ProposalDAOTest {
 		
 		TypeOfRequest typeOfReq = new TypeOfRequest();
 		
-		System.out.println("Please enter if is pre-proposal :(true or false)");
+		System.out.println("Please enter if is pre-proposal :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setPreProposal(desicion);
-		System.out.println("Please enter if is new proposal :(true or false)");
+		System.out.println("Please enter if is new proposal :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setNewProposal(desicion);
-		System.out.println("Please enter if is continuation :(true or false)");
+		System.out.println("Please enter if is continuation :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setContinuation(desicion);
-		System.out.println("Please enter if is supplement :(true or false)");
+		System.out.println("Please enter if is supplement :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setSupplement(desicion);
@@ -222,7 +261,7 @@ public class ProposalDAOTest {
 		System.out.println("How many days from today is the proposal due?");
 		index = scan.nextInt();
 		//Converting to milliseconds
-		long time = index * 24 * 60 * 60 * 1000;
+		long time = System.currentTimeMillis() + index * 24 * 60 * 60 * 1000;
 		Date dueDate = new Date(time);
 		projInf.setDueDate(dueDate);
 		
@@ -231,14 +270,14 @@ public class ProposalDAOTest {
 		System.out.println("How many days from today is the project begin?");
 		index = scan.nextInt();
 		//Converting to milliseconds
-		time = index * 24 * 60 * 60 * 1000;
+		time = System.currentTimeMillis() + index * 24 * 60 * 60 * 1000;
 		Date from = new Date(time);
 		projPer.setFrom(from);
 		
 		System.out.println("How many days from today is the project end?");
 		index = scan.nextInt();
 		//Converting to milliseconds
-		time = index * 24 * 60 * 60 * 1000;
+		time = System.currentTimeMillis() + index * 24 * 60 * 60 * 1000;
 		Date to = new Date(time);
 		projPer.setTo(to);
 		
@@ -246,12 +285,14 @@ public class ProposalDAOTest {
 		
 		ProjectLocation projLoc = new ProjectLocation();
 		
-		System.out.println("Is the project off-campus :(true or false)");
-		desicion = scan.nextBoolean();
+		System.out.println("Is the project off-campus :(T or F)");
+		input = scan.next();
+		desicion = (input.charAt(0) == 'T') ? true : false;
 		projLoc.setOffCampus(desicion);
 		
-		System.out.println("Is the project on-campus :(true or false)");
-		desicion = scan.nextBoolean();
+		System.out.println("Is the project on-campus :(T or F)");
+		input = scan.next();
+		desicion = (input.charAt(0) == 'T') ? true : false;
 		projLoc.setOnCampus(desicion);
 		
 		projInf.setProjectLocation(projLoc);
