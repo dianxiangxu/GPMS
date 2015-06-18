@@ -20,6 +20,7 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
+import com.mongodb.DBRef;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -75,10 +76,15 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
 	}
 
-	public UserProfile findByUserID(ObjectId id) {
+	public UserProfile findByUserAccountID(ObjectId id) 
+	{
 		Datastore ds = getDatastore();
-		return ds.createQuery(UserProfile.class).field("user id.id").equal(id)
-				.get();
+		Query<UserProfile> query = ds.createQuery(UserProfile.class);
+		DBRef ref = null;
+		UserProfile temp = query.field("user id.$id").equal(id).get();
+//		UserProfile tempUser = ds.createQuery(UserProfile.class);
+//				.field("user id.id").equal(id).get();
+		return temp;
 	}
 
 	/**
