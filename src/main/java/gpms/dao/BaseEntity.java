@@ -2,8 +2,6 @@ package gpms.dao;
 
 import java.util.List;
 
-import gpms.model.Auditlog;
-
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
@@ -20,7 +18,7 @@ public abstract class BaseEntity {
 	private Long version;
 
 	@Embedded
-	private List<Auditlog> auditLog;
+	private List<AuditLog> auditLog;
 
 	public BaseEntity() {
 		super();
@@ -38,11 +36,16 @@ public abstract class BaseEntity {
 		this.version = version;
 	}
 
-	public List<Auditlog> getAuditLog() {
+	public List<AuditLog> getAuditLog() {
 		return auditLog;
 	}
 
-	public void setAuditLog(List<Auditlog> auditLog) {
+	public void setAuditLog(List<AuditLog> auditLog) {
 		this.auditLog = auditLog;
+	}
+	
+	public void addEntryToAuditLog(AuditLog entry)
+	{
+		auditLog.add(entry);
 	}
 }
