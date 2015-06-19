@@ -8,6 +8,7 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Proposal;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -76,15 +77,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
 	}
 
-	public UserProfile findByUserAccountID(ObjectId id) 
+	public UserProfile findByUserAccount(UserAccount userAccount) 
 	{
 		Datastore ds = getDatastore();
-		Query<UserProfile> query = ds.createQuery(UserProfile.class);
-		DBRef ref = null;
-		UserProfile temp = query.field("user id.$id").equal(id).get();
+		
+//		UserProfile temp = query.field("user id.$id").equal(id).get();
 //		UserProfile tempUser = ds.createQuery(UserProfile.class);
 //				.field("user id.id").equal(id).get();
-		return temp;
+		return ds.createQuery(UserProfile.class).field("user id").equal(userAccount).get();
 	}
 
 	/**
