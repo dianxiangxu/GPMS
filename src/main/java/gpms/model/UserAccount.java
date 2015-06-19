@@ -15,7 +15,8 @@ import org.mongodb.morphia.utils.IndexDirection;
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserAccount extends BaseEntity {
 	@Property("username")
-//	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
+	// @Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique =
+	// true)
 	private String userName;
 	@Property("password")
 	private String password;

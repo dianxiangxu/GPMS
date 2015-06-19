@@ -20,13 +20,13 @@ public class Family extends BaseEntity {
 	@Property("Sur Name")
 	private String surname;
 
-	@Reference("Dad")
+	@Reference(value = "Dad", lazy = true)
 	private User dad;
 
-	@Reference("Mommy")
+	@Reference(value = "Mommy", lazy = true)
 	private User mom;
 
-	@Reference("Children")
+	@Reference(value = "Children", lazy = true)
 	private List<User> children = new ArrayList<User>();
 
 	public Family() {

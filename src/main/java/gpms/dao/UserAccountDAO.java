@@ -41,6 +41,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 				e.printStackTrace();
 			}
 		}
+		ds.ensureIndexes();
 		return ds;
 	}
 
@@ -53,12 +54,11 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		return ds.createQuery(UserAccount.class).asList();
 	}
 
-	public UserAccount findByID(ObjectId id)
-	{
+	public UserAccount findByID(ObjectId id) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).field("id").equal(id).get();
 	}
-	
+
 	public UserAccount findByUserName(String userName) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).field("username")

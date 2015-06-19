@@ -71,7 +71,6 @@ public class ProposalDAOTest2 {
 		Proposal prop;
 		InvestigatorInfo invInf = new InvestigatorInfo();
 		
-		
 		Scanner scan = new Scanner(System.in);
 		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, dbName);
 		List<UserProfile> upList = upDAO.findAll();
@@ -94,7 +93,7 @@ public class ProposalDAOTest2 {
 			index = scan.nextInt();
 		}while(index < 0 || index > pList.size());
 		prop = pList.get(index);
-		invInf.setPi(prop.getInvestigatorInfo().getPi());
+		
 		//Investigator Information set\edit
 		System.out.println("Investigator Information is : ");
 		System.out.println(prop.getInvestigatorInfo().toString());
@@ -168,19 +167,19 @@ public class ProposalDAOTest2 {
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchBasic(desicion);
-		System.out.println("Please enter if is research-applied :(T or F)");
+		System.out.println("Please enter if is research-applied :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchApplied(desicion);
-		System.out.println("Please enter if is research-development :(T or F)");
+		System.out.println("Please enter if is research-development :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchDevelopment(desicion);
-		System.out.println("Please enter if is instruction :(T or F)");
+		System.out.println("Please enter if is instruction :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsInstruction(desicion);
-		System.out.println("Please enter if is other sponsored activity :(T or F)");
+		System.out.println("Please enter if is other sponsored activity :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsOtherSponsoredActivity(desicion);
@@ -189,19 +188,19 @@ public class ProposalDAOTest2 {
 		
 		TypeOfRequest typeOfReq = new TypeOfRequest();
 		
-		System.out.println("Please enter if is pre-proposal :(T or F)");
+		System.out.println("Please enter if is pre-proposal :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setPreProposal(desicion);
-		System.out.println("Please enter if is new proposal :(T or F)");
+		System.out.println("Please enter if is new proposal :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setNewProposal(desicion);
-		System.out.println("Please enter if is continuation :(T or F)");
+		System.out.println("Please enter if is continuation :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setContinuation(desicion);
-		System.out.println("Please enter if is supplement :(T or F)");
+		System.out.println("Please enter if is supplement :(true or false)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setSupplement(desicion);
@@ -235,14 +234,12 @@ public class ProposalDAOTest2 {
 		
 		ProjectLocation projLoc = new ProjectLocation();
 		
-		System.out.println("Is the project off-campus :(T or F)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
+		System.out.println("Is the project off-campus :(true or false)");
+		desicion = scan.nextBoolean();
 		projLoc.setOffCampus(desicion);
 		
-		System.out.println("Is the project on-campus :(T or F)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
+		System.out.println("Is the project on-campus :(true or false)");
+		desicion = scan.nextBoolean();
 		projLoc.setOnCampus(desicion);
 		
 		projInf.setProjectLocation(projLoc);
