@@ -68,229 +68,54 @@ public class ProposalDAOTest2 {
 	@Test
 	public void TestAddProposal() throws UnknownHostException
 	{
-		Proposal prop;
-		InvestigatorInfo invInf = new InvestigatorInfo();
-		
-		Scanner scan = new Scanner(System.in);
-		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, dbName);
-		List<UserProfile> upList = upDAO.findAll();
-		int index = -1;
-		int count = 0;
+		boolean isLegit = false;
 		String input = "";
+		int count = 0;
+		Scanner scan = new Scanner(System.in);
+		UserAccount ua = new UserAccount();
+		UserAccountDAO uaDAO = new UserAccountDAO(mongo, morphia, "GPMS");
+		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, "GPMS");
 		
-		List<Proposal> pList = pdao.findAll();
+		while(isLegit != true)
+		{
+			System.out.println("Please enter your user account : ");
+			input = scan.nextLine();
+			ua = uaDAO.findByUserName(input);
+			if(ua != null)
+			{
+				System.out.println("Please enter your password : ");
+				input = scan.nextLine();
+				if(input.equals(ua.getPassword()))
+				{
+					isLegit = true;
+				}
+			}
+		}
 		
+		UserProfile up = upDAO.findByUserID(ua);
+		System.out.println("Now finding proposals in wich you are PI...");
+		List<Proposal> pList = pdao.proposalByPiId(up);
 		for(Proposal p : pList)
 		{
-			System.out.println("Proposal numnber : " + count);
+			System.out.println("Proposal number : " + count++);
 			System.out.println(p.toString());
-			count++;
 		}
 		
-		do
+		System.out.println("Now finding proposals in wich you are CO-PI...");
+		pList = pdao.proposalByCoPiId(up);
+		for(Proposal p : pList)
 		{
-			System.out.println("Please chose a proposal : ");
-			index = scan.nextInt();
-		}while(index < 0 || index > pList.size());
-		prop = pList.get(index);
-		
-		//Investigator Information set\edit
-		System.out.println("Investigator Information is : ");
-		System.out.println(prop.getInvestigatorInfo().toString());
-		
-		ArrayList<UserProfile> coPiList = new ArrayList<UserProfile>();
-		ArrayList<UserProfile> seniorPersonnelList = new ArrayList<UserProfile>();
-		
-		count = 0;
-		input = "";
-		if(upList.size() > 0)
-		{
-
-			System.out.println("Please Select a co-pi to add : ");
-			for(UserProfile up : upList)
-			{
-				System.out.println("Do you wish to add(Y or N) : ");
-				System.out.println(up.toString());
-				do
-				{
-					System.out.println("Please enter youre choice.");
-					input = scan.next();
-				}while(input.charAt(0) != 'Y' && input.charAt(0) != 'N');
-				if(input.charAt(0) == 'Y')
-				{
-					invInf.addCo_pi(up);
-					//upList.remove(up);
-				}
-			}				
+			System.out.println("Proposal number : " + count++);
+			System.out.println(p.toString());
 		}
 		
-		count = 0;
-		input = "";
-		if(upList.size() > 0)
+		System.out.println("Now finding proposals in wich you are Senior Personnel...");
+		pList = pdao.proposalBySeniorPersonnelId(up);
+		for(Proposal p : pList)
 		{
-
-			System.out.println("Please Select a senior personnel to add : ");
-			for(UserProfile up : upList)
-			{
-				System.out.println("Do you wish to add(Y or N) : ");
-				System.out.println(up.toString());
-				do
-				{
-					System.out.println("Please enter youre choice.");
-					input = scan.next();
-				}while(input.charAt(0) != 'Y' && input.charAt(0) != 'N');
-				if(input.charAt(0) == 'Y')
-				{
-					invInf.addSeniorPersonnel(up);
-					//upList.remove(up);
-				}
-			}				
+			System.out.println("Proposal number : " + count++);
+			System.out.println(p.toString());
 		}
-		
-		pdao.setEditInvestigatorInfo(prop, invInf);
-		
-		System.out.println("New investigator info is : ");
-		System.out.println(prop.getInvestigatorInfo().toString());
-		
-		//ProjectInformation set\edit
-		System.out.println("Project Information is : ");
-		System.out.println(prop.getProjectInfo().toString());
-		
-		ProjectInfo projInf = new ProjectInfo();
-		System.out.println("Please enter the project title : ");
-		input = scan.next();
-		projInf.setProjectTitle(input);
-		
-		ProjectType projType = new ProjectType();
-		boolean desicion;
-		System.out.println("Please enter if is research-basic :(T or F)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		projType.setIsResearchBasic(desicion);
-		System.out.println("Please enter if is research-applied :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		projType.setIsResearchApplied(desicion);
-		System.out.println("Please enter if is research-development :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		projType.setIsResearchDevelopment(desicion);
-		System.out.println("Please enter if is instruction :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		projType.setIsInstruction(desicion);
-		System.out.println("Please enter if is other sponsored activity :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		projType.setIsOtherSponsoredActivity(desicion);
-		
-		projInf.setProjectType(projType);
-		
-		TypeOfRequest typeOfReq = new TypeOfRequest();
-		
-		System.out.println("Please enter if is pre-proposal :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		typeOfReq.setPreProposal(desicion);
-		System.out.println("Please enter if is new proposal :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		typeOfReq.setNewProposal(desicion);
-		System.out.println("Please enter if is continuation :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		typeOfReq.setContinuation(desicion);
-		System.out.println("Please enter if is supplement :(true or false)");
-		input = scan.next();
-		desicion = (input.charAt(0) == 'T') ? true : false;
-		typeOfReq.setSupplement(desicion);
-		
-		projInf.setTypeOfRequest(typeOfReq);
-		
-		System.out.println("How many days from today is the proposal due?");
-		index = scan.nextInt();
-		//Converting to milliseconds
-		long time = index * 24 * 60 * 60 * 1000;
-		Date dueDate = new Date(time);
-		projInf.setDueDate(dueDate);
-		
-		ProjectPeriod projPer = new ProjectPeriod();
-		
-		System.out.println("How many days from today is the project begin?");
-		index = scan.nextInt();
-		//Converting to milliseconds
-		time = index * 24 * 60 * 60 * 1000;
-		Date from = new Date(time);
-		projPer.setFrom(from);
-		
-		System.out.println("How many days from today is the project end?");
-		index = scan.nextInt();
-		//Converting to milliseconds
-		time = index * 24 * 60 * 60 * 1000;
-		Date to = new Date(time);
-		projPer.setTo(to);
-		
-		projInf.setProjectPeriod(projPer);
-		
-		ProjectLocation projLoc = new ProjectLocation();
-		
-		System.out.println("Is the project off-campus :(true or false)");
-		desicion = scan.nextBoolean();
-		projLoc.setOffCampus(desicion);
-		
-		System.out.println("Is the project on-campus :(true or false)");
-		desicion = scan.nextBoolean();
-		projLoc.setOnCampus(desicion);
-		
-		projInf.setProjectLocation(projLoc);
-		
-		pdao.setEditProjectInfo(prop, projInf);
-		
-		System.out.println("New project information is : ");
-		System.out.println(prop.getProjectInfo().toString());
-		
-		//sponsor and budget information
-		System.out.println("Sponsor and budget info is : ");
-		System.out.println(prop.getSponsorAndBudgetInfo().toString());
-		
-		SponsorAndBudgetInfo sponAndBudg = new SponsorAndBudgetInfo();
-		ArrayList<String> grantingAgencies = new ArrayList<String>();
-		
-		do
-		{
-			System.out.println("Please enter grenting agency name : ");
-			input = scan.next();
-			grantingAgencies.add(input);
-			do
-			{
-				System.out.println("Do you wish to continue entering names? (Y or N)");
-				input = scan.next();
-			}while(input.charAt(0) != 'Y' && input.charAt(0) != 'N');
-		}while(input.charAt(0) != 'N');
-		
-		sponAndBudg.setGrantingAgency(grantingAgencies);
-		
-		double costs = 0;
-		
-		System.out.println("Please enter the direct costs : ");
-		costs = scan.nextDouble();
-		sponAndBudg.setDirectCosts(costs);
-		
-		System.out.println("Please enter the F & A costs : ");
-		costs = scan.nextDouble();
-		sponAndBudg.setFACosts(costs);
-		
-		sponAndBudg.setTotalCosts(sponAndBudg.getDirectCosts() + sponAndBudg.getFACosts());
-		
-		System.out.println("Please enter F & A rate : ");
-		costs = scan.nextDouble();
-		sponAndBudg.setFARate(costs);
-		
-		pdao.setEditSponsorAndBudgetInfo(prop, sponAndBudg);
-		
-		System.out.println("New Sponsor and budget info is : ");
-		System.out.println(prop.getSponsorAndBudgetInfo().toString());
-		scan.close();
 	}
 
 }
