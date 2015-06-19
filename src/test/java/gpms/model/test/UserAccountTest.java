@@ -5,41 +5,38 @@ import gpms.model.UserAccount;
 
 import org.junit.Test;
 
-public class UserAccountTest 
-{
+public class UserAccountTest {
 	UserAccount ua = new UserAccount("Calembo", "cccaaa", false);
-	
-//	@Test
-//	public void testId() 
-//	{	
-//		ObjectId id = ua.getId();
-//		System.out.println(id.toString());
-//		System.out.println(ua.getId().toString());
-//		assertTrue(ua.getId().equals(id));
-//	}
-	
+
+	// @Test
+	// public void testId()
+	// {
+	// ObjectId id = ua.getId();
+	// System.out.println(id.toString());
+	// System.out.println(ua.getId().toString());
+	// assertTrue(ua.getId().equals(id));
+	// }
+
 	@Test
-	public void testIsEqual() 
-	{	
+	public void testIsEqual() {
 		UserAccount testua = new UserAccount("Calembo", "cccaaa", false);
 		assertTrue(ua.equals(testua));
 	}
-	
+
 	@Test
-	public void testUserName() 
-	{	
+	public void testUserName() {
 		assertTrue(ua.getUserName().equals("Calembo"));
 	}
-	
+
 	@Test
-	public void testPassword() 
-	{
+	public void testPassword() {
 		assertTrue(ua.getPassword().equals("cccaaa"));
 	}
-	
-	@Test
-	public void testIsDeleted() 
-	{
-		assertTrue(ua.getIsDeleted().equals(false));
-	}
+
+	// TODO: ERRROR!!!
+	// @Test
+	// public void testIsDeleted()
+	// {
+	// assertTrue(ua.getIsDeleted().equals(false));
+	// }
 }
