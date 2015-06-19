@@ -25,7 +25,7 @@ public class UserProfile extends BaseEntity {
 	private String firstName = new String();
 
 	@Property("middle name")
-//	@Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
+	// @Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
 	private String middleName = new String();
 
 	@Property("last name")
@@ -56,9 +56,9 @@ public class UserProfile extends BaseEntity {
 
 	@Property("personal email")
 	@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
-	private List<String>  personalEmails = new ArrayList<String>();
-	
-	@Reference("user id")
+	private List<String> personalEmails = new ArrayList<String>();
+
+	@Reference(value = "user id", lazy = true)
 	private UserAccount userAccount = new UserAccount();
 
 	/**
@@ -91,7 +91,6 @@ public class UserProfile extends BaseEntity {
 		homeNumbers = setHomeNumbers;
 		mobileNumbers = setMobileNumbers;
 
-		
 		this.userAccount = userAccount;
 	}
 
@@ -109,14 +108,14 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		
+
 	}
 
 	/**
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
 	public UserProfile() {
-		
+
 	}
 
 	/**
@@ -182,17 +181,17 @@ public class UserProfile extends BaseEntity {
 	public List<PositionDetails> getDetailsList() {
 		return details;
 	}
-	
+
 	/**
 	 * Will return a PositionDetails object from the list, for manipulation
-	 * @param index index to find
+	 * 
+	 * @param index
+	 *            index to find
 	 * @return PositionDetails object to return
 	 */
-	public PositionDetails getDetails(int index)
-	{
+	public PositionDetails getDetails(int index) {
 		return details.get(index);
 	}
-
 
 	/**
 	 * Add a collection of position details to the existing array list
@@ -203,12 +202,11 @@ public class UserProfile extends BaseEntity {
 		details.add(positionDetails);
 	}
 
-	public void deleteDetails(PositionDetails positionDetails)
-	{
+	public void deleteDetails(PositionDetails positionDetails) {
 		int deleteInd = details.indexOf(positionDetails);
 		details.remove(deleteInd);
 	}
-	
+
 	/**
 	 * Adds a new office number to the arraylist
 	 * 
@@ -387,11 +385,10 @@ public class UserProfile extends BaseEntity {
 		return workEmails;
 	}
 
-	public List<String> getPersonalEmails()
-	{
+	public List<String> getPersonalEmails() {
 		return personalEmails;
 	}
-	
+
 	/**
 	 * Add an email string to the email array list
 	 * 
@@ -401,24 +398,21 @@ public class UserProfile extends BaseEntity {
 	public void addWorkEmail(String addEmail) {
 		workEmails.add(addEmail);
 	}
-	
-	public void setWorkEmail(String oldEmail, String newEmail)
-	{
+
+	public void setWorkEmail(String oldEmail, String newEmail) {
 		int index = workEmails.indexOf(oldEmail);
 		workEmails.set(index, newEmail);
 	}
-	
-	public void setPersonalEmail(String oldEmail, String newEmail)
-	{
+
+	public void setPersonalEmail(String oldEmail, String newEmail) {
 		int index = personalEmails.indexOf(oldEmail);
 		personalEmails.set(index, newEmail);
 	}
-	
-	public void addPersonalEmail(String addEmail)
-	{
+
+	public void addPersonalEmail(String addEmail) {
 		personalEmails.add(addEmail);
 	}
-	
+
 	public void deleteEmail(List<String> emailString, String deleteEmail) {
 		int index = emailString.indexOf(deleteEmail);
 		emailString.remove(index);
@@ -432,7 +426,6 @@ public class UserProfile extends BaseEntity {
 		userAccount = newUserAccount;
 	}
 
-	
 	/**
 	 * toString returns full user name
 	 * 
@@ -451,7 +444,7 @@ public class UserProfile extends BaseEntity {
 				&& this.middleName.equals(up.middleName)
 				&& this.lastName.equals(up.lastName)
 				&& this.details.equals(up.details);
-				// && this.phoneNumbers.equals(up.phoneNumbers)
-				
+		// && this.phoneNumbers.equals(up.phoneNumbers)
+
 	}
 }

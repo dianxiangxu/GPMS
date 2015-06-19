@@ -2,39 +2,60 @@ package gpms.model;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
 
 @Embedded
 public class Address {
-	private ObjectId id;
-	private String street;
-	private String city;
-	private String state;
-	private String zipcode;
+	@Property("country")
 	private String country;
+	@Property("state")
+	private String state;
+	@Property("zipcode")
+	private String zipcode;
+	@Property("city")
+	private String city;
+	@Property("street")
+	private String street;
 
 	public Address() {
-		street = "";
-		city = "";
+		country = "";
 		state = "";
 		zipcode = "";
-		country = "";
+		city = "";
+		street = "";
 	}
 
-	public Address(String setStreet, String setCity, String setState, String setZipcode, String setCountry)
-	{
-		street = setStreet;
-		city = setCity;
+	public Address(String setCountry, String setState, String setZipcode,
+			String setCity, String setStreet) {
+		country = setCountry;
 		state = setState;
 		zipcode = setZipcode;
-		country = setCountry;
-	}
-	
-	public ObjectId getId() {
-		return id;
+		city = setCity;
+		street = setStreet;
 	}
 
-	public void setId(ObjectId id) {
-		this.id = id;
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 
 	public String getCity() {
@@ -45,38 +66,11 @@ public class Address {
 		this.city = city;
 	}
 
-	public String getState() {
-		return state;
-	}
-	
-
-	public void setState(String state) {
-		this.state = state;
-	}
-	
-	public String getCountry()
-	{
-		return country;
-	}
-	
-	public void setCountry(String setCountry)
-	{
-		country = setCountry;
-	}
-
 	public String getStreet() {
 		return street;
 	}
 
 	public void setStreet(String street) {
 		this.street = street;
-	}
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
 	}
 }
