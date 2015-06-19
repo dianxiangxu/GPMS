@@ -39,7 +39,7 @@ public class UserReferenceCheckTest {
 		datastore = morphia.createDatastore(mongoClient, dbName);
 		newUserAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
 		newUserProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
-		mongoClient.dropDatabase(dbName);
+		//mongoClient.dropDatabase(dbName);
 	}
 
 	@After

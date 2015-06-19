@@ -8,6 +8,7 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Proposal;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
@@ -48,7 +50,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				e.printStackTrace();
 			}
 		}
-		ds.ensureIndexes();
+		//ds.ensureIndexes();
 		return ds;
 	}
 
@@ -75,10 +77,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
 	}
 
-	public UserProfile findByUserID(ObjectId id) {
+	public UserProfile findByUserID(UserAccount id) 
+	{
 		Datastore ds = getDatastore();
-		return ds.createQuery(UserProfile.class).field("user id.id").equal(id)
-				.get();
+		return ds.createQuery(UserProfile.class).field("user id").equal(id).get();
 	}
 
 	/**
