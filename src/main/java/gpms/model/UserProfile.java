@@ -289,6 +289,16 @@ public class UserProfile extends BaseEntity {
 	}
 
 	/**
+	 * Will delete the number from a list
+	 * 
+	 * @param deleteNumber
+	 *            the number to be deleted
+	 */
+	public void deleteMobileNumber(String deleteNumber) {
+		deleteNumber(mobileNumbers, deleteNumber);
+	}
+	
+	/**
 	 * Adds a new home number to the arraylist
 	 * 
 	 * @param homeNumber
@@ -403,6 +413,16 @@ public class UserProfile extends BaseEntity {
 		int index = workEmails.indexOf(oldEmail);
 		workEmails.set(index, newEmail);
 	}
+	
+	public void deleteWorkEmail(String email)
+	{
+		deleteEmail(workEmails, email);
+	}
+	
+	public void deletePersonalEmail(String email)
+	{
+		deleteEmail(personalEmails, email);
+	}
 
 	public void setPersonalEmail(String oldEmail, String newEmail) {
 		int index = personalEmails.indexOf(oldEmail);
@@ -413,7 +433,7 @@ public class UserProfile extends BaseEntity {
 		personalEmails.add(addEmail);
 	}
 
-	public void deleteEmail(List<String> emailString, String deleteEmail) {
+	private void deleteEmail(List<String> emailString, String deleteEmail) {
 		int index = emailString.indexOf(deleteEmail);
 		emailString.remove(index);
 	}

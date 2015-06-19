@@ -7,6 +7,7 @@ package gpms.dao;
  */
 
 import gpms.DAL.MongoDBConnector;
+import gpms.model.Address;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
@@ -181,17 +182,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return res;
 	}
 
-	/**
-	 * Returns a list of the details lists
-	 * @param profile
-	 * @return
-	 */
-	public List getDetailsList(UserProfile profile)
-	{
-		List<PositionDetails> list = profile.getDetailsList();
-		
-		return list;
-	}
 	
 
 	/**
@@ -229,44 +219,124 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		profile.setLastName(newName);
 		ds.save(profile);
 	}
-
 	
-//	/**
-//	 * 
-//	 * @param id
-//	 * @param middleName
-//	 * @throws UnknownHostException
-//	 * @throws MongoException
-//	 */
-//	public void changeMiddleName(ObjectId id, String middleName)
-//			throws UnknownHostException, MongoException {
-//		Datastore ds = getDatastore();
-//		UpdateOperations<UserProfile> ops;
-//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-//				.field("_id").equal(id);
-//		ops = ds.createUpdateOperations(UserProfile.class).set("middle name",
-//				middleName);
-//		ds.update(updateQuery, ops);
-//	}
 
-//	/**
-//	 * 
-//	 * @param id
-//	 * @param lastName
-//	 * @throws UnknownHostException
-//	 * @throws MongoException
-//	 */
-//	public void changeLastName(ObjectId id, String lastName)
-//			throws UnknownHostException, MongoException {
-//		Datastore ds = getDatastore();
-//		UpdateOperations<UserProfile> ops;
-//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-//				.field("_id").equal(id);
-//		ops = ds.createUpdateOperations(UserProfile.class).set("last name",
-//				lastName);
-//		ds.update(updateQuery, ops);
-//	}
+	/**
+	 * Returns a list of the details lists
+	 * @param profile
+	 * @return
+	 */
+	public List getDetailsList(UserProfile profile)
+	{
+		List<PositionDetails> list = profile.getDetailsList();
+		
+		return list;
+	}
+	
+	/**
+	 * Delete a specific "details" entry from a user profile
+	 * @param profile the profile to use
+	 * @param details the details to delete
+	 */
+	public void removeDetails(UserProfile profile, PositionDetails details)
+	{
+		Datastore ds = getDatastore();
+		profile.deleteDetails(details);
+		ds.save(profile);
+	}
 
+	/**
+	 * Add a details object to the details of the user
+	 * @param profile the profile to use
+	 * @param details the details to add
+	 */
+	public void addDetails(UserProfile profile, PositionDetails details)
+	{
+		Datastore ds = getDatastore();
+		profile.addDetails(details);
+		ds.save(profile);
+	}
+	
+	public void addOfficeNumber(UserProfile profile, String number)
+	{
+		Datastore ds = getDatastore();
+		profile.addOfficeNumber(number);
+		ds.save(profile);
+	}
+	
+	public void deleteOfficeNumber(UserProfile profile, String number)
+	{
+		Datastore ds = getDatastore();
+		profile.deleteOfficeNumber(number);
+		ds.save(profile);
+	}
+	
+	public void addHomeNumber(UserProfile profile, String number)
+	{
+		Datastore ds = getDatastore();
+		profile.addOfficeNumber(number);
+		ds.save(profile);
+	}
+	
+	public void deleteHomeNumber(UserProfile profile, String number)
+	{
+		Datastore ds = getDatastore();
+		profile.deleteHomeNumber(number);
+		ds.save(profile);
+	}
+	
+	public void addMobileNumber(UserProfile profile, String number)
+	{
+		Datastore ds = getDatastore();
+		profile.addMobileNumber(number);
+		ds.save(profile);
+	}
+	
+	public void deleteMobileNumber(UserProfile profile, String number)
+	{
+		Datastore ds = getDatastore();
+		profile.deleteMobileNumber(number);
+		ds.save(profile);
+	}
+	
+	public void setAddress(UserProfile profile, Address address)
+	{
+		Datastore ds = getDatastore();
+		profile.setAddress(address);
+		ds.save(profile);
+	}
+	
+	public void addWorkEmail(UserProfile profile, String email)
+	{
+		Datastore ds = getDatastore();
+		profile.addWorkEmail(email);
+		ds.save(profile);
+	}
+	
+	public void deleteWorkEmail(UserProfile profile, String email)
+	{
+		Datastore ds = getDatastore();
+		profile.deleteWorkEmail(email);
+		ds.save(profile);
+	}
+
+	public void addPersonalEmail(UserProfile profile, String email)
+	{
+		Datastore ds = getDatastore();
+		profile.addPersonalEmail(email);
+		ds.save(profile);
+	}
+	
+	public void deletePersonalEmail(UserProfile profile, String email)
+	{
+		Datastore ds = getDatastore();
+		profile.deletePersonalEmail(email);
+		ds.save(profile);
+	}
+	
+	
+	
+	
 	/**
 	 * Dangerous method, will erase all entries. When it works Used only for
 	 * testing, will be removed later
