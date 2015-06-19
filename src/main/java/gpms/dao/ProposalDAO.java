@@ -7,6 +7,7 @@ import gpms.model.InvestigatorInfo;
 import gpms.model.ProjectInfo;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
+import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.util.Date;

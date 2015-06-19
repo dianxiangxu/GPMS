@@ -40,7 +40,7 @@ public class QueryReferenceTest
 			}
 		}
 		
-		UserProfile up = upDAO.findByUserID(ua);
+		UserProfile up = upDAO.findByUserAccount(ua);
 		System.out.println(up.toString());
 	}
 }
