@@ -1,10 +1,11 @@
 package gpms.dao;
 
-import gpms.model.UserAccount;
+import java.util.List;
 
-import java.util.Date;
+import gpms.model.Auditlog;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Version;
@@ -18,12 +19,8 @@ public abstract class BaseEntity {
 	@Property("version")
 	private Long version;
 
-	private Boolean isDeleted;
-	private Boolean isUpdated;
-	private Date deletedOn;
-	private Date updatedOn;
-	private UserAccount deletedBy;
-	private UserAccount updatedBy;
+	@Embedded
+	private List<Auditlog> auditLog;
 
 	public BaseEntity() {
 		super();
@@ -41,52 +38,11 @@ public abstract class BaseEntity {
 		this.version = version;
 	}
 
-	public Boolean getIsDeleted() {
-		return isDeleted;
+	public List<Auditlog> getAuditLog() {
+		return auditLog;
 	}
 
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setAuditLog(List<Auditlog> auditLog) {
+		this.auditLog = auditLog;
 	}
-
-	public Boolean getIsUpdated() {
-		return isUpdated;
-	}
-
-	public void setIsUpdated(Boolean isUpdated) {
-		this.isUpdated = isUpdated;
-	}
-
-	public Date getDeletedOn() {
-		return deletedOn;
-	}
-
-	public void setDeletedOn(Date deletedOn) {
-		this.deletedOn = deletedOn;
-	}
-
-	public Date getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(Date updatedOn) {
-		this.updatedOn = updatedOn;
-	}
-
-	public UserAccount getDeletedBy() {
-		return deletedBy;
-	}
-
-	public void setDeletedBy(UserAccount deletedBy) {
-		this.deletedBy = deletedBy;
-	}
-
-	public UserAccount getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(UserAccount updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
 }
