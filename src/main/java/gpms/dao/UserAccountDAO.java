@@ -1,7 +1,6 @@
 package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
-import gpms.model.Proposal;
 import gpms.model.UserAccount;
 
 import java.net.UnknownHostException;

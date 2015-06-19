@@ -91,6 +91,11 @@ public class CRUDTestForUserProfileAndAccount
 		System.out.println(userList.toString());
 		//Let's just grab our guy up front.
 		
+		UserProfile tempUser = userList.get(0);
+		//Let's get his user account and see if we can print out his ID.
+		System.out.println("User Account ID: " + tempUser.getUserAccount().getId());
+		
+		
 	}
 
 }
