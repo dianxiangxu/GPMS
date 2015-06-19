@@ -180,25 +180,19 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return res;
 	}
 
-//	/**
-//	 * Method for changing the first name of a user
-//	 * 
-//	 * @param userProfile
-//	 * @param firstName
-//	 * @throws MongoException
-//	 * @throws UnknownHostException
-//	 */
-//	public void changeFirstName(ObjectId id, String firstName)
-//			throws UnknownHostException, MongoException {
-//		Datastore ds = getDatastore();
-//		UpdateOperations<UserProfile> ops;
-//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-//				.field("_id").equal(id);
-//		ops = ds.createUpdateOperations(UserProfile.class).set("first name",
-//				firstName);
-//		ds.update(updateQuery, ops);
-//
-//	}
+	
+
+	/**
+	 * Sets the first name of a user profile
+	 * @param profile the user profile to change
+	 * @param newName the new name to set
+	 */
+	public void setFirstName(UserProfile profile, String newName)
+	{
+		Datastore ds = getDatastore();
+		profile.setFirstName(newName);
+		ds.save(profile);
+	}
 
 //	/**
 //	 * 
