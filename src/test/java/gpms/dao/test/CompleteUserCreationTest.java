@@ -6,14 +6,11 @@ package gpms.dao.test;
  * 
  */
 
-import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
-import gpms.model.Family;
 import gpms.model.PositionDetails;
-import gpms.model.User;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -123,11 +120,11 @@ public class CompleteUserCreationTest {
 		country = "United States";
 
 		newAddress = new Address();
-		newAddress.setStreet(street);
-		newAddress.setCity(city);
+		newAddress.setCountry(country);
 		newAddress.setState(state);
 		newAddress.setZipcode(zipcode);
-		newAddress.setCountry(country);
+		newAddress.setCity(city);
+		newAddress.setStreet(street);
 
 		// Now that we know his personal info we need some work info from him
 		// Currently our PositionDetails class supports Strings only
