@@ -8,6 +8,7 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Proposal;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -20,6 +21,7 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
+import com.mongodb.DBRef;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -75,10 +77,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
 	}
 
-	public UserProfile findByUserID(ObjectId id) {
+	public UserProfile findByUserAccount(UserAccount userAccount) 
+	{
 		Datastore ds = getDatastore();
-		return ds.createQuery(UserProfile.class).field("user id.id").equal(id)
-				.get();
+		
+//		UserProfile temp = query.field("user id.$id").equal(id).get();
+//		UserProfile tempUser = ds.createQuery(UserProfile.class);
+//				.field("user id.id").equal(id).get();
+		return ds.createQuery(UserProfile.class).field("user id").equal(userAccount).get();
 	}
 
 	/**
@@ -174,25 +180,19 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return res;
 	}
 
-//	/**
-//	 * Method for changing the first name of a user
-//	 * 
-//	 * @param userProfile
-//	 * @param firstName
-//	 * @throws MongoException
-//	 * @throws UnknownHostException
-//	 */
-//	public void changeFirstName(ObjectId id, String firstName)
-//			throws UnknownHostException, MongoException {
-//		Datastore ds = getDatastore();
-//		UpdateOperations<UserProfile> ops;
-//		Query<UserProfile> updateQuery = ds.createQuery(UserProfile.class)
-//				.field("_id").equal(id);
-//		ops = ds.createUpdateOperations(UserProfile.class).set("first name",
-//				firstName);
-//		ds.update(updateQuery, ops);
-//
-//	}
+	
+
+	/**
+	 * Sets the first name of a user profile
+	 * @param profile the user profile to change
+	 * @param newName the new name to set
+	 */
+	public void setFirstName(UserProfile profile, String newName)
+	{
+		Datastore ds = getDatastore();
+		profile.setFirstName(newName);
+		ds.save(profile);
+	}
 
 //	/**
 //	 * 
