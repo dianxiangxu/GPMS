@@ -7,6 +7,7 @@ package gpms.dao;
  */
 
 import gpms.DAL.MongoDBConnector;
+import gpms.model.PositionDetails;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
@@ -180,6 +181,17 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return res;
 	}
 
+	/**
+	 * Returns a list of the details lists
+	 * @param profile
+	 * @return
+	 */
+	public List getDetailsList(UserProfile profile)
+	{
+		List<PositionDetails> list = profile.getDetailsList();
+		
+		return list;
+	}
 	
 
 	/**
@@ -193,7 +205,32 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		profile.setFirstName(newName);
 		ds.save(profile);
 	}
+	
+	/**
+	 * Sets the middle name of a user profile
+	 * @param profile the user profile to change 
+	 * @param newName the new name to set
+	 */
+	public void setMiddleName(UserProfile profile, String newName)
+	{
+		Datastore ds = getDatastore();
+		profile.setMiddleName(newName);
+		ds.save(profile);
+	}
+	
+	/**
+	 * Sets the last name of a user profile
+	 * @param profile the user profile to change
+	 * @param newName the new name to set
+	 */
+	public void setLastName(UserProfile profile, String newName)
+	{
+		Datastore ds = getDatastore();
+		profile.setLastName(newName);
+		ds.save(profile);
+	}
 
+	
 //	/**
 //	 * 
 //	 * @param id

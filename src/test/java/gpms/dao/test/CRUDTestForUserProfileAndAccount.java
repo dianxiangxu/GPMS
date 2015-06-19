@@ -69,7 +69,7 @@ public class CRUDTestForUserProfileAndAccount
 		
 		//I want to change his name.
 		//Let's change his first name, it was "Rico", I want to change it to Ricardo
-		tempUser.setFirstName("Ricardo");
+		newUserProfileDAO.setFirstName(tempUser, "Maximus Dangerous");
 		//Now I want to put it back in saved and changed.
 		newUserProfileDAO.save(tempUser);
 		//Let's go back to the DB and check that it's the only thing there.  That means alt tab or w/e
