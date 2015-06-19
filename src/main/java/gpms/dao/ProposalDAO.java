@@ -2,18 +2,11 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.InvestigatorInfo;
-import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
-import gpms.model.ProjectPeriod;
-import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
-import gpms.model.Todo;
-import gpms.model.TypeOfRequest;
-import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +14,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
-import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.UpdateOperations;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;

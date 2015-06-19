@@ -7,7 +7,6 @@ package gpms.dao;
  */
 
 import gpms.DAL.MongoDBConnector;
-import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -19,9 +18,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.UpdateOperations;
 
-import com.mongodb.DBRef;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
