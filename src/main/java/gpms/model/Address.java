@@ -5,7 +5,6 @@ import org.mongodb.morphia.annotations.Embedded;
 
 @Embedded
 public class Address {
-	private ObjectId id;
 	private String street;
 	private String city;
 	private String state;
@@ -20,21 +19,13 @@ public class Address {
 		country = "";
 	}
 
-	public Address(String setStreet, String setCity, String setState, String setZipcode, String setCountry)
-	{
+	public Address(String setStreet, String setCity, String setState,
+			String setZipcode, String setCountry) {
 		street = setStreet;
 		city = setCity;
 		state = setState;
 		zipcode = setZipcode;
 		country = setCountry;
-	}
-	
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
 	}
 
 	public String getCity() {
@@ -48,19 +39,16 @@ public class Address {
 	public String getState() {
 		return state;
 	}
-	
 
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	public String getCountry()
-	{
+
+	public String getCountry() {
 		return country;
 	}
-	
-	public void setCountry(String setCountry)
-	{
+
+	public void setCountry(String setCountry) {
 		country = setCountry;
 	}
 

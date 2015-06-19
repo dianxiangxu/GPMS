@@ -15,7 +15,8 @@ import org.mongodb.morphia.utils.IndexDirection;
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserAccount extends BaseEntity {
 	@Property("username")
-//	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
+	// @Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique =
+	// true)
 	private String userName;
 	@Property("password")
 	private String password;
@@ -75,14 +76,12 @@ public class UserAccount extends BaseEntity {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	
-	public void delete()
-	{
+
+	public void delete() {
 		isDeleted = true;
 	}
-	
-	public void unDelete()
-	{
+
+	public void unDelete() {
 		isDeleted = false;
 	}
 }

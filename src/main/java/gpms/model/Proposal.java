@@ -40,8 +40,6 @@ public class Proposal extends BaseEntity {
 	private ConflictOfInterest conflicOfInterest;
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo;
-//	@Property
-//	private boolean isDeleted;
 
 	public Proposal(String proposalNo, Date dateReceived,
 			Status proposalStatus, InvestigatorInfo investigatorInfo,
@@ -169,16 +167,6 @@ public class Proposal extends BaseEntity {
 	public void setComplianceInfo(ComplianceInfo complianceInfo) {
 		this.complianceInfo = complianceInfo;
 	}
-	
-//	public void setIsDeleted(boolean isDeleted)
-//	{
-//		this.isDeleted = isDeleted;
-//	}
-	
-//	public boolean getIsDeleted()
-//	{
-//		return isDeleted;
-//	}
 	
 	@Override
 	public String toString() {
