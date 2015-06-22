@@ -60,6 +60,7 @@ public class UserProfile extends BaseEntity {
 
 	@Reference(value = "user id", lazy = true)
 	private UserAccount userAccount = new UserAccount();
+	
 
 	/**
 	 * Overloaded constructor

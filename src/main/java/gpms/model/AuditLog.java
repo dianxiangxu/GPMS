@@ -3,9 +3,11 @@ package gpms.model;
 
 import java.util.Date;
 
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
+@Embedded
 public class AuditLog 
 {
 	@Reference("user id")
