@@ -35,12 +35,12 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 			try {
 				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
 						DBNAME);
+				ds.ensureIndexes();
 			} catch (UnknownHostException | MongoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		ds.ensureIndexes();
 		return ds;
 	}
 

@@ -34,8 +34,8 @@ import com.mongodb.MongoException;
 
 public class ProposalDAOTest {
 
-	private final static Logger logger = LoggerFactory
-			.getLogger(MongoDBConnector.class);
+	// private final static Logger logger = LoggerFactory
+	// .getLogger(MongoDBConnector.class);
 
 	private MongoClient mongo;
 	private Morphia morphia;

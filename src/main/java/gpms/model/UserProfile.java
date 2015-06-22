@@ -51,16 +51,17 @@ public class UserProfile extends BaseEntity {
 	private Address address = new Address();
 
 	@Property("work email")
-	//@Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique = true)
+	// @Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique =
+	// true)
 	private List<String> workEmails = new ArrayList<String>();
 
 	@Property("personal email")
-	//@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
+	// @Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique
+	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-	@Reference(value = "user id"/*, lazy = true*/)
+	@Reference(value = "user id", lazy = true)
 	private UserAccount userAccount = new UserAccount();
-	
 
 	/**
 	 * Overloaded constructor
@@ -298,7 +299,7 @@ public class UserProfile extends BaseEntity {
 	public void deleteMobileNumber(String deleteNumber) {
 		deleteNumber(mobileNumbers, deleteNumber);
 	}
-	
+
 	/**
 	 * Adds a new home number to the arraylist
 	 * 
@@ -414,14 +415,12 @@ public class UserProfile extends BaseEntity {
 		int index = workEmails.indexOf(oldEmail);
 		workEmails.set(index, newEmail);
 	}
-	
-	public void deleteWorkEmail(String email)
-	{
+
+	public void deleteWorkEmail(String email) {
 		deleteEmail(workEmails, email);
 	}
-	
-	public void deletePersonalEmail(String email)
-	{
+
+	public void deletePersonalEmail(String email) {
 		deleteEmail(personalEmails, email);
 	}
 

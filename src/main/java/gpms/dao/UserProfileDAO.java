@@ -36,8 +36,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	private static Morphia morphia;
 	private static Datastore ds;
 	private AuditLog audit;
-	
-	
+
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
 		if (morphia == null) {
@@ -52,11 +51,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			try {
 				ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
 						DBNAME);
+				ds.ensureIndexes();
 			} catch (UnknownHostException | MongoException e) {
 				e.printStackTrace();
 			}
 		}
-		ds.ensureIndexes();
 		return ds;
 	}
 
@@ -83,14 +82,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
 	}
 
-	public UserProfile findByUserAccount(UserAccount userAccount) 
-	{
+	public UserProfile findByUserAccount(UserAccount userAccount) {
 		Datastore ds = getDatastore();
-		
-//		UserProfile temp = query.field("user id.$id").equal(id).get();
-//		UserProfile tempUser = ds.createQuery(UserProfile.class);
-//				.field("user id.id").equal(id).get();
-		return ds.createQuery(UserProfile.class).field("user id").equal(userAccount).get();
+
+		// UserProfile temp = query.field("user id.$id").equal(id).get();
+		// UserProfile tempUser = ds.createQuery(UserProfile.class);
+		// .field("user id.id").equal(id).get();
+		return ds.createQuery(UserProfile.class).field("user id")
+				.equal(userAccount).get();
 	}
 
 	/**
@@ -186,166 +185,169 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return res;
 	}
 
-	
-
 	/**
 	 * Sets the first name of a user profile
-	 * @param profile the user profile to change
-	 * @param newName the new name to set
+	 * 
+	 * @param profile
+	 *            the user profile to change
+	 * @param newName
+	 *            the new name to set
 	 */
-	public void setFirstName(UserProfile profile, String newName)
-	{
+	public void setFirstName(UserProfile profile, String newName) {
 		Datastore ds = getDatastore();
-		
+
 		audit = new AuditLog(profile, "Edited first name", new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.setFirstName(newName);
 		ds.save(profile);
 	}
-	
+
 	/**
 	 * Sets the middle name of a user profile
-	 * @param profile the user profile to change 
-	 * @param newName the new name to set
+	 * 
+	 * @param profile
+	 *            the user profile to change
+	 * @param newName
+	 *            the new name to set
 	 */
-	public void setMiddleName(UserProfile profile, String newName)
-	{
+	public void setMiddleName(UserProfile profile, String newName) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Edited middle name", new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.setMiddleName(newName);
 		ds.save(profile);
 	}
-	
+
 	/**
 	 * Sets the last name of a user profile
-	 * @param profile the user profile to change
-	 * @param newName the new name to set
+	 * 
+	 * @param profile
+	 *            the user profile to change
+	 * @param newName
+	 *            the new name to set
 	 */
-	public void setLastName(UserProfile profile, String newName)
-	{
+	public void setLastName(UserProfile profile, String newName) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Edited last name", new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.setLastName(newName);
 		ds.save(profile);
 	}
-	
 
 	/**
 	 * Returns a list of the details lists
+	 * 
 	 * @param profile
 	 * @return
 	 */
-	public List getDetailsList(UserProfile profile)
-	{
+	public List getDetailsList(UserProfile profile) {
 		List<PositionDetails> list = profile.getDetailsList();
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * Delete a specific "details" entry from a user profile
-	 * @param profile the profile to use
-	 * @param details the details to delete
+	 * 
+	 * @param profile
+	 *            the profile to use
+	 * @param details
+	 *            the details to delete
 	 */
-	public void removeDetails(UserProfile profile, PositionDetails details)
-	{
+	public void removeDetails(UserProfile profile, PositionDetails details) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Removed details", new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.deleteDetails(details);
 		ds.save(profile);
 	}
-	
+
 	/**
 	 * Add a details object to the details of the user
-	 * @param profile the profile to use
-	 * @param details the details to add
+	 * 
+	 * @param profile
+	 *            the profile to use
+	 * @param details
+	 *            the details to add
 	 */
-	public void addDetails(UserProfile profile, PositionDetails details)
-	{
+	public void addDetails(UserProfile profile, PositionDetails details) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Added details", new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.addDetails(details);
 		ds.save(profile);
 	}
-	
-	public void addOfficeNumber(UserProfile profile, String number)
-	{
+
+	public void addOfficeNumber(UserProfile profile, String number) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Added office number " + number, new Date());
+		audit = new AuditLog(profile, "Added office number " + number,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.addOfficeNumber(number);
 		ds.save(profile);
 	}
-	
-	public void deleteOfficeNumber(UserProfile profile, String number)
-	{
+
+	public void deleteOfficeNumber(UserProfile profile, String number) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Deleted office number "+ number, new Date());
+		audit = new AuditLog(profile, "Deleted office number " + number,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.deleteOfficeNumber(number);
 		ds.save(profile);
 	}
-	
-	public void addHomeNumber(UserProfile profile, String number)
-	{
+
+	public void addHomeNumber(UserProfile profile, String number) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Added home number " + number, new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.addOfficeNumber(number);
 		ds.save(profile);
 	}
-	
-	public void deleteHomeNumber(UserProfile profile, String number)
-	{
+
+	public void deleteHomeNumber(UserProfile profile, String number) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Deleted home number " + number, new Date());
+		audit = new AuditLog(profile, "Deleted home number " + number,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.deleteHomeNumber(number);
 		ds.save(profile);
 	}
-	
-	public void addMobileNumber(UserProfile profile, String number)
-	{
+
+	public void addMobileNumber(UserProfile profile, String number) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Added mobile number " + number, new Date());
+		audit = new AuditLog(profile, "Added mobile number " + number,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.addMobileNumber(number);
 		ds.save(profile);
 	}
-	
-	public void deleteMobileNumber(UserProfile profile, String number)
-	{
+
+	public void deleteMobileNumber(UserProfile profile, String number) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Deleted mobile number " + number, new Date());
+		audit = new AuditLog(profile, "Deleted mobile number " + number,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.deleteMobileNumber(number);
 		ds.save(profile);
 	}
-	
-	public void setAddress(UserProfile profile, Address address)
-	{
+
+	public void setAddress(UserProfile profile, Address address) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Edited address", new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.setAddress(address);
 		ds.save(profile);
 	}
-	
-	public void addWorkEmail(UserProfile profile, String email)
-	{
+
+	public void addWorkEmail(UserProfile profile, String email) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Added work email " + email, new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.addWorkEmail(email);
 		ds.save(profile);
 	}
-	
-	public void deleteWorkEmail(UserProfile profile, String email)
-	{
+
+	public void deleteWorkEmail(UserProfile profile, String email) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(profile, "Deleted work email " + email, new Date());
 		profile.addEntryToAuditLog(audit);
@@ -353,27 +355,24 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		ds.save(profile);
 	}
 
-	public void addPersonalEmail(UserProfile profile, String email)
-	{
+	public void addPersonalEmail(UserProfile profile, String email) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Added personal email " + email, new Date());
+		audit = new AuditLog(profile, "Added personal email " + email,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.addPersonalEmail(email);
 		ds.save(profile);
 	}
-	
-	public void deletePersonalEmail(UserProfile profile, String email)
-	{
+
+	public void deletePersonalEmail(UserProfile profile, String email) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Deleted personal email " + email, new Date());
+		audit = new AuditLog(profile, "Deleted personal email " + email,
+				new Date());
 		profile.addEntryToAuditLog(audit);
 		profile.deletePersonalEmail(email);
 		ds.save(profile);
 	}
-	
-	
-	
-	
+
 	/**
 	 * Dangerous method, will erase all entries. When it works Used only for
 	 * testing, will be removed later
