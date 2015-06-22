@@ -70,32 +70,31 @@ public class CRUDTestForUserProfileAndAccount
 		//I want to change his name.
 		//Let's change his first name, it was "Rico", I want to change it to...
 		newUserProfileDAO.setFirstName(tempUser, "Maximus Dangerous");
-		//Now I want to put it back in saved and changed.
-//		newUserProfileDAO.save(tempUser);
+		//We have also implemented auditing, which should add an entry to the database.
 		//Let's go back to the DB and check that it's the only thing there.  That means alt tab or w/e
 	}
 	
 	
-	@Test
-	public void findByID() throws UnknownHostException
-	{
-		//Here's a more complex task, we've been working on retrieving a unique User ID, the one created by 
-		//Mongo / Morphia (not our user account id's like bananaMan7000
-		//We want to use this ID to find every object in the db that the user is attached to.
-		//With "Rico" as our guinea pig again, let's grab him out of the DB.
-		
-		//Here's how we create a list of people.
-		List<UserProfile> userList = newUserProfileDAO.findAll();
-		//In our final implementation this might be a printed list.
-		//For now:
-		System.out.println(userList.toString());
-		//Let's just grab our guy up front.
-		
-		UserProfile tempUser = userList.get(0);
-		//Let's get his user account and see if we can print out his ID.
-		System.out.println("User Account ID: " + tempUser.getUserAccount().getId());
-		
-		
-	}
+//	@Test
+//	public void findByID() throws UnknownHostException
+//	{
+//		//Here's a more complex task, we've been working on retrieving a unique User ID, the one created by 
+//		//Mongo / Morphia (not our user account id's like bananaMan7000
+//		//We want to use this ID to find every object in the db that the user is attached to.
+//		//With "Rico" as our guinea pig again, let's grab him out of the DB.
+//		
+//		//Here's how we create a list of people.
+//		List<UserProfile> userList = newUserProfileDAO.findAll();
+//		//In our final implementation this might be a printed list.
+//		//For now:
+//		System.out.println(userList.toString());
+//		//Let's just grab our guy up front.
+//		
+//		UserProfile tempUser = userList.get(0);
+//		//Let's get his user account and see if we can print out his ID.
+//		System.out.println("User Account ID: " + tempUser.getUserAccount().getId());
+//		
+//		
+//	}
 
 }
