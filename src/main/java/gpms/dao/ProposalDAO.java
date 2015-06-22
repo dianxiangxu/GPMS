@@ -3,6 +3,7 @@
 package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
+import gpms.model.AuditLog;
 import gpms.model.InvestigatorInfo;
 import gpms.model.ProjectInfo;
 import gpms.model.Proposal;
@@ -54,15 +55,20 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		super(mongo, morphia, dbName);
 	}
 
-	public void setEditProposalNumber(Proposal proposal, String number) {
+	public void setEditProposalNumber(Proposal proposal, String number, UserProfile author) {
 		Datastore ds = getDatastore();
 		proposal.setProposalNo(number);
+		AuditLog entry = new AuditLog(author, "Edited Proposal Number", new Date());
+		proposal.addEntryToAuditLog(entry);
 		ds.save(proposal);
+		
 	}
 
-	public void setEditDateReceivedr(Proposal proposal, Date date) {
+	public void setEditDateReceivedr(Proposal proposal, Date date, UserProfile author) {
 		Datastore ds = getDatastore();
 		proposal.setDateReceived(date);
+		AuditLog entry = new AuditLog(author, "Edited Date Received", new Date());
+		proposal.addEntryToAuditLog(entry);
 		ds.save(proposal);
 	}
 
@@ -71,23 +77,36 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		return ds.createQuery(Proposal.class).asList();
 	}
 
-	public void setEditInvestigatorInfo(Proposal proposal,
-			InvestigatorInfo invInf) {
+	public void setEditInvestigatorInfo(Proposal proposal, InvestigatorInfo invInf, UserProfile author) {
 		Datastore ds = getDatastore();
 		proposal.setInvestigatorInfo(invInf);
+		AuditLog entry = new AuditLog(author, "Edited Investogator Information", new Date());
+		proposal.addEntryToAuditLog(entry);
 		ds.save(proposal);
 	}
 
-	public void setEditProjectInfo(Proposal proposal, ProjectInfo projInf) {
+	public void setEditProjectInfo(Proposal proposal, ProjectInfo projInf, UserProfile author) {
 		Datastore ds = getDatastore();
 		proposal.setProjectInfo(projInf);
+		AuditLog entry = new AuditLog(author, "Edited Project Information", new Date());
+		proposal.addEntryToAuditLog(entry);
 		ds.save(proposal);
 	}
 
-	public void setEditSponsorAndBudgetInfo(Proposal proposal,
-			SponsorAndBudgetInfo sponAndBudgInf) {
+	public void setEditSponsorAndBudgetInfo(Proposal proposal, SponsorAndBudgetInfo sponAndBudgInf, UserProfile author) {
 		Datastore ds = getDatastore();
 		proposal.setSponsorAndBudgetInfo(sponAndBudgInf);
+		AuditLog entry = new AuditLog(author, "Edited Sponsor and Budget Information", new Date());
+		proposal.addEntryToAuditLog(entry);
+		ds.save(proposal);
+	}
+	
+	public void deleteProposal(Proposal proposal, UserProfile author)
+	{
+		Datastore ds = getDatastore();
+		proposal.setIsDeleted(true);
+		AuditLog entry = new AuditLog(author, "Deleted Proposal", new Date());
+		proposal.addEntryToAuditLog(entry);
 		ds.save(proposal);
 	}
 

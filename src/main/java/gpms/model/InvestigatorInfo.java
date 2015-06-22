@@ -42,7 +42,7 @@ public class InvestigatorInfo {
 	}
 
 	public void addCo_pi(UserProfile co_pi) {
-		if (this.co_pi.size() <= MAX_NUM_CO_PI)
+		if (this.co_pi.size() < MAX_NUM_CO_PI)
 			this.co_pi.add(co_pi);
 	}
 
@@ -57,7 +57,7 @@ public class InvestigatorInfo {
 	}
 
 	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
-		if (seniorPersonnel.size() < MAX_NUM_SENIOR_PERSONNEL) {
+		if (seniorPersonnel.size() <= MAX_NUM_SENIOR_PERSONNEL) {
 			this.seniorPersonnel = seniorPersonnel;
 		}
 	}
