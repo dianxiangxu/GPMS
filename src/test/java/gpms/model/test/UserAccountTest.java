@@ -6,7 +6,7 @@ import gpms.model.UserAccount;
 import org.junit.Test;
 
 public class UserAccountTest {
-	UserAccount ua = new UserAccount("Calembo", "cccaaa", false);
+	UserAccount ua = new UserAccount("Calembo", "cccaaa");
 
 	// @Test
 	// public void testId()
@@ -19,7 +19,7 @@ public class UserAccountTest {
 
 	@Test
 	public void testIsEqual() {
-		UserAccount testua = new UserAccount("Calembo", "cccaaa", false);
+		UserAccount testua = new UserAccount("Calembo", "cccaaa");
 		assertTrue(ua.equals(testua));
 	}
 

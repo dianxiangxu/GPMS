@@ -95,6 +95,7 @@ public class ProposalDAOTest2 {
 		UserProfile up = upDAO.findByUserAccount(ua);
 		System.out.println("Now finding proposals in wich you are PI...");
 		List<Proposal> pList = pdao.proposalByPiId(up);
+
 		for(Proposal p : pList)
 		{
 			System.out.println("Proposal number : " + count++);

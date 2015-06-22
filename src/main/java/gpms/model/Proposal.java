@@ -53,6 +53,10 @@ public class Proposal extends BaseEntity {
 		this.investigatorInfo = investigatorInfo;
 		this.projectInfo = projectInfo;
 		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
+		this.costShareInfo  = new CostShareInfo();
+		this.universityCommitments = new UniversityCommitments();
+		this.conflicOfInterest = new ConflictOfInterest();
+		this.complianceInfo = new ComplianceInfo();
 	}
 
 	public Proposal(String proposalNo, Date dateReceived, Status proposalStatus) {

@@ -4,6 +4,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.AuditLog;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
@@ -55,7 +56,7 @@ public class ProposalDAOTest {
 		morphia.map(TypeOfRequest.class).map(ProjectPeriod.class)
 				.map(SponsorAndBudgetInfo.class);
 		morphia.map(UserProfile.class).map(PositionDetails.class)
-				.map(ProjectInfo.class);
+				.map(ProjectInfo.class).map(AuditLog.class);
 		pdao = new ProposalDAO(mongo, morphia, dbName);
 		// datastore = morphia.createDatastore(mongo, dbName);
 	}
@@ -111,22 +112,41 @@ public class ProposalDAOTest {
 		
 		if(input.charAt(0) == 'E')
 		{
-			for(Proposal p : pList)
-			{
-				System.out.println("Proposal numnber : " + count);
-				System.out.println(p.toString());
-				count++;
-			}
-			
 			do
 			{
-				System.out.println("Please chose a proposal : ");
-				index = scan.nextInt();
-			}while(index < 0 || index > pList.size());
-			prop = pList.get(index);
+				for(Proposal p : pList)
+				{
+					System.out.println("Proposal numnber : " + count);
+					System.out.println(p.toString());
+					count++;
+				}
+				
+				do
+				{
+					System.out.println("Please chose a proposal : ");
+					index = scan.nextInt();
+				}while(index < 0 || index > pList.size());
+				prop = pList.get(index);
+				
+				System.out.println("To delete enter \"D\"");
+				System.out.println("To update enter \"U\"");
+				
+				do
+				{
+					System.out.println("Please enter selection : ");
+					input = scan.next();
+				}while(input.charAt(0) != 'D' && input.charAt(0) != 'U');
+				
+				if(input.charAt(0) == 'D')
+				{
+					pdao.deleteProposal(prop, piProfile);
+				}
+				
+			}while(input.charAt(0) == 'D');
 		}
 		else
 		{
+			System.out.println("Now creating new proposal...");
 			prop = new Proposal();
 			prop.getInvestigatorInfo().setPi(piProfile);
 			upList.remove(piProfile);
@@ -138,114 +158,116 @@ public class ProposalDAOTest {
 		
 		//Investigator Information set\edit
 		System.out.println("Investigator Information is : ");
+//		InvestigatorInfo invInf = prop.getInvestigatorInfo();
+//		System.out.println(invInf.toString());
 		System.out.println(prop.getInvestigatorInfo().toString());
 		
 		ArrayList<UserProfile> coPiList = prop.getInvestigatorInfo().getCo_pi();
 		ArrayList<UserProfile> seniorPersonnelList = prop.getInvestigatorInfo().getSeniorPersonnel();
 		
-		
-		
-		do
+		if(upList.size() > 0)
 		{
-			input = "";
-			count = 0;
-			System.out.println("Here's your co-pi list : ");
-			for(UserProfile up : coPiList)
-			{
-				upList.remove(up);
-				System.out.println(count + " " + up.toString());
-				count++;
-			}
-			
-			System.out.println("If you wish to add a co-pi enter \"A\"");
-			System.out.println("If you wish to remove a co-pi enter \"R\"");
-			System.out.println("If you wish to exit \"E\"");
 			do
 			{
-				System.out.println("Please enter your answer");
-				input = scan.next();
-			}while(input.charAt(0) != 'A' && input.charAt(0) != 'R' && input.charAt(0) != 'E');
-			count = 0;
-			if(input.charAt(0) == 'R')
-			{
+				input = "";
+				count = 0;
+				System.out.println("Here's your co-pi list : ");
 				for(UserProfile up : coPiList)
 				{
-					System.out.println(count++ + " " + up.toString());
+					upList.remove(up);
+					System.out.println(count + " " + up.toString());
+					count++;
 				}
+				
+				System.out.println("If you wish to add a co-pi enter \"A\"");
+				System.out.println("If you wish to remove a co-pi enter \"R\"");
+				System.out.println("If you wish to exit \"E\"");
 				do
 				{
-					System.out.println("Please enter an index :");
-					index = scan.nextInt();
-				}while(index < 0 || index > coPiList.size());
-				upList.add(coPiList.remove(index));
-			}
-			else if (input.charAt(0) == 'A')
-			{
-				for(UserProfile up : upList)
+					System.out.println("Please enter your answer");
+					input = scan.next();
+				}while(input.charAt(0) != 'A' && input.charAt(0) != 'R' && input.charAt(0) != 'E');
+				count = 0;
+				if(input.charAt(0) == 'R')
 				{
-					System.out.println(count++ + " " + up.toString());
+					for(UserProfile up : coPiList)
+					{
+						System.out.println(count++ + " " + up.toString());
+					}
+					do
+					{
+						System.out.println("Please enter an index :");
+						index = scan.nextInt();
+					}while(index < 0 || index > coPiList.size());
+					upList.add(coPiList.remove(index));
 				}
-				do
+				else if (input.charAt(0) == 'A')
 				{
-					System.out.println("Please enter an index :");
-					index = scan.nextInt();
-				}while(index < 0 || index > upList.size());
-				coPiList.add(upList.remove(index));
-			}				
-		}while(input.charAt(0) != 'E' && upList.size() > 0);
-		
+					for(UserProfile up : upList)
+					{
+						System.out.println(count++ + " " + up.toString());
+					}
+					do
+					{
+						System.out.println("Please enter an index :");
+						index = scan.nextInt();
+					}while(index < 0 || index > upList.size());
+					coPiList.add(upList.remove(index));
+				}				
+			}while(input.charAt(0) != 'E' && upList.size() > 0);
+		}
 		
 		if(upList.size() > 0)
 		{
-			input = "";
-			count = 0;
-			System.out.println("Here's your Senior Personnel list : ");
-			for(UserProfile up : seniorPersonnelList)
-			{
-				upList.remove(up);
-				System.out.println(count++ + " " + up.toString());
-			}
-			
-			System.out.println("If you wish to add a Senior Personnel enter \"A\"");
-			System.out.println("If you wish to remove a Senior Personnel enter \"R\"");
-			System.out.println("If you wish to exit \"E\"");
-			do
-			{
-				System.out.println("Please enter your answer");
-				input = scan.next();
-			}while(input.charAt(0) != 'A' && input.charAt(0) != 'R' && input.charAt(0) != 'E');
-			count = 0;
-			if(input.charAt(0) == 'R')
-			{
+			do{
+				input = "";
+				count = 0;
+				System.out.println("Here's your Senior Personnel list : ");
 				for(UserProfile up : seniorPersonnelList)
 				{
+					upList.remove(up);
 					System.out.println(count++ + " " + up.toString());
 				}
+				
+				System.out.println("If you wish to add a Senior Personnel enter \"A\"");
+				System.out.println("If you wish to remove a Senior Personnel enter \"R\"");
+				System.out.println("If you wish to exit \"E\"");
 				do
 				{
-					System.out.println("Please enter an index :");
-					index = scan.nextInt();
-				}while(index < 0 || index > seniorPersonnelList.size());
-				upList.add(seniorPersonnelList.remove(index));
-			}
-			else if (input.charAt(0) == 'A')
-			{
-				for(UserProfile up : upList)
+					System.out.println("Please enter your answer");
+					input = scan.next();
+				}while(input.charAt(0) != 'A' && input.charAt(0) != 'R' && input.charAt(0) != 'E');
+				count = 0;
+				if(input.charAt(0) == 'R')
 				{
-					System.out.println(count++ + " " + up.toString());
+					for(UserProfile up : seniorPersonnelList)
+					{
+						System.out.println(count++ + " " + up.toString());
+					}
+					do
+					{
+						System.out.println("Please enter an index :");
+						index = scan.nextInt();
+					}while(index < 0 || index > seniorPersonnelList.size());
+					upList.add(seniorPersonnelList.remove(index));
 				}
-				do
+				else if (input.charAt(0) == 'A')
 				{
-					System.out.println("Please enter an index :");
-					index = scan.nextInt();
-				}while(index < 0 || index > upList.size());
-				seniorPersonnelList.add(upList.remove(index));
-			}				
-		}while(input.charAt(0) != 'E' && upList.size() > 0);
-		
-		invInf.setCo_pi(coPiList);
-		invInf.setSeniorPersonnel(seniorPersonnelList);
-		pdao.setEditInvestigatorInfo(prop, invInf);
+					for(UserProfile up : upList)
+					{
+						System.out.println(count++ + " " + up.toString());
+					}
+					do
+					{
+						System.out.println("Please enter an index :");
+						index = scan.nextInt();
+					}while(index < 0 || index > upList.size());
+					seniorPersonnelList.add(upList.remove(index));
+				}				
+			}while(input.charAt(0) != 'E' && upList.size() > 0);
+		}
+
+		pdao.setEditInvestigatorInfo(prop, piProfile);
 		
 		System.out.println("New investigator info is : ");
 		System.out.println(prop.getInvestigatorInfo().toString());
@@ -254,7 +276,7 @@ public class ProposalDAOTest {
 		System.out.println("Project Information is : ");
 		System.out.println(prop.getProjectInfo().toString());
 		
-		ProjectInfo projInf = new ProjectInfo();
+		ProjectInfo projInf = prop.getProjectInfo();
 		System.out.println("Please enter the project title : ");
 		input = scan.next();
 		projInf.setProjectTitle(input);
@@ -265,19 +287,19 @@ public class ProposalDAOTest {
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchBasic(desicion);
-		System.out.println("Please enter if is research-applied :(true or false)");
+		System.out.println("Please enter if is research-applied :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchApplied(desicion);
-		System.out.println("Please enter if is research-development :(true or false)");
+		System.out.println("Please enter if is research-development :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsResearchDevelopment(desicion);
-		System.out.println("Please enter if is instruction :(true or false)");
+		System.out.println("Please enter if is instruction :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsInstruction(desicion);
-		System.out.println("Please enter if is other sponsored activity :(true or false)");
+		System.out.println("Please enter if is other sponsored activity :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		projType.setIsOtherSponsoredActivity(desicion);
@@ -286,19 +308,19 @@ public class ProposalDAOTest {
 		
 		TypeOfRequest typeOfReq = new TypeOfRequest();
 		
-		System.out.println("Please enter if is pre-proposal :(true or false)");
+		System.out.println("Please enter if is pre-proposal :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setPreProposal(desicion);
-		System.out.println("Please enter if is new proposal :(true or false)");
+		System.out.println("Please enter if is new proposal :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setNewProposal(desicion);
-		System.out.println("Please enter if is continuation :(true or false)");
+		System.out.println("Please enter if is continuation :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setContinuation(desicion);
-		System.out.println("Please enter if is supplement :(true or false)");
+		System.out.println("Please enter if is supplement :(T or F)");
 		input = scan.next();
 		desicion = (input.charAt(0) == 'T') ? true : false;
 		typeOfReq.setSupplement(desicion);
@@ -308,7 +330,7 @@ public class ProposalDAOTest {
 		System.out.println("How many days from today is the proposal due?");
 		index = scan.nextInt();
 		//Converting to milliseconds
-		long time = index * 24 * 60 * 60 * 1000;
+		long time = System.currentTimeMillis() + index * 24 * 60 * 60 * 1000;
 		Date dueDate = new Date(time);
 		projInf.setDueDate(dueDate);
 		
@@ -317,14 +339,14 @@ public class ProposalDAOTest {
 		System.out.println("How many days from today is the project begin?");
 		index = scan.nextInt();
 		//Converting to milliseconds
-		time = index * 24 * 60 * 60 * 1000;
+		time = System.currentTimeMillis() + index * 24 * 60 * 60 * 1000;
 		Date from = new Date(time);
 		projPer.setFrom(from);
 		
 		System.out.println("How many days from today is the project end?");
 		index = scan.nextInt();
 		//Converting to milliseconds
-		time = index * 24 * 60 * 60 * 1000;
+		time = System.currentTimeMillis() + index * 24 * 60 * 60 * 1000;
 		Date to = new Date(time);
 		projPer.setTo(to);
 		
@@ -332,17 +354,19 @@ public class ProposalDAOTest {
 		
 		ProjectLocation projLoc = new ProjectLocation();
 		
-		System.out.println("Is the project off-campus :(true or false)");
-		desicion = scan.nextBoolean();
+		System.out.println("Is the project off-campus :(T or F)");
+		input = scan.next();
+		desicion = (input.charAt(0) == 'T') ? true : false;
 		projLoc.setOffCampus(desicion);
 		
-		System.out.println("Is the project on-campus :(true or false)");
-		desicion = scan.nextBoolean();
+		System.out.println("Is the project on-campus :(T or F)");
+		input = scan.next();
+		desicion = (input.charAt(0) == 'T') ? true : false;
 		projLoc.setOnCampus(desicion);
 		
 		projInf.setProjectLocation(projLoc);
 		
-		pdao.setEditProjectInfo(prop, projInf);
+		pdao.setEditProjectInfo(prop, piProfile);
 		
 		System.out.println("New project information is : ");
 		System.out.println(prop.getProjectInfo().toString());
@@ -351,7 +375,7 @@ public class ProposalDAOTest {
 		System.out.println("Sponsor and budget info is : ");
 		System.out.println(prop.getSponsorAndBudgetInfo().toString());
 		
-		SponsorAndBudgetInfo sponAndBudg = new SponsorAndBudgetInfo();
+		SponsorAndBudgetInfo sponAndBudg = prop.getSponsorAndBudgetInfo();
 		ArrayList<String> grantingAgencies = new ArrayList<String>();
 		
 		do
@@ -384,7 +408,7 @@ public class ProposalDAOTest {
 		costs = scan.nextDouble();
 		sponAndBudg.setFARate(costs);
 		
-		pdao.setEditSponsorAndBudgetInfo(prop, sponAndBudg);
+		pdao.setEditSponsorAndBudgetInfo(prop, piProfile);
 		
 		System.out.println("New Sponsor and budget info is : ");
 		System.out.println(prop.getSponsorAndBudgetInfo().toString());

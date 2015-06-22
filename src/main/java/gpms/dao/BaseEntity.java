@@ -2,6 +2,7 @@ package gpms.dao;
 
 import gpms.model.AuditLog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -19,13 +20,14 @@ public abstract class BaseEntity {
 	@Property("version")
 	private Long version;
 
-	@Embedded
-	private List<AuditLog> auditLog;
-	
+	@Embedded("audit log")
+	private ArrayList<AuditLog> auditLog;
+
 	private boolean isDeleted;
 
 	public BaseEntity() {
 		super();
+		auditLog = new ArrayList<AuditLog>();
 	}
 
 	public ObjectId getId() {
@@ -44,21 +46,19 @@ public abstract class BaseEntity {
 		return auditLog;
 	}
 
-	public void setAuditLog(List<AuditLog> auditLog) {
+	public void setAuditLog(ArrayList<AuditLog> auditLog) {
 		this.auditLog = auditLog;
 	}
 
 	public void addEntryToAuditLog(AuditLog entry) {
 		auditLog.add(entry);
 	}
-	
-	public void setIsDeleted(boolean isDeleted)
-	{
+
+	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	
-	public boolean getIsDeleted()
-	{
+
+	public boolean getIsDeleted() {
 		return isDeleted;
 	}
 }
