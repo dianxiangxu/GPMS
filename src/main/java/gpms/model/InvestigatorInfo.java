@@ -7,10 +7,13 @@ import java.util.ArrayList;
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Transient;
 
 @Embedded
 public class InvestigatorInfo {
+	@Transient
 	public final int MAX_NUM_CO_PI = 4;
+	@Transient
 	public final int MAX_NUM_SENIOR_PERSONNEL = 10;
 
 	@Reference(value = "PI"/*, lazy = true*/)
