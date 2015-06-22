@@ -16,11 +16,11 @@ public class InvestigatorInfo {
 	@Transient
 	public final int MAX_NUM_SENIOR_PERSONNEL = 10;
 
-	@Reference(value = "PI"/*, lazy = true*/)
+	@Reference(value = "PI", lazy = true)
 	private UserProfile pi = new UserProfile();
-	@Reference(value = "CO-PI"/*, lazy = true*/)
+	@Reference(value = "CO-PI", lazy = true)
 	private ArrayList<UserProfile> co_pi = new ArrayList<UserProfile>();
-	@Reference(value = "senior personnel"/*, lazy = true*/)
+	@Reference(value = "senior personnel", lazy = true)
 	private ArrayList<UserProfile> seniorPersonnel = new ArrayList<UserProfile>();
 
 	public InvestigatorInfo() {
