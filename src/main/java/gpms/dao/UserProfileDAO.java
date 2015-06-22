@@ -8,12 +8,14 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Address;
+import gpms.model.AuditLog;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -33,7 +35,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 	private static Morphia morphia;
 	private static Datastore ds;
-
+	private AuditLog audit;
+	
+	
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
 		if (morphia == null) {
@@ -192,6 +196,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void setFirstName(UserProfile profile, String newName)
 	{
 		Datastore ds = getDatastore();
+		
+		audit = new AuditLog(profile, "Edited first name", new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.setFirstName(newName);
 		ds.save(profile);
 	}
@@ -204,6 +211,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void setMiddleName(UserProfile profile, String newName)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Edited middle name", new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.setMiddleName(newName);
 		ds.save(profile);
 	}
@@ -216,6 +225,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void setLastName(UserProfile profile, String newName)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Edited last name", new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.setLastName(newName);
 		ds.save(profile);
 	}
@@ -241,10 +252,12 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void removeDetails(UserProfile profile, PositionDetails details)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Removed details", new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.deleteDetails(details);
 		ds.save(profile);
 	}
-
+	
 	/**
 	 * Add a details object to the details of the user
 	 * @param profile the profile to use
@@ -253,6 +266,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addDetails(UserProfile profile, PositionDetails details)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Added details", new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.addDetails(details);
 		ds.save(profile);
 	}
@@ -260,6 +275,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addOfficeNumber(UserProfile profile, String number)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Added office number " + number, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.addOfficeNumber(number);
 		ds.save(profile);
 	}
@@ -267,6 +284,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deleteOfficeNumber(UserProfile profile, String number)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Deleted office number "+ number, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.deleteOfficeNumber(number);
 		ds.save(profile);
 	}
@@ -274,6 +293,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addHomeNumber(UserProfile profile, String number)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Added home number " + number, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.addOfficeNumber(number);
 		ds.save(profile);
 	}
@@ -281,6 +302,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deleteHomeNumber(UserProfile profile, String number)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Deleted home number " + number, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.deleteHomeNumber(number);
 		ds.save(profile);
 	}
@@ -288,6 +311,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addMobileNumber(UserProfile profile, String number)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Added mobile number " + number, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.addMobileNumber(number);
 		ds.save(profile);
 	}
@@ -295,6 +320,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deleteMobileNumber(UserProfile profile, String number)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Deleted mobile number " + number, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.deleteMobileNumber(number);
 		ds.save(profile);
 	}
@@ -302,6 +329,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void setAddress(UserProfile profile, Address address)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Edited address", new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.setAddress(address);
 		ds.save(profile);
 	}
@@ -309,6 +338,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addWorkEmail(UserProfile profile, String email)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Added work email " + email, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.addWorkEmail(email);
 		ds.save(profile);
 	}
@@ -316,6 +347,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deleteWorkEmail(UserProfile profile, String email)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Deleted work email " + email, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.deleteWorkEmail(email);
 		ds.save(profile);
 	}
@@ -323,6 +356,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addPersonalEmail(UserProfile profile, String email)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Added personal email " + email, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.addPersonalEmail(email);
 		ds.save(profile);
 	}
@@ -330,6 +365,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deletePersonalEmail(UserProfile profile, String email)
 	{
 		Datastore ds = getDatastore();
+		audit = new AuditLog(profile, "Deleted personal email " + email, new Date());
+		profile.addEntryToAuditLog(audit);
 		profile.deletePersonalEmail(email);
 		ds.save(profile);
 	}
