@@ -48,17 +48,17 @@ public class UserProfile extends BaseEntity {
 	private List<String> additionalNumbers = new ArrayList<String>();
 
 	@Embedded("address")
-	private Address address;
+	private Address address = new Address();
 
 	@Property("work email")
-	@Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique = true)
+	//@Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique = true)
 	private List<String> workEmails = new ArrayList<String>();
 
 	@Property("personal email")
-	@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
+	//@Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-	@Reference(value = "user id", lazy = true)
+	@Reference(value = "user id"/*, lazy = true*/)
 	private UserAccount userAccount = new UserAccount();
 	
 

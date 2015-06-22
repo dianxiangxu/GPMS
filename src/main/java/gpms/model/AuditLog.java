@@ -17,6 +17,12 @@ public class AuditLog
 	@Property("when")
 	private Date when;
 	
+	public AuditLog()
+	{
+		who = new UserProfile();
+		action = new String();
+		when = new Date();
+	}
 	
 	public AuditLog(UserProfile who, String action, Date when)
 	{

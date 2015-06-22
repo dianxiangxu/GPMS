@@ -20,9 +20,9 @@ public abstract class BaseEntity {
 	@Property("version")
 	private Long version;
 
-	@Embedded
+	@Embedded("audit log")
 	private ArrayList<AuditLog> auditLog;
-	
+
 	private boolean isDeleted;
 
 	public BaseEntity() {
@@ -53,14 +53,12 @@ public abstract class BaseEntity {
 	public void addEntryToAuditLog(AuditLog entry) {
 		auditLog.add(entry);
 	}
-	
-	public void setIsDeleted(boolean isDeleted)
-	{
+
+	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	
-	public boolean getIsDeleted()
-	{
+
+	public boolean getIsDeleted() {
 		return isDeleted;
 	}
 }
