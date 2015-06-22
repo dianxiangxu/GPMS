@@ -8,14 +8,15 @@ import org.mongodb.morphia.annotations.Reference;
 
 public class AuditLog 
 {
+	@Reference("user id")
+	private UserProfile who;
 	@Property("action")
 	private String action;
 	@Property("when")
 	private Date when;
-	@Reference("user id")
-	private UserProfile who;
 	
-	public AuditLog(String action, Date when, UserProfile who)
+	
+	public AuditLog(UserProfile who, String action, Date when)
 	{
 		this.action = action;
 		this.when = when;

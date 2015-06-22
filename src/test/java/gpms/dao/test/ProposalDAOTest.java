@@ -2,6 +2,7 @@ package gpms.dao.test;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
+import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
@@ -12,6 +13,7 @@ import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.TypeOfRequest;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -62,100 +64,184 @@ public class ProposalDAOTest {
 	public void testCreatingEditingProposal() throws UnknownHostException
 	{
 		Proposal prop;
-		InvestigatorInfo invInf = new InvestigatorInfo();
-		
-		Scanner scan = new Scanner(System.in);
-		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, dbName);
-		List<UserProfile> upList = upDAO.findAll();
-		int index = -1;
-		int count = 0;
+		boolean isLegit = false;
 		String input = "";
+		int count = 0;
+		Scanner scan = new Scanner(System.in);
+		UserAccount ua = new UserAccount();
+		UserAccountDAO uaDAO = new UserAccountDAO(mongo, morphia, "GPMS");
+		UserProfileDAO upDAO = new UserProfileDAO(mongo, morphia, "GPMS");
 		
-		List<Proposal> pList = pdao.findAll();
-		
-		for(Proposal p : pList)
+		while(isLegit != true)
 		{
-			System.out.println("Proposal numnber : " + count);
-			System.out.println(p.toString());
-			count++;
+			System.out.println("Please enter your user account : ");
+			input = scan.nextLine();
+			ua = uaDAO.findByUserName(input);
+			if(ua != null)
+			{
+				System.out.println("Please enter your password : ");
+				input = scan.nextLine();
+				if(input.equals(ua.getPassword()))
+				{
+					isLegit = true;
+				}
+			}
 		}
 		
-		do
+		UserProfile piProfile = upDAO.findByUserAccount(ua);
+		List<UserProfile> upList = upDAO.findAll();
+		int index = -1;
+		
+		List<Proposal> pList = pdao.proposalByPiId(piProfile);
+		
+		if(pList.size() > 0)
 		{
-			System.out.println("Please chose a proposal : ");
-			index = scan.nextInt();
-		}while(index < 0 || index > pList.size());
-		prop = pList.get(index);
+			System.out.println("To create a new proposal enter \"N\"");
+			System.out.println("To edit existing proposal enter \"E\"");
+			do
+			{
+				System.out.println("Please enter youre choice : ");
+				input = scan.next();
+			}while(input.charAt(0) != 'E' && input.charAt(0) != 'N');
+		}
+		else 
+		{
+			input = "N";
+		}
+		
+		if(input.charAt(0) == 'E')
+		{
+			for(Proposal p : pList)
+			{
+				System.out.println("Proposal numnber : " + count);
+				System.out.println(p.toString());
+				count++;
+			}
+			
+			do
+			{
+				System.out.println("Please chose a proposal : ");
+				index = scan.nextInt();
+			}while(index < 0 || index > pList.size());
+			prop = pList.get(index);
+		}
+		else
+		{
+			prop = new Proposal();
+			prop.getInvestigatorInfo().setPi(piProfile);
+			upList.remove(piProfile);
+			System.out.println("Please enter a Proposal number: ");
+			input = scan.next();
+			prop.setProposalNo(input);
+			prop.setDateReceived(new Date());
+		}
 		
 		//Investigator Information set\edit
 		System.out.println("Investigator Information is : ");
 		System.out.println(prop.getInvestigatorInfo().toString());
 		
-		ArrayList<UserProfile> coPiList = new ArrayList<UserProfile>();
-		ArrayList<UserProfile> seniorPersonnelList = new ArrayList<UserProfile>();
+		ArrayList<UserProfile> coPiList = prop.getInvestigatorInfo().getCo_pi();
+		ArrayList<UserProfile> seniorPersonnelList = prop.getInvestigatorInfo().getSeniorPersonnel();
 		
-		count = 0;
-		input = "";
-		if(upList.size() > 0)
+		
+		
+		do
 		{
+			input = "";
+			count = 0;
+			System.out.println("Here's your co-pi list : ");
+			for(UserProfile up : coPiList)
+			{
+				upList.remove(up);
+				System.out.println(count + " " + up.toString());
+				count++;
+			}
+			
+			System.out.println("If you wish to add a co-pi enter \"A\"");
+			System.out.println("If you wish to remove a co-pi enter \"R\"");
+			System.out.println("If you wish to exit \"E\"");
 			do
 			{
-				System.out.println("Please Select a co-pi to add : ");
+				System.out.println("Please enter your answer");
+				input = scan.next();
+			}while(input.charAt(0) != 'A' && input.charAt(0) != 'R' && input.charAt(0) != 'E');
+			count = 0;
+			if(input.charAt(0) == 'R')
+			{
+				for(UserProfile up : coPiList)
+				{
+					System.out.println(count++ + " " + up.toString());
+				}
+				do
+				{
+					System.out.println("Please enter an index :");
+					index = scan.nextInt();
+				}while(index < 0 || index > coPiList.size());
+				upList.add(coPiList.remove(index));
+			}
+			else if (input.charAt(0) == 'A')
+			{
 				for(UserProfile up : upList)
 				{
-					System.out.println(count + " " + up.toString());
-					count++;
+					System.out.println(count++ + " " + up.toString());
 				}
-				count = 0;
 				do
 				{
-					System.out.println("Please enter an index : ");
+					System.out.println("Please enter an index :");
 					index = scan.nextInt();
 				}while(index < 0 || index > upList.size());
-				
-				coPiList.add(upList.get(index));
-				upList.remove(index);
-				do
-				{
-					System.out.println("Do you wish to continue?(Y or N)");
-					input = scan.next();
-					input.toUpperCase();
-				}while(input.charAt(0) != 'Y' && input.charAt(0) != 'N');
-				
-			}while(input.charAt(0) != 'N' && upList.size() > 0);
-		}
+				coPiList.add(upList.remove(index));
+			}				
+		}while(input.charAt(0) != 'E' && upList.size() > 0);
 		
-		count = 0;
-		input = "";
+		
 		if(upList.size() > 0)
 		{
+			input = "";
+			count = 0;
+			System.out.println("Here's your Senior Personnel list : ");
+			for(UserProfile up : seniorPersonnelList)
+			{
+				upList.remove(up);
+				System.out.println(count++ + " " + up.toString());
+			}
+			
+			System.out.println("If you wish to add a Senior Personnel enter \"A\"");
+			System.out.println("If you wish to remove a Senior Personnel enter \"R\"");
+			System.out.println("If you wish to exit \"E\"");
 			do
 			{
-				System.out.println("Please Select a senior personnel to add : ");
+				System.out.println("Please enter your answer");
+				input = scan.next();
+			}while(input.charAt(0) != 'A' && input.charAt(0) != 'R' && input.charAt(0) != 'E');
+			count = 0;
+			if(input.charAt(0) == 'R')
+			{
+				for(UserProfile up : seniorPersonnelList)
+				{
+					System.out.println(count++ + " " + up.toString());
+				}
+				do
+				{
+					System.out.println("Please enter an index :");
+					index = scan.nextInt();
+				}while(index < 0 || index > seniorPersonnelList.size());
+				upList.add(seniorPersonnelList.remove(index));
+			}
+			else if (input.charAt(0) == 'A')
+			{
 				for(UserProfile up : upList)
 				{
-					System.out.println(count + " " + up.toString());
-					count++;
+					System.out.println(count++ + " " + up.toString());
 				}
-				count = 0;
 				do
 				{
-					System.out.println("Please enter an index : ");
+					System.out.println("Please enter an index :");
 					index = scan.nextInt();
 				}while(index < 0 || index > upList.size());
-				
-				seniorPersonnelList.add(upList.get(index));
-				upList.remove(index);
-				do
-				{
-					System.out.println("Do you wish to continue?(Y or N)");
-					input = scan.next();
-					input.toUpperCase();
-				}while(input.charAt(0) != 'Y' && input.charAt(0) != 'N');
-				
-			}while(input.charAt(0) != 'N' && upList.size() > 0);
-		}
-		
+				seniorPersonnelList.add(upList.remove(index));
+			}				
+		}while(input.charAt(0) != 'E' && upList.size() > 0);
 		
 		invInf.setCo_pi(coPiList);
 		invInf.setSeniorPersonnel(seniorPersonnelList);
