@@ -232,10 +232,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getLastName().equals(newName))
 		{
-		audit = new AuditLog(author, "Edited last name", new Date());
-		target.addEntryToAuditLog(audit);
-		target.setLastName(newName);
-		ds.save(target);
+			audit = new AuditLog(author, "Edited last name", new Date());
+			target.addEntryToAuditLog(audit);
+			target.setLastName(newName);
+			ds.save(target);
 		}
 	}
 
@@ -285,10 +285,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getOfficeNumbers().contains(number))
 		{
-		audit = new AuditLog(author, "Added office number " + number, new Date());
-		target.addEntryToAuditLog(audit);
-		target.addOfficeNumber(number);
-		ds.save(target);
+			audit = new AuditLog(author, "Added office number " + number, new Date());
+			target.addEntryToAuditLog(audit);
+			target.addOfficeNumber(number);
+			ds.save(target);
 		}
 	}
 
@@ -297,10 +297,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(target.getOfficeNumbers().contains(number))
 		{
-		audit = new AuditLog(author, "Deleted office number "+ number, new Date());
-		target.addEntryToAuditLog(audit);
-		target.deleteOfficeNumber(number);
-		ds.save(target);
+			audit = new AuditLog(author, "Deleted office number "+ number, new Date());
+			target.addEntryToAuditLog(audit);
+			target.deleteOfficeNumber(number);
+			ds.save(target);
 		}
 	}
 
@@ -309,10 +309,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getHomeNumbers().contains(number))
 		{
-		audit = new AuditLog(author, "Added home number " + number, new Date());
-		target.addEntryToAuditLog(audit);
-		target.addOfficeNumber(number);
-		ds.save(target);
+			audit = new AuditLog(author, "Added home number " + number, new Date());
+			target.addEntryToAuditLog(audit);
+			target.addHomeNumber(number);
+			ds.save(target);
 		}
 	}
 
@@ -321,10 +321,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(target.getHomeNumbers().contains(number))
 		{
-		audit = new AuditLog(author, "Deleted home number " + number, new Date());
-		target.addEntryToAuditLog(audit);
-		target.deleteHomeNumber(number);
-		ds.save(target);
+			audit = new AuditLog(author, "Deleted home number " + number, new Date());
+			target.addEntryToAuditLog(audit);
+			target.deleteHomeNumber(number);
+			ds.save(target);
 		}
 	}
 
@@ -333,10 +333,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getMobileNumbers().contains(number))
 		{
-		audit = new AuditLog(author, "Added mobile number " + number, new Date());
-		target.addEntryToAuditLog(audit);
-		target.addMobileNumber(number);
-		ds.save(target);
+			audit = new AuditLog(author, "Added mobile number " + number, new Date());
+			target.addEntryToAuditLog(audit);
+			target.addMobileNumber(number);
+			ds.save(target);
 		}
 	}
 
@@ -345,20 +345,20 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(target.getMobileNumbers().contains(number))
 		{
-		audit = new AuditLog(author, "Deleted mobile number " + number, new Date());
-		target.addEntryToAuditLog(audit);
-		target.deleteMobileNumber(number);
-		ds.save(target);
+			audit = new AuditLog(author, "Deleted mobile number " + number, new Date());
+			target.addEntryToAuditLog(audit);
+			target.deleteMobileNumber(number);
+			ds.save(target);
 		}
 	}
 
 	public void setAddress(UserProfile author, UserProfile target, Address address)
 	{
 		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Edited address", new Date());
-		profile.addEntryToAuditLog(audit);
-		profile.setAddress(address);
-		ds.save(profile);
+		audit = new AuditLog(author, "Edited address", new Date());
+		target.addEntryToAuditLog(audit);
+		target.setAddress(address);
+		ds.save(target);
 	}
 
 	public void addWorkEmail(UserProfile author, UserProfile target, String email)
@@ -366,10 +366,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getWorkEmails().contains(email))
 		{
-		audit = new AuditLog(author, "Added work email " + email, new Date());
-		target.addEntryToAuditLog(audit);
-		target.addWorkEmail(email);
-		ds.save(target);
+			audit = new AuditLog(author, "Added work email " + email, new Date());
+			target.addEntryToAuditLog(audit);
+			target.addWorkEmail(email);
+			ds.save(target);
 		}
 	}
 
@@ -378,10 +378,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(target.getWorkEmails().contains(email))
 		{
-		audit = new AuditLog(author, "Deleted work email " + email, new Date());
-		target.addEntryToAuditLog(audit);
-		target.deleteWorkEmail(email);
-		ds.save(target);
+			audit = new AuditLog(author, "Deleted work email " + email, new Date());
+			target.addEntryToAuditLog(audit);
+			target.deleteWorkEmail(email);
+			ds.save(target);
 		}
 	}
 
@@ -390,10 +390,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getPersonalEmails().contains(email))
 		{
-		audit = new AuditLog(author, "Added personal email " + email, new Date());
-		target.addEntryToAuditLog(audit);
-		target.addPersonalEmail(email);
-		ds.save(target);
+			audit = new AuditLog(author, "Added personal email " + email, new Date());
+			target.addEntryToAuditLog(audit);
+			target.addPersonalEmail(email);
+			ds.save(target);
 		}
 	}
 
@@ -402,10 +402,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(target.getPersonalEmails().contains(email))
 		{
-		audit = new AuditLog(author, "Deleted personal email " + email, new Date());
-		target.addEntryToAuditLog(audit);
-		target.deletePersonalEmail(email);
-		ds.save(target);
+			audit = new AuditLog(author, "Deleted personal email " + email, new Date());
+			target.addEntryToAuditLog(audit);
+			target.deletePersonalEmail(email);
+			ds.save(target);
 		}
 	}
 

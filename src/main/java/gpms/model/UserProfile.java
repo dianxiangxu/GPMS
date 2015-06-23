@@ -44,9 +44,6 @@ public class UserProfile extends BaseEntity {
 	@Property("home number")
 	private List<String> homeNumbers = new ArrayList<String>();
 
-	@Property("additional numbers")
-	private List<String> additionalNumbers = new ArrayList<String>();
-
 	@Embedded("address")
 	private Address address = new Address();
 
@@ -366,7 +363,11 @@ public class UserProfile extends BaseEntity {
 	 */
 	private void deleteNumber(List<String> numberString, String deleteNumber) {
 		int index = numberString.indexOf(deleteNumber);
+		System.out.println("Inside of delete number method: ");
+		System.out.println("The number to delete is " + deleteNumber + " from list ");
+		System.out.println("List before operation: " + numberString.toString());
 		numberString.remove(index);
+		System.out.println("List after operation: " + numberString.toString());
 	}
 
 	/**
