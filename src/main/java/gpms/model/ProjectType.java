@@ -109,4 +109,17 @@ public class ProjectType {
 				&& this.isInstruction == pt.isInstruction
 				&& this.isOtherSponsoredActivity == pt.isOtherSponsoredActivity;
 	}
+	
+	public ProjectType clone()
+	{
+		ProjectType copy = new ProjectType();
+		
+		copy.setIsResearchBasic(this.isResearchBasic);
+		copy.setIsResearchApplied(this.isResearchApplied);
+		copy.setIsResearchDevelopment(this.isResearchDevelopment);
+		copy.setIsInstruction(this.isInstruction);
+		copy.setIsOtherSponsoredActivity(this.isOtherSponsoredActivity);
+		
+		return copy;
+	}
 }

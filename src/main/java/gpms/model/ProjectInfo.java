@@ -115,4 +115,18 @@ public class ProjectInfo {
 				&& this.projectType.equals(pinf.projectType)
 				&& this.typeOfRequest.equals(pinf.typeOfRequest);
 	}
+	
+	public ProjectInfo clone()
+	{
+		ProjectInfo copy = new ProjectInfo();
+
+		copy.setProjectTitle(this.projectTitle);
+		copy.setProjectType(this.projectType.clone());
+		copy.setTypeOfRequest(this.typeOfRequest.clone());
+		copy.setDueDate(new Date(this.dueDate.getTime()));
+		copy.setProjectPeriod(this.projectPeriod.clone());
+		copy.setProjectLocation(this.projectLocation.clone());
+		
+		return copy;
+	}
 }

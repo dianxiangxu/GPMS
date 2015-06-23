@@ -36,4 +36,14 @@ public class ProjectLocation {
 	public boolean equals(ProjectLocation pl) {
 		return this.offCampus == pl.offCampus && this.onCampus == pl.onCampus;
 	}
+	
+	public ProjectLocation clone()
+	{
+		ProjectLocation copy = new ProjectLocation();
+		
+		copy.setOnCampus(this.onCampus);
+		copy.setOffCampus(this.offCampus);
+		
+		return copy;
+	}
 }

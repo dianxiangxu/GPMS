@@ -90,5 +90,20 @@ public class InvestigatorInfo {
 		return this.pi.equals(invInf.pi) && this.co_pi.equals(invInf.co_pi)
 				&& this.seniorPersonnel.equals(invInf.seniorPersonnel);
 	}
-
+	
+	public InvestigatorInfo clone()
+	{
+		InvestigatorInfo copy  = new InvestigatorInfo();
+		copy.setPi(this.pi.clone());
+		
+		for(UserProfile coPi : this.co_pi)
+		{
+			copy.addCo_pi(coPi.clone());
+		}
+		for(UserProfile seniorPersonnel : this.seniorPersonnel)
+		{
+			copy.addSeniorPersonnel(seniorPersonnel.clone());
+		}
+		return copy;
+	}
 }

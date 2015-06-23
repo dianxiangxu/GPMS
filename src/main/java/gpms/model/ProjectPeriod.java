@@ -45,4 +45,14 @@ public class ProjectPeriod {
 	public boolean equals(ProjectPeriod pp) {
 		return this.from.equals(pp.from) && this.to.equals(pp.to);
 	}
+	
+	public ProjectPeriod clone()
+	{
+		ProjectPeriod copy = new ProjectPeriod();
+		
+		copy.setFrom(new Date(this.from.getTime()));
+		copy.setTo(new Date(this.to.getTime()));
+		
+		return copy;
+	}
 }

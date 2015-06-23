@@ -8,6 +8,7 @@ import gpms.model.InvestigatorInfo;
 import gpms.model.ProjectInfo;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
+import gpms.model.Status;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
@@ -124,6 +125,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	{
 		Datastore ds = getDatastore();
 		proposal.setIsDeleted(true);
+		proposal.setProposalStatus(Status.DELETED);
 		AuditLog entry = new AuditLog(author, "Deleted Proposal", new Date());
 		proposal.addEntryToAuditLog(entry);
 		ds.save(proposal);
