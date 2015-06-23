@@ -41,6 +41,8 @@ public class QueryReferenceTest
 		}
 		
 		UserProfile up = upDAO.findByUserAccount(ua);
-		System.out.println(up.toString());
+		UserProfile pp = up;
+		pp.setFirstName("fdsfsd");
+		System.out.println(up.getFirstName());
 	}
 }
