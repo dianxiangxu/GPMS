@@ -13,7 +13,8 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
-public class UserAccount extends BaseEntity {
+public class UserAccount extends BaseEntity 
+{
 	@Property("username")
 	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
 	private String userName;
@@ -62,4 +63,9 @@ public class UserAccount extends BaseEntity {
 		return this.userName.equals(ua.userName)
 				&& this.password.equals(ua.password);
 	}
+	
+//	public void copy(UserAccount ua)
+//	{
+//		this.userName = ua.userName.;
+//	}
 }
