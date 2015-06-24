@@ -66,7 +66,9 @@ public class UserAccount extends BaseEntity
 	
 	public UserAccount clone()
 	{
-		return new UserAccount(this.userName, this.password);
+		UserAccount copy = new UserAccount(this.userName, this.password);
+		copy.setId(this.getId());
+		return copy;
 	}
 	
 //	public void copy(UserAccount ua)
