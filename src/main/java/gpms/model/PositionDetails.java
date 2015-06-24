@@ -78,4 +78,9 @@ public class PositionDetails {
 				&& this.college.equals(pd.college)
 				&& this.department.equals(pd.department);
 	}
+	
+	public PositionDetails clone()
+	{
+		return new PositionDetails(this.positionType, this.positionTitle, this.department, this.college);
+	}
 }

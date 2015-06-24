@@ -110,8 +110,8 @@ public class Proposal extends BaseEntity {
 		return proposalStatus;
 	}
 
-	public void setProposalStatus(Status pending) {
-		this.proposalStatus = pending;
+	public void setProposalStatus(Status status) {
+		this.proposalStatus = status;
 	}
 
 	public InvestigatorInfo getInvestigatorInfo() {
