@@ -40,9 +40,28 @@ public class QueryReferenceTest
 			}
 		}
 		
+		UserAccount ua2 = ua.clone();
+		ua2.setUserName("fdsfs");
+
+		if(!ua2.getUserName().equals(ua.getUserName()))
+		{
+			System.out.println("It works!");
+		}
+		else
+		{
+			System.out.println("It doesnt work.");
+		}
+		
 		UserProfile up = upDAO.findByUserAccount(ua);
-		UserProfile pp = up;
-		pp.setFirstName("fdsfsd");
-		System.out.println(up.getFirstName());
+		UserProfile up2 = up.clone();
+		up2.setFirstName("fdsfsd");
+		if(!up2.getFirstName().equals(up.getFirstName()))
+		{
+			System.out.println("It works!");
+		}
+		else
+		{
+			System.out.println("It doesnt work.");
+		}
 	}
 }

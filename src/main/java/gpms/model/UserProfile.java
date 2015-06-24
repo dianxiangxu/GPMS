@@ -44,9 +44,6 @@ public class UserProfile extends BaseEntity {
 	@Property("home number")
 	private List<String> homeNumbers = new ArrayList<String>();
 
-	@Property("additional numbers")
-	private List<String> additionalNumbers = new ArrayList<String>();
-
 	@Embedded("address")
 	private Address address = new Address();
 
@@ -466,5 +463,38 @@ public class UserProfile extends BaseEntity {
 				&& this.details.equals(up.details);
 		// && this.phoneNumbers.equals(up.phoneNumbers)
 
+	}
+	
+	public UserProfile clone()
+	{
+		UserProfile copy = new UserProfile(this.firstName, this.middleName, this.lastName);
+		for(PositionDetails pd : this.details)
+		{
+			copy.addDetails(pd.clone());
+		}
+		for(String phone : this.officeNumbers)
+		{
+			copy.addOfficeNumber(phone);
+		}
+		for(String phone : this.mobileNumbers)
+		{
+			copy.addMobileNumber(phone);
+		}
+		for(String phone : this.homeNumbers)
+		{
+			copy.addHomeNumber(phone);
+		}
+		for(String email : this.workEmails)
+		{
+			copy.addWorkEmail(email);
+		}
+		for(String email : this.personalEmails)
+		{
+			copy.addPersonalEmail(email);
+		}
+		copy.setUserId(this.userAccount.clone());
+		copy.setAddress(this.address.clone());
+		
+		return copy;
 	}
 }

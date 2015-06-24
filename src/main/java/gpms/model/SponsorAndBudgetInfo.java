@@ -86,4 +86,20 @@ public class SponsorAndBudgetInfo {
 				&& this.grantingAgency.equals(sabi.grantingAgency)
 				&& this.totalCosts == sabi.totalCosts;
 	}
+	
+	public SponsorAndBudgetInfo clone()
+	{
+		SponsorAndBudgetInfo copy = new SponsorAndBudgetInfo();
+		
+		for(String agency : this.grantingAgency)
+		{
+			copy.addGrantingAgency(agency);
+		}
+		copy.setDirectCosts(directCosts);
+		copy.setFACosts(FACosts);
+		copy.setTotalCosts(totalCosts);
+		copy.setFARate(FARate);
+		
+		return copy;
+	}
 }

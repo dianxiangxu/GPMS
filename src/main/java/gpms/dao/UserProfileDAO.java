@@ -10,7 +10,6 @@ import gpms.DAL.MongoDBConnector;
 import gpms.model.Address;
 import gpms.model.AuditLog;
 import gpms.model.PositionDetails;
-import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -23,9 +22,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.UpdateOperations;
 
-import com.mongodb.DBRef;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -240,17 +237,17 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	}
 
 
-	/**
-	 * Returns a list of the details lists
-	 * @param profile
-	 * @return
-	 */
-	public List getDetailsList(UserProfile profile)
-	{
-		List<PositionDetails> list = profile.getDetailsList();
-
-		return list;
-	}
+//	/**
+//	 * Returns a list of the details lists
+//	 * @param profile
+//	 * @return
+//	 */
+//	public List getDetailsList(UserProfile profile)
+//	{
+//		List<PositionDetails> list = profile.getDetailsList();
+//
+//		return list;
+//	}
 
 	/**
 	 * Delete a specific "details" entry from a user profile
@@ -354,11 +351,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 	public void setAddress(UserProfile author, UserProfile target, Address address)
 	{
-		Datastore ds = getDatastore();
-		audit = new AuditLog(profile, "Edited address", new Date());
-		profile.addEntryToAuditLog(audit);
-		profile.setAddress(address);
-		ds.save(profile);
+		if(!target.getAddress().equals(address))
+		{
+			Datastore ds = getDatastore();
+			audit = new AuditLog(author, "Edited address", new Date());
+			target.addEntryToAuditLog(audit);
+			target.setAddress(address);
+			ds.save(target);
+		}
 	}
 
 	public void addWorkEmail(UserProfile author, UserProfile target, String email)
@@ -366,10 +366,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(!target.getWorkEmails().contains(email))
 		{
-		audit = new AuditLog(author, "Added work email " + email, new Date());
-		target.addEntryToAuditLog(audit);
-		target.addWorkEmail(email);
-		ds.save(target);
+			audit = new AuditLog(author, "Added work email " + email, new Date());
+			target.addEntryToAuditLog(audit);
+			target.addWorkEmail(email);
+			ds.save(target);
 		}
 	}
 
@@ -378,10 +378,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		if(target.getWorkEmails().contains(email))
 		{
-		audit = new AuditLog(author, "Deleted work email " + email, new Date());
-		target.addEntryToAuditLog(audit);
-		target.deleteWorkEmail(email);
-		ds.save(target);
+			audit = new AuditLog(author, "Deleted work email " + email, new Date());
+			target.addEntryToAuditLog(audit);
+			target.deleteWorkEmail(email);
+			ds.save(target);
 		}
 	}
 

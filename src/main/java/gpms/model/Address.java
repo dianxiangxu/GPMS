@@ -1,6 +1,5 @@
 package gpms.model;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
@@ -72,5 +71,29 @@ public class Address {
 
 	public void setStreet(String street) {
 		this.street = street;
+	}
+	
+	public String toString()
+	{
+		String output = "";
+		output += "country : " + country + "\n";
+		output += "state   : " + state   + "\n";
+		output += "zipcode : " + zipcode + "\n";
+		output += "city    : " + city    + "\n";
+		output += "street  : " + street  + "\n";
+		
+		return output;
+	}
+	
+	public boolean equals(Address address)
+	{
+		return this.country.equals(address.country) && this.state.equals(address.state)
+				&& this.zipcode.equals(address.zipcode) && this.city.equals(address.city)
+				&& this.street.equals(address.street);
+	}
+	
+	public Address clone()
+	{
+		return new Address(this.country, this.state, this.zipcode, this.city, this.street);
 	}
 }

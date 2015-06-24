@@ -64,6 +64,11 @@ public class UserAccount extends BaseEntity
 				&& this.password.equals(ua.password);
 	}
 	
+	public UserAccount clone()
+	{
+		return new UserAccount(this.userName, this.password);
+	}
+	
 //	public void copy(UserAccount ua)
 //	{
 //		this.userName = ua.userName.;

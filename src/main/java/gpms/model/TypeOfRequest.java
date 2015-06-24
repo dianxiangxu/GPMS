@@ -66,4 +66,16 @@ public class TypeOfRequest {
 				&& this.isPreProposal == tor.isPreProposal
 				&& this.isSupplement == tor.isSupplement;
 	}
+	
+	public TypeOfRequest clone()
+	{
+		TypeOfRequest copy = new TypeOfRequest();
+		
+		copy.setContinuation(this.isContinuation);
+		copy.setNewProposal(this.isNewProposal);
+		copy.setPreProposal(this.isPreProposal);
+		copy.setSupplement(this.isSupplement);
+		
+		return copy;
+	}
 }
