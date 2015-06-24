@@ -363,7 +363,11 @@ public class UserProfile extends BaseEntity {
 	 */
 	private void deleteNumber(List<String> numberString, String deleteNumber) {
 		int index = numberString.indexOf(deleteNumber);
+		System.out.println("Inside of delete number method: ");
+		System.out.println("The number to delete is " + deleteNumber + " from list ");
+		System.out.println("List before operation: " + numberString.toString());
 		numberString.remove(index);
+		System.out.println("List after operation: " + numberString.toString());
 	}
 
 	/**

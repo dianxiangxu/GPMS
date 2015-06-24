@@ -5,40 +5,48 @@ import org.mongodb.morphia.annotations.Property;
 
 @Embedded
 public class Address {
-	@Property("country")
-	private String country;
+	@Property("street")
+	private String street;
+	@Property("city")
+	private String city;
 	@Property("state")
 	private String state;
 	@Property("zipcode")
 	private String zipcode;
-	@Property("city")
-	private String city;
-	@Property("street")
-	private String street;
+	@Property("country")
+	private String country;
 
 	public Address() {
-		country = "";
+		street = "";
+		city = "";
 		state = "";
 		zipcode = "";
-		city = "";
-		street = "";
+		country = "";
 	}
 
-	public Address(String setCountry, String setState, String setZipcode,
-			String setCity, String setStreet) {
-		country = setCountry;
+	public Address(String setStreet, String setCity, String setState,
+			String setZipcode, String setCountry) {
+		street = setStreet;
+		city = setCity;
 		state = setState;
 		zipcode = setZipcode;
-		city = setCity;
-		street = setStreet;
+		country = setCountry;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getState() {
@@ -57,43 +65,34 @@ public class Address {
 		this.zipcode = zipcode;
 	}
 
-	public String getCity() {
-		return city;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	
-	public String toString()
-	{
+	public String toString() {
 		String output = "";
-		output += "country : " + country + "\n";
-		output += "state   : " + state   + "\n";
+		output += "street  : " + street + "\n";
+		output += "city    : " + city + "\n";
+		output += "state   : " + state + "\n";
 		output += "zipcode : " + zipcode + "\n";
-		output += "city    : " + city    + "\n";
-		output += "street  : " + street  + "\n";
-		
+		output += "country : " + country + "\n";
 		return output;
 	}
-	
-	public boolean equals(Address address)
-	{
-		return this.country.equals(address.country) && this.state.equals(address.state)
-				&& this.zipcode.equals(address.zipcode) && this.city.equals(address.city)
-				&& this.street.equals(address.street);
+
+	public boolean equals(Address address) {
+		return this.country.equals(address.street)
+				&& this.state.equals(address.city)
+				&& this.zipcode.equals(address.state)
+				&& this.city.equals(address.zipcode)
+				&& this.street.equals(address.country);
 	}
-	
-	public Address clone()
-	{
-		return new Address(this.country, this.state, this.zipcode, this.city, this.street);
+
+	public Address clone() {
+		return new Address(this.street, this.city, this.state, this.zipcode,
+				this.country);
 	}
 }
