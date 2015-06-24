@@ -87,13 +87,41 @@ public class InvestigatorInfo {
 	}
 
 	public boolean equals(InvestigatorInfo invInf) {
-		return this.pi.equals(invInf.pi) && this.co_pi.equals(invInf.co_pi)
-				&& this.seniorPersonnel.equals(invInf.seniorPersonnel);
+
+		boolean coPiEqual = false;
+		if(this.co_pi.size() == invInf.co_pi.size())
+		{
+			coPiEqual = true;
+			for(int i = 0; i < this.co_pi.size(); i++)
+			{
+				if(!this.co_pi.get(i).equals(invInf.co_pi.get(i)))
+				{
+					coPiEqual = false;
+					break;
+				}
+			}
+		}
+		
+		boolean seniorPersonnelEqual = false;
+		if(this.seniorPersonnel.size() == invInf.seniorPersonnel.size())
+		{
+			seniorPersonnelEqual = true;
+			for(int i = 0; i < this.seniorPersonnel.size(); i++)
+			{
+				if(!this.seniorPersonnel.get(i).equals(invInf.seniorPersonnel.get(i)))
+				{
+					seniorPersonnelEqual = false;
+					break;
+				}
+			}
+		}
+		
+		return this.pi.equals(invInf.getPi()) && coPiEqual && seniorPersonnelEqual;
 	}
 	
 	public InvestigatorInfo clone()
 	{
-		InvestigatorInfo copy  = new InvestigatorInfo();
+		InvestigatorInfo copy = new InvestigatorInfo();
 		copy.setPi(this.pi.clone());
 		
 		for(UserProfile coPi : this.co_pi)
