@@ -494,6 +494,7 @@ public class UserProfile extends BaseEntity {
 		}
 		copy.setUserId(this.userAccount.clone());
 		copy.setAddress(this.address.clone());
+		copy.setId(this.getId());
 		
 		return copy;
 	}
