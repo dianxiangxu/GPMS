@@ -1,10 +1,5 @@
 package gpms.dao.test;
 
-/**
- * @author Thomas Volz
- */
-
-import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -13,7 +8,6 @@ import gpms.model.Address;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
-import gpms.model.User;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -21,31 +15,29 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Scanner;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
-
-
-public class CRUDTestForUserProfileAndAccount
+public class CreateTwoUsersTest 
 {
 
-	MongoClient mongoClient;
-	Morphia morphia;
-	UserAccountDAO newUserAccountDAO;
-	UserProfileDAO newUserProfileDAO;
-	String dbName = "GPMS";
-	String username, password;
-	UserAccount activeLog, newUserAccount2;
-	Address newAddress;
-	PositionDetails newDetails;
-	UserProfile newUserProfile2;
+	public static void main(String args[]) throws UnknownHostException
+	{
 
-	@Before
-	public void initiate() throws UnknownHostException, MongoException {
+		MongoClient mongoClient;
+		Morphia morphia;
+		UserAccountDAO newUserAccountDAO;
+		UserProfileDAO newUserProfileDAO;
+		String dbName = "GPMS";
+		String username, password;
+		UserAccount activeLog, newUserAccount2;
+		Address newAddress;
+		PositionDetails newDetails;
+		UserProfile newUserProfile2;
+		Scanner keyb;
+
 		mongoClient = MongoDBConnector.getMongo();
 		morphia = new Morphia();
 		morphia.map(UserProfile.class).map(UserAccount.class);
@@ -53,21 +45,16 @@ public class CRUDTestForUserProfileAndAccount
 		newUserAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
 		newUserProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
 
-	}
-
-
-	@Test
-	public void CreateNewUser() throws UnknownHostException 
-	{
 		//We're going to change this one up a bit.
 		//We'll be testing out our new auditing methods.
 		//So let's take this from the top.
 		//Step One, we're going to log in and make a user.
 
-		Scanner keyb = new Scanner(System.in);
+
 
 		System.out.println("Welcome to the Official System of Systeming:\nPlease type in a user name:");
 		activeLog = new UserAccount();
+		keyb = new Scanner(System.in);
 		username = keyb.nextLine();
 		System.out.println("Please type in a password");
 		password = keyb.nextLine();
@@ -184,21 +171,21 @@ public class CRUDTestForUserProfileAndAccount
 
 		ProposalDAO newProposalDAO = new ProposalDAO(mongoClient, morphia, dbName);
 		newProposalDAO.save(proposal1);
-		
+
 		//////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////
 		/////////  Second User Creation Below...  ////////////////////////
 		//////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////
-		
-		
-		String firstName = "Doctor";
-		String middleName = "Rodney";
+
+
+		String firstName = "Rodney";
+		String middleName = "Meredith";
 		String lastName = "McKay";
 
-		
+
 		String userName = "drodmack";
-		
+
 		String passWord = "chevron";
 
 		//First we create the user account object.
@@ -208,7 +195,7 @@ public class CRUDTestForUserProfileAndAccount
 		newUserAccount2.setUserName(userName);
 		newUserAccount2.setPassword(passWord);
 
-		
+
 		//He can choose to fill in specific details now or at a later date.
 		//For now, it may be easiest to use our basic constructor.
 
@@ -221,9 +208,9 @@ public class CRUDTestForUserProfileAndAccount
 		//Let's add the reference to the UserAccount
 		newUserProfile2.setUserId(newUserAccount2);
 
-		
+
 		//Let's start with phone numbers.
-		
+
 		workPhone = "703-485-0352";
 		homePhone = "703-492-2212";
 		cellPhone = "703-866-0500";
@@ -233,7 +220,7 @@ public class CRUDTestForUserProfileAndAccount
 		newUserProfile2.addHomeNumber(homePhone);
 		newUserProfile2.addMobileNumber(cellPhone);
 
-		
+
 		email = "greatestguy@stargatebase.gov";
 		newUserProfile2.addPersonalEmail(email);
 		//Let's add a work one
@@ -241,7 +228,7 @@ public class CRUDTestForUserProfileAndAccount
 		newUserProfile2.addWorkEmail(email);
 
 		//We need his living address too.
-		
+
 		street = "466 West Floridian Road";
 		city = "Langley";
 		state = "Virginia";
@@ -259,7 +246,7 @@ public class CRUDTestForUserProfileAndAccount
 
 		//Now that we know his personal info we need some work info from him
 		//Currently our PositionDetails class supports Strings only
-		
+
 		//Enum may be supported in the future.
 		//But for now let's set these deets
 
@@ -298,71 +285,30 @@ public class CRUDTestForUserProfileAndAccount
 		//UserAccount must be saved first as UserProfile has an @reference to it.
 		//References cannot be made to an object that does not exist.
 		newUserProfileDAO.save(newUserProfile2);
-		
+
 		InvestigatorInfo secondInv = new InvestigatorInfo();
 		Proposal proposal2 = new Proposal();
-		
+
 		secondInv.setPi(newUserProfile2);
 		secondInv.addCo_pi(newUserProfile);
-		
+
 		proposal2.setProposalNo("10002");
 		proposal2.setInvestigatorInfo(secondInv);
-		
+
 		ProposalDAO nextProposalDAO = new ProposalDAO(mongoClient, morphia, dbName);
+
 		nextProposalDAO.save(proposal2);
 
 		
-	}
-	
-	@Test
-	public void AuditTestSameValuesNoAuditsExpected() throws UnknownHostException
-	{
-		//Choose an active log in:
-		List<UserAccount> userAccountList = newUserAccountDAO.findAll();
-		for(int m = 0; m < userAccountList.size(); m++)
-		{
-			System.out.println(m + " " + userAccountList.get(m).getUserName());
-		}
-		Scanner keyb = new Scanner(System.in);
-		System.out.println("Select a User (I recommend user zed: ");
-		int accountIndex = keyb.nextInt();
-		activeLog = userAccountList.get(accountIndex);
-		
-		//Now let's test the auditing.
-		System.out.println("Logged in as : " + activeLog.getUserName());
-		//We're going to search for a user profile name and test the changes.
-		
-		newUserProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
-		
-		//Let's find Rodney and test changing him
-		List<UserProfile> list = newUserProfileDAO.findByFirstNameIgnoreCase("Rodney");
-		
-		System.out.println("A list of Rodneys has been found: \n");
 
-		for(int n = 0; n < list.size(); n++)
-		{
-			System.out.println(n + " " + list.get(n));
-		}
-		
-		System.out.println("Choose a user to edit.");
-		
-		int index = keyb.nextInt();
-		
-		UserProfile temp = list.get(index);
-		System.out.println("You have selected " + temp.getFirstName() + " " + temp.getLastName());
-		
-		//Let's change his name to the same stuff then check our DB to make sure that no audits were added.
-		
-		newUserProfileDAO.setFirstName(newUserProfileDAO.findByUserAccount(activeLog), temp, "Rodney");
-		
-		//Go and look.
-		
-		
-		
-		
-		
-		
+
+
+
+
 	}
 
 
 }
+
+
+
