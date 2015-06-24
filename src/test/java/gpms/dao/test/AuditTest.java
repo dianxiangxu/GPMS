@@ -100,7 +100,7 @@ public class AuditTest
 		lastname = temp.getLastName();
 
 		newUserProfileDAO.setFirstName(loggedIn, temp, firstname);
-		newUserProfileDAO.setFirstName(loggedIn, temp, "Changed");
+		newUserProfileDAO.setFirstName(loggedIn, temp, "Pedro-Julio");
 		newUserProfileDAO.setMiddleName(loggedIn, temp, middlename);
 		newUserProfileDAO.setMiddleName(loggedIn, temp, "The");
 		newUserProfileDAO.setLastName(loggedIn, temp, lastname);
@@ -114,9 +114,14 @@ public class AuditTest
 		String number = homeList.get(0);
 		System.out.println("The home number is: " + number);
 		
+		
 		newUserProfileDAO.addHomeNumber(loggedIn, temp, number);
+		newUserProfileDAO.addHomeNumber(loggedIn, temp, "704-467-2124");
 		newUserProfileDAO.addHomeNumber(loggedIn, temp, "208-208-2080");
 		newUserProfileDAO.deleteHomeNumber(loggedIn, temp, number);
+		
+//		List<String> officeList = temp.getOfficeNumbers();
+		
 		
 		
 		
