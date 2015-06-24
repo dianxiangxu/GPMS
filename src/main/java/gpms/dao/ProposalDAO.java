@@ -111,7 +111,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 
 	public void setEditSponsorAndBudgetInfo(Proposal proposal, SponsorAndBudgetInfo sponAndBudgInf, UserProfile author)
 	{
-		if(proposal.getSponsorAndBudgetInfo().equals(sponAndBudgInf))
+		if(!proposal.getSponsorAndBudgetInfo().equals(sponAndBudgInf))
 		{
 			Datastore ds = getDatastore();
 			proposal.setSponsorAndBudgetInfo(sponAndBudgInf);

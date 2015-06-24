@@ -1,5 +1,6 @@
 package gpms.dao.test;
 
+import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -166,6 +167,10 @@ public class ProposalDAOTest {
 		//Investigator Information set\edit
 		System.out.println("Investigator Information is : ");
 		InvestigatorInfo invInf = prop.getInvestigatorInfo().clone();
+		
+		assertTrue(prop.getInvestigatorInfo().equals(invInf));
+		assertTrue(prop.getInvestigatorInfo() != invInf);
+		
 		System.out.println(invInf.toString());
 		
 		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
@@ -288,6 +293,9 @@ public class ProposalDAOTest {
 		//ProjectInformation sProjectInfo projInf = prop.getProjectInfo().clone();et\edit
 		ProjectInfo projInf = prop.getProjectInfo().clone();
 		
+		assertTrue(prop.getProjectInfo().equals(projInf));
+		assertTrue(prop.getProjectInfo() != projInf);
+		
 		System.out.println("Project Information is : ");
 		System.out.println(projInf.toString());
 		System.out.println("Do you wish to edit project information ?(Y or N)");
@@ -397,6 +405,10 @@ public class ProposalDAOTest {
 		//sponsor and budget information
 		
 		SponsorAndBudgetInfo sponAndBudg = prop.getSponsorAndBudgetInfo().clone();
+		
+		assertTrue(prop.getSponsorAndBudgetInfo().equals(sponAndBudg));
+		assertTrue(prop.getSponsorAndBudgetInfo() != sponAndBudg);
+		
 		System.out.println("Sponsor and budget info is : ");
 		System.out.println(sponAndBudg.toString());
 		System.out.println("Do you wish to edit project information ?(Y or N)");

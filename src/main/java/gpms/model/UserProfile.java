@@ -57,7 +57,7 @@ public class UserProfile extends BaseEntity {
 	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-	@Reference(value = "user id", lazy = true)
+	@Reference(value = "user id"/*, lazy = true*/)
 	private UserAccount userAccount = new UserAccount();
 
 	/**
@@ -460,13 +460,12 @@ public class UserProfile extends BaseEntity {
 	}
 
 	public boolean equals(UserProfile up) {
-		return this.userAccount.equals(up.getUserAccount())
-				&& this.firstName.equals(up.firstName)
-				&& this.middleName.equals(up.middleName)
-				&& this.lastName.equals(up.lastName)
-				&& this.details.equals(up.details);
-		// && this.phoneNumbers.equals(up.phoneNumbers)
-
+		return this.id.equals(up.id) && this.firstName.equals(up.firstName) 
+				&& this.middleName.equals(up.middleName) && this.lastName.equals(up.lastName)
+				&& this.details.equals(up.details) && this.officeNumbers.equals(up.officeNumbers)
+				&& this.mobileNumbers.equals(up.mobileNumbers) && this.homeNumbers.equals(up.homeNumbers)
+				&& this.address.equals(up.address) && this.workEmails.equals(up.workEmails)
+				&& this.personalEmails.equals(up.personalEmails) && this.userAccount.equals(up.userAccount);
 	}
 	
 	public UserProfile clone()
@@ -499,6 +498,12 @@ public class UserProfile extends BaseEntity {
 		copy.setUserId(this.userAccount.clone());
 		copy.setAddress(this.address.clone());
 		copy.setId(this.getId());
+		copy.setVersion(this.getVersion());
+		copy.setIsDeleted(this.getIsDeleted());
+		for(AuditLog entry : this.getAuditLog())
+		{
+			copy.addEntryToAuditLog(entry);
+		}
 		
 		return copy;
 	}

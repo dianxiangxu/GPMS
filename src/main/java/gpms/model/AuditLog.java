@@ -45,4 +45,9 @@ public class AuditLog
 	{
 		return who;
 	}
+	
+	public AuditLog clone()
+	{
+		return new AuditLog(this.who, this.action, this.when);
+	}
 }

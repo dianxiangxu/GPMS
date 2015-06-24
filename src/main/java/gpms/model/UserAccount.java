@@ -60,7 +60,7 @@ public class UserAccount extends BaseEntity
 	}
 
 	public boolean equals(UserAccount ua) {
-		return this.userName.equals(ua.userName)
+		return this.id.equals(ua.id) && this.userName.equals(ua.userName)
 				&& this.password.equals(ua.password);
 	}
 	
@@ -68,11 +68,12 @@ public class UserAccount extends BaseEntity
 	{
 		UserAccount copy = new UserAccount(this.userName, this.password);
 		copy.setId(this.getId());
+		copy.setVersion(this.getVersion());
+		copy.setIsDeleted(this.getIsDeleted());
+		for(AuditLog entry : this.getAuditLog())
+		{
+			copy.addEntryToAuditLog(entry);
+		}
 		return copy;
 	}
-	
-//	public void copy(UserAccount ua)
-//	{
-//		this.userName = ua.userName.;
-//	}
 }
