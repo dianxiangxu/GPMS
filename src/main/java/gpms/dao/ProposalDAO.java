@@ -121,6 +121,18 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		}
 	}
 	
+	public void setEditProposalStatus(Proposal proposal, Status status, UserProfile author)
+	{
+		if(!proposal.getProposalStatus().equals(status))
+		{
+			Datastore ds = getDatastore();
+			proposal.setProposalStatus(status);
+			AuditLog entry = new AuditLog(author, "Edited Proposal Status", new Date());
+			proposal.addEntryToAuditLog(entry);
+			ds.save(proposal);
+		}
+	}
+	
 	public void deleteProposal(Proposal proposal, UserProfile author)
 	{
 		Datastore ds = getDatastore();
