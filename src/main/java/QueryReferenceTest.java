@@ -63,5 +63,7 @@ public class QueryReferenceTest
 		{
 			System.out.println("It doesnt work.");
 		}
+		
+		scan.close();
 	}
 }

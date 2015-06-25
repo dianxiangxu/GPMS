@@ -123,12 +123,8 @@ public class ProposalDAOTest {
 					{
 						System.out.println("Proposal numnber : " + count);
 						System.out.println(p.toString());
-						count++;
-					}
-					else
-					{
-						pList.remove(count);
-					}
+					}	
+					count++;
 				}
 				
 				do
