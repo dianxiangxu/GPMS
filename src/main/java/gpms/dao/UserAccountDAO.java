@@ -58,6 +58,12 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		return ds.createQuery(UserAccount.class).field("id").equal(id).get();
 	}
 
+	/**
+	 * This method will return a user account object that matches the username searched for
+	 * 
+	 * @param userName the user account name to search for 
+	 * @return the username if it exists or null if it does not
+	 */
 	public UserAccount findByUserName(String userName) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).field("username")
