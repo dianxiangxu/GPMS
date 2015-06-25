@@ -308,7 +308,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		{
 		audit = new AuditLog(author, "Added home number " + number, new Date());
 		target.addEntryToAuditLog(audit);
-		target.addOfficeNumber(number);
+		target.addHomeNumber(number);
 		ds.save(target);
 		}
 	}
