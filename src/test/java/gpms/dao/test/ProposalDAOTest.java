@@ -14,6 +14,7 @@ import gpms.model.ProjectPeriod;
 import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
+import gpms.model.Status;
 import gpms.model.TypeOfRequest;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
@@ -115,6 +116,7 @@ public class ProposalDAOTest {
 		{
 			do
 			{
+				count = 0;
 				for(Proposal p : pList)
 				{
 					if(!p.getIsDeleted())
@@ -125,7 +127,7 @@ public class ProposalDAOTest {
 					}
 					else
 					{
-						pList.remove(p);
+						pList.remove(count);
 					}
 				}
 				
@@ -162,6 +164,35 @@ public class ProposalDAOTest {
 			input = scan.next();
 			prop.setProposalNo(input);
 			prop.setDateReceived(new Date());
+		}
+		
+		//Proposal Status
+		System.out.println("Proposal Status is : ");
+		System.out.println(prop.getProposalStatus().toString());
+		
+		System.out.println("Do you wish to change the status ?(Y or N) ");
+		do
+		{
+			System.out.println("Please enter choice : ");
+			input = scan.next();
+			input.toUpperCase();
+		}while(input.charAt(0) != 'Y' && input.charAt(0) != 'N');
+		
+		count = 0;
+		if(input.charAt(0) == 'Y')
+		{
+			System.out.println("Please choose one of the following, ");
+			for(Status stat : Status.values())
+			{
+				System.out.println(count++ + " " + stat.toString());
+			}
+			System.out.println("Please choose a Status : ");
+			do
+			{
+				System.out.println("Please enter your choice :");
+				index =scan.nextInt();
+			}while(index < 0 || index > Status.values().length);
+			pdao.setEditProposalStatus(prop, Status.values()[index], piProfile);
 		}
 		
 		//Investigator Information set\edit
