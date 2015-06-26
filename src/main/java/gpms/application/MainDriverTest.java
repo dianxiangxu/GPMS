@@ -1,8 +1,9 @@
-package gpms.gui;
+package gpms.application;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.Address;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -17,19 +18,22 @@ import com.mongodb.MongoClient;
 public class MainDriverTest 
 {
 
-	static String dbName = "GPMS";
-	static UserAccountDAO activeLog = null;
-	static UserAccount loggedInAs = null;
-	static UserProfile loggedInProfile = null;
-	static UserProfileDAO newProfile;
-	static MongoClient mongoClient = MongoDBConnector.getMongo();
-	static Morphia morphia = new Morphia();
-
 	public static void main(String argsp[])
 	{
+		UserAccountDAO activeLog = null;
+		UserAccount loggedInAs = null;
+		UserProfile loggedInProfile = null;
+		UserProfileDAO newProfile;
+		MongoClient mongoClient = MongoDBConnector.getMongo();
+		Morphia morphia = new Morphia();
+		String dbName = "GPMS";
+		boolean endProgram = false;
+		RestMode restMode = null;
 		Scanner keyb = new Scanner(System.in);
 		int loginType = 0;
-		boolean endRun = false;
+		NewUserRegistration newUserRegistration;
+		
+		
 		String username = null;
 		String password = null;
 
@@ -83,6 +87,7 @@ public class MainDriverTest
 			System.out.println("Please type in your user name to continue:");
 
 			activeLog = new UserAccountDAO(mongoClient, morphia, dbName);
+			newProfile = new UserProfileDAO(mongoClient, morphia, dbName);
 			boolean userFound = false;
 
 			while(!userFound && loginType == 1)
@@ -99,6 +104,7 @@ public class MainDriverTest
 				{
 					userFound = true;
 					loggedInAs = activeLog.findByUserName(username);
+					loggedInProfile = newProfile.findByUserAccount(loggedInAs);
 				}
 				else
 				{
@@ -111,7 +117,7 @@ public class MainDriverTest
 
 			if(loginType == 2 && (!userFound))
 			{
-				newUserRegistration();
+				System.out.println("Skpping a step");
 			}
 			else
 			{	
@@ -148,19 +154,26 @@ public class MainDriverTest
 
 				System.out.println("Welcome " + loggedInProfile.getFirstName() + " " + loggedInProfile.getLastName());
 				System.out.println("What would you like to do today?");
-				keyb.close();
-				restMode();
+				restMode = new RestMode(loggedInProfile);
+				
 			}
 
 		}
 
 		if(loginType == 2)
 		{
-			newUserRegistration();
+			newUserRegistration = new NewUserRegistration();
+			restMode = new RestMode(newUserRegistration.getUserProfile());
 		}
 
+		while(!endProgram)
+		{
+			restMode.runIdleOperation();
+			endProgram = restMode.stopRunning();
+		}
+		
 		//Close Input
-
+		keyb.close();
 	}//End Main Class
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,117 +184,7 @@ public class MainDriverTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Idle Operation for the Database
-	 */
-	private static void restMode()
-	{
-		//Defines how the program operates while waiting for input
-		System.out.println("If you would like to quit, please type QUIT");
-		System.out.println("Otherwise, please select an operation");
-		Scanner keyb = new Scanner(System.in);
-		String choice = keyb.next();
-		operation(choice);
-	}
-
-	/**
-	 * Method to run to register into the system as a new user 
-	 * and then continue to operate.
-	 */
-	private static void newUserRegistration()
-	{
-		activeLog = new UserAccountDAO(mongoClient, morphia, dbName);
-		System.out.println("Please Register a user name first:");
-		String username = null; 
-		String password = null; 
-		String verifyPassword;
-		boolean userFound = true;
-		boolean cleanName = false;
-		Scanner keyb = new Scanner(System.in);
-		System.out.println("Type a user name you would like assigned to you:");
-		while(!cleanName && userFound)
-		{
-			username = keyb.nextLine();
-			if(username.contains(" ") || (containsIllegals(username)))
-			{
-				System.out.println("Don't make dumb user names.  Stick to alphanumerics");
-			}
-			else
-			{
-				if(activeLog.findByUserName(username) == null)
-				{
-					userFound = false;
-					cleanName = true;
-				}
-				else
-				{
-					System.out.println("Username already exists in system, please try another name.");
-				}	
-			}
-
-		}
-		System.out.println("Username :' " + username +" 'selected");
-		boolean passVerify = false;
-		while(!passVerify)
-		{
-			System.out.println("Please type in a password: ");
-			password = keyb.nextLine();
-			System.out.println("Your password is: " + password);
-			System.out.println("Please type your password a second time to verify:");
-			verifyPassword = keyb.nextLine();
-			if(password.equals(verifyPassword) && !password.contains(" "))
-			{
-				passVerify = true;
-			}
-			else
-			{
-				System.out.println("Look man, don't make weird passwords, try again.");
-				System.out.println("Just don't use spaces and we'll be ok.");
-			}
-		}
-		
-		System.out.println("Verification successful, creating user account");
-		
-		UserAccount newUserAccount = new UserAccount();
-		newUserAccount.setUserName(username);
-		newUserAccount.setPassword(password);
-
-		System.out.println("Now we need to create user information for you.");
-		UserProfile newUserProfile = new UserProfile();
-		System.out.println("I'm only giving you one try so get this right.");
-		System.out.println("You may just press enter if you wish to leave the fields blank");
-		System.out.println("Please enter your first name:");
-		String firstname = keyb.nextLine();
-		System.out.println("Please enter your middle name:");
-		String middlename = keyb.nextLine();
-		System.out.println("Please enter your last name:");
-		String lastname = keyb.nextLine();
-		
-		newUserProfile.setFirstName(firstname);
-		newUserProfile.setLastName(lastname);
-		newUserProfile.setMiddleName(middlename);
-		
-		System.out.println("Please enter your address:");
-		System.out.println("City: ");
-		String city = keyb.nextLine();
-		System.out.println("Street Address:");
-		String street = keyb.nextLine();
-		System.out.println("State:");
-		String state = keyb.nextLine();
-		System.out.println("Zipcode:");
-		String zipcode = keyb.nextLine();
-		System.out.println("Country:");
-		String country = keyb.nextLine();
-		
-	}
-
-
-	private static void operation(String calledOp)
-	{
-		//Method to choose actions to perform
-		System.out.println("Please select an operation to perform:");
-	}
-
+	
 	/**
 	 * Totally stole this from a stack overflow post
 	 * This will check for "illegal characters" that we list
@@ -296,6 +199,5 @@ public class MainDriverTest
 	}
 
 }
-
 
 
