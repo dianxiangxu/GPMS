@@ -92,6 +92,7 @@ public class ProjectType {
 		return isOtherSponsoredActivity;
 	}
 
+	@Override
 	public String toString() {
 		String outPut = "";
 		outPut += "Research-Basic           : " + isResearchBasic + "\n";
@@ -110,6 +111,7 @@ public class ProjectType {
 				&& this.isOtherSponsoredActivity == pt.isOtherSponsoredActivity;
 	}
 	
+	@Override
 	public ProjectType clone()
 	{
 		ProjectType copy = new ProjectType();

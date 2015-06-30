@@ -3,7 +3,6 @@ package gpms.application;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.Address;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 

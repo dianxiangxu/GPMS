@@ -460,14 +460,15 @@ public class UserProfile extends BaseEntity {
 	}
 
 	public boolean equals(UserProfile up) {
-		return this.id.equals(up.id) && this.firstName.equals(up.firstName) 
-				&& this.middleName.equals(up.middleName) && this.lastName.equals(up.lastName)
-				&& this.details.equals(up.details) && this.officeNumbers.equals(up.officeNumbers)
-				&& this.mobileNumbers.equals(up.mobileNumbers) && this.homeNumbers.equals(up.homeNumbers)
-				&& this.address.equals(up.address) && this.workEmails.equals(up.workEmails)
-				&& this.personalEmails.equals(up.personalEmails) && this.userAccount.equals(up.userAccount);
+		return this.firstName.equals(up.firstName) && this.middleName.equals(up.middleName)
+				&& this.lastName.equals(up.lastName) && this.details.equals(up.details) 
+				&& this.officeNumbers.equals(up.officeNumbers) && this.mobileNumbers.equals(up.mobileNumbers) 
+				&& this.homeNumbers.equals(up.homeNumbers) && this.address.equals(up.address) 
+				&& this.workEmails.equals(up.workEmails) && this.personalEmails.equals(up.personalEmails) 
+				&& this.userAccount.equals(up.userAccount);
 	}
 	
+	@Override
 	public UserProfile clone()
 	{
 		UserProfile copy = new UserProfile(this.firstName, this.middleName, this.lastName);

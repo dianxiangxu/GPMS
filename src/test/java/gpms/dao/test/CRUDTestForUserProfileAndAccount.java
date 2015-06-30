@@ -4,7 +4,6 @@ package gpms.dao.test;
  * @author Thomas Volz
  */
 
-import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -13,7 +12,6 @@ import gpms.model.Address;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
-import gpms.model.User;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 

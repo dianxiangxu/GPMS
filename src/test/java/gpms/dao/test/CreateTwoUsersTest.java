@@ -12,13 +12,11 @@ import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
-import java.util.List;
 import java.util.Scanner;
 
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
 
 public class CreateTwoUsersTest 
 {

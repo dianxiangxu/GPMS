@@ -65,6 +65,7 @@ public class InvestigatorInfo {
 		}
 	}
 
+	@Override
 	public String toString() {
 		int count = 0;
 		String outPut = "";
@@ -119,6 +120,7 @@ public class InvestigatorInfo {
 		return this.pi.equals(invInf.getPi()) && coPiEqual && seniorPersonnelEqual;
 	}
 	
+	@Override
 	public InvestigatorInfo clone()
 	{
 		InvestigatorInfo copy = new InvestigatorInfo();

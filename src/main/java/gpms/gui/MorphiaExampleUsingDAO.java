@@ -8,7 +8,6 @@ import gpms.model.User;
 
 import org.mongodb.morphia.Morphia;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 import java.util.List;

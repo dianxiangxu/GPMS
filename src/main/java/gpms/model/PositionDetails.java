@@ -64,6 +64,7 @@ public class PositionDetails {
 		this.college = college;
 	}
 
+	@Override
 	public String toString() {
 		String posDet = "Position Title : " + positionTitle + "\n";
 		posDet += "PositionType   : " + positionType + "\n";
@@ -79,6 +80,7 @@ public class PositionDetails {
 				&& this.department.equals(pd.department);
 	}
 	
+	@Override
 	public PositionDetails clone()
 	{
 		return new PositionDetails(this.positionType, this.positionTitle, this.department, this.college);

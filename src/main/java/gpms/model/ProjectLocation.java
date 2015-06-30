@@ -26,6 +26,7 @@ public class ProjectLocation {
 		this.onCampus = onCampus;
 	}
 
+	@Override
 	public String toString() {
 		String outPut = "";
 		outPut += "Off-Campus : " + offCampus + "\n";
@@ -37,6 +38,7 @@ public class ProjectLocation {
 		return this.offCampus == pl.offCampus && this.onCampus == pl.onCampus;
 	}
 	
+	@Override
 	public ProjectLocation clone()
 	{
 		ProjectLocation copy = new ProjectLocation();

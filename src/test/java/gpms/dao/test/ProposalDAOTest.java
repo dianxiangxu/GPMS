@@ -28,9 +28,6 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 import org.mongodb.morphia.Morphia;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 

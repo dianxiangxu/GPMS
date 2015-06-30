@@ -2,11 +2,8 @@ package gpms.dao.test;
 
 import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
-import gpms.dao.TestClassDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.Address;
-import gpms.model.TestClass;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -17,11 +14,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.query.Query;
-
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 

@@ -46,6 +46,7 @@ public class AuditLog
 		return who;
 	}
 	
+	@Override
 	public AuditLog clone()
 	{
 		return new AuditLog(this.who, this.action, this.when);

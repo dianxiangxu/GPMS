@@ -289,12 +289,12 @@ public class SimpleCRUDTest {
 		query = datastore.createQuery(TestClass.class).filter("Name = ",
 				"Robinson");
 
-		TestClass result = (TestClass) query.asList().get(0);
+		TestClass result = query.asList().get(0);
 		assertEquals(t.getId(), result.getId());
 
 		query = datastore.createQuery(TestClass.class).field("Name")
 				.equal("Robinson");
-		result = (TestClass) query.asList().get(0);
+		result = query.asList().get(0);
 		assertEquals(t.getId(), result.getId());
 
 		// For using Referenced Collection Try this:
@@ -364,17 +364,17 @@ public class SimpleCRUDTest {
 		t3.setCompleted(Boolean.TRUE);
 		testClassDao.save(t3);
 
-		TestClass result = (TestClass) query.asList().get(0);
+		TestClass result = query.asList().get(0);
 		// Test the last Test User with same Email is not added!
 		query = datastore.createQuery(TestClass.class).field("Email")
 				.equal("milsonmun@gmail.com");
-		result = (TestClass) query.asList().get(0);
+		result = query.asList().get(0);
 		assertEquals(t1, result);
 
 		// Test the last Test User with differnet Email with same Name is added!
 		query = datastore.createQuery(TestClass.class).field("Email")
 				.equal("milsonmun@hotmail.com");
-		result = (TestClass) query.asList().get(0);
+		result = query.asList().get(0);
 		assertEquals(t3, result);
 	}
 }

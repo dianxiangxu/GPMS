@@ -1,6 +1,4 @@
 package gpms.DAL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DataModel {
 	private DataAccessLayer dal;

@@ -35,7 +35,7 @@ public class HashTableTest
 		keyArray = keys.toArray();
 		pd.setCollege((String)keyArray[index]);
 		
-		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentKeys = collegeKey.get((String)keyArray[index]);
+		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentKeys = collegeKey.get(keyArray[index]);
 		keys = departmentKeys.keySet();
 		
 		count = 0;
@@ -52,7 +52,7 @@ public class HashTableTest
 		keyArray = keys.toArray();
 		pd.setDepartment((String)keyArray[index]);
 		
-		Hashtable<String, ArrayList<String>> titleKeys = departmentKeys.get((String)keyArray[index]);
+		Hashtable<String, ArrayList<String>> titleKeys = departmentKeys.get(keyArray[index]);
 		keys = titleKeys.keySet();
 		
 		count = 0;
@@ -69,7 +69,7 @@ public class HashTableTest
 		keyArray = keys.toArray();
 		pd.setPositionTitle((String)keyArray[index]);
 		
-		ArrayList<String> types = titleKeys.get((String)keyArray[index]);
+		ArrayList<String> types = titleKeys.get(keyArray[index]);
 		
 		count = 0;
 		for(String k : types)

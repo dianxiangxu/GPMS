@@ -73,6 +73,7 @@ public class Address {
 		this.country = country;
 	}
 
+	@Override
 	public String toString() {
 		String output = "";
 		output += "street  : " + street + "\n";
@@ -91,6 +92,7 @@ public class Address {
 				&& this.street.equals(address.country);
 	}
 
+	@Override
 	public Address clone() {
 		return new Address(this.street, this.city, this.state, this.zipcode,
 				this.country);

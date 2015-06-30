@@ -51,6 +51,7 @@ public class TypeOfRequest {
 		this.isSupplement = isSupplement;
 	}
 
+	@Override
 	public String toString() {
 		String outPut = "";
 		outPut += "pre-proposal : " + isPreProposal + "\n";
@@ -67,6 +68,7 @@ public class TypeOfRequest {
 				&& this.isSupplement == tor.isSupplement;
 	}
 	
+	@Override
 	public TypeOfRequest clone()
 	{
 		TypeOfRequest copy = new TypeOfRequest();

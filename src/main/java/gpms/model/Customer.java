@@ -38,6 +38,7 @@ public class Customer extends BaseEntity {
 		this.address = address2;
 	}
 
+	@Override
 	public String toString() {
 		return name + " lives @ " + address.getPostcode();
 	}
