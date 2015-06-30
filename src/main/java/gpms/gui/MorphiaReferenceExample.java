@@ -8,7 +8,6 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 import java.util.List;

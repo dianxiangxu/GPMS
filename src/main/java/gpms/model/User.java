@@ -78,6 +78,7 @@ public class User extends BaseEntity {
 		this.address = address;
 	}
 
+	@Override
 	public String toString() {
 		return firstName + " " + lastName + " is " + age + " years old";
 	}

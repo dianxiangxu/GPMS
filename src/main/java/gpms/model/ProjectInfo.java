@@ -6,9 +6,7 @@ import java.util.Date;
 
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
-import org.mongodb.morphia.utils.IndexDirection;
 
 //import org.mongodb.morphia.annotations.Id;
 
@@ -91,6 +89,7 @@ public class ProjectInfo {
 		this.projectLocation = projectLocation;
 	}
 
+	@Override
 	public String toString() {
 		String outPut = "";
 		outPut += "Project Title       : " + projectTitle + "\n";
@@ -116,6 +115,7 @@ public class ProjectInfo {
 				&& this.typeOfRequest.equals(pinf.typeOfRequest);
 	}
 	
+	@Override
 	public ProjectInfo clone()
 	{
 		ProjectInfo copy = new ProjectInfo();

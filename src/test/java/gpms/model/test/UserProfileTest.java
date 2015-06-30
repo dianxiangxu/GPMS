@@ -2,10 +2,6 @@ package gpms.model.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import gpms.model.PositionDetails;
 import gpms.model.UserProfile;
 
 import org.junit.Test;

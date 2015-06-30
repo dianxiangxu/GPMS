@@ -4,8 +4,6 @@ import gpms.dao.CustomerDAO;
 import gpms.model.Account;
 import gpms.model.Customer;
 import gpms.model.IndianAddress;
-import gpms.model.User;
-
 import java.util.ArrayList;
 import java.util.List;
 

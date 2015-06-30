@@ -1,6 +1,5 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
 import gpms.dao.CustomerDAO;
 import gpms.model.Account;
 import gpms.model.Customer;

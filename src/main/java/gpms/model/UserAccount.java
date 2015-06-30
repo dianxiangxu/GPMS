@@ -60,10 +60,10 @@ public class UserAccount extends BaseEntity
 	}
 
 	public boolean equals(UserAccount ua) {
-		return this.id.equals(ua.id) && this.userName.equals(ua.userName)
-				&& this.password.equals(ua.password);
+		return this.userName.equals(ua.userName) && this.password.equals(ua.password);
 	}
 	
+	@Override
 	public UserAccount clone()
 	{
 		UserAccount copy = new UserAccount(this.userName, this.password);

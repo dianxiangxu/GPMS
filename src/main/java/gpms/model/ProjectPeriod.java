@@ -35,6 +35,7 @@ public class ProjectPeriod {
 		this.to = to;
 	}
 
+	@Override
 	public String toString() {
 		String outPut = "";
 		outPut += "From : " + from.toString() + "\n";
@@ -46,6 +47,7 @@ public class ProjectPeriod {
 		return this.from.equals(pp.from) && this.to.equals(pp.to);
 	}
 	
+	@Override
 	public ProjectPeriod clone()
 	{
 		ProjectPeriod copy = new ProjectPeriod();

@@ -70,6 +70,7 @@ public class SponsorAndBudgetInfo {
 		FARate = fARate;
 	}
 
+	@Override
 	public String toString() {
 		String outPut = "";
 		outPut += "Granting Agency : " + grantingAgency.toString() + "\n";
@@ -87,6 +88,7 @@ public class SponsorAndBudgetInfo {
 				&& this.totalCosts == sabi.totalCosts;
 	}
 	
+	@Override
 	public SponsorAndBudgetInfo clone()
 	{
 		SponsorAndBudgetInfo copy = new SponsorAndBudgetInfo();

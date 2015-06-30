@@ -1,7 +1,6 @@
 package gpms.DAL;
 
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 
