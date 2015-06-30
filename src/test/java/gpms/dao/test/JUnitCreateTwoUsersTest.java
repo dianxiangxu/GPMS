@@ -1,5 +1,6 @@
 package gpms.dao.test;
 
+import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -14,80 +15,94 @@ import gpms.model.UserProfile;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
 
-public class CreateTwoUsersTest 
+/**
+ * 
+ * This will run through a test to create two users for our database
+ * 
+ * @author Thomas Volz
+ * thomasvolz@u.boisestate.edu
+ *
+ */
+public class JUnitCreateTwoUsersTest 
 {
-
-	public static void main(String args[]) throws UnknownHostException
+	MongoClient mongoClient;
+	Morphia morphia;
+	String dbName = "GPMS";
+	UserAccountDAO newUserAccountDAO;
+	UserProfileDAO newUserProfileDAO;
+	
+	@Before
+	public void initiate()
 	{
+		mongoClient = MongoDBConnector.getMongo();
+		morphia = new Morphia();
+		morphia.map(UserProfile.class).map(UserAccount.class);
+		newUserAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+		newUserProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
 
-		MongoClient mongoClient;
-		Morphia morphia;
-		UserAccountDAO newUserAccountDAO;
-		UserProfileDAO newUserProfileDAO;
-		String dbName = "GPMS";
+	}
+
+
+	@Test
+	public void test() throws UnknownHostException 
+	{
 		String username, password;
 		UserAccount activeLog, newUserAccount2;
 		Address newAddress;
 		PositionDetails newDetails;
 		UserProfile newUserProfile2;
-		Scanner keyb;
-
-		mongoClient = MongoDBConnector.getMongo();
-		morphia = new Morphia();
-		morphia.map(UserProfile.class).map(UserAccount.class);
-		//datastore = morphia.createDatastore(mongoClient, dbName);
-		newUserAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
-		newUserProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
-
+		long dbSize = newUserProfileDAO.count();
 		//We're going to change this one up a bit.
 		//We'll be testing out our new auditing methods.
 		//So let's take this from the top.
 		//Step One, we're going to log in and make a user.
 
-
-
-//		System.out.println("Welcome to the Official System of Systeming:\nPlease type in a user name:");
+		//		System.out.println("Welcome to the Official System of Systeming:\nPlease type in a user name:");
 		activeLog = new UserAccount();
-//		keyb = new Scanner(System.in);
-//		username = keyb.nextLine();
-//		System.out.println("Please type in a password");
-//		password = keyb.nextLine();
+		//		keyb = new Scanner(System.in);
+		//		username = keyb.nextLine();
+		//		System.out.println("Please type in a password");
+		//		password = keyb.nextLine();
 
 		username = "batman";
 		password = "robin";
-		
+
 		activeLog.setUserName(username);
 		activeLog.setPassword(password);
 
-//		System.out.println("A user account has been created for you, username: "
-//				+ activeLog.getUserName() + " password " + activeLog.getPassword());
+		//		System.out.println("A user account has been created for you, username: "
+		//				+ activeLog.getUserName() + " password " + activeLog.getPassword());
 
-//		System.out.println("Give us a first, middle, and last name and we'll handle the rest: ");
+		//		System.out.println("Give us a first, middle, and last name and we'll handle the rest: ");
 		String firstname, middlename, lastname;
 		UserProfile newUserProfile = new UserProfile();
-//		System.out.println("First name?: ");
-//		firstname = keyb.nextLine();
-//		System.out.println("Middle name?: ");
-//		middlename = keyb.nextLine();
-//		System.out.println("Last name?: ");
-//		lastname = keyb.nextLine();
-		
+		//		System.out.println("First name?: ");
+		//		firstname = keyb.nextLine();
+		//		System.out.println("Middle name?: ");
+		//		middlename = keyb.nextLine();
+		//		System.out.println("Last name?: ");
+		//		lastname = keyb.nextLine();
+
 		firstname = "Bruce";
 		middlename = "Grayson";
 		lastname = "Wayne";
-		
+
 
 		newUserProfile.setFirstName(firstname);
 		newUserProfile.setMiddleName(middlename);
 		newUserProfile.setLastName(lastname);
 
-//		System.out.println("Your user profile for " + newUserProfile.getFirstName() + " " + newUserProfile.getMiddleName() + " "
-//				+ newUserProfile.getLastName() + " has been created.");
-//		System.out.println("We'll autopopulate the rest.");
+		//		System.out.println("Your user profile for " + newUserProfile.getFirstName() + " " + newUserProfile.getMiddleName() + " "
+		//				+ newUserProfile.getLastName() + " has been created.");
+		//		System.out.println("We'll autopopulate the rest.");
 
 		//Let's start with phone numbers.
 		String workPhone, homePhone, cellPhone;
@@ -178,6 +193,8 @@ public class CreateTwoUsersTest
 		ProposalDAO newProposalDAO = new ProposalDAO(mongoClient, morphia, dbName);
 		newProposalDAO.save(proposal1);
 
+		assertTrue(newUserProfileDAO.count() == (dbSize+1));
+		
 		//////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////
 		/////////  Second User Creation Below...  ////////////////////////
@@ -305,14 +322,9 @@ public class CreateTwoUsersTest
 
 		nextProposalDAO.save(proposal2);
 
-		
-
-
-
-
+		assertTrue(newUserProfileDAO.count() == (dbSize+2));
 
 	}
-
 
 }
 
