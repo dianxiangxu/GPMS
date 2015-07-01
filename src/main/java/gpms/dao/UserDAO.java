@@ -62,7 +62,21 @@ public class UserDAO {
 		ds.save(account);
 	}
 	
-	
+	// public List<AttributesBasicInfo> GetAttributesList(int offset, int limit,
+	// AttributeBindInfo attrbuteBindObj, AspxCommonInfo aspxCommonObj)
+	// {
+	// try
+	// {
+	// List<AttributesBasicInfo> lstAttrBasic =
+	// AspxItemAttrMgntController.GetItemAttributes(offset, limit,
+	// attrbuteBindObj, aspxCommonObj);
+	// return lstAttrBasic;
+	// }
+	// catch (Exception e)
+	// {
+	// throw e;
+	// }
+	// }
 	
 	
 	
