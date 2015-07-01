@@ -1,599 +1,1539 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Script-Type" content="text/javascript">
-    <meta http-equiv="Content-Style-Type" content="text/css">
-    <meta content="Manage Attributes" name="DESCRIPTION">
-    <meta content="Manage Attributes" name="KEYWORDS">
-    <meta content="@SageFrame" name="COPYRIGHT">
-    <meta content="GENERATOR" name="GENERATOR">
-    <meta content="Author" name="AUTHOR">
-    <meta content="DOCUMENT" name="RESOURCE-TYPE">
-    <meta content="GLOBAL" name="DISTRIBUTION">
-    <meta content="INDEX, FOLLOW" name="ROBOTS">
-    <meta content="1 DAYS" name="REVISIT-AFTER">
-    <meta content="GENERAL" name="RATING">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-    <!-- Mimic Internet Explorer 7 -->
-    <meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
-    <meta content="RevealTrans(Duration=0,Transition=1)" http-equiv="PAGE-ENTER">
-    <link type="icon shortcut" media="icon" href="favicon.ico">
-    <!--[if IE 9]>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta content="Manage Attributes" name="DESCRIPTION">
+<meta content="Manage Attributes" name="KEYWORDS">
+<meta content="@SageFrame" name="COPYRIGHT">
+<meta content="GENERATOR" name="GENERATOR">
+<meta content="Author" name="AUTHOR">
+<meta content="DOCUMENT" name="RESOURCE-TYPE">
+<meta content="GLOBAL" name="DISTRIBUTION">
+<meta content="INDEX, FOLLOW" name="ROBOTS">
+<meta content="1 DAYS" name="REVISIT-AFTER">
+<meta content="GENERAL" name="RATING">
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+<!-- Mimic Internet Explorer 7 -->
+<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
+<meta content="RevealTrans(Duration=0,Transition=1)"
+	http-equiv="PAGE-ENTER">
+<link type="icon shortcut" media="icon" href="favicon.ico">
+<!--[if IE 9]>
         <link rel="stylesheet" href="css/ie9.css" type="text/css" media="screen"/><![endif]-->
-    <!--[if lt IE 9]>
+<!--[if lt IE 9]>
         <link rel="stylesheet" href="css/IE.css" type="text/css" media="screen"/><![endif]-->
-    <!--[if lt IE 7]>
+<!--[if lt IE 7]>
         <script type="text/javascript" src="js/core/IE8.js"></script>
     <![endif]-->
-    <title>Grid Example</title>
+<title>Grid Example</title>
 
-    <script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
-        $.ajaxSetup({ 'beforeSend': function(xhr) { xhr.setRequestHeader("ASPX-TOKEN", "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5"); } });
-    </script>
-
-    <script type="text/javascript">
-        //<![CDATA[
-        var SageFrameAppPath = "";
-        var SageFrameUserName = "superuser";
-        var SageFrameCurrentCulture = "en-US";
-        var SageFramePortalID = "1";
-        var SageFramePortalName = "default";
-        var SageFrameActiveTemplate = "AspxCommerce";
-        var SageFrameHostURL = "http://localhost/aspx/";
-        var SageFrameSecureToken = "SageFrame.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
-        var MsgTemplate = "default";
-
-        var aspxservicePath = "Modules/AspxCommerce/AspxCommerceServices/";
-        var aspxRootPath = "/";
-        var aspxTemplateFolderPath = "Templates/AspxCommerce";
-        var pageExtension = ".aspx";
-        var storeID = "1";
-        var portalID = "1";
-        var cultureName = "en-US";
-        var templateName = "AspxCommerce";
-        var customerID = "1";
-        var userName = "superuser";
-        var IsUseFriendlyUrls = "True";
-        var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
-        var clientIPAddress = "::1";
-        var LoginURL = "sf/sfLogin";
-        var itemImagePath = "Modules/AspxCommerce/AspxItemsManagement/uploads/";
-        var categoryImagePath = "Modules/AspxCommerce/AspxCategoryManagement/uploads/";
-        var section = "1";
-        var aspxCountryName = "RESERVED";
-        var region = "en-US";
-        var curSymbol = "$";
-        var aspxRedirectPath = "/";
-        var currencyRate = "[]"; //]]>
-    </script>
-
-    <script type="text/javascript" src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
-
-    <script type="text/javascript" src="js/core/aspxcommercecore.js"></script>
-
-    <script type="text/javascript" src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
-
-    <!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
-    <script type="text/javascript" src="js/modules/Language/CoreJsLanguage.js"></script>
-
-    <script type="text/javascript" src="js/core/json2.js"></script>
-
-    <script type="text/javascript" src="js/jquery-browser.js"></script>
-    <script type="text/javascript" src="js/jquery.uniform.js"></script>
-
-    <script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
-
-    <script type="text/javascript" src="js/GridView/jquery.tablesorter.js"></script>
-    <script type="text/javascript" src="js/GridView/jquery.grid.js"></script>
-    <script type="text/javascript" src="js/GridView/SagePaging.js"></script>
-    <script type="text/javascript" src="js/GridView/jquery.global.js"></script>
-    <script type="text/javascript" src="js/GridView/jquery.dateFormat.js"></script>
-
-    <script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
-
-    <!-- <script type="text/javascript" src="js/core/Session.js"></script>
-    <script type="text/javascript" src="js/core/encoder.js"></script> -->
-
-    <script type="text/javascript" src="js/modules/AttributesManage.js"></script>
-    <script type="text/javascript" src="js/modules/Language/AspxAttributesManagement.js"></script>
-    <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
-
-    <link type="text/css" rel="stylesheet" href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css"/>
-    <link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css"/>
-    <link type="text/css" rel="stylesheet" href="css/MessageBox/style.css"/>
-
-    <link type="text/css" rel="stylesheet" href="css/Templates/grid.css"/>
-    <link type="text/css" rel="stylesheet" href="css/Templates/topstickybar.css"/>
-    <link type="text/css" rel="stylesheet" href="css/Templates/admin.css"/>
-</head>
-<body>
-<form enctype="multipart/form-data" action="Manage-Attributes.aspx" method="post" name="form1">
-<div style="display: none;" id="UpdateProgress1" role="status" aria-hidden="true">
-
-    <div class="sfLoadingbg">
-        &nbsp;
-    </div>
-    <div class="sfLoadingdiv">
-        <img style="border-width: 0px;" alt="Loading..." src="../../../../Administrator/Templates/Default/images/ajax-loader.gif" title="Loading..." id="imgPrgress">
-        <br>
-        <span id="lblPrgress">Please wait...</span>
-    </div>
-
-</div>
-<noscript>
-    <span id="lblnoScript">This page requires java-script to be enabled. Please adjust your browser-settings.</span>
-</noscript>
-
-<div id="sfOuterwrapper">
-<div class="sfSagewrapper">
-
-<!--Body Content-->
-<div class="sfContentwrapper clearfix">
-<div id="divCenterContent">
-
-<div class="sfMaincontent">
-<div style="display: block" class="sfCpanel sfInnerwrapper" id="divBottompanel">
-
-<div class="">
-<div class="sfModulecontent clearfix">
+<script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    //<![CDATA[
-    $(function() {
-        $(".sfLocale").localize({
-            moduleKey: AspxAttributesManagement
-        });
-    });
-    var lblAttrFormHeading = "ctl19_lblAttrFormHeading";
-    var lblLength = "ctl19_lblLength";
-    var lblDefaultValue = "ctl19_lblDefaultValue";
-    var umi = "192";
-    //]]>
+	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
+	$
+			.ajaxSetup({
+				'beforeSend' : function(xhr) {
+					xhr
+							.setRequestHeader(
+									"ASPX-TOKEN",
+									"NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5");
+				}
+			});
 </script>
 
-<!-- Grid -->
-<div id="divAttribGrid">
-    <div class="cssClassCommonBox Curve">
-        <div class="cssClassHeader">
-            <h1>
-                <span id="ctl19_lblAttrGridHeading">Manage Attributes</span>
-            </h1>
-            <div class="cssClassHeaderRight">
-                <div class="sfButtonwrapper">
-                    <p>
-                        <button type="button" id="btnAddNew" class="sfBtn">
-                            <span class="sfLocale icon-addnew">Add New Attribute</span>
-                        </button>
-                    </p>
-                    <p>
-                        <button type="button" id="btnDeleteSelected" class="sfBtn">
-                            <span class="sfLocale icon-delete">Delete All Selected</span>
-                        </button>
-                    </p>
+<script type="text/javascript">
+	//<![CDATA[
+	var SageFrameAppPath = "";
+	var SageFrameUserName = "superuser";
+	var SageFrameCurrentCulture = "en-US";
+	var SageFramePortalID = "1";
+	var SageFramePortalName = "default";
+	var SageFrameActiveTemplate = "AspxCommerce";
+	var SageFrameHostURL = "http://localhost/aspx/";
+	var SageFrameSecureToken = "SageFrame.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
+	var MsgTemplate = "default";
 
-                    <div class="cssClassClear">
-                    </div>
-                </div>
-                <div class="cssClassClear">
-                </div>
-            </div>
-            <div class="cssClassClear">
-            </div>
-        </div>
-        <div class="sfGridwrapper">
-            <div class="sfGridWrapperContent">
-                <div class="sfFormwrapper sfTableOption">
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tbody>
-                        <tr>
-                            <td width="150">
-                                <label class="cssClassLabel sfLocale">Attribute Name:</label>
-                                <input type="text" class="sfTextBoxSmall" id="txtSearchAttributeName"/>
-                            </td>
-                            <td width="150">
-                                <label class="cssClassLabel sfLocale">Required:</label>
-                                <select style="width: 150px;" class="sfListmenu" id="ddlIsRequired">
-                                    <option class="sfLocale" value="">-- All --</option>
-                                    <option class="sfLocale" value="True">Yes</option>
-                                    <option class="sfLocale" value="False">No</option>
-                                </select>
-                            </td>
-                            <td width="150">
-                                <label class="cssClassLabel sfLocale">Comparable:</label><br/>
-                                <select class="sfListmenu" id="ddlComparable">
-                                    <option class="sfLocale" value="">-- All --</option>
-                                    <option class="sfLocale" value="True">Yes</option>
-                                    <option class="sfLocale" value="False">No</option>
-                                </select>
-                            </td>
-                            <td width="160">
-                                <label class="cssClassLabel sfLocale">System:</label>
-                                <select class="sfListmenu" id="ddlIsSystem">
-                                    <option class="sfLocale" value="">-- All --</option>
-                                    <option class="sfLocale" value="True">Yes</option>
-                                    <option class="sfLocale" value="False">No</option>
-                                </select>
-                            </td>
-                            <td>
-                                <br/>
-                                <button class="sfBtn" id="btnSearchAttribute" type="button">
-                                    <span class="sfLocale icon-search">Search</span>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="loading">
-                    <img id="ajaxAttributeImageLoader" src="" class="sfLocale" alt="loading...." title="loading...."/>
-                </div>
-                <div class="log">
-                </div>
-                <table id="gdvAttributes" cellspacing="0" cellpadding="0" border="0" width="100%"></table>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Grid -->
-<!-- form -->
-<div id="divAttribForm" style="display: none">
-<div class="cssClassCommonBox Curve">
-<div class="cssClassHeader">
-    <h1>
-        <span id="ctl19_lblAttrFormHeading">General Information</span>
-    </h1>
-</div>
-<div class="cssClassTabPanelTable">
-<div id="container-7">
-<ul>
-    <li>
-        <a href="#fragment-1">
-            <span id="ctl19_lblTabTitle1">Attribute Properties</span>
-        </a>
-    </li>
-    <li>
-        <a href="#fragment-2">
-            <span id="ctl19_lblTabTitle2">Frontend Properties</span>
-        </a>
-    </li>
-</ul>
-<div id="fragment-1">
-<div class="sfFormwrapper">
-    <h3>
-        <span id="ctl19_lblTab1Info">General Information</span>
-    </h3>
-    <table cellspacing="0" cellpadding="0" border="0">
-        <tbody>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblAttributeName">Attribute Name:</span>
+	var aspxservicePath = "Modules/AspxCommerce/AspxCommerceServices/";
+	var aspxRootPath = "/";
+	var aspxTemplateFolderPath = "Templates/AspxCommerce";
+	var pageExtension = ".aspx";
+	var storeID = "1";
+	var portalID = "1";
+	var cultureName = "en-US";
+	var templateName = "AspxCommerce";
+	var customerID = "1";
+	var userName = "superuser";
+	var IsUseFriendlyUrls = "True";
+	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
+	var clientIPAddress = "::1";
+	var LoginURL = "sf/sfLogin";
+	var itemImagePath = "Modules/AspxCommerce/AspxItemsManagement/uploads/";
+	var categoryImagePath = "Modules/AspxCommerce/AspxCategoryManagement/uploads/";
+	var section = "1";
+	var aspxCountryName = "RESERVED";
+	var region = "en-US";
+	var curSymbol = "$";
+	var aspxRedirectPath = "/";
+	var currencyRate = "[]"; //]]>
+</script>
 
-            </td>
-            <td class="cssClassTableRightCol required">
-                <input type="text" class="sfInputbox" id="txtAttributeName"/>
-                <span class="cssClassRight">
-                                                                                <img class="cssClassSuccessImg sfLocale" height="13" width="18" title="Right" src="" alt="Right" />
-                                                                            </span>
-                <b class="cssClassError sfLocale">Ops! found something error, must be unique with no spaces</b> <span class="cssClassRequired">*</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblType">Type:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <select id="ddlAttributeType" class="sfListmenu" title="Attribute Input Type"></select>
-            </td>
-        </tr>
-        <tr id="trdefaultValue">
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblDefaultValue">Default Value:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <input type="text" class="sfInputbox" title="Default Value" value="" name="default_value_text"
-                       id="default_value_text"/>
-                <span id="iferror" class="iferror" style="color: #FF0000;"></span>
-                <div id="fileDefaultTooltip" style="display: none;" class="cssClassRed">
-                </div>
-                <textarea class="cssClassTextArea" cols="15" rows="2" title="Default Value" name="default_value_textarea"
-                          id="default_value_textarea"></textarea>
-                <div id="div_default_value_date">
-                    <input type="text" class="sfInputbox" title="Default Value" value="" id="default_value_date"
-                           name="default_value_date"/>
-                </div>
-                <select class="sfListmenu" title="Default Value" name="default_value_yesno"
-                        id="default_value_yesno">
-                    <option value="1" class="sfLocale">Yes</option>
-                    <option selected="selected" value="0" class="sfLocale">No</option>
-                </select>
-            </td>
-        </tr>
-        <tr id="trOptionsAdd">
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblAddOptions">Manage Options (values of your attribute):</span>
-                <span class="cssClassRequired">*</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <table id="dataTable" cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>
-                            <span class="cssClassLabel" id="ctl19_lblValue">Value:</span>
-                            <span class="cssClassRequired">*</span>
-                        </th>
-                        <th>
-                            <span class="cssClassLabel" id="ctl19_lblPosition">Display Order:</span>
-                            <span class="cssClassRequired">*</span>
-                        </th>
-                        <th>
-                            <span class="cssClassLabel" id="ctl19_lblAlias">Alias:</span>
-                        </th>
-                        <th>
-                            <span class="cssClassLabel" id="ctl19_lblIsDefault">Is Default:</span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <input type="hidden" class="class-text" value="0" name="optionValueId"/>
-                            <input type="text" class="class-text" value="" name="value"/>
-                            <span class="" style="color: #FF0000;">*</span>
-                        </td>
-                        <td>
-                            <input type="text" class="class-text" value="" name="position"/>
-                            <span class="" style="color: #FF0000;">*</span>
-                        </td>
-                        <td>
-                            <input type="text" class="class-text" value="" name="Alias"/>
-                        </td>
-                        <td class="tddefault"></td>
-                        <td>
-                            <input type="Button" value="Add More" name="AddMore" class="AddOption cssClassButtonSubmit sfLocale"/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblUniqueValue">Unique Value:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <input type="checkbox" name="chkUniqueValue" value="" class="cssClassCheckBox"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblTypeValidation">Type Validation:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <select id="ddlTypeValidation" class="sfListmenu" name="" title="Attribute Input Validation Type"></select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblValuesRequired">Values Required:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <input type="checkbox" name="chkValuesRequired" class="cssClassCheckBox"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblApplyTo">Apply To:</span>
+<script type="text/javascript"
+	src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
 
-            </td>
-            <td class="cssClassTableRightCol">
-                <select id="ddlApplyTo" class="sfListmenu" name="">
-                    <option selected="selected" value="0" class="sfLocale">All Item Types</option>
-                    <option value="1" class="sfLocale">Selected Item Types</option>
-                </select><span class="cssClassRequired">*</span>
-            </td>
-        </tr>
-        <tr class="itemTypes">
-            <td>
-                &nbsp;
+<script type="text/javascript" src="js/core/aspxcommercecore.js"></script>
 
-            </td>
-            <td class="cssClassTableRightCol">
-                <select id="lstItemType" class="cssClassMultiSelect"></select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblLength">Length:</span>
+<!-- For Side Bar Navigation -->
+<script type="text/javascript" src="js/dashboard.js"></script>
+<script type="text/javascript" src="js/sidebar_accordian.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
 
-            </td>
-            <td class="cssClassTableRightCol required">
-                <input class="sfInputbox verifyInteger" id="txtLength" type="text" maxlength="10"/>
-                <span class="iferror sfLocale" style="color: #FF0000;">Integer Number</span> <span class="cssClassRequired">*</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblAliasName">Alias Name:</span>
+<script type="text/javascript"
+	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
 
-            </td>
-            <td class="cssClassTableRightCol required">
-                <input class="sfInputbox" id="txtAliasName" type="text"/>
-                <span class="cssClassRequired">*</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblAliasToolTip">Alias ToolTip:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <input class="sfInputbox" id="txtAliasToolTip" type="text"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblAliasHelp">Alias Help:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <input class="sfInputbox" id="txtAliasHelp" type="text"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblDisplayOrder">Display Order:</span>
+<!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
+<script type="text/javascript"
+	src="js/modules/Language/CoreJsLanguage.js"></script>
 
-            </td>
-            <td class="cssClassTableRightCol required">
-                <input class="sfInputbox verifyInteger" id="txtDisplayOrder" type="text"/> <span class="cssClassRequired sfLocale">*</span>
-                <span class="iferror sfLocale" style="color: #FF0000;">Integer Number</span>
-            </td>
-        </tr>
-        <tr id="activeTR">
-            <td>
-                <span class="cssClassLabel" id="ctl19_lblActive">Active:</span>
-            </td>
-            <td class="cssClassTableRightCol">
-                <input type="checkbox" name="chkActive" class="cssClassCheckBox"/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-</div>
-<div id="fragment-2">
-    <div class="sfFormwrapper">
-        <h3>
-            <span id="ctl19_lblTab2Info">Frontend Display Settings</span>
-        </h3>
-        <table cellspacing="0" cellpadding="0" border="0">
-            <tbody>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblIsEnableEditor">Is Enable Editor:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkIsEnableEditor"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblIsUseInFilter">Used in Filter:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkIsUseInFilter"/>
-                </td>
-            </tr>
+<script type="text/javascript" src="js/core/json2.js"></script>
 
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblUseInAdvancedSearch">Use in Advanced Search:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkUseInAdvancedSearch"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblComparable">Comparable on Front-end:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkComparable"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblUseForPriceRule">Use for Price Rule Conditions:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkUseForPriceRule"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblShowInItemListing">Show In Item Listing:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkShowInItemListing"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblShowInItemDetail">Show In Item Detail Page:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkShowInItemDetail"/>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
-</div>
-<div class="sfButtonwrapper">
-    <p>
-        <button type="button" id="btnBack" class="sfBtn">
-            <span class="sfLocale icon-arrow-slim-w">Back</span>
-        </button>
-    </p>
-    <p>
-        <button type="button" id="btnReset" class="sfBtn">
-            <span class="sfLocale icon-refresh">Reset</span>
-        </button>
-    </p>
-    <p>
-        <button type="button" class="delbutton sfBtn">
-            <span class="sfLocale icon-delete">Delete</span>
-        </button>
-    </p>
-    <p>
-        <button type="button" id="btnSaveAttribute" class="sfBtn">
-            <span class="sfLocale icon-save">Save</span>
-        </button>
-    </p>
-</div>
-</div>
-</div>
-<!-- End form -->
+<script type="text/javascript" src="js/jquery-browser.js"></script>
+<script type="text/javascript" src="js/jquery.uniform.js"></script>
 
-</div>
-</div>
+<script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
 
-</div>
-</div>
-<!-- END sfMaincontent -->
+<script type="text/javascript" src="js/GridView/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="js/GridView/jquery.grid.js"></script>
+<script type="text/javascript" src="js/GridView/SagePaging.js"></script>
+<script type="text/javascript" src="js/GridView/jquery.global.js"></script>
+<script type="text/javascript" src="js/GridView/jquery.dateFormat.js"></script>
 
-</div>
-</div>
-<!-- END Body Content sfContentwrapper -->
+<script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
 
-</div>
-</div>
+<!-- <script type="text/javascript" src="js/core/Session.js"></script>
+    <script type="text/javascript" src="js/core/encoder.js"></script> -->
 
-<div title="Confirmation Required" id="dialog">
-    <label id="sf_lblConfirmation">
-    </label>
-</div>
+<script type="text/javascript" src="js/modules/AttributesManage.js"></script>
+<script type="text/javascript"
+	src="js/modules/Language/AspxAttributesManagement.js"></script>
+<!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
-</form>
-<div style="display: none;" id="ajaxBusy">
-    <img align="absmiddle" src="Administrator/Templates/Default/images/ajax-loader.gif">&nbsp;Working...
-</div>
-<div id="tooltip" style="display: none;">
-    <h3></h3>
-    <div class="body"></div>
-    <div class="url"></div>
-</div>
-<div id="BoxOverlay" style="position: fixed; top: 0px; left: 0px; opacity: 0.7; background-color: rgb(0, 0, 0); z-index: 999; height: 697px; width: 1349px; display: none;"></div>
-<div id="alert-Box" style="display: none; position: fixed;">
-    <div id="alert-InBox">
-        <div id="alert-BoxContent">
-            <div id="alert-BoxContenedor"></div>
-        </div>
-    </div>
-</div>
+<link type="text/css" rel="stylesheet"
+	href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css" />
+<link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
+<link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
+
+<link type="text/css" rel="stylesheet" href="css/Templates/grid.css" />
+<link type="text/css" rel="stylesheet"
+	href="css/Templates/topstickybar.css" />
+<link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
+</head>
+<body>
+	<form enctype="multipart/form-data" action="Manage-Attributes.aspx"
+		method="post" name="form1">
+		<div style="display: none;" id="UpdateProgress1" role="status"
+			aria-hidden="true">
+
+			<div class="sfLoadingbg">&nbsp;</div>
+			<div class="sfLoadingdiv">
+				<img style="border-width: 0px;" alt="Loading..."
+					src="../../../../Administrator/Templates/Default/images/ajax-loader.gif"
+					title="Loading..." id="imgPrgress"> <br> <span
+					id="lblPrgress">Please wait...</span>
+			</div>
+
+		</div>
+		<noscript>
+			<span id="lblnoScript">This page requires java-script to be
+				enabled. Please adjust your browser-settings.</span>
+		</noscript>
+
+		<div id="sfOuterwrapper">
+			<div class="sfSagewrapper">
+
+				<!--Body Content-->
+				<div class="sfContentwrapper clearfix">
+					<div id="divCenterContent">
+						<!-- Side Bar Starts-->
+						<div class="sideBarLeft" id="divSideBar">
+
+
+							<script type="text/javascript">
+								//<![CDATA[    
+								$(function() {
+									SidebarMgr.init();
+								});
+								var SidebarMgr = {
+									config : {
+										isPostBack : false,
+										async : false,
+										cache : false,
+										type : 'POST',
+										contentType : "application/json; charset=utf-8",
+										data : '{}',
+										dataType : 'json',
+										method : "",
+										url : "",
+										categoryList : "",
+										ajaxCallMode : 0,
+										arr : [],
+										arrModules : [],
+										baseURL : '/aspx'
+												+ '/Modules/Dashboard/Services/DashboardWebService.asmx/',
+										PortalID : 1,
+										Path : '/aspx' + '/Modules/Dashboard/',
+										SaveMode : "Add",
+										SidebarItemID : 0,
+										SidebarMode : '1',
+										ShowSideBar : '1',
+										UserName : 'superuser',
+										PortalID : '1',
+										ForceTrigger : ''
+									},
+									init : function() {
+										if (SidebarMgr.config.SidebarMode == 0) {
+											InitSuperfish();
+											$('#divFooterWrapper').addClass(
+													'sfFooterCollapse');
+										} else {
+											$('#divFooterWrapper').removeClass(
+													'sfFooterCollapse');
+											$('ul.menu').initMenu();
+											SidebarMgr.HighlightSelected();
+											if ($('.menu .Grandparent')
+													.hasClass('active')) {
+												if ($(
+														'.menu .Grandparent .parent')
+														.hasClass('active')) {
+													$('.Grandparent.active')
+															.find('a').eq(0)
+															.trigger('click');
+													$('.parent.active').find(
+															'a').eq(0).trigger(
+															'click');
+												} else {
+													$('.Grandparent.active')
+															.find('a').eq(0)
+															.trigger('click');
+												}
+											} else {
+												$('.Grandparent').find('a').eq(
+														0).trigger('click');
+											}
+										}
+										if (SidebarMgr.config.ShowSideBar == "1")
+											$('div.sfHidepanel')
+													.on(
+															"click",
+															function() {
+																if (!$(
+																		'div.sfSidebar')
+																		.hasClass(
+																				"sfSidebarhide")) {
+																	//$('div.sfSidebar').find("ul li ul").hide(function() { $(this).animate({ display: "none" }, 100) });
+																	//$('div.sfSidebar').find("ul li a span").hide(function() { $(this).animate({ display: "none" }, 100) });
+																	//$('div.sfHidepanel').find("a span").hide(function() { $(this).animate({ display: "none" }, 100) });
+																	$(
+																			'div.sfSidebar')
+																			.animate(
+																					{
+																						width : "45px"
+																					},
+																					400,
+																					function() {
+																						//                            $('div.sfHidepanel').find("img").animate({ opacity: 0 }, 100, function() {
+																						//                                $('div.sfHidepanel img').attr("src", SageFrame.utils.GetAdminImage("show-arrow.png"))
+																						//                                $('div.sfHidepanel img').animate({ opacity: 1 }, 100);
+																						//                            });
+																					});
+																	InitSuperfish();
+																	$(
+																			'div.sfSidebar')
+																			.addClass(
+																					"sfSidebarhide");
+																	InitModuleFloat(65);
+																	$(
+																			'.Grandparent')
+																			.find(
+																					'a:eq(0)')
+																			.find(
+																					'span:eq(0)')
+																			.hide();
+																	SidebarMgr
+																			.UpdateSidebarMode();
+
+																} else {
+																	$(
+																			'div.sfSidebar')
+																			.find(
+																					"ul li ul")
+																			.show(
+																					function() {
+																						$(
+																								this)
+																								.animate(
+																										{
+																											display : "block"
+																										},
+																										100)
+																					});
+																	$(
+																			'div.sfSidebar')
+																			.find(
+																					"ul li a span")
+																			.show(
+																					function() {
+																						$(
+																								this)
+																								.animate(
+																										{
+																											display : "block"
+																										},
+																										100)
+																					});
+																	$(
+																			'div.sfSidebar')
+																			.animate(
+																					{
+																						width : "210px"
+																					},
+																					400,
+																					function() {
+																						//                            $('div.sfHidepanel').find("a span").show(function() { $(this).animate({ display: "block" }, 100) });
+																						//                            $('div.sfHidepanel').find("img").attr("src", SageFrameAppPath + "/Administrator/Templates/Default/images/hide-arrow.png");
+																					});
+																	InitAccordianMode();
+																	$(
+																			'#sidebar ul')
+																			.attr(
+																					"class",
+																					"menu")
+																			.css(
+																					"visibility",
+																					"visible");
+																	$(
+																			'#sidebar ul li.Grandparent ul')
+																			.attr(
+																					"class",
+																					"acitem fullwidth");
+																	$(
+																			'#sidebar ul li a')
+																			.removeAttr(
+																					"class");
+																	$(
+																			'div.sfSidebar')
+																			.removeClass(
+																					"sfSidebarhide");
+																	InitModuleFloat(200);
+																	$(
+																			'.Grandparent')
+																			.find(
+																					'a')
+																			.eq(
+																					0)
+																			.find(
+																					'span')
+																			.eq(
+																					0)
+																			.show();
+																	SidebarMgr
+																			.UpdateSidebarMode();
+
+																}
+
+																if ($(
+																		'.sfHidepanel')
+																		.find(
+																				'i')
+																		.hasClass(
+																				'sidebarExpand')) {
+																	$(
+																			'.sfHidepanel')
+																			.find(
+																					'i')
+																			.removeClass(
+																					'sidebarExpand')
+																			.addClass(
+																					'sidebarCollapse');
+																	$(
+																			'#divFooterWrapper')
+																			.addClass(
+																					'sfFooterCollapse');
+																} else {
+																	$(
+																			'.sfHidepanel')
+																			.find(
+																					'i')
+																			.removeClass(
+																					'sidebarCollapse')
+																			.addClass(
+																					'sidebarExpand');
+																	$(
+																			'#divFooterWrapper')
+																			.removeClass(
+																					'sfFooterCollapse');
+																}
+															});
+									},
+									HighlightSelected : function() {
+										var sidebar = $('#sidebar ul li');
+										$
+												.each(
+														sidebar,
+														function(index, item) {
+															if ($(this)
+																	.hasClass(
+																			"parent")) {
+																var submenu = $(
+																		this)
+																		.find(
+																				"ul li");
+																$
+																		.each(
+																				submenu,
+																				function() {
+																					if ($(
+																							this)
+																							.hasClass(
+																									"parentchild")) {
+																						var subsubmenu = $(
+																								this)
+																								.find(
+																										"ul li");
+																						$
+																								.each(
+																										subsubmenu,
+																										function() {
+																											var hreflink = $(
+																													this)
+																													.find(
+																															"a")
+																													.attr(
+																															"href");
+																											if (location.href
+																													.toLowerCase()
+																													.indexOf(
+																															hreflink
+																																	.toLowerCase()) > -1) {
+																												$(
+																														this)
+																														.parent(
+																																"ul.acitem")
+																														.css(
+																																"display",
+																																"block")
+																														.addClass(
+																																"active");
+																												$(
+																														this)
+																														.parent(
+																																"ul.acitem")
+																														.prev(
+																																"a")
+																														.addClass(
+																																"active");
+																												$(
+																														this)
+																														.parent(
+																																"ul.acitem")
+																														.parents(
+																																'li.parent')
+																														.css(
+																																"display",
+																																"block")
+																														.addClass(
+																																"active");
+																												$(
+																														this)
+																														.parent(
+																																"ul.acitem")
+																														.parent(
+																																'ul.acitem')
+																														.css(
+																																"display",
+																																"block")
+																														.addClass(
+																																"active");
+																												$(
+																														this)
+																														.parent(
+																																"ul.acitem")
+																														.parents(
+																																'li.Grandparent')
+																														.css(
+																																"display",
+																																"block")
+																														.addClass(
+																																"active");
+																											}
+																										});
+																					} else {
+																						var hreflink = $(
+																								this)
+																								.find(
+																										"a")
+																								.attr(
+																										"href");
+																						if (location.href
+																								.toLowerCase()
+																								.indexOf(
+																										hreflink
+																												.toLowerCase()) > -1) {
+																							$(
+																									this)
+																									.parent(
+																											"ul.acitem")
+																									.css(
+																											"display",
+																											"block")
+																									.addClass(
+																											"active");
+																							$(
+																									this)
+																									.parent(
+																											"ul.acitem")
+																									.prev(
+																											"a")
+																									.addClass(
+																											"active");
+																							$(
+																									this)
+																									.parent(
+																											"ul.acitem")
+																									.parents(
+																											'li.Grandparent')
+																									.css(
+																											"display",
+																											"block")
+																									.addClass(
+																											"active");
+																							//$(this).parent("ul.acitem").parents('li.Grandparent').find("a").eq(0).addClass("active");
+																						}
+																					}
+																				});
+															} else if (!$(this)
+																	.hasClass(
+																			"parent")) {
+																var hreflink = $(
+																		this)
+																		.find(
+																				"a")
+																		.attr(
+																				"href");
+																if (location.href
+																		.toLowerCase()
+																		.indexOf(
+																				hreflink
+																						.toLowerCase()) > -1) {
+																	$(this)
+																			.find(
+																					"a")
+																			.addClass(
+																					'active');
+																	$(this)
+																			.parent(
+																					"ul.acitem")
+																			.parents(
+																					'li.Grandparent')
+																			.css(
+																					"display",
+																					"block")
+																			.addClass(
+																					"active");
+																}
+															}
+														});
+									},
+									BuildURL : function(item) {
+										var portalchange = SidebarMgr.config.PortalID > 1 ? "/portal/"
+												+ 'default'
+												: "";
+										var url = '/aspx'
+												+ portalchange
+												+ item.URL
+												+ SageFrameSettingKeys.PageExtension
+										return url;
+									},
+									UpdateSidebarMode : function() {
+										var _status = $('div.sfSidebar')
+												.hasClass("sfSidebarhide") ? "closed"
+												: "open";
+										var param = JSON2.stringify({
+											status : _status,
+											PortalID : SageFramePortalID,
+											UserName : SageFrameUserName,
+											secureToken : SageFrameSecureToken
+										});
+										$
+												.ajax({
+													type : SidebarMgr.config.type,
+													contentType : SidebarMgr.config.contentType,
+													cache : SidebarMgr.config.cache,
+													url : SidebarMgr.config.baseURL
+															+ "UpdateSidebar",
+													data : param,
+													dataType : SidebarMgr.config.dataType,
+													success : function(msg) {
+													}
+												});
+									}
+								};
+								function InitCollapsedMode() {
+									$('div.sfSidebar').find("ul li ul").hide(
+											function() {
+												$(this).animate({
+													display : "none"
+												}, 100)
+											});
+									$('div.sfHidepanel').find("a span").hide(
+											function() {
+												$(this).animate({
+													display : "none"
+												}, 100)
+											});
+									//$('div.sfSidebar').animate({ width: "45px" }, 400, function() {
+									//            $('div.sfHidepanel').find("img").animate({ opacity: 0 }, 100, function() {
+									//                $('div.sfHidepanel img').attr("src", GetAdminImage("show-arrow.png"))
+									//                $('div.sfHidepanel img').animate({ opacity: 1 }, 100);
+									//            });
+									//});
+									$('div.sfSidebar')
+											.addClass("sfSidebarhide");
+									InitSuperfish();
+								}
+								function GetAdminImage(imagename) {
+									return (SageFrameAppPath
+											+ "/Administrator/Templates/Default/images/" + imagename);
+								}
+								function InitSuperfish() {
+									$('ul.menu').addClass("sf-vertical");
+									var ul = $('ul.menu ul.acitem');
+									$.each(ul, function(index, item) {
+										$(this).addClass("sfCollapsed")
+												.removeClass("fullwidth");
+									});
+									$('ul.menu').superfish({
+										animation : {
+											height : 'show'
+										}, // slide-down effect without fade-in 
+										delay : 100
+									// 1.2 second delay on mouseout 
+									});
+								}
+								function InitAccordianMode() {
+									var ul = $('ul.menu ul.acitem');
+									$.each(ul, function(index, item) {
+										$(this).removeClass("sfCollapsed")
+												.addClass("fullwidth");
+									});
+									$('ul.menu').removeClass("sf-vertical");
+									$('ul.menu').initMenu();
+								}
+								//]]>
+							</script>
+
+							<div style="float: left; height: 877px;" id="sidebar"
+								class="sfSidebar">
+								<ul class="menu">
+									<li class="Grandparent sfLevel0 active" style="display: block;"><a
+										href="#" class=""><i class="icon-store-management"></i><span>Store
+												Management</span></a>
+										<ul style="display: none;" class="acitem">
+											<li class="parent sfLevel1 active" style="display: block;"><a
+												href="#" class="active"><i class="icon-catalog"></i><span>Catalog</span></a>
+												<ul style="" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Catalog/Manage-Categories.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Manage
+																Categories</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Catalog/Manage-Items.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Manage Items</span></a></li>
+													<li class="child parentchild sfLevel2"><a href="#"
+														class="active"><i class="icon-arrow-slim-e"></i><span>Attributes</span></a>
+														<ul style="display: block;" class="acitem active">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Attributes/Manage-Attributes.aspx"
+																class="active"><i class="icon-arrow-dash"></i><span>Manage
+																		Attributes</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Attributes/Manage-Attribute-sets.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage
+																		Attribute sets</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Gift Cards</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Manage-Gift-Card.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Gift
+																		Card</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Manage-Gift-Card-Categories.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Gift
+																		Card Categories</span></a></li>
+														</ul></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Catalog/Manage-Brands.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Manage Brands</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Catalog/Variant-Options.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Variant
+																Options</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Catalog/Kit-Management.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Kit Management</span></a></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Appointments</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Appointments/Appointment-Management.aspx"><i
+																	class="icon-arrow-dash"></i><span>Appointment
+																		Management</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Appointments/Appointment-Status-Management.aspx"><i
+																	class="icon-arrow-dash"></i><span>Appointment
+																		Status Management</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Comments and
+																Reviews Overview</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Comments-and-Reviews-Overview/Comments-and-Reviews.aspx"><i
+																	class="icon-arrow-dash"></i><span>Comments and
+																		Reviews</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Comments-and-Reviews-Overview/Manage-Item-Rating-Criteria.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Item
+																		Rating Criteria</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Tags</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Tags/All-Tags.aspx"><i
+																	class="icon-arrow-dash"></i><span>All Tags</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Catalog/Tags/Pending-Tags.aspx"><i
+																	class="icon-arrow-dash"></i><span>Pending Tags</span></a></li>
+														</ul></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Catalog/Search-Terms.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Search Terms</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-sales"></i><span>Sales</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Orders
+																Overview</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Sales/Orders-Overview/Orders.aspx"><i
+																	class="icon-arrow-dash"></i><span>Orders</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Sales/Orders-Overview/Manage-Order-Status.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Order
+																		Status</span></a></li>
+														</ul></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Sales/Invoices.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Invoices</span></a></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Returns</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Sales/Returns/Returns-Setting.aspx"><i
+																	class="icon-arrow-dash"></i><span>Returns
+																		Setting</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Sales/Returns/View-Returns.aspx"><i
+																	class="icon-arrow-dash"></i><span>View Returns</span></a></li>
+														</ul></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Sales/Shipments.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Shipments</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Sales/Out-Of-Stock-Notification.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Out Of Stock
+																Notification</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-customers"></i><span>Customers</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Customers/Manage-Customers.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Manage
+																Customers</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Customers/Online-Customers.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Online
+																Customers</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Customers/Abandoned-and-Live-Carts.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Abandoned and
+																Live Carts</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-promotions"></i><span>Promotions</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Promotions/Catalog-Price-Rules.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Catalog Price
+																Rules</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Promotions/Shopping-Cart-Price-Rules.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Shopping Cart
+																Price Rules</span></a></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Coupons
+																Overview</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Promotions/Coupons-Overview/Coupons.aspx"><i
+																	class="icon-arrow-dash"></i><span>Coupons</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Promotions/Coupons-Overview/Manage-Coupon-Status.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Coupon
+																		Status</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Promotions/Coupons-Overview/Manage-Coupon-Types.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Coupon
+																		Types</span></a></li>
+														</ul></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Promotions/Reward-Points.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Reward Points</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-reports"></i><span>Reports</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Sales Reports</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Sales-Reports/Coupon-Reports.aspx"><i
+																	class="icon-arrow-dash"></i><span>Coupon Reports</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Sales-Reports/Invoiced-Reports.aspx"><i
+																	class="icon-arrow-dash"></i><span>Invoiced
+																		Reports</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Sales-Reports/Order-Reports.aspx"><i
+																	class="icon-arrow-dash"></i><span>Order Reports</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Sales-Reports/Return-Reports.aspx"><i
+																	class="icon-arrow-dash"></i><span>Return Reports</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Sales-Reports/Shipping-Reports.aspx"><i
+																	class="icon-arrow-dash"></i><span>Shipping
+																		Reports</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Sales-Reports/Tax-Reports.aspx"><i
+																	class="icon-arrow-dash"></i><span>Tax Reports</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Shopping Carts</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Shopping-Carts/Abandoned-Carts.aspx"><i
+																	class="icon-arrow-dash"></i><span>Abandoned
+																		Carts</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Shopping-Carts/Items-in-Carts.aspx"><i
+																	class="icon-arrow-dash"></i><span>Items in Carts</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Items</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Items/Downloadable.aspx"><i
+																	class="icon-arrow-dash"></i><span>Downloadable</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Items/Gift-Card-Items.aspx"><i
+																	class="icon-arrow-dash"></i><span>Gift-Card-Items</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Items/Items-Ordered.aspx"><i
+																	class="icon-arrow-dash"></i><span>Items Ordered</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Items/Low-Stock.aspx"><i
+																	class="icon-arrow-dash"></i><span>Low Stock</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Items/Most-Viewed.aspx"><i
+																	class="icon-arrow-dash"></i><span>Most Viewed</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Items/Services-Items.aspx"><i
+																	class="icon-arrow-dash"></i><span>Services Items</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Store
+																Customers</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Store-Customers/Customers-by-Total-Orders.aspx"><i
+																	class="icon-arrow-dash"></i><span>Customers by
+																		Total Orders</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Store-Customers/New-Accounts.aspx"><i
+																	class="icon-arrow-dash"></i><span>New Accounts</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Reviews</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Reviews/Customers-Reviews.aspx"><i
+																	class="icon-arrow-dash"></i><span>Customers
+																		Reviews</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Reviews/Items-Reviews.aspx"><i
+																	class="icon-arrow-dash"></i><span>Items Reviews</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Store Tags</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Store-Tags/Customers-Tags.aspx"><i
+																	class="icon-arrow-dash"></i><span>Customers Tags</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Store-Tags/Items-Tags.aspx"><i
+																	class="icon-arrow-dash"></i><span>Items Tags</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Reports/Store-Tags/Popular-Tags.aspx"><i
+																	class="icon-arrow-dash"></i><span>Popular Tags</span></a></li>
+														</ul></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-administration"></i><span>Administration</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Store-Settings.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Store Settings</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Currencies.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Currencies</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Payment-Methods.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Payment
+																Methods</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Credit-Cards.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Credit Cards</span></a></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Store Locator</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Store-Locator/Store-Branch-Management.aspx"><i
+																	class="icon-arrow-dash"></i><span>Store Branch
+																		Management</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Store-Locator/Store-Locator-Management.aspx"><i
+																	class="icon-arrow-dash"></i><span>Store Locator
+																		Management</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Shipping</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Shipping/Shipping-Methods.aspx"><i
+																	class="icon-arrow-dash"></i><span>Shipping
+																		Methods</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Shipping/Shipping-Providers.aspx"><i
+																	class="icon-arrow-dash"></i><span>Shipping
+																		Providers</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Shipping/Store-WareHouse.aspx"><i
+																	class="icon-arrow-dash"></i><span>Store
+																		WareHouse</span></a></li>
+														</ul></li>
+													<li class="child parentchild sfLevel2"><a href="#"><i
+															class="icon-arrow-slim-e"></i><span>Taxes</span></a>
+														<ul style="display: none" class="acitem">
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Taxes/Manage-Item-Tax-Class.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Item
+																		Tax Class</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Taxes/Manage-Tax-Rates.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Tax
+																		Rates</span></a></li>
+															<li class="grandchild sfLevel3"><a
+																href="/aspx/Admin/AspxCommerce/Administration/Taxes/Manage-Tax-Rules.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage Tax
+																		Rules</span></a></li>
+														</ul></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Store-Access.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Store Access</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Notification-Management.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Notification
+																Management</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Index-Management.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Index
+																Management</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/AspxCommerce/Administration/Import-Manager.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Import Manager</span></a></li>
+												</ul></li>
+										</ul></li>
+									<li class="Grandparent sfLevel0"><a href="#"><i
+											class="icon-portal-management"></i><span>Portal
+												Management</span></a>
+										<ul style="display: none" class="acitem">
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-user-accounts"></i><span>User Accounts</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Users.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Users</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Roles.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Roles</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Message-Template.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Message
+																Templates</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-manage-site"></i><span>Manage Site</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Pages.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Pages</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Menu.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Menu</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Templates.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Templates</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-settings"></i><span>Settings</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/SEO.aspx"><i
+															class="icon-arrow-slim-e"></i><span>SEO</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Localization.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Localization</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Scheduler.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Scheduler</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Settings.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Portal
+																Settings</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-tools"></i><span>Tools</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/SQL.aspx"><i
+															class="icon-arrow-slim-e"></i><span>SQL</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Lists.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Lists</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Event-Log.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Event Log</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Cache-Maintenance.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Cache
+																Maintenance</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Files.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Files</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Links.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Links</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/CDN.aspx"><i
+															class="icon-arrow-slim-e"></i><span>CDN</span></a></li>
+												</ul></li>
+											<li class="parent sfLevel1"><a href="#"><i
+													class="icon-system"></i><span>System</span></a>
+												<ul style="display: none" class="acitem">
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/System-Event-StartUp.aspx"><i
+															class="icon-arrow-slim-e"></i><span>System Event
+																StartUp</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Modules.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Modules</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Module-Message.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Module Message</span></a></li>
+													<li class="child sfLevel2"><a
+														href="/aspx/Admin/Module-Maker.aspx"><i
+															class="icon-arrow-slim-e"></i><span>Module Maker</span></a></li>
+												</ul></li>
+											<li class="sfLevel1"><a href="/aspx/Admin/Portals.aspx"><i
+													class="icon-portals"></i><span>Portals</span></a></li>
+											<li class="sfLevel1"><a
+												href="/aspx/Admin/Site-Analytics.aspx"><i
+													class="icon-site-analytics"></i><span>Site Analytics</span></a></li>
+										</ul></li>
+								</ul>
+								<div class="sfHidepanel clearfix">
+									<a href="#"><i class="sidebarExpand"></i><span></span></a>
+								</div>
+							</div>
+
+							<div class="sfFooterwrapper clearfix" id="divFooterWrapper">
+								<div id="ctl_CPanleFooter1_divFooterContent">Copyright
+									2015 AspxCommerce.com. All Rights Reserved&reg;</div>
+
+							</div>
+						</div>
+						<!-- Side Bar Ends -->
+						<div class="sfMaincontent">
+							<div style="display: block" class="sfCpanel sfInnerwrapper"
+								id="divBottompanel">
+
+								<div class="">
+									<div class="sfModulecontent clearfix">
+
+										<script type="text/javascript">
+											//<![CDATA[
+											$(function() {
+												$(".sfLocale")
+														.localize(
+																{
+																	moduleKey : AspxAttributesManagement
+																});
+											});
+											var lblAttrFormHeading = "ctl19_lblAttrFormHeading";
+											var lblLength = "ctl19_lblLength";
+											var lblDefaultValue = "ctl19_lblDefaultValue";
+											var umi = "192";
+											//]]>
+										</script>
+
+										<!-- Grid -->
+										<div id="divAttribGrid">
+											<div class="cssClassCommonBox Curve">
+												<div class="cssClassHeader">
+													<h1>
+														<span id="ctl19_lblAttrGridHeading">Manage
+															Attributes</span>
+													</h1>
+													<div class="cssClassHeaderRight">
+														<div class="sfButtonwrapper">
+															<p>
+																<button type="button" id="btnAddNew" class="sfBtn">
+																	<span class="sfLocale icon-addnew">Add New
+																		Attribute</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnDeleteSelected"
+																	class="sfBtn">
+																	<span class="sfLocale icon-delete">Delete All
+																		Selected</span>
+																</button>
+															</p>
+
+															<div class="cssClassClear"></div>
+														</div>
+														<div class="cssClassClear"></div>
+													</div>
+													<div class="cssClassClear"></div>
+												</div>
+												<div class="sfGridwrapper">
+													<div class="sfGridWrapperContent">
+														<div class="sfFormwrapper sfTableOption">
+															<table width="100%" cellspacing="0" cellpadding="0"
+																border="0">
+																<tbody>
+																	<tr>
+																		<td width="150"><label
+																			class="cssClassLabel sfLocale">Attribute
+																				Name:</label> <input type="text" class="sfTextBoxSmall"
+																			id="txtSearchAttributeName" /></td>
+																		<td width="150"><label
+																			class="cssClassLabel sfLocale">Required:</label> <select
+																			style="width: 150px;" class="sfListmenu"
+																			id="ddlIsRequired">
+																				<option class="sfLocale" value="">-- All --</option>
+																				<option class="sfLocale" value="True">Yes</option>
+																				<option class="sfLocale" value="False">No</option>
+																		</select></td>
+																		<td width="150"><label
+																			class="cssClassLabel sfLocale">Comparable:</label><br />
+																			<select class="sfListmenu" id="ddlComparable">
+																				<option class="sfLocale" value="">-- All --</option>
+																				<option class="sfLocale" value="True">Yes</option>
+																				<option class="sfLocale" value="False">No</option>
+																		</select></td>
+																		<td width="160"><label
+																			class="cssClassLabel sfLocale">System:</label> <select
+																			class="sfListmenu" id="ddlIsSystem">
+																				<option class="sfLocale" value="">-- All --</option>
+																				<option class="sfLocale" value="True">Yes</option>
+																				<option class="sfLocale" value="False">No</option>
+																		</select></td>
+																		<td><br />
+																			<button class="sfBtn" id="btnSearchAttribute"
+																				type="button">
+																				<span class="sfLocale icon-search">Search</span>
+																			</button></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<div class="loading">
+															<img id="ajaxAttributeImageLoader" src=""
+																class="sfLocale" alt="loading...." title="loading...." />
+														</div>
+														<div class="log"></div>
+														<table id="gdvAttributes" cellspacing="0" cellpadding="0"
+															border="0" width="100%"></table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End of Grid -->
+										<!-- form -->
+										<div id="divAttribForm" style="display: none">
+											<div class="cssClassCommonBox Curve">
+												<div class="cssClassHeader">
+													<h1>
+														<span id="ctl19_lblAttrFormHeading">General
+															Information</span>
+													</h1>
+												</div>
+												<div class="cssClassTabPanelTable">
+													<div id="container-7">
+														<ul>
+															<li><a href="#fragment-1"> <span
+																	id="ctl19_lblTabTitle1">Attribute Properties</span>
+															</a></li>
+															<li><a href="#fragment-2"> <span
+																	id="ctl19_lblTabTitle2">Frontend Properties</span>
+															</a></li>
+														</ul>
+														<div id="fragment-1">
+															<div class="sfFormwrapper">
+																<h3>
+																	<span id="ctl19_lblTab1Info">General Information</span>
+																</h3>
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblAttributeName">Attribute Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtAttributeName" />
+																				<span class="cssClassRight"> <img
+																					class="cssClassSuccessImg sfLocale" height="13"
+																					width="18" title="Right" src="" alt="Right" />
+																			</span> <b class="cssClassError sfLocale">Ops! found
+																					something error, must be unique with no spaces</b> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblType">Type:</span></td>
+																			<td class="cssClassTableRightCol"><select
+																				id="ddlAttributeType" class="sfListmenu"
+																				title="Attribute Input Type"></select></td>
+																		</tr>
+																		<tr id="trdefaultValue">
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblDefaultValue">Default Value:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" class="sfInputbox" title="Default Value"
+																				value="" name="default_value_text"
+																				id="default_value_text" /> <span id="iferror"
+																				class="iferror" style="color: #FF0000;"></span>
+																				<div id="fileDefaultTooltip" style="display: none;"
+																					class="cssClassRed"></div> <textarea
+																					class="cssClassTextArea" cols="15" rows="2"
+																					title="Default Value" name="default_value_textarea"
+																					id="default_value_textarea"></textarea>
+																				<div id="div_default_value_date">
+																					<input type="text" class="sfInputbox"
+																						title="Default Value" value=""
+																						id="default_value_date" name="default_value_date" />
+																				</div> <select class="sfListmenu" title="Default Value"
+																				name="default_value_yesno" id="default_value_yesno">
+																					<option value="1" class="sfLocale">Yes</option>
+																					<option selected="selected" value="0"
+																						class="sfLocale">No</option>
+																			</select></td>
+																		</tr>
+																		<tr id="trOptionsAdd">
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblAddOptions">Manage Options
+																					(values of your attribute):</span> <span
+																				class="cssClassRequired">*</span></td>
+																			<td class="cssClassTableRightCol">
+																				<table id="dataTable" cellspacing="0"
+																					cellpadding="0" border="0" width="100%">
+																					<thead>
+																						<tr>
+																							<th><span class="cssClassLabel"
+																								id="ctl19_lblValue">Value:</span> <span
+																								class="cssClassRequired">*</span></th>
+																							<th><span class="cssClassLabel"
+																								id="ctl19_lblPosition">Display Order:</span> <span
+																								class="cssClassRequired">*</span></th>
+																							<th><span class="cssClassLabel"
+																								id="ctl19_lblAlias">Alias:</span></th>
+																							<th><span class="cssClassLabel"
+																								id="ctl19_lblIsDefault">Is Default:</span></th>
+																						</tr>
+																					</thead>
+																					<tbody>
+																						<tr>
+																							<td><input type="hidden" class="class-text"
+																								value="0" name="optionValueId" /> <input
+																								type="text" class="class-text" value=""
+																								name="value" /> <span class=""
+																								style="color: #FF0000;">*</span></td>
+																							<td><input type="text" class="class-text"
+																								value="" name="position" /> <span class=""
+																								style="color: #FF0000;">*</span></td>
+																							<td><input type="text" class="class-text"
+																								value="" name="Alias" /></td>
+																							<td class="tddefault"></td>
+																							<td><input type="Button" value="Add More"
+																								name="AddMore"
+																								class="AddOption cssClassButtonSubmit sfLocale" />
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblUniqueValue">Unique Value:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" name="chkUniqueValue" value=""
+																				class="cssClassCheckBox" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblTypeValidation">Type Validation:</span>
+																			</td>
+																			<td class="cssClassTableRightCol"><select
+																				id="ddlTypeValidation" class="sfListmenu" name=""
+																				title="Attribute Input Validation Type"></select></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblValuesRequired">Values Required:</span>
+																			</td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" name="chkValuesRequired"
+																				class="cssClassCheckBox" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblApplyTo">Apply To:</span></td>
+																			<td class="cssClassTableRightCol"><select
+																				id="ddlApplyTo" class="sfListmenu" name="">
+																					<option selected="selected" value="0"
+																						class="sfLocale">All Item Types</option>
+																					<option value="1" class="sfLocale">Selected
+																						Item Types</option>
+																			</select><span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr class="itemTypes">
+																			<td>&nbsp;</td>
+																			<td class="cssClassTableRightCol"><select
+																				id="lstItemType" class="cssClassMultiSelect"></select>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblLength">Length:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				class="sfInputbox verifyInteger" id="txtLength"
+																				type="text" maxlength="10" /> <span
+																				class="iferror sfLocale" style="color: #FF0000;">Integer
+																					Number</span> <span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblAliasName">Alias Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				class="sfInputbox" id="txtAliasName" type="text" />
+																				<span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblAliasToolTip">Alias ToolTip:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				class="sfInputbox" id="txtAliasToolTip" type="text" />
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblAliasHelp">Alias Help:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				class="sfInputbox" id="txtAliasHelp" type="text" />
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblDisplayOrder">Display Order:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				class="sfInputbox verifyInteger"
+																				id="txtDisplayOrder" type="text" /> <span
+																				class="cssClassRequired sfLocale">*</span> <span
+																				class="iferror sfLocale" style="color: #FF0000;">Integer
+																					Number</span></td>
+																		</tr>
+																		<tr id="activeTR">
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblActive">Active:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" name="chkActive"
+																				class="cssClassCheckBox" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div id="fragment-2">
+															<div class="sfFormwrapper">
+																<h3>
+																	<span id="ctl19_lblTab2Info">Frontend Display
+																		Settings</span>
+																</h3>
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblIsEnableEditor">Is Enable
+																					Editor:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkIsEnableEditor" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblIsUseInFilter">Used in Filter:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkIsUseInFilter" /></td>
+																		</tr>
+
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblUseInAdvancedSearch">Use in
+																					Advanced Search:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkUseInAdvancedSearch" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblComparable">Comparable on
+																					Front-end:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkComparable" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblUseForPriceRule">Use for Price
+																					Rule Conditions:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkUseForPriceRule" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblShowInItemListing">Show In Item
+																					Listing:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkShowInItemListing" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblShowInItemDetail">Show In Item
+																					Detail Page:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkShowInItemDetail" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="sfButtonwrapper">
+													<p>
+														<button type="button" id="btnBack" class="sfBtn">
+															<span class="sfLocale icon-arrow-slim-w">Back</span>
+														</button>
+													</p>
+													<p>
+														<button type="button" id="btnReset" class="sfBtn">
+															<span class="sfLocale icon-refresh">Reset</span>
+														</button>
+													</p>
+													<p>
+														<button type="button" class="delbutton sfBtn">
+															<span class="sfLocale icon-delete">Delete</span>
+														</button>
+													</p>
+													<p>
+														<button type="button" id="btnSaveAttribute" class="sfBtn">
+															<span class="sfLocale icon-save">Save</span>
+														</button>
+													</p>
+												</div>
+											</div>
+										</div>
+										<!-- End form -->
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- END sfMaincontent -->
+
+					</div>
+				</div>
+				<!-- END Body Content sfContentwrapper -->
+
+			</div>
+		</div>
+
+		<div title="Confirmation Required" id="dialog">
+			<label id="sf_lblConfirmation"> </label>
+		</div>
+
+	</form>
+	<div style="display: none;" id="ajaxBusy">
+		<img align="absmiddle"
+			src="Administrator/Templates/Default/images/ajax-loader.gif">&nbsp;Working...
+	</div>
+	<div id="tooltip" style="display: none;">
+		<h3></h3>
+		<div class="body"></div>
+		<div class="url"></div>
+	</div>
+	<div id="BoxOverlay"
+		style="position: fixed; top: 0px; left: 0px; opacity: 0.7; background-color: rgb(0, 0, 0); z-index: 999; height: 697px; width: 1349px; display: none;"></div>
+	<div id="alert-Box" style="display: none; position: fixed;">
+		<div id="alert-InBox">
+			<div id="alert-BoxContent">
+				<div id="alert-BoxContenedor"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
