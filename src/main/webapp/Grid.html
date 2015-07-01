@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="Content-Script-Type" content="text/javascript">
@@ -18,13 +17,13 @@
     <!-- Mimic Internet Explorer 7 -->
     <meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
     <meta content="RevealTrans(Duration=0,Transition=1)" http-equiv="PAGE-ENTER">
-    <link type="icon shortcut" media="icon" href="../../../../Sagin/favicon.ico">
+    <link type="icon shortcut" media="icon" href="favicon.ico">
     <!--[if IE 9]>
         <link rel="stylesheet" href="css/ie9.css" type="text/css" media="screen"/><![endif]-->
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="css/IE.css" type="text/css" media="screen"/><![endif]-->
     <!--[if lt IE 7]>
-        <script type="text/javascript" src="js/SageFrameCorejs/IE8.js"></script>
+        <script type="text/javascript" src="js/core/IE8.js"></script>
     <![endif]-->
     <title>Grid Example</title>
 
@@ -73,14 +72,14 @@
 
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
 
-    <script type="text/javascript" src="js/aspxcommercecore.js"></script>
+    <script type="text/javascript" src="js/core/aspxcommercecore.js"></script>
 
     <script type="text/javascript" src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
 
     <!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
     <script type="text/javascript" src="js/modules/Language/CoreJsLanguage.js"></script>
 
-    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/core/json2.js"></script>
 
     <script type="text/javascript" src="js/jquery-browser.js"></script>
     <script type="text/javascript" src="js/jquery.uniform.js"></script>
@@ -96,20 +95,20 @@
     <script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
 
-    <!-- <script type="text/javascript" src="js/Session.js"></script>
-    <script type="text/javascript" src="js/encoder.js"></script> -->
+    <!-- <script type="text/javascript" src="js/core/Session.js"></script>
+    <script type="text/javascript" src="js/core/encoder.js"></script> -->
 
     <script type="text/javascript" src="js/modules/AttributesManage.js"></script>
     <script type="text/javascript" src="js/modules/Language/AspxAttributesManagement.js"></script>
     <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
-    <link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
+    <link type="text/css" rel="stylesheet" href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css"/>
+    <link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css"/>
+    <link type="text/css" rel="stylesheet" href="css/MessageBox/style.css"/>
 
-    <link type="text/css" rel="stylesheet" href="css/Templates/grid.css" />
-    <link type="text/css" rel="stylesheet" href="css/Templates/topstickybar.css" />
-    <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
+    <link type="text/css" rel="stylesheet" href="css/Templates/grid.css"/>
+    <link type="text/css" rel="stylesheet" href="css/Templates/topstickybar.css"/>
+    <link type="text/css" rel="stylesheet" href="css/Templates/admin.css"/>
 </head>
 <body>
 <form enctype="multipart/form-data" action="Manage-Attributes.aspx" method="post" name="form1">
@@ -188,51 +187,45 @@
         <div class="sfGridwrapper">
             <div class="sfGridWrapperContent">
                 <div class="sfFormwrapper sfTableOption">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
                         <tr>
                             <td width="150">
-                                <label class="cssClassLabel sfLocale">
-                                    Attribute Name:
-                                </label>
-                                <input type="text" id="txtSearchAttributeName" class="sfTextBoxSmall"/>
+                                <label class="cssClassLabel sfLocale">Attribute Name:</label>
+                                <input type="text" class="sfTextBoxSmall" id="txtSearchAttributeName"/>
                             </td>
                             <td width="150">
-                                <label class="cssClassLabel sfLocale">
-                                    Required:
-                                </label>
-                                <select id="ddlIsRequired" class="sfListmenu" style="width: 150px;">
-                                    <option value="" class="sfLocale">-- All --</option>
-                                    <option value="True" class="sfLocale">Yes</option>
-                                    <option value="False" class="sfLocale">No</option>
+                                <label class="cssClassLabel sfLocale">Required:</label>
+                                <select style="width: 150px;" class="sfListmenu" id="ddlIsRequired">
+                                    <option class="sfLocale" value="">-- All --</option>
+                                    <option class="sfLocale" value="True">Yes</option>
+                                    <option class="sfLocale" value="False">No</option>
                                 </select>
                             </td>
                             <td width="150">
-                                <label class="cssClassLabel sfLocale">
-                                    Comparable:
-                                </label><br/>
-                                <select id="ddlComparable" class="sfListmenu">
-                                    <option value="" class="sfLocale">-- All --</option>
-                                    <option value="True" class="sfLocale">Yes</option>
-                                    <option value="False" class="sfLocale">No</option>
+                                <label class="cssClassLabel sfLocale">Comparable:</label><br/>
+                                <select class="sfListmenu" id="ddlComparable">
+                                    <option class="sfLocale" value="">-- All --</option>
+                                    <option class="sfLocale" value="True">Yes</option>
+                                    <option class="sfLocale" value="False">No</option>
                                 </select>
                             </td>
                             <td width="160">
-                                <label class="cssClassLabel sfLocale">
-                                    System:
-                                </label>
-                                <select id="ddlIsSystem" class="sfListmenu">
-                                    <option value="" class="sfLocale">-- All --</option>
-                                    <option value="True" class="sfLocale">Yes</option>
-                                    <option value="False" class="sfLocale">No</option>
+                                <label class="cssClassLabel sfLocale">System:</label>
+                                <select class="sfListmenu" id="ddlIsSystem">
+                                    <option class="sfLocale" value="">-- All --</option>
+                                    <option class="sfLocale" value="True">Yes</option>
+                                    <option class="sfLocale" value="False">No</option>
                                 </select>
                             </td>
                             <td>
                                 <br/>
-                                <button type="button" id="btnSearchAttribute" class="sfBtn">
+                                <button class="sfBtn" id="btnSearchAttribute" type="button">
                                     <span class="sfLocale icon-search">Search</span>
                                 </button>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="loading">
@@ -269,202 +262,206 @@
     </li>
 </ul>
 <div id="fragment-1">
-    <div class="sfFormwrapper">
-        <h3>
-            <span id="ctl19_lblTab1Info">General Information</span>
-        </h3>
-        <table cellspacing="0" cellpadding="0" border="0">
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblAttributeName">Attribute Name:</span>
+<div class="sfFormwrapper">
+    <h3>
+        <span id="ctl19_lblTab1Info">General Information</span>
+    </h3>
+    <table cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblAttributeName">Attribute Name:</span>
 
-                </td>
-                <td class="cssClassTableRightCol required">
-                    <input type="text" id="txtAttributeName" class="sfInputbox"/>
-                    <span class="cssClassRight">
+            </td>
+            <td class="cssClassTableRightCol required">
+                <input type="text" class="sfInputbox" id="txtAttributeName"/>
+                <span class="cssClassRight">
                                                                                 <img class="cssClassSuccessImg sfLocale" height="13" width="18" title="Right" src="" alt="Right" />
                                                                             </span>
-                    <b class="cssClassError sfLocale">Ops! found something error, must be unique with no spaces</b> <span class="cssClassRequired">*</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="lblType" runat="server" Text="Type:" CssClass="cssClassLabel" meta:resourcekey="lblTypeResource1"></asp:Label>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <select id="ddlAttributeType" class="sfListmenu" title="Attribute Input Type"></select>
-                </td>
-            </tr>
-            <tr id="trdefaultValue">
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblDefaultValue">Default Value:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="text" class="sfInputbox" title="Default Value" value="" name="default_value_text"
-                           id="default_value_text"/>
-                    <span id="iferror" class="iferror" style="color: #FF0000;"></span>
-                    <div id="fileDefaultTooltip" style="display: none;" class="cssClassRed">
-                    </div>
-                    <textarea class="cssClassTextArea" cols="15" rows="2" title="Default Value" name="default_value_textarea"
-                              id="default_value_textarea"></textarea>
-                    <div id="div_default_value_date">
-                        <input type="text" class="sfInputbox" title="Default Value" value="" id="default_value_date"
-                               name="default_value_date"/>
-                    </div>
-                    <select class="sfListmenu" title="Default Value" name="default_value_yesno"
-                            id="default_value_yesno">
-                        <option value="1" class="sfLocale">Yes</option>
-                        <option selected="selected" value="0" class="sfLocale">No</option>
-                    </select>
-                </td>
-            </tr>
-            <tr id="trOptionsAdd">
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblAddOptions">Manage Options (values of your attribute):</span>
-                    <span class="cssClassRequired">*</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <table id="dataTable" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>
-                                <span class="cssClassLabel" id="ctl19_lblValue">Value:</span>
-                                <span class="cssClassRequired">*</span>
-                            </th>
-                            <th>
-                                <span class="cssClassLabel" id="ctl19_lblPosition">Display Order:</span>
-                                <span class="cssClassRequired">*</span>
-                            </th>
-                            <th>
-                                <span class="cssClassLabel" id="ctl19_lblAlias">Alias:</span>
-                            </th>
-                            <th>
-                                <span class="cssClassLabel" id="ctl19_lblIsDefault">Is Default:</span>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tr>
-                            <td>
-                                <input type="hidden" class="class-text" value="0" name="optionValueId"/>
-                                <input type="text" class="class-text" value="" name="value"/>
-                                <span class="" style="color: #FF0000;">*</span>
-                            </td>
-                            <td>
-                                <input type="text" class="class-text" value="" name="position"/>
-                                <span class="" style="color: #FF0000;">*</span>
-                            </td>
-                            <td>
-                                <input type="text" class="class-text" value="" name="Alias"/>
-                            </td>
-                            <td class="tddefault"></td>
-                            <td>
-                                <input type="Button" value="Add More" name="AddMore" class="AddOption cssClassButtonSubmit sfLocale"/>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblUniqueValue">Unique Value:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" name="chkUniqueValue" value="" class="cssClassCheckBox"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblTypeValidation">Type Validation:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <select id="ddlTypeValidation" class="sfListmenu" name="" title="Attribute Input Validation Type"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblValuesRequired">Values Required:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" name="chkValuesRequired" class="cssClassCheckBox"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblApplyTo">Apply To:</span>
+                <b class="cssClassError sfLocale">Ops! found something error, must be unique with no spaces</b> <span class="cssClassRequired">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblType">Type:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <select id="ddlAttributeType" class="sfListmenu" title="Attribute Input Type"></select>
+            </td>
+        </tr>
+        <tr id="trdefaultValue">
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblDefaultValue">Default Value:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <input type="text" class="sfInputbox" title="Default Value" value="" name="default_value_text"
+                       id="default_value_text"/>
+                <span id="iferror" class="iferror" style="color: #FF0000;"></span>
+                <div id="fileDefaultTooltip" style="display: none;" class="cssClassRed">
+                </div>
+                <textarea class="cssClassTextArea" cols="15" rows="2" title="Default Value" name="default_value_textarea"
+                          id="default_value_textarea"></textarea>
+                <div id="div_default_value_date">
+                    <input type="text" class="sfInputbox" title="Default Value" value="" id="default_value_date"
+                           name="default_value_date"/>
+                </div>
+                <select class="sfListmenu" title="Default Value" name="default_value_yesno"
+                        id="default_value_yesno">
+                    <option value="1" class="sfLocale">Yes</option>
+                    <option selected="selected" value="0" class="sfLocale">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="trOptionsAdd">
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblAddOptions">Manage Options (values of your attribute):</span>
+                <span class="cssClassRequired">*</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <table id="dataTable" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>
+                            <span class="cssClassLabel" id="ctl19_lblValue">Value:</span>
+                            <span class="cssClassRequired">*</span>
+                        </th>
+                        <th>
+                            <span class="cssClassLabel" id="ctl19_lblPosition">Display Order:</span>
+                            <span class="cssClassRequired">*</span>
+                        </th>
+                        <th>
+                            <span class="cssClassLabel" id="ctl19_lblAlias">Alias:</span>
+                        </th>
+                        <th>
+                            <span class="cssClassLabel" id="ctl19_lblIsDefault">Is Default:</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="hidden" class="class-text" value="0" name="optionValueId"/>
+                            <input type="text" class="class-text" value="" name="value"/>
+                            <span class="" style="color: #FF0000;">*</span>
+                        </td>
+                        <td>
+                            <input type="text" class="class-text" value="" name="position"/>
+                            <span class="" style="color: #FF0000;">*</span>
+                        </td>
+                        <td>
+                            <input type="text" class="class-text" value="" name="Alias"/>
+                        </td>
+                        <td class="tddefault"></td>
+                        <td>
+                            <input type="Button" value="Add More" name="AddMore" class="AddOption cssClassButtonSubmit sfLocale"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblUniqueValue">Unique Value:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <input type="checkbox" name="chkUniqueValue" value="" class="cssClassCheckBox"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblTypeValidation">Type Validation:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <select id="ddlTypeValidation" class="sfListmenu" name="" title="Attribute Input Validation Type"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblValuesRequired">Values Required:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <input type="checkbox" name="chkValuesRequired" class="cssClassCheckBox"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblApplyTo">Apply To:</span>
 
-                </td>
-                <td class="cssClassTableRightCol">
-                    <select id="ddlApplyTo" class="sfListmenu" name="">
-                        <option selected="selected" value="0" class="sfLocale">All Item Types</option>
-                        <option value="1" class="sfLocale">Selected Item Types</option>
-                    </select><span class="cssClassRequired">*</span>
-                </td>
-            </tr>
-            <tr class="itemTypes">
-                <td>
-                    &nbsp;
+            </td>
+            <td class="cssClassTableRightCol">
+                <select id="ddlApplyTo" class="sfListmenu" name="">
+                    <option selected="selected" value="0" class="sfLocale">All Item Types</option>
+                    <option value="1" class="sfLocale">Selected Item Types</option>
+                </select><span class="cssClassRequired">*</span>
+            </td>
+        </tr>
+        <tr class="itemTypes">
+            <td>
+                &nbsp;
 
-                </td>
-                <td class="cssClassTableRightCol">
-                    <select id="lstItemType" class="cssClassMultiSelect"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblLength">Length:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <select id="lstItemType" class="cssClassMultiSelect"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblLength">Length:</span>
 
-                </td>
-                <td class="cssClassTableRightCol required">
-                    <input class="sfInputbox verifyInteger" id="txtLength" type="text" maxlength="10"/>
-                    <span class="iferror sfLocale" style="color: #FF0000;">Integer Number</span> <span class="cssClassRequired">*</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblAliasName">Alias Name:</span>
+            </td>
+            <td class="cssClassTableRightCol required">
+                <input class="sfInputbox verifyInteger" id="txtLength" type="text" maxlength="10"/>
+                <span class="iferror sfLocale" style="color: #FF0000;">Integer Number</span> <span class="cssClassRequired">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblAliasName">Alias Name:</span>
 
-                </td>
-                <td class="cssClassTableRightCol required">
-                    <input class="sfInputbox" id="txtAliasName" type="text"/>
-                    <span class="cssClassRequired">*</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblAliasToolTip">Alias ToolTip:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input class="sfInputbox" id="txtAliasToolTip" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblAliasHelp">Alias Help:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input class="sfInputbox" id="txtAliasHelp" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblDisplayOrder">Display Order:</span>
+            </td>
+            <td class="cssClassTableRightCol required">
+                <input class="sfInputbox" id="txtAliasName" type="text"/>
+                <span class="cssClassRequired">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblAliasToolTip">Alias ToolTip:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <input class="sfInputbox" id="txtAliasToolTip" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblAliasHelp">Alias Help:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <input class="sfInputbox" id="txtAliasHelp" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblDisplayOrder">Display Order:</span>
 
-                </td>
-                <td class="cssClassTableRightCol required">
-                    <input class="sfInputbox verifyInteger" id="txtDisplayOrder" type="text"/> <span class="cssClassRequired sfLocale">*</span>
-                    <span class="iferror sfLocale" style="color: #FF0000;">Integer Number</span>
-                </td>
-            </tr>
-            <tr id="activeTR">
-                <td>
-                    <span class="cssClassLabel" id="ctl19_lblActive">Active:</span>
-                </td>
-                <td class="cssClassTableRightCol">
-                    <input type="checkbox" name="chkActive" class="cssClassCheckBox"/>
-                </td>
-            </tr>
-        </table>
-    </div>
+            </td>
+            <td class="cssClassTableRightCol required">
+                <input class="sfInputbox verifyInteger" id="txtDisplayOrder" type="text"/> <span class="cssClassRequired sfLocale">*</span>
+                <span class="iferror sfLocale" style="color: #FF0000;">Integer Number</span>
+            </td>
+        </tr>
+        <tr id="activeTR">
+            <td>
+                <span class="cssClassLabel" id="ctl19_lblActive">Active:</span>
+            </td>
+            <td class="cssClassTableRightCol">
+                <input type="checkbox" name="chkActive" class="cssClassCheckBox"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 <div id="fragment-2">
     <div class="sfFormwrapper">
@@ -472,12 +469,13 @@
             <span id="ctl19_lblTab2Info">Frontend Display Settings</span>
         </h3>
         <table cellspacing="0" cellpadding="0" border="0">
+            <tbody>
             <tr>
                 <td>
                     <span class="cssClassLabel" id="ctl19_lblIsEnableEditor">Is Enable Editor:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkIsEnableEditor">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkIsEnableEditor"/>
                 </td>
             </tr>
             <tr>
@@ -485,7 +483,7 @@
                     <span class="cssClassLabel" id="ctl19_lblIsUseInFilter">Used in Filter:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkIsUseInFilter">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkIsUseInFilter"/>
                 </td>
             </tr>
 
@@ -494,7 +492,7 @@
                     <span class="cssClassLabel" id="ctl19_lblUseInAdvancedSearch">Use in Advanced Search:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkUseInAdvancedSearch">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkUseInAdvancedSearch"/>
                 </td>
             </tr>
             <tr>
@@ -502,7 +500,7 @@
                     <span class="cssClassLabel" id="ctl19_lblComparable">Comparable on Front-end:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkComparable">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkComparable"/>
                 </td>
             </tr>
             <tr>
@@ -510,7 +508,7 @@
                     <span class="cssClassLabel" id="ctl19_lblUseForPriceRule">Use for Price Rule Conditions:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkUseForPriceRule">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkUseForPriceRule"/>
                 </td>
             </tr>
             <tr>
@@ -518,7 +516,7 @@
                     <span class="cssClassLabel" id="ctl19_lblShowInItemListing">Show In Item Listing:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkShowInItemListing">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkShowInItemListing"/>
                 </td>
             </tr>
             <tr>
@@ -526,9 +524,10 @@
                     <span class="cssClassLabel" id="ctl19_lblShowInItemDetail">Show In Item Detail Page:</span>
                 </td>
                 <td class="cssClassTableRightCol">
-                    <input type="checkbox" class="cssClassCheckBox" name="chkShowInItemDetail">
+                    <input type="checkbox" class="cssClassCheckBox" name="chkShowInItemDetail"/>
                 </td>
             </tr>
+            </tbody>
         </table>
     </div>
 </div>
