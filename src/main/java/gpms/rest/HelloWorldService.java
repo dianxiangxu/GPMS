@@ -48,6 +48,14 @@ public class HelloWorldService {
 				+ "<body><h1>" + "Hello " + id + "</body></h1>" + "</html> ";
 	}
 
+	// This method is called if JSON is request
+	@Path("{id}/json")
+	@GET
+	@Produces("application/json")
+	public String sayJSONHello(@PathParam("id") String id) {
+		return "{\"name\":\"" + id + "\", \"saying\":\"Hello\"}";
+	}
+
 	// Using Parameterized REST
 	@GET
 	@Path("/{parameter}")
