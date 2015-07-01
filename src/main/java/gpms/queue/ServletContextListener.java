@@ -26,14 +26,10 @@ public class ServletContextListener implements
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		// Read the properties from here
-		properties.put(
-				"socialnetworking.workers",
-				event.getServletContext().getInitParameter(
-						"socialnetworking.workers"));
-		properties.put(
-				"socialnetworking.queuedepth",
-				event.getServletContext().getInitParameter(
-						"socialnetworking.queuedepth"));
+		properties.put("gpms.workers", event.getServletContext()
+				.getInitParameter("gpms.workers"));
+		properties.put("gpms.queuedepth", event.getServletContext()
+				.getInitParameter("gpms.queuedepth"));
 
 		System.out.println("Read the following properties from web.xml: "
 				+ properties);
