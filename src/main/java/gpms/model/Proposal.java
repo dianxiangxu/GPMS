@@ -16,19 +16,19 @@ public class Proposal extends BaseEntity {
 	@Property("proposal no")
 	@Indexed(value = IndexDirection.ASC, name = "proposalNoIndex", unique = true)
 	private String proposalNo;
-	
+
 	@Property("date received")
 	private Date dateReceived;
-	
+
 	@Property("proposal status")
 	private Status proposalStatus = Status.NEW;
-	
+
 	@Embedded("investigator info")
 	private InvestigatorInfo investigatorInfo;
-	
+
 	@Embedded("project info")
 	private ProjectInfo projectInfo;
-	
+
 	@Embedded("sponsor and budget info")
 	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
 
@@ -53,7 +53,7 @@ public class Proposal extends BaseEntity {
 		this.investigatorInfo = investigatorInfo;
 		this.projectInfo = projectInfo;
 		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
-		this.costShareInfo  = new CostShareInfo();
+		this.costShareInfo = new CostShareInfo();
 		this.universityCommitments = new UniversityCommitments();
 		this.conflicOfInterest = new ConflictOfInterest();
 		this.complianceInfo = new ComplianceInfo();
@@ -84,8 +84,6 @@ public class Proposal extends BaseEntity {
 		complianceInfo = new ComplianceInfo();
 	}
 
-	
-
 	public String getProposalNo() {
 		return proposalNo;
 	}
@@ -100,8 +98,7 @@ public class Proposal extends BaseEntity {
 
 	public void setDateReceived(Date dateReceived) {
 		Date currDate = new Date();
-		if(dateReceived.equals(currDate) || dateReceived.after(currDate))
-		{
+		if (dateReceived.equals(currDate) || dateReceived.after(currDate)) {
 			this.dateReceived = dateReceived;
 		}
 	}
@@ -171,10 +168,12 @@ public class Proposal extends BaseEntity {
 	public void setComplianceInfo(ComplianceInfo complianceInfo) {
 		this.complianceInfo = complianceInfo;
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.getProposalNo() + " " + this.getDateReceived() + " "
-				+ this.getProposalStatus();
+		return new StringBuffer(" Proposal Number : ")
+				.append(this.getProposalNo()).append(" Date Received : ")
+				.append(this.getDateReceived()).append(" Proposal Status : ")
+				.append(this.getProposalStatus()).toString();
 	}
 }

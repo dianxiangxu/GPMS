@@ -466,9 +466,11 @@ public class UserProfile extends BaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return this.getFirstName() + " " + this.getMiddleName() + " "
-				+ this.getLastName() + ", Account name: "
-				+ userAccount.getUserName();
+		return new StringBuffer(" First Name : ").append(this.getFirstName())
+				.append(" Middle Name : ").append(this.getMiddleName())
+				.append(" Last Name : ").append(this.getLastName())
+				.append(" Account name: ").append(userAccount.getUserName())
+				.toString();
 	}
 
 	public boolean equals(UserProfile up) {
