@@ -13,13 +13,14 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
-public class UserAccount extends BaseEntity 
-{
+public class UserAccount extends BaseEntity {
 	@Property("username")
 	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
 	private String userName;
 	@Property("password")
 	private String password;
+	@Property("is deleted")
+	private boolean isDeleted;
 
 	public UserAccount() {
 		this.userName = new String();
@@ -54,24 +55,32 @@ public class UserAccount extends BaseEntity
 		this.password = password;
 	}
 
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
 	@Override
 	public String toString() {
-		return this.getUserName() + " " + this.getPassword();
+		return new StringBuffer(" User Name : ").append(this.getUserName())
+				.append(" Password : ").append(this.getPassword()).toString();
 	}
 
 	public boolean equals(UserAccount ua) {
-		return this.userName.equals(ua.userName) && this.password.equals(ua.password);
+		return this.userName.equals(ua.userName)
+				&& this.password.equals(ua.password);
 	}
-	
+
 	@Override
-	public UserAccount clone()
-	{
+	public UserAccount clone() {
 		UserAccount copy = new UserAccount(this.userName, this.password);
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
 		copy.setIsDeleted(this.getIsDeleted());
-		for(AuditLog entry : this.getAuditLog())
-		{
+		for (AuditLog entry : this.getAuditLog()) {
 			copy.addEntryToAuditLog(entry);
 		}
 		return copy;

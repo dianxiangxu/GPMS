@@ -23,8 +23,6 @@ public abstract class BaseEntity {
 	@Embedded("audit log")
 	private ArrayList<AuditLog> auditLog;
 
-	private boolean isDeleted;
-
 	public BaseEntity() {
 		super();
 		auditLog = new ArrayList<AuditLog>();
@@ -33,7 +31,7 @@ public abstract class BaseEntity {
 	public ObjectId getId() {
 		return id;
 	}
-	
+
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
@@ -56,13 +54,5 @@ public abstract class BaseEntity {
 
 	public void addEntryToAuditLog(AuditLog entry) {
 		auditLog.add(entry);
-	}
-
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public boolean getIsDeleted() {
-		return isDeleted;
 	}
 }

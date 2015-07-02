@@ -136,7 +136,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	public void deleteProposal(Proposal proposal, UserProfile author)
 	{
 		Datastore ds = getDatastore();
-		proposal.setIsDeleted(true);
 		proposal.setProposalStatus(Status.DELETED);
 		AuditLog entry = new AuditLog(author, "Deleted Proposal", new Date());
 		proposal.addEntryToAuditLog(entry);
