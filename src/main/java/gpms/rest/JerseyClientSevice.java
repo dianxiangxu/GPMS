@@ -1,5 +1,7 @@
 package gpms.rest;
 
+import gpms.model.Proposal;
+import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import javax.ws.rs.Consumes;
@@ -18,9 +20,39 @@ public class JerseyClientSevice {
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserProfile produceJSON(@PathParam("name") String name) {
 
-		UserProfile user = new UserProfile("Milson", "", "Munakami");
+		UserProfile user = new UserProfile(name, "", "Munakami");
 
 		return user;
+	}
+
+	@GET
+	@Path("/print/UserProfile")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserProfile produceUserProfileJSON() {
+
+		UserProfile userProfile = new UserProfile();
+
+		return userProfile;
+	}
+
+	@GET
+	@Path("/print/UserAccount")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserAccount produceUserAccountJSON() {
+
+		UserAccount userAccount = new UserAccount();
+
+		return userAccount;
+	}
+
+	@GET
+	@Path("/print/Proposal")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Proposal produceProposalJSON() {
+
+		Proposal proposal = new Proposal();
+
+		return proposal;
 	}
 
 	@POST

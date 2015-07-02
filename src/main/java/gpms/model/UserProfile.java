@@ -18,6 +18,13 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.utils.IndexDirection;
 
+//{"id":null,"version":null,"auditLog":[],
+//"firstName":"Milson","middleName":"","lastName":"Munakami",
+//"officeNumbers":[],"mobileNumbers":[],"homeNumbers":[],
+//"address":{"street":"","city":"","state":"","zipcode":"","country":""},
+//"workEmails":[],"personalEmails":[],
+//"userAccount":{"id":null,"version":null,"auditLog":[],"userName":"","password":"","isDeleted":false},
+//"isDeleted":false,"detailsList":[]}
 @Entity(value = UserProfileDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserProfile extends BaseEntity {
 	@Property("first name")

@@ -12,6 +12,9 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
+//{"id":null,"version":null,"auditLog":[],
+//"userName":"","password":"","isDeleted":false}
+
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserAccount extends BaseEntity {
 	@Property("username")
