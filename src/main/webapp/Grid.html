@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta content="Manage Attributes" name="DESCRIPTION">
 <meta content="Manage Attributes" name="KEYWORDS">
-<meta content="@SageFrame" name="COPYRIGHT">
+<meta content="@GPMS" name="COPYRIGHT">
 <meta content="GENERATOR" name="GENERATOR">
 <meta content="Author" name="AUTHOR">
 <meta content="DOCUMENT" name="RESOURCE-TYPE">
@@ -32,15 +32,11 @@
 
 <script type="text/javascript">
 	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
-	$
-			.ajaxSetup({
-				'beforeSend' : function(xhr) {
-					xhr
-							.setRequestHeader(
-									"ASPX-TOKEN",
-									"NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5");
-				}
-			});
+	$.ajaxSetup({
+		'beforeSend' : function(xhr) {
+			xhr.setRequestHeader("ASPX-TOKEN", _aspx_token);
+		}
+	});
 </script>
 
 <script type="text/javascript">
@@ -146,8 +142,8 @@
 
 		</div>
 		<noscript>
-			<span id="lblnoScript">This page requires java-script to be
-				enabled. Please adjust your browser-settings.</span>
+			<span>This page requires java-script to be enabled. Please
+				adjust your browser-settings.</span>
 		</noscript>
 
 		<div id="sfOuterwrapper">
@@ -158,8 +154,6 @@
 					<div id="divCenterContent">
 						<!-- Side Bar Starts-->
 						<div class="sideBarLeft" id="divSideBar">
-
-
 							<script type="text/javascript">
 								//<![CDATA[    
 								$(function() {
@@ -1086,15 +1080,15 @@
 
 							<div class="sfFooterwrapper clearfix" id="divFooterWrapper">
 								<div id="ctl_CPanleFooter1_divFooterContent">Copyright
-									2015 AspxCommerce.com. All Rights Reserved&reg;</div>
+									2015 GPMS. All Rights Reserved&reg;</div>
 
 							</div>
 						</div>
 						<!-- Side Bar Ends -->
+
 						<div class="sfMaincontent">
 							<div style="display: block" class="sfCpanel sfInnerwrapper"
 								id="divBottompanel">
-
 								<div class="">
 									<div class="sfModulecontent clearfix">
 
@@ -1107,9 +1101,6 @@
 																	moduleKey : AspxAttributesManagement
 																});
 											});
-											var lblAttrFormHeading = "ctl19_lblAttrFormHeading";
-											var lblLength = "ctl19_lblLength";
-											var lblDefaultValue = "ctl19_lblDefaultValue";
 											var umi = "192";
 											//]]>
 										</script>
@@ -1119,8 +1110,7 @@
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
-														<span id="ctl19_lblAttrGridHeading">Manage
-															Attributes</span>
+														<span>Manage Attributes</span>
 													</h1>
 													<div class="cssClassHeaderRight">
 														<div class="sfButtonwrapper">
@@ -1203,8 +1193,7 @@
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
-														<span id="ctl19_lblAttrFormHeading">General
-															Information</span>
+														<span>General Information</span>
 													</h1>
 												</div>
 												<div class="cssClassTabPanelTable">
@@ -1220,7 +1209,7 @@
 														<div id="fragment-1">
 															<div class="sfFormwrapper">
 																<h3>
-																	<span id="ctl19_lblTab1Info">General Information</span>
+																	<span>General Information</span>
 																</h3>
 																<table cellspacing="0" cellpadding="0" border="0">
 																	<tbody>
@@ -1244,8 +1233,8 @@
 																				title="Attribute Input Type"></select></td>
 																		</tr>
 																		<tr id="trdefaultValue">
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblDefaultValue">Default Value:</span></td>
+																			<td><span class="cssClassLabel">Default
+																					Value:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" title="Default Value"
 																				value="" name="default_value_text"
@@ -1352,8 +1341,7 @@
 																			</td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblLength">Length:</span></td>
+																			<td><span class="cssClassLabel">Length:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				class="sfInputbox verifyInteger" id="txtLength"
 																				type="text" maxlength="10" /> <span
@@ -1405,8 +1393,7 @@
 														<div id="fragment-2">
 															<div class="sfFormwrapper">
 																<h3>
-																	<span id="ctl19_lblTab2Info">Frontend Display
-																		Settings</span>
+																	<span>Frontend Display Settings</span>
 																</h3>
 																<table cellspacing="0" cellpadding="0" border="0">
 																	<tbody>
