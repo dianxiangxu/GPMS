@@ -1,15 +1,16 @@
 package gpms.rest;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import com.fasterxml.jackson.jaxrs.json.annotation.JSONP;
 
 // Plain old Java Object it does not extend as class or implements 
 // an interface
@@ -73,5 +74,28 @@ public class HelloWorldService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllProducts() {
 		return "{\"name\":\"MAC\", \"quantity\":\"10\"}";
+	}
+
+	@PUT
+	@Path("/create")
+	public void createUser() {
+		System.out.println("Inside createUser method");
+
+	}
+
+	// Normal resource methods
+	@GET
+	public void getUser() {
+		System.out.println("Inside getUser method");
+	}
+
+	@POST
+	public void updateUser() {
+
+	}
+
+	@DELETE
+	public void deleteUser() {
+
 	}
 }

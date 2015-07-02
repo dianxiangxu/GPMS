@@ -24,7 +24,7 @@ public class JerseyClient {
 			Client client = Client.create(clientConfig);
 
 			WebResource webResource = client
-					.resource("http://localhost:9090/JerseyJSONExample/rest/jsonServices/send");
+					.resource("http://localhost:8181/GPMS/REST/jsonServices/send");
 
 			ClientResponse response = webResource.accept("application/json")
 					.type("application/json").post(ClientResponse.class, user);
