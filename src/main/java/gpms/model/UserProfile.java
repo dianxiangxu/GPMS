@@ -57,8 +57,11 @@ public class UserProfile extends BaseEntity {
 	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-	@Reference(value = "user id"/*, lazy = true*/)
+	@Reference(value = "user id"/* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
+
+	@Property("is deleted")
+	private boolean isDeleted;
 
 	/**
 	 * Overloaded constructor
@@ -364,7 +367,8 @@ public class UserProfile extends BaseEntity {
 	private void deleteNumber(List<String> numberString, String deleteNumber) {
 		int index = numberString.indexOf(deleteNumber);
 		System.out.println("Inside of delete number method: ");
-		System.out.println("The number to delete is " + deleteNumber + " from list ");
+		System.out.println("The number to delete is " + deleteNumber
+				+ " from list ");
 		System.out.println("List before operation: " + numberString.toString());
 		numberString.remove(index);
 		System.out.println("List after operation: " + numberString.toString());
@@ -447,6 +451,14 @@ public class UserProfile extends BaseEntity {
 		userAccount = newUserAccount;
 	}
 
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
 	/**
 	 * toString returns full user name
 	 * 
@@ -460,40 +472,39 @@ public class UserProfile extends BaseEntity {
 	}
 
 	public boolean equals(UserProfile up) {
-		return this.firstName.equals(up.firstName) && this.middleName.equals(up.middleName)
-				&& this.lastName.equals(up.lastName) && this.details.equals(up.details) 
-				&& this.officeNumbers.equals(up.officeNumbers) && this.mobileNumbers.equals(up.mobileNumbers) 
-				&& this.homeNumbers.equals(up.homeNumbers) && this.address.equals(up.address) 
-				&& this.workEmails.equals(up.workEmails) && this.personalEmails.equals(up.personalEmails) 
+		return this.firstName.equals(up.firstName)
+				&& this.middleName.equals(up.middleName)
+				&& this.lastName.equals(up.lastName)
+				&& this.details.equals(up.details)
+				&& this.officeNumbers.equals(up.officeNumbers)
+				&& this.mobileNumbers.equals(up.mobileNumbers)
+				&& this.homeNumbers.equals(up.homeNumbers)
+				&& this.address.equals(up.address)
+				&& this.workEmails.equals(up.workEmails)
+				&& this.personalEmails.equals(up.personalEmails)
 				&& this.userAccount.equals(up.userAccount);
 	}
-	
+
 	@Override
-	public UserProfile clone()
-	{
-		UserProfile copy = new UserProfile(this.firstName, this.middleName, this.lastName);
-		for(PositionDetails pd : this.details)
-		{
+	public UserProfile clone() {
+		UserProfile copy = new UserProfile(this.firstName, this.middleName,
+				this.lastName);
+		for (PositionDetails pd : this.details) {
 			copy.addDetails(pd.clone());
 		}
-		for(String phone : this.officeNumbers)
-		{
+		for (String phone : this.officeNumbers) {
 			copy.addOfficeNumber(phone);
 		}
-		for(String phone : this.mobileNumbers)
-		{
+		for (String phone : this.mobileNumbers) {
 			copy.addMobileNumber(phone);
 		}
-		for(String phone : this.homeNumbers)
-		{
+		for (String phone : this.homeNumbers) {
 			copy.addHomeNumber(phone);
 		}
-		for(String email : this.workEmails)
-		{
+		for (String email : this.workEmails) {
 			copy.addWorkEmail(email);
 		}
-		for(String email : this.personalEmails)
-		{
+		for (String email : this.personalEmails) {
 			copy.addPersonalEmail(email);
 		}
 		copy.setUserId(this.userAccount.clone());
@@ -501,11 +512,10 @@ public class UserProfile extends BaseEntity {
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
 		copy.setIsDeleted(this.getIsDeleted());
-		for(AuditLog entry : this.getAuditLog())
-		{
+		for (AuditLog entry : this.getAuditLog()) {
 			copy.addEntryToAuditLog(entry);
 		}
-		
+
 		return copy;
 	}
 }
