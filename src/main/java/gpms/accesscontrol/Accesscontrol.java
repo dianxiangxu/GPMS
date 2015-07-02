@@ -56,6 +56,13 @@ public class Accesscontrol {
 		}
 	}
 
+	/**
+	 * Does this need a user name or their position details?
+	 * @param userName
+	 * @param resource
+	 * @param action
+	 * @return
+	 */
 	private String createXACMLRequest(String userName, String resource,
 			String action) {
 
