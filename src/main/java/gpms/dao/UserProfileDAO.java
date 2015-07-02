@@ -7,7 +7,7 @@ package gpms.dao;
  */
 
 import gpms.DAL.MongoDBConnector;
-
+import gpms.accesscontrol.Accesscontrol;
 import gpms.model.Address;
 import gpms.model.AuditLog;
 import gpms.model.PositionDetails;
@@ -193,6 +193,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 */
 	public void setFirstName(UserProfile author, UserProfile target, String newName)
 	{
+		Accesscontrol ac = new Accesscontrol();
 		Datastore ds = getDatastore();
 		if(!target.getFirstName().equals(newName))
 		{
