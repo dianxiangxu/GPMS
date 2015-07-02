@@ -16,11 +16,12 @@ import javax.ws.rs.core.Response;
 @Path("/jsonServices")
 public class JerseyClientSevice {
 	@GET
-	@Path("/print/{name}")
+	@Path("/print/{firstName}/{lastName}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserProfile produceJSON(@PathParam("name") String name) {
+	public UserProfile produceJSON(@PathParam("firstName") String firstName,
+			@PathParam("lastName") String lastName) {
 
-		UserProfile user = new UserProfile(name, "", "Munakami");
+		UserProfile user = new UserProfile(firstName, "", lastName);
 
 		return user;
 	}
