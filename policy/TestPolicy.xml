@@ -13,7 +13,7 @@
 		Effect="Permit">
 		<Description>
 	Any subject with an e-mail name in the med.example.com domain
-	can perform ay action on any resource.
+	can perform any action on any resource.
 	</Description>
 		<Target>
 			<AnyOf>

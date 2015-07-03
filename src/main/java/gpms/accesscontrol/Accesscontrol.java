@@ -156,24 +156,24 @@ public class Accesscontrol {
 		Set<AbstractResult> set = responseCtx.getResults();
 		Iterator<AbstractResult> it = set.iterator();
 		int intDecision = 3;
-		while (it.hasNext()) {
+		while (it.hasNext()) 
+		{
 			ar = it.next();
 			intDecision = ar.getDecision();
-			if (intDecision >= 4 && intDecision <= 6) {
+			if (intDecision >= 4 && intDecision <= 6)
+			{
 				intDecision = 2;
 			}
-			System.out.println("Decision:" + intDecision + " that is: "
-					+ AbstractResult.DECISIONS[intDecision]);
+			System.out.println("Decision:" + intDecision + " that is: " + AbstractResult.DECISIONS[intDecision]);
 			break; // WARNING: We currently take the first decision as the final
 					// one, but multipul decisions may be returned
 		}
 		return AbstractResult.DECISIONS[intDecision];
 	}
 
-	public String getXACMLdecision(String userName, String resource,
-			String action, String environment) {
-		String request = createXACMLRequest(userName, resource, action,
-				environment);
+	public String getXACMLdecision(String userName, String resource, String action, String environment) 
+	{
+		String request = createXACMLRequest(userName, resource, action, environment);
 		ResponseCtx responseCtx = getResponse(request);
 
 		Set<AbstractResult> set = responseCtx.getResults();
@@ -192,6 +192,11 @@ public class Accesscontrol {
 		}
 		return AbstractResult.DECISIONS[intDecision];
 	}
+	
+//	public int returnDecision(String userName, String resource, String action)
+//	{
+//		
+//	}
 
 	public static void main(String[] args) {
 		Accesscontrol ac = new Accesscontrol();
