@@ -1,6 +1,4 @@
-package gpms.dao;
-
-import gpms.model.AuditLog;
+package gpms.model;
 
 import java.util.ArrayList;
 import java.util.List;
