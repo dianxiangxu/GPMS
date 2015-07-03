@@ -1,7 +1,5 @@
 package gpms.model;
 
-import gpms.dao.BaseEntity;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;

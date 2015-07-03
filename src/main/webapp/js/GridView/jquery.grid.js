@@ -242,7 +242,7 @@ var fromServer = 0;
 													success : function(data) {
 														g.clearAll();
 														g.addHeader();
-														if (data.d.length == 0) {
+														if (data.length == 0) {
 															g.noDataMsg();
 														} else {
 															g.addData(data);
@@ -885,7 +885,7 @@ var fromServer = 0;
 
 			addData : function(data) {
 				var tbody = document.createElement('tbody');
-				$.each(data.d, function(i, row) {
+				$.each(data, function(i, row) {
 					delete (row.__type);
 					p.total = row.RowTotal;
 					delete (row.RowTotal);

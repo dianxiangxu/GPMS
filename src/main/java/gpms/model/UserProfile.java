@@ -5,7 +5,6 @@
 
 package gpms.model;
 
-import gpms.dao.BaseEntity;
 import gpms.dao.UserProfileDAO;
 
 import java.util.ArrayList;

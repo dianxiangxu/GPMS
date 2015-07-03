@@ -4,7 +4,6 @@ package gpms.model;
 
 //import java.util.Date;
 
-import gpms.dao.BaseEntity;
 import gpms.dao.UserAccountDAO;
 
 import org.mongodb.morphia.annotations.Entity;
@@ -19,9 +18,9 @@ import org.mongodb.morphia.utils.IndexDirection;
 public class UserAccount extends BaseEntity {
 	@Property("username")
 	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
-	private String userName;
+	private String userName = new String();
 	@Property("password")
-	private String password;
+	private String password = new String();
 	@Property("is deleted")
 	private boolean isDeleted;
 

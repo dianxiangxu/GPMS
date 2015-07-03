@@ -1,6 +1,5 @@
 package gpms.model;
 
-import gpms.dao.BaseEntity;
 import gpms.dao.ProposalDAO;
 
 import java.util.Date;
