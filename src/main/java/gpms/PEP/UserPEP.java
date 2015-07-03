@@ -1,5 +1,10 @@
 package gpms.PEP;
 
+
+/**
+ * @author Thomas Volz
+ * 
+ */
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.UserAccount;

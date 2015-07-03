@@ -194,6 +194,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void setFirstName(UserProfile author, UserProfile target, String newName)
 	{
 		Accesscontrol ac = new Accesscontrol();
+		ac.getXACMLdecision(userName, resource, action);
 		Datastore ds = getDatastore();
 		if(!target.getFirstName().equals(newName))
 		{
