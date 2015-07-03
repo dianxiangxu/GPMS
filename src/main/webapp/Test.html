@@ -1,1048 +1,1048 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<meta content="Manage Attributes" name="DESCRIPTION">
-<meta content="Manage Attributes" name="KEYWORDS">
-<meta content="@SageFrame" name="COPYRIGHT">
-<meta content="GENERATOR" name="GENERATOR">
-<meta content="Author" name="AUTHOR">
-<meta content="DOCUMENT" name="RESOURCE-TYPE">
-<meta content="GLOBAL" name="DISTRIBUTION">
-<meta content="INDEX, FOLLOW" name="ROBOTS">
-<meta content="1 DAYS" name="REVISIT-AFTER">
-<meta content="GENERAL" name="RATING">
-<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-<!-- Mimic Internet Explorer 7 -->
-<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
-<meta content="RevealTrans(Duration=0,Transition=1)"
-	http-equiv="PAGE-ENTER">
-<link type="icon shortcut" media="icon" href="favicon.ico">
-<!--[if IE 9]>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta content="Manage Attributes" name="DESCRIPTION">
+    <meta content="Manage Attributes" name="KEYWORDS">
+    <meta content="@SageFrame" name="COPYRIGHT">
+    <meta content="GENERATOR" name="GENERATOR">
+    <meta content="Author" name="AUTHOR">
+    <meta content="DOCUMENT" name="RESOURCE-TYPE">
+    <meta content="GLOBAL" name="DISTRIBUTION">
+    <meta content="INDEX, FOLLOW" name="ROBOTS">
+    <meta content="1 DAYS" name="REVISIT-AFTER">
+    <meta content="GENERAL" name="RATING">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <!-- Mimic Internet Explorer 7 -->
+    <meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
+    <meta content="RevealTrans(Duration=0,Transition=1)"
+          http-equiv="PAGE-ENTER">
+    <link type="icon shortcut" media="icon" href="favicon.ico">
+    <!--[if IE 9]>
         <link rel="stylesheet" href="css/ie9.css" type="text/css" media="screen"/><![endif]-->
-<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
         <link rel="stylesheet" href="css/IE.css" type="text/css" media="screen"/><![endif]-->
-<!--[if lt IE 7]>
+    <!--[if lt IE 7]>
         <script type="text/javascript" src="js/core/IE8.js"></script>
     <![endif]-->
-<title>Grid Example</title>
+    <title>Grid Example</title>
 
-<script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
-	$
-			.ajaxSetup({
-				'beforeSend' : function(xhr) {
-					xhr
-							.setRequestHeader(
-									"ASPX-TOKEN",
-									"NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5");
-				}
-			});
-</script>
+    <script type="text/javascript">
+        var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
+        $
+            .ajaxSetup({
+                'beforeSend': function(xhr) {
+                    xhr
+                        .setRequestHeader(
+                            "ASPX-TOKEN",
+                            "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5");
+                }
+            });
+    </script>
 
-<script type="text/javascript">
-	//<![CDATA[
-	var SageFrameAppPath = "";
-	var SageFrameUserName = "superuser";
-	var SageFrameCurrentCulture = "en-US";
-	var SageFramePortalID = "1";
-	var SageFramePortalName = "default";
-	var SageFrameActiveTemplate = "AspxCommerce";
-	var SageFrameHostURL = "http://localhost/aspx/";
-	var SageFrameSecureToken = "SageFrame.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
-	var MsgTemplate = "default";
+    <script type="text/javascript">
+        //<![CDATA[
+        var SageFrameAppPath = "";
+        var SageFrameUserName = "superuser";
+        var SageFrameCurrentCulture = "en-US";
+        var SageFramePortalID = "1";
+        var SageFramePortalName = "default";
+        var SageFrameActiveTemplate = "AspxCommerce";
+        var SageFrameHostURL = "http://localhost/aspx/";
+        var SageFrameSecureToken = "SageFrame.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
+        var MsgTemplate = "default";
 
-	var aspxservicePath = "REST/";
-	var aspxRootPath = "/";
-	var aspxTemplateFolderPath = "Templates/AspxCommerce";
-	var pageExtension = ".aspx";
-	var storeID = "1";
-	var portalID = "1";
-	var cultureName = "en-US";
-	var templateName = "AspxCommerce";
-	var customerID = "1";
-	var userName = "superuser";
-	var IsUseFriendlyUrls = "True";
-	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
-	var clientIPAddress = "::1";
-	var LoginURL = "sf/sfLogin";
-	var itemImagePath = "Modules/AspxCommerce/AspxItemsManagement/uploads/";
-	var categoryImagePath = "Modules/AspxCommerce/AspxCategoryManagement/uploads/";
-	var section = "1";
-	var aspxCountryName = "RESERVED";
-	var region = "en-US";
-	var curSymbol = "$";
-	var aspxRedirectPath = "/";
-	var currencyRate = "[]";
+        var aspxservicePath = "REST/";
+        var aspxRootPath = "/";
+        var aspxTemplateFolderPath = "Templates/AspxCommerce";
+        var pageExtension = ".aspx";
+        var storeID = "1";
+        var portalID = "1";
+        var cultureName = "en-US";
+        var templateName = "AspxCommerce";
+        var customerID = "1";
+        var userName = "superuser";
+        var IsUseFriendlyUrls = "True";
+        var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
+        var clientIPAddress = "::1";
+        var LoginURL = "sf/sfLogin";
+        var itemImagePath = "Modules/AspxCommerce/AspxItemsManagement/uploads/";
+        var categoryImagePath = "Modules/AspxCommerce/AspxCategoryManagement/uploads/";
+        var section = "1";
+        var aspxCountryName = "RESERVED";
+        var region = "en-US";
+        var curSymbol = "$";
+        var aspxRedirectPath = "/";
+        var currencyRate = "[]";
 
-	//]]>
-</script>
+        //]]>
+    </script>
 
-<script type="text/javascript"
-	src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript"
+            src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
 
-<script type="text/javascript" src="js/core/aspxcommercecore.js"></script>
+    <script type="text/javascript" src="js/core/aspxcommercecore.js"></script>
 
-<script type="text/javascript"
-	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
+    <script type="text/javascript"
+            src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
 
-<!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
-<script type="text/javascript"
-	src="js/modules/Language/CoreJsLanguage.js"></script>
+    <!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
+    <script type="text/javascript"
+            src="js/modules/Language/CoreJsLanguage.js"></script>
 
-<script type="text/javascript" src="js/core/json2.js"></script>
+    <script type="text/javascript" src="js/core/json2.js"></script>
 
-<script type="text/javascript" src="js/jquery-browser.js"></script>
-<script type="text/javascript" src="js/jquery.uniform.js"></script>
+    <script type="text/javascript" src="js/jquery-browser.js"></script>
+    <script type="text/javascript" src="js/jquery.uniform.js"></script>
 
-<script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
+    <script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
 
-<script type="text/javascript" src="js/GridView/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="js/GridView/jquery.grid.js"></script>
-<script type="text/javascript" src="js/GridView/SagePaging.js"></script>
-<script type="text/javascript" src="js/GridView/jquery.global.js"></script>
-<script type="text/javascript" src="js/GridView/jquery.dateFormat.js"></script>
+    <script type="text/javascript" src="js/GridView/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="js/GridView/jquery.grid.js"></script>
+    <script type="text/javascript" src="js/GridView/SagePaging.js"></script>
+    <script type="text/javascript" src="js/GridView/jquery.global.js"></script>
+    <script type="text/javascript" src="js/GridView/jquery.dateFormat.js"></script>
 
-<script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
+    <script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
 
-<!-- <script type="text/javascript" src="js/core/Session.js"></script>
+    <!-- <script type="text/javascript" src="js/core/Session.js"></script>
     <script type="text/javascript" src="js/core/encoder.js"></script> -->
 
-<script type="text/javascript" src="js/modules/AttributesManage.js"></script>
-<script type="text/javascript"
-	src="js/modules/Language/AspxAttributesManagement.js"></script>
-<!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
+    <script type="text/javascript" src="js/modules/AttributesManage.js"></script>
+    <script type="text/javascript"
+            src="js/modules/Language/AspxAttributesManagement.js"></script>
+    <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
-<link type="text/css" rel="stylesheet"
-	href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css" />
-<link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
-<link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
+    <link type="text/css" rel="stylesheet"
+          href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css"/>
+    <link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css"/>
+    <link type="text/css" rel="stylesheet" href="css/MessageBox/style.css"/>
 
-<link type="text/css" rel="stylesheet" href="css/Templates/grid.css" />
-<link type="text/css" rel="stylesheet"
-	href="css/Templates/topstickybar.css" />
-<link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
+    <link type="text/css" rel="stylesheet" href="css/Templates/grid.css"/>
+    <link type="text/css" rel="stylesheet"
+          href="css/Templates/topstickybar.css"/>
+    <link type="text/css" rel="stylesheet" href="css/Templates/admin.css"/>
 </head>
 <body>
-	<form enctype="multipart/form-data" action="Manage-Attributes.aspx"
-		method="post" name="form1">
-		<div style="display: none;" id="UpdateProgress1" role="status"
-			aria-hidden="true">
+<form enctype="multipart/form-data" action="Manage-Attributes.aspx"
+      method="post" name="form1">
+<div style="display: none;" id="UpdateProgress1" role="status"
+     aria-hidden="true">
 
-			<div class="sfLoadingbg">&nbsp;</div>
-			<div class="sfLoadingdiv">
-				<img style="border-width: 0px;" alt="Loading..."
-					src="../../../../Administrator/Templates/Default/images/ajax-loader.gif"
-					title="Loading..." id="imgPrgress"> <br> <span
+    <div class="sfLoadingbg">&nbsp;</div>
+    <div class="sfLoadingdiv">
+        <img style="border-width: 0px;" alt="Loading..."
+             src="../../../../Administrator/Templates/Default/images/ajax-loader.gif"
+             title="Loading..." id="imgPrgress"> <br> <span
 					id="lblPrgress">Please wait...</span>
-			</div>
+    </div>
 
-		</div>
-		<noscript>
-			<span id="lblnoScript">This page requires java-script to be
+</div>
+<noscript>
+    <span id="lblnoScript">This page requires java-script to be
 				enabled. Please adjust your browser-settings.</span>
-		</noscript>
+</noscript>
 
-		<div id="sfOuterwrapper">
-			<div class="sfSagewrapper">
+<div id="sfOuterwrapper">
+<div class="sfSagewrapper">
 
-				<!--Body Content-->
-				<div class="sfContentwrapper clearfix">
-					<div id="divCenterContent">
+<!--Body Content-->
+<div class="sfContentwrapper clearfix">
+<div id="divCenterContent">
 
-						<div class="sfMaincontent">
-							<div style="display: block" class="sfCpanel sfInnerwrapper"
-								id="divBottompanel">
+<div class="sfMaincontent">
+<div style="display: block" class="sfCpanel sfInnerwrapper"
+     id="divBottompanel">
 
-								<div class="">
-									<div class="sfModulecontent clearfix">
+<div class="">
+<div class="sfModulecontent clearfix">
 
-										<script type="text/javascript">
-											//<![CDATA[
-											$(function() {
-												$(".sfLocale")
-														.localize(
-																{
-																	moduleKey : AspxAttributesManagement
-																});
-											});
-											var lblAttrFormHeading = "ctl19_lblAttrFormHeading";
-											var lblLength = "ctl19_lblLength";
-											var lblDefaultValue = "ctl19_lblDefaultValue";
-											var umi = "192";
-											//]]>
-										</script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(function() {
+        $(".sfLocale")
+            .localize(
+            {
+                moduleKey: AspxAttributesManagement
+            });
+    });
+    var lblAttrFormHeading = "ctl19_lblAttrFormHeading";
+    var lblLength = "ctl19_lblLength";
+    var lblDefaultValue = "ctl19_lblDefaultValue";
+    var umi = "192";
+    //]]>
+</script>
 
-										<!-- Grid -->
-										<div id="divAttribGrid">
-											<div class="cssClassCommonBox Curve">
-												<div class="cssClassHeader">
-													<h1>
-														<span id="ctl19_lblAttrGridHeading">Manage
+<!-- Grid -->
+<div id="divAttribGrid">
+<div class="cssClassCommonBox Curve">
+<div class="cssClassHeader">
+    <h1>
+        <span id="ctl19_lblAttrGridHeading">Manage
 															Attributes</span>
-													</h1>
-													<div class="cssClassHeaderRight">
-														<div class="sfButtonwrapper">
-															<p>
-																<button type="button" id="btnAddNew" class="sfBtn">
-																	<span class="sfLocale icon-addnew">Add New
+    </h1>
+    <div class="cssClassHeaderRight">
+        <div class="sfButtonwrapper">
+            <p>
+                <button type="button" id="btnAddNew" class="sfBtn">
+                    <span class="sfLocale icon-addnew">Add New
 																		Attribute</span>
-																</button>
-															</p>
-															<p>
-																<button type="button" id="btnDeleteSelected"
-																	class="sfBtn">
-																	<span class="sfLocale icon-delete">Delete All
+                </button>
+            </p>
+            <p>
+                <button type="button" id="btnDeleteSelected"
+                        class="sfBtn">
+                    <span class="sfLocale icon-delete">Delete All
 																		Selected</span>
-																</button>
-															</p>
+                </button>
+            </p>
 
-															<div class="cssClassClear"></div>
-														</div>
-														<div class="cssClassClear"></div>
-													</div>
-													<div class="cssClassClear"></div>
-												</div>
-												<div class="sfGridwrapper">
-													<div class="sfGridWrapperContent">
-														<div class="sfFormwrapper sfTableOption">
-															<table width="100%" cellspacing="0" cellpadding="0"
-																border="0">
-																<tbody>
-																	<tr>
-																		<td width="150"><label
-																			class="cssClassLabel sfLocale">Attribute
-																				Name:</label> <input type="text" class="sfTextBoxSmall"
-																			id="txtSearchAttributeName" /></td>
-																		<td width="150"><label
-																			class="cssClassLabel sfLocale">Required:</label> <select
-																			style="width: 150px;" class="sfListmenu"
-																			id="ddlIsRequired">
-																				<option class="sfLocale" value="">-- All --</option>
-																				<option class="sfLocale" value="True">Yes</option>
-																				<option class="sfLocale" value="False">No</option>
-																		</select></td>
-																		<td width="150"><label
-																			class="cssClassLabel sfLocale">Comparable:</label><br />
-																			<select class="sfListmenu" id="ddlComparable">
-																				<option class="sfLocale" value="">-- All --</option>
-																				<option class="sfLocale" value="True">Yes</option>
-																				<option class="sfLocale" value="False">No</option>
-																		</select></td>
-																		<td width="160"><label
-																			class="cssClassLabel sfLocale">System:</label> <select
-																			class="sfListmenu" id="ddlIsSystem">
-																				<option class="sfLocale" value="">-- All --</option>
-																				<option class="sfLocale" value="True">Yes</option>
-																				<option class="sfLocale" value="False">No</option>
-																		</select></td>
-																		<td><br />
-																			<button class="sfBtn" id="btnSearchAttribute"
-																				type="button">
-																				<span class="sfLocale icon-search">Search</span>
-																			</button></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-														<div class="loading">
-															<img id="ajaxAttributeImageLoader" src=""
-																class="sfLocale" alt="loading...." title="loading...." />
-														</div>
-														<div class="log"></div>
+            <div class="cssClassClear"></div>
+        </div>
+        <div class="cssClassClear"></div>
+    </div>
+    <div class="cssClassClear"></div>
+</div>
+<div class="sfGridwrapper">
+<div class="sfGridWrapperContent">
+<div class="sfFormwrapper sfTableOption">
+    <table width="100%" cellspacing="0" cellpadding="0"
+           border="0">
+        <tbody>
+        <tr>
+            <td width="150"><label
+                                class="cssClassLabel sfLocale">Attribute
+                Name:</label> <input type="text" class="sfTextBoxSmall"
+                                     id="txtSearchAttributeName"/></td>
+            <td width="150"><label
+                                class="cssClassLabel sfLocale">Required:</label> <select
+                                                                                     style="width: 150px;" class="sfListmenu"
+                                                                                     id="ddlIsRequired">
+                <option class="sfLocale" value="">-- All --</option>
+                <option class="sfLocale" value="True">Yes</option>
+                <option class="sfLocale" value="False">No</option>
+            </select></td>
+            <td width="150"><label
+                                class="cssClassLabel sfLocale">Comparable:</label><br/>
+                <select class="sfListmenu" id="ddlComparable">
+                    <option class="sfLocale" value="">-- All --</option>
+                    <option class="sfLocale" value="True">Yes</option>
+                    <option class="sfLocale" value="False">No</option>
+                </select></td>
+            <td width="160"><label
+                                class="cssClassLabel sfLocale">System:</label> <select
+                                                                                   class="sfListmenu" id="ddlIsSystem">
+                <option class="sfLocale" value="">-- All --</option>
+                <option class="sfLocale" value="True">Yes</option>
+                <option class="sfLocale" value="False">No</option>
+            </select></td>
+            <td><br/>
+                <button class="sfBtn" id="btnSearchAttribute"
+                        type="button">
+                    <span class="sfLocale icon-search">Search</span>
+                </button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="loading">
+    <img id="ajaxAttributeImageLoader" src=""
+         class="sfLocale" alt="loading...." title="loading...."/>
+</div>
+<div class="log"></div>
 
-														<table width="100%" cellspacing="0" cellpadding="0"
-															border="0" id="gdvAttributes" style="">
-															<thead>
-																<tr class="cssClassHeading">
-																	<th abbr="attr_id" axis="col0"
-																		class="cssClassHeadCheckBox"><input
-																		type="checkbox" class="attribHeaderChkbox" /></th>
-																	<th abbr="attr_name" axis="col1" class="header">Attribute
-																		Name</th>
-																	<th abbr="attr_alias" axis="col2" class="header">Attribute
-																		Alias</th>
-																	<th abbr="IsRequired" axis="col3"
-																		class="cssClassHeadBoolean header">Required</th>
-																	<th abbr="IsActive" axis="col4"
-																		class="cssClassHeadBoolean header">Active</th>
-																	<th abbr="IsSystemUsed" axis="col5"
-																		class="cssClassHeadBoolean header">In System</th>
-																	<th abbr="ShowInSearch" axis="col6"
-																		class="cssClassHeadBoolean header"
-																		style="display: none;">Searchable</th>
-																	<th abbr="IsUsedInConfigItem:" axis="col7"
-																		class="cssClassHeadBoolean header"
-																		style="display: none;">Used In Configurable Item</th>
-																	<th abbr="ShowInComparison" axis="col8"
-																		class="cssClassHeadBoolean header">Comparable</th>
-																	<th abbr="AddedOn" axis="col9"
-																		class="cssClassHeadDate header">Added On</th>
-																	<th abbr="action" axis="col10" class="cssClassAction">Actions</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr class="sfEven">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="48" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Manufacturer
-																		Suggested Retail Price</td>
-																	<td align="left" style="text-align: left;">Manufacturer
-																		Suggested Retail Price</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2010/11/24</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit0" class="1">Edit</a><a
-																							href="javascript:;" id="delete0" class="2">Delete</a><a
-																							href="javascript:;" id="activate0" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate0" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfOdd">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="47" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Special
-																		Price To Date</td>
-																	<td align="left" style="text-align: left;">Special
-																		Price To Date</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/2/18</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit1" class="1">Edit</a><a
-																							href="javascript:;" id="delete1" class="2">Delete</a><a
-																							href="javascript:;" id="activate1" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate1" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfEven">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="46" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Special
-																		Price From Date</td>
-																	<td align="left" style="text-align: left;">Special
-																		Price From Date</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/2/18</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit2" class="1">Edit</a><a
-																							href="javascript:;" id="delete2" class="2">Delete</a><a
-																							href="javascript:;" id="activate2" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate2" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfOdd">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="45" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Special
-																		Price</td>
-																	<td align="left" style="text-align: left;">Special
-																		Price</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2010/11/24</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit3" class="1">Edit</a><a
-																							href="javascript:;" id="delete3" class="2">Delete</a><a
-																							href="javascript:;" id="activate3" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate3" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfEven">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="44" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Cost
-																		Price</td>
-																	<td align="left" style="text-align: left;">Cost
-																		Price</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2010/11/24</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit4" class="1">Edit</a><a
-																							href="javascript:;" id="delete4" class="2">Delete</a><a
-																							href="javascript:;" id="activate4" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate4" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfOdd">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="43" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Total
-																		Weight</td>
-																	<td align="left" style="text-align: left;">Total
-																		Weight</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/5/19</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit5" class="1">Edit</a><a
-																							href="javascript:;" id="delete5" class="2">Delete</a><a
-																							href="javascript:;" id="activate5" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate5" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfEven">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="42" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Total
-																		Items Quantity</td>
-																	<td align="left" style="text-align: left;">Total
-																		Items Quantity</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/5/19</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit6" class="1">Edit</a><a
-																							href="javascript:;" id="delete6" class="2">Delete</a><a
-																							href="javascript:;" id="activate6" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate6" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfOdd">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="41" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Subtotal</td>
-																	<td align="left" style="text-align: left;">Subtotal</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/5/19</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit7" class="1">Edit</a><a
-																							href="javascript:;" id="delete7" class="2">Delete</a><a
-																							href="javascript:;" id="activate7" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate7" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfEven">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="40" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Row
-																		Total in Cart</td>
-																	<td align="left" style="text-align: left;">Row
-																		Total in Cart</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/7/11</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit8" class="1">Edit</a><a
-																							href="javascript:;" id="delete8" class="2">Delete</a><a
-																							href="javascript:;" id="activate8" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate8" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-																<tr class="sfOdd">
-																	<td align="center" style="text-align: center;"><input
-																		type="checkbox" value="39" class="attrChkbox"
-																		disabled="" /></td>
-																	<td align="left" style="text-align: left;">Quantity
-																		in Cart</td>
-																	<td align="left" style="text-align: left;">Quantity
-																		in Cart</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left" style="text-align: left;">Yes</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">No</td>
-																	<td align="left"
-																		style="text-align: left; display: none;">Yes</td>
-																	<td align="left" style="text-align: left;">No</td>
-																	<td align="left" style="text-align: left;">2011/7/11</td>
-																	<td align="center">
-																		<div class="cssClassActionOnClick">
-																			<div class="cssClassActionOnClickShow"
-																				style="display: none;">
-																				<div class="cssClassActionOnClickShowInfo">
-																					<p>
-																						<a href="javascript:;" id="edit9" class="1">Edit</a><a
-																							href="javascript:;" id="delete9" class="2">Delete</a><a
-																							href="javascript:;" id="activate9" class="4">Activate</a><a
-																							href="javascript:;" id="deactivate9" class="5">Deactivate</a>
-																					</p>
-																				</div>
-																			</div>
-																			<p class="Sageshowhide cssClassActionImg">
-																				<a class="icon-settings" href="javascript:;">&nbsp;</a>
-																			</p>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														<div class="cssClassPageNumber clearfix"
-															id="gdvAttributes_Pagination">
-															<div class="cssClassPages">
-																Page <input type="text" readonly="readonly" value="1" />
-																Of 5
-															</div>
-															<div class="pagination">
-																<span class="cssClassPaginationActive">1</span><a
-																	alt="2" href="#">2</a><a alt="3" href="#">3</a><a
-																	alt="4" href="#">4</a><a alt="5" href="#">5</a><a
-																	class="cssClassPagePrevNxt" alt="2" href="#">›</a><a
-																	class="cssClassPagePrevNxt" alt="5" href="#">»</a>
-															</div>
-															<div class="cssClassViewPerPage">
-																View Per Page: <select id="gdvAttributes_pagesize"
-																	name="rp">+"
-																	<option value="5">5</option>
-																	<option selected="selected" value="10">10</option>
-																	<option value="15">15</option>
-																	<option value="20">20</option>
-																	<option value="25">25</option>
-																	<option value="40">40</option>"
-																</select>
-															</div>
-															<div class="cssClassViewOf">View 1-10 Of 48 records</div>
-														</div>
+<table width="100%" cellspacing="0" cellpadding="0"
+       border="0" id="gdvAttributes" style="">
+<thead>
+<tr class="cssClassHeading">
+    <th abbr="attr_id" axis="col0"
+        class="cssClassHeadCheckBox"><input
+                                         type="checkbox" class="attribHeaderChkbox"/></th>
+    <th abbr="attr_name" axis="col1" class="header">Attribute
+        Name</th>
+    <th abbr="attr_alias" axis="col2" class="header">Attribute
+        Alias</th>
+    <th abbr="IsRequired" axis="col3"
+        class="cssClassHeadBoolean header">Required</th>
+    <th abbr="IsActive" axis="col4"
+        class="cssClassHeadBoolean header">Active</th>
+    <th abbr="IsSystemUsed" axis="col5"
+        class="cssClassHeadBoolean header">In System</th>
+    <th abbr="ShowInSearch" axis="col6"
+        class="cssClassHeadBoolean header"
+        style="display: none;">Searchable</th>
+    <th abbr="IsUsedInConfigItem:" axis="col7"
+        class="cssClassHeadBoolean header"
+        style="display: none;">Used In Configurable Item</th>
+    <th abbr="ShowInComparison" axis="col8"
+        class="cssClassHeadBoolean header">Comparable</th>
+    <th abbr="AddedOn" axis="col9"
+        class="cssClassHeadDate header">Added On</th>
+    <th abbr="action" axis="col10" class="cssClassAction">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sfEven">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="48" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Manufacturer
+        Suggested Retail Price</td>
+    <td align="left" style="text-align: left;">Manufacturer
+        Suggested Retail Price</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2010/11/24</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit0" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete0" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate0" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate0" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfOdd">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="47" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Special
+        Price To Date</td>
+    <td align="left" style="text-align: left;">Special
+        Price To Date</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/2/18</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit1" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete1" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate1" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate1" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfEven">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="46" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Special
+        Price From Date</td>
+    <td align="left" style="text-align: left;">Special
+        Price From Date</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/2/18</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit2" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete2" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate2" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate2" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfOdd">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="45" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Special
+        Price</td>
+    <td align="left" style="text-align: left;">Special
+        Price</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2010/11/24</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit3" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete3" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate3" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate3" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfEven">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="44" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Cost
+        Price</td>
+    <td align="left" style="text-align: left;">Cost
+        Price</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2010/11/24</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit4" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete4" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate4" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate4" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfOdd">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="43" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Total
+        Weight</td>
+    <td align="left" style="text-align: left;">Total
+        Weight</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/5/19</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit5" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete5" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate5" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate5" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfEven">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="42" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Total
+        Items Quantity</td>
+    <td align="left" style="text-align: left;">Total
+        Items Quantity</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/5/19</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit6" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete6" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate6" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate6" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfOdd">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="41" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Subtotal</td>
+    <td align="left" style="text-align: left;">Subtotal</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/5/19</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit7" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete7" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate7" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate7" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfEven">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="40" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Row
+        Total in Cart</td>
+    <td align="left" style="text-align: left;">Row
+        Total in Cart</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/7/11</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit8" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete8" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate8" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate8" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+<tr class="sfOdd">
+    <td align="center" style="text-align: center;"><input
+                                                       type="checkbox" value="39" class="attrChkbox"
+                                                       disabled=""/></td>
+    <td align="left" style="text-align: left;">Quantity
+        in Cart</td>
+    <td align="left" style="text-align: left;">Quantity
+        in Cart</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left" style="text-align: left;">Yes</td>
+    <td align="left"
+        style="text-align: left; display: none;">No</td>
+    <td align="left"
+        style="text-align: left; display: none;">Yes</td>
+    <td align="left" style="text-align: left;">No</td>
+    <td align="left" style="text-align: left;">2011/7/11</td>
+    <td align="center">
+        <div class="cssClassActionOnClick">
+            <div class="cssClassActionOnClickShow"
+                 style="display: none;">
+                <div class="cssClassActionOnClickShowInfo">
+                    <p>
+                        <a href="javascript:;" id="edit9" class="1">Edit</a><a
+                                                                                href="javascript:;" id="delete9" class="2">Delete</a><a
+                                                                                                                                         href="javascript:;" id="activate9" class="4">Activate</a><a
+                                                                                                                                                                                                      href="javascript:;" id="deactivate9" class="5">Deactivate</a>
+                    </p>
+                </div>
+            </div>
+            <p class="Sageshowhide cssClassActionImg">
+                <a class="icon-settings" href="javascript:;">&nbsp;</a>
+            </p>
+        </div>
+    </td>
+</tr>
+</tbody>
+</table>
+<div class="cssClassPageNumber clearfix"
+     id="gdvAttributes_Pagination">
+    <div class="cssClassPages">
+        Page <input type="text" readonly="readonly" value="1"/>
+        Of 5
+    </div>
+    <div class="pagination">
+        <span class="cssClassPaginationActive">1</span><a
+                                                           alt="2" href="#">2</a><a alt="3" href="#">3</a><a
+                                                                                                              alt="4" href="#">4</a><a alt="5" href="#">5</a><a
+                                                                                                                                                                 class="cssClassPagePrevNxt" alt="2" href="#">›</a><a
+                                                                                                                                                                                                                       class="cssClassPagePrevNxt" alt="5" href="#">»</a>
+    </div>
+    <div class="cssClassViewPerPage">
+        View Per Page: <select id="gdvAttributes_pagesize"
+                               name="rp">+"
+            <option value="5">5</option>
+            <option selected="selected" value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="40">40</option>"
+        </select>
+    </div>
+    <div class="cssClassViewOf">View 1-10 Of 48 records</div>
+</div>
 
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End of Grid -->
-										<!-- form -->
-										<div id="divAttribForm" style="display: none">
-											<div class="cssClassCommonBox Curve">
-												<div class="cssClassHeader">
-													<h1>
-														<span id="ctl19_lblAttrFormHeading">General
+</div>
+</div>
+</div>
+</div>
+<!-- End of Grid -->
+<!-- form -->
+<div id="divAttribForm" style="display: none">
+<div class="cssClassCommonBox Curve">
+<div class="cssClassHeader">
+    <h1>
+        <span id="ctl19_lblAttrFormHeading">General
 															Information</span>
-													</h1>
-												</div>
-												<div class="cssClassTabPanelTable">
-													<div id="container-7">
-														<ul>
-															<li><a href="#fragment-1"> <span
+    </h1>
+</div>
+<div class="cssClassTabPanelTable">
+<div id="container-7">
+<ul>
+    <li><a href="#fragment-1"> <span
 																	id="ctl19_lblTabTitle1">Attribute Properties</span>
-															</a></li>
-															<li><a href="#fragment-2"> <span
+    </a></li>
+    <li><a href="#fragment-2"> <span
 																	id="ctl19_lblTabTitle2">Frontend Properties</span>
-															</a></li>
-														</ul>
-														<div id="fragment-1">
-															<div class="sfFormwrapper">
-																<h3>
-																	<span id="ctl19_lblTab1Info">General Information</span>
-																</h3>
-																<table cellspacing="0" cellpadding="0" border="0">
-																	<tbody>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    </a></li>
+</ul>
+<div id="fragment-1">
+<div class="sfFormwrapper">
+<h3>
+    <span id="ctl19_lblTab1Info">General Information</span>
+</h3>
+<table cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblAttributeName">Attribute Name:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtAttributeName" />
-																				<span class="cssClassRight"> <img
+    <td class="cssClassTableRightCol required"><input
+                                                   type="text" class="sfInputbox" id="txtAttributeName"/>
+        <span class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />
 																			</span> <b class="cssClassError sfLocale">Ops! found
-																					something error, must be unique with no spaces</b> <span
+            something error, must be unique with no spaces</b> <span
 																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblType">Type:</span></td>
-																			<td class="cssClassTableRightCol"><select
-																				title="Attribute Input Type" class="sfListmenu"
-																				id="ddlAttributeType">
-																					<option value="1">TextField</option>
-																					<option value="2">TextArea</option>
-																					<option value="3">Date</option>
-																					<option value="4">Boolean</option>
-																					<option value="5">MultipleSelect</option>
-																					<option value="6">DropDown</option>
-																					<option value="7">Price</option>
-																					<option value="8">File</option>
-																					<option value="9">Radio</option>
-																					<option value="10">RadioButtonList</option>
-																					<option value="11">CheckBox</option>
-																					<option value="12">CheckBoxList</option>
-																			</select></td>
-																		</tr>
-																		<tr id="trdefaultValue">
-																			<td><span class="cssClassLabel"
+    <td class="cssClassTableRightCol"><select
+                                          title="Attribute Input Type" class="sfListmenu"
+                                          id="ddlAttributeType">
+        <option value="1">TextField</option>
+        <option value="2">TextArea</option>
+        <option value="3">Date</option>
+        <option value="4">Boolean</option>
+        <option value="5">MultipleSelect</option>
+        <option value="6">DropDown</option>
+        <option value="7">Price</option>
+        <option value="8">File</option>
+        <option value="9">Radio</option>
+        <option value="10">RadioButtonList</option>
+        <option value="11">CheckBox</option>
+        <option value="12">CheckBoxList</option>
+    </select></td>
+</tr>
+<tr id="trdefaultValue">
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblDefaultValue">Default Value:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="text" id="default_value_text"
-																				name="default_value_text" value=""
-																				title="Default Value" class="sfInputbox" /> <span
+    <td class="cssClassTableRightCol"><input
+                                          type="text" id="default_value_text"
+                                          name="default_value_text" value=""
+                                          title="Default Value" class="sfInputbox"/> <span
 																				style="color: #FF0000;" class="iferror" id="iferror"></span>
-																				<div class="cssClassRed" style="display: none;"
-																					id="fileDefaultTooltip"></div> <textarea
-																					id="default_value_textarea"
-																					name="default_value_textarea" title="Default Value"
-																					rows="2" cols="15" class="cssClassTextArea"></textarea>
-																				<div id="div_default_value_date">
-																					<input type="text" name="default_value_date"
-																						id="default_value_date" value=""
-																						title="Default Value" class="sfInputbox" />
-																				</div> <select id="default_value_yesno"
-																				name="default_value_yesno" title="Default Value"
-																				class="sfListmenu">
-																					<option class="sfLocale" value="1">Yes</option>
-																					<option class="sfLocale" value="0"
-																						selected="selected">No</option>
-																			</select></td>
-																		</tr>
-																		<tr id="trOptionsAdd">
-																			<td><span class="cssClassLabel"
+        <div class="cssClassRed" style="display: none;"
+             id="fileDefaultTooltip"></div> <textarea
+                                                id="default_value_textarea"
+                                                name="default_value_textarea" title="Default Value"
+                                                rows="2" cols="15" class="cssClassTextArea"></textarea>
+        <div id="div_default_value_date">
+            <input type="text" name="default_value_date"
+                   id="default_value_date" value=""
+                   title="Default Value" class="sfInputbox"/>
+        </div> <select id="default_value_yesno"
+                       name="default_value_yesno" title="Default Value"
+                       class="sfListmenu">
+            <option class="sfLocale" value="1">Yes</option>
+            <option class="sfLocale" value="0"
+                    selected="selected">No</option>
+        </select></td>
+</tr>
+<tr id="trOptionsAdd">
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblAddOptions">Manage Options
 																					(values of your attribute):</span> <span
 																				class="cssClassRequired">*</span></td>
-																			<td class="cssClassTableRightCol">
-																				<table width="100%" cellspacing="0" cellpadding="0"
-																					border="0" id="dataTable">
-																					<thead>
-																						<tr>
-																							<th><span class="cssClassLabel"
+    <td class="cssClassTableRightCol">
+        <table width="100%" cellspacing="0" cellpadding="0"
+               border="0" id="dataTable">
+            <thead>
+            <tr>
+                <th><span class="cssClassLabel"
 																								id="ctl19_lblValue">Value:</span> <span
 																								class="cssClassRequired">*</span></th>
-																							<th><span class="cssClassLabel"
+                <th><span class="cssClassLabel"
 																								id="ctl19_lblPosition">Display Order:</span> <span
 																								class="cssClassRequired">*</span></th>
-																							<th><span class="cssClassLabel"
+                <th><span class="cssClassLabel"
 																								id="ctl19_lblAlias">Alias:</span></th>
-																							<th><span class="cssClassLabel"
+                <th><span class="cssClassLabel"
 																								id="ctl19_lblIsDefault">Is Default:</span></th>
-																						</tr>
-																					</thead>
-																					<tbody>
-																						<tr>
-																							<td><input type="hidden"
-																								name="optionValueId" value="0"
-																								class="class-text" /> <input type="text"
-																								name="value" value="" class="class-text" /> <span
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="hidden"
+                           name="optionValueId" value="0"
+                           class="class-text"/> <input type="text"
+                                                       name="value" value="" class="class-text"/> <span
 																								style="color: #FF0000;" class="">*</span></td>
-																							<td><input type="text" name="position"
-																								value="" class="class-text" /> <span
+                <td><input type="text" name="position"
+                           value="" class="class-text"/> <span
 																								style="color: #FF0000;" class="">*</span></td>
-																							<td><input type="text" name="Alias" value=""
-																								class="class-text" /></td>
-																							<td class="tddefault"></td>
-																							<td><input type="Button"
-																								class="AddOption cssClassButtonSubmit sfLocale"
-																								name="AddMore" value="Add More" /></td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+                <td><input type="text" name="Alias" value=""
+                           class="class-text"/></td>
+                <td class="tddefault"></td>
+                <td><input type="Button"
+                           class="AddOption cssClassButtonSubmit sfLocale"
+                           name="AddMore" value="Add More"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblUniqueValue">Unique Value:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox" value=""
-																				name="chkUniqueValue" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    <td class="cssClassTableRightCol"><input
+                                          type="checkbox" class="cssClassCheckBox" value=""
+                                          name="chkUniqueValue"/></td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblTypeValidation">Type Validation:</span>
-																			</td>
-																			<td class="cssClassTableRightCol"><select
-																				title="Attribute Input Validation Type" name=""
-																				class="sfListmenu" id="ddlTypeValidation">
-																					<option value="1">AlphabetsOnly</option>
-																					<option value="2">AlphaNumeric</option>
-																					<option value="3">DecimalNumber</option>
-																					<option value="4">Email</option>
-																					<option value="5">IntegerNumber</option>
-																					<option value="6">Price</option>
-																					<option value="7">WebURL</option>
-																					<option value="8">None</option>
-																			</select></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    </td>
+    <td class="cssClassTableRightCol"><select
+                                          title="Attribute Input Validation Type" name=""
+                                          class="sfListmenu" id="ddlTypeValidation">
+        <option value="1">AlphabetsOnly</option>
+        <option value="2">AlphaNumeric</option>
+        <option value="3">DecimalNumber</option>
+        <option value="4">Email</option>
+        <option value="5">IntegerNumber</option>
+        <option value="6">Price</option>
+        <option value="7">WebURL</option>
+        <option value="8">None</option>
+    </select></td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblValuesRequired">Values Required:</span>
-																			</td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkValuesRequired" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    </td>
+    <td class="cssClassTableRightCol"><input
+                                          type="checkbox" class="cssClassCheckBox"
+                                          name="chkValuesRequired"/></td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblApplyTo">Apply To:</span></td>
-																			<td class="cssClassTableRightCol"><select
-																				name="" class="sfListmenu" id="ddlApplyTo">
-																					<option class="sfLocale" value="0"
-																						selected="selected">All Item Types</option>
-																					<option class="sfLocale" value="1">Selected
-																						Item Types</option>
-																			</select><span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr class="itemTypes" style="display: none;">
-																			<td>&nbsp;</td>
-																			<td class="cssClassTableRightCol"><select
-																				class="cssClassMultiSelect" id="lstItemType"
-																				multiple="" size="5">
-																					<option value="1">Simple Item</option>
-																					<option value="2">Downloadable Item</option>
-																					<option value="3">Gift Card</option>
-																					<option value="4">Service Item</option>
-																					<option value="5">Group Item</option>
-																					<option value="6">Kit Item</option>
-																			</select></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    <td class="cssClassTableRightCol"><select
+                                          name="" class="sfListmenu" id="ddlApplyTo">
+        <option class="sfLocale" value="0"
+                selected="selected">All Item Types</option>
+        <option class="sfLocale" value="1">Selected
+            Item Types</option>
+    </select><span class="cssClassRequired">*</span></td>
+</tr>
+<tr class="itemTypes" style="display: none;">
+    <td>&nbsp;</td>
+    <td class="cssClassTableRightCol"><select
+                                          class="cssClassMultiSelect" id="lstItemType"
+                                          multiple="" size="5">
+        <option value="1">Simple Item</option>
+        <option value="2">Downloadable Item</option>
+        <option value="3">Gift Card</option>
+        <option value="4">Service Item</option>
+        <option value="5">Group Item</option>
+        <option value="6">Kit Item</option>
+    </select></td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblLength">Length:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" maxlength="10" id="txtLength"
-																				class="sfInputbox verifyInteger" /> <span
+    <td class="cssClassTableRightCol required"><input
+                                                   type="text" maxlength="10" id="txtLength"
+                                                   class="sfInputbox verifyInteger"/> <span
 																				style="color: #FF0000;" class="iferror sfLocale">Integer
 																					Number</span> <span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblAliasName">Alias Name:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" id="txtAliasName" class="sfInputbox" />
-																				<span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    <td class="cssClassTableRightCol required"><input
+                                                   type="text" id="txtAliasName" class="sfInputbox"/>
+        <span class="cssClassRequired">*</span></td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblAliasToolTip">Alias ToolTip:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="text" id="txtAliasToolTip" class="sfInputbox" />
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    <td class="cssClassTableRightCol"><input
+                                          type="text" id="txtAliasToolTip" class="sfInputbox"/>
+    </td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblAliasHelp">Alias Help:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="text" id="txtAliasHelp" class="sfInputbox" />
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+    <td class="cssClassTableRightCol"><input
+                                          type="text" id="txtAliasHelp" class="sfInputbox"/>
+    </td>
+</tr>
+<tr>
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblDisplayOrder">Display Order:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" id="txtDisplayOrder"
-																				class="sfInputbox verifyInteger" /> <span
+    <td class="cssClassTableRightCol required"><input
+                                                   type="text" id="txtDisplayOrder"
+                                                   class="sfInputbox verifyInteger"/> <span
 																				class="cssClassRequired sfLocale">*</span> <span
 																				style="color: #FF0000;" class="iferror sfLocale">Integer
 																					Number</span></td>
-																		</tr>
-																		<tr id="activeTR">
-																			<td><span class="cssClassLabel"
+</tr>
+<tr id="activeTR">
+    <td><span class="cssClassLabel"
 																				id="ctl19_lblActive">Active:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkActive" /></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-														<div id="fragment-2">
-															<div class="sfFormwrapper">
-																<h3>
-																	<span id="ctl19_lblTab2Info">Frontend Display
+    <td class="cssClassTableRightCol"><input
+                                          type="checkbox" class="cssClassCheckBox"
+                                          name="chkActive"/></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="fragment-2">
+    <div class="sfFormwrapper">
+        <h3>
+            <span id="ctl19_lblTab2Info">Frontend Display
 																		Settings</span>
-																</h3>
-																<table cellspacing="0" cellpadding="0" border="0">
-																	<tbody>
-																		<tr>
-																			<td><span class="cssClassLabel"
+        </h3>
+        <table cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblIsEnableEditor">Is Enable
 																					Editor:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkIsEnableEditor" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkIsEnableEditor"/></td>
+            </tr>
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblIsUseInFilter">Used in Filter:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkIsUseInFilter" /></td>
-																		</tr>
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkIsUseInFilter"/></td>
+            </tr>
 
-																		<tr>
-																			<td><span class="cssClassLabel"
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblUseInAdvancedSearch">Use in
 																					Advanced Search:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkUseInAdvancedSearch" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkUseInAdvancedSearch"/></td>
+            </tr>
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblComparable">Comparable on
 																					Front-end:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkComparable" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkComparable"/></td>
+            </tr>
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblUseForPriceRule">Use for Price
 																					Rule Conditions:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkUseForPriceRule" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkUseForPriceRule"/></td>
+            </tr>
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblShowInItemListing">Show In Item
 																					Listing:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkShowInItemListing" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkShowInItemListing"/></td>
+            </tr>
+            <tr>
+                <td><span class="cssClassLabel"
 																				id="ctl19_lblShowInItemDetail">Show In Item
 																					Detail Page:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkShowInItemDetail" /></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="sfButtonwrapper">
-													<p>
-														<button type="button" id="btnBack" class="sfBtn">
-															<span class="sfLocale icon-arrow-slim-w">Back</span>
-														</button>
-													</p>
-													<p>
-														<button type="button" id="btnReset" class="sfBtn">
-															<span class="sfLocale icon-refresh">Reset</span>
-														</button>
-													</p>
-													<p>
-														<button type="button" class="delbutton sfBtn">
-															<span class="sfLocale icon-delete">Delete</span>
-														</button>
-													</p>
-													<p>
-														<button type="button" id="btnSaveAttribute" class="sfBtn">
-															<span class="sfLocale icon-save">Save</span>
-														</button>
-													</p>
-												</div>
-											</div>
-										</div>
-										<!-- End form -->
+                <td class="cssClassTableRightCol"><input
+                                                      type="checkbox" class="cssClassCheckBox"
+                                                      name="chkShowInItemDetail"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+<div class="sfButtonwrapper">
+    <p>
+        <button type="button" id="btnBack" class="sfBtn">
+            <span class="sfLocale icon-arrow-slim-w">Back</span>
+        </button>
+    </p>
+    <p>
+        <button type="button" id="btnReset" class="sfBtn">
+            <span class="sfLocale icon-refresh">Reset</span>
+        </button>
+    </p>
+    <p>
+        <button type="button" class="delbutton sfBtn">
+            <span class="sfLocale icon-delete">Delete</span>
+        </button>
+    </p>
+    <p>
+        <button type="button" id="btnSaveAttribute" class="sfBtn">
+            <span class="sfLocale icon-save">Save</span>
+        </button>
+    </p>
+</div>
+</div>
+</div>
+<!-- End form -->
 
-									</div>
-								</div>
+</div>
+</div>
 
-							</div>
-						</div>
-						<!-- END sfMaincontent -->
+</div>
+</div>
+<!-- END sfMaincontent -->
 
-					</div>
-				</div>
-				<!-- END Body Content sfContentwrapper -->
+</div>
+</div>
+<!-- END Body Content sfContentwrapper -->
 
-			</div>
-		</div>
+</div>
+</div>
 
-		<div title="Confirmation Required" id="dialog">
-			<label id="sf_lblConfirmation"> </label>
-		</div>
+<div title="Confirmation Required" id="dialog">
+    <label id="sf_lblConfirmation"> </label>
+</div>
 
-	</form>
-	<div style="display: none;" id="ajaxBusy">
-		<img align="absmiddle"
-			src="Administrator/Templates/Default/images/ajax-loader.gif">&nbsp;Working...
-	</div>
-	<div id="tooltip" style="display: none;">
-		<h3></h3>
-		<div class="body"></div>
-		<div class="url"></div>
-	</div>
-	<div id="BoxOverlay"
-		style="position: fixed; top: 0px; left: 0px; opacity: 0.7; background-color: rgb(0, 0, 0); z-index: 999; height: 697px; width: 1349px; display: none;"></div>
-	<div id="alert-Box" style="display: none; position: fixed;">
-		<div id="alert-InBox">
-			<div id="alert-BoxContent">
-				<div id="alert-BoxContenedor"></div>
-			</div>
-		</div>
-	</div>
+</form>
+<div style="display: none;" id="ajaxBusy">
+    <img align="absmiddle"
+         src="Administrator/Templates/Default/images/ajax-loader.gif">&nbsp;Working...
+</div>
+<div id="tooltip" style="display: none;">
+    <h3></h3>
+    <div class="body"></div>
+    <div class="url"></div>
+</div>
+<div id="BoxOverlay"
+     style="position: fixed; top: 0px; left: 0px; opacity: 0.7; background-color: rgb(0, 0, 0); z-index: 999; height: 697px; width: 1349px; display: none;"></div>
+<div id="alert-Box" style="display: none; position: fixed;">
+    <div id="alert-InBox">
+        <div id="alert-BoxContent">
+            <div id="alert-BoxContenedor"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

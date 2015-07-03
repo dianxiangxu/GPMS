@@ -83,9 +83,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 		List<UserProfile> userProfiles = ds.createQuery(UserProfile.class)
 				.asList();
+		int rowTotal = userProfiles.size();
 		for (UserProfile userProfile : userProfiles) {
 			UserInfo user = new UserInfo();
-			user.setId(userProfile.getId());
+			user.setRowTotal(rowTotal);
+			user.setId(userProfile.getId().toString());
 			user.setFirstName(userProfile.getFirstName());
 			user.setMiddleName(userProfile.getMiddleName());
 			user.setLastName(userProfile.getLastName());

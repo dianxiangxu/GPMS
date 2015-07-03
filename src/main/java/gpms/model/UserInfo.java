@@ -3,18 +3,27 @@ package gpms.model;
 import org.bson.types.ObjectId;
 
 public class UserInfo {
-	protected ObjectId id;
+	private int rowTotal;
+	private String id = new String();
 	private String firstName = new String();
 	private String middleName = new String();
 	private String lastName = new String();
 	private String userName = new String();
 
-	public ObjectId getId() {
+	public int getRowTotal() {
+		return rowTotal;
+	}
+
+	public void setRowTotal(int rowTotal) {
+		this.rowTotal = rowTotal;
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
-		this.id = id;
+	public void setId(String string) {
+		this.id = string;
 	}
 
 	public String getFirstName() {
