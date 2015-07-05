@@ -240,7 +240,6 @@ var fromServer = 0;
 													async : false,
 													// cache: false,
 													success : function(data) {
-
 														g.clearAll();
 														g.addHeader();
 														if (data.length == 0) {

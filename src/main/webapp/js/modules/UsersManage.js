@@ -706,73 +706,60 @@ $(function() {
 			}
 		},
 		FillForm : function(response) {
-			$.each(response.d, function(index, item) {
+			// See this how we can get response object based on fields
+			$('#txtAttributeName').val(response['firstName']);
+			// $('#ddlAttributeType').val(item.InputTypeID);
+			$('#ddlAttributeType').prop('disabled', 'disabled');
 
-				// $('#txtAttributeName').val(item.AttributeName);
-				// $('#ddlAttributeType').val(item.InputTypeID);
-				$('#ddlAttributeType').prop('disabled', 'disabled');
+			// usersManage.FillDefaultValue(item.DefaultValue);
 
-				// usersManage.FillDefaultValue(item.DefaultValue);
+			// $('#ddlTypeValidation').val(item.ValidationTypeID);
+			// $('#txtLength').val(item.Length);
+			// $('#txtAliasName').val(item.AliasName);
+			// $('#txtAliasToolTip').val(item.AliasToolTip);
+			// $('#txtAliasHelp').val(item.AliasHelp);
+			// $('#txtDisplayOrder').val(item.DisplayOrder);
+			//
+			// $('input[name=chkUniqueValue]').prop('checked',
+			// item.IsUnique);
+			// $('input[name=chkValuesRequired]').prop('checked',
+			// item.IsRequired);
+			// $('input[name=chkActive]').prop('checked', item.IsActive);
+			//
+			// $('input[name=chkIsEnableEditor]').prop('checked',
+			// item.IsEnableEditor);
+			// $('input[name=chkUseInAdvancedSearch]').prop('checked',
+			// item.ShowInAdvanceSearch);
+			// $('input[name=chkComparable]').prop('checked',
+			// item.ShowInComparison);
+			// $('input[name=chkUseForPriceRule]').prop('checked',
+			// item.IsIncludeInPriceRule);
+			// $('input[name=chkIsUseInFilter]').prop('checked',
+			// item.IsUseInFilter);
+			// $('input[name=chkShowInItemListing]').prop('checked',
+			// item.IsShowInItemListing);
+			// $('input[name=chkShowInItemDetail]').prop('checked',
+			// item.IsShowInItemDetail);
+			// usersManage.ValidationTypeEnableDisable(item.FillOptionValues,
+			// false);
 
-				// $('#ddlTypeValidation').val(item.ValidationTypeID);
-				// $('#txtLength').val(item.Length);
-				// $('#txtAliasName').val(item.AliasName);
-				// $('#txtAliasToolTip').val(item.AliasToolTip);
-				// $('#txtAliasHelp').val(item.AliasHelp);
-				// $('#txtDisplayOrder').val(item.DisplayOrder);
-				//
-				// $('input[name=chkUniqueValue]').prop('checked',
-				// item.IsUnique);
-				// $('input[name=chkValuesRequired]').prop('checked',
-				// item.IsRequired);
-				// $('input[name=chkActive]').prop('checked', item.IsActive);
-				//
-				// $('input[name=chkIsEnableEditor]').prop('checked',
-				// item.IsEnableEditor);
-				// $('input[name=chkUseInAdvancedSearch]').prop('checked',
-				// item.ShowInAdvanceSearch);
-				// $('input[name=chkComparable]').prop('checked',
-				// item.ShowInComparison);
-				// $('input[name=chkUseForPriceRule]').prop('checked',
-				// item.IsIncludeInPriceRule);
-				// $('input[name=chkIsUseInFilter]').prop('checked',
-				// item.IsUseInFilter);
-				// $('input[name=chkShowInItemListing]').prop('checked',
-				// item.IsShowInItemListing);
-				// $('input[name=chkShowInItemDetail]').prop('checked',
-				// item.IsShowInItemDetail);
-				// usersManage.ValidationTypeEnableDisable(item.FillOptionValues,
-				// false);
-
-				// if (item.ItemTypes.length > 0) {
-				// $('#ddlApplyTo').val('1');
-				// $('.itemTypes').show();
-				// var itemsType = item.ItemTypes;
-				// var arr = itemsType.split(",");
-				// $.each(arr, function(i) {
-				// $("#lstItemType option[value=" + arr[i] + "]").prop(
-				// "selected", "selected");
-				// });
-				// } else {
-				// $('#ddlApplyTo').val('0');
-				// }
-			});
+			// if (item.ItemTypes.length > 0) {
+			// $('#ddlApplyTo').val('1');
+			// $('.itemTypes').show();
+			// var itemsType = item.ItemTypes;
+			// var arr = itemsType.split(",");
+			// $.each(arr, function(i) {
+			// $("#lstItemType option[value=" + arr[i] + "]").prop(
+			// "selected", "selected");
+			// });
+			// } else {
+			// $('#ddlApplyTo').val('0');
+			// }
 		},
 		EditAttributes : function(tblID, argus) {
 			usersManage.ClearForm();
 			switch (tblID) {
 			case "gdvUsers":
-				$('#languageSelect').find('li').each(
-						function() {
-							if ($(this).attr("value") == GPMS.utils
-									.GetCultureName()) {
-								$('#languageSelect').find('li').removeClass(
-										"languageSelected");
-								$(this).addClass("languageSelected");
-								return;
-
-							}
-						});
 				$('#lblAttrFormHeading').html(
 						getLocale(gpmsUsersManagement, 'Edit User Details: ')
 								+ argus[3]);
