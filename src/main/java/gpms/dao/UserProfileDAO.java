@@ -10,6 +10,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.accesscontrol.Accesscontrol;
 import gpms.model.Address;
 import gpms.model.AuditLog;
+import gpms.model.GPMSCommonInfo;
 import gpms.model.PositionDetails;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
@@ -77,6 +78,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).asList();
 	}
 
+	/*
+	 * This is example format for grid Info object bind that is customized to
+	 * bind in grid
+	 */
 	public List<UserInfo> findAllForUserGrid() throws UnknownHostException {
 		Datastore ds = getDatastore();
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
@@ -92,14 +97,33 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setMiddleName(userProfile.getMiddleName());
 			user.setLastName(userProfile.getLastName());
 			user.setUserName(userProfile.getUserAccount().getUserName());
+			user.setIsActive(userProfile.getUserAccount().getIsDeleted());
+
+			// Date today = Calendar.getInstance().getTime();
+			//
+			// SimpleDateFormat formatter = new SimpleDateFormat(
+			// "yyyy-MM-dd hh.mm.ss");
+			// String folderName = formatter.format(today);
+			// // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			// String d = formatter.parse(userProfile.getUserAccount()
+			// .getAddedOn());
+			//
+			// user.setAddedOn(d);
+			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
 			users.add(user);
 		}
 		return users;
 	}
 
-	public UserProfile findByID(ObjectId id) {
+	public UserProfile findUserByProfileID(ObjectId id,
+			GPMSCommonInfo gpmsCommonObj) {
 		Datastore ds = getDatastore();
-		return ds.createQuery(UserProfile.class).field("id").equal(id).get();
+		return ds.createQuery(UserProfile.class).field("_id").equal(id).get();
+	}
+
+	public UserProfile findByID(String id) {
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserProfile.class).field("_id").equal(id).get();
 	}
 
 	public UserProfile findByUserAccount(UserAccount userAccount) {

@@ -4,6 +4,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.GPMSCommonInfo;
 import gpms.model.JSONTansformer;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
@@ -22,8 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.bson.types.ObjectId;
+import org.json.JSONObject;
 import org.mongodb.morphia.Morphia;
 
+import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 
 @Path("/jsonServices")
@@ -59,11 +63,11 @@ public class JerseyClientSevice {
 	}
 
 	@POST
-	@Path("/GetUserAccountList")
+	@Path("/GetUsersList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String produceUserProfileJSON() {
+	public String produceUsersJSON() {
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-		String response = null;
+		String response = new String();
 
 		try {
 			users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
@@ -71,6 +75,50 @@ public class JerseyClientSevice {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
+
+		return response;
+	}
+
+	@POST
+	@Path("/GetUsersByProfileId")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public String produceUserByProfileId(String message)
+			throws UnknownHostException {
+		UserProfile user = new UserProfile();
+		String response = new String();
+
+		// {"attributeId":"55980da27e7e020a009b90b3","gpmsCommonObj":{"UserName":"superuser","UserAccountID":"1","CultureName":"en-US"}}
+		// build a JSON object
+		JSONObject obj = new JSONObject(message);
+
+		// get the first result
+		String profileId = obj.getString("attributeId");
+		ObjectId id = new ObjectId(profileId);
+
+		// Embedded Object
+		JSONObject commonObj = obj.getJSONObject("gpmsCommonObj");
+		String userName = commonObj.getString("UserName");
+		String userAccountID = commonObj.getString("UserAccountID");
+		String cultureName = commonObj.getString("CultureName");
+
+		System.out.println("Profile ID String: " + profileId
+				+ ", Profile ID with ObjectId: " + id + ", User Name: "
+				+ userName + ", User Account ID: " + userAccountID
+				+ ", Culture Name: " + cultureName);
+
+		// int a = obj.getInt("age");
+		// JSONObject gpmsCommonObj = obj.getJSONObject(obj
+		// .getString("gpmsCommonObj"));
+		// System.out.println("attributeId: " + n);
+
+		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+		gpmsCommonObj.setUserName(userName);
+		gpmsCommonObj.setUserAccountID(userAccountID);
+		gpmsCommonObj.setCultureName(cultureName);
+		user = userProfileDAO.findUserByProfileID(id, gpmsCommonObj);
+		Gson gson = new Gson();
+		response = gson.toJson(user, UserProfile.class);
 
 		return response;
 	}

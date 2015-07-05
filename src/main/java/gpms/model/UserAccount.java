@@ -6,6 +6,8 @@ package gpms.model;
 
 import gpms.dao.UserAccountDAO;
 
+import java.util.Date;
+
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
@@ -23,6 +25,9 @@ public class UserAccount extends BaseEntity {
 	private String password = new String();
 	@Property("is deleted")
 	private boolean isDeleted;
+
+	@Property("added on")
+	private Date addedOn;
 
 	public UserAccount() {
 		this.userName = new String();
@@ -63,6 +68,18 @@ public class UserAccount extends BaseEntity {
 
 	public boolean getIsDeleted() {
 		return isDeleted;
+	}
+
+	public Date getAddedOn() {
+		return addedOn;
+	}
+
+	public void setAddedOn(Date addedOn) {
+		this.addedOn = addedOn;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	@Override

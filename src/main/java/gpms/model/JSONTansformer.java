@@ -12,6 +12,13 @@ public class JSONTansformer {
 		return response;
 	}
 
+	// public static String ConvertToJSON(T<?> sendData) {
+	// String response = null;
+	// Gson gson = new Gson();
+	// response = gson.toJson(sendData, T.class);
+	// return response;
+	// }
+
 	// public static String RetweetJSONInfo(RetweetObjects messageData) {
 	// String retweet = null;
 	// Gson gson = new Gson();

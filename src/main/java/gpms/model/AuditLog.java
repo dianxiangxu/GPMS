@@ -8,47 +8,52 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
-public class AuditLog 
-{
+public class AuditLog {
 	@Reference("user id")
-	private UserProfile who;
+	private UserProfile userProfileId;
 	@Property("action")
 	private String action;
-	@Property("when")
-	private Date when;
-	
-	public AuditLog()
-	{
-		who = new UserProfile();
+	@Property("activity on")
+	private Date activityDate;
+
+	public AuditLog() {
+		userProfileId = new UserProfile();
 		action = new String();
-		when = new Date();
+		activityDate = new Date();
 	}
-	
-	public AuditLog(UserProfile who, String action, Date when)
-	{
+
+	public AuditLog(UserProfile userProfileId, String action, Date activityDate) {
 		this.action = action;
-		this.when = when;
-		this.who = who;
+		this.activityDate = activityDate;
+		this.userProfileId = userProfileId;
 	}
-	
-	public String getAction()
-	{
+
+	public UserProfile getUserProfileId() {
+		return userProfileId;
+	}
+
+	public void setUserProfileId(UserProfile userProfileId) {
+		this.userProfileId = userProfileId;
+	}
+
+	public String getAction() {
 		return action;
 	}
-	
-	public Date getWhen()
-	{
-		return when;
+
+	public void setAction(String action) {
+		this.action = action;
 	}
-	
-	public UserProfile getWho()
-	{
-		return who;
+
+	public Date getActivityDate() {
+		return activityDate;
 	}
-	
+
+	public void setActivityDate(Date activityDate) {
+		this.activityDate = activityDate;
+	}
+
 	@Override
-	public AuditLog clone()
-	{
-		return new AuditLog(this.who, this.action, this.when);
+	public AuditLog clone() {
+		return new AuditLog(this.userProfileId, this.action, this.activityDate);
 	}
 }
