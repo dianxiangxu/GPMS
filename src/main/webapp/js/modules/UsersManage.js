@@ -757,6 +757,8 @@ $(function() {
 			// }
 		},
 		EditAttributes : function(tblID, argus) {
+			alert(argus);
+			debugger;
 			usersManage.ClearForm();
 			switch (tblID) {
 			case "gdvUsers":

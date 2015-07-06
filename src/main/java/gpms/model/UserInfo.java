@@ -10,6 +10,7 @@ public class UserInfo {
 	private String lastName = new String();
 	private String userName = new String();
 	private boolean isActive = false;
+
 	private Date addedOn = new Date();
 
 	public int getRowTotal() {
