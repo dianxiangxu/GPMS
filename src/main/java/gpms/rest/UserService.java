@@ -68,7 +68,7 @@ public class UserService {
 	}
 
 	@GET
-	@Path("{firstname}")
+	@Path("/{firstname}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String findUserDeatilsByFirstName(
 			@PathParam("firstname") String query) throws UnknownHostException {
@@ -84,8 +84,9 @@ public class UserService {
 
 	@POST
 	@Path("/GetUsersList")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(MediaType.APPLICATION_JSON)
-	public String produceUsersJSON() throws UnknownHostException {
+	public String produceUsersJSON(String message) throws UnknownHostException {
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 		String response = new String();
 
