@@ -40,13 +40,13 @@ $(function() {
 			GetUserName : function() {
 				return gpmsUserName;
 			},
-			GetUserAccountID : function() {
-				return userAccountId;
+			GetUserProfileID : function() {
+				return userProfileId;
 			},
 			GetCultureName : function() {
 				return gpmsCurrentCulture;
 			},
-			
+
 			GetSessionCode : function() {
 				return sessionCode;
 			},
@@ -66,7 +66,7 @@ $(function() {
 		GPMSCommonObj : function() {
 			var gpmsCommonInfo = {
 				UserName : GPMS.utils.GetUserName(),
-				UserAccountID : GPMS.utils.GetUserAccountID(),
+				UserProfileID : GPMS.utils.GetUserProfileID(),
 				CultureName : GPMS.utils.GetCultureName(),
 				SessionCode : GPMS.utils.GetSessionCode()
 			};
