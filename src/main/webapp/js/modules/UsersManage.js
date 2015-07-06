@@ -9,7 +9,7 @@ $(function() {
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
 			UserName : GPMS.utils.GetUserName(),
-			UserAccountID : GPMS.utils.GetUserAccountID(),
+			UserProfileID : GPMS.utils.GetUserProfileID(),
 			CultureName : GPMS.utils.GetCultureName()
 		};
 		return gpmsCommonInfo;
@@ -26,7 +26,7 @@ $(function() {
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
 			dataType : 'json',
-			baseURL : GPMS.utils.GetGPMSServicePath() + "jsonServices/",
+			baseURL : GPMS.utils.GetGPMSServicePath() + "users/",
 			method : "",
 			url : "",
 			ajaxCallMode : 0
@@ -41,7 +41,7 @@ $(function() {
 							request.setRequestHeader("UName", GPMS.utils
 									.GetUserName());
 							request.setRequestHeader("PID", GPMS.utils
-									.GetUserAccountID());
+									.GetUserProfileID());
 							request.setRequestHeader("PType", "v");
 							request.setRequestHeader('Escape', '0');
 						},
