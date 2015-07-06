@@ -54,9 +54,24 @@ public class UserService {
 
 	@GET
 	@Path("/search/{query}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public String findByName(@PathParam("query") String query)
+	@Produces({ MediaType.APPLICATION_JSON })
+	public String findByFirstName(@PathParam("query") String query)
 			throws UnknownHostException {
+		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
+		String response = new String();
+
+		users = (ArrayList<UserProfile>) userProfileDAO
+				.findByFirstNameIgnoreCase(query);
+		response = JSONTansformer.ConvertToJSON(users);
+
+		return response;
+	}
+
+	@GET
+	@Path("{firstname}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public String findUserDeatilsByFirstName(
+			@PathParam("firstname") String query) throws UnknownHostException {
 		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
 		String response = new String();
 
@@ -100,12 +115,12 @@ public class UserService {
 		// Embedded Object
 		JSONObject commonObj = obj.getJSONObject("gpmsCommonObj");
 		String userName = commonObj.getString("UserName");
-		String userAccountID = commonObj.getString("UserAccountID");
+		String userProfileID = commonObj.getString("UserProfileID");
 		String cultureName = commonObj.getString("CultureName");
 
 		System.out.println("Profile ID String: " + profileId
 				+ ", Profile ID with ObjectId: " + id + ", User Name: "
-				+ userName + ", User Account ID: " + userAccountID
+				+ userName + ", User Profile ID: " + userProfileID
 				+ ", Culture Name: " + cultureName);
 
 		// int a = obj.getInt("age");
@@ -115,7 +130,7 @@ public class UserService {
 
 		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
 		gpmsCommonObj.setUserName(userName);
-		gpmsCommonObj.setUserAccountID(userAccountID);
+		gpmsCommonObj.setUserProfileID(userProfileID);
 		gpmsCommonObj.setCultureName(cultureName);
 		user = userProfileDAO.findUserByProfileID(id, gpmsCommonObj);
 		Gson gson = new Gson();
