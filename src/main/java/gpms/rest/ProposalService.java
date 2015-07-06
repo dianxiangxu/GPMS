@@ -5,14 +5,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/proposal")
-public class ProposalService 
-{
+@Path("/proposals")
+public class ProposalService {
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String returnString()
-	{
+	public String returnString() {
 		return "Hello World!";
 	}
 }
