@@ -224,8 +224,8 @@ var fromServer = 0;
 												.prop(
 														'src',
 														''
-																+ AspxCommerce.utils
-																		.GetAspxTemplateFolderPath()
+																+ GPMS.utils
+																		.GetGPMSRootPath()
 																+ '/images/ajax-loader.gif');
 										$("#" + t.id).prev().prev(".loading")
 												.show();
@@ -242,7 +242,7 @@ var fromServer = 0;
 													success : function(data) {
 														g.clearAll();
 														g.addHeader();
-														if (data.d.length == 0) {
+														if (data.length == 0) {
 															g.noDataMsg();
 														} else {
 															g.addData(data);
@@ -323,6 +323,7 @@ var fromServer = 0;
 												});
 									});
 				} else {
+
 					var data = JSON.parse('{"d":' + p.data + '}');
 					g.clearAll();
 					g.addHeader();
@@ -885,10 +886,11 @@ var fromServer = 0;
 
 			addData : function(data) {
 				var tbody = document.createElement('tbody');
-				$.each(data.d, function(i, row) {
-					delete (row.__type);
-					p.total = row.RowTotal;
-					delete (row.RowTotal);
+				$.each(data, function(i) {
+					row = data[i];
+					// delete (row.__type);
+					p.total = row.rowTotal;
+					delete (row.rowTotal);
 					var setprimaryID = false;
 					var tr = document.createElement('tr');
 					tr.className = (i % 2 && p.striped) ? 'sfOdd' : 'sfEven';
@@ -917,7 +919,6 @@ var fromServer = 0;
 						if (tdtype[cell] != '') {
 							row[ncols] = g.formatContent(row[ncols],
 									tdtype[cell], tdformat[cell]);
-
 						}
 
 						$(td).html(row[Encoder.htmlDecode(ncols)]);
@@ -939,9 +940,7 @@ var fromServer = 0;
 						if (tdHide[cell])
 							$(td).hide();
 					}
-
 					$(tbody).append(tr);
-
 				}); // row ends
 
 				$(t).append(tbody);
@@ -951,7 +950,8 @@ var fromServer = 0;
 				switch (type) {
 				case 'date':
 					content = String(content);
-					var isDate = /Date\(([-+]?\d+[-+]?\d+)\)/.exec(content);
+					var isDate = content;
+					// var isDate = /Date\(([-+]?\d+[-+]?\d+)\)/.exec(content);
 					if (isDate) {
 						isDate2 = isDate[1].split('+');
 						var n = parseInt(isDate2[0]);
@@ -970,7 +970,6 @@ var fromServer = 0;
 					break;
 				}
 				return returnvalue;
-
 			},
 
 			addControls : function() {
@@ -1916,7 +1915,6 @@ var fromServer = 0;
 	};
 
 	$.fn.sagegrid = function(p) {
-
 		return this.each(function() {
 			$.createGrid(this, p);
 		});

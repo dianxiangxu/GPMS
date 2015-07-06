@@ -5,7 +5,6 @@
 
 package gpms.model;
 
-import gpms.dao.BaseEntity;
 import gpms.dao.UserProfileDAO;
 
 import java.util.ArrayList;
@@ -18,6 +17,13 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.utils.IndexDirection;
 
+//{"id":null,"version":null,"auditLog":[],
+//"firstName":"Milson","middleName":"","lastName":"Munakami",
+//"officeNumbers":[],"mobileNumbers":[],"homeNumbers":[],
+//"address":{"street":"","city":"","state":"","zipcode":"","country":""},
+//"workEmails":[],"personalEmails":[],
+//"userAccount":{"id":null,"version":null,"auditLog":[],"userName":"","password":"","isDeleted":false},
+//"isDeleted":false,"detailsList":[]}
 @Entity(value = UserProfileDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserProfile extends BaseEntity {
 	@Property("first name")
@@ -466,9 +472,11 @@ public class UserProfile extends BaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return this.getFirstName() + " " + this.getMiddleName() + " "
-				+ this.getLastName() + ", Account name: "
-				+ userAccount.getUserName();
+		return new StringBuffer(" First Name : ").append(this.getFirstName())
+				.append(" Middle Name : ").append(this.getMiddleName())
+				.append(" Last Name : ").append(this.getLastName())
+				.append(" Account name: ").append(userAccount.getUserName())
+				.toString();
 	}
 
 	public boolean equals(UserProfile up) {

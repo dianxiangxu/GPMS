@@ -48,7 +48,11 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		super(mongo, morphia, dbName);
 	}
 
-	public List<UserAccount> findAll() throws UnknownHostException {
+	public List<UserAccount> findAll() throws UnknownHostException 
+	{
+		//if decision permit = 0
+		//do
+		//else don't
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).asList();
 	}

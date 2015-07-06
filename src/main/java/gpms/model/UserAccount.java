@@ -4,23 +4,30 @@ package gpms.model;
 
 //import java.util.Date;
 
-import gpms.dao.BaseEntity;
 import gpms.dao.UserAccountDAO;
+
+import java.util.Date;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
+//{"id":null,"version":null,"auditLog":[],
+//"userName":"","password":"","isDeleted":false}
+
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
 public class UserAccount extends BaseEntity {
 	@Property("username")
 	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
-	private String userName;
+	private String userName = new String();
 	@Property("password")
-	private String password;
+	private String password = new String();
 	@Property("is deleted")
 	private boolean isDeleted;
+
+	@Property("added on")
+	private Date addedOn;
 
 	public UserAccount() {
 		this.userName = new String();
@@ -61,6 +68,18 @@ public class UserAccount extends BaseEntity {
 
 	public boolean getIsDeleted() {
 		return isDeleted;
+	}
+
+	public Date getAddedOn() {
+		return addedOn;
+	}
+
+	public void setAddedOn(Date addedOn) {
+		this.addedOn = addedOn;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	@Override

@@ -2,8 +2,6 @@ package gpms.model;
 
 import org.mongodb.morphia.annotations.Entity;
 
-import gpms.dao.BaseEntity;
-
 @Entity
 public class Account extends BaseEntity {
 	private String name;

@@ -1,15 +1,23 @@
 package gpms.model;
+
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
 public class JSONTansformer {
-	public static String ConvertToJSON(ArrayList<?> feedData) {
-		String feeds = null;
+	public static String ConvertToJSON(ArrayList<?> sendData) {
+		String response = null;
 		Gson gson = new Gson();
-		feeds = gson.toJson(feedData);
-		return feeds;
+		response = gson.toJson(sendData);
+		return response;
 	}
+
+	// public static String ConvertToJSON(T<?> sendData) {
+	// String response = null;
+	// Gson gson = new Gson();
+	// response = gson.toJson(sendData, T.class);
+	// return response;
+	// }
 
 	// public static String RetweetJSONInfo(RetweetObjects messageData) {
 	// String retweet = null;

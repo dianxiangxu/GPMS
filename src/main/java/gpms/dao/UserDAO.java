@@ -1,9 +1,11 @@
 package gpms.dao;
 
-import gpms.DAL.MongoDBConnector;
-import gpms.model.UserAccount;
+
 import java.net.UnknownHostException;
 import java.util.List;
+
+import gpms.DAL.MongoDBConnector;
+import gpms.model.UserAccount;
 
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta content="Manage Attributes" name="DESCRIPTION">
 <meta content="Manage Attributes" name="KEYWORDS">
-<meta content="@SageFrame" name="COPYRIGHT">
+<meta content="@GPMS" name="COPYRIGHT">
 <meta content="GENERATOR" name="GENERATOR">
 <meta content="Author" name="AUTHOR">
 <meta content="DOCUMENT" name="RESOURCE-TYPE">
@@ -32,57 +32,38 @@
 
 <script type="text/javascript">
 	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
-	$
-			.ajaxSetup({
-				'beforeSend' : function(xhr) {
-					xhr
-							.setRequestHeader(
-									"ASPX-TOKEN",
-									"NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5");
-				}
-			});
+	$.ajaxSetup({
+		'beforeSend' : function(xhr) {
+			xhr.setRequestHeader("ASPX-TOKEN", _aspx_token);
+		}
+	});
 </script>
 
 <script type="text/javascript">
 	//<![CDATA[
-	var SageFrameAppPath = "";
-	var SageFrameUserName = "superuser";
-	var SageFrameCurrentCulture = "en-US";
-	var SageFramePortalID = "1";
-	var SageFramePortalName = "default";
-	var SageFrameActiveTemplate = "AspxCommerce";
-	var SageFrameHostURL = "http://localhost/aspx/";
-	var SageFrameSecureToken = "SageFrame.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
-	var MsgTemplate = "default";
+	var gpmsAppPath = "";
+	var gpmsUserName = "superuser";
+	var gpmsCurrentCulture = "en-US";
+	var gpmsHostURL = "http://localhost:8181/GPMS/";
+	var gpmsSecureToken = "GPMS.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
 
-	var aspxservicePath = "Modules/AspxCommerce/AspxCommerceServices/";
-	var aspxRootPath = "/";
-	var aspxTemplateFolderPath = "Templates/AspxCommerce";
-	var pageExtension = ".aspx";
-	var storeID = "1";
-	var portalID = "1";
-	var cultureName = "en-US";
-	var templateName = "AspxCommerce";
-	var customerID = "1";
-	var userName = "superuser";
-	var IsUseFriendlyUrls = "True";
+	var gpmsServicePath = "REST/";
+	var gpmsRootPath = "/";
+	var userAccountId = "1";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
-	var LoginURL = "sf/sfLogin";
-	var itemImagePath = "Modules/AspxCommerce/AspxItemsManagement/uploads/";
-	var categoryImagePath = "Modules/AspxCommerce/AspxCategoryManagement/uploads/";
-	var section = "1";
-	var aspxCountryName = "RESERVED";
-	var region = "en-US";
-	var curSymbol = "$";
-	var aspxRedirectPath = "/";
-	var currencyRate = "[]"; //]]>
+	var gpmsCountryName = "RESERVED";
+	var gpmsRedirectPath = "/";
+
+	var logInURL = "login";
+	var pageExtension = ".jsp";
+	//]]>
 </script>
 
 <script type="text/javascript"
 	src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
 
-<script type="text/javascript" src="js/core/aspxcommercecore.js"></script>
+<script type="text/javascript" src="js/core/gpmscore.js"></script>
 
 <!-- For Side Bar Navigation -->
 <script type="text/javascript" src="js/dashboard.js"></script>
@@ -112,12 +93,12 @@
 <script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
 
-<!-- <script type="text/javascript" src="js/core/Session.js"></script>
-    <script type="text/javascript" src="js/core/encoder.js"></script> -->
+<!-- <script type="text/javascript" src="js/core/Session.js"></script> -->
+<script type="text/javascript" src="js/core/encoder.js"></script>
 
-<script type="text/javascript" src="js/modules/AttributesManage.js"></script>
+<script type="text/javascript" src="js/modules/UsersManage.js"></script>
 <script type="text/javascript"
-	src="js/modules/Language/AspxAttributesManagement.js"></script>
+	src="js/modules/Language/GPMSUsersManagement.js"></script>
 <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
 <link type="text/css" rel="stylesheet"
@@ -139,15 +120,14 @@
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
 				<img style="border-width: 0px;" alt="Loading..."
-					src="../../../../Administrator/Templates/Default/images/ajax-loader.gif"
-					title="Loading..." id="imgPrgress"> <br> <span
-					id="lblPrgress">Please wait...</span>
+					src="images/ajax-loader.gif" title="Loading..." id="imgPrgress">
+				<br> <span id="lblPrgress">Please wait...</span>
 			</div>
 
 		</div>
 		<noscript>
-			<span id="lblnoScript">This page requires java-script to be
-				enabled. Please adjust your browser-settings.</span>
+			<span>This page requires java-script to be enabled. Please
+				adjust your browser-settings.</span>
 		</noscript>
 
 		<div id="sfOuterwrapper">
@@ -158,8 +138,6 @@
 					<div id="divCenterContent">
 						<!-- Side Bar Starts-->
 						<div class="sideBarLeft" id="divSideBar">
-
-
 							<script type="text/javascript">
 								//<![CDATA[    
 								$(function() {
@@ -302,7 +280,7 @@
 																					400,
 																					function() {
 																						//                            $('div.sfHidepanel').find("a span").show(function() { $(this).animate({ display: "block" }, 100) });
-																						//                            $('div.sfHidepanel').find("img").attr("src", SageFrameAppPath + "/Administrator/Templates/Default/images/hide-arrow.png");
+																						//                            $('div.sfHidepanel').find("img").attr("src", gpmsAppPath + "/Administrator/Templates/Default/images/hide-arrow.png");
 																					});
 																	InitAccordianMode();
 																	$(
@@ -580,6 +558,7 @@
 												});
 									}
 								};
+
 								function InitCollapsedMode() {
 									$('div.sfSidebar').find("ul li ul").hide(
 											function() {
@@ -603,10 +582,12 @@
 											.addClass("sfSidebarhide");
 									InitSuperfish();
 								}
+
 								function GetAdminImage(imagename) {
-									return (SageFrameAppPath
+									return (gpmsAppPath
 											+ "/Administrator/Templates/Default/images/" + imagename);
 								}
+
 								function InitSuperfish() {
 									$('ul.menu').addClass("sf-vertical");
 									var ul = $('ul.menu ul.acitem');
@@ -622,6 +603,7 @@
 									// 1.2 second delay on mouseout 
 									});
 								}
+
 								function InitAccordianMode() {
 									var ul = $('ul.menu ul.acitem');
 									$.each(ul, function(index, item) {
@@ -1086,15 +1068,15 @@
 
 							<div class="sfFooterwrapper clearfix" id="divFooterWrapper">
 								<div id="ctl_CPanleFooter1_divFooterContent">Copyright
-									2015 AspxCommerce.com. All Rights Reserved&reg;</div>
+									2015 GPMS. All Rights Reserved&reg;</div>
 
 							</div>
 						</div>
 						<!-- Side Bar Ends -->
+
 						<div class="sfMaincontent">
 							<div style="display: block" class="sfCpanel sfInnerwrapper"
 								id="divBottompanel">
-
 								<div class="">
 									<div class="sfModulecontent clearfix">
 
@@ -1104,12 +1086,9 @@
 												$(".sfLocale")
 														.localize(
 																{
-																	moduleKey : AspxAttributesManagement
+																	moduleKey : gpmsUsersManagement
 																});
 											});
-											var lblAttrFormHeading = "ctl19_lblAttrFormHeading";
-											var lblLength = "ctl19_lblLength";
-											var lblDefaultValue = "ctl19_lblDefaultValue";
 											var umi = "192";
 											//]]>
 										</script>
@@ -1119,8 +1098,7 @@
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
-														<span id="ctl19_lblAttrGridHeading">Manage
-															Attributes</span>
+														<span>Manage Attributes</span>
 													</h1>
 													<div class="cssClassHeaderRight">
 														<div class="sfButtonwrapper">
@@ -1187,11 +1165,11 @@
 															</table>
 														</div>
 														<div class="loading">
-															<img id="ajaxAttributeImageLoader" src=""
-																class="sfLocale" alt="loading...." title="loading...." />
+															<img id="ajaxLoader" src="" class="sfLocale"
+																alt="loading...." title="loading...." />
 														</div>
 														<div class="log"></div>
-														<table id="gdvAttributes" cellspacing="0" cellpadding="0"
+														<table id="gdvUsers" cellspacing="0" cellpadding="0"
 															border="0" width="100%"></table>
 													</div>
 												</div>
@@ -1203,8 +1181,7 @@
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
-														<span id="ctl19_lblAttrFormHeading">General
-															Information</span>
+														<span id="lblAttrFormHeading">General Information</span>
 													</h1>
 												</div>
 												<div class="cssClassTabPanelTable">
@@ -1220,7 +1197,7 @@
 														<div id="fragment-1">
 															<div class="sfFormwrapper">
 																<h3>
-																	<span id="ctl19_lblTab1Info">General Information</span>
+																	<span>General Information</span>
 																</h3>
 																<table cellspacing="0" cellpadding="0" border="0">
 																	<tbody>
@@ -1244,8 +1221,8 @@
 																				title="Attribute Input Type"></select></td>
 																		</tr>
 																		<tr id="trdefaultValue">
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblDefaultValue">Default Value:</span></td>
+																			<td><span class="cssClassLabel">Default
+																					Value:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" title="Default Value"
 																				value="" name="default_value_text"
@@ -1352,8 +1329,7 @@
 																			</td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblLength">Length:</span></td>
+																			<td><span class="cssClassLabel" id="lblLength">Length:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				class="sfInputbox verifyInteger" id="txtLength"
 																				type="text" maxlength="10" /> <span
@@ -1405,8 +1381,7 @@
 														<div id="fragment-2">
 															<div class="sfFormwrapper">
 																<h3>
-																	<span id="ctl19_lblTab2Info">Frontend Display
-																		Settings</span>
+																	<span>Frontend Display Settings</span>
 																</h3>
 																<table cellspacing="0" cellpadding="0" border="0">
 																	<tbody>
@@ -1518,22 +1493,7 @@
 
 	</form>
 	<div style="display: none;" id="ajaxBusy">
-		<img align="absmiddle"
-			src="Administrator/Templates/Default/images/ajax-loader.gif">&nbsp;Working...
-	</div>
-	<div id="tooltip" style="display: none;">
-		<h3></h3>
-		<div class="body"></div>
-		<div class="url"></div>
-	</div>
-	<div id="BoxOverlay"
-		style="position: fixed; top: 0px; left: 0px; opacity: 0.7; background-color: rgb(0, 0, 0); z-index: 999; height: 697px; width: 1349px; display: none;"></div>
-	<div id="alert-Box" style="display: none; position: fixed;">
-		<div id="alert-InBox">
-			<div id="alert-BoxContent">
-				<div id="alert-BoxContenedor"></div>
-			</div>
-		</div>
+		<img align="absmiddle" src="images/ajax-loader.gif">&nbsp;Working...
 	</div>
 </body>
 </html>
