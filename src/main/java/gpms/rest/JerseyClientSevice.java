@@ -32,8 +32,6 @@ import com.mongodb.MongoClient;
 
 @Path("/jsonServices")
 public class JerseyClientSevice {
-	private UserProfileDAO upDAO = null;
-
 	MongoClient mongoClient = null;
 	Morphia morphia = null;
 	String dbName = "GPMS";
