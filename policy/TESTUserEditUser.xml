@@ -5,4 +5,12 @@
 	Version="1.0">
 	<Description>Testing certain functions involving user editing a user
 	</Description>
-	<Rule></Rule></Policy>
+	<Target>
+	<AnyOf>
+	
+	</AnyOf>
+	</Target>
+	<Rule>
+	
+	</Rule>
+	</Policy>
