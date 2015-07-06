@@ -17,7 +17,7 @@ import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
 
-@Path("/users")
+@Path("/testusers")
 public class TestServiceResource {
 
 	MongoClient mongoClient = MongoDBConnector.getMongo();
