@@ -204,5 +204,4 @@ public class Accesscontrol {
 		Accesscontrol ac = new Accesscontrol();
 		ac.getXACMLdecision("Faculty", "Proposal", "Create");
 	}
-
 }

@@ -10,7 +10,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		Accesscontrol ac = new Accesscontrol();
 		Accesscontrol.initBalana();
-		String decision = ac.getXACMLdecision("PI", "Chair","Add");
+		String decision = ac.getXACMLdecision("Faculty", "Proposal", "Create");
 		System.out.println(decision);
 	}
 
