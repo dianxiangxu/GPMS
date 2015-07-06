@@ -116,7 +116,7 @@ public class ProposalDAOTest {
 				count = 0;
 				for(Proposal p : pList)
 				{
-					if(!p.getIsDeleted())
+					if(!p.getProposalStatus().equals(Status.DELETED))
 					{
 						System.out.println("Proposal numnber : " + count);
 						System.out.println(p.toString());
