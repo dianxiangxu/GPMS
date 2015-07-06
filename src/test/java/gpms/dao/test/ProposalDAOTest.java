@@ -113,16 +113,16 @@ public class ProposalDAOTest {
 		{
 			do
 			{
-				// count = 0;
-				// for(Proposal p : pList)
-				// {
-				// if(!p.getIsDeleted())
-				// {
-				// System.out.println("Proposal numnber : " + count);
-				// System.out.println(p.toString());
-				// }
-				// count++;
-				// }
+				count = 0;
+				for(Proposal p : pList)
+				{
+					if(!p.getProposalStatus().equals(Status.DELETED))
+					{
+						System.out.println("Proposal numnber : " + count);
+						System.out.println(p.toString());
+					}	
+					count++;
+				}
 				
 				do
 				{
