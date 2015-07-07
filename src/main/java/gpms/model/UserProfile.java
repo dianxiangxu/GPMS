@@ -70,6 +70,13 @@ public class UserProfile extends BaseEntity {
 	private boolean isDeleted;
 
 	/**
+	 * Non-Parameterized constructor, needed for @id assignment
+	 */
+	public UserProfile() {
+
+	}
+
+	/**
 	 * Overloaded constructor
 	 * 
 	 * @param firstName
@@ -116,13 +123,6 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-
-	}
-
-	/**
-	 * Non-Parameterized constructor, needed for @id assignment
-	 */
-	public UserProfile() {
 
 	}
 

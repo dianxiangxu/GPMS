@@ -6,6 +6,9 @@ public class GPMSCommonInfo {
 	private String cultureName;
 	private String sessionCode;
 
+	public GPMSCommonInfo() {
+	}
+
 	public String getUserName() {
 		return userName;
 	}

@@ -9,52 +9,39 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
-//{"id":null,"version":null,"auditLog":[],
-//"proposalNo":"","dateReceived":1435876850010,"proposalStatus":"NEW",
-//"investigatorInfo":{"MAX_NUM_CO_PI":4,"MAX_NUM_SENIOR_PERSONNEL":10,
-//"pi":{"id":null,"version":null,"auditLog":[],"firstName":"","middleName":"","lastName":"","officeNumbers":[],"mobileNumbers":[],"homeNumbers":[],"address":{"street":"","city":"","state":"","zipcode":"","country":""},"workEmails":[],"personalEmails":[],"userAccount":{"id":null,"version":null,"auditLog":[],"userName":"","password":"","isDeleted":false},"isDeleted":false,"detailsList":[]},
-//"co_pi":[],"seniorPersonnel":[]},
-//"projectInfo":{"projectTitle":"",
-//"projectType":{"isResearchBasic":true,"isResearchApplied":false,"isResearchDevelopment":false,"isInstruction":false,"isOtherSponsoredActivity":false},
-//"typeOfRequest":{"continuation":false,"supplement":false,"preProposal":false,"newProposal":false},
-//"dueDate":1435876850022,
-//"projectPeriod":{"from":1435876850025,"to":1435876850025},
-//"projectLocation":{"offCampus":false,"onCampus":false}},
-//"sponsorAndBudgetInfo":{"grantingAgency":[],"directCosts":0.0,"totalCosts":0.0,"facosts":0.0,"farate":0.0},
-//"costShareInfo":{"institutionalCommitted":false,"thirdPartyCommitted":false},
-//"universityCommitments":{"newRenovatedFacilitiesRequired":false,"rentalSpaceRequired":false,"institutionalCommitmentRequired":false},
-//"conflicOfInterest":{"financialCOI":false,"conflictDisclosed":false,"disclosureFormChange":false},
-//"complianceInfo":{}}
 
 @Entity(value = ProposalDAO.COLLECTION_NAME, noClassnameStored = true)
 public class Proposal extends BaseEntity {
 	@Property("proposal no")
 	@Indexed(value = IndexDirection.ASC, name = "proposalNoIndex", unique = true)
-	private String proposalNo;
+	private String proposalNo = new String();
 
 	@Property("date received")
-	private Date dateReceived;
+	private Date dateReceived = new Date();
 
 	@Property("proposal status")
 	private Status proposalStatus = Status.NEW;
 
 	@Embedded("investigator info")
-	private InvestigatorInfo investigatorInfo;
+	private InvestigatorInfo investigatorInfo = new InvestigatorInfo();
 
 	@Embedded("project info")
-	private ProjectInfo projectInfo;
+	private ProjectInfo projectInfo = new ProjectInfo();
 
 	@Embedded("sponsor and budget info")
-	private SponsorAndBudgetInfo sponsorAndBudgetInfo;
+	private SponsorAndBudgetInfo sponsorAndBudgetInfo = new SponsorAndBudgetInfo();
 
 	@Embedded("cost share info")
-	private CostShareInfo costShareInfo;
+	private CostShareInfo costShareInfo = new CostShareInfo();
 	@Embedded("university commitments")
-	private UniversityCommitments universityCommitments;
+	private UniversityCommitments universityCommitments = new UniversityCommitments();
 	@Embedded("conflict of interest and commitment info")
-	private ConflictOfInterest conflicOfInterest;
+	private ConflictOfInterest conflicOfInterest = new ConflictOfInterest();
 	@Embedded("compliance info")
-	private ComplianceInfo complianceInfo;
+	private ComplianceInfo complianceInfo = new ComplianceInfo();
+
+	public Proposal() {
+	}
 
 	public Proposal(String proposalNo, Date dateReceived,
 			Status proposalStatus, InvestigatorInfo investigatorInfo,
@@ -78,18 +65,6 @@ public class Proposal extends BaseEntity {
 		this.proposalNo = proposalNo;
 		this.dateReceived = dateReceived;
 		this.proposalStatus = proposalStatus;
-		investigatorInfo = new InvestigatorInfo();
-		projectInfo = new ProjectInfo();
-		sponsorAndBudgetInfo = new SponsorAndBudgetInfo();
-		costShareInfo = new CostShareInfo();
-		universityCommitments = new UniversityCommitments();
-		conflicOfInterest = new ConflictOfInterest();
-		complianceInfo = new ComplianceInfo();
-	}
-
-	public Proposal() {
-		proposalNo = new String();
-		dateReceived = new Date();
 		investigatorInfo = new InvestigatorInfo();
 		projectInfo = new ProjectInfo();
 		sponsorAndBudgetInfo = new SponsorAndBudgetInfo();

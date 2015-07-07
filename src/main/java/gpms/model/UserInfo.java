@@ -13,6 +13,9 @@ public class UserInfo {
 
 	private Date addedOn = new Date();
 
+	public UserInfo() {
+	}
+
 	public int getRowTotal() {
 		return rowTotal;
 	}
