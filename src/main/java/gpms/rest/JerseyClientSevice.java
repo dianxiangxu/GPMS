@@ -32,8 +32,6 @@ import com.mongodb.MongoClient;
 
 @Path("/jsonServices")
 public class JerseyClientSevice {
-	private UserProfileDAO upDAO = null;
-
 	MongoClient mongoClient = null;
 	Morphia morphia = null;
 	String dbName = "GPMS";
@@ -60,67 +58,6 @@ public class JerseyClientSevice {
 		UserProfile user = new UserProfile(firstName, "", lastName);
 
 		return user;
-	}
-
-	@POST
-	@Path("/GetUsersList")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String produceUsersJSON() {
-		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-		String response = new String();
-
-		try {
-			users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
-			response = JSONTansformer.ConvertToJSON(users);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-
-		return response;
-	}
-
-	@POST
-	@Path("/GetUsersByProfileId")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public String produceUserByProfileId(String message)
-			throws UnknownHostException {
-		UserProfile user = new UserProfile();
-		String response = new String();
-
-		// {"attributeId":"55980da27e7e020a009b90b3","gpmsCommonObj":{"UserName":"superuser","UserAccountID":"1","CultureName":"en-US"}}
-		// build a JSON object
-		JSONObject obj = new JSONObject(message);
-
-		// get the first result
-		String profileId = obj.getString("attributeId");
-		ObjectId id = new ObjectId(profileId);
-
-		// Embedded Object
-		JSONObject commonObj = obj.getJSONObject("gpmsCommonObj");
-		String userName = commonObj.getString("UserName");
-		String userAccountID = commonObj.getString("UserAccountID");
-		String cultureName = commonObj.getString("CultureName");
-
-		System.out.println("Profile ID String: " + profileId
-				+ ", Profile ID with ObjectId: " + id + ", User Name: "
-				+ userName + ", User Account ID: " + userAccountID
-				+ ", Culture Name: " + cultureName);
-
-		// int a = obj.getInt("age");
-		// JSONObject gpmsCommonObj = obj.getJSONObject(obj
-		// .getString("gpmsCommonObj"));
-		// System.out.println("attributeId: " + n);
-
-		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
-		gpmsCommonObj.setUserName(userName);
-		gpmsCommonObj.setUserAccountID(userAccountID);
-		gpmsCommonObj.setCultureName(cultureName);
-		user = userProfileDAO.findUserByProfileID(id, gpmsCommonObj);
-		Gson gson = new Gson();
-		response = gson.toJson(user, UserProfile.class);
-
-		return response;
 	}
 
 	@GET

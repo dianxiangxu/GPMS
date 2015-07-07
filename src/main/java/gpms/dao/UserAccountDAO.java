@@ -1,9 +1,12 @@
 package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
+import gpms.model.AuditLog;
 import gpms.model.UserAccount;
+import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -17,7 +20,7 @@ import com.mongodb.MongoException;
 public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	private static final String DBNAME = "GPMS";
 	public static final String COLLECTION_NAME = "useraccount";
-
+	private AuditLog audit;
 	private static Morphia morphia;
 	private static Datastore ds;
 
@@ -73,4 +76,41 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		return ds.createQuery(UserAccount.class).field("username")
 				.equal(userName).get();
 	}
+	
+	/**
+	 * Method to set account name
+	 * @param author profile making the change
+	 * @param target profile being changed
+	 * @param newName the new name for the user
+	 */
+	public void setAccountName(UserProfile author, UserProfile target, String newName) 
+	{
+		Datastore ds = getDatastore();
+		if (!target.getUserAccount().getUserName().equals(newName)) 
+		{
+			audit = new AuditLog(author, "Edited user name", new Date());
+			target.addEntryToAuditLog(audit);
+			target.getUserAccount().setUserName(newName);
+			ds.save(target);
+		}
+	}
+	
+	/**
+	 * Method to set the password
+	 * @param author profile making the change
+	 * @param target profile the change will be made to
+	 * @param newPassword the new password
+	 */
+	public void setPassword(UserProfile author, UserProfile target, String newPassword)
+	{
+		Datastore ds = getDatastore();
+		if (!target.getUserAccount().getPassword().equals(newPassword)) 
+		{
+			audit = new AuditLog(author, "Edited password", new Date());
+			target.addEntryToAuditLog(audit);
+			target.getUserAccount().setPassword(newPassword);
+			ds.save(target);
+		}
+	}
+	
 }

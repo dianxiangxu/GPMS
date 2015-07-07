@@ -2,7 +2,7 @@ package gpms.model;
 
 public class GPMSCommonInfo {
 	private String userName;
-	private String userAccountID;
+	private String userProfileID;
 	private String cultureName;
 	private String sessionCode;
 
@@ -14,12 +14,12 @@ public class GPMSCommonInfo {
 		this.userName = userName;
 	}
 
-	public String getUserAccountID() {
-		return userAccountID;
+	public String getUserProfileID() {
+		return userProfileID;
 	}
 
-	public void setUserAccountID(String userAccountID) {
-		this.userAccountID = userAccountID;
+	public void setUserProfileID(String userProfileID) {
+		this.userProfileID = userProfileID;
 	}
 
 	public String getCultureName() {
