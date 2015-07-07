@@ -94,7 +94,7 @@ public class HashTableTest
 		tenuredTitles.add("professor");
 		tenuredTitles.add("associate professor");
 		tenuredTitles.add("assistant professor");
-		
+
 		ArrayList<String> nonTenuredTitles = new ArrayList<String>();
 		nonTenuredTitles.add("research professaor");
 		nonTenuredTitles.add("associate research professor");
@@ -105,56 +105,56 @@ public class HashTableTest
 		nonTenuredTitles.add("visiting profesor");
 		nonTenuredTitles.add("visiting associate profesor");
 		nonTenuredTitles.add("visiting assistant profesor");
-		
+
 		ArrayList<String> teachingFaculty = new ArrayList<String>();
 		teachingFaculty.add("lecturer");
 		teachingFaculty.add("senior lecturer");
 		teachingFaculty.add("adjunct professor");
-		
+
 		ArrayList<String> researchStaff = new ArrayList<String>();
 		researchStaff.add("research associate");
 		researchStaff.add("research sciencetist");
 		researchStaff.add("senior research sciencetist");
-		
+
 		ArrayList<String> professionalStaff = new ArrayList<String>();
 		professionalStaff.add("business manager");
 		professionalStaff.add("university research administrator");
 		professionalStaff.add("department administrative assistant");
-		
+
 		Hashtable<String, ArrayList<String>> TypeTitleHtCS = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtCS.put("Tenured", tenuredTitles);
 		TypeTitleHtCS.put("Research Staff", researchStaff);
 		TypeTitleHtCS.put("Teaching Faculty", tenuredTitles);
-		
+
 		Hashtable<String, ArrayList<String>> TypeTitleHtEE = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtEE.put("Non-tenure-track", nonTenuredTitles);
 		TypeTitleHtEE.put("Professional Staff", professionalStaff);
 		TypeTitleHtEE.put("Research Staff", researchStaff);
-		
+
 		Hashtable<String, ArrayList<String>> TypeTitleHtCE = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtCE.put("Teaching Faculty", teachingFaculty);
 		TypeTitleHtCE.put("Professional Staff", professionalStaff);
 		TypeTitleHtCE.put("Tenured", tenuredTitles);
-		
+
 		Hashtable<String, ArrayList<String>> TypeTitleHtFis = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtFis.put("Research Staff", researchStaff);
 		TypeTitleHtFis.put("Teaching Faculty", teachingFaculty);
 		TypeTitleHtFis.put("Non-Tenured-Track", nonTenuredTitles);
-		
+
 		Hashtable<String, ArrayList<String>> TypeTitleHtChe = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtChe.put("Teaching Faculty", teachingFaculty);
 		TypeTitleHtChe.put("Tenured", tenuredTitles);
 		TypeTitleHtChe.put("Non-Tenured-Track", nonTenuredTitles);
-		
+
 		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtEng = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
 		departmentTypeHtEng.put("Computer Science", TypeTitleHtCS);
 		departmentTypeHtEng.put("Electrical Engineering", TypeTitleHtEE);
 		departmentTypeHtEng.put("Computer Engineering", TypeTitleHtCE);
-		
+
 		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtSci = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
 		departmentTypeHtSci.put("Physics", TypeTitleHtFis);
 		departmentTypeHtSci.put("Chemestry", TypeTitleHtChe);
-		
+
 		ht.put("Engineering", departmentTypeHtEng);
 		ht.put("Science", departmentTypeHtSci);
 	}

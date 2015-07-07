@@ -10,7 +10,7 @@ import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
-import java.net.UnknownHostException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -22,10 +22,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.bson.types.ObjectId;
-import org.json.JSONObject;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
 
 @Path("/users")
@@ -56,7 +61,7 @@ public class UserService {
 	@Path("/search/{query}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String findByFirstName(@PathParam("query") String query)
-			throws UnknownHostException {
+			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
 		String response = new String();
 
@@ -71,7 +76,8 @@ public class UserService {
 	@Path("/{firstname}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String findUserDeatilsByFirstName(
-			@PathParam("firstname") String query) throws UnknownHostException {
+			@PathParam("firstname") String query)
+			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
 		String response = new String();
 
@@ -86,7 +92,8 @@ public class UserService {
 	@Path("/GetUsersList")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(MediaType.APPLICATION_JSON)
-	public String produceUsersJSON(String message) throws UnknownHostException {
+	public String produceUsersJSON(String message)
+			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 		String response = new String();
 
@@ -101,23 +108,50 @@ public class UserService {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public String produceUserByProfileId(String message)
-			throws UnknownHostException {
+			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
 		String response = new String();
 
 		// {"attributeId":"55980da27e7e020a009b90b3","gpmsCommonObj":{"UserName":"superuser","UserAccountID":"1","CultureName":"en-US"}}
-		// build a JSON object
-		JSONObject obj = new JSONObject(message);
+		String profileId = new String();
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
 
-		// get the first result
-		String profileId = obj.getString("attributeId");
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("attributeId")) {
+			profileId = root.get("attributeId").getTextValue();
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
+		// // build a JSON object using org.JSON
+		// JSONObject obj = new JSONObject(message);
+		//
+		// // get the first result
+		// String profileId = obj.getString("attributeId");
+
+		//
+		// // Embedded Object
+		// JSONObject commonObj = obj.getJSONObject("gpmsCommonObj");
+		// String userName = commonObj.getString("UserName");
+		// String userProfileID = commonObj.getString("UserProfileID");
+		// String cultureName = commonObj.getString("CultureName");
+
 		ObjectId id = new ObjectId(profileId);
-
-		// Embedded Object
-		JSONObject commonObj = obj.getJSONObject("gpmsCommonObj");
-		String userName = commonObj.getString("UserName");
-		String userProfileID = commonObj.getString("UserProfileID");
-		String cultureName = commonObj.getString("CultureName");
 
 		System.out.println("Profile ID String: " + profileId
 				+ ", Profile ID with ObjectId: " + id + ", User Name: "
@@ -134,9 +168,21 @@ public class UserService {
 		gpmsCommonObj.setUserProfileID(userProfileID);
 		gpmsCommonObj.setCultureName(cultureName);
 		user = userProfileDAO.findUserByProfileID(id, gpmsCommonObj);
-		Gson gson = new Gson();
-		response = gson.toJson(user, UserProfile.class);
+
+		// // Gson gson = new Gson();
+		// Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		// response = gson.toJson(user, UserProfile.class);
+		// response = gson.toJson(user);
+
+		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+				user);
 
 		return response;
 	}
+	// DepartmentsPositionsCollection dtc = new
+	// DepartmentsPositionsCollection();
+	// Hashtable<String, Hashtable<String, Hashtable<String,
+	// ArrayList<String>>>> collegeKey = dtc
+	// .getAvailableDepartmentsAndPositions();
+	// Set<String> keys = collegeKey.keySet();
 }

@@ -618,10 +618,9 @@ $(function() {
 					cssclass : 'cssClassHeadDate',
 					controlclass : '',
 					coltype : 'label',
-					align : 'left'
-				// ,
-				// type : 'date',
-				// format : 'yyyy/MM/dd'
+					align : 'left',
+					type : 'date',
+					format : 'yyyy/MM/dd'
 				},
 
 				{

@@ -11,6 +11,7 @@ import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -24,6 +25,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.json.JSONObject;
 import org.mongodb.morphia.Morphia;
 
@@ -63,7 +66,8 @@ public class JerseyClientSevice {
 	@GET
 	@Path("/print/UserAccount")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String produceUserAccountJSON() {
+	public String produceUserAccountJSON() throws JsonGenerationException,
+			JsonMappingException, IOException {
 		ArrayList<UserAccount> userAccounts = new ArrayList<UserAccount>();
 		String response = null;
 
@@ -80,7 +84,8 @@ public class JerseyClientSevice {
 	@GET
 	@Path("/print/Proposal")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String produceProposalJSON() {
+	public String produceProposalJSON() throws JsonGenerationException,
+			JsonMappingException, IOException {
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		String response = null;
 
