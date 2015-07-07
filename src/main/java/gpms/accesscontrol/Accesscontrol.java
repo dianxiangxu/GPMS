@@ -63,6 +63,39 @@ public class Accesscontrol {
 	 * @param action
 	 * @return
 	 */
+//	private String createXACMLRequest(String userName, String resource,
+//			String action) {
+//
+//		return "<Request xmlns=\"urn:oasis:names:tc:xacml:3.0:core:schema:wd-17\" CombinedDecision=\"false\" ReturnPolicyIdList=\"false\">\n"
+//				+ "<Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\">\n"
+//				+ 	"<Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" IncludeInResult=\"false\">\n"
+//				+ 		"<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">"
+//				+ 			action
+//				+ 		"</AttributeValue>\n"
+//				+ 	"</Attribute>\n"
+//				+ "</Attributes>\n"
+//				+ "<Attributes Category=\"urn:oasis:names:tc:xacml:1.0:subject-category:access-subject\">\n"
+//				+ 	"<Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:subject:subject-id\" IncludeInResult=\"false\">\n"
+//				+ 		"<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">"
+//				+ 			userName
+//				+ 		"</AttributeValue>\n"
+//				+ 	"</Attribute>\n"
+//				+ "</Attributes>\n"
+//				+ "<Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:resource\">\n"
+//				+ 	"<Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:resource:resource-id\" IncludeInResult=\"false\">\n"
+//				+ 		"<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">"
+//				+ 			resource
+//				+ 		"</AttributeValue>\n"
+//				+ 	"</Attribute>\n"
+//				+ "</Attributes>\n" 
+//			    +"</Request>";
+//
+//	}
+	
+	/////////////////////////////////////////////////////////////////
+	//////////THIS IS A COPY THAT I AM MODIFYING FOR TESTING/////////
+	/////////////////////////////////////////////////////////////////
+	
 	private String createXACMLRequest(String userName, String resource,
 			String action) {
 
@@ -91,6 +124,7 @@ public class Accesscontrol {
 			    +"</Request>";
 
 	}
+
 
 	private String createXACMLRequest(String userName, String resource,
 			String action, String environment) {
