@@ -10,16 +10,13 @@ import org.mongodb.morphia.annotations.Reference;
 @Embedded
 public class AuditLog {
 	@Reference("user id")
-	private UserProfile userProfileId;
+	private UserProfile userProfileId = new UserProfile();
 	@Property("action")
-	private String action;
+	private String action = new String();
 	@Property("activity on")
-	private Date activityDate;
+	private Date activityDate = new Date();
 
 	public AuditLog() {
-		userProfileId = new UserProfile();
-		action = new String();
-		activityDate = new Date();
 	}
 
 	public AuditLog(UserProfile userProfileId, String action, Date activityDate) {

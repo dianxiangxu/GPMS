@@ -10,13 +10,11 @@ import org.mongodb.morphia.annotations.Property;
 @Embedded
 public class ProjectPeriod {
 	@Property("from")
-	private Date from;
+	private Date from = new Date();
 	@Property("to")
-	private Date to;
+	private Date to = new Date();
 
 	public ProjectPeriod() {
-		from = new Date();
-		to = new Date();
 	}
 
 	public Date getFrom() {
@@ -46,15 +44,14 @@ public class ProjectPeriod {
 	public boolean equals(ProjectPeriod pp) {
 		return this.from.equals(pp.from) && this.to.equals(pp.to);
 	}
-	
+
 	@Override
-	public ProjectPeriod clone()
-	{
+	public ProjectPeriod clone() {
 		ProjectPeriod copy = new ProjectPeriod();
-		
+
 		copy.setFrom(new Date(this.from.getTime()));
 		copy.setTo(new Date(this.to.getTime()));
-		
+
 		return copy;
 	}
 }
