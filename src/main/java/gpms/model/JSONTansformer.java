@@ -28,7 +28,9 @@ public class JSONTansformer {
 		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		mapper.setDateFormat(df);
 
-		response = mapper.writeValueAsString(sendData);
+		// response = mapper.writeValueAsString(sendData);
+		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+				sendData);
 
 		return response;
 	}

@@ -946,22 +946,22 @@ var fromServer = 0;
 				$(t).append(tbody);
 			},
 			formatContent : function(content, type, formats) {
-				var returnvalue;
+				// var returnvalue;
 				switch (type) {
 				case 'date':
-					content = String(content);
-					var isDate = content;
+					// content = String(content);
+					// var isDate = content;
 					// var isDate = /Date\(([-+]?\d+[-+]?\d+)\)/.exec(content);
-					if (isDate) {
-						isDate2 = isDate[1].split('+');
-						var n = parseInt(isDate2[0]);
-						returnvalue = new Date(n);
-						// returnvalue = returnvalue.toString();
-					}
+					// if (isDate) {
+					// isDate2 = isDate[1].split('+');
+					// var n = parseInt(isDate2[0]);
+					// returnvalue = new Date(n);
+					// // returnvalue = returnvalue.toString();
+					// }
 
 					if (formats == undefined || formats == '')
 						formats = p.dateformat;
-					returnvalue = $.format.date(returnvalue, formats);
+					returnvalue = $.format.date(content, formats);
 					break;
 
 				case "boolean":

@@ -620,7 +620,7 @@ $(function() {
 					coltype : 'label',
 					align : 'left',
 					type : 'date',
-					format : 'yyyy/MM/dd'
+					format : 'yyyy/MM/dd hh:mm:ss a'
 				},
 
 				{
