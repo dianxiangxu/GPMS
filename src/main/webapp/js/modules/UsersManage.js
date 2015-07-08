@@ -621,6 +621,8 @@ $(function() {
 					align : 'left',
 					type : 'date',
 					format : 'yyyy/MM/dd hh:mm:ss a'
+				// Want more format then
+				// :https://github.com/phstc/jquery-dateFormat/blob/master/test/expected_inputs_spec.js
 				},
 
 				{
@@ -637,7 +639,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '1',
-					callMethod : 'usersManage.EditAttributes',
+					callMethod : 'usersManage.EditUser',
 					arguments : '1,2,3,4,5,6,7'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Delete"),
@@ -645,7 +647,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '2',
-					callMethod : 'usersManage.DeleteAttributes',
+					callMethod : 'usersManage.DeleteUser',
 					arguments : '5'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
@@ -653,7 +655,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '4',
-					callMethod : 'usersManage.ActiveAttributes',
+					callMethod : 'usersManage.ActiveUser',
 					arguments : '5'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Deactivate"),
@@ -661,7 +663,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '5',
-					callMethod : 'usersManage.DeactiveAttributes',
+					callMethod : 'usersManage.DeactiveUser',
 					arguments : '5'
 				} ],
 				rp : perpage,
@@ -755,7 +757,7 @@ $(function() {
 			// $('#ddlApplyTo').val('0');
 			// }
 		},
-		EditAttributes : function(tblID, argus) {
+		EditUser : function(tblID, argus) {
 			usersManage.ClearForm();
 			switch (tblID) {
 			case "gdvUsers":
@@ -877,7 +879,7 @@ $(function() {
 					usersManage.GetValidationTypeErrorMessage(attValType));
 		},
 
-		DeleteAttributes : function(tblID, argus) {
+		DeleteUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
 				if (argus[3].toLowerCase() != "yes") {
@@ -959,7 +961,7 @@ $(function() {
 			this.ajaxCall(this.config);
 			return false;
 		},
-		DeactiveAttributes : function(tblID, argus) {
+		DeactiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
 				if (argus[3].toLowerCase() != "yes") {
@@ -979,7 +981,7 @@ $(function() {
 				break;
 			}
 		},
-		ActiveAttributes : function(tblID, argus) {
+		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
 				if (argus[3].toLowerCase() != "yes") {
