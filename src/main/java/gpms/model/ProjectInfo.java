@@ -14,31 +14,26 @@ import org.mongodb.morphia.annotations.Property;
 public class ProjectInfo {
 
 	@Property("project title")
-	//@Indexed(value = IndexDirection.ASC, name = "proposalTitleIndex", unique = true)
-	private String projectTitle;
+	// @Indexed(value = IndexDirection.ASC, name = "proposalTitleIndex", unique
+	// = true)
+	private String projectTitle = new String();
 
 	@Embedded("project type")
-	private ProjectType projectType;
+	private ProjectType projectType = new ProjectType();
 
 	@Embedded("type of request")
-	private TypeOfRequest typeOfRequest;
+	private TypeOfRequest typeOfRequest = new TypeOfRequest();
 
 	@Property("due date")
-	private Date dueDate;
+	private Date dueDate = new Date();
 
 	@Embedded("project period")
-	private ProjectPeriod projectPeriod;
+	private ProjectPeriod projectPeriod = new ProjectPeriod();
 
 	@Embedded("location of project")
-	private ProjectLocation projectLocation;
+	private ProjectLocation projectLocation = new ProjectLocation();
 
 	public ProjectInfo() {
-		projectTitle = new String();
-		projectType = new ProjectType();
-		typeOfRequest = new TypeOfRequest();
-		dueDate = new Date();
-		projectPeriod = new ProjectPeriod();
-		projectLocation = new ProjectLocation();
 	}
 
 	public String getProjectTitle() {
@@ -114,10 +109,9 @@ public class ProjectInfo {
 				&& this.projectType.equals(pinf.projectType)
 				&& this.typeOfRequest.equals(pinf.typeOfRequest);
 	}
-	
+
 	@Override
-	public ProjectInfo clone()
-	{
+	public ProjectInfo clone() {
 		ProjectInfo copy = new ProjectInfo();
 
 		copy.setProjectTitle(this.projectTitle);
@@ -126,7 +120,7 @@ public class ProjectInfo {
 		copy.setDueDate(new Date(this.dueDate.getTime()));
 		copy.setProjectPeriod(this.projectPeriod.clone());
 		copy.setProjectLocation(this.projectLocation.clone());
-		
+
 		return copy;
 	}
 }

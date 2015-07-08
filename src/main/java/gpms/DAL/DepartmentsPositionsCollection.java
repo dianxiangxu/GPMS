@@ -1,94 +1,12 @@
-import gpms.model.PositionDetails;
+package gpms.DAL;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Scanner;
-import java.util.Set;
 
-
-public class HashTableTest 
-{
+public class DepartmentsPositionsCollection {
 	private static final Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> ht = new Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>>();
-	
-	public static void main(String[] args)
-	{
-		PositionDetails pd = new PositionDetails();
-		Scanner scan = new Scanner(System.in);
-		HashTableTest htt = new HashTableTest();
-		Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> collegeKey = htt.getHashtable();
-		Set<String> keys = collegeKey.keySet();
-		Object[] keyArray;
-		int count = 0;
-		int index = 0;
-		
-		
-		System.out.println("Please Select one");
-		for(String k : keys)
-		{
-			System.out.println(count++ + " " + k);
-		}
-		do
-		{
-			System.out.println("Please Select an index");
-			index = scan.nextInt();
-		}while(index < 0 || index > keys.size());
-		keyArray = keys.toArray();
-		pd.setCollege((String)keyArray[index]);
-		
-		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentKeys = collegeKey.get(keyArray[index]);
-		keys = departmentKeys.keySet();
-		
-		count = 0;
-		System.out.println("Please Select one");
-		for(String k : keys)
-		{
-			System.out.println(count++ + " " + k);
-		}
-		do
-		{
-			System.out.println("Please Select an index");
-			index = scan.nextInt();
-		}while(index < 0 || index > keys.size());
-		keyArray = keys.toArray();
-		pd.setDepartment((String)keyArray[index]);
-		
-		Hashtable<String, ArrayList<String>> titleKeys = departmentKeys.get(keyArray[index]);
-		keys = titleKeys.keySet();
-		
-		count = 0;
-		System.out.println("Please Select one");
-		for(String k : keys)
-		{
-			System.out.println(count++ + " " + k);
-		}
-		do
-		{
-			System.out.println("Please Select an index");
-			index = scan.nextInt();
-		}while(index < 0 || index > keys.size());
-		keyArray = keys.toArray();
-		pd.setPositionTitle((String)keyArray[index]);
-		
-		ArrayList<String> types = titleKeys.get(keyArray[index]);
-		
-		count = 0;
-		for(String k : types)
-		{
-			System.out.println(count++ + " " + k);
-		}
-		do
-		{
-			System.out.println("Please Select an index");
-			index = scan.nextInt();
-		}while(index < 0 || index > types.size());
-		pd.setPositionType(types.get(index));
-		
-		System.out.println("Position Details : ");
-		System.out.println(pd.toString());
-	}
-	
-	HashTableTest()
-	{
+
+	public DepartmentsPositionsCollection() {
 		ArrayList<String> tenuredTitles = new ArrayList<String>();
 		tenuredTitles.add("distinguished professor");
 		tenuredTitles.add("professor");
@@ -158,9 +76,42 @@ public class HashTableTest
 		ht.put("Engineering", departmentTypeHtEng);
 		ht.put("Science", departmentTypeHtSci);
 	}
-	
-	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getHashtable()
-	{
+
+	// {Engineering={Electrical Engineering={Research Staff=[research associate,
+	// research sciencetist, senior research sciencetist],
+	// Non-tenure-track=[research professaor, associate research professor,
+	// assistant research profesor, clinical profesor, clinical associate
+	// profesor, clinical assistant profesor, visiting profesor, visiting
+	// associate profesor, visiting assistant profesor], Professional
+	// Staff=[business manager, university research administrator, department
+	// administrative assistant]}, Computer Science={Research Staff=[research
+	// associate, research sciencetist, senior research sciencetist],
+	// Tenured=[distinguished professor, professor, associate professor,
+	// assistant professor], Teaching Faculty=[distinguished professor,
+	// professor, associate professor, assistant professor]}, Computer
+	// Engineering={Tenured=[distinguished professor, professor, associate
+	// professor, assistant professor], Teaching Faculty=[lecturer, senior
+	// lecturer, adjunct professor], Professional Staff=[business manager,
+	// university research administrator, department administrative
+	// assistant]}},
+	//
+	// Science={Physics={Research Staff=[research associate, research
+	// sciencetist, senior research sciencetist], Teaching Faculty=[lecturer,
+	// senior lecturer, adjunct professor], Non-Tenured-Track=[research
+	// professaor, associate research professor, assistant research profesor,
+	// clinical profesor, clinical associate profesor, clinical assistant
+	// profesor, visiting profesor, visiting associate profesor, visiting
+	// assistant profesor]}, Chemestry={Tenured=[distinguished professor,
+	// professor, associate professor, assistant professor], Teaching
+	// Faculty=[lecturer, senior lecturer, adjunct professor],
+	// Non-Tenured-Track=[research professaor, associate research professor,
+	// assistant research profesor, clinical profesor, clinical associate
+	// profesor, clinical assistant profesor, visiting profesor, visiting
+	// associate profesor, visiting assistant profesor]}}
+	//
+	// }
+	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getAvailableDepartmentsAndPositions() {
 		return ht;
 	}
+
 }

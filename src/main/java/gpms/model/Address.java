@@ -6,22 +6,18 @@ import org.mongodb.morphia.annotations.Property;
 @Embedded
 public class Address {
 	@Property("street")
-	private String street;
+	private String street = new String();
 	@Property("city")
-	private String city;
+	private String city = new String();
 	@Property("state")
-	private String state;
+	private String state = new String();
 	@Property("zipcode")
-	private String zipcode;
+	private String zipcode = new String();
 	@Property("country")
-	private String country;
+	private String country = new String();
 
 	public Address() {
-		street = "";
-		city = "";
-		state = "";
-		zipcode = "";
-		country = "";
+
 	}
 
 	public Address(String setStreet, String setCity, String setState,

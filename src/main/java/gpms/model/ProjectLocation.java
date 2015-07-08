@@ -10,6 +10,9 @@ public class ProjectLocation {
 	@Property("on-campus")
 	private boolean onCampus;
 
+	public ProjectLocation() {
+	}
+
 	public boolean isOffCampus() {
 		return offCampus;
 	}
@@ -37,15 +40,14 @@ public class ProjectLocation {
 	public boolean equals(ProjectLocation pl) {
 		return this.offCampus == pl.offCampus && this.onCampus == pl.onCampus;
 	}
-	
+
 	@Override
-	public ProjectLocation clone()
-	{
+	public ProjectLocation clone() {
 		ProjectLocation copy = new ProjectLocation();
-		
+
 		copy.setOnCampus(this.onCampus);
 		copy.setOffCampus(this.offCampus);
-		
+
 		return copy;
 	}
 }

@@ -27,11 +27,9 @@ public class UserAccount extends BaseEntity {
 	private boolean isDeleted;
 
 	@Property("added on")
-	private Date addedOn;
+	private Date addedOn = new Date();
 
 	public UserAccount() {
-		this.userName = new String();
-		this.password = new String();
 	}
 
 	public UserAccount(String userName, String password) {

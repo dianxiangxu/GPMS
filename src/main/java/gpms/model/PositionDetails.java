@@ -9,19 +9,15 @@ import org.mongodb.morphia.annotations.Property;
 @Embedded
 public class PositionDetails {
 	@Property("position type")
-	private String positionType;
+	private String positionType = new String();
 	@Property("position title")
-	private String positionTitle;
+	private String positionTitle = new String();
 	@Property("department")
-	private String department;
+	private String department = new String();
 	@Property("college")
-	private String college;
+	private String college = new String();;
 
 	public PositionDetails() {
-		positionType = new String();
-		positionTitle = new String();
-		department = new String();
-		college = new String();
 	}
 
 	public PositionDetails(String positionType, String positionTitle,
@@ -79,10 +75,10 @@ public class PositionDetails {
 				&& this.college.equals(pd.college)
 				&& this.department.equals(pd.department);
 	}
-	
+
 	@Override
-	public PositionDetails clone()
-	{
-		return new PositionDetails(this.positionType, this.positionTitle, this.department, this.college);
+	public PositionDetails clone() {
+		return new PositionDetails(this.positionType, this.positionTitle,
+				this.department, this.college);
 	}
 }
