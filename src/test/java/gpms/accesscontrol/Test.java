@@ -11,7 +11,7 @@ public class Test
 		// TODO Auto-generated method stub
 		Accesscontrol ac = new Accesscontrol();
 		Accesscontrol.initBalana();
-		String decision = ac.getXACMLdecision("Senior-Personnel", "Senior-Personnel-List", "Edit");
+		String decision = ac.getXACMLdecision("Co-PI", "Project-Info", "Edit");
 		System.out.println(decision);
 	}
 }
