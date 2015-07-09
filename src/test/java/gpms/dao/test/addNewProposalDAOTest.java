@@ -6,6 +6,7 @@ import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
+import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
 import gpms.model.ProjectLocation;
@@ -47,6 +48,7 @@ public class addNewProposalDAOTest {
 	private UserAccount ua;
 	private UserProfile piProfile;
 	private List<UserProfile> upList;
+	private InvestigatorRefAndPosition irap = new InvestigatorRefAndPosition();
 		
 	@Before
 	public void initiate() throws UnknownHostException, MongoException {
@@ -56,7 +58,7 @@ public class addNewProposalDAOTest {
 				.map(ProjectType.class);
 		morphia.map(TypeOfRequest.class).map(ProjectPeriod.class)
 				.map(SponsorAndBudgetInfo.class);
-		morphia.map(UserProfile.class).map(PositionDetails.class)
+		morphia.map(InvestigatorRefAndPosition.class).map(PositionDetails.class)
 				.map(ProjectInfo.class);
 		pdao = new ProposalDAO(mongo, morphia, dbName);
 		
@@ -70,7 +72,13 @@ public class addNewProposalDAOTest {
 		if(pList.size() < 1)
 		{
 			prop = new Proposal();
-			prop.getInvestigatorInfo().setPi(piProfile);
+			irap.setId(piProfile.getId());
+			irap.setCollege(piProfile.getDetails(0).getCollege());
+			irap.setDepartment(piProfile.getDetails(0).getDepartment());
+			irap.setPositionType(piProfile.getDetails(0).getPositionType());
+			irap.setPositionTitle(piProfile.getDetails(0).getPositionTitle());
+		
+			prop.getInvestigatorInfo().setPi(irap);
 		}
 		else
 		{
@@ -88,7 +96,13 @@ public class addNewProposalDAOTest {
 		assertTrue(prop.getInvestigatorInfo().equals(invInf));
 		assertTrue(prop.getInvestigatorInfo() != invInf);
 		
-		invInf.setPi(piProfile);
+		irap.setId(piProfile.getId());
+		irap.setCollege(piProfile.getDetails(0).getCollege());
+		irap.setDepartment(piProfile.getDetails(0).getDepartment());
+		irap.setPositionType(piProfile.getDetails(0).getPositionType());
+		irap.setPositionTitle(piProfile.getDetails(0).getPositionTitle());
+		
+		invInf.setPi(irap);
 		
 		pdao.setEditInvestigatorInfo(prop, invInf, piProfile);
 		
@@ -124,22 +138,27 @@ public class addNewProposalDAOTest {
 		assertTrue(prop.getInvestigatorInfo().equals(invInf));
 		assertTrue(prop.getInvestigatorInfo() != invInf);
 		
-		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
-		ArrayList<UserProfile> seniorPersonnelList = invInf.getSeniorPersonnel();
+		ArrayList<InvestigatorRefAndPosition> coPiList = invInf.getCo_pi();
+		ArrayList<InvestigatorRefAndPosition> seniorPersonnelList = invInf.getSeniorPersonnel();
 		
 		for(UserProfile up : upList)
 		{
 			if(!up.equals(prop.getInvestigatorInfo().getPi()))
 			{
+				irap.setId(up.getId());
+				irap.setCollege(up.getDetails(0).getCollege());
+				irap.setDepartment(up.getDetails(0).getDepartment());
+				irap.setPositionType(up.getDetails(0).getPositionType());
+				irap.setPositionTitle(up.getDetails(0).getPositionTitle());
 				if(coPiList.size() < 4)
 				{
-					coPiList.add(up);
+					coPiList.add(irap);
 					assertTrue(coPiList.size() == coPiCount + 1);
 					coPiCount++;
 				}
 				else
 				{
-					seniorPersonnelList.add(up);
+					seniorPersonnelList.add(irap);
 					assertTrue(seniorPersonnelList.size() == seniorPersonnelCount + 1);
 					seniorPersonnelCount++;
 				}
@@ -164,7 +183,7 @@ public class addNewProposalDAOTest {
 		ProjectType projType = projInf.getProjectType();
 		
 		projType.setIsResearchBasic(false);
-		assertTrue(!projType.getIsResearchBasic() == false);
+		assertTrue(projType.getIsResearchBasic() == false);
 		
 		projType.setIsResearchApplied(true);
 		assertTrue(projType.getIsResearchApplied() == true);
