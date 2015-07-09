@@ -132,6 +132,18 @@ public class JUnitCreateTwoUsersTest {
 		newAddress.setZipcode(zipcode);
 		newAddress.setCountry(country);
 
+		street = "2601 W Boise Ave TRLR B";
+		city = "Boise";
+		state = "Idaho";
+		zipcode = "83706";
+		country = "United States";
+		Address newAddress2 = new Address();
+		newAddress2.setStreet(street);
+		newAddress2.setCity(city);
+		newAddress2.setState(state);
+		newAddress2.setZipcode(zipcode);
+		newAddress2.setCountry(country);
+
 		// Now that we know his personal info we need some work info from him
 		// Currently our PositionDetails class supports Strings only
 		String positionType, positionTitle, department, college;
@@ -164,7 +176,8 @@ public class JUnitCreateTwoUsersTest {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile.setAddress(newAddress);
+		newUserProfile.addAddress(newAddress);
+		newUserProfile.addAddress(newAddress2);
 		newUserProfile.addDetails(newDetails);
 		newUserProfile.addDetails(moreDetails);
 		newUserProfile.setUserId(activeLog);
@@ -292,7 +305,7 @@ public class JUnitCreateTwoUsersTest {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile2.setAddress(newAddress);
+		newUserProfile2.addAddress(newAddress);
 		newUserProfile2.addDetails(newDetails);
 		newUserProfile2.addDetails(moreDetails);
 

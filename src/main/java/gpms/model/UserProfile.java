@@ -51,7 +51,7 @@ public class UserProfile extends BaseEntity {
 	private List<String> homeNumbers = new ArrayList<String>();
 
 	@Embedded("address")
-	private Address address = new Address();
+	private List<Address> address = new ArrayList<Address>();
 
 	@Property("work email")
 	// @Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique =
@@ -380,14 +380,12 @@ public class UserProfile extends BaseEntity {
 		System.out.println("List after operation: " + numberString.toString());
 	}
 
-	/**
-	 * Set the address for the user
-	 * 
-	 * @param setAddress
-	 *            address obj to add
-	 */
-	public void setAddress(Address setAddress) {
-		address = setAddress;
+	public List<PositionDetails> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<PositionDetails> details) {
+		this.details = details;
 	}
 
 	/**
@@ -395,8 +393,51 @@ public class UserProfile extends BaseEntity {
 	 * 
 	 * @return the address object
 	 */
-	public Address getAddress() {
+
+	public List<Address> getAddress() {
 		return address;
+	}
+
+	/**
+	 * Set the address for the user
+	 * 
+	 * @param setAddress
+	 *            address list to add
+	 */
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+	public void addAddress(Address address) {
+		this.address.add(address);
+	}
+
+	public void setOfficeNumbers(List<String> officeNumbers) {
+		this.officeNumbers = officeNumbers;
+	}
+
+	public void setMobileNumbers(List<String> mobileNumbers) {
+		this.mobileNumbers = mobileNumbers;
+	}
+
+	public void setHomeNumbers(List<String> homeNumbers) {
+		this.homeNumbers = homeNumbers;
+	}
+
+	public void setWorkEmails(List<String> workEmails) {
+		this.workEmails = workEmails;
+	}
+
+	public void setPersonalEmails(List<String> personalEmails) {
+		this.personalEmails = personalEmails;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	/**
@@ -515,8 +556,12 @@ public class UserProfile extends BaseEntity {
 		for (String email : this.personalEmails) {
 			copy.addPersonalEmail(email);
 		}
+
+		for (Address address : this.address) {
+			copy.addAddress(address);
+		}
+
 		copy.setUserId(this.userAccount.clone());
-		copy.setAddress(this.address.clone());
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
 		copy.setIsDeleted(this.getIsDeleted());

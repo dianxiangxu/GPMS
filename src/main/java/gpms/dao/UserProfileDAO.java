@@ -239,7 +239,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 */
 	public void setFirstName(UserProfile author, UserProfile target,
 			String newName) {
-//		Accesscontrol ac = new Accesscontrol();
+		// Accesscontrol ac = new Accesscontrol();
 		// ac.getXACMLdecision(userName, resource, action);
 		// Datastore ds = getDatastore();
 		if (!target.getFirstName().equals(newName)) {
@@ -406,13 +406,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 	}
 
-	public void setAddress(UserProfile author, UserProfile target,
+	public void addAddress(UserProfile author, UserProfile target,
 			Address address) {
-		if (!target.getAddress().equals(address)) {
-			Datastore ds = getDatastore();
-			audit = new AuditLog(author, "Edited address", new Date());
+		Datastore ds = getDatastore();
+		if (!target.getAddress().contains(address)) {
+			audit = new AuditLog(author,
+					"Edited address " + address.toString(), new Date());
 			target.addEntryToAuditLog(audit);
-			target.setAddress(address);
+			target.addAddress(address);
 			ds.save(target);
 		}
 	}
