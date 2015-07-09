@@ -66,9 +66,14 @@ public class UserProfile extends BaseEntity {
 	@Reference(value = "user id"/* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
 
+	@Property("Proposal Keys")
+	private List<String> proposalKeys = new ArrayList<String>();
+	
 	@Property("is deleted")
 	private boolean isDeleted;
 
+	
+	
 	/**
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
@@ -465,6 +470,34 @@ public class UserProfile extends BaseEntity {
 		return isDeleted;
 	}
 
+	/**
+	 * Add a proposal key to the key chain
+	 * @param proposalKey the key to be added
+	 */
+	public void addProposalKey(String proposalKey)
+	{
+		proposalKeys.add(proposalKey);
+	}
+	
+	/**
+	 * Delete a proposal key from the list
+	 * @param proposalKey the key to be deleted
+	 */
+	public void deleteProposalKey(String proposalKey)
+	{
+		proposalKeys.remove(proposalKey);
+	}
+	
+	/**
+	 * 
+	 * @return the list of proposal keys
+	 */
+	public List<String> getProposalKeys()
+	{
+		return proposalKeys;
+	}
+	
+	
 	/**
 	 * toString returns full user name
 	 * 

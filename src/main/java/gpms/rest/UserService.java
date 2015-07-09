@@ -111,7 +111,7 @@ public class UserService {
 		UserProfile user = new UserProfile();
 		String response = new String();
 
-		// {"attributeId":"55980da27e7e020a009b90b3","gpmsCommonObj":{"UserName":"superuser","UserAccountID":"1","CultureName":"en-US"}}
+		// {"userId":"559af097af6e0422642ca519","gpmsCommonObj":{"UserName":"superuser","UserProfileID":"1","CultureName":"en-US"}}
 		String profileId = new String();
 		String userName = new String();
 		String userProfileID = new String();
@@ -120,8 +120,8 @@ public class UserService {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(message);
 
-		if (root != null && root.has("attributeId")) {
-			profileId = root.get("attributeId").getTextValue();
+		if (root != null && root.has("userId")) {
+			profileId = root.get("userId").getTextValue();
 		}
 
 		JsonNode commonObj = root.get("gpmsCommonObj");

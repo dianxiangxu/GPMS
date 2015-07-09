@@ -21,6 +21,7 @@ public class UserPEP
 	public UserPEP()
 	{
 		account = new UserAccountDAO(null, null, null);
+		profile = new UserProfileDAO(null,null,null);
 	}
 	
 //	public findAllUserAccounts() 
