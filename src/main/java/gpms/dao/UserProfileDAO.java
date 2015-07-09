@@ -83,6 +83,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * bind in grid
 	 */
 	public List<UserInfo> findAllForUserGrid() throws UnknownHostException {
+		
 		Datastore ds = getDatastore();
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 
