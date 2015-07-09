@@ -6,6 +6,7 @@ import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
+import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
 import gpms.model.ProjectLocation;
@@ -86,11 +87,14 @@ public class editProposalDAOTest
 	@Test
 	public void editInvestigatorInfo() throws UnknownHostException
 	{
+		UserProfile newEntry;
+		InvestigatorRefAndPosition irap = new InvestigatorRefAndPosition();
+		
 		upList = upDAO.findAll();
 		
 		InvestigatorInfo invInf = prop.getInvestigatorInfo().clone();
-		ArrayList<UserProfile> coPiList = invInf.getCo_pi();
-		ArrayList<UserProfile> seniorPersonnelList = invInf.getSeniorPersonnel();
+		ArrayList<InvestigatorRefAndPosition> coPiList = invInf.getCo_pi();
+		ArrayList<InvestigatorRefAndPosition> seniorPersonnelList = invInf.getSeniorPersonnel();
 		
 		int coPiCount = coPiList.size();
 		int seniorPersonnelCount = seniorPersonnelList.size();
@@ -112,10 +116,26 @@ public class editProposalDAOTest
 			assertTrue(seniorPersonnelList.size() == --seniorPersonnelCount);
 		}
 		
-		coPiList.add(upList.remove(0));
+		newEntry = upList.remove(0);
+		
+		irap.setId(newEntry.getId());
+		irap.setCollege(newEntry.getDetails(0).getCollege());
+		irap.setDepartment(newEntry.getDetails(0).getDepartment());
+		irap.setPositionTitle(newEntry.getDetails(0).getPositionTitle());
+		irap.setPositionType(newEntry.getDetails(0).getPositionType());
+		
+		coPiList.add(irap);
 		assertTrue(coPiList.size() == ++coPiCount);
 		
-		seniorPersonnelList.add(upList.remove(0));
+		newEntry = upList.remove(0);
+		
+		irap.setId(newEntry.getId());
+		irap.setCollege(newEntry.getDetails(0).getCollege());
+		irap.setDepartment(newEntry.getDetails(0).getDepartment());
+		irap.setPositionTitle(newEntry.getDetails(0).getPositionTitle());
+		irap.setPositionType(newEntry.getDetails(0).getPositionType());
+		
+		seniorPersonnelList.add(irap);
 		assertTrue(seniorPersonnelList.size() == ++seniorPersonnelCount);
 		
 		pdao.setEditInvestigatorInfo(prop, invInf, piProfile);

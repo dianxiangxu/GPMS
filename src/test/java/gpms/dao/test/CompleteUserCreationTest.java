@@ -12,12 +12,14 @@ import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
 import gpms.model.InvestigatorInfo;
+import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -178,7 +180,15 @@ public class CompleteUserCreationTest {
 		InvestigatorInfo firstInv = new InvestigatorInfo();
 		Proposal proposal1 = new Proposal();
 		
-		firstInv.setPi(newUserProfile);
+		InvestigatorRefAndPosition irap = new InvestigatorRefAndPosition();
+		irap.setId(newUserProfile.getId());
+		irap.setCollege(newUserProfile.getDetails(0).getCollege());
+		irap.setDepartment(newUserProfile.getDetails(0).getDepartment());
+		irap.setPositionType(newUserProfile.getDetails(0).getPositionType());
+		irap.setPositionTitle(newUserProfile.getDetails(0).getPositionTitle());
+	
+		
+		firstInv.setPi(irap);
 		
 		proposal1.setProposalNo("10001");
 		proposal1.setInvestigatorInfo(firstInv);
@@ -320,8 +330,22 @@ public class CompleteUserCreationTest {
 				InvestigatorInfo secondInv = new InvestigatorInfo();
 				Proposal proposal2 = new Proposal();
 				
-				secondInv.setPi(newUserProfile2);
-				secondInv.addCo_pi(newUserProfile);
+				irap.setId(newUserProfile2.getId());
+				irap.setCollege(newUserProfile2.getDetails(0).getCollege());
+				irap.setDepartment(newUserProfile2.getDetails(0).getDepartment());
+				irap.setPositionType(newUserProfile2.getDetails(0).getPositionType());
+				irap.setPositionTitle(newUserProfile2.getDetails(0).getPositionTitle());
+			
+				
+				secondInv.setPi(irap);
+				
+				irap.setId(newUserProfile.getId());
+				irap.setCollege(newUserProfile.getDetails(0).getCollege());
+				irap.setDepartment(newUserProfile.getDetails(0).getDepartment());
+				irap.setPositionType(newUserProfile.getDetails(0).getPositionType());
+				irap.setPositionTitle(newUserProfile.getDetails(0).getPositionTitle());
+			
+				secondInv.addCo_pi(irap);
 				
 				proposal2.setProposalNo("10002");
 				proposal2.setInvestigatorInfo(secondInv);
