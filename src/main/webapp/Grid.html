@@ -93,6 +93,13 @@
 <script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
 
+<script type="text/javascript" src="js/AjaxFileUploader/ajaxupload.js"></script>
+
+<script type="text/javascript" src="js/Editors/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"
+	src="js/Editors/ckeditor/adapters/jquery.js"></script>
+
+
 <!-- <script type="text/javascript" src="js/core/Session.js"></script> -->
 <script type="text/javascript" src="js/core/encoder.js"></script>
 
@@ -146,8 +153,8 @@
 								var SidebarMgr = {
 									config : {
 										isPostBack : false,
-										async : false,
-										cache : false,
+										async : true,
+										cache : true,
 										type : 'POST',
 										contentType : "application/json; charset=utf-8",
 										data : '{}',
@@ -1089,12 +1096,11 @@
 																	moduleKey : gpmsUsersManagement
 																});
 											});
-											var umi = "192";
 											//]]>
 										</script>
 
 										<!-- Grid -->
-										<div id="divAttribGrid">
+										<div id="divUserGrid">
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
@@ -1177,7 +1183,7 @@
 										</div>
 										<!-- End of Grid -->
 										<!-- form -->
-										<div id="divAttribForm" style="display: none">
+										<div id="divUserForm" style="display: none">
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
@@ -1464,7 +1470,7 @@
 														</button>
 													</p>
 													<p>
-														<button type="button" id="btnSaveAttribute" class="sfBtn">
+														<button type="button" id="btnSaveUser" class="sfBtn">
 															<span class="sfLocale icon-save">Save</span>
 														</button>
 													</p>

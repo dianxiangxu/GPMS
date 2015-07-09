@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.JsonGenerationException;
@@ -29,8 +30,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
 
 @Path("/users")
@@ -179,10 +178,12 @@ public class UserService {
 
 		return response;
 	}
+
 	// DepartmentsPositionsCollection dtc = new
 	// DepartmentsPositionsCollection();
 	// Hashtable<String, Hashtable<String, Hashtable<String,
 	// ArrayList<String>>>> collegeKey = dtc
 	// .getAvailableDepartmentsAndPositions();
 	// Set<String> keys = collegeKey.keySet();
+
 }

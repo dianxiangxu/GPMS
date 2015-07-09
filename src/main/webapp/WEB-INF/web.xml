@@ -59,10 +59,22 @@
 		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>OctetStreamReader</display-name>
+		<servlet-name>OctetStreamReader</servlet-name>
+		<servlet-class>gpms.rest.OctetStreamReader</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>GPMS-enterprise-rest</servlet-name>
 		<url-pattern>/RESTQ/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>OctetStreamReader</servlet-name>
+		<url-pattern>/OctetStreamReader</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

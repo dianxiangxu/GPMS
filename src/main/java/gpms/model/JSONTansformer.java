@@ -26,6 +26,8 @@ public class JSONTansformer {
 		ObjectMapper mapper = new ObjectMapper();
 
 		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		// 2014/09/1 for item detail bind to jQuery Date picker
+		// final DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		mapper.setDateFormat(df);
 
 		// response = mapper.writeValueAsString(sendData);

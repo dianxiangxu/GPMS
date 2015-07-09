@@ -1,10 +1,4 @@
 ﻿var usersManage = '';
-function reinitialise() {
-	if ($('body').find('#BoxOverlay').length == 0) {
-		csscody.initialize();
-	}
-}
-
 $(function() {
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
@@ -20,8 +14,8 @@ $(function() {
 	usersManage = {
 		config : {
 			isPostBack : false,
-			async : false,
-			cache : false,
+			async : true,
+			cache : true,
 			type : 'POST',
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
@@ -36,8 +30,7 @@ $(function() {
 					.ajax({
 						type : usersManage.config.type,
 						beforeSend : function(request) {
-							request.setRequestHeader('ASPX-TOKEN', _aspx_token);
-							request.setRequestHeader("UMID", umi);
+							request.setRequestHeader('GPMS-TOKEN', _aspx_token);
 							request.setRequestHeader("UName", GPMS.utils
 									.GetUserName());
 							request.setRequestHeader("PID", GPMS.utils
@@ -166,7 +159,7 @@ $(function() {
 			$('#lblAttrFormHeading').html(
 					getLocale(gpmsUsersManagement, "New User Details"));
 			$(".delbutton").removeAttr("id");
-			$("#btnSaveAttribute").removeAttr("name");
+			$("#btnSaveUser").removeAttr("name");
 			$('#lblLength').html(getLocale("Length:"));
 			$(".delbutton").hide();
 			$("#btnReset").show();
@@ -544,7 +537,7 @@ $(function() {
 			}
 		},
 
-		BindAttributeGrid : function(attributeNm, required, SearchComparable,
+		BindUserGrid : function(attributeNm, required, SearchComparable,
 				isSystem) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetUsersList";
@@ -567,7 +560,7 @@ $(function() {
 					cssclass : 'cssClassHeadCheckBox',
 					coltype : 'checkbox',
 					align : 'center',
-					checkFor : '5',
+					checkFor : '5', // this is count from 0 column index
 					elemClass : 'attrChkbox',
 					elemDefault : false,
 					controlclass : 'attribHeaderChkbox'
@@ -757,6 +750,7 @@ $(function() {
 			// $('#ddlApplyTo').val('0');
 			// }
 		},
+
 		EditUser : function(tblID, argus) {
 			usersManage.ClearForm();
 			switch (tblID) {
@@ -825,13 +819,13 @@ $(function() {
 					$("input[name=chkValuesRequired]").prop('disabled',
 							'disabled');
 				}
-				$("#btnSaveAttribute").prop("name", argus[0]);
+				$("#btnSaveUser").prop("name", argus[0]);
 				usersManage.onInit();
 
 				usersManage.config.url = usersManage.config.baseURL
 						+ "GetUsersByProfileId";
 				usersManage.config.data = JSON2.stringify({
-					attributeId : argus[0],
+					userId : argus[0],
 					gpmsCommonObj : gpmsCommonObj()
 				});
 				usersManage.config.ajaxCallMode = 4;
@@ -849,67 +843,38 @@ $(function() {
 				break;
 			}
 		},
-		DateDeserialize : function(dateStr) {
-			return eval('new' + dateStr.replace(/\//g, ' '));
-		},
-
-		RebindAttributesOnLanguageChange : function() {
-			// Added for rebinding data in language select options
-			var gpmsCommonInfo = gpmsCommonObj();
-			if ($("#languageSelect").length > 0) {
-				gpmsCommonInfo.CultureName = $(".languageSelected").attr(
-						"value");
-			}
-			// usersManage.onInit();
-			usersManage.config.url = usersManage.config.baseURL
-					+ "GetAttributeDetailsByAttributeID";
-			usersManage.config.data = JSON2.stringify({
-				attributeId : $("#btnSaveAttribute").prop("name"),
-				gpmsCommonObj : gpmsCommonInfo
-			});
-			usersManage.config.ajaxCallMode = 4;
-			usersManage.ajaxCall(usersManage.config);
-			var attValType = $("#ddlTypeValidation").val();
-			$("#default_value_text").prop(
-					"class",
-					"sfInputbox "
-							+ usersManage.CreateValidationClass(attValType)
-							+ "");
-			$('#iferror').html(
-					usersManage.GetValidationTypeErrorMessage(attValType));
-		},
 
 		DeleteUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
 				if (argus[3].toLowerCase() != "yes") {
-					usersManage.DeleteAttribute(argus[0]);
+					usersManage.DeleteUserById(argus[0]);
 				} else {
-					csscody
-							.alert('<h2>'
-									+ getLocale(gpmsUsersManagement,
-											"Information Alert")
-									+ '</h2><p>'
-									+ getLocale(gpmsUsersManagement,
-											"Sorry! System attribute can not be deleted.")
-									+ '</p>');
+					csscody.alert('<h2>'
+							+ getLocale(gpmsUsersManagement,
+									"Information Alert")
+							+ '</h2><p>'
+							+ getLocale(gpmsUsersManagement,
+									"Sorry! this user is already deleted.")
+							+ '</p>');
 				}
 				break;
 			default:
 				break;
 			}
 		},
-		ConfirmDeleteMultiple : function(attribute_ids, event) {
+
+		ConfirmDeleteMultiple : function(user_ids, event) {
 			if (event) {
-				usersManage.DeleteMultipleAttribute(attribute_ids);
+				usersManage.DeleteMultipleAttribute(user_ids);
 			}
 		},
 
-		DeleteMultipleAttribute : function(_attributeIds) {
+		DeleteMultipleAttribute : function(_userIds) {
 			this.config.url = this.config.baseURL
 					+ "DeleteMultipleAttributesByAttributeID";
 			this.config.data = JSON2.stringify({
-				attributeIds : _attributeIds,
+				userIds : _userIds,
 				gpmsCommonObj : gpmsCommonObj()
 			});
 			this.config.ajaxCallMode = 6;
@@ -917,10 +882,10 @@ $(function() {
 			return false;
 		},
 
-		DeleteAttribute : function(_attributeId) {
+		DeleteUserById : function(_userId) {
 			var properties = {
 				onComplete : function(e) {
-					usersManage.ConfirmSingleDelete(_attributeId, e);
+					usersManage.ConfirmSingleDelete(_userId, e);
 				}
 			};
 			csscody.confirm("<h2>"
@@ -938,22 +903,22 @@ $(function() {
 			return false;
 		},
 
-		DeleteSingleAttribute : function(_attributeId) {
+		DeleteSingleAttribute : function(_userId) {
 			this.config.url = this.config.baseURL
 					+ "DeleteAttributeByAttributeID";
 			this.config.data = JSON2.stringify({
-				attributeId : parseInt(_attributeId),
+				userId : parseInt(_userId),
 				gpmsCommonObj : gpmsCommonObj()
 			});
 			this.config.ajaxCallMode = 5;
 			this.ajaxCall(this.config);
 		},
 
-		ActivateAttribute : function(_attributeId, _isActive) {
+		ActivateAttribute : function(_userId, _isActive) {
 			this.config.url = this.config.baseURL
 					+ "UpdateAttributeIsActiveByAttributeID";
 			this.config.data = JSON2.stringify({
-				attributeId : parseInt(_attributeId),
+				userId : parseInt(_userId),
 				gpmsCommonObj : gpmsCommonObj(),
 				isActive : _isActive
 			});
@@ -1001,9 +966,9 @@ $(function() {
 				break;
 			}
 		},
-		IsUnique : function(attributeName, attributeId) {
+		IsUnique : function(attributeName, userId) {
 			var attrbuteUniqueObj = {
-				AttributeID : attributeId,
+				AttributeID : userId,
 				AttributeName : attributeName
 			};
 			var gpmsCommonInfo = gpmsCommonObj();
@@ -1017,7 +982,7 @@ $(function() {
 			this.ajaxCall(this.config);
 			return isUnique;
 		},
-		SaveAttribute : function(_attributeId, _flag) {
+		SaveUser : function(_userId, _flag) {
 			$('#iferror').hide();
 			if (checkForm($("#form1"))) {
 				var selectedItemTypeID = '';
@@ -1028,7 +993,7 @@ $(function() {
 				var attributeName = $('#txtAttributeName').val();
 				if (!attributeName) {
 					validateErrorMessage += 'Please enter attribute name.<br/>';
-				} else if (!usersManage.IsUnique(attributeName, _attributeId)) {
+				} else if (!usersManage.IsUnique(attributeName, _userId)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsUsersManagement,
 									"Please enter unique attribute name") + "'"
@@ -1200,7 +1165,7 @@ $(function() {
 					var _Flag = _flag;
 					var _IsUsedInConfigItem = isUsedInConfigItem;
 
-					usersManage.AddAttributeInfo(_attributeId, _attributeName,
+					usersManage.AddAttributeInfo(_userId, _attributeName,
 							_inputTypeID, _DefaultValue, _ValidationTypeID,
 							_Length, _AliasName, _AliasToolTip, _AliasHelp,
 							_DisplayOrder, _IsUnique, _IsRequired,
@@ -1217,7 +1182,7 @@ $(function() {
 			}
 		},
 
-		AddAttributeInfo : function(_attributeId, _attributeName, _inputTypeID,
+		AddAttributeInfo : function(_userId, _attributeName, _inputTypeID,
 				_DefaultValue, _ValidationTypeID, _Length, _AliasName,
 				_AliasToolTip, _AliasHelp, _DisplayOrder, _IsUnique,
 				_IsRequired, _IsEnableEditor, _ShowInAdvanceSearch,
@@ -1227,7 +1192,7 @@ $(function() {
 				_flag, _isUsedInConfigItem, _saveOptions, _attributeValueId) {
 
 			var info = {
-				AttributeID : parseInt(_attributeId),
+				AttributeID : parseInt(_userId),
 				AttributeName : _attributeName,
 				InputTypeID : _inputTypeID,
 				DefaultValue : _DefaultValue,
@@ -1290,7 +1255,7 @@ $(function() {
 			this.config.ajaxCallMode = 3;
 			this.ajaxCall(this.config);
 		},
-		SearchAttributeName : function() {
+		SearchUsers : function() {
 			var attributeNm = $.trim($("#txtSearchAttributeName").val());
 			var required = $.trim($('#ddlIsRequired').val()) == "" ? null : $
 					.trim($('#ddlIsRequired').val()) == "True" ? true : false;
@@ -1302,8 +1267,8 @@ $(function() {
 			if (attributeNm.length < 1) {
 				attributeNm = null;
 			}
-			usersManage.BindAttributeGrid(attributeNm, required,
-					SearchComparable, isSystem);
+			usersManage.BindUserGrid(attributeNm, required, SearchComparable,
+					isSystem);
 		},
 		ajaxSuccess : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
@@ -1344,22 +1309,22 @@ $(function() {
 				break;
 			case 4:
 				usersManage.FillForm(msg);
-				$('#divAttribGrid').hide();
-				$('#divAttribForm').show();
+				$('#divUserGrid').hide();
+				$('#divUserForm').show();
 				break;
 			case 5:
-				usersManage.BindAttributeGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Successful Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
 								'Attribute has been deleted successfully.')
 						+ "</p>");
-				$('#divAttribForm').hide();
-				$('#divAttribGrid').show();
+				$('#divUserForm').hide();
+				$('#divUserGrid').show();
 				break;
 			case 6:
-				usersManage.BindAttributeGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null);
 				csscody
 						.info("<h2>"
 								+ getLocale(gpmsUsersManagement,
@@ -1370,14 +1335,14 @@ $(function() {
 								+ "</p>");
 				break;
 			case 7:
-				usersManage.BindAttributeGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null);
 				break;
 			case 8:
 				isUnique = msg.d;
 				break;
 			case 9:
-				usersManage.BindAttributeGrid(null, null, null, null);
-				$('#divAttribGrid').show();
+				usersManage.BindUserGrid(null, null, null, null);
+				$('#divUserGrid').show();
 				if (editFlag > 0) {
 					csscody.info("<h2>"
 							+ getLocale(gpmsUsersManagement,
@@ -1396,7 +1361,7 @@ $(function() {
 							+ "</p>");
 				}
 				usersManage.ClearForm();
-				$('#divAttribForm').hide();
+				$('#divUserForm').hide();
 				break;
 			}
 		},
@@ -1468,9 +1433,9 @@ $(function() {
 		},
 		init : function(config) {
 			usersManage.LoadAttributeStaticImage();
-			usersManage.BindAttributeGrid(null, null, null, null);
-			$('#divAttribForm').hide();
-			$('#divAttribGrid').show();
+			usersManage.BindUserGrid(null, null, null, null);
+			$('#divUserForm').hide();
+			$('#divUserGrid').show();
 			// usersManage.BindAttributesInputType();
 			// usersManage.BindAttributesValidationType();
 			// usersManage.BindAttributesItemType();
@@ -1488,14 +1453,14 @@ $(function() {
 			$('#btnDeleteSelected')
 					.click(
 							function() {
-								var attribute_ids = '';
-								attribute_ids = SageData.Get("gdvUsers").Arr
+								var user_ids = '';
+								user_ids = SageData.Get("gdvUsers").Arr
 										.join(',');
-								if (attribute_ids.length > 0) {
+								if (user_ids.length > 0) {
 									var properties = {
 										onComplete : function(e) {
 											usersManage.ConfirmDeleteMultiple(
-													attribute_ids, e);
+													user_ids, e);
 										}
 									};
 									csscody
@@ -1507,7 +1472,7 @@ $(function() {
 															+ "</h2><p>"
 															+ getLocale(
 																	gpmsUsersManagement,
-																	'Are you sure you want to delete selected attribute(s)?')
+																	'Are you sure you want to delete selected user(s)?')
 															+ "</p>",
 													properties);
 								} else {
@@ -1519,20 +1484,20 @@ $(function() {
 													+ '</h2><p>'
 													+ getLocale(
 															gpmsUsersManagement,
-															"Please select at least one attribute before delete.")
+															"Please select at least one user before deleting.")
 													+ '</p>');
 								}
 							});
 
 			$('#btnAddNew').bind("click", function() {
-				$('#divAttribGrid').hide();
-				$('#divAttribForm').show();
+				$('#divUserGrid').hide();
+				$('#divUserForm').show();
 				usersManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {
-				$('#divAttribForm').hide();
-				$('#divAttribGrid').show();
+				$('#divUserForm').hide();
+				$('#divUserGrid').show();
 				usersManage.ClearForm();
 			});
 
@@ -1540,14 +1505,14 @@ $(function() {
 				usersManage.ClearForm();
 			});
 
-			$('#btnSaveAttribute').click(function() {
+			$('#btnSaveUser').click(function() {
 				var attribute_id = $(this).prop("name");
 				if (attribute_id != '') {
 					editFlag = attribute_id;
-					usersManage.SaveAttribute(attribute_id, false);
+					usersManage.SaveUser(attribute_id, false);
 				} else {
 					editFlag = 0;
-					usersManage.SaveAttribute(0, true);
+					usersManage.SaveUser(0, true);
 				}
 			});
 
@@ -1556,20 +1521,19 @@ $(function() {
 							function() {
 								var errors = '';
 								var attributeName = $(this).val();
-								var attribute_id = $('#btnSaveAttribute').prop(
+								var attribute_id = $('#btnSaveUser').prop(
 										"name");
 								if (attribute_id == '') {
 									attribute_id = 0;
 								}
 								if (!attributeName) {
-
 									errors += getLocale(gpmsUsersManagement,
-											"Please enter attribute name");
+											"Please enter user name");
 								} else if (!usersManage.IsUnique(attributeName,
 										attribute_id)) {
 									errors += "'"
 											+ getLocale(gpmsUsersManagement,
-													"Please enter Please enter unique attribute name")
+													"Please enter Please enter unique user name")
 											+ "'"
 											+ attributeName.trim()
 											+ "'"
@@ -1601,7 +1565,7 @@ $(function() {
 
 			$(".delbutton").click(function() {
 				var attribute_id = $(this).prop("id").replace(/[^0-9]/gi, '');
-				usersManage.DeleteAttribute(attribute_id);
+				usersManage.DeleteUserById(attribute_id);
 			});
 
 			$("td.required input, td select").focusout(function() {
@@ -1756,7 +1720,7 @@ $(function() {
 						}
 					});
 			$("#btnSearchAttribute").bind("click", function() {
-				usersManage.SearchAttributeName();
+				usersManage.SearchUsers();
 			});
 
 			$(
