@@ -10,6 +10,14 @@ public class EditUserTest {
 		ac.initBalana();
 		String decision = ac.getXACMLdecision("ADMIN", "userProfile","edit");
 		System.out.println(decision);
+		if(decision.equals("Permit"))
+		{
+			System.out.println("Action permitted");
+		}
+		else
+		{
+			System.out.println("Action denied");
+		}
 	}
 
 }
