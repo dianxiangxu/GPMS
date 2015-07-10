@@ -154,7 +154,7 @@
  		newUserAccount = new UserAccount("tBorges");
 		
 		pd.setCollege("Engeneering");
-		pd.setDepartment("Computer Science");
+		pd.setDepartment("Electrical Engineering");
 		pd.setPositionTitle("Research Staff");
 		pd.setPositionType("Research Associate");
 		
