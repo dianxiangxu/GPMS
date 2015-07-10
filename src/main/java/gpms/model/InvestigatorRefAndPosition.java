@@ -1,16 +1,20 @@
 package gpms.model;
-
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
 public class InvestigatorRefAndPosition
 {
-	
-	ObjectId id;
+	@Reference(value = "user profile")
+	UserProfile userRef;
+	@Property("college")
 	private String college = new String();
+	@Property("department")
 	private String department = new String();
+	@Property("position title")
 	private String positionTitle = new String();
+	@Property("position type")
 	private String positionType = new String();
 	
 	public InvestigatorRefAndPosition() 
@@ -18,24 +22,24 @@ public class InvestigatorRefAndPosition
 		super();
 	}
 	
-	public InvestigatorRefAndPosition(ObjectId id, String college,String department, String positionTitle, String positionType) 
+	public InvestigatorRefAndPosition(UserProfile userRef, String college,String department, String positionTitle, String positionType) 
 	{
 		super();
-		this.id = id;
+		this.userRef = userRef;
 		this.college = college;
 		this.department = department;
 		this.positionTitle = positionTitle;
 		this.positionType = positionType;
 	}
 
-	public ObjectId getId() 
+	public UserProfile getUserRef() 
 	{
-		return id;
+		return userRef;
 	}
 	
-	public void setId(ObjectId id) 
+	public void setUserRef(UserProfile userRef) 
 	{
-		this.id = id;
+		this.userRef = userRef;
 	}
 	
 	public String getCollege() 
@@ -82,7 +86,7 @@ public class InvestigatorRefAndPosition
 	public String toString() 
 	{
 		String output = "";
-		output += "Id             : " + id + "\n";
+		output += "User Reference : " + userRef + "\n";
 		output += "College        : " + college + "\n";
 		output += "Department     : " + department + "\n";
 		output += "Position Title : " + positionTitle + "\n";
@@ -92,9 +96,9 @@ public class InvestigatorRefAndPosition
 	
 	public boolean equals(InvestigatorRefAndPosition irap)
 	{
-		if(this.id == null || irap.id == null)
+		if(this.userRef == null || irap.userRef == null)
 			return false;
-		return this.id.equals(irap.id) && this.college.equals(irap.college)
+		return this.userRef.equals(irap.userRef) && this.college.equals(irap.college)
 				&& this.department.equals(irap.department) && this.positionTitle.equals(irap.positionTitle)
 				&& this.positionType.equals(irap.positionType);
 	}
@@ -102,7 +106,7 @@ public class InvestigatorRefAndPosition
 	public InvestigatorRefAndPosition clone()
 	{
 		InvestigatorRefAndPosition copy = new InvestigatorRefAndPosition();
-		copy.setId(id);
+		copy.setUserRef(userRef);
 		copy.setCollege(college);
 		copy.setDepartment(department);
 		copy.setPositionTitle(positionTitle);
