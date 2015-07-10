@@ -7,7 +7,6 @@ import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
 import gpms.model.InvestigatorInfo;
-import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
@@ -133,6 +132,18 @@ public class JUnitCreateTwoUsersTest {
 		newAddress.setZipcode(zipcode);
 		newAddress.setCountry(country);
 
+		street = "2601 W Boise Ave TRLR B";
+		city = "Boise";
+		state = "Idaho";
+		zipcode = "83706";
+		country = "United States";
+		Address newAddress2 = new Address();
+		newAddress2.setStreet(street);
+		newAddress2.setCity(city);
+		newAddress2.setState(state);
+		newAddress2.setZipcode(zipcode);
+		newAddress2.setCountry(country);
+
 		// Now that we know his personal info we need some work info from him
 		// Currently our PositionDetails class supports Strings only
 		String positionType, positionTitle, department, college;
@@ -165,7 +176,8 @@ public class JUnitCreateTwoUsersTest {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile.setAddress(newAddress);
+		newUserProfile.addAddress(newAddress);
+		newUserProfile.addAddress(newAddress2);
 		newUserProfile.addDetails(newDetails);
 		newUserProfile.addDetails(moreDetails);
 		newUserProfile.setUserId(activeLog);
@@ -182,16 +194,8 @@ public class JUnitCreateTwoUsersTest {
 
 		InvestigatorInfo firstInv = new InvestigatorInfo();
 		Proposal proposal1 = new Proposal();
-		
-		InvestigatorRefAndPosition irap = new InvestigatorRefAndPosition();
-		irap.setId(newUserProfile.getId());
-		irap.setCollege(newUserProfile.getDetails(0).getCollege());
-		irap.setDepartment(newUserProfile.getDetails(0).getDepartment());
-		irap.setPositionType(newUserProfile.getDetails(0).getPositionType());
-		irap.setPositionTitle(newUserProfile.getDetails(0).getPositionTitle());
-	
 
-		firstInv.setPi(irap);
+		firstInv.setPi(newUserProfile);
 
 		proposal1.setProposalNo("10001");
 		proposal1.setInvestigatorInfo(firstInv);
@@ -301,7 +305,7 @@ public class JUnitCreateTwoUsersTest {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile2.setAddress(newAddress);
+		newUserProfile2.addAddress(newAddress);
 		newUserProfile2.addDetails(newDetails);
 		newUserProfile2.addDetails(moreDetails);
 
@@ -314,22 +318,9 @@ public class JUnitCreateTwoUsersTest {
 
 		InvestigatorInfo secondInv = new InvestigatorInfo();
 		Proposal proposal2 = new Proposal();
-		
-		irap.setId(newUserProfile2.getId());
-		irap.setCollege(newUserProfile2.getDetails(0).getCollege());
-		irap.setDepartment(newUserProfile2.getDetails(0).getDepartment());
-		irap.setPositionType(newUserProfile2.getDetails(0).getPositionType());
-		irap.setPositionTitle(newUserProfile2.getDetails(0).getPositionTitle());
-	
-		secondInv.setPi(irap);
 
-		irap.setId(newUserProfile.getId());
-		irap.setCollege(newUserProfile.getDetails(0).getCollege());
-		irap.setDepartment(newUserProfile.getDetails(0).getDepartment());
-		irap.setPositionType(newUserProfile.getDetails(0).getPositionType());
-		irap.setPositionTitle(newUserProfile.getDetails(0).getPositionTitle());
-		
-		secondInv.addCo_pi(irap);
+		secondInv.setPi(newUserProfile2);
+		secondInv.addCo_pi(newUserProfile);
 
 		proposal2.setProposalNo("10002");
 		proposal2.setInvestigatorInfo(secondInv);

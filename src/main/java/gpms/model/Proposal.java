@@ -4,7 +4,6 @@ import gpms.dao.ProposalDAO;
 
 import java.util.Date;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
@@ -41,9 +40,6 @@ public class Proposal extends BaseEntity {
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo = new ComplianceInfo();
 
-	@Property("Proposal Key")
-	private ObjectId proposalKey;
-
 	public Proposal() {
 	}
 
@@ -54,7 +50,7 @@ public class Proposal extends BaseEntity {
 		this.proposalNo = proposalNo;
 		this.dateReceived = dateReceived;
 		this.proposalStatus = proposalStatus;
-	
+
 		// TODO:: need to do in loop of the list object
 		this.investigatorInfo = investigatorInfo;
 		this.projectInfo = projectInfo;
@@ -99,7 +95,6 @@ public class Proposal extends BaseEntity {
 
 	public Status getProposalStatus() {
 		return proposalStatus;
-
 	}
 
 	public void setProposalStatus(Status status) {
@@ -110,34 +105,7 @@ public class Proposal extends BaseEntity {
 		return investigatorInfo;
 	}
 
-	/**
-	 * When Investigator info is set, we will add a uniquely generated id to everyone involved at the creation
-	 * of the proposal this id is the proposalKey, which is an ObjectId object, but we run the toString 
-	 * to make it more manageable for our purposes.
-	 * 
-	 * @param investigatorInfo
-	 */
-	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) 
-	{
-		investigatorInfo.getPi().addProposalKey(proposalKey.toString());
-		//Scans the list of co pi's and adds the proposal key if they don't have it already
-		if(investigatorInfo.getCo_pi().size()>0)
-		{
-			for(int a = 0; a < investigatorInfo.getCo_pi().size(); a++)
-			{
-				if(!investigatorInfo.getCo_pi().get(a).getProposalKeys().contains(proposalKey.toString()))
-				{investigatorInfo.getCo_pi().get(a).addProposalKey(proposalKey.toString());}
-			}
-		}
-		//Scans the list of senior personnel and adds the proposal key if they don't have it already
-		if(investigatorInfo.getSeniorPersonnel().size()>0)
-		{
-			for(int b = 0; b < investigatorInfo.getSeniorPersonnel().size(); b++)
-			{
-				if(!investigatorInfo.getSeniorPersonnel().get(b).getProposalKeys().contains(proposalKey.toString()))
-				{investigatorInfo.getSeniorPersonnel().get(b).addProposalKey(proposalKey.toString());}
-			}
-		}
+	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) {
 		this.investigatorInfo = investigatorInfo;
 	}
 
@@ -194,8 +162,8 @@ public class Proposal extends BaseEntity {
 	@Override
 	public String toString() {
 		return new StringBuffer(" Proposal Number : ")
-		.append(this.getProposalNo()).append(" Date Received : ")
-		.append(this.getDateReceived()).append(" Proposal Status : ")
-		.append(this.getProposalStatus()).toString();
+				.append(this.getProposalNo()).append(" Date Received : ")
+				.append(this.getDateReceived()).append(" Proposal Status : ")
+				.append(this.getProposalStatus()).toString();
 	}
 }

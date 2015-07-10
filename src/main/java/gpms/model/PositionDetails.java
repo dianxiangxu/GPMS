@@ -15,7 +15,7 @@ public class PositionDetails {
 	@Property("department")
 	private String department = new String();
 	@Property("college")
-	private String college = new String();
+	private String college = new String();;
 
 	public PositionDetails() {
 	}

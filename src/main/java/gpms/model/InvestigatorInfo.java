@@ -4,10 +4,8 @@ package gpms.model;
 
 import java.util.ArrayList;
 
-
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.annotations.Transient;
 
@@ -18,50 +16,50 @@ public class InvestigatorInfo {
 	@Transient
 	public final int MAX_NUM_SENIOR_PERSONNEL = 10;
 
-	@Embedded("PI")
-	private InvestigatorRefAndPosition pi = new InvestigatorRefAndPosition();
-	@Embedded("CO-PI")
-	private ArrayList<InvestigatorRefAndPosition> co_pi = new ArrayList<InvestigatorRefAndPosition>();
-	@Embedded("senior personnel")
-	private ArrayList<InvestigatorRefAndPosition> seniorPersonnel = new ArrayList<InvestigatorRefAndPosition>();
+	@Reference(value = "PI"/*, lazy = true*/)
+	private UserProfile pi = new UserProfile();
+	@Reference(value = "CO-PI"/*, lazy = true*/)
+	private ArrayList<UserProfile> co_pi = new ArrayList<UserProfile>();
+	@Reference(value = "senior personnel"/*, lazy = true*/)
+	private ArrayList<UserProfile> seniorPersonnel = new ArrayList<UserProfile>();
 
 	public InvestigatorInfo() {
 	}
 
-	public InvestigatorRefAndPosition getPi() {
+	public UserProfile getPi() {
 		return pi;
 	}
 
-	public void setPi(InvestigatorRefAndPosition pi) {
+	public void setPi(UserProfile pi) {
 		this.pi = pi;
 	}
 
-	public ArrayList<InvestigatorRefAndPosition> getCo_pi() {
+	public ArrayList<UserProfile> getCo_pi() {
 		return co_pi;
 	}
 
-	public void setCo_pi(ArrayList<InvestigatorRefAndPosition> co_pi) {
+	public void setCo_pi(ArrayList<UserProfile> co_pi) {
 		if (co_pi.size() <= MAX_NUM_CO_PI) {
 			this.co_pi = co_pi;
 		}
 	}
 
-	public void addCo_pi(InvestigatorRefAndPosition co_pi) {
+	public void addCo_pi(UserProfile co_pi) {
 		if (this.co_pi.size() < MAX_NUM_CO_PI)
 			this.co_pi.add(co_pi);
 	}
 
-	public ArrayList<InvestigatorRefAndPosition> getSeniorPersonnel() {
+	public ArrayList<UserProfile> getSeniorPersonnel() {
 		return seniorPersonnel;
 	}
 
-	public void addSeniorPersonnel(InvestigatorRefAndPosition seniorPersonnel) {
+	public void addSeniorPersonnel(UserProfile seniorPersonnel) {
 		if (this.seniorPersonnel.size() < MAX_NUM_SENIOR_PERSONNEL) {
 			this.seniorPersonnel.add(seniorPersonnel);
 		}
 	}
 
-	public void setSeniorPersonnel(ArrayList<InvestigatorRefAndPosition> seniorPersonnel) {
+	public void setSeniorPersonnel(ArrayList<UserProfile> seniorPersonnel) {
 		if (seniorPersonnel.size() <= MAX_NUM_SENIOR_PERSONNEL) {
 			this.seniorPersonnel = seniorPersonnel;
 		}
@@ -74,14 +72,14 @@ public class InvestigatorInfo {
 		outPut += "PI               : " + "\n";
 		outPut += pi.toString() + "\n";
 		outPut += "CO-PI            : " + "\n";
-		for (InvestigatorRefAndPosition coPi : co_pi) {
+		for (UserProfile coPi : co_pi) {
 			outPut += "Co-Pi number : " + count + "\n";
 			outPut += coPi.toString() + "\n";
 			count++;
 		}
 		count = 0;
 		outPut += "senior personnel : " + "\n";
-		for (InvestigatorRefAndPosition sp : seniorPersonnel) {
+		for (UserProfile sp : seniorPersonnel) {
 			outPut += "Senior Personel number : " + count + "\n";
 			outPut += sp.toString() + "\n";
 			count++;
@@ -128,11 +126,11 @@ public class InvestigatorInfo {
 		InvestigatorInfo copy = new InvestigatorInfo();
 		copy.setPi(this.pi.clone());
 		
-		for(InvestigatorRefAndPosition coPi : this.co_pi)
+		for(UserProfile coPi : this.co_pi)
 		{
 			copy.addCo_pi(coPi.clone());
 		}
-		for(InvestigatorRefAndPosition seniorPersonnel : this.seniorPersonnel)
+		for(UserProfile seniorPersonnel : this.seniorPersonnel)
 		{
 			copy.addSeniorPersonnel(seniorPersonnel.clone());
 		}
