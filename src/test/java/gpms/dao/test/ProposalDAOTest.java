@@ -151,7 +151,7 @@ public class ProposalDAOTest {
 		{
 			System.out.println("Now creating new proposal...");
 			prop = new Proposal();
-			prop.getInvestigatorInfo().setPi(piProfile);
+//			prop.getInvestigatorInfo().setPi(piProfile);
 			upList.remove(piProfile);
 			System.out.println("Please enter a Proposal number: ");
 			input = scan.next();

@@ -108,7 +108,66 @@ public class Proposal extends BaseEntity {
 		return investigatorInfo;
 	}
 
-	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) {
+	/**
+	 * When Investigator info is set, we will add a uniquely generated id to
+	 * everyone involved at the creation of the proposal this id is the
+	 * proposalKey, which is an ObjectId object, but we run the toString to make
+	 * it more manageable for our purposes.
+	 * 
+	 * @param investigatorInfo
+	 */
+	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) 
+	{	
+		//This will delete prior investigator proposal key entries to ensure that people do not retain access
+		if(this.investigatorInfo!=null)
+		{
+			investigatorInfo.getPi().getUserRef().deleteProposalKey(proposalKey.toString());
+			if (investigatorInfo.getCo_pi().size() > 0) 
+			{
+				for (int a = 0; a < investigatorInfo.getCo_pi().size(); a++) 
+				{
+					if (!investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().contains(proposalKey.toString()))
+					{
+						investigatorInfo.getCo_pi().get(a).getUserRef().deleteProposalKey(proposalKey.toString());
+					}
+				}
+			}
+			if (investigatorInfo.getSeniorPersonnel().size() > 0) 
+			{
+				for (int b = 0; b < investigatorInfo.getSeniorPersonnel().size(); b++) 
+				{
+					if (!investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().contains(proposalKey.toString())) 
+					{
+						investigatorInfo.getSeniorPersonnel().get(b).getUserRef().deleteProposalKey(proposalKey.toString());
+					}
+				}
+			}
+		}
+		investigatorInfo.getPi().getUserRef().addProposalKey(proposalKey.toString());
+		// Scans the list of co pi's and adds the proposal key if they don't
+		// have it already
+		if (investigatorInfo.getCo_pi().size() > 0) 
+		{
+			for (int a = 0; a < investigatorInfo.getCo_pi().size(); a++) 
+			{
+				if (!investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().contains(proposalKey.toString()))
+				{
+					investigatorInfo.getCo_pi().get(a).getUserRef().addProposalKey(proposalKey.toString());
+				}
+			}
+		}
+		// Scans the list of senior personnel and adds the proposal key if they
+		// don't have it already
+		if (investigatorInfo.getSeniorPersonnel().size() > 0) 
+		{
+			for (int b = 0; b < investigatorInfo.getSeniorPersonnel().size(); b++) 
+			{
+				if (!investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().contains(proposalKey.toString())) 
+				{
+					investigatorInfo.getSeniorPersonnel().get(b).getUserRef().addProposalKey(proposalKey.toString());
+				}
+			}
+		}
 		this.investigatorInfo = investigatorInfo;
 	}
 
@@ -165,8 +224,8 @@ public class Proposal extends BaseEntity {
 	@Override
 	public String toString() {
 		return new StringBuffer(" Proposal Number : ")
-				.append(this.getProposalNo()).append(" Date Received : ")
-				.append(this.getDateReceived()).append(" Proposal Status : ")
-				.append(this.getProposalStatus()).toString();
+		.append(this.getProposalNo()).append(" Date Received : ")
+		.append(this.getDateReceived()).append(" Proposal Status : ")
+		.append(this.getProposalStatus()).toString();
 	}
 }
