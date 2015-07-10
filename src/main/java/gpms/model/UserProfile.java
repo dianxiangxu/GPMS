@@ -63,6 +63,9 @@ public class UserProfile extends BaseEntity {
 	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
+	@Property("Keychain")
+	private List<String> proposalKeys = new ArrayList<String>();
+	
 	@Reference(value = "user id"/* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
 
@@ -497,6 +500,35 @@ public class UserProfile extends BaseEntity {
 	public void setUserId(UserAccount newUserAccount) {
 		userAccount = newUserAccount;
 	}
+
+	/**
+	 * Add a proposal key to the key chain
+	 * @param proposalKey the key to be added
+	 */
+	public void addProposalKey(String proposalKey)
+	{
+		proposalKeys.add(proposalKey);
+	}
+
+	/**
+	 * Delete a proposal key from the list
+	 * @param proposalKey the key to be deleted
+	 */
+	public void deleteProposalKey(String proposalKey)
+	{
+		proposalKeys.remove(proposalKey);
+	}
+
+	/**
+	 * 
+	 * @return the list of proposal keys
+	 */
+	public List<String> getProposalKeys()
+	{
+		return proposalKeys;
+	}
+
+
 
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
