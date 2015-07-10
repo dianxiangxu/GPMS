@@ -163,4 +163,31 @@ public class HashTableTest
 	{
 		return ht;
 	}
+	
+	public String[] getCollegeKeys()
+	{
+		Set<String> keys = ht.keySet();
+		String[] keyArray = (String[])keys.toArray();
+		return keyArray;
+	}
+	
+	public String[] getDepartmentKeys(String college)
+	{
+		Set<String> keys = ht.get(college).keySet();
+		String[] keyArray = (String[])keys.toArray();
+		return keyArray;
+	}
+	
+	public String[] getPositionTitle(String college, String department)
+	{
+		Set<String> keys = ht.get(college).get(department).keySet();
+		String[] keyArray = (String[])keys.toArray();
+		return keyArray;
+	}
+	
+	public String[] getPositionType(String college, String department, String positionTitle)
+	{
+		String[] keys = (String[]) ht.get(college).get(department).get(positionTitle).toArray();
+		return keys;
+	}
 }

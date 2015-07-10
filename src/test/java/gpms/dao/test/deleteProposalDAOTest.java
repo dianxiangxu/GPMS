@@ -76,6 +76,11 @@ public class deleteProposalDAOTest
 	{
 		pdao.deleteProposal(prop, piProfile);
 		assertTrue(prop.getProposalStatus().equals(Status.values()[6]));
+		
+		Proposal p;
+		pdao.delete(prop);
+		p = pdao.proposalById(prop.getId());
+		assertTrue(p == null);
 	}
 
 }
