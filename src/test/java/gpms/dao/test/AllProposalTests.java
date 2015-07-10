@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ addNewProposalDAOTest.class, editProposalDAOTest.class, 
-		deleteProposalDAOTest.class, actualProposalDeleteDAOTest.class})
+		deleteProposalDAOTest.class})
 public class AllProposalTests 
 {
 
