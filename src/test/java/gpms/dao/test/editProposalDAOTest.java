@@ -68,7 +68,7 @@ public class editProposalDAOTest
 		ua = uaDAO.findByUserName("hOrtiz");
 		piProfile = upDAO.findByUserAccount(ua);
 		
-		List<Proposal> pList = pdao.findAll();
+		List<Proposal> pList = pdao.proposalByPiId(piProfile);
 		if(pList.size() < 1)
 		{
 			fail("No proposals to edit");

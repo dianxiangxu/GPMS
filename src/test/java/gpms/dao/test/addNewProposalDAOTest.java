@@ -137,34 +137,25 @@ public class addNewProposalDAOTest {
 		assertTrue(prop.getInvestigatorInfo().equals(invInf));
 		assertTrue(prop.getInvestigatorInfo() != invInf);
 		
-		ArrayList<InvestigatorRefAndPosition> coPiList = invInf.getCo_pi();
-		ArrayList<InvestigatorRefAndPosition> seniorPersonnelList = invInf.getSeniorPersonnel();
-		
 		for(UserProfile up : upList)
 		{
-			if(!up.equals(prop.getInvestigatorInfo().getPi()))
-			{
-				if(coPiList.size() < 4)
+			if(!up.equals(prop.getInvestigatorInfo().getPi().getUserRef()))
+			{	
+				irap = new InvestigatorRefAndPosition();
+				irap.setUserRef(up);
+				irap.setCollege(up.getDetails(0).getCollege());
+				irap.setDepartment(up.getDetails(0).getDepartment());
+				irap.setPositionTitle(up.getDetails(0).getPositionTitle());
+				irap.setPositionType(up.getDetails(0).getPositionType());
+				if(invInf.getCo_pi().size() < 4)
 				{
-					irap.setUserRef(up);
-					irap.setCollege(up.getDetails(0).getCollege());
-					irap.setDepartment(up.getDetails(0).getDepartment());
-					irap.setPositionTitle(up.getDetails(0).getPositionTitle());
-					irap.setPositionType(up.getDetails(0).getPositionType());
-					coPiList.add(irap);
-					assertTrue(coPiList.size() == coPiCount + 1);
-					coPiCount++;
+					invInf.addCo_pi(irap);
+					assertTrue(invInf.getCo_pi().size() == ++coPiCount);
 				}
 				else
 				{
-					irap.setUserRef(up);
-					irap.setCollege(up.getDetails(0).getCollege());
-					irap.setDepartment(up.getDetails(0).getDepartment());
-					irap.setPositionTitle(up.getDetails(0).getPositionTitle());
-					irap.setPositionType(up.getDetails(0).getPositionType());
-					seniorPersonnelList.add(irap);
-					assertTrue(seniorPersonnelList.size() == seniorPersonnelCount + 1);
-					seniorPersonnelCount++;
+					invInf.addSeniorPersonnel(irap);
+					assertTrue(invInf.getSeniorPersonnel().size() == ++seniorPersonnelCount);
 				}
 			}
 		}

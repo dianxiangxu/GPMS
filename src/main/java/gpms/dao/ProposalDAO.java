@@ -145,24 +145,35 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	public List<Proposal> proposalByPiId(UserProfile piId) throws UnknownHostException 
 	{
 		Datastore ds = getDatastore();
-		return ds.createQuery(Proposal.class).field("investigator info.PI").equal(piId).asList();
+		return ds.createQuery(Proposal.class).field("investigator info.PI.user profile").equal(piId).asList();
 	}
-
-	public List<Proposal> proposalByCoPiId(UserProfile coPiId)
-			throws UnknownHostException {
+	
+	public List<Proposal> proposalByPiDepartment(String department) throws UnknownHostException 
+	{
 		Datastore ds = getDatastore();
-		return ds.createQuery(Proposal.class).field("investigator info.CO-PI")
-				.equal(coPiId).asList();
+		return ds.createQuery(Proposal.class).field("investigator info.PI.department").equal(department).asList();
 	}
 
-	public List<Proposal> proposalBySeniorPersonnelId(
-			UserProfile seniorPersonnelId) throws UnknownHostException {
+	public List<Proposal> proposalByCoPiId(UserProfile coPiId) throws UnknownHostException {
 		Datastore ds = getDatastore();
-		return ds.createQuery(Proposal.class)
-				.field("investigator info.senior personnel")
-				.equal(seniorPersonnelId).asList();
+		return ds.createQuery(Proposal.class).field("investigator info.CO-PI.user profile").equal(coPiId).asList();
+	}
+	
+	public List<Proposal> proposalByCoPiDepartment(String department) throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).field("investigator info.CO-PI.department").equal(department).asList();
 	}
 
+	public List<Proposal> proposalBySeniorPersonnelId(UserProfile seniorPersonnelId) throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).field("investigator info.senior personnel.user profile").equal(seniorPersonnelId).asList();
+	}
+
+	public List<Proposal> proposalBySeniorPersonnelDepartment(String department) throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).field("investigator info.senior personnel.department").equal(department).asList();
+	}
+	
 	public Proposal proposalById(ObjectId id) throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class).field("_id").equal(id).get();
