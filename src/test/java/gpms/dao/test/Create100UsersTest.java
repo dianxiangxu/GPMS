@@ -6,6 +6,7 @@ import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
+import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
@@ -51,7 +52,9 @@ public class Create100UsersTest {
 			UserProfile newProfile = new UserProfile();
 			Proposal newProposal = new Proposal();
 			InvestigatorInfo newInfo = new InvestigatorInfo();
-			newInfo.setPi(newProfile);
+			InvestigatorRefAndPosition newInvPos = new InvestigatorRefAndPosition();
+			newInvPos.setUserRef(newProfile);
+			newInfo.setPi(newInvPos);
 			newProposal.setInvestigatorInfo(newInfo);
 			newAccount.setUserName(userAccount);
 			newProfile.setFirstName(userProfile);

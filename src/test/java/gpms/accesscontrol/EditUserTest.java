@@ -8,7 +8,7 @@ public class EditUserTest {
 		// TODO Auto-generated method stub
 		Accesscontrol ac = new Accesscontrol();
 		ac.initBalana();
-		String decision = ac.getXACMLdecision("Admin", "Edit","AllowsStaffView");
+		String decision = ac.getXACMLdecision("ADMIN", "userProfile","edit");
 		System.out.println(decision);
 	}
 
