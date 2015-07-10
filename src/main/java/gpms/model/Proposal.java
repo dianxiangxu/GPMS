@@ -117,6 +117,11 @@ public class Proposal extends BaseEntity {
 	 * @param investigatorInfo
 	 */
 	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) {
+		System.out.println(proposalKey.toString());
+		System.out.println(proposalKey.toString());
+		System.out.println(proposalKey.toString());
+		System.out.println(proposalKey.toString());
+		System.out.println(proposalKey.toString());
 		investigatorInfo.getPi().addProposalKey(proposalKey.toString());
 		// Scans the list of co pi's and adds the proposal key if they don't
 		// have it already
