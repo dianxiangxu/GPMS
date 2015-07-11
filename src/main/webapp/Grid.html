@@ -3,8 +3,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
-<meta content="Manage Attributes" name="DESCRIPTION">
-<meta content="Manage Attributes" name="KEYWORDS">
+<meta content="Manage Users" name="DESCRIPTION">
+<meta content="Manage Users" name="KEYWORDS">
 <meta content="@GPMS" name="COPYRIGHT">
 <meta content="GENERATOR" name="GENERATOR">
 <meta content="Author" name="AUTHOR">
@@ -120,7 +120,7 @@
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 </head>
 <body>
-	<form enctype="multipart/form-data" action="Manage-Attributes.aspx"
+	<form enctype="multipart/form-data" action="Manage-Users.aspx"
 		method="post" name="form1">
 		<div style="display: none;" id="UpdateProgress1" role="status"
 			aria-hidden="true">
@@ -642,16 +642,16 @@
 														href="/aspx/Admin/AspxCommerce/Catalog/Manage-Items.aspx"><i
 															class="icon-arrow-slim-e"></i><span>Manage Items</span></a></li>
 													<li class="child parentchild sfLevel2"><a href="#"
-														class="active"><i class="icon-arrow-slim-e"></i><span>Attributes</span></a>
+														class="active"><i class="icon-arrow-slim-e"></i><span>Users</span></a>
 														<ul style="display: block;" class="acitem active">
 															<li class="grandchild sfLevel3"><a
-																href="/aspx/Admin/AspxCommerce/Catalog/Attributes/Manage-Attributes.aspx"
+																href="/aspx/Admin/AspxCommerce/Catalog/Users/Manage-Users.aspx"
 																class="active"><i class="icon-arrow-dash"></i><span>Manage
-																		Attributes</span></a></li>
+																		Users</span></a></li>
 															<li class="grandchild sfLevel3"><a
-																href="/aspx/Admin/AspxCommerce/Catalog/Attributes/Manage-Attribute-sets.aspx"><i
-																	class="icon-arrow-dash"></i><span>Manage
-																		Attribute sets</span></a></li>
+																href="/aspx/Admin/AspxCommerce/Catalog/Users/Manage-User-sets.aspx"><i
+																	class="icon-arrow-dash"></i><span>Manage User
+																		sets</span></a></li>
 														</ul></li>
 													<li class="child parentchild sfLevel2"><a href="#"><i
 															class="icon-arrow-slim-e"></i><span>Gift Cards</span></a>
@@ -1105,14 +1105,13 @@
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
-														<span>Manage Attributes</span>
+														<span>Manage Users</span>
 													</h1>
 													<div class="cssClassHeaderRight">
 														<div class="sfButtonwrapper">
 															<p>
 																<button type="button" id="btnAddNew" class="sfBtn">
-																	<span class="sfLocale icon-addnew">Add New
-																		Attribute</span>
+																	<span class="sfLocale icon-addnew">Add New User</span>
 																</button>
 															</p>
 															<p>
@@ -1120,6 +1119,19 @@
 																	class="sfBtn">
 																	<span class="sfLocale icon-delete">Delete All
 																		Selected</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnExportToExcel"
+																	class="sfBtn">
+																	<span class="sfLocale icon-showall">Export to
+																		Excel</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnExportToCSV" class="sfBtn">
+																	<span class="sfLocale icon-showall">Export to
+																		CSV</span>
 																</button>
 															</p>
 
@@ -1136,31 +1148,49 @@
 																border="0">
 																<tbody>
 																	<tr>
-																		<td width="150"><label
-																			class="cssClassLabel sfLocale">Attribute
+																		<td><label class="cssClassLabel sfLocale">User
 																				Name:</label> <input type="text" class="sfTextBoxSmall"
 																			id="txtSearchAttributeName" /></td>
-																		<td width="150"><label
-																			class="cssClassLabel sfLocale">Required:</label> <select
-																			style="width: 150px;" class="sfListmenu"
-																			id="ddlIsRequired">
-																				<option class="sfLocale" value="">-- All --</option>
-																				<option class="sfLocale" value="True">Yes</option>
-																				<option class="sfLocale" value="False">No</option>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				College:</label> <select id="ddlCollege" class="sfListmenu"
+																			style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
-																		<td width="150"><label
-																			class="cssClassLabel sfLocale">Comparable:</label><br />
-																			<select class="sfListmenu" id="ddlComparable">
-																				<option class="sfLocale" value="">-- All --</option>
-																				<option class="sfLocale" value="True">Yes</option>
-																				<option class="sfLocale" value="False">No</option>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Department:</label> <select id="ddlDepartment"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
-																		<td width="160"><label
-																			class="cssClassLabel sfLocale">System:</label> <select
-																			class="sfListmenu" id="ddlIsSystem">
-																				<option class="sfLocale" value="">-- All --</option>
-																				<option class="sfLocale" value="True">Yes</option>
-																				<option class="sfLocale" value="False">No</option>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Position Type:</label> <select id="ddlPositionType"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Position Title:</label> <select id="ddlPositionTitle"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<!-- <td width="315"><label
+																			class="cssClassLabel sfLocale"> Added On:</label><br />
+																			<span class="label sfLocale"> From :</span> <input
+																			type="text" id="txtAddedOnFrom"
+																			class="sfTextBoxSmall"
+																			style="width: 80px !important;" /> <span
+																			class="label sfLocale"> To :</span> <input
+																			type="text" id="txtAddedOnTo" class="sfTextBoxSmall"
+																			style="width: 80px !important;" /></td> -->
+																		<td><label class="cssClassLabel sfLocale">
+																				Active:</label> <select id="ddlIsActive" class="sfListmenu"
+																			style="width: 85px;">
+																				<option value="" class="sfLocale">--All--</option>
+																				<option value="True" class="sfLocale">True</option>
+																				<option value="False" class="sfLocale">False</option>
 																		</select></td>
 																		<td><br />
 																			<button class="sfBtn" id="btnSearchAttribute"
@@ -1195,7 +1225,7 @@
 													<div id="container-7">
 														<ul>
 															<li><a href="#fragment-1"> <span
-																	id="ctl19_lblTabTitle1">Attribute Properties</span>
+																	id="ctl19_lblTabTitle1">User Properties</span>
 															</a></li>
 															<li><a href="#fragment-2"> <span
 																	id="ctl19_lblTabTitle2">Frontend Properties</span>
@@ -1210,7 +1240,7 @@
 																	<tbody>
 																		<tr>
 																			<td><span class="cssClassLabel"
-																				id="ctl19_lblAttributeName">Attribute Name:</span></td>
+																				id="ctl19_lblAttributeName">User Name:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtAttributeName" />
 																				<span class="cssClassRight"> <img
@@ -1225,7 +1255,7 @@
 																				id="ctl19_lblType">Type:</span></td>
 																			<td class="cssClassTableRightCol"><select
 																				id="ddlAttributeType" class="sfListmenu"
-																				title="Attribute Input Type"></select></td>
+																				title="User Input Type"></select></td>
 																		</tr>
 																		<tr id="trdefaultValue">
 																			<td><span class="cssClassLabel">Default
@@ -1308,7 +1338,7 @@
 																			</td>
 																			<td class="cssClassTableRightCol"><select
 																				id="ddlTypeValidation" class="sfListmenu" name=""
-																				title="Attribute Input Validation Type"></select></td>
+																				title="User Input Validation Type"></select></td>
 																		</tr>
 																		<tr>
 																			<td><span class="cssClassLabel"

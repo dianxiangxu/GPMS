@@ -48,7 +48,7 @@ $(function() {
 						error : usersManage.ajaxFailure
 					});
 		},
-		LoadAttributeStaticImage : function() {
+		LoadStaticImage : function() {
 			$('.cssClassSuccessImg').prop('src',
 					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
 		},
@@ -560,31 +560,10 @@ $(function() {
 					cssclass : 'cssClassHeadCheckBox',
 					coltype : 'checkbox',
 					align : 'center',
-					checkFor : '5', // this is count from 0 column index
+					checkFor : '8', // this is count from 0 column index
 					elemClass : 'attrChkbox',
 					elemDefault : false,
 					controlclass : 'attribHeaderChkbox'
-				}, {
-					display : 'First Name',
-					name : 'first_name',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Middle Name',
-					name : 'middle_Name',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Last Name',
-					name : 'last_name',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
 				}, {
 					display : 'User Name',
 					name : 'user_name',
@@ -592,6 +571,54 @@ $(function() {
 					controlclass : '',
 					coltype : 'label',
 					align : 'left'
+				}, {
+					display : 'Full Name',
+					name : 'full_name',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'PI Count',
+					name : 'PI_proposal_count',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Co-PI Count',
+					name : 'CoPI_proposal_count',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Senior Count',
+					name : 'senior_proposal_count',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : getLocale(gpmsUsersManagement, 'Added On'),
+					name : 'added_on',
+					cssclass : 'cssClassHeadDate',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'date',
+					format : 'yyyy/MM/dd hh:mm:ss a'
+				// Want more format then
+				// :https://github.com/phstc/jquery-dateFormat/blob/master/test/expected_inputs_spec.js
+				}, {
+					display : getLocale(gpmsUsersManagement, 'Last Updated'),
+					name : 'last_updated',
+					cssclass : 'cssClassHeadDate',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'date',
+					format : 'yyyy/MM/dd hh:mm:ss a'
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
 					name : 'status',
@@ -606,19 +633,6 @@ $(function() {
 				// you can define 'Yes/No'
 				// hide : true
 				}, {
-					display : getLocale(gpmsUsersManagement, 'Added On'),
-					name : 'AddedOn',
-					cssclass : 'cssClassHeadDate',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
-				// Want more format then
-				// :https://github.com/phstc/jquery-dateFormat/blob/master/test/expected_inputs_spec.js
-				},
-
-				{
 					display : getLocale(gpmsUsersManagement, 'Actions'),
 					name : 'action',
 					cssclass : 'cssClassAction',
@@ -633,7 +647,7 @@ $(function() {
 					_event : 'click',
 					trigger : '1',
 					callMethod : 'usersManage.EditUser',
-					arguments : '1,2,3,4,5,6,7'
+					arguments : '1,2,3,4,5,6,7,8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Delete"),
 					name : 'delete',
@@ -641,7 +655,7 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '5'
+					arguments : '8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
@@ -649,7 +663,7 @@ $(function() {
 					_event : 'click',
 					trigger : '4',
 					callMethod : 'usersManage.ActiveUser',
-					arguments : '5'
+					arguments : '8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Deactivate"),
 					name : 'deactivate',
@@ -657,7 +671,7 @@ $(function() {
 					_event : 'click',
 					trigger : '5',
 					callMethod : 'usersManage.DeactiveUser',
-					arguments : '5'
+					arguments : '8'
 				} ],
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
@@ -671,7 +685,7 @@ $(function() {
 					0 : {
 						sorter : false
 					},
-					7 : {
+					9 : {
 						sorter : false
 					}
 				}
@@ -1313,7 +1327,7 @@ $(function() {
 				$('#divUserForm').show();
 				break;
 			case 5:
-				usersManage.BindUserGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Successful Message')
 						+ "</h2><p>"
@@ -1324,7 +1338,7 @@ $(function() {
 				$('#divUserGrid').show();
 				break;
 			case 6:
-				usersManage.BindUserGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody
 						.info("<h2>"
 								+ getLocale(gpmsUsersManagement,
@@ -1335,13 +1349,13 @@ $(function() {
 								+ "</p>");
 				break;
 			case 7:
-				usersManage.BindUserGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null, null, null);
 				break;
 			case 8:
 				isUnique = msg.d;
 				break;
 			case 9:
-				usersManage.BindUserGrid(null, null, null, null);
+				usersManage.BindUserGrid(null, null, null, null, null, null);
 				$('#divUserGrid').show();
 				if (editFlag > 0) {
 					csscody.info("<h2>"
@@ -1432,8 +1446,8 @@ $(function() {
 			}
 		},
 		init : function(config) {
-			usersManage.LoadAttributeStaticImage();
-			usersManage.BindUserGrid(null, null, null, null);
+			usersManage.LoadStaticImage();
+			usersManage.BindUserGrid(null, null, null, null, null, null);
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
 			// usersManage.BindAttributesInputType();

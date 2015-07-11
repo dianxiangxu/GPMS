@@ -65,7 +65,7 @@ public class addNewProposalDAOTest {
 		uaDAO = new UserAccountDAO(mongo, morphia, "GPMS");
 		upDAO = new UserProfileDAO(mongo, morphia, "GPMS");
 
-		ua = uaDAO.findByUserName("hOrtiz");
+		ua = uaDAO.findByUserName("rrodriguez");
 		piProfile = upDAO.findByUserAccount(ua);
 		
 		List<Proposal> pList = pdao.findAll();

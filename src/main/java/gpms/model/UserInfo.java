@@ -5,13 +5,15 @@ import java.util.Date;
 public class UserInfo {
 	private int rowTotal;
 	private String id = new String();
-	private String firstName = new String();
-	private String middleName = new String();
-	private String lastName = new String();
 	private String userName = new String();
-	private boolean isActive = false;
+	private String fullName = new String();
 
+	private int noOfPIedProposal = 0;
+	private int noOfCoPIedProposal = 0;
+	private int noOfSenioredProposal = 0;
 	private Date addedOn = new Date();
+	private Date lastUpdated = new Date();
+	private boolean isDeleted = false;
 
 	public UserInfo() {
 	}
@@ -28,32 +30,8 @@ public class UserInfo {
 		return id;
 	}
 
-	public void setId(String string) {
-		this.id = string;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getUserName() {
@@ -64,12 +42,36 @@ public class UserInfo {
 		this.userName = userName;
 	}
 
-	public boolean getIsActive() {
-		return isActive;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setIsActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public int getNoOfPIedProposal() {
+		return noOfPIedProposal;
+	}
+
+	public void setNoOfPIedProposal(int noOfPIedProposal) {
+		this.noOfPIedProposal = noOfPIedProposal;
+	}
+
+	public int getNoOfCoPIedProposal() {
+		return noOfCoPIedProposal;
+	}
+
+	public void setNoOfCoPIedProposal(int noOfCoPIedProposal) {
+		this.noOfCoPIedProposal = noOfCoPIedProposal;
+	}
+
+	public int getNoOfSenioredProposal() {
+		return noOfSenioredProposal;
+	}
+
+	public void setNoOfSenioredProposal(int noOfSenioredProposal) {
+		this.noOfSenioredProposal = noOfSenioredProposal;
 	}
 
 	public Date getAddedOn() {
@@ -80,4 +82,19 @@ public class UserInfo {
 		this.addedOn = addedOn;
 	}
 
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 }

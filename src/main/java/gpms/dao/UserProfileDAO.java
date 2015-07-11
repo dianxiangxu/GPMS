@@ -12,6 +12,7 @@ import gpms.model.Address;
 import gpms.model.AuditLog;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.PositionDetails;
+import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
@@ -93,12 +94,15 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			UserInfo user = new UserInfo();
 			user.setRowTotal(rowTotal);
 			user.setId(userProfile.getId().toString());
-			user.setFirstName(userProfile.getFirstName());
-			user.setMiddleName(userProfile.getMiddleName());
-			user.setLastName(userProfile.getLastName());
 			user.setUserName(userProfile.getUserAccount().getUserName());
-			user.setIsActive(userProfile.getUserAccount().getIsDeleted());
+			user.setFullName(userProfile.getFirstName() + " "
+					+ userProfile.getMiddleName() + " "
+					+ userProfile.getLastName());
 
+			// TODO: TO bind the PI, Co-PI and Senior Proposal Count
+			user.setNoOfPIedProposal(CountPIProposal(userProfile));
+			user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
+			user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
 			// Date today = Calendar.getInstance().getTime();
 			//
 			// SimpleDateFormat formatter = new SimpleDateFormat(
@@ -110,9 +114,32 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			//
 			// user.setAddedOn(d);
 			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
+			// TODO: get the lastUpdated for User here
+			Date lastUpdated = new Date();
+			user.setLastUpdated(lastUpdated);
+
+			user.setIsDeleted(userProfile.getUserAccount().getIsDeleted());
 			users.add(user);
 		}
 		return users;
+	}
+
+	private int CountPIProposal(UserProfile userProfile) {
+		return ds.createQuery(Proposal.class)
+				.field("investigator info.PI.user profile").equal(userProfile)
+				.asList().size();
+	}
+
+	private int CountCoPIProposal(UserProfile userProfile) {
+		return ds.createQuery(Proposal.class)
+				.field("investigator info.CO-PI.user profile")
+				.equal(userProfile).asList().size();
+	}
+
+	private int CountSeniorProposal(UserProfile userProfile) {
+		return ds.createQuery(Proposal.class)
+				.field("investigator info.senior personnel.user profile")
+				.equal(userProfile).asList().size();
 	}
 
 	public UserProfile findUserByProfileID(ObjectId id,
