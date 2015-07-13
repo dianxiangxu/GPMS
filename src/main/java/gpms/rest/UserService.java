@@ -97,8 +97,62 @@ public class UserService {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 		// String response = new String();
+		// {"offset":1,"limit":10,
+		// "userBindObj":{"UserName":null,"College":null,"Department":null,"PostitionType":null,"PostitionTitle":null,"IsActive":null}}
 
-		users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
+		int offset = 0, limit = 0;
+		String userName = new String();
+		String college = new String();
+		String department = new String();
+		String postitionType = new String();
+		String postitionTitle = new String();
+		Boolean isActive = null;
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("offset")) {
+			offset = root.get("offset").getIntValue();
+		}
+
+		if (root != null && root.has("limit")) {
+			limit = root.get("limit").getIntValue();
+		}
+
+		JsonNode userObj = root.get("userBindObj");
+		if (userObj != null && userObj.has("UserName")) {
+			userName = userObj.get("UserName").getTextValue();
+		}
+
+		if (userObj != null && userObj.has("College")) {
+			college = userObj.get("College").getTextValue();
+		}
+
+		if (userObj != null && userObj.has("Department")) {
+			department = userObj.get("Department").getTextValue();
+		}
+
+		if (userObj != null && userObj.has("PostitionType")) {
+			postitionType = userObj.get("PostitionType").getTextValue();
+		}
+
+		if (userObj != null && userObj.has("PostitionTitle")) {
+			postitionTitle = userObj.get("PostitionTitle").getTextValue();
+		}
+
+		if (userObj != null && userObj.has("IsActive")) {
+			if (!userObj.get("IsActive").isNull()) {
+				isActive = userObj.get("IsActive").getBooleanValue();
+			} else {
+				isActive = null;
+			}
+		}
+
+		users = (ArrayList<UserInfo>) userProfileDAO.findUsersForGrid(offset,
+				limit, userName, college, department, postitionType,
+				postitionTitle, isActive);
+
+		// users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
 		// response = JSONTansformer.ConvertToJSON(users);
 
 		return users;

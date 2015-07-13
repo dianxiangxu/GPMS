@@ -537,19 +537,21 @@ $(function() {
 			}
 		},
 
-		BindUserGrid : function(attributeNm, required, SearchComparable,
-				isSystem) {
+		BindUserGrid : function(userName, college, department, postitionType,
+				postitionTitle, isActive) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetUsersList";
 			var offset_ = 1;
 			var current_ = 1;
 			var perpage = ($("#gdvAttributes_pagesize").length > 0) ? $(
 					"#gdvAttributes_pagesize :selected").text() : 10;
-			var attrbuteBindObj = {
-				AttributeName : attributeNm,
-				IsRequired : required,
-				ShowInComparison : SearchComparable,
-				IsSystemUsed : isSystem
+			var userBindObj = {
+				UserName : userName,
+				College : college,
+				Department : department,
+				PostitionType : postitionType,
+				PostitionTitle : postitionTitle,
+				IsActive : isActive
 			};
 			$("#gdvUsers").sagegrid({
 				url : this.config.url,
@@ -676,8 +678,7 @@ $(function() {
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
 				param : {
-					attrbuteBindObj : attrbuteBindObj,
-					gpmsCommonObj : gpmsCommonObj()
+					userBindObj : userBindObj
 				},
 				current : current_,
 				pnew : offset_,
@@ -1289,26 +1290,36 @@ $(function() {
 			}
 		},
 		SearchUsers : function() {
-			var attributeNm = $.trim($("#txtSearchAttributeName").val());
-			var required = $.trim($('#ddlIsRequired').val()) == "" ? null : $
-					.trim($('#ddlIsRequired').val()) == "True" ? true : false;
-			var SearchComparable = $.trim($("#ddlComparable").val()) == "" ? null
-					: $.trim($("#ddlComparable").val()) == "True" ? true
-							: false;
-			var isSystem = $.trim($("#ddlIsSystem").val()) == "" ? null : $
-					.trim($("#ddlIsSystem").val()) == "True" ? true : false;
-			if (attributeNm.length < 1) {
-				attributeNm = null;
+			var userName = $.trim($("#txtSearchAttributeName").val());
+			var college = $.trim($('#ddlCollege').val()) == "" ? null : $
+					.trim($('#ddlCollege').val()) == "0" ? null : $.trim($(
+					'#ddlCollege').val());
+			var department = $.trim($('#ddlDepartment').val()) == "" ? null : $
+					.trim($('#ddlDepartment').val()) == "0" ? null : $.trim($(
+					'#ddlDepartment').val());
+			var postitionType = $.trim($('#ddlPositionType').val()) == "" ? null
+					: $.trim($('#ddlPositionType').val()) == "0" ? null : $
+							.trim($('#ddlPositionType').val());
+			var postitionTitle = $.trim($('#ddlPositionTitle').val()) == "" ? null
+					: $.trim($('#ddlPositionTitle').val()) == "0" ? null : $
+							.trim($('#ddlPositionTitle').val());
+			var isActive = $.trim($("#ddlIsActive").val()) == "" ? null : $
+					.trim($("#ddlIsActive").val()) == "True" ? true : false;
+			if (userName.length < 1) {
+				userName = null;
 			}
-			usersManage.BindUserGrid(attributeNm, required, SearchComparable,
-					isSystem);
+			usersManage.BindUserGrid(userName, college, department,
+					postitionType, postitionTitle, isActive);
 		},
 		ajaxSuccess : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
 			case 0:
 				break;
 			case 1: // For College Dropdown Binding
-				$("#ddlCollege").get(0).options.length = 0;
+				$('#ddlCollege').get(0).options.length = 1;
+				$('#ddlDepartment').get(0).options.length = 1;
+				$('#ddlPositionType').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
 				$.each(msg,
 						function(index, item) {
 							$("#ddlCollege").get(0).options[$("#ddlCollege")
@@ -1316,24 +1327,27 @@ $(function() {
 									item);
 						});
 				break
-			case 2:// For College Dropdown Binding
-				$("#ddlDepartment").get(0).options.length = 0;
+			case 2:// For Department Dropdown Binding
+				$('#ddlDepartment').get(0).options.length = 1;
+				$('#ddlPositionType').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
 				$.each(msg, function(index, item) {
 					$("#ddlDepartment").get(0).options[$("#ddlDepartment").get(
 							0).options.length] = new Option(item, item);
 				});
 				break;
 
-			case 3: // For College Dropdown Binding
-				$("#ddlPositionType").get(0).options.length = 0;
+			case 3: // For College Position Type Binding
+				$('#ddlPositionType').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
 				$.each(msg, function(index, item) {
 					$("#ddlPositionType").get(0).options[$("#ddlPositionType")
 							.get(0).options.length] = new Option(item, item);
 				});
 				break;
 
-			case 4: // For College Dropdown Binding
-				$("#ddlPositionTitle").get(0).options.length = 0;
+			case 4: // For College Position Title Binding
+				$('#ddlPositionTitle').get(0).options.length = 1;
 				$
 						.each(
 								msg,

@@ -7,7 +7,6 @@ package gpms.dao;
  */
 
 import gpms.DAL.MongoDBConnector;
-import gpms.accesscontrol.Accesscontrol;
 import gpms.model.Address;
 import gpms.model.AuditLog;
 import gpms.model.GPMSCommonInfo;
@@ -26,6 +25,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.FieldEnd;
 import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
@@ -89,6 +89,96 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 		List<UserProfile> userProfiles = ds.createQuery(UserProfile.class)
 				.asList();
+		int rowTotal = userProfiles.size();
+		for (UserProfile userProfile : userProfiles) {
+			UserInfo user = new UserInfo();
+			user.setRowTotal(rowTotal);
+			user.setId(userProfile.getId().toString());
+			user.setUserName(userProfile.getUserAccount().getUserName());
+			user.setFullName(userProfile.getFirstName() + " "
+					+ userProfile.getMiddleName() + " "
+					+ userProfile.getLastName());
+
+			// TODO: TO bind the PI, Co-PI and Senior Proposal Count
+			user.setNoOfPIedProposal(CountPIProposal(userProfile));
+			user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
+			user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
+			// Date today = Calendar.getInstance().getTime();
+			//
+			// SimpleDateFormat formatter = new SimpleDateFormat(
+			// "yyyy-MM-dd hh.mm.ss");
+			// String folderName = formatter.format(today);
+			// // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			// String d = formatter.parse(userProfile.getUserAccount()
+			// .getAddedOn());
+			//
+			// user.setAddedOn(d);
+			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
+			// TODO: get the lastUpdated for User here
+			Date lastUpdated = new Date();
+			user.setLastUpdated(lastUpdated);
+
+			user.setDeleted(userProfile.getUserAccount().isDeleted());
+			users.add(user);
+		}
+		return users;
+	}
+
+	public ArrayList<UserInfo> findUsersForGrid(int offset, int limit,
+			String userName, String college, String department,
+			String postitionType, String postitionTitle, Boolean isActive)
+			throws UnknownHostException {
+		Datastore ds = getDatastore();
+		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+
+		// TODO: add filters based on attributes
+		// Set UserAccount based on userName
+
+		Query<UserProfile> q = ds.createQuery(UserProfile.class);
+
+		if (userName != null) {
+			UserAccount userRef = ds.find(UserAccount.class).field("username")
+					.equal(userName).get();
+			q.field("user id").equal(userRef);
+		}
+
+		PositionDetails pd = new PositionDetails();
+
+		if (college != null) {
+			pd.setCollege(college);
+			// q.field("details.college").hasThisElement(college);
+
+			// ((FieldEnd<? extends Query<UserAccount>>) q).hasAllOf(q.field(
+			// "details").hasThisElement(college));
+		}
+		if (department != null) {
+			// pd.setDepartment(department);
+			// q.field("details.department").hasThisElement(department);
+
+			((FieldEnd<? extends Query<UserAccount>>) q).hasAllOf(q.field(
+					"details.department").hasThisElement(department));
+		}
+		if (postitionType != null) {
+			// pd.setPositionType(postitionType);
+			// q.field("details.position type").hasThisElement(postitionType);
+
+			((FieldEnd<? extends Query<UserAccount>>) q).hasAllOf(q.field(
+					"details.position type").hasThisElement(postitionType));
+		}
+		if (postitionTitle != null) {
+			// pd.setPositionTitle(postitionTitle);
+			// q.field("details.position title").hasThisElement(postitionTitle);
+
+			((FieldEnd<? extends Query<UserAccount>>) q).hasAllOf(q.field(
+					"details.position title").hasThisElement(postitionTitle));
+		}
+		if (isActive != null) {
+			q.field("is deleted").equal(!isActive);
+		}
+		q.field("details.college").hasThisOne(pd.getCollege());
+		List<UserProfile> userProfiles = q.batchSize(offset).limit(limit)
+				.asList();
+		// List<UserProfile> userProfiles = q.asList();
 		int rowTotal = userProfiles.size();
 		for (UserProfile userProfile : userProfiles) {
 			UserInfo user = new UserInfo();
