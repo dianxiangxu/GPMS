@@ -387,26 +387,35 @@ var fromServer = 0;
 				var uncheckedflag = true;
 				indexArr = SageData.getIndex(t.id);
 				var tableGridId = t.id;
-				$('.' + elementclass).each(function() {
-					var id = $(this).val();
-					if (!$(this).is(':checked')) {
-						uncheckedflag = false;
-						if (!SageData.checkDelArrItemExist(id, tableGridId)) {
-							SageData.delArrPush(indexArr, id);
-						}
-						if (SageData.checkArrItemExist(id, tableGridId)) {
-							SageData.deleteArr(tableGridId, id);
-						}
-					} else {
-						if (!SageData.checkArrItemExist(id, tableGridId)) {
-							SageData.pushArr(indexArr, id)
-						}
-						if (SageData.checkDelArrItemExist(id, tableGridId)) {
-							SageData.delArrDel(tableGridId, id);
-						}
-					}
-					$('.' + controlClass).prop('checked', uncheckedflag);
-				});
+				$('.' + elementclass).each(
+						function() {
+							if (!$(this).not(':disabled')) {
+								var id = $(this).val();
+								if (!$(this).is(':checked')) {
+									uncheckedflag = false;
+									if (!SageData.checkDelArrItemExist(id,
+											tableGridId)) {
+										SageData.delArrPush(indexArr, id);
+									}
+									if (SageData.checkArrItemExist(id,
+											tableGridId)) {
+										SageData.deleteArr(tableGridId, id);
+									}
+								} else {
+									if (!SageData.checkArrItemExist(id,
+											tableGridId)) {
+										SageData.pushArr(indexArr, id)
+									}
+									if (SageData.checkDelArrItemExist(id,
+											tableGridId)) {
+										SageData.delArrDel(tableGridId, id);
+									}
+								}
+
+								$('.' + controlClass).prop('checked',
+										uncheckedflag);
+							}
+						});
 			},
 
 			noDataMsg : function() {
