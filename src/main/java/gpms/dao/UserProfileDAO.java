@@ -137,9 +137,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserProfile> q = ds.createQuery(UserProfile.class);
 
 		if (userName != null) {
-			UserAccount userRef = ds.find(UserAccount.class).field("username")
-					.equal(userName).get();
-			q.field("user id").equal(userRef);
+			List<UserAccount> userRef = ds.find(UserAccount.class)
+					.field("username").contains(userName).asList();
+			for (UserAccount userAccount : userRef) {
+				q.field("user id").equal(userAccount);
+			}
 		}
 
 		PositionDetails pd = new PositionDetails();
@@ -596,6 +598,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		ds.delete(ds.createQuery(UserProfile.class));
 	}
-	
-	//UserName, College, Department, Position Type, Position Title, 
+
+	// UserName, College, Department, Position Type, Position Title,
 }
