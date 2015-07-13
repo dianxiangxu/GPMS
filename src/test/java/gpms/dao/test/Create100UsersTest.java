@@ -53,7 +53,6 @@ public class Create100UsersTest {
 
 		while(creationCounter < MAXIMUM_PROFILES)
 		{
-//			String proposal = "proposal"+creationCounter;
 			String userProfile = "userName"+creationCounter;
 			String userAccount = "userAccount"+creationCounter;
 			String firstName = "firstName"+creationCounter;
@@ -62,14 +61,9 @@ public class Create100UsersTest {
 			
 			UserAccount newAccount = new UserAccount();
 			UserProfile newProfile = new UserProfile();
-			Proposal newProposal = new Proposal();
-			InvestigatorInfo newInfo = new InvestigatorInfo();
-			InvestigatorRefAndPosition newInvPos = new InvestigatorRefAndPosition();
 			
-			newInvPos.setUserRef(newProfile);
-			newInfo.setPi(newInvPos);
-			newProposal.setInvestigatorInfo(newInfo);
 			newAccount.setUserName(userAccount);
+			newAccount.setPassword(userAccount);
 			newProfile.setFirstName(firstName);
 			
 			Random rand1 = new Random();
@@ -89,7 +83,7 @@ public class Create100UsersTest {
 			//Save the informations
 			newUserAccountDAO.save(newAccount);
 			newUserProfileDAO.save(newProfile);
-			newProposalDAO.save(newProposal);
+			
 			
 			//Increment Count
 			creationCounter++;
