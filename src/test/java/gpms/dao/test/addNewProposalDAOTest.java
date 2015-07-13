@@ -64,10 +64,10 @@ public class addNewProposalDAOTest {
 		uaDAO = new UserAccountDAO(mongo, morphia, "GPMS");
 		upDAO = new UserProfileDAO(mongo, morphia, "GPMS");
 
-		ua = uaDAO.findByUserName("batman");
+		ua = uaDAO.findByUserName("hOrtiz");
 		piProfile = upDAO.findByUserAccount(ua);
 
-		List<Proposal> pList = pdao.findAll();
+		List<Proposal> pList = pdao.proposalByPiId(piProfile);
 		if (pList.size() < 1) {
 			prop = new Proposal();
 			irap.setUserRef(piProfile);

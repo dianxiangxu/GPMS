@@ -41,8 +41,6 @@ public class Proposal extends BaseEntity {
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo = new ComplianceInfo();
 
-	private ObjectId proposalKey = this.getId();
-
 	public Proposal() {
 	}
 
@@ -118,56 +116,6 @@ public class Proposal extends BaseEntity {
 	 */
 	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) 
 	{	
-		//This will delete prior investigator proposal key entries to ensure that people do not retain access
-		if(this.investigatorInfo!=null)
-		{
-			investigatorInfo.getPi().getUserRef().deleteProposalKey(proposalKey.toString());
-			if (investigatorInfo.getCo_pi().size() > 0) 
-			{
-				for (int a = 0; a < investigatorInfo.getCo_pi().size(); a++) 
-				{
-					if (!investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().contains(proposalKey.toString()))
-					{
-						investigatorInfo.getCo_pi().get(a).getUserRef().deleteProposalKey(proposalKey.toString());
-					}
-				}
-			}
-			if (investigatorInfo.getSeniorPersonnel().size() > 0) 
-			{
-				for (int b = 0; b < investigatorInfo.getSeniorPersonnel().size(); b++) 
-				{
-					if (!investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().contains(proposalKey.toString())) 
-					{
-						investigatorInfo.getSeniorPersonnel().get(b).getUserRef().deleteProposalKey(proposalKey.toString());
-					}
-				}
-			}
-		}
-		investigatorInfo.getPi().getUserRef().getProposalKeys().add(proposalKey.toString());
-		// Scans the list of co pi's and adds the proposal key if they don't
-		// have it already
-		if (investigatorInfo.getCo_pi().size() > 0) 
-		{
-			for (int a = 0; a < investigatorInfo.getCo_pi().size(); a++) 
-			{
-				if (!investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().contains(proposalKey.toString()))
-				{
-					investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().add(proposalKey.toString());
-				}
-			}
-		}
-		// Scans the list of senior personnel and adds the proposal key if they
-		// don't have it already
-		if (investigatorInfo.getSeniorPersonnel().size() > 0) 
-		{
-			for (int b = 0; b < investigatorInfo.getSeniorPersonnel().size(); b++) 
-			{
-				if (!investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().contains(proposalKey.toString())) 
-				{
-					investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().add(proposalKey.toString());
-				}
-			}
-		}
 		this.investigatorInfo = investigatorInfo;
 	}
 
