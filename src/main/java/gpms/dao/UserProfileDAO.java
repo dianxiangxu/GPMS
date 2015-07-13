@@ -175,6 +175,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 					"details.position title").hasThisElement(postitionTitle));
 		}
 		if (isActive != null) {
+			//TODO: can we do with UserAccount "is deleted" rather than UserProfile "is deleted"
 			q.field("is deleted").equal(!isActive);
 		}
 		q.field("details.college").hasThisOne(pd.getCollege());
