@@ -43,6 +43,14 @@ public class DepartmentsPositionsCollection {
 		professionalStaff.add("University Research Administrator");
 		professionalStaff.add("Department Administrative Assistant");
 
+		ArrayList<String> administratorStaff = new ArrayList<String>();
+		administratorStaff.add("Department Chair");
+		administratorStaff.add("Associate Chair");
+		administratorStaff.add("Dean");
+		administratorStaff.add("Associate Dean");
+		administratorStaff.add("Research Administrator");
+		administratorStaff.add("University Research Director");
+
 		Hashtable<String, ArrayList<String>> TypeTitleHtCS = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtCS.put("Tenured/tenure-track faculty", tenuredTitles);
 		TypeTitleHtCS
@@ -50,6 +58,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtCS.put("Teaching faculty", teachingFaculty);
 		TypeTitleHtCS.put("Research staff", researchStaff);
 		TypeTitleHtCS.put("Professional staff", professionalStaff);
+		TypeTitleHtCS.put("Administrator", administratorStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtEE = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtEE.put("Tenured/tenure-track faculty", tenuredTitles);
@@ -58,6 +67,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtEE.put("Teaching faculty", teachingFaculty);
 		TypeTitleHtEE.put("Research staff", researchStaff);
 		TypeTitleHtEE.put("Professional staff", professionalStaff);
+		TypeTitleHtEE.put("Administrator", administratorStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtCE = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtCE.put("Tenured/tenure-track faculty", tenuredTitles);
@@ -66,6 +76,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtCE.put("Teaching faculty", teachingFaculty);
 		TypeTitleHtCE.put("Research staff", researchStaff);
 		TypeTitleHtCE.put("Professional staff", professionalStaff);
+		TypeTitleHtCE.put("Administrator", administratorStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtFis = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtFis.put("Tenured/tenure-track faculty", tenuredTitles);
@@ -74,6 +85,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtFis.put("Teaching faculty", teachingFaculty);
 		TypeTitleHtFis.put("Research staff", researchStaff);
 		TypeTitleHtFis.put("Professional staff", professionalStaff);
+		TypeTitleHtFis.put("Administrator", administratorStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtChe = new Hashtable<String, ArrayList<String>>();
 		TypeTitleHtChe.put("Tenured/tenure-track faculty", tenuredTitles);
@@ -82,6 +94,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtChe.put("Teaching faculty", teachingFaculty);
 		TypeTitleHtChe.put("Research staff", researchStaff);
 		TypeTitleHtChe.put("Professional staff", professionalStaff);
+		TypeTitleHtChe.put("Administrator", administratorStaff);
 
 		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtEng = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
 		departmentTypeHtEng.put("Computer Science", TypeTitleHtCS);
@@ -96,39 +109,6 @@ public class DepartmentsPositionsCollection {
 		ht.put("Science", departmentTypeHtSci);
 	}
 
-	// {Engineering={Electrical Engineering={Research Staff=[research associate,
-	// research sciencetist, senior research sciencetist],
-	// Non-tenure-track=[research professaor, associate research professor,
-	// assistant research profesor, clinical profesor, clinical associate
-	// profesor, clinical assistant profesor, visiting profesor, visiting
-	// associate profesor, visiting assistant profesor], Professional
-	// Staff=[business manager, university research administrator, department
-	// administrative assistant]}, Computer Science={Research Staff=[research
-	// associate, research sciencetist, senior research sciencetist],
-	// Tenured=[distinguished professor, professor, associate professor,
-	// assistant professor], Teaching Faculty=[distinguished professor,
-	// professor, associate professor, assistant professor]}, Computer
-	// Engineering={Tenured=[distinguished professor, professor, associate
-	// professor, assistant professor], Teaching Faculty=[lecturer, senior
-	// lecturer, adjunct professor], Professional Staff=[business manager,
-	// university research administrator, department administrative
-	// assistant]}},
-	//
-	// Science={Physics={Research Staff=[research associate, research
-	// sciencetist, senior research sciencetist], Teaching Faculty=[lecturer,
-	// senior lecturer, adjunct professor], Non-Tenured-Track=[research
-	// professaor, associate research professor, assistant research profesor,
-	// clinical profesor, clinical associate profesor, clinical assistant
-	// profesor, visiting profesor, visiting associate profesor, visiting
-	// assistant profesor]}, Chemestry={Tenured=[distinguished professor,
-	// professor, associate professor, assistant professor], Teaching
-	// Faculty=[lecturer, senior lecturer, adjunct professor],
-	// Non-Tenured-Track=[research professaor, associate research professor,
-	// assistant research profesor, clinical profesor, clinical associate
-	// profesor, clinical assistant profesor, visiting profesor, visiting
-	// associate profesor, visiting assistant profesor]}}
-	//
-	// }
 	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getAvailableDepartmentsAndPositions() {
 		return ht;
 	}
