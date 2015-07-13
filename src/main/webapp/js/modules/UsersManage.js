@@ -1795,15 +1795,16 @@ $(function() {
 							$('#dataTable tr:last td').show();
 						}
 					});
-			$("#btnSearchAttribute").bind("click", function() {
+			$("#btnSearchUser").bind("click", function() {
 				usersManage.SearchUsers();
+				return false;
 			});
 
 			$(
-					'#txtSearchAttributeName,#ddlIsRequired,#ddlComparable,#ddlIsSystem')
+					'#txtSearchAttributeName,#ddlCollege,#ddlDepartment,#ddlPositionType,#ddlPositionTitle,#ddlIsActive')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
-							$("#btnSearchAttribute").click();
+							$("#btnSearchUser").click();
 						}
 					});
 		}
