@@ -56,6 +56,9 @@ public class Create100UsersTest {
 //			String proposal = "proposal"+creationCounter;
 			String userProfile = "userName"+creationCounter;
 			String userAccount = "userAccount"+creationCounter;
+			String firstName = "firstName"+creationCounter;
+			String middleName = "middleName"+creationCounter;
+			String lastName = "lastName"+creationCounter;
 			
 			UserAccount newAccount = new UserAccount();
 			UserProfile newProfile = new UserProfile();
@@ -67,30 +70,21 @@ public class Create100UsersTest {
 			newInfo.setPi(newInvPos);
 			newProposal.setInvestigatorInfo(newInfo);
 			newAccount.setUserName(userAccount);
-			newProfile.setFirstName(userProfile);
+			newProfile.setFirstName(firstName);
+			
+			Random rand1 = new Random();
+			int haveMiddle = rand1.nextInt(3);
+			if(haveMiddle < 1)
+			{
+				newProfile.setMiddleName(middleName);
+			}
+			
+			newProfile.setLastName(lastName);
 			newProfile.setUserId(newAccount);
 			
-			DepartmentsPositionsCollection newThing = new DepartmentsPositionsCollection();
-			List<String> firstList = newThing.getCollegeKeys(); 
-			PositionDetails newDetails = new PositionDetails();
-			Random rand = new Random();
-			
-			int choice1 = rand.nextInt(firstList.size());
-			newDetails.setCollege(firstList.get(choice1));
-			
-			List<String> secondList = newThing.getDepartmentKeys(firstList.get(choice1));
-			int choice2 = rand.nextInt(secondList.size());
-			newDetails.setDepartment(secondList.get(choice2));
-			
-			List<String> thirdList = newThing.getPositionType(firstList.get(choice1), secondList.get(choice2));
-			int choice3 = rand.nextInt(thirdList.size());
-			newDetails.setPositionType(thirdList.get(choice3));
-			
-			List<String> fourthList = newThing.getPositionTitle(firstList.get(choice1), secondList.get(choice2), thirdList.get(choice3));
-			int choice4 = rand.nextInt(fourthList.size());
-			newDetails.setPositionTitle(fourthList.get(choice4));
-			
-			newProfile.getDetails().add(newDetails);
+			//Add two Position Detail objects to the user profile
+			setTheDeets(newProfile);
+			setTheDeets(newProfile);
 			
 			//Save the informations
 			newUserAccountDAO.save(newAccount);
@@ -100,5 +94,36 @@ public class Create100UsersTest {
 			//Increment Count
 			creationCounter++;
 		}
+		
+		
+	}
+	
+	/**
+	 * This method does some random assignment of position details to the profile
+	 * @param theProfile
+	 */
+	public void setTheDeets(UserProfile theProfile)
+	{
+		DepartmentsPositionsCollection newThing = new DepartmentsPositionsCollection();
+		List<String> firstList = newThing.getCollegeKeys(); 
+		PositionDetails newDetails = new PositionDetails();
+		Random rand = new Random();
+		
+		int choice1 = rand.nextInt(firstList.size());
+		newDetails.setCollege(firstList.get(choice1));
+		
+		List<String> secondList = newThing.getDepartmentKeys(firstList.get(choice1));
+		int choice2 = rand.nextInt(secondList.size());
+		newDetails.setDepartment(secondList.get(choice2));
+		
+		List<String> thirdList = newThing.getPositionType(firstList.get(choice1), secondList.get(choice2));
+		int choice3 = rand.nextInt(thirdList.size());
+		newDetails.setPositionType(thirdList.get(choice3));
+		
+		List<String> fourthList = newThing.getPositionTitle(firstList.get(choice1), secondList.get(choice2), thirdList.get(choice3));
+		int choice4 = rand.nextInt(fourthList.size());
+		newDetails.setPositionTitle(fourthList.get(choice4));
+		
+		theProfile.getDetails().add(newDetails);
 	}
 }
