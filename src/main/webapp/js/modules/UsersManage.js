@@ -1262,6 +1262,8 @@ $(function() {
 				});
 				this.config.ajaxCallMode = 2;
 				this.ajaxCall(this.config);
+			} else {
+				$('#ddlDepartment').find('option:gt(0)').remove();
 			}
 		},
 		BindPositionTypeDropDown : function(collegeName, departmentName) {
@@ -1273,6 +1275,8 @@ $(function() {
 				});
 				this.config.ajaxCallMode = 3;
 				this.ajaxCall(this.config);
+			} else {
+				$('#ddlPositionType').find('option:gt(0)').remove();
 			}
 		},
 		BindPositionTitleDropDown : function(collegeName, departmentName,
@@ -1287,6 +1291,8 @@ $(function() {
 				});
 				this.config.ajaxCallMode = 4;
 				this.ajaxCall(this.config);
+			} else {
+				$('#ddlPositionTitle').find('option:gt(0)').remove();
 			}
 		},
 		SearchUsers : function() {
