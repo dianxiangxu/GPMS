@@ -110,7 +110,7 @@
 				</AllOf>
 			</AnyOf>
 		</Target>
-		<Rule Effect="Permit" RuleId="PI-Views-Edits-Co-PI-List"><!--Rule:PI can edit Co-PI, SeniorPersonnel -->
+		<Rule Effect="Permit" RuleId="PI-Views-Edits-Co-PI-List"><!--Rule:PI can view/edit Co-PI -->
 			<Target>
 				<AnyOf>
 					<AllOf>
@@ -146,12 +146,22 @@
 				</Apply>
 			</Condition>
 		</Rule>
-		<Rule Effect="Permit" RuleId="Co-PI-Views-Co-PI-List"><!--Rule:PI can edit Co-PI, SeniorPersonnel -->
+		<Rule Effect="Permit" RuleId="Co-PI/Senior-Personnel-Views-Co-PI-List"><!--Rule:Co-PI/Senior-Personnel can view Co-PI-List -->
 			<Target>
 				<AnyOf>
 					<AllOf>
 						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
 							<AttributeDesignator
 								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
 								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
@@ -190,8 +200,8 @@
 				</AllOf>
 			</AnyOf>
 		</Target>
-		<Rule Effect="Permit" RuleId="PI-View-Edits-Senior-Personnel-List">
-		<!--Rule:PI can edit Co-PI, SeniorPersonnel -->
+		<Rule Effect="Permit" RuleId="PI/Co-PI-View-Edits-Senior-Personnel-List">
+		<!--Rule:PI and Co-PI can view/edit SeniorPersonnel -->
 			<Target>
 				<AnyOf>
 					<AllOf>
@@ -204,33 +214,6 @@
 								MustBePresent="true" />
 						</Match>
 					</AllOf>
-				</AnyOf>
-			</Target>
-			<Condition>
-				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
-					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
-						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Edit</AttributeValue>
-						<AttributeDesignator
-							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
-							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
-							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-					</Apply>
-					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
-						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
-						<AttributeDesignator
-							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
-							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
-							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-					</Apply>
-				</Apply>
-			</Condition>
-		</Rule>
-		<Rule Effect="Permit" RuleId="Co-PI-View-Edits-Senior-Personel-List">
-		<!--Rule:Co-PI can edit SeniorPersonnel -->
-			<Target>
-				<AnyOf>
 					<AllOf>
 						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
@@ -261,6 +244,33 @@
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
 							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
 					</Apply>
+				</Apply>
+			</Condition>
+		</Rule>
+		<Rule Effect="Permit" RuleId="Senior-Personnel-View-Senior-Personel-List">
+		<!--Rule:Senior-Personnel can view SeniorPersonnel List -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
 				</Apply>
 			</Condition>
 		</Rule>
@@ -319,13 +329,23 @@
 				</Apply>
 			</Condition>
 		</Rule>
-		<Rule Effect="Permit" RuleId="Co-PI-View-Project-Info">
-		<!--Rule:Co-PI can view ProjectInfo-->
+		<Rule Effect="Permit" RuleId="Co-PI/Senior-Personnel-View-Project-Info">
+		<!--Rule:Co-PI/Senior-Personnel can view ProjectInfo-->
 			<Target>
 				<AnyOf>
 					<AllOf>
 						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
 							<AttributeDesignator
 								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
 								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
