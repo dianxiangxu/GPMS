@@ -1,5 +1,9 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
@@ -26,7 +30,7 @@
 <!--[if lt IE 7]>
         <script type="text/javascript" src="js/core/IE8.js"></script>
     <![endif]-->
-<title>Grid Example</title>
+<title>Proposal Management Example</title>
 
 <script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
 
@@ -104,9 +108,9 @@
 <!-- <script type="text/javascript" src="js/core/Session.js"></script> -->
 <script type="text/javascript" src="js/core/encoder.js"></script>
 
-<script type="text/javascript" src="js/modules/UsersManage.js"></script>
+<script type="text/javascript" src="js/modules/ProposalsManage.js"></script>
 <script type="text/javascript"
-	src="js/modules/Language/GPMSUsersManagement.js"></script>
+	src="js/modules/Language/GPMSProposalsManagement.js"></script>
 <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
 <link type="text/css" rel="stylesheet"
@@ -137,7 +141,6 @@
 			<span>This page requires java-script to be enabled. Please
 				adjust your browser-settings.</span>
 		</noscript>
-
 		<div id="sfOuterwrapper">
 			<div class="sfSagewrapper">
 
@@ -631,7 +634,7 @@
 										href="#"><i class="icon-portal-management"></i><span>GPMS
 												Management</span></a>
 										<ul style="display: none" class="acitem">
-											<li class="parent sfLevel1 active"><a href="#"><i
+											<li class="parent sfLevel1"><a href="#"><i
 													class="icon-user-accounts"></i><span>User Accounts</span></a>
 												<ul style="display: none" class="acitem">
 													<li class="child sfLevel2"><a
@@ -641,11 +644,11 @@
 														href="/aspx/Admin/Roles.jsp"><i
 															class="icon-arrow-slim-e"></i><span>Roles</span></a></li>
 												</ul></li>
-											<li class="parent sfLevel1"><a href="#"><i
+											<li class="parent sfLevel1 active"><a href="#"><i
 													class="icon-manage-site"></i><span>Manage Proposals</span></a>
 												<ul style="display: none" class="acitem">
 													<li class="child sfLevel2"><a
-														href="/aspx/Admin/Pages.jsp"><i
+														href="/aspx/Admin/Pages.jsp" class="active"><i
 															class="icon-arrow-slim-e"></i><span>Proposals</span></a></li>
 												</ul></li>
 											<li class="parent sfLevel1"><a href="#"><i
@@ -670,7 +673,6 @@
 							</div>
 						</div>
 						<!-- Side Bar Ends -->
-
 						<div class="sfMaincontent">
 							<div style="display: block" class="sfCpanel sfInnerwrapper"
 								id="divBottompanel">
@@ -683,24 +685,24 @@
 												$(".sfLocale")
 														.localize(
 																{
-																	moduleKey : gpmsUsersManagement
+																	moduleKey : gpmsProposalsManagement
 																});
 											});
 											//]]>
 										</script>
-
 										<!-- Grid -->
 										<div id="divUserGrid">
 											<div class="cssClassCommonBox Curve">
 												<div class="cssClassHeader">
 													<h1>
-														<span>Manage Users</span>
+														<span>Manage Proposals</span>
 													</h1>
 													<div class="cssClassHeaderRight">
 														<div class="sfButtonwrapper">
 															<p>
 																<button type="button" id="btnAddNew" class="sfBtn">
-																	<span class="sfLocale icon-addnew">Add New User</span>
+																	<span class="sfLocale icon-addnew">Add New
+																		Proposal</span>
 																</button>
 															</p>
 															<p>
@@ -737,52 +739,62 @@
 																border="0">
 																<tbody>
 																	<tr>
-																		<td><label class="cssClassLabel sfLocale">User
-																				Name:</label> <input type="text" class="sfTextBoxSmall"
-																			id="txtSearchUserName" /></td>
+																		<td><label class="cssClassLabel sfLocale">Project
+																				Title:</label> <input type="text" class="sfTextBoxSmall"
+																			id="txtSearchProjectTitle" /></td>
 
 																		<td><label class="cssClassLabel sfLocale">
-																				College:</label> <select id="ddlSearchCollege" class="sfListmenu"
+																				Total Costs:</label> <br /> <span class="label sfLocale">
+																				From :</span> <input type="text"
+																			id="txtSearchTotalCostsFrom" class="sfTextBoxSmall"
+																			style="width: 80px !important;" /> <span
+																			class="label sfLocale"> To :</span> <input
+																			type="text" id="txtSearchTotalCostsTo"
+																			class="sfTextBoxSmall"
+																			style="width: 80px !important;" /></td>
+																		</td>
+
+																		<!-- 																																				<td><label class="cssClassLabel sfLocale"> -->
+																		<!-- 																																						Project Type:</label> <select id="ddlProjectType" -->
+																		<!-- 																																					class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																																						<option value="0" class="sfLocale">--All--</option> -->
+																		<!-- 																																				</select></td> -->
+																		<!-- 																																				<td><label class="cssClassLabel sfLocale"> -->
+																		<!-- 																																						Type of Request:</label> <select id="ddlTypeOfRequest" -->
+																		<!-- 																																					class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																																						<option value="0" class="sfLocale">--All--</option> -->
+																		<!-- 																																				</select></td> -->
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Proposal Status:</label> <select
+																			id="ddlSearchProposalStatus" class="sfListmenu"
 																			style="width: 100px;">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
 
 																		<td><label class="cssClassLabel sfLocale">
-																				Department:</label> <select id="ddlSearchDepartment"
+																				Proposed By:</label> <select id="ddlSearchProposedBy"
 																			class="sfListmenu" style="width: 100px;">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
-
 																		<td><label class="cssClassLabel sfLocale">
-																				Position Type:</label> <select id="ddlSearchPositionType"
-																			class="sfListmenu" style="width: 100px;">
-																				<option value="0" class="sfLocale">--All--</option>
-																		</select></td>
-
-																		<td><label class="cssClassLabel sfLocale">
-																				Position Title:</label> <select id="ddlSearchPositionTitle"
-																			class="sfListmenu" style="width: 100px;">
-																				<option value="0" class="sfLocale">--All--</option>
-																		</select></td>
-
-																		<!-- <td width="315"><label
-																			class="cssClassLabel sfLocale"> Added On:</label><br />
-																			<span class="label sfLocale"> From :</span> <input
-																			type="text" id="txtSearchAddedOnFrom"
-																			class="sfTextBoxSmall"
+																				Received On:</label><br /> <span class="label sfLocale">
+																				From :</span> <input type="text"
+																			id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
 																			style="width: 80px !important;" /> <span
 																			class="label sfLocale"> To :</span> <input
-																			type="text" id="txtSearchAddedOnTo" class="sfTextBoxSmall"
-																			style="width: 80px !important;" /></td> -->
+																			type="text" id="txtSearchReceivedOnTo"
+																			class="sfTextBoxSmall"
+																			style="width: 80px !important;" /></td>
 																		<td><label class="cssClassLabel sfLocale">
-																				Active:</label> <select id="ddlSearchIsActive" class="sfListmenu"
+																				Active:</label> <select id="ddlIsActive" class="sfListmenu"
 																			style="width: 85px;">
 																				<option value="" class="sfLocale">--All--</option>
 																				<option value="True" class="sfLocale">True</option>
 																				<option value="False" class="sfLocale">False</option>
 																		</select></td>
 																		<td><br />
-																			<button class="sfBtn" id="btnSearchUser"
+																			<button class="sfBtn" id="btnSearchProposal"
 																				type="button">
 																				<span class="sfLocale icon-search">Search</span>
 																			</button></td>
@@ -795,7 +807,7 @@
 																alt="loading...." title="loading...." />
 														</div>
 														<div class="log"></div>
-														<table id="gdvUsers" cellspacing="0" cellpadding="0"
+														<table id="gdvProposals" cellspacing="0" cellpadding="0"
 															border="0" width="100%"></table>
 													</div>
 												</div>
@@ -813,8 +825,9 @@
 												<div class="cssClassTabPanelTable">
 													<div id="container-7">
 														<ul>
+															<!-- Need to have each section bind to fragment all together 11 sections -->
 															<li><a href="#fragment-1"> <span
-																	id="ctl19_lblTabTitle1">User Properties</span>
+																	id="ctl19_lblTabTitle1">Proposal Properties</span>
 															</a></li>
 															<li><a href="#fragment-2"> <span
 																	id="ctl19_lblTabTitle2">Frontend Properties</span>
@@ -838,160 +851,6 @@
 																			</span> <b class="cssClassError sfLocale">Ops! found
 																					something error, must be unique with no spaces</b> <span
 																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblType">Type:</span></td>
-																			<td class="cssClassTableRightCol"><select
-																				id="ddlAttributeType" class="sfListmenu"
-																				title="User Input Type"></select></td>
-																		</tr>
-																		<tr id="trdefaultValue">
-																			<td><span class="cssClassLabel">Default
-																					Value:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="text" class="sfInputbox" title="Default Value"
-																				value="" name="default_value_text"
-																				id="default_value_text" /> <span id="iferror"
-																				class="iferror" style="color: #FF0000;"></span>
-																				<div id="fileDefaultTooltip" style="display: none;"
-																					class="cssClassRed"></div> <textarea
-																					class="cssClassTextArea" cols="15" rows="2"
-																					title="Default Value" name="default_value_textarea"
-																					id="default_value_textarea"></textarea>
-																				<div id="div_default_value_date">
-																					<input type="text" class="sfInputbox"
-																						title="Default Value" value=""
-																						id="default_value_date" name="default_value_date" />
-																				</div> <select class="sfListmenu" title="Default Value"
-																				name="default_value_yesno" id="default_value_yesno">
-																					<option value="1" class="sfLocale">Yes</option>
-																					<option selected="selected" value="0"
-																						class="sfLocale">No</option>
-																			</select></td>
-																		</tr>
-																		<tr id="trOptionsAdd">
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblAddOptions">Manage Options
-																					(values of your attribute):</span> <span
-																				class="cssClassRequired">*</span></td>
-																			<td class="cssClassTableRightCol">
-																				<table id="dataTable" cellspacing="0"
-																					cellpadding="0" border="0" width="100%">
-																					<thead>
-																						<tr>
-																							<th><span class="cssClassLabel"
-																								id="ctl19_lblValue">Value:</span> <span
-																								class="cssClassRequired">*</span></th>
-																							<th><span class="cssClassLabel"
-																								id="ctl19_lblPosition">Display Order:</span> <span
-																								class="cssClassRequired">*</span></th>
-																							<th><span class="cssClassLabel"
-																								id="ctl19_lblAlias">Alias:</span></th>
-																							<th><span class="cssClassLabel"
-																								id="ctl19_lblIsDefault">Is Default:</span></th>
-																						</tr>
-																					</thead>
-																					<tbody>
-																						<tr>
-																							<td><input type="hidden" class="class-text"
-																								value="0" name="optionValueId" /> <input
-																								type="text" class="class-text" value=""
-																								name="value" /> <span class=""
-																								style="color: #FF0000;">*</span></td>
-																							<td><input type="text" class="class-text"
-																								value="" name="position" /> <span class=""
-																								style="color: #FF0000;">*</span></td>
-																							<td><input type="text" class="class-text"
-																								value="" name="Alias" /></td>
-																							<td class="tddefault"></td>
-																							<td><input type="Button" value="Add More"
-																								name="AddMore"
-																								class="AddOption cssClassButtonSubmit sfLocale" />
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblUniqueValue">Unique Value:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" name="chkUniqueValue" value=""
-																				class="cssClassCheckBox" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblTypeValidation">Type Validation:</span>
-																			</td>
-																			<td class="cssClassTableRightCol"><select
-																				id="ddlTypeValidation" class="sfListmenu" name=""
-																				title="User Input Validation Type"></select></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblValuesRequired">Values Required:</span>
-																			</td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" name="chkValuesRequired"
-																				class="cssClassCheckBox" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblApplyTo">Apply To:</span></td>
-																			<td class="cssClassTableRightCol"><select
-																				id="ddlApplyTo" class="sfListmenu" name="">
-																					<option selected="selected" value="0"
-																						class="sfLocale">All Item Types</option>
-																					<option value="1" class="sfLocale">Selected
-																						Item Types</option>
-																			</select><span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr class="itemTypes">
-																			<td>&nbsp;</td>
-																			<td class="cssClassTableRightCol"><select
-																				id="lstItemType" class="cssClassMultiSelect"></select>
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel" id="lblLength">Length:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				class="sfInputbox verifyInteger" id="txtLength"
-																				type="text" maxlength="10" /> <span
-																				class="iferror sfLocale" style="color: #FF0000;">Integer
-																					Number</span> <span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblAliasName">Alias Name:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				class="sfInputbox" id="txtAliasName" type="text" />
-																				<span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblAliasToolTip">Alias ToolTip:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				class="sfInputbox" id="txtAliasToolTip" type="text" />
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblAliasHelp">Alias Help:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				class="sfInputbox" id="txtAliasHelp" type="text" />
-																			</td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblDisplayOrder">Display Order:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				class="sfInputbox verifyInteger"
-																				id="txtDisplayOrder" type="text" /> <span
-																				class="cssClassRequired sfLocale">*</span> <span
-																				class="iferror sfLocale" style="color: #FF0000;">Integer
-																					Number</span></td>
 																		</tr>
 																		<tr id="activeTR">
 																			<td><span class="cssClassLabel"
@@ -1019,54 +878,6 @@
 																				type="checkbox" class="cssClassCheckBox"
 																				name="chkIsEnableEditor" /></td>
 																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblIsUseInFilter">Used in Filter:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkIsUseInFilter" /></td>
-																		</tr>
-
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblUseInAdvancedSearch">Use in
-																					Advanced Search:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkUseInAdvancedSearch" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblComparable">Comparable on
-																					Front-end:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkComparable" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblUseForPriceRule">Use for Price
-																					Rule Conditions:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkUseForPriceRule" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblShowInItemListing">Show In Item
-																					Listing:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkShowInItemListing" /></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="ctl19_lblShowInItemDetail">Show In Item
-																					Detail Page:</span></td>
-																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" class="cssClassCheckBox"
-																				name="chkShowInItemDetail" /></td>
-																		</tr>
 																	</tbody>
 																</table>
 															</div>
@@ -1090,7 +901,7 @@
 														</button>
 													</p>
 													<p>
-														<button type="button" id="btnSaveUser" class="sfBtn">
+														<button type="button" id="btnSaveProposal" class="sfBtn">
 															<span class="sfLocale icon-save">Save</span>
 														</button>
 													</p>
@@ -1098,7 +909,6 @@
 											</div>
 										</div>
 										<!-- End form -->
-
 									</div>
 								</div>
 

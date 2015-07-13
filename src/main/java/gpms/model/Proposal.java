@@ -34,12 +34,33 @@ public class Proposal extends BaseEntity {
 
 	@Embedded("cost share info")
 	private CostShareInfo costShareInfo = new CostShareInfo();
+
 	@Embedded("university commitments")
 	private UniversityCommitments universityCommitments = new UniversityCommitments();
+
 	@Embedded("conflict of interest and commitment info")
 	private ConflictOfInterest conflicOfInterest = new ConflictOfInterest();
+
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo = new ComplianceInfo();
+
+	@Embedded("additional info")
+	private AdditionalInfo additionalInfo = new AdditionalInfo();
+
+	@Embedded("collaboration info")
+	private CollaborationInfo collaborationInfo = new CollaborationInfo();
+
+	@Embedded("proprietary/confidential info")
+	private ConfidentialInfo confidentialInfo = new ConfidentialInfo();
+
+	@Embedded("OSPSection info")
+	private OSPSectionInfo oSPSectionInfo = new OSPSectionInfo();
+
+	@Embedded("signature info")
+	private SignatureInfo signatureInfo = new SignatureInfo();
+
+	@Embedded("delegation info")
+	private DelegationInfo delegationInfo = new DelegationInfo();
 
 	public Proposal() {
 	}
@@ -114,8 +135,7 @@ public class Proposal extends BaseEntity {
 	 * 
 	 * @param investigatorInfo
 	 */
-	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) 
-	{	
+	public void setInvestigatorInfo(InvestigatorInfo investigatorInfo) {
 		this.investigatorInfo = investigatorInfo;
 	}
 
@@ -169,11 +189,59 @@ public class Proposal extends BaseEntity {
 		this.complianceInfo = complianceInfo;
 	}
 
+	public AdditionalInfo getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(AdditionalInfo additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public CollaborationInfo getCollaborationInfo() {
+		return collaborationInfo;
+	}
+
+	public void setCollaborationInfo(CollaborationInfo collaborationInfo) {
+		this.collaborationInfo = collaborationInfo;
+	}
+
+	public ConfidentialInfo getConfidentialInfo() {
+		return confidentialInfo;
+	}
+
+	public void setConfidentialInfo(ConfidentialInfo confidentialInfo) {
+		this.confidentialInfo = confidentialInfo;
+	}
+
+	public OSPSectionInfo getoSPSectionInfo() {
+		return oSPSectionInfo;
+	}
+
+	public void setoSPSectionInfo(OSPSectionInfo oSPSectionInfo) {
+		this.oSPSectionInfo = oSPSectionInfo;
+	}
+
+	public SignatureInfo getSignatureInfo() {
+		return signatureInfo;
+	}
+
+	public void setSignatureInfo(SignatureInfo signatureInfo) {
+		this.signatureInfo = signatureInfo;
+	}
+
+	public DelegationInfo getDelegationInfo() {
+		return delegationInfo;
+	}
+
+	public void setDelegationInfo(DelegationInfo delegationInfo) {
+		this.delegationInfo = delegationInfo;
+	}
+
 	@Override
 	public String toString() {
 		return new StringBuffer(" Proposal Number : ")
-		.append(this.getProposalNo()).append(" Date Received : ")
-		.append(this.getDateReceived()).append(" Proposal Status : ")
-		.append(this.getProposalStatus()).toString();
+				.append(this.getProposalNo()).append(" Date Received : ")
+				.append(this.getDateReceived()).append(" Proposal Status : ")
+				.append(this.getProposalStatus()).toString();
 	}
 }

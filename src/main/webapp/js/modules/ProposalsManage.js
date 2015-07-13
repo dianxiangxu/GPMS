@@ -1,4 +1,4 @@
-﻿var usersManage = '';
+﻿var proposalsManage = '';
 $(function() {
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
@@ -11,7 +11,7 @@ $(function() {
 	var isUnique = false;
 	var editFlag = 0;
 	var arrAttrValueId = "";
-	usersManage = {
+	proposalsManage = {
 		config : {
 			isPostBack : false,
 			async : true,
@@ -20,7 +20,7 @@ $(function() {
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
 			dataType : 'json',
-			baseURL : GPMS.utils.GetGPMSServicePath() + "users/",
+			baseURL : GPMS.utils.GetGPMSServicePath() + "proposals/",
 			method : "",
 			url : "",
 			ajaxCallMode : 0
@@ -28,7 +28,7 @@ $(function() {
 		ajaxCall : function(config) {
 			$
 					.ajax({
-						type : usersManage.config.type,
+						type : proposalsManage.config.type,
 						beforeSend : function(request) {
 							request.setRequestHeader('GPMS-TOKEN', _aspx_token);
 							request.setRequestHeader("UName", GPMS.utils
@@ -38,37 +38,25 @@ $(function() {
 							request.setRequestHeader("PType", "v");
 							request.setRequestHeader('Escape', '0');
 						},
-						contentType : usersManage.config.contentType,
-						cache : usersManage.config.cache,
-						async : usersManage.config.async,
-						url : usersManage.config.url,
-						data : usersManage.config.data,
-						dataType : usersManage.config.dataType,
-						success : usersManage.ajaxSuccess,
-						error : usersManage.ajaxFailure
+						contentType : proposalsManage.config.contentType,
+						cache : proposalsManage.config.cache,
+						async : proposalsManage.config.async,
+						url : proposalsManage.config.url,
+						data : proposalsManage.config.data,
+						dataType : proposalsManage.config.dataType,
+						success : proposalsManage.ajaxSuccess,
+						error : proposalsManage.ajaxFailure
 					});
 		},
 		LoadStaticImage : function() {
 			$('.cssClassSuccessImg').prop('src',
 					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
 		},
-		ClearOptionTable : function(btnAddOption) {
-			btnAddOption.closest("tr:eq(0)").find("input:not(:last)").each(
-					function(i) {
-						$(this).val('');
-						$(this).removeAttr('checked');
-					});
-		},
 		onInit : function() {
-			usersManage.SetFirstTabActive();
-			$("#ddlApplyTo").val('0');
-			$('.itemTypes').hide();
+			proposalsManage.SetFirstTabActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
-			$("#lstItemType").each(function() {
-				$("#lstItemType option").removeAttr("selected");
-			});
 		},
 		SetFirstTabActive : function() {
 			var $tabs = $('#container-7').tabs({
@@ -155,11 +143,11 @@ $(function() {
 				$(this).val('');
 				$(this).prop('checked', false);
 			});
-			usersManage.onInit();
+			proposalsManage.onInit();
 			$('#lblAttrFormHeading').html(
-					getLocale(gpmsUsersManagement, "New User Details"));
+					getLocale(gpmsUsersManagement, "New Proposal Details"));
 			$(".delbutton").removeAttr("id");
-			$("#btnSaveUser").removeAttr("name");
+			$("#btnSaveProposal").removeAttr("name");
 			$('#lblLength').html(getLocale("Length:"));
 			$(".delbutton").hide();
 			$("#btnReset").show();
@@ -190,7 +178,8 @@ $(function() {
 
 			$('#default_value_text').val('');
 			$("#dataTable tr:gt(1)").remove();
-			usersManage.ClearOptionTable($("input[type='button'].AddOption"));
+			proposalsManage
+					.ClearOptionTable($("input[type='button'].AddOption"));
 			$('#trOptionsAdd').hide();
 
 			$('#ddlTypeValidation').val('8');
@@ -226,316 +215,6 @@ $(function() {
 			$('input[name=optionValueId]').val('0');
 			return false;
 		},
-		BindAttributeOptionsValues : function(_fillOptionValues) {
-			var _fillOptions = _fillOptionValues;
-			if (_fillOptions != undefined && _fillOptions != "") {
-				var arr = _fillOptions.split("!#!");
-				var htmlContent = '';
-				$.each(arr, function(i) {
-					var btnOption = "Add More";
-					var btnName = "AddMore";
-					if (i > 0) {
-						btnOption = "Delete Option";
-						var btnName = "DeleteOption";
-					}
-					var arr2 = arr[i].split("#!#");
-					var cloneRow = $('#dataTable tbody>tr:last').clone(true);
-					$(cloneRow).find("input").each(function(j) {
-
-						if (this.name == "optionValueId") {
-							$(this).val(arr2[0]);
-						} else if (this.name == "value") {
-							$(this).val(arr2[1]);
-						} else if (this.name == "position") {
-							$(this).val(arr2[2]);
-						} else if (this.name == "Alias") {
-							$(this).val(arr2[3]);
-						} else if ($(this).hasClass("class-isdefault")) {
-							this.checked = usersManage.Boolean(arr2[4]);
-						} else if ($(this).hasClass("AddOption")) {
-							$(this).prop("name", btnName);
-							$(this).prop("value", btnOption);
-						}
-					});
-					$(cloneRow).appendTo("#dataTable");
-				});
-				$('#dataTable>tbody tr:first').remove();
-			}
-		},
-		ValidationTypeEnableDisable : function(fillOptionValues, isChanged) {
-			var selectedVal = $("#ddlAttributeType :selected").val();
-			switch (selectedVal) {
-			case "1":
-				$("#ddlTypeValidation").removeAttr('disabled');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "2":
-				$('#ddlTypeValidation').val('8');
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$('#' + lblDefaultValue).html("Default Value:");
-				$('#lblLength').html("Rows:");
-				if (isChanged) {
-					$('#txtLength').val(3);
-				}
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").hide();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").show();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').removeAttr('disabled');
-				break;
-			case "3":
-				$('#ddlTypeValidation').val('8');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").show();
-				$("#default_value_text").hide();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").show();
-				$("#default_value_date").datepicker({
-					dateFormat : 'yy/mm/dd'
-				});
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "4":
-				$('#ddlTypeValidation').val('8');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").show();
-				$("#default_value_text").hide();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").show();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "5":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html("Length:");
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Size:"));
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				if (isChanged) {
-					$('#txtLength').val(3);
-				}
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"checkbox\" name=\"defaultChk\" class=\"class-isdefault\">');
-				$(".AddOption").val("Add More");
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "6":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").val('');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"radio\" name=\"defaultRdo\" class=\"class-isdefault\">');
-				$(".AddOption").val("Add More");
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "7":
-				$('#ddlTypeValidation').val('6');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "8":
-				$('#ddlTypeValidation').val('8');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement,
-								"Allowed File Extension(s):"));
-				$("#fileDefaultTooltip").html(
-						getLocale(gpmsUsersManagement,
-								"- Separate each file extensions with space"));
-				$("#fileDefaultTooltip").show();
-				$('#lblLength').html(
-						getLocale(gpmsUsersManagement, "Size:(KB)"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "9":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-
-				$(".tddefault")
-						.html(
-								'<input type=\"radio\" name=\"defaultRdo\" class=\"class-isdefault\">');
-				$(".AddOption").hide();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "10":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"radio\" name=\"defaultRdo\" class=\"class-isdefault\">');
-				$(".AddOption").val("Add More");
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "11":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"checkbox\" name=\"defaultChk\" class=\"class-isdefault\">');
-				$(".AddOption").hide();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "12":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"checkbox\" name=\"defaultChk\" class=\"class-isdefault\">');
-				$(".AddOption").val(getLocale(gpmsUsersManagement, "Add More"));
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "13":
-				$("#ddlTypeValidation").removeAttr('disabled');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			default:
-				break;
-			}
-		},
 
 		BindUserGrid : function(userName, college, department, postitionType,
 				postitionTitle, isActive) {
@@ -543,8 +222,8 @@ $(function() {
 			this.config.method = "GetUsersList";
 			var offset_ = 1;
 			var current_ = 1;
-			var perpage = ($("#gdvUsers_pagesize").length > 0) ? $(
-					"#gdvUsers_pagesize :selected").text() : 10;
+			var perpage = ($("#gdvProposals_pagesize").length > 0) ? $(
+					"#gdvProposals_pagesize :selected").text() : 10;
 			var userBindObj = {
 				UserName : userName,
 				College : college,
@@ -553,12 +232,12 @@ $(function() {
 				PostitionTitle : postitionTitle,
 				IsActive : isActive
 			};
-			$("#gdvUsers").sagegrid({
+			$("#gdvProposals").sagegrid({
 				url : this.config.url,
 				functionMethod : this.config.method,
 				colModel : [ {
-					display : 'User Profile ID',
-					name : 'userProfile_id',
+					display : 'Proposal ID',
+					name : 'proposal_id',
 					cssclass : 'cssClassHeadCheckBox',
 					coltype : 'checkbox',
 					align : 'center',
@@ -567,51 +246,116 @@ $(function() {
 					elemDefault : false,
 					controlclass : 'attribHeaderChkbox'
 				}, {
-					display : 'User Name',
-					name : 'user_name',
+					display : 'Proposal No',
+					name : 'proposal_no',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left'
 				}, {
-					display : 'Full Name',
-					name : 'full_name',
+					display : 'Date Received',
+					name : 'date_received',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left'
 				}, {
-					display : 'PI Count',
-					name : 'PI_proposal_count',
+					display : 'Proposal Status',
+					name : 'proposal_status',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left'
 				}, {
-					display : 'Co-PI Count',
-					name : 'CoPI_proposal_count',
+					display : 'Project Title',
+					name : 'project_title',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left'
 				}, {
-					display : 'Senior Count',
-					name : 'senior_proposal_count',
+					display : 'Project Type',
+					name : 'project_type',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left'
 				}, {
-					display : getLocale(gpmsUsersManagement, 'Added On'),
-					name : 'added_on',
+					display : 'Type of Request',
+					name : 'type_of_request',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Due Date',
+					name : 'due_date',
 					cssclass : 'cssClassHeadDate',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left',
 					type : 'date',
 					format : 'yyyy/MM/dd hh:mm:ss a'
-				// Want more format then
-				// :https://github.com/phstc/jquery-dateFormat/blob/master/test/expected_inputs_spec.js
+				}, {
+					display : 'Project Period From',
+					name : 'project_period_from',
+					cssclass : 'cssClassHeadDate',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'date',
+					format : 'yyyy/MM/dd hh:mm:ss a'
+				}, {
+					display : 'Project Period To',
+					name : 'project_period_to',
+					cssclass : 'cssClassHeadDate',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'date',
+					format : 'yyyy/MM/dd hh:mm:ss a'
+				}, {
+					display : 'Project Location',
+					name : 'project_location',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Granting Agencies',
+					name : 'granting_agencies',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Direct Costs',
+					name : 'directCosts',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'FA Costs',
+					name : 'FA_costs',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Total Costs',
+					name : 'total_costs',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'FA Rate',
+					name : 'FA_rate',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Last Updated'),
 					name : 'last_updated',
@@ -628,12 +372,8 @@ $(function() {
 					controlclass : '',
 					coltype : 'label',
 					align : 'left',
-					// To override it we need
 					type : 'boolean',
 					format : 'Yes/No'
-				// default format (No Need to specify) is True/False
-				// you can define 'Yes/No'
-				// hide : true
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Actions'),
 					name : 'action',
@@ -648,7 +388,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '1',
-					callMethod : 'usersManage.EditUser',
+					callMethod : 'proposalsManage.EditUser',
 					arguments : '1,2,3,4,5,6,7,8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Delete"),
@@ -656,7 +396,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '2',
-					callMethod : 'usersManage.DeleteUser',
+					callMethod : 'proposalsManage.DeleteUser',
 					arguments : '8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
@@ -664,7 +404,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '4',
-					callMethod : 'usersManage.ActiveUser',
+					callMethod : 'proposalsManage.ActiveUser',
 					arguments : '8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Deactivate"),
@@ -672,7 +412,7 @@ $(function() {
 					enable : true,
 					_event : 'click',
 					trigger : '5',
-					callMethod : 'usersManage.DeactiveUser',
+					callMethod : 'proposalsManage.DeactiveUser',
 					arguments : '8'
 				} ],
 				rp : perpage,
@@ -720,7 +460,7 @@ $(function() {
 			// $('#ddlAttributeType').val(item.InputTypeID);
 			$('#ddlAttributeType').prop('disabled', 'disabled');
 
-			// usersManage.FillDefaultValue(item.DefaultValue);
+			// proposalsManage.FillDefaultValue(item.DefaultValue);
 
 			// $('#ddlTypeValidation').val(item.ValidationTypeID);
 			// $('#txtLength').val(item.Length);
@@ -749,7 +489,7 @@ $(function() {
 			// item.IsShowInItemListing);
 			// $('input[name=chkShowInItemDetail]').prop('checked',
 			// item.IsShowInItemDetail);
-			// usersManage.ValidationTypeEnableDisable(item.FillOptionValues,
+			// proposalsManage.ValidationTypeEnableDisable(item.FillOptionValues,
 			// false);
 
 			// if (item.ItemTypes.length > 0) {
@@ -767,11 +507,12 @@ $(function() {
 		},
 
 		EditUser : function(tblID, argus) {
-			usersManage.ClearForm();
+			proposalsManage.ClearForm();
 			switch (tblID) {
-			case "gdvUsers":
+			case "gdvProposals":
 				$('#lblAttrFormHeading').html(
-						getLocale(gpmsUsersManagement, 'Edit User Details: ')
+						getLocale(gpmsUsersManagement,
+								'Edit Proposal Details: ')
 								+ argus[3]);
 				$('#txtAttributeName').prop('disabled', 'disabled');
 				if (argus[7].toLowerCase() != "yes") {
@@ -834,25 +575,28 @@ $(function() {
 					$("input[name=chkValuesRequired]").prop('disabled',
 							'disabled');
 				}
-				$("#btnSaveUser").prop("name", argus[0]);
-				usersManage.onInit();
+				$("#btnSaveProposal").prop("name", argus[0]);
+				proposalsManage.onInit();
 
-				usersManage.config.url = usersManage.config.baseURL
+				proposalsManage.config.url = proposalsManage.config.baseURL
 						+ "GetUsersByProfileId";
-				usersManage.config.data = JSON2.stringify({
+				proposalsManage.config.data = JSON2.stringify({
 					userId : argus[0],
 					gpmsCommonObj : gpmsCommonObj()
 				});
-				usersManage.config.ajaxCallMode = 4;
-				usersManage.ajaxCall(usersManage.config);
+				proposalsManage.config.ajaxCallMode = 4;
+				proposalsManage.ajaxCall(proposalsManage.config);
 				var attValType = $("#ddlTypeValidation").val();
-				$("#default_value_text").prop(
-						"class",
-						"sfInputbox "
-								+ usersManage.CreateValidationClass(attValType)
-								+ "");
+				$("#default_value_text")
+						.prop(
+								"class",
+								"sfInputbox "
+										+ proposalsManage
+												.CreateValidationClass(attValType)
+										+ "");
 				$('#iferror').html(
-						usersManage.GetValidationTypeErrorMessage(attValType));
+						proposalsManage
+								.GetValidationTypeErrorMessage(attValType));
 				break;
 			default:
 				break;
@@ -861,9 +605,9 @@ $(function() {
 
 		DeleteUser : function(tblID, argus) {
 			switch (tblID) {
-			case "gdvUsers":
+			case "gdvProposals":
 				if (argus[3].toLowerCase() != "yes") {
-					usersManage.DeleteUserById(argus[0]);
+					proposalsManage.DeleteUserById(argus[0]);
 				} else {
 					csscody.alert('<h2>'
 							+ getLocale(gpmsUsersManagement,
@@ -879,9 +623,9 @@ $(function() {
 			}
 		},
 
-		ConfirmDeleteMultiple : function(user_ids, event) {
+		ConfirmDeleteMultiple : function(proposal_ids, event) {
 			if (event) {
-				usersManage.DeleteMultipleAttribute(user_ids);
+				proposalsManage.DeleteMultipleAttribute(proposal_ids);
 			}
 		},
 
@@ -900,7 +644,7 @@ $(function() {
 		DeleteUserById : function(_userId) {
 			var properties = {
 				onComplete : function(e) {
-					usersManage.ConfirmSingleDelete(_userId, e);
+					proposalsManage.ConfirmSingleDelete(_userId, e);
 				}
 			};
 			csscody.confirm("<h2>"
@@ -911,9 +655,9 @@ $(function() {
 					+ "</p>", properties);
 		},
 
-		ConfirmSingleDelete : function(user_id, event) {
+		ConfirmSingleDelete : function(proposal_id, event) {
 			if (event) {
-				usersManage.DeleteSingleAttribute(user_id);
+				proposalsManage.DeleteSingleAttribute(proposal_id);
 			}
 			return false;
 		},
@@ -943,9 +687,9 @@ $(function() {
 		},
 		DeactiveUser : function(tblID, argus) {
 			switch (tblID) {
-			case "gdvUsers":
+			case "gdvProposals":
 				if (argus[3].toLowerCase() != "yes") {
-					usersManage.ActivateAttribute(argus[0], false);
+					proposalsManage.ActivateAttribute(argus[0], false);
 				} else {
 					csscody
 							.alert('<h2>'
@@ -963,9 +707,9 @@ $(function() {
 		},
 		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
-			case "gdvUsers":
+			case "gdvProposals":
 				if (argus[3].toLowerCase() != "yes") {
-					usersManage.ActivateAttribute(argus[0], true);
+					proposalsManage.ActivateAttribute(argus[0], true);
 				} else {
 					csscody
 							.alert('<h2>'
@@ -1008,7 +752,7 @@ $(function() {
 				var attributeName = $('#txtAttributeName').val();
 				if (!attributeName) {
 					validateErrorMessage += 'Please enter attribute name.<br/>';
-				} else if (!usersManage.IsUnique(attributeName, _userId)) {
+				} else if (!proposalsManage.IsUnique(attributeName, _userId)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsUsersManagement,
 									"Please enter unique attribute name") + "'"
@@ -1072,7 +816,8 @@ $(function() {
 												$(this).parent('td').find(
 														'span').addClass(
 														'error').show();
-												usersManage.SetFirstTabActive();
+												proposalsManage
+														.SetFirstTabActive();
 												$(this).addClass('error');
 												$(this).focus();
 											} else {
@@ -1094,7 +839,7 @@ $(function() {
 																.addClass(
 																		'error')
 																.show();
-														usersManage
+														proposalsManage
 																.SetFirstTabActive();
 														$(this).addClass(
 																'error');
@@ -1180,7 +925,7 @@ $(function() {
 					var _Flag = _flag;
 					var _IsUsedInConfigItem = isUsedInConfigItem;
 
-					usersManage.AddAttributeInfo(_userId, _attributeName,
+					proposalsManage.AddAttributeInfo(_userId, _attributeName,
 							_inputTypeID, _DefaultValue, _ValidationTypeID,
 							_Length, _AliasName, _AliasToolTip, _AliasHelp,
 							_DisplayOrder, _IsUnique, _IsRequired,
@@ -1254,123 +999,71 @@ $(function() {
 			this.config.ajaxCallMode = 1;
 			this.ajaxCall(this.config);
 		},
-		BindDepartmentDropDown : function(collegeName) {
-			if (collegeName != "0") {
-				this.config.url = this.config.baseURL + "GetDepartmentList";
-				this.config.data = JSON2.stringify({
-					college : collegeName
-				});
-				this.config.ajaxCallMode = 2;
-				this.ajaxCall(this.config);
-			} else {
-				$('#ddlSearchDepartment').find('option:gt(0)').remove();
-			}
-		},
-		BindPositionTypeDropDown : function(collegeName, departmentName) {
-			if (collegeName != "0" && departmentName != "0") {
-				this.config.url = this.config.baseURL + "GetPostitionTypeList";
-				this.config.data = JSON2.stringify({
-					college : collegeName,
-					department : departmentName
-				});
-				this.config.ajaxCallMode = 3;
-				this.ajaxCall(this.config);
-			} else {
-				$('#ddlSearchPositionType').find('option:gt(0)').remove();
-			}
-		},
-		BindPositionTitleDropDown : function(collegeName, departmentName,
-				positionTypeName) {
-			if (collegeName != "0" && departmentName != "0"
-					&& positionTypeName != "0") {
-				this.config.url = this.config.baseURL + "GetPostitionTitleList";
-				this.config.data = JSON2.stringify({
-					college : collegeName,
-					department : departmentName,
-					positionType : positionTypeName
-				});
-				this.config.ajaxCallMode = 4;
-				this.ajaxCall(this.config);
-			} else {
-				$('#ddlSearchPositionTitle').find('option:gt(0)').remove();
-			}
-		},
 		SearchUsers : function() {
-			var userName = $.trim($("#txtSearchUserName").val());
-			var college = $.trim($('#ddlSearchCollege').val()) == "" ? null : $
-					.trim($('#ddlSearchCollege').val()) == "0" ? null : $
-					.trim($('#ddlSearchCollege').val());
-			var department = $.trim($('#ddlSearchDepartment').val()) == "" ? null
-					: $.trim($('#ddlSearchDepartment').val()) == "0" ? null : $
-							.trim($('#ddlSearchDepartment').val());
-			var postitionType = $.trim($('#ddlSearchPositionType').val()) == "" ? null
-					: $.trim($('#ddlSearchPositionType').val()) == "0" ? null
-							: $.trim($('#ddlSearchPositionType').val());
-			var postitionTitle = $.trim($('#ddlSearchPositionTitle').val()) == "" ? null
-					: $.trim($('#ddlSearchPositionTitle').val()) == "0" ? null
-							: $.trim($('#ddlSearchPositionTitle').val());
-			var isActive = $.trim($("#ddlSearchIsActive").val()) == "" ? null
-					: $.trim($("#ddlSearchIsActive").val()) == "True" ? true
-							: false;
+			var userName = $.trim($("#txtSearchProjectTitle").val());
+			var college = $.trim($('#ddlCollege').val()) == "" ? null : $
+					.trim($('#ddlCollege').val()) == "0" ? null : $.trim($(
+					'#ddlCollege').val());
+			var department = $.trim($('#ddlDepartment').val()) == "" ? null : $
+					.trim($('#ddlDepartment').val()) == "0" ? null : $.trim($(
+					'#ddlDepartment').val());
+			var postitionType = $.trim($('#ddlPositionType').val()) == "" ? null
+					: $.trim($('#ddlPositionType').val()) == "0" ? null : $
+							.trim($('#ddlPositionType').val());
+			var postitionTitle = $.trim($('#ddlPositionTitle').val()) == "" ? null
+					: $.trim($('#ddlPositionTitle').val()) == "0" ? null : $
+							.trim($('#ddlPositionTitle').val());
+			var isActive = $.trim($("#ddlIsActive").val()) == "" ? null : $
+					.trim($("#ddlIsActive").val()) == "True" ? true : false;
 			if (userName.length < 1) {
 				userName = null;
 			}
-			usersManage.BindUserGrid(userName, college, department,
+			proposalsManage.BindUserGrid(userName, college, department,
 					postitionType, postitionTitle, isActive);
 		},
 		ajaxSuccess : function(msg) {
-			switch (usersManage.config.ajaxCallMode) {
+			switch (proposalsManage.config.ajaxCallMode) {
 			case 0:
 				break;
 			case 1: // For College Dropdown Binding
-				$('#ddlSearchCollege').get(0).options.length = 1;
-				$('#ddlSearchDepartment').get(0).options.length = 1;
-				$('#ddlSearchPositionType').get(0).options.length = 1;
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchCollege").get(0).options[$(
-											"#ddlSearchCollege").get(0).options.length] = new Option(
-											item, item);
-								});
+				$('#ddlCollege').get(0).options.length = 1;
+				$('#ddlDepartment').get(0).options.length = 1;
+				$('#ddlPositionType').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
+				$.each(msg,
+						function(index, item) {
+							$("#ddlCollege").get(0).options[$("#ddlCollege")
+									.get(0).options.length] = new Option(item,
+									item);
+						});
 				break
 			case 2:// For Department Dropdown Binding
-				$('#ddlSearchDepartment').get(0).options.length = 1;
-				$('#ddlSearchPositionType').get(0).options.length = 1;
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchDepartment").get(0).options[$(
-											"#ddlSearchDepartment").get(0).options.length] = new Option(
-											item, item);
-								});
+				$('#ddlDepartment').get(0).options.length = 1;
+				$('#ddlPositionType').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
+				$.each(msg, function(index, item) {
+					$("#ddlDepartment").get(0).options[$("#ddlDepartment").get(
+							0).options.length] = new Option(item, item);
+				});
 				break;
 
 			case 3: // For College Position Type Binding
-				$('#ddlSearchPositionType').get(0).options.length = 1;
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchPositionType").get(0).options[$(
-											"#ddlSearchPositionType").get(0).options.length] = new Option(
-											item, item);
-								});
+				$('#ddlPositionType').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
+				$.each(msg, function(index, item) {
+					$("#ddlPositionType").get(0).options[$("#ddlPositionType")
+							.get(0).options.length] = new Option(item, item);
+				});
 				break;
 
 			case 4: // For College Position Title Binding
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+				$('#ddlPositionTitle').get(0).options.length = 1;
 				$
 						.each(
 								msg,
 								function(index, item) {
-									$("#ddlSearchPositionTitle").get(0).options[$(
-											"#ddlSearchPositionTitle").get(0).options.length] = new Option(
+									$("#ddlPositionTitle").get(0).options[$(
+											"#ddlPositionTitle").get(0).options.length] = new Option(
 											item, item);
 								});
 				break;
@@ -1386,12 +1079,13 @@ $(function() {
 						});
 				break;
 			case 6:
-				usersManage.FillForm(msg);
+				proposalsManage.FillForm(msg);
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
 				break;
 			case 7:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage
+						.BindUserGrid(null, null, null, null, null, null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Successful Message')
 						+ "</h2><p>"
@@ -1402,7 +1096,8 @@ $(function() {
 				$('#divUserGrid').show();
 				break;
 			case 8:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage
+						.BindUserGrid(null, null, null, null, null, null);
 				csscody
 						.info("<h2>"
 								+ getLocale(gpmsUsersManagement,
@@ -1413,13 +1108,15 @@ $(function() {
 								+ "</p>");
 				break;
 			case 9:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage
+						.BindUserGrid(null, null, null, null, null, null);
 				break;
 			case 10:
 				isUnique = msg.d;
 				break;
 			case 11:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage
+						.BindUserGrid(null, null, null, null, null, null);
 				$('#divUserGrid').show();
 				if (editFlag > 0) {
 					csscody.info("<h2>"
@@ -1438,13 +1135,13 @@ $(function() {
 									'Attribute has been saved successfully.')
 							+ "</p>");
 				}
-				usersManage.ClearForm();
+				proposalsManage.ClearForm();
 				$('#divUserForm').hide();
 				break;
 			}
 		},
 		ajaxFailure : function(msg) {
-			switch (usersManage.config.ajaxCallMode) {
+			switch (proposalsManage.config.ajaxCallMode) {
 			case 0:
 				break;
 			case 1:
@@ -1512,57 +1209,28 @@ $(function() {
 			}
 		},
 		init : function(config) {
-			usersManage.LoadStaticImage();
-			usersManage.BindUserGrid(null, null, null, null, null, null);
+			proposalsManage.LoadStaticImage();
+			proposalsManage.BindUserGrid(null, null, null, null, null, null);
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
-			usersManage.BindCollegeDropDown();
-			// usersManage.BindDepartmentDropDown($("#ddlSearchCollege").val());
-			// usersManage.BindPositionTypeDropDown($("#ddlSearchCollege").val(),
-			// $(
-			// "#ddlSearchDepartment").val());
-			// usersManage.BindPositionTitleDropDown($("#ddlSearchCollege").val(),
-			// $(
-			// "#ddlSearchDepartment").val(),
-			// $("#ddlSearchPositionType").val());
-			// usersManage.BindAttributesValidationType();
-			// usersManage.BindAttributesItemType();
+			proposalsManage.BindCollegeDropDown();
 
-			$("#ddlSearchCollege").bind(
-					"change",
-					function() {
-						usersManage.BindDepartmentDropDown($(
-								"#ddlSearchCollege").val());
-					});
-
-			$("#ddlSearchDepartment").bind(
-					"change",
-					function() {
-						usersManage.BindPositionTypeDropDown($(
-								"#ddlSearchCollege").val(), $(
-								"#ddlSearchDepartment").val());
-					});
-
-			$("#ddlSearchPositionType").bind(
-					"change",
-					function() {
-						usersManage.BindPositionTitleDropDown($(
-								"#ddlSearchCollege").val(), $(
-								"#ddlSearchDepartment").val(), $(
-								"#ddlSearchPositionType").val());
-					});
+			$("#ddlCollege").bind("change", function() {
+				proposalsManage.BindDepartmentDropDown($("#ddlCollege").val());
+			});
 
 			$('#btnDeleteSelected')
 					.click(
 							function() {
-								var user_ids = '';
-								user_ids = SageData.Get("gdvUsers").Arr
+								var proposal_ids = '';
+								proposal_ids = SageData.Get("gdvProposals").Arr
 										.join(',');
-								if (user_ids.length > 0) {
+								if (proposal_ids.length > 0) {
 									var properties = {
 										onComplete : function(e) {
-											usersManage.ConfirmDeleteMultiple(
-													user_ids, e);
+											proposalsManage
+													.ConfirmDeleteMultiple(
+															proposal_ids, e);
 										}
 									};
 									csscody
@@ -1594,27 +1262,27 @@ $(function() {
 			$('#btnAddNew').bind("click", function() {
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
-				usersManage.ClearForm();
+				proposalsManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {
 				$('#divUserForm').hide();
 				$('#divUserGrid').show();
-				usersManage.ClearForm();
+				proposalsManage.ClearForm();
 			});
 
 			$('#btnReset').bind("click", function() {
-				usersManage.ClearForm();
+				proposalsManage.ClearForm();
 			});
 
-			$('#btnSaveUser').click(function() {
-				var user_id = $(this).prop("name");
-				if (user_id != '') {
-					editFlag = user_id;
-					usersManage.SaveUser(user_id, false);
+			$('#btnSaveProposal').click(function() {
+				var proposal_id = $(this).prop("name");
+				if (proposal_id != '') {
+					editFlag = proposal_id;
+					proposalsManage.SaveUser(proposal_id, false);
 				} else {
 					editFlag = 0;
-					usersManage.SaveUser(0, true);
+					proposalsManage.SaveUser(0, true);
 				}
 			});
 
@@ -1623,15 +1291,16 @@ $(function() {
 							function() {
 								var errors = '';
 								var attributeName = $(this).val();
-								var user_id = $('#btnSaveUser').prop("name");
-								if (user_id == '') {
-									user_id = 0;
+								var proposal_id = $('#btnSaveProposal').prop(
+										"name");
+								if (proposal_id == '') {
+									proposal_id = 0;
 								}
 								if (!attributeName) {
 									errors += getLocale(gpmsUsersManagement,
 											"Please enter user name");
-								} else if (!usersManage.IsUnique(attributeName,
-										user_id)) {
+								} else if (!proposalsManage.IsUnique(
+										attributeName, proposal_id)) {
 									errors += "'"
 											+ getLocale(gpmsUsersManagement,
 													"Please enter Please enter unique user name")
@@ -1665,174 +1334,23 @@ $(function() {
 							});
 
 			$(".delbutton").click(function() {
-				var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
-				usersManage.DeleteUserById(user_id);
+				var proposal_id = $(this).prop("id").replace(/[^0-9]/gi, '');
+				proposalsManage.DeleteUserById(proposal_id);
 			});
 
-			$("td.required input, td select").focusout(function() {
-				$tdParent = $(this).parent();
-				if ($tdParent.find('.cssClassRequired')) {
-					if ($(this).val() != '' && $(this).val() != '0') {
-						$tdParent.find('.cssClassRequired').hide();
-					} else {
-						$tdParent.find('.cssClassRequired').show();
-					}
-				}
-			});
-
-			$("#ddlAttributeType")
-					.bind(
-							"change",
-							function() {
-								$('.class-text').removeClass('error').next(
-										'span').removeClass('error');
-								$("#default_value_text").prop("class",
-										"sfInputbox");
-								$('#ddlTypeValidation').val('8');
-								$('#iferror').html('');
-								$('#iferror').hide();
-								if ($(this).val() == 1 || $(this).val() == 2
-										|| $(this).val() == 3
-										|| $(this).val() == 7) {
-									$("input[name=chkValuesRequired]").prop(
-											'checked', false).prop("disabled",
-											false);
-								} else {
-									$("input[name=chkValuesRequired]").prop(
-											'checked', false).prop("disabled",
-											true);
-								}
-								$("#dataTable tr:gt(1)").remove();
-								$("#dataTable>tbody tr")
-										.find("input:not(:last)")
-										.each(
-												function(i) {
-													if (this.name == "optionValueId") {
-														if ($(this).val() == '') {
-															$(this).val('0');
-														}
-													} else if (this.name == "value") {
-														$(this).val('');
-													} else if (this.name == "position") {
-														$(this).val('');
-													} else if ($(this)
-															.hasClass(
-																	"class-isdefault")) {
-														this.checked = false;
-													}
-
-												});
-
-								usersManage.ValidationTypeEnableDisable("",
-										true);
-								if ($(this).val() == 10) {
-									$("#dataTable .tddefault").find(
-											'input[name=defaultRdo]').prop(
-											'checked', true);
-								}
-								var attValType = $("#ddlTypeValidation").val();
-								$("#default_value_text")
-										.prop(
-												"class",
-												"sfInputbox "
-														+ usersManage
-																.CreateValidationClass(attValType)
-														+ "");
-								$('#iferror')
-										.html(
-												usersManage
-														.GetValidationTypeErrorMessage(attValType));
-							});
-
-			$("#ddlTypeValidation")
-					.bind(
-							"change",
-							function() {
-								var attValType = $("#ddlTypeValidation").val();
-								$("#default_value_text")
-										.prop(
-												"class",
-												"sfInputbox "
-														+ usersManage
-																.CreateValidationClass(attValType)
-														+ "").val('');
-								$('#iferror').hide();
-								$('#iferror')
-										.html(
-												usersManage
-														.GetValidationTypeErrorMessage(attValType));
-							});
-
-			$("input[type=button].AddOption").click(
-					function() {
-						var checkedState = false;
-						if ($(this).prop("name") == "DeleteOption") {
-							var t = $(this).closest('tr');
-
-							var attrId = t.find("td").find(
-									'input[type="hidden"]').val();
-							if (attrId != '0') {
-								arrAttrValueId += attrId + ',';
-
-							}
-							t.find("td").wrapInner(
-									"<div style='DISPLAY: block'/>").parent()
-									.find("td div").slideUp(300, function() {
-										t.remove();
-									});
-
-						} else if ($(this).prop("name") == "AddMore") {
-							checkedState = $('#dataTable>tbody tr:first').find(
-									'input[type="radio"]').prop("checked");
-							var cloneRow = $(this).closest('tr').clone(true);
-							$(cloneRow).find("input").each(
-									function(i) {
-										if (this.name == "optionValueId") {
-											$(this).val('0');
-										} else if (this.name == "value") {
-											$(this).val('');
-										} else if (this.name == "position") {
-											$(this).val('');
-										} else if (this.name == "Alias") {
-											$(this).val('');
-										} else if ($(this).hasClass(
-												"class-isdefault")) {
-											this.checked = false;
-										} else if ($(this)
-												.hasClass("AddOption")) {
-											$(this)
-													.prop("name",
-															"DeleteOption");
-											$(this).prop("value",
-													"Delete Option");
-										}
-										$(this).parent('td').find('span')
-												.removeClass('error');
-										$(this).removeClass('error');
-									});
-							$(cloneRow).appendTo("#dataTable");
-							$('#dataTable>tbody tr:first').find(
-									'input[type="radio"]').prop("checked",
-									checkedState);
-							$('#dataTable tr:last').hide();
-							$('#dataTable tr:last td').fadeIn('slow');
-							$('#dataTable tr:last').show();
-							$('#dataTable tr:last td').show();
-						}
-					});
-			$("#btnSearchUser").bind("click", function() {
-				usersManage.SearchUsers();
+			$("#btnSearchProposal").bind("click", function() {
+				proposalsManage.SearchUsers();
 				return false;
 			});
 
 			$(
-					'#txtSearchUserName,#ddlSearchCollege,#ddlSearchDepartment,#ddlSearchPositionType,#ddlSearchPositionTitle,#ddlSearchIsActive')
+					'#txtSearchProjectTitle,#txtSearchTotalCostsFrom, #txtSearchTotalCostsTo,#ddlSearchProposalStatus,#ddlSearchProposedBy,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlIsActive')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
-							$("#btnSearchUser").click();
+							$("#btnSearchProposal").click();
 						}
 					});
 		}
 	};
-	usersManage.init();
+	proposalsManage.init();
 });

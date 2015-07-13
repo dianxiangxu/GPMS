@@ -48,3 +48,6 @@ Create Filter to bind GRID with null value
 
 9. Bind Grid of Proposals
 
+10. Added Proposal section classed with Delegation and Signature additional Info classes!!!
+
+
