@@ -3,12 +3,12 @@ package gpms.dao.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class SUITECreateXUsersAndProposals {
-
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
+@RunWith(Suite.class)
+@Suite.SuiteClasses({Create100UsersTest.class, Create100Proposals.class})
+public class SUITECreateXUsersAndProposals 
+{
 
 }
