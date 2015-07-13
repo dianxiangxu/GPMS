@@ -41,3 +41,10 @@ UserProfileDAO////
 			String postitionType, String postitionTitle, String isActive)
 			
 Create Filter to bind GRID with null value
+
+-- Also how to use UserAccount --> is deleted to the find()
+
+8. Lazy=true
+
+9. Bind Grid of Proposals
+
