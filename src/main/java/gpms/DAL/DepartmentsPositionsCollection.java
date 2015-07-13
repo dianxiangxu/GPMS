@@ -12,61 +12,76 @@ public class DepartmentsPositionsCollection {
 
 	public DepartmentsPositionsCollection() {
 		ArrayList<String> tenuredTitles = new ArrayList<String>();
-		tenuredTitles.add("distinguished professor");
-		tenuredTitles.add("professor");
-		tenuredTitles.add("associate professor");
-		tenuredTitles.add("assistant professor");
+		tenuredTitles.add("Distinguished Professor");
+		tenuredTitles.add("Professor");
+		tenuredTitles.add("Associate Professor");
+		tenuredTitles.add("Assistant Professor");
 
 		ArrayList<String> nonTenuredTitles = new ArrayList<String>();
-		nonTenuredTitles.add("research professaor");
-		nonTenuredTitles.add("associate research professor");
-		nonTenuredTitles.add("assistant research profesor");
-		nonTenuredTitles.add("clinical profesor");
-		nonTenuredTitles.add("clinical associate profesor");
-		nonTenuredTitles.add("clinical assistant profesor");
-		nonTenuredTitles.add("visiting profesor");
-		nonTenuredTitles.add("visiting associate profesor");
-		nonTenuredTitles.add("visiting assistant profesor");
+		nonTenuredTitles.add("Research Professor");
+		nonTenuredTitles.add("Associate Research Professor");
+		nonTenuredTitles.add("Assistant Research Professor");
+		nonTenuredTitles.add("Clinical Professor");
+		nonTenuredTitles.add("Clinical Associate Professor");
+		nonTenuredTitles.add("Clinical Assistant Professor");
+		nonTenuredTitles.add("Visiting Professor");
+		nonTenuredTitles.add("Visiting Associate Professor");
+		nonTenuredTitles.add("Visiting Assistant Professor");
 
 		ArrayList<String> teachingFaculty = new ArrayList<String>();
-		teachingFaculty.add("lecturer");
-		teachingFaculty.add("senior lecturer");
-		teachingFaculty.add("adjunct professor");
+		teachingFaculty.add("Lecturer");
+		teachingFaculty.add("Senior Lecturer");
+		teachingFaculty.add("Adjunct Professor");
 
 		ArrayList<String> researchStaff = new ArrayList<String>();
-		researchStaff.add("research associate");
-		researchStaff.add("research sciencetist");
-		researchStaff.add("senior research sciencetist");
+		researchStaff.add("Research Associate");
+		researchStaff.add("Research Scientist");
+		researchStaff.add("Senior Research Scientist");
 
 		ArrayList<String> professionalStaff = new ArrayList<String>();
-		professionalStaff.add("business manager");
-		professionalStaff.add("university research administrator");
-		professionalStaff.add("department administrative assistant");
+		professionalStaff.add("Business Manager");
+		professionalStaff.add("University Research Administrator");
+		professionalStaff.add("Department Administrative Assistant");
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtCS = new Hashtable<String, ArrayList<String>>();
-		TypeTitleHtCS.put("Tenured", tenuredTitles);
-		TypeTitleHtCS.put("Research Staff", researchStaff);
-		TypeTitleHtCS.put("Teaching Faculty", tenuredTitles);
+		TypeTitleHtCS.put("Tenured/tenure-track faculty", tenuredTitles);
+		TypeTitleHtCS
+				.put("Non-tenure-track research faculty", nonTenuredTitles);
+		TypeTitleHtCS.put("Teaching faculty", teachingFaculty);
+		TypeTitleHtCS.put("Research staff", researchStaff);
+		TypeTitleHtCS.put("Professional staff", professionalStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtEE = new Hashtable<String, ArrayList<String>>();
-		TypeTitleHtEE.put("Non-tenure-track", nonTenuredTitles);
-		TypeTitleHtEE.put("Professional Staff", professionalStaff);
-		TypeTitleHtEE.put("Research Staff", researchStaff);
+		TypeTitleHtEE.put("Tenured/tenure-track faculty", tenuredTitles);
+		TypeTitleHtEE
+				.put("Non-tenure-track research faculty", nonTenuredTitles);
+		TypeTitleHtEE.put("Teaching faculty", teachingFaculty);
+		TypeTitleHtEE.put("Research staff", researchStaff);
+		TypeTitleHtEE.put("Professional staff", professionalStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtCE = new Hashtable<String, ArrayList<String>>();
-		TypeTitleHtCE.put("Teaching Faculty", teachingFaculty);
-		TypeTitleHtCE.put("Professional Staff", professionalStaff);
-		TypeTitleHtCE.put("Tenured", tenuredTitles);
+		TypeTitleHtCE.put("Tenured/tenure-track faculty", tenuredTitles);
+		TypeTitleHtCE
+				.put("Non-tenure-track research faculty", nonTenuredTitles);
+		TypeTitleHtCE.put("Teaching faculty", teachingFaculty);
+		TypeTitleHtCE.put("Research staff", researchStaff);
+		TypeTitleHtCE.put("Professional staff", professionalStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtFis = new Hashtable<String, ArrayList<String>>();
-		TypeTitleHtFis.put("Research Staff", researchStaff);
-		TypeTitleHtFis.put("Teaching Faculty", teachingFaculty);
-		TypeTitleHtFis.put("Non-Tenured-Track", nonTenuredTitles);
+		TypeTitleHtFis.put("Tenured/tenure-track faculty", tenuredTitles);
+		TypeTitleHtFis.put("Non-tenure-track research faculty",
+				nonTenuredTitles);
+		TypeTitleHtFis.put("Teaching faculty", teachingFaculty);
+		TypeTitleHtFis.put("Research staff", researchStaff);
+		TypeTitleHtFis.put("Professional staff", professionalStaff);
 
 		Hashtable<String, ArrayList<String>> TypeTitleHtChe = new Hashtable<String, ArrayList<String>>();
-		TypeTitleHtChe.put("Teaching Faculty", teachingFaculty);
-		TypeTitleHtChe.put("Tenured", tenuredTitles);
-		TypeTitleHtChe.put("Non-Tenured-Track", nonTenuredTitles);
+		TypeTitleHtChe.put("Tenured/tenure-track faculty", tenuredTitles);
+		TypeTitleHtChe.put("Non-tenure-track research faculty",
+				nonTenuredTitles);
+		TypeTitleHtChe.put("Teaching faculty", teachingFaculty);
+		TypeTitleHtChe.put("Research staff", researchStaff);
+		TypeTitleHtChe.put("Professional staff", professionalStaff);
 
 		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtEng = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
 		departmentTypeHtEng.put("Computer Science", TypeTitleHtCS);
@@ -75,7 +90,7 @@ public class DepartmentsPositionsCollection {
 
 		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtSci = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
 		departmentTypeHtSci.put("Physics", TypeTitleHtFis);
-		departmentTypeHtSci.put("Chemestry", TypeTitleHtChe);
+		departmentTypeHtSci.put("Chemistry", TypeTitleHtChe);
 
 		ht.put("Engineering", departmentTypeHtEng);
 		ht.put("Science", departmentTypeHtSci);
