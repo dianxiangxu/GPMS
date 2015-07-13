@@ -108,9 +108,9 @@
 <!-- <script type="text/javascript" src="js/core/Session.js"></script> -->
 <script type="text/javascript" src="js/core/encoder.js"></script>
 
-<script type="text/javascript" src="js/modules/UsersManage.js"></script>
+<script type="text/javascript" src="js/modules/ProposalsManage.js"></script>
 <script type="text/javascript"
-	src="js/modules/Language/GPMSUsersManagement.js"></script>
+	src="js/modules/Language/GPMSProposalsManagement.js"></script>
 <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
 <link type="text/css" rel="stylesheet"
@@ -132,7 +132,7 @@
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
 				<img style="border-width: 0px;" alt="Loading..."
-					src="images/ajax-loader.gif" title="Loading..." id="imgPrgress">
+					src="images/ajax-loader.gif" title="Loading..." id="imgProgress">
 				<br> <span id="lblPrgress">Please wait...</span>
 			</div>
 
@@ -673,5 +673,263 @@
 							</div>
 						</div>
 						<!-- Side Bar Ends -->
+						<div class="sfMaincontent">
+							<div style="display: block" class="sfCpanel sfInnerwrapper"
+								id="divBottompanel">
+								<div class="">
+									<div class="sfModulecontent clearfix">
+
+										<script type="text/javascript">
+											//<![CDATA[
+											$(function() {
+												$(".sfLocale")
+														.localize(
+																{
+																	moduleKey : gpmsProposalsManagement
+																});
+											});
+											//]]>
+										</script>
+										<!-- Grid -->
+										<div id="divUserGrid">
+											<div class="cssClassCommonBox Curve">
+												<div class="cssClassHeader">
+													<h1>
+														<span>Manage Proposals</span>
+													</h1>
+													<div class="cssClassHeaderRight">
+														<div class="sfButtonwrapper">
+															<p>
+																<button type="button" id="btnAddNew" class="sfBtn">
+																	<span class="sfLocale icon-addnew">Add New
+																		Proposal</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnDeleteSelected"
+																	class="sfBtn">
+																	<span class="sfLocale icon-delete">Delete All
+																		Selected</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnExportToExcel"
+																	class="sfBtn">
+																	<span class="sfLocale icon-showall">Export to
+																		Excel</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnExportToCSV" class="sfBtn">
+																	<span class="sfLocale icon-showall">Export to
+																		CSV</span>
+																</button>
+															</p>
+
+															<div class="cssClassClear"></div>
+														</div>
+														<div class="cssClassClear"></div>
+													</div>
+													<div class="cssClassClear"></div>
+												</div>
+												<div class="sfGridwrapper">
+													<div class="sfGridWrapperContent">
+														<div class="sfFormwrapper sfTableOption">
+															<table width="100%" cellspacing="0" cellpadding="0"
+																border="0">
+																<tbody>
+																	<tr>
+																		<td><label class="cssClassLabel sfLocale">Project
+																				Title:</label> <input type="text" class="sfTextBoxSmall"
+																			id="txtSearchProjectTitle" /></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Total Costs:</label> <br /> <span class="label sfLocale">
+																				From :</span> <input type="text"
+																			id="txtSearchTotalCostsFrom" class="sfTextBoxSmall"
+																			style="width: 80px !important;" /> <span
+																			class="label sfLocale"> To :</span> <input
+																			type="text" id="txtSearchTotalCostsTo"
+																			class="sfTextBoxSmall"
+																			style="width: 80px !important;" /></td>
+																		</td>
+
+																		<!-- 																																				<td><label class="cssClassLabel sfLocale"> -->
+																		<!-- 																																						Project Type:</label> <select id="ddlProjectType" -->
+																		<!-- 																																					class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																																						<option value="0" class="sfLocale">--All--</option> -->
+																		<!-- 																																				</select></td> -->
+																		<!-- 																																				<td><label class="cssClassLabel sfLocale"> -->
+																		<!-- 																																						Type of Request:</label> <select id="ddlTypeOfRequest" -->
+																		<!-- 																																					class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																																						<option value="0" class="sfLocale">--All--</option> -->
+																		<!-- 																																				</select></td> -->
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Proposal Status:</label> <select
+																			id="ddlSearchProposalStatus" class="sfListmenu"
+																			style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Proposed By:</label> <select id="ddlSearchProposedBy"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+																		<td><label class="cssClassLabel sfLocale">
+																				Received On:</label><br /> <span class="label sfLocale">
+																				From :</span> <input type="text"
+																			id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
+																			style="width: 80px !important;" /> <span
+																			class="label sfLocale"> To :</span> <input
+																			type="text" id="txtSearchReceivedOnTo"
+																			class="sfTextBoxSmall"
+																			style="width: 80px !important;" /></td>
+																		<td><label class="cssClassLabel sfLocale">
+																				Active:</label> <select id="ddlIsActive" class="sfListmenu"
+																			style="width: 85px;">
+																				<option value="" class="sfLocale">--All--</option>
+																				<option value="True" class="sfLocale">True</option>
+																				<option value="False" class="sfLocale">False</option>
+																		</select></td>
+																		<td><br />
+																			<button class="sfBtn" id="btnSearchProposal"
+																				type="button">
+																				<span class="sfLocale icon-search">Search</span>
+																			</button></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<div class="loading">
+															<img id="ajaxLoader" src="" class="sfLocale"
+																alt="loading...." title="loading...." />
+														</div>
+														<div class="log"></div>
+														<table id="gdvProposals" cellspacing="0" cellpadding="0"
+															border="0" width="100%"></table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End of Grid -->
+										<!-- form -->
+										<div id="divUserForm" style="display: none">
+											<div class="cssClassCommonBox Curve">
+												<div class="cssClassHeader">
+													<h1>
+														<span id="lblAttrFormHeading">General Information</span>
+													</h1>
+												</div>
+												<div class="cssClassTabPanelTable">
+													<div id="container-7">
+														<ul>
+															<!-- Need to have each section bind to fragment all together 11 sections -->
+															<li><a href="#fragment-1"> <span
+																	id="ctl19_lblTabTitle1">Proposal Properties</span>
+															</a></li>
+															<li><a href="#fragment-2"> <span
+																	id="ctl19_lblTabTitle2">Frontend Properties</span>
+															</a></li>
+														</ul>
+														<div id="fragment-1">
+															<div class="sfFormwrapper">
+																<h3>
+																	<span>General Information</span>
+																</h3>
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblAttributeName">User Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtAttributeName" />
+																				<span class="cssClassRight"> <img
+																					class="cssClassSuccessImg sfLocale" height="13"
+																					width="18" title="Right" src="" alt="Right" />
+																			</span> <b class="cssClassError sfLocale">Ops! found
+																					something error, must be unique with no spaces</b> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr id="activeTR">
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblActive">Active:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" name="chkActive"
+																				class="cssClassCheckBox" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div id="fragment-2">
+															<div class="sfFormwrapper">
+																<h3>
+																	<span>Frontend Display Settings</span>
+																</h3>
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="ctl19_lblIsEnableEditor">Is Enable
+																					Editor:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkIsEnableEditor" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="sfButtonwrapper">
+													<p>
+														<button type="button" id="btnBack" class="sfBtn">
+															<span class="sfLocale icon-arrow-slim-w">Back</span>
+														</button>
+													</p>
+													<p>
+														<button type="button" id="btnReset" class="sfBtn">
+															<span class="sfLocale icon-refresh">Reset</span>
+														</button>
+													</p>
+													<p>
+														<button type="button" class="delbutton sfBtn">
+															<span class="sfLocale icon-delete">Delete</span>
+														</button>
+													</p>
+													<p>
+														<button type="button" id="btnSaveProposal" class="sfBtn">
+															<span class="sfLocale icon-save">Save</span>
+														</button>
+													</p>
+												</div>
+											</div>
+										</div>
+										<!-- End form -->
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- END sfMaincontent -->
+
+					</div>
+				</div>
+				<!-- END Body Content sfContentwrapper -->
+
+			</div>
+		</div>
+
+		<div title="Confirmation Required" id="dialog">
+			<label id="sf_lblConfirmation"> </label>
+		</div>
+
+	</form>
+	<div style="display: none;" id="ajaxBusy">
+		<img align="absmiddle" src="images/ajax-loader.gif">&nbsp;Working...
+	</div>
 </body>
 </html>

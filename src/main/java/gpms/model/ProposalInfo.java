@@ -10,6 +10,7 @@ import org.mongodb.morphia.annotations.Property;
 public class ProposalInfo {
 
 	private int rowTotal;
+	private String id = new String();
 
 	// Proposal
 	private String proposalNo = new String();
@@ -26,7 +27,7 @@ public class ProposalInfo {
 	private String projectLocation = new String();
 
 	// SponsorAndBudgetInfo
-	private List<String> grantingAgency = new ArrayList<String>();
+	private String grantingAgencies = new String();
 	private double directCosts;
 	private double FACosts;
 	private double totalCosts;
@@ -45,6 +46,14 @@ public class ProposalInfo {
 
 	public void setRowTotal(int rowTotal) {
 		this.rowTotal = rowTotal;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getProposalNo() {
@@ -127,12 +136,12 @@ public class ProposalInfo {
 		this.projectLocation = projectLocation;
 	}
 
-	public List<String> getGrantingAgency() {
-		return grantingAgency;
+	public String getGrantingAgencies() {
+		return grantingAgencies;
 	}
 
-	public void setGrantingAgency(List<String> grantingAgency) {
-		this.grantingAgency = grantingAgency;
+	public void setGrantingAgencies(String grantingAgencies) {
+		this.grantingAgencies = grantingAgencies;
 	}
 
 	public double getDirectCosts() {

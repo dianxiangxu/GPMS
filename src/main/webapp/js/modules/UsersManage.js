@@ -543,8 +543,8 @@ $(function() {
 			this.config.method = "GetUsersList";
 			var offset_ = 1;
 			var current_ = 1;
-			var perpage = ($("#gdvAttributes_pagesize").length > 0) ? $(
-					"#gdvAttributes_pagesize :selected").text() : 10;
+			var perpage = ($("#gdvUsers_pagesize").length > 0) ? $(
+					"#gdvUsers_pagesize :selected").text() : 10;
 			var userBindObj = {
 				UserName : userName,
 				College : college,
@@ -1263,7 +1263,7 @@ $(function() {
 				this.config.ajaxCallMode = 2;
 				this.ajaxCall(this.config);
 			} else {
-				$('#ddlDepartment').find('option:gt(0)').remove();
+				$('#ddlSearchDepartment').find('option:gt(0)').remove();
 			}
 		},
 		BindPositionTypeDropDown : function(collegeName, departmentName) {
@@ -1276,7 +1276,7 @@ $(function() {
 				this.config.ajaxCallMode = 3;
 				this.ajaxCall(this.config);
 			} else {
-				$('#ddlPositionType').find('option:gt(0)').remove();
+				$('#ddlSearchPositionType').find('option:gt(0)').remove();
 			}
 		},
 		BindPositionTitleDropDown : function(collegeName, departmentName,
@@ -1292,25 +1292,26 @@ $(function() {
 				this.config.ajaxCallMode = 4;
 				this.ajaxCall(this.config);
 			} else {
-				$('#ddlPositionTitle').find('option:gt(0)').remove();
+				$('#ddlSearchPositionTitle').find('option:gt(0)').remove();
 			}
 		},
 		SearchUsers : function() {
-			var userName = $.trim($("#txtSearchAttributeName").val());
-			var college = $.trim($('#ddlCollege').val()) == "" ? null : $
-					.trim($('#ddlCollege').val()) == "0" ? null : $.trim($(
-					'#ddlCollege').val());
-			var department = $.trim($('#ddlDepartment').val()) == "" ? null : $
-					.trim($('#ddlDepartment').val()) == "0" ? null : $.trim($(
-					'#ddlDepartment').val());
-			var postitionType = $.trim($('#ddlPositionType').val()) == "" ? null
-					: $.trim($('#ddlPositionType').val()) == "0" ? null : $
-							.trim($('#ddlPositionType').val());
-			var postitionTitle = $.trim($('#ddlPositionTitle').val()) == "" ? null
-					: $.trim($('#ddlPositionTitle').val()) == "0" ? null : $
-							.trim($('#ddlPositionTitle').val());
-			var isActive = $.trim($("#ddlIsActive").val()) == "" ? null : $
-					.trim($("#ddlIsActive").val()) == "True" ? true : false;
+			var userName = $.trim($("#txtSearchUserName").val());
+			var college = $.trim($('#ddlSearchCollege').val()) == "" ? null : $
+					.trim($('#ddlSearchCollege').val()) == "0" ? null : $
+					.trim($('#ddlSearchCollege').val());
+			var department = $.trim($('#ddlSearchDepartment').val()) == "" ? null
+					: $.trim($('#ddlSearchDepartment').val()) == "0" ? null : $
+							.trim($('#ddlSearchDepartment').val());
+			var postitionType = $.trim($('#ddlSearchPositionType').val()) == "" ? null
+					: $.trim($('#ddlSearchPositionType').val()) == "0" ? null
+							: $.trim($('#ddlSearchPositionType').val());
+			var postitionTitle = $.trim($('#ddlSearchPositionTitle').val()) == "" ? null
+					: $.trim($('#ddlSearchPositionTitle').val()) == "0" ? null
+							: $.trim($('#ddlSearchPositionTitle').val());
+			var isActive = $.trim($("#ddlSearchIsActive").val()) == "" ? null
+					: $.trim($("#ddlSearchIsActive").val()) == "True" ? true
+							: false;
 			if (userName.length < 1) {
 				userName = null;
 			}
@@ -1322,44 +1323,54 @@ $(function() {
 			case 0:
 				break;
 			case 1: // For College Dropdown Binding
-				$('#ddlCollege').get(0).options.length = 1;
-				$('#ddlDepartment').get(0).options.length = 1;
-				$('#ddlPositionType').get(0).options.length = 1;
-				$('#ddlPositionTitle').get(0).options.length = 1;
-				$.each(msg,
-						function(index, item) {
-							$("#ddlCollege").get(0).options[$("#ddlCollege")
-									.get(0).options.length] = new Option(item,
-									item);
-						});
-				break
-			case 2:// For Department Dropdown Binding
-				$('#ddlDepartment').get(0).options.length = 1;
-				$('#ddlPositionType').get(0).options.length = 1;
-				$('#ddlPositionTitle').get(0).options.length = 1;
-				$.each(msg, function(index, item) {
-					$("#ddlDepartment").get(0).options[$("#ddlDepartment").get(
-							0).options.length] = new Option(item, item);
-				});
-				break;
-
-			case 3: // For College Position Type Binding
-				$('#ddlPositionType').get(0).options.length = 1;
-				$('#ddlPositionTitle').get(0).options.length = 1;
-				$.each(msg, function(index, item) {
-					$("#ddlPositionType").get(0).options[$("#ddlPositionType")
-							.get(0).options.length] = new Option(item, item);
-				});
-				break;
-
-			case 4: // For College Position Title Binding
-				$('#ddlPositionTitle').get(0).options.length = 1;
+				$('#ddlSearchCollege').get(0).options.length = 1;
+				$('#ddlSearchDepartment').get(0).options.length = 1;
+				$('#ddlSearchPositionType').get(0).options.length = 1;
+				$('#ddlSearchPositionTitle').get(0).options.length = 1;
 				$
 						.each(
 								msg,
 								function(index, item) {
-									$("#ddlPositionTitle").get(0).options[$(
-											"#ddlPositionTitle").get(0).options.length] = new Option(
+									$("#ddlSearchCollege").get(0).options[$(
+											"#ddlSearchCollege").get(0).options.length] = new Option(
+											item, item);
+								});
+				break
+			case 2:// For Department Dropdown Binding
+				$('#ddlSearchDepartment').get(0).options.length = 1;
+				$('#ddlSearchPositionType').get(0).options.length = 1;
+				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$("#ddlSearchDepartment").get(0).options[$(
+											"#ddlSearchDepartment").get(0).options.length] = new Option(
+											item, item);
+								});
+				break;
+
+			case 3: // For College Position Type Binding
+				$('#ddlSearchPositionType').get(0).options.length = 1;
+				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$("#ddlSearchPositionType").get(0).options[$(
+											"#ddlSearchPositionType").get(0).options.length] = new Option(
+											item, item);
+								});
+				break;
+
+			case 4: // For College Position Title Binding
+				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$("#ddlSearchPositionTitle").get(0).options[$(
+											"#ddlSearchPositionTitle").get(0).options.length] = new Option(
 											item, item);
 								});
 				break;
@@ -1506,31 +1517,39 @@ $(function() {
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
 			usersManage.BindCollegeDropDown();
-			// usersManage.BindDepartmentDropDown($("#ddlCollege").val());
-			// usersManage.BindPositionTypeDropDown($("#ddlCollege").val(), $(
-			// "#ddlDepartment").val());
-			// usersManage.BindPositionTitleDropDown($("#ddlCollege").val(), $(
-			// "#ddlDepartment").val(), $("#ddlPositionType").val());
+			// usersManage.BindDepartmentDropDown($("#ddlSearchCollege").val());
+			// usersManage.BindPositionTypeDropDown($("#ddlSearchCollege").val(),
+			// $(
+			// "#ddlSearchDepartment").val());
+			// usersManage.BindPositionTitleDropDown($("#ddlSearchCollege").val(),
+			// $(
+			// "#ddlSearchDepartment").val(),
+			// $("#ddlSearchPositionType").val());
 			// usersManage.BindAttributesValidationType();
 			// usersManage.BindAttributesItemType();
 
-			$("#ddlCollege").bind("change", function() {
-				usersManage.BindDepartmentDropDown($("#ddlCollege").val());
-			});
-
-			$("#ddlDepartment").bind(
+			$("#ddlSearchCollege").bind(
 					"change",
 					function() {
-						usersManage.BindPositionTypeDropDown($("#ddlCollege")
-								.val(), $("#ddlDepartment").val());
+						usersManage.BindDepartmentDropDown($(
+								"#ddlSearchCollege").val());
 					});
 
-			$("#ddlPositionType").bind(
+			$("#ddlSearchDepartment").bind(
 					"change",
 					function() {
-						usersManage.BindPositionTitleDropDown($("#ddlCollege")
-								.val(), $("#ddlDepartment").val(), $(
-								"#ddlPositionType").val());
+						usersManage.BindPositionTypeDropDown($(
+								"#ddlSearchCollege").val(), $(
+								"#ddlSearchDepartment").val());
+					});
+
+			$("#ddlSearchPositionType").bind(
+					"change",
+					function() {
+						usersManage.BindPositionTitleDropDown($(
+								"#ddlSearchCollege").val(), $(
+								"#ddlSearchDepartment").val(), $(
+								"#ddlSearchPositionType").val());
 					});
 
 			$('#btnDeleteSelected')
@@ -1807,7 +1826,7 @@ $(function() {
 			});
 
 			$(
-					'#txtSearchAttributeName,#ddlCollege,#ddlDepartment,#ddlPositionType,#ddlPositionTitle,#ddlIsActive')
+					'#txtSearchUserName,#ddlSearchCollege,#ddlSearchDepartment,#ddlSearchPositionType,#ddlSearchPositionTitle,#ddlSearchIsActive')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
 							$("#btnSearchUser").click();
