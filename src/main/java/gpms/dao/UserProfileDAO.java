@@ -596,4 +596,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		ds.delete(ds.createQuery(UserProfile.class));
 	}
+	
+	//UserName, College, Department, Position Type, Position Title, 
 }
