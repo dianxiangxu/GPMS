@@ -30,4 +30,14 @@ Remove by Object also works fine why we need IndexOf(Object)
 		
 5. addProposalKey How this is used and where?
 
+UserProfileDAO////
+@Property("Keychain")
+	private List<String> proposalKeys = new ArrayList<String>();
+
 6. Why we need this : irap.setCollege(up.getDetails(0).getCollege()); index getDetails?
+
+7. findUsersForGrid(int offset, int limit,
+			String userName, String college, String department,
+			String postitionType, String postitionTitle, String isActive)
+			
+Create Filter to bind GRID with null value
