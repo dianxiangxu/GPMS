@@ -1,7 +1,11 @@
 package gpms.DAL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
 
 public class DepartmentsPositionsCollection {
 	private static final Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> ht = new Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>>();
@@ -112,6 +116,23 @@ public class DepartmentsPositionsCollection {
 	// }
 	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getAvailableDepartmentsAndPositions() {
 		return ht;
+	}
+
+	public List<String> getCollegeKeys() {
+		return Collections.list(ht.keys());
+	}
+
+	public List<String> getDepartmentKeys(String college) {
+		return Collections.list(ht.get(college).keys());
+	}
+
+	public List<String> getPositionType(String college, String department) {
+		return Collections.list(ht.get(college).get(department).keys());
+	}
+
+	public List<String> getPositionTitle(String college, String department,
+			String positionType) {
+		return ht.get(college).get(department).get(positionType);
 	}
 
 }

@@ -7,6 +7,7 @@ import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
 import gpms.model.InvestigatorInfo;
+import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
@@ -106,16 +107,16 @@ public class JUnitCreateTwoUsersTest {
 		cellPhone = "208-649-2568";
 
 		// Let's add the numbers in.
-		newUserProfile.addOfficeNumber(workPhone);
-		newUserProfile.addHomeNumber(homePhone);
-		newUserProfile.addMobileNumber(cellPhone);
+		newUserProfile.getOfficeNumbers().add(workPhone);
+		newUserProfile.getHomeNumbers().add(homePhone);
+		newUserProfile.getMobileNumbers().add(cellPhone);
 
 		// Rico also has an email address.
 		String email = "superfly@yahoo.com";
-		newUserProfile.addPersonalEmail(email);
+		newUserProfile.getPersonalEmails().add(email);
 		// Let's add a work one
 		email = "officialsoundingemail@superserious.net";
-		newUserProfile.addWorkEmail(email);
+		newUserProfile.getWorkEmails().add(email);
 
 		// We need his living address too.
 		String street, city, state, zipcode, country;
@@ -149,9 +150,8 @@ public class JUnitCreateTwoUsersTest {
 		String positionType, positionTitle, department, college;
 		// Enum may be supported in the future.
 		// But for now let's set these deets
-
-		positionType = "Tenured Faculty";
 		positionTitle = "Research Professor";
+		positionType = "Tenured Faculty";
 		department = "Headquarters Personnel";
 		college = "College of Krypton Studies";
 
@@ -164,8 +164,8 @@ public class JUnitCreateTwoUsersTest {
 
 		// But wait, he may have multiple details!
 		PositionDetails moreDetails = new PositionDetails();
-		positionType = "Teaching Faculty";
 		positionTitle = "Senior Lecturer";
+		positionType = "Teaching Faculty";
 		department = "Justice Leage";
 		college = "Hogwarts";
 		// Let's add this to details.
@@ -176,10 +176,10 @@ public class JUnitCreateTwoUsersTest {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile.addAddress(newAddress);
-		newUserProfile.addAddress(newAddress2);
-		newUserProfile.addDetails(newDetails);
-		newUserProfile.addDetails(moreDetails);
+		newUserProfile.getAddresses().add(newAddress);
+		newUserProfile.getAddresses().add(newAddress2);
+		newUserProfile.getDetails().add(newDetails);
+		newUserProfile.getDetails().add(moreDetails);
 		newUserProfile.setUserId(activeLog);
 
 		// Here we finalize our data entry and add it through our dao.
@@ -191,13 +191,20 @@ public class JUnitCreateTwoUsersTest {
 
 		// We need to create a proposal and we need to create an investigator
 		// for this proposal.
+		Proposal proposal1 = new Proposal();
+		proposal1.setProposalNo("10001");
 
 		InvestigatorInfo firstInv = new InvestigatorInfo();
-		Proposal proposal1 = new Proposal();
 
-//		firstInv.setPi(newUserProfile);
+		InvestigatorRefAndPosition pi = new InvestigatorRefAndPosition();
+		pi.setUserRef(newUserProfile);
+		pi.setCollege("College of Krypton Studies");
+		pi.setDepartment("Headquarters Personnel");
+		pi.setPositionType("Tenured Faculty");
+		pi.setPositionTitle("Research Professor");
 
-		proposal1.setProposalNo("10001");
+		firstInv.setPi(pi);
+
 		proposal1.setInvestigatorInfo(firstInv);
 
 		ProposalDAO newProposalDAO = new ProposalDAO(mongoClient, morphia,
@@ -248,15 +255,15 @@ public class JUnitCreateTwoUsersTest {
 		cellPhone = "703-866-0500";
 
 		// Let's add the numbers in.
-		newUserProfile2.addOfficeNumber(workPhone);
-		newUserProfile2.addHomeNumber(homePhone);
-		newUserProfile2.addMobileNumber(cellPhone);
+		newUserProfile2.getOfficeNumbers().add(workPhone);
+		newUserProfile2.getHomeNumbers().add(homePhone);
+		newUserProfile2.getMobileNumbers().add(cellPhone);
 
 		email = "greatestguy@stargatebase.gov";
-		newUserProfile2.addPersonalEmail(email);
+		newUserProfile2.getPersonalEmails().add(email);
 		// Let's add a work one
 		email = "yoursuperior@stargatecommand.org";
-		newUserProfile2.addWorkEmail(email);
+		newUserProfile2.getWorkEmails().add(email);
 
 		// We need his living address too.
 
@@ -278,9 +285,8 @@ public class JUnitCreateTwoUsersTest {
 
 		// Enum may be supported in the future.
 		// But for now let's set these deets
-
-		positionType = "Science Personnel";
 		positionTitle = "Senior Science Commander";
+		positionType = "Science Personnel";
 		department = "Stargate Command";
 		college = "Super Smart University";
 
@@ -293,8 +299,8 @@ public class JUnitCreateTwoUsersTest {
 
 		// But wait, he may have multiple details!
 		moreDetails = new PositionDetails();
-		positionType = "Master of Dungeons";
 		positionTitle = "Dungeon Master";
+		positionType = "Master of Dungeons";
 		department = "Adventure";
 		college = "Kickin Butt";
 		// Let's add this to details.
@@ -305,9 +311,9 @@ public class JUnitCreateTwoUsersTest {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile2.addAddress(newAddress);
-		newUserProfile2.addDetails(newDetails);
-		newUserProfile2.addDetails(moreDetails);
+		newUserProfile2.getAddresses().add(newAddress);
+		newUserProfile2.getDetails().add(newDetails);
+		newUserProfile2.getDetails().add(moreDetails);
 
 		// Here we finalize our data entry and add it through our dao.
 		newUserAccountDAO.save(newUserAccount2);
@@ -319,8 +325,8 @@ public class JUnitCreateTwoUsersTest {
 		InvestigatorInfo secondInv = new InvestigatorInfo();
 		Proposal proposal2 = new Proposal();
 
-//		secondInv.setPi(newUserProfile2);
-//		secondInv.addCo_pi(newUserProfile);
+		// secondInv.setPi(newUserProfile2);
+		// secondInv.addCo_pi(newUserProfile);
 
 		proposal2.setProposalNo("10002");
 		proposal2.setInvestigatorInfo(secondInv);

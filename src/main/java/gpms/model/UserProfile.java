@@ -50,8 +50,8 @@ public class UserProfile extends BaseEntity {
 	@Property("home number")
 	private List<String> homeNumbers = new ArrayList<String>();
 
-	@Embedded("address")
-	private List<Address> address = new ArrayList<Address>();
+	@Embedded("addresses")
+	private List<Address> addresses = new ArrayList<Address>();
 
 	@Property("work email")
 	// @Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique =
@@ -65,7 +65,7 @@ public class UserProfile extends BaseEntity {
 
 	@Property("Keychain")
 	private List<String> proposalKeys = new ArrayList<String>();
-	
+
 	@Reference(value = "user id"/* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
 
@@ -77,6 +77,125 @@ public class UserProfile extends BaseEntity {
 	 */
 	public UserProfile() {
 
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public List<PositionDetails> getDetails() {
+		return details;
+	}
+
+	/**
+	 * Will return a PositionDetails object from the list, for manipulation
+	 * 
+	 * @param index
+	 *            index to find
+	 * @return PositionDetails object to return
+	 */
+	public PositionDetails getDetails(int index) {
+		return details.get(index);
+	}
+
+	public void setDetails(List<PositionDetails> details) {
+		this.details = details;
+	}
+
+	public List<String> getOfficeNumbers() {
+		return officeNumbers;
+	}
+
+	public void setOfficeNumbers(List<String> officeNumbers) {
+		this.officeNumbers = officeNumbers;
+	}
+
+	public List<String> getMobileNumbers() {
+		return mobileNumbers;
+	}
+
+	public void setMobileNumbers(List<String> mobileNumbers) {
+		this.mobileNumbers = mobileNumbers;
+	}
+
+	public List<String> getHomeNumbers() {
+		return homeNumbers;
+	}
+
+	public void setHomeNumbers(List<String> homeNumbers) {
+		this.homeNumbers = homeNumbers;
+	}
+
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public List<String> getWorkEmails() {
+		return workEmails;
+	}
+
+	public void setWorkEmails(List<String> workEmails) {
+		this.workEmails = workEmails;
+	}
+
+	public List<String> getPersonalEmails() {
+		return personalEmails;
+	}
+
+	public void setPersonalEmails(List<String> personalEmails) {
+		this.personalEmails = personalEmails;
+	}
+
+	public List<String> getProposalKeys() {
+		return proposalKeys;
+	}
+
+	public void setProposalKeys(List<String> proposalKeys) {
+		this.proposalKeys = proposalKeys;
+	}
+
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public void setUserId(UserAccount newUserAccount) {
+		userAccount = newUserAccount;
 	}
 
 	/**
@@ -126,416 +245,6 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-
-	}
-
-	/**
-	 * 
-	 * @return First name of the user
-	 */
-	public String getFirstName() {
-		return firstName;
-
-	}
-
-	/**
-	 * Changes the first name of the user
-	 * 
-	 * @param newName
-	 *            the new first name
-	 * 
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * 
-	 * @return the middle name of the user
-	 */
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	/**
-	 * Changes the middle name of the user
-	 * 
-	 * @param newName
-	 *            the new middle name
-	 */
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	/**
-	 * 
-	 * @return the last name of the user
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * Changes the last name of the user
-	 * 
-	 * @param newName
-	 *            the new last name
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * 
-	 * @return the array list of details
-	 */
-	public List<PositionDetails> getDetailsList() {
-		return details;
-	}
-
-	/**
-	 * Will return a PositionDetails object from the list, for manipulation
-	 * 
-	 * @param index
-	 *            index to find
-	 * @return PositionDetails object to return
-	 */
-	public PositionDetails getDetails(int index) {
-		return details.get(index);
-	}
-
-	/**
-	 * Add a collection of position details to the existing array list
-	 * 
-	 * @param positionDetails
-	 */
-	public void addDetails(PositionDetails positionDetails) {
-		details.add(positionDetails);
-	}
-
-	public void deleteDetails(PositionDetails positionDetails) {
-		int deleteInd = details.indexOf(positionDetails);
-		details.remove(deleteInd);
-	}
-
-	/**
-	 * Adds a new office number to the arraylist
-	 * 
-	 * @param officeNumber
-	 *            Office Number to be added
-	 */
-	public void addOfficeNumber(String officeNumber) {
-		officeNumbers.add(officeNumber);
-	}
-
-	/**
-	 * Adds a new office number with an EXT: to the arraylist
-	 * 
-	 * @param officeNumber
-	 *            Office Number to be added
-	 */
-	public void addOfficeNumber(String officeNumber, String extention) {
-		officeNumber = officeNumber + " ext: " + extention;
-		officeNumbers.add(officeNumber);
-	}
-
-	/**
-	 * Will delete the number from a list
-	 * 
-	 * @param deleteNumber
-	 *            the number to be deleted
-	 */
-	public void deleteOfficeNumber(String deleteNumber) {
-		deleteNumber(officeNumbers, deleteNumber);
-	}
-
-	/**
-	 * 
-	 * @return the list of office numbers
-	 */
-	public List<String> getOfficeNumbers() {
-		return officeNumbers;
-	}
-
-	/**
-	 * Used for changing the mobile number
-	 * 
-	 * @param oldNumber
-	 *            number to change
-	 * @param newNumber
-	 *            number to become
-	 */
-	public void setOfficeNumber(String oldNumber, String newNumber) {
-		setNumber(officeNumbers, oldNumber, newNumber);
-	}
-
-	/**
-	 * Adds a new mobile number to the arraylist
-	 * 
-	 * @param mobileNumber
-	 *            mobile Number to be added
-	 */
-	public void addMobileNumber(String mobileNumber) {
-		mobileNumbers.add(mobileNumber);
-	}
-
-	/**
-	 * 
-	 * @return the list of office numbers
-	 */
-	public List<String> getMobileNumbers() {
-		return mobileNumbers;
-	}
-
-	/**
-	 * Used for changing the mobile number
-	 * 
-	 * @param oldNumber
-	 *            number to change
-	 * @param newNumber
-	 *            number to become
-	 */
-	public void setMobileNumber(String oldNumber, String newNumber) {
-		setNumber(mobileNumbers, oldNumber, newNumber);
-	}
-
-	/**
-	 * Will delete the number from a list
-	 * 
-	 * @param deleteNumber
-	 *            the number to be deleted
-	 */
-	public void deleteMobileNumber(String deleteNumber) {
-		deleteNumber(mobileNumbers, deleteNumber);
-	}
-
-	/**
-	 * Adds a new home number to the arraylist
-	 * 
-	 * @param homeNumber
-	 *            Home Number to be added
-	 */
-	public void addHomeNumber(String homeNumber) {
-		homeNumbers.add(homeNumber);
-	}
-
-	/**
-	 * Used for changing the home number
-	 * 
-	 * @param oldNumber
-	 *            number to change
-	 * @param newNumber
-	 *            number to become
-	 */
-	public void setHomeNumber(String oldNumber, String newNumber) {
-		setNumber(homeNumbers, oldNumber, newNumber);
-	}
-
-	/**
-	 * Will delete the number from a list
-	 * 
-	 * @param deleteNumber
-	 *            the number to be deleted
-	 */
-	public void deleteHomeNumber(String deleteNumber) {
-		deleteNumber(homeNumbers, deleteNumber);
-	}
-
-	/**
-	 * 
-	 * @return the list of home numbers
-	 */
-	public List<String> getHomeNumbers() {
-		return homeNumbers;
-	}
-
-	/**
-	 * 
-	 * Change an existing number to a new one
-	 * 
-	 * @param numberString
-	 *            the list of either office, home, mobile, etc
-	 * @param newNumber
-	 *            number to change the old number to
-	 */
-	private void setNumber(List<String> numberString, String oldNumber,
-			String newNumber) {
-		int index = numberString.indexOf(oldNumber);
-		numberString.set(index, newNumber);
-	}
-
-	/**
-	 * 
-	 * Will delete a number from a list
-	 * 
-	 * @param numberString
-	 *            number list to delete from
-	 * @param deleteNumber
-	 *            number to delete
-	 */
-	private void deleteNumber(List<String> numberString, String deleteNumber) {
-		int index = numberString.indexOf(deleteNumber);
-		System.out.println("Inside of delete number method: ");
-		System.out.println("The number to delete is " + deleteNumber
-				+ " from list ");
-		System.out.println("List before operation: " + numberString.toString());
-		numberString.remove(index);
-		System.out.println("List after operation: " + numberString.toString());
-	}
-
-	public List<PositionDetails> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<PositionDetails> details) {
-		this.details = details;
-	}
-
-	/**
-	 * Returns the address for use
-	 * 
-	 * @return the address object
-	 */
-
-	public List<Address> getAddress() {
-		return address;
-	}
-
-	/**
-	 * Set the address for the user
-	 * 
-	 * @param setAddress
-	 *            address list to add
-	 */
-	public void setAddress(List<Address> address) {
-		this.address = address;
-	}
-
-	public void addAddress(Address address) {
-		this.address.add(address);
-	}
-
-	public void setOfficeNumbers(List<String> officeNumbers) {
-		this.officeNumbers = officeNumbers;
-	}
-
-	public void setMobileNumbers(List<String> mobileNumbers) {
-		this.mobileNumbers = mobileNumbers;
-	}
-
-	public void setHomeNumbers(List<String> homeNumbers) {
-		this.homeNumbers = homeNumbers;
-	}
-
-	public void setWorkEmails(List<String> workEmails) {
-		this.workEmails = workEmails;
-	}
-
-	public void setPersonalEmails(List<String> personalEmails) {
-		this.personalEmails = personalEmails;
-	}
-
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	/**
-	 * 
-	 * @return the array list of email addresses
-	 */
-
-	public List<String> getWorkEmails() {
-		return workEmails;
-	}
-
-	public List<String> getPersonalEmails() {
-		return personalEmails;
-	}
-
-	/**
-	 * Add an email string to the email array list
-	 * 
-	 * @param addEmail
-	 *            the new email to add
-	 */
-	public void addWorkEmail(String addEmail) {
-		workEmails.add(addEmail);
-	}
-
-	public void setWorkEmail(String oldEmail, String newEmail) {
-		int index = workEmails.indexOf(oldEmail);
-		workEmails.set(index, newEmail);
-	}
-
-	public void deleteWorkEmail(String email) {
-		deleteEmail(workEmails, email);
-	}
-
-	public void deletePersonalEmail(String email) {
-		deleteEmail(personalEmails, email);
-	}
-
-	public void setPersonalEmail(String oldEmail, String newEmail) {
-		int index = personalEmails.indexOf(oldEmail);
-		personalEmails.set(index, newEmail);
-	}
-
-	public void addPersonalEmail(String addEmail) {
-		personalEmails.add(addEmail);
-	}
-
-	private void deleteEmail(List<String> emailString, String deleteEmail) {
-		int index = emailString.indexOf(deleteEmail);
-		emailString.remove(index);
-	}
-
-	public UserAccount getUserAccount() {
-		return userAccount;
-	}
-
-	public void setUserId(UserAccount newUserAccount) {
-		userAccount = newUserAccount;
-	}
-
-	/**
-	 * Add a proposal key to the key chain
-	 * @param proposalKey the key to be added
-	 */
-	public void addProposalKey(String proposalKey)
-	{
-		proposalKeys.add(proposalKey);
-	}
-
-	/**
-	 * Delete a proposal key from the list
-	 * @param proposalKey the key to be deleted
-	 */
-	public void deleteProposalKey(String proposalKey)
-	{
-		proposalKeys.remove(proposalKey);
-	}
-
-	/**
-	 * 
-	 * @return the list of proposal keys
-	 */
-	public List<String> getProposalKeys()
-	{
-		return proposalKeys;
-	}
-
-
-
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public boolean getIsDeleted() {
-		return isDeleted;
 	}
 
 	/**
@@ -560,7 +269,7 @@ public class UserProfile extends BaseEntity {
 				&& this.officeNumbers.equals(up.officeNumbers)
 				&& this.mobileNumbers.equals(up.mobileNumbers)
 				&& this.homeNumbers.equals(up.homeNumbers)
-				&& this.address.equals(up.address)
+				&& this.addresses.equals(up.addresses)
 				&& this.workEmails.equals(up.workEmails)
 				&& this.personalEmails.equals(up.personalEmails)
 				&& this.userAccount.equals(up.userAccount);
@@ -568,39 +277,52 @@ public class UserProfile extends BaseEntity {
 
 	@Override
 	public UserProfile clone() {
-		UserProfile copy = new UserProfile(this.firstName, this.middleName,
-				this.lastName);
+		UserProfile copy = new UserProfile();
+		copy.setFirstName(firstName);
+		copy.setMiddleName(middleName);
+		copy.setLastName(lastName);
+
 		for (PositionDetails pd : this.details) {
-			copy.addDetails(pd.clone());
+			copy.getDetails().add(pd.clone());
 		}
 		for (String phone : this.officeNumbers) {
-			copy.addOfficeNumber(phone);
+			copy.getOfficeNumbers().add(phone);
 		}
 		for (String phone : this.mobileNumbers) {
-			copy.addMobileNumber(phone);
+			copy.getMobileNumbers().add(phone);
 		}
 		for (String phone : this.homeNumbers) {
-			copy.addHomeNumber(phone);
+			copy.getHomeNumbers().add(phone);
 		}
 		for (String email : this.workEmails) {
-			copy.addWorkEmail(email);
+			copy.getWorkEmails().add(email);
 		}
 		for (String email : this.personalEmails) {
-			copy.addPersonalEmail(email);
+			copy.getPersonalEmails().add(email);
 		}
 
-		for (Address address : this.address) {
-			copy.addAddress(address);
+		for (Address address : this.addresses) {
+			copy.getAddresses().add(address);
 		}
 
 		copy.setUserId(this.userAccount.clone());
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
-		copy.setIsDeleted(this.getIsDeleted());
+		copy.setDeleted(this.isDeleted());
 		for (AuditLog entry : this.getAuditLog()) {
 			copy.addEntryToAuditLog(entry);
 		}
 
 		return copy;
+	}
+
+	/**
+	 * Delete a proposal key from the list
+	 * 
+	 * @param proposalKey
+	 *            the key to be deleted
+	 */
+	public void deleteProposalKey(String proposalKey) {
+		proposalKeys.remove(proposalKey);
 	}
 }

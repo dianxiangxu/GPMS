@@ -132,7 +132,7 @@ public class NewUserRegistration
 		{
 			System.out.println("Please type an office number to add:");
 			number = keyb.nextLine();
-			newUserProfile.addOfficeNumber(number);
+			newUserProfile.getOfficeNumbers().add(number);
 			System.out.println("Number " + number + " added.\n  If you would like to add another number type y"
 					+ ", to continue type anything else.");
 			String prompt = keyb.nextLine();
@@ -149,7 +149,7 @@ public class NewUserRegistration
 		{
 			System.out.println("Please type a mobile number to add:");
 			number = keyb.nextLine();
-			newUserProfile.addMobileNumber(number);
+			newUserProfile.getMobileNumbers().add(number);
 			System.out.println("Number " + number + " added.\n  If you would like to add another number type y"
 					+ ", to continue type anything else.");
 			String prompt = keyb.nextLine();
@@ -166,7 +166,7 @@ public class NewUserRegistration
 		{
 			System.out.println("Please type a home number to add:");
 			number = keyb.nextLine();
-			newUserProfile.addHomeNumber(number);
+			newUserProfile.getHomeNumbers().add(number);
 			System.out.println("Number " + number + " added.\n  If you would like to add another number type y"
 					+ ", to continue type anything else.");
 			String prompt = keyb.nextLine();
@@ -180,10 +180,10 @@ public class NewUserRegistration
 		
 		System.out.println("Type in your work email address:");
 		String email = keyb.nextLine();
-		newUserProfile.addWorkEmail(email);
+		newUserProfile.getWorkEmails().add(email);
 		System.out.println("Type in your personal email address:");
 		email = keyb.nextLine();
-		newUserProfile.addPersonalEmail(email);
+		newUserProfile.getPersonalEmails().add(email);
 		
 		newUserProfile.setUserId(newUserAccount);
 		activeLog.save(newUserAccount);

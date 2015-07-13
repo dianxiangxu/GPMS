@@ -143,7 +143,7 @@ public class Proposal extends BaseEntity {
 				}
 			}
 		}
-		investigatorInfo.getPi().getUserRef().addProposalKey(proposalKey.toString());
+		investigatorInfo.getPi().getUserRef().getProposalKeys().add(proposalKey.toString());
 		// Scans the list of co pi's and adds the proposal key if they don't
 		// have it already
 		if (investigatorInfo.getCo_pi().size() > 0) 
@@ -152,7 +152,7 @@ public class Proposal extends BaseEntity {
 			{
 				if (!investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().contains(proposalKey.toString()))
 				{
-					investigatorInfo.getCo_pi().get(a).getUserRef().addProposalKey(proposalKey.toString());
+					investigatorInfo.getCo_pi().get(a).getUserRef().getProposalKeys().add(proposalKey.toString());
 				}
 			}
 		}
@@ -164,7 +164,7 @@ public class Proposal extends BaseEntity {
 			{
 				if (!investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().contains(proposalKey.toString())) 
 				{
-					investigatorInfo.getSeniorPersonnel().get(b).getUserRef().addProposalKey(proposalKey.toString());
+					investigatorInfo.getSeniorPersonnel().get(b).getUserRef().getProposalKeys().add(proposalKey.toString());
 				}
 			}
 		}

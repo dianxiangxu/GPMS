@@ -60,12 +60,12 @@ public class UserAccount extends BaseEntity {
 		this.password = password;
 	}
 
-	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 
-	public boolean getIsDeleted() {
-		return isDeleted;
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public Date getAddedOn() {
@@ -74,10 +74,6 @@ public class UserAccount extends BaseEntity {
 
 	public void setAddedOn(Date addedOn) {
 		this.addedOn = addedOn;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
 	}
 
 	@Override
@@ -96,7 +92,7 @@ public class UserAccount extends BaseEntity {
 		UserAccount copy = new UserAccount(this.userName, this.password);
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
-		copy.setIsDeleted(this.getIsDeleted());
+		copy.setDeleted(this.isDeleted());
 		for (AuditLog entry : this.getAuditLog()) {
 			copy.addEntryToAuditLog(entry);
 		}

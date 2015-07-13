@@ -1,5 +1,6 @@
 package gpms.rest;
 
+import gpms.DAL.DepartmentsPositionsCollection;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -12,6 +13,8 @@ import gpms.model.UserProfile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,7 +23,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.JsonGenerationException;
@@ -91,15 +93,15 @@ public class UserService {
 	@Path("/GetUsersList")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(MediaType.APPLICATION_JSON)
-	public String produceUsersJSON(String message)
+	public ArrayList<UserInfo> produceUsersJSON(String message)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-		String response = new String();
+		// String response = new String();
 
 		users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
-		response = JSONTansformer.ConvertToJSON(users);
+		// response = JSONTansformer.ConvertToJSON(users);
 
-		return response;
+		return users;
 	}
 
 	@POST
@@ -185,5 +187,87 @@ public class UserService {
 	// ArrayList<String>>>> collegeKey = dtc
 	// .getAvailableDepartmentsAndPositions();
 	// Set<String> keys = collegeKey.keySet();
+	@POST
+	@Path("/GetPositionDetailsHash")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> producePositionDetailsHash()
+			throws JsonProcessingException, IOException {
+		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
+		return dpc.getAvailableDepartmentsAndPositions();
+	}
 
+	@POST
+	@Path("/GetCollegeList")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<String> produceCollegeList() throws JsonProcessingException,
+			IOException {
+		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
+		return dpc.getCollegeKeys();
+	}
+
+	@POST
+	@Path("/GetDepartmentList")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<String> produceDepartmentList(String message)
+			throws JsonProcessingException, IOException {
+		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+		String college = new String();
+		if (root != null && root.has("college")) {
+			college = root.get("college").getTextValue();
+		}
+
+		return dpc.getDepartmentKeys(college);
+	}
+
+	@POST
+	@Path("/GetPostitionTypeList")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<String> producePostitionTypeList(String message)
+			throws JsonProcessingException, IOException {
+		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+		String college = new String();
+		String department = new String();
+		if (root != null && root.has("college")) {
+			college = root.get("college").getTextValue();
+		}
+		if (root != null && root.has("department")) {
+			department = root.get("department").getTextValue();
+		}
+		return dpc.getPositionType(college, department);
+	}
+
+	@POST
+	@Path("/GetPostitionTitleList")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<String> producePostitionTitleList(String message)
+			throws JsonProcessingException, IOException {
+		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+		String college = new String();
+		String department = new String();
+		String positionType = new String();
+		if (root != null && root.has("college")) {
+			college = root.get("college").getTextValue();
+		}
+		if (root != null && root.has("department")) {
+			department = root.get("department").getTextValue();
+		}
+		if (root != null && root.has("positionType")) {
+			positionType = root.get("positionType").getTextValue();
+		}
+		return dpc.getPositionTitle(college, department, positionType);
+	}
 }

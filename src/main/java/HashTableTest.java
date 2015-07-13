@@ -5,90 +5,80 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Set;
 
-
-public class HashTableTest 
-{
+public class HashTableTest {
 	private static final Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> ht = new Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>>();
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		PositionDetails pd = new PositionDetails();
 		Scanner scan = new Scanner(System.in);
 		HashTableTest htt = new HashTableTest();
-		Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> collegeKey = htt.getHashtable();
+		Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> collegeKey = htt
+				.getHashtable();
 		Set<String> keys = collegeKey.keySet();
 		Object[] keyArray;
 		int count = 0;
 		int index = 0;
-		
-		
+
 		System.out.println("Please Select one");
-		for(String k : keys)
-		{
+		for (String k : keys) {
 			System.out.println(count++ + " " + k);
 		}
-		do
-		{
+		do {
 			System.out.println("Please Select an index");
 			index = scan.nextInt();
-		}while(index < 0 || index > keys.size());
+		} while (index < 0 || index > keys.size());
 		keyArray = keys.toArray();
-		pd.setCollege((String)keyArray[index]);
-		
-		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentKeys = collegeKey.get(keyArray[index]);
+		pd.setCollege((String) keyArray[index]);
+
+		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentKeys = collegeKey
+				.get(keyArray[index]);
 		keys = departmentKeys.keySet();
-		
+
 		count = 0;
 		System.out.println("Please Select one");
-		for(String k : keys)
-		{
+		for (String k : keys) {
 			System.out.println(count++ + " " + k);
 		}
-		do
-		{
+		do {
 			System.out.println("Please Select an index");
 			index = scan.nextInt();
-		}while(index < 0 || index > keys.size());
+		} while (index < 0 || index > keys.size());
 		keyArray = keys.toArray();
-		pd.setDepartment((String)keyArray[index]);
-		
-		Hashtable<String, ArrayList<String>> titleKeys = departmentKeys.get(keyArray[index]);
+		pd.setDepartment((String) keyArray[index]);
+
+		Hashtable<String, ArrayList<String>> titleKeys = departmentKeys
+				.get(keyArray[index]);
 		keys = titleKeys.keySet();
-		
+
 		count = 0;
 		System.out.println("Please Select one");
-		for(String k : keys)
-		{
+		for (String k : keys) {
 			System.out.println(count++ + " " + k);
 		}
-		do
-		{
+		do {
 			System.out.println("Please Select an index");
 			index = scan.nextInt();
-		}while(index < 0 || index > keys.size());
+		} while (index < 0 || index > keys.size());
 		keyArray = keys.toArray();
-		pd.setPositionTitle((String)keyArray[index]);
-		
+		pd.setPositionType((String) keyArray[index]);
+
 		ArrayList<String> types = titleKeys.get(keyArray[index]);
-		
+
 		count = 0;
-		for(String k : types)
-		{
+		for (String k : types) {
 			System.out.println(count++ + " " + k);
 		}
-		do
-		{
+		do {
 			System.out.println("Please Select an index");
 			index = scan.nextInt();
-		}while(index < 0 || index > types.size());
-		pd.setPositionType(types.get(index));
-		
+		} while (index < 0 || index > types.size());
+		pd.setPositionTitle(types.get(index));
+
 		System.out.println("Position Details : ");
 		System.out.println(pd.toString());
 	}
-	
-	HashTableTest()
-	{
+
+	HashTableTest() {
 		ArrayList<String> tenuredTitles = new ArrayList<String>();
 		tenuredTitles.add("distinguished professor");
 		tenuredTitles.add("professor");
@@ -158,36 +148,33 @@ public class HashTableTest
 		ht.put("Engineering", departmentTypeHtEng);
 		ht.put("Science", departmentTypeHtSci);
 	}
-	
-	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getHashtable()
-	{
+
+	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getHashtable() {
 		return ht;
 	}
-	
-	public String[] getCollegeKeys()
-	{
+
+	public String[] getCollegeKeys() {
 		Set<String> keys = ht.keySet();
-		String[] keyArray = (String[])keys.toArray();
+		String[] keyArray = (String[]) keys.toArray();
 		return keyArray;
 	}
-	
-	public String[] getDepartmentKeys(String college)
-	{
+
+	public String[] getDepartmentKeys(String college) {
 		Set<String> keys = ht.get(college).keySet();
-		String[] keyArray = (String[])keys.toArray();
+		String[] keyArray = (String[]) keys.toArray();
 		return keyArray;
 	}
-	
-	public String[] getPositionTitle(String college, String department)
-	{
+
+	public String[] getPositionTitle(String college, String department) {
 		Set<String> keys = ht.get(college).get(department).keySet();
-		String[] keyArray = (String[])keys.toArray();
+		String[] keyArray = (String[]) keys.toArray();
 		return keyArray;
 	}
-	
-	public String[] getPositionType(String college, String department, String positionTitle)
-	{
-		String[] keys = (String[]) ht.get(college).get(department).get(positionTitle).toArray();
+
+	public String[] getPositionType(String college, String department,
+			String positionTitle) {
+		String[] keys = (String[]) ht.get(college).get(department)
+				.get(positionTitle).toArray();
 		return keys;
 	}
 }

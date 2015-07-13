@@ -910,9 +910,9 @@ $(function() {
 					+ "</p>", properties);
 		},
 
-		ConfirmSingleDelete : function(attribute_id, event) {
+		ConfirmSingleDelete : function(user_id, event) {
 			if (event) {
-				usersManage.DeleteSingleAttribute(attribute_id);
+				usersManage.DeleteSingleAttribute(user_id);
 			}
 			return false;
 		},
@@ -1247,27 +1247,46 @@ $(function() {
 			this.ajaxCall(this.config);
 			return false;
 		},
-		BindAttributesInputType : function() {
-			this.config.url = this.config.baseURL
-					+ "GetAttributesInputTypeList";
+		BindCollegeDropDown : function() {
+			this.config.url = this.config.baseURL + "GetCollegeList";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
 			this.ajaxCall(this.config);
 		},
-		BindAttributesValidationType : function() {
-			this.config.url = this.config.baseURL
-					+ "GetAttributesValidationTypeList";
-			this.config.data = "{}";
-			this.config.ajaxCallMode = 2;
-			this.ajaxCall(this.config);
+		BindDepartmentDropDown : function(collegeName) {
+			if (collegeName != "0") {
+				this.config.url = this.config.baseURL + "GetDepartmentList";
+				this.config.data = JSON2.stringify({
+					college : collegeName
+				});
+				this.config.ajaxCallMode = 2;
+				this.ajaxCall(this.config);
+			}
 		},
-		BindAttributesItemType : function() {
-			this.config.url = this.config.baseURL + "GetAttributesItemTypeList";
-			this.config.data = JSON2.stringify({
-				gpmsCommonObj : gpmsCommonObj()
-			});
-			this.config.ajaxCallMode = 3;
-			this.ajaxCall(this.config);
+		BindPositionTypeDropDown : function(collegeName, departmentName) {
+			if (collegeName != "0" && departmentName != "0") {
+				this.config.url = this.config.baseURL + "GetPostitionTypeList";
+				this.config.data = JSON2.stringify({
+					college : collegeName,
+					department : departmentName
+				});
+				this.config.ajaxCallMode = 3;
+				this.ajaxCall(this.config);
+			}
+		},
+		BindPositionTitleDropDown : function(collegeName, departmentName,
+				positionTypeName) {
+			if (collegeName != "0" && departmentName != "0"
+					&& positionTypeName != "0") {
+				this.config.url = this.config.baseURL + "GetPostitionTitleList";
+				this.config.data = JSON2.stringify({
+					college : collegeName,
+					department : departmentName,
+					positionType : positionTypeName
+				});
+				this.config.ajaxCallMode = 4;
+				this.ajaxCall(this.config);
+			}
 		},
 		SearchUsers : function() {
 			var attributeNm = $.trim($("#txtSearchAttributeName").val());
@@ -1288,29 +1307,43 @@ $(function() {
 			switch (usersManage.config.ajaxCallMode) {
 			case 0:
 				break;
-			case 1:
-				$("#ddlAttributeType").get(0).options.length = 0;
-				$
-						.each(
-								msg.d,
-								function(index, item) {
-									$("#ddlAttributeType").get(0).options[$(
-											"#ddlAttributeType").get(0).options.length] = new Option(
-											item.InputType, item.InputTypeID);
-								});
+			case 1: // For College Dropdown Binding
+				$("#ddlCollege").get(0).options.length = 0;
+				$.each(msg,
+						function(index, item) {
+							$("#ddlCollege").get(0).options[$("#ddlCollege")
+									.get(0).options.length] = new Option(item,
+									item);
+						});
 				break
-			case 2:
+			case 2:// For College Dropdown Binding
+				$("#ddlDepartment").get(0).options.length = 0;
+				$.each(msg, function(index, item) {
+					$("#ddlDepartment").get(0).options[$("#ddlDepartment").get(
+							0).options.length] = new Option(item, item);
+				});
+				break;
+
+			case 3: // For College Dropdown Binding
+				$("#ddlPositionType").get(0).options.length = 0;
+				$.each(msg, function(index, item) {
+					$("#ddlPositionType").get(0).options[$("#ddlPositionType")
+							.get(0).options.length] = new Option(item, item);
+				});
+				break;
+
+			case 4: // For College Dropdown Binding
+				$("#ddlPositionTitle").get(0).options.length = 0;
 				$
 						.each(
-								msg.d,
+								msg,
 								function(index, item) {
-									$("#ddlTypeValidation").get(0).options[$(
-											"#ddlTypeValidation").get(0).options.length] = new Option(
-											item.ValidationType,
-											item.ValidationTypeID);
+									$("#ddlPositionTitle").get(0).options[$(
+											"#ddlPositionTitle").get(0).options.length] = new Option(
+											item, item);
 								});
 				break;
-			case 3:
+			case 5:
 				$('#lstItemType').get(0).options.length = 0;
 				$('#lstItemType').prop('multiple', 'multiple');
 				$('#lstItemType').prop('size', '5');
@@ -1321,12 +1354,12 @@ $(function() {
 									item.ItemTypeName, item.ItemTypeID);
 						});
 				break;
-			case 4:
+			case 6:
 				usersManage.FillForm(msg);
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
 				break;
-			case 5:
+			case 7:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Successful Message')
@@ -1337,7 +1370,7 @@ $(function() {
 				$('#divUserForm').hide();
 				$('#divUserGrid').show();
 				break;
-			case 6:
+			case 8:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody
 						.info("<h2>"
@@ -1348,13 +1381,13 @@ $(function() {
 										'Selected attribute(s) has been deleted successfully.')
 								+ "</p>");
 				break;
-			case 7:
+			case 9:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				break;
-			case 8:
+			case 10:
 				isUnique = msg.d;
 				break;
-			case 9:
+			case 11:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				$('#divUserGrid').show();
 				if (editFlag > 0) {
@@ -1388,30 +1421,32 @@ $(function() {
 						+ getLocale(gpmsUsersManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsUsersManagement,
-								"Failed to load attributes input type.")
-						+ '</p>');
+								"Failed to load colleges list.") + '</p>');
 				break;
 			case 2:
 				csscody.error('<h2>'
 						+ getLocale(gpmsUsersManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsUsersManagement,
-								"Failed to load validation type.") + '</p>');
+								"Failed to load departments list.") + '</p>');
 				break;
 			case 3:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load attributes item type.")
-						+ '</p>');
+				csscody
+						.error('<h2>'
+								+ getLocale(gpmsUsersManagement,
+										"Error Message")
+								+ '</h2><p>'
+								+ getLocale(gpmsUsersManagement,
+										"Failed to load position types list.")
+								+ '</p>');
 				break;
 			case 4:
 				csscody.error('<h2>'
 						+ getLocale(gpmsUsersManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsUsersManagement,
-								"Failed to update attributes.") + '</p>');
+								"Failed to load position titles list.")
+						+ '</p>');
 				break;
 			case 5:
 				csscody.error('<h2>'
@@ -1450,19 +1485,33 @@ $(function() {
 			usersManage.BindUserGrid(null, null, null, null, null, null);
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
-			// usersManage.BindAttributesInputType();
+			usersManage.BindCollegeDropDown();
+			// usersManage.BindDepartmentDropDown($("#ddlCollege").val());
+			// usersManage.BindPositionTypeDropDown($("#ddlCollege").val(), $(
+			// "#ddlDepartment").val());
+			// usersManage.BindPositionTitleDropDown($("#ddlCollege").val(), $(
+			// "#ddlDepartment").val(), $("#ddlPositionType").val());
 			// usersManage.BindAttributesValidationType();
 			// usersManage.BindAttributesItemType();
-			$('.itemTypes').hide();
 
-			$('#ddlApplyTo').change(function() {
-				var selectedValue = $(this).val();
-				if (selectedValue !== "0") {
-					$('.itemTypes').show();
-				} else {
-					$('.itemTypes').hide();
-				}
+			$("#ddlCollege").bind("change", function() {
+				usersManage.BindDepartmentDropDown($("#ddlCollege").val());
 			});
+
+			$("#ddlDepartment").bind(
+					"change",
+					function() {
+						usersManage.BindPositionTypeDropDown($("#ddlCollege")
+								.val(), $("#ddlDepartment").val());
+					});
+
+			$("#ddlPositionType").bind(
+					"change",
+					function() {
+						usersManage.BindPositionTitleDropDown($("#ddlCollege")
+								.val(), $("#ddlDepartment").val(), $(
+								"#ddlPositionType").val());
+					});
 
 			$('#btnDeleteSelected')
 					.click(
@@ -1520,10 +1569,10 @@ $(function() {
 			});
 
 			$('#btnSaveUser').click(function() {
-				var attribute_id = $(this).prop("name");
-				if (attribute_id != '') {
-					editFlag = attribute_id;
-					usersManage.SaveUser(attribute_id, false);
+				var user_id = $(this).prop("name");
+				if (user_id != '') {
+					editFlag = user_id;
+					usersManage.SaveUser(user_id, false);
 				} else {
 					editFlag = 0;
 					usersManage.SaveUser(0, true);
@@ -1535,16 +1584,15 @@ $(function() {
 							function() {
 								var errors = '';
 								var attributeName = $(this).val();
-								var attribute_id = $('#btnSaveUser').prop(
-										"name");
-								if (attribute_id == '') {
-									attribute_id = 0;
+								var user_id = $('#btnSaveUser').prop("name");
+								if (user_id == '') {
+									user_id = 0;
 								}
 								if (!attributeName) {
 									errors += getLocale(gpmsUsersManagement,
 											"Please enter user name");
 								} else if (!usersManage.IsUnique(attributeName,
-										attribute_id)) {
+										user_id)) {
 									errors += "'"
 											+ getLocale(gpmsUsersManagement,
 													"Please enter Please enter unique user name")
@@ -1578,8 +1626,8 @@ $(function() {
 							});
 
 			$(".delbutton").click(function() {
-				var attribute_id = $(this).prop("id").replace(/[^0-9]/gi, '');
-				usersManage.DeleteUserById(attribute_id);
+				var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
+				usersManage.DeleteUserById(user_id);
 			});
 
 			$("td.required input, td select").focusout(function() {

@@ -118,7 +118,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			Date lastUpdated = new Date();
 			user.setLastUpdated(lastUpdated);
 
-			user.setIsDeleted(userProfile.getUserAccount().getIsDeleted());
+			user.setDeleted(userProfile.getUserAccount().isDeleted());
 			users.add(user);
 		}
 		return users;
@@ -340,7 +340,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(author, "Removed details", new Date());
 		target.addEntryToAuditLog(audit);
-		target.deleteDetails(details);
+		target.getDetails().remove(target.getDetails().indexOf(details));
 		ds.save(target);
 	}
 
@@ -357,7 +357,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(author, "Added details", new Date());
 		target.addEntryToAuditLog(audit);
-		target.addDetails(details);
+		target.getDetails().add(details);
 		ds.save(target);
 	}
 
@@ -368,7 +368,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Added office number " + number,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.addOfficeNumber(number);
+			target.getOfficeNumbers().add(number);
 			ds.save(target);
 		}
 	}
@@ -380,7 +380,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Deleted office number " + number,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.deleteOfficeNumber(number);
+			target.getOfficeNumbers().remove(
+					target.getOfficeNumbers().indexOf(number));
 			ds.save(target);
 		}
 	}
@@ -392,7 +393,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Added home number " + number,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.addHomeNumber(number);
+			target.getHomeNumbers().add(number);
 			ds.save(target);
 		}
 	}
@@ -404,7 +405,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Deleted home number " + number,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.deleteHomeNumber(number);
+			target.getHomeNumbers().remove(
+					target.getHomeNumbers().indexOf(number));
 			ds.save(target);
 		}
 	}
@@ -416,7 +418,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Added mobile number " + number,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.addMobileNumber(number);
+			target.getMobileNumbers().add(number);
 			ds.save(target);
 		}
 	}
@@ -428,7 +430,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Deleted mobile number " + number,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.deleteMobileNumber(number);
+			target.getMobileNumbers().remove(
+					target.getMobileNumbers().indexOf(number));
 			ds.save(target);
 		}
 	}
@@ -436,11 +439,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void addAddress(UserProfile author, UserProfile target,
 			Address address) {
 		Datastore ds = getDatastore();
-		if (!target.getAddress().contains(address)) {
+		if (!target.getAddresses().contains(address)) {
 			audit = new AuditLog(author,
 					"Edited address " + address.toString(), new Date());
 			target.addEntryToAuditLog(audit);
-			target.addAddress(address);
+			target.getAddresses().add(address);
 			ds.save(target);
 		}
 	}
@@ -452,7 +455,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Added work email " + email,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.addWorkEmail(email);
+			target.getWorkEmails().add(email);
 			ds.save(target);
 		}
 	}
@@ -464,7 +467,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Deleted work email " + email,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.deleteWorkEmail(email);
+			target.getWorkEmails()
+					.remove(target.getWorkEmails().indexOf(email));
 			ds.save(target);
 		}
 	}
@@ -476,7 +480,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Added personal email " + email,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.addPersonalEmail(email);
+			target.getPersonalEmails().add(email);
 			ds.save(target);
 		}
 	}
@@ -488,7 +492,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			audit = new AuditLog(author, "Deleted personal email " + email,
 					new Date());
 			target.addEntryToAuditLog(audit);
-			target.deletePersonalEmail(email);
+			target.getPersonalEmails().remove(
+					target.getPersonalEmails().indexOf(email));
 			ds.save(target);
 		}
 	}

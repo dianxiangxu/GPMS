@@ -8,10 +8,10 @@ import org.mongodb.morphia.annotations.Property;
 
 @Embedded
 public class PositionDetails {
-	@Property("position type")
-	private String positionType = new String();
 	@Property("position title")
 	private String positionTitle = new String();
+	@Property("position type")
+	private String positionType = new String();
 	@Property("department")
 	private String department = new String();
 	@Property("college")
@@ -20,20 +20,12 @@ public class PositionDetails {
 	public PositionDetails() {
 	}
 
-	public PositionDetails(String positionType, String positionTitle,
+	public PositionDetails(String positionTitle, String positionType,
 			String department, String college) {
-		this.positionType = positionType;
 		this.positionTitle = positionTitle;
+		this.positionType = positionType;
 		this.department = department;
 		this.college = college;
-	}
-
-	public String getPositionType() {
-		return positionType;
-	}
-
-	public void setPositionType(String positionType) {
-		this.positionType = positionType;
 	}
 
 	public String getPositionTitle() {
@@ -42,6 +34,14 @@ public class PositionDetails {
 
 	public void setPositionTitle(String positionTitle) {
 		this.positionTitle = positionTitle;
+	}
+
+	public String getPositionType() {
+		return positionType;
+	}
+
+	public void setPositionType(String positionType) {
+		this.positionType = positionType;
 	}
 
 	public String getDepartment() {
@@ -62,23 +62,23 @@ public class PositionDetails {
 
 	@Override
 	public String toString() {
-		String posDet = "Position Title : " + positionTitle + "\n";
-		posDet += "PositionType   : " + positionType + "\n";
-		posDet += "College        : " + college + "\n";
-		posDet += "Department     : " + department + "\n";
+		String posDet = "Position Title: " + positionTitle + "\n";
+		posDet += "Position Type: " + positionType + "\n";
+		posDet += "College: " + college + "\n";
+		posDet += "Department: " + department + "\n";
 		return posDet;
 	}
 
 	public boolean equals(PositionDetails pd) {
-		return this.positionType.equals(pd.positionType)
-				&& this.positionTitle.equals(pd.positionTitle)
+		return this.positionTitle.equals(pd.positionTitle)
+				&& this.positionType.equals(pd.positionType)
 				&& this.college.equals(pd.college)
 				&& this.department.equals(pd.department);
 	}
 
 	@Override
 	public PositionDetails clone() {
-		return new PositionDetails(this.positionType, this.positionTitle,
+		return new PositionDetails(this.positionTitle, this.positionType,
 				this.department, this.college);
 	}
 }

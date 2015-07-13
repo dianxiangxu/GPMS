@@ -102,16 +102,16 @@ public class CRUDTestForUserProfileAndAccount {
 		cellPhone = "208-649-2568";
 
 		// Let's add the numbers in.
-		newUserProfile.addOfficeNumber(workPhone);
-		newUserProfile.addHomeNumber(homePhone);
-		newUserProfile.addMobileNumber(cellPhone);
+		newUserProfile.getOfficeNumbers().add(workPhone);
+		newUserProfile.getHomeNumbers().add(homePhone);
+		newUserProfile.getMobileNumbers().add(cellPhone);
 
 		// Rico also has an email address.
 		String email = "superfly@yahoo.com";
-		newUserProfile.addPersonalEmail(email);
+		newUserProfile.getPersonalEmails().add(email);
 		// Let's add a work one
 		email = "officialsoundingemail@superserious.net";
-		newUserProfile.addWorkEmail(email);
+		newUserProfile.getWorkEmails().add(email);
 
 		// We need his living address too.
 		String street, city, state, zipcode, country;
@@ -160,9 +160,9 @@ public class CRUDTestForUserProfileAndAccount {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile.addAddress(newAddress);
-		newUserProfile.addDetails(newDetails);
-		newUserProfile.addDetails(moreDetails);
+		newUserProfile.getAddresses().add(newAddress);
+		newUserProfile.getDetails().add(newDetails);
+		newUserProfile.getDetails().add(moreDetails);
 		newUserProfile.setUserId(activeLog);
 
 		// Here we finalize our data entry and add it through our dao.
@@ -178,7 +178,7 @@ public class CRUDTestForUserProfileAndAccount {
 		InvestigatorInfo firstInv = new InvestigatorInfo();
 		Proposal proposal1 = new Proposal();
 
-//		firstInv.setPi(newUserProfile);
+		// firstInv.setPi(newUserProfile);
 
 		proposal1.setProposalNo("10001");
 		proposal1.setInvestigatorInfo(firstInv);
@@ -229,15 +229,15 @@ public class CRUDTestForUserProfileAndAccount {
 		cellPhone = "703-866-0500";
 
 		// Let's add the numbers in.
-		newUserProfile2.addOfficeNumber(workPhone);
-		newUserProfile2.addHomeNumber(homePhone);
-		newUserProfile2.addMobileNumber(cellPhone);
+		newUserProfile2.getOfficeNumbers().add(workPhone);
+		newUserProfile2.getHomeNumbers().add(homePhone);
+		newUserProfile2.getMobileNumbers().add(cellPhone);
 
 		email = "greatestguy@stargatebase.gov";
-		newUserProfile2.addPersonalEmail(email);
+		newUserProfile2.getPersonalEmails().add(email);
 		// Let's add a work one
 		email = "yoursuperior@stargatecommand.org";
-		newUserProfile2.addWorkEmail(email);
+		newUserProfile2.getWorkEmails().add(email);
 
 		// We need his living address too.
 
@@ -286,9 +286,9 @@ public class CRUDTestForUserProfileAndAccount {
 		moreDetails.setDepartment(department);
 
 		// Now let's add them to the user. Both our address and our details.
-		newUserProfile2.addAddress(newAddress);
-		newUserProfile2.addDetails(newDetails);
-		newUserProfile2.addDetails(moreDetails);
+		newUserProfile2.getAddresses().add(newAddress);
+		newUserProfile2.getDetails().add(newDetails);
+		newUserProfile2.getDetails().add(moreDetails);
 
 		// Here we finalize our data entry and add it through our dao.
 		newUserAccountDAO.save(newUserAccount2);
@@ -300,8 +300,8 @@ public class CRUDTestForUserProfileAndAccount {
 		InvestigatorInfo secondInv = new InvestigatorInfo();
 		Proposal proposal2 = new Proposal();
 
-//		secondInv.setPi(newUserProfile2);
-//		secondInv.addCo_pi(newUserProfile);
+		// secondInv.setPi(newUserProfile2);
+		// secondInv.addCo_pi(newUserProfile);
 
 		proposal2.setProposalNo("10002");
 		proposal2.setInvestigatorInfo(secondInv);

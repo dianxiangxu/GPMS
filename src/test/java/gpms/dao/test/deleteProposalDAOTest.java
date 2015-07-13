@@ -1,6 +1,7 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -43,7 +44,7 @@ public class deleteProposalDAOTest
 	private UserProfileDAO upDAO;
 	private UserAccount ua;
 	private UserProfile piProfile;
-		
+
 	@Before
 	public void initiate() throws UnknownHostException, MongoException {
 		mongo = MongoDBConnector.getMongo();
@@ -55,28 +56,26 @@ public class deleteProposalDAOTest
 		morphia.map(UserProfile.class).map(PositionDetails.class)
 				.map(ProjectInfo.class);
 		pdao = new ProposalDAO(mongo, morphia, dbName);
-		
+
 		uaDAO = new UserAccountDAO(mongo, morphia, "GPMS");
 		upDAO = new UserProfileDAO(mongo, morphia, "GPMS");
 
 		ua = uaDAO.findByUserName("hOrtiz");
 		piProfile = upDAO.findByUserAccount(ua);
-		
+
 		List<Proposal> pList = pdao.findAll();
-		if(pList.size() < 1)
-		{
+		if (pList.size() < 1) {
 			fail("No proposals to edit");
 		}
-		
+
 		prop = pList.get(0);
 	}
-	
+
 	@Test
-	public void deleteProposalTest() throws UnknownHostException 
-	{
+	public void deleteProposalTest() throws UnknownHostException {
 		pdao.deleteProposal(prop, piProfile);
 		assertTrue(prop.getProposalStatus().equals(Status.values()[6]));
-		
+
 		Proposal p;
 		pdao.delete(prop);
 		p = pdao.proposalById(prop.getId());
