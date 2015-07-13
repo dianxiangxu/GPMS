@@ -473,10 +473,10 @@ var fromServer = 0;
 						'<div class="cssClassViewPerPage">'
 								+ getLocale(CoreJsLanguage, "View Per Page:")
 								+ ' <select name="rp" id="' + t.id
-								+ '_pagesize">+"' + opt + '"</select></div>');
+								+ '_pagesize">' + opt + '</select></div>');
 				$(PageWrapper).find('select').change(function() {
 					p.page = 1;
-					p.rp = this.value;
+					p.rp = parseInt(this.value);
 					g.clearAll();
 					p.pnew = 1;
 					p.current = 1;
@@ -889,7 +889,7 @@ var fromServer = 0;
 				$.each(data, function(i) {
 					row = data[i];
 					// delete (row.__type);
-					p.total = row.rowTotal;
+					p.total = parseInt(row.rowTotal);
 					delete (row.rowTotal);
 					var setprimaryID = false;
 					var tr = document.createElement('tr');
