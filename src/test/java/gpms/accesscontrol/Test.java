@@ -22,7 +22,7 @@ public class Test
 		//ac.getXACMLdecision("Co-PI", "Co-PI-List", "View");
 		//ac.getXACMLdecision("Senior-Personnel", "Co-PI-List", "Edit");
 		//ac.getXACMLdecision("Senior-Personnel", "Co-PI-List", "View");
-		//ac.getXACMLdecision("PI", "Senior-Personnel-List", "Edit");
+		//ac.getXACMLdecision("PI", "Senior-Personnel-List", "View");
 		//ac.getXACMLdecision("PI", "Senior-Personnel-List", "View");
 		//ac.getXACMLdecision("Co-PI", "Senior-Personnel-List", "Edit");
 		//ac.getXACMLdecision("Co-PI", "Senior-Personnel-List", "View");
@@ -33,7 +33,7 @@ public class Test
 		//ac.getXACMLdecision("Co-PI", "Project-Info", "View");
 		//ac.getXACMLdecision("Co-PI", "Project-Info", "Edit");
 		//ac.getXACMLdecision("Senior-Personnel", "Project-Info", "View");
-		//ac.getXACMLdecision("Senior-Personnel", "Project-Info", "Edit");
+		//ac.getXACMLdecision("Admin", "User-Profile", "Edit");
 		
 		//String decision = ac.getXACMLdecision("PI", "Project-Info", "View");
 		//System.out.println(decision);
