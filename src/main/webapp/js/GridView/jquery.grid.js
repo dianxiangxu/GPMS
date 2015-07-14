@@ -402,13 +402,13 @@ var fromServer = 0;
 			},
 
 			MakeHeaderCheck : function(elementclass, controlClass) {
-				var uncheckedflag = true;
+				// var uncheckedflag = true;
 				indexArr = SageData.getIndex(t.id);
 				var tableGridId = t.id;
 				$('.' + elementclass).each(function() {
 					var id = $(this).val();
 					if (!$(this).is(':checked')) {
-						uncheckedflag = false;
+						// uncheckedflag = false;
 						if (!SageData.checkDelArrItemExist(id, tableGridId)) {
 							SageData.delArrPush(indexArr, id);
 						}
@@ -423,10 +423,17 @@ var fromServer = 0;
 							SageData.delArrDel(tableGridId, id);
 						}
 					}
-					if (!$(this).not(':disabled')) {
-						$('.' + controlClass).prop('checked', uncheckedflag);
-					}
+					// if (!$(this).not(':disabled')) {
+					// $('.' + controlClass).prop('checked', uncheckedflag);
+					// }
 				});
+
+				if ($('.' + elementclass + ':not(:disabled):not(:checked)')
+						.size() == 0) {
+					$('.' + controlClass).prop('checked', true);
+				} else {
+					$('.' + controlClass).prop('checked', false);
+				}
 			},
 
 			noDataMsg : function() {
