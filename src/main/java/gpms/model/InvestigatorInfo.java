@@ -43,10 +43,17 @@ public class InvestigatorInfo {
 		}
 	}
 
-	public void addCo_pi(InvestigatorRefAndPosition co_pi) {
-		if (this.co_pi.size() < MAX_NUM_CO_PI)
-			this.co_pi.add(co_pi);
+	public void addCo_pi(InvestigatorRefAndPosition co_pi)
+	{
+		if(!this.co_pi.contains(co_pi))
+		{
+			if (this.co_pi.size() < MAX_NUM_CO_PI)
+			{
+				this.co_pi.add(co_pi);
+			}
+		}
 	}
+
 
 	public ArrayList<InvestigatorRefAndPosition> getSeniorPersonnel() {
 		return seniorPersonnel;
@@ -101,7 +108,7 @@ public class InvestigatorInfo {
 				}
 			}
 		}
-		
+
 		boolean seniorPersonnelEqual = false;
 		if(this.seniorPersonnel.size() == invInf.seniorPersonnel.size())
 		{
@@ -115,16 +122,16 @@ public class InvestigatorInfo {
 				}
 			}
 		}
-		
+
 		return this.pi.equals(invInf.getPi()) && coPiEqual && seniorPersonnelEqual;
 	}
-	
+
 	@Override
 	public InvestigatorInfo clone()
 	{
 		InvestigatorInfo copy = new InvestigatorInfo();
 		copy.setPi(this.pi.clone());
-		
+
 		for(InvestigatorRefAndPosition coPi : this.co_pi)
 		{
 			copy.addCo_pi(coPi.clone());

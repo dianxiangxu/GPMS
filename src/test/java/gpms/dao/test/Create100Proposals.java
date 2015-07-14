@@ -13,6 +13,7 @@ import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.Proposal;
+import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -22,6 +23,9 @@ import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
 
+
+//This class should either be run as part of the suite SUITECreateXUsersAndProposals.java
+//or after the db has been populated.
 
 public class Create100Proposals 
 {
@@ -90,7 +94,18 @@ public class Create100Proposals
 				newInfo.addSeniorPersonnel(makeSenior(masterList, newInfo));
 			}
 			
+			SponsorAndBudgetInfo newSandBud = new SponsorAndBudgetInfo();
+			
+			int sponsorChoice = rand.nextInt(2);
+			
+			if(sponsorChoice == 0){newSandBud.addGrantingAgency("NSF");}
+			if(sponsorChoice == 1){newSandBud.addGrantingAgency("Idaho STEM Grant");}
+			
+			
+			newProposal.setSponsorAndBudgetInfo(newSandBud);
 			newProposal.setInvestigatorInfo(newInfo);
+			String propNumb = ""+(choice-1);
+			newProposal.setProposalNo(propNumb);
 			newProposalDAO.save(newProposal);
 		}
 
