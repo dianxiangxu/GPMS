@@ -23,11 +23,10 @@ $(function() {
 			$('span.sfPopupclose').bind("click", function() {
 				$('div.sfPopup,#fade').fadeOut();
 			});
-			$('body')
-					.append(
-							'<div id="ajaxBusy" style="display:none"><img align="absmiddle"  src="'
-									+ gpmsAppPath
-									+ '/Administrator/Templates/Default/images/ajax-loader.gif">&nbsp;Working...</div>');
+			$('body').append(
+					'<div id="ajaxBusy" style="display:none"><img align="absmiddle"  src="'
+							+ gpmsAppPath
+							+ 'images/ajax-loader.gif">&nbsp;Working...</div>');
 			$('div.sfMessage ').on('click', 'img.delete', function() {
 				$('div.sfMessage').slideUp('slow');
 			});
@@ -55,7 +54,7 @@ $(function() {
 				return fullpath;
 			},
 			GetUserName : function() {
-				return SageFrameUserName;
+				return gpmsUserName;
 			},
 			IsNumber : function(str) {
 				var isnum = false;

@@ -10,7 +10,8 @@ $(function() {
 	};
 	var isUnique = false;
 	var editFlag = 0;
-	var arrAttrValueId = "";
+	var rowIndex = 0;
+	var arrAttrValueId = 0;
 	usersManage = {
 		config : {
 			isPostBack : false,
@@ -52,23 +53,11 @@ $(function() {
 			$('.cssClassSuccessImg').prop('src',
 					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
 		},
-		ClearOptionTable : function(btnAddOption) {
-			btnAddOption.closest("tr:eq(0)").find("input:not(:last)").each(
-					function(i) {
-						$(this).val('');
-						$(this).removeAttr('checked');
-					});
-		},
 		onInit : function() {
 			usersManage.SetFirstTabActive();
-			$("#ddlApplyTo").val('0');
-			$('.itemTypes').hide();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
-			$("#lstItemType").each(function() {
-				$("#lstItemType option").removeAttr("selected");
-			});
 		},
 		SetFirstTabActive : function() {
 			var $tabs = $('#container-7').tabs({
@@ -156,74 +145,24 @@ $(function() {
 				$(this).prop('checked', false);
 			});
 			usersManage.onInit();
-			$('#lblAttrFormHeading').html(
+			$('#lblFormHeading').html(
 					getLocale(gpmsUsersManagement, "New User Details"));
 			$(".delbutton").removeAttr("id");
 			$("#btnSaveUser").removeAttr("name");
-			$('#lblLength').html(getLocale("Length:"));
 			$(".delbutton").hide();
 			$("#btnReset").show();
 			$(".required:enabled").each(function() {
-
 				if ($(this).parent("td").find("span.error").length == 1) {
 					$(this).removeClass("error").addClass("required");
 					$(this).parent("td").find("span.error").remove();
 				}
-
 			});
-			$('#txtAttributeName').val('');
-			$('#txtAttributeName').removeAttr('disabled');
-			$('#ddlAttributeType').val('1');
-			$('#ddlAttributeType').removeAttr('disabled');
+			$('#txtUserName').removeAttr('disabled');
 
-			$("#default_value_text").prop("class", "sfInputbox");
-			$("#default_value_text").val('');
-			$("#default_value_textarea").val('');
-			$("#default_value_date").val('');
-			$("#trdefaultValue").show();
-			$("#default_value_text").show();
-			$("#fileDefaultTooltip").html('');
-			$("#fileDefaultTooltip").hide();
-			$("#default_value_textarea").hide();
-			$("#div_default_value_date").hide();
-			$("#default_value_yesno").hide();
-
-			$('#default_value_text').val('');
+			$(".AddOption").val("Add More");
 			$("#dataTable tr:gt(1)").remove();
-			usersManage.ClearOptionTable($("input[type='button'].AddOption"));
-			$('#trOptionsAdd').hide();
 
-			$('#ddlTypeValidation').val('8');
-			$('#ddlTypeValidation').removeAttr('disabled');
-
-			$('#txtLength').val('');
-			$('#txtLength').removeAttr('disabled');
-			$('#txtLength').next('span').next('span').show();
-			$('#txtAliasName').val('');
-			$('#txtAliasToolTip').val('');
-			$('#txtAliasHelp').val('');
-			$('#txtDisplayOrder').val('');
-			$('#ddlApplyTo').val('0');
-			$('.itemTypes').hide();
-
-			$('input[name=chkUniqueValue]').removeAttr('checked');
-			$('input[name=chkValuesRequired]').removeAttr('checked');
 			$('input[name=chkActive]').prop('checked', 'checked');
-			$('#activeTR').show();
-
-			$('input[name=chkIsEnableEditor]').removeAttr('checked');
-			$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-			$('input[name=chkUseInAdvancedSearch]').removeAttr('disabled');
-			$('input[name=chkUseInAdvancedSearch]').removeAttr('checked');
-			$('input[name=chkComparable]').removeAttr('disabled');
-			$('input[name=chkComparable]').removeAttr('checked');
-			$('input[name=chkUseForPriceRule]').removeAttr('disabled');
-			$('input[name=chkUseForPriceRule]').removeAttr('checked');
-			$('input[name=chkIsUseInFilter]').removeAttr('disabled');
-			$('input[name=chkShowInItemListing]').removeAttr('checked');
-			$('input[name=chkShowInItemDetail]').removeAttr('checked');
-
-			$('input[name=optionValueId]').val('0');
 			return false;
 		},
 		BindAttributeOptionsValues : function(_fillOptionValues) {
@@ -241,7 +180,6 @@ $(function() {
 					var arr2 = arr[i].split("#!#");
 					var cloneRow = $('#dataTable tbody>tr:last').clone(true);
 					$(cloneRow).find("input").each(function(j) {
-
 						if (this.name == "optionValueId") {
 							$(this).val(arr2[0]);
 						} else if (this.name == "value") {
@@ -260,280 +198,6 @@ $(function() {
 					$(cloneRow).appendTo("#dataTable");
 				});
 				$('#dataTable>tbody tr:first').remove();
-			}
-		},
-		ValidationTypeEnableDisable : function(fillOptionValues, isChanged) {
-			var selectedVal = $("#ddlAttributeType :selected").val();
-			switch (selectedVal) {
-			case "1":
-				$("#ddlTypeValidation").removeAttr('disabled');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "2":
-				$('#ddlTypeValidation').val('8');
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$('#' + lblDefaultValue).html("Default Value:");
-				$('#lblLength').html("Rows:");
-				if (isChanged) {
-					$('#txtLength').val(3);
-				}
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").hide();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").show();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').removeAttr('disabled');
-				break;
-			case "3":
-				$('#ddlTypeValidation').val('8');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").show();
-				$("#default_value_text").hide();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").show();
-				$("#default_value_date").datepicker({
-					dateFormat : 'yy/mm/dd'
-				});
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "4":
-				$('#ddlTypeValidation').val('8');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").show();
-				$("#default_value_text").hide();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").show();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "5":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html("Length:");
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Size:"));
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				if (isChanged) {
-					$('#txtLength').val(3);
-				}
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"checkbox\" name=\"defaultChk\" class=\"class-isdefault\">');
-				$(".AddOption").val("Add More");
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "6":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").val('');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"radio\" name=\"defaultRdo\" class=\"class-isdefault\">');
-				$(".AddOption").val("Add More");
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "7":
-				$('#ddlTypeValidation').val('6');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "8":
-				$('#ddlTypeValidation').val('8');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement,
-								"Allowed File Extension(s):"));
-				$("#fileDefaultTooltip").html(
-						getLocale(gpmsUsersManagement,
-								"- Separate each file extensions with space"));
-				$("#fileDefaultTooltip").show();
-				$('#lblLength').html(
-						getLocale(gpmsUsersManagement, "Size:(KB)"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "9":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-
-				$(".tddefault")
-						.html(
-								'<input type=\"radio\" name=\"defaultRdo\" class=\"class-isdefault\">');
-				$(".AddOption").hide();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "10":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"radio\" name=\"defaultRdo\" class=\"class-isdefault\">');
-				$(".AddOption").val("Add More");
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "11":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"checkbox\" name=\"defaultChk\" class=\"class-isdefault\">');
-				$(".AddOption").hide();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "12":
-				$('#ddlTypeValidation').val('8');
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#ddlTypeValidation").prop('disabled', 'disabled');
-				$("#txtLength").prop('disabled', 'disabled');
-				$('#txtLength').next('span').next('span').hide();
-				$("#trdefaultValue").hide();
-				$('#trOptionsAdd').show();
-				$(".tddefault")
-						.html(
-								'<input type=\"checkbox\" name=\"defaultChk\" class=\"class-isdefault\">');
-				$(".AddOption").val(getLocale(gpmsUsersManagement, "Add More"));
-				$(".AddOption").show();
-				usersManage.BindAttributeOptionsValues(fillOptionValues);
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			case "13":
-				$("#ddlTypeValidation").removeAttr('disabled');
-				$('#' + lblDefaultValue).html(
-						getLocale(gpmsUsersManagement, "Default Value:"));
-				$('#lblLength').html(getLocale(gpmsUsersManagement, "Length:"));
-				if (isChanged) {
-					$('#txtLength').val('');
-				}
-				$("#txtLength").removeAttr('disabled');
-				$('#txtLength').next('span').next('span').show();
-				$("#trdefaultValue").show();
-				$("#default_value_text").show();
-				$("#fileDefaultTooltip").html('');
-				$("#fileDefaultTooltip").hide();
-				$("#default_value_textarea").hide();
-				$("#div_default_value_date").hide();
-				$("#default_value_yesno").hide();
-				$('#trOptionsAdd').hide();
-				$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-				break;
-			default:
-				break;
 			}
 		},
 
@@ -657,7 +321,7 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '8'
+					arguments : '1,8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
@@ -716,7 +380,7 @@ $(function() {
 		},
 		FillForm : function(response) {
 			// See this how we can get response object based on fields
-			$('#txtAttributeName').val(response['firstName']);
+			$('#txtUserName').val(response['firstName']);
 			// $('#ddlAttributeType').val(item.InputTypeID);
 			$('#ddlAttributeType').prop('disabled', 'disabled');
 
@@ -770,69 +434,17 @@ $(function() {
 			usersManage.ClearForm();
 			switch (tblID) {
 			case "gdvUsers":
-				$('#lblAttrFormHeading').html(
+				$('#lblFormHeading').html(
 						getLocale(gpmsUsersManagement, 'Edit User Details: ')
 								+ argus[3]);
-				$('#txtAttributeName').prop('disabled', 'disabled');
-				if (argus[7].toLowerCase() != "yes") {
-					$(".delbutton").prop("id", 'attributeid' + argus[0]);
+				$('#txtUserName').prop('disabled', 'disabled');
+				if (argus[8].toLowerCase() != "no") {
+					$(".delbutton").prop("id", 'userId' + argus[0]);
 					$(".delbutton").show();
-					$('#activeTR').show();
-					$("#ddlTypeValidation").removeAttr('disabled');
-					$('input[name=chkUseInAdvancedSearch]').removeAttr(
-							'disabled');
-					$('input[name=chkComparable]').removeAttr('disabled');
-					$('input[name=chkIsUseInFilter]').removeAttr('disabled');
-					$('input[name=chkUseForPriceRule]').removeAttr('disabled');
-					$('input[name=chkShowInItemListing]')
-							.removeAttr('disabled');
-					$('input[name=chkShowInItemDetail]').removeAttr('disabled');
-
-					$("input[class=class-text]").removeAttr('disabled');
-					$("input[class=class-isdefault]").removeAttr('disabled');
 					$("input[name=AddMore]").removeAttr('disabled');
 					$("input[name=DeleteOption]").removeAttr('disabled');
-					$('#lstItemType').removeAttr('disabled');
-					$('#txtDisplayOrder').removeAttr('disabled');
-					$('#txtLength').removeAttr('disabled');
-					$('#ddlApplyTo').removeAttr('disabled');
-					$("input[name=default_value_text]").removeAttr('disabled');
-					$('#txtLength').removeAttr('disabled');
-					$("input[name=chkUniqueValue]").removeAttr('disabled');
-					$("input[name=chkValuesRequired]").removeAttr('disabled');
 				} else {
-					$(".delbutton").hide();
-					$('#activeTR').hide();
-					$("#ddlTypeValidation").prop('disabled', 'disabled');
-					$('input[name=chkUseInAdvancedSearch]').prop('disabled',
-							'disabled');
-					$('input[name=chkComparable]').prop('disabled', 'disabled');
-					$('input[name=chkIsUseInFilter]').prop('disabled',
-							'disabled');
-					$('input[name=chkUseForPriceRule]').prop('disabled',
-							'disabled');
-					$('input[name=chkShowInItemListing]').prop('disabled',
-							'disabled');
-					$('input[name=chkShowInItemDetail]').prop('disabled',
-							'disabled');
 
-					$("input[class=class-text]").prop('disabled', 'disabled');
-					$("input[class=class-isdefault]").prop('disabled',
-							'disabled');
-					$("input[name=AddMore]").attr("disabled", "disabled");
-					$("input[name=DeleteOption]").attr("disabled", "disabled");
-					$("input[name=Alias]").removeAttr('disabled');
-					$('#lstItemType').attr("disabled", "disabled");
-					$('#txtDisplayOrder').attr("disabled", "disabled");
-					$('#txtLength').attr("disabled", "disabled");
-					$('#ddlApplyTo').attr("disabled", "disabled");
-					$("input[name=default_value_text]").prop('disabled',
-							'disabled');
-					$('#txtLength').attr("disabled", "disabled");
-					$("input[name=chkUniqueValue]")
-							.prop('disabled', 'disabled');
-					$("input[name=chkValuesRequired]").prop('disabled',
-							'disabled');
 				}
 				$("#btnSaveUser").prop("name", argus[0]);
 				usersManage.onInit();
@@ -845,14 +457,6 @@ $(function() {
 				});
 				usersManage.config.ajaxCallMode = 4;
 				usersManage.ajaxCall(usersManage.config);
-				var attValType = $("#ddlTypeValidation").val();
-				$("#default_value_text").prop(
-						"class",
-						"sfInputbox "
-								+ usersManage.CreateValidationClass(attValType)
-								+ "");
-				$('#iferror').html(
-						usersManage.GetValidationTypeErrorMessage(attValType));
 				break;
 			default:
 				break;
@@ -862,7 +466,7 @@ $(function() {
 		DeleteUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
-				if (argus[3].toLowerCase() != "yes") {
+				if (argus[1].toLowerCase() != "no") {
 					usersManage.DeleteUserById(argus[0]);
 				} else {
 					csscody.alert('<h2>'
@@ -1005,7 +609,7 @@ $(function() {
 				var itemSelected = false;
 				var isUsedInConfigItem = false;
 
-				var attributeName = $('#txtAttributeName').val();
+				var attributeName = $('#txtUserName').val();
 				if (!attributeName) {
 					validateErrorMessage += 'Please enter attribute name.<br/>';
 				} else if (!usersManage.IsUnique(attributeName, _userId)) {
@@ -1121,7 +725,7 @@ $(function() {
 					var _CultureName = $(".languageSelected").attr("value");
 					var _UserName = gpmsCommonInfo.UserName;
 
-					var _attributeName = $('#txtAttributeName').val();
+					var _attributeName = $('#txtUserName').val();
 					var _inputTypeID = $('#ddlAttributeType').val();
 
 					var selectedAttributeType = $("#ddlAttributeType :selected")
@@ -1254,46 +858,46 @@ $(function() {
 			this.config.ajaxCallMode = 1;
 			this.ajaxCall(this.config);
 		},
-		BindDepartmentDropDown : function(collegeName) {
-			if (collegeName != "0") {
-				this.config.url = this.config.baseURL + "GetDepartmentList";
-				this.config.data = JSON2.stringify({
-					college : collegeName
-				});
+		BindDepartmentDropDown : function(collegeName, flagSearch) {
+			this.config.url = this.config.baseURL + "GetDepartmentList";
+			this.config.data = JSON2.stringify({
+				college : collegeName
+			});
+			if (flagSearch) {
 				this.config.ajaxCallMode = 2;
-				this.ajaxCall(this.config);
 			} else {
-				$('#ddlSearchDepartment').find('option:gt(0)').remove();
-			}
-		},
-		BindPositionTypeDropDown : function(collegeName, departmentName) {
-			if (collegeName != "0" && departmentName != "0") {
-				this.config.url = this.config.baseURL + "GetPositionTypeList";
-				this.config.data = JSON2.stringify({
-					college : collegeName,
-					department : departmentName
-				});
 				this.config.ajaxCallMode = 3;
-				this.ajaxCall(this.config);
-			} else {
-				$('#ddlSearchPositionType').find('option:gt(0)').remove();
 			}
+			this.ajaxCall(this.config);
+		},
+		BindPositionTypeDropDown : function(collegeName, departmentName,
+				flagSearch) {
+			this.config.url = this.config.baseURL + "GetPositionTypeList";
+			this.config.data = JSON2.stringify({
+				college : collegeName,
+				department : departmentName
+			});
+			if (flagSearch) {
+				this.config.ajaxCallMode = 4;
+			} else {
+				this.config.ajaxCallMode = 5;
+			}
+			this.ajaxCall(this.config);
 		},
 		BindPositionTitleDropDown : function(collegeName, departmentName,
-				positionTypeName) {
-			if (collegeName != "0" && departmentName != "0"
-					&& positionTypeName != "0") {
-				this.config.url = this.config.baseURL + "GetPositionTitleList";
-				this.config.data = JSON2.stringify({
-					college : collegeName,
-					department : departmentName,
-					positionType : positionTypeName
-				});
-				this.config.ajaxCallMode = 4;
-				this.ajaxCall(this.config);
+				positionTypeName, flagSearch) {
+			this.config.url = this.config.baseURL + "GetPositionTitleList";
+			this.config.data = JSON2.stringify({
+				college : collegeName,
+				department : departmentName,
+				positionType : positionTypeName
+			});
+			if (flagSearch) {
+				this.config.ajaxCallMode = 6;
 			} else {
-				$('#ddlSearchPositionTitle').find('option:gt(0)').remove();
+				this.config.ajaxCallMode = 7;
 			}
+			this.ajaxCall(this.config);
 		},
 		SearchUsers : function() {
 			var userName = $.trim($("#txtSearchUserName").val());
@@ -1322,24 +926,40 @@ $(function() {
 			switch (usersManage.config.ajaxCallMode) {
 			case 0:
 				break;
-			case 1: // For College Dropdown Binding
-				$('#ddlSearchCollege').get(0).options.length = 1;
-				$('#ddlSearchDepartment').get(0).options.length = 1;
-				$('#ddlSearchPositionType').get(0).options.length = 1;
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+			case 1: // For College Dropdown Binding for both form and search
+				$('#ddlSearchCollege').get(rowIndex).options.length = 1;
+				$('#ddlSearchDepartment').get(rowIndex).options.length = 1;
+				$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
+				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
+
+				$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
 				$
 						.each(
 								msg,
 								function(index, item) {
-									$("#ddlSearchCollege").get(0).options[$(
-											"#ddlSearchCollege").get(0).options.length] = new Option(
+									$("#ddlSearchCollege").get(rowIndex).options[$(
+											"#ddlSearchCollege").get(rowIndex).options.length] = new Option(
+											item, item);
+
+									// For form Dropdown Binding
+									$('select[name="ddlCollege"]')
+											.get(rowIndex).options[$(
+											'select[name="ddlCollege"]').get(
+											rowIndex).options.length] = new Option(
 											item, item);
 								});
-				break
-			case 2:// For Department Dropdown Binding
-				$('#ddlSearchDepartment').get(0).options.length = 1;
-				$('#ddlSearchPositionType').get(0).options.length = 1;
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+				usersManage.BindDepartmentDropDown($(
+						'select[name="ddlCollege"]').eq(rowIndex).val(), false);
+				break;
+
+			case 2:// For Search Department Dropdown Binding
+				$('#ddlSearchDepartment').get(rowIndex).options.length = 1;
+				$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
+				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
 				$
 						.each(
 								msg,
@@ -1350,96 +970,84 @@ $(function() {
 								});
 				break;
 
-			case 3: // For College Position Type Binding
-				$('#ddlSearchPositionType').get(0).options.length = 1;
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+			case 3:// For Form Department Dropdown Binding
+				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 				$
 						.each(
 								msg,
 								function(index, item) {
-									$("#ddlSearchPositionType").get(0).options[$(
+									$('select[name="ddlDepartment"]').get(
+											rowIndex).options[$(
+											'select[name="ddlDepartment"]')
+											.get(rowIndex).options.length] = new Option(
+											item, item);
+								});
+				usersManage.BindPositionTypeDropDown($(
+						'select[name="ddlCollege"]').eq(rowIndex).val(), $(
+						'select[name="ddlDepartment"]').eq(rowIndex).val(),
+						false);
+				break;
+
+			case 4: // For Search College Position Type Binding
+				$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
+				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$("#ddlSearchPositionType").get(rowIndex).options[$(
 											"#ddlSearchPositionType").get(0).options.length] = new Option(
 											item, item);
 								});
 				break;
 
-			case 4: // For College Position Title Binding
-				$('#ddlSearchPositionTitle').get(0).options.length = 1;
+			case 5: // For Form College Position Type Binding
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 				$
 						.each(
 								msg,
 								function(index, item) {
-									$("#ddlSearchPositionTitle").get(0).options[$(
-											"#ddlSearchPositionTitle").get(0).options.length] = new Option(
+									$('select[name="ddlPositionType"]').get(
+											rowIndex).options[$(
+											'select[name="ddlPositionType"]')
+											.get(rowIndex).options.length] = new Option(
+											item, item);
+								});
+				usersManage.BindPositionTitleDropDown($(
+						'select[name="ddlCollege"]').eq(rowIndex).val(), $(
+						'select[name="ddlDepartment"]').eq(rowIndex).val(), $(
+						'select[name="ddlPositionType"]').eq(rowIndex).val(),
+						false);
+				break;
+
+			case 6: // For Search College Position Title Binding
+				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$("#ddlSearchPositionTitle").get(rowIndex).options[$(
+											"#ddlSearchPositionTitle").get(
+											rowIndex).options.length] = new Option(
 											item, item);
 								});
 				break;
-			case 5:
-				$('#lstItemType').get(0).options.length = 0;
-				$('#lstItemType').prop('multiple', 'multiple');
-				$('#lstItemType').prop('size', '5');
-				$.each(msg.d,
-						function(index, item) {
-							$("#lstItemType").get(0).options[$("#lstItemType")
-									.get(0).options.length] = new Option(
-									item.ItemTypeName, item.ItemTypeID);
-						});
-				break;
-			case 6:
-				usersManage.FillForm(msg);
-				$('#divUserGrid').hide();
-				$('#divUserForm').show();
-				break;
-			case 7:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
-				csscody.info("<h2>"
-						+ getLocale(gpmsUsersManagement, 'Successful Message')
-						+ "</h2><p>"
-						+ getLocale(gpmsUsersManagement,
-								'Attribute has been deleted successfully.')
-						+ "</p>");
-				$('#divUserForm').hide();
-				$('#divUserGrid').show();
-				break;
-			case 8:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
-				csscody
-						.info("<h2>"
-								+ getLocale(gpmsUsersManagement,
-										'Successful Message')
-								+ "</h2><p>"
-								+ getLocale(gpmsUsersManagement,
-										'Selected attribute(s) has been deleted successfully.')
-								+ "</p>");
-				break;
-			case 9:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
-				break;
-			case 10:
-				isUnique = msg.d;
-				break;
-			case 11:
-				usersManage.BindUserGrid(null, null, null, null, null, null);
-				$('#divUserGrid').show();
-				if (editFlag > 0) {
-					csscody.info("<h2>"
-							+ getLocale(gpmsUsersManagement,
-									'Successful Message')
-							+ "</h2><p>"
-							+ getLocale(gpmsUsersManagement,
-									'Attribute has been updated successfully.')
-							+ "</p>");
-				} else {
-					csscody.info("<h2>"
-							+ getLocale(gpmsUsersManagement,
-									'Successful Message')
-							+ "</h2><p>"
-							+ getLocale(gpmsUsersManagement,
-									'Attribute has been saved successfully.')
-							+ "</p>");
-				}
-				usersManage.ClearForm();
-				$('#divUserForm').hide();
+
+			case 7: // For Form College Position Title Binding
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$('select[name="ddlPositionTitle"]').get(
+											rowIndex).options[$(
+											'select[name="ddlPositionTitle"]')
+											.get(rowIndex).options.length] = new Option(
+											item, item);
+								});
 				break;
 			}
 		},
@@ -1462,6 +1070,13 @@ $(function() {
 								"Failed to load departments list.") + '</p>');
 				break;
 			case 3:
+				csscody.error('<h2>'
+						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsUsersManagement,
+								"Failed to load departments list.") + '</p>');
+				break;
+			case 4:
 				csscody
 						.error('<h2>'
 								+ getLocale(gpmsUsersManagement,
@@ -1471,7 +1086,17 @@ $(function() {
 										"Failed to load position types list.")
 								+ '</p>');
 				break;
-			case 4:
+			case 5:
+				csscody
+						.error('<h2>'
+								+ getLocale(gpmsUsersManagement,
+										"Error Message")
+								+ '</h2><p>'
+								+ getLocale(gpmsUsersManagement,
+										"Failed to load position types list.")
+								+ '</p>');
+				break;
+			case 6:
 				csscody.error('<h2>'
 						+ getLocale(gpmsUsersManagement, "Error Message")
 						+ '</h2><p>'
@@ -1479,35 +1104,13 @@ $(function() {
 								"Failed to load position titles list.")
 						+ '</p>');
 				break;
-			case 5:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to delete attribute.") + '</p>');
-				break;
-			case 6:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to delete attributes.") + '</p>');
-				break;
 			case 7:
 				csscody.error('<h2>'
 						+ getLocale(gpmsUsersManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement, "Failed to operate.")
-						+ '</p>');
-				break;
-			case 8:
-				break;
-			case 9:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
 						+ getLocale(gpmsUsersManagement,
-								"Failed to save attribute.") + '</p>');
+								"Failed to load position titles list.")
+						+ '</p>');
 				break;
 			}
 		},
@@ -1517,40 +1120,101 @@ $(function() {
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
 			usersManage.BindCollegeDropDown();
-			// usersManage.BindDepartmentDropDown($("#ddlSearchCollege").val());
-			// usersManage.BindPositionTypeDropDown($("#ddlSearchCollege").val(),
-			// $(
-			// "#ddlSearchDepartment").val());
-			// usersManage.BindPositionTitleDropDown($("#ddlSearchCollege").val(),
-			// $(
-			// "#ddlSearchDepartment").val(),
-			// $("#ddlSearchPositionType").val());
-			// usersManage.BindAttributesValidationType();
-			// usersManage.BindAttributesItemType();
 
-			$("#ddlSearchCollege").bind(
-					"change",
-					function() {
-						usersManage.BindDepartmentDropDown($(
-								"#ddlSearchCollege").val());
-					});
+			$("#ddlSearchCollege").bind("change", function() {
+				if ($(this).val() != "0") {
+					rowIndex = 0;
+					usersManage.BindDepartmentDropDown($(this).val(), true);
+				} else {
+					$('#ddlSearchDepartment').find('option:gt(0)').remove();
+				}
+
+			});
 
 			$("#ddlSearchDepartment").bind(
 					"change",
 					function() {
-						usersManage.BindPositionTypeDropDown($(
-								"#ddlSearchCollege").val(), $(
-								"#ddlSearchDepartment").val());
+						if ($("#ddlSearchCollege").val() != "0"
+								&& $(this).val() != "0") {
+							rowIndex = 0;
+							usersManage.BindPositionTypeDropDown($(
+									"#ddlSearchCollege").val(), $(this).val(),
+									true);
+						} else {
+							$('#ddlSearchPositionType').find('option:gt(0)')
+									.remove();
+						}
+
 					});
 
 			$("#ddlSearchPositionType").bind(
 					"change",
 					function() {
-						usersManage.BindPositionTitleDropDown($(
-								"#ddlSearchCollege").val(), $(
-								"#ddlSearchDepartment").val(), $(
-								"#ddlSearchPositionType").val());
+						if ($("#ddlSearchCollege").val() != "0"
+								&& $("#ddlSearchDepartment").val() != "0"
+								&& $(this).val() != "0") {
+							rowIndex = 0;
+							usersManage.BindPositionTitleDropDown($(
+									"#ddlSearchCollege").val(), $(
+									"#ddlSearchDepartment").val(), $(this)
+									.val(), true);
+						} else {
+							$('#ddlSearchPositionTitle').find('option:gt(0)')
+									.remove();
+						}
+
 					});
+
+			// Form Position details Drop downs
+			$('select[name="ddlCollege"]').bind("change", function() {
+				rowIndex = $(this).closest('tr').prevAll().length;
+				if ($(this).val() != "0") {
+					usersManage.BindDepartmentDropDown($(this).val(), false);
+				} else {
+					$(this).find('option:gt(0)').remove();
+				}
+			});
+
+			$('select[name="ddlDepartment"]')
+					.bind(
+							"change",
+							function() {
+								rowIndex = $(this).closest('tr').prevAll().length;
+								if ($('select[name="ddlCollege"]').eq(rowIndex)
+										.val() != "0"
+										&& $(this).val() != "0") {
+									usersManage.BindPositionTypeDropDown($(
+											'select[name="ddlCollege"]').eq(
+											rowIndex).val(), $(this).val(),
+											false);
+								} else {
+									$('select[name="ddlPositionType"]').find(
+											'option:gt(0)').remove();
+								}
+							});
+
+			$('select[name="ddlPositionType"]')
+					.bind(
+							"change",
+							function() {
+								rowIndex = $(this).closest('tr').prevAll().length;
+								if ($('select[name="ddlCollege"]').eq(rowIndex)
+										.val() != "0"
+										&& $('select[name="ddlDepartment"]')
+												.eq(rowIndex).val() != "0"
+										&& $(this).val() != "0") {
+									usersManage.BindPositionTitleDropDown($(
+											'select[name="ddlCollege"]').eq(
+											rowIndex).val(), $(
+											'select[name="ddlDepartment"]').eq(
+											rowIndex).val(), $(this).val(),
+											false);
+								} else {
+									$('select[name="ddlPositionTitle"]').find(
+											'option:gt(0)').remove();
+								}
+
+							});
 
 			$('#btnDeleteSelected')
 					.click(
@@ -1618,7 +1282,7 @@ $(function() {
 				}
 			});
 
-			$('#txtAttributeName')
+			$('#txtUserName')
 					.blur(
 							function() {
 								var errors = '';
@@ -1680,146 +1344,48 @@ $(function() {
 				}
 			});
 
-			$("#ddlAttributeType")
-					.bind(
-							"change",
+			$("input[type=button].AddOption")
+					.click(
 							function() {
-								$('.class-text').removeClass('error').next(
-										'span').removeClass('error');
-								$("#default_value_text").prop("class",
-										"sfInputbox");
-								$('#ddlTypeValidation').val('8');
-								$('#iferror').html('');
-								$('#iferror').hide();
-								if ($(this).val() == 1 || $(this).val() == 2
-										|| $(this).val() == 3
-										|| $(this).val() == 7) {
-									$("input[name=chkValuesRequired]").prop(
-											'checked', false).prop("disabled",
-											false);
-								} else {
-									$("input[name=chkValuesRequired]").prop(
-											'checked', false).prop("disabled",
+								if ($(this).prop("name") == "DeleteOption") {
+									var t = $(this).closest('tr');
+
+									t.find("td").wrapInner(
+											"<div style='DISPLAY: block'/>")
+											.parent().find("td div").slideUp(
+													300, function() {
+														t.remove();
+													});
+
+								} else if ($(this).prop("name") == "AddMore") {
+									var cloneRow = $(this).closest('tr').clone(
 											true);
-								}
-								$("#dataTable tr:gt(1)").remove();
-								$("#dataTable>tbody tr")
-										.find("input:not(:last)")
-										.each(
-												function(i) {
-													if (this.name == "optionValueId") {
-														if ($(this).val() == '') {
-															$(this).val('0');
-														}
-													} else if (this.name == "value") {
-														$(this).val('');
-													} else if (this.name == "position") {
-														$(this).val('');
-													} else if ($(this)
-															.hasClass(
-																	"class-isdefault")) {
-														this.checked = false;
-													}
-
-												});
-
-								usersManage.ValidationTypeEnableDisable("",
-										true);
-								if ($(this).val() == 10) {
-									$("#dataTable .tddefault").find(
-											'input[name=defaultRdo]').prop(
-											'checked', true);
-								}
-								var attValType = $("#ddlTypeValidation").val();
-								$("#default_value_text")
-										.prop(
-												"class",
-												"sfInputbox "
-														+ usersManage
-																.CreateValidationClass(attValType)
-														+ "");
-								$('#iferror')
-										.html(
-												usersManage
-														.GetValidationTypeErrorMessage(attValType));
-							});
-
-			$("#ddlTypeValidation")
-					.bind(
-							"change",
-							function() {
-								var attValType = $("#ddlTypeValidation").val();
-								$("#default_value_text")
-										.prop(
-												"class",
-												"sfInputbox "
-														+ usersManage
-																.CreateValidationClass(attValType)
-														+ "").val('');
-								$('#iferror').hide();
-								$('#iferror')
-										.html(
-												usersManage
-														.GetValidationTypeErrorMessage(attValType));
-							});
-
-			$("input[type=button].AddOption").click(
-					function() {
-						var checkedState = false;
-						if ($(this).prop("name") == "DeleteOption") {
-							var t = $(this).closest('tr');
-
-							var attrId = t.find("td").find(
-									'input[type="hidden"]').val();
-							if (attrId != '0') {
-								arrAttrValueId += attrId + ',';
-
-							}
-							t.find("td").wrapInner(
-									"<div style='DISPLAY: block'/>").parent()
-									.find("td div").slideUp(300, function() {
-										t.remove();
-									});
-
-						} else if ($(this).prop("name") == "AddMore") {
-							checkedState = $('#dataTable>tbody tr:first').find(
-									'input[type="radio"]').prop("checked");
-							var cloneRow = $(this).closest('tr').clone(true);
-							$(cloneRow).find("input").each(
-									function(i) {
-										if (this.name == "optionValueId") {
-											$(this).val('0');
-										} else if (this.name == "value") {
-											$(this).val('');
-										} else if (this.name == "position") {
-											$(this).val('');
-										} else if (this.name == "Alias") {
-											$(this).val('');
-										} else if ($(this).hasClass(
-												"class-isdefault")) {
-											this.checked = false;
-										} else if ($(this)
-												.hasClass("AddOption")) {
-											$(this)
-													.prop("name",
+									$(cloneRow).find("input").each(
+											function(i) {
+												if ($(this).hasClass(
+														"AddOption")) {
+													$(this).prop("name",
 															"DeleteOption");
-											$(this).prop("value",
-													"Delete Option");
-										}
-										$(this).parent('td').find('span')
-												.removeClass('error');
-										$(this).removeClass('error');
-									});
-							$(cloneRow).appendTo("#dataTable");
-							$('#dataTable>tbody tr:first').find(
-									'input[type="radio"]').prop("checked",
-									checkedState);
-							$('#dataTable tr:last').hide();
-							$('#dataTable tr:last td').fadeIn('slow');
-							$('#dataTable tr:last').show();
-							$('#dataTable tr:last td').show();
-						}
-					});
+													$(this).prop("value",
+															"Delete Option");
+												}
+												$(this).parent('td').find(
+														'span').removeClass(
+														'error');
+												$(this).removeClass('error');
+											});
+									$(cloneRow).appendTo("#dataTable");
+									rowIndex = $(cloneRow).closest('tr')
+											.prevAll().length;
+									usersManage.BindDepartmentDropDown($(
+											'select[name="ddlCollege"]').eq(
+											rowIndex).val(), false);
+									$('#dataTable tr:last').hide();
+									$('#dataTable tr:last td').fadeIn('slow');
+									$('#dataTable tr:last').show();
+									$('#dataTable tr:last td').show();
+								}
+							});
 			$("#btnSearchUser").bind("click", function() {
 				usersManage.SearchUsers();
 				return false;

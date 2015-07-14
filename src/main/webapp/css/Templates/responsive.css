@@ -20,7 +20,7 @@ _overflow: auto;
 margin: 0 0 1em;}
 
 /* Responsive Button */
-.sfResponsiveNavBtn { height:24px; width:28px; background:url(../images/responsive-nav.png) no-repeat 0 -24px;; border:none; text-indent:-9999px; cursor:pointer; 
+.sfResponsiveNavBtn { height:24px; width:28px; background:url(../../images/responsive-nav.png) no-repeat 0 -24px;; border:none; text-indent:-9999px; cursor:pointer; 
 position:absolute; top:-60px; right:3px; z-index:88; display:none;
 -webkit-border-radius: 3px;
 border-radius: 3px; }

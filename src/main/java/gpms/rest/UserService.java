@@ -96,9 +96,6 @@ public class UserService {
 	public List<UserInfo> produceUsersJSON(String message)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		List<UserInfo> users = new ArrayList<UserInfo>();
-		// String response = new String();
-		// {"offset":1,"limit":10,
-		// "userBindObj":{"UserName":null,"College":null,"Department":null,"PositionType":null,"PositionTitle":null,"IsActive":null}}
 
 		int offset = 0, limit = 0;
 		String userName = new String();
@@ -166,7 +163,6 @@ public class UserService {
 		UserProfile user = new UserProfile();
 		String response = new String();
 
-		// {"userId":"559af097af6e0422642ca519","gpmsCommonObj":{"UserName":"superuser","UserProfileID":"1","CultureName":"en-US"}}
 		String profileId = new String();
 		String userName = new String();
 		String userProfileID = new String();
@@ -196,7 +192,7 @@ public class UserService {
 		// JSONObject obj = new JSONObject(message);
 		//
 		// // get the first result
-		// String profileId = obj.getString("attributeId");
+		// String profileId = obj.getString("userId");
 
 		//
 		// // Embedded Object
@@ -211,11 +207,6 @@ public class UserService {
 				+ ", Profile ID with ObjectId: " + id + ", User Name: "
 				+ userName + ", User Profile ID: " + userProfileID
 				+ ", Culture Name: " + cultureName);
-
-		// int a = obj.getInt("age");
-		// JSONObject gpmsCommonObj = obj.getJSONObject(obj
-		// .getString("gpmsCommonObj"));
-		// System.out.println("attributeId: " + n);
 
 		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
 		gpmsCommonObj.setUserName(userName);
@@ -234,12 +225,6 @@ public class UserService {
 		return response;
 	}
 
-	// DepartmentsPositionsCollection dtc = new
-	// DepartmentsPositionsCollection();
-	// Hashtable<String, Hashtable<String, Hashtable<String,
-	// ArrayList<String>>>> collegeKey = dtc
-	// .getAvailableDepartmentsAndPositions();
-	// Set<String> keys = collegeKey.keySet();
 	@POST
 	@Path("/GetPositionDetailsHash")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })

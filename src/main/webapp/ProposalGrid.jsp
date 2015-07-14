@@ -70,7 +70,7 @@
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
 
 <!-- For Side Bar Navigation -->
-<script type="text/javascript" src="js/dashboard.js"></script>
+<script type="text/javascript" src="js/core/dashboard.js"></script>
 <script type="text/javascript" src="js/sidebar_accordian.js"></script>
 <script type="text/javascript" src="js/superfish.js"></script>
 
@@ -922,14 +922,6 @@
 
 			</div>
 		</div>
-
-		<div title="Confirmation Required" id="dialog">
-			<label id="sf_lblConfirmation"> </label>
-		</div>
-
 	</form>
-	<div style="display: none;" id="ajaxBusy">
-		<img align="absmiddle" src="images/ajax-loader.gif">&nbsp;Working...
-	</div>
 </body>
 </html>

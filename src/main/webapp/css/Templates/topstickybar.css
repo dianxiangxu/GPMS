@@ -1,4 +1,4 @@
-/*---Top Bar---*/
+/*---Top Bar---*//*---Top Bar---*/
 /*************************font-icon*******************************************/
 @font-face
 {
@@ -814,7 +814,7 @@ li.preview a:hover.icon-preview, li.preview a:hover.icon-preview:before, li.home
 }
 .sfTopbar ul.left li.sfDashBoard
 {
-    background: url(../images/dashboard.png) no-repeat 0 50%;
+    background: url(../../images/dashboard.png) no-repeat 0 50%;
     padding: 0 0 0 22px;
 }
 .sfTopbar ul.right li.home
@@ -1226,7 +1226,7 @@ border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -msborder-
 }
 .sfLogged .sfModuleControl a
 {
-    background: url(../images/edit.png) no-repeat 3px 3px #fff;
+    background: url(../../images/edit.png) no-repeat 3px 3px #fff;
     height: 20px;
     width: 20px;
     display: inline-block;
@@ -1455,7 +1455,7 @@ border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -msborder-
 }
 .toast-item-close
 {
-    background: url(../images/closeMessage.gif);
+    background: url(../../images/closeMessage.gif);
     width: 22px;
     height: 22px;
     position: absolute;
@@ -1473,19 +1473,19 @@ border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -msborder-
 }
 .toast-item-image-notice
 {
-    background: url(../images/noticeMessage.png);
+    background: url(../../images/noticeMessage.png);
 }
 .toast-item-image-success
 {
-    background: url(../images/successMessage.png);
+    background: url(../../images/successMessage.png);
 }
 .toast-item-image-warning
 {
-    background: url(../images/warningMessage.png);
+    background: url(../../images/warningMessage.png);
 }
 .toast-item-image-error
 {
-    background: url(../images/errorMessage.png);
+    background: url(../../images/errorMessage.png);
 }
 .toast-type-notice
 {
@@ -1668,6 +1668,37 @@ font-family: "aspx" !important;
   
 .ui-dialog-titlebar-restore:before {content: "\e6109"; color:#fff; font-size:18px;
 font-family: "aspx" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;}*/
+
+
+.icon-info
+{
+    font-size: 12px;
+}
+
+
+@media only screen and ( max-width: 800px ) {
+	
+	#divCpanel{left:126px;}
+	}
+@media only screen and ( max-width: 600px ) {
+	
+	#divCpanel{display:none;}
+	}	
+@media only screen and ( max-width: 480px ) {
+	
+	#divCpanel,.sfquickNotification{display:none !important;}
+	}	
+
+
+" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
