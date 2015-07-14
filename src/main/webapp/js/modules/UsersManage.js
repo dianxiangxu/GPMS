@@ -537,8 +537,8 @@ $(function() {
 			}
 		},
 
-		BindUserGrid : function(userName, college, department, postitionType,
-				postitionTitle, isActive) {
+		BindUserGrid : function(userName, college, department, positionType,
+				positionTitle, isActive) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetUsersList";
 			var offset_ = 1;
@@ -549,8 +549,8 @@ $(function() {
 				UserName : userName,
 				College : college,
 				Department : department,
-				PostitionType : postitionType,
-				PostitionTitle : postitionTitle,
+				PositionType : positionType,
+				PositionTitle : positionTitle,
 				IsActive : isActive
 			};
 			$("#gdvUsers").sagegrid({
@@ -1268,7 +1268,7 @@ $(function() {
 		},
 		BindPositionTypeDropDown : function(collegeName, departmentName) {
 			if (collegeName != "0" && departmentName != "0") {
-				this.config.url = this.config.baseURL + "GetPostitionTypeList";
+				this.config.url = this.config.baseURL + "GetPositionTypeList";
 				this.config.data = JSON2.stringify({
 					college : collegeName,
 					department : departmentName
@@ -1283,7 +1283,7 @@ $(function() {
 				positionTypeName) {
 			if (collegeName != "0" && departmentName != "0"
 					&& positionTypeName != "0") {
-				this.config.url = this.config.baseURL + "GetPostitionTitleList";
+				this.config.url = this.config.baseURL + "GetPositionTitleList";
 				this.config.data = JSON2.stringify({
 					college : collegeName,
 					department : departmentName,
@@ -1303,10 +1303,10 @@ $(function() {
 			var department = $.trim($('#ddlSearchDepartment').val()) == "" ? null
 					: $.trim($('#ddlSearchDepartment').val()) == "0" ? null : $
 							.trim($('#ddlSearchDepartment').val());
-			var postitionType = $.trim($('#ddlSearchPositionType').val()) == "" ? null
+			var positionType = $.trim($('#ddlSearchPositionType').val()) == "" ? null
 					: $.trim($('#ddlSearchPositionType').val()) == "0" ? null
 							: $.trim($('#ddlSearchPositionType').val());
-			var postitionTitle = $.trim($('#ddlSearchPositionTitle').val()) == "" ? null
+			var positionTitle = $.trim($('#ddlSearchPositionTitle').val()) == "" ? null
 					: $.trim($('#ddlSearchPositionTitle').val()) == "0" ? null
 							: $.trim($('#ddlSearchPositionTitle').val());
 			var isActive = $.trim($("#ddlSearchIsActive").val()) == "" ? null
@@ -1316,7 +1316,7 @@ $(function() {
 				userName = null;
 			}
 			usersManage.BindUserGrid(userName, college, department,
-					postitionType, postitionTitle, isActive);
+					positionType, positionTitle, isActive);
 		},
 		ajaxSuccess : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {

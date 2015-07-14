@@ -4,8 +4,6 @@ package gpms.dao;
  * @author Thomas Volz
  * 
  * @author Milson Munakami
- * 
- * @author Hector C. Ortiz
  */
 
 import gpms.DAL.MongoDBConnector;
@@ -22,7 +20,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -81,14 +78,15 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).asList();
 	}
-	
+
 	/*
 	 * This is example format for grid Info object bind that is customized to
 	 * bind in grid
 	 */
 	public List<UserInfo> findAllForUserGrid(int offset, int limit,
 			String userName, String college, String department,
-			String postitionType, String postitionTitle, Boolean isActive) throws UnknownHostException {
+			String positionType, String positionTitle, Boolean isActive)
+			throws UnknownHostException {
 		Datastore ds = getDatastore();
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 
@@ -105,9 +103,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 					+ userProfile.getLastName());
 
 			// TODO: TO bind the PI, Co-PI and Senior Proposal Count
-			user.setNoOfPIedProposal(CountPIProposal(userProfile));
-			user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
-			user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
+			// user.setNoOfPIedProposal(CountPIProposal(userProfile));
+			// user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
+			// user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
 			// Date today = Calendar.getInstance().getTime();
 			//
 			// SimpleDateFormat formatter = new SimpleDateFormat(
@@ -120,7 +118,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			// user.setAddedOn(d);
 			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
 			// TODO: get the lastUpdated for User here
-			Date lastUpdated = userProfile.getAuditLog().get(userProfile.getAuditLog().size() - 1).getActivityDate();
+			// Date lastUpdated = userProfile.getAuditLog()
+			// .get(userProfile.getAuditLog().size() - 1)
+			// .getActivityDate();
+
+			Date lastUpdated = new Date();
 			user.setLastUpdated(lastUpdated);
 
 			user.setDeleted(userProfile.getUserAccount().isDeleted());

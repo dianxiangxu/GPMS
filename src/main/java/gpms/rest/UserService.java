@@ -93,19 +93,19 @@ public class UserService {
 	@Path("/GetUsersList")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<UserInfo> produceUsersJSON(String message)
+	public List<UserInfo> produceUsersJSON(String message)
 			throws JsonGenerationException, JsonMappingException, IOException {
-		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+		List<UserInfo> users = new ArrayList<UserInfo>();
 		// String response = new String();
 		// {"offset":1,"limit":10,
-		// "userBindObj":{"UserName":null,"College":null,"Department":null,"PostitionType":null,"PostitionTitle":null,"IsActive":null}}
+		// "userBindObj":{"UserName":null,"College":null,"Department":null,"PositionType":null,"PositionTitle":null,"IsActive":null}}
 
 		int offset = 0, limit = 0;
 		String userName = new String();
 		String college = new String();
 		String department = new String();
-		String postitionType = new String();
-		String postitionTitle = new String();
+		String positionType = new String();
+		String positionTitle = new String();
 		Boolean isActive = null;
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -132,12 +132,12 @@ public class UserService {
 			department = userObj.get("Department").getTextValue();
 		}
 
-		if (userObj != null && userObj.has("PostitionType")) {
-			postitionType = userObj.get("PostitionType").getTextValue();
+		if (userObj != null && userObj.has("PositionType")) {
+			positionType = userObj.get("PositionType").getTextValue();
 		}
 
-		if (userObj != null && userObj.has("PostitionTitle")) {
-			postitionTitle = userObj.get("PostitionTitle").getTextValue();
+		if (userObj != null && userObj.has("PositionTitle")) {
+			positionTitle = userObj.get("PositionTitle").getTextValue();
 		}
 
 		if (userObj != null && userObj.has("IsActive")) {
@@ -148,9 +148,8 @@ public class UserService {
 			}
 		}
 
-		users = (ArrayList<UserInfo>) userProfileDAO.findUsersForGrid(offset,
-				limit, userName, college, department, postitionType,
-				postitionTitle, isActive);
+		users = userProfileDAO.findAllForUserGrid(offset, limit, userName,
+				college, department, positionType, positionTitle, isActive);
 
 		// users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
 		// response = JSONTansformer.ConvertToJSON(users);
@@ -280,10 +279,10 @@ public class UserService {
 	}
 
 	@POST
-	@Path("/GetPostitionTypeList")
+	@Path("/GetPositionTypeList")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<String> producePostitionTypeList(String message)
+	public List<String> producePositionTypeList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 
@@ -301,10 +300,10 @@ public class UserService {
 	}
 
 	@POST
-	@Path("/GetPostitionTitleList")
+	@Path("/GetPositionTitleList")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<String> producePostitionTitleList(String message)
+	public List<String> producePositionTitleList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 

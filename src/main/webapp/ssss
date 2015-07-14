@@ -1,0 +1,84 @@
+public List<UserInfo> findUsersForGrid(int offset, int limit,
+			String userName, String college, String department,
+			String positionType, String positionTitle, Boolean isActive)
+			throws UnknownHostException {
+		Datastore ds = getDatastore();
+		// ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+
+		// TODO: add filters based on attributes
+		// Set UserAccount based on userName
+
+		Query<UserInfo> q = ds.createQuery(UserInfo.class);
+		
+			//if (userName != null) {
+			//List<UserAccount> userRef = ds.find(UserAccount.class)
+			//		.field("username").contains(userName).asList();
+			//for (UserAccount userAccount : userRef) {
+			//	q.field("user id").equal(userAccount);
+			//}
+		//}
+
+		if (firstName != null) {
+			q.field("first name").contains(firstName);
+		}
+
+		if (college != null) {
+			q.field("details.college").contains(college);
+		}
+		if (department != null) {
+			q.field("details.department").contains(department);
+		}
+
+		if (positionTitle != null) {
+			q.field("details.position title").contains(positionTitle);
+		}
+
+		if (positionType != null) {
+			q.field("details.position type").contains(positionType);
+		}
+
+		if (isActive != null) {
+			// TODO: can we do with UserAccount "is deleted" rather than
+			// UserProfile "is deleted"
+			q.field("is deleted").equal(!isActive);
+		}
+		// q.field("details.college").hasThisOne(pd.getCollege());
+		List<UserInfo> userProfiles = q.offset(offset).limit(limit).asList();
+
+		return userProfiles;
+
+		// int rowTotal = userProfiles.size();
+		// for (UserProfile userProfile : userProfiles) {
+		// UserInfo user = new UserInfo();
+		// user.setRowTotal(rowTotal);
+		// user.setId(userProfile.getId().toString());
+		// user.setUserName(userProfile.getUserAccount().getUserName());
+		// user.setFullName(userProfile.getFirstName() + " "
+		// + userProfile.getMiddleName() + " "
+		// + userProfile.getLastName());
+		//
+		// // TODO: TO bind the PI, Co-PI and Senior Proposal Count
+		// user.setNoOfPIedProposal(CountPIProposal(userProfile));
+		// user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
+		// user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
+		// // Date today = Calendar.getInstance().getTime();
+		// //
+		// // SimpleDateFormat formatter = new SimpleDateFormat(
+		// // "yyyy-MM-dd hh.mm.ss");
+		// // String folderName = formatter.format(today);
+		// // // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// // String d = formatter.parse(userProfile.getUserAccount()
+		// // .getAddedOn());
+		// //
+		// // user.setAddedOn(d);
+		// user.setAddedOn(userProfile.getUserAccount().getAddedOn());
+		// // TODO: get the lastUpdated for User here
+		// Date lastUpdated =
+		// userProfile.getAuditLog().get(userProfile.getAuditLog().size()-1).getActivityDate();
+		// user.setLastUpdated(lastUpdated);
+		//
+		// user.setDeleted(userProfile.getUserAccount().isDeleted());
+		// users.add(user);
+		// }
+		// return users;
+	}
