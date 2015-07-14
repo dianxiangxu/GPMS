@@ -63,8 +63,8 @@ public class UserProfile extends BaseEntity {
 	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-	@Property("Keychain")
-	private List<String> proposalKeys = new ArrayList<String>();
+//	@Property("Keychain")
+//	private List<String> proposalKeys = new ArrayList<String>();
 
 	@Reference(value = "user id"/* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
@@ -170,13 +170,13 @@ public class UserProfile extends BaseEntity {
 		this.personalEmails = personalEmails;
 	}
 
-	public List<String> getProposalKeys() {
-		return proposalKeys;
-	}
+//	public List<String> getProposalKeys() {
+//		return proposalKeys;
+//	}
 
-	public void setProposalKeys(List<String> proposalKeys) {
-		this.proposalKeys = proposalKeys;
-	}
+//	public void setProposalKeys(List<String> proposalKeys) {
+//		this.proposalKeys = proposalKeys;
+//	}
 
 	public UserAccount getUserAccount() {
 		return userAccount;
@@ -316,13 +316,13 @@ public class UserProfile extends BaseEntity {
 		return copy;
 	}
 
-	/**
-	 * Delete a proposal key from the list
-	 * 
-	 * @param proposalKey
-	 *            the key to be deleted
-	 */
-	public void deleteProposalKey(String proposalKey) {
-		proposalKeys.remove(proposalKey);
-	}
+//	/**
+//	 * Delete a proposal key from the list
+//	 * 
+//	 * @param proposalKey
+//	 *            the key to be deleted
+//	 */
+//	public void deleteProposalKey(String proposalKey) {
+//		proposalKeys.remove(proposalKey);
+//	}
 }
