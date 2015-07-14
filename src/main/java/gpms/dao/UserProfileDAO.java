@@ -102,29 +102,17 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 					+ userProfile.getMiddleName() + " "
 					+ userProfile.getLastName());
 
-			// TODO: TO bind the PI, Co-PI and Senior Proposal Count
-			user.setNoOfPIedProposal(CountPIProposal(userProfile));
-			user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
-			user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
-			// Date today = Calendar.getInstance().getTime();
-			//
-			// SimpleDateFormat formatter = new SimpleDateFormat(
-			// "yyyy-MM-dd hh.mm.ss");
-			// String folderName = formatter.format(today);
-			// // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			// String d = formatter.parse(userProfile.getUserAccount()
-			// .getAddedOn());
-			//
-			// user.setAddedOn(d);
+			user.setNoOfPIedProposal(countPIProposal(userProfile));
+			user.setNoOfCoPIedProposal(countCoPIProposal(userProfile));
+			user.setNoOfSenioredProposal(countSeniorPersonnel(userProfile));
+
 			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
-			// TODO: get the lastUpdated for User here
 			Date lastUpdated = null;
 			if (userProfile.getAuditLog().size() > 0) {
 				lastUpdated = userProfile.getAuditLog()
 						.get(userProfile.getAuditLog().size() - 1)
 						.getActivityDate();
 			}
-			// Date lastUpdated = new Date();
 			user.setLastUpdated(lastUpdated);
 
 			user.setDeleted(userProfile.getUserAccount().isDeleted());
@@ -208,19 +196,22 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		// return users;
 	}
 
-	private int CountPIProposal(UserProfile userProfile) {
+	private int countPIProposal(UserProfile userProfile) {
+		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class)
 				.field("investigator info.PI.user profile").equal(userProfile)
 				.asList().size();
 	}
 
-	private int CountCoPIProposal(UserProfile userProfile) {
+	private int countCoPIProposal(UserProfile userProfile) {
+		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class)
 				.field("investigator info.CO-PI.user profile")
 				.equal(userProfile).asList().size();
 	}
 
-	private int CountSeniorProposal(UserProfile userProfile) {
+	private int countSeniorPersonnel(UserProfile userProfile) {
+		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class)
 				.field("investigator info.senior personnel.user profile")
 				.equal(userProfile).asList().size();

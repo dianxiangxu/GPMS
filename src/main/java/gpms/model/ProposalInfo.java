@@ -17,6 +17,11 @@ public class ProposalInfo {
 	private Date dateReceived = new Date();
 	private Status proposalStatus = Status.NEW;
 
+	// PI, CO-PI and Senior UserProfiles
+	private InvestigatorRefAndPosition PIUsers = new InvestigatorRefAndPosition();
+	private InvestigatorRefAndPosition COPIUsers = new InvestigatorRefAndPosition();
+	private InvestigatorRefAndPosition seniorPersonnelUsers = new InvestigatorRefAndPosition();
+
 	// ProjectInfo
 	private String projectTitle = new String();
 	private String projectType = new String();
