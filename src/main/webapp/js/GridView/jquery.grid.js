@@ -60,6 +60,10 @@ var fromServer = 0;
 		var ElemDefault = new Array();
 		var ControlClass = new Array();
 
+		// Update On July 13 2015
+		var checkBoxHeaderclass = "";
+		var checkBoxElemclass = "";
+
 		// Updated On 29 May 2011
 		var tdURL = new Array();
 		var QueryPairs = new Array();
@@ -269,6 +273,20 @@ var fromServer = 0;
 																	if (cm.elemClass != undefined) {
 																		var elementclass = cm.elemClass;
 																	}
+
+																	if ($(
+																			'.'
+																					+ elementclass
+																					+ ':not(:disabled):not(:checked)')
+																			.size() == 0) {
+																		$(
+																				'.'
+																						+ controlClass)
+																				.prop(
+																						'checked',
+																						true);
+																	}
+
 																	$(
 																			'.'
 																					+ elementclass)
@@ -520,11 +538,30 @@ var fromServer = 0;
 									}
 								});
 
-				$(Pages).find('a').each(function() {
-					$(this).click(function() {
-						g.invokePagination($(this).attr('alt'));
-					});
-				});
+				$(Pages)
+						.find('a')
+						.each(
+								function() {
+									$(this)
+											.click(
+													function() {
+														g.invokePagination($(
+																this).attr(
+																'alt'));
+														if ($(
+																'.'
+																		+ checkBoxElemclass
+																		+ ':not(:disabled):not(:checked)')
+																.size() == 0) {
+															$(
+																	'.'
+																			+ checkBoxHeaderclass)
+																	.prop(
+																			'checked',
+																			true);
+														}
+													});
+								});
 
 			},
 
@@ -742,11 +779,13 @@ var fromServer = 0;
 
 							if (cm.controlclass != undefined) {
 								var controlClass = cm.controlclass;
+								checkBoxHeaderclass = controlClass;
 								$(chkbox).prop('class', cm.controlclass);
 							}
 
 							if (cm.elemClass != undefined) {
 								var elementclass = cm.elemClass;
+								checkBoxElemclass = elementclass;
 							}
 
 							$(chkbox)
