@@ -7,7 +7,7 @@
 		<AnyOf>
 			<AllOf>
 				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">userProfile</AttributeValue>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">User-Profile</AttributeValue>
 					<AttributeDesignator
 						AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
 						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
@@ -24,7 +24,7 @@
 			<AnyOf>
 				<AllOf>
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">edit</AttributeValue>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Edit</AttributeValue>
 						<AttributeDesignator
 							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
@@ -36,7 +36,7 @@
 		<Condition>
 			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
 					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">ADMIN</AttributeValue>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Admin</AttributeValue>
 					<AttributeDesignator
 						AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
 						Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
