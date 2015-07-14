@@ -103,9 +103,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 					+ userProfile.getLastName());
 
 			// TODO: TO bind the PI, Co-PI and Senior Proposal Count
-			// user.setNoOfPIedProposal(CountPIProposal(userProfile));
-			// user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
-			// user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
+			user.setNoOfPIedProposal(CountPIProposal(userProfile));
+			user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
+			user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
 			// Date today = Calendar.getInstance().getTime();
 			//
 			// SimpleDateFormat formatter = new SimpleDateFormat(
@@ -118,11 +118,13 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			// user.setAddedOn(d);
 			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
 			// TODO: get the lastUpdated for User here
-			// Date lastUpdated = userProfile.getAuditLog()
-			// .get(userProfile.getAuditLog().size() - 1)
-			// .getActivityDate();
-
-			Date lastUpdated = new Date();
+			Date lastUpdated = null;
+			if (userProfile.getAuditLog().size() > 0) {
+				lastUpdated = userProfile.getAuditLog()
+						.get(userProfile.getAuditLog().size() - 1)
+						.getActivityDate();
+			}
+			// Date lastUpdated = new Date();
 			user.setLastUpdated(lastUpdated);
 
 			user.setDeleted(userProfile.getUserAccount().isDeleted());
@@ -134,81 +136,76 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public List<UserProfile> findUsersForGrid(int offset, int limit,
 			String firstName, String college, String department,
 			String postitionTitle, String postitionType, Boolean isActive)
-			throws UnknownHostException 
-	{
+			throws UnknownHostException {
 		Datastore ds = getDatastore();
-		//ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+		// ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 
 		// TODO: add filters based on attributes
 		// Set UserAccount based on userName
 
 		Query<UserProfile> q = ds.createQuery(UserProfile.class);
 
-		if (firstName != null) 
-		{
+		if (firstName != null) {
 			q.field("first name").contains(firstName);
 		}
 
-		if (college != null) 
-		{
+		if (college != null) {
 			q.field("details.college").contains(college);
 		}
-		if (department != null) 
-		{
+		if (department != null) {
 			q.field("details.department").contains(department);
 		}
-		
-		if (postitionTitle != null) 
-		{
+
+		if (postitionTitle != null) {
 			q.field("details.position title").contains(postitionTitle);
 		}
-		
-		if (postitionType != null) 
-		{
+
+		if (postitionType != null) {
 			q.field("details.position type").contains(postitionType);
 		}
-		
-		if (isActive != null) 
-		{
+
+		if (isActive != null) {
 			q.field("is deleted").equals(!isActive);
 		}
-		List<UserProfile> userProfiles = q.batchSize(offset).limit(limit).asList();
-		
+		List<UserProfile> userProfiles = q.offset(offset - 1).limit(limit)
+				.asList();
+
 		return userProfiles;
-		
-//		int rowTotal = userProfiles.size();
-//		for (UserProfile userProfile : userProfiles) {
-//			UserInfo user = new UserInfo();
-//			user.setRowTotal(rowTotal);
-//			user.setId(userProfile.getId().toString());
-//			user.setUserName(userProfile.getUserAccount().getUserName());
-//			user.setFullName(userProfile.getFirstName() + " "
-//					+ userProfile.getMiddleName() + " "
-//					+ userProfile.getLastName());
-//
-//			// TODO: TO bind the PI, Co-PI and Senior Proposal Count
-//			user.setNoOfPIedProposal(CountPIProposal(userProfile));
-//			user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
-//			user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
-//			// Date today = Calendar.getInstance().getTime();
-//			//
-//			// SimpleDateFormat formatter = new SimpleDateFormat(
-//			// "yyyy-MM-dd hh.mm.ss");
-//			// String folderName = formatter.format(today);
-//			// // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			// String d = formatter.parse(userProfile.getUserAccount()
-//			// .getAddedOn());
-//			//
-//			// user.setAddedOn(d);
-//			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
-//			// TODO: get the lastUpdated for User here
-//			Date lastUpdated = userProfile.getAuditLog().get(userProfile.getAuditLog().size()-1).getActivityDate();
-//			user.setLastUpdated(lastUpdated);
-//
-//			user.setDeleted(userProfile.getUserAccount().isDeleted());
-//			users.add(user);
-//		}
-//		return users;
+
+		// int rowTotal = userProfiles.size();
+		// for (UserProfile userProfile : userProfiles) {
+		// UserInfo user = new UserInfo();
+		// user.setRowTotal(rowTotal);
+		// user.setId(userProfile.getId().toString());
+		// user.setUserName(userProfile.getUserAccount().getUserName());
+		// user.setFullName(userProfile.getFirstName() + " "
+		// + userProfile.getMiddleName() + " "
+		// + userProfile.getLastName());
+		//
+		// // TODO: TO bind the PI, Co-PI and Senior Proposal Count
+		// user.setNoOfPIedProposal(CountPIProposal(userProfile));
+		// user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
+		// user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
+		// // Date today = Calendar.getInstance().getTime();
+		// //
+		// // SimpleDateFormat formatter = new SimpleDateFormat(
+		// // "yyyy-MM-dd hh.mm.ss");
+		// // String folderName = formatter.format(today);
+		// // // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// // String d = formatter.parse(userProfile.getUserAccount()
+		// // .getAddedOn());
+		// //
+		// // user.setAddedOn(d);
+		// user.setAddedOn(userProfile.getUserAccount().getAddedOn());
+		// // TODO: get the lastUpdated for User here
+		// Date lastUpdated =
+		// userProfile.getAuditLog().get(userProfile.getAuditLog().size()-1).getActivityDate();
+		// user.setLastUpdated(lastUpdated);
+		//
+		// user.setDeleted(userProfile.getUserAccount().isDeleted());
+		// users.add(user);
+		// }
+		// return users;
 	}
 
 	private int CountPIProposal(UserProfile userProfile) {

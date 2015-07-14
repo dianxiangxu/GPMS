@@ -1006,10 +1006,13 @@ var fromServer = 0;
 					// returnvalue = new Date(n);
 					// // returnvalue = returnvalue.toString();
 					// }
-
-					if (formats == undefined || formats == '')
-						formats = p.dateformat;
-					returnvalue = $.format.date(content, formats);
+					if (content != null) {
+						if (formats == undefined || formats == '')
+							formats = p.dateformat;
+						returnvalue = $.format.date(content, formats);
+					} else {
+						returnvalue = "";
+					}
 					break;
 
 				case "boolean":

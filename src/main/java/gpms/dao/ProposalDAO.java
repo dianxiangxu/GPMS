@@ -7,6 +7,7 @@ import gpms.model.AuditLog;
 import gpms.model.InvestigatorInfo;
 import gpms.model.ProjectInfo;
 import gpms.model.Proposal;
+import gpms.model.ProposalInfo;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
 import gpms.model.UserProfile;
@@ -192,5 +193,15 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	public Proposal proposalById(ObjectId id) throws UnknownHostException {
 		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class).field("_id").equal(id).get();
+	}
+
+	// TODO: For Grid binding
+	public List<ProposalInfo> findProposalsForGrid(int offset, int limit,
+			String projectTitle, String totalCostsFrom, String totalCostsTo,
+			Boolean proposalStatus, String proposedBy, Date receivedOnFrom,
+			Date receivedOnTo, Boolean isActive) throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return null; // Please make sure it bind every details/ fields on
+						// ProposalInfo Object otherwise Grid can't be binded
 	}
 }

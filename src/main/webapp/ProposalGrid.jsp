@@ -754,16 +754,16 @@
 																			style="width: 80px !important;" /></td>
 																		</td>
 
-																		<!-- 																																				<td><label class="cssClassLabel sfLocale"> -->
-																		<!-- 																																						Project Type:</label> <select id="ddlProjectType" -->
-																		<!-- 																																					class="sfListmenu" style="width: 100px;"> -->
-																		<!-- 																																						<option value="0" class="sfLocale">--All--</option> -->
-																		<!-- 																																				</select></td> -->
-																		<!-- 																																				<td><label class="cssClassLabel sfLocale"> -->
-																		<!-- 																																						Type of Request:</label> <select id="ddlTypeOfRequest" -->
-																		<!-- 																																					class="sfListmenu" style="width: 100px;"> -->
-																		<!-- 																																						<option value="0" class="sfLocale">--All--</option> -->
-																		<!-- 																																				</select></td> -->
+																		<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
+																		<!-- 																				Project Type:</label> <select id="ddlProjectType" -->
+																		<!-- 																			class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
+																		<!-- 																		</select></td> -->
+																		<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
+																		<!-- 																				Type of Request:</label> <select id="ddlTypeOfRequest" -->
+																		<!-- 																			class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
+																		<!-- 																		</select></td> -->
 
 																		<td><label class="cssClassLabel sfLocale">
 																				Proposal Status:</label> <select
