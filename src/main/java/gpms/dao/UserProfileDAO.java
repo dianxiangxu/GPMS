@@ -86,13 +86,15 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	 * This is example format for grid Info object bind that is customized to
 	 * bind in grid
 	 */
-	public List<UserInfo> findAllForUserGrid() throws UnknownHostException {
+	public List<UserInfo> findAllForUserGrid(int offset, int limit,
+			String userName, String college, String department,
+			String postitionType, String postitionTitle, Boolean isActive) throws UnknownHostException {
 		Datastore ds = getDatastore();
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 
 		List<UserProfile> userProfiles = ds.createQuery(UserProfile.class)
-				.asList();
-		int rowTotal = userProfiles.size();
+				.offset(offset - 1).limit(limit).asList();
+		int rowTotal = ds.createQuery(UserProfile.class).asList().size();
 		for (UserProfile userProfile : userProfiles) {
 			UserInfo user = new UserInfo();
 			user.setRowTotal(rowTotal);
