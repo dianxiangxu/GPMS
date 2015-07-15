@@ -585,7 +585,7 @@ line-height: 1;
 	padding:10px;
 }
 .sfAccordianheader h2 {
-	background:url(../images/down-arrow.png) no-repeat right 50%;
+	background:url(../../images/down-arrow.png) no-repeat right 50%;
 	color:#3c3c3c !important;
 	margin:0;
 	padding:5px 0;
@@ -598,7 +598,7 @@ line-height: 1;
 	cursor:pointer;
 }
 .sfAccordianholder.Active h2 {
-	background:url(../images/up-arrow.png) no-repeat right 50%;
+	background:url(../../images/up-arrow.png) no-repeat right 50%;
 	border:none;
 }
 
@@ -656,7 +656,7 @@ line-height: 1;
 	margin:0 5px 0 0;
 }
 .sfTabpenelHeader ul li a {
-	background:url(../images/tab-default.gif) repeat-x;
+	background:url(../../images/tab-default.gif) repeat-x;
 	padding:0 15px;
 	-webkit-border-top-left-radius: 3px;
 	-webkit-border-top-right-radius: 3px;
@@ -671,7 +671,7 @@ line-height: 1;
 	line-height:30px;
 }
 .sfTabpenelHeader ul li a:hover, .sfTabpenelHeader ul li.active a {
-	background:url(../images/tab-hover.gif) repeat-x;
+	background:url(../../images/tab-hover.gif) repeat-x;
 	color:#333;
 	position:relative;
 	margin:0 0 -1px 0;
@@ -880,7 +880,7 @@ input.sfDisable, select.sfDisable {
 	outline:none;
 }
 .sfFormwrapper select.sfListmenu {
-	width:200px;
+	width:150px;
 }
 .sfButtonwrapper p {
 	float:left;
@@ -978,28 +978,28 @@ td.sfSelectleftright {
 	border:none;
 }
 .sfSelectallright {
-	background:url(../images/left-right.png) no-repeat 0 0;
+	background:url(../../images/left-right.png) no-repeat 0 0;
 }
 .sfSelectallright:hover {
-	background:url(../images/left-right.png) no-repeat -19px 0;
+	background:url(../../images/left-right.png) no-repeat -19px 0;
 }
 .sfSelectoneright {
-	background:url(../images/left-right.png) no-repeat 0 -19px;
+	background:url(../../images/left-right.png) no-repeat 0 -19px;
 }
 .sfSelectoneright:hover {
-	background:url(../images/left-right.png) no-repeat -19px -19px;
+	background:url(../../images/left-right.png) no-repeat -19px -19px;
 }
 .sfSelectallleft {
-	background:url(../images/left-right.png) no-repeat 0 -38px;
+	background:url(../../images/left-right.png) no-repeat 0 -38px;
 }
 .sfSelectallleft:hover {
-	background:url(../images/left-right.png) no-repeat -19px -38px;
+	background:url(../../images/left-right.png) no-repeat -19px -38px;
 }
 .sfSelectoneleft {
-	background:url(../images/left-right.png) no-repeat 0 -57px;
+	background:url(../../images/left-right.png) no-repeat 0 -57px;
 }
 .sfSelectoneleft:hover {
-	background:url(../images/left-right.png) no-repeat -19px -57px;
+	background:url(../../images/left-right.png) no-repeat -19px -57px;
 }
 .sfFormwrapper table td {
 	padding:5px; vertical-align:middle;
@@ -1071,7 +1071,7 @@ input.cssClassButtonSubmit {padding:7px 10px;}
 }
 
 .sfEdit a {
-	background:url(../images/edit-icon.png) no-repeat 0 50%;
+	background:url(../../images/edit-icon.png) no-repeat 0 50%;
 	font-size:10px; font-weight:normal;
 	text-decoration:none;
 	padding:0 0 20px;
@@ -1109,41 +1109,41 @@ input.cssClassButtonSubmit {padding:7px 10px;}
 }
 .ajax__tab_panel .sftype1.sfMargintop label { padding-left:0;}
 .sftype1 label.sfAdd {
-	background:url(../images/add.png) no-repeat 0 50%; 
+	background:url(../../images/add.png) no-repeat 0 50%; 
 }
 .sftype1 label.sfAdduser {
-	background:url(../images/adduser.png) no-repeat 0 50%;
+	background:url(../../images/adduser.png) no-repeat 0 50%;
 }
 .sftype1 label.sfDelete {
-	background:url(../images/delete.png) no-repeat 0 50%;
+	background:url(../../images/delete.png) no-repeat 0 50%;
 }
 .sftype1 label.sfUpdate {
-	background:url(../images/update.png) no-repeat 0 50%;
+	background:url(../../images/update.png) no-repeat 0 50%;
 }
 .sftype1 label.sfSave {
-	background:url(../images/save.png) no-repeat 0 50%;
+	background:url(../../images/save.png) no-repeat 0 50%;
 }
 .sftype1 label.sfRefresh {
-	background:url(../images/refresh.png) no-repeat 0 50%;
+	background:url(../../images/refresh.png) no-repeat 0 50%;
 }
 .sftype1 label.sfClearlog {
-	background:url(../images/clearlog.png) no-repeat 0 50%;
+	background:url(../../images/clearlog.png) no-repeat 0 50%;
 }
 .sftype1 label.sfInstall {
-	background:url(../images/install-module.png) no-repeat 0 50%;
+	background:url(../../images/install-module.png) no-repeat 0 50%;
 }
 .sftype1 label.sfSearch {
-	background:url(../images/search.png) no-repeat 0 50%;
+	background:url(../../images/search.png) no-repeat 0 50%;
 	display:inline-block;
 }
 .sftype1 label.sfRestart {
-	background:url(../images/restart.png) no-repeat 0 50%;
+	background:url(../../images/restart.png) no-repeat 0 50%;
 }
 .sftype1 label.sfExecute {
-	background:url(../images/execute.png) no-repeat 0 50%;
+	background:url(../../images/execute.png) no-repeat 0 50%;
 }
 .sftype1 label.sfCancel {
-	background:url(../images/delete.png) no-repeat 0 50%;
+	background:url(../../images/delete.png) no-repeat 0 50%;
 }
 /*alignments*/
 .align-right {
@@ -1433,7 +1433,7 @@ tr.sfNotfound td, tr.sfEmptyrow td, div.sfEmptyrow {
 	text-indent:-9999px;
 	height:28px;
 	overflow:hidden;
-	background:url(../images/close.png) no-repeat !important;
+	background:url(../../images/close.png) no-repeat !important;
 	z-index:450;
 }
 .cssClassClose:hover{ border:none; box-shadow:none;-o-box-shadow:none;-webkit-box-shadow:none;}
@@ -1444,7 +1444,7 @@ tr.sfNotfound td, tr.sfEmptyrow td, div.sfEmptyrow {
 	padding:5px 0 !important;
 }
 .sfPopup sfButtonwrapper {
-	background:url(../images/lines.png) repeat-x;
+	background:url(../../images/lines.png) repeat-x;
 	padding-top:10px;
 	margin:10px;
 }
@@ -1453,7 +1453,7 @@ tr.sfNotfound td, tr.sfEmptyrow td, div.sfEmptyrow {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	background:url("../images/info.png") no-repeat scroll 10px center #FFFFFF;
+	background:url("../../images/info.png") no-repeat scroll 10px center #FFFFFF;
 	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.5);
 	-moz-box-shadow: 0 0 2px rgba(0,0,0,.5);
 	box-shadow: 0 0 2px rgba(0,0,0,.5);
@@ -1462,7 +1462,7 @@ tr.sfNotfound td, tr.sfEmptyrow td, div.sfEmptyrow {
 	color:#383838; margin-bottom:20px;
 }
 .sfModuleinfo .sfWarning { 
-    background: url("../images/alert.png") no-repeat 10px center #E2A000;
+    background: url("../../images/alert.png") no-repeat 10px center #E2A000;
 }
 
 .sfModuleinfo p {
@@ -1473,7 +1473,7 @@ tr.sfNotfound td, tr.sfEmptyrow td, div.sfEmptyrow {
 	float:right; margin-top:-3px;
 }
 /*
-.sfLinks a.sfClose { background:url(../images/close.png) no-repeat; opacity:0.8; display:inline-block; width:28px; height:28px; border:none; text-indent:-9999px; }
+.sfLinks a.sfClose { background:url(../../images/close.png) no-repeat; opacity:0.8; display:inline-block; width:28px; height:28px; border:none; text-indent:-9999px; }
 .sfLinks a.sfClose:hover { opacity:1; border:none;}*/
 
 /* context menu  (Page Manager)*/
@@ -1887,10 +1887,10 @@ transition:all .3s ease-out;
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
-	background: transparent url(../images/next-horizontal.png) no-repeat 0 0;
+	background: transparent url(../../images/next-horizontal.png) no-repeat 0 0;
 }
 .sfquicklinks .jcarousel-next-horizontal:hover {
-	background: transparent url(../images/next-horizontal-hover.png) no-repeat 0 0;
+	background: transparent url(../../images/next-horizontal-hover.png) no-repeat 0 0;
 }
 .sfquicklinks .jcarousel-prev-horizontal {
 	position: absolute;
@@ -1899,17 +1899,17 @@ transition:all .3s ease-out;
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
-	background: transparent url(../images/prev-horizontal.png) no-repeat 0 0;
+	background: transparent url(../../images/prev-horizontal.png) no-repeat 0 0;
 }
 .sfquicklinks .jcarousel-prev-horizontal:hover {
-	background: transparent url(../images/prev-horizontal-hover.png) no-repeat 0 0;
+	background: transparent url(../../images/prev-horizontal-hover.png) no-repeat 0 0;
 }
 .sfquicklinks .jcarousel-prev-disabled-horizontal, .sfquicklinks .jcarousel-prev-disabled-horizontal:hover {
-	background: transparent url(../images/prev-horizontal-disable.png) no-repeat 0 0;
+	background: transparent url(../../images/prev-horizontal-disable.png) no-repeat 0 0;
 	cursor:default;
 }
 .sfquicklinks .jcarousel-next-disabled-horizontal, .sfquicklinks .jcarousel-next-disabled-horizontal:hover {
-	background: transparent url(../images/next-horizontal-disable.png) no-repeat 0 0;
+	background: transparent url(../../images/next-horizontal-disable.png) no-repeat 0 0;
 	cursor:default;
 }
 /* Tooltip*/
@@ -1961,7 +1961,7 @@ transition:all .3s ease-out;
 }
 /* Uniform File Upload Css*/
 div.uploader, div.uploader {
-	background-image: url(../images/sprite.png);
+	background-image: url(../../images/sprite.png);
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
@@ -2072,7 +2072,7 @@ filter: alpha(opacity:0);
 	overflow:hidden;
 }
 div.selector, div.selector span, div.checker span, div.radio span, div.uploader, div.uploader span.action, div.button, div.button span {
-	background-image: url(../images/sprite.png);
+	background-image: url(../../images/sprite.png);
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
@@ -2168,10 +2168,10 @@ p.cssClassActionImg a {
 	background:#055E7F
 }
 .ui-accordion .ui-state-active .ui-icon {
-	background: url(../images/up-arrow.png) no-repeat !important;
+	background: url(../../images/up-arrow.png) no-repeat !important;
 }
 .ui-accordion .ui-state-default .ui-icon {
-	background: url(../images/down-arrow.png) no-repeat !important;
+	background: url(../../images/down-arrow.png) no-repeat !important;
 }
 .cssClassAccordionWrapper .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
 	color:#fff
@@ -2345,8 +2345,8 @@ input.cssClassDisplayOrder {
 .ui-dialog .ui-dialog-titlebar-maximize, .ui-dialog .ui-dialog-titlebar-minimize, .ui-dialog .ui-dialog-titlebar-restore { }
 
 
-.sfClear { background:url(../images/clear.png) no-repeat left center; padding-left:20px;}
-.sfCache { background:url(../images/cache.png) no-repeat left center; padding-left:20px;}
+.sfClear { background:url(../../images/clear.png) no-repeat left center; padding-left:20px;}
+.sfCache { background:url(../../images/cache.png) no-repeat left center; padding-left:20px;}
 
 .sfPadding {
 	padding:0px;
@@ -2577,8 +2577,8 @@ border-radius:3px; -webkit-border-radius:3px; -ms-border-radius:3px; -o-border-r
 .sfTutorialWrap ul li.sfTutorialA div.sfTakeTour:after { content:"\e693";  }
 .sfTutorialWrap ul li.sfTutorialB a:after { content:"\e694";  }
 .sfTutorialWrap ul li.sfTutorialA:hover div.sfTakeTour:after, .sfTutorialWrap ul li.sfTutorialB:hover a:after { color:#fff;}
-.sfTutorialWrap ul li.sfTutorialA div.sfTakeTour { background:url(../images/ui-navigation.jpg) no-repeat;}
-.sfTutorialWrap ul li.sfTutorialB a { background:url(../images/about-sageframe.jpg) no-repeat;}
+.sfTutorialWrap ul li.sfTutorialA div.sfTakeTour { background:url(../../images/ui-navigation.jpg) no-repeat;}
+.sfTutorialWrap ul li.sfTutorialB a { background:url(../../images/about-sageframe.jpg) no-repeat;}
 .sfTakeTour  { cursor:pointer;}
 .sfTutorialWrap ul li.sfTutorialA h4 {}
 
@@ -2656,7 +2656,7 @@ p.sfDisplayName {}
 p.sfDisplayName span.sfFormlabel { font-size:13px; margin-right:8px;}
 p.sfDisplayName span.sfFormlabel.sfDefaultName { font-size:16px; font-weight:bold;}
 	
-.sfDefaultImage { background:url(../images/default-avatar.jpg) no-repeat center center; width:120px; min-height:90px; border:1px solid #ccc; padding:4px; width:120px; position:relative; margin-top:15px; margin-bottom:5px;
+.sfDefaultImage { background:url(../../images/default-avatar.jpg) no-repeat center center; width:120px; min-height:90px; border:1px solid #ccc; padding:4px; width:120px; position:relative; margin-top:15px; margin-bottom:5px;
 border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px;}	
 
 .sfProfileimage label { position:absolute; left:138px; top:138px; background:#2a2a2a; padding:6px; color:#fff; text-align:center; font-size:9px; cursor:pointer;
@@ -3006,28 +3006,28 @@ a.cssRssImage:hover:before {color:#ff6017;}
 	color:#000;
 }
 .cssClassFieldSet span.cssClassList {
-	background:url(../images/list.png) no-repeat 0 3px;
+	background:url(../../images/list.png) no-repeat 0 3px;
 	height:18px;
 	width:15px;
 	cursor:pointer;
 	display:inline-block;
 }
 .cssClassFieldSet span.cssClassClose {
-	background:url(../images/close.png) no-repeat 0 3px;
+	background:url(../../images/close.png) no-repeat 0 3px;
 	height:18px;
 	width:15px;
 	cursor:pointer;
 	display:inline-block;
 }
 .cssClassFieldSet span.cssClassRightGreen {
-	background:url(../images/right.jpg) no-repeat 0 3px;
+	background:url(../../images/right.jpg) no-repeat 0 3px;
 	height:18px;
 	width:15px;
 	cursor:pointer;
 	display:inline-block;
 }
 .cssClassFieldSet span.cssClassRight {
-	background:url(../images/right.png) no-repeat 0 3px;
+	background:url(../../images/right.png) no-repeat 0 3px;
 	height:18px;
 	width:15px;
 	cursor:pointer;
@@ -3036,14 +3036,14 @@ a.cssRssImage:hover:before {color:#ff6017;}
 	display:block;
 }
 .cssClassFieldSet span.cssClassDelete {
-	background:url(../images/delete.png) no-repeat 0 0;
+	background:url(../../images/delete.png) no-repeat 0 0;
 	height:18px;
 	width:15px;
 	cursor:pointer;
 	display:inline-block;
 }
 .cssClassFieldSet span.cssClassAdd {
-	background:url(../images/add.png) no-repeat 0 3px;
+	background:url(../../images/add.png) no-repeat 0 3px;
 	height:20px;
 	width:20px;
 	cursor:pointer;
@@ -3051,7 +3051,7 @@ a.cssRssImage:hover:before {color:#ff6017;}
 	z-index:9999;
 }
 .cssClassFieldSet span.cssClassCalendar {
-	background:url(../images/calendar.png) no-repeat 0 3px;
+	background:url(../../images/calendar.png) no-repeat 0 3px;
 	height:18px;
 	width:15px;
 	cursor:pointer;
