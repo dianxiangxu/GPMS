@@ -248,30 +248,26 @@
 			<AnyOf>
 				<AllOf>
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel-List</AttributeValue>
 						<AttributeDesignator
 							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
 							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-					</Match>
-					<AnyOf>
-						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
-							<AttributeDesignator
-								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
-								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
-								DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-						</Match>
-					</AnyOf>
-					<AnyOf>
-						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
-							<AttributeDesignator
-								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
-								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
-								DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-						</Match>
-					</AnyOf>		
+					</Match>					
 				</AllOf>
 			</AnyOf>
 		</Target>
