@@ -159,7 +159,7 @@ $(function() {
 			});
 			$('#txtUserName').removeAttr('disabled');
 
-			$(".AddOption").val("Add More");
+			$(".AddOption").val("+ Add ");
 			$("#dataTable tr:gt(1)").remove();
 
 			$('input[name=chkActive]').prop('checked', 'checked');
@@ -1167,7 +1167,7 @@ $(function() {
 
 			// Form Position details Drop downs
 			$('select[name="ddlCollege"]').bind("change", function() {
-				rowIndex = $(this).closest('tr').prevAll().length;
+				rowIndex = $(this).closest('tr').prevAll("tr").length;
 				if ($(this).val() != "0") {
 					usersManage.BindDepartmentDropDown($(this).val(), false);
 				} else {
@@ -1179,7 +1179,7 @@ $(function() {
 					.bind(
 							"change",
 							function() {
-								rowIndex = $(this).closest('tr').prevAll().length;
+								rowIndex = $(this).closest('tr').prevAll("tr").length;
 								if ($('select[name="ddlCollege"]').eq(rowIndex)
 										.val() != "0"
 										&& $(this).val() != "0") {
@@ -1197,7 +1197,7 @@ $(function() {
 					.bind(
 							"change",
 							function() {
-								rowIndex = $(this).closest('tr').prevAll().length;
+								rowIndex = $(this).closest('tr').prevAll("tr").length;
 								if ($('select[name="ddlCollege"]').eq(rowIndex)
 										.val() != "0"
 										&& $('select[name="ddlDepartment"]')
@@ -1344,48 +1344,39 @@ $(function() {
 				}
 			});
 
-			$("input[type=button].AddOption")
-					.click(
-							function() {
-								if ($(this).prop("name") == "DeleteOption") {
-									var t = $(this).closest('tr');
+			$("input[type=button].AddOption").click(
+					function() {
+						if ($(this).prop("name") == "DeleteOption") {
+							var t = $(this).closest('tr');
 
-									t.find("td").wrapInner(
-											"<div style='DISPLAY: block'/>")
-											.parent().find("td div").slideUp(
-													300, function() {
-														t.remove();
-													});
+							t.find("td").wrapInner(
+									"<div style='DISPLAY: block'/>").parent()
+									.find("td div").slideUp(300, function() {
+										t.remove();
+									});
 
-								} else if ($(this).prop("name") == "AddMore") {
-									var cloneRow = $(this).closest('tr').clone(
-											true);
-									$(cloneRow).find("input").each(
-											function(i) {
-												if ($(this).hasClass(
-														"AddOption")) {
-													$(this).prop("name",
+						} else if ($(this).prop("name") == "AddMore") {
+							var cloneRow = $(this).closest('tr').clone(true);
+							$(cloneRow).find("input").each(
+									function(i) {
+										if ($(this).hasClass("AddOption")) {
+											$(this)
+													.prop("name",
 															"DeleteOption");
-													$(this).prop("value",
-															"Delete Option");
-												}
-												$(this).parent('td').find(
-														'span').removeClass(
-														'error');
-												$(this).removeClass('error');
-											});
-									$(cloneRow).appendTo("#dataTable");
-									rowIndex = $(cloneRow).closest('tr')
-											.prevAll().length;
-									usersManage.BindDepartmentDropDown($(
-											'select[name="ddlCollege"]').eq(
-											rowIndex).val(), false);
-									$('#dataTable tr:last').hide();
-									$('#dataTable tr:last td').fadeIn('slow');
-									$('#dataTable tr:last').show();
-									$('#dataTable tr:last td').show();
-								}
-							});
+											$(this).prop("value", "Delete");
+										}
+										$(this).parent('td').find('span')
+												.removeClass('error');
+										$(this).removeClass('error');
+									});
+							$(cloneRow).appendTo("#dataTable");
+							rowIndex = $('#dataTable > tbody tr').size() - 1;
+							usersManage.BindDepartmentDropDown($(
+									'select[name="ddlCollege"]').eq(rowIndex)
+									.val(), false);
+							$('#dataTable tr:last td').fadeIn('slow');
+						}
+					});
 			$("#btnSearchUser").bind("click", function() {
 				usersManage.SearchUsers();
 				return false;

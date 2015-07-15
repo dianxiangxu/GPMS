@@ -880,7 +880,7 @@ input.sfDisable, select.sfDisable {
 	outline:none;
 }
 .sfFormwrapper select.sfListmenu {
-	width:200px;
+	width:150px;
 }
 .sfButtonwrapper p {
 	float:left;
