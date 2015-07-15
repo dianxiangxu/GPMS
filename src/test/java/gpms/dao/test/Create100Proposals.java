@@ -36,6 +36,7 @@ public class Create100Proposals
 	ProposalDAO newProposalDAO;
 	String dbName = "GPMS";
 	final int MAXIMUM_PROPOSALS = 100; //Adjust this to make more or less profiles with the generator.
+	
 
 	@Before
 	public void initiate() 
@@ -55,6 +56,7 @@ public class Create100Proposals
 		//We'll have up to 4 co-pi's added, and up to 2 senior personnel added
 		List<UserProfile> masterList = newUserProfileDAO.findAll();
 		List<UserProfile> pullList = newUserProfileDAO.findAll();
+		int propNumb=0;
 
 		while(!pullList.isEmpty())
 		{
@@ -104,9 +106,11 @@ public class Create100Proposals
 			
 			newProposal.setSponsorAndBudgetInfo(newSandBud);
 			newProposal.setInvestigatorInfo(newInfo);
-			String propNumb = ""+(choice-1);
-			newProposal.setProposalNo(propNumb);
+			String propNumbString = ""+propNumb;
+			newProposal.setProposalNo(propNumbString);
 			newProposalDAO.save(newProposal);
+			propNumb++;
+			
 		}
 
 
