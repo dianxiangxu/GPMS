@@ -685,8 +685,9 @@ var fromServer = 0;
 															var arg = new Array();
 															// var argus = null;
 															arg[0] = primaryID[k];
-															arg[1] = p.pnew;
-															arg[2] = p.current;
+															// arg[1] = p.pnew;
+															// arg[2] =
+															// p.current;
 
 															if (arguments != '') {
 																var argus = arguments

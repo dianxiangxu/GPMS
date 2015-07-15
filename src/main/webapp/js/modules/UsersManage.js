@@ -321,13 +321,13 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '1,8'
+					arguments : '8'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
 					enable : true,
 					_event : 'click',
-					trigger : '4',
+					trigger : '3',
 					callMethod : 'usersManage.ActiveUser',
 					arguments : '8'
 				}, {
@@ -335,7 +335,7 @@ $(function() {
 					name : 'deactivate',
 					enable : true,
 					_event : 'click',
-					trigger : '5',
+					trigger : '4',
 					callMethod : 'usersManage.DeactiveUser',
 					arguments : '8'
 				} ],
