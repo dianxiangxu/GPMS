@@ -22,7 +22,7 @@ public class Test
 		//ac.getXACMLdecision("Co-PI", "Co-PI-List", "View");
 		//ac.getXACMLdecision("Senior-Personnel", "Co-PI-List", "Edit");
 		//ac.getXACMLdecision("Senior-Personnel", "Co-PI-List", "View");
-		ac.getXACMLdecision("PI", "Senior-Personnel-List", "View");
+		//ac.getXACMLdecision("PI", "Senior-Personnel-List", "View");
 		//ac.getXACMLdecision("PI", "Senior-Personnel-List", "View");
 		//ac.getXACMLdecision("Co-PI", "Senior-Personnel-List", "Edit");
 		//ac.getXACMLdecision("Co-PI", "Senior-Personnel-List", "View");

@@ -88,7 +88,7 @@
 			</Apply>
 		</Condition>
 	</Rule>
-	<Rule Effect="Permit" RuleId="PI-Views-Edits-Co-PI-List"><!--Rule:PI can view/edit Co-PI -->
+	<Rule Effect="Permit" RuleId="PI-Views-Edits-Co-PI-List"><!--Rule:PI can view/edit Co-PIp-List -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -131,7 +131,7 @@
 		</Condition>
 	</Rule>
 	<Rule Effect="Permit" RuleId="People-That-Can-View-Co-PI-List">
-		<!--Rule:Co-PI/Senior-Personnel can view Co-PI-List -->
+		<!--Rule:Co-PI/Senior-Personnel/Chair/Dean/Business-Manager/Research-Administrator/Research-Director can view Co-PI-List -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -255,6 +255,15 @@
 							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
 					</Match>
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel-List</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
 						<AttributeDesignator
 							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
@@ -267,9 +276,9 @@
 							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
 							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-					</Match>					
+					</Match>	
 				</AllOf>
-			</AnyOf>
+			</AnyOf>							
 		</Target>
 		<Condition>
 			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
@@ -293,7 +302,7 @@
 		</Condition>
 	</Rule>
 	<Rule Effect="Permit" RuleId="People-That-Can-View-Senior-Personel-List">
-		<!--Rule:Senior-Personnel can view SeniorPersonnel List -->
+		<!--Rule:Senior-Personnel/Chair/Dean/Business-Manager/Research-Administrator/Research-Director can view SeniorPersonnel List -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -331,6 +340,22 @@
 				<AllOf>
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Dean</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel-List</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Business-Manager</AttributeValue>
 						<AttributeDesignator
 							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
 							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
@@ -389,7 +414,7 @@
 		</Condition>
 	</Rule>
 	<Rule Effect="Permit" RuleId="PI/Research-Administrator-View-Edits-Project-Info">
-		<!--Rule:PI can view/edit Project-Inf -->
+		<!--Rule:PI/Research-Administrator can view/edit Project-Inf -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -448,7 +473,7 @@
 		</Condition>
 	</Rule>
 	<Rule Effect="Permit" RuleId="People-That-Can-View-Project-Info">
-		<!--Rule:Co-PI/Senior-Personnel can view ProjectInfo -->
+		<!--Rule:Co-PI/Senior-Personnel/Chair/Dean/Business-Manager/Research-Director can view ProjectInfo -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -543,8 +568,8 @@
 			</Apply>
 		</Condition>
 	</Rule>
-	<Rule Effect="Permit" RuleId="PI-View-Edits-Sponsor-And-Budget-Info">
-		<!--Rule:PI can view/edit Project-Inf -->
+	<Rule Effect="Permit" RuleId="PI/Research-Administrator/Business-Manager-View-Edits-Sponsor-And-Budget-Info">
+		<!--Rule:PI/Research-Administrator/Business-Manager can view/edit Project-Inf -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -618,8 +643,8 @@
 			</Apply>
 		</Condition>
 	</Rule>
-	<Rule Effect="Permit" RuleId="Co-PI/Senior-Personnel-View-Project-Info">
-		<!--Rule:Co-PI/Senior-Personnel can view ProjectInfo -->
+	<Rule Effect="Permit" RuleId="People-That-Can-View-Project-Info">
+		<!--Rule:Co-PI/Senior-Personnel/Chair/Dean/Research-Director can view ProjectInfo -->
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -696,6 +721,177 @@
 					</Match>
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Spon-And-Budg-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+				<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+				<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+				<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+					Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+					DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+			</Apply>
+		</Condition>
+	</Rule>
+	<Rule Effect="Permit" RuleId="PI/Research-Administrator-View-Edits-Cost-Share-Info">
+		<!--Rule:PI/Research-Administrator can view/edit Cost-Share-Info -->
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Research-Administrator</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Edit</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+	<Rule Effect="Permit" RuleId="People-That-Can-View-Cost-Share-Info">
+		<!--Rule:Co-PI/Senior-Personnel/Chair/Dean/Business-Manager/Research-Director can view ProjectInfo -->
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Chair</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Dean</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Business-Manager</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Research-Director</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Cost-Share-Info</AttributeValue>
 						<AttributeDesignator
 							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
