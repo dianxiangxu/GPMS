@@ -1,0 +1,50 @@
+<!--
+ Copyright 2010 Blue Lotus Software, LLC.
+ Copyright 2010 John Yeary.
+ Copyright 2006 Pete Freitag
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>Apache Commons File Upload Example 2</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript">
+            var upload_number = 2;
+            function addFileInput() {
+                var d = document.createElement("div");
+                var file = document.createElement("input");
+                file.setAttribute("type", "file");
+                file.setAttribute("name", "attachment"+upload_number);
+                d.appendChild(file);
+                document.getElementById("moreUploads").appendChild(d);
+                upload_number++;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Apache Commons File Upload Example 2</h1>
+        <p>This example uploads a multiple files, but the user must select them individually.</p>
+        <p>
+            Example adapted from Pete Freitag <a href="http://www.petefreitag.com/item/587.cfm">Uploading Files Like GMail Attachments</a>.
+        </p>
+        <form id="form2" enctype="multipart/form-data" method="post" action="CommonsFileUploadServlet">
+            <input type="file" name="attachment" id="attachment" onchange="document.getElementById('moreUploadsLink').style.display = 'block';" />
+            <div id="moreUploads"></div>
+            <div id="moreUploadsLink" style="display:none;"><a href="javascript:addFileInput();">Attach Another File</a></div>
+            <input type="submit" value="Upload File"/>
+        </form>
+    </body>
+</html>
