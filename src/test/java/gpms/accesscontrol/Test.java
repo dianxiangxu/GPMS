@@ -29,11 +29,11 @@ public class Test
 		//ac.getXACMLdecision("Senior-Personnel", "Senior-Personnel-List", "Edit");
 		//ac.getXACMLdecision("Senior-Personnel", "Senior-Personnel-List", "View");
 		//ac.getXACMLdecision("PI", "Project-Info", "View");
-		//ac.getXACMLdecision("PI", "Project-Info", "Edit");
+		ac.getXACMLdecision("PI", "Project-Info", "Edit");
 		//ac.getXACMLdecision("Co-PI", "Project-Info", "View");
 		//ac.getXACMLdecision("Co-PI", "Project-Info", "Edit");
 		//ac.getXACMLdecision("Senior-Personnel", "Project-Info", "View");
-		//ac.getXACMLdecision("Admin", "User-Profile", "Edit");
+		//ac.getXACMLdecision("Research-Administrator", "OSP-Section", "Edit");
 		
 		//String decision = ac.getXACMLdecision("PI", "Project-Info", "View");
 		//System.out.println(decision);
