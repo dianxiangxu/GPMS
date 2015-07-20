@@ -109,7 +109,7 @@ public class addNewProposalDAOTest {
 		Date date = new Date();
 
 		System.out.println("Now adding Date Received...");
-		pdao.setEditDateReceivedr(prop, date, piProfile);
+		pdao.setEditDateReceived(prop, date, piProfile);
 		assertTrue(prop.getDateReceived().equals(date));
 
 		System.out.println("Now adding Proposal Status...");
