@@ -75,6 +75,14 @@ public class Create100UsersTest {
 			
 			newProfile.setLastName(lastName);
 			newProfile.setUserId(newAccount);
+			newProfile.getHomeNumbers().add("208-466-1200");
+			newProfile.getOfficeNumbers().add("208-494-7492");
+			newProfile.getMobileNumbers().add("208-702-4522");
+			newProfile.getWorkEmails().add("workman@worksite.org");
+			newProfile.getPersonalEmails().add("supercoolbro@yahoo.com");
+			
+			newUserProfileDAO.addHomeNumber(newProfile, newProfile, "208-938-9302");
+			newUserProfileDAO.addWorkEmail(newProfile, newProfile, "alternatecontact@officialplace.com");
 			
 			//Add two Position Detail objects to the user profile
 			setTheDeets(newProfile);

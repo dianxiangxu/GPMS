@@ -69,7 +69,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		}
 	}
 
-	public void setEditDateReceivedr(Proposal proposal, Date date,
+	public void setEditDateReceived(Proposal proposal, Date date,
 			UserProfile author) {
 		if (!proposal.getDateReceived().equals(date)) {
 			Datastore ds = getDatastore();
