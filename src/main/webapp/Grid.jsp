@@ -1,0 +1,614 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta content="Manage Users" name="DESCRIPTION">
+<meta content="Manage Users" name="KEYWORDS">
+<meta content="@GPMS" name="COPYRIGHT">
+<meta content="GENERATOR" name="GENERATOR">
+<meta content="Author" name="AUTHOR">
+<meta content="DOCUMENT" name="RESOURCE-TYPE">
+<meta content="GLOBAL" name="DISTRIBUTION">
+<meta content="INDEX, FOLLOW" name="ROBOTS">
+<meta content="1 DAYS" name="REVISIT-AFTER">
+<meta content="GENERAL" name="RATING">
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+<!-- Mimic Internet Explorer 7 -->
+<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
+<meta content="RevealTrans(Duration=0,Transition=1)"
+	http-equiv="PAGE-ENTER">
+<link type="icon shortcut" media="icon" href="favicon.ico">
+<!--[if IE 9]>
+        <link rel="stylesheet" href="css/ie9.css" type="text/css" media="screen"/><![endif]-->
+<!--[if lt IE 9]>
+        <link rel="stylesheet" href="css/IE.css" type="text/css" media="screen"/><![endif]-->
+<!--[if lt IE 7]>
+        <script type="text/javascript" src="js/core/IE8.js"></script>
+    <![endif]-->
+<title>Grid Example</title>
+
+<script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
+	$.ajaxSetup({
+		'beforeSend' : function(xhr) {
+			xhr.setRequestHeader("ASPX-TOKEN", _aspx_token);
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	//<![CDATA[
+	var gpmsAppPath = "";
+	var gpmsUserName = "superuser";
+	var gpmsCurrentCulture = "en-US";
+	var gpmsHostURL = "http://localhost:8181/GPMS/";
+	var gpmsSecureToken = "GPMS.AUTHjxr30wycjzvpqd0jv3vkybx4ZADJX9SLOC1";
+
+	var gpmsServicePath = "REST/";
+	var gpmsRootPath = "http://localhost:8181/GPMS/";
+	var userProfileId = "1";
+	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
+	var clientIPAddress = "::1";
+	var gpmsCountryName = "RESERVED";
+	var gpmsRedirectPath = "/";
+
+	var logInURL = "login";
+	var pageExtension = ".jsp";
+	//]]>
+</script>
+
+<script type="text/javascript"
+	src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+<script type="text/javascript" src="js/core/gpmscore.js"></script>
+
+<!-- For Side Bar Navigation -->
+<script type="text/javascript" src="js/core/dashboard.js"></script>
+<script type="text/javascript" src="js/sidebar_accordian.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript"
+	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
+
+<!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
+<script type="text/javascript"
+	src="js/modules/Language/CoreJsLanguage.js"></script>
+
+<script type="text/javascript" src="js/core/json2.js"></script>
+
+<script type="text/javascript" src="js/jquery-browser.js"></script>
+<script type="text/javascript" src="js/jquery.uniform.js"></script>
+
+<script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
+
+<script type="text/javascript" src="js/GridView/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="js/GridView/jquery.grid.js"></script>
+<script type="text/javascript" src="js/GridView/SagePaging.js"></script>
+<script type="text/javascript" src="js/GridView/jquery.global.js"></script>
+<script type="text/javascript" src="js/GridView/jquery-dateFormat.js"></script>
+
+<script type="text/javascript" src="js/MessageBox/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/MessageBox/alertbox.js"></script>
+
+<script type="text/javascript" src="js/AjaxFileUploader/ajaxupload.js"></script>
+
+<script type="text/javascript"
+	src="js/ckeditor_4.5.1_full/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"
+	src="js/ckeditor_4.5.1_full/ckeditor/adapters/jquery.js"></script>
+
+
+<!-- <script type="text/javascript" src="js/core/Session.js"></script> -->
+<script type="text/javascript" src="js/core/encoder.js"></script>
+
+<script type="text/javascript" src="js/modules/UsersManage.js"></script>
+<script type="text/javascript"
+	src="js/modules/Language/GPMSUsersManagement.js"></script>
+<!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
+
+<link type="text/css" rel="stylesheet"
+	href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css" />
+<link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
+<link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
+
+<link type="text/css" rel="stylesheet" href="css/Templates/grid.css" />
+<link type="text/css" rel="stylesheet"
+	href="css/Templates/topstickybar.css" />
+<link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
+</head>
+<body>
+	<form enctype="multipart/form-data" action="Manage-Users.jsp"
+		method="post" name="form1">
+		<div style="display: none;" id="UpdateProgress1" role="status"
+			aria-hidden="true">
+
+			<div class="sfLoadingbg">&nbsp;</div>
+			<div class="sfLoadingdiv">
+				<img style="border-width: 0px;" alt="Loading..."
+					src="images/ajax-loader.gif" title="Loading..." id="imgProgress">
+				<br> <span id="lblPrgress">Please wait...</span>
+			</div>
+
+		</div>
+		<noscript>
+			<span>This page requires java-script to be enabled. Please
+				adjust your browser-settings.</span>
+		</noscript>
+
+		<div id="sfOuterwrapper">
+			<div class="sfSagewrapper">
+
+				<!--Body Content-->
+				<div class="sfContentwrapper clearfix">
+					<div id="divCenterContent">
+						<!-- Side Bar Starts-->
+						<div class="sideBarLeft" id="divSideBar">
+							<%@ include file="Sidebar.jsp"%>
+						</div>
+						<!-- Side Bar Ends -->
+
+						<div class="sfMaincontent">
+							<div style="display: block" class="sfCpanel sfInnerwrapper"
+								id="divBottompanel">
+								<div class="">
+									<div class="sfModulecontent clearfix">
+
+										<script type="text/javascript">
+											//<![CDATA[
+											$(function() {
+												$(".sfLocale")
+														.localize(
+																{
+																	moduleKey : gpmsUsersManagement
+																});
+											});
+											//]]>
+										</script>
+
+										<!-- Grid -->
+										<div id="divUserGrid">
+											<div class="cssClassCommonBox Curve">
+												<div class="cssClassHeader">
+													<h1>
+														<span>Manage Users</span>
+													</h1>
+													<div class="cssClassHeaderRight">
+														<div class="sfButtonwrapper">
+															<p>
+																<button type="button" id="btnAddNew" class="sfBtn">
+																	<span class="sfLocale icon-addnew">Add New User</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnDeleteSelected"
+																	class="sfBtn">
+																	<span class="sfLocale icon-delete">Delete All
+																		Selected</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnExportToExcel"
+																	class="sfBtn">
+																	<span class="sfLocale icon-showall">Export to
+																		Excel</span>
+																</button>
+															</p>
+															<p>
+																<button type="button" id="btnExportToCSV" class="sfBtn">
+																	<span class="sfLocale icon-showall">Export to
+																		CSV</span>
+																</button>
+															</p>
+
+															<div class="cssClassClear"></div>
+														</div>
+														<div class="cssClassClear"></div>
+													</div>
+													<div class="cssClassClear"></div>
+												</div>
+												<div class="sfGridwrapper">
+													<div class="sfGridWrapperContent">
+														<div class="sfFormwrapper sfTableOption">
+															<table width="100%" cellspacing="0" cellpadding="0"
+																border="0">
+																<tbody>
+																	<tr>
+																		<td><label class="cssClassLabel sfLocale">User
+																				Name:</label> <input type="text" class="sfTextBoxSmall"
+																			id="txtSearchUserName" /></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				College:</label> <select id="ddlSearchCollege"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Department:</label> <select id="ddlSearchDepartment"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Position Type:</label> <select id="ddlSearchPositionType"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<td><label class="cssClassLabel sfLocale">
+																				Position Title:</label> <select id="ddlSearchPositionTitle"
+																			class="sfListmenu" style="width: 100px;">
+																				<option value="0" class="sfLocale">--All--</option>
+																		</select></td>
+
+																		<!-- <td width="315"><label
+																			class="cssClassLabel sfLocale"> Added On:</label><br />
+																			<span class="label sfLocale"> From :</span> <input
+																			type="text" id="txtSearchAddedOnFrom"
+																			class="sfTextBoxSmall"
+																			style="width: 80px !important;" /> <span
+																			class="label sfLocale"> To :</span> <input
+																			type="text" id="txtSearchAddedOnTo" class="sfTextBoxSmall"
+																			style="width: 80px !important;" /></td> -->
+																		<td><label class="cssClassLabel sfLocale">
+																				Active:</label> <select id="ddlSearchIsActive"
+																			class="sfListmenu" style="width: 85px;">
+																				<option value="" class="sfLocale">--All--</option>
+																				<option value="True" class="sfLocale">True</option>
+																				<option value="False" class="sfLocale">False</option>
+																		</select></td>
+																		<td>
+																			<button class="sfBtn" id="btnSearchUser"
+																				type="button">
+																				<span class="sfLocale icon-search">Search</span>
+																			</button>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<div class="loading">
+															<img id="ajaxLoader" src="" class="sfLocale"
+																alt="loading...." title="loading...." />
+														</div>
+														<div class="log"></div>
+														<table id="gdvUsers" cellspacing="0" cellpadding="0"
+															border="0" width="100%"></table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End of Grid -->
+										<!-- form -->
+										<div id="divUserForm" style="display: none">
+											<div class="cssClassCommonBox Curve">
+												<div class="cssClassHeader">
+													<h1>
+														<span id="lblFormHeading">General Information</span>
+													</h1>
+												</div>
+												<div class="cssClassTabPanelTable">
+													<div id="container-7">
+														<ul>
+															<li><a href="#fragment-1"> <span
+																	id="lblTabTitle1">General Information</span>
+															</a></li>
+															<li><a href="#fragment-2"> <span
+																	id="lblTabTitle2">User Position Details</span>
+															</a></li>
+															<li><a href="#fragment-3"> <span
+																	id="lblTabTitle3">User Login Credentials</span>
+															</a></li>
+															<li id="auditLogTab"><a href="#fragment-4"> <span
+																	id="lblTabTitle4">Audit Logs</span>
+															</a></li>
+														</ul>
+														<div id="fragment-1">
+															<div class="sfFormwrapper">
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblUserName">First
+																					Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtFirstName" />
+																				<span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblMiddleName">Middle Name:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" class="sfInputbox" id="txtMiddleName" /></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblLastName">Last
+																					Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtLastName" />
+																				<span class="cssClassRequired">*</span></td>
+																		</tr>
+
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblAddress">Address:</span></td>
+																			<td class="cssClassTableRightCol"></td>
+																		</tr>
+
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblStreet">Street:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtStreet" /> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblCity">City:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtCity" /> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblState">State:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtState" /> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblZipcode">Zip
+																					Code:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtZipcode" /> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblCountry">Country:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtCountry" /> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblOfficeNumber">Office Number:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" class="sfInputbox" id="txtOfficeNumber" />
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblMobileNumber">Mobile Number:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtMobileNumber" />
+																				<span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblHomeNumber">Home Number:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" class="sfInputbox" id="txtHomeNumber" />
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblWorkEmail">Work Email:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtWorkEmail" />
+																				<span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblPersonalEmail">Personal Email:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" class="sfInputbox" id="txtPersonalEmail" />
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblActive">Active:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="checkbox" name="chkActive"
+																				class="cssClassCheckBox" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div id="fragment-2">
+															<div class="sfFormwrapper">
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel">Position
+																					Details:</span> <span class="cssClassRequired">*</span></td>
+																			<td class="cssClassTableRightCol">
+																				<table id="dataTable" cellspacing="0"
+																					cellpadding="0" border="0" width="100%">
+																					<thead>
+																						<tr>
+																							<th><span class="cssClassLabel">College:</span><span
+																								class="cssClassRequired">*</span></th>
+																							<th><span class="cssClassLabel">Department:</span><span
+																								class="cssClassRequired">*</span></th>
+																							<th><span class="cssClassLabel">Position
+																									Type:</span><span class="cssClassRequired">*</span></th>
+																							<th><span class="cssClassLabel">Position
+																									Title:</span><span class="cssClassRequired">*</span></th>
+
+																							<th></th>
+																						</tr>
+																					</thead>
+																					<tbody>
+																						<tr>
+																							<td><select title="College Name"
+																								class="sfListmenu" name="ddlCollege">
+																							</select></td>
+																							<td><select title="Department Name"
+																								class="sfListmenu" name="ddlDepartment">
+																							</select></td>
+																							<td><select title="Position Type"
+																								class="sfListmenu" name="ddlPositionType">
+																							</select></td>
+																							<td><select title="Position Title"
+																								class="sfListmenu" name="ddlPositionTitle">
+																							</select></td>
+																							<td><input type="Button" value="Add More"
+																								name="AddMore"
+																								class="AddOption cssClassButtonSubmit sfLocale" />
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div id="fragment-3">
+															<div class="sfFormwrapper">
+																<table cellspacing="0" cellpadding="0" border="0">
+																	<tbody>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblUserName">User
+																					Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtUserName" />
+																				<span class="cssClassRight"> <img
+																					class="cssClassSuccessImg sfLocale" height="13"
+																					width="18" title="Right" src="" alt="Right" />
+																			</span> <b class="cssClassError sfLocale">Ops! found
+																					something error, must be unique with no spaces</b> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel" id="lblPassword">Password:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox" id="txtPassword" />
+																				<span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span class="cssClassLabel"
+																				id="lblConfirmPassword">Confirm Password:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" class="sfInputbox"
+																				id="txtConfirmPassword" /> <span
+																				class="cssClassRequired">*</span></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div id="fragment-4">
+															<div id="divUserGrid">
+																<div class="cssClassCommonBox Curve">
+																	<div class="sfGridwrapper">
+																		<div class="sfGridWrapperContent">
+																			<div class="sfFormwrapper sfTableOption">
+																				<table width="100%" cellspacing="0" cellpadding="0"
+																					border="0">
+																					<tbody>
+																						<tr>
+																							<td><label class="cssClassLabel sfLocale">
+																									Action:</label> <input type="text" class="sfInputbox"
+																								id="txtSearchAction" /></td>
+																							<td><label class="cssClassLabel sfLocale">
+																									Audited By:</label> <input type="text"
+																								class="sfInputbox" id="txtSearchAuditedBy" /></td>
+																							<td><label class="cssClassLabel sfLocale">
+																									Activity On From:</label> <input type="text"
+																								class="sfInputbox" id="txtSearchActivityOnFrom" /></td>
+																							<td><label class="cssClassLabel sfLocale">
+																									Activity On To:</label> <input type="text"
+																								class="sfInputbox" id="txtSearchActivityOnTo" /></td>
+
+																							<td><button class="sfBtn"
+																									id="btnSearchUserAuditLog" type="button">
+																									<span class="sfLocale icon-search">Search</span>
+																								</button></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</div>
+																			<div class="loading">
+																				<img id="ajaxLoader" src="" class="sfLocale"
+																					alt="loading...." title="loading...." />
+																			</div>
+																			<div class="log"></div>
+																			<table id="gdvUsersAuditLog" cellspacing="0"
+																				cellpadding="0" border="0" width="100%"></table>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<table cellspacing="0" cellpadding="0" border="0">
+																<tbody>
+																	<tr>
+																		<td><span class="cssClassLabel">Last
+																				Updated On:</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblLastUpdatedOn" class="cssClassLabel">2015/07/14
+																				10:34:01 AM </span></td>
+																	</tr>
+																	<tr>
+																		<td><span class="cssClassLabel">Last
+																				Updated By:</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblLastUpdatedOn" class="cssClassLabel">firstName0
+																				lastName0 </span></td>
+																	</tr>
+																	<tr>
+																		<td><span class="cssClassLabel">Last
+																				Activity:</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblActivity" class="cssClassLabel">Edited
+																				Username </span></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="sfButtonwrapper">
+												<p>
+													<button type="button" id="btnBack" class="sfBtn">
+														<span class="sfLocale icon-arrow-slim-w">Back</span>
+													</button>
+												</p>
+												<p>
+													<button type="button" id="btnReset" class="sfBtn">
+														<span class="sfLocale icon-refresh">Reset</span>
+													</button>
+												</p>
+												<p>
+													<button type="button" class="delbutton sfBtn">
+														<span class="sfLocale icon-delete">Delete</span>
+													</button>
+												</p>
+												<p>
+													<button type="button" id="btnSaveUser" class="sfBtn">
+														<span class="sfLocale icon-save">Save</span>
+													</button>
+												</p>
+											</div>
+										</div>
+									</div>
+									<!-- End form -->
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!-- END sfMaincontent -->
+
+				</div>
+			</div>
+			<!-- END Body Content sfContentwrapper -->
+
+		</div>
+		</div>
+	</form>
+</body>
+</html>

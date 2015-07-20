@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class AuditLogInfo {
 	private int rowTotal;
-	private String userProfileId = new String();
+	private String userName = new String();
 	private String userFullName = new String();
 	private String action = new String();
 	private Date activityDate = new Date();
@@ -18,14 +18,14 @@ public class AuditLogInfo {
 
 	public void setRowTotal(int rowTotal) {
 		this.rowTotal = rowTotal;
+	}	
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public String getUserProfileId() {
-		return userProfileId;
-	}
-
-	public void setUserProfileId(String userProfileId) {
-		this.userProfileId = userProfileId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserFullName() {

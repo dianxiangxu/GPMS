@@ -773,10 +773,8 @@
 																		</select></td>
 
 																		<td><label class="cssClassLabel sfLocale">
-																				Proposed By:</label> <select id="ddlSearchProposedBy"
-																			class="sfListmenu" style="width: 100px;">
-																				<option value="0" class="sfLocale">--All--</option>
-																		</select></td>
+																				Proposed By:</label><input id="txtSearchProposedBy"
+																			class="sfTextBoxSmall" type="text"></td>
 																		<td><label class="cssClassLabel sfLocale">
 																				Received On:</label><br /> <span class="label sfLocale">
 																				From :</span> <input type="text"

@@ -111,25 +111,25 @@ $(function() {
 			var retString = ''
 			switch (attValType) {
 			case "1":
-				retString = getLocale(gpmsUsersManagement, 'Alphabets Only');
+				retString = getLocale(gpmsProposalsManagement, 'Alphabets Only');
 				break;
 			case "2":
-				retString = getLocale(gpmsUsersManagement, 'AlphaNumeric');
+				retString = getLocale(gpmsProposalsManagement, 'AlphaNumeric');
 				break;
 			case "3":
-				retString = getLocale(gpmsUsersManagement, 'Decimal Number');
+				retString = getLocale(gpmsProposalsManagement, 'Decimal Number');
 				break;
 			case "4":
-				retString = getLocale(gpmsUsersManagement, 'Email Address');
+				retString = getLocale(gpmsProposalsManagement, 'Email Address');
 				break;
 			case "5":
-				retString = getLocale(gpmsUsersManagement, 'Integer Number');
+				retString = getLocale(gpmsProposalsManagement, 'Integer Number');
 				break;
 			case "6":
-				retString = getLocale(gpmsUsersManagement, 'Price error');
+				retString = getLocale(gpmsProposalsManagement, 'Price error');
 				break;
 			case "7":
-				retString = getLocale(gpmsUsersManagement, 'Web URL');
+				retString = getLocale(gpmsProposalsManagement, 'Web URL');
 				break;
 			}
 			return retString;
@@ -145,7 +145,7 @@ $(function() {
 			});
 			proposalsManage.onInit();
 			$('#lblAttrFormHeading').html(
-					getLocale(gpmsUsersManagement, "New Proposal Details"));
+					getLocale(gpmsProposalsManagement, "New Proposal Details"));
 			$(".delbutton").removeAttr("id");
 			$("#btnSaveProposal").removeAttr("name");
 			$('#lblLength').html(getLocale("Length:"));
@@ -216,8 +216,8 @@ $(function() {
 			return false;
 		},
 
-		BindUserGrid : function(userName, college, department, postitionType,
-				postitionTitle, isActive) {
+		BindProposalGrid : function(userName, college, department,
+				postitionType, postitionTitle, isActive) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetUsersList";
 			var offset_ = 1;
@@ -232,205 +232,247 @@ $(function() {
 				PostitionTitle : postitionTitle,
 				IsActive : isActive
 			};
-			$("#gdvProposals").sagegrid({
-				url : this.config.url,
-				functionMethod : this.config.method,
-				colModel : [ {
-					display : 'Proposal ID',
-					name : 'proposal_id',
-					cssclass : 'cssClassHeadCheckBox',
-					coltype : 'checkbox',
-					align : 'center',
-					checkFor : '8', // this is count from 0 column index
-					elemClass : 'attrChkbox',
-					elemDefault : false,
-					controlclass : 'attribHeaderChkbox'
-				}, {
-					display : 'Proposal No',
-					name : 'proposal_no',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Date Received',
-					name : 'date_received',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Proposal Status',
-					name : 'proposal_status',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Project Title',
-					name : 'project_title',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Project Type',
-					name : 'project_type',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Type of Request',
-					name : 'type_of_request',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Due Date',
-					name : 'due_date',
-					cssclass : 'cssClassHeadDate',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
-				}, {
-					display : 'Project Period From',
-					name : 'project_period_from',
-					cssclass : 'cssClassHeadDate',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
-				}, {
-					display : 'Project Period To',
-					name : 'project_period_to',
-					cssclass : 'cssClassHeadDate',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
-				}, {
-					display : 'Project Location',
-					name : 'project_location',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Granting Agencies',
-					name : 'granting_agencies',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Direct Costs',
-					name : 'directCosts',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'FA Costs',
-					name : 'FA_costs',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'Total Costs',
-					name : 'total_costs',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : 'FA Rate',
-					name : 'FA_rate',
-					cssclass : '',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left'
-				}, {
-					display : getLocale(gpmsUsersManagement, 'Last Updated'),
-					name : 'last_updated',
-					cssclass : 'cssClassHeadDate',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
-				}, {
-					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
-					name : 'status',
-					cssclass : 'cssClassHeadBoolean',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'boolean',
-					format : 'Yes/No'
-				}, {
-					display : getLocale(gpmsUsersManagement, 'Actions'),
-					name : 'action',
-					cssclass : 'cssClassAction',
-					coltype : 'label',
-					align : 'center'
-				} ],
+			$("#gdvProposals")
+					.sagegrid(
+							{
+								url : this.config.url,
+								functionMethod : this.config.method,
+								colModel : [
+										{
+											display : 'Proposal ID',
+											name : 'proposal_id',
+											cssclass : 'cssClassHeadCheckBox',
+											coltype : 'checkbox',
+											align : 'center',
+											checkFor : '8', // this is count
+											// from 0 column
+											// index
+											elemClass : 'attrChkbox',
+											elemDefault : false,
+											controlclass : 'attribHeaderChkbox'
+										},
+										{
+											display : 'Proposal No',
+											name : 'proposal_no',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Date Received',
+											name : 'date_received',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Proposal Status',
+											name : 'proposal_status',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Project Title',
+											name : 'project_title',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Project Type',
+											name : 'project_type',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Type of Request',
+											name : 'type_of_request',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Due Date',
+											name : 'due_date',
+											cssclass : 'cssClassHeadDate',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'date',
+											format : 'yyyy/MM/dd hh:mm:ss a'
+										},
+										{
+											display : 'Project Period From',
+											name : 'project_period_from',
+											cssclass : 'cssClassHeadDate',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'date',
+											format : 'yyyy/MM/dd hh:mm:ss a'
+										},
+										{
+											display : 'Project Period To',
+											name : 'project_period_to',
+											cssclass : 'cssClassHeadDate',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'date',
+											format : 'yyyy/MM/dd hh:mm:ss a'
+										},
+										{
+											display : 'Project Location',
+											name : 'project_location',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Granting Agencies',
+											name : 'granting_agencies',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Direct Costs',
+											name : 'directCosts',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'FA Costs',
+											name : 'FA_costs',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Total Costs',
+											name : 'total_costs',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'FA Rate',
+											name : 'FA_rate',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													'Last Updated'),
+											name : 'last_updated',
+											cssclass : 'cssClassHeadDate',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'date',
+											format : 'yyyy/MM/dd hh:mm:ss a'
+										},
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													'Is Deleted?'),
+											name : 'status',
+											cssclass : 'cssClassHeadBoolean',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'boolean',
+											format : 'Yes/No'
+										},
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													'Actions'),
+											name : 'action',
+											cssclass : 'cssClassAction',
+											coltype : 'label',
+											align : 'center'
+										} ],
 
-				buttons : [ {
-					display : getLocale(gpmsUsersManagement, "Edit"),
-					name : 'edit',
-					enable : true,
-					_event : 'click',
-					trigger : '1',
-					callMethod : 'proposalsManage.EditUser',
-					arguments : '1,2,3,4,5,6,7,8'
-				}, {
-					display : getLocale(gpmsUsersManagement, "Delete"),
-					name : 'delete',
-					enable : true,
-					_event : 'click',
-					trigger : '2',
-					callMethod : 'proposalsManage.DeleteUser',
-					arguments : '8'
-				}, {
-					display : getLocale(gpmsUsersManagement, "Activate"),
-					name : 'activate',
-					enable : true,
-					_event : 'click',
-					trigger : '4',
-					callMethod : 'proposalsManage.ActiveUser',
-					arguments : '8'
-				}, {
-					display : getLocale(gpmsUsersManagement, "Deactivate"),
-					name : 'deactivate',
-					enable : true,
-					_event : 'click',
-					trigger : '5',
-					callMethod : 'proposalsManage.DeactiveUser',
-					arguments : '8'
-				} ],
-				rp : perpage,
-				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
-				param : {
-					userBindObj : userBindObj
-				},
-				current : current_,
-				pnew : offset_,
-				sortcol : {
-					0 : {
-						sorter : false
-					},
-					9 : {
-						sorter : false
-					}
-				}
-			});
+								buttons : [
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													"Edit"),
+											name : 'edit',
+											enable : true,
+											_event : 'click',
+											trigger : '1',
+											callMethod : 'proposalsManage.EditUser',
+											arguments : '1,2,3,4,5,6,7,8'
+										},
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													"Delete"),
+											name : 'delete',
+											enable : true,
+											_event : 'click',
+											trigger : '2',
+											callMethod : 'proposalsManage.DeleteUser',
+											arguments : '8'
+										},
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													"Activate"),
+											name : 'activate',
+											enable : true,
+											_event : 'click',
+											trigger : '4',
+											callMethod : 'proposalsManage.ActiveUser',
+											arguments : '8'
+										},
+										{
+											display : getLocale(
+													gpmsProposalsManagement,
+													"Deactivate"),
+											name : 'deactivate',
+											enable : true,
+											_event : 'click',
+											trigger : '5',
+											callMethod : 'proposalsManage.DeactiveUser',
+											arguments : '8'
+										} ],
+								rp : perpage,
+								nomsg : getLocale(gpmsProposalsManagement,
+										'No Records Found!'),
+								param : {
+									userBindObj : userBindObj
+								},
+								current : current_,
+								pnew : offset_,
+								sortcol : {
+									0 : {
+										sorter : false
+									},
+									9 : {
+										sorter : false
+									}
+								}
+							});
 		},
 		FillDefaultValue : function(defaultVal) {
 			var selectedAttributeType = $("#ddlAttributeType :selected").val();
@@ -511,7 +553,7 @@ $(function() {
 			switch (tblID) {
 			case "gdvProposals":
 				$('#lblAttrFormHeading').html(
-						getLocale(gpmsUsersManagement,
+						getLocale(gpmsProposalsManagement,
 								'Edit Proposal Details: ')
 								+ argus[3]);
 				$('#txtAttributeName').prop('disabled', 'disabled');
@@ -610,10 +652,10 @@ $(function() {
 					proposalsManage.DeleteUserById(argus[0]);
 				} else {
 					csscody.alert('<h2>'
-							+ getLocale(gpmsUsersManagement,
+							+ getLocale(gpmsProposalsManagement,
 									"Information Alert")
 							+ '</h2><p>'
-							+ getLocale(gpmsUsersManagement,
+							+ getLocale(gpmsProposalsManagement,
 									"Sorry! this user is already deleted.")
 							+ '</p>');
 				}
@@ -648,9 +690,9 @@ $(function() {
 				}
 			};
 			csscody.confirm("<h2>"
-					+ getLocale(gpmsUsersManagement, "Delete Confirmation")
+					+ getLocale(gpmsProposalsManagement, "Delete Confirmation")
 					+ "</h2><p>"
-					+ getLocale(gpmsUsersManagement,
+					+ getLocale(gpmsProposalsManagement,
 							"Are you sure you want to delete this attribute?")
 					+ "</p>", properties);
 		},
@@ -693,10 +735,10 @@ $(function() {
 				} else {
 					csscody
 							.alert('<h2>'
-									+ getLocale(gpmsUsersManagement,
+									+ getLocale(gpmsProposalsManagement,
 											"Information Alert")
 									+ '</h2><p>'
-									+ getLocale(gpmsUsersManagement,
+									+ getLocale(gpmsProposalsManagement,
 											"Sorry! System attribute can not be deactivated.")
 									+ '</p>');
 				}
@@ -713,10 +755,10 @@ $(function() {
 				} else {
 					csscody
 							.alert('<h2>'
-									+ getLocale(gpmsUsersManagement,
+									+ getLocale(gpmsProposalsManagement,
 											"Information Alert")
 									+ '</h2><p>'
-									+ getLocale(gpmsUsersManagement,
+									+ getLocale(gpmsProposalsManagement,
 											"Sorry! System attribute can not be activated.")
 									+ '</p>');
 				}
@@ -754,11 +796,13 @@ $(function() {
 					validateErrorMessage += 'Please enter attribute name.<br/>';
 				} else if (!proposalsManage.IsUnique(attributeName, _userId)) {
 					validateErrorMessage += "'"
-							+ getLocale(gpmsUsersManagement,
-									"Please enter unique attribute name") + "'"
-							+ attributeName.trim() + "'"
-							+ getLocale(gpmsUsersManagement, "already exists.")
-							+ '<br/>';
+							+ getLocale(gpmsProposalsManagement,
+									"Please enter unique attribute name")
+							+ "'"
+							+ attributeName.trim()
+							+ "'"
+							+ getLocale(gpmsProposalsManagement,
+									"already exists.") + '<br/>';
 				}
 				var selectedValue = $("#ddlApplyTo").val();
 				if (selectedValue !== "0") {
@@ -774,7 +818,8 @@ $(function() {
 						}
 					});
 					if (!itemSelected) {
-						validateErrorMessage += getLocale(gpmsUsersManagement,
+						validateErrorMessage += getLocale(
+								gpmsProposalsManagement,
 								"Please select at least one item type.")
 								+ "<br/>";
 					}
@@ -810,7 +855,7 @@ $(function() {
 											if (!optionsText
 													&& $(this).prop("name") != "Alias") {
 												validateErrorMessage = getLocale(
-														gpmsUsersManagement,
+														gpmsProposalsManagement,
 														"Please enter all option values and display order for your attribute.")
 														+ "<br/>";
 												$(this).parent('td').find(
@@ -830,7 +875,7 @@ $(function() {
 													var intRegex = /^\d+$/;
 													if (!intRegex.test(value)) {
 														validateErrorMessage = getLocale(
-																gpmsUsersManagement,
+																gpmsProposalsManagement,
 																"Display order is numeric value.")
 																+ '<br/>';
 														$(this)
@@ -993,7 +1038,7 @@ $(function() {
 			this.ajaxCall(this.config);
 			return false;
 		},
-		BindCollegeDropDown : function() {
+		BindProposalStatusDropDown : function() {
 			this.config.url = this.config.baseURL + "GetCollegeList";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
@@ -1018,7 +1063,7 @@ $(function() {
 			if (userName.length < 1) {
 				userName = null;
 			}
-			proposalsManage.BindUserGrid(userName, college, department,
+			proposalsManage.BindProposalGrid(userName, college, department,
 					postitionType, postitionTitle, isActive);
 		},
 		ajaxSuccess : function(msg) {
@@ -1084,54 +1129,55 @@ $(function() {
 				$('#divUserForm').show();
 				break;
 			case 7:
-				proposalsManage
-						.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage.BindProposalGrid(null, null, null, null, null,
+						null, null, null);
 				csscody.info("<h2>"
-						+ getLocale(gpmsUsersManagement, 'Successful Message')
+						+ getLocale(gpmsProposalsManagement,
+								'Successful Message')
 						+ "</h2><p>"
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								'Attribute has been deleted successfully.')
 						+ "</p>");
 				$('#divUserForm').hide();
 				$('#divUserGrid').show();
 				break;
 			case 8:
-				proposalsManage
-						.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage.BindProposalGrid(null, null, null, null, null,
+						null);
 				csscody
 						.info("<h2>"
-								+ getLocale(gpmsUsersManagement,
+								+ getLocale(gpmsProposalsManagement,
 										'Successful Message')
 								+ "</h2><p>"
-								+ getLocale(gpmsUsersManagement,
+								+ getLocale(gpmsProposalsManagement,
 										'Selected attribute(s) has been deleted successfully.')
 								+ "</p>");
 				break;
 			case 9:
-				proposalsManage
-						.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage.BindProposalGrid(null, null, null, null, null,
+						null);
 				break;
 			case 10:
 				isUnique = msg.d;
 				break;
 			case 11:
-				proposalsManage
-						.BindUserGrid(null, null, null, null, null, null);
+				proposalsManage.BindProposalGrid(null, null, null, null, null,
+						null);
 				$('#divUserGrid').show();
 				if (editFlag > 0) {
 					csscody.info("<h2>"
-							+ getLocale(gpmsUsersManagement,
+							+ getLocale(gpmsProposalsManagement,
 									'Successful Message')
 							+ "</h2><p>"
-							+ getLocale(gpmsUsersManagement,
+							+ getLocale(gpmsProposalsManagement,
 									'Attribute has been updated successfully.')
 							+ "</p>");
 				} else {
 					csscody.info("<h2>"
-							+ getLocale(gpmsUsersManagement,
+							+ getLocale(gpmsProposalsManagement,
 									'Successful Message')
 							+ "</h2><p>"
-							+ getLocale(gpmsUsersManagement,
+							+ getLocale(gpmsProposalsManagement,
 									'Attribute has been saved successfully.')
 							+ "</p>");
 				}
@@ -1146,78 +1192,76 @@ $(function() {
 				break;
 			case 1:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								"Failed to load colleges list.") + '</p>');
 				break;
 			case 2:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								"Failed to load departments list.") + '</p>');
 				break;
 			case 3:
 				csscody
 						.error('<h2>'
-								+ getLocale(gpmsUsersManagement,
+								+ getLocale(gpmsProposalsManagement,
 										"Error Message")
 								+ '</h2><p>'
-								+ getLocale(gpmsUsersManagement,
+								+ getLocale(gpmsProposalsManagement,
 										"Failed to load position types list.")
 								+ '</p>');
 				break;
 			case 4:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								"Failed to load position titles list.")
 						+ '</p>');
 				break;
 			case 5:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								"Failed to delete attribute.") + '</p>');
 				break;
 			case 6:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								"Failed to delete attributes.") + '</p>');
 				break;
 			case 7:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement, "Failed to operate.")
-						+ '</p>');
+						+ getLocale(gpmsProposalsManagement,
+								"Failed to operate.") + '</p>');
 				break;
 			case 8:
 				break;
 			case 9:
 				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
+						+ getLocale(gpmsProposalsManagement,
 								"Failed to save attribute.") + '</p>');
 				break;
 			}
 		},
 		init : function(config) {
 			proposalsManage.LoadStaticImage();
-			proposalsManage.BindUserGrid(null, null, null, null, null, null);
+			proposalsManage.BindProposalGrid(null, null, null, null, null,
+					null, null, null);
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
-			proposalsManage.BindCollegeDropDown();
-
-			$("#ddlCollege").bind("change", function() {
-				proposalsManage.BindDepartmentDropDown($("#ddlCollege").val());
-			});
+			proposalsManage.BindProposalStatusDropDown();
+			proposalsManage.BindProposedByDropDown();
 
 			$('#btnDeleteSelected')
 					.click(
@@ -1237,11 +1281,11 @@ $(function() {
 											.confirm(
 													"<h2>"
 															+ getLocale(
-																	gpmsUsersManagement,
+																	gpmsProposalsManagement,
 																	'Delete Confirmation')
 															+ "</h2><p>"
 															+ getLocale(
-																	gpmsUsersManagement,
+																	gpmsProposalsManagement,
 																	'Are you sure you want to delete selected user(s)?')
 															+ "</p>",
 													properties);
@@ -1249,11 +1293,11 @@ $(function() {
 									csscody
 											.alert('<h2>'
 													+ getLocale(
-															gpmsUsersManagement,
+															gpmsProposalsManagement,
 															"Information Alert")
 													+ '</h2><p>'
 													+ getLocale(
-															gpmsUsersManagement,
+															gpmsProposalsManagement,
 															"Please select at least one user before deleting.")
 													+ '</p>');
 								}
@@ -1297,17 +1341,20 @@ $(function() {
 									proposal_id = 0;
 								}
 								if (!attributeName) {
-									errors += getLocale(gpmsUsersManagement,
+									errors += getLocale(
+											gpmsProposalsManagement,
 											"Please enter user name");
 								} else if (!proposalsManage.IsUnique(
 										attributeName, proposal_id)) {
 									errors += "'"
-											+ getLocale(gpmsUsersManagement,
+											+ getLocale(
+													gpmsProposalsManagement,
 													"Please enter Please enter unique user name")
 											+ "'"
 											+ attributeName.trim()
 											+ "'"
-											+ getLocale(gpmsUsersManagement,
+											+ getLocale(
+													gpmsProposalsManagement,
 													"already exists.")
 											+ '<br/>';
 								}

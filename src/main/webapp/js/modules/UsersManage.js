@@ -163,10 +163,6 @@ $(function() {
 			$(".AddOption").val("[+] Add");
 			$("#dataTable tr:gt(1)").remove();
 
-			rowIndex = 0;
-			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
-					.eq(rowIndex).val(), false);
-
 			$('input[name=chkActive]').prop('checked', 'checked');
 			return false;
 		},
@@ -215,6 +211,7 @@ $(function() {
 			var current_ = 1;
 			var perpage = ($("#gdvUsers_pagesize").length > 0) ? $(
 					"#gdvUsers_pagesize :selected").text() : 10;
+
 			var userBindObj = {
 				UserName : userName,
 				College : college,
@@ -223,6 +220,11 @@ $(function() {
 				PositionTitle : positionTitle,
 				IsActive : isActive
 			};
+			this.config.data = {
+				userBindObj : userBindObj
+			};
+			var data = this.config.data;
+
 			$("#gdvUsers").sagegrid({
 				url : this.config.url,
 				functionMethod : this.config.method,
@@ -347,9 +349,7 @@ $(function() {
 				} ],
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
-				param : {
-					userBindObj : userBindObj
-				},
+				param : data,
 				current : current_,
 				pnew : offset_,
 				sortcol : {
@@ -357,6 +357,73 @@ $(function() {
 						sorter : false
 					},
 					9 : {
+						sorter : false
+					}
+				}
+			});
+		},
+
+		BindUserAuditLogGrid : function(action, auditedBy, activityOnFrom,
+				activityOnTo) {
+			this.config.url = this.config.baseURL;
+			this.config.method = "GetUsersAuditLogList";
+			var offset_ = 1;
+			var current_ = 1;
+			var perpage = ($("#gdvUsersAuditLog_pagesize").length > 0) ? $(
+					"#gdvUsersAuditLog_pagesize :selected").text() : 10;
+
+			var auditLogBindObj = {
+				Action : action,
+				AuditedBy : auditedBy,
+				ActivityOnFrom : activityOnFrom,
+				ActivityOnTo : activityOnTo,
+			};
+			this.config.data = {
+				auditLogBindObj : auditLogBindObj
+			};
+			var data = this.config.data;
+
+			$("#gdvUsersAuditLog").sagegrid({
+				url : this.config.url,
+				functionMethod : this.config.method,
+				colModel : [ {
+					display : 'User Name',
+					name : 'user_name',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Full Name',
+					name : 'full_name',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Action',
+					name : 'action',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left'
+				}, {
+					display : 'Activity On',
+					name : 'activity_on',
+					cssclass : 'cssClassHeadDate',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'date',
+					format : 'yyyy/MM/dd hh:mm:ss a'
+				} ],
+				rp : perpage,
+				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
+				param : data,
+				current : current_,
+				pnew : offset_,
+				sortcol : {
+					4 : {
 						sorter : false
 					}
 				}
@@ -386,39 +453,34 @@ $(function() {
 		},
 		FillForm : function(response) {
 			// See this how we can get response object based on fields
-			$('#txtUserName').val(response['firstName']);
-			// $('#ddlAttributeType').val(item.InputTypeID);
-			$('#ddlAttributeType').prop('disabled', 'disabled');
+			$('#txtFirstName').val(response['firstName']);
+			$('#txtMiddleName').val(response['middleName']);
+			$('#txtLastName').val(response['lastName']);
 
-			// usersManage.FillDefaultValue(item.DefaultValue);
+			$.each(response['addresses'], function(index, value) {
+				alert(index + " :: " + value);
+			});
 
-			// $('#ddlTypeValidation').val(item.ValidationTypeID);
-			// $('#txtLength').val(item.Length);
-			// $('#txtAliasName').val(item.AliasName);
-			// $('#txtAliasToolTip').val(item.AliasToolTip);
-			// $('#txtAliasHelp').val(item.AliasHelp);
-			// $('#txtDisplayOrder').val(item.DisplayOrder);
+			// $('txtStreet').val(response['lastName']);
+			// $('txtCity').val(response['lastName']);
+			// $('txtState').val(response['lastName']);
+			// $('txtZipcode').val(response['lastName']);
+			// $('txtCountry').val(response['lastName']);
 			//
+			// $('txtOfficeNumber').val(response['officeNumbers']);
+			// $('txtMobileNumber').val(response['mobileNumbers']);
+			// $('txtHomeNumber').val(response['homeNumbers']);
+			// $('txtWorkEmail').val(response['workEmails']);
+			// $('txtPersonalEmail').val(response['personalEmails']);
+			$('input[name=chkActive]').prop('checked', response["deleted"]);
+
+			// $('#txtUserName').val(response['userAccount']['userName']);
+
+			// $('#ddlAttributeType').prop('disabled', 'disabled');
+
 			// $('input[name=chkUniqueValue]').prop('checked',
 			// item.IsUnique);
-			// $('input[name=chkValuesRequired]').prop('checked',
-			// item.IsRequired);
-			// $('input[name=chkActive]').prop('checked', item.IsActive);
-			//
-			// $('input[name=chkIsEnableEditor]').prop('checked',
-			// item.IsEnableEditor);
-			// $('input[name=chkUseInAdvancedSearch]').prop('checked',
-			// item.ShowInAdvanceSearch);
-			// $('input[name=chkComparable]').prop('checked',
-			// item.ShowInComparison);
-			// $('input[name=chkUseForPriceRule]').prop('checked',
-			// item.IsIncludeInPriceRule);
-			// $('input[name=chkIsUseInFilter]').prop('checked',
-			// item.IsUseInFilter);
-			// $('input[name=chkShowInItemListing]').prop('checked',
-			// item.IsShowInItemListing);
-			// $('input[name=chkShowInItemDetail]').prop('checked',
-			// item.IsShowInItemDetail);
+
 			// usersManage.ValidationTypeEnableDisable(item.FillOptionValues,
 			// false);
 
@@ -437,22 +499,18 @@ $(function() {
 		},
 
 		EditUser : function(tblID, argus) {
-			usersManage.ClearForm();
 			switch (tblID) {
 			case "gdvUsers":
 				$('#lblFormHeading').html(
 						getLocale(gpmsUsersManagement, 'Edit User Details: ')
 								+ argus[3]);
 				$('#txtUserName').prop('disabled', 'disabled');
-				if (argus[8].toLowerCase() != "no") {
-					$(".delbutton").prop("id", 'userId' + argus[0]);
-					$(".delbutton").show();
-					$("input[name=AddMore]").removeAttr('disabled');
-					$("input[name=DeleteOption]").removeAttr('disabled');
-				} else {
-
-				}
+				$(".delbutton").prop("id", 'userId' + argus[0]);
+				$(".delbutton").show();
+				$("input[name=AddMore]").removeAttr('disabled');
+				$("input[name=DeleteOption]").removeAttr('disabled');
 				$("#btnSaveUser").prop("name", argus[0]);
+
 				usersManage.onInit();
 
 				usersManage.config.url = usersManage.config.baseURL
@@ -461,8 +519,12 @@ $(function() {
 					userId : argus[0],
 					gpmsCommonObj : gpmsCommonObj()
 				});
-				usersManage.config.ajaxCallMode = 4;
+				usersManage.config.ajaxCallMode = 8;
 				usersManage.ajaxCall(usersManage.config);
+
+				// TODO: Bind Audit Log Grid
+				usersManage.BindUserAuditLogGrid(null, null, null, null);
+				$('#auditLogTab').show();
 				break;
 			default:
 				break;
@@ -863,6 +925,7 @@ $(function() {
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
 			this.ajaxCall(this.config);
+			return false;
 		},
 		BindDepartmentDropDown : function(collegeName, flagSearch) {
 			this.config.url = this.config.baseURL + "GetDepartmentList";
@@ -875,6 +938,7 @@ $(function() {
 				this.config.ajaxCallMode = 3;
 			}
 			this.ajaxCall(this.config);
+			return false;
 		},
 		BindPositionTypeDropDown : function(collegeName, departmentName,
 				flagSearch) {
@@ -889,6 +953,7 @@ $(function() {
 				this.config.ajaxCallMode = 5;
 			}
 			this.ajaxCall(this.config);
+			return false;
 		},
 		BindPositionTitleDropDown : function(collegeName, departmentName,
 				positionTypeName, flagSearch) {
@@ -904,6 +969,7 @@ $(function() {
 				this.config.ajaxCallMode = 7;
 			}
 			this.ajaxCall(this.config);
+			return false;
 		},
 		SearchUsers : function() {
 			var userName = $.trim($("#txtSearchUserName").val());
@@ -959,7 +1025,8 @@ $(function() {
 											item, item);
 								});
 				usersManage.BindDepartmentDropDown($(
-						'select[name="ddlCollege"]').eq(rowIndex).val(), false);
+						'select[name="ddlCollege"]').val(), false);
+
 				break;
 
 			case 2:// For Search Department Dropdown Binding
@@ -991,9 +1058,8 @@ $(function() {
 											item, item);
 								});
 				usersManage.BindPositionTypeDropDown($(
-						'select[name="ddlCollege"]').eq(rowIndex).val(), $(
-						'select[name="ddlDepartment"]').eq(rowIndex).val(),
-						false);
+						'select[name="ddlCollege"]').val(), $(
+						'select[name="ddlDepartment"]').val(), false);
 				break;
 
 			case 4: // For Search College Position Type Binding
@@ -1022,11 +1088,11 @@ $(function() {
 											.get(rowIndex).options.length] = new Option(
 											item, item);
 								});
+
 				usersManage.BindPositionTitleDropDown($(
-						'select[name="ddlCollege"]').eq(rowIndex).val(), $(
-						'select[name="ddlDepartment"]').eq(rowIndex).val(), $(
-						'select[name="ddlPositionType"]').eq(rowIndex).val(),
-						false);
+						'select[name="ddlCollege"]').val(), $(
+						'select[name="ddlDepartment"]').val(), $(
+						'select[name="ddlPositionType"]').val(), false);
 				break;
 
 			case 6: // For Search College Position Title Binding
@@ -1055,8 +1121,15 @@ $(function() {
 											item, item);
 								});
 				break;
+
+			case 8: // For User Edit Action
+				usersManage.FillForm(msg);
+				$('#divUserGrid').hide();
+				$('#divUserForm').show();
+				break;
 			}
 		},
+
 		ajaxFailure : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
 			case 0:
@@ -1117,6 +1190,12 @@ $(function() {
 						+ getLocale(gpmsUsersManagement,
 								"Failed to load position titles list.")
 						+ '</p>');
+				break;
+
+			case 8: // For User Edit Action
+				csscody.error('<h2>'
+						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ '</h2><p>' + "Failed to load user details" + '</p>');
 				break;
 			}
 		},
@@ -1262,6 +1341,7 @@ $(function() {
 							});
 
 			$('#btnAddNew').bind("click", function() {
+				$('#auditLogTab').hide();
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
 				usersManage.ClearForm();
@@ -1376,10 +1456,12 @@ $(function() {
 										$(this).removeClass('error');
 									});
 							$(cloneRow).appendTo("#dataTable");
+
 							rowIndex = $('#dataTable > tbody tr').size() - 1;
 							usersManage.BindDepartmentDropDown($(
 									'select[name="ddlCollege"]').eq(rowIndex)
 									.val(), false);
+
 							$('#dataTable tr:last td').fadeIn('slow');
 						}
 					});
