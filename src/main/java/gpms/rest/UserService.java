@@ -35,6 +35,8 @@ import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoClient;
 
 @Path("/users")
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class UserService {
 	MongoClient mongoClient = null;
 	Morphia morphia = null;
@@ -91,8 +93,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetUsersList")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<UserInfo> produceUsersJSON(String message)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		List<UserInfo> users = new ArrayList<UserInfo>();
@@ -156,8 +156,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetUsersByProfileId")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public String produceUserByProfileId(String message)
 			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
@@ -227,8 +225,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetPositionDetailsHash")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> producePositionDetailsHash()
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
@@ -237,8 +233,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetCollegeList")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<String> produceCollegeList() throws JsonProcessingException,
 			IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
@@ -247,8 +241,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetDepartmentList")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<String> produceDepartmentList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
@@ -265,8 +257,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetPositionTypeList")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<String> producePositionTypeList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
@@ -286,8 +276,6 @@ public class UserService {
 
 	@POST
 	@Path("/GetPositionTitleList")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<String> producePositionTitleList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();

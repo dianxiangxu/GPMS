@@ -144,6 +144,7 @@ $(function() {
 				$(this).val('');
 				$(this).prop('checked', false);
 			});
+
 			usersManage.onInit();
 			$('#lblFormHeading').html(
 					getLocale(gpmsUsersManagement, "New User Details"));
@@ -159,22 +160,27 @@ $(function() {
 			});
 			$('#txtUserName').removeAttr('disabled');
 
-			$(".AddOption").val("+ Add ");
+			$(".AddOption").val("[+] Add");
 			$("#dataTable tr:gt(1)").remove();
+
+			rowIndex = 0;
+			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
+					.eq(rowIndex).val(), false);
 
 			$('input[name=chkActive]').prop('checked', 'checked');
 			return false;
 		},
 		BindAttributeOptionsValues : function(_fillOptionValues) {
+			// "FillOptionValues":"11#!#test1#!#1#!#test1#!#1!#!12#!#test2#!#2#!#test2#!#0!#!13#!#test3#!#3#!#test3#!#0"
 			var _fillOptions = _fillOptionValues;
 			if (_fillOptions != undefined && _fillOptions != "") {
 				var arr = _fillOptions.split("!#!");
 				var htmlContent = '';
 				$.each(arr, function(i) {
-					var btnOption = "Add More";
+					var btnOption = "[+] Add";
 					var btnName = "AddMore";
 					if (i > 0) {
-						btnOption = "Delete Option";
+						btnOption = "Delete";
 						var btnName = "DeleteOption";
 					}
 					var arr2 = arr[i].split("#!#");
