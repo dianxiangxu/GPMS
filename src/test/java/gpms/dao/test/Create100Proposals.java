@@ -3,6 +3,7 @@ package gpms.dao.test;
 import static org.junit.Assert.*;
 
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -12,6 +13,7 @@ import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
 import gpms.model.InvestigatorRefAndPosition;
+import gpms.model.ProjectInfo;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.UserAccount;
@@ -79,6 +81,7 @@ public class Create100Proposals
 			newInvPos.setPositionType(propProfile.getDetails(0).getPositionType());
 			newInvPos.setPositionTitle(propProfile.getDetails(0).getPositionTitle());
 			newInvPos.setUserRef(propProfile);
+			
 
 
 			newInfo.setPi(newInvPos);
@@ -103,11 +106,21 @@ public class Create100Proposals
 			if(sponsorChoice == 0){newSandBud.addGrantingAgency("NSF");}
 			if(sponsorChoice == 1){newSandBud.addGrantingAgency("Idaho STEM Grant");}
 			
+			String nameString = "Proposal"+propNumb;
+			String proNumb = ""+propNumb;
+			newProposal.setProposalNo(proNumb);
+			
+			ProjectInfo newProjInf = new ProjectInfo();
+			newProjInf.setProjectTitle(nameString);
+			newProjInf.setDueDate(new Date());
+			
 			
 			newProposal.setSponsorAndBudgetInfo(newSandBud);
 			newProposal.setInvestigatorInfo(newInfo);
 			String propNumbString = ""+propNumb;
 			newProposal.setProposalNo(propNumbString);
+			newProposalDAO.setEditProposalNumber(newProposal, proNumb, propProfile);
+			newProposalDAO.setEditDateReceived(newProposal, new Date(), propProfile);
 			newProposalDAO.save(newProposal);
 			propNumb++;
 			
