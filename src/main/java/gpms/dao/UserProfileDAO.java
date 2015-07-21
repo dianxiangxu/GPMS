@@ -9,6 +9,7 @@ package gpms.dao;
 import gpms.DAL.MongoDBConnector;
 import gpms.model.Address;
 import gpms.model.AuditLog;
+import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.PositionDetails;
 import gpms.model.Proposal;
@@ -17,6 +18,8 @@ import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +28,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
-import org.mongodb.morphia.query.FieldEnd;
 import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
@@ -194,6 +196,41 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		// users.add(user);
 		// }
 		// return users;
+	}
+
+	public List<AuditLogInfo> findAllForUserAuditLogGrid(int offset, int limit,
+			String action, String auditedBy, String activityOnFrom,
+			String activityOnTo) throws ParseException, UnknownHostException {
+		Datastore ds = getDatastore();
+		Query<AuditLogInfo> q = ds.createQuery(AuditLogInfo.class);
+		// TODO Filter the AuditLog based on these Filters
+		if (action != null) {
+			q.field("first name").contains(action);
+		}
+
+		if (auditedBy != null) {
+			q.field("first name").contains(auditedBy);
+		}
+
+		// Need to do Range for give 2 Dates
+		if (activityOnFrom != null) {
+			SimpleDateFormat formatter = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			Date activityDateFrom = formatter.parse(activityOnFrom);
+			q.field("startDate").greaterThanOrEq(activityDateFrom);
+		}
+
+		if (activityOnTo != null) {
+			SimpleDateFormat formatter = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			Date activityDateTo = formatter.parse(activityOnTo);
+			q.field("startDate").lessThanOrEq(activityDateTo);
+		}
+
+		List<AuditLogInfo> userAuditLogs = q.offset(offset - 1).limit(limit)
+				.asList();
+
+		return userAuditLogs;
 	}
 
 	private int countPIProposal(UserProfile userProfile) {

@@ -5,6 +5,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.JSONTansformer;
 import gpms.model.UserAccount;
@@ -12,7 +13,9 @@ import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -221,6 +224,57 @@ public class UserService {
 				user);
 
 		return response;
+	}
+
+	@POST
+	@Path("/GetUsersAuditLogList")
+	public List<AuditLogInfo> produceUsersAuditLogJSON(String message)
+			throws JsonGenerationException, JsonMappingException, IOException,
+			ParseException {
+		List<AuditLogInfo> usersAuditLogs = new ArrayList<AuditLogInfo>();
+
+		int offset = 0, limit = 0;
+		String action = new String();
+		String auditedBy = new String();
+		String activityOnFrom = new String();
+		String activityOnTo = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("offset")) {
+			offset = root.get("offset").getIntValue();
+		}
+
+		if (root != null && root.has("limit")) {
+			limit = root.get("limit").getIntValue();
+		}
+
+		JsonNode auditLogBindObj = root.get("auditLogBindObj");
+		if (auditLogBindObj != null && auditLogBindObj.has("Action")) {
+			action = auditLogBindObj.get("Action").getTextValue();
+		}
+
+		if (auditLogBindObj != null && auditLogBindObj.has("AuditedBy")) {
+			auditedBy = auditLogBindObj.get("AuditedBy").getTextValue();
+		}
+
+		if (auditLogBindObj != null && auditLogBindObj.has("ActivityOnFrom")) {
+			activityOnFrom = auditLogBindObj.get("ActivityOnFrom")
+					.getTextValue();
+		}
+
+		if (auditLogBindObj != null && auditLogBindObj.has("ActivityOnTo")) {
+			activityOnTo = auditLogBindObj.get("ActivityOnTo").getTextValue();
+		}
+
+		usersAuditLogs = userProfileDAO.findAllForUserAuditLogGrid(offset,
+				limit, action, auditedBy, activityOnFrom, activityOnTo);
+
+		// users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
+		// response = JSONTansformer.ConvertToJSON(users);
+
+		return usersAuditLogs;
 	}
 
 	@POST
