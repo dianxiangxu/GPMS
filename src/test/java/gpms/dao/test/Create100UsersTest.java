@@ -81,8 +81,6 @@ public class Create100UsersTest {
 			newProfile.getWorkEmails().add("workman@worksite.org");
 			newProfile.getPersonalEmails().add("supercoolbro@yahoo.com");
 			
-			newUserProfileDAO.addHomeNumber(newProfile, newProfile, "208-938-9302");
-			newUserProfileDAO.addWorkEmail(newProfile, newProfile, "alternatecontact@officialplace.com");
 			
 			//Add two Position Detail objects to the user profile
 			setTheDeets(newProfile);
@@ -91,6 +89,9 @@ public class Create100UsersTest {
 			//Save the informations
 			newUserAccountDAO.save(newAccount);
 			newUserProfileDAO.save(newProfile);
+			
+			newUserProfileDAO.addHomeNumber(newProfile, newProfile, "208-938-9302");
+			newUserProfileDAO.addWorkEmail(newProfile, newProfile, "alternatecontact@officialplace.com");
 			
 			
 			//Increment Count
