@@ -40,9 +40,10 @@ public class UserEntryExample {
 		firstName = "Rick";
 		middleName = "Andrew";
 		lastName = "Hunter";
-		UserProfile newUser = new UserProfile(firstName, middleName, lastName);
-
-		//
+		UserProfile newUser = new UserProfile();
+		newUser.setFirstName(firstName);
+		newUser.setMiddleName(middleName);
+		newUser.setLastName(lastName);
 
 		// System.out.println(firstName.charAt(0));
 

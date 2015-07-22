@@ -13,8 +13,9 @@ public class JerseyClient {
 
 	public static void main(String[] args) {
 		try {
-
-			UserProfile user = new UserProfile("Adriana", "Herald", "Barrer");
+			String dob = "Nov 4, 1984 8:14 PM";
+			UserProfile user = new UserProfile("Adriana", "Herald", "Barrer",
+					dob, "Male");
 
 			ClientConfig clientConfig = new DefaultClientConfig();
 

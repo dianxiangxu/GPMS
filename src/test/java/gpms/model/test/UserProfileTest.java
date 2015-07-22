@@ -1,96 +1,109 @@
 package gpms.model.test;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertTrue;
+import gpms.DAL.MongoDBConnector;
+import gpms.dao.TestClassDAO;
+import gpms.model.TestClass;
 import gpms.model.UserProfile;
 
-import org.junit.Test;
+import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
-public class UserProfileTest
-{
+import org.junit.Before;
+import org.junit.Test;
+import org.mongodb.morphia.Morphia;
+
+import com.mongodb.MongoException;
+
+public class UserProfileTest {
 	String fName = "Tom";
 	String mName = "Tito";
 	String lName = "Perelman";
-	UserProfile up = new UserProfile(fName, mName, lName);
-	
+	String dob = "Nov 4, 1984 8:14 PM";
+	UserProfile up = new UserProfile();
+
+	@Before
+	public void initiate() throws ParseException {
+		up = new UserProfile(fName, mName, lName, dob, "Male");
+	}
+
 	@Test
-	public void testEqulity() 
-	{
-		UserProfile upt = new UserProfile(fName, mName, lName);
+	public void testEqulity() throws ParseException {
+		UserProfile upt = new UserProfile(fName, mName, lName, dob, "Male");
 		assertTrue(up.equals(upt));
 	}
 
 	@Test
-	public void testFirstName() 
-	{
+	public void testFirstName() {
 		up.setFirstName(fName);
 		assertTrue(up.getFirstName().equals(fName));
 	}
-	
+
 	@Test
-	public void testLastName() 
-	{
+	public void testLastName() {
 		up.setLastName(lName);
 		assertTrue(up.getLastName().equals(lName));
 	}
-	
+
 	@Test
-	public void testMiddleName() 
-	{
+	public void testMiddleName() {
 		up.setMiddleName(mName);
 		assertTrue(up.getMiddleName().equals(mName));
 	}
-	
-//	@Test
-//	public void testDetails() 
-//	{
-//		List<PositionDetails> pdl = new ArrayList<PositionDetails>();
-//		pdl.add(new PositionDetails());
-//		up.setDetails(pdl);
-//		assertTrue(up.getDetails().equals(pdl));
-//		
-//		int count = up.getDetails().size();
-//		assertTrue(count == 1);			
-//		
-//		up.addDetails(new PositionDetails());
-//		assertTrue((count+1) == up.getDetails().size());
-//	}
-//	
-//	@Test
-//	public void testPhoneNumbers() 
-//	{
-//		List<String> p = new ArrayList<String>();
-//		p.add("7875430987");
-//		up.setPhoneNumbers(p);
-//		assertTrue(up.getPhoneNumbers().equals(p));
-//		
-//		int count = up.getPhoneNumbers().size();
-//		assertTrue(count == 1);			
-//		
-//		up.addPhoneNumber("09984848");
-//		assertTrue((count+1) == up.getPhoneNumbers().size());
-//	}
-//	
-//	@Test
-//	public void testEmails() 
-//	{
-//		List<String> e = new ArrayList<String>();
-//		e.add("rew@vd.com");
-//		up.setEmails(e);
-//		assertTrue(up.getEmails().equals(e));
-//		
-//		int count = up.getEmails().size();
-//		assertTrue(count == 1);			
-//		
-//		up.addEmail("mkn@ji.com");
-//		assertTrue((count+1) == up.getEmails().size());
-//	}
-//	
+
+	// @Test
+	// public void testDetails()
+	// {
+	// List<PositionDetails> pdl = new ArrayList<PositionDetails>();
+	// pdl.add(new PositionDetails());
+	// up.setDetails(pdl);
+	// assertTrue(up.getDetails().equals(pdl));
+	//
+	// int count = up.getDetails().size();
+	// assertTrue(count == 1);
+	//
+	// up.addDetails(new PositionDetails());
+	// assertTrue((count+1) == up.getDetails().size());
+	// }
+	//
+	// @Test
+	// public void testPhoneNumbers()
+	// {
+	// List<String> p = new ArrayList<String>();
+	// p.add("7875430987");
+	// up.setPhoneNumbers(p);
+	// assertTrue(up.getPhoneNumbers().equals(p));
+	//
+	// int count = up.getPhoneNumbers().size();
+	// assertTrue(count == 1);
+	//
+	// up.addPhoneNumber("09984848");
+	// assertTrue((count+1) == up.getPhoneNumbers().size());
+	// }
+	//
+	// @Test
+	// public void testEmails()
+	// {
+	// List<String> e = new ArrayList<String>();
+	// e.add("rew@vd.com");
+	// up.setEmails(e);
+	// assertTrue(up.getEmails().equals(e));
+	//
+	// int count = up.getEmails().size();
+	// assertTrue(count == 1);
+	//
+	// up.addEmail("mkn@ji.com");
+	// assertTrue((count+1) == up.getEmails().size());
+	// }
+	//
 	@Test
-	public void testToString()
-	{
-		//Suppose to have user account name at end, but since in the test has non
-		//just add space.
+	public void testToString() {
+		// Suppose to have user account name at end, but since in the test has
+		// non
+		// just add space.
 		String fullName = fName + " " + mName + " " + lName + " ";
 		up.setFirstName(fName);
 		up.setMiddleName(mName);

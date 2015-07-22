@@ -7,7 +7,10 @@ package gpms.model;
 
 import gpms.dao.UserProfileDAO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
@@ -38,6 +41,12 @@ public class UserProfile extends BaseEntity {
 	@Indexed(value = IndexDirection.ASC, name = "lastNameIndex")
 	private String lastName = new String();
 
+	@Property("date of birth")
+	private Date dateOfBirth = new Date();
+
+	@Property("gender")
+	private String gender = new String();
+
 	@Embedded("details")
 	private List<PositionDetails> details = new ArrayList<PositionDetails>();
 
@@ -63,10 +72,7 @@ public class UserProfile extends BaseEntity {
 	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-//	@Property("Keychain")
-//	private List<String> proposalKeys = new ArrayList<String>();
-
-	@Reference(value = "user id"/* , lazy = true */)
+	@Reference(value = "user id", lazy = true)
 	private UserAccount userAccount = new UserAccount();
 
 	@Property("is deleted")
@@ -101,6 +107,22 @@ public class UserProfile extends BaseEntity {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public List<PositionDetails> getDetails() {
@@ -170,14 +192,6 @@ public class UserProfile extends BaseEntity {
 		this.personalEmails = personalEmails;
 	}
 
-//	public List<String> getProposalKeys() {
-//		return proposalKeys;
-//	}
-
-//	public void setProposalKeys(List<String> proposalKeys) {
-//		this.proposalKeys = proposalKeys;
-//	}
-
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}
@@ -215,6 +229,7 @@ public class UserProfile extends BaseEntity {
 	 *            Emails of the user
 	 */
 	public UserProfile(String firstName, String middleName, String lastName,
+			Date dateOfBirth, String gender,
 			ArrayList<PositionDetails> details,
 			ArrayList<String> setOfficeNumbers,
 			ArrayList<String> setHomeNumbers,
@@ -223,6 +238,8 @@ public class UserProfile extends BaseEntity {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
 		this.details = details;
 		officeNumbers = setOfficeNumbers;
 		homeNumbers = setHomeNumbers;
@@ -240,11 +257,19 @@ public class UserProfile extends BaseEntity {
 	 *            Middle name of the user
 	 * @param lastName
 	 *            Last name of the user
+	 * @throws ParseException
 	 */
-	public UserProfile(String firstName, String middleName, String lastName) {
+	public UserProfile(String firstName, String middleName, String lastName,
+			String dateOfBirth, String gender) throws ParseException {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
+		Date dob = df.parse(dateOfBirth);
+
+		this.dateOfBirth = dob;
+		this.gender = gender;
 	}
 
 	/**
@@ -257,6 +282,8 @@ public class UserProfile extends BaseEntity {
 		return new StringBuffer(" First Name : ").append(this.getFirstName())
 				.append(" Middle Name : ").append(this.getMiddleName())
 				.append(" Last Name : ").append(this.getLastName())
+				.append(" Date of Birth : ").append(this.getDateOfBirth())
+				.append(" Gender : ").append(this.getGender())
 				.append(" Account name: ").append(userAccount.getUserName())
 				.toString();
 	}
@@ -265,6 +292,8 @@ public class UserProfile extends BaseEntity {
 		return this.firstName.equals(up.firstName)
 				&& this.middleName.equals(up.middleName)
 				&& this.lastName.equals(up.lastName)
+				&& this.dateOfBirth.equals(up.dateOfBirth)
+				&& this.gender.equals(up.gender)
 				&& this.details.equals(up.details)
 				&& this.officeNumbers.equals(up.officeNumbers)
 				&& this.mobileNumbers.equals(up.mobileNumbers)
@@ -281,6 +310,8 @@ public class UserProfile extends BaseEntity {
 		copy.setFirstName(firstName);
 		copy.setMiddleName(middleName);
 		copy.setLastName(lastName);
+		copy.setDateOfBirth(dateOfBirth);
+		copy.setGender(gender);
 
 		for (PositionDetails pd : this.details) {
 			copy.getDetails().add(pd.clone());
@@ -315,14 +346,4 @@ public class UserProfile extends BaseEntity {
 
 		return copy;
 	}
-
-//	/**
-//	 * Delete a proposal key from the list
-//	 * 
-//	 * @param proposalKey
-//	 *            the key to be deleted
-//	 */
-//	public void deleteProposalKey(String proposalKey) {
-//		proposalKeys.remove(proposalKey);
-//	}
 }

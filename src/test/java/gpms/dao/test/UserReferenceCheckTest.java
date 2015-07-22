@@ -52,7 +52,11 @@ public class UserReferenceCheckTest {
 		long count = newUserAccountDAO.count();
 		PositionDetails pd = new PositionDetails();
 
-		newUserProfile = new UserProfile("Shane", "Bernthal", "Walsh");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("Shane");
+		newUserProfile.setMiddleName("Bernthal");
+		newUserProfile.setLastName("Walsh");
+
 		newUserAccount = new UserAccount("sWalsh");
 
 		pd.setCollege("Engeneering");
@@ -68,7 +72,11 @@ public class UserReferenceCheckTest {
 		assertTrue(count + 1 == newUserAccountDAO.count());
 		count = newUserAccountDAO.count();
 
-		newUserProfile = new UserProfile("Hector", "Caleb", "Ortiz");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("Hector");
+		newUserProfile.setMiddleName("Caleb");
+		newUserProfile.setLastName("Ortiz");
+
 		newUserAccount = new UserAccount("hOrtiz");
 
 		pd.setCollege("Engeneering");
@@ -84,7 +92,10 @@ public class UserReferenceCheckTest {
 		assertTrue(count + 1 == newUserAccountDAO.count());
 		count = newUserAccountDAO.count();
 
-		newUserProfile = new UserProfile("Thomas", "", "Volz");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("Thomas");
+		newUserProfile.setLastName("Volz");
+
 		newUserAccount = new UserAccount("tVolz");
 
 		pd.setCollege("Engeneering");
@@ -100,10 +111,13 @@ public class UserReferenceCheckTest {
 		assertTrue(count + 1 == newUserAccountDAO.count());
 		count = newUserAccountDAO.count();
 
-		newUserProfile = new UserProfile("Milsen", "", "Muyasaki");
-		newUserAccount = new UserAccount("mMuyasaki");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("Milson");
+		newUserProfile.setLastName("Munakami");
 
-		pd.setCollege("Engeneering");
+		newUserAccount = new UserAccount("milsonmun");
+
+		pd.setCollege("Engineering");
 		pd.setDepartment("Computer Engeneering");
 		pd.setPositionTitle("Teaching Faculty");
 		pd.setPositionType("Lecturer");
@@ -116,7 +130,10 @@ public class UserReferenceCheckTest {
 		assertTrue(count + 1 == newUserAccountDAO.count());
 		count = newUserAccountDAO.count();
 
-		newUserProfile = new UserProfile("Diangxian", "", "Xu");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("Diangxian");
+		newUserProfile.setLastName("Xu");
+
 		newUserAccount = new UserAccount("dXu");
 
 		pd.setCollege("Engeneering");
@@ -132,7 +149,11 @@ public class UserReferenceCheckTest {
 		assertTrue(count + 1 == newUserAccountDAO.count());
 		count = newUserAccountDAO.count();
 
-		newUserProfile = new UserProfile("William", "", "Bush");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("William");
+		newUserProfile.setFirstName("H");
+		newUserProfile.setLastName("Bush");
+
 		newUserAccount = new UserAccount("wBush");
 
 		pd.setCollege("Science");
@@ -148,7 +169,10 @@ public class UserReferenceCheckTest {
 		assertTrue(count + 1 == newUserAccountDAO.count());
 		count = newUserAccountDAO.count();
 
-		newUserProfile = new UserProfile("Turner", "", "Borges");
+		newUserProfile = new UserProfile();
+		newUserProfile.setFirstName("Turner");
+		newUserProfile.setLastName("Borges");
+
 		newUserAccount = new UserAccount("tBorges");
 
 		pd.setCollege("Engeneering");

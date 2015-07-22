@@ -58,8 +58,10 @@ public class JerseyClientSevice {
 	public UserProfile produceJSON(@PathParam("firstName") String firstName,
 			@PathParam("lastName") String lastName) {
 
-		UserProfile user = new UserProfile(firstName, "", lastName);
-
+		UserProfile user = new UserProfile();
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		
 		return user;
 	}
 

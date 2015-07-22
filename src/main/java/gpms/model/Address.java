@@ -7,6 +7,8 @@ import org.mongodb.morphia.annotations.Property;
 public class Address {
 	@Property("street")
 	private String street = new String();
+	@Property("apt")
+	private String apt = new String();
 	@Property("city")
 	private String city = new String();
 	@Property("state")
@@ -20,13 +22,14 @@ public class Address {
 
 	}
 
-	public Address(String setStreet, String setCity, String setState,
-			String setZipcode, String setCountry) {
-		street = setStreet;
-		city = setCity;
-		state = setState;
-		zipcode = setZipcode;
-		country = setCountry;
+	public Address(String setStreet, String setApt, String setCity,
+			String setState, String setZipcode, String setCountry) {
+		this.street = setStreet;
+		this.apt = setApt;
+		this.city = setCity;
+		this.state = setState;
+		this.zipcode = setZipcode;
+		this.country = setCountry;
 	}
 
 	public String getStreet() {
@@ -35,6 +38,14 @@ public class Address {
 
 	public void setStreet(String street) {
 		this.street = street;
+	}
+
+	public String getApt() {
+		return apt;
+	}
+
+	public void setApt(String apt) {
+		this.apt = apt;
 	}
 
 	public String getCity() {
@@ -73,6 +84,7 @@ public class Address {
 	public String toString() {
 		String output = "";
 		output += "street  : " + street + "\n";
+		output += "apartment #  : " + apt + "\n";
 		output += "city    : " + city + "\n";
 		output += "state   : " + state + "\n";
 		output += "zipcode : " + zipcode + "\n";
@@ -82,6 +94,7 @@ public class Address {
 
 	public boolean equals(Address address) {
 		return this.country.equals(address.street)
+				&& this.apt.equals(address.apt)
 				&& this.state.equals(address.city)
 				&& this.zipcode.equals(address.state)
 				&& this.city.equals(address.zipcode)
@@ -90,7 +103,7 @@ public class Address {
 
 	@Override
 	public Address clone() {
-		return new Address(this.street, this.city, this.state, this.zipcode,
-				this.country);
+		return new Address(this.street, this.apt, this.city, this.state,
+				this.zipcode, this.country);
 	}
 }
