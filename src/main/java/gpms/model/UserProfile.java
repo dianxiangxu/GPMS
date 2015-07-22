@@ -59,6 +59,9 @@ public class UserProfile extends BaseEntity {
 	@Property("home number")
 	private List<String> homeNumbers = new ArrayList<String>();
 
+	@Property("other number")
+	private List<String> otherNumbers = new ArrayList<String>();
+
 	@Embedded("addresses")
 	private List<Address> addresses = new ArrayList<Address>();
 
@@ -168,6 +171,14 @@ public class UserProfile extends BaseEntity {
 		this.homeNumbers = homeNumbers;
 	}
 
+	public List<String> getOtherNumbers() {
+		return otherNumbers;
+	}
+
+	public void setOtherNumbers(List<String> otherNumbers) {
+		this.otherNumbers = otherNumbers;
+	}
+
 	public List<Address> getAddresses() {
 		return addresses;
 	}
@@ -233,7 +244,8 @@ public class UserProfile extends BaseEntity {
 			ArrayList<PositionDetails> details,
 			ArrayList<String> setOfficeNumbers,
 			ArrayList<String> setHomeNumbers,
-			ArrayList<String> setMobileNumbers, ArrayList<String> emails,
+			ArrayList<String> setMobileNumbers,
+			ArrayList<String> setOtherNumbers, ArrayList<String> emails,
 			UserAccount userAccount) {
 		this.firstName = firstName;
 		this.middleName = middleName;
@@ -244,6 +256,7 @@ public class UserProfile extends BaseEntity {
 		officeNumbers = setOfficeNumbers;
 		homeNumbers = setHomeNumbers;
 		mobileNumbers = setMobileNumbers;
+		otherNumbers = setOtherNumbers;
 
 		this.userAccount = userAccount;
 	}
@@ -298,6 +311,7 @@ public class UserProfile extends BaseEntity {
 				&& this.officeNumbers.equals(up.officeNumbers)
 				&& this.mobileNumbers.equals(up.mobileNumbers)
 				&& this.homeNumbers.equals(up.homeNumbers)
+				&& this.otherNumbers.equals(up.otherNumbers)
 				&& this.addresses.equals(up.addresses)
 				&& this.workEmails.equals(up.workEmails)
 				&& this.personalEmails.equals(up.personalEmails)
@@ -324,6 +338,9 @@ public class UserProfile extends BaseEntity {
 		}
 		for (String phone : this.homeNumbers) {
 			copy.getHomeNumbers().add(phone);
+		}
+		for (String phone : this.otherNumbers) {
+			copy.getOtherNumbers().add(phone);
 		}
 		for (String email : this.workEmails) {
 			copy.getWorkEmails().add(email);

@@ -313,102 +313,171 @@
 																<table cellspacing="0" cellpadding="0" border="0">
 																	<tbody>
 																		<tr>
-																			<td><span class="cssClassLabel" id="lblUserName">First
-																					Name:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtFirstName" />
-																				<span class="cssClassRequired">*</span></td>
+																			<td><span id="lblName" class="cssClassLabel">Name</span></td>
+																			<td class="cssClassTableRightCol"></td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="lblMiddleName">Middle Name:</span></td>
+																			<td><span id="lblUserName" class="cssClassLabel">First
+																					Name:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" id="txtFirstName" class="sfInputbox">
+																				<span class="cssClassRequired">*</span></td>
+																			<td><span id="lblMiddleName"
+																				class="cssClassLabel">Middle Name:</span></td>
 																			<td class="cssClassTableRightCol"><input
-																				type="text" class="sfInputbox" id="txtMiddleName" /></td>
+																				type="text" id="txtMiddleName" class="sfInputbox"></td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel" id="lblLastName">Last
+																			<td><span id="lblLastName" class="cssClassLabel">Last
 																					Name:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtLastName" />
+																				type="text" id="txtLastName" class="sfInputbox">
 																				<span class="cssClassRequired">*</span></td>
+																			<td></td>
+																			<td></td>
 																		</tr>
 
 																		<tr>
-																			<td><span class="cssClassLabel" id="lblAddress">Address:</span></td>
+																			<td><span id="lblAddress" class="cssClassLabel">Address</span></td>
 																			<td class="cssClassTableRightCol"></td>
 																		</tr>
 
 																		<tr>
-																			<td><span class="cssClassLabel" id="lblStreet">Street:</span></td>
+																			<td><span id="lblStreet" class="cssClassLabel">Street:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtStreet" /> <span
-																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel" id="lblCity">City:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtCity" /> <span
-																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel" id="lblState">State:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtState" /> <span
-																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel" id="lblZipcode">Zip
-																					Code:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtZipcode" /> <span
-																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel" id="lblCountry">Country:</span></td>
-																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtCountry" /> <span
-																				class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="lblOfficeNumber">Office Number:</span></td>
+																				type="text" id="txtStreet" class="sfInputbox">
+																				<span class="cssClassRequired">*</span></td>
+																			<td><span id="lblApt" class="cssClassLabel">Apt.,
+																					Suit, Floor, etc (Optional):</span></td>
 																			<td class="cssClassTableRightCol"><input
-																				type="text" class="sfInputbox" id="txtOfficeNumber" />
-																			</td>
+																				type="text" id="txtApt" class="sfInputbox"></td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="lblMobileNumber">Mobile Number:</span></td>
+																			<td><span id="lblCity" class="cssClassLabel">City:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtMobileNumber" />
+																				type="text" id="txtCity" class="sfInputbox">
+																				<span class="cssClassRequired">*</span></td>
+																			<td><span id="lblState" class="cssClassLabel">State:</span></td>
+																			<td class="cssClassTableRightCol required"><select
+																				name="State" id="State"><option value="">Choose
+																						state</option>
+																					<option value="1">Alabama</option>
+																					<option value="2">Alaska</option>
+																					<option value="4">Arizona</option>
+																					<option value="5">Arkansas</option>
+																					<option value="6">California</option>
+																					<option value="7">Colorado</option>
+																					<option value="8">Connecticut</option>
+																					<option value="10">Delaware</option>
+																					<option value="57">District of Columbia</option>
+																					<option value="11">Florida</option>
+																					<option value="12">Georgia</option>
+																					<option value="14">Hawaii</option>
+																					<option value="15">Idaho</option>
+																					<option value="16">Illinois</option>
+																					<option value="17">Indiana</option>
+																					<option value="18">Iowa</option>
+																					<option value="19">Kansas</option>
+																					<option value="20">Kentucky</option>
+																					<option value="21">Louisiana</option>
+																					<option value="22">Maine</option>
+																					<option value="23">Maryland</option>
+																					<option value="24">Massachusetts</option>
+																					<option value="25">Michigan</option>
+																					<option value="26">Minnesota</option>
+																					<option value="27">Mississippi</option>
+																					<option value="28">Missouri</option>
+																					<option value="29">Montana</option>
+																					<option value="30">Nebraska</option>
+																					<option value="31">Nevada</option>
+																					<option value="32">New Hampshire</option>
+																					<option value="33">New Jersey</option>
+																					<option value="34">New Mexico</option>
+																					<option value="35">New York</option>
+																					<option value="36">North Carolina</option>
+																					<option value="37">North Dakota</option>
+																					<option value="39">Ohio</option>
+																					<option value="40">Oklahoma</option>
+																					<option value="41">Oregon</option>
+																					<option value="42">Pennsylvania</option>
+																					<option value="58">Puerto Rico</option>
+																					<option value="44">Rhode Island</option>
+																					<option value="45">South Carolina</option>
+																					<option value="46">South Dakota</option>
+																					<option value="47">Tennessee</option>
+																					<option value="48">Texas</option>
+																					<option value="59">U.S. Virgin Islands</option>
+																					<option value="49">Utah</option>
+																					<option value="50">Vermont</option>
+																					<option value="51">Virginia</option>
+																					<option value="53">Washington</option>
+																					<option value="54">West Virginia</option>
+																					<option value="55">Wisconsin</option>
+																					<option value="56">Wyoming</option>
+																			</select> <span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span id="lblZip" class="cssClassLabel">Zip:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" id="txtZip" class="sfInputbox">
+																				<span class="cssClassRequired">*</span></td>
+																			<td><span id="lblCountry" class="cssClassLabel">Country:</span></td>
+																			<td class="cssClassTableRightCol required"><select
+																				name="Country" id="Country"><option
+																						value="">Choose country</option>
+																					<option value="1">United State of America</option>
+																			</select> <span class="cssClassRequired">*</span></td>
+																		</tr>
+																		<tr>
+																			<td><span id="lblPhone" class="cssClassLabel">Phone</span></td>
+																			<td class="cssClassTableRightCol"></td>
+																		</tr>
+																		<tr>
+																			<td><span id="lblOfficeNumber"
+																				class="cssClassLabel">Office Number:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" id="txtOfficeNumber" class="sfInputbox">
+																			</td>
+																			<td><span id="lblMobileNumber"
+																				class="cssClassLabel">Mobile Number:</span></td>
+																			<td class="cssClassTableRightCol required"><input
+																				type="text" id="txtMobileNumber" class="sfInputbox">
 																				<span class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="lblHomeNumber">Home Number:</span></td>
+																			<td><span id="lblHomeNumber"
+																				class="cssClassLabel">Home Number:</span></td>
 																			<td class="cssClassTableRightCol"><input
-																				type="text" class="sfInputbox" id="txtHomeNumber" />
+																				type="text" id="txtHomeNumber" class="sfInputbox">
+																			</td>
+																			<td><span id="lblOtherNumber"
+																				class="cssClassLabel">Other:</span></td>
+																			<td class="cssClassTableRightCol"><input
+																				type="text" id="txtOtherNumber" class="sfInputbox">
 																			</td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="lblWorkEmail">Work Email:</span></td>
+																			<td><span id="lblEmail" class="cssClassLabel">E-mail
+																					Address</span></td>
+																			<td class="cssClassTableRightCol"></td>
+																		</tr>
+																		<tr>
+																			<td><span id="lblWorkEmail"
+																				class="cssClassLabel">Work Email:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtWorkEmail" />
+																				type="text" id="txtWorkEmail" class="sfInputbox">
 																				<span class="cssClassRequired">*</span></td>
-																		</tr>
-																		<tr>
-																			<td><span class="cssClassLabel"
-																				id="lblPersonalEmail">Personal Email:</span></td>
+																			<td><span id="lblPersonalEmail"
+																				class="cssClassLabel">Personal Email:</span></td>
 																			<td class="cssClassTableRightCol"><input
-																				type="text" class="sfInputbox" id="txtPersonalEmail" />
+																				type="text" id="txtPersonalEmail" class="sfInputbox">
 																			</td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel" id="lblActive">Active:</span></td>
+																			<td><span id="lblActive" class="cssClassLabel">Active:</span></td>
 																			<td class="cssClassTableRightCol"><input
-																				type="checkbox" name="chkActive"
-																				class="cssClassCheckBox" /></td>
+																				type="checkbox" class="cssClassCheckBox"
+																				name="chkActive" value=""></td>
 																		</tr>
 																	</tbody>
 																</table>
