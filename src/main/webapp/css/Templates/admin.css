@@ -813,6 +813,9 @@ line-height: 1;
 /*.sfFormwrapper span.sfFormlabel, .sfFormwrapper label.sfFormlabel, .sfGridwrapper .sfFormlabel, .cssClassLabel {
  font-weight:bold;
 }*/
+.cssClassLabelTitle {
+ font-weight:bold;
+}
 .sfGridwrapper .sfButtonWrapper{ padding:0 20px 20px 20px;}
 .sfFormwrapper input.sfInputbox, input[type="text"], select, textarea, .sfFormwrapper textarea.sfTextarea, .sfFormwrapper select, .sfFormwrapper select.sfListmenusmall, .sfFormwrapper select.sfListmenubig, textarea.sfTextareabig1, select.sfListmenusmall, textarea.sfInputbox, .sfTextBoxSmall, .cssClassSearchPanel select, .cssClassViewPerPage select, .cssClassVariantValueName, .cssClassIsActive, .cssClassTextArea, .cssClassElement select, .popupbox select {
 	padding:8px;
@@ -2800,6 +2803,40 @@ box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box
 text-indent: -9999px; width: 14px;
 border-radius: 50%; -webkit-border-radius: 50%; -ms-border-radius: 50%; -o-border-radius: 50%; }
 
+.rule.dashed {
+    border-style: dashed !important;
+	border-bottom: 1px solid #ced0d1;
+}
+
+.input-group {
+    border-collapse: separate;
+    display: table;
+    position: relative;
+}
+
+.input-group-addon {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    padding: 6px 12px;
+    text-align: center;
+}
+.input-group-addon {
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 1%;
+}
+.input-group-addon{
+    display: table-cell;
+}
+
+.input-group-addon:first-child {
+    border-right: 0 none;
+}
 
 .cssClassHeader { position:relative;}
 .cssClassRssDiv { position:absolute; top:10px; right:0px;}
@@ -3183,5 +3220,3 @@ padding: 8px;}
 .cssClassresetPad{ line-height:19px;line-height:1.444;}
 div#aspxcommereloading img{height: 50px;margin-top: 20px;position: relative;width: 49px;}
 div#aspxcommereloading{background:#fff; width:100px; height:100px; border-radius:5px; text-align:center; position:fixed; left:50%; top:50%;z-index: 5050;"}
-
-
