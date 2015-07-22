@@ -109,13 +109,21 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setNoOfSenioredProposal(countSeniorPersonnel(userProfile));
 
 			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
-			Date lastUpdated = null;
+			Date lastAudited = null;
+			String lastAuditedBy = new String();
+			String lastAuditAction = new String();
 			if (userProfile.getAuditLog().size() > 0) {
-				lastUpdated = userProfile.getAuditLog()
-						.get(userProfile.getAuditLog().size() - 1)
-						.getActivityDate();
+				AuditLog auditLog = userProfile.getAuditLog().get(
+						userProfile.getAuditLog().size() - 1);
+				lastAudited = auditLog.getActivityDate();
+				lastAuditedBy = auditLog.getUserProfileId().getFirstName()
+						+ " " + auditLog.getUserProfileId().getMiddleName()
+						+ " " + auditLog.getUserProfileId().getLastName();
+				lastAuditAction = auditLog.getAction();
 			}
-			user.setLastUpdated(lastUpdated);
+			user.setLastAudited(lastAudited);
+			user.setLastAuditedBy(lastAuditedBy);
+			user.setLastAuditAction(lastAuditAction);
 
 			user.setDeleted(userProfile.getUserAccount().isDeleted());
 			users.add(user);

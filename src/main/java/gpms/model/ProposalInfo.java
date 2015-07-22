@@ -38,7 +38,9 @@ public class ProposalInfo {
 	private double totalCosts;
 	private double FARate;
 
-	private Date lastUpdated = new Date();
+	private Date lastAudited = new Date();
+	private String lastAuditedBy = new String();
+	private String lastAuditAction = new String();
 	private boolean isDeleted = false;
 
 	public ProposalInfo() {
@@ -83,6 +85,31 @@ public class ProposalInfo {
 
 	public void setProposalStatus(Status proposalStatus) {
 		this.proposalStatus = proposalStatus;
+	}
+
+	public InvestigatorRefAndPosition getPIUsers() {
+		return PIUsers;
+	}
+
+	public void setPIUsers(InvestigatorRefAndPosition pIUsers) {
+		PIUsers = pIUsers;
+	}
+
+	public InvestigatorRefAndPosition getCOPIUsers() {
+		return COPIUsers;
+	}
+
+	public void setCOPIUsers(InvestigatorRefAndPosition cOPIUsers) {
+		COPIUsers = cOPIUsers;
+	}
+
+	public InvestigatorRefAndPosition getSeniorPersonnelUsers() {
+		return seniorPersonnelUsers;
+	}
+
+	public void setSeniorPersonnelUsers(
+			InvestigatorRefAndPosition seniorPersonnelUsers) {
+		this.seniorPersonnelUsers = seniorPersonnelUsers;
 	}
 
 	public String getProjectTitle() {
@@ -181,12 +208,28 @@ public class ProposalInfo {
 		FARate = fARate;
 	}
 
-	public Date getLastUpdated() {
-		return lastUpdated;
+	public Date getLastAudited() {
+		return lastAudited;
 	}
 
-	public void setLastUpdated(Date lastUpdated) {
-		this.lastUpdated = lastUpdated;
+	public void setLastAudited(Date lastAudited) {
+		this.lastAudited = lastAudited;
+	}
+
+	public String getLastAuditedBy() {
+		return lastAuditedBy;
+	}
+
+	public void setLastAuditedBy(String lastAuditedBy) {
+		this.lastAuditedBy = lastAuditedBy;
+	}
+
+	public String getLastAuditAction() {
+		return lastAuditAction;
+	}
+
+	public void setLastAuditAction(String lastAuditAction) {
+		this.lastAuditAction = lastAuditAction;
 	}
 
 	public boolean isDeleted() {

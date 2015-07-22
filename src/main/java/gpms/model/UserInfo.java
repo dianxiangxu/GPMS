@@ -12,7 +12,9 @@ public class UserInfo {
 	private int noOfCoPIedProposal = 0;
 	private int noOfSenioredProposal = 0;
 	private Date addedOn = new Date();
-	private Date lastUpdated = new Date();
+	private Date lastAudited = new Date();
+	private String lastAuditedBy = new String();
+	private String lastAuditAction = new String();
 	private boolean isDeleted = false;
 
 	public UserInfo() {
@@ -82,12 +84,28 @@ public class UserInfo {
 		this.addedOn = addedOn;
 	}
 
-	public Date getLastUpdated() {
-		return lastUpdated;
+	public Date getLastAudited() {
+		return lastAudited;
 	}
 
-	public void setLastUpdated(Date lastUpdated) {
-		this.lastUpdated = lastUpdated;
+	public void setLastAudited(Date lastAudited) {
+		this.lastAudited = lastAudited;
+	}
+
+	public String getLastAuditedBy() {
+		return lastAuditedBy;
+	}
+
+	public void setLastAuditedBy(String lastAuditedBy) {
+		this.lastAuditedBy = lastAuditedBy;
+	}
+
+	public String getLastAuditAction() {
+		return lastAuditAction;
+	}
+
+	public void setLastAuditAction(String lastAuditAction) {
+		this.lastAuditAction = lastAuditAction;
 	}
 
 	public boolean isDeleted() {

@@ -285,14 +285,30 @@ $(function() {
 				// Want more format then
 				// :https://github.com/phstc/jquery-dateFormat/blob/master/test/expected_inputs_spec.js
 				}, {
-					display : getLocale(gpmsUsersManagement, 'Last Updated'),
-					name : 'last_updated',
+					display : getLocale(gpmsUsersManagement, 'Last Audited'),
+					name : 'last_audited',
 					cssclass : 'cssClassHeadDate',
 					controlclass : '',
 					coltype : 'label',
 					align : 'left',
 					type : 'date',
 					format : 'yyyy/MM/dd hh:mm:ss a'
+				}, {
+					display : 'Last Audited By',
+					name : 'last_audited_by',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					hide : true
+				}, {
+					display : 'Last Audited Action',
+					name : 'last_audited_action',
+					cssclass : '',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					hide : true
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
 					name : 'status',
@@ -356,7 +372,7 @@ $(function() {
 					0 : {
 						sorter : false
 					},
-					9 : {
+					11 : {
 						sorter : false
 					}
 				}
