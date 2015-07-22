@@ -13,19 +13,31 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.annotations.Expose;
+
 //{"id":null,"version":null,"auditLog":[],
 //"userName":"","password":"","isDeleted":false}
 
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
+// @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
+// property = "_id")
 public class UserAccount extends BaseEntity {
+	@Expose
 	@Property("username")
 	@Indexed(value = IndexDirection.ASC, name = "userNameIndex", unique = true)
 	private String userName = new String();
+
+	@Expose
 	@Property("password")
 	private String password = new String();
+
+	@Expose
 	@Property("is deleted")
 	private boolean isDeleted;
 
+	@Expose
 	@Property("added on")
 	private Date addedOn = new Date();
 

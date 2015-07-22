@@ -9,6 +9,8 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Version;
 
+import com.google.gson.annotations.Expose;
+
 public abstract class BaseEntity {
 	@Id
 	@Property("id")
@@ -22,7 +24,6 @@ public abstract class BaseEntity {
 	private ArrayList<AuditLog> auditLog;
 
 	public BaseEntity() {
-		super();
 		auditLog = new ArrayList<AuditLog>();
 	}
 

@@ -325,20 +325,20 @@
 																					Name:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtFirstName"
-																				placeholder="First Name"> <span
+																				name="firstName" placeholder="First Name"> <span
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel"
 																				id="lblMiddleName">Middle Name:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" id="txtMiddleName"
-																				placeholder="Middle Name"></td>
+																				name="middleName" placeholder="Middle Name"></td>
 																		</tr>
 																		<tr>
 																			<td><span id="lblLastName" class="cssClassLabel">Last
 																					Name:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" id="txtLastName" class="sfInputbox"
-																				placeholder="Last Name"> <span
+																				name="lastName" placeholder="Last Name"> <span
 																				class="cssClassRequired">*</span></td>
 																			<td></td>
 																			<td></td>
@@ -349,12 +349,15 @@
 																			<td class="cssClassTableRightCol required"
 																				placeholder="Date
 																					of Birth"><input
-																				type="text" id="txtDOB" class="sfInputbox">
+																				type="text" id="txtDOB" class="sfInputbox"
+																				name="dob"
+																				placeholder="Date
+																					of Birth">
 																				<span class="cssClassRequired">*</span></td>
 																			<td><span id="lblGender" class="cssClassLabel">Gender:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				name="Gender" id="Gender"><option value="0"
-																						selected="selected">Male</option>
+																				id="ddlGender" name="gender"><option
+																						value="0" selected="selected">Male</option>
 																					<option value="1">Female</option>
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
@@ -369,25 +372,25 @@
 																			<td><span class="cssClassLabel" id="lblStreet">Street:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtStreet"
-																				placeholder="Street"> <span
+																				name="street" placeholder="Street"> <span
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel" id="lblApt">Apt.,
 																					Suit, Floor, etc (Optional):</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" id="txtApt"
-																				placeholder="Apt.,
-																					Suit, Floor, etc (Optional)"></td>
+																				name="apt"
+																				placeholder="Apt., Suite, Floor, etc. (optional)"></td>
 																		</tr>
 																		<tr>
 																			<td><span class="cssClassLabel" id="lblCity">City:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtCity"
-																				placeholder="City"> <span
+																				name="city" placeholder="City"> <span
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel" id="lblState">State:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				id="State" name="State"><option value="">Choose
-																						state</option>
+																				id="ddlState" name="state"><option
+																						value="0">Choose state</option>
 																					<option value="1">Alabama</option>
 																					<option value="2">Alaska</option>
 																					<option value="4">Arizona</option>
@@ -447,12 +450,12 @@
 																			<td><span class="cssClassLabel" id="lblZip">Zip:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtZip"
-																				placeholder="Zip"> <span
+																				name="zip" placeholder="Zip"> <span
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel" id="lblCountry">Country:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				id="Country" name="Country"><option
-																						value="">Choose country</option>
+																				id="ddlCountry" name="country"><option
+																						value="0">Choose country</option>
 																					<option value="1">United State of America</option>
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
@@ -466,25 +469,25 @@
 																				id="lblOfficeNumber">Office Number:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" id="txtOfficeNumber"
-																				placeholder="Office Number"></td>
+																				name="officeNumber" placeholder="Office Number"></td>
 																			<td><span class="cssClassLabel"
 																				id="lblMobileNumber">Mobile Number:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtMobileNumber"
-																				placeholder="Mobile Number"> <span
-																				class="cssClassRequired">*</span></td>
+																				name="mobileNumber" placeholder="Mobile Number">
+																				<span class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr>
 																			<td><span class="cssClassLabel"
 																				id="lblHomeNumber">Home Number:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" id="txtHomeNumber"
-																				placeholder="Home Number"></td>
+																				name="homeNumber" placeholder="Home Number"></td>
 																			<td><span class="cssClassLabel"
 																				id="lblOtherNumber">Other:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" id="txtOtherNumber"
-																				placeholder="Other Number"></td>
+																				name="otherNumber" placeholder="Other Number"></td>
 																		</tr>
 																		<tr class="rule dashed">
 
@@ -499,8 +502,9 @@
 																				<div class="input-group">
 																					<div class="input-group-addon">@</div>
 																					<input type="email" id="txtWorkEmail"
-																						class="sfInputbox" placeholder="Work Email">
-																					<span class="cssClassRequired">*</span>
+																						class="sfInputbox" name="workEmail"
+																						placeholder="Work Email"> <span
+																						class="cssClassRequired">*</span>
 																				</div>
 																			</td>
 																			<td><span class="cssClassLabel"
@@ -509,7 +513,8 @@
 																				<div class="input-group">
 																					<div class="input-group-addon">@</div>
 																					<input type="email" class="sfInputbox"
-																						id="txtPersonalEmail" placeholder="Personal Email">
+																						id="txtPersonalEmail" name="personalEmail"
+																						placeholder="Personal Email">
 																				</div>
 																			</td>
 																		</tr>
@@ -595,7 +600,7 @@
 																		<tr>
 																			<td><span class="cssClassLabel" id="lblPassword">Password:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtPassword"
+																				type="password" class="sfInputbox" id="txtPassword"
 																				placeholder="Password" /> <span
 																				class="cssClassRequired">*</span></td>
 																		</tr>
@@ -603,7 +608,7 @@
 																			<td><span class="cssClassLabel"
 																				id="lblConfirmPassword">Confirm Password:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox"
+																				type="password" class="sfInputbox"
 																				id="txtConfirmPassword"
 																				placeholder="Password (Again)" /> <span
 																				class="cssClassRequired">*</span></td>

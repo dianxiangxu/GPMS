@@ -6,7 +6,7 @@ import org.mongodb.morphia.annotations.Reference;
 
 @Embedded
 public class InvestigatorRefAndPosition {
-	@Reference(value = "user profile")
+	@Reference(value = "user profile", lazy = true)
 	UserProfile userRef;
 	@Property("college")
 	private String college = new String();

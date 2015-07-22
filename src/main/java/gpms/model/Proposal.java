@@ -4,7 +4,9 @@ import gpms.dao.ProposalDAO;
 
 import java.util.Date;
 
-import org.bson.types.ObjectId;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
@@ -21,6 +23,7 @@ public class Proposal extends BaseEntity {
 	private Date dateReceived = new Date();
 
 	@Property("proposal status")
+	@Enumerated(EnumType.STRING)
 	private Status proposalStatus = Status.NEW;
 
 	@Embedded("investigator info")

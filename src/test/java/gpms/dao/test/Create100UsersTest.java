@@ -31,7 +31,7 @@ public class Create100UsersTest {
 	UserAccountDAO newUserAccountDAO;
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
-	final int MAXIMUM_PROFILES = 100; //Adjust this to make more or less profiles with the generator.
+	final int MAXIMUM_PROFILES = 2; //Adjust this to make more or less profiles with the generator.
 
 	@Before
 	public void initiate() 

@@ -6,14 +6,23 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class PositionDetails {
+	@Expose
 	@Property("position title")
 	private String positionTitle = new String();
+
+	@Expose
 	@Property("position type")
 	private String positionType = new String();
+
+	@Expose
 	@Property("department")
 	private String department = new String();
+
+	@Expose
 	@Property("college")
 	private String college = new String();;
 

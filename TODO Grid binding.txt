@@ -246,11 +246,15 @@ I want to bind a grid based on these both tables' fields information like:
 1. Users Management Grid
 UserProfile.TotalRecord, UserProfile._id, UserAccount.userName, UserProfile.fullName, Proposal.investigator info.CountTotalNoOfOfProposalsAsPI, Proposal.investigator info.CountTotalNoOfOfProposalsAsCoPI, Proposal.investigator info.CountTotalNoOfOfProposalsAsSeniorPersonnel, UserAccount.addedOn, UserProfile.BasedOnAuditLogGetLatestChangedDate, UserAccount.isDeleted
 
+In this grid I have a Search panel like this: 
+
+
 2. Proposals Management Grid
 Proposal.TotalRecord, Proposal._id, Proposal.proposalNo, Proposal.dateReceived, Proposal.investigator info.ListOfPIUserProfileObject, Proposal.investigator info.ListOfCoPIUserProfileObject, Proposal.investigator info.ListOfSeniorPersonnelUserProfileObject, Proposal.project info.projectTitle, Proposal.project info.projectType, Proposal.project info.typeOfRequest, Proposal.project info.dueDate, Proposal.project info.project period.projectPeriodFrom, Proposal.project info.project period.projectPeriodTo, Proposal.project info.location of project.projectLocation, Proposal.grantingAgencies, Proposal.sponsor and budget info.directCosts, Proposal.sponsor and budget info.FACosts, Proposal.sponsor and budget info.totalCosts, Proposal.sponsor and budget info.FARate, Proposal.BasedOnAuditLogGetLatestChangedDate, Proposal.proposalStatus
 
 3. AuditLog Grid For both Tables
 TotalRecordOfAuditLogForThatUser/Proposal
+UserAccount.UserName
 UserProfile.userFullNameWhoAuditIt
 actionForThatUser/Proposal
 activityDateForThatUser/Proposal

@@ -299,16 +299,20 @@ $(function() {
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
-					align : 'left',
-					hide : true
+					align : 'left'
+				/*
+				 * , hide : true
+				 */
 				}, {
 					display : 'Last Audited Action',
 					name : 'last_audited_action',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
-					align : 'left',
-					hide : true
+					align : 'left'
+				/*
+				 * , hide : true
+				 */
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
 					name : 'status',
@@ -337,7 +341,7 @@ $(function() {
 					_event : 'click',
 					trigger : '1',
 					callMethod : 'usersManage.EditUser',
-					arguments : '1,2,3,4,5,6,7,8'
+					arguments : '1,2,3,4,5,6,7,8,9,10'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Delete"),
 					name : 'delete',
@@ -345,7 +349,7 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '8'
+					arguments : '10'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
@@ -353,7 +357,7 @@ $(function() {
 					_event : 'click',
 					trigger : '3',
 					callMethod : 'usersManage.ActiveUser',
-					arguments : '8'
+					arguments : '10'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Deactivate"),
 					name : 'deactivate',
@@ -361,7 +365,7 @@ $(function() {
 					_event : 'click',
 					trigger : '4',
 					callMethod : 'usersManage.DeactiveUser',
-					arguments : '8'
+					arguments : '10'
 				} ],
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
@@ -472,33 +476,72 @@ $(function() {
 			$('#txtFirstName').val(response['firstName']);
 			$('#txtMiddleName').val(response['middleName']);
 			$('#txtLastName').val(response['lastName']);
+			$('#txtDOB').val(response['dateOfBirth']);
 
-			$.each(response['addresses'], function(index, value) {
-				alert(index + " :: " + value);
+			$('#ddlGender option').map(function() {
+				if ($(this).text() == response['gender'])
+					return this;
+			}).attr('selected', 'selected');
+
+			$.each(response['details'], function(index, value) {
+				alert(index + " :: " + value['positionTitle']);
 			});
 
-			// $('txtStreet').val(response['lastName']);
-			// $('txtCity').val(response['lastName']);
-			// $('txtState').val(response['lastName']);
-			// $('txtZipcode').val(response['lastName']);
-			// $('txtCountry').val(response['lastName']);
-			//
-			// $('txtOfficeNumber').val(response['officeNumbers']);
-			// $('txtMobileNumber').val(response['mobileNumbers']);
-			// $('txtHomeNumber').val(response['homeNumbers']);
-			// $('txtWorkEmail').val(response['workEmails']);
-			// $('txtPersonalEmail').val(response['personalEmails']);
-			$('input[name=chkActive]').prop('checked', response["deleted"]);
+			$.each(response['officeNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtOfficeNumber').val(response['officeNumbers']);
+			});
 
-			// $('#txtUserName').val(response['userAccount']['userName']);
+			$.each(response['mobileNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtMobileNumber').val(response['mobileNumbers']);
+			});
 
-			// $('#ddlAttributeType').prop('disabled', 'disabled');
+			$.each(response['homeNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtHomeNumber').val(response['homeNumbers']);
+			});
 
-			// $('input[name=chkUniqueValue]').prop('checked',
-			// item.IsUnique);
+			$.each(response['otherNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtOtherNumber').val(response['otherNumbers']);
+			});
 
-			// usersManage.ValidationTypeEnableDisable(item.FillOptionValues,
-			// false);
+			$.each(response['addresses'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtStreet').val(value['street']);
+				$('#txtApt').val(value['apt']);
+				$('#txtCity').val(value['city']);
+				$('#ddlState option').map(function() {
+					if ($(this).text() == response['state'])
+						return this;
+				}).attr('selected', 'selected');
+				$('#txtZip').val(value['zip']);
+				$('#ddlCountry option').map(function() {
+					if ($(this).text() == response['country'])
+						return this;
+				}).attr('selected', 'selected');
+			});
+
+			$.each(response['workEmails'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtWorkEmail').val(response['workEmails']);
+			});
+
+			$.each(response['personalEmails'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtPersonalEmail').val(response['personalEmails']);
+			});
+
+			$('input[name=chkActive]').prop('checked', !response["deleted"]);
+
+			$.each(response['userAccount'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtUserName').val(response['userAccount']['userName']);
+				$('#txtUserName').prop('disabled', 'disabled');
+
+				$('#txtPassword').val(response['userAccount']['password']);
+			});
 
 			// if (item.ItemTypes.length > 0) {
 			// $('#ddlApplyTo').val('1');
@@ -515,12 +558,17 @@ $(function() {
 		},
 
 		EditUser : function(tblID, argus) {
+			// 55b011b7af6e0429b078db57,userAccount0,firstName0
+			// lastName0,1,0,1,2015/07/22 03:57:11 PM,2015/07/22 03:57:11
+			// PM,firstName0 lastName0,Added work email
+			// alternatecontact@officialplace.com,No
 			switch (tblID) {
 			case "gdvUsers":
 				$('#lblFormHeading').html(
 						getLocale(gpmsUsersManagement, 'Edit User Details: ')
 								+ argus[3]);
-				$('#txtUserName').prop('disabled', 'disabled');
+				// $('#txtUserName').val(argus[1]);
+				// $('#txtUserName').prop('disabled', 'disabled');
 				$(".delbutton").prop("id", 'userId' + argus[0]);
 				$(".delbutton").show();
 				$("input[name=AddMore]").removeAttr('disabled');
@@ -1471,14 +1519,15 @@ $(function() {
 												.removeClass('error');
 										$(this).removeClass('error');
 									});
-							$(cloneRow).appendTo("#dataTable");
+							$(cloneRow).appendTo("#dataTable").hide().fadeIn(
+									1200);
 
 							rowIndex = $('#dataTable > tbody tr').size() - 1;
 							usersManage.BindDepartmentDropDown($(
 									'select[name="ddlCollege"]').eq(rowIndex)
 									.val(), false);
 
-							$('#dataTable tr:last td').fadeIn('slow');
+							// $('#dataTable tr:last td').fadeIn('slow');
 						}
 					});
 			$("#btnSearchUser").bind("click", function() {

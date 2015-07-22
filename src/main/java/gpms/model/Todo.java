@@ -9,7 +9,6 @@ import org.mongodb.morphia.annotations.Id;
 
 @Entity
 public class Todo {
-
 	private String task;
 	private Boolean completed = false;
 	private Date added;

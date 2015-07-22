@@ -7,12 +7,22 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.annotations.Expose;
+
 @Embedded
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class AuditLog {
-	@Reference("user id")
+	@Expose
+	@Reference(value = "user id", lazy = true)
 	private UserProfile userProfileId = new UserProfile();
+
+	@Expose
 	@Property("action")
 	private String action = new String();
+
+	@Expose
 	@Property("activity on")
 	private Date activityDate = new Date();
 

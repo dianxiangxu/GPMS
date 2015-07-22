@@ -20,6 +20,10 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.utils.IndexDirection;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.annotations.Expose;
+
 //{"id":null,"version":null,"auditLog":[],
 //"firstName":"Milson","middleName":"","lastName":"Munakami",
 //"officeNumbers":[],"mobileNumbers":[],"homeNumbers":[],
@@ -28,56 +32,73 @@ import org.mongodb.morphia.utils.IndexDirection;
 //"userAccount":{"id":null,"version":null,"auditLog":[],"userName":"","password":"","isDeleted":false},
 //"isDeleted":false,"detailsList":[]}
 @Entity(value = UserProfileDAO.COLLECTION_NAME, noClassnameStored = true)
+// @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
+// property = "id")
 public class UserProfile extends BaseEntity {
+	@Expose
 	@Property("first name")
 	@Indexed(value = IndexDirection.ASC, name = "firstNameIndex")
 	private String firstName = new String();
 
+	@Expose
 	@Property("middle name")
 	// @Indexed(value = IndexDirection.ASC, name = "middleNameIndex")
 	private String middleName = new String();
 
+	@Expose
 	@Property("last name")
 	@Indexed(value = IndexDirection.ASC, name = "lastNameIndex")
 	private String lastName = new String();
 
+	@Expose
 	@Property("date of birth")
 	private Date dateOfBirth = new Date();
 
+	@Expose
 	@Property("gender")
 	private String gender = new String();
 
+	@Expose
 	@Embedded("details")
 	private List<PositionDetails> details = new ArrayList<PositionDetails>();
 
+	@Expose
 	@Property("office number")
 	private List<String> officeNumbers = new ArrayList<String>();
 
+	@Expose
 	@Property("mobile number")
 	private List<String> mobileNumbers = new ArrayList<String>();
 
+	@Expose
 	@Property("home number")
 	private List<String> homeNumbers = new ArrayList<String>();
 
+	@Expose
 	@Property("other number")
 	private List<String> otherNumbers = new ArrayList<String>();
 
+	@Expose
 	@Embedded("addresses")
 	private List<Address> addresses = new ArrayList<Address>();
 
+	@Expose
 	@Property("work email")
 	// @Indexed(value = IndexDirection.ASC, name = "workEmailsIndex", unique =
 	// true)
 	private List<String> workEmails = new ArrayList<String>();
 
+	@Expose
 	@Property("personal email")
 	// @Indexed(value = IndexDirection.ASC, name = "personalEmailsIndex", unique
 	// = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
-	@Reference(value = "user id", lazy = true)
+	@Expose
+	@Reference(/* idOnly = true, */value = "user id" /* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
 
+	@Expose
 	@Property("is deleted")
 	private boolean isDeleted;
 

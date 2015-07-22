@@ -5,7 +5,6 @@ import org.mongodb.morphia.annotations.Property;
 
 @Embedded
 public class Recovery {
-
 	@Property("full recovery")
 	private boolean fullRecovery;
 

@@ -15,7 +15,6 @@ import gpms.model.UserProfile;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -35,6 +34,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
 
 @Path("/users")
@@ -215,13 +216,18 @@ public class UserService {
 		gpmsCommonObj.setCultureName(cultureName);
 		user = userProfileDAO.findUserByProfileID(id, gpmsCommonObj);
 
-		// // Gson gson = new Gson();
-		// Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		// response = gson.toJson(user, UserProfile.class);
+		// user.getUserAccount().getUserName();
+
+		// Gson gson = new Gson();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+				.setPrettyPrinting().create();
+		response = gson.toJson(user, UserProfile.class);
+
 		// response = gson.toJson(user);
 
-		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
-				user);
+		// response =
+		// mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+		// user);
 
 		return response;
 	}
