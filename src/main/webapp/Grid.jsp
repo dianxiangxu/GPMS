@@ -589,7 +589,7 @@
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtUserName"
 																				placeholder="User
-																					Name" /> <span
+																					Name" > <span
 																				class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />
@@ -601,7 +601,7 @@
 																			<td><span class="cssClassLabel" id="lblPassword">Password:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="password" class="sfInputbox" id="txtPassword"
-																				placeholder="Password" /> <span
+																				placeholder="Password"> <span
 																				class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr>
@@ -610,7 +610,7 @@
 																			<td class="cssClassTableRightCol required"><input
 																				type="password" class="sfInputbox"
 																				id="txtConfirmPassword"
-																				placeholder="Password (Again)" /> <span
+																				placeholder="Password (Again)"> <span
 																				class="cssClassRequired">*</span></td>
 																		</tr>
 																	</tbody>
