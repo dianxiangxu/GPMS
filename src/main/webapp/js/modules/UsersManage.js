@@ -15,8 +15,8 @@ $(function() {
 	usersManage = {
 		config : {
 			isPostBack : false,
-			async : true,
-			cache : true,
+			async : false,
+			cache : false,
 			type : 'POST',
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
@@ -161,46 +161,18 @@ $(function() {
 			$('#txtUserName').removeAttr('disabled');
 
 			$(".AddOption").val("[+] Add");
-			$("#dataTable tr:gt(1)").remove();
+
+			rowIndex = 0;
+			$("#dataTable tbody>tr:gt(0)").remove();
+			$("#dataTable tbody>tr:first").find("select").find('option').each(
+					function(i) {
+						$(this).removeAttr("selected");
+					});
+			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
+					.eq(0).val(), false);
 
 			$('input[name=chkActive]').prop('checked', 'checked');
 			return false;
-		},
-		BindAttributeOptionsValues : function(_fillOptionValues) {
-			// "FillOptionValues":"11#!#test1#!#1#!#test1#!#1!#!12#!#test2#!#2#!#test2#!#0!#!13#!#test3#!#3#!#test3#!#0"
-			var _fillOptions = _fillOptionValues;
-			if (_fillOptions != undefined && _fillOptions != "") {
-				var arr = _fillOptions.split("!#!");
-				var htmlContent = '';
-				$.each(arr, function(i) {
-					var btnOption = "[+] Add";
-					var btnName = "AddMore";
-					if (i > 0) {
-						btnOption = "Delete";
-						var btnName = "DeleteOption";
-					}
-					var arr2 = arr[i].split("#!#");
-					var cloneRow = $('#dataTable tbody>tr:last').clone(true);
-					$(cloneRow).find("input").each(function(j) {
-						if (this.name == "optionValueId") {
-							$(this).val(arr2[0]);
-						} else if (this.name == "value") {
-							$(this).val(arr2[1]);
-						} else if (this.name == "position") {
-							$(this).val(arr2[2]);
-						} else if (this.name == "Alias") {
-							$(this).val(arr2[3]);
-						} else if ($(this).hasClass("class-isdefault")) {
-							this.checked = usersManage.Boolean(arr2[4]);
-						} else if ($(this).hasClass("AddOption")) {
-							$(this).prop("name", btnName);
-							$(this).prop("value", btnOption);
-						}
-					});
-					$(cloneRow).appendTo("#dataTable");
-				});
-				$('#dataTable>tbody tr:first').remove();
-			}
 		},
 
 		BindUserGrid : function(userName, college, department, positionType,
@@ -471,6 +443,151 @@ $(function() {
 				break;
 			}
 		},
+		BindUserPostionDetails : function(postitionDetails) {
+			// $("#dataTable tr:gt(1)").remove();
+			$
+					.each(
+							postitionDetails,
+							function(i, value) {
+								// alert(index + " :: " +
+								// value['positionTitle']);
+								var btnOption = "[+] Add";
+								var btnName = "AddMore";
+								if (i > 0) {
+									btnOption = "Delete";
+									var btnName = "DeleteOption";
+								}
+								var cloneRow = $('#dataTable tbody>tr:first')
+										.clone(true);
+								$(cloneRow).appendTo("#dataTable");
+
+								rowIndex = i;
+								$('#dataTable tbody>tr:eq(' + i + ')')
+										.find("select")
+										.each(
+												function(j) {
+													if (this.name == "ddlCollege") {
+														// $(this).val(value['college']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['college']) {
+																				$this
+																						.attr(
+																								'selected',
+																								'selected');
+																				usersManage
+																						.BindDepartmentDropDown(
+																								$(
+																										'select[name="ddlCollege"] option:selected')
+																										.eq(
+																												i)
+																										.val(),
+																								false);
+																				return false;
+																			}
+																		});
+													} else if (this.name == "ddlDepartment") {
+														// $(this).val(value['department']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['department']) {
+																				$this
+																						.attr(
+																								'selected',
+																								'selected');
+
+																				usersManage
+																						.BindPositionTypeDropDown(
+																								$(
+																										'select[name="ddlCollege"] option:selected')
+																										.eq(
+																												i)
+																										.val(),
+																								$(
+																										'select[name="ddlDepartment"] option:selected')
+																										.eq(
+																												i)
+																										.val(),
+																								false);
+																				return false;
+																			}
+																		});
+													} else if (this.name == "ddlPositionType") {
+														// $(this).val(value['positionType']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['positionType']) {
+																				$this
+																						.attr(
+																								'selected',
+																								'selected');
+
+																				usersManage
+																						.BindPositionTitleDropDown(
+																								$(
+																										'select[name="ddlCollege"] option:selected')
+																										.eq(
+																												i)
+																										.val(),
+																								$(
+																										'select[name="ddlDepartment"] option:selected')
+																										.eq(
+																												i)
+																										.val(),
+																								$(
+																										'select[name="ddlPositionType"] option:selected')
+																										.eq(
+																												i)
+																										.val(),
+																								false);
+																				return false;
+																			}
+																		});
+													} else if (this.name == "ddlPositionTitle") {
+														// $(this).val(value['positionTitle']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['positionTitle']) {
+																				$this
+																						.attr(
+																								'selected',
+																								'selected');
+																				return false;
+																			}
+																		});
+													}
+												});
+
+								$('#dataTable tbody>tr:eq(' + i + ')').find(
+										"input").each(function(k) {
+									if ($(this).hasClass("AddOption")) {
+										$(this).prop("name", btnName);
+										$(this).prop("value", btnOption);
+									}
+								});
+							});
+			$('#dataTable>tbody tr:last').remove();
+		},
 		FillForm : function(response) {
 			// See this how we can get response object based on fields
 			$('#txtFirstName').val(response['firstName']);
@@ -483,9 +600,7 @@ $(function() {
 					return this;
 			}).attr('selected', 'selected');
 
-			$.each(response['details'], function(index, value) {
-				alert(index + " :: " + value['positionTitle']);
-			});
+			usersManage.BindUserPostionDetails(response['details']);
 
 			$.each(response['officeNumbers'], function(index, value) {
 				// alert(index + " :: " + value);
@@ -564,9 +679,11 @@ $(function() {
 			// alternatecontact@officialplace.com,No
 			switch (tblID) {
 			case "gdvUsers":
+				usersManage.ClearForm();
 				$('#lblFormHeading').html(
-						getLocale(gpmsUsersManagement, 'Edit User Details: ')
-								+ argus[3]);
+						getLocale(gpmsUsersManagement,
+								'Edit User Details for: ')
+								+ argus[2]);
 				// $('#txtUserName').val(argus[1]);
 				// $('#txtUserName').prop('disabled', 'disabled');
 				$(".delbutton").prop("id", 'userId' + argus[0]);
@@ -575,7 +692,7 @@ $(function() {
 				$("input[name=DeleteOption]").removeAttr('disabled');
 				$("#btnSaveUser").prop("name", argus[0]);
 
-				usersManage.onInit();
+				$("#btnReset").hide();
 
 				usersManage.config.url = usersManage.config.baseURL
 						+ "GetUsersByProfileId";
@@ -1089,7 +1206,8 @@ $(function() {
 											item, item);
 								});
 				usersManage.BindDepartmentDropDown($(
-						'select[name="ddlCollege"]').val(), false);
+						'select[name="ddlCollege"] option:selected').eq(
+						rowIndex).val(), false);
 
 				break;
 
@@ -1122,8 +1240,10 @@ $(function() {
 											item, item);
 								});
 				usersManage.BindPositionTypeDropDown($(
-						'select[name="ddlCollege"]').val(), $(
-						'select[name="ddlDepartment"]').val(), false);
+						'select[name="ddlCollege"] option:selected').eq(
+						rowIndex).val(), $(
+						'select[name="ddlDepartment"] option:selected').eq(
+						rowIndex).val(), false);
 				break;
 
 			case 4: // For Search College Position Type Binding
@@ -1154,9 +1274,12 @@ $(function() {
 								});
 
 				usersManage.BindPositionTitleDropDown($(
-						'select[name="ddlCollege"]').val(), $(
-						'select[name="ddlDepartment"]').val(), $(
-						'select[name="ddlPositionType"]').val(), false);
+						'select[name="ddlCollege"] option:selected').eq(
+						rowIndex).val(), $(
+						'select[name="ddlDepartment"] option:selected').eq(
+						rowIndex).val(), $(
+						'select[name="ddlPositionType"] option:selected').eq(
+						rowIndex).val(), false);
 				break;
 
 			case 6: // For Search College Position Title Binding
@@ -1315,7 +1438,7 @@ $(function() {
 					});
 
 			// Form Position details Drop downs
-			$('select[name="ddlCollege"]').bind("change", function() {
+			$('select[name="ddlCollege"]').on("change", function() {
 				rowIndex = $(this).closest('tr').prevAll("tr").length;
 				if ($(this).val() != "0") {
 					usersManage.BindDepartmentDropDown($(this).val(), false);
@@ -1325,7 +1448,7 @@ $(function() {
 			});
 
 			$('select[name="ddlDepartment"]')
-					.bind(
+					.on(
 							"change",
 							function() {
 								rowIndex = $(this).closest('tr').prevAll("tr").length;
@@ -1343,7 +1466,7 @@ $(function() {
 							});
 
 			$('select[name="ddlPositionType"]')
-					.bind(
+					.on(
 							"change",
 							function() {
 								rowIndex = $(this).closest('tr').prevAll("tr").length;
@@ -1494,42 +1617,57 @@ $(function() {
 				}
 			});
 
-			$("input[type=button].AddOption").click(
-					function() {
-						if ($(this).prop("name") == "DeleteOption") {
-							var t = $(this).closest('tr');
+			$("input[type=button].AddOption")
+					.on(
+							"click",
+							function() {
+								if ($(this).prop("name") == "DeleteOption") {
+									var t = $(this).closest('tr');
 
-							t.find("td").wrapInner(
-									"<div style='DISPLAY: block'/>").parent()
-									.find("td div").slideUp(300, function() {
-										t.remove();
-									});
+									t.find("td").wrapInner(
+											"<div style='DISPLAY: block'/>")
+											.parent().find("td div").slideUp(
+													300, function() {
+														t.remove();
+													});
 
-						} else if ($(this).prop("name") == "AddMore") {
-							var cloneRow = $(this).closest('tr').clone(true);
-							$(cloneRow).find("input").each(
-									function(i) {
-										if ($(this).hasClass("AddOption")) {
-											$(this)
-													.prop("name",
+								} else if ($(this).prop("name") == "AddMore") {
+									var cloneRow = $(this).closest('tr').clone(
+											true);
+									$(cloneRow).find("input").each(
+											function(i) {
+												if ($(this).hasClass(
+														"AddOption")) {
+													$(this).prop("name",
 															"DeleteOption");
-											$(this).prop("value", "Delete");
-										}
-										$(this).parent('td').find('span')
-												.removeClass('error');
-										$(this).removeClass('error');
-									});
-							$(cloneRow).appendTo("#dataTable").hide().fadeIn(
-									1200);
+													$(this).prop("value",
+															"Delete");
+												}
+												$(this).parent('td').find(
+														'span').removeClass(
+														'error');
+												$(this).removeClass('error');
+											});
+									$(cloneRow).find("select").find("option")
+											.each(function(j) {
+												$(this).removeAttr("selected");
+											});
+									$(cloneRow).appendTo("#dataTable").hide()
+											.fadeIn(1200);
 
-							rowIndex = $('#dataTable > tbody tr').size() - 1;
-							usersManage.BindDepartmentDropDown($(
-									'select[name="ddlCollege"]').eq(rowIndex)
-									.val(), false);
+									rowIndex = $('#dataTable > tbody tr')
+											.size() - 1;
+									usersManage
+											.BindDepartmentDropDown(
+													$(
+															'select[name="ddlCollege"] option:selected')
+															.eq(rowIndex).val(),
+													false);
 
-							// $('#dataTable tr:last td').fadeIn('slow');
-						}
-					});
+									// $('#dataTable tr:last
+									// td').fadeIn('slow');
+								}
+							});
 			$("#btnSearchUser").bind("click", function() {
 				usersManage.SearchUsers();
 				return false;

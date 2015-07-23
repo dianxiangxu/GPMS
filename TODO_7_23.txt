@@ -1,0 +1,35 @@
+TODO:
+
+1. AuditLog Table to bind for @UserProfileID and @ProposalID sorted based on Activity Date
+{"offset":1,"limit":10,"auditLogBindObj":{"Action":null,"AuditedBy":null,"ActivityOnFrom":null,"ActivityOnTo"
+:null}}
+
+For User based Audit I already added : 
+public List<AuditLogInfo> findAllForUserAuditLogGrid(int offset, int limit,
+			String action, String auditedBy, String activityOnFrom,
+			String activityOnTo)
+
+Method in UserProfileDAO need to make it working!
+- Here activityOnFrom and activityOnTo is the DATE range! If any one of them is not SET then need to assume that user is searching all valid range 
+
+For example, if user only searching for activityonFrom then all above that need to be fetched and if only activityOnTo is SET then below that need to be fetched!
+
+And if both are set then Range in between those two dates need to be fetched!
+
+Similarly need to add another method for Proposal in ProposalDAO file
+public List<AuditLogInfo> findAllForProposalAuditLogGrid(int offset, int limit,
+			String action, String auditedBy, String activityOnFrom,
+			String activityOnTo)			
+	
+2. BUT, In User Audit Log we need to merge the both Audit logs from UserProfile and UserAccount
+
+
+3. Search Method with null or something values on each parameters! i.e. projectTitle, totalCostsFrom  for Proposal Grid
+BindProposalGrid (int offset, int limit, String projectTitle, String totalCostsFrom, String totalCostsTo, String proposalStatus (This is a DropDown Value so need to be exactly on db match NOT to use Contains!), String proposedBy, String receivedOnFrom, String receivedOnTo, String active)
+
+- Here totalCostsFrom and totalCostsTo is the range (double) for the Total Costs so if either is filled and searched based on that
+similarly  receivedOnFrom and receivedOnTo is the DATE range!
+
+4. Sending Email from Java web application
+
+5. 
