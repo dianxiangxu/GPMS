@@ -262,7 +262,7 @@
 																				<option value="True" class="sfLocale">True</option>
 																				<option value="False" class="sfLocale">False</option>
 																		</select></td>
-																		<td>
+																		<td><br>
 																			<button class="sfBtn" id="btnSearchUser"
 																				type="button">
 																				<span class="sfLocale icon-search">Search</span>
