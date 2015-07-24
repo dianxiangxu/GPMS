@@ -224,25 +224,29 @@
 
 																		<td><label class="cssClassLabel sfLocale">
 																				College:</label> <select id="ddlSearchCollege"
-																			class="sfListmenu" style="width: 100px;">
+																			class="sfListmenu" style="width: 100px;"
+																			title="College">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
 
 																		<td><label class="cssClassLabel sfLocale">
 																				Department:</label> <select id="ddlSearchDepartment"
-																			class="sfListmenu" style="width: 100px;">
+																			class="sfListmenu" style="width: 100px;"
+																			title="Department">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
 
 																		<td><label class="cssClassLabel sfLocale">
 																				Position Type:</label> <select id="ddlSearchPositionType"
-																			class="sfListmenu" style="width: 100px;">
+																			class="sfListmenu" style="width: 100px;"
+																			title="Position Type">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
 
 																		<td><label class="cssClassLabel sfLocale">
 																				Position Title:</label> <select id="ddlSearchPositionTitle"
-																			class="sfListmenu" style="width: 100px;">
+																			class="sfListmenu" style="width: 100px;"
+																			title="Position Title">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
 
@@ -257,7 +261,7 @@
 																			style="width: 80px !important;"></td> -->
 																		<td><label class="cssClassLabel sfLocale">
 																				Active:</label> <select id="ddlSearchIsActive"
-																			class="sfListmenu" style="width: 85px;">
+																			class="sfListmenu" style="width: 85px;" title="Is Active?">
 																				<option value="" class="sfLocale">--All--</option>
 																				<option value="True" class="sfLocale">True</option>
 																				<option value="False" class="sfLocale">False</option>
@@ -351,7 +355,7 @@
 																				class="cssClassRequired">*</span></td>
 																			<td><span id="lblGender" class="cssClassLabel">Gender:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				id="ddlGender" name="gender"><option
+																				id="ddlGender" name="gender" title="Gender"><option
 																						value="0">Male</option>
 																					<option value="1">Female</option>
 																			</select> <span class="cssClassRequired">*</span></td>
@@ -384,7 +388,7 @@
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel" id="lblState">State:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				id="ddlState" name="state"><option
+																				id="ddlState" name="state" title="State"><option
 																						value="0">Choose state</option>
 																					<option value="1">Alabama</option>
 																					<option value="2">Alaska</option>
@@ -449,7 +453,7 @@
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel" id="lblCountry">Country:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				id="ddlCountry" name="country"><option
+																				id="ddlCountry" name="country" title="Country"><option
 																						value="0">Choose country</option>
 																					<option value="1">United States of America</option>
 																			</select> <span class="cssClassRequired">*</span></td>

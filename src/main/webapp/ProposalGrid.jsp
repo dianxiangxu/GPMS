@@ -741,57 +741,58 @@
 																	<tr>
 																		<td><label class="cssClassLabel sfLocale">Project
 																				Title:</label> <input type="text" class="sfTextBoxSmall"
-																			id="txtSearchProjectTitle" /></td>
+																			id="txtSearchProjectTitle" placeholder="Project Title"></td>
 
 																		<td><label class="cssClassLabel sfLocale">
-																				Total Costs:</label> <br /> <span class="label sfLocale">
+																				Total Costs:</label> <br> <span class="label sfLocale">
 																				From :</span> <input type="text"
 																			id="txtSearchTotalCostsFrom" class="sfTextBoxSmall"
-																			style="width: 80px !important;" /> <span
-																			class="label sfLocale"> To :</span> <input
+																			style="width: 80px !important;" placeholder="From">
+																			<span class="label sfLocale"> To :</span> <input
 																			type="text" id="txtSearchTotalCostsTo"
 																			class="sfTextBoxSmall"
-																			style="width: 80px !important;" /></td>
+																			style="width: 80px !important;" placeholder="To"></td>
 																		</td>
 
 																		<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
 																		<!-- 																				Project Type:</label> <select id="ddlProjectType" -->
-																		<!-- 																			class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																			class="sfListmenu" style="width: 100px;" title="Project Type"> -->
 																		<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																		<!-- 																		</select></td> -->
 																		<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
 																		<!-- 																				Type of Request:</label> <select id="ddlTypeOfRequest" -->
-																		<!-- 																			class="sfListmenu" style="width: 100px;"> -->
+																		<!-- 																			class="sfListmenu" style="width: 100px;" title="Type of Request"> -->
 																		<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																		<!-- 																		</select></td> -->
 
 																		<td><label class="cssClassLabel sfLocale">
 																				Proposal Status:</label> <select
 																			id="ddlSearchProposalStatus" class="sfListmenu"
-																			style="width: 100px;">
+																			style="width: 100px;" title="Proposal Status">
 																				<option value="0" class="sfLocale">--All--</option>
 																		</select></td>
 
 																		<td><label class="cssClassLabel sfLocale">
 																				Proposed By:</label><input id="txtSearchProposedBy"
-																			class="sfTextBoxSmall" type="text"></td>
+																			class="sfTextBoxSmall" type="text"
+																			placeholder="Proposed By"></td>
 																		<td><label class="cssClassLabel sfLocale">
-																				Received On:</label><br /> <span class="label sfLocale">
+																				Received On:</label><br> <span class="label sfLocale">
 																				From :</span> <input type="text"
 																			id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
-																			style="width: 80px !important;" /> <span
-																			class="label sfLocale"> To :</span> <input
+																			style="width: 80px !important;" placeholder="From">
+																			<span class="label sfLocale"> To :</span> <input
 																			type="text" id="txtSearchReceivedOnTo"
 																			class="sfTextBoxSmall"
-																			style="width: 80px !important;" /></td>
+																			style="width: 80px !important;" placeholder="To"></td>
 																		<td><label class="cssClassLabel sfLocale">
 																				Active:</label> <select id="ddlIsActive" class="sfListmenu"
-																			style="width: 85px;">
+																			style="width: 85px;" title="Is Active?">
 																				<option value="" class="sfLocale">--All--</option>
 																				<option value="True" class="sfLocale">True</option>
 																				<option value="False" class="sfLocale">False</option>
 																		</select></td>
-																		<td><br />
+																		<td><br>
 																			<button class="sfBtn" id="btnSearchProposal"
 																				type="button">
 																				<span class="sfLocale icon-search">Search</span>
@@ -842,10 +843,11 @@
 																			<td><span class="cssClassLabel"
 																				id="ctl19_lblAttributeName">User Name:</span></td>
 																			<td class="cssClassTableRightCol required"><input
-																				type="text" class="sfInputbox" id="txtAttributeName" />
-																				<span class="cssClassRight"> <img
+																				type="text" class="sfInputbox" id="txtAttributeName"
+																				placeholder="User Name"> <span
+																				class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
-																					width="18" title="Right" src="" alt="Right" />
+																					width="18" title="Right" alt="Right" />
 																			</span> <b class="cssClassError sfLocale">Ops! found
 																					something error, must be unique with no spaces</b> <span
 																				class="cssClassRequired">*</span></td>
@@ -855,7 +857,7 @@
 																				id="ctl19_lblActive">Active:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="checkbox" name="chkActive"
-																				class="cssClassCheckBox" /></td>
+																				class="cssClassCheckBox"></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -874,7 +876,7 @@
 																					Editor:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="checkbox" class="cssClassCheckBox"
-																				name="chkIsEnableEditor" /></td>
+																				name="chkIsEnableEditor"></td>
 																		</tr>
 																	</tbody>
 																</table>
