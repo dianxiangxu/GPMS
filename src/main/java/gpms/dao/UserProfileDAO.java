@@ -435,6 +435,28 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 	}
 
+	public void setDateOfBirth(UserProfile author, UserProfile target,
+			Date newDOB) {
+		Datastore ds = getDatastore();
+		if (!target.getDateOfBirth().equals(newDOB)) {
+			audit = new AuditLog(author, "Edited Date Of Birth", new Date());
+			target.addEntryToAuditLog(audit);
+			target.setDateOfBirth(newDOB);
+			ds.save(target);
+		}
+	}
+
+	public void setGender(UserProfile author, UserProfile target,
+			String newGender) {
+		Datastore ds = getDatastore();
+		if (!target.getGender().equals(newGender)) {
+			audit = new AuditLog(author, "Edited Gender", new Date());
+			target.addEntryToAuditLog(audit);
+			target.setGender(newGender);
+			ds.save(target);
+		}
+	}
+
 	// /**
 	// * Returns a list of the details lists
 	// * @param profile
@@ -552,6 +574,31 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			target.addEntryToAuditLog(audit);
 			target.getMobileNumbers().remove(
 					target.getMobileNumbers().indexOf(number));
+			ds.save(target);
+		}
+	}
+
+	public void addOtherNumber(UserProfile author, UserProfile target,
+			String number) {
+		Datastore ds = getDatastore();
+		if (!target.getOtherNumbers().contains(number)) {
+			audit = new AuditLog(author, "Added other number " + number,
+					new Date());
+			target.addEntryToAuditLog(audit);
+			target.getOtherNumbers().add(number);
+			ds.save(target);
+		}
+	}
+
+	public void deleteOtherNumber(UserProfile author, UserProfile target,
+			String number) {
+		Datastore ds = getDatastore();
+		if (target.getOtherNumbers().contains(number)) {
+			audit = new AuditLog(author, "Deleted other number " + number,
+					new Date());
+			target.addEntryToAuditLog(audit);
+			target.getOtherNumbers().remove(
+					target.getOtherNumbers().indexOf(number));
 			ds.save(target);
 		}
 	}

@@ -219,8 +219,10 @@ public class UserService {
 		// user.getUserAccount().getUserName();
 
 		// Gson gson = new Gson();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-				.setPrettyPrinting().create();
+		// .setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")
+				.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
+				.create();
 		response = gson.toJson(user, UserProfile.class);
 
 		// response = gson.toJson(user);

@@ -220,7 +220,7 @@
 																	<tr>
 																		<td><label class="cssClassLabel sfLocale">User
 																				Name:</label> <input type="text" class="sfTextBoxSmall"
-																			id="txtSearchUserName" /></td>
+																			id="txtSearchUserName" placeholder="User Name"></td>
 
 																		<td><label class="cssClassLabel sfLocale">
 																				College:</label> <select id="ddlSearchCollege"
@@ -251,10 +251,10 @@
 																			<span class="label sfLocale"> From :</span> <input
 																			type="text" id="txtSearchAddedOnFrom"
 																			class="sfTextBoxSmall"
-																			style="width: 80px !important;" /> <span
+																			style="width: 80px !important;"> <span
 																			class="label sfLocale"> To :</span> <input
 																			type="text" id="txtSearchAddedOnTo" class="sfTextBoxSmall"
-																			style="width: 80px !important;" /></td> -->
+																			style="width: 80px !important;"></td> -->
 																		<td><label class="cssClassLabel sfLocale">
 																				Active:</label> <select id="ddlSearchIsActive"
 																			class="sfListmenu" style="width: 85px;">
@@ -266,8 +266,7 @@
 																			<button class="sfBtn" id="btnSearchUser"
 																				type="button">
 																				<span class="sfLocale icon-search">Search</span>
-																			</button>
-																		</td>
+																			</button></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -346,14 +345,10 @@
 																		<tr>
 																			<td><span id="lblDOB" class="cssClassLabel">Date
 																					of Birth:</span></td>
-																			<td class="cssClassTableRightCol required"
-																				placeholder="Date
-																					of Birth"><input
+																			<td class="cssClassTableRightCol required"><input
 																				type="text" id="txtDOB" class="sfInputbox"
-																				name="dob"
-																				placeholder="Date
-																					of Birth">
-																				<span class="cssClassRequired">*</span></td>
+																				name="dob" placeholder="Date of Birth"> <span
+																				class="cssClassRequired">*</span></td>
 																			<td><span id="lblGender" class="cssClassLabel">Gender:</span></td>
 																			<td class="cssClassTableRightCol required"><select
 																				id="ddlGender" name="gender"><option
@@ -375,7 +370,7 @@
 																				name="street" placeholder="Street"> <span
 																				class="cssClassRequired">*</span></td>
 																			<td><span class="cssClassLabel" id="lblApt">Apt.,
-																					Suit, Floor, etc (Optional):</span></td>
+																					Suit, Floor, etc:</span></td>
 																			<td class="cssClassTableRightCol"><input
 																				type="text" class="sfInputbox" id="txtApt"
 																				name="apt"
@@ -456,7 +451,7 @@
 																			<td class="cssClassTableRightCol required"><select
 																				id="ddlCountry" name="country"><option
 																						value="0">Choose country</option>
-																					<option value="1">United State of America</option>
+																					<option value="1">United States of America</option>
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr class="rule dashed">
@@ -589,8 +584,8 @@
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtUserName"
 																				placeholder="User
-																					Name" > <span
-																				class="cssClassRight"> <img
+																					Name">
+																				<span class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />
 																			</span> <b class="cssClassError sfLocale">Ops! found
@@ -629,19 +624,25 @@
 																						<tr>
 																							<td><label class="cssClassLabel sfLocale">
 																									Action:</label> <input type="text" class="sfInputbox"
-																								id="txtSearchAction" /></td>
+																								id="txtSearchAction" placeholder="Action"></td>
 																							<td><label class="cssClassLabel sfLocale">
 																									Audited By:</label> <input type="text"
-																								class="sfInputbox" id="txtSearchAuditedBy" /></td>
+																								class="sfInputbox" id="txtSearchAuditedBy"
+																								placeholder="Audited By"></td>
 																							<td><label class="cssClassLabel sfLocale">
 																									Activity On From:</label> <input type="text"
-																								class="sfInputbox" id="txtSearchActivityOnFrom" /></td>
+																								class="sfTextBoxSmall"
+																								id="txtSearchActivityOnFrom"
+																								placeholder="Activity On From"></td>
 																							<td><label class="cssClassLabel sfLocale">
 																									Activity On To:</label> <input type="text"
-																								class="sfInputbox" id="txtSearchActivityOnTo" /></td>
+																								class="sfTextBoxSmall"
+																								id="txtSearchActivityOnTo"
+																								placeholder="Activity On To"></td>
 
-																							<td><button class="sfBtn"
-																									id="btnSearchUserAuditLog" type="button">
+																							<td><br>
+																								<button class="sfBtn" id="btnSearchUserAuditLog"
+																									type="button">
 																									<span class="sfLocale icon-search">Search</span>
 																								</button></td>
 																						</tr>
@@ -662,25 +663,22 @@
 															<table cellspacing="0" cellpadding="0" border="0">
 																<tbody>
 																	<tr>
-																		<td><span class="cssClassLabel">Last
-																				Updated On:</span></td>
+																		<td><span class="cssClassLabelTitle">Last
+																				Audited On:&nbsp;</span></td>
 																		<td class="cssClassTableRightCol"><span
-																			id="lblLastUpdatedOn" class="cssClassLabel">2015/07/14
-																				10:34:01 AM </span></td>
+																			id="lblLastUpdatedOn" class="cssClassLabel"></span></td>
 																	</tr>
 																	<tr>
-																		<td><span class="cssClassLabel">Last
-																				Updated By:</span></td>
+																		<td><span class="cssClassLabelTitle">Last
+																				Audited By:&nbsp;</span></td>
 																		<td class="cssClassTableRightCol"><span
-																			id="lblLastUpdatedOn" class="cssClassLabel">firstName0
-																				lastName0 </span></td>
+																			id="lblLastUpdatedBy" class="cssClassLabel"></span></td>
 																	</tr>
 																	<tr>
-																		<td><span class="cssClassLabel">Last
-																				Activity:</span></td>
+																		<td><span class="cssClassLabelTitle">Last
+																				Activity:&nbsp;</span></td>
 																		<td class="cssClassTableRightCol"><span
-																			id="lblActivity" class="cssClassLabel">Edited
-																				Username </span></td>
+																			id="lblActivity" class="cssClassLabel"></span></td>
 																	</tr>
 																</tbody>
 															</table>

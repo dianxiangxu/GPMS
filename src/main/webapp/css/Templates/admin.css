@@ -2265,15 +2265,6 @@ p.cssClassActionImg a {
 .cssClassLiDate {
 	margin-bottom:10px;
 }
-.sfFormwrapper input.hasDatepicker {
-	width: 110px;
-	margin-right: 10px;
-}
-.sfFormwrapper input.hasDatepicker.sfBirthDate {
-	width: 200px;
-	margin-left: 0px;
-	margin-right: 0px;
-}
 .cssClassServceProvider {
 	margin:0 0 10px 0
 }

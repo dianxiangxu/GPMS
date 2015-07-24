@@ -58,6 +58,27 @@ $(function() {
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
+			$("#txtDOB").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			});
+
+			$("#txtSearchActivityOnFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtSearchActivityOnTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					});
+			$("#txtSearchActivityOnTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			});
 		},
 		SetFirstTabActive : function() {
 			var $tabs = $('#container-7').tabs({
@@ -271,20 +292,16 @@ $(function() {
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
-					align : 'left'
-				/*
-				 * , hide : true
-				 */
+					align : 'left',
+					hide : true
 				}, {
 					display : 'Last Audited Action',
 					name : 'last_audited_action',
 					cssclass : '',
 					controlclass : '',
 					coltype : 'label',
-					align : 'left'
-				/*
-				 * , hide : true
-				 */
+					align : 'left',
+					hide : true
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
 					name : 'status',
@@ -628,12 +645,12 @@ $(function() {
 				$('#txtApt').val(value['apt']);
 				$('#txtCity').val(value['city']);
 				$('#ddlState option').map(function() {
-					if ($(this).text() == response['state'])
+					if ($(this).text() == value['state'])
 						return this;
 				}).attr('selected', 'selected');
-				$('#txtZip').val(value['zip']);
+				$('#txtZip').val(value['zipcode']);
 				$('#ddlCountry option').map(function() {
-					if ($(this).text() == response['country'])
+					if ($(this).text() == value['country'])
 						return this;
 				}).attr('selected', 'selected');
 			});
@@ -684,6 +701,10 @@ $(function() {
 						getLocale(gpmsUsersManagement,
 								'Edit User Details for: ')
 								+ argus[2]);
+
+				$('#lblLastUpdatedOn').html(argus[7]);
+				$('#lblLastUpdatedBy').html(argus[8]);
+				$('#lblActivity').html(argus[9]);
 				// $('#txtUserName').val(argus[1]);
 				// $('#txtUserName').prop('disabled', 'disabled');
 				$(".delbutton").prop("id", 'userId' + argus[0]);
