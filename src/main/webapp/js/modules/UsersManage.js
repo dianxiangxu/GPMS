@@ -461,8 +461,8 @@ $(function() {
 										.clone(true);
 								$(cloneRow).appendTo("#dataTable");
 
-								rowIndex = i;
-								$('#dataTable tbody>tr:eq(' + i + ')')
+								rowIndex = i + 1;
+								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
 										.find("select")
 										.each(
 												function(j) {
@@ -481,13 +481,11 @@ $(function() {
 																								'selected',
 																								'selected');
 																				usersManage
-																						.BindDepartmentDropDown(
-																								$(
-																										'select[name="ddlCollege"] option:selected')
-																										.eq(
-																												i)
-																										.val(),
-																								false);
+																						.BindDepartmentOnly($(
+																								'select[name="ddlCollege"] option:selected')
+																								.eq(
+																										rowIndex)
+																								.val());
 																				return false;
 																			}
 																		});
@@ -507,18 +505,17 @@ $(function() {
 																								'selected');
 
 																				usersManage
-																						.BindPositionTypeDropDown(
+																						.BindPositionTypeOnly(
 																								$(
 																										'select[name="ddlCollege"] option:selected')
 																										.eq(
-																												i)
+																												rowIndex)
 																										.val(),
 																								$(
 																										'select[name="ddlDepartment"] option:selected')
 																										.eq(
-																												i)
-																										.val(),
-																								false);
+																												rowIndex)
+																										.val());
 																				return false;
 																			}
 																		});
@@ -538,23 +535,22 @@ $(function() {
 																								'selected');
 
 																				usersManage
-																						.BindPositionTitleDropDown(
+																						.BindPositionTitleOnly(
 																								$(
 																										'select[name="ddlCollege"] option:selected')
 																										.eq(
-																												i)
+																												rowIndex)
 																										.val(),
 																								$(
 																										'select[name="ddlDepartment"] option:selected')
 																										.eq(
-																												i)
+																												rowIndex)
 																										.val(),
 																								$(
 																										'select[name="ddlPositionType"] option:selected')
 																										.eq(
-																												i)
-																										.val(),
-																								false);
+																												rowIndex)
+																										.val());
 																				return false;
 																			}
 																		});
@@ -578,15 +574,19 @@ $(function() {
 													}
 												});
 
-								$('#dataTable tbody>tr:eq(' + i + ')').find(
-										"input").each(function(k) {
-									if ($(this).hasClass("AddOption")) {
-										$(this).prop("name", btnName);
-										$(this).prop("value", btnOption);
-									}
-								});
+								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
+										.find("input").each(
+												function(k) {
+													if ($(this).hasClass(
+															"AddOption")) {
+														$(this).prop("name",
+																btnName);
+														$(this).prop("value",
+																btnOption);
+													}
+												});
 							});
-			$('#dataTable>tbody tr:last').remove();
+			$('#dataTable>tbody tr:first').remove();
 		},
 		FillForm : function(response) {
 			// See this how we can get response object based on fields
@@ -1152,6 +1152,37 @@ $(function() {
 			this.ajaxCall(this.config);
 			return false;
 		},
+		BindDepartmentOnly : function(collegeName) {
+			this.config.url = this.config.baseURL + "GetDepartmentList";
+			this.config.data = JSON2.stringify({
+				college : collegeName
+			});
+			this.config.ajaxCallMode = 9;
+			this.ajaxCall(this.config);
+			return false;
+		},
+		BindPositionTypeOnly : function(collegeName, departmentName) {
+			this.config.url = this.config.baseURL + "GetPositionTypeList";
+			this.config.data = JSON2.stringify({
+				college : collegeName,
+				department : departmentName
+			});
+			this.config.ajaxCallMode = 10;
+			this.ajaxCall(this.config);
+			return false;
+		},
+		BindPositionTitleOnly : function(collegeName, departmentName,
+				positionTypeName) {
+			this.config.url = this.config.baseURL + "GetPositionTitleList";
+			this.config.data = JSON2.stringify({
+				college : collegeName,
+				department : departmentName,
+				positionType : positionTypeName
+			});
+			this.config.ajaxCallMode = 11;
+			this.ajaxCall(this.config);
+			return false;
+		},
 		SearchUsers : function() {
 			var userName = $.trim($("#txtSearchUserName").val());
 			var college = $.trim($('#ddlSearchCollege').val()) == "" ? null : $
@@ -1313,6 +1344,54 @@ $(function() {
 				usersManage.FillForm(msg);
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
+				break;
+
+			case 9: // For Binding Department Dropdown based on College
+				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$('select[name="ddlDepartment"]').get(
+											rowIndex).options[$(
+											'select[name="ddlDepartment"]')
+											.get(rowIndex).options.length] = new Option(
+											item, item);
+								});
+				break;
+
+			case 10: // For Binding PositionType Dropdown based on
+				// Department
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$('select[name="ddlPositionType"]').get(
+											rowIndex).options[$(
+											'select[name="ddlPositionType"]')
+											.get(rowIndex).options.length] = new Option(
+											item, item);
+								});
+
+				break;
+
+			case 11: // For Binding PositionTitle Dropdown based on
+				// PositionType
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+				$
+						.each(
+								msg,
+								function(index, item) {
+									$('select[name="ddlPositionTitle"]').get(
+											rowIndex).options[$(
+											'select[name="ddlPositionTitle"]')
+											.get(rowIndex).options.length] = new Option(
+											item, item);
+								});
 				break;
 			}
 		},
