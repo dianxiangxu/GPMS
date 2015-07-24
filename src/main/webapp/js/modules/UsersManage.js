@@ -164,6 +164,7 @@ $(function() {
 				rmErrorClass(item);
 				$(this).val('');
 				$(this).prop('checked', false);
+				// $(this).find('option').removeAttr('selected');
 			});
 
 			usersManage.onInit();
@@ -181,7 +182,7 @@ $(function() {
 			});
 			$('#txtUserName').removeAttr('disabled');
 
-			$(".AddOption").val("[+] Add");
+			$(".AddOption").val("[+]Add");
 
 			rowIndex = 0;
 			$("#dataTable tbody>tr:gt(0)").remove();
@@ -468,7 +469,7 @@ $(function() {
 							function(i, value) {
 								// alert(index + " :: " +
 								// value['positionTitle']);
-								var btnOption = "[+] Add";
+								var btnOption = "[+]Add";
 								var btnName = "AddMore";
 								if (i > 0) {
 									btnOption = "Delete";
@@ -494,7 +495,7 @@ $(function() {
 																			if ($this
 																					.text() == value['college']) {
 																				$this
-																						.attr(
+																						.prop(
 																								'selected',
 																								'selected');
 																				usersManage
@@ -517,7 +518,7 @@ $(function() {
 																			if ($this
 																					.text() == value['department']) {
 																				$this
-																						.attr(
+																						.prop(
 																								'selected',
 																								'selected');
 
@@ -547,7 +548,7 @@ $(function() {
 																			if ($this
 																					.text() == value['positionType']) {
 																				$this
-																						.attr(
+																						.prop(
 																								'selected',
 																								'selected');
 
@@ -582,7 +583,7 @@ $(function() {
 																			if ($this
 																					.text() == value['positionTitle']) {
 																				$this
-																						.attr(
+																						.prop(
 																								'selected',
 																								'selected');
 																				return false;
@@ -612,10 +613,12 @@ $(function() {
 			$('#txtLastName').val(response['lastName']);
 			$('#txtDOB').val(response['dateOfBirth']);
 
+			// $('#ddlGender').val(response['gender']);
+
 			$('#ddlGender option').map(function() {
 				if ($(this).text() == response['gender'])
 					return this;
-			}).attr('selected', 'selected');
+			}).prop('selected', 'selected');
 
 			usersManage.BindUserPostionDetails(response['details']);
 
@@ -640,19 +643,21 @@ $(function() {
 			});
 
 			$.each(response['addresses'], function(index, value) {
-				// alert(index + " :: " + value);
 				$('#txtStreet').val(value['street']);
 				$('#txtApt').val(value['apt']);
 				$('#txtCity').val(value['city']);
+
 				$('#ddlState option').map(function() {
 					if ($(this).text() == value['state'])
 						return this;
-				}).attr('selected', 'selected');
+				}).prop('selected', 'selected');
+
 				$('#txtZip').val(value['zipcode']);
+
 				$('#ddlCountry option').map(function() {
 					if ($(this).text() == value['country'])
 						return this;
-				}).attr('selected', 'selected');
+				}).prop('selected', 'selected');
 			});
 
 			$.each(response['workEmails'], function(index, value) {
@@ -707,7 +712,7 @@ $(function() {
 				$('#lblActivity').html(argus[9]);
 				// $('#txtUserName').val(argus[1]);
 				// $('#txtUserName').prop('disabled', 'disabled');
-				$(".delbutton").prop("id", 'userId' + argus[0]);
+				$(".delbutton").prop("id", argus[0]);
 				$(".delbutton").show();
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
@@ -1702,20 +1707,22 @@ $(function() {
 							});
 
 			$(".delbutton").click(function() {
-				var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
-				usersManage.DeleteUserById(user_id);
+				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
+				var user_id = $(this).prop("id");
+				alert(user_id)
+				// usersManage.DeleteUserById(user_id);
 			});
 
-			$("td.required input, td select").focusout(function() {
-				$tdParent = $(this).parent();
-				if ($tdParent.find('.cssClassRequired')) {
-					if ($(this).val() != '' && $(this).val() != '0') {
-						$tdParent.find('.cssClassRequired').hide();
-					} else {
-						$tdParent.find('.cssClassRequired').show();
-					}
-				}
-			});
+			// $("td.required input, td select").focusout(function() {
+			// $tdParent = $(this).parent();
+			// if ($tdParent.find('.cssClassRequired')) {
+			// if ($(this).val() != '' && $(this).val() != '0') {
+			// $tdParent.find('.cssClassRequired').hide();
+			// } else {
+			// $tdParent.find('.cssClassRequired').show();
+			// }
+			// }
+			// });
 
 			$("input[type=button].AddOption")
 					.on(

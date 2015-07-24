@@ -352,7 +352,7 @@
 																			<td><span id="lblGender" class="cssClassLabel">Gender:</span></td>
 																			<td class="cssClassTableRightCol required"><select
 																				id="ddlGender" name="gender"><option
-																						value="0" selected="selected">Male</option>
+																						value="0">Male</option>
 																					<option value="1">Female</option>
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
