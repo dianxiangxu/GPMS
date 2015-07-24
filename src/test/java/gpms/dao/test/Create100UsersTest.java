@@ -10,6 +10,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.Address;
 import gpms.model.InvestigatorInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
@@ -85,6 +86,41 @@ public class Create100UsersTest {
 			//Add two Position Detail objects to the user profile
 			setTheDeets(newProfile);
 			setTheDeets(newProfile);
+
+			Address newAddress = new Address();
+			
+			// We need his living address too.
+			String street, city, state, zipcode, country;
+			street = "12019 Torrey Pine Court";
+			city = "Hoodbridge";
+			state = "Zanzibar";
+			zipcode = "83686";
+			country = "United States";
+
+			newAddress = new Address();
+			newAddress.setStreet(street);
+			newAddress.setCity(city);
+			newAddress.setState(state);
+			newAddress.setZipcode(zipcode);
+			newAddress.setCountry(country);
+			
+			Address newAddress2 = new Address();
+			
+			newProfile.getAddresses().add(newAddress);
+			
+			street = "466 West Floridian Road";
+			city = "Langley";
+			state = "Virginia";
+			zipcode = "22192";
+			country = "United States";
+
+			newAddress2.setStreet(street);
+			newAddress2.setCity(city);
+			newAddress2.setState(state);
+			newAddress2.setZipcode(zipcode);
+			newAddress2.setCountry(country);
+			
+			newProfile.getAddresses().add(newAddress2);
 			
 			//Save the informations
 			newUserAccountDAO.save(newAccount);
@@ -93,6 +129,8 @@ public class Create100UsersTest {
 			newUserProfileDAO.addHomeNumber(newProfile, newProfile, "208-938-9302");
 			newUserProfileDAO.addWorkEmail(newProfile, newProfile, "alternatecontact@officialplace.com");
 			
+
+
 			
 			//Increment Count
 			creationCounter++;
