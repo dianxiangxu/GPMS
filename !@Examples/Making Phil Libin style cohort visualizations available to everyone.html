@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<!-- saved from url=(0191)https://www.airpair.com/keen-io/posts/making-phil-libin-style-cohort-visualizations-available-to-everyone?utm_content=buffer426d2&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" ng-app="AP" ng-strict-di="" class="ng-scope pw-locale-en ra1-pw-desktop"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+  <title>Making Phil Libin style cohort visualizations available to everyone</title>
+  <meta name="description" content="What if every product owner could see their user retention the way Phil Libin presented Evernote&#39;s? I definitely wanted to see my products this way. So we built a product.">
+  
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Making Phil Libin style cohort visualizations available to everyone">
+  <style type="text/css"></style><meta property="og:description" content="What if every product owner could see their user retention the way Phil Libin presented Evernote&#39;s? I definitely wanted to see my products this way. So we built a product.">
+  <meta property="og:image" content="//i.imgur.com/blzICNs.png">
+  <meta property="og:url" content="https://www.airpair.com/keen-io/posts/making-phil-libin-style-cohort-visualizations-available-to-everyone">
+  <link rel="canonical" href="https://www.airpair.com/keen-io/posts/making-phil-libin-style-cohort-visualizations-available-to-everyone">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./Making Phil Libin style cohort visualizations available to everyone_files/libs-588bf637.css" type="text/css">
+  <link rel="stylesheet" href="./Making Phil Libin style cohort visualizations available to everyone_files/index-6aac55bd.css" type="text/css">
+  <link rel="alternate" type="application/rss+xml" href="https://www.airpair.com/rss" title="AirPair Rss">
+  <link rel="alternate" type="application/rss+xml" href="https://www.airpair.com/rss/posts" title="AirPair Posts">
+  <link rel="alternate" type="application/rss+xml" href="https://www.airpair.com/rss/workshops" title="AirPair Workshops">
+  <!--<base href="/">--><base href=".">
+<style id="ace_editor">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><style>.ace_snippet-marker {    -moz-box-sizing: border-box;    box-sizing: border-box;    background: rgba(194, 193, 208, 0.09);    border: 1px dotted rgba(211, 208, 235, 0.62);    position: absolute;}</style><style>.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {    background-color: #CAD6FA;    z-index: 1;}.ace_editor.ace_autocomplete .ace_line-hover {    border: 1px solid #abbffe;    margin-top: -1px;    background: rgba(233,233,253,0.4);}.ace_editor.ace_autocomplete .ace_line-hover {    position: absolute;    z-index: 2;}.ace_editor.ace_autocomplete .ace_scroller {   background: none;   border: none;   box-shadow: none;}.ace_rightAlignedText {    color: gray;    display: inline-block;    position: absolute;    right: 4px;    text-align: right;    z-index: -1;}.ace_editor.ace_autocomplete .ace_completion-highlight{    color: #000;    text-shadow: 0 0 0.01em;}.ace_editor.ace_autocomplete {    width: 280px;    z-index: 200000;    background: #fbfbfb;    color: #444;    border: 1px lightgray solid;    position: fixed;    box-shadow: 2px 3px 5px rgba(0,0,0,.2);    line-height: 1.4;}</style><script type="text/javascript" async="" src="./Making Phil Libin style cohort visualizations available to everyone_files/analytics.js"></script><script type="text/javascript" async="" src="./Making Phil Libin style cohort visualizations available to everyone_files/tagjs"></script><img src="./Making Phil Libin style cohort visualizations available to everyone_files/saved_resource" width="1" height="1" border="0"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/seg" width="1" height="1" border="0"><script async="true" type="text/javascript" src="https://s.adroll.com/j/roundtrip.js"></script><link rel="stylesheet" type="text/css" href="./Making Phil Libin style cohort visualizations available to everyone_files/r1post.css" media="all"><link rel="stylesheet" type="text/css" href="./Making Phil Libin style cohort visualizations available to everyone_files/r1post_retina.css" media="all"><style type="text/css">.fancybox-margin{margin-right:0px;}</style></head>
+<body data-gclp-initialized="true" data-gistbox-initialized="true"><script src="./Making Phil Libin style cohort visualizations available to everyone_files/1713.js" async="" type="text/javascript"></script><script id="post_script" type="text/javascript" async="" src="./Making Phil Libin style cohort visualizations available to everyone_files/post-widget.js"></script><script type="text/javascript" async="" src="./Making Phil Libin style cohort visualizations available to everyone_files/54b046fb22526644ea000012.js"></script><script type="text/javascript" id="analytics-js" async="" src="./Making Phil Libin style cohort visualizations available to everyone_files/analytics.min.js"></script><script type="text/javascript">
+//<![CDATA[
+try{(function(a){var b="https://",c="www.airpair.com",d="/cdn-cgi/cl/",e="img.gif",f=new a;f.src=[b,c,d,e].join("")})(Image)}catch(e){}
+//]]>
+</script>
+<header>
+  <a href="https://www.airpair.com/" tile="airpair.com pair programming"></a>
+
+  <ul>
+    
+    <li class="find nomob"><a href="https://www.airpair.com/find-an-expert" target="_self">Find an expert</a></li>
+    <li class="exp nomob"><a href="https://www.airpair.com/be-an-expert" target="_self">Help others</a></li>
+    <li class="ps"><a href="https://www.airpair.com/posts" target="_self">Posts</a></li>
+    <li class="more nomob"><a>More</a>
+      <ul class="more">
+        <li><a href="https://www.airpair.com/blog" target="_self" class="blog">AirPair Blog</a></li>
+        <li><a href="https://www.airpair.com/rss" target="_self" class="rss">Rss</a></li>
+        <li><a href="https://www.airpair.com/privacy" target="_blank" class="pp">Privacy</a></li>
+      </ul>
+    </li>
+  </ul>
+</header>
+
+<div class="main-wrap">
+  <div notifications="" class="notify"><!-- ngIf: serverErrors.length > 0 -->
+<!-- ngIf: (!serverErrors || serverErrors.length==0) && notifications -->
+</div>
+  <!-- ngView:  --><main ng-view="" class="ng-scope">
+        
+<div class="banner-top ng-scope" banner-posttop=""><a href="https://www.airpair.com/visit/keen.io-072015" class="banner banner-top banner-keenio-pain" target="_self">
+  <img src="./Making Phil Libin style cohort visualizations available to everyone_files/900x90-keenio-pain-in-the-backend.gif" alt="Try customer analytics with Keen.io" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;">
+</a>
+
+</div>
+
+<article class="blogpost ng-scope">
+
+  <h1 class="entry-title" itemprop="headline">Making Phil Libin style cohort visualizations available to everyone</h1>
+
+
+  <div class="railMarker"></div>
+
+  <h4 id="table-of-contents" style="position: fixed; left: 911.5px; top: 262px;">Table of Contents</h4>
+  <ul style="position: fixed; left: 911.5px; top: 302px;">
+<li><a href="https://www.airpair.com/#planning-out-the-system">Planning out the system</a></li>
+<li><a href="https://www.airpair.com/#1-event-collection">1. Event collection</a><ul>
+<li><a href="https://www.airpair.com/#choosing-keen-io">Choosing Keen IO</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#2-analysis-engine">2. Analysis Engine</a><ul>
+<li><a href="https://www.airpair.com/#batching-queries">Batching queries</a></li>
+<li><a href="https://www.airpair.com/#large-revenue-cohorts-workaround">Large revenue cohorts workaround</a></li>
+<li><a href="https://www.airpair.com/#filters">Filters</a></li>
+<li><a href="https://www.airpair.com/#limiting-data-points">Limiting data points</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#3-visualization">3. Visualization</a></li>
+<li><a href="https://www.airpair.com/#4-dashboard">4. Dashboard</a></li>
+<li><a href="https://www.airpair.com/#where-do-we-go-from-here-">Where do we go from here?</a></li>
+<li><a href="https://www.airpair.com/#the-moral-of-the-story-">The moral of the story...</a></li>
+<li><a href="https://www.airpair.com/#-"></a></li>
+</ul>
+
+
+  <figure class="author">
+    <img alt="Ry Walker" src="./Making Phil Libin style cohort visualizations available to everyone_files/7cf61c7c25b97dd624c7beadfb202153">
+    <hr>
+    <div>
+      <label>Ry Walker</label>
+      <social-links profile="{&quot;gh&quot;:{&quot;username&quot;:&quot;ryw&quot;},&quot;so&quot;:{&quot;link&quot;:&quot;2477/ryw&quot;},&quot;in&quot;:{&quot;id&quot;:&quot;NUyCJsJNjD&quot;},&quot;tw&quot;:{&quot;username&quot;:&quot;rywalker&quot;},&quot;al&quot;:{&quot;username&quot;:&quot;ry&quot;},&quot;gp&quot;:{&quot;link&quot;:&quot;https://plus.google.com/116996327581042275934&quot;}}" class="ng-isolate-scope"><div class="sociallinks">
+  <!-- ngIf: p.gh --><a ng-if="p.gh" href="https://github.com/ryw" target="_blank" class="gh-white icon ng-scope"></a><!-- end ngIf: p.gh -->
+
+  <!-- ngIf: p.so --><a ng-if="p.so" href="https://stackoverflow.com/users/2477/ryw" target="_blank" class="so-white icon ng-scope"></a><!-- end ngIf: p.so -->
+
+  <!-- ngIf: p.bb -->
+
+  <!-- ngIf: p.in --><a ng-if="p.in" href="https://linkedin.com/x/profile/sy5n2q8o2i49/NUyCJsJNjD" target="_blank" class="in-white icon ng-scope"></a><!-- end ngIf: p.in -->
+
+  <!-- ngIf: p.tw --><a ng-if="p.tw" href="https://twitter.com/rywalker" target="_blank" class="tw-white icon ng-scope"></a><!-- end ngIf: p.tw -->
+
+  <!-- ngIf: p.gp --><a ng-if="p.gp" href="https://plus.google.com/116996327581042275934" target="_blank" class="gp-white icon ng-scope"></a><!-- end ngIf: p.gp -->
+
+  <!-- ngIf: p.al --><a ng-if="p.al" href="https://angel.co/ry" target="_blank" class="al-white icon ng-scope"></a><!-- end ngIf: p.al -->
+</div>
+</social-links>
+      <figcaption>
+        Ry is a Meteor developer and entrepreneur. Co-founder of Differential and USERcycle. Co-host of The Meteor Podcast.  http://rywalker.com
+      </figcaption>
+    </div>
+    <hr>
+  </figure>
+
+  <p class="asset"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/blzICNs.png"></p>
+  <hr>
+
+
+  <post no-compile=""><p>One day I saw a link to <a href="https://vimeo.com/11932184#t=705s">Phil Libin’s talk in 2010</a> where he described Evernote’s growth, visualized in signup cohorts.</p>
+<table style="max-width: 640px;">
+<tbody><tr>
+<td><a href="https://vimeo.com/11932184#t=705s"><img style="width:310px;padding: 5px;" src="./Making Phil Libin style cohort visualizations available to everyone_files/1.png"></a></td>
+<td><a href="https://vimeo.com/11932184#t=705s"><img style="width:310px;padding: 5px;" src="./Making Phil Libin style cohort visualizations available to everyone_files/2.png"></a></td>
+</tr>
+<tr>
+<td><a href="https://vimeo.com/11932184#t=705s"><img style="width:310px;padding: 5px;" src="./Making Phil Libin style cohort visualizations available to everyone_files/3.png"></a></td>
+<td><a href="https://vimeo.com/11932184#t=705s"><img style="width:310px;padding: 5px;" src="./Making Phil Libin style cohort visualizations available to everyone_files/4.png"></a></td>
+</tr>
+</tbody></table>
+
+<p>The presentation was amazing on two levels. First, Evernote has very impressive retention story. Second, the visualizations were compelling; they told a story, visually without needing a lot of numbers. By just looking at the shapes, you could see what was going on.</p>
+<p>So then I couldn’t get the idea out of my head — what if every product owner could see their user activity this way, visually, through Phil’s lens? I definitely wanted to see my products this way.</p>
+<p>Googling around, I couldn’t find a product that provided anything like this, at an affordable price point. So we did what all self-starting developer/entrepreneurs do — we rolled up our sleeves, and built it ourself :)</p>
+<p>The way systems like this work is that you have to reliably get events from the app that is being analyzed into a central database that is accessible to the analytics engine.</p>
+<h2 id="planning-out-the-system">Planning out the system</h2>
+<p>We figured we'd build something that looks like this:</p>
+<p><img src="./Making Phil Libin style cohort visualizations available to everyone_files/Screenshot-2015-03-18-20-41-38.png"></p>
+<p>Not only did we need to build the data initially, but we want to keep the charts up-to-date throughout the day, refreshing the data hourly.</p>
+<p>Four main components to the system:</p>
+<ol>
+<li><strong>Event Collection</strong> — getting user events from your app, and into a database that we can access.</li>
+<li><strong>Analysis Engine</strong> — run queries on the raw data and create data that is ready to be visualized. </li>
+<li><strong>Visualization</strong> — we want to see the computed data in all it's glory, right?</li>
+<li><strong>Dashboard</strong> — if we want to make this system accessible to everyone, we need a place where people can signup and configure their project.</li>
+</ol>
+<p>Here's a mockup of the sort of visualization we were going for:</p>
+<p><img src="./Making Phil Libin style cohort visualizations available to everyone_files/Screenshot-2015-03-01-12-35-39.png"></p>
+<p>Next, I'll share some details on how we built these components.</p>
+<h2 id="1-event-collection">1. Event collection</h2>
+<p>If you're not familiar with what I mean when I say "user events" it's simply an object:</p>
+<pre data-initialized="true" data-gclp-id="0"><code>  name: 'Viewed Dashboard'
+  userId: 123
+  platform: 'iOS'
+</code></pre><p>For enterprise SaaS, there could be a few more properties:</p>
+<pre data-initialized="true" data-gclp-id="1"><code>  name: 'Viewed Dashboard'
+  userId: 123
+  accountId: 456
+  locationId: 789
+  platform: 'iOS'
+</code></pre><p>Popular products could be sending millions of events per month (or day!). Building a system to both reliably and efficently collect this data and make it reliably and efficiently queryable is <strong>a lot of work</strong> that I wanted to avoid.</p>
+<h3 id="choosing-keen-io">Choosing Keen IO</h3>
+<p>I had recently heard of <a href="https://keen.io/">Keen IO</a>, and after looking at it again, it seemed like a perfect fit. They are a venture-backed startup that do two things, but do them well: 1) collect event data 2) provide a great API to query the data. The icing on the cake for me was their <a href="https://keen.io/docs/data-analysis/funnels/">Funnel Analysis API</a> — I knew that building on top of Keen IO would not only save us a lot of time, but also allow us to focus our energy on the analytics engine and visualization layers.</p>
+<p>We knew that leveraging their system would cut our work down tremendously, because we wouldn't have to deal with building a reliable web service to collect user events. They also have a nice <a href="https://github.com/keen/keen-cli">command line tool</a> that can be used for data import, which was on our list of needs. Perfect :)</p>
+<p>By choosing Keen IO, we checked off the entire event collection bucket, and gave us a great API on which to build our analysis engine.</p>
+<p>One component down, three to go.</p>
+<h2 id="2-analysis-engine">2. Analysis Engine</h2>
+<p>To build a chart like the one above requires a funnel query <strong>for every data point</strong>. And depending on how much underlying data that's being querying, and the complexity of the query, these queries can take a "non-trivial" amount of time.</p>
+<p>We had to build an application to manage the execution of these queries in accordance with Keen IO’s API limits. Also, to keep things simple, we used the <a href="https://github.com/scttnlsn/monq">Monq</a> node library, which keeps track of the job queue right in MongoDB.</p>
+<p>We’re big <a href="https://www.meteor.com/">Meteor</a> fans, so we decided to use it (hosted on <a href="https://modulus.io/">Modulus.io</a>), with our <a href="http://www.mongodb.org/">MongoDB</a> hosted on <a href="https://www.compose.io/">Compose.io</a>.</p>
+<h3 id="batching-queries">Batching queries</h3>
+<p>Keen IO has a query batching feature, allowing us to bundle multiple queries up into a batch to improve efficiency. To take advantage of this, we built a process to bundle individual queries into batches of 20.</p>
+<h3 id="large-revenue-cohorts-workaround">Large revenue cohorts workaround</h3>
+<p>One of our analysis shows how much revenue each cohort generates, for each time interval.</p>
+<p>Implementing this in Keen requires two steps:</p>
+<ol>
+<li>Extract the userIds who had a revenue event in the time period, for the cohort that's being currently analyzed.</li>
+<li>Pass these userIds into a <a href="https://keen.io/docs/api/reference/#sum-resource">sum query</a>.</li>
+</ol>
+<p>We discovered that for products with lots of paying users, the query will fail if there are too many userIds passed to the query.</p>
+<p>So to compute <em>just one data point in one chart</em>, we need to run <code>n</code> queries by batching userIds into groups of 50, then summing up the data at the end. JUST FOR ONE DATA POINT on a chart. Crazy.</p>
+<h3 id="filters">Filters</h3>
+<p>Keen IO has a powerful filters feature, allowing you to filter just about every query based on event properties. We didn't support filters at first, to keep things simple, but eventually we decided it was time. Didn’t seem too hard conceptually, but let's see how many files adding the feature touched:</p>
+<p><img src="./Making Phil Libin style cohort visualizations available to everyone_files/Screenshot-2015-03-18-11-07-37.png"></p>
+<p>In fact, the feature touched 37 files, in 195 places. It turned out to be not so easy, and did increase complexity throughout our codebase.</p>
+<p>This is a great example of how an innocent-looking feature can be quite complicated underneath the surface.</p>
+<h3 id="limiting-data-points">Limiting data points</h3>
+<p>To limit the # of data points per chart, we only show a maximum of 30 cohorts, and lump data older than 30 cohorts old into a "catch-all" bucket.</p>
+<p><img src="./Making Phil Libin style cohort visualizations available to everyone_files/Screenshot-2015-03-18-20-48-12.png"></p>
+<p>Our max # of data points became: <code>30 x 29 / 2 + n</code> where n represents the number of periods for the catch all cohort. </p>
+<p>In the chart above, this would be around 500 data points &amp; queries. If we allowed 100 cohorts, it would require about 10x more processing time (5000 queries).</p>
+<p>But this innocent little feature created quite a bit of extra work for us. As each new cohort comes into existence, we have to merge the oldest cohort into this catch-all bucket, and prune the old data.</p>
+<h2 id="3-visualization">3. Visualization</h2>
+<p>For the MVP, we decided to use <a href="https://developers.google.com/chart/interactive/docs/gallery/areachart">Google's Area Chart Visualization</a> because it has a lot of customization features that quickly got us to something we liked.</p>
+<p>This was a situation where we could get to 80% of our vision with 10% of the work — and we took the opportunity to cut a corner, because the analysis engine really sucked up our time.</p>
+<h2 id="4-dashboard">4. Dashboard</h2>
+<p>This too was fairly straightforward, but you should never underestimate the amount of time it takes to think through and build a good user experience for any app.</p>
+<p>We didn't have a designer for the project, so we decided to follow Google's <a href="http://www.google.com/design/spec/material-design">Material Design spec</a> via <a href="https://www.polymer-project.org/">Polymer</a>.</p>
+<p>With each new feature we add to the app, we find ourselves refactoring the user experience to some degree.</p>
+<h2 id="where-do-we-go-from-here-">Where do we go from here?</h2>
+<p>We've been building the product for about three months. USERcycle is launched, and users are signing up and setting themselves up independently, so we're thrilled about that. We’ve been evangelizing the heck out of Keen IO. (We love the Keen IO team, so this really isn’t much of a burden.)</p>
+<p>We’re working now to replace the quick-and-dirty, minimal Google Visualizations we whipped up with something a little nicer, using D3.</p>
+<p>We’re also tuning our data processing engine to scale up to be capable of running millions of queries on Keen IO each day.</p>
+<p>We feel lucky to have partners like Modulus.io, Keen IO, Compose.io, and MongoDB as strong partners to scale with us.</p>
+<h2 id="the-moral-of-the-story-">The moral of the story...</h2>
+<blockquote>
+<p>"Complexity is unavoidable when you're creating real value." -Ry Walker</p>
+</blockquote>
+<p>THANK GOODNESS we decided to limit the complexity of our system and build on top of Keen IO, Google Visualization, and Meteor. We found all the complexity we could ever want building the analytics engine, generating cohort data and keeping it fresh.</p>
+<hr>
+<p><strong>Shameless self promotion:</strong> If you have a product with a signup button, and would like to see your product through Phil Libin's lens, I invite you to <a href="https://usercycle.com/">sign up for USERcycle</a>.</p>
+</post>
+
+  <div class="share" style="position: fixed; left: 911.5px; top: 0px;">
+    <div class="pw pw-widget ra1-pw-classicWidget ra1-pw_size_large pw-layout-horizontal pw-counter-horizontal" pw:twitter-via="airpair">
+      <a class="pw-button pw-button-twitter button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-twitter"></span></a><a class="pw-button pw-button-facebook button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-facebook"></span></a><a class="pw-button pw-button-linkedin button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-linkedin"></span></a><a class="pw-button pw-button-googleplus button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-googleplus"></span></a>
+      <a class="pw-button pw-button-post button-type-square pw-size-large pw-button-counter-horizontal" aria-haspopup="true"><span class="pw-icon ra1-pw-icon ra1-pw-icon-post"></span><span class="pw-button-counter"><i class="pw-button-counter__brd"></i><span class="pw-button-counter__count ra1-pw-button-counter-value">180</span></span></a>
+    </div>
+  </div>
+
+
+  <div class="rail1CTA railBookmarkCTA" style="position: fixed; left: 911.5px; top: 65px;">
+      <post-rail-stars class="ng-scope"><div class="railstars">
+  <!-- ngIf: notReviewed --><h6 ng-if="notReviewed" class="ng-binding ng-scope">Community Rating<!-- ngIf: count > 1 --><span ng-if="count &gt; 1" class="ng-scope">s</span><!-- end ngIf: count > 1 -->
+    (6)
+  </h6><!-- end ngIf: notReviewed -->
+  <stars val="starsAvg" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 --><li class="half ng-scope" ng-if="stars &gt;= 4.5 &amp;&amp; stars &lt; 5"></li><!-- end ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</stars>
+
+</div>
+</post-rail-stars>
+    <h6>Need 1 on 1 expert help?</h6>
+    <div class="gethelp">
+      <img src="./Making Phil Libin style cohort visualizations available to everyone_files/7cf61c7c25b97dd624c7beadfb202153">
+      <span><b>PAIR UP</b> with<br> experts like <br>Ry Walker</span>
+      <a href="https://www.airpair.com/login" class="btn btn-sm">Login</a>
+    </div>
+  </div>
+
+
+</article>
+
+  <div id="reviews" post-reviews="" reviews="[{&quot;by&quot;:{&quot;_id&quot;:&quot;550a2efae40f100c00238e6b&quot;,&quot;name&quot;:&quot;Tim Metzner&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/61a6d639d19b2542c4cfd62af6b1d301&quot;},&quot;_id&quot;:&quot;550a2faae40f100c00238e84&quot;,&quot;votes&quot;:[{&quot;by&quot;:{&quot;_id&quot;:&quot;54ebea8e3275fe0c00f1829c&quot;,&quot;name&quot;:&quot;Ry Walker&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153&quot;},&quot;val&quot;:1,&quot;_id&quot;:&quot;550ae6b8bde9c70c0042fcc2&quot;},{&quot;_id&quot;:&quot;550b3b1ee1947f0c002c21c1&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;52ad320166a6f999a465fdc5&quot;,&quot;name&quot;:&quot;Air Pair&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/e79ddd03edffc5c0669b78e7a090b037&quot;}}],&quot;replies&quot;:[],&quot;questions&quot;:[{&quot;answer&quot;:&quot;5&quot;,&quot;key&quot;:&quot;rating&quot;},{&quot;answer&quot;:&quot;Well written, detailed description and bonus points for transparency into the complexities of the business.&quot;,&quot;key&quot;:&quot;feedback&quot;}],&quot;rating&quot;:&quot;5&quot;,&quot;feedback&quot;:&quot;Well written, detailed description and bonus points for transparency into the complexities of the business.&quot;},{&quot;_id&quot;:&quot;550a8070df66070c00fb8ed9&quot;,&quot;by&quot;:{&quot;_id&quot;:&quot;54d119adea3ebb0900927db7&quot;,&quot;name&quot;:&quot;Alexandra Meyer&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/322ba0944b70e9ff5ad8863912db0bac&quot;},&quot;votes&quot;:[{&quot;_id&quot;:&quot;550ae6b638c8740c003064fe&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;54ebea8e3275fe0c00f1829c&quot;,&quot;name&quot;:&quot;Ry Walker&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153&quot;}},{&quot;by&quot;:{&quot;_id&quot;:&quot;52ad320166a6f999a465fdc5&quot;,&quot;name&quot;:&quot;Air Pair&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/e79ddd03edffc5c0669b78e7a090b037&quot;},&quot;val&quot;:1,&quot;_id&quot;:&quot;550b3b1bf8c4420c006fe827&quot;}],&quot;replies&quot;:[],&quot;questions&quot;:[{&quot;key&quot;:&quot;rating&quot;,&quot;answer&quot;:&quot;5&quot;},{&quot;key&quot;:&quot;feedback&quot;,&quot;answer&quot;:&quot;This is an incredibly well written overview explaining the technical foundations of your business. Congrats, UserCycle &lt;3 We’re so excited for you guys! &quot;}],&quot;rating&quot;:&quot;5&quot;,&quot;feedback&quot;:&quot;This is an incredibly well written overview explaining the technical foundations of your business. Congrats, UserCycle &lt;3 We’re so excited for you guys! &quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;54f39b9b286e410c00971c55&quot;,&quot;name&quot;:&quot;Yan Cui&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/0bbaed5a18c131ba152cf566e1becaf8&quot;},&quot;_id&quot;:&quot;550a845f5c27f40c0032e76b&quot;,&quot;votes&quot;:[{&quot;_id&quot;:&quot;550ae6d0bde9c70c0042fcd1&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;54ebea8e3275fe0c00f1829c&quot;,&quot;name&quot;:&quot;Ry Walker&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153&quot;}}],&quot;replies&quot;:[{&quot;by&quot;:{&quot;_id&quot;:&quot;54ebea8e3275fe0c00f1829c&quot;,&quot;name&quot;:&quot;Ry Walker&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153&quot;},&quot;comment&quot;:&quot;Hi Yan — the amount of time a query takes to run is a bit unpredictable, and so we needed to build a system that takes that into consideration. I’m sure that the amount of activity that Keen IO is experiencing at the time (they’ve made some of their system metrics public here: http://status.keen.io/) has some effect. I’m very impressed by the response times, but it could be a number of seconds, and when we’re sending thousands of queries per hour, even a 2-3 second query run time adds up.&quot;,&quot;_id&quot;:&quot;550ae7e638c8740c00306545&quot;}],&quot;questions&quot;:[{&quot;answer&quot;:&quot;4&quot;,&quot;key&quot;:&quot;rating&quot;},{&quot;answer&quot;:&quot;Good read, nice to see a real-world example showing the good and the bad. The funnel API looks very interesting, we did something similar ourselves for our new user journeys couple of years ago in AppEngine and something like this would have been nice! I am curious though to some of the constraints you mentioned as it seems to elude to potential scalability concerns one would have using Keen.io on large datasets a) is the ’non-trivial’ query time driven primarily by size of dataset? b) can you quantify that, e.g. 1 min to run a query like this against X GB/TB/no.of events? \n(and thanks for mentioning some of the other services, made me check them out again)&quot;,&quot;key&quot;:&quot;feedback&quot;}],&quot;rating&quot;:&quot;4&quot;,&quot;feedback&quot;:&quot;Good read, nice to see a real-world example showing the good and the bad. The funnel API looks very interesting, we did something similar ourselves for our new user journeys couple of years ago in AppEngine and something like this would have been nice! I am curious though to some of the constraints you mentioned as it seems to elude to potential scalability concerns one would have using Keen.io on large datasets a) is the ’non-trivial’ query time driven primarily by size of dataset? b) can you quantify that, e.g. 1 min to run a query like this against X GB/TB/no.of events? \n(and thanks for mentioning some of the other services, made me check them out again)&quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;550a4468e40f100c00239041&quot;,&quot;name&quot;:&quot;Tim Falls&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/b2d0a2d135b4a46e39ddfdff3b7c46bb&quot;},&quot;_id&quot;:&quot;550af01301a4760c005bcff2&quot;,&quot;votes&quot;:[{&quot;_id&quot;:&quot;550af044f8c4420c006fd9f9&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;54ebea8e3275fe0c00f1829c&quot;,&quot;name&quot;:&quot;Ry Walker&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153&quot;}},{&quot;by&quot;:{&quot;_id&quot;:&quot;54d119adea3ebb0900927db7&quot;,&quot;name&quot;:&quot;Alexandra Meyer&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/322ba0944b70e9ff5ad8863912db0bac&quot;},&quot;val&quot;:1,&quot;_id&quot;:&quot;550b3677e1947f0c002c208b&quot;},{&quot;_id&quot;:&quot;550b37ace1947f0c002c20dd&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;5175efbfa3802cc4d5a5e6ed&quot;,&quot;name&quot;:&quot;Jonathon Kresner&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/19183084115c4a79d34cdc3110adef37&quot;}}],&quot;replies&quot;:[],&quot;questions&quot;:[{&quot;answer&quot;:&quot;5&quot;,&quot;key&quot;:&quot;rating&quot;},{&quot;answer&quot;:&quot;Quite inspiring to hear a startup story like this: from roots established during a seemingly routine talk by a successful CEO, to an idea to build a product for others, to the eventual launch and growth of a new company. On top of that, the story illustrates how such paths can be followed by others, in an incredibly attainable manner, through the utilization of the tools available to entrepreneurs/developers today. \nThanks for sharing and good luck moving forward! &quot;,&quot;key&quot;:&quot;feedback&quot;}],&quot;rating&quot;:&quot;5&quot;,&quot;feedback&quot;:&quot;Quite inspiring to hear a startup story like this: from roots established during a seemingly routine talk by a successful CEO, to an idea to build a product for others, to the eventual launch and growth of a new company. On top of that, the story illustrates how such paths can be followed by others, in an incredibly attainable manner, through the utilization of the tools available to entrepreneurs/developers today. \nThanks for sharing and good luck moving forward! &quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;550b1070f8c4420c006fe018&quot;,&quot;name&quot;:&quot;Kevin Wofsy&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/eb5c2cda410fa5424905f880f451c48c&quot;},&quot;_id&quot;:&quot;550b121ae1947f0c002c1a2d&quot;,&quot;votes&quot;:[{&quot;_id&quot;:&quot;550b1577f8c4420c006fe0e8&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;54ebea8e3275fe0c00f1829c&quot;,&quot;name&quot;:&quot;Ry Walker&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153&quot;}},{&quot;by&quot;:{&quot;_id&quot;:&quot;5175efbfa3802cc4d5a5e6ed&quot;,&quot;name&quot;:&quot;Jonathon Kresner&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/19183084115c4a79d34cdc3110adef37&quot;},&quot;val&quot;:1,&quot;_id&quot;:&quot;55a350b1df7ba71100baa9b1&quot;}],&quot;replies&quot;:[],&quot;questions&quot;:[{&quot;answer&quot;:&quot;5&quot;,&quot;key&quot;:&quot;rating&quot;},{&quot;answer&quot;:&quot;Fantastic post! The mix of clear technical details and great storytelling makes this an excellent read. I also find this exact type of visualization totally mesmerizing (kind of makes me want to become a geologist), so I loved learning about how you created them. &quot;,&quot;key&quot;:&quot;feedback&quot;}],&quot;rating&quot;:&quot;5&quot;,&quot;feedback&quot;:&quot;Fantastic post! The mix of clear technical details and great storytelling makes this an excellent read. I also find this exact type of visualization totally mesmerizing (kind of makes me want to become a geologist), so I loved learning about how you created them. &quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;531fddc71c67d1a4859d2744&quot;,&quot;name&quot;:&quot;Slava Kim&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/93c8da7ec6d46bc5abfc74b9144eb84b&quot;},&quot;_id&quot;:&quot;550e5ab97d6ec20c0042cc39&quot;,&quot;updated&quot;:&quot;2015-03-22T06:03:42.254Z&quot;,&quot;votes&quot;:[],&quot;replies&quot;:[],&quot;questions&quot;:[{&quot;key&quot;:&quot;rating&quot;,&quot;answer&quot;:&quot;5&quot;},{&quot;key&quot;:&quot;feedback&quot;,&quot;answer&quot;:&quot;I really like the diagrams and detailed descriptions of the processes. (it is weird that I need to write this \&quot;review\&quot;).&quot;}],&quot;rating&quot;:&quot;5&quot;,&quot;feedback&quot;:&quot;I really like the diagrams and detailed descriptions of the processes. (it is weird that I need to write this \&quot;review\&quot;).&quot;}]" byid="54ebea8e3275fe0c00f1829c" class="ng-scope ng-isolate-scope"><div survey-post="" class="ng-scope"><!-- ngIf: data && show --><form ng-if="data &amp;&amp; show" id="postReviewForm" novalidate="" name="postReviewForm" ng-submit="submitReview(postReviewForm.$valid, data)" class="ng-pristine ng-scope ng-invalid ng-invalid-required">
+
+  <div class="question multiple-choice stars ng-scope form-group" data-key="rating" form-group="">
+    <label class="control-label" for="postRating">How would you rate the quality of this post?</label>
+    <select form-control="" id="postRating" name="rating" ng-model="data.rating" required="" tabindex="1203" class="ng-pristine ng-untouched ng-valid form-control ng-valid-required">
+      <option value="1">1 star (not ready)</option>
+      <option value="2">2 stars (needs works)</option>
+      <option value="3">3 stars (average)</option>
+      <option value="4">4 stars (good)</option>
+      <option value="5">5 stars (exceptional)</option>
+    </select>
+    <!-- ngIf: formGroup.showError(postReviewForm.rating) -->
+  </div>
+
+  <!-- ngIf: session._id --><div ng-if="session._id" class="question paragraph ng-scope form-group" data-key="feedback" form-group="">
+    <label class="control-label" for="postFeedback" style="display:none">Overall comment</label>
+    <textarea textarea-grow="" form-control="" id="postFeedback" name="feedback" ng-model="data.feedback" placeholder="Why did you give this post 3 stars?" required="" tabindex="1204" ng-disabled="!data.rating" class="ng-pristine ng-untouched form-control ng-invalid ng-invalid-required" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 100px;"></textarea>
+    <!-- ngIf: formGroup.showError(postReviewForm.feedback) -->
+  </div><!-- end ngIf: session._id -->
+
+  <!-- ngIf: session._id --><div ng-if="session._id" ng-class="unsaved(data, existing) ? &#39;unsaved&#39; : &#39;saved&#39;" class="ng-scope unsaved">
+    <input ng-disabled="!data.feedback" type="submit" value="Save review" class="btn" disabled="disabled">
+    <p class="edit">Review saved. Edit it any time right from this widget.</p>
+  </div><!-- end ngIf: session._id -->
+
+
+
+  <!-- ngIf: !session._id -->
+
+  <div form-errors=""><div class="form-errors">
+  <!-- ngIf: serverErrors.length > 0 -->
+</div>
+</div>
+
+</form><!-- end ngIf: data && show -->
+</div>
+<div post-comments="" class="ng-scope"><!-- ngIf: reviews --><div class="reviewsthread ng-scope" ng-if="reviews">
+
+  <header post-comments-header=""><h3 class="ng-binding">Reviews (6) <!-- ngIf: reviews.length > 0 --><span style="float:right" ng-if="reviews.length &gt; 0" class="ng-binding ng-scope">Rating 4.8/5</span><!-- end ngIf: reviews.length > 0 --></h3>
+
+<!-- ngIf: reviews.length == 0 -->
+</header>
+
+  <!-- ngIf: reviews.length > 0 --><ul class="reviews ng-scope" ng-if="reviews.length &gt; 0">
+    <!-- ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="550af01301a4760c005bcff2" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/b2d0a2d135b4a46e39ddfdff3b7c46bb?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/b2d0a2d135b4a46e39ddfdff3b7c46bb">
+  <label class="ng-binding">Tim Falls</label>
+  <time class="ng-binding">4 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 --><li ng-if="stars &gt;= 5" class="ng-scope"></li><!-- end ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Quite inspiring to hear a startup story like this: from roots established during a seemingly routine talk by a successful CEO, to an idea to build a product for others, to the eventual launch and growth of a new company. On top of that, the story illustrates how such paths can be followed by others, in an incredibly attainable manner, through the utilization of the tools available to entrepreneurs/developers today. 
+Thanks for sharing and good luck moving forward! </p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">3 Vote<!-- ngIf: r.votes.length > 1 --><span ng-if="r.votes.length &gt; 1" class="ng-scope">s</span><!-- end ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="550a2faae40f100c00238e84" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/61a6d639d19b2542c4cfd62af6b1d301?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/61a6d639d19b2542c4cfd62af6b1d301">
+  <label class="ng-binding">Tim Metzner</label>
+  <time class="ng-binding">4 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 --><li ng-if="stars &gt;= 5" class="ng-scope"></li><!-- end ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Well written, detailed description and bonus points for transparency into the complexities of the business.</p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">2 Vote<!-- ngIf: r.votes.length > 1 --><span ng-if="r.votes.length &gt; 1" class="ng-scope">s</span><!-- end ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="550a8070df66070c00fb8ed9" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/322ba0944b70e9ff5ad8863912db0bac?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/322ba0944b70e9ff5ad8863912db0bac">
+  <label class="ng-binding">Alexandra Meyer</label>
+  <time class="ng-binding">4 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 --><li ng-if="stars &gt;= 5" class="ng-scope"></li><!-- end ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">This is an incredibly well written overview explaining the technical foundations of your business. Congrats, UserCycle &lt;3 We’re so excited for you guys! </p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">2 Vote<!-- ngIf: r.votes.length > 1 --><span ng-if="r.votes.length &gt; 1" class="ng-scope">s</span><!-- end ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="550b121ae1947f0c002c1a2d" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/eb5c2cda410fa5424905f880f451c48c?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/eb5c2cda410fa5424905f880f451c48c">
+  <label class="ng-binding">Kevin Wofsy</label>
+  <time class="ng-binding">4 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 --><li ng-if="stars &gt;= 5" class="ng-scope"></li><!-- end ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Fantastic post! The mix of clear technical details and great storytelling makes this an excellent read. I also find this exact type of visualization totally mesmerizing (kind of makes me want to become a geologist), so I loved learning about how you created them. </p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">2 Vote<!-- ngIf: r.votes.length > 1 --><span ng-if="r.votes.length &gt; 1" class="ng-scope">s</span><!-- end ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="550a845f5c27f40c0032e76b" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/0bbaed5a18c131ba152cf566e1becaf8?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/0bbaed5a18c131ba152cf566e1becaf8">
+  <label class="ng-binding">Yan Cui</label>
+  <time class="ng-binding">4 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Good read, nice to see a real-world example showing the good and the bad. The funnel API looks very interesting, we did something similar ourselves for our new user journeys couple of years ago in AppEngine and something like this would have been nice! I am curious though to some of the constraints you mentioned as it seems to elude to potential scalability concerns one would have using Keen.io on large datasets a) is the ’non-trivial’ query time driven primarily by size of dataset? b) can you quantify that, e.g. 1 min to run a query like this against X GB/TB/no.of events? 
+(and thanks for mentioning some of the other services, made me check them out again)</p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">1 Vote<!-- ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies --><li ng-repeat="reply in r.replies" class="ng-scope">
+      <img ng-src="//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/7cf61c7c25b97dd624c7beadfb202153(1)">
+      <label class="ng-binding">Ry Walker</label>
+      <time class="ng-binding">4 months ago</time>
+      <p class="ng-binding">Hi Yan —&nbsp;the amount of time a query takes to run is a bit unpredictable, and so we needed to build a system that takes that into consideration. I’m sure that the amount of activity that Keen IO is experiencing at the time (they’ve made some of their system metrics public here: http://status.keen.io/) has some effect. I’m very impressed by the response times, but it could be a number of seconds, and when we’re sending thousands of queries per hour, even a 2-3 second query run time adds up.</p>
+    </li><!-- end ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="550e5ab97d6ec20c0042cc39" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/93c8da7ec6d46bc5abfc74b9144eb84b?s=40" class="user" src="./Making Phil Libin style cohort visualizations available to everyone_files/93c8da7ec6d46bc5abfc74b9144eb84b">
+  <label class="ng-binding">Slava Kim</label>
+  <time class="ng-binding">4 months ago <!-- ngIf: r.updated --><span ng-if="r.updated" class="ng-binding ng-scope">+ updated 4 months ago</span><!-- end ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 --><li ng-if="stars &gt;= 5" class="ng-scope"></li><!-- end ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">I really like the diagrams and detailed descriptions of the processes. (it is weird that I need to write this "review").</p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true -->
+  </ul><!-- end ngIf: reviews.length > 0 -->
+
+</div><!-- end ngIf: reviews -->
+
+</div>
+</div>
+
+<article class="blogpost ng-scope">
+<div id="bodyCTA1" class="bodyCTA1 bodyCTA">
+  <!-- ngIf: !session._id -->
+  <!-- ngIf: session._id --><div ng-if="session._id" request="" class="ng-scope"><request-widget req="request" class="ng-isolate-scope"><!-- ngIf: r && r.type -->
+</request-widget>
+
+<!-- ngIf: request --><form ng-if="request" class="requestForm ng-pristine ng-scope ng-invalid ng-invalid-required" novalidate="" name="requestForm" ng-submit="RequestFormCtrl.submit(requestForm.$valid, request)">
+
+<!-- ngIf: request.type && !entercard -->
+
+<request-progress><div class="requestProgress">
+  <div ng-class="stepClass(&#39;type&#39;)" class="type current">
+    <label>Help</label>
+    <a ng-click="setCurrent(&#39;type&#39;)">Help</a>
+  </div>
+  <div ng-class="stepClass(&#39;tags&#39;)" class="tags">
+    <label>Tags</label>
+    <a ng-click="setCurrent(&#39;tags&#39;)">Tags</a>
+  </div>
+  <div ng-class="stepClass(&#39;experience&#39;)" class="experience">
+    <label>Difficulty</label>
+    <a ng-click="setCurrent(&#39;experience&#39;)">Difficulty</a>
+  </div>
+  <div ng-class="stepClass(&#39;brief&#39;)" class="brief">
+    <label>Brief</label>
+    <a ng-click="setCurrent(&#39;brief&#39;)">Brief</a>
+  </div>
+  <div ng-class="stepClass(&#39;time&#39;)" class="time">
+    <label>Speed</label>
+    <a ng-click="setCurrent(&#39;time&#39;)">Speed</a>
+  </div>
+  <div ng-class="stepClass(&#39;hours&#39;)" class="hours">
+    <label>Hours</label>
+    <a ng-click="setCurrent(&#39;hours&#39;)">Hours</a>
+  </div>
+  <div ng-class="stepClass(&#39;budget&#39;)" class="budget">
+    <label>Budget</label>
+    <a ng-click="setCurrent(&#39;budget&#39;)">Budget</a>
+  </div>
+  <div ng-class="stepClass(&#39;submit&#39;)" class="submit">
+    <label>Submit</label>
+    <a ng-click="setCurrent(&#39;submit&#39;)">Submit</a>
+  </div>
+</div>
+</request-progress>
+
+<section ng-class="stepClass(&#39;submit&#39;)" class="submit">
+
+  <!-- ngIf: request._id -->
+
+  <a ng-click="submit()" class="btn">Submit request with max budget of <b class="ng-binding">$</b>/Hr</a>
+
+  <i>An AirPair Matchmaker will email you within 5-15 minutes if you haven't already spoken with one.</i>
+
+</section>
+
+<section ng-class="stepClass(&#39;budget&#39;)" class="budget">
+
+  <div form-group="" class="radios ng-scope form-group">
+    <label class="control-label" for="requestTime">What is your max hourly budget?</label>
+
+    <div>
+      <input id="requestBudget300" name="budget" ng-model="request.budget" type="radio" value="300" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestBudget300">
+        <b>$300<span>/hr</span></b>
+        <i>Our best experts, the fastest responses.</i>
+      </label>
+    </div>
+
+    <div>
+      <input id="requestBudget210" name="budget" ng-model="request.budget" type="radio" value="210" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestBudget210">
+        <b>$210<span>/hr</span></b>
+        <i>Our best experts, normal response times.</i>
+      </label>
+    </div>
+
+    <div>
+      <!-- ngIf: !nonCurrentBudget --><input ng-if="!nonCurrentBudget" id="requestBudget150" name="budget" ng-model="request.budget" type="radio" value="150" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid ng-scope"><!-- end ngIf: !nonCurrentBudget -->
+      <!-- ngIf: !nonCurrentBudget --><label ng-if="!nonCurrentBudget" for="requestBudget150" class="ng-scope">
+        <b>$150<span>/hr</span></b>
+        <i>Proven experts, fast responses <em>* Most popular</em>.</i>
+      </label><!-- end ngIf: !nonCurrentBudget -->
+    </div>
+
+    <div>
+      <input id="requestBudget100" name="budget" ng-model="request.budget" type="radio" value="100" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestBudget100">
+        <b>$100<span>/hr</span></b>
+        <i>Proven experts, normal response times.</i>
+      </label>
+    </div>
+
+    <!-- ngIf: request.time == 'rush' -->
+
+<!--     <div class="{{request.time}}">
+      <input id="requestBudget70" name="budget" ng-model="request.budget" type="radio" value="70" ng-click="setBuget()">
+      <label for="requestBudget70">
+        <b>$70<span>/hr</span></b>
+        <i ng-if="request.time != 'rush'">Available experts, normal response times.</i>
+        <i ng-if="request.time == 'rush'">Rate not available with RUSH timing.</i>
+      </label>
+    </div>
+
+ -->
+    <!-- ngIf: nonCurrentBudget -->
+
+    <hr>
+  </div>
+
+
+  <div class="info nomob">
+    <b>$10/hr Discount</b>
+    <p>Off these rates, <br>if you choose to <em>open source</em> your video recording later.</p>
+  </div>
+
+</section>
+
+
+<section ng-class="stepClass(&#39;hours&#39;)" class="hours">
+
+  <div form-group="" class="radios ng-scope form-group">
+    <label class="control-label" for="requestHours">How many hours do you think you'll need?</label>
+
+    <div>
+      <input id="requestHours1" name="hours" ng-model="request.hours" type="radio" value="1" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours1">1</label>
+    </div>
+
+    <div>
+      <input id="requestHours2" name="hours" ng-model="request.hours" type="radio" value="2" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours2">2</label>
+    </div>
+
+    <!-- ngIf: request.time == 'rush' -->
+
+    <div class="">
+      <input id="requestHours5" name="hours" ng-model="request.hours" type="radio" value="5" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours5">5</label>
+    </div>
+
+    <div class="">
+      <input id="requestHours10" name="hours" ng-model="request.hours" type="radio" value="10" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours10">10</label>
+    </div>
+
+    <div class="">
+      <input id="requestHoursMore" name="hours" ng-model="request.hours" type="radio" value="10+" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHoursMore">More</label>
+    </div>
+
+
+  </div>
+  <hr>
+
+</section>
+
+<section ng-class="stepClass(&#39;time&#39;)" class="time">
+
+  <!-- ngIf: !entercard --><div form-group="" ng-if="!entercard" class="ng-scope form-group">
+    <label class="control-label" for="requestTime">How soon would you like to speak to an expert?</label>
+
+    <div class="radios">
+      <input id="requestTimeRegular" name="time" ng-model="request.time" type="radio" value="regular" ng-click="setTime()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestTimeRegular"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/time-regular.png">In 1-2 Days</label>
+    </div>
+
+    <div class="radios">
+      <input id="requestTimeRush" name="time" ng-model="request.time" type="radio" value="rush" ng-click="setTime()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestTimeRush"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/time-rush.png">In 1-2 Hours <i>+ $20/hr rush fee paid to expert</i></label>
+    </div>
+
+    <div class="radios">
+      <input id="requestTimeLater" name="time" ng-model="request.time" type="radio" value="later" ng-click="setTime()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestTimeLater"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/time-later.png">I don't know yet
+    </label></div>
+
+  </div><!-- end ngIf: !entercard -->
+
+  <!-- ngIf: entercard -->
+
+</section>
+
+
+<section ng-class="stepClass(&#39;brief&#39;)" class="brief">
+
+  <div form-group="" class="ng-scope form-group">
+    <label class="control-label" for="requestBrief">Specifically what do you need help with?</label>
+    <textarea id="requestBrief" form-control="" placeholder="describe your requirements in as much detail as possible" ng-model="request.brief" required="" class="ng-pristine ng-untouched form-control ng-invalid ng-invalid-required">    </textarea>
+  </div>
+  <a href="https://guides.github.com/features/mastering-markdown/" target="_blank" class="md">
+    <img src="./Making Phil Libin style cohort visualizations available to everyone_files/markdown.png">
+    markdown supported
+  </a>
+  <hr>
+
+</section>
+
+
+<section ng-class="stepClass(&#39;experience&#39;)" class="experience">
+
+  <!-- ngIf: request.tags && request.tags.length > 0 && session.emailVerified --><div form-group="" ng-if="request.tags &amp;&amp; request.tags.length &gt; 0 &amp;&amp; session.emailVerified" class="ng-scope form-group">
+
+    <!-- ngIf: request.tags.length == 1 -->
+    <!-- ngIf: request.tags.length > 1 --><label class="control-label ng-binding ng-scope" for="requestExperience" ng-if="request.tags.length &gt; 1">What's your experience using mongodb, java and node.js together?</label><!-- end ngIf: request.tags.length > 1 -->
+
+    <!-- <i>Well make sure to match you with an equal or more experienced expert.</i> -->
+
+     <div class="experienceOptions radios">
+      <span>
+        <input id="requestExperienceBeginner" name="experience" ng-model="request.experience" type="radio" value="beginner" ng-change="setExperience()" class="ng-pristine ng-untouched ng-valid">
+        <label for="requestExperienceBeginner"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/experience-beginner.png"> Beginner</label> <i>Basic setup and functionality</i>
+      </span>
+
+      <span>
+        <input id="requestExperienceProficient" name="experience" ng-model="request.experience" type="radio" value="proficient" ng-change="setExperience()" class="ng-pristine ng-untouched ng-valid">
+        <label for="requestExperienceProficient"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/experience-proficient.png"> Proficient</label> <i>Typical development issues</i>
+      </span>
+
+      <span>
+        <input id="requestExperienceAdvanced" name="experience" ng-model="request.experience" type="radio" value="advanced" ng-change="setExperience()" class="ng-pristine ng-untouched ng-valid">
+        <label for="requestExperienceAdvanced"><img src="./Making Phil Libin style cohort visualizations available to everyone_files/experience-advanced.png"> Advanced</label> <i>Trying to do something crazy here</i>
+      </span>
+    </div>
+
+  </div><!-- end ngIf: request.tags && request.tags.length > 0 && session.emailVerified -->
+
+ <!-- ngIf: request.tags && request.tags.length > 0 && !session.emailVerified -->
+
+  
+  <hr>
+
+</section>
+
+<section ng-class="stepClass(&#39;tags&#39;)" class="tags">
+
+  <div form-group="" class="ng-scope form-group">
+    <label class="control-label" for="requestTags">What technologies are you using?</label>
+    <div class="form-group">
+      <div tag-input="" class="ng-isolate-scope"><div class="form-group tag-input-group">
+  <div class="nomobile">This feature is not available on mobile</div>
+
+  <div class="drag">
+    <!-- ngIf: tags() && tags().length > 1 --><p ng-if="tags() &amp;&amp; tags().length &gt; 1" class="ng-scope">
+      <!-- <img src="/static/img/css/sort-arrows.png" style="margin:0px 0px 7px 0px" /> -->
+      <br><b>drag in order of importance</b>
+      <br>place most used first
+      <br>
+    </p><!-- end ngIf: tags() && tags().length > 1 -->
+  </div>
+  <div class="selected">
+    <label for="tagInput">Your stack</label>
+
+    <ul class="tags ui-sortable" sortable="" get="tags" set="updateTags">
+      <!-- ngRepeat: tag in tags() | orderBy:'sort' --><li ng-repeat="tag in tags() | orderBy:&#39;sort&#39;" ng-attr-data-id="{{tag._id}}" class="ng-binding ng-scope" data-id="514825fa2a26ea0200000025">
+        mongodb
+        <a class="remove" ng-click="deselectMatch(tag)">x</a>
+        <!-- ngIf: tags().length > 1 --><a ng-if="tags().length &gt; 1" class="order ng-scope"></a><!-- end ngIf: tags().length > 1 -->
+      </li><!-- end ngRepeat: tag in tags() | orderBy:'sort' --><li ng-repeat="tag in tags() | orderBy:&#39;sort&#39;" ng-attr-data-id="{{tag._id}}" class="ng-binding ng-scope" data-id="514825fa2a26ea020000001e">
+        java
+        <a class="remove" ng-click="deselectMatch(tag)">x</a>
+        <!-- ngIf: tags().length > 1 --><a ng-if="tags().length &gt; 1" class="order ng-scope"></a><!-- end ngIf: tags().length > 1 -->
+      </li><!-- end ngRepeat: tag in tags() | orderBy:'sort' --><li ng-repeat="tag in tags() | orderBy:&#39;sort&#39;" ng-attr-data-id="{{tag._id}}" class="ng-binding ng-scope" data-id="514825fa2a26ea0200000028">
+        node.js
+        <a class="remove" ng-click="deselectMatch(tag)">x</a>
+        <!-- ngIf: tags().length > 1 --><a ng-if="tags().length &gt; 1" class="order ng-scope"></a><!-- end ngIf: tags().length > 1 -->
+      </li><!-- end ngRepeat: tag in tags() | orderBy:'sort' -->
+    </ul>
+
+    <!-- ngIf: !tags() || tags().length == 0 -->
+  </div>
+
+  <label for="tagInput">Search technologies</label>
+  <input type="text" class="tagInput form-control ng-pristine ng-untouched ng-valid" placeholder="Type a technology (e.g. javascript)" ng-model="q" typeahead="t as t for t in getTags($viewValue) | filter:$viewValue" typeahead-editable="false" typeahead-input-formatter="keypressSelect($model)" tabindex="351" typeahead-template-url="tagMatch.html" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-292-3812"><!-- ngIf: isOpen() -->
+  <!-- typeahead-loading="loading"
+  <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+   -->
+  <div class="nomob">
+    <!-- ngIf: none && !addErrorMsg && !adding -->
+    <!-- ngIf: adding -->
+    <!-- ngIf: addErrorMsg -->
+  </div>
+</div>
+
+<script type="text/ng-template" id="tagMatch.html">
+  <div>
+    <a class="tagSelect">
+      <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+      <p bind-html-unsafe="match.model.desc | typeaheadHighlight:query"></p>
+    </a>
+  </div>
+</script>
+</div>
+    </div>
+    <i>* Choose up to 3 tags</i>
+  </div>
+  <hr>
+
+</section>
+
+<section ng-class="stepClass(&#39;type&#39;)" class="type current">
+
+  <div form-group="" class="ng-scope form-group">
+    <label class="control-label" for="requestType">What type of coding help could you use?</label>
+    <div class="requestTypes">
+      <a ng-click="setType(&#39;troubleshooting&#39;)">Troubleshooting</a>
+      <a ng-click="setType(&#39;mentoring&#39;)">Mentoring</a>
+      <a ng-click="setType(&#39;code-review&#39;)">Code review</a>
+      <a ng-click="setType(&#39;resources&#39;)">Extra resources</a>
+      <a ng-click="setType(&#39;advice&#39;)">Technology advice</a>
+      <a ng-click="setType(&#39;other&#39;)">Other</a>
+    </div>
+    <select id="requestType" form-control="" ng-model="request.type" class="ng-pristine ng-untouched ng-valid form-control"><option value="? undefined:undefined ?"></option>
+      <option value="troubleshooting">Troubleshooting</option>
+      <option value="mentoring">Mentoring</option>
+      <option value="code-review">Code review</option>
+      <option value="resources">Extra resources</option>
+      <option value="advice">Technology advice</option>
+      <option value="other">Other</option>
+    </select>
+
+    <div class="nomob info">
+      <img class="user" ng-src="/static/img/css/request/ap-circle-mediumm.png" src="./Making Phil Libin style cohort visualizations available to everyone_files/ap-circle-mediumm.png">
+      <p><b>Get live programming help over video chat</b>
+        <span>Tell us what you need and get matched with an expert in
+        as little as 30 minutes.</span>
+      </p>
+    </div>
+  </div>
+  <hr>
+
+</section>
+
+</form><!-- end ngIf: request -->
+
+<!-- ngIf: customers -->
+
+
+</div><!-- end ngIf: session._id -->
+</div>
+</article>
+
+
+<footer id="posts" class="postfooter similar  ng-scope">
+  <hr>
+  <h5>Tagged under</h5>
+  <ul class="tags">
+    <li><a href="https://www.airpair.com/posts/tag/keen-io">keen-io</a></li>
+
+    <li><a href="https://www.airpair.com/posts/tag/mongodb">MongoDB</a></li>
+
+    <li><a href="https://www.airpair.com/posts/tag/meteor">Meteor</a></li>
+  </ul>
+
+  <div class="share-horizontal">
+    <div class="pw pw-widget ra1-pw-classicWidget ra1-pw_size_small pw-layout-horizontal pw-counter-vertical pw-widget-look-native" pw:twitter-via="airpair">
+      <a class="pw-button pw-button-twitter button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">110</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-twitter"></span><span class="pw-button-type-looknative__txt">Tweet</span></span></a>
+      <a class="pw-button pw-button-googleplus button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">4</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-googleplus"></span><span class="pw-button-type-looknative__txt">Share</span></span></a>
+      <a class="pw-button pw-button-facebook button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">28</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-facebook"></span><span class="pw-button-type-looknative__txt">Share</span></span></a>
+      <a class="pw-button pw-button-linkedin button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">37</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-linkedin"></span><span class="pw-button-type-looknative__txt">Share</span></span></a>
+      <a class="pw-button pw-button-tumblr button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">0</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-tumblr"></span><span class="pw-button-type-looknative__txt">Tumblr</span></span></a>
+      <a class="pw-button pw-button-reddit button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">1</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-reddit"></span><span class="pw-button-type-looknative__txt">Reddit</span></span></a>
+      <a class="pw-button pw-button-email button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">0</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-email"></span><span class="pw-button-type-looknative__txt">Email</span></span></a>
+    </div>
+  </div>
+
+  <section id="allposts">
+    <h3 class="underline">Similar posts <a href="https://www.airpair.com/posts" class="btn btn-sm btn-inverse" target="_self">All posts</a></h3>
+    <div class="similar nostars">
+      <article class="posttile" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+  <a href="https://www.airpair.com/analytics/posts/user-analytics-as-your-product-grows" title="User Analytics as Your Product Grows" target="_self" rel="bookmark">
+    <header class="entry-header">
+      <img class="entry-header-image" itemprop="image" src="./Making Phil Libin style cohort visualizations available to everyone_files/xN3MlqA.png" align="left">
+      <div class="glass"></div>
+      <p>
+        <span class="entry-categories">
+          <em>analytics</em>
+          <em>keen-io</em>
+          <em>data-visualization</em>
+        </span>
+        Welcome to the crazy world of modern analytics. Tools come in all shapes, sizes, and costs; the options are daunting.
+      </p>
+    </header>
+
+    <div class="entry-content" itemprop="text">
+      <h6><b>5</b> x</h6>
+      <div class="stars ng-isolate-scope" stars="" val="4.2"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</div>
+      <h2 class="entry-title" itemprop="headline">User Analytics as Your Product Grows</h2>
+
+      <span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <span class="entry-author-name" itemprop="name">Ry Walker</span>
+      </span>
+
+    </div>
+  </a>
+  <footer class="entry-footer">
+    <bookmarkerserver type="&#39;post&#39;" object-id="&#39;5514559c5955b711004d652e&#39;" class="ng-isolate-scope"><img class="bookmark" ng-src="/static/img/css/bookmark.png" ng-click="bookmarker.toggle()" src="./Making Phil Libin style cohort visualizations available to everyone_files/bookmark.png">
+</bookmarkerserver>
+    <img class="entry-author-img" itemprop="image" ng-src="//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153?s=50" src="./Making Phil Libin style cohort visualizations available to everyone_files/7cf61c7c25b97dd624c7beadfb202153(2)">
+  </footer>
+
+</article>
+<article class="posttile" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+  <a href="https://www.airpair.com/keen-io/posts/simple-blog-analytics-with-keenio" title="Simple blog analytics with keen.io" target="_self" rel="bookmark">
+    <header class="entry-header">
+      <img class="entry-header-image" itemprop="image" src="./Making Phil Libin style cohort visualizations available to everyone_files/Simple_blog_analytics_with_keen.jpg" align="left">
+      <div class="glass"></div>
+      <p>
+        <span class="entry-categories">
+          <em>keen-io</em>
+          <em>analytics</em>
+          <em>data-visualization</em>
+        </span>
+        An introduction on how to use Keen.IO ImageBeacon technique
+      </p>
+    </header>
+
+    <div class="entry-content" itemprop="text">
+      <h6><b>3</b> x</h6>
+      <div class="stars ng-isolate-scope" stars="" val="4"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</div>
+      <h2 class="entry-title" itemprop="headline">Simple blog analytics with keen.io</h2>
+
+      <span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <span class="entry-author-name" itemprop="name">Antonio Mancuso</span>
+      </span>
+
+    </div>
+  </a>
+  <footer class="entry-footer">
+    <bookmarkerserver type="&#39;post&#39;" object-id="&#39;550d87ca27b2d40c000f8220&#39;" class="ng-isolate-scope"><img class="bookmark" ng-src="/static/img/css/bookmark.png" ng-click="bookmarker.toggle()" src="./Making Phil Libin style cohort visualizations available to everyone_files/bookmark.png">
+</bookmarkerserver>
+    <img class="entry-author-img" itemprop="image" ng-src="//0.gravatar.com/avatar/bb4053e61185721e14c4066c57f3ac4c?s=50" src="./Making Phil Libin style cohort visualizations available to everyone_files/bb4053e61185721e14c4066c57f3ac4c">
+  </footer>
+
+</article>
+<article class="posttile" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+  <a href="https://www.airpair.com/sendgrid/posts/making-a-dashboard-with-keen-io-sendgrid-events" title="Making a dashboard with Keen IO + SendGrid&#39;s Event Webhook data" target="_self" rel="bookmark">
+    <header class="entry-header">
+      <img class="entry-header-image" itemprop="image" src="./Making Phil Libin style cohort visualizations available to everyone_files/keen-dashboard-airpair.png" align="left">
+      <div class="glass"></div>
+      <p>
+        <span class="entry-categories">
+          <em>sendgrid</em>
+          <em>keen-io</em>
+          <em>events</em>
+        </span>
+        This is a getting started tutorial on using Keen IO + SendGrid's Event Webhook to set up a dashboard  showing email data
+      </p>
+    </header>
+
+    <div class="entry-content" itemprop="text">
+      <h6><b>4</b> x</h6>
+      <div class="stars ng-isolate-scope" stars="" val="5"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 --><li ng-if="stars &gt;= 5" class="ng-scope"></li><!-- end ngIf: stars >= 5 -->
+</ul>
+</div>
+      <h2 class="entry-title" itemprop="headline">Making a dashboard with Keen IO + SendGrid's Event Webhook data</h2>
+
+      <span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <span class="entry-author-name" itemprop="name">Heitor Tashiro Sergent</span>
+      </span>
+
+    </div>
+  </a>
+  <footer class="entry-footer">
+    <bookmarkerserver type="&#39;post&#39;" object-id="&#39;550c9e37bbbbef0c004b5c8f&#39;" class="ng-isolate-scope"><img class="bookmark" ng-src="/static/img/css/bookmark.png" ng-click="bookmarker.toggle()" src="./Making Phil Libin style cohort visualizations available to everyone_files/bookmark.png">
+</bookmarkerserver>
+    <img class="entry-author-img" itemprop="image" ng-src="//0.gravatar.com/avatar/10eef81625284e8299967a73960e860b?s=50" src="./Making Phil Libin style cohort visualizations available to everyone_files/10eef81625284e8299967a73960e860b">
+  </footer>
+
+</article>
+
+    </div>
+  </section>
+
+</footer>
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </main>
+
+</div>
+
+<!-- ngIf: session._id --><nav id="side" ng-if="session._id" class="collapse ng-scope" side-nav="" style="top: 0px; display: block;"><header>
+  <div class="toggle" id="sideNavToggle" track-click="sideNav" data="Show" track-click-if="!session._id" ng-click="sideNav.toggle()"></div>
+</header>
+
+
+<section class="help">
+  <a href="https://www.airpair.com/help/request" class="btn btn-inverse" target="_self">
+    <div class="pair"></div><span>get help</span>
+  </a>
+</section>
+
+
+<section class="main">
+  <ul>
+    <li><a href="https://www.airpair.com/me" class="avatar"><div><img ng-src="//0.gravatar.com/avatar/e330d9e72eeaab635aa06a619cbca4e1?s=31" src="./Making Phil Libin style cohort visualizations available to everyone_files/e330d9e72eeaab635aa06a619cbca4e1"></div><span>me</span></a></li>
+    <li><a href="https://www.airpair.com/dashboard"><div class="dashboard"></div><span>dashboard</span></a></li>
+    <li><a href="https://www.airpair.com/settings"><div class="settings"></div><span>settings</span></a></li>
+    <li><a href="https://www.airpair.com/posts/me"><div class="posts"></div><span>my posts</span></a></li>
+    <!--<li><a href="/experts">experts</a></li>
+    <li><a href="#">airpairs</a></li> -->
+    <li><a id="navStackToggle" track-click="sideNav" href="https://www.airpair.com/#" ng-click="openStack()">
+        <div class="stack"></div><span>stack</span>
+      </a>
+    </li>
+<!--     <li>
+      <a id="navBookmarksToggle" track-click="sideNav" href="#" ng-click="openBookmarks()"><div class="bookmarks"></div><span>bookmarks</span>
+      </a>
+    </li> -->
+    <li><a href="https://www.airpair.com/billing"><div class="billing"></div><span>billing</span></a></li>
+    <li><a href="https://www.airpair.com/logout" target="_self"><div class="logout"></div><span>logout</span></a></li>
+  </ul>
+</section>
+
+<section class="expert">
+  <ul>
+    <li><a href="https://www.airpair.com/be-an-expert" class="avatar"><div><img ng-src="//0.gravatar.com/avatar/e330d9e72eeaab635aa06a619cbca4e1?s=31" src="./Making Phil Libin style cohort visualizations available to everyone_files/e330d9e72eeaab635aa06a619cbca4e1"></div><span>profile</span></a></li>
+    <li><a href="https://www.airpair.com/office"><div class="dashboard"></div><span>office</span></a></li>
+<!--     <li><a href="/availability"><div class="deals"></div><span>availability</span></a></li> -->
+    <!-- <li><a href="/deals"><div class="deals"></div><span>deals</span></a></li> -->
+    <li><a href="https://www.airpair.com/payouts"><div class="billing"></div><span>payouts</span></a></li>
+    <li><a href="https://www.airpair.com/settings"><div class="settings"></div><span>settings</span></a></li>
+  </ul>
+</section>
+
+<div stack=""></div>
+</nav><!-- end ngIf: session._id -->
+
+
+<script type="text/javascript" src="./Making Phil Libin style cohort visualizations available to everyone_files/index-5a093158.js"></script>
+<script type="text/javascript">
+
+function bindTracking() {
+  ga('send', 'pageview')
+}
+
+window.viewData = { canonical: 'https://www.airpair.com/keen-io/posts/making-phil-libin-style-cohort-visualizations-available-to-everyone', post : {"_id":"5509e5c19ea8470c00457db6"}, session: {"_id":"553946c93e9c0011008bab81","google":{"id":"112948496169152478560","_json":{"url":"https://plus.google.com/+MilsonMunakami","email":"milsonmun@gmail.com"}},"email":"milsonmun@gmail.com","emailVerified":true,"name":"Milson Munakami","username":"milstein","tags":[{"name":"MongoDB","slug":"mongodb","sort":0,"tagId":"514825fa2a26ea0200000025","_id":"5578a9f7fc784111004ecefc"},{"name":"java","slug":"java","_id":"5578a9fafc784111004ecefe","tagId":"514825fa2a26ea020000001e","sort":0},{"name":"Node.JS","slug":"node.js","sort":0,"tagId":"514825fa2a26ea0200000028","_id":"5578a9fefc784111004ecf00"},{"name":"asp.net","slug":"asp.net","_id":"5578aa04ed0e0d1100d7d231","tagId":"514a3f2ebf82130200000030","sort":0},{"name":"c#","slug":"c%23","sort":0,"tagId":"514825fa2a26ea020000000e","_id":"5578aa08ed0e0d1100d7d233"}],"bookmarks":[{"title":"Selenium Tutorial - Get started using Java","url":"https://www.airpair.com/selenium/posts/selenium-tutorial-with-java","sort":0,"type":"post","objectId":"54f245230701170c002d1339","_id":"5578aae3ed0e0d1100d7d25c"},{"title":"Modelling game economy with Neo4j","url":"https://www.airpair.com/neo4j/posts/modelling-game-economy-with-neo4j","_id":"5578aae8ed0e0d1100d7d25d","objectId":"54f5d05c5e76ff0c00e577e5","type":"post","sort":0},{"title":"Seven ineffective coding habits many F# programmers don’t have","url":"https://www.airpair.com/f%23/tips-n-tricks/seven-ineffective-coding-habits-many-fsharp-programmers-dont-have","sort":0,"type":"post","objectId":"55060c664ffec50c00ce0e1a","_id":"5578aaeded0e0d1100d7d260"},{"title":"Scalable Architecture DR CoN: Docker, Registrator, Consul, Consul Template and Nginx","url":"https://www.airpair.com/scalable-architecture-with-docker-consul-and-nginx","_id":"5578aaf5ed0e0d1100d7d265","objectId":"550106c2f1377c0c0051cbef","type":"post","sort":0},{"title":"How to Create a Complete Express.js + Node.js + MongoDB CRUD and REST Skeleton","url":"https://www.airpair.com/javascript/complete-expressjs-nodejs-mongodb-crud-skeleton","sort":0,"type":"post","objectId":"54f70cdb8438550c00e989d1","_id":"5578aafbfc784111004ecf25"},{"title":"D3 force layout internals","url":"https://www.airpair.com/javascript/posts/d3-force-layout-internals","_id":"5578aafeed0e0d1100d7d269","objectId":"54f319905450820c00d1bdd1","type":"post","sort":0},{"title":"Realtime AngularJS Pub/Sub Messaging using PubNub","url":"https://www.airpair.com/pubnub/posts/realtime-angularjs-pubsub-messaging-using-pubnub1","sort":0,"type":"post","objectId":"54dd479af9cf4b0a0016d071","_id":"5578ab04fc784111004ecf26"},{"title":"Getting Started with Docker for the Node.js Developer","url":"https://www.airpair.com/node.js/posts/getting-started-with-docker-for-the-nodejs-dev","_id":"5578ab1dfc784111004ecf2d","objectId":"5516f8187fb1af1100e5a297","type":"post","sort":0},{"title":"Database migration in NodeJS and MongoDB","url":"https://www.airpair.com/javascript/posts/database-migration-in-nodejs-and-mongodb","sort":0,"type":"post","objectId":"5510256f49565d11006d5702","_id":"5578ab20ed0e0d1100d7d276"},{"title":"Unit testing Ajax requests with Mocha","url":"https://www.airpair.com/javascript/posts/unit-testing-ajax-requests-with-mocha","_id":"5578ab22ed0e0d1100d7d277","objectId":"550b4908f8c4420c006feb18","type":"post","sort":0},{"title":"Express/Angular/Redis/Node Stack","url":"https://www.airpair.com/express/posts/earn-stack","sort":0,"type":"post","objectId":"550898091e53dd0c005ff5ae","_id":"5578ab25fc784111004ecf30"},{"title":"Distributed PageRank Using Apache Spark and Neo4j","url":"https://www.airpair.com/apache-spark/posts/distributed-pagerank-using-apache-spark-and-neo4j","_id":"5578ab27ed0e0d1100d7d278","objectId":"54f398587ec03b0c008b69e2","type":"post","sort":0}],"cohort":{"engagement":{"visits":["2015-04-23T00:00:00.000Z"],"visit_first":"2015-04-23T19:21:48.631Z","visit_signup":"2015-04-23T19:23:53.115Z","visit_last":"2015-04-23T19:23:53.115Z"}},"localization":{"location":"Boise, ID, USA","timezone":"Mountain Daylight Time","timezoneData":{"timeZoneId":"America/Denver"}},"social":{"gh":{"username":"Milstein"},"gp":{"link":"https://plus.google.com/+MilsonMunakami","email":"milsonmun@gmail.com"}},"timeZoneId":"America/Denver","avatar":"//0.gravatar.com/avatar/e330d9e72eeaab635aa06a619cbca4e1"} };
+
+</script>
+
+
+<script type="text/javascript">
+
+  window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+  window.analytics.load("0xxx5xrw5q");
+
+
+  window.analytics.ready(function() {
+
+    if (!window.bindTracking)
+      window.bindTracking = function() {};
+
+    // var mixId = mixpanel.get_distinct_id()
+
+    var email = 'milsonmun@gmail.com';
+    var anonymousId = null;
+
+    //console.log('userEmail', email, 'mixId', mixId, 'anonymousId', anonymousId)
+
+    // var ident = function() {
+      // console.log('identify', email || anonymousId)  //-- could be from a different session.
+      // window.analytics.identify(email || anonymousId, { id: email || anonymousId, name: 'Milson Munakami' });
+    // }
+
+
+    // If they're signed in
+    // if (email && mixId != email) ident()
+
+    // If they didn't already identify their email and log out
+    // else if (mixId.indexOf("@") == -1 && anonymousId != mixId)
+    // {
+      // setTimeout(ident,200)
+    // }
+
+    bindTracking();
+  });
+
+</script>
+
+<script type="text/javascript">
+adroll_adv_id = "XF634YIRAZHM5AG2HSQDII";
+adroll_pix_id = "RJLKZHU5IFD2NP5M3C6X35";
+(function () {
+var oldonload = window.onload;
+window.onload = function(){
+   __adroll_loaded=true;
+   var scr = document.createElement("script");
+   var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+   scr.setAttribute('async', 'true');
+   scr.type = "text/javascript";
+   scr.src = host + "/j/roundtrip.js";
+   ((document.getElementsByTagName('head') || [null])[0] ||
+    document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+   if(oldonload){oldonload()}};
+}());
+</script>
+<script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.perfectaudience.com/serve/54b046fb22526644ea000012.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+</script>
+<script type="text/javascript">setTimeout(function(){var a=document.createElement("script");var b=document.getElementsByTagName("script")[0];a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0021/1713.js?"+Math.floor(new Date().getTime()/3600000);a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+
+
+
+<script src="./Making Phil Libin style cohort visualizations available to everyone_files/braintree.js"></script><textarea tabindex="-1" style="position: absolute; top: -999px; right: auto; bottom: auto; left: 0px; overflow: hidden; box-sizing: content-box; padding: 0px; word-wrap: break-word; border: 0px; min-height: 0px !important; height: 0px !important;"></textarea><textarea tabindex="-1" style="position: absolute; top: -999px; right: auto; bottom: auto; left: 0px; overflow: hidden; box-sizing: content-box; padding: 0px; word-wrap: break-word; border: 0px; font-family: &#39;Open Sans&#39;, &#39;Century Gothic&#39;; font-size: 14px; font-weight: normal; font-style: normal; letter-spacing: normal; line-height: 20px; text-transform: none; word-spacing: 0px; text-indent: 0px; min-height: 0px !important; height: 0px !important; width: 604px;"></textarea><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}"></div><form id="gclp-frame-form" target="gclp-frame" method="post" style="display: none;"></form><div class="gclp-code-grabber" data-gclp-id="0" style="left: 835.5px; top: 2936px; display: none;" data-hasqtip="true"></div><div class="gclp-code-grabber" data-gclp-id="1" style="left: 835.5px; top: 3078px; display: none;" data-hasqtip="true"></div></body></html>
