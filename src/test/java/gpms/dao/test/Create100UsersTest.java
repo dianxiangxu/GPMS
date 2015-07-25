@@ -88,7 +88,7 @@ public class Create100UsersTest {
 			city = "Hoodbridge";
 			state = "Idaho";
 			zipcode = "83686";
-			country = "United States of America";
+			country = "United States";
 
 			newAddress = new Address();
 			newAddress.setStreet(street);
@@ -106,7 +106,7 @@ public class Create100UsersTest {
 			// city = "Langley";
 			// state = "Virginia";
 			// zipcode = "22192";
-			// country = "United States of America";
+			// country = "United States";
 			//
 			// newAddress2.setStreet(street);
 			// newAddress2.setCity(city);

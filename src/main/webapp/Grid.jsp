@@ -355,9 +355,10 @@
 																				class="cssClassRequired">*</span></td>
 																			<td><span id="lblGender" class="cssClassLabel">Gender:</span></td>
 																			<td class="cssClassTableRightCol required"><select
-																				id="ddlGender" name="gender" title="Gender"><option
-																						value="0">Male</option>
-																					<option value="1">Female</option>
+																				id="ddlGender" name="gender" title="Gender">
+																					<option value="0">Choose Gender</option>
+																					<option value="Male">Male</option>
+																					<option value="Female">Female</option>
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr class="rule dashed">
@@ -389,7 +390,7 @@
 																			<td><span class="cssClassLabel" id="lblState">State:</span></td>
 																			<td class="cssClassTableRightCol required"><select
 																				id="ddlState" name="state" title="State"><option
-																						value="0">Choose state</option>
+																						value="0">Choose State</option>
 																					<option value="1">Alabama</option>
 																					<option value="2">Alaska</option>
 																					<option value="4">Arizona</option>
@@ -454,8 +455,8 @@
 																			<td><span class="cssClassLabel" id="lblCountry">Country:</span></td>
 																			<td class="cssClassTableRightCol required"><select
 																				id="ddlCountry" name="country" title="Country"><option
-																						value="0">Choose country</option>
-																					<option value="1">United States of America</option>
+																						value="0">Choose Country</option>
+																					<option value="1">United States</option>
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr class="rule dashed">
