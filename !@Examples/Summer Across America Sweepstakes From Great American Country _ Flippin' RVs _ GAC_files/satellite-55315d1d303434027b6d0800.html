@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- saved from url=(0115)http://assets.adobedtm.com/076e416a6caa07234c15d9bd371ee9e19eef88d3/scripts/satellite-55315d1d303434027b6d0800.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css"></style></head><body>
+    <script>
+      (function(){
+        function escapeForHtml(str){
+          if (!str) return str
+          return str
+            .replace(/\&/g, '&amp;')
+            .replace(/\</g, '&lt;')
+            .replace(/\>/g, '&gt;')
+            .replace(/\"/g, '&quot;')
+            .replace(/\'/g, '&#x27;')
+            .replace(/\//g, '&#x2F;')
+        }
+        function parseQueryString(){
+          var ret = {}, parts = location.search.substring(1).split('&');
+          for (var i = parts.length; i--;) {
+            var vardef = parts[i].split('='), varname = vardef[0], value = vardef[1];
+            ret[varname] = value;
+          }
+          return ret;
+        }
+        var queryParams = parseQueryString();
+
+        var markup = "<script language=\"javascript\" src=\"http://icompass.insightexpressai.com/375.js\"></scr"+"ipt>\n";
+
+        for (var name in queryParams){
+          var regex = new RegExp('%' + name.replace('.', '\.') + '%', 'ig');
+          markup = markup.replace(regex, 
+            escapeForHtml(queryParams[name]));
+        }
+
+        document.write(markup)
+      })();
+    </script><script language="javascript" src="http://icompass.insightexpressai.com/375.js"></script>
+
+  
+
+</body></html>
