@@ -79,6 +79,9 @@ $(function() {
 				changeMonth : true,
 				changeYear : true
 			});
+
+			$("#gdvUsersAuditLog").empty();
+			$("#gdvUsersAuditLog_Pagination").remove();
 		},
 		SetFirstTabActive : function() {
 			var $tabs = $('#container-7').tabs({
@@ -708,9 +711,14 @@ $(function() {
 								'Edit User Details for: ')
 								+ argus[2]);
 
-				$('#lblLastUpdatedOn').html(argus[7]);
-				$('#lblLastUpdatedBy').html(argus[8]);
-				$('#lblActivity').html(argus[9]);
+				if (argus[7] != null && argus[7] != "") {
+					$('#tblLastAuditedInfo').show();
+					$('#lblLastUpdatedOn').html(argus[7]);
+					$('#lblLastUpdatedBy').html(argus[8]);
+					$('#lblActivity').html(argus[9]);
+				} else {
+					$('#tblLastAuditedInfo').hide();
+				}
 				// $('#txtUserName').val(argus[1]);
 				// $('#txtUserName').prop('disabled', 'disabled');
 				$(".delbutton").prop("id", argus[0]);

@@ -19,8 +19,8 @@ import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -109,18 +109,66 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setNoOfSenioredProposal(countSeniorPersonnel(userProfile));
 
 			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
+
+			ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
+
+			if (userProfile.getAuditLog() != null
+					&& userProfile.getAuditLog().size() != 0) {
+				if (userProfile.getUserAccount().getAuditLog() != null
+						&& userProfile.getUserAccount().getAuditLog().size() != 0) {
+					for (AuditLog userAccountAudit : userProfile
+							.getUserAccount().getAuditLog()) {
+						AuditLogInfo userAuditLog = new AuditLogInfo();
+
+						userAuditLog.setActivityDate(userAccountAudit
+								.getActivityDate());
+						userAuditLog.setUserFullName(userAccountAudit
+								.getUserProfileId().getFirstName()
+								+ " "
+								+ userAccountAudit.getUserProfileId()
+										.getMiddleName()
+								+ " "
+								+ userAccountAudit.getUserProfileId()
+										.getLastName());
+						userAuditLog.setAction(userAccountAudit.getAction());
+
+						allAuditLogs.add(userAuditLog);
+					}
+
+				}
+
+				for (AuditLog userProfileAudit : userProfile.getAuditLog()) {
+					AuditLogInfo userAuditLog = new AuditLogInfo();
+					userAuditLog.setActivityDate(userProfileAudit
+							.getActivityDate());
+					userAuditLog
+							.setUserFullName(userProfileAudit
+									.getUserProfileId().getFirstName()
+									+ " "
+									+ userProfileAudit.getUserProfileId()
+											.getMiddleName()
+									+ " "
+									+ userProfileAudit.getUserProfileId()
+											.getLastName());
+					userAuditLog.setAction(userProfileAudit.getAction());
+
+					allAuditLogs.add(userAuditLog);
+				}
+
+			}
+
+			Collections.sort(allAuditLogs);
+
 			Date lastAudited = null;
 			String lastAuditedBy = new String();
 			String lastAuditAction = new String();
-			if (userProfile.getAuditLog().size() > 0) {
-				AuditLog auditLog = userProfile.getAuditLog().get(
-						userProfile.getAuditLog().size() - 1);
+			if (allAuditLogs.size() > 0) {
+				AuditLogInfo auditLog = allAuditLogs.get(0);
 				lastAudited = auditLog.getActivityDate();
-				lastAuditedBy = auditLog.getUserProfileId().getFirstName()
-						+ " " + auditLog.getUserProfileId().getMiddleName()
-						+ " " + auditLog.getUserProfileId().getLastName();
+				lastAuditedBy = auditLog.getUserFullName();
 				lastAuditAction = auditLog.getAction();
 			}
+
 			user.setLastAudited(lastAudited);
 			user.setLastAuditedBy(lastAuditedBy);
 			user.setLastAuditAction(lastAuditAction);
@@ -210,9 +258,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			ObjectId userId, String action, String auditedBy,
 			String activityOnFrom, String activityOnTo) throws ParseException,
 			UnknownHostException {
+
 		Datastore ds = getDatastore();
 		UserProfile q = ds.createQuery(UserProfile.class).field("_id")
 				.equal(userId).get();
+		// .order("audit log.activity on")
 
 		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
 		int rowTotal = 0;
@@ -294,8 +344,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 		// List<AuditLogInfo> userAuditLogs = ds.createQuery(AuditLogInfo.class)
 		// .offset(offset - 1).limit(limit).asList();
-		if (rowTotal >= limit) {
-			return allAuditLogs.subList(offset - 1, limit);
+
+		Collections.sort(allAuditLogs);
+
+		if (rowTotal >= (offset + limit - 1)) {
+			return allAuditLogs.subList(offset - 1, offset + limit - 1);
 		} else {
 			return allAuditLogs.subList(offset - 1, rowTotal);
 		}

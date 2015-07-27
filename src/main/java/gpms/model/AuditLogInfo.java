@@ -2,7 +2,7 @@ package gpms.model;
 
 import java.util.Date;
 
-public class AuditLogInfo {
+public class AuditLogInfo implements Comparable<AuditLogInfo> {
 	private int rowTotal;
 	private String userName = new String();
 	private String userFullName = new String();
@@ -18,7 +18,7 @@ public class AuditLogInfo {
 
 	public void setRowTotal(int rowTotal) {
 		this.rowTotal = rowTotal;
-	}	
+	}
 
 	public String getUserName() {
 		return userName;
@@ -51,4 +51,19 @@ public class AuditLogInfo {
 	public void setActivityDate(Date activityDate) {
 		this.activityDate = activityDate;
 	}
+
+	@Override
+	public String toString() {
+		return "AuditLogInfo [rowTotal=" + rowTotal + ", userName=" + userName
+				+ ", userFullName=" + userFullName + ", action=" + action
+				+ ", activityDate=" + activityDate + "]";
+	}
+
+	@Override
+	public int compareTo(AuditLogInfo o) {
+		if (getActivityDate() == null || o.getActivityDate() == null)
+			return 0;
+		return o.getActivityDate().compareTo(getActivityDate()); // Descending
+	}
+
 }

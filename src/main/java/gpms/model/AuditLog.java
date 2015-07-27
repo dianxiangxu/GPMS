@@ -14,7 +14,7 @@ import com.google.gson.annotations.Expose;
 @Embedded
 // @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
 // property = "id")
-public class AuditLog {
+public class AuditLog implements Comparable<AuditLog> {
 	// @Expose
 	@Reference(value = "user id" /* , lazy = true */)
 	private UserProfile userProfileId = new UserProfile();
@@ -63,5 +63,12 @@ public class AuditLog {
 	@Override
 	public AuditLog clone() {
 		return new AuditLog(this.userProfileId, this.action, this.activityDate);
+	}
+
+	@Override
+	public int compareTo(AuditLog o) {
+		if (getActivityDate() == null || o.getActivityDate() == null)
+			return 0;
+		return getActivityDate().compareTo(o.getActivityDate()); // Ascending
 	}
 }

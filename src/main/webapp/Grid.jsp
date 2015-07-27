@@ -261,7 +261,8 @@
 																			style="width: 80px !important;"></td> -->
 																		<td><label class="cssClassLabel sfLocale">
 																				Active:</label> <select id="ddlSearchIsActive"
-																			class="sfListmenu" style="width: 85px;" title="Is Active?">
+																			class="sfListmenu" style="width: 85px;"
+																			title="Is Active?">
 																				<option value="" class="sfLocale">--All--</option>
 																				<option value="True" class="sfLocale">True</option>
 																				<option value="False" class="sfLocale">False</option>
@@ -665,7 +666,8 @@
 																	</div>
 																</div>
 															</div>
-															<table cellspacing="0" cellpadding="0" border="0">
+															<table id="tblLastAuditedInfo" cellspacing="0"
+																cellpadding="0" border="0">
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabelTitle">Last

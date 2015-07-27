@@ -209,7 +209,6 @@ var fromServer = 0;
 			wcf : function() {
 				// var param = { offset: p.pnew, limit: p.rp, portalId: 1,
 				// userName: 'RAJA' };
-
 				if (fromServer !== 0 || p.data == "") {
 					var params = $.extend({
 						offset : p.pnew,
@@ -274,30 +273,32 @@ var fromServer = 0;
 																		var elementclass = cm.elemClass;
 																	}
 
-																	if ($(
-																			'.'
-																					+ elementclass
-																					+ ':not(:disabled):not(:checked)')
-																			.size() == 0) {
+																	if (elementclass != undefined) {
+																		if ($(
+																				'.'
+																						+ elementclass
+																						+ ':not(:disabled):not(:checked)')
+																				.size() == 0) {
+																			$(
+																					'.'
+																							+ controlClass)
+																					.prop(
+																							'checked',
+																							true);
+																		}
+
 																		$(
 																				'.'
-																						+ controlClass)
-																				.prop(
-																						'checked',
-																						true);
+																						+ elementclass)
+																				.bind(
+																						'click',
+																						function() {
+																							g
+																									.MakeHeaderCheck(
+																											elementclass,
+																											controlClass);
+																						});
 																	}
-
-																	$(
-																			'.'
-																					+ elementclass)
-																			.bind(
-																					'click',
-																					function() {
-																						g
-																								.MakeHeaderCheck(
-																										elementclass,
-																										controlClass);
-																					});
 																}
 															}
 														}
@@ -555,18 +556,22 @@ var fromServer = 0;
 														g.invokePagination($(
 																this).attr(
 																'alt'));
-														if ($(
-																'.'
-																		+ checkBoxElemclass
-																		+ ':not(:disabled):not(:checked)')
-																.size() == 0) {
-															$(
+														if (checkBoxElemclass != undefined
+																&& checkBoxElemclass != "") {
+															if ($(
 																	'.'
-																			+ checkBoxHeaderclass)
-																	.prop(
-																			'checked',
-																			true);
+																			+ checkBoxElemclass
+																			+ ':not(:disabled):not(:checked)')
+																	.size() == 0) {
+																$(
+																		'.'
+																				+ checkBoxHeaderclass)
+																		.prop(
+																				'checked',
+																				true);
+															}
 														}
+
 													});
 								});
 
@@ -574,7 +579,7 @@ var fromServer = 0;
 
 			invokePagination : function(pageno) {
 				p.current = pageno;
-				p.pnew = (pageno - 1) * p.rp + 1; // offset
+				p.pnew = (pageno - 1) * parseInt(p.rp) + 1; // offset
 				// g.clearAll();
 				g.wcf();
 			},
