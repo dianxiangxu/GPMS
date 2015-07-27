@@ -88,13 +88,13 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	 * @param newName
 	 *            the new name for the user
 	 */
-	public void setAccountName(UserProfile author, UserProfile target,
+	public void setAccountName(UserProfile author, UserAccount target,
 			String newName) {
 		Datastore ds = getDatastore();
-		if (!target.getUserAccount().getUserName().equals(newName)) {
+		if (!target.getUserName().equals(newName)) {
 			audit = new AuditLog(author, "Edited user name", new Date());
 			target.addEntryToAuditLog(audit);
-			target.getUserAccount().setUserName(newName);
+			target.setUserName(newName);
 			ds.save(target);
 		}
 	}
@@ -109,13 +109,13 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	 * @param newPassword
 	 *            the new password
 	 */
-	public void setPassword(UserProfile author, UserProfile target,
+	public void setPassword(UserProfile author, UserAccount target,
 			String newPassword) {
 		Datastore ds = getDatastore();
-		if (!target.getUserAccount().getPassword().equals(newPassword)) {
+		if (!target.getPassword().equals(newPassword)) {
 			audit = new AuditLog(author, "Edited password", new Date());
 			target.addEntryToAuditLog(audit);
-			target.getUserAccount().setPassword(newPassword);
+			target.setPassword(newPassword);
 			ds.save(target);
 		}
 	}

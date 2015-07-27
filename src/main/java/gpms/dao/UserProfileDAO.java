@@ -215,9 +215,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				.equal(userId).get();
 
 		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
-
+		int rowTotal = 0;
 		if (q.getAuditLog() != null && q.getAuditLog().size() != 0) {
-			int rowTotal = q.getAuditLog().size();
+			rowTotal = q.getAuditLog().size();
 			if (q.getUserAccount().getAuditLog() != null
 					&& q.getUserAccount().getAuditLog().size() != 0) {
 
@@ -292,10 +292,13 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		// List<AuditLogInfo> userAuditLogs = q.offset(offset - 1).limit(limit)
 		// .asList();
 
-//		List<AuditLogInfo> userAuditLogs = ds.createQuery(AuditLogInfo.class)
-		//				.offset(offset - 1).limit(limit).asList();
-
-		return allAuditLogs;
+		// List<AuditLogInfo> userAuditLogs = ds.createQuery(AuditLogInfo.class)
+		// .offset(offset - 1).limit(limit).asList();
+		if (rowTotal >= limit) {
+			return allAuditLogs.subList(offset - 1, limit);
+		} else {
+			return allAuditLogs.subList(offset - 1, rowTotal);
+		}
 	}
 
 	private int countPIProposal(UserProfile userProfile) {

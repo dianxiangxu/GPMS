@@ -21,10 +21,9 @@ public abstract class BaseEntity {
 	private Long version;
 
 	@Embedded("audit log")
-	private ArrayList<AuditLog> auditLog;
+	private ArrayList<AuditLog> auditLog = new ArrayList<AuditLog>();
 
 	public BaseEntity() {
-		auditLog = new ArrayList<AuditLog>();
 	}
 
 	public ObjectId getId() {

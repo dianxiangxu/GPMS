@@ -58,7 +58,11 @@ public class Create100UsersTest {
 			UserProfile newProfile = new UserProfile();
 
 			newAccount.setUserName(userAccount);
+			// newUserAccountDAO.setAccountName(newProfile, newAccount,
+			// userAccount);
 			newAccount.setPassword(userAccount);
+			// newUserAccountDAO.setPassword(newProfile, newAccount,
+			// userAccount);
 			newAccount.setAddedOn(new Date());
 
 			newProfile.setFirstName(firstName);
@@ -127,7 +131,7 @@ public class Create100UsersTest {
 			Date dateDOB = formatter.parse(strDOB);
 
 			String newPassword = userAccount + "pwd";
-			newUserAccountDAO.setPassword(newProfile, newProfile, newPassword);
+			newUserAccountDAO.setPassword(newProfile, newAccount, newPassword);
 
 			newUserProfileDAO.setDateOfBirth(newProfile, newProfile, dateDOB);
 			newUserProfileDAO.setGender(newProfile, newProfile, "Male");

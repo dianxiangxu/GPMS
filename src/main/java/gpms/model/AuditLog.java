@@ -15,15 +15,15 @@ import com.google.gson.annotations.Expose;
 // @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
 // property = "id")
 public class AuditLog {
-	@Expose
+	// @Expose
 	@Reference(value = "user id" /* , lazy = true */)
 	private UserProfile userProfileId = new UserProfile();
 
-	@Expose
+	// @Expose
 	@Property("action")
 	private String action = new String();
 
-	@Expose
+	// @Expose
 	@Property("activity on")
 	private Date activityDate = new Date();
 
