@@ -51,11 +51,10 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		super(mongo, morphia, dbName);
 	}
 
-	public List<UserAccount> findAll() throws UnknownHostException 
-	{
-		//if decision permit = 0
-		//do
-		//else don't
+	public List<UserAccount> findAll() throws UnknownHostException {
+		// if decision permit = 0
+		// do
+		// else don't
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).asList();
 	}
@@ -66,9 +65,11 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	}
 
 	/**
-	 * This method will return a user account object that matches the username searched for
+	 * This method will return a user account object that matches the username
+	 * searched for
 	 * 
-	 * @param userName the user account name to search for 
+	 * @param userName
+	 *            the user account name to search for
 	 * @return the username if it exists or null if it does not
 	 */
 	public UserAccount findByUserName(String userName) {
@@ -76,41 +77,47 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		return ds.createQuery(UserAccount.class).field("username")
 				.equal(userName).get();
 	}
-	
+
 	/**
 	 * Method to set account name
-	 * @param author profile making the change
-	 * @param target profile being changed
-	 * @param newName the new name for the user
+	 * 
+	 * @param author
+	 *            profile making the change
+	 * @param target
+	 *            profile being changed
+	 * @param newName
+	 *            the new name for the user
 	 */
-	public void setAccountName(UserProfile author, UserProfile target, String newName) 
-	{
+	public void setAccountName(UserProfile author, UserProfile target,
+			String newName) {
 		Datastore ds = getDatastore();
-		if (!target.getUserAccount().getUserName().equals(newName)) 
-		{
+		if (!target.getUserAccount().getUserName().equals(newName)) {
 			audit = new AuditLog(author, "Edited user name", new Date());
 			target.addEntryToAuditLog(audit);
 			target.getUserAccount().setUserName(newName);
 			ds.save(target);
 		}
 	}
-	
+
 	/**
 	 * Method to set the password
-	 * @param author profile making the change
-	 * @param target profile the change will be made to
-	 * @param newPassword the new password
+	 * 
+	 * @param author
+	 *            profile making the change
+	 * @param target
+	 *            profile the change will be made to
+	 * @param newPassword
+	 *            the new password
 	 */
-	public void setPassword(UserProfile author, UserProfile target, String newPassword)
-	{
+	public void setPassword(UserProfile author, UserProfile target,
+			String newPassword) {
 		Datastore ds = getDatastore();
-		if (!target.getUserAccount().getPassword().equals(newPassword)) 
-		{
+		if (!target.getUserAccount().getPassword().equals(newPassword)) {
 			audit = new AuditLog(author, "Edited password", new Date());
 			target.addEntryToAuditLog(audit);
 			target.getUserAccount().setPassword(newPassword);
 			ds.save(target);
 		}
 	}
-	
+
 }

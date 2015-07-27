@@ -12,10 +12,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
 
 @Embedded
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
+// property = "id")
 public class AuditLog {
 	@Expose
-	@Reference(value = "user id", lazy = true)
+	@Reference(value = "user id" /* , lazy = true */)
 	private UserProfile userProfileId = new UserProfile();
 
 	@Expose

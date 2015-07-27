@@ -207,38 +207,95 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	}
 
 	public List<AuditLogInfo> findAllForUserAuditLogGrid(int offset, int limit,
-			String action, String auditedBy, String activityOnFrom,
-			String activityOnTo) throws ParseException, UnknownHostException {
+			ObjectId userId, String action, String auditedBy,
+			String activityOnFrom, String activityOnTo) throws ParseException,
+			UnknownHostException {
 		Datastore ds = getDatastore();
-		Query<AuditLogInfo> q = ds.createQuery(AuditLogInfo.class);
+		UserProfile q = ds.createQuery(UserProfile.class).field("_id")
+				.equal(userId).get();
+
+		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
+
+		if (q.getAuditLog() != null && q.getAuditLog().size() != 0) {
+			int rowTotal = q.getAuditLog().size();
+			if (q.getUserAccount().getAuditLog() != null
+					&& q.getUserAccount().getAuditLog().size() != 0) {
+
+				rowTotal += q.getUserAccount().getAuditLog().size();
+				for (AuditLog userAccountAudit : q.getUserAccount()
+						.getAuditLog()) {
+					AuditLogInfo userAuditLog = new AuditLogInfo();
+					userAuditLog.setRowTotal(rowTotal);
+					userAuditLog.setUserName(userAccountAudit
+							.getUserProfileId().getUserAccount().getUserName());
+					userAuditLog
+							.setUserFullName(userAccountAudit
+									.getUserProfileId().getFirstName()
+									+ " "
+									+ userAccountAudit.getUserProfileId()
+											.getMiddleName()
+									+ " "
+									+ userAccountAudit.getUserProfileId()
+											.getLastName());
+					userAuditLog.setAction(userAccountAudit.getAction());
+					userAuditLog.setActivityDate(userAccountAudit
+							.getActivityDate());
+
+					allAuditLogs.add(userAuditLog);
+				}
+
+			}
+
+			for (AuditLog userProfileAudit : q.getAuditLog()) {
+				AuditLogInfo userAuditLog = new AuditLogInfo();
+				userAuditLog.setRowTotal(rowTotal);
+				userAuditLog.setUserName(userProfileAudit.getUserProfileId()
+						.getUserAccount().getUserName());
+				userAuditLog.setUserFullName(userProfileAudit
+						.getUserProfileId().getFirstName()
+						+ " "
+						+ userProfileAudit.getUserProfileId().getMiddleName()
+						+ " "
+						+ userProfileAudit.getUserProfileId().getLastName());
+				userAuditLog.setAction(userProfileAudit.getAction());
+				userAuditLog
+						.setActivityDate(userProfileAudit.getActivityDate());
+
+				allAuditLogs.add(userAuditLog);
+			}
+
+		}
+		// Query<AuditLogInfo> q = ds.createQuery(AuditLogInfo.class);
 		// TODO Filter the AuditLog based on these Filters
-		if (action != null) {
-			q.field("first name").contains(action);
-		}
+		// if (action != null) {
+		// q.field("first name").contains(action);
+		// }
+		//
+		// if (auditedBy != null) {
+		// q.field("first name").contains(auditedBy);
+		// }
+		//
+		// SimpleDateFormat formatter = new
+		// SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// // Need to do Range for give 2 Dates
+		// if (activityOnFrom != null) {
+		//
+		// Date activityDateFrom = formatter.parse(activityOnFrom);
+		// q.field("startDate").greaterThanOrEq(activityDateFrom);
+		// }
+		//
+		// if (activityOnTo != null) {
+		// Date activityDateTo = formatter.parse(activityOnTo);
+		// q.field("startDate").lessThanOrEq(activityDateTo);
+		// }
+		//
+		// List<AuditLogInfo> userAuditLogs = q.offset(offset - 1).limit(limit)
+		// .asList();
 
-		if (auditedBy != null) {
-			q.field("first name").contains(auditedBy);
-		}
+//		List<AuditLogInfo> userAuditLogs = ds.createQuery(AuditLogInfo.class)
+		//				.offset(offset - 1).limit(limit).asList();
 
-		// Need to do Range for give 2 Dates
-		if (activityOnFrom != null) {
-			SimpleDateFormat formatter = new SimpleDateFormat(
-					"yyyy-MM-dd HH:mm:ss");
-			Date activityDateFrom = formatter.parse(activityOnFrom);
-			q.field("startDate").greaterThanOrEq(activityDateFrom);
-		}
-
-		if (activityOnTo != null) {
-			SimpleDateFormat formatter = new SimpleDateFormat(
-					"yyyy-MM-dd HH:mm:ss");
-			Date activityDateTo = formatter.parse(activityOnTo);
-			q.field("startDate").lessThanOrEq(activityDateTo);
-		}
-
-		List<AuditLogInfo> userAuditLogs = q.offset(offset - 1).limit(limit)
-				.asList();
-
-		return userAuditLogs;
+		return allAuditLogs;
 	}
 
 	private int countPIProposal(UserProfile userProfile) {

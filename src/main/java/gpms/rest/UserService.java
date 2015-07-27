@@ -5,6 +5,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.AuditLog;
 import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.JSONTansformer;
@@ -242,6 +243,7 @@ public class UserService {
 		List<AuditLogInfo> usersAuditLogs = new ArrayList<AuditLogInfo>();
 
 		int offset = 0, limit = 0;
+		String profileId = new String();
 		String action = new String();
 		String auditedBy = new String();
 		String activityOnFrom = new String();
@@ -256,6 +258,10 @@ public class UserService {
 
 		if (root != null && root.has("limit")) {
 			limit = root.get("limit").getIntValue();
+		}
+
+		if (root != null && root.has("userId")) {
+			profileId = root.get("userId").getTextValue();
 		}
 
 		JsonNode auditLogBindObj = root.get("auditLogBindObj");
@@ -276,8 +282,10 @@ public class UserService {
 			activityOnTo = auditLogBindObj.get("ActivityOnTo").getTextValue();
 		}
 
+		ObjectId userId = new ObjectId(profileId);
+
 		usersAuditLogs = userProfileDAO.findAllForUserAuditLogGrid(offset,
-				limit, action, auditedBy, activityOnFrom, activityOnTo);
+				limit, userId, action, auditedBy, activityOnFrom, activityOnTo);
 
 		// users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
 		// response = JSONTansformer.ConvertToJSON(users);

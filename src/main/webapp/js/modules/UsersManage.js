@@ -373,8 +373,8 @@ $(function() {
 			});
 		},
 
-		BindUserAuditLogGrid : function(action, auditedBy, activityOnFrom,
-				activityOnTo) {
+		BindUserAuditLogGrid : function(userId, action, auditedBy,
+				activityOnFrom, activityOnTo) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetUsersAuditLogList";
 			var offset_ = 1;
@@ -389,6 +389,7 @@ $(function() {
 				ActivityOnTo : activityOnTo,
 			};
 			this.config.data = {
+				userId : userId,
 				auditLogBindObj : auditLogBindObj
 			};
 			var data = this.config.data;
@@ -730,7 +731,8 @@ $(function() {
 				usersManage.ajaxCall(usersManage.config);
 
 				// TODO: Bind Audit Log Grid
-				usersManage.BindUserAuditLogGrid(null, null, null, null);
+				usersManage.BindUserAuditLogGrid(argus[0], null, null, null,
+						null);
 				$('#auditLogTab').show();
 				break;
 			default:

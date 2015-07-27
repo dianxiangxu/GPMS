@@ -30,7 +30,7 @@ public class Create100UsersTest {
 	UserAccountDAO newUserAccountDAO;
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
-	final int MAXIMUM_PROFILES = 100; // Adjust this to make more or less profiles
+	final int MAXIMUM_PROFILES = 2; // Adjust this to make more or less profiles
 									// with the generator.
 
 	@Before
@@ -59,6 +59,8 @@ public class Create100UsersTest {
 
 			newAccount.setUserName(userAccount);
 			newAccount.setPassword(userAccount);
+			newAccount.setAddedOn(new Date());
+
 			newProfile.setFirstName(firstName);
 
 			Random rand1 = new Random();
@@ -123,6 +125,9 @@ public class Create100UsersTest {
 			String strDOB = "1984-12-01";
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateDOB = formatter.parse(strDOB);
+
+			String newPassword = userAccount + "pwd";
+			newUserAccountDAO.setPassword(newProfile, newProfile, newPassword);
 
 			newUserProfileDAO.setDateOfBirth(newProfile, newProfile, dateDOB);
 			newUserProfileDAO.setGender(newProfile, newProfile, "Male");
