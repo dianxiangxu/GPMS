@@ -351,14 +351,6 @@ $(function() {
 					trigger : '3',
 					callMethod : 'usersManage.ActiveUser',
 					arguments : '10'
-				}, {
-					display : getLocale(gpmsUsersManagement, "Deactivate"),
-					name : 'deactivate',
-					enable : true,
-					_event : 'click',
-					trigger : '4',
-					callMethod : 'usersManage.DeactiveUser',
-					arguments : '10'
 				} ],
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
@@ -699,10 +691,6 @@ $(function() {
 		},
 
 		EditUser : function(tblID, argus) {
-			// 55b011b7af6e0429b078db57,userAccount0,firstName0
-			// lastName0,1,0,1,2015/07/22 03:57:11 PM,2015/07/22 03:57:11
-			// PM,firstName0 lastName0,Added work email
-			// alternatecontact@officialplace.com,No
 			switch (tblID) {
 			case "gdvUsers":
 				usersManage.ClearForm();
@@ -738,7 +726,6 @@ $(function() {
 				usersManage.config.ajaxCallMode = 8;
 				usersManage.ajaxCall(usersManage.config);
 
-				// TODO: Bind Audit Log Grid
 				usersManage.BindUserAuditLogGrid(argus[0], null, null, null,
 						null);
 				$('#auditLogTab').show();
@@ -751,7 +738,7 @@ $(function() {
 		DeleteUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
-				if (argus[1].toLowerCase() != "no") {
+				if (argus[1].toLowerCase() != "yes") {
 					usersManage.DeleteUserById(argus[0]);
 				} else {
 					csscody.alert('<h2>'
@@ -776,7 +763,7 @@ $(function() {
 
 		DeleteMultipleAttribute : function(_userIds) {
 			this.config.url = this.config.baseURL
-					+ "DeleteMultipleAttributesByAttributeID";
+					+ "DeleteMultipleUsersByUserID";
 			this.config.data = JSON2.stringify({
 				userIds : _userIds,
 				gpmsCommonObj : gpmsCommonObj()
@@ -796,33 +783,32 @@ $(function() {
 					+ getLocale(gpmsUsersManagement, "Delete Confirmation")
 					+ "</h2><p>"
 					+ getLocale(gpmsUsersManagement,
-							"Are you sure you want to delete this attribute?")
+							"Are you sure you want to delete this user?")
 					+ "</p>", properties);
 		},
 
 		ConfirmSingleDelete : function(user_id, event) {
 			if (event) {
-				usersManage.DeleteSingleAttribute(user_id);
+				usersManage.DeleteSingleUser(user_id);
 			}
 			return false;
 		},
 
-		DeleteSingleAttribute : function(_userId) {
-			this.config.url = this.config.baseURL
-					+ "DeleteAttributeByAttributeID";
+		DeleteSingleUser : function(_userId) {
+			this.config.url = this.config.baseURL + "DeleteUserByUserID";
 			this.config.data = JSON2.stringify({
-				userId : parseInt(_userId),
+				userId : _userId,
 				gpmsCommonObj : gpmsCommonObj()
 			});
 			this.config.ajaxCallMode = 5;
 			this.ajaxCall(this.config);
 		},
 
-		ActivateAttribute : function(_userId, _isActive) {
+		ActivateUser : function(_userId, _isActive) {
 			this.config.url = this.config.baseURL
-					+ "UpdateAttributeIsActiveByAttributeID";
+					+ "UpdateUserIsDeletedByUserID";
 			this.config.data = JSON2.stringify({
-				userId : parseInt(_userId),
+				userId : _userId,
 				gpmsCommonObj : gpmsCommonObj(),
 				isActive : _isActive
 			});
@@ -830,31 +816,11 @@ $(function() {
 			this.ajaxCall(this.config);
 			return false;
 		},
-		DeactiveUser : function(tblID, argus) {
-			switch (tblID) {
-			case "gdvUsers":
-				if (argus[3].toLowerCase() != "yes") {
-					usersManage.ActivateAttribute(argus[0], false);
-				} else {
-					csscody
-							.alert('<h2>'
-									+ getLocale(gpmsUsersManagement,
-											"Information Alert")
-									+ '</h2><p>'
-									+ getLocale(gpmsUsersManagement,
-											"Sorry! System attribute can not be deactivated.")
-									+ '</p>');
-				}
-				break;
-			default:
-				break;
-			}
-		},
 		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
 				if (argus[3].toLowerCase() != "yes") {
-					usersManage.ActivateAttribute(argus[0], true);
+					usersManage.ActivateUser(argus[0], true);
 				} else {
 					csscody
 							.alert('<h2>'
