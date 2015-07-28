@@ -185,7 +185,7 @@ $(function() {
 			});
 			$('#txtUserName').removeAttr('disabled');
 
-			$(".AddOption").val("[+]Add");
+			$(".AddOption").val("[+] Add");
 
 			rowIndex = 0;
 			$("#dataTable tbody>tr:gt(0)").remove();
@@ -231,7 +231,7 @@ $(function() {
 					cssclass : 'cssClassHeadCheckBox',
 					coltype : 'checkbox',
 					align : 'center',
-					checkFor : '8', // this is count from 0 column index
+					checkFor : '10', // this is count from 0 column index
 					elemClass : 'attrChkbox',
 					elemDefault : false,
 					controlclass : 'attribHeaderChkbox'
@@ -465,7 +465,7 @@ $(function() {
 							function(i, value) {
 								// alert(index + " :: " +
 								// value['positionTitle']);
-								var btnOption = "[+]Add";
+								var btnOption = "[+] Add";
 								var btnName = "AddMore";
 								if (i > 0) {
 									btnOption = "Delete";
@@ -819,17 +819,17 @@ $(function() {
 		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
-				if (argus[3].toLowerCase() != "yes") {
+				alert(argus[0]);
+				if (argus[1].toLowerCase() != "no") {
 					usersManage.ActivateUser(argus[0], true);
 				} else {
-					csscody
-							.alert('<h2>'
-									+ getLocale(gpmsUsersManagement,
-											"Information Alert")
-									+ '</h2><p>'
-									+ getLocale(gpmsUsersManagement,
-											"Sorry! System attribute can not be activated.")
-									+ '</p>');
+					csscody.alert('<h2>'
+							+ getLocale(gpmsUsersManagement,
+									"Information Alert")
+							+ '</h2><p>'
+							+ getLocale(gpmsUsersManagement,
+									"Sorry! this user is already active.")
+							+ '</p>');
 				}
 				break;
 			default:

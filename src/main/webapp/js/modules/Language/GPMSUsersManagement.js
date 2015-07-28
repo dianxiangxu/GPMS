@@ -64,9 +64,14 @@
 	'- Separate each file extensions with space' : '- Separate each file extensions with space',
 	'Sorry! System attribute can not be updated.' : 'Sorry! System attribute can not be updated.',
 	'Sorry! System attribute can not be deleted.' : 'Sorry! System attribute can not be deleted.',
-	"Are you sure you want to delete this user?" : "Are you sure you want to delete this user?",
+
 	'Sorry! System attribute can not be deactivated.' : 'Sorry! System attribute can not be deactivated.',
 	'Sorry! System attribute can not be activated.' : 'Sorry! System attribute can not be activated.',
+
+	// Used
+	"Are you sure you want to delete this user?" : "Are you sure you want to delete this user?",
+	'Sorry! this user is already deleted.' : 'Sorry! this user is already deleted.',
+	'Sorry! this user is already active.' : 'Sorry! this user is already active.',
 
 	'Please enter attribute name.' : 'Please enter attribute name.',
 	'Please enter unique attribute name. ' : 'Please enter unique attribute name. ',
