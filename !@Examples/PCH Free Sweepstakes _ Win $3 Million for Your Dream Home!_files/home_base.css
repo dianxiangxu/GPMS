@@ -1,0 +1,417 @@
+/* CSS Document */
+
+body
+{
+	color:#000;	
+    font-size: 12px;
+	font-family:Arial,Helvetica,sans-serif;
+	padding: 0 0 20px;
+	background-color:#fff;
+}
+
+.regNew .bodyWrap {
+	background: url("../images/main_background3.jpg") repeat-x scroll 0 0px #fff;
+}
+.regNew .headline {
+	height: 50px;
+}
+.regReturn .headline {
+	height: 50px;
+}
+/*#greyLogo {
+	padding:10px 0 0 20px;
+}*/
+
+#mainWrap{
+	width: 1000px;
+	margin: 0 auto;
+	background:url("../images/main_background.jpg") no-repeat scroll 0 0 #fff;
+}
+
+
+
+*+html #mainWrap {
+	width:949px;
+}
+
+.regReturn #mainWrap {
+	width:610px;
+	margin-top:13px;
+	background:none;
+	
+}
+.top {
+	background:url("../images/top.png") no-repeat scroll 0 0 transparent;
+	width: 610px;
+	height: 32px;
+}
+.bottom {	
+	background:url("../images/bottom.png") no-repeat scroll 0 0 transparent;
+	width: 610px;
+	height: 32px;
+}
+.regReturn .bgWrap {
+	min-height:849px;
+	background: transparent url("../images/middle.png") repeat-y scroll 0 0;
+	padding: 0 21px;
+}
+
+#contestWrap{
+	float:left;
+	min-height:600px;
+}
+
+.regReturn #contestWrap{
+	float:none;
+	background:url("../images/promo_bg.jpg") no-repeat scroll 0 0 transparent;
+	text-align:center;
+	min-height:663px;
+}
+
+.columnLeft {
+	float: left;
+	width: 602px;
+}
+.columnRight {
+	 float: right;         
+	 width: 363px;
+}
+
+*+html #regCnt {
+	padding-right:50px !important;
+}
+
+#logo {
+	padding: 20px 0 0 16px;
+    text-align: left;
+}
+
+.regReturn #logo {
+	padding-top:0px;
+	margin-top:-2px;
+}
+
+#promoWrap{		
+	margin: 22px 0 0 19px;
+    text-align: left;
+}
+
+.regReturn #promoWrap {
+	padding:0;
+	margin:0;
+}
+
+#red-txt1{
+	color: #da2502;
+    font-family: open sans;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 1px;
+    text-align: center;
+}
+
+#red-txt1 h1{
+	font-size:55px;
+	font-weight:900;
+}
+
+.regReturn #red-txt1 {
+	font-size: 14px;
+    padding-top: 12px;
+	font-weight: bold;
+	word-spacing: -1px;
+}
+
+#redTxt {
+	margin: 15px 4px 0 0;
+}
+
+
+
+.greenLogo {
+	margin:48px 0 0 97px;
+}
+
+.regReturn .greenLogo {
+	margin:22px 0 0 97px;
+}
+
+.red-txt3 {
+	color:#644731;
+	font-size:14px;
+	font-weight:bold;
+	font-family:'Open Sans', sans-serif;
+	text-align:center;
+	line-height:17px;
+	margin:54px 73px 0;
+}
+
+.regReturn .red-txt3 {
+	color: #644731;
+    font-size: 19px;
+    line-height: 24px;
+    margin: 24px 0 0;
+}
+
+.regReturn .red-txt3.red-txt6 {
+	color: #FFFF33;
+    font-size: 16px;
+    margin: 5px 0 0;
+}
+
+#red-txt2 {
+  	color: #da2502;
+    font-family: open sans;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 800;
+    margin: -5px 0 0 -42px;
+    padding-top: 2px;
+    text-align: center;
+
+}
+
+#red-txt2 b {
+	font-size:23px;
+}
+
+#red-txt2 sup {
+	vertical-align:text-top;
+}
+#red-txt2  .nbcLogo {
+	background: url("../images/nbc_logo.png") no-repeat scroll 0 0 transparent;
+	display: inline-block;
+	width: 28px;
+	height: 18px;
+}
+.regReturn #red-txt2 {
+    font-size: 13px;
+    margin: -5px 0 0;
+}
+
+.regReturn #red-txt2 b{
+	font-size:15px;
+}
+
+#red-txt4 {
+	color:#f5f57b;
+	padding-top:5px;
+	font-family: 'Open Sans Condensed', sans-serif;	
+	font-size:28px;
+	font-weight:900;
+	text-align:center;
+
+}
+
+.regReturn #red-txt4,.regReturn #red-txt4 a  {
+	color:#666666;
+	font-size:12px;
+	font-family:Arial;
+	text-shadow:none;
+	font-weight:400;
+	padding-top:393px;
+}
+
+.regReturn #red-txt5 {
+	color: #da2502;
+    font-family: arial;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0;
+    text-align: center;
+}
+
+#regCnt h1{
+    color: #000000;
+    text-align: right;
+    padding:4px 19px 0 0;
+    font-size: 16px;
+}
+
+#regCnt h1 span{ 
+	font-size: 18px;
+	color:#b2b2b2;
+ }
+
+ .regNew .contestCopy {
+	text-align:left;
+	padding: 5px 0 3px 3px;
+	font-weight: bold;
+}
+
+.contestCopy, .contestCopy a{  
+	color: #000;
+}
+
+.contestCopy strong {
+	display:block;
+	font-size:15px;
+	text-align:center;
+	color:#ce0200;
+	margin:2px 0 2px -34px;
+}
+
+#regCnt{    
+	color: #FFFFFF;	
+	padding: 10px 0 0 20px;
+}
+
+/** Dont delete**/
+#pch-form-cnt label, .pch-form-cnt label, 
+.regNew #spectrumRegForm.reg-form, .regNew #spectrumRegForm.reg-form .rememberMe {
+	color: #000 !important;
+}
+
+.pch-form-cnt{
+	padding:0;
+}
+
+#gvwyNo{
+	color: #000;
+    float: right;
+    font-size: 10px;
+	margin:-14px 27px 0 0;
+}
+
+.regReturn #gvwyNo{
+    color: #da2502;
+    float: none;
+    font-size: 9px;
+    font-style: italic;
+    font-weight: bold;
+	text-align: right;
+    margin: 0px 86px 0 0;
+    padding: 0;
+}
+
+#continueButtonWrap {
+    position: relative;
+}
+
+
+.regReturn #continueButtonWrap {
+    padding: 22px 0 15px;
+}
+
+#buttonOptin {
+    left: 274px;
+    position: absolute;
+    top: 18px;
+}
+
+.regReturn #buttonOptin {
+	left:89px;
+	top:58px;
+}
+
+.submitWrap{
+	text-align:center;
+	margin:10px 0 0;
+}
+
+.regReturn .submitWrap {
+	margin-top:8px;
+}
+
+.submitWrap input{
+	margin:0 auto;
+	background: url("../images/Enter_to_win_million_dollars.png") no-repeat scroll 0 0 transparent;
+	width:307px;
+	height:86px;
+	border:0 none;
+	clear:both;
+	cursor:pointer;
+	display:block;
+	font-size:0;
+	line-height:1000px;
+	overflow:hidden;
+}
+
+#optinWrap{
+	clear:both;
+	color:#666666;
+}
+
+.regReturn #optinWrap{
+	padding-top:28px;
+}
+
+#optinWrap .SpectrumOptinList {
+	padding:10px 160px 0;
+}
+
+.regNew #optinWrap .SpectrumOptinList {
+	padding:20px 26px 0;
+}
+
+#optinWrap .SpectrumOptinList li {
+	background:none;
+	padding:10px 0;
+	min-height:15px;
+}
+
+#optinWrap .SpectrumOptinList a{
+	color:#666666;
+}
+
+.regReturn #optinWrap .SpectrumOptinList {
+	padding:0 42px;
+	margin-top:-25px;
+	
+}
+
+
+#disclosureBox {
+	width:610px;
+	padding:20px;
+	font-size:11px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#ff9999;
+	margin:5px auto;
+	border:1px solid #cd6363;
+}
+
+
+
+.regReturn #disclosureBox {
+	color:#5b5b5b;
+	border:1px solid #9c9c9c;
+	width:590px;
+	padding:16px 10px 16px;
+	
+}
+
+#disclosureBox h4 {
+	font-weight:bold;
+	font-size:12px;
+	text-align:center;
+	padding-bottom:10px;
+	text-transform:uppercase;
+}
+
+.disclaimersWrap{
+	width: 600px;
+	margin: 0 auto;
+	font-size:9px;
+	margin-top:9px;
+}
+
+.disclaimersWrap, .disclaimersWrap a {
+	color:#666666;
+}
+
+.regReturn .disclaimersWrap, .regReturn .disclaimersWrap a {
+	
+	color:#333;
+}
+
+
+.disclaimersWrap p{
+	text-align: center;	
+	padding: 0 0 5px;
+	font-size:11px;
+}
+
+.disclaimersWrap p.disclaimer {
+	font-size:9px;
+}

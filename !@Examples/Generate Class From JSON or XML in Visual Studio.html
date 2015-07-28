@@ -1,0 +1,1525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0096)http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+Generate Class From JSON or XML in Visual Studio
+</title> <title>Generate Class From JSON or XML in Visual Studio</title> <meta name="Keywords" content="json,JSON class,Visual Studio,xml,XML class"> <meta name="DESCRIPTION" content="This article is about a cool feature in Visual Studio that helps save the effort of a developer to generate class a structure from a JSON or XML string."> <meta name="Search.TopicType" content="kbArticle"> <meta name="Search.PublishDate" content="25 Jul 2015 12:00:00 GMT"> <meta name="Search.RevisedDate" content="25 Jul 2015 06:01:16 GMT"> <meta name="Search.UserRating" content="0%"> <meta name="CODE_LANGUAGE" content="C#"> <meta name="MS.LOCALE" content="en-US">  <meta name="Author" content="Pranay Rana"> <link rel="stylesheet" type="text/css" href="./Generate Class From JSON or XML in Visual Studio_files/csharp_articles_15062015.css"><link href="./Generate Class From JSON or XML in Visual Studio_files/responsive_19062015.css" rel="stylesheet" type="text/css"><link href="./Generate Class From JSON or XML in Visual Studio_files/SyntaxHighlighter.css" rel="stylesheet" type="text/css"><link rel="Shortcut Icon" href="http://www.c-sharpcorner.com/Images/McnIcon.ico"><meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(duration=.3)"><meta property="fb:app_id" content="440531902678919"> <script src="./Generate Class From JSON or XML in Visual Studio_files/cb=gapi.loaded_0" async=""></script><script src="./Generate Class From JSON or XML in Visual Studio_files/in.js"></script><script src="./Generate Class From JSON or XML in Visual Studio_files/widgets.js"></script><script type="text/javascript" async="" src="./Generate Class From JSON or XML in Visual Studio_files/client-plusone.js" gapi_processed="true"></script><script id="facebook-jssdk" async="" src="./Generate Class From JSON or XML in Visual Studio_files/sdk.js"></script><script type="text/javascript" async="" src="./Generate Class From JSON or XML in Visual Studio_files/ga.js"></script><script src="./Generate Class From JSON or XML in Visual Studio_files/jquery.TrendingNow_09032014.js"></script><script src="./Generate Class From JSON or XML in Visual Studio_files/MindcrackerJScript.js"></script><script src="./Generate Class From JSON or XML in Visual Studio_files/jquery.min.js" type="text/javascript"></script><style type="text/css"></style> <script type="text/javascript">
+var $j = jQuery.noConflict();
+$j(document).ready(function() {
+$j(".expand").click(function() {
+var thisBtn = $j(this);
+if (!thisBtn.hasClass('hideExpand')) {
+$j(this).addClass("hideExpand");
+$j(".innerArticleIcons").css("height", "36px");
+// var iconSCount = $j(".innerArticleIcons ul li a").length;
+var iconSCount = $j(".innerArticleIcons ul li a:visible").length;
+var innerArticlesWidth = iconSCount * 42;
+$j(".innerArticleIcons").animate({
+width: innerArticlesWidth,
+opacity: 1.0
+}, 1500);
+$j(".viewBar").animate({
+opacity: 0
+}, 1500);
+}
+else {
+$j(".innerArticleIcons").animate({
+width: "1px",
+opacity: 0.4
+}, 1500);
+setTimeout(function() {
+$j(".innerArticleIcons").css("height", "1px");
+}, 1500);
+$j(".viewBar").animate({
+opacity: 1
+}, 1500);
+$j(this).removeClass("hideExpand");
+}
+});
+});
+// Script for share popup window
+function popupwindowAtCenter(url, title, w, h) {
+var left = (screen.width / 2) - (w / 2);
+var top = (screen.height / 2) - (h / 2);
+return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+}
+</script> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><style type="text/css">.fancybox-margin{margin-right:0px;}</style><script src="./Generate Class From JSON or XML in Visual Studio_files/secureAnonymousFramework"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head> <body id="MasterBody" data-gclp-initialized="true" data-gistbox-initialized="true"> <form name="aspnetForm" method="post" action="http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/default.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm"> <div> <input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value=""> <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""> <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""> <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY1NDU2MTA1Mg9kFgJmDw8WDh4IQXV0aG9ySUQFCXByYW5heWFtch4NQ3VycmVudFJhdGluZwUBMB4GU3RhdHVzBQEyHgtIYXNGZWVkYmFja2geCUFydGljbGVJRAUkYjJjOWRlZTYtODJkNS00NmVlLWFmZDQtMWJkNDc5OGNkN2NkHg9NaW5vckNhdGVnb3J5SWQFAzI5Nh4OVHdpdHRlckhhbmRsZXJlZBYCAgEPZBYkZg9kFggCAQ9kFgYCAQ8WAh4HVmlzaWJsZWdkAgMPDxYEHgtOYXZpZ2F0ZVVybAVLaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9Vc2VyUmVnaXN0cmF0aW9uL1VzZXJSZWdpc3RyYXRpb24uYXNweD9jaGVjaz1yHwdnZGQCFQ8PFgIfB2hkZAIDD2QWAgIBDxYCHgtfIUl0ZW1Db3VudAIBFgJmD2QWAmYPFQJLaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9OZXdzLzQ4NTcvMjAxNS1oYWxmLXllYXJseS1tdnBzLWFubm91bmNlZC5hc3B4HjIwMTUgRmlyc3QgSGFsZiBNVlBzIEFubm91bmNlZGQCBQ9kFgQCAQ8WAh4EaHJlZgUcaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbWQCAw9kFgICAQ8PFgIfB2hkZAIHD2QWAgIBD2QWAgIBDzwrAAkBAA8WBB4IRGF0YUtleXMWAB8JAlZkFqwBZg9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMzcvbmV0LTIwMTUuYXNweAkuTkVUIDIwMTVkAgEPZBYCZg8VAjVodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNTcvbmV0LWFzc2VtYmxpZXMuYXNweA8uTkVUIEFzc2VtYmxpZXNkAgIPZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTMxL2Fkby1uZXQuYXNweAdBRE8uTkVUZAIDD2QWAmYPFQIsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE3Ni9hamF4LmFzcHgEQUpBWGQCBA9kFgJmDxUCPGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS81Ni9hbGdvcml0aG1zLWluLUMtU2hhcnAuYXNweBBBbGdvcml0aG1zIGluIEMjZAIFD2QWAmYPFQI7aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI0Ny9hbmRyb2lkLXByb2dyYW1taW5nLmFzcHgTQW5kcm9pZCBQcm9ncmFtbWluZ2QCBg9kFgJmDxUCMWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMDIvYW5ndWxhcmpzLmFzcHgJQW5ndWxhckpTZAIHD2QWAmYPFQI0aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNi9hcmNoaXRlY3R1cmUuYXNweAxBcmNoaXRlY3R1cmVkAggPZBYCZg8VAjtodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjI0L0FzcC1OZXQtcHJvZ3JhbW1pbmcuYXNweBNBU1AuTkVUIFByb2dyYW1taW5nZAIJD2QWAmYPFQItaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzMi9henVyZS5hc3B4BUF6dXJlZAIKD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNC9iaWctZGF0YS5hc3B4CEJpZyBEYXRhZAILD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwOS9idXNpbmVzcy5hc3B4CEJ1c2luZXNzZAIMD2QWAmYPFQI7aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0NC9DLVNoYXJwLXByb2dyYW1taW5nLmFzcHgOQyMgUHJvZ3JhbW1pbmdkAg0PZBYCZg8VAjFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjgyL2MtY3BwLW1mYy5hc3B4C0MsIEMrKywgTUZDZAIOD2QWAmYPFQI1aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzOC9jYXJlZXItYWR2aWNlLmFzcHgNQ2FyZWVyIEFkdmljZWQCDw9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yODAvY2hhcHRlcnMuYXNweAhDaGFwdGVyc2QCEA9kFgJmDxUCLWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMjQvY2xvdWQuYXNweAVDbG91ZGQCEQ9kFgJmDxUCPGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82OC9jb2RpbmctYmVzdC1wcmFjdGljZXMuYXNweBVDb2RpbmcgQmVzdCBQcmFjdGljZXNkAhIPZBYCZg8VAjNodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNjAvY3J5cHRvZ3JhcGh5LmFzcHgMQ3J5cHRvZ3JhcGh5ZAITD2QWAmYPFQI3aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE3MC9jdXJyZW50LWFmZmFpcnMuYXNweA9DdXJyZW50IEFmZmFpcnNkAhQPZBYCZg8VAjVodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjIwL2RhdGFiYXNlcy1kYmEuYXNweA9EYXRhYmFzZXMgJiBEQkFkAhUPZBYCZg8VAkBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNjIvZGVzaWduLXBhdHRlcm5zLXByYWN0aWNlcy5hc3B4G0Rlc2lnbiBQYXR0ZXJucyAmIFByYWN0aWNlc2QCFg9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTMvZHluYW1pY3MtY3JtLmFzcHgMRHluYW1pY3MgQ1JNZAIXD2QWAmYPFQI+aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE1OS9lbnRlcnByaXNlLWRldmVsb3BtZW50LmFzcHgWRW50ZXJwcmlzZSBEZXZlbG9wbWVudGQCGA9kFgJmDxUCQGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82NS9nYW1lcy1wcm9ncmFtbWluZy1DLVNoYXJwLmFzcHgUR2FtZXMgUHJvZ3JhbW1pbmcgQyNkAhkPZBYCZg8VAjpodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzIzL2dvb2dsZS1kZXZlbG9wbWVudC5hc3B4Ekdvb2dsZSBEZXZlbG9wbWVudGQCGg9kFgJmDxUCN2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTQvZ3JhcGhpY3MtZGVzaWduLmFzcHgPR3JhcGhpY3MgRGVzaWduZAIbD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIyMS9oYXJkd2FyZS5hc3B4CEhhcmR3YXJlZAIcD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxOC9ob2xvbGVucy5hc3B4CEhvbG9MZW5zZAIdD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0My9ob3ctZG8taS5hc3B4CUhvdyBkbyBJIGQCHg9kFgJmDxUCLmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNDQvaHRtbC01LmFzcHgGSFRNTCA1ZAIfD2QWAmYPFQIzaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzY2L2ludGVybmV0LXdlYi5hc3B4DkludGVybmV0ICYgV2ViZAIgD2QWAmYPFQI6aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMyMC9pbnRlcm5ldC1vZi10aGluZ3MuYXNweBJJbnRlcm5ldCBvZiBUaGluZ3NkAiEPZBYCZg8VAitodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjM1L2lvcy5hc3B4A2lPU2QCIg9kFgJmDxUCLGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNTgvamF2YS5hc3B4BEphdmFkAiMPZBYCZg8VAjJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjMzL2phdmFzY3JpcHQuYXNweApKYXZhU2NyaXB0ZAIkD2QWAmYPFQIuaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzNi9qcXVlcnkuYXNweAZKUXVlcnlkAiUPZBYCZg8VAjBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzAwL2tub2Nrb3V0LmFzcHgIS25vY2tvdXRkAiYPZBYCZg8VAjJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjc4L2xlYWRlcnNoaXAuYXNweApMZWFkZXJzaGlwZAInD2QWAmYPFQIxaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE4Ni9sZWFybi1uZXQuYXNweApMZWFybiAuTkVUZAIoD2QWAmYPFQIsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE4MC9saW5xLmFzcHgETElOUWQCKQ9kFgJmDxUCOGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yODgvbWljcm9zb2Z0LW9mZmljZS5hc3B4EE1pY3Jvc29mdCBPZmZpY2VkAioPZBYCZg8VAjdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjQ1L21pY3Jvc29mdC1waG9uZS5hc3B4D01pY3Jvc29mdCBQaG9uZWQCKw9kFgJmDxUCLWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82Ny9tb2JpbGUuYXNweAZNb2JpbGVkAiwPZBYCZg8VAjZodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTQ5L211bHRpdGhyZWFkaW5nLmFzcHgOTXVsdGl0aHJlYWRpbmdkAi0PZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzA0L25vZGUtanMuYXNweAdOb2RlLmpzZAIuD2QWAmYPFQI6aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0Ni9vZmZpY2UtZGV2ZWxvcG1lbnQuYXNweBJPZmZpY2UgRGV2ZWxvcG1lbnRkAi8PZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjA4L29vcG9vZC5hc3B4B09PUC9PT0RkAjAPZBYCZg8VAjNodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjc2L29wZW4tc291cmNlLmFzcHgLT3BlbiBTb3VyY2VkAjEPZBYCZg8VAjlodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjIyL29wZXJhdGluZy1zeXN0ZW1zLmFzcHgRT3BlcmF0aW5nIFN5c3RlbXNkAjIPZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjk5L29yYWNsZS5hc3B4Bk9yYWNsZWQCMw9kFgJmDxUCM2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTUvb3V0c291cmNpbmcuYXNweAtPdXRzb3VyY2luZ2QCNA9kFgJmDxUCMmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTEvcGhpbG9zb3BoeS5hc3B4ClBoaWxvc29waHlkAjUPZBYCZg8VAitodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjc5L3BocC5hc3B4A1BIUGQCNg9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMDgvcG93ZXItYmkuYXNweAhQb3dlciBCSWQCNw9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yODMvcHJvZHVjdHMuYXNweAhQcm9kdWN0c2QCOA9kFgJmDxUCOmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xOTgvcHJvamVjdC1tYW5hZ2VtZW50LmFzcHgSUHJvamVjdCBNYW5hZ2VtZW50ZAI5D2QWAmYPFQIuaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMyMi9weXRob24uYXNweAZQeXRob25kAjoPZBYCZg8VAj1odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTg4L3JlcG9ydHMtdXNpbmctQy1TaGFycC5hc3B4EFJlcG9ydHMgdXNpbmcgQyNkAjsPZBYCZg8VAjJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzE3L3NhbGVzZm9yY2UuYXNweApTYWxlc2ZvcmNlZAI8D2QWAmYPFQI2aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzcxL3NlY3VyaXR5LWluLW5ldC5hc3B4EFNlY3VyaXR5IGluIC5ORVRkAj0PZBYCZg8VAjJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTgzL3NoYXJlcG9pbnQuYXNweApTaGFyZVBvaW50ZAI+D2QWAmYPFQIvaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwMS9zaWduYWxyLmFzcHgHU2lnbmFsUmQCPw9kFgJmDxUCM2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMTAvc2lsdmVybGlnaHQuYXNweAtTaWx2ZXJsaWdodGQCQA9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMTYvc3FsLWxhbmd1YWdlLmFzcHgMU1FMIExhbmd1YWdlZAJBD2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI5Ny9zcWwtc2VydmVyLmFzcHgKU1FMIFNlcnZlcmQCQg9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTIvc3RhcnR1cHMuYXNweAhTdGFydHVwc2QCQw9kFgJmDxUCOWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xOTkvc3RyaW5nLWluLUMtU2hhcnAuYXNweAxTdHJpbmcgaW4gQyNkAkQPZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTc0L3Rlc3RpbmcuYXNweAdUZXN0aW5nZAJFD2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI5MS90eXBlc2NyaXB0LmFzcHgKVHlwZVNjcmlwdGQCRg9kFgJmDxUCPmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xMzgvdW5pdmVyc2FsLXdpbmRvd3MtYXBwcy5hc3B4FlVuaXZlcnNhbCBXaW5kb3dzIEFwcHNkAkcPZBYCZg8VAjhodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjc3L3Zpc3VhbC1iYXNpYy1uZXQuYXNweBFWaXN1YWwgQmFzaWMgLk5FVGQCSA9kFgJmDxUCNWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTYvdmlzdWFsLXN0dWRpby5hc3B4DVZpc3VhbCBTdHVkaW9kAkkPZBYCZg8VAitodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTkyL3djZi5hc3B4A1dDRmQCSg9kFgJmDxUCMWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMDcvd2VhcmFibGVzLmFzcHgJV2VhcmFibGVzZAJLD2QWAmYPFQI3aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE1NC93ZWItZGV2ZWxvcG1lbnQuYXNweA9XZWIgRGV2ZWxvcG1lbnRkAkwPZBYCZg8VAjRodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTMzL3dlYi1zZXJ2aWNlcy5hc3B4DFdlYiBTZXJ2aWNlc2QCTQ9kFgJmDxUCMmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNzUvd2luZG93cy0xMC5hc3B4CldpbmRvd3MgMTBkAk4PZBYCZg8VAjRodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNzYvd2luZG93cy1mb3Jtcy5hc3B4DVdpbmRvd3MgRm9ybXNkAk8PZBYCZg8VAjpodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjQzL3dpbmRvd3MtcG93ZXJzaGVsbC5hc3B4EldpbmRvd3MgUG93ZXJTaGVsbGQCUA9kFgJmDxUCO2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTIvd2luZG93cy1zZXJ2ZXItMjAxMi5hc3B4E1dpbmRvd3MgU2VydmVyIDIwMTJkAlEPZBYCZg8VAjdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNzgvd2luZG93cy1zZXJ2aWNlcy5hc3B4EFdpbmRvd3MgU2VydmljZXNkAlIPZBYCZg8VAitodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTkxL3dwZi5hc3B4A1dQRmQCUw9kFgJmDxUCL2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTkveGFtYXJpbi5hc3B4B1hhbWFyaW5kAlQPZBYCZg8VAixodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTkwL3hhbWwuYXNweARYQU1MZAJVD2QWAmYPFQIqaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzc5L3htbC5hc3B4A1hNTGQCAQ9kFgICAQ8WAh8JAgoWFGYPZBYCZg8VAk5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvYjZjYjRiL3F1YWxpdGllcy1vZi1hLXF1YWxpdHktYW5hbHlzdC8eUXVhbGl0aWVzIG9mIGEgUXVhbGl0eSBBbmFseXN0ZAIBD2QWAmYPFQJbaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2I2Y2I0Yi9za2lsbC1zZXRzLXRoYXQtY2FuLWV2ZW4ta2lsbC1xYS1wcm9mZXNzaW9uLydTa2lsbCBTZXRzIFRoYXQgQ2FuIEV2ZW4gS2lsbCBRQSBQciAuLi5kAgIPZBYCZg8VAmJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvZjI4MjNlL2FuZ3VsYXJqcy1jb21wYXJpc29uLXdpdGgtYmFja2JvbmUta25vY2tvdXQtcGFydC0zLydBbmd1bGFySlMgQ29tcGFyaXNvbiB3aXRoIEJhY2tib25lLCAuLi5kAgMPZBYCZg8VAk1odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvYjZjYjRiL2hvdy10by10ZXN0LWEtY3JtLWFwcGxpY2F0aW9uLx1Ib3cgdG8gVGVzdCBhIENSTSBBcHBsaWNhdGlvbmQCBA9kFgJmDxUCYWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9iNmNiNGIvd2h5LWRldmVsb3BlcnMtc2hvdWxkLW5vdC10ZXN0LXRoZWlyLW93bi1zb2Z0d2FyZS8nV2h5IERldmVsb3BlcnMgU2hvdWxkIE5vdCBUZXN0IFRoZWkgLi4uZAIFD2QWAmYPFQJoaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2E1NDcwZC9pbnRyb2R1Y3Rpb24tdG8tYmlnLWRhdGEtYW5hbHl0aWNzLXVzaW5nLW1pY3Jvc29mdC1henVyZS8nSW50cm9kdWN0aW9uIHRvIEJpZyBEYXRhIEFuYWx5dGljcyAgLi4uZAIGD2QWAmYPFQJSaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2I2Y2I0Yi9lbnRlcnByaXNlLWFwcGxpY2F0aW9uLWludGVncmF0aW9uLyJFbnRlcnByaXNlIEFwcGxpY2F0aW9uIEludGVncmF0aW9uZAIHD2QWAmYPFQJraHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2FzbWFiZWdhbS9tdmMtYW5ndWxhcmpzLWNydWQtdXNpbmctd2ViLWFwaS0yLXdpdGgtc3RvcmVkLXByb2NlZHVyZS8nTVZDLCBBbmd1bGFySlMgQ1JVRCBVc2luZyBXRUIgQVBJIDIgLi4uZAIID2QWAmYPFQJsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2JkNmM2Ny9pbnN0YWxsLXdvcmRwcmVzcy1hbmQtaWlzLXNlcnZlci11c2luZy13ZWItcGxhdGZvcm0taW5zdGFsbGUvJ0luc3RhbGwgV29yZHByZXNzIGFuZCBJSVMgU2VydmVyIFVzIC4uLmQCCQ9kFgJmDxUCQWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS83NWE0OGYvcHl0aG9uLWRhdGEtdHlwZXMvEVB5dGhvbiBEYXRhIFR5cGVzZAICD2QWAgIBDw8WBh4IQ3NzQ2xhc3MFG3Nwcml0ZSBkZXRhaWxzIGludGVybWVkaWF0ZR4HVG9vbFRpcAUMSW50ZXJtZWRpYXRlHgRfIVNCAgJkZAIFDxYCHwoFNWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTYvdmlzdWFsLXN0dWRpby5hc3B4FgICAQ8PFgQeCEltYWdlVXJsBScvVXBsb2FkRmlsZS9NaW5vckNhdEltYWdlcy8wNjEyMzFBTS5wbmcfDQUNVmlzdWFsIFN0dWRpb2RkAgYPFgIeCWlubmVyaHRtbAUwR2VuZXJhdGUgQ2xhc3MgRnJvbSBKU09OIG9yIFhNTCBpbiBWaXN1YWwgU3R1ZGlvZAIHDxYEHwoFP2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vYXV0aG9ycy9wcmFuYXlhbXIvcHJhbmF5LXJhbmEuYXNweB8QBQtQcmFuYXkgUmFuYWQCCA8PFgIeBFRleHQFDEp1bCAyNSwgMjAxNWRkAgkPFgIfEAWmBDxhIGNsYXNzPSdMaW5rTm9ybWFsR3JheUxpZ2h0JyBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL3RhZ3MvanNvbic+anNvbjwvYT4sIDxhIGNsYXNzPSdMaW5rTm9ybWFsR3JheUxpZ2h0JyBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL3RhZ3MvSlNPTi1jbGFzcyc+SlNPTiBjbGFzczwvYT4sIDxhIGNsYXNzPSdMaW5rTm9ybWFsR3JheUxpZ2h0JyBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL3RhZ3MvVmlzdWFsLVN0dWRpbyc+VmlzdWFsIFN0dWRpbzwvYT4sIDxhIGNsYXNzPSdMaW5rTm9ybWFsR3JheUxpZ2h0JyBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL3RhZ3MveG1sJz54bWw8L2E+LCA8YSBjbGFzcz0nTGlua05vcm1hbEdyYXlMaWdodCcgaHJlZj0naHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS90YWdzL1hNTC1jbGFzcyc+WE1MIGNsYXNzPC9hPiwgPGEgY2xhc3M9J0xpbmtOb3JtYWxHcmF5TGlnaHQnIGhyZWY9J2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vdGFncy8nPjwvYT5kAgoPFgIfEAWYAVRoaXMgYXJ0aWNsZSBpcyBhYm91dCBhIGNvb2wgZmVhdHVyZSBpbiBWaXN1YWwgU3R1ZGlvIHRoYXQgaGVscHMgc2F2ZSB0aGUgZWZmb3J0IG9mIGEgZGV2ZWxvcGVyIHRvIGdlbmVyYXRlIGNsYXNzIGEgc3RydWN0dXJlIGZyb20gYSBKU09OIG9yIFhNTCBzdHJpbmcuZAIMDxYCHxAFHjEuNDxzcGFuIGNsYXNzPSd1bml0Jz5rPC9zcGFuPmQCDQ8PFgIfEQUBMGRkAhQPDxYGHwwFI25ld1Nwcml0ZUljb25zIG1ha2VfYXJ0aWNsZV9mZWF0dXJlHw0FGk1ha2UgdGhpcyBhcnRpY2xlIGZlYXR1cmVkHw4CAmRkAhkPDxYCHw0FDkRpbmVzaCBCZW5pd2FsZGQCGw8WAh4Fc3R5bGUFL21hcmdpbi10b3A6MTBweDttYXJnaW4tYm90dG9tOjBweDtkaXNwbGF5Om5vbmU7FgICAQ8WAh8HaGQCHQ9kFgICAw8WAh8HaGQCHg8PFgIeCEF1dGhvcklkBQlwcmFuYXlhbXJkFhpmDxYCHwoFP2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vYXV0aG9ycy9wcmFuYXlhbXIvcHJhbmF5LXJhbmEuYXNweBYCAgEPFgIeA3NyYwVBaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL0F1dGhvckltYWdlL3ByYW5heWFtci5qcGdkAgEPFgQfEAULUHJhbmF5IFJhbmEfCgU/aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9hdXRob3JzL3ByYW5heWFtci9wcmFuYXktcmFuYS5hc3B4ZAICDxYCHxAFzgJIZXksIEkgYW0gUHJhbmF5IFJhbmEsIHdvcmtpbmcgYXMgYSBEZXZsb3BlciBpbiBNTkMuJm5ic3A7IFdlYiBkZXZlbG9wbWVudCBpbiBBc3AuTmV0IHdpdGggQyMgYW5kIE1TIHNxbCBzZXJ2ZXIgYXJlIHRoZSBleHBlcmllbmNlIHRvb2xzIHRoYXQgSSBoYXZlIGhhZCBmb3IgdGhlIHBhc3QgOC4yIHllYXJzIG5vdy5Gb3IgbWUgZGVmLiBvZiBwcm9ncmFtbWluZyBpcyA6IFByb2dyYW1tLi4uIDxhIGhyZWY9J2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vYXV0aG9ycy9wcmFuYXlhbXIvcHJhbmF5LXJhbmEuYXNweCcgY2xhc3M9J0xpbmtOb3JtYWxCbHVlJz5SZWFkIG1vcmU8L2E+ZAIDD2QWAgIBDxYEHwoFHWh0dHA6Ly9wcmFuYXlhbXIuYmxvZ3Nwb3QuY29tHxAFHWh0dHA6Ly9wcmFuYXlhbXIuYmxvZ3Nwb3QuY29tZAIEDxYEHgV0aXRsZQUHTm90IFNldB4FY2xhc3MFBm5vdFNldGQCBQ8WAh8KBSJodHRwczovL3d3dy5mYWNlYm9vay5jb20vcHJhbmF5YW1yZAIGDxYCHwoFT2h0dHA6Ly93d3cubGlua2VkaW4uY29tL3Byb2ZpbGUvdmlldz9pZD0yMTg1Mjc1NyZ0cms9bmF2X3Jlc3BvbnNpdmVfdGFiX3Byb2ZpbGVkAggPFgIfEAUDMjgzZAIJDxYCHxAFBjEwMC4za2QCCg8WBB8WBQxtZWRhbCBCcm9uemUfFQUNQnJvbnplIE1lbWJlcmQCCw8WBB8WBQxjb3VudCBCcm9uemUfEAUGQnJvbnplZAIMDxYEHxYFC2xpXzMgbm90U2V0HxUFIEMjIENvcm5lciBNVlAgLSBOb3QgYXdhcmRlZCB5ZXQuZAIND2QWAmYPFgIfEAUBMWQCIA8PFgYeCUNvbnRlbnRJZAUkYjJjOWRlZTYtODJkNS00NmVlLWFmZDQtMWJkNDc5OGNkN2NkHg1Db250ZW50VXNlcklkBQlwcmFuYXlhbXIeDENvbnRlbnRUaXRsZQUwR2VuZXJhdGUgQ2xhc3MgRnJvbSBKU09OIG9yIFhNTCBpbiBWaXN1YWwgU3R1ZGlvZBYEZg9kFgICAQ8QDxYCHwdoZGRkZAIBDxYCHwdnZAIhD2QWAgIBD2QWAgICD2QWAgIBDw8WAh4LXyFEYXRhQm91bmRnZGRkWe8578wp1oAjIECXd1UHgLuoUH4="> </div> <script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+theForm.__EVENTTARGET.value = eventTarget;
+theForm.__EVENTARGUMENT.value = eventArgument;
+theForm.submit();
+}
+}
+//]]> </script> <script src="./Generate Class From JSON or XML in Visual Studio_files/WebResource.axd" type="text/javascript"></script> <script src="./Generate Class From JSON or XML in Visual Studio_files/WebResource(1).axd" type="text/javascript"></script> <script src="./Generate Class From JSON or XML in Visual Studio_files/WebResource(2).axd" type="text/javascript"></script> <script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]> </script> <div class="master"> <a name="Top"></a> <div class="responsiveHeader"> <script type="text/javascript">
+$j(document).ready(function() {
+var flag;
+var textBoxClientId = '#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId';
+var value = $j(textBoxClientId).val();
+$j(textBoxClientId).click(function() {
+if (value == "Invalid ID / Password")
+$j(textBoxClientId).val('');
+});
+//login popup js start here//
+$j('#ctl00_HeaderWithoutAjax1_Login1_loginBtn').click(function() {
+flag = 1;
+$j('#ctl00_HeaderWithoutAjax1_Login1_LoginSpan').slideToggle("slow");
+$j('#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId').focus();
+});
+$j('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').mouseover(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').show();
+});
+$j('.loginPopup.loggedIn').mouseover(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').show();
+$j('.userdetailCntr').addClass('hover');
+});
+$j('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').mouseout(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+});
+$j('.loginPopup.loggedIn').mouseout(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+$j('.userdetailCntr').removeClass('hover');
+});
+$j('.loginPopup').click(function() {
+flag = 1;
+});
+$j('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').click(function() {
+flag = 1;
+});
+$j(document).click(function() {
+if (flag != 1) {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LoginSpan').hide();
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+}
+flag = 0;
+});
+//login popup js end here//
+});
+</script> <script>
+$j(document).ready(function() {
+var flag = true;
+var close = true;
+$j('.notificationMessageCntr').click(function() {
+var id = $j(this)[0].id;
+if (id != 'askQuestion') {
+if ($j(this).next().is(':visible')) {
+$j(this).find('.arrow').hide();
+$j(this).next().hide();
+}
+else {
+$j('.msg_container').hide();
+$j('.notificationMessageCntr .arrow').hide();
+flag = false;
+close = false;
+$j(this).find('.arrow').show();
+$j(this).next().show();
+ResetNotificationCount(this);
+}
+}
+});
+$j('.msg_container').click(function() {
+close = false;
+});
+$j(document).click(function() {
+if (close) {
+$j('.notificationMessageCntr .arrow').hide();
+$j('.msg_container').hide();
+flag = true;
+}
+close = true;
+});
+//        if ($j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoData').length > 0)
+//            $j('#ctl00_HeaderWithoutAjax1_Login1_LinkButtonAllMessages').hide();
+});
+//Reset notification count
+//type: 1- Message Notification, 2- Comment Notification
+function ResetNotificationCount(container) {
+var type = 0;
+if ($j(container).attr('id') == 'messageNotification')
+type = 1
+else if ($j(container).attr('id') == 'commentNotification')
+type = 2
+else if ($j(container).attr('id') == 'generalNotifications')
+type = 3
+if (type != 0) {
+$j.ajax({
+url: "/Handlers/CsharpCommon.ashx?method=reset_notification_message_count&type=" + type,
+type: "POST",
+async: false,
+beforeSend: function() {
+if (type == 1)
+$j('#imgComments').show();
+if (type == 2)
+$j('#imgMessages').show();
+if (type == 3)
+$j('#imgGeneralNotifications').show();
+},
+success: function(response) {
+$j(container).find('.messageCount').hide();
+if (response[0] == undefined)
+var response = "";
+if (response == 'login')
+var response = "";
+if (type == 1) {
+if (response != "") {
+$j('#dvMessages').empty();
+$j('#dvMessages').html(response);
+}
+else {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoData').show();
+}
+}
+if (type == 2) {
+if (response != "") {
+$j('#dvComments').empty();
+$j('#dvComments').html(response);
+}
+else {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoComments').show();
+}
+}
+if (type == 3) {
+if (response != "") {
+$j('#dvGeneralNotifications').empty();
+$j('#dvGeneralNotifications').html(response);
+}
+else {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoDataNotifications').show();
+}
+}
+},
+complete: function() {
+if (type == 1)
+$j('#imgComments').hide();
+if (type == 2)
+$j('#imgMessages').hide();
+if (type == 3)
+$j('#imgGeneralNotifications').hide();
+}
+});
+}
+}
+</script> <div class="page" style="position: relative; z-index: 999;"> <div class="loginControl"> <a href="http://www.c-sharpcorner.com/Controls/#" id="ctl00_HeaderWithoutAjax1_Login1_loginBtn" class="icons login" onclick="return false;" title="Login">&nbsp;</a> <a id="ctl00_HeaderWithoutAjax1_Login1_HyperLinkRegister" title="Sign Up" class="icons signUp" href="http://www.c-sharpcorner.com/UserRegistration/UserRegistration.aspx?check=r"></a> <div id="askQuestion" class="notificationMessageCntr display_none_mobile"> <a id="ctl00_HeaderWithoutAjax1_Login1_PostForum" class="icons askaquestion" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$PostForum','')"></a> </div> <div id="commentNotification" class="notificationMessageCntr"> <span class="arrow">&nbsp;</span> </div> <div id="userCommentBox" class="msg_container" style="display: none;"> <div class="NoticationLoading"> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelNoComments" style="color:Red;display: none; text-align: center;">No new comments.</span> <a id="imgComments" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif"></a> </div> <ul> <div id="dvComments"> </div> </ul> <a class="LinkNormalBlue" style="margin-right: 10px; float: right; margin-top: 10px;
+font-size: 13px;" href="http://www.c-sharpcorner.com/notification/">Go to all comments &gt;&gt;</a> </div> <div id="messageNotification" class="notificationMessageCntr"> <span class="arrow">&nbsp;</span> </div> <div id="userMsgBox" class="msg_container" style="display: none;"> <div class="NoticationLoading"> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelNoData" style="color:Red;display: none; text-align: center;">No new messages.</span> <a id="imgMessages" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif"></a> </div> <ul> <div id="dvMessages"> </div> </ul> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonAllMessages" class="LinkNormalBlue" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonAllMessages','')" style="margin-right: 10px;
+float: right; margin-top: 10px;">Go to all messages &gt;&gt;</a> </div> <div id="generalNotifications" class="notificationMessageCntr"> <span class="arrow">&nbsp;</span> </div> <div id="generalNotificationContainer" class="msg_container general_notifications" style="display: none;"> <div class="NoticationLoading"> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelNoDataNotifications" style="color:Red;display: none; text-align: center;">No new notifications.</span> <a id="imgGeneralNotifications" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif"></a> </div> <ul> <div id="dvGeneralNotifications"> </div> </ul> <a class="LinkNormalBlue" style="margin-right: 10px; float: right; margin-top: 10px;
+color: #06c; font-size: 13px;" href="http://www.c-sharpcorner.com/notification/GeneralNotification.aspx">Go
+to all notifications &gt;&gt;</a> </div> <div class="notificationMessageCntr display_none_mobile"> <span class="arrow">&nbsp;</span> </div> <div class="msg_container" style="display: none;"> <ul id="ctl00_HeaderWithoutAjax1_Login1_UnapprovedContentStats" class="unapproved_stats"> </ul> </div> </div> <div id="ctl00_HeaderWithoutAjax1_Login1_LoginSpan" class="loginPopup" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_HeaderWithoutAjax1_Login1_ImageButtonLogin&#39;)" style="display: none;"> <center> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelErrorMessage" style="color:Red;padding-bottom: 5px;"></span></center> <span class="arrow">&nbsp;</span> <div class="row"> <label class="lableText">
+Email :</label> <input name="ctl00$HeaderWithoutAjax1$Login1$TextBoxUserId" type="text" id="ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId" class="inputBox" placeholder="Enter User ID or Email" style="width: 150px;"> <span id="ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId" style="color:Red;display:none;">*</span> </div> <div class="row"> <label class="lableText">
+Password :
+</label> <input name="ctl00$HeaderWithoutAjax1$Login1$TextBoxPassword" type="password" maxlength="15" id="ctl00_HeaderWithoutAjax1_Login1_TextBoxPassword" class="inputBox" placeholder="Enter Password" autocomplete="off" style="width: 150px;"> <span id="ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword" style="color: red; display: none;">*</span> </div> <div class="row"> <label class="lableText">
+&nbsp;</label> <label class="lableText" style="width: auto"> <input type="checkbox" checked="checked" name="a">Remember me?</label> </div> <div class="row"> <label class="lableText">
+&nbsp;</label> <input type="submit" name="ctl00$HeaderWithoutAjax1$Login1$ImageButtonLogin" value="Login" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$HeaderWithoutAjax1$Login1$ImageButtonLogin&quot;, &quot;&quot;, true, &quot;LeftLogin&quot;, &quot;&quot;, false, false))" id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonLogin" title="Login"> <a href="http://www.c-sharpcorner.com/UserRegistration/UserRegistration.aspx?check=f" class="LinkRed">Forgot password</a> </div> <div class="row2"> <label class="lableText2">
+Login using
+</label> <a class="facebook" onclick="FacebookLogin(); return false;" title="Facebook"></a>
+&nbsp;<a id="googleLoginHeader" class="google" title="Google"></a> </div> </div> <a class="menuButton"></a><a href="http://www.c-sharpcorner.com/" class="logo_responsive">
+&nbsp;</a> </div> <input type="hidden" id="HiddenErrorMessage" value="Unable to fetch your account data!"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldUserId" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldUserId"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldEmail" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldFirstName" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldLastName" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldType" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType"> <input type="submit" name="ctl00$HeaderWithoutAjax1$Login1$ButtonLoginSocial" value="" id="ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial" style="display: none;"> <script>
+function FacebookLogin() {
+FB.login(function(response) {
+if (response.authResponse) {
+FB.api('/me', function(response) {
+try {
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldUserId').val(response.id.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail').val(response.email.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName').val(response.first_name.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName').val(response.last_name.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType').val('facebook');
+$j('#ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial').click();
+}
+catch (err) {
+alert($j('#HiddenErrorMessage').val());
+}
+});
+} else {
+console.log('User cancelled login or did not fully authorize.');
+}
+}, { scope: 'publish_actions, email' });
+}
+</script> <script>
+$j(document).ready(function() {
+function signinCallback(authResult) {
+if (authResult['status']['signed_in']) {
+try {
+gapi.client.load('plus', 'v1', function() {
+var request = gapi.client.plus.people.get({
+'userId': 'me'
+});
+request.execute(function(resp) {
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail').val(resp.emails[0].value.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName').val(resp.name.givenName.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName').val(resp.name.familyName.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType').val('google');
+$j('#ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial').click();
+});
+});
+}
+catch (err) {
+alert($j('#HiddenErrorMessage').val());
+}
+} else {
+console.log('Sign-in state: ' + authResult['error']);
+}
+}
+var additionalParams = {
+'callback': signinCallback
+};
+var signinButton = document.getElementById('googleLoginHeader');
+if (signinButton != null) {
+signinButton.addEventListener('click', function() {
+gapi.auth.signIn(additionalParams);
+console.log(gapi);
+});
+}
+});
+</script> <!-- PopUp Start--> <!-- PopUp End--> <div class="header"> <div class="topHeaderConainer" style="width: 100%; float: left;"> <script>
+$j(document).ready(function() {
+$j.getScript('/JQuery/ticker_21122013.js', function() {
+$j('#js-news').ticker();
+});
+});
+</script> <style type="text/css">
+.ticker
+{
+width: 538px;
+height: 30px;
+display: block;
+position: relative;
+overflow: hidden;
+}
+.ticker-title
+{
+padding-top: 9px;
+color: #900;
+font-weight: bold;
+text-transform: uppercase;
+}
+.ticker-content
+{
+margin: 0;
+padding-top: 9px;
+position: absolute;
+color: #1f527b;
+overflow: hidden;
+white-space: nowrap;
+line-height: 1.2em;
+}
+.ticker-content a:hover
+{
+text-decoration: none;
+color: #0d3059;
+}
+.ticker-swipe
+{
+padding-top: 9px;
+position: absolute;
+top: 0;
+background-color: #f60;
+display: block;
+width: 800px;
+height: 23px;
+}
+.ticker-swipe span
+{
+margin-left: 1px;
+border-bottom: 1px solid #fff;
+height: 14px;
+width: 7px;
+display: block;
+}
+.js-hidden
+{
+display: none;
+}
+.ticker-controls
+{
+padding: 8px 0 0 0;
+list-style-type: none;
+float: left;
+}
+.left .ticker-controls, .left .ticker-content, .left .ticker-title, .left .ticker
+{
+float: left;
+}
+</style> <div class="InFocusNews display_none" id="InFocus"> <div class="page" style="position: relative;"> <h2>
+In Focus</h2> <div class="rightNew" style="display: inline;"> <div id="ticker-wrapper-1437923648796" class="ticker-wrapper has-js left"><div id="ticker-1437923648796" class="ticker"><div id="ticker-title-1437923648796" class="ticker-title"><span></span></div><p id="ticker-content-1437923648796" class="ticker-content" style="display: block; opacity: 1; left: 0px;"><a href="http://www.c-sharpcorner.com/News/4857/2015-half-yearly-mvps-announced.aspx" style="color: White;" rel="nofollow">
+2015 First Half MVPs Announced</a></p><div id="ticker-swipe-1437923648796" class="ticker-swipe" style="left: 0px; margin-left: 236px; display: none;"><span style="display: block;"><!-- --></span></div></div><ul id="ticker-controls-1437923648796" class="ticker-controls"><li id="play-pause-1437923648796" class="jnt-play-pause controls"><a href=""><!-- --></a></li><li id="prev-1437923648796" class="jnt-prev controls"><a href=""><!-- --></a></li><li id="next-1437923648796" class="jnt-next controls"><a href=""><!-- --></a></li></ul></div> </div> </div> </div> <div class="display_none"> <div class="page"> <a href="http://www.c-sharpcorner.com/" id="ctl00_HeaderWithoutAjax1_Contribution1_LogoLink"> <span id="ctl00_HeaderWithoutAjax1_Contribution1_LogoImage" class="logo"></span> </a> <div class="headerBanner"> </div> <div id="ctl00_HeaderWithoutAjax1_Contribution1_ContributionLinks"> <div class="contributeList"> <a href="javascript:void(0);" class="contributeOnHeader">Contribute</a> <ul> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostArticle" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostArticle','')">An Article</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_LinkButtonCodeSnippet" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$LinkButtonCodeSnippet','')">A Code Snippet</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostBlog" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostBlog','')">A Blog</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostNews" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostNews','')">A News</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostVideo" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostVideo','')">A Video</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostResource" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostResource','')">A Link</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostInterview" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostInterview','')">An Interview Question</a></li> </ul> </div> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostForum" class="askQuestionOnHeader" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostForum','')">Ask a Question</a> </div> </div> </div> <div id="ctl00_HeaderWithoutAjax1_HeaderMenu" class="HeadermenuStripBlue" style="position: fixed; top: 0px;"> <div class="page" style="position: relative;"> <div class="responsiveMenu"> <div class="SearchBox"> <div id="ctl00_HeaderWithoutAjax1_Panal1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_HeaderWithoutAjax1_searchImageButton&#39;)"> <input name="ctl00$HeaderWithoutAjax1$searchTextBox" type="text" id="ctl00_HeaderWithoutAjax1_searchTextBox" class="searchTextBox" placeholder="C# Corner Search" style="font-family:Calibri;"> <input type="submit" name="ctl00$HeaderWithoutAjax1$searchImageButton" value="" id="ctl00_HeaderWithoutAjax1_searchImageButton" class="button"> </div> </div> <ul class="headerMenu"> <li class="display_none" style="background:none;"><a href="http://www.c-sharpcorner.com/" class="csharpHome" title="C# Corner Home">&nbsp;</a></li> <li class="first display_none"><a href="http://www.c-sharpcorner.com/pulse/" title="C# Corner Pulse" class="pulse"></a></li> <li><a href="http://www.c-sharpcorner.com/category/" class="show-dropdown menuLinkBlue">
+TECHNOLOGIES </a> <div class="dropDownMenu" id="dropDown"> <div id="ctl00_HeaderWithoutAjax1_divTechnology" style="overflow: hidden; margin-bottom: 10px;"> <span id="ctl00_HeaderWithoutAjax1_DataListTechnologyTop"><span> <a href="http://www.c-sharpcorner.com/1/237/net-2015.aspx">
+.NET 2015
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/60/cryptography.aspx">
+Cryptography
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/233/javascript.aspx">
+JavaScript
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/311/philosophy.aspx">
+Philosophy
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/291/typescript.aspx">
+TypeScript
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/57/net-assemblies.aspx">
+.NET Assemblies
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/170/current-affairs.aspx">
+Current Affairs
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/236/jquery.aspx">
+JQuery
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/279/php.aspx">
+PHP
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/138/universal-windows-apps.aspx">
+Universal Windows Apps
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/131/ado-net.aspx">
+ADO.NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/220/databases-dba.aspx">
+Databases &amp; DBA
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/300/knockout.aspx">
+Knockout
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/308/power-bi.aspx">
+Power BI
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/277/visual-basic-net.aspx">
+Visual Basic .NET
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/176/ajax.aspx">
+AJAX
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/62/design-patterns-practices.aspx">
+Design Patterns &amp; Practices
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/278/leadership.aspx">
+Leadership
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/283/products.aspx">
+Products
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/296/visual-studio.aspx">
+Visual Studio
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/56/algorithms-in-C-Sharp.aspx">
+Algorithms in C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/293/dynamics-crm.aspx">
+Dynamics CRM
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/186/learn-net.aspx">
+Learn .NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/198/project-management.aspx">
+Project Management
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/192/wcf.aspx">
+WCF
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/247/android-programming.aspx">
+Android Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/159/enterprise-development.aspx">
+Enterprise Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/180/linq.aspx">
+LINQ
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/322/python.aspx">
+Python
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/307/wearables.aspx">
+Wearables
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/302/angularjs.aspx">
+AngularJS
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/65/games-programming-C-Sharp.aspx">
+Games Programming C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/288/microsoft-office.aspx">
+Microsoft Office
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/188/reports-using-C-Sharp.aspx">
+Reports using C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/154/web-development.aspx">
+Web Development
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/316/architecture.aspx">
+Architecture
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/323/google-development.aspx">
+Google Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/245/microsoft-phone.aspx">
+Microsoft Phone
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/317/salesforce.aspx">
+Salesforce
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/133/web-services.aspx">
+Web Services
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/224/Asp-Net-programming.aspx">
+ASP.NET Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/294/graphics-design.aspx">
+Graphics Design
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/67/mobile.aspx">
+Mobile
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/71/security-in-net.aspx">
+Security in .NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/275/windows-10.aspx">
+Windows 10
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/232/azure.aspx">
+Azure
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/221/hardware.aspx">
+Hardware
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/149/multithreading.aspx">
+Multithreading
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/183/sharepoint.aspx">
+SharePoint
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/76/windows-forms.aspx">
+Windows Forms
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/314/big-data.aspx">
+Big Data
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/318/hololens.aspx">
+HoloLens
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/304/node-js.aspx">
+Node.js
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/301/signalr.aspx">
+SignalR
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/243/windows-powershell.aspx">
+Windows PowerShell
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/309/business.aspx">
+Business
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/143/how-do-i.aspx">
+How do I 
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/146/office-development.aspx">
+Office Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/210/silverlight.aspx">
+Silverlight
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/292/windows-server-2012.aspx">
+Windows Server 2012
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/144/C-Sharp-programming.aspx">
+C# Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/244/html-5.aspx">
+HTML 5
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/208/oopood.aspx">
+OOP/OOD
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/216/sql-language.aspx">
+SQL Language
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/78/windows-services.aspx">
+Windows Services
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/282/c-cpp-mfc.aspx">
+C, C++, MFC
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/66/internet-web.aspx">
+Internet &amp; Web
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/276/open-source.aspx">
+Open Source
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/297/sql-server.aspx">
+SQL Server
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/191/wpf.aspx">
+WPF
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/238/career-advice.aspx">
+Career Advice
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/320/internet-of-things.aspx">
+Internet of Things
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/222/operating-systems.aspx">
+Operating Systems
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/312/startups.aspx">
+Startups
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/319/xamarin.aspx">
+Xamarin
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/280/chapters.aspx">
+Chapters
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/235/ios.aspx">
+iOS
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/299/oracle.aspx">
+Oracle
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/199/string-in-C-Sharp.aspx">
+String in C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/190/xaml.aspx">
+XAML
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/324/cloud.aspx">
+Cloud
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/258/java.aspx">
+Java
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/315/outsourcing.aspx">
+Outsourcing
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/174/testing.aspx">
+Testing
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/79/xml.aspx">
+XML
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/68/coding-best-practices.aspx">
+Coding Best Practices
+</a> </span></span> </div> <div style="position: absolute; bottom: 0px; left: 0px;"> <a href="http://www.c-sharpcorner.com/ContactUs.aspx?type=7" class="LinkNormalBlue" style="color: #ff6600; background: none; text-transform: none; float: left;">Request
+a new Category</a><span style="float: left; color: #8D8D8D; margin-top: 4px;">|</span> <a href="http://www.c-sharpcorner.com/Category/" class="LinkNormalBlue viewAll" style="color: #36c; background: none!important; text-transform: none; float: left;">
+View All</a> </div> </div> </li> <li><a href="http://www.c-sharpcorner.com/forums/" title="Ask a Question">ANSWERS</a></li> <li><a href="http://www.c-sharpcorner.com/blogs/" title="Share a Blog">BLOGS</a></li> <li><a href="http://www.c-sharpcorner.com/videos/" title="Share a Video">VIDEOS</a></li><li> <a href="http://www.c-sharpcorner.com/interviews/" title="Ask an Interview Question">
+INTERVIEWS</a></li><li><a href="http://www.c-sharpcorner.com/ebooks/" title="Share a Book">
+BOOKS</a></li> <li><a href="http://www.c-sharpcorner.com/news/" title="Submit a News">NEWS</a></li> <li><a href="http://www.c-sharpcorner.com/chapters/" title="Attend an Event">
+CHAPTERS</a></li> <li><a href="http://www.c-sharpcorner.com/careerAdvice/" title="Get career advice">
+CAREER ADVICE</a></li> <li><a href="http://www.c-sharpcorner.com/jobs/" title="Get Jobs">Jobs</a></li> </ul> </div> </div> </div> </div> </div> </div> <script type="text/javascript" language="javascript">
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '/JavaScripts/MindcrackerJScript.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+</script> <script type="text/javascript">
+$j(window).scroll(function() {
+var topS = $j(window).scrollTop();
+var winWidth = $j(window).width();
+var headerHe = $j(".topHeaderConainer").height() - $j(".HeadermenuStripBlue").height();
+// header js
+if (topS > headerHe) {
+if (parseInt(winWidth) < 767) {
+$j(".HeadermenuStripBlue").css("position", "relative");
+}
+else {
+$j(".HeadermenuStripBlue").css({ "position": "fixed", "top": 0 });
+}
+}
+else if (topS <= (headerHe + $j(".HeadermenuStripBlue").height())) {
+$j(".HeadermenuStripBlue").css("position", "relative");
+}
+});
+</script> <script type="text/javascript">
+// media query js
+$j(document).ready(function() {
+$j(window).resize(function() {
+if ($j(".menuButton").is(':visible')) {
+var windowHeight = $j(window).height();
+$j('.responsiveHeader .responsiveMenu').css("height", windowHeight);
+}
+else {
+$j('.responsiveHeader .responsiveMenu').css("height", 'auto');
+}
+});
+// responsive jquery 
+$j(".menuButton").click(function() {
+var windowHeight = $j(window).height();
+var menu_container = $j('.responsiveHeader .responsiveMenu');
+if (!menu_container.hasClass('hidden')) {
+menu_container.animate({ left: 0 });
+$j('body, .responsiveHeader').animate({ left: 260 + 'px' });
+menu_container.addClass('hidden');
+menu_container.css("height", windowHeight);
+$j('body').css({ 'height': windowHeight, 'overflow': 'hidden', 'position': 'fixed' });
+//$j('.SearchBox').animate({ left: 0 });
+} else {
+menu_container.animate({ left: -260 + 'px' });
+$j('body ,.responsiveHeader').animate({ left: 0 + 'px' });
+menu_container.removeClass('hidden');
+$j('body').css({ 'height': windowHeight, 'overflow-y': 'auto', 'position': 'relative' });
+//$j('.SearchBox').animate({ left: -260 + 'px' });
+}
+});
+});
+// add 'active' class to active menu
+var path = window.location.href.replace(/^https?:\/\//, '').split('/');
+var hostName = window.location.hostname;
+var activeCategory = hostName + '/' + path[1].toLowerCase();
+if (path[1].toLowerCase() === 'uploadfile') {
+var contentHeadingText = document.querySelector('div.article a.HeadingBold').textContent.trim() || document.querySelector('div.article a.HeadingBold').innerText.trim();
+activeCategory = hostName + '/' + contentHeadingText.toLowerCase();
+}
+else {
+if (path[1] === '1') {
+activeCategory = hostName + '/category';
+}
+}
+var activeMenuItem = document.querySelector('ul.headerMenu li a[href*="' + activeCategory + '"]');
+if (activeMenuItem !== null) {
+activeMenuItem.classList.add('active');
+}
+// ends here
+</script> <div class="page"> <div class="clear"> </div> <div class="main responsive_marginTop"> <div class="leftCntr"> <div class="trendingNowBox display_none_mobile"> <div class="left" id="example1_wrap"> <div class="bx_wrap"><a href="" class="prev"></a><a href="" class="next"></a><div class="bx_container" style="position: relative; width: 275px; overflow: hidden;"><ul id="example1" style="width: 999999px; position: relative; left: -275px;"><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/75a48f/python-data-types/" class="LinkNormalStyle" style="color: Gray;">
+Python Data Types</a></li><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/qualities-of-a-quality-analyst/" class="LinkNormalStyle" style="color: Gray;">
+Qualities of a Quality Analyst</a></li><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/skill-sets-that-can-even-kill-qa-profession/" class="LinkNormalStyle" style="color: Gray;">
+Skill Sets That Can Even Kill QA Pr ...</a></li></ul></div></div> </div> <div class="right"> <div id="ctl00_TrendingNow1_Panal1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_TrendingNow1_searchImageButton&#39;)"> <input name="ctl00$TrendingNow1$searchTextBox" type="text" id="ctl00_TrendingNow1_searchTextBox" class="searchTextBox" placeholder="C# Corner Search" style="font-family:Calibri;"> <input type="submit" name="ctl00$TrendingNow1$searchImageButton" value="" id="ctl00_TrendingNow1_searchImageButton" class="button">  </div> </div> </div> <div class="article"> <div class="HeadingAr" id="div1"> <div class="floatRight marginTop"> <div id="ctl00_AuthorRank" class="AuthorRank"> <span id="ctl00_ImageReaderLevel" title="Intermediate" class="sprite details intermediate"></span>
+Reader Level:
+</div> </div> <span id="ctl00_spanArticle" class="floatLeft marginTop5"> <a href="http://www.c-sharpcorner.com/Articles/" id="ctl00_A1" class="HeadingBold grayHeading">
+Article</a> </span> </div> <div class="clear"> </div> <div class="image display_none_mobile"> <a href="http://www.c-sharpcorner.com/1/296/visual-studio.aspx" id="ctl00_AnchorAuthorImage"> <img id="ctl00_imgAuthor" title="Visual Studio" class="image90" src="./Generate Class From JSON or XML in Visual Studio_files/061231AM.png" style="border-width:0px;"></a> </div> <div class="detail"> <div class="grayText"> <h1> <span id="ctl00_LabelArticleTitle" cssclass="BlogsWelcomeHeading">Generate Class From JSON or XML in Visual Studio</span> </h1> </div> <div class="LinkNormalGrayLight">
+By <span><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" id="ctl00_AuthorLink" class="LinkOrange">Pranay Rana</a></span>
+on
+<span id="ctl00_LabelDate">Jul 25, 2015</span> </div> <div class="LinkNormalGrayLight" style="display: none;"> <span style="color: Black;"></span><span id="ctl00_spanTags"><a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/json">json</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/JSON-class">JSON class</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/Visual-Studio">Visual Studio</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/xml">xml</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/XML-class">XML class</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/"></a></span> </div> <div id="ctl00_DivDescription" class="normalGray">This article is about a cool feature in Visual Studio that helps save the effort of a developer to generate class a structure from a JSON or XML string.</div> </div> <div class="clear"> </div> <div class="tweetIcon"> </div> </div> <div class="clear"> </div> <div> <span id="ctl00_LabelMessageBox" style="color:Red;"></span> </div> <div class="clear"> </div> <div class="clear"> </div> <div class="contentHeaderArticleIcons"> <ul class="right viewBar"> <li><a title="Views" class="newSpriteIcons like"><span class="point"><span id="ctl00_spanArticleViews">1.4<span class="unit">k</span></span></span></a></li> <li><a href="http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/#ReadAndPostComment" class="newSpriteIcons comments" title="Comments"><span class="point"><span id="spanComments">13</span></span></a></li> <li><a class="newSpriteIcons views" title="Like" onclick="Like();"><span><span class="point"> <span id="ctl00_LabelLikeCount">0</span></span></span></a></li> </ul> <ul class="leftIcons"> <li><a class="newSpriteIcons facebook" href="https://www.facebook.com/sharer.php?u=http%3a%2f%2fgoo.gl%2f23s2WW" onclick="popupwindowAtCenter(this.href,&#39;Share on Facebook&#39;,600,600);return false;" target="_blank">facebook</a></li> <li><a class="newSpriteIcons twitter" href="https://twitter.com/intent/tweet?&url=http%3a%2f%2fgoo.gl%2f23s2WW&via=CsharpCorner&related=CsharpCorner&text=Generate+Class+From+JSON+or+XML+in+Visual+Studio" target="_blank">twitter</a></li> <li><a class="newSpriteIcons linkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fgoo.gl%2f23s2WW" onclick="popupwindowAtCenter(this.href,&#39;Share on LinkedIn&#39;,600,600);return false;" target="_blank">linkedIn</a></li> <li><a class="newSpriteIcons googlePlus" href="https://plus.google.com/share?url=http%3a%2f%2fgoo.gl%2f23s2WW" onclick="popupwindowAtCenter(this.href,&#39;Share on Google+&#39;,600,600);return false;" target="_blank">google Plus</a></li> <li class="innerArticleIcons display_none_mobile"> <ul> <li> <a id="ctl00_ImageButtonEmail" title="Email this article to friend" class="newSpriteIcons email" href="javascript:__doPostBack('ctl00$ImageButtonEmail','')"></a></li> <li class="display_none"> <a id="ctl00_ImageButtonAddToMyBookmarks" title="Bookmark this article" class="newSpriteIcons bookmark" href="javascript:__doPostBack('ctl00$ImageButtonAddToMyBookmarks','')"></a> </li> <li class="display_none"><a href="javascript:void(GetPrintVersion())" id="ctl00_AnchorPrintArticle" title="Print" class="newSpriteIcons print"></a></li> <li><a href="http://www.c-sharpcorner.com/Authors/pranayamr/articles/" id="ctl00_AuthorsOtherArticles" title="Author&#39;s other article" class="newSpriteIcons author_other_article"></a> </li> <li><a href="http://www.c-sharpcorner.com/Articles/Default.aspx?ArticleId=b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd" id="ctl00_AnchorSimilarArticles" title="Similar articles" class="newSpriteIcons similar_article"></a></li> <li class="display_none"> </li> <li class="display_none"> </li> <li> <a id="ctl00_ImageButtonHistory" title="Article History" class="newSpriteIcons article_history" href="javascript:__doPostBack('ctl00$ImageButtonHistory','')"></a> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> </ul> </li> <li><a href="javascript:void(0);" class="newSpriteIcons expand display_none_mobile">
+expand</a></li> </ul> </div> <div class="clear"> </div> <div id="ctl00_downloadFiles" class="ratingTilte" style="margin-top:10px;margin-bottom:0px;display:none;">
+&nbsp;
+</div> <div id="div2" class="PaddingLeft5"><p align="justify"></p><p><strong>Introduction<br></strong><br>This article is about a cool feature in Visual Studio that helps save the effort of a developer to generate class a structure from a JSON or XML string.<br><br>There is cases application written using the .NET Framework written by a developer that receives a JSON or XML string from a web service or from another third party application. After receiving JSON or XML string data there is a need for further processing of the received data that requires deserialization of the received JSON or XML in a .Net object. And for that a .Net class structure must be created to match the JSON or XML string data so that the JSON or XML string can be deserialized correctly.<br><br><strong>Problem Statement<br></strong><br>For example, a program receives the following JSON string by calling a web service or third-party program. <br><br><strong>JSON</strong><br></p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{</span><span class="string">"employees"</span><span>:[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;{<span class="string">"firstName"</span><span>:</span><span class="string">"John"</span><span>,&nbsp;</span><span class="string">"lastName"</span><span>:</span><span class="string">"Doe"</span><span>},&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;{<span class="string">"firstName"</span><span>:</span><span class="string">"Anna"</span><span>,&nbsp;</span><span class="string">"lastName"</span><span>:</span><span class="string">"Smith"</span><span>},&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;{<span class="string">"firstName"</span><span>:</span><span class="string">"Peter"</span><span>,&nbsp;</span><span class="string">"lastName"</span><span>:</span><span class="string">"Jones"</span><span>}&nbsp;&nbsp;</span></span> </li><li class="alt"><span>]}&nbsp;&nbsp;</span></li></ol></div><strong>XML </strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>&lt;employees&gt;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;employee&gt;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;firstName&gt;John&lt;/firstName&gt;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lastName&gt;Doe&lt;/lastName&gt;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/employee&gt;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;employee&gt;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;firstName&gt;Anna&lt;/firstName&gt;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lastName&gt;Smith&lt;/lastName&gt;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/employee&gt;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;employee&gt;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;firstName&gt;Peter&lt;/firstName&gt;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lastName&gt;Jones&lt;/lastName&gt;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/employee&gt;&nbsp;&nbsp;</span> </li><li><span>&lt;/employees&gt;&nbsp;&nbsp;</span></li></ol></div>And now there is the need for deserializing the received JSON or XML string to a .Net object so further processing can be done based on the received data or on the received data.<br><br><strong>Approach 1: Do it manually</strong><br><br>In this approach the developer must understand JSON or XML so that he/she can understand the received JSON or XML string and its structure. Once getting the details of JSON or XML and the received JSON or XML string, the developer must convert the JSON or XML string into a meaningful class structure so desterilization can be done without a problem.<br><br>So the problem with this approach is so much work must be done by the developer, like:&nbsp;
+<ol> <li>Requires knowledge of JSON or XML.<br><br> </li><li>Requires an understanding of the JSON or XML string sent by the exteranl program.<br><br> </li><li>Creates class strucutre for the JSON or XML structure that is a trial and error approch because usually the created structure doesn't work in the first go.<br><br> </li><li>If a JSON or XML string has a complex structure then its difficult and requires time to create the class structure to deserialize the JSON or XML string. </li></ol> <p><strong>Approach 2: Automated using Visual Studio</strong><br><br>This approach uses Visual Studio to generate a class just by copying and pasting the JSON or XML string.<br><br>The following is the procedure to generate the class:</p> <ol> <li><strong>Copy JSON or XML string<br></strong><br><strong>JSON<br><br><img alt="JSON" src="./Generate Class From JSON or XML in Visual Studio_files/JSON page.jpg"></strong><br><br><strong>XML<br><br><img alt="XML" src="./Generate Class From JSON or XML in Visual Studio_files/XML.jpg"><br></strong><br> </li><li>Go to Edit &gt; Paste Sepcial &gt; Paste JSON As Classes or Paste XML As Classes.<br><br><img alt="past spacial" src="./Generate Class From JSON or XML in Visual Studio_files/past spacial.jpg"><br><br> </li><li>Visual Studio generates a class structure for the developer as in the following:<br><br>The following is an example of the class structure created by copying and pasting a JSON string.<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;EmployeeList&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;Employee[]&nbsp;employees&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">get</span><span>;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">set</span><span>;&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>}&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;</span> </li><li><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;Employee&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">string</span><span>&nbsp;firstName&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">get</span><span>;&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">set</span><span>;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">string</span><span>&nbsp;lastName&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">get</span><span>;&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">set</span><span>;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>}&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>Below&nbsp;<span class="keyword">is</span><span>&nbsp;example&nbsp;of&nbsp;</span><span class="keyword">class</span><span>&nbsp;structure&nbsp;created&nbsp;by&nbsp;copy&nbsp;and&nbsp;pasting&nbsp;XML&nbsp;</span><span class="keyword">string</span><span>&nbsp;&nbsp;</span></span> </li><li><span><span class="comment">///&nbsp;&lt;remarks/&gt;</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>[System.Xml.Serialization.XmlTypeAttribute(AnonymousType&nbsp;=&nbsp;<span class="keyword">true</span><span>)]&nbsp;&nbsp;</span></span> </li><li><span>[System.Xml.Serialization.XmlRootAttribute(Namespace&nbsp;=&nbsp;<span class="string">""</span><span>,&nbsp;IsNullable&nbsp;=&nbsp;</span><span class="keyword">false</span><span>)]&nbsp;&nbsp;</span></span> </li><li class="alt"><span><span class="keyword">public</span><span>&nbsp;partial&nbsp;</span><span class="keyword">class</span><span>&nbsp;employees&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;privateemployeesEmployee[]&nbsp;employeeField;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">///&nbsp;&lt;remarks/&gt;</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;[System.Xml.Serialization.XmlElementAttribute(<span class="string">"employee"</span><span>)]&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;publicemployeesEmployee[]&nbsp;employee&nbsp;{&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">get</span><span>&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnthis.employeeField;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">set</span><span>&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.employeeField&nbsp;=&nbsp;value;&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>}&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span><span class="comment">///&nbsp;&lt;remarks/&gt;</span><span>&nbsp;&nbsp;</span></span> </li><li><span>[System.Xml.Serialization.XmlTypeAttribute(AnonymousType&nbsp;=&nbsp;<span class="keyword">true</span><span>)]&nbsp;&nbsp;</span></span> </li><li class="alt"><span><span class="keyword">public</span><span>&nbsp;partial&nbsp;</span><span class="keyword">class</span><span>&nbsp;employeesEmployee&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span><span>&nbsp;</span><span class="keyword">string</span><span>&nbsp;firstNameField;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span><span>&nbsp;</span><span class="keyword">string</span><span>&nbsp;lastNameField;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">///&nbsp;&lt;remarks/&gt;</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">string</span><span>&nbsp;firstName&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">get</span><span>&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnthis.firstNameField;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">set</span><span>&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.firstNameField&nbsp;=&nbsp;value;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">///&nbsp;&lt;remarks/&gt;</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">string</span><span>&nbsp;lastName&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">get</span><span>&nbsp;{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnthis.lastNameField;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">set</span><span>&nbsp;{&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.lastNameField&nbsp;=&nbsp;value;&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>}&nbsp;&nbsp;</span></li></ol></div></li></ol> <p>As you see in the preceding code it will generate the correct attributes for the XML in the class so the deserialization is done without problems.<br><br>The advantages of this solution are:</p> <ol> <li>No need to understand JSON or XML 
+</li><li>No effort require for creating the class </li></ol><strong>Summary<br></strong><br>The Visual Studio feature for creating a class based on a string is really helpful for developers because an understanding of the JSON or XML string and the creation of the class structure requires effort and is sometimes very frustrating.
+<p></p></div> <div class="clear"> </div> <div class="clear"> </div> <div class="auther_bio"> <a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" id="ctl00_AboutAuthor1_AuthorImageAnchor" class="image"> <img src="./Generate Class From JSON or XML in Visual Studio_files/pranayamr.jpg" id="ctl00_AboutAuthor1_AuthorImage"></a> <div class="autherDetail"> <a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" id="ctl00_AboutAuthor1_AuthorName" class="userName">Pranay Rana</a> <p id="ctl00_AboutAuthor1_Description" class="description">Hey, I am Pranay Rana, working as a Devloper in MNC.&nbsp; Web development in Asp.Net with C# and MS sql server are the experience tools that I have had for the past 8.2 years now.For me def. of programming is : Programm... <a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" class="LinkNormalBlue">Read more</a></p> <div id="ctl00_AboutAuthor1_PersonalBlogContainer" class="description">
+Personal Blog:&nbsp;<a href="http://pranayamr.blogspot.com/" id="ctl00_AboutAuthor1_PersonalBlog" class="LinkNormalBlue" target="_blank">http://pranayamr.blogspot.com</a> </div> <ul class="social"> <li class="twitter"><a id="ctl00_AboutAuthor1_TwitterFollow" title="Not Set" class="notSet">Follow</a></li> <li class="facebook"><a href="https://www.facebook.com/pranayamr" id="ctl00_AboutAuthor1_FacebookProfileUrl" title="Facebook">Facebook</a></li> <li class="linkedIn"><a href="http://www.linkedin.com/profile/view?id=21852757&trk=nav_responsive_tab_profile" id="ctl00_AboutAuthor1_LinkedInProfileUrl" title="LinkedIn">LinkedIn</a></li> <li class="message"> <a id="ctl00_AboutAuthor1_SendMessageImageButton" title="Send Message" href="javascript:__doPostBack('ctl00$AboutAuthor1$SendMessageImageButton','')">message</a></li> </ul> </div> <div class="clear"> </div> <div class="autherIcons"> <ul> <li class="li_1"><a href="http://www.c-sharpcorner.com/Members/rank/"><span class="rank"> </span><span class="text">rank</span><span id="ctl00_AboutAuthor1_Rank" class="count">283</span></a> </li> <li class="li_2"><a href="http://www.c-sharpcorner.com/Articles/AuthorTopArticles.aspx?authorid=pranayamr"> <span class="reader"></span><span id="ctl00_AboutAuthor1_Readers" class="count">100.3k</span> <span class="text">readers</span> </a></li> <li class="li_4"><span id="ctl00_AboutAuthor1_Medal" class="medal Bronze" title="Bronze Member"></span><span id="ctl00_AboutAuthor1_MedalText" class="count Bronze">Bronze</span><span class="text">Member</span></li> <li id="ctl00_AboutAuthor1_CSharpMVP" class="li_3 notSet" title="C# Corner MVP - Not awarded yet."><a href="http://www.c-sharpcorner.com/Members/mvps/"> <span class="csharpmvp"></span><span id="ctl00_AboutAuthor1_MVP" class="count"></span> <span class="text">
+times</span> </a></li> <li id="ctl00_AboutAuthor1_MicrosoftMVP" class="li_5" title="Microsoft MVP"><a href="http://mvp.microsoft.com/en-us/search-mvp.aspx?cr=YourRegion" target="_blank"><span class="microsoftmvp"></span><span id="ctl00_AboutAuthor1_MSMVP" class="count">1</span><span class="text">time</span></a></li> </ul> </div> </div> <div class="clear"> </div> <div id="ctl00_RelatedArticles" class="relatedArticle"> <h3>
+Related Articles
+</h3> <ul> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl00_HyperLinkTitle" href="http://www.c-sharpcorner.com/uploadfile/satisharveti/introduction-to-interfacing-win-forms-with-vs-add-ins/default.aspx">Introduction to Interfacing Win Forms with VS Add-ins</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl01_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/5fd9bd/xml-and-json-generation-from-java-object-a-birds-eyeview1/">Overview of XML and JSON Generation From Java Object</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl02_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/4b0136/working-with-new-json-editor-in-visual-studio-2013-ctp2-upda/">Working With New JSON Editor in Visual Studio 2013 CTP2 Update2</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl03_HyperLinkTitle" href="http://www.c-sharpcorner.com/uploadfile/satisharveti/introduction-to-visual-studio-add-ins/default.aspx">Introduction to Visual Studio Add-ins</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl04_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/56fb14/how-entity-framework-works/">How Entity Framework Works</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl05_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/ce3669/an-introduction-to-json-in-ios-7/">An Introduction to JSON in iOS 7</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl06_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/4b0136/getting-started-with-new-scaffolded-item-dialog-to-design-ge/">Getting Started With New Scaffolded Item Dialog to Design Generated Files</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl07_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-sequence-diagram-in-C-Sharp/">Generate Sequence Diagram in C#</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl08_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/mahesh/rv09172007125635PM/rv.aspx">Free Book: Reports using Report Viewer in Visual Studio 2005</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl09_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/satisharveti/look-at-dependency-graphs-in-visual-studio-2012/">Look at Dependency Graphs in Visual Studio 2012</a> </li> </ul> </div> <script src="./Generate Class From JSON or XML in Visual Studio_files/jquery-Mention-Combined.js" type="text/javascript"></script> <script type="text/javascript">
+var mentionarraydata=[];
+var Comments_article = (function () {
+var pageSize = 10;
+var rootClass = '.article ';
+return {
+//Get Comments
+GetComments: function (parent_id) {
+var pageNumber = $j('#HiddenPageNumber_article').val();
+var rootComments = $j(rootClass + '#RootComments');
+var items = 0;
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/Comments.asmx/GetComments",
+data: "{'id':'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd','type':'article','pageNumber':'" + pageNumber + "', 'pageSize':'" + pageSize + "', 'parentId':" + parent_id + "}",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#mainLoader').show();
+},
+success: function (d) {
+var data = d[0];
+var totalComments;
+$j.each(data, function (index) {
+rootComments.prepend(BuildComment(data[index])); //Prepend root comments
+if (pageNumber == 1 && index == 0) {
+$j(rootClass + '#HiddenTotalComments').val(data[index].TotalComments);
+if (d[2][index] == null || d[2][index] == undefined) {
+totalComments = data[index].TotalComments;
+}
+else {
+totalComments = parseFloat(data[index].TotalComments) + parseFloat(d[2][index].TotalComments);
+}
+$j(rootClass + '#TotalComments').text(totalComments); //set total comments only once.
+$j('#spanComments').text(totalComments); //Manages Header Comment Count
+}
+items = parseFloat(items) + 1; //track for number of comments to show
+ManageAlternateColor();
+});
+//Reply Binding starts here
+var reply = d[1];
+var element;
+$j.each(reply, function (index) {
+element = $j(rootClass + '#CommentReplies_' + reply[index].ParentId);
+element.prepend(BulildCommentReply(reply[index]));
+items = parseFloat(items) + 1;
+});
+//Reply Binding ends here
+//Manage paging
+{
+if (items != 0 && parseFloat(pageNumber) >= 1) {
+if (parseFloat(pageNumber) == 1)
+$j(rootClass + '#CommentCount').text(items);
+else
+$j(rootClass + '#CommentCount').text(parseFloat($j(rootClass + '#CommentCount').text()) + items);
+}
+else {
+$j(rootClass + '#Paging').hide();
+}
+ManageViewMoreVisibility();
+}
+$j(rootClass + '#mainLoader').hide();
+}
+});
+},
+//Like Comment
+LikeComment: function (id) {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=like_comment&id=" + id + "&type=article",
+type: "POST",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#ajaxLoader_' + id).show(); //Show Ajax Loader
+},
+success: function (response) {
+status = response;
+$j(rootClass + '#ajaxLoader_' + id).hide(); //Hide Ajax Loader
+},
+Error: ShowError
+});
+if (status == '1') {
+var likes = $j(rootClass + '#Likes_' + id).text();
+$j(rootClass + '#Likes_' + id).text(parseFloat(likes) + 1);
+}
+else if (status == '2') {
+}
+},
+//Delete Comment
+DeleteComment: function (id, parent_id) {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=delte_comment&id=" + id + "&type=article",
+type: "POST",
+async: false,
+success: function (response) {
+status = response;
+},
+Error: ShowError
+});
+if (status == '1') {
+var count = $j(rootClass + '#Replies_' + id).text();
+$j(rootClass + '#comment_' + id).remove();
+if (parent_id == 0) {
+ManageAlternateColor();
+ManagePaging('d', count);
+if (GetParentCommentsCount() == 0)
+Comments_article.GetComments(0);
+}
+else {
+var replies = $j(rootClass + '#Replies_' + parent_id).text();
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+$j(rootClass + '#Replies_' + parent_id).text(parseFloat(replies) - 1);
+totalComments.text(parseFloat(totalComments.text()) - 1);
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+}
+}
+},
+//Post Comment
+PostComment: function (parent_id, e) {
+if (e.keyCode == 13) {
+var rootComments = $j(rootClass + '#RootComments');
+var totalComments = $j(rootClass + '#HiddenTotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var comment = null;
+$j('textarea.mention').mentionsInput('val', function(text) {
+comment=text;
+});
+comment=FormatText(comment);
+comment=GetCommentData(comment,'textarea.mention');
+if (comment != '') {
+VerifyUser();
+$j.ajax({
+url: "/WebServices/Comments.asmx/InsertComment",
+data: "{'user_id':'','content_id':'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd','type':'article','parent_id':'" + parent_id + "', 'description':'" + comment + "'}",
+type: "POST",
+contentType: "application/json; charset=utf-8",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader').show(); //Show Ajax Loader
+},
+success: function (response) {
+var data = response[0];
+var mailtosendids=[];
+var mailtobesendids=null;
+$j('textarea.mention').mentionsInput('getMentions', function(data) {
+$j.each(data, function(idx, obj) {
+mailtosendids.push(obj.id);
+});
+});
+$j('textarea.mention').mentionsInput('reset', function(data) {
+});                          
+rootComments.append(BuildComment(data));
+ManageAlternateColor();
+$j(rootClass + '#InputCommentText_' + parent_id).val('').trigger('autosize.resize');
+//if (!(parseFloat(totalComments.val()) == parseFloat(commentCount.text()) && parseFloat($j('#HiddenPageNumber_article').val()) > 1))
+if (parseFloat(GetParentCommentsCount()) > parseFloat(pageSize))
+rootComments.find('div').first().remove();
+ManagePaging('i', 0);
+SendMail(comment, '0', data.ParentUserId, data.CommentId);
+if(mailtosendids.length > 0)
+{
+mailtobesendids=mailtosendids.join(",");
+SendNotification(comment,mailtobesendids)
+}
+$j(rootClass + '#PostLoader').hide(); //Hide Ajax Loader
+PreventDefault(e);
+},
+Error: ShowError
+});
+}
+else { PreventDefault(e); }
+}
+},
+//Show Reply TextBox
+ShowReplyBox: function (id) {
+var element = $j(rootClass + '#CommentReplies_' + id);
+if ($j(rootClass + '#CommentReplies_' + id + ' #ReplyContainer_' + id).length)
+{ $j(rootClass + '#CommentReplies_' + id + ' #ReplyContainer_' + id).toggle(); }
+else {
+var postReply = '<div id="ReplyContainer_' + id + '" class="ReplyComment" style="padding-bottom:5px;">\
+<div class="image level1"><img src="http://www.c-sharpcorner.com/UploadFile/AuthorImage/DefaultAuthorImage.gif" alt=""></div>\
+<div class="commentcontent">\
+<textarea id="ReplyComment_' + id + '" onkeypress="Comments_article.PostCommentReply(' + id + ',event);" class="mention" style="height:18px;" spellcheck="true" placeholder="Type your comment here and press Enter Key...."></textarea>\
+</div>\
+<img id="PostLoader_' + id + '" src="/Images/csharp/ajax-loader_12x9.gif"\
+style="margin: 5px 7px 0px 0px; clear:both; float:right; display:none;" />\
+</div>';
+element.append(postReply);
+$j(rootClass + 'textarea#ReplyComment_' + id).elastic();
+GetValueAtTheRate(rootClass + 'textarea#ReplyComment_' + id);
+$j(rootClass + '#ReplyComment_' + id).focus();
+}
+$j(rootClass + '#CommentReplies_' + id).show();
+},
+//Show Replies
+ShowReplies: function (id, anchr) {
+var element = $j(rootClass + '#CommentReplies_' + id);
+var commentCount = $j(rootClass + '#CommentCount');
+//if (element.is(":visible") &&  == '')
+var pageSize = 50;
+if ($j(rootClass + '#Replies_' + id).text() != '0') {
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/Comments.asmx/GetComments",
+data: "{'id':'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd','type':'article','pageNumber':'1', 'pageSize':'" + pageSize + "', 'parentId':" + id + "}",
+beforeSend: function () {
+$j(rootClass + '#ajaxLoader_' + id).show(); //Show Ajax Loader
+},
+success: function (d) {
+element.html('');
+var data = d[0];
+$j.each(data, function (index) {
+data[index].CommentId;
+element.prepend(BulildCommentReply(data[index])); //Prepend root comments
+});
+$j(rootClass + '#ajaxLoader_' + id).hide(); //Hide Ajax Loader
+$j(anchr).remove();
+$j('#CommentReplies_' + id).show();
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+}
+});
+}
+},
+//Expend/Collapse Comment Replies
+ToggleReplies: function (id) {
+$j(rootClass + '#CommentReplies_' + id).toggle();
+},
+//Post Comment Reply
+PostCommentReply: function (parent_id, e) {
+if (e.keyCode == 13) {
+var replyContainer = $j(rootClass + '#ReplyContainer_' + parent_id);
+//var comment = FormatText($j(rootClass + '#ReplyComment_' + parent_id).val());
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var comment=null;
+$j(rootClass + '#ReplyComment_' + parent_id).mentionsInput('val', function(text) {
+comment=text;
+});
+comment =FormatText(comment);
+comment=GetCommentData(comment,rootClass + '#ReplyComment_' + parent_id);
+$j(rootClass +'#ReplyComment_' + parent_id).mentionsInput('reset', function(data) {
+});
+if (comment != '') {
+VerifyUser();
+$j.ajax({
+url: "/WebServices/Comments.asmx/InsertComment",
+data: "{'user_id':'','content_id':'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd','type':'article','parent_id':'" + parent_id + "', 'description':'" + comment + "'}",
+type: "POST",
+contentType: "application/json; charset=utf-8",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader_' + parent_id).show(); //Show Ajax Loader
+},
+success: function (response) {
+var data = response[0];
+replyContainer.before(BulildCommentReply(data));
+$j(rootClass + '#ReplyComment_' + parent_id).val('').trigger('autosize.resize');
+var replies = $j(rootClass + '#Replies_' + parent_id).text();
+$j(rootClass + '#Replies_' + parent_id).text(parseFloat(replies) + 1);
+totalComments.text(parseFloat(totalComments.text()) + 1);
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+SendMail(comment, '1', data.ParentUserId, data.CommentId); //SendMail(comment, is_child_comment, parent_user_id)
+$j(rootClass + '#PostLoader_' + parent_id).hide(); //Hide Ajax Loader
+PreventDefault(e);
+},
+Error: ShowError
+});
+}
+else { PreventDefault(e); }
+}
+},
+//Show Edit Panel
+ShowEditView: function (commentId) {
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var editButton = $j(rootClass + '#comment_' + commentId + ' div:eq(0) .edit');
+var editView = '<textarea id="CommentToEdit_' + commentId + '" onkeypress="Comments_article.EditComment(' + commentId + ',event);" class="inputText" spellcheck="true"  ></textarea>\
+<img id="ajaxLoaderEdit_' + commentId + '" src=\'/Images/csharp/ajax-loader_12x9.gif\' style="margin:4px 0px 0px 5px; display:none;" />';
+editButton.hide().next().hide();
+content.after(editView);
+var edittext=content.html();
+var existingusers= edittext.match(/<a[^>]+>([^<]+)<\/a>/g);
+var hyperlink=null;
+var username=null;
+//var userid=null;
+//var pieces=null;
+if(existingusers)
+{
+for(var i=0;i<=existingusers.length-1;i++)
+{
+hyperlink= $j(existingusers[i]).attr('href');
+//pieces=hyperlink.split('/');
+//userid=pieces[pieces.length-2];
+username=existingusers[i].match(/<a[^>]+>([^<]+)<\/a>/)[1];           
+mentionarraydata.push(username+'/^g*~o0#g*^/'+hyperlink);
+edittext=edittext.replace(existingusers[i],username);
+}
+}
+$j(rootClass + '#CommentToEdit_' + commentId).val(edittext);
+$j(rootClass + '#CommentToEdit_' + commentId).focus();
+content.hide();
+$j(rootClass + 'textarea#CommentToEdit_' + commentId).elastic();
+},
+//Edit Comment
+EditComment: function (commentId, e) {
+if (e.keyCode == 13) {  
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var textBox = $j(rootClass + '#CommentToEdit_' + commentId);
+textBox.val(textBox.val().replace('\n', ''));
+var comment = $j(rootClass + '#CommentToEdit_' + commentId).val().trim();
+comment = FormatText(comment);
+comment=GetEditData(comment);                    
+if (comment == content.text() || comment == '') {
+RemoveEditView(commentId);
+PreventDefault(e);
+}
+else {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=edit_comment&id=" + commentId + "&type=article",
+type: "POST",
+async: false,
+data: { description: comment },
+beforeSend: function () {
+$j(rootClass + '#ajaxLoaderEdit_' + commentId).show(); //Show Ajax Loader
+},
+success: function (response) {
+status = response;
+PreventDefault(e);
+mentionarraydata.length=0;
+},
+Error: ShowError
+});
+if (status == '1') {
+content.html(decodeURIComponent(comment));
+RemoveEditView(commentId);
+}
+}
+}
+else if (e.keyCode == 27) {
+RemoveEditView(commentId);
+}
+},
+//Update Comment Follow Status
+UpdateFollowStatus: function (checkBox) {
+var status;
+status = ($j(checkBox).is(':checked'))?true:false;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=comment_follow_status&id=b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd&type=article&status=" + status,
+type: "POST",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader').show(); //Show Ajax Loader
+},
+success: function (response) {
+if(response=='1')
+$j(rootClass + '#PostLoader').hide();
+},
+Error: ShowError
+});
+},
+//View Previous Comments
+ViewPreviousComments: function () {
+var pageNumber = $j('#HiddenPageNumber_article').val();
+var totalComment = $j(rootClass + '#HiddenTotalComments').val();
+if (parseFloat(totalComment) > (parseFloat(pageNumber) * pageSize)) {
+$j('#HiddenPageNumber_article').val(parseFloat(pageNumber) + 1);
+}
+else {
+$j(rootClass + '#RootComments').text('');
+$j('#HiddenPageNumber_article').val('1');
+}
+Comments_article.GetComments(0);
+},
+//Show editor options
+ShowEditorOptions: function (container,e) {
+$j(container).find('.pulseDelete:first').show();
+},
+//Hide editor options
+HideEditorOptions: function (container,e) {
+$j(container).find('.pulseDelete:first').hide();
+},
+//Show editor options
+ShowEditorOptionsReply: function (container,e) {
+$j(container).find('.pulseDeleteReply:first').show();
+$j(container).parents().eq(2).find('.pulseDelete').hide();
+e.stopPropagation();
+},
+//Hide editor options
+HideEditorOptionsReply: function (container,e) {
+$j(container).find('.pulseDeleteReply:first').hide();
+e.stopPropagation();
+}
+}// End of return
+function PreventDefault(e)//Function to prevent Default Events. Working in IE8
+{
+if (e.preventDefault)
+e.preventDefault();
+else
+e.returnValue = false;
+}
+function BuildComment(obj) {
+var authorUrl = obj.AuthorUrl;
+var desc=unescape(obj.Description);
+var commentHtml;
+commentHtml = '<div id="comment_' + obj.CommentId + '" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);" >';
+if ('' == obj.UserId || '' == 'E' || '' == 'A') {
+commentHtml += '<div class="pulseDelete">';
+commentHtml += '<span onclick="Comments_article.ShowEditView(' + obj.CommentId + ')" title="Edit" class="sprite edit"></span>';
+if ('' == obj.UserId || '' == 'A')
+commentHtml += '<span onclick="Comments_article.DeleteComment(' + obj.CommentId + ',' + obj.ParentId + ')" title="Delete" class="sprite delete"></span>';
+commentHtml += '</div>';
+}
+commentHtml += '<div class="image level0"><a href="' + authorUrl + '"><img alt="" title="' + obj.FullName + '" src="' + obj.PhotoUrl + '" /></a></div>\
+<div class="commentcontent">\
+<div class="commentDescription"  >' + desc + '</div>\
+<div>\
+<a class="LinkRed" href="'  + authorUrl + '">' + obj.FullName + '</a>\
+<span class="floatRight responsive_Commenttime"  style="font-size: 11px;"><span class="watchICon"></span>' + obj.CreatedDate + '</span>\
+</div>\
+<div style="margin-top: 4px;">\
+<ul class="rpv"><li class="newSpriteIcons rank" title="Rank" ><span>'+obj.AuthorRank+'</span></li><li class="newSpriteIcons point" title="Points" ><span>'+obj.AuthorPoints+'</span></li><li class="newSpriteIcons views" title="Total Views" ><span>'+obj.AuthorReadCount+'</span></li></ul>\
+<div class="floatRight pulseAction">\
+<img id="ajaxLoader_' + obj.CommentId + '" src=\'/Images/csharp/ajax-loader_12x9.gif\' style="margin:4px 0px 0px 5px; display:none;" />\
+<a class="newSpriteIcons like" onclick="Comments_article.LikeComment(' + obj.CommentId + ')"><span id="Likes_' + obj.CommentId + '">' + obj.Likes + '</span> </a>\
+<a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(' + obj.CommentId + ')" ><span id="Replies_' + obj.CommentId + '">' + obj.Replies + '</span> </a>';
+if ('True' == 'True')
+commentHtml += '<a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(' + obj.CommentId + ')">Post Reply</a>';
+if (parseFloat(obj.Replies) > 3)
+commentHtml += '<a class="newSpriteIcons showAll" onclick="Comments_article.ShowReplies(' + obj.CommentId + ', this)">Show All</a>';
+commentHtml += '</div>\
+</div>\
+<div class="clear"></div>\
+<div id="CommentReplies_' + obj.CommentId + '"></div>\
+</div>\
+</div>';
+return commentHtml;
+}
+function BulildCommentReply(obj) {
+var authorUrl = obj.AuthorUrl;
+var commentHtml = '<div id="comment_' + obj.CommentId + '" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);" >';
+if ('' == obj.UserId || '' == 'E' || '' == 'A') {
+commentHtml += '<div class="pulseDeleteReply">';
+commentHtml += '<span onclick="Comments_article.ShowEditView(' + obj.CommentId + ')" title="Edit" class="sprite edit"></span>';
+if ('' == obj.UserId || '' == 'A')
+commentHtml += '<span onclick="Comments_article.DeleteComment(' + obj.CommentId + ',' + obj.ParentId + ')" title="Delete" class="sprite delete"></span>';
+commentHtml += '</div>';
+}
+commentHtml += '<div class="image level1"><a href="' + authorUrl + '"><img title="' + obj.FullName + '" src="' + obj.PhotoUrl + '" alt="" /></a></div>\
+<div class="commentcontent">\
+<div class="commentDescription" >' + unescape(obj.Description) + '</div>\
+<div>\
+<a href="' + authorUrl + '" class="LinkRed">' + obj.FullName + '</a>\
+<span class="floatRight responsive_Commenttime"  style="font-size: 11px;"><span class="watchICon"></span>' + obj.CreatedDate + '</span>\
+</div>\
+<div style="margin-top: 4px;">\
+<ul class="rpv"><li class="newSpriteIcons rank" title="Rank" ><span>'+obj.AuthorRank+'</span></li><li class="newSpriteIcons point" title="Points" ><span>'+obj.AuthorPoints+'</span></li><li class="newSpriteIcons views" title="Total Views" ><span>'+obj.AuthorReadCount+'</span></li></ul>\
+<div class="floatRight pulseAction">\
+<img id="ajaxLoader_' + obj.CommentId + '" src=\'/Images/csharp/ajax-loader_12x9.gif\' style="margin:4px 0px 0px 5px; display:none;" />\
+<a onclick="Comments_article.LikeComment(' + obj.CommentId + ')" class="newSpriteIcons like"> <span id="Likes_' + obj.CommentId + '">' + obj.Likes + '</span></a>\
+</div>\
+</div>\
+</div>';
+return commentHtml;
+}
+function GetParentCommentsCount() {
+var count = 0;
+//$j(rootClass + '#RootComments > div.pulsecomment').each(function () {
+//    count = count + 1;
+//});
+count = $j(rootClass + '#RootComments > div.pulsecomment').size();
+return count;
+}
+function GetChildCommentsCount() {
+var childNodes = $j(rootClass + '#RootComments > div.pulsecomment div.commentcontent div div.ReplyComment').size();
+var textareas = $j(rootClass + '#RootComments > div.pulsecomment div.commentcontent textarea').size();
+if (childNodes > 0)
+return childNodes - textareas;
+else return 0;
+}
+function ManageAlternateColor() {
+$j(rootClass + '#RootComments > div').removeClass("BackgroundWhite");
+$j(rootClass + '#RootComments > div:odd').addClass("BackgroundWhite");
+}
+//        function FormatTextToInsert(text) {
+//            return escape(($j.trim(text)).replace('<', '&lt;').replace('>', '&gt;').replace('/', '&#47;').replace('"', '&quot;').replace('\n', ''));
+//        }
+function SendMail(comment, is_child_comment, parent_user, commentId) {
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=send_mail&type=article",
+data: { description: unescape(comment),
+content_title:'Generate Class From JSON or XML in Visual Studio',
+content_user_id:'pranayamr',
+is_child_comment:is_child_comment,
+content_id: 'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd',
+parent_user_id: parent_user,
+request_url:'http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/default.aspx',
+content_url:'',
+content_user_email:'',
+comment_id:commentId
+},
+type: "POST",
+async: false,
+success: function (response) {
+}
+});
+}
+function SendNotification(comment,mailtosendids)
+{
+var pathname = 'http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/default.aspx';
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=send_notification&type=article",
+data: { description: unescape(comment),
+mailtosend:mailtosendids,
+currenturl:pathname
+},
+type: "POST",
+async: false,
+success: function (response) {
+}
+});
+}
+function VerifyUser() {
+var data;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=current_user",
+type: "GET",
+async: false,
+success: function (response) {
+data = $j.parseJSON(response)[0].user_name;
+}
+});
+if (data == null || data == '') {
+var url = 'http://www.c-sharpcorner.com/UserRegistration/Logincheck.aspx?ReturnURL=/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/default.aspx';
+window.location = url;
+}
+}
+function ManagePaging(action, count) {
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var total_comments = $j.trim($j(rootClass + '#HiddenTotalComments').val());
+switch (action) {
+case 'i': //increase
+total_comments = parseFloat(total_comments) + 1;
+if ($j.trim(totalComments.text()) == '')
+totalComments.text('1');
+else
+totalComments.text(parseFloat(totalComments.text()) + 1);
+$j(rootClass + '#Paging').show();
+break;
+case 'd': //decrease
+if (parseFloat(total_comments) <= 0) {
+totalComments.text('');
+commentCount.text('');
+$j(rootClass + '#Paging').hide();
+}
+else {
+totalComments.text(parseFloat(totalComments.text()) - (1 + parseFloat(count)));
+total_comments = parseFloat(total_comments) - 1;
+}
+break;
+}
+var parentComments = parseFloat(GetParentCommentsCount());
+commentCount.text(parentComments + parseFloat(GetChildCommentsCount()));
+$j(rootClass + '#HiddenTotalComments').val(total_comments);
+$j('#HiddenPageNumber_article').val(parseInt((parentComments - 1) / pageSize) + 1);
+ManageViewMoreVisibility();
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+}
+function ManageViewMoreVisibility() {
+var previousComments = $j(rootClass + '#ViewPreviousComments');
+if (parseFloat($j(rootClass + '#HiddenTotalComments').val()) > parseFloat(GetParentCommentsCount()))
+previousComments.show();
+else
+previousComments.hide();
+}
+function RemoveEditView(commentId) {
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var editButton = $j(rootClass + '#comment_' + commentId + ' div:eq(0) .edit');
+var textBox = $j(rootClass + '#CommentToEdit_' + commentId);
+var ajaxLoader = $j(rootClass + '#ajaxLoaderEdit_' + commentId);
+editButton.show().next().show();
+textBox.val('');
+textBox.remove();
+ajaxLoader.remove();
+content.show();
+}
+function ShowError() {
+alert('There is some error processing your request');
+}
+}());
+$j(document).ready(function () {
+$j.ajaxSetup({ cache: false });
+if ('True' == 'False') {
+$j('#RootPostComment').remove();
+}
+Comments_article.GetComments(0);
+GetValueAtTheRate('textarea.mention');
+$j(document).on("click",function(event) {
+var classname = event.target.className;
+if(classname=== 'mention')
+{
+$j('.mentions-autocomplete-list').has('ul').show();
+}
+else
+{
+$j('.mentions-autocomplete-list').hide();
+}
+});
+//        $j('.commentcontent').not('.ReplyComment').mouseover(function(e){
+//          $j(this).prev().prev().show(); 
+//          e.stopPropagation();
+//        });
+//        
+//        $j('.commentcontent').mouseout(function(e){
+//          $j(this).prev().prev().hide(); 
+//          e.stopPropagation();
+//        });
+//        $j('.pulsecomment').not('.commentcontent .ReplyComment').mouseover(function(e){
+//          $j(this).find('.pulseDelete').show(); 
+//          e.stopPropagation();
+//        });
+//        
+//        $j('.pulsecomment').mouseout(function(e){
+//          $j(this).find('.pulseDelete').hide(); 
+//          $j(this).find('.pulseDeleteReply').hide();
+//           e.stopPropagation();
+//        });
+//        
+//        $j('.pulsecomment .commentcontent .ReplyComment').mouseover(function(e){
+//         $j(this).find('.pulseDeleteReply').show();  
+//         $j('.pulseDelete').hide(); 
+//         e.stopPropagation();
+//        });
+});    
+function GetValueAtTheRate(id) {
+$j(id).mentionsInput({
+minChars:1,
+onDataRequest:function (mode, query, callback) {
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/CSharpSearch.asmx/GetAllFriendsFollowers",
+data: "{'name':'"+query+"','user_id':'','content_id':'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd','type':'article'}",
+async:false,
+success: function(data) {
+var jasondata= [];
+var Id=null,Name=null,Avatar=null,Type=null;
+for(var i=0;i<=data.length-1;i++)
+{
+Id= data[i].Id
+Name= data[i].Name;
+Avatar=data[i].PhotoUrl;
+Type=data[i].AuthorUrl;
+var jasonobj= new JasonObj(Id,Name,Avatar,Type);
+jasondata.push(jasonobj);
+}
+//jasondata = _.filter(jasondata, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+callback.call(this, jasondata);
+}
+});
+}
+});
+}
+var JasonObj =function(Id, Name, Avatar,Type){
+this.id = Id;
+this.name = Name;
+this.avatar= Avatar;
+this.type = Type;
+};
+function GetCommentData(comment,id)
+{
+var value=null;
+var valuetobereplaced=null; 
+var userURL=null;
+$j(id).mentionsInput('getMentions', function(data) {
+$j.each(data, function(idx, obj) {
+value = '@['+obj.value+']('+obj.type+':'+obj.id+')';
+valuetobereplaced=FormatText(value);
+userURL= '<a target=_blank class=LinkNormalBlue href='+decodeURIComponent(obj.type)+'>'+obj.value+'</a>';
+comment=comment.replace(valuetobereplaced, userURL);
+});
+});
+return comment;            
+}
+function FormatText(text) {
+return escape(($j.trim(text)).replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('/', '&#47;').replace('"', '&quot;').replace('\n', '').replace('\\', '&#92;'));
+}  
+function GetEditData(comment) {
+comment = unescape(comment);
+if (mentionarraydata) {
+var username = null;
+var userlink = null;
+for (var i = 0; i <= mentionarraydata.length - 1; i++) {
+username = mentionarraydata[i].split('/^g*~o0#g*^/')[0];
+userlink = mentionarraydata[i].split('/^g*~o0#g*^/')[1];
+if (comment.indexOf(username) !== -1) {
+comment = comment.replace(username, '<a target=_blank class=LinkNormalGray href=' + userlink + '>' + username + '</a>')
+}
+}
+mentionarraydata.length = 0;
+}
+return escape(comment);
+}
+</script> <div class="clear"> </div> <div style="position: relative;" class="article"> <a name="ReadAndPostComment"></a> <div class="commentHeader"> <h2 class="headerControls">
+comments</h2> <img id="mainLoader" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="position: absolute; left: 315px; top: 26px; display: none;"> <div id="Paging" class="commentPaging"> <div class="commentpage"> <label id="TotalComments" class="floatRight" style="margin-right: 3px;">13</label> <label class="floatRight" style="margin-right: 3px;">
+of
+</label> <label id="CommentCount" class="floatRight" style="margin-right: 3px;">13</label> <input id="HiddenPageNumber_article" type="hidden" value="1"> <input id="HiddenTotalComments" type="hidden" value="8"> </div> <a id="ViewPreviousComments" class="previousComments" style="display: none;" onclick="Comments_article.ViewPreviousComments();return false;">
+View Previous Comments &gt;&gt;</a> </div> </div> <div class="clear"> </div> <div id="ctl00_Comments1_Panel1" class="pulseMainComment" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_Comments1_Button1&#39;)"> <div class="pulseCommentSectionMain" style="padding: 0px; overflow: inherit"> <div class="pulseCommentSection"> <div id="RootComments"><div id="comment_76512" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/SamTomato/sam-hobbs.aspx"><img alt="" title="Sam Hobbs" src="./Generate Class From JSON or XML in Visual Studio_files/SamTomato.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Visual Studio also has a command-line tool called XSD that can help with XML.</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/SamTomato/sam-hobbs.aspx">Sam Hobbs</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jul 25, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>9</span></li><li class="newSpriteIcons point" title="Points"><span>9.5k</span></li><li class="newSpriteIcons views" title="Total Views"><span>705.3k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76512" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76512)"><span id="Likes_76512">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76512)"><span id="Replies_76512">1</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76512)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76512"><div id="comment_76561" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);"><div class="image level1"><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx"><img title="Pranay Rana" src="./Generate Class From JSON or XML in Visual Studio_files/pranayamr.jpg" alt=""></a></div><div class="commentcontent"><div class="commentDescription">thank for information ...I do check that part also...</div><div><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" class="LinkRed">Pranay Rana</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>8h 19m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>283</span></li><li class="newSpriteIcons point" title="Points"><span>601</span></li><li class="newSpriteIcons views" title="Total Views"><span>100.3k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76561" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a onclick="Comments_article.LikeComment(76561)" class="newSpriteIcons like"> <span id="Likes_76561">0</span></a></div></div></div></div></div></div></div><div id="comment_76516" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/f0b2ed/pankaj-kumar-choudhary.aspx"><img alt="" title="Pankaj  Kumar Choudhary" src="./Generate Class From JSON or XML in Visual Studio_files/f0b2ed20150317084217.png"></a></div><div class="commentcontent"><div class="commentDescription">Nice Explain Sir........</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/f0b2ed/pankaj-kumar-choudhary.aspx">Pankaj  Kumar Choudhary</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Jul 25, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>96</span></li><li class="newSpriteIcons point" title="Points"><span>2k</span></li><li class="newSpriteIcons views" title="Total Views"><span>74.4k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76516" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76516)"><span id="Likes_76516">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76516)"><span id="Replies_76516">1</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76516)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76516"><div id="comment_76562" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);"><div class="image level1"><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx"><img title="Pranay Rana" src="./Generate Class From JSON or XML in Visual Studio_files/pranayamr.jpg" alt=""></a></div><div class="commentcontent"><div class="commentDescription">thank you</div><div><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" class="LinkRed">Pranay Rana</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>8h 19m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>283</span></li><li class="newSpriteIcons point" title="Points"><span>601</span></li><li class="newSpriteIcons views" title="Total Views"><span>100.3k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76562" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a onclick="Comments_article.LikeComment(76562)" class="newSpriteIcons like"> <span id="Likes_76562">0</span></a></div></div></div></div></div></div></div><div id="comment_76527" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/b926a6/rakesh-chavda.aspx"><img alt="" title="Rakesh Chavda" src="./Generate Class From JSON or XML in Visual Studio_files/b926a620150720012157.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Good one</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/b926a6/rakesh-chavda.aspx">Rakesh Chavda</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>10h 20m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>234</span></li><li class="newSpriteIcons point" title="Points"><span>852</span></li><li class="newSpriteIcons views" title="Total Views"><span>45.5k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76527" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76527)"><span id="Likes_76527">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76527)"><span id="Replies_76527">1</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76527)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76527"><div id="comment_76563" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);"><div class="image level1"><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx"><img title="Pranay Rana" src="./Generate Class From JSON or XML in Visual Studio_files/pranayamr.jpg" alt=""></a></div><div class="commentcontent"><div class="commentDescription">thank you</div><div><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" class="LinkRed">Pranay Rana</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>8h 19m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>283</span></li><li class="newSpriteIcons point" title="Points"><span>601</span></li><li class="newSpriteIcons views" title="Total Views"><span>100.3k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76563" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a onclick="Comments_article.LikeComment(76563)" class="newSpriteIcons like"> <span id="Likes_76563">0</span></a></div></div></div></div></div></div></div><div id="comment_76533" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/f2823e/santhakumar-munuswamy.aspx"><img alt="" title="Santhakumar Munuswamy" src="./Generate Class From JSON or XML in Visual Studio_files/f2823e20150612020708.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Thanks for nice article</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/f2823e/santhakumar-munuswamy.aspx">Santhakumar Munuswamy</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>9h 5m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>71</span></li><li class="newSpriteIcons point" title="Points"><span>2.5k</span></li><li class="newSpriteIcons views" title="Total Views"><span>53.4k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76533" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76533)"><span id="Likes_76533">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76533)"><span id="Replies_76533">1</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76533)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76533"><div id="comment_76564" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);"><div class="image level1"><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx"><img title="Pranay Rana" src="./Generate Class From JSON or XML in Visual Studio_files/pranayamr.jpg" alt=""></a></div><div class="commentcontent"><div class="commentDescription">thank you</div><div><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" class="LinkRed">Pranay Rana</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>8h 18m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>283</span></li><li class="newSpriteIcons point" title="Points"><span>601</span></li><li class="newSpriteIcons views" title="Total Views"><span>100.3k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76564" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a onclick="Comments_article.LikeComment(76564)" class="newSpriteIcons like"> <span id="Likes_76564">0</span></a></div></div></div></div></div></div></div><div id="comment_76553" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/9a9e6f/gopi-chand.aspx"><img alt="" title="Gopi Chand" src="./Generate Class From JSON or XML in Visual Studio_files/9a9e6f20150504031745.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Great one</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/9a9e6f/gopi-chand.aspx">Gopi Chand</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>8h 35m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>77</span></li><li class="newSpriteIcons point" title="Points"><span>2.3k</span></li><li class="newSpriteIcons views" title="Total Views"><span>178.7k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76553" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76553)"><span id="Likes_76553">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76553)"><span id="Replies_76553">1</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76553)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76553"><div id="comment_76565" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);"><div class="image level1"><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx"><img title="Pranay Rana" src="./Generate Class From JSON or XML in Visual Studio_files/pranayamr.jpg" alt=""></a></div><div class="commentcontent"><div class="commentDescription">thank you</div><div><a href="http://www.c-sharpcorner.com/authors/pranayamr/pranay-rana.aspx" class="LinkRed">Pranay Rana</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>8h 18m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>283</span></li><li class="newSpriteIcons point" title="Points"><span>601</span></li><li class="newSpriteIcons views" title="Total Views"><span>100.3k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76565" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a onclick="Comments_article.LikeComment(76565)" class="newSpriteIcons like"> <span id="Likes_76565">0</span></a></div></div></div></div></div></div></div><div id="comment_76586" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/2a6dc5/rajeesh-menoth.aspx"><img alt="" title="Rajeesh Menoth" src="./Generate Class From JSON or XML in Visual Studio_files/2a6dc520140923042903.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Good One</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/2a6dc5/rajeesh-menoth.aspx">Rajeesh Menoth</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>4h 51m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>261</span></li><li class="newSpriteIcons point" title="Points"><span>761</span></li><li class="newSpriteIcons views" title="Total Views"><span>8.1k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76586" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76586)"><span id="Likes_76586">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76586)"><span id="Replies_76586">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76586)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76586"></div></div></div><div id="comment_76589" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/6d1860/james-croft.aspx"><img alt="" title="James Croft" src="./Generate Class From JSON or XML in Visual Studio_files/6d186020141224123819.png"></a></div><div class="commentcontent"><div class="commentDescription">Wow this is incredible! Didn't realise you could do this. So much time wasted doing this manually! Thanks for the tip.</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/6d1860/james-croft.aspx">James Croft</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>3h 50m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>362</span></li><li class="newSpriteIcons point" title="Points"><span>368</span></li><li class="newSpriteIcons views" title="Total Views"><span>51.1k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76589" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76589)"><span id="Likes_76589">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76589)"><span id="Replies_76589">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76589)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76589"></div></div></div><div id="comment_76594" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/authors/mahesh/mahesh-chand.aspx"><img alt="" title="Mahesh Chand" src="./Generate Class From JSON or XML in Visual Studio_files/mahesh.png"></a></div><div class="commentcontent"><div class="commentDescription">Great. Nice tip!</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/authors/mahesh/mahesh-chand.aspx">Mahesh Chand</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>2h 6m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>1</span></li><li class="newSpriteIcons point" title="Points"><span>46.9k</span></li><li class="newSpriteIcons views" title="Total Views"><span>79.6m</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_76594" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(76594)"><span id="Likes_76594">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(76594)"><span id="Replies_76594">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(76594)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_76594"></div></div></div> </div> <div class="pulsecomment borderNone" id="RootPostComment" style="min-height: 42px;"> <div class="image level0"> <img src="./Generate Class From JSON or XML in Visual Studio_files/DefaultAuthorImage.gif" alt=""> </div> <div id="ctl00_Comments1_PanelPostComment" class="commentcontentPost" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_Comments1_ButtonPost&#39;)"> <div class="mentions-input-box"><div class="mentions"><div></div></div><textarea id="InputCommentText_0" style="height: 35px; overflow: hidden;" onkeypress="Comments_article.PostComment(&#39;0&#39;,event);" class="mention" spellcheck="true" placeholder="Type your comment here and press Enter Key...." data-mentions-input="true"></textarea><div style="position: absolute; display: none; word-wrap: break-word; white-space: pre-wrap; border: 1px solid rgb(220, 220, 220); font-weight: normal; width: 574px; font-family: pt_sansregular; line-height: normal; font-size: 14px; padding: 5px;">&nbsp;</div><div class="mentions-autocomplete-list"></div></div> <input type="submit" name="ctl00$Comments1$ButtonPost" value="" id="ctl00_Comments1_ButtonPost" style="display: none;"> </div> <img id="PostLoader" src="./Generate Class From JSON or XML in Visual Studio_files/ajax-loader_12x9.gif" style="clear: both; margin: 10px 5px 0px 0px; float: right; display: none;"> </div> </div> </div> <input type="submit" name="ctl00$Comments1$Button1" value="" onclick="return false;" id="ctl00_Comments1_Button1" style="display: none;"> <input type="hidden" name="ctl00$Comments1$HiddenFieldEmailComment" id="ctl00_Comments1_HiddenFieldEmailComment"> <input type="hidden" name="ctl00$Comments1$HiddenFieldIsChildComment" id="ctl00_Comments1_HiddenFieldIsChildComment"> <input type="hidden" name="ctl00$Comments1$HiddenFieldParentUserId" id="ctl00_Comments1_HiddenFieldParentUserId"> </div> <div class="clear"> </div> <div id="ctl00_Comments1_SocialComments" class="socialComments"> <div class="commentHeader"> <h2 class="headerControls floatLeft">
+COMMENT USING</h2> <span class="facebookComments" style="margin: 3px 5px;"></span> </div> <div class="fb-comments fb_iframe_widget" data-href="http://www.c-sharpcorner.com/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/default.aspx" data-width="675" data-num-posts="5" fb-xfbml-state="rendered"><span style="height: 175px; width: 675px;"><iframe id="fd870571" name="f513858a" scrolling="no" title="Facebook Social Plugin" class="fb_ltr" src="./Generate Class From JSON or XML in Visual Studio_files/comments.html" style="border: none; overflow: hidden; height: 175px; width: 675px;"></iframe></span></div> </div> </div> <div> </div> </div> <div class="rightCntr"> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_SponsorWithImage" updatemode="Conditional"> <h2 class="headerControls">
+SPONSORED BY
+</h2> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_SponsorAdWithImage" class="adBox"> <div class="adImage"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=62&target=http://www.mcnsolutions.net/" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_HrefSponsorLinkImage" rel="nofollow" target="_blank"> <img src="./Generate Class From JSON or XML in Visual Studio_files/040518AM.png" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_imgSponsor" width="75" height="90" class="image90"> </a> </div> <div class="adRight"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=62&target=http://www.mcnsolutions.net/" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_HrefSponsorLink" class="MemberoftheMonth" target="_blank">Custom Software Development</a> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_divSponsorDetail">MCN is your source for developing solutions involving websites, mobile apps, cloud-computing, databases, BI, back-end services and processes and client-server applications.</div> </div> </div> </div> <div class="clear"> </div> <div style="width: 336px; margin:10px 0;"> <a id="ctl00_RightBar_ArticleDetailRightBar1_NewsArticleAd1_AdRotatorArticle" href="http://www.c-sharpcorner.com/AdRedirector.aspx?BannerId=725&target=http://www.aspose.com/total-component-suite.aspx?utm_source=CSharpCorner&utm_medium=banner&utm_campaign=CSharpCorner-Rectangle" target="_blank"><img src="./Generate Class From JSON or XML in Visual Studio_files/2015_q2_336x280-static.jpg" alt="Aspose File APIs" style="border-width: 0px; display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;" width="0" height="0"></a> </div> <h2 class="headerControls">
+Trending up <a href="http://www.c-sharpcorner.com/RSS/TopArticles.aspx" id="ctl00_RightBar_ArticleDetailRightBar1_TrendingUp1_RssEnabledImageButton" class="headerRss" target="_blank"></a> </h2> <div class="rightBox"> <ul class="trendingBox"> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+01</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/qualities-of-a-quality-analyst/">
+Qualities of a Quality Analyst</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+02</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/skill-sets-that-can-even-kill-qa-profession/">
+Skill Sets That Can Even Kill QA Profession</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+03</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/f2823e/angularjs-comparison-with-backbone-knockout-part-3/">
+AngularJS Comparison with Backbone, Knockout - Part 3</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+04</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/how-to-test-a-crm-application/">
+How to Test a CRM Application</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+05</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/why-developers-should-not-test-their-own-software/">
+Why Developers Should Not Test Their Own Software</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+06</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/a5470d/introduction-to-big-data-analytics-using-microsoft-azure/">
+Introduction to Big Data Analytics Using Microsoft Azure</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+07</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/enterprise-application-integration/">
+Enterprise Application Integration</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+08</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/components-of-a-cloud-computing/">
+Components of Cloud Computing</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+09</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/asmabegam/mvc-angularjs-crud-using-web-api-2-with-stored-procedure/">
+MVC, AngularJS CRUD Using WEB API 2 With Stored Procedure</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+10</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/bd6c67/install-wordpress-and-iis-server-using-web-platform-installe/">
+Install Wordpress and IIS Server Using Web Platform Installer</a> </div> </li> </ul> <a href="http://www.c-sharpcorner.com/Articles/TopArticles.aspx" class="viewAllLink">
+View All</a> </div> <div style="padding-bottom: 10px;"> <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./Generate Class From JSON or XML in Visual Studio_files/follow_button.36a0bf81ff285eb6cad31df608651a2f.en.html" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="position: static; visibility: visible; width: 231px; height: 20px;"></iframe> </div> <div id="fb-root" class=" fb_reset"> <div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Generate Class From JSON or XML in Visual Studio_files/X9pYjJn4xhW.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Generate Class From JSON or XML in Visual Studio_files/X9pYjJn4xhW(1).html" style="border: none;"></iframe></div></div></div> <div class="fb-like-box fb_iframe_widget" data-href="https://www.facebook.com/pages/C-Corner/194086953935286" data-width="336px" data-show-faces="true" data-stream="false" data-header="true" data-border-color="#c6c6c6" data-max-rows="2" style="padding-bottom: 10px;
+border: none 0px" async="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=440531902678919&amp;container_width=336&amp;header=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FC-Corner%2F194086953935286&amp;locale=en_US&amp;sdk=joey&amp;show_faces=true&amp;stream=false&amp;width=336"><span style="vertical-align: bottom; width: 336px; height: 214px;"><iframe name="f18ae4059" width="336px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="./Generate Class From JSON or XML in Visual Studio_files/like_box.html" style="border: none; visibility: visible; width: 336px; height: 214px;" class=""></iframe></span></div> <div class="clear"> </div> </div> </div> </div> <div class="footer"> <div class="menuStripGray"> <div class="page"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/Members/mvps/">MVPs</a></li> <li><a href="http://www.c-sharpcorner.com/Articles/mostviewed.aspx">MOST VIEWED</a></li> <li><a href="http://www.c-sharpcorner.com/Members/legend/">LEGENDS</a></li> <li><a href="http://www.c-sharpcorner.com/articles/">NOW</a></li> <li><a href="http://www.c-sharpcorner.com/prizes/">PRIZES</a></li> <li><a href="http://www.c-sharpcorner.com/reviews/">REVIEWS</a></li> <li><a href="http://www.c-sharpcorner.com/survey/">SURVEY</a></li> <li><a href="http://www.c-sharpcorner.com/exam/">CERTIFICATIONS</a></li> <li><a href="http://www.c-sharpcorner.com/downloads/">DOWNLOADS</a></li> </ul> <div class="rightlink"> <a href="http://www.cbeyond.net/" target="_blank"><span class="hosted">Hosted By </span>
+CBeyond Cloud Services</a></div> </div> </div> <div class="menuStripBlue"> <div class="page"> <div class="menu"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/photos/">PHOTOS</a></li> <li><a href="http://www.c-sharpcorner.com/code/">CODE SNIPPETS</a> </li> <li class="display_none"><a href="http://www.c-sharpcorner.com/consulting/">CONSULTING</a> </li> <li class="display_none"><a href="http://www.c-sharpcorner.com/training/">TRAINING</a> </li> <li><a href="http://www.c-sharpcorner.com/beginners/">STUDENTS</a> </li> <li><a href="http://www.c-sharpcorner.com/Members/">MEMBERS</a> </li> <li><a href="http://www.c-sharpcorner.com/media/ContactUs.aspx">MEDIA KIT</a></li> <li><a href="http://www.c-sharpcorner.com/resources/aboutus.aspx">ABOUT US</a></li> <li><a href="http://www.c-sharpcorner.com/resources/">LINKS</a></li> <li><a href="http://www.c-sharpcorner.com/ideas/">IDEAS</a> </li> </ul> </div> </div> </div> <div class="footerBottom"> <div class="page"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/contactus.aspx">CONTACT
+US</a></li> <li><a href="http://www.c-sharpcorner.com/privacypolicy.aspx">PRIVACY POLICY</a></li> <li><a href="http://www.c-sharpcorner.com/termsconditions.aspx">TERMS &amp;
+CONDITIONS</a></li> <li><a href="http://www.c-sharpcorner.com/sitemap/">SITEMAP</a></li> <li><a href="http://www.c-sharpcorner.com/contactus.aspx?Type=6">REPORT ABUSE</a></li> </ul> <div class="social_link"> <ul> <li><a target="_blank" href="http://www.facebook.com/pages/C-Corner/194086953935286" class="facebook">facebook</a></li> <li><a target="_blank" href="http://twitter.com/csharpcorner" class="twitter">twitter</a></li> <li><a target="_blank" href="https://plus.google.com/u/0/114221266846457741050/posts" class="google">google</a></li> <li><a target="_blank" href="http://www.youtube.com/user/CsharpCorner1/" class="media">
+media</a></li> </ul> <p class="copyright">
+©2015
+C# Corner. All contents are copyright of their authors.</p> </div> </div> </div> </div> <div class="responsive_footer"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/contactus.aspx">Contact
+Us</a></li> <li><a href="http://www.c-sharpcorner.com/privacypolicy.aspx">Privacy Policy</a></li> <li><a href="http://www.c-sharpcorner.com/termsconditions.aspx">Terms &amp;
+Conditions</a></li> <li><a href="http://www.c-sharpcorner.com/resources/aboutus.aspx">About Us</a></li> </ul> <p>
+©2015
+C# Corner. All contents are copyright of their authors.</p> </div> </div> <input type="hidden" name="ctl00$hiddenFieldNext" id="ctl00_hiddenFieldNext"> <input type="hidden" name="ctl00$hiddenFieldPrevious" id="ctl00_hiddenFieldPrevious"> <meta name="google-signin-clientid" content="1008907732563-jaf78g0pj7k52q8efh0r22c58iol91cg.apps.googleusercontent.com"> <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read profile"> <meta name="google-signin-requestvisibleactions" content="http://schemas.google.com/AddActivity"> <meta name="google-signin-cookiepolicy" content="single_host_origin"> <script type="text/javascript">
+$j(window).load(function() {
+window.fbAsyncInit = function() {
+// init the FB JS SDK
+FB.init({
+appId: '440531902678919', // App ID from the App Dashboard
+xfbml: true,  // parse XFBML tags on this page?
+version: 'v2.3'
+});
+// Additional initialization code such as adding Event Listeners goes here
+};
+// Load the SDK's source Asynchronously
+(function(d, debug) {
+var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+if (d.getElementById(id)) { return; }
+js = d.createElement('script'); js.id = id; js.async = true;
+js.src = "//connect.facebook.net/en_US/sdk" + (debug ? "/debug" : "") + ".js";
+ref.parentNode.insertBefore(js, ref);
+} (document, /*debug*/false));
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/client:plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '//platform.twitter.com/widgets.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '//platform.linkedin.com/in.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+});
+</script> <div id="fb-root"> </div> <input type="hidden" name="ctl00$HiddenFieldCurrentPageUrl" id="ctl00_HiddenFieldCurrentPageUrl" value="http%3a%2f%2fgoo.gl%2f23s2WW"> <script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId"), document.getElementById("ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword"));
+//]]> </script> <script type="text/javascript">
+//<![CDATA[
+var ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId = document.all ? document.all["ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId"] : document.getElementById("ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId");
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.controltovalidate = "ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.focusOnError = "t";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.errormessage = "*";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.display = "Dynamic";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.validationGroup = "LeftLogin";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorUserId.initialvalue = "";
+var ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword = document.all ? document.all["ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword"] : document.getElementById("ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword");
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.controltovalidate = "ctl00_HeaderWithoutAjax1_Login1_TextBoxPassword";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.focusOnError = "t";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.errormessage = "*";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.display = "Dynamic";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.validationGroup = "LeftLogin";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_HeaderWithoutAjax1_Login1_RequiredFieldValidatorPassword.initialvalue = "";
+//]]> </script> <div> <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWJALE87HABALWhpmdAgL5qLTNDwKG2sDjDwLK34tbArmB+v4DAqzNvY8LAofWx+wHAqffju4DAsWHqLYOAt/E7eYIAsWy3PENAtTZ9swPAqHymPUBAu2g4IYPAqKy6oYLArTOrN8MAoaFxNMCAr2bnoYBAoq7n44DArvtkskKAsC9rPgBApPG95sFAvqYvr8NArqZvLQNAozTxuQIAqyhgL0KAumZnI0HAunC4L8LAuu5rv8PAqzJoPwHAt2gqOsNAqaV1o0JApzesN4MAprImu0FApX3q9AKY6XKwyMDBu2IAug6si3RO7nDRk4="> </div> <script type="text/javascript">
+//<![CDATA[
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+ValidatorOnLoad();
+}
+function ValidatorOnSubmit() {
+if (Page_ValidationActive) {
+return ValidatorCommonOnSubmit();
+}
+else {
+return true;
+}
+}
+WebForm_AutoFocus('ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId');//]]> </script> </form> <script type="text/javascript">
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '/JQuery/jquery.TrendingNow_09032014.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+function Like() {
+$j.ajax({
+url: "/Handlers/CsharpCommon.ashx?method=like_content&type=Article",
+data: { article_id: 'b2c9dee6-82d5-46ee-afd4-1bd4798cd7cd' },
+type: "POST",
+async: false,
+success: function(response) {
+var label = $j('#ctl00_LabelLikeCount');
+if (response == "login")
+window.location = 'http://www.c-sharpcorner.com/UserRegistration/Logincheck.aspx?ReturnURL=/UploadFile/pranayamr/generate-class-from-json-xml-in-visual-studio/default.aspx';
+else if (parseInt(response) == 1) {
+label.text(parseInt(label.text()) + 1);
+//                        label.css('color', 'green');
+}
+else {
+label.css('color', 'red');
+}
+}
+});
+}
+</script> <script type="text/javascript">
+$j(document).ready(function() {
+$j('a.show-dropdown').mouseover(function() {
+//get the height position of the current object
+var elementHeight = $j(this).height();
+var offsetWidth = 10;
+var offsetHeight = 10;
+//Get the tool tip container width adn height
+var toolTipWidth = $j("#dropDown").width();
+var toolTipHeight = $j("#dropDown").height();
+//Get the HTML document width and height
+var documentWidth = $j(document).width();
+var documentHeight = $j(document).height();
+//Set top and bottom position of the tool tip
+var top = $j(this).offset().top;
+if (top + toolTipHeight > documentHeight) {
+top = documentHeight - toolTipHeight - offsetHeight - (2 * elementHeight);
+}
+var left = $j(this).offset().left + offsetWidth;
+if (left + toolTipWidth > documentWidth) {
+left = documentWidth - toolTipWidth - (2 * offsetWidth);
+}
+$j('#dropDown').show();
+});
+$j('a.show-dropdown').mouseout(function() {
+$j("#dropDown").hide();
+});
+$j('#dropDown').mouseover(function() {
+$j('#dropDown').show();
+});
+$j('#dropDown').mouseout(function() {
+$j('#dropDown').hide();
+});
+});
+</script> <script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-535360-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>  <iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}"></div><form id="gclp-frame-form" target="gclp-frame" method="post" style="display: none;"></form><iframe name="oauth2relay242028031" id="oauth2relay242028031" src="./Generate Class From JSON or XML in Visual Studio_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

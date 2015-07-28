@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<!-- saved from url=(0105)https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#more-272 -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>API Testing using Selenium WebDriver And Java | AutomationGuide</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://seleniumbycharan.wordpress.com/xmlrpc.php">
+	<!--[if lt IE 9]>
+		<script src="https://s0.wp.com/wp-content/themes/pub/suits/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+	<meta name="google-site-verification" content="YIi26aykZiUIcz0Xgl3bYNn_Aya9kXHP236uusknGxQ">
+<meta name="msvalidate.01" content="B6F6005C939CD3C25A20F22309E8E01B">
+<meta name="p:domain_verify" content="713d6f1f72b834a2a0c44330533ff782">
+<meta name="yandex-verification" content="511ba56396b5961e">
+<link rel="alternate" type="application/rss+xml" title="AutomationGuide » Feed" href="https://seleniumbycharan.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="AutomationGuide » Comments Feed" href="https://seleniumbycharan.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="AutomationGuide » API Testing using Selenium WebDriver And Java Comments Feed" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/feed/">
+<script id="facebook-jssdk" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/sdk.js"></script><script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<style type="text/css"></style><link rel="stylesheet" id="all-css-0" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource" type="text/css" media="all">
+<link rel="stylesheet" id="suits-font-css" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-2" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(1)" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-3" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/global-print.css" type="text/css" media="print">
+<link rel="stylesheet" id="all-css-4" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(2)" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(3)"></script>
+<link rel="stylesheet" id="all-css-0" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://seleniumbycharan.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="How to set the browser language using selenium webdriver (Internationalization)" href="https://seleniumbycharan.wordpress.com/2015/07/20/how-to-set-the-browser-language-using-selenium-webdriver-internationalization/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/">
+<link rel="shortlink" href="http://wp.me/p6h9Dt-4o">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&url=https%3A%2F%2Fseleniumbycharan.wordpress.com%2F2015%2F07%2F26%2Fapi-testing-using-selenium-webdriver-and-java%2F&for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&url=https%3A%2F%2Fseleniumbycharan.wordpress.com%2F2015%2F07%2F26%2Fapi-testing-using-selenium-webdriver-and-java%2F&for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="API Testing using Selenium WebDriver And Java">
+<meta property="og:url" content="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/">
+<meta property="og:description" content="What is API : An application-programming interface (API) is a set of programming instructions and standards for accessing a Web-based software application or Web tool. Example :">
+<meta property="article:published_time" content="2015-07-26T14:52:05+00:00">
+<meta property="article:modified_time" content="2015-07-26T15:01:32+00:00">
+<meta property="og:site_name" content="AutomationGuide">
+<meta property="og:image" content="https://seleniumbycharan.files.wordpress.com/2015/07/images-4.jpg">
+<meta property="og:image:width" content="421">
+<meta property="og:image:height" content="282">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="https://seleniumbycharan.files.wordpress.com/2015/07/images-4.jpg?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://seleniumbycharan.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://seleniumbycharan.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://seleniumbycharan.wordpress.com/osd.xml" title="AutomationGuide">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wordpress.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="AutomationGuide"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="The More You Learn The More You Play"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://seleniumbycharan.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="API Testing using Selenium WebDriver And Java | AutomationGuide on WordPress.com">
+<meta name="description" content="What is API : An application-programming interface (API) is a set of programming instructions and standards for accessing a Web-based software application or Web tool. Example : An API is a software-to-software interface, not a user interface. With APIs, applications talk to each other without any user knowledge or intervention. When you buy movie tickets…">
+
+<script type="text/javascript">/*<![CDATA[*/if(typeof(addLoadEvent)!='undefined'){addLoadEvent(function(){if(top==self){i=document.createElement('img');i.src='https://botd2.wordpress.com/botd.gif?blog=92746635&post=272&lang=en&date=1437922325&ip=106.51.135.79&url=https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/';i.id='botd2';i.style.width='0px';i.style.height='0px';i.style.overflow='hidden';document.body.appendChild(i);}});}/*]]>*/</script>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<script charset="utf-8" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/rate.php"></script><script type="text/javascript" async="" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(4)"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/services.css"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://m-static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script type="text/javascript" async="" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(5)"></script><script charset="utf-8" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/rating-results.php"></script><style type="text/css" id="pd_popup_holder_style_8150989_post_272">#pd_popup_holder_8150989_post_272 { position:absolute; display:none; width:175px; height:auto; top:0px; left:0px; z-index:10000; border:solid 1px #CCC; background-color:white; padding:0px 15px;font-family:Arial,Sans;box-shadow: -10px 10px 20px rgba(0, 0, 0, .5);-webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);-moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25); }</style><style type="text/css">.fancybox-margin{margin-right:0px;}</style></head>
+
+<body class="single single-post postid-272 single-format-standard mp6 customizer-styles-applied single-author no-footer-sidebar highlander-enabled highlander-light" data-gclp-initialized="true" data-gistbox-initialized="true">
+	<div id="page" class="hfeed site">
+
+		<header id="masthead" class="site-header" role="banner">
+
+			<a class="home-link" href="https://seleniumbycharan.wordpress.com/" title="AutomationGuide" rel="home">
+				<h1 class="site-title">AutomationGuide</h1>
+				<h2 class="site-description">The More You Learn The More You Play</h2>
+			</a><!-- #navbar .header-navigation -->
+
+			<div id="navbar" class="header-navigation">
+
+				<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+					<h3 class="menu-toggle">Menu</h3>
+					<div class="menu-advancedselenium-part-2-container"><ul id="menu-advancedselenium-part-2" class="nav-menu"><li id="menu-item-58" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-58"><a href="https://seleniumbycharan.wordpress.com/category/advanced-selenium-part-1/">Categories</a>
+<ul class="sub-menu">
+	<li id="menu-item-16" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16"><a href="https://seleniumbycharan.wordpress.com/category/advanced-selenium-part-1/">Advance Selenium Part 1</a></li>
+	<li id="menu-item-59" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-59"><a href="https://seleniumbycharan.wordpress.com/tag/selenium-webdriver/">Advanced Selenium Part 2</a></li>
+	<li id="menu-item-76" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-76"><a href="https://seleniumbycharan.wordpress.com/category/basics/">Selenium Basics</a></li>
+	<li id="menu-item-57" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-57"><a href="https://seleniumbycharan.wordpress.com/category/database-testing/">DataBase Testing</a></li>
+</ul>
+</li>
+<li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29"><a href="https://seleniumbycharan.wordpress.com/about/">About Me</a></li>
+</ul></div>					<form role="search" method="get" class="search-form" action="https://seleniumbycharan.wordpress.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s" title="Search for:">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form>				</nav><!-- #site-navigation .navigation .main-navigation -->
+
+			</div><!-- #navbar .header-navigation -->
+
+		</header><!-- #masthead .site-header -->
+
+		<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+
+		<div id="content" class="site-content" role="main">
+
+			
+<article id="post-272" class="post-272 post type-post status-publish format-standard hentry category-webservices-testing tag-java tag-selenium tag-selenium-webdriver tag-testng">
+
+	
+			<header class="entry-header">
+
+				
+				<h1 class="entry-title">API Testing using Selenium WebDriver And&nbsp;Java</h1>
+			</header><!-- .entry-header -->
+
+											<div class="entry-content">
+					<div class="pd-rating" id="pd_rating_holder_8150989_post_272" style="display: inline-block;"><div class="rating-icons" id="pd_rate_8150989_post_272" style="float:left;"><div class="rating-star-icon" onmouseout="PDRTJS_8150989_post_272.rebuild();" onclick="PDRTJS_8150989_post_272.rate(1);" onmouseover="PDRTJS_8150989_post_272.hover(1);" id="PDRTJS_8150989_post_272_stars_1" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_8150989_post_272.rebuild();" onclick="PDRTJS_8150989_post_272.rate(2);" onmouseover="PDRTJS_8150989_post_272.hover(2);" id="PDRTJS_8150989_post_272_stars_2" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_8150989_post_272.rebuild();" onclick="PDRTJS_8150989_post_272.rate(3);" onmouseover="PDRTJS_8150989_post_272.hover(3);" id="PDRTJS_8150989_post_272_stars_3" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_8150989_post_272.rebuild();" onclick="PDRTJS_8150989_post_272.rate(4);" onmouseover="PDRTJS_8150989_post_272.hover(4);" id="PDRTJS_8150989_post_272_stars_4" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) bottom left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_8150989_post_272.rebuild();" onclick="PDRTJS_8150989_post_272.rate(5);" onmouseover="PDRTJS_8150989_post_272.hover(5);" id="PDRTJS_8150989_post_272_stars_5" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml.png) bottom left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div></div><span style="float:left;">&nbsp;</span><div id="rating_info_8150989_post_272" style="display: block; float: left; width: 16px; height: 16px; cursor: pointer; background: url(https://polldaddy.com/images/ratings/info.png) 3px 2px no-repeat;" onclick="javascript:PDRTJS_8150989_post_272.togglePopup();return false;"><span style="display:none;">i</span></div><div class="pd_popup_holder" id="pd_popup_holder_8150989_post_272">&nbsp;</div><div class="rating-msg" id="PDRTJS_8150989_post_272_msg" style="float:left; padding-left: 5px; text-align: left; font:normal normal /16px ; color: #000000;">1 Vote</div><p style="padding: 0px; margin: 0px; clear: both;"></p></div><br><p><img class="alignnone size-medium wp-image-273" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/images-4.jpg" alt="images (4)" width="300" height="201"></p>
+<p><strong>What is API</strong> :<br>
+An <strong>application-programming interface</strong> (API) is a set of programming instructions and standards for accessing a Web-based software application or Web tool.</p>
+<p><strong>Example :</strong></p>
+<p><span id="more-272"></span></p>
+<p>An API is a software-to-software interface, not a user interface. With APIs, applications talk to each other without any user knowledge or intervention. When you buy movie tickets online and enter your credit card information, the movie ticket Web site uses an API to send your credit card information to a remote application that verifies whether your information is correct. Once payment is confirmed, the remote application sends a response back to the movie ticket Web site saying it’s OK to issue the tickets.</p>
+<p><strong>What is JSON</strong> :</p>
+<p><strong>JSON (JavaScript Object Notation)</strong> is a lightweight, text-based, language-independent data exchange format that is easy for humans and machines to read and write. JSON can represent two structured types: objects and arrays. An object is an unordered collection of zero or more name/value pairs. An array is an ordered sequence of zero or more values. The values can be strings, numbers, booleans, null, and these two structured types.</p>
+<p><strong>Example :</strong>&nbsp;<a href="http://json.org/example" target="_blank">You can see it here</a>.</p>
+<p>JSON is an easier-to-use alternative to XML.</p>
+<p><strong>Note :</strong> Here i am just&nbsp;conferring how to parse and How to convert JsonObject to Java <span class="skimlinks-unlinked">Object.So</span> that you could use it your live projects using selenium.<br>
+<strong>&nbsp;Application contentType :</strong> Json</p>
+<p><strong>Objective : </strong>To validate Address :&nbsp;Chicago, IL, USA.<br>
+<strong>GoogleMaps API :&nbsp;</strong><a href="http://maps.googleapis.com/maps/api/geocode/json?address=chicago&sensor=false" rel="nofollow">http://maps.googleapis.com/maps/api/geocode/json?address=chicago&amp;sensor=false</a></p>
+<p>We can easily parse Json using “json-lib-2.4-jdk15.jar” &nbsp;<a href="http://www.java2s.com/Code/Jar/j/Downloadjsonlib24jdk15jar.htm" target="_blank">Download from here</a>…!</p>
+<p><strong>Please consider the below code as a reference.</strong></p>
+<p>import <span class="skimlinks-unlinked">java.io.IOException</span>;<br>
+import <span class="skimlinks-unlinked">java.net.HttpURLConnection</span>;<br>
+import <span class="skimlinks-unlinked">java.net.MalformedURLException</span>;<br>
+import <span class="skimlinks-unlinked">java.net.URL</span>;<br>
+import <span class="skimlinks-unlinked">java.util.Scanner</span>;</p>
+<p>import <span class="skimlinks-unlinked">org.json.JSONArray</span>;<br>
+import <span class="skimlinks-unlinked">org.json.JSONObject</span>;<br>
+import org.testng.Reporter;<br>
+import <span class="skimlinks-unlinked">org.testng.annotations.Test</span>;</p>
+<p>public class ReadJsonObject{<br>
+@Test<br>
+public void aptTesting() throws Exception {<br>
+try {<br>
+URL url = new URL(<br>
+“<a href="http://maps.googleapis.com/maps/api/geocode/json?address=chicago&sensor=false&#8221" rel="nofollow">http://maps.googleapis.com/maps/api/geocode/json?address=chicago&amp;sensor=false&amp;#8221</a>;);<br>
+HttpURLConnection conn = (HttpURLConnection) url.openConnection();<br>
+conn.setRequestMethod(“GET”);<br>
+conn.setRequestProperty(“Accept”, “application/json”);</p>
+<p>if (conn.getResponseCode() != 200) {<br>
+throw new RuntimeException(” HTTP error code : ”<br>
++ conn.getResponseCode());<br>
+}</p>
+<p>Scanner scan = new Scanner(url.openStream());<br>
+String entireResponse&nbsp;= new String();<br>
+while (scan.hasNext())<br>
+entireResponse += scan.nextLine();</p>
+<p><span class="skimlinks-unlinked">System.out.println(“Response</span> : “+entireResponse);</p>
+<p><span class="skimlinks-unlinked">scan.close</span>();</p>
+<p>JSONObject obj = new JSONObject(str);<br>
+String responseCode = obj.getString(“status”);<br>
+<span class="skimlinks-unlinked">System.out.println(“status</span> : ” + responseCode);</p>
+<p>JSONArray arr = obj.getJSONArray(“results”);<br>
+for (int i = 0; i &lt; arr.length(); i++) {<br>
+String placeid = arr.getJSONObject(i).getString(“place_id”);<br>
+<span class="skimlinks-unlinked">System.out.println(“Place</span> id : ” + placeid);<br>
+String formatAddress = arr.getJSONObject(i).getString(<br>
+“formatted_address”);<br>
+<span class="skimlinks-unlinked">System.out.println(“Address</span> : ” + formatAddress);</p>
+<p>//validating Address as per the requirement<br>
+if(formatAddress.equalsIgnoreCase(“Chicago, IL, USA”))<br>
+{<br>
+<span class="skimlinks-unlinked">System.out.println(“Address</span> is as Expected”);<br>
+}<br>
+else<br>
+{<br>
+<span class="skimlinks-unlinked">System.out.println(“Address</span> is not as Expected”);<br>
+}<br>
+}</p>
+<p>conn.disconnect();<br>
+} catch (MalformedURLException e) {<br>
+e.printStackTrace();</p>
+<p>} catch (IOException e) {</p>
+<p>e.printStackTrace();</p>
+<p>}</p>
+<p>}<br>
+}</p>
+<p>That’s it, Now you know to convert JsonObject to Java Object and use it in your Selenium snippet.</p>
+<p><strong>You can Practice using API</strong> :&nbsp;<span class="skimlinks-unlinked">http://restcountries.eu/rest/v1</span></p>
+<p>Smart way of&nbsp;Rest API Testing using Selenium Webdriver will be posted soon.</p>
+<div id="jp-post-flair" class="sharedaddy sd-rating-enabled sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this on</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-272" class="share-twitter sd-button share-icon" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/?share=twitter&nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-272" class="share-facebook sd-button share-icon" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/?share=facebook&nb=1" target="_blank" title="Share on Facebook"><span>Facebook<span class="share-count">65</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-272" class="share-google-plus-1 sd-button share-icon" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/?share=google-plus-1&nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-272" class="share-linkedin sd-button share-icon" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/?share=linkedin&nb=1" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn<span class="share-count">5</span></span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-visual"><div class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-nothumbs" data-post-id="96" data-post-format="false"><a class="jp-relatedposts-post-a jp-relatedposts-post-aoverlay" href="https://seleniumbycharan.wordpress.com/2015/06/01/page-object-model-selenium/" title="Page Object Model - Selenium FrameWork
+
+This will give you an introduction to &quot;Page Object Model&quot; and its implementation in Selenium using java. Before starting with Page Object Model let&#39;s first know what are design patterns. Design patterns. A Design pattern is a generic solution to a common software design/architecture problem. Implementation of these design patterns…" rel="nofollow" data-origin="272" data-position="0"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://seleniumbycharan.wordpress.com/2015/06/01/page-object-model-selenium/" title="Page Object Model - Selenium FrameWork
+
+This will give you an introduction to &quot;Page Object Model&quot; and its implementation in Selenium using java. Before starting with Page Object Model let&#39;s first know what are design patterns. Design patterns. A Design pattern is a generic solution to a common software design/architecture problem. Implementation of these design patterns…" rel="nofollow" data-origin="272" data-position="0">Page Object Model - Selenium FrameWork</a></h4><p class="jp-relatedposts-post-excerpt" style="max-height: 7.14285714285714em;">This will give you an introduction to "Page Object Model" and its implementation in Selenium using java. Before starting with Page Object Model let's first know what are design patterns. Design patterns. A Design pattern is a generic solution to a common software design/architecture problem. Implementation of these design patterns…</p><p class="jp-relatedposts-post-context">In "Advanced Selenium Part 1"</p></div><div class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-nothumbs" data-post-id="246" data-post-format="false"><a class="jp-relatedposts-post-a jp-relatedposts-post-aoverlay" href="https://seleniumbycharan.wordpress.com/2015/07/12/upload-a-file-using-autoit-in-selenium-webdriver/" title="Upload a file using AutoIT in Selenium-Webdriver
+
+Generally we face a problem while uploading a file in selenium.Because we know that selenium only supports web based applications.In order to suppress this we need to use AutoIT.For example you wanna upload your a file in Gmail-compose. what you gonna do ??? What is AutoIT ? AutoIt v3 is a…" rel="nofollow" data-origin="272" data-position="1"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://seleniumbycharan.wordpress.com/2015/07/12/upload-a-file-using-autoit-in-selenium-webdriver/" title="Upload a file using AutoIT in Selenium-Webdriver
+
+Generally we face a problem while uploading a file in selenium.Because we know that selenium only supports web based applications.In order to suppress this we need to use AutoIT.For example you wanna upload your a file in Gmail-compose. what you gonna do ??? What is AutoIT ? AutoIt v3 is a…" rel="nofollow" data-origin="272" data-position="1">Upload a file using AutoIT in Selenium-Webdriver</a></h4><p class="jp-relatedposts-post-excerpt" style="max-height: 7.14285714285714em;">Generally we face a problem while uploading a file in selenium.Because we know that selenium only supports web based applications.In order to suppress this we need to use AutoIT.For example you wanna upload your a file in Gmail-compose. what you gonna do ??? What is AutoIT ?&nbsp;AutoIt v3 is a…</p><p class="jp-relatedposts-post-context">In "Advanced Selenium Part 1"</p></div><div class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs" data-post-id="251" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://seleniumbycharan.wordpress.com/2015/07/12/how-to-use-firefox-profile-preferences-in-selenium-webdriver/" title="How to use Firefox Profile preferences in Selenium Webdriver
+
+There are many advantages by using FirefoxProfile preferences in selenium. You have to update the preferences within Firefox. We can do this by instantiating a Firefox Profile object and then update the settings.We will then need to pass this object into FirefoxDriver which will load the profile with your defined settings. 1.…" rel="nofollow" data-origin="272" data-position="2"><img class="jp-relatedposts-post-img" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/happy_developer_jxnyk9.gif" width="350" alt="How to use Firefox Profile preferences in Selenium Webdriver"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://seleniumbycharan.wordpress.com/2015/07/12/how-to-use-firefox-profile-preferences-in-selenium-webdriver/" title="How to use Firefox Profile preferences in Selenium Webdriver
+
+There are many advantages by using FirefoxProfile preferences in selenium. You have to update the preferences within Firefox. We can do this by instantiating a Firefox Profile object and then update the settings.We will then need to pass this object into FirefoxDriver which will load the profile with your defined settings. 1.…" rel="nofollow" data-origin="272" data-position="2">How to use Firefox Profile preferences in Selenium Webdriver</a></h4><p class="jp-relatedposts-post-excerpt">There are many advantages by using FirefoxProfile&nbsp;preferences in selenium. You have&nbsp;to update the preferences within Firefox. We can do this by instantiating a Firefox Profile object and then update the settings.We will then need to pass this object into FirefoxDriver which will load the profile with your defined settings. 1.…</p><p class="jp-relatedposts-post-context">In "Advanced Selenium Part 1"</p></div></div></div></div>									</div><!-- .entry-content -->
+			
+			<footer class="entry-meta">
+				Posted in <a href="https://seleniumbycharan.wordpress.com/category/webservices-testing/" rel="category tag">Webservices Testing</a> and tagged <a href="https://seleniumbycharan.wordpress.com/tag/java/" rel="tag">java</a>, <a href="https://seleniumbycharan.wordpress.com/tag/selenium/" rel="tag">selenium</a>, <a href="https://seleniumbycharan.wordpress.com/tag/selenium-webdriver/" rel="tag">selenium webdriver</a>, <a href="https://seleniumbycharan.wordpress.com/tag/testng/" rel="tag">TestNg</a><span class="on-date"> on <a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/" title="8:22 pm" rel="bookmark"><time class="entry-date" datetime="2015-07-26T20:22:05+00:00">July 26, 2015</time></a></span><span class="by-author"> by <span class="author vcard"><a class="url fn n" href="https://seleniumbycharan.wordpress.com/author/charan163/" title="View all posts by charan163" rel="author">charan163</a></span></span>.
+									<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#respond"><span class="leave-reply">Leave a comment</span></a>				
+							</footer><!-- .entry-meta -->
+
+
+</article><!-- #post-# .#post-class-# -->
+
+	<nav role="navigation" id="nav-below" class="post-navigation">
+		<h1 class="screen-reader-text">Post navigation</h1>
+
+	
+		<div class="nav-previous"><a href="https://seleniumbycharan.wordpress.com/2015/07/20/how-to-set-the-browser-language-using-selenium-webdriver-internationalization/" rel="prev"><span class="meta-nav">←</span> How to set the browser language using selenium webdriver (Internationalization)</a></div>		
+	
+	</nav><!-- #nav-below -->
+
+	
+<div id="comments" class="comments-area">
+
+	
+							<div id="respond" class="comment-respond js">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="https://seleniumbycharan.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
+																										
+
+
+												<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="3db050f8e6"><input type="hidden" name="_wp_http_referer" value="/2015/07/26/api-testing-using-selenium-webdriver-and-java/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; -webkit-transition: none; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: normal; width: 598px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 36px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource.html" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name</label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/wplogo.png" alt="WordPress.com Logo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your <span class="skimlinks-unlinked">WordPress.com</span> account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/ad516503a11cd5ca435acc9bb6523536" alt="Twitter picture" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/ad516503a11cd5ca435acc9bb6523536" alt="Facebook photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p><p class="post-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;" tabindex="7"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog" style="display: inline;">Notify me of new posts via email.</label></p></div>
+
+						
+						<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="272" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="704057d021"></p>
+<input type="hidden" name="genseq" value="1437924572">
+<p style="display: none;"></p>					<input type="hidden" id="ak_js" name="ak_js" value="1437924680136"></form>
+							</div><!-- #respond -->
+			<div style="clear: both"></div>
+</div><!-- #comments .comments-area -->
+		</div><!-- #content .site-content -->
+
+	</div><!-- #primary .content-area -->
+
+
+	<div id="secondary" class="sidebar-container" role="complementary">
+		<div class="widget-area">
+			<aside id="blog-stats-9" class="widget widget_blog-stats"><h3 class="widget-title">Blog Stats</h3>		<ul>
+			<li>18,309 Views</li>
+		</ul>
+		</aside><aside id="categories-7" class="widget widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-360925095"><a href="https://seleniumbycharan.wordpress.com/category/advanced-selenium-part-1/">Advanced Selenium Part 1</a>
+</li>
+	<li class="cat-item cat-item-8516"><a href="https://seleniumbycharan.wordpress.com/category/basics/">Basics</a>
+</li>
+	<li class="cat-item cat-item-2137975"><a href="https://seleniumbycharan.wordpress.com/category/database-testing/">DataBase Testing</a>
+</li>
+	<li class="cat-item cat-item-235584345"><a href="https://seleniumbycharan.wordpress.com/category/webservices-testing/">Webservices Testing</a>
+</li>
+		</ul>
+</aside>		<aside id="recent-posts-5" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/">API Testing using Selenium WebDriver And&nbsp;Java</a>
+						</li>
+					<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/20/how-to-set-the-browser-language-using-selenium-webdriver-internationalization/">How to set the browser language using selenium webdriver (Internationalization)</a>
+						</li>
+					<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/14/record-your-testcases-using-selenium-webdriver-java/">Record a Video of Your TestCases Using Selenium Webdriver+&nbsp;Java</a>
+						</li>
+					<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/12/how-to-use-firefox-profile-preferences-in-selenium-webdriver/">How to use Firefox Profile preferences in Selenium&nbsp;Webdriver</a>
+						</li>
+					<li>
+				<a href="https://seleniumbycharan.wordpress.com/2015/07/12/how-to-create-custom-firefox-profile-in-selenium-webdriver/">How to create custom firefox profile in Selenium&nbsp;Webdriver</a>
+						</li>
+				</ul>
+		</aside><aside id="facebook-likebox-10" class="widget widget_facebook_likebox"><h3 class="widget-title"><a href="https://www.facebook.com/seleniumautomationguide">Stay updated</a></h3>		<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/X9pYjJn4xhW.html" style="border: none;"></iframe></div></div></div>
+		<div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/seleniumautomationguide" data-width="340" data-height="250" data-hide-cover="false" data-show-facepile="false" data-show-posts="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=249643311490&amp;container_width=220&amp;height=250&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fseleniumautomationguide&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=false&amp;show_posts=false&amp;width=340"><span style="vertical-align: bottom; width: 220px; height: 130px;"><iframe name="f237762ab8" width="340px" height="250px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/page.html" style="border: none; visibility: visible; width: 220px; height: 130px;" class=""></iframe></span></div>
+		<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=249643311490&version=v2.3'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+		</aside><aside id="text-6" class="widget widget_text"><h3 class="widget-title">Facebook Group</h3>			<div class="textwidget"><!-- Facebook Badge START --><a href="https://www.facebook.com/groups/AutomationGuide/" title="Selenium Automation Guide" style="font-family:&quot;font-size:15px;font-variant:normal;font-style:normal;font-weight:normal;color:#3B5998;text-decoration:none;" target="_TOP">Selenium Automation Guide</a><br><a href="https://www.facebook.com/groups/AutomationGuide/" title="Selenium Automation Guide" target="_TOP"><img class="img" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/100009938220607.11021.1722827296.png" style="border:0;" alt=""></a><br><a href="https://www.facebook.com/groups/AutomationGuide/" title="Facebook Group" style="font-family:&quot;font-size:18px;font-variant:normal;font-style:normal;font-weight:normal;color:#3B5998;text-decoration:none;" target="_TOP">Join the group</a><!-- Facebook Badge END --></div>
+		</aside><aside id="blog_subscription-5" class="widget widget_blog_subscription"><h3 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h3>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog">
+											<p>Enter your email address to follow this blog and receive notifications of new posts by email.</p>
+						<p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Enter your email address" value="" id="subscribe-field"></p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="92746635">
+						<input type="hidden" name="source" value="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-5">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="3c04afb00c">						<input type="submit" value="Follow Us">
+					</p>
+				</form>
+			
+</aside>		</div><!-- .widget-area -->
+	</div><!-- #secondary .sidebar-container -->
+
+
+		</div><!-- #main .site-main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+			
+			<div class="site-info-container">
+
+				<div class="site-info">
+										<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com</a>.
+					<a href="https://wordpress.com/themes/suits/" title="Learn more about this theme">The Suits Theme</a>.				</div><!-- .site-info -->
+
+			</div><!-- .site-info-container -->
+
+		</footer><!-- #colophon .site-footer -->
+
+	</div><!-- #page -->
+
+<!-- wpcom_wp_footer -->
+<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/seleniumbycharan.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/seleniumbycharan.wordpress.com\/wp-login.php?action=logout&_wpnonce=97530c7e6d","homeURL":"https:\/\/seleniumbycharan.wordpress.com\/","postID":"272","gravDefault":"mystery","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(6)"></script>
+
+	<div id="bit" class="loggedout-follow-normal" style="bottom: -331px;">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “AutomationGuide”</label></h3>
+
+			<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 376 other followers</p>
+			<p><input type="email" name="email" value="Enter your email address" onfocus="this.value=(this.value==&quot;Enter your email address&quot;) ? &quot;&quot; : this.value;" onblur="this.value=(this.value==&quot;&quot;) ? &quot;Enter your email address&quot; : this.value;" id="loggedout-follow-field"></p>
+
+			<input type="hidden" name="action" value="subscribe">
+			<input type="hidden" name="blog_id" value="92746635">
+			<input type="hidden" name="source" value="https://seleniumbycharan.wordpress.com/2015/07/26/api-testing-using-selenium-webdriver-and-java/">
+			<input type="hidden" name="sub-type" value="loggedout-follow">
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="3c04afb00c"><input type="hidden" name="_wp_http_referer" value="/2015/07/26/api-testing-using-selenium-webdriver-and-java/">
+			<p id="bsub-subscribe-button"><input type="submit" value="Sign me up"></p>
+			</form>
+					<div id="bsub-credit"><a href="https://wordpress.com/?ref=lof">Build a website with WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+<script type="text/javascript" charset="UTF-8" id="polldaddyRatings"><!--//--><![CDATA[//><!--
+PDRTJS_settings_8150989_post_272={"id":8150989,"unique_id":"wp-post-272","title":"API%20Testing%20using%20Selenium%20WebDriver%20And%26nbsp%3BJava","permalink":"https:\/\/seleniumbycharan.wordpress.com\/2015\/07\/26\/api-testing-using-selenium-webdriver-and-java\/","item_id":"_post_272"}; if ( typeof PDRTJS_RATING !== 'undefined' ){if ( typeof PDRTJS_8150989_post_272 == 'undefined' ){PDRTJS_8150989_post_272 = new PDRTJS_RATING( PDRTJS_settings_8150989_post_272 );}}
+//--><!]]></script><script type="text/javascript" charset="UTF-8" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/rating.js"></script>
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/seleniumbycharan.wordpress.com\/2015\/07\/26\/api-testing-using-selenium-webdriver-and-java\/":272};
+		window.WPCOM_jetpack = false;
+				window.WPCOM_site_ID = 92746635;
+			</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/form.js"></script>
+<link rel="stylesheet" id="all-css-0" href="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/style(1).css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var JetpackEmojiSettings = {"base_url":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/emoji\/twemoji\/"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/saved_resource(7)"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "seleniumbycharan.wordpress.com";
+	</script>
+	<script type="text/javascript" src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/725X1342.skimlinks.js"></script><script src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'92746635','blog_tz':'5','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'92746635','v':'wpcom','tz':'5','user_id':'0','post':'272','subd':'seleniumbycharan'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1mJVY3bm9aR3VCbS9mWm1pRyZuJS1LX1t5QmRXZzE3RC9rQWZHK1FjbDltdWdaMVFFZTcxUGVHLWR0WTJodFRFMVRKdWkzdyYmdzUzfGc2LERLazh2JWpvWlI/V0w0P28ydEIlMnNDNWRKUG1NWFtqUz91PUk5SEwvfkwsMFRJU0R3Ykh+ckIsMSZddHlbVThIbFI3SGFJRnl0MnFHME4uQV9SdWJNQz1mdXxrSmtifFs4MmhnaTF4Ji1ORiZfcFFSWVU/dUNTSGpWW09ETEJoT1p4UXNjV093X0ZTNysuaUVfWkpiVVVrfltXWkItNG9aNmUwfCZhXy8vQlhBem8mUG1mST9aTS5xY3NPTDEuNmdIQX4/WWtSUkNteU1oPUpSbz1lZDYyRmhoelJ8TCVEK3Y='}]);
+_stq.push([ 'clickTrackerInit', '92746635', '272' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+
+<!--
+	generated 108 seconds ago
+	generated in 0.271 seconds
+	served from batcache in 0.002 seconds
+	expires in 192 seconds
+-->
+<div class="comment-likes-overlay" style="display: none;"></div><img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/g.gif" id="wpstats"><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div><img src="./API Testing using Selenium WebDriver And Java _ AutomationGuide_files/botd.gif" id="botd2" style="width: 0px; height: 0px; overflow: hidden;"><form id="gclp-frame-form" target="gclp-frame" method="post" style="display: none;"></form></body></html>
