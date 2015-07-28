@@ -52,6 +52,11 @@ $(function() {
 		},
 		GetEmail : function(data) {
 			var lines = data.split("\r\n");
+			// console.log(Mellanox.unique(lines));
+
+			// Saving Only Works with IE
+			// Mellanox.save_content_to_file(Mellanox.unique(lines),
+			// "C:\\test");
 
 			// Mellanox
 			var submission_entry_ids = [ 40391348, 40382399, 40077716, 40391156 ];
@@ -70,20 +75,50 @@ $(function() {
 			// map[value] = true;
 			// } else {
 			// console.log(email);
-			// }
+			//				}
+			//			});
 
-			$.each(lines, function(n, email) {
+			 $.each(lines, function(n, email) {
 				$.each(submission_entry_ids, function(i, val) {
 					// alert(submission_entry_ids[i]);
 					Mellanox.VoteNow(email, submission_entry_ids[i]);
 				});
 			});
 		},
+		unique : function(list) {
+			var result = [];
+			$.each(list, function(i, e) {
+				if ($.inArray(e, result) == -1)
+					result.push(e);
+			});
+			return result;
+		},
+		save_content_to_file : function(content, filename) {
+			var dlg = false;
+			with (document) {
+				ir = createElement('iframe');
+				ir.id = 'ifr';
+				ir.location = 'about.blank';
+				ir.style.display = 'none';
+				body.appendChild(ir);
+				with (getElementById('ifr').contentWindow.document) {
+					open("text/plain", "replace");
+					charset = "utf-8";
+					write(content);
+					close();
+					document.charset = "utf-8";
+					dlg = execCommand('SaveAs', false, filename);
+				}
+				body.removeChild(ir);
+			}
+			return dlg;
+		},
 		VoteHere : function() {
 			// TO GET all Email IDs and randomize GUI
 			// {"brandName":"test","aspxCommonObj":{"StoreID":"1","PortalID":"1","UserName":"superuser","CultureName":"en-US"}}
 
-			$.get('EmailsList.txt', function(data) {
+			// EmailsList.txt bg_email_list_Unique.txt email_list_2_Unique.txt
+			$.get('bg_email_list_Unique.txt', function(data) {
 				Mellanox.GetEmail(data);
 			}, 'text');
 		},
