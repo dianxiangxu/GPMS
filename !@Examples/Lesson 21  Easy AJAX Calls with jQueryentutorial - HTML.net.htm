@@ -1,0 +1,1032 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>
+
+	<title>Lesson 21: Easy AJAX Calls with jQueryentutorial - HTML.net</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=yes,maximum-scale=2">
+	<meta name="title" content="Lesson 21: Easy AJAX Calls with jQuery - HTML.net">
+	<meta name="description" content="Lesson 21: Easy AJAX Calls with jQuery - Free tutorials on HTML, CSS and PHP - Build your own website">
+	<meta name="keywords" content="HTML, CSS, XHTML, HTML Tutorial, CSS Tutorial, Forums, , ">
+	<meta name="language" content="en">
+	<meta name="robots" content="index, follow">
+	<meta http-equiv="PICS-Label" content="(PICS-1.1 &quot;http://www.classify.org/safesurf/&quot; l gen true for &quot;http://html.net/&quot; r (SS~~000 1))">
+	<meta http-equiv="PICS-Label" content="(PICS-1.1 &quot;http://www.icra.org/ratingsv02.html&quot; l gen true for &quot;http://html.net&quot; r (cz 1 lz 1 nz 1 oz 1 vz 1) &quot;http://www.rsac.org/ratingsv01.html&quot; l gen true for &quot;http://html.net&quot; r (n 0 s 0 v 0 l 0))"> 
+	<!--
+	<meta property="og:title" content="Lesson 21: Easy AJAX Calls with jQuery - HTML.net" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://html.net/tutorials/javascript/lesson21.php" />
+	<meta property="og:image" content="http://html.net/avatar.png" />
+	<meta property="og:site_name" content="HTML.net" />
+	<meta property="fb:admins" content="610699221" />
+	-->
+	<link rel="canonical" href="http://www.html.net/tutorials/javascript/lesson21.php"><link rel="stylesheet" href="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/default_002.css" type="text/css" media="screen"><link rel="stylesheet" href="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/default_003.css" type="text/css" media="print"><link rel="stylesheet" href="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/default.css" type="text/css" media="handheld, only screen and (max-device-width:480px)">
+	<script async="" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/cbgapi.loaded_1"></script><script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/ga.js" async="" type="text/javascript"></script><script async="" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/cbgapi.loaded_0"></script><script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/gpt.js" type="text/javascript" async=""></script><script type="text/javascript">
+			
+		function toggleVisibility(objectID, imageID) {
+		vis = document.getElementById(objectID).style;
+		state = vis.display;
+		if (state == 'none') {
+			vis.display = 'block';	
+			document.getElementById(imageID).value = '▲ Collapse view';
+			}
+		else {		
+			if (state == 'block') {
+				vis.display = 'none';
+				document.getElementById(imageID).value = '▼ Expand view';
+				}	
+			else {
+				vis.display = 'block'; 
+				document.getElementById(imageID).value = '▲ Collapse view';
+				}
+		}}
+
+		//-->
+	</script>
+
+	<script type="text/javascript">
+	// <![CDATA[
+		var jump_page = '{LA_JUMP_PAGE}:';
+		var on_page = '{ON_PAGE}';
+		var per_page = '{PER_PAGE}';
+		var base_url = '{A_BASE_URL}';
+		var style_cookie = 'phpBBstyle';
+		var style_cookie_settings = '{A_COOKIE_SETTINGS}';
+		var onload_functions = new Array();
+		var onunload_functions = new Array();
+
+		/**
+		* Find a member
+		*/
+		function find_username(url)
+		{
+			popup(url, 760, 570, '_usersearch');
+			return false;
+		}
+
+		/**
+		* New function for handling multiple calls to window.onload and window.unload by pentapenguin
+		*/
+		window.onload = function()
+		{
+			for (var i = 0; i < onload_functions.length; i++)
+			{
+				eval(onload_functions[i]);
+			}
+		}
+
+		window.onunload = function()
+		{
+			for (var i = 0; i < onunload_functions.length; i++)
+			{
+				eval(onunload_functions[i]);
+			}
+		}
+
+	// ]]>
+	</script>
+
+	<script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/forum_fn.js"></script>
+
+	
+
+	<!-- GOOGLE DFP -->
+	
+	<script type="text/javascript">
+		(function() {
+		var useSSL = 'https:' == document.location.protocol;
+		var src = (useSSL ? 'https:' : 'http:') +
+		'//www.googletagservices.com/tag/js/gpt.js';
+		document.write('\u003Cscr' + 'ipt src="' + src + '">\u003C/scr' + 'ipt>');
+	})();
+	</script><script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/gpt.js"></script><iframe class="tsvnzoqcwycdaneuagih" style="visibility: hidden; display: none;" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/container_002.htm"></iframe>
+	
+	<script type="text/javascript">
+		googletag.pubads().set('page_url', 'http://html.net/tutorials/javascript/lesson21.php');
+		googletag.pubads().setTargeting('language', 'en');
+		googletag.pubads().setTargeting('page', 'tutorial');
+ 
+		googletag.defineSlot('/16232578/HTML_NET_160x600', [160, 600], 'div-gpt-ad-1406669457921-0').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML_NET_1x1', [1, 1], 'div-gpt-ad-1406669457921-1').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML_NET_300x250A', [300, 250], 'div-gpt-ad-1406669457921-2').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML_NET_300x250B', [300, 250], 'div-gpt-ad-1406669457921-3').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML_NET_728x90', [728, 90], 'div-gpt-ad-1406669457921-4').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML.net_Passback_160x600', [160, 600], 'div-gpt-ad-1415474780011-0').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML.net_Passback_300x250', [300, 250], 'div-gpt-ad-1415474914296-0').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML.net_Passback_300x250B', [300, 250], 'div-gpt-ad-1415474942999-0').addService(googletag.pubads());
+		googletag.defineSlot('/16232578/HTML.net_Passback_728x90', [728, 90], 'div-gpt-ad-1415474992242-0').addService(googletag.pubads());
+		
+		googletag.pubads().enableSyncRendering();
+		googletag.enableServices();
+
+	</script><script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/pubads_impl_68.js"></script>
+	
+	<script type="text/javascript">
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/16232578/HTML.net_Passback_160x600', [160, 600], 'div-gpt-ad-1415474780011-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/16232578/HTML.net_Passback_300x250', [300, 250], 'div-gpt-ad-1415522828348-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/16232578/HTML.net_Passback_300x250B', [300, 250], 'div-gpt-ad-1415474942999-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/16232578/HTML.net_Passback_728x90', [728, 90], 'div-gpt-ad-1415474992242-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+	
+	
+	
+	
+<script type="text/javascript">var ezouid = "1589639888";</script><script type="text/javascript">window.google_analytics_uacct = "UA-59094534-21";</script><!-- base href="http://html.net/tutorials/javascript/lesson21.php" --><!--[if lt IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+<!--[if (gte IE 9) | (!IE)]><!-->
+    <script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/jquery.js"></script><iframe class="tsvnzoqcwycdaneuagih" style="visibility: hidden; display: none;" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/container_002.htm"></iframe>
+<!--<![endif]--><script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/ezjquery-noconflict.js"></script><script type="text/javascript">
+var ezoTemplate = 'old_site_gc';
+if(typeof ezouid == 'undefined')
+{
+    var ezouid = 'none';
+}
+var ezoFormfactor = '1';
+var ezo_elements_to_check = Array();
+if(typeof $ !== "undefined")
+{
+$(document).ready(function($) {
+    var ezIgnoreTags = ['SCRIPT','IFRAME','STYLE','LINK','BODY','HEAD'];
+    $(document).bind('DOMNodeInserted', function(e) {  
+        var element = e.target;
+        
+        //move our before and after spans to be first or last sibling elements
+        var after_span = $(element).prev('.ezoic-after-el');
+        if(after_span != null)
+        {
+             after_span.insertAfter($(element));
+        }
+        var before_span = $(element).next('.ezoic-before-el');
+        if(before_span != null)
+        {
+             before_span.insertBefore($(element));
+        }
+        
+
+        if(ezIgnoreTags.indexOf(element.tagName) == -1)
+        {
+            if($(element).hasClass('ezoic-wrapper') == false && $(element).hasClass('ezoic-no-wrapper') == false)
+            {
+                if($(element).closest('.ezoic-no-wrapper').length < 1 && $(element).closest('.ezoic-ad').length < 1 && $(element).closest('.ezo_ad').length < 1 && $(element).closest('.ezoic-wrapper').length < 1  && $(element).css('position') != 'fixed' && $(element).css('position') != 'absolute')
+                {
+                    $(element).addClass('ezoic-wrapper');
+                    ezo_elements_to_check.push(element);
+                    ezo_resize_interval_count=0; //reset interval timer
+
+                    if($(element).hasClass('ez_wrap_ins') == false && $(element).parent().is('body'))
+                    {
+                        $(element).wrap("<ins class='ezoic-wrapper ez_wrap_ins'></ins>");
+                        $(element).css('max-width','none');
+                        var ezo_style = getComputedStyle(element);
+
+                        var rand_class = 'ezo_wrapper_'+Math.floor((Math.random()*100000)+1);
+
+                        var ezoTempStyle = document.createElement('style');
+                        ezoTempStyle.innerHTML = '.'+rand_class+'{'+ezo_style.cssText+'}';
+                        document.getElementsByTagName('head')[0].insertBefore(ezoTempStyle,document.getElementsByTagName('head')[0].firstChild)
+                        $(element).addClass('ez_wrap_ins');
+                        $(element).addClass(rand_class);
+                        $(element).unwrap('ins');
+                    }
+
+
+                }
+            }
+        }
+        
+        
+    });
+});
+}</script>
+
+<script>
+var old_jquery = null;
+var old_jquery_sign = null;
+function open_jquery_wrapper()
+{
+    if(typeof $ezJQuery != 'undefined')
+    {
+        old_jquery = jQuery;
+        old_jquery_sign = $;
+        $ = $ezJQuery;
+        jQuery = $ezJQuery;
+    }
+}
+function close_jquery_wrapper()
+{
+    if(typeof $ezJQuery != 'undefined')
+    {
+        $ = old_jquery_sign;
+        jQuery = old_jquery;
+    }
+}
+//minified table_resize_js.txt - http://refresh-sf.com/yui/
+function ez_get_widest_cells(c){var b=0;var d=0;var a=new Array();$ezJQuery("td,th",c).each(function(){if($ezJQuery(this).css("word-break")!="break-all"&&$ezJQuery(this).css("word-break")!="break-word"){if($ezJQuery(this).width()>b){b=$ezJQuery(this).width();d=0;a=new Array()}if($ezJQuery(this).width()==b){if($ezJQuery(this).data("ez_lpw")>d){d=$ezJQuery(this).data("ez_lpw");a=new Array()}if($ezJQuery(this).data("ez_lpw")==d){a.push(this)}}}});return a}function ez_scale_font(a){if($ezJQuery(a).children().length>0){$ezJQuery(a).children().each(function(){ez_scale_font(this)})}$ezJQuery(a).css("font-size",parseInt($ezJQuery(a).css("font-size"))-1)}function ez_get_min_font(a){var b=16;$ezJQuery("*",a).each(function(){if(parseInt($ezJQuery(this).css("font-size"))<b){b=parseInt($ezJQuery(this).css("font-size"))}});return b}function ez_get_max_font(b){var a=10;$ezJQuery("*",b).each(function(){if(parseInt($ezJQuery(this).css("font-size"))>a){a=parseInt($ezJQuery(this).css("font-size"))}});return a}function ez_get_max_padding(b){var a=0;$ezJQuery("td",b).each(function(){if(parseInt($ezJQuery(this).css("padding-left"))>a){a=parseInt($ezJQuery(this).css("padding-left"))}if(parseInt($ezJQuery(this).css("padding-right"))>a){a=parseInt($ezJQuery(this).css("padding-left"))}});return a}function ez_scale_padding(a){$ezJQuery("td",a).each(function(){if(parseInt($ezJQuery(this).css("padding-left"))>1){$ezJQuery(this).css("padding-left",parseInt($ezJQuery(this).css("padding-left"))-1)}if(parseInt($ezJQuery(this).css("padding-right"))>1){$ezJQuery(this).css("padding-right",parseInt($ezJQuery(this).css("padding-left"))-1)}})}var ez_word_break_tables=[];function ez_word_break_table(a){if(typeof $ezJQuery=="undefined"){ez_word_break_tables.push(a);if(ez_word_break_tables.length==1){ez_queue.push({method:run_ez_word_break_tables,priority:1})}}else{run_ez_word_break_table(a)}}function ez_reset_width(a){if($ezJQuery(a).data("ez-no-defined-width")===true){$ezJQuery(a).css("width","")}return 1}function run_ez_word_break_tables(){$ezJQuery.each(ez_word_break_tables,function(a,b){run_ez_word_break_table(b)})}function run_ez_word_break_table(a){var l=$ezJQuery("#ez_script_id_"+a).prev("table");var d=11;if($ezJQuery(l).data("ez-gwidth")!=null){var g=$ezJQuery(l).data("ez-gwidth");var m=false;if(String(g).indexOf("%")>=0){m=true;g=Math.ceil((parseInt(g)/100)*$ezJQuery(l).parent()[0].clientWidth)}if($ezJQuery(l).width()<=g){return ez_reset_width(l)}var b=true;if(m==false&&$ezJQuery(l).data("ez-no-defined-width")===true){b=false;$ezJQuery(l).css("width",g)}var j=false;$ezJQuery("td,th",l).each(function(){var q=$ezJQuery(this).clone().find("script").remove().end().text();var n=q.split(/[.,\/ -]/);var p=n.reduce(function(r,s){return r.length>s.length?r:s}).length;var i=ez_get_max_font(this);var o=p*i*0.6;$ezJQuery(this).data("ez_lpw",o);if($ezJQuery(this).width()>0&&o>($ezJQuery(this).width()*0.65)){j=true}});if(j==false){return ez_reset_width(l)}var c=ez_get_min_font(l);if(c==12){d=10}else{if(c==11){d=9}}while(c>d+1&&$ezJQuery(l).width()>g){var f=$ezJQuery(l).width();ez_scale_font(l);c--;if(f==$ezJQuery(l).width()){return ez_reset_width(l)}}if($ezJQuery(l).width()<=g){return ez_reset_width(l)}var k=ez_get_max_padding(l);var f=$ezJQuery(l).width();while(k>1&&$ezJQuery(l).width()>g){ez_scale_padding(l);k--;if($ezJQuery(l).width()<=g){return ez_reset_width(l)}}while(c>d&&$ezJQuery(l).width()>g){var f=$ezJQuery(l).width();ez_scale_font(l);c--;if(f==$ezJQuery(l).width()){return ez_reset_width(l)}}if($ezJQuery(l).width()<=g){return ez_reset_width(l)}var h=ez_get_widest_cells((l));while(h.length!=0&&$ezJQuery(l).width()>g){for(var e=0;e<h.length;e++){if(b===true){$ezJQuery(h[e]).css("width",$ezJQuery(h[e]).width())}$ezJQuery(h[e]).css("word-break","break-all");$ezJQuery(h[e]).css("word-break","break-word")}h=ez_get_widest_cells(l)}return ez_reset_width(l)}};
+</script>
+
+<!-- START EZHEAD -->
+<script type="text/javascript">
+var soc_app_id = '0';
+var did = 3543;
+var ezdomain = 'html.net';
+var ezoicSearchable = 1;
+</script>
+<!---->
+<!-- END EZHEAD -->
+<script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/a_002.js" async="" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/a.js" async="" type="text/javascript"></script></head>
+
+<body>	
+
+	<div id="login">
+		
+		<div><a href="http://html.net/forums/ucp.php?mode=login">Login</a> | <a href="http://html.net/forums/ucp.php?mode=register">Register</a> | <a href="http://html.net/forums/faq.php">FAQ</a></div><img src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/user.png" alt="Anonymous">		
+	</div>
+	
+	
+<div id="ad_leaderboard">
+
+	<!-- HTML_NET_728x90 -->
+	<div id="div-gpt-ad-1406669457921-4" style="width:728px; height:90px;">
+	<script type="text/javascript">
+	googletag.display('div-gpt-ad-1406669457921-4');
+	</script><script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/ads"></script>
+
+</div>
+</div>
+
+
+	<div id="header">
+		
+        <div class="mobile">
+        <br><br>
+		<script async="" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/adsbygoogle.js"></script>
+        <!-- Mobile -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0457588126625430" data-ad-slot="9252428276" data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>
+		
+			
+		<ul>
+			<li><a href="http://html.net/">Home</a></li>
+			<li class="selected"><a href="http://html.net/tutorials/">Tutorials</a></li>
+			<li><a href="http://html.net/forums/">Forums</a></li>
+			<li><a href="http://html.net/about/">About</a></li>
+		</ul>
+		<form method="get" action="/search/" id="cse-search-box">
+		<div id="searchbar">
+			<span>
+			
+				<input name="q" id="query" type="text"><input id="submit" value="Search" type="submit">
+				 <input name="cx" value="002160260272865772965:d4fb4jd-jh0" type="hidden">
+				<input name="cof" value="FORID:11;NB:1" type="hidden">
+				<input name="ie" value="UTF-8" type="hidden">	
+				<input name="lr" value="lang_en" type="hidden">	
+				<input name="hl" value="en" type="hidden">	
+			
+			</span>
+		</div>
+		</form>
+
+	</div><!--/#header-->
+
+	
+		<div id="main">
+		<div id="content">
+			<div id="breadcrumb"><a href="http://html.net/">Home</a> » <a href="http://html.net/tutorials/">Tutorials</a> » <a href="http://html.net/tutorials/javascript/">JavaScript</a> » Lesson 21: Easy AJAX Calls with jQuery</div>
+			<div id="socialBookmarks">
+				<iframe style="position: static; visibility: visible; width: 80px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/tweet_button.htm" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>
+				<span id="FbCont"><fb:like fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=http%3A%2F%2Fhtml.net%2Ftutorials%2Fjavascript%2Flesson21.php&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;show_faces=false" fb-xfbml-state="rendered" class=" fb_iframe_widget" style="position:relative; top:-3px;" width="" show_faces="false" layout="button_count" href=""><span style="vertical-align: bottom; width: 78px; height: 20px;"><iframe class="" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/like.htm" style="border: medium none; visibility: visible; width: 78px; height: 20px;" title="fb:like Facebook Social Plugin" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f288cd68df2df64" frameborder="0" height="1000px" width="1000px"></iframe></span></fb:like></span>
+				<span id="gplusone"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/fastbutton.htm" name="I1_1438202697557" id="I1_1438202697557" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></span>
+				
+								
+			</div>
+			
+			
+			<!-- google_ad_section_start -->
+		
+		<div id="tutorials">﻿	
+	  <h1>Lesson 21: Easy AJAX Calls with jQuery</h1>
+	
+	  <p><em>By <a href="http://www.mariaantoniettaperna.com/">Maria Antonietta Perna</a></em></p>
+		
+		<p>jQuery provides a rich set of handy methods you can use to Ajaxify your web pages.</p>
+		
+		<p>Back in lesson 18 you used AJAX by dealing directly with the 
+XMLHttpRequest object.  You also performed some feature testing for 
+Internet Explorer browsers that didn't support the XMLHttpRequest 
+object.</p>
+		
+		<p>jQuery provides <strong>wrapper methods</strong> that shield you from the inner mechanisms of an AJAX request.</p>
+		
+		<p>In this lesson, you will learn how to use:</p>
+		
+		<ul>
+		
+		  <li><strong>$.load()</strong> to request content from an HTML page;</li>
+			
+			<li>the shorthand <strong>$.get()</strong> method;</li>
+			
+			<li>the shorthand <strong>$.post()</strong> method;</li>
+			
+			<li>the full-blown <strong>$.ajax()</strong> method.</li>
+		
+		</ul>
+		
+		<p>To follow along with the examples in this lesson, you need to have access to a server, just as you did back in lesson 18.</p>
+		
+		<h2>How do I load HTML content with jQuery AJAX?</h2>
+		
+		<p>jQuery offers a very simple approach to loading HTML content on your web page asynchronously.  Just use the <strong>$.load()</strong> function and you're done.</p>
+		
+		<p>If you use $.load(htmlPageUrl) passing only the URL of the HTML 
+document as argument, the entire content of the HTML document is loaded 
+into the calling page.</p>
+		
+		<p>Instead, I like to use $.load(htmlPageUrl fragmentIdentifier), which exactly targets the bit of content I intend to retrieve.</p>
+		
+		<p>Here's how this is done in practice.</p>
+		
+		<p>Prepare an HTML page containing a div element with an id of <em>content</em> and a paragraph element with some dummy content.  Save it as <em>content.html</em> (or anything you like), and upload it to your server.  This document provides the content to retrieve using AJAX.</p>
+		
+		<p>Prepare a second HTML page containing a link element, a div element with an id of <em>result</em>,
+ a reference to the jQuery library in the &lt;head&gt; section, and 
+enclosing &lt;script&gt; tags in the &lt;body&gt; section for your own 
+jQuery-powered JavaScript code.</p>
+		
+		<div class="codebox">
+		
+		<pre>		
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;title&gt;Lesson 21: Easy AJAX Calls with jQuery&lt;/title&gt;
+		<strong>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"&gt;&lt;/script&gt;</strong>
+		&lt;/head&gt;
+		&lt;body&gt;
+		&lt;h1&gt;Lesson 21: Easy AJAX Calls with jQuery load()&lt;/h1&gt;
+		
+		<strong>&lt;p&gt;&lt;a href="#"&gt;Click here to fetch HTML content&lt;/a&gt;&lt;/p&gt;</strong>
+		
+		<strong>&lt;div id="result"&gt;
+		
+		&lt;/div&gt;</strong>
+		
+		<strong>&lt;script type="text/javascript"&gt;</strong>
+		
+		<span class="code- comments">//JavaScript AJAX code here</span>
+		
+		<strong>&lt;/script&gt;</strong>
+			
+		&lt;/body&gt;
+		&lt;/html&gt;
+		
+		</pre>
+		
+		</div>
+		
+		<p>For these simple demos, we're going to embed our JavaScript code 
+inside the HTML page.  However, keep in mind that, if you write code for
+ a website, it's highly recommended that you use external JavaScript 
+files.</p>
+		
+		<p>When the user clicks on the link on your HTML page, an AJAX request will be made to <em>content.html</em> targeting the text inside the div element with an id of <em>content</em>.  This text is dynamically inserted in the div with an id of <em>result</em> in the calling page.</p> 
+		
+		<p>To achieve this, enter the following code snippet inside the enclosing &lt;script&gt; tags:</p>
+		
+		<div class="codebox">
+		
+		<pre>		
+		<span class="code-javascript">$(document).ready(function()</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//Attach a handler to the click event</span>
+		
+		<span class="code-comments">//of the link on the page:</span>
+		
+		<span class="code-javascript">$('a').click(function()</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//Target the div with id of result</span>
+		
+		<span class="code-comments">//and load the content from the specified url</span>
+		
+		<span class="code-comments">//and the specified div element into it:</span>
+		
+		<span class="code-javascript"><strong>$('#result').load('content.html #content')</strong>;</span>
+		
+		<span class="code-javascript">});</span>
+		
+		<span class="code-javascript">});</span>
+		
+		</pre>
+		
+		</div>
+		
+		<div class="examplelink"><img src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/icon.gif" alt=" - "> <a href="http://html.net/tutorials/javascript/lesson21_ex1.html" title="View the above code as an example">Show example</a></div>
+		
+		<p>Save your work and preview it in a browser.  You should see 
+something like the page indicated by following the example link above.</p>
+		
+		<p>Click the link, and if all goes well, the dummy text from <em>content.html</em> is loaded inside the div element on the page.  The operation takes place asynchronously without a full page refresh.</p>
+		
+		<h2>How do I use $.get()?</h2>
+		
+		<p>As nice and simple as $.load() is, it can't perform all types of content requests.  A more flexible approach is offered by the <strong>$.get() method</strong>.</p>
+		
+		<p>You can use $.get() to load data from the server with a <strong>GET HTTP request</strong> - that is, via a <strong>query string</strong> (see <strong><a href="http://html.net/tutorials/php/lesson10.php">Lesson 10: Passing variables in a URL</a></strong> in the <strong>PHP tutorial on HTML.net</strong> for a great introduction to query strings).</p>
+		
+		<p>$.get(url, {dataKey1 : 'dataValue1', dataKey2 : 'dataValue2'}, optionalSuccessFunction) takes in 3 arguments:</p>
+
+		<ol>
+		
+		  <li>the<strong>URL where the data you want to retrieve is stored</strong>;</li>
+			
+			<li>optionally, <strong>some data</strong>, if you want to send data to the server with the request.  This is done using either a string or what is called <strong>object literal or map</strong>, that is, comma-separated key:value pairs inside curly braces.  For instance: <strong>{'First Name' : 'John', 'Last Name' : 'Smith'}</strong> sends the First Name and Last Name values to the server together with the AJAX GET request;</li>
+			
+			<li>and a <strong>function that deals with the returned data if you want to display or process the successful response in any way.</strong></li>
+		
+		</ol>
+		
+		<p>Let's see how to use jQuery .get() to retrieve the XML document you used back in lesson 18.</p>
+		
+		<p>The HTML page that makes the AJAX request remains unchanged from the previous example.  Rewrite the JavaScript code as follows:</p>
+		
+		<div class="codebox">
+		
+		<pre>		
+		<span class="code-javascript">$(document).ready(function()</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//Store the URL value in a variable</span>
+		
+		<span class="code-javascript">var url = "content.xml";</span>
+		
+		
+		<span class="code-comments">/*************************************/</span>
+		
+		
+		<span class="code-comments">//Package the result-handling code</span>
+		
+		<span class="code-comments">//in its own function: it's more readable</span>
+		
+		<span class="code-javascript">function processData(data)</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//This variable will hold the result</span>
+		
+		<span class="code-comments">//converted into a string for display</span>
+		
+		<span class="code-javascript">var resultStr = "";</span>
+		
+		<span class="code-comments">//use jQuery .find() to extract the language</span>
+		
+		<span class="code-comments">//element from the returned data</span>
+		
+		<span class="code-comments">//and store it in an array</span>
+		
+		<span class="code-javascript">var items = <strong>$(data).find('language')</strong>;</span>
+		
+		<span class="code-comments">//loop over each language item with</span>
+		
+		<span class="code-comments">//jQuery .each() function</span>
+		
+		<span class="code-javascript"><strong>$(items).each(function(i)</strong></span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//extract the text of each language item and</span>
+		
+		<span class="code-comments">//add it to the resultStr variable with a line break.</span>
+		
+		<span class="code-comments"><strong>//Notice the use of $(this)</strong></span>
+		
+		<span class="code-comments"><strong>//to refer to the item currently being</strong></span>
+		
+		<span class="code-comments"><strong>//inspected by the loop</strong></span>
+		
+		<span class="code-javascript">resultStr += <strong>$(this).text() + '&lt;br /&gt;'</strong>;</span>
+		
+		<span class="code-comments">//add the final string result to div element</span>
+		
+		<span class="code-comments">//with the id of result using .html()</span>
+		
+		<span class="code-javascript">$('#result').html(resultStr);</span>
+		
+		<span class="code-javascript">});</span>
+		
+		<span class="code-javascript">}</span>
+		
+		
+		<span class="code-comments">/****************************************/</span>
+		
+		
+		<span class="code-comments">//Attach a click handler to the link element:</span>
+		
+		<span class="code-comments">//when the user clicks on the link, the AJAX</span>
+		
+		<span class="code-comments">//request is sent to the server:</span>
+		
+		<span class="code-javascript">$('a').click(function()</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//use $.get() passing the url variable and</span>
+		
+		<span class="code-comments">//the name of the result-handling function</span>
+		
+		<span class="code-comments">//as arguments:</span>
+		
+		<span class="code-javascript"><strong>$.get(url, processData)</strong>;</span>
+		
+		<span class="code-javascript">});</span>
+		
+		<span class="code-javascript">});</span>
+		
+		</pre>
+		
+		</div>
+		
+		<div class="examplelink"><img src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/icon.gif" alt=" - "> <a href="http://html.net/tutorials/javascript/lesson21_ex2.html" title="View the above code as an example">Show example</a></div>
+		
+		<p>Save all your files on the server and click on the link.  If all 
+goes well, you should see a list of programming languages being 
+displayed on the page without a full page refresh.</p>
+		
+		<p>In the example above, you came across <strong>jQuery .find()</strong> and <strong>jQuery .each()</strong>.</p>
+		
+		<p><strong>$.find()</strong> is used to find a DOM element's descendants or children.  In the example above, you used it to find all children called <em>language</em> of the root XML element contained in the variable called <em>data</em>.  Further details on $.find() can be accessed on <a href="http://api.jquery.com/find/">http://api.jquery.com/find/</a>.</p>
+		
+		<p><strong>$.each(index)</strong> is a for ... loop done the jQuery way.  It's extremely concise and efficient.  Notice the use of <strong>$(this)</strong>
+ inside the $.each() function block.  This is a snappy way of referring 
+to the item the loop is currently processing: in our example above 
+$(this) refers to one of the <em>language items</em> in the <em>items array</em>.</p>
+		
+		<p>More details on $.each() can be found on <a href="http://api.jquery.com/each/">http://api.jquery.com/each/</a>.</p>
+		
+		<h2>How do I use $.post()?</h2>
+		
+		<p>If you want to use POST instead of GET in your AJAX calls, you can use <strong>$.post()</strong>.</p>
+		
+		<p>Unlike GET requests, POST requests don't use a query string to send
+ data.  If you intend to send more than a few bits of data to the sever,
+ or if you intend to send sensitive data, it's recommended you use an 
+HTTP POST request.</p>
+		
+		<p>The way you implement $.post() is very similar to the way you 
+implemented $.get() in the previous example.  I invite you to experiment
+ with it on your own and to visit <a href="http://api.jquery.com/jQuery.post/">http://api.jquery.com/jQuery.post/</a> for more code samples and useful details.</p>
+		
+		<h2>How do I use $.ajax()?</h2>
+		
+		<p>If you need greater flexibility, the full-blown <strong>$.ajax()</strong> function offers a great number of settings.</p>
+		
+		<p>For instance, let's say you want to retrieve a list of programming 
+languages from the XML document you used in the previous example.  You 
+might want to specify the following options:</p>
+		
+		<ol>
+		
+		  <li>the request must be an <strong>HTTP GET</strong>;</li>
+			
+			<li>the page from which the result is returned <strong>must not be in the browser's cache</strong>;</li>
+			
+			<li>the response returned by the server <strong>is of data-type XML</strong>;</li>
+			
+			<li>the request <strong>is made in html</strong>;</li>
+			
+			<li>there must be a <strong>function that handles the returned result if all goes well</strong>;</li>
+			
+			<li>and, finally, there must be a <strong>function that handles errors</strong> in case the request is not successful.</li>
+		
+		</ol>
+		
+		<p>Use the HTML page and the XML document from the previous example.  
+Also, keep the url variable and the processData() function from the 
+previous exercise - you will use both as the url and the success 
+arguments respectively inside the $.ajax() function.  Delete everything 
+else inside the document.ready() function.  Just below the processData()
+ function, write the following code:</p>
+		
+		<div class="codebox">
+		
+		<pre>		
+		<span class="code-comments">//Package the code that handles</span>
+		
+		<span class="code-comments">//error message in case the request</span>
+		
+		<span class="code-comments">//is not successful:</span>
+		
+		<span class="code-javascript">function errorAlert(e, jqxhr)</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-javascript">alert("Your request was not successful: " + jqxhr);</span>
+		
+		<span class="code-javascript">}</span>
+		
+		
+		<span class="code-comments">/*************************************/</span>
+		
+		
+		<span class="code-comments">//Attach a click handler to the</span>
+		
+		<span class="code-comments">//link element on the page</span>
+		
+		<span class="code-javascript">$('a').click(function()</span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-comments">//Prepare the AJAX request that</span>
+		
+		<span class="code-comments">//will be sent when the user clicks the link:</span>
+		
+		<span class="code-javascript"><strong>$.ajax(</strong></span>
+		
+		<span class="code-javascript">{</span>
+		
+		<span class="code-javascript">type: "GET",</span>
+		
+		<span class="code-javascript">cache: false,</span>
+		
+		<span class="code-javascript">url: url,</span>
+		
+		<span class="code-javascript">dataType: "xml",</span>
+		
+		<span class="code-javascript">contentType: "text/html",</span>
+		
+		<span class="code-javascript">success: processData,</span>
+		
+		<span class="code-javascript">error: errorAlert</span>
+		
+		<span class="code-javascript">});</span> <span class="code-comments">//end of $.ajax</span>
+		
+		<span class="code-javascript">});</span> <span class="code-comments">//end of click handler</span>
+		
+		<span class="code-javascript">});</span>  <span class="code-comments">//end of $.ready function</span>
+		
+		</pre>
+		
+		</div>
+		
+		<p>Save your work and preview it in a browser.  The result should be 
+similar to the previous example.  If an error occurs, you'll be 
+presented with an alert box.  The errorAlert() function has an <strong>e</strong> argument that represents the <strong>type of error</strong>, and an <strong>jqxhr</strong> argument that represents the <strong>request as a jQuery object</strong>.</p>
+		
+		<p>In case an error occurs, details about the error are automatically 
+contained in the arguments provided and will be displayed in the alert 
+box.</p>
+		
+		<p>Do you want to test the error catching function?  Simply replace <code>dataType: "xml"</code> in the $.ajax() function with <code>dataType: "text/xml"</code>.
+  Save all your files and run the HTML page.  Now, when you click the 
+link, an alert box should pop up displaying a parser error message.</p>
+		
+		<p>More on $.ajax() can be found on <a href="http://api.jquery.com/jQuery.ajax/">http://api.jquery.com/jQuery.ajax/</a>.</p>
+		
+		<h2>Summary</h2>
+		
+		<p>You got to the end of the lesson, and also to the end of this JavaScript tutorial.  Congratulations!</p>
+		
+		<p>Now you're familiar with the <strong>core JavaScript syntax and objects</strong>.  You know how to include the <strong>jQuery library</strong> in your projects to add flair to your web pages and <strong>make AJAX calls</strong> easily and efficiently.</p>
+		
+		<p>I encourage you to keep experimenting with code samples and to be 
+an active participant in JavaScript forums.  Why not starting from the <a href="http://html.net/forums/"> forums on HTML.net</a>?  It's easy to <a href="http://html.net/forums/ucp.php?mode=register">register</a> and meet with the real experts in your programming language of choice.</p> 
+		
+		<p>As you might have already guessed, the best way to learn coding is to keep coding ... a lot.</p>
+		
+		<p>The only thing left is for me to wish you hours of fun with your new friends, JavaScript and jQuery.</p>
+	
+	<hr><div id="ad_rectangle">
+		
+		<span style="width:300px; height:250px; margin-right:20px; margin-bottom:10px; float:left">
+		
+			<!-- HTML_NET_300x250A -->
+			<div id="div-gpt-ad-1406669457921-2" style="width:300px; height:250px;">
+			<script type="text/javascript">
+			googletag.display('div-gpt-ad-1406669457921-2');
+			</script><script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/ads_003"></script>
+			</div>
+
+		</span>
+	
+
+		<!-- HTML_NET_300x250B -->
+		
+		<div id="div-gpt-ad-1406669457921-3" style="width:300px; height:250px; float:left;">
+		<script type="text/javascript">
+		googletag.display('div-gpt-ad-1406669457921-3');
+		</script><script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/ads_004"></script>
+		</div>
+		
+		
+		
+		<!--
+		<div data-type="ad" data-publisher="lqm.html.site" data-zone="ron" data-format="300x250" style='width:300px; height:250px; float:left;'></div>
+			
+		-->
+		
+</div><table id="forums" style="font-size:0.8em;"><thead><tr><th class="topic">Related topics in the <a href="http://html.net/forums/viewforum.php?f=" style="font-size:1em;"></a></th><th class="replies">Replies</th><th class="views">Views</th></tr></thead><tbody><tr><td colspan="3" style="text-align:center;"><strong>No related topics yet</strong></td></tr></tbody></table><p><a href="http://html.net/forums/posting.php?mode=post&amp;f=&amp;subject=Easy%20AJAX%20Calls%20with%20jQuery" title="Post a new topic" style="text-decoration:none; font-size:0.8em;">+ Post a new topic</a></p><hr><p class="previous"><a href="http://html.net/tutorials/javascript/lesson20.php">&lt;&lt; Lesson 20: Cool Animation Effects with jQuery</a></p><p class="next"><a href="http://html.net/tutorials/javascript/lesson22.php"> &gt;&gt;</a></p></div>  		<!-- google_ad_section_end -->
+
+		</div>
+
+		
+<div id="ad_skyscraper">
+
+	<!-- HTML_NET_160x600 -->
+	<div id="div-gpt-ad-1406669457921-0" style="width:160px; height:600px;">
+	<script type="text/javascript">
+	googletag.display('div-gpt-ad-1406669457921-0');
+	</script><script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/ads_002"></script>
+	
+</div>
+</div>
+
+
+
+
+
+	</div>
+
+	<div id="sidebar">
+					<h1>Tutorials</h1>
+			<ul>
+			<li><a href="http://html.net/tutorials/html/">HTML Tutorial</a></li><li><a href="http://html.net/tutorials/html5/">HTML5 Tutorial</a></li><li><a href="http://html.net/tutorials/css/">CSS Tutorial</a></li><li><a href="http://html.net/tutorials/php/">PHP Tutorial</a></li><li><a href="http://html.net/tutorials/asp/">ASP Tutorial</a></li><li><strong><a href="http://html.net/tutorials/javascript/">JavaScript Tutorial</a></strong><ul><li><a href="http://html.net/tutorials/javascript/introduction.php">Introduction</a></li><li><a href="http://html.net/tutorials/javascript/lesson1.php">What is JavaScript</a></li><li><a href="http://html.net/tutorials/javascript/lesson2.php">Your First JavaScript</a></li><li><a href="http://html.net/tutorials/javascript/lesson3.php">Events</a></li><li><a href="http://html.net/tutorials/javascript/lesson4.php">Variables and Constants</a></li><li><a href="http://html.net/tutorials/javascript/lesson5.php">Smarter Scripts with Operators</a></li><li><a href="http://html.net/tutorials/javascript/lesson6.php">Even Smarter Scripts with if…else and switch</a></li><li><a href="http://html.net/tutorials/javascript/lesson7.php">Leave Boring Repetitive Stuff to JavaScript with Loops</a></li><li><a href="http://html.net/tutorials/javascript/lesson8.php">Package your JavaScript Code with Functions</a></li><li><a href="http://html.net/tutorials/javascript/lesson9.php">A Gentle Introduction to Objects</a></li><li><a href="http://html.net/tutorials/javascript/lesson10.php">JavaScript Objects: Strings</a></li><li><a href="http://html.net/tutorials/javascript/lesson11.php">JavaScript Objects: Date Object</a></li><li><a href="http://html.net/tutorials/javascript/lesson12.php">JavaScript Objects: Math Object</a></li><li><a href="http://html.net/tutorials/javascript/lesson13.php">JavaScript Objects: Arrays</a></li><li><a href="http://html.net/tutorials/javascript/lesson14.php">JavaScript Living Space - the Browser Environment</a></li><li><a href="http://html.net/tutorials/javascript/lesson15.php">Useful Tasks (I) – Setting and Retrieving Cookies</a></li><li><a href="http://html.net/tutorials/javascript/lesson16.php">Useful Tasks (II) – Form Validation</a></li><li><a href="http://html.net/tutorials/javascript/lesson17.php">JavaScript Timing Events</a></li><li><a href="http://html.net/tutorials/javascript/lesson18.php">Making AJAX Calls</a></li><li><a href="http://html.net/tutorials/javascript/lesson19.php">Short Introduction to jQuery </a></li><li><a href="http://html.net/tutorials/javascript/lesson20.php">Cool Animation Effects with jQuery</a></li><li class="selected"><a href="http://html.net/tutorials/javascript/lesson21.php">Easy AJAX Calls with jQuery</a></li></ul></li>			</ul>
+			
+		<!-- google_ad_section_start(weight=ignore) -->
+		<h2>Language</h2>
+		
+		<form method="post" action="/redirect.php">
+			<p>
+			<select name="location">
+				
+				<option value="http://ar.html.net/tutorials/javascript/lesson21.php">العربية</option>
+				<option value="http://de.html.net/tutorials/javascript/lesson21.php">Deutsch</option>
+				<option selected="selected" value="http://html.net/tutorials/javascript/lesson21.php">English</option>
+				<option value="http://es.html.net/tutorials/javascript/lesson21.php">Español</option>
+				<option value="http://fr.html.net/tutorials/javascript/lesson21.php">Français</option>
+				<option value="http://he.html.net/tutorials/javascript/lesson21.php">עברית</option>
+				<option value="http://it.html.net/tutorials/javascript/lesson21.php">Italiano</option>
+				<option value="http://pl.html.net/tutorials/javascript/lesson21.php">Polski</option>
+				<option value="http://pt-br.html.net/tutorials/javascript/lesson21.php">Portgués (Brasil)</option>
+				<option value="http://ru.html.net/tutorials/javascript/lesson21.php">Русский</option>
+				<option value="http://zh.html.net/tutorials/javascript/lesson21.php">中文</option>			</select>
+			<input value="&gt;&gt;" type="submit">
+			</p>
+		</form>
+		
+		
+		<h2>Layout</h2>
+		<form method="post" action="http://html.net/tutorials/javascript/lesson21.php">			<p>
+			<select name="strCSS">
+				
+				<option selected="selected" value="1">Default</option>
+				<option value="2">Default - Blue</option>
+				<option value="3">No CSS</option>			</select>
+			<input value="&gt;&gt;" type="submit">
+			</p>
+		</form>
+
+				
+
+	</div>
+
+	<div id="footer">
+
+		<hr>
+
+		
+		<h1>Who is online:</h1>
+		<p>In total there are <strong>133</strong> users online :: 3 registered, 0 hidden and 130 guests</p> 
+		<p>Most users ever online was <strong>961</strong> on Fri Jan 16, 2015 9:53 am</p> 
+		<p id="userlist"><br>Registered users: <span style="color: #9E8DA7;" class="username-coloured">Google [Bot]</span>, <span style="color: #9E8DA7;" class="username-coloured">Google Feedfetcher</span>, <span style="color: #9E8DA7;" class="username-coloured">Yahoo [Bot]</span></p>
+		
+		<h1>Statistics:</h1>
+		<p>Total posts <strong>16865</strong> - Total topics <strong>10588</strong></p><p>Total members <strong>18405</strong> - Our newest member <strong><a href="http://html.net/forums/memberlist.php?mode=viewprofile&amp;u=27603">fabio luiz</a></strong></p>
+		<p><br><a href="http://html.net/forums/memberlist.php">View complete list of members</a></p>
+		
+
+		<h1>Language:</h1>
+		<p><span>
+		<a href="http://ar.html.net/tutorials/javascript/lesson21.php">العربية</a> | <a href="http://de.html.net/tutorials/javascript/lesson21.php">Deutsch</a> | English | <a href="http://es.html.net/tutorials/javascript/lesson21.php">Español</a> | <a href="http://fr.html.net/tutorials/javascript/lesson21.php">Français</a> | <a href="http://he.html.net/tutorials/javascript/lesson21.php">עברית</a> | <a href="http://it.html.net/tutorials/javascript/lesson21.php">Italiano</a> | <a href="http://pl.html.net/tutorials/javascript/lesson21.php">Polski</a> | <a href="http://pt-br.html.net/tutorials/javascript/lesson21.php">Portgués (Brasil)</a> | <a href="http://ru.html.net/tutorials/javascript/lesson21.php">Русский</a> | <a href="http://zh.html.net/tutorials/javascript/lesson21.php">中文</a> | 		</span></p>
+
+		        
+        <div class="mobile">
+        <script async="" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/adsbygoogle.js"></script>
+        <!-- Mobile - bottom -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0457588126625430" data-ad-slot="1729161476" data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>
+        
+	</div><!--/#footer-->
+
+	<!-- google_ad_section_end -->
+	
+<!-- Developer Media -->
+
+<script type="text/javascript">
+    function _dmBootstrap(file) {
+        var _dma = document.createElement('script');
+        _dma.type = 'text/javascript';
+        _dma.async = true;
+        _dma.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + file;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(_dma);
+    }
+    function _dmFollowup(file) { if (typeof DMAds === 'undefined') _dmBootstrap('cdn2.DeveloperMedia.com/a.min.js'); }
+    (function () { _dmBootstrap('cdn1.DeveloperMedia.com/a.min.js'); setTimeout(_dmFollowup, 2000); })();
+</script>
+
+
+<!-- BuySellAds FancyBar -->
+<script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/fancybar.js" id="_fancybar_js"></script>
+
+
+<script gapi_processed="true" type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/plusone.js"></script>
+<script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/widgets.js"></script>
+<script src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/all.js" type="text/javascript"></script><div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/4B2NplaqNF3.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/4B2NplaqNF3_002.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+<script type="text/javascript">
+//<![CDATA[
+var campisi = document.createElement('g:plusone');
+campisi.setAttribute("align","left");
+campisi.setAttribute("size","medium");
+campisi.setAttribute("annotation","bubble");
+document.getElementById("gplusone").appendChild(campisi);
+//]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var fb = document.createElement('fb:like'); 
+fb.setAttribute("href",""); 
+fb.setAttribute("layout","button_count");
+fb.setAttribute("show_faces","false");
+fb.setAttribute("width","");
+fb.setAttribute("style","position:relative; top:-3px;");
+document.getElementById("FbCont").appendChild(fb);
+//--><!]]>
+</script>
+
+
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-59094534-21']);
+_gaq.push(['_setCustomVar',1,'template','old_site_gc',1]);
+_gaq.push(['_setCustomVar',2,'v','{ezoic_variation_id}',1]);
+_gaq.push(['_setCustomVar',3,'t','126',1]);
+_gaq.push(['_setAllowAnchor',true]);
+_gaq.push(['_setSiteSpeedSampleRate', 10]);
+_gaq.push(['_trackPageview']);
+_gaq.push(['b._setAccount', 'UA-38339005-1']);
+_gaq.push(['b._setCustomVar',1,'template','old_site_gc',1]);
+_gaq.push(['b._setCustomVar',2,'domain','html.net',3]);
+_gaq.push(['b._setSiteSpeedSampleRate', 20]);
+_gaq.push(['b._trackPageview']);
+
+_gaq.push(['c._setAccount', 'UA-6716118-1']);
+_gaq.push(['c._trackPageview']);
+
+
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+var ez_tos_track_count = 0;
+var ez_last_activity_count = 0;
+(function (__ez_tos) {
+  window.setInterval(function () {
+    __ez_tos = (function (t) {
+      return t[0] == 45 ? (parseInt(t[1]) + 1) + ':00' : (t[1] || '0') + ':' + (parseInt(t[0]) + 15);
+    })(__ez_tos.split(':').reverse());
+
+    ez_tos_track_count++;
+    if(ez_tos_track_count > 1 && ez_tos_track_count < (ez_last_activity_count + 4) && ez_tos_track_count < 240)
+    {
+        if(window.pageTracker)
+        {
+            pageTracker._trackEvent('Time', 'Log', __ez_tos)
+        }
+        else
+        {
+           _gaq.push(['_trackEvent', 'Time', 'Log', __ez_tos]);
+           _gaq.push(['b._trackEvent', 'Time', 'Log', __ez_tos]);
+        }
+		
+		if(typeof(_paq) != 'undefined')
+        {
+            _paq.push(['trackEvent', 'Time', __ez_tos, 'TimeOnPage']);
+        }
+
+    }
+  }, 15000);
+})('00');
+
+</script>
+
+<script type="text/javascript">
+
+
+if(typeof $ezJQuery == 'undefined')
+{
+    if (typeof jQuery == 'undefined')
+    {
+        document.write('<scr'+'ipt type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></sc'+'ript>');
+    }
+    else
+    {
+        $ezJQuery = jQuery;
+    }
+}
+
+</script>
+
+<script type="text/javascript">
+
+
+if (typeof $ezJQuery == 'undefined' && typeof jQuery != 'undefined')
+{
+    $ezJQuery = jQuery.noConflict();
+}
+
+</script>
+
+<script type="text/javascript">
+if(typeof $ezJQuery != 'undefined')
+{
+    $ezJQuery("body").mousemove(function(e){
+      ez_last_activity_count = ez_tos_track_count;
+    });
+    $ezJQuery("body").keypress(function(e){
+      ez_last_activity_count = ez_tos_track_count;
+    });
+    $ezJQuery(window).scroll(function(e){
+      ez_last_activity_count = ez_tos_track_count;
+    });
+}
+else
+{
+    ez_last_activity_count = 8;
+}
+</script>
+<script type="text/javascript" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/tb.php"></script>
+<script>
+$ezJQuery(function() {
+    if (typeof run_body_onload == 'function') {
+        run_body_onload();
+    }
+    if (typeof ezoicJSPageLoad == 'function') {
+        ezoicJSPageLoad($ezJQuery);
+    }
+});
+</script>
+
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Lesson%2021%20%20Easy%20AJAX%20Calls%20with%20jQueryentutorial%20-%20HTML.net_files/postmessageRelay.htm" id="oauth2relay449949840" name="oauth2relay449949840"></iframe></body></html>
