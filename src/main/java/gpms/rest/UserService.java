@@ -178,18 +178,18 @@ public class UserService {
 			profileId = root.get("userId").getTextValue();
 		}
 
-		JsonNode commonObj = root.get("gpmsCommonObj");
-		if (commonObj != null && commonObj.has("UserName")) {
-			userName = commonObj.get("UserName").getTextValue();
-		}
-
-		if (commonObj != null && commonObj.has("UserProfileID")) {
-			userProfileID = commonObj.get("UserProfileID").getTextValue();
-		}
-
-		if (commonObj != null && commonObj.has("CultureName")) {
-			cultureName = commonObj.get("CultureName").getTextValue();
-		}
+		// JsonNode commonObj = root.get("gpmsCommonObj");
+		// if (commonObj != null && commonObj.has("UserName")) {
+		// userName = commonObj.get("UserName").getTextValue();
+		// }
+		//
+		// if (commonObj != null && commonObj.has("UserProfileID")) {
+		// userProfileID = commonObj.get("UserProfileID").getTextValue();
+		// }
+		//
+		// if (commonObj != null && commonObj.has("CultureName")) {
+		// cultureName = commonObj.get("CultureName").getTextValue();
+		// }
 
 		// // build a JSON object using org.JSON
 		// JSONObject obj = new JSONObject(message);
@@ -197,7 +197,7 @@ public class UserService {
 		// // get the first result
 		// String profileId = obj.getString("userId");
 
-		//
+		// Alternatively
 		// // Embedded Object
 		// JSONObject commonObj = obj.getJSONObject("gpmsCommonObj");
 		// String userName = commonObj.getString("UserName");
@@ -206,16 +206,16 @@ public class UserService {
 
 		ObjectId id = new ObjectId(profileId);
 
-		System.out.println("Profile ID String: " + profileId
-				+ ", Profile ID with ObjectId: " + id + ", User Name: "
-				+ userName + ", User Profile ID: " + userProfileID
-				+ ", Culture Name: " + cultureName);
+		// System.out.println("Profile ID String: " + profileId
+		// + ", Profile ID with ObjectId: " + id + ", User Name: "
+		// + userName + ", User Profile ID: " + userProfileID
+		// + ", Culture Name: " + cultureName);
 
-		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
-		gpmsCommonObj.setUserName(userName);
-		gpmsCommonObj.setUserProfileID(userProfileID);
-		gpmsCommonObj.setCultureName(cultureName);
-		user = userProfileDAO.findUserByProfileID(id, gpmsCommonObj);
+		// GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+		// gpmsCommonObj.setUserName(userName);
+		// gpmsCommonObj.setUserProfileID(userProfileID);
+		// gpmsCommonObj.setCultureName(cultureName);
+		// user = userProfileDAO.findUserByProfileID(id);
 
 		// user.getUserAccount().getUserName();
 
@@ -365,5 +365,172 @@ public class UserService {
 			positionType = root.get("positionType").getTextValue();
 		}
 		return dpc.getPositionTitle(college, department, positionType);
+	}
+
+	@POST
+	@Path("/DeleteUserByUserID")
+	public void deleteUserByUserID(String message)
+			throws JsonProcessingException, IOException {
+		UserProfile user = new UserProfile();
+		String response = new String();
+
+		String profileId = new String();
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("userId")) {
+			profileId = root.get("userId").getTextValue();
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
+		// TODO : login set this session value
+		// FOr Testing I am using HardCoded UserProfileID
+		// userProfileID = "55b9225454ffd82dc052a32a";
+
+		ObjectId id = new ObjectId(profileId);
+		ObjectId authorId = new ObjectId(userProfileID);
+
+		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+		gpmsCommonObj.setUserName(userName);
+		gpmsCommonObj.setUserProfileID(userProfileID);
+		gpmsCommonObj.setCultureName(cultureName);
+
+		UserProfile authorProfile = userProfileDAO
+				.findUserByProfileID(authorId);
+
+		UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
+		userProfileDAO.deleteUserProfileByUserID(userProfile, authorProfile,
+				gpmsCommonObj);
+
+		UserAccount userAccount = userAccountDAO.findByID(userProfile
+				.getUserAccount().getId());
+		userAccountDAO.deleteUserAccountByUserID(userAccount, authorProfile,
+				gpmsCommonObj);
+	}
+
+	@POST
+	@Path("/DeleteMultipleUsersByUserID")
+	public void deleteMultipleUsersByUserID(String message)
+			throws JsonProcessingException, IOException {
+		UserProfile user = new UserProfile();
+		String response = new String();
+
+		String profileIds = new String();
+		String profiles[] = new String[0];
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("userIds")) {
+			profileIds = root.get("userIds").getTextValue();
+			profiles = profileIds.split(",");
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
+		for (String profile : profiles) {
+			ObjectId id = new ObjectId(profile);
+			ObjectId authorId = new ObjectId(userProfileID);
+
+			GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+			gpmsCommonObj.setUserName(userName);
+			gpmsCommonObj.setUserProfileID(userProfileID);
+			gpmsCommonObj.setCultureName(cultureName);
+
+			UserProfile authorProfile = userProfileDAO
+					.findUserByProfileID(authorId);
+
+			UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
+			userProfileDAO.deleteUserProfileByUserID(userProfile,
+					authorProfile, gpmsCommonObj);
+
+			UserAccount userAccount = userAccountDAO.findByID(userProfile
+					.getUserAccount().getId());
+			userAccountDAO.deleteUserAccountByUserID(userAccount,
+					authorProfile, gpmsCommonObj);
+		}
+	}
+
+	@POST
+	@Path("/UpdateUserIsDeletedByUserID")
+	public void updateUserIsDeletedByUserID(String message)
+			throws JsonProcessingException, IOException {
+		UserProfile user = new UserProfile();
+		String response = new String();
+
+		String profileId = new String();
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("userId")) {
+			profileId = root.get("userId").getTextValue();
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(profileId);
+		ObjectId authorId = new ObjectId(userProfileID);
+
+		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+		gpmsCommonObj.setUserName(userName);
+		gpmsCommonObj.setUserProfileID(userProfileID);
+		gpmsCommonObj.setCultureName(cultureName);
+
+		UserProfile authorProfile = userProfileDAO
+				.findUserByProfileID(authorId);
+
+		UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
+		userProfileDAO.activateUserProfileByUserID(userProfile, authorProfile,
+				gpmsCommonObj);
+
+		UserAccount userAccount = userAccountDAO.findByID(userProfile
+				.getUserAccount().getId());
+		userAccountDAO.activateUserAccountByUserID(userAccount, authorProfile,
+				gpmsCommonObj);
 	}
 }

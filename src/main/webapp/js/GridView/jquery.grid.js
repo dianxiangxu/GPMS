@@ -1143,6 +1143,11 @@ var fromServer = 0;
 																			.prop(
 																					'disabled',
 																					checkstatus);
+
+																	$(chkbox)
+																			.prop(
+																					'checked',
+																					false);
 																}
 																$(this).html(
 																		chkbox);

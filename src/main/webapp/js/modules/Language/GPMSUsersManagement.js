@@ -84,9 +84,10 @@
 	'Please enter all option values and display order for your attribute.' : 'Please enter all option values and display order for your attribute.',
 	'Display order is numeric value.' : 'Display order is numeric value.',
 
+	//USED
 	"Successful Message" : "Successful Message",
-	"Attribute has been deleted successfully." : "Attribute has been deleted successfully.",
-	"Selected attribute(s) has been deleted successfully." : "Selected attribute(s) has been deleted successfully.",
+	"User has been deleted successfully." : "User has been deleted successfully.",
+	"Selected user(s) has been deleted successfully." : "Selected user(s) has been deleted successfully.",
 	"Attribute has been updated successfully." : "Attribute has been updated successfully.",
 	"Attribute has been saved successfully." : "Attribute has been saved successfully.",
 

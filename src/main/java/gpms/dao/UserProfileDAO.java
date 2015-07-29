@@ -268,34 +268,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		int rowTotal = 0;
 		if (q.getAuditLog() != null && q.getAuditLog().size() != 0) {
 			rowTotal = q.getAuditLog().size();
-			if (q.getUserAccount().getAuditLog() != null
-					&& q.getUserAccount().getAuditLog().size() != 0) {
-
-				rowTotal += q.getUserAccount().getAuditLog().size();
-				for (AuditLog userAccountAudit : q.getUserAccount()
-						.getAuditLog()) {
-					AuditLogInfo userAuditLog = new AuditLogInfo();
-					userAuditLog.setRowTotal(rowTotal);
-					userAuditLog.setUserName(userAccountAudit
-							.getUserProfileId().getUserAccount().getUserName());
-					userAuditLog
-							.setUserFullName(userAccountAudit
-									.getUserProfileId().getFirstName()
-									+ " "
-									+ userAccountAudit.getUserProfileId()
-											.getMiddleName()
-									+ " "
-									+ userAccountAudit.getUserProfileId()
-											.getLastName());
-					userAuditLog.setAction(userAccountAudit.getAction());
-					userAuditLog.setActivityDate(userAccountAudit
-							.getActivityDate());
-
-					allAuditLogs.add(userAuditLog);
-				}
-
-			}
-
 			for (AuditLog userProfileAudit : q.getAuditLog()) {
 				AuditLogInfo userAuditLog = new AuditLogInfo();
 				userAuditLog.setRowTotal(rowTotal);
@@ -310,6 +282,28 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				userAuditLog.setAction(userProfileAudit.getAction());
 				userAuditLog
 						.setActivityDate(userProfileAudit.getActivityDate());
+
+				allAuditLogs.add(userAuditLog);
+			}
+		}
+
+		if (q.getUserAccount().getAuditLog() != null
+				&& q.getUserAccount().getAuditLog().size() != 0) {
+			rowTotal += q.getUserAccount().getAuditLog().size();
+			for (AuditLog userAccountAudit : q.getUserAccount().getAuditLog()) {
+				AuditLogInfo userAuditLog = new AuditLogInfo();
+				userAuditLog.setRowTotal(rowTotal);
+				userAuditLog.setUserName(userAccountAudit.getUserProfileId()
+						.getUserAccount().getUserName());
+				userAuditLog.setUserFullName(userAccountAudit
+						.getUserProfileId().getFirstName()
+						+ " "
+						+ userAccountAudit.getUserProfileId().getMiddleName()
+						+ " "
+						+ userAccountAudit.getUserProfileId().getLastName());
+				userAuditLog.setAction(userAccountAudit.getAction());
+				userAuditLog
+						.setActivityDate(userAccountAudit.getActivityDate());
 
 				allAuditLogs.add(userAuditLog);
 			}
@@ -375,8 +369,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				.equal(userProfile).asList().size();
 	}
 
-	public UserProfile findUserByProfileID(ObjectId id,
-			GPMSCommonInfo gpmsCommonObj) {
+	public UserProfile findUserByProfileID(ObjectId id) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).field("_id").equal(id).get();
 	}
@@ -394,6 +387,33 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		// .field("user id.id").equal(id).get();
 		return ds.createQuery(UserProfile.class).field("user id")
 				.equal(userAccount).get();
+	}
+
+	public void deleteUserProfileByUserID(UserProfile userProfile,
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+		Datastore ds = getDatastore();
+		audit = new AuditLog(authorProfile,
+				"Deleted user " + userProfile.getFirstName() + " "
+						+ userProfile.getMiddleName() + " "
+						+ userProfile.getLastName(), new Date());
+		userProfile.addEntryToAuditLog(audit);
+
+		userProfile.setDeleted(true);
+		ds.save(userProfile);
+	}
+
+	public void activateUserProfileByUserID(UserProfile userProfile,
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+		Datastore ds = getDatastore();
+		audit = new AuditLog(authorProfile,
+				"Deleted user " + userProfile.getFirstName() + " "
+						+ userProfile.getMiddleName() + " "
+						+ userProfile.getLastName(), new Date());
+		userProfile.addEntryToAuditLog(audit);
+
+		userProfile.setDeleted(true);
+		ds.save(userProfile);
+
 	}
 
 	/**

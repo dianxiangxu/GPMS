@@ -2,6 +2,7 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.AuditLog;
+import gpms.model.GPMSCommonInfo;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
@@ -61,7 +62,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 
 	public UserAccount findByID(ObjectId id) {
 		Datastore ds = getDatastore();
-		return ds.createQuery(UserAccount.class).field("id").equal(id).get();
+		return ds.createQuery(UserAccount.class).field("_id").equal(id).get();
 	}
 
 	/**
@@ -120,4 +121,26 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		}
 	}
 
+	public void deleteUserAccountByUserID(UserAccount userAccount,
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+		Datastore ds = getDatastore();
+		audit = new AuditLog(authorProfile, "Deleted user account for "
+				+ userAccount.getUserName(), new Date());
+		userAccount.addEntryToAuditLog(audit);
+
+		userAccount.setDeleted(true);
+		ds.save(userAccount);
+	}
+
+	public void activateUserAccountByUserID(UserAccount userAccount,
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+		Datastore ds = getDatastore();
+		audit = new AuditLog(authorProfile, "Activated user account for "
+				+ userAccount.getUserName(), new Date());
+		userAccount.addEntryToAuditLog(audit);
+
+		userAccount.setDeleted(false);
+		ds.save(userAccount);
+
+	}
 }

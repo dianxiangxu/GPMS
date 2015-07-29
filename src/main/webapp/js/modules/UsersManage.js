@@ -768,7 +768,7 @@ $(function() {
 				userIds : _userIds,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 6;
+			this.config.ajaxCallMode = 13;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -791,7 +791,6 @@ $(function() {
 			if (event) {
 				usersManage.DeleteSingleUser(user_id);
 			}
-			return false;
 		},
 
 		DeleteSingleUser : function(_userId) {
@@ -800,8 +799,9 @@ $(function() {
 				userId : _userId,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 5;
+			this.config.ajaxCallMode = 12;
 			this.ajaxCall(this.config);
+			return false;
 		},
 
 		ActivateUser : function(_userId, _isActive) {
@@ -812,14 +812,13 @@ $(function() {
 				gpmsCommonObj : gpmsCommonObj(),
 				isActive : _isActive
 			});
-			this.config.ajaxCallMode = 7;
+			this.config.ajaxCallMode = 14;
 			this.ajaxCall(this.config);
 			return false;
 		},
 		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
-				alert(argus[0]);
 				if (argus[1].toLowerCase() != "no") {
 					usersManage.ActivateUser(argus[0], true);
 				} else {
@@ -1395,8 +1394,40 @@ $(function() {
 											item, item);
 								});
 				break;
-			}
-		},
+
+			case 12:
+				usersManage.BindUserGrid(null, null, null, null, null, null);
+				csscody
+						.info("<h2>"
+								+ getLocale(gpmsUsersManagement,
+										'Successful Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsUsersManagement,
+										'User has been deleted successfully.')
+								+ "</p>");
+
+				$('#divUserForm').hide();
+				$('#divUserGrid').show();
+				break;
+
+			case 13:
+				usersManage.BindUserGrid(null, null, null, null, null, null);
+				csscody
+						.info("<h2>"
+								+ getLocale(gpmsUsersManagement,
+										'Successful Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsUsersManagement,
+										'Selected user(s) has been deleted successfully.')
+								+ "</p>");
+				break;
+			break;
+
+		case 14:
+			usersManage.BindUserGrid(null, null, null, null, null, null);
+			break;
+		}
+	},
 
 		ajaxFailure : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
@@ -1685,8 +1716,7 @@ $(function() {
 			$(".delbutton").click(function() {
 				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
 				var user_id = $(this).prop("id");
-				alert(user_id)
-				// usersManage.DeleteUserById(user_id);
+				usersManage.DeleteUserById(user_id);
 			});
 
 			// $("td.required input, td select").focusout(function() {
