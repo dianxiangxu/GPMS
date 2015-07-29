@@ -666,7 +666,8 @@ $(function() {
 				$('#txtPersonalEmail').val(response['personalEmails']);
 			});
 
-			$('input[name=chkActive]').prop('checked', !response["deleted"]);
+			$('input[name=chkActive]').prop('checked',
+					!response['userAccount']['isDeleted']);
 
 			$.each(response['userAccount'], function(index, value) {
 				// alert(index + " :: " + value);
@@ -709,8 +710,13 @@ $(function() {
 				}
 				// $('#txtUserName').val(argus[1]);
 				// $('#txtUserName').prop('disabled', 'disabled');
-				$(".delbutton").prop("id", argus[0]);
-				$(".delbutton").show();
+				if (argus[10].toLowerCase() != "yes") {
+					$(".delbutton").prop("id", argus[0]);
+					$(".delbutton").show();
+				} else {
+					$(".delbutton").removeAttr("id");
+					$(".delbutton").hide();
+				}
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
 				$("#btnSaveUser").prop("name", argus[0]);
@@ -762,6 +768,7 @@ $(function() {
 		},
 
 		DeleteMultipleAttribute : function(_userIds) {
+			// this.config.dataType = "html";
 			this.config.url = this.config.baseURL
 					+ "DeleteMultipleUsersByUserID";
 			this.config.data = JSON2.stringify({
@@ -1421,13 +1428,18 @@ $(function() {
 										'Selected user(s) has been deleted successfully.')
 								+ "</p>");
 				break;
-			break;
 
-		case 14:
-			usersManage.BindUserGrid(null, null, null, null, null, null);
-			break;
-		}
-	},
+			case 14:
+				usersManage.BindUserGrid(null, null, null, null, null, null);
+				csscody.info("<h2>"
+						+ getLocale(gpmsUsersManagement, 'Successful Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsUsersManagement,
+								'User has been activated successfully.')
+						+ "</p>");
+				break;
+			}
+		},
 
 		ajaxFailure : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
@@ -1491,10 +1503,65 @@ $(function() {
 						+ '</p>');
 				break;
 
-			case 8: // For User Edit Action
+			case 8:
 				csscody.error('<h2>'
 						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>' + "Failed to load user details" + '</p>');
+						+ '</h2><p>' + "Failed to load user details." + '</p>');
+				break;
+
+			case 9:
+				csscody.error('<h2>'
+						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsUsersManagement,
+								"Failed to load departments list.") + '</p>');
+				break;
+
+			case 10:
+				csscody
+						.error('<h2>'
+								+ getLocale(gpmsUsersManagement,
+										"Error Message")
+								+ '</h2><p>'
+								+ getLocale(gpmsUsersManagement,
+										"Failed to load position types list.")
+								+ '</p>');
+				break;
+
+			case 11:
+				csscody.error('<h2>'
+						+ getLocale(gpmsUsersManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsUsersManagement,
+								"Failed to load position titles list.")
+						+ '</p>');
+				break;
+
+			case 12:
+				csscody.info("<h2>"
+						+ getLocale(gpmsUsersManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsUsersManagement,
+								'User cannot be deleted.') + "</p>");
+				break;
+
+			case 13:
+				csscody
+						.info("<h2>"
+								+ getLocale(gpmsUsersManagement,
+										'Error Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsUsersManagement,
+										'Selected user(s) cannot be deleted.')
+								+ "</p>");
+				break;
+
+			case 14:
+				csscody.info("<h2>"
+						+ getLocale(gpmsUsersManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsUsersManagement,
+								'User cannot be activated.') + "</p>");
 				break;
 			}
 		},

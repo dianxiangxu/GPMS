@@ -403,7 +403,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	}
 
 	public void activateUserProfileByUserID(UserProfile userProfile,
-			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj,
+			Boolean isActive) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(authorProfile,
 				"Deleted user " + userProfile.getFirstName() + " "
@@ -411,7 +412,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 						+ userProfile.getLastName(), new Date());
 		userProfile.addEntryToAuditLog(audit);
 
-		userProfile.setDeleted(true);
+		userProfile.setDeleted(!isActive);
 		ds.save(userProfile);
 
 	}

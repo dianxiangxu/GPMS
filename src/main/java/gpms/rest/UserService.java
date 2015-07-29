@@ -5,7 +5,6 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.AuditLog;
 import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.JSONTansformer;
@@ -22,6 +21,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -215,7 +215,8 @@ public class UserService {
 		// gpmsCommonObj.setUserName(userName);
 		// gpmsCommonObj.setUserProfileID(userProfileID);
 		// gpmsCommonObj.setCultureName(cultureName);
-		// user = userProfileDAO.findUserByProfileID(id);
+
+		user = userProfileDAO.findUserByProfileID(id);
 
 		// user.getUserAccount().getUserName();
 
@@ -369,7 +370,7 @@ public class UserService {
 
 	@POST
 	@Path("/DeleteUserByUserID")
-	public void deleteUserByUserID(String message)
+	public String deleteUserByUserID(String message)
 			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
 		String response = new String();
@@ -422,11 +423,18 @@ public class UserService {
 				.getUserAccount().getId());
 		userAccountDAO.deleteUserAccountByUserID(userAccount, authorProfile,
 				gpmsCommonObj);
+
+		// response.setContentType("text/html;charset=UTF-8");
+		// response.getWriter().write("Success Data");
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		response = gson.toJson("Success", String.class);
+		return response;
 	}
 
 	@POST
 	@Path("/DeleteMultipleUsersByUserID")
-	public void deleteMultipleUsersByUserID(String message)
+	public String deleteMultipleUsersByUserID(String message)
 			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
 		String response = new String();
@@ -479,16 +487,20 @@ public class UserService {
 			userAccountDAO.deleteUserAccountByUserID(userAccount,
 					authorProfile, gpmsCommonObj);
 		}
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		response = gson.toJson("Success", String.class);
+		return response;
 	}
 
 	@POST
 	@Path("/UpdateUserIsDeletedByUserID")
-	public void updateUserIsDeletedByUserID(String message)
+	public String updateUserIsDeletedByUserID(String message)
 			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
 		String response = new String();
 
 		String profileId = new String();
+		Boolean isActive = true;
 		String userName = new String();
 		String userProfileID = new String();
 		String cultureName = new String();
@@ -498,6 +510,10 @@ public class UserService {
 
 		if (root != null && root.has("userId")) {
 			profileId = root.get("userId").getTextValue();
+		}
+
+		if (root != null && root.has("isActive")) {
+			isActive = root.get("isActive").getBooleanValue();
 		}
 
 		JsonNode commonObj = root.get("gpmsCommonObj");
@@ -526,11 +542,16 @@ public class UserService {
 
 		UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
 		userProfileDAO.activateUserProfileByUserID(userProfile, authorProfile,
-				gpmsCommonObj);
+				gpmsCommonObj, isActive);
 
 		UserAccount userAccount = userAccountDAO.findByID(userProfile
 				.getUserAccount().getId());
 		userAccountDAO.activateUserAccountByUserID(userAccount, authorProfile,
-				gpmsCommonObj);
+				gpmsCommonObj, isActive);
+		// return Response.ok("Success", MediaType.APPLICATION_JSON).build();
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		response = gson.toJson("Success", String.class);
+		return response;
 	}
 }

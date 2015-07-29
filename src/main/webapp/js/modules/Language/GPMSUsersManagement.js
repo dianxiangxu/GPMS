@@ -84,10 +84,12 @@
 	'Please enter all option values and display order for your attribute.' : 'Please enter all option values and display order for your attribute.',
 	'Display order is numeric value.' : 'Display order is numeric value.',
 
-	//USED
+	// USED
 	"Successful Message" : "Successful Message",
 	"User has been deleted successfully." : "User has been deleted successfully.",
 	"Selected user(s) has been deleted successfully." : "Selected user(s) has been deleted successfully.",
+	"User has been activated successfully." : "User has been activated successfully.",
+
 	"Attribute has been updated successfully." : "Attribute has been updated successfully.",
 	"Attribute has been saved successfully." : "Attribute has been saved successfully.",
 
@@ -96,6 +98,11 @@
 	'Failed to load departments list.' : 'Failed to load departments list.',
 	'Failed to load position types list.' : 'Failed to load position types list.',
 	'Failed to load position titles list.' : 'Failed to load position titles list.',
+	'Failed to load user details.' : 'Failed to load user details.',
+	'User cannot be deleted.' : 'User cannot be deleted.',
+	'Selected user(s) cannot be deleted.' : 'Selected user(s) cannot be deleted.',
+	'User cannot be activated.' : 'User cannot be activated.',
+
 	'Failed to delete attribute.' : 'Failed to delete attribute.',
 	'Failed to delete attributes.' : 'Failed to delete attributes.',
 	'Failed to operate.' : 'Failed to operate.',

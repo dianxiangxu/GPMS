@@ -133,13 +133,14 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 	}
 
 	public void activateUserAccountByUserID(UserAccount userAccount,
-			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj,
+			Boolean isActive) {
 		Datastore ds = getDatastore();
 		audit = new AuditLog(authorProfile, "Activated user account for "
 				+ userAccount.getUserName(), new Date());
 		userAccount.addEntryToAuditLog(audit);
 
-		userAccount.setDeleted(false);
+		userAccount.setDeleted(!isActive);
 		ds.save(userAccount);
 
 	}
