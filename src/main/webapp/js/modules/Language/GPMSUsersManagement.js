@@ -73,8 +73,10 @@
 	'Sorry! this user is already deleted.' : 'Sorry! this user is already deleted.',
 	'Sorry! this user is already active.' : 'Sorry! this user is already active.',
 
-	'Please enter attribute name.' : 'Please enter attribute name.',
-	'Please enter unique attribute name. ' : 'Please enter unique attribute name. ',
+	'Please enter user name.' : 'Please enter user name.',
+	'Please enter Please enter unique user name.' : 'Please enter Please enter unique user name.',	
+	"already exists." : "already exists.",
+	
 	'Please select at least one item type.' : 'Please select at least one item type.',
 	'Attribute max length must be numeric only.' : 'Attribute max length must be numeric only.',
 	'Please enter attribute Length.' : 'Please enter attribute Length.',
@@ -102,6 +104,7 @@
 	'User cannot be deleted.' : 'User cannot be deleted.',
 	'Selected user(s) cannot be deleted.' : 'Selected user(s) cannot be deleted.',
 	'User cannot be activated.' : 'User cannot be activated.',
+	'Cannot check for unique Username' : 'Cannot check for unique Username',
 
 	'Failed to delete attribute.' : 'Failed to delete attribute.',
 	'Failed to delete attributes.' : 'Failed to delete attributes.',
@@ -160,7 +163,7 @@
 	"Deactive" : "Deactive",
 	"Rename" : "Rename",
 	"Remove" : "Remove",
-	"already exists." : "already exists.",
+	
 	"Saving.." : "Saving..",
 	"Unassigned Attributes" : "Unassigned Attributes",
 	"Please enter unique attribute set name!" : "Please enter unique attribute set name!",

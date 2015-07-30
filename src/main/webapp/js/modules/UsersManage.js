@@ -8,9 +8,11 @@ $(function() {
 		};
 		return gpmsCommonInfo;
 	};
-	var isUnique = false;
-	var editFlag = 0;
+
 	var rowIndex = 0;
+	var isUnique = false;
+
+	var editFlag = 0;
 	var arrAttrValueId = 0;
 	usersManage = {
 		config : {
@@ -842,19 +844,18 @@ $(function() {
 				break;
 			}
 		},
-		IsUnique : function(attributeName, userId) {
-			var attrbuteUniqueObj = {
-				AttributeID : userId,
-				AttributeName : attributeName
+		IsUnique : function(userId, newUserName) {
+			var userUniqueObj = {
+				UserID : userId,
+				NewUserName : newUserName
 			};
 			var gpmsCommonInfo = gpmsCommonObj();
-			gpmsCommonInfo.CultureName = $(".languageSelected").attr("value");
-			this.config.url = this.config.baseURL + "CheckUniqueAttributeName";
+			this.config.url = this.config.baseURL + "CheckUniqueUserName";
 			this.config.data = JSON2.stringify({
-				attrbuteUniqueObj : attrbuteUniqueObj,
+				userUniqueObj : userUniqueObj,
 				gpmsCommonObj : gpmsCommonInfo
 			});
-			this.config.ajaxCallMode = 8;
+			this.config.ajaxCallMode = 15;
 			this.ajaxCall(this.config);
 			return isUnique;
 		},
@@ -866,14 +867,14 @@ $(function() {
 				var itemSelected = false;
 				var isUsedInConfigItem = false;
 
-				var attributeName = $('#txtUserName').val();
-				if (!attributeName) {
-					validateErrorMessage += 'Please enter attribute name.<br/>';
-				} else if (!usersManage.IsUnique(attributeName, _userId)) {
+				var newUserName = $('#txtUserName').val();
+				if (!newUserName) {
+					validateErrorMessage += 'Please enter user name.<br/>';
+				} else if (!usersManage.IsUnique(_userId, newUserName)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsUsersManagement,
-									"Please enter unique attribute name") + "'"
-							+ attributeName.trim() + "'"
+									"Please enter unique user name.") + " '"
+							+ usersManage.trim() + "' "
 							+ getLocale(gpmsUsersManagement, "already exists.")
 							+ '<br/>';
 				}
@@ -1438,6 +1439,10 @@ $(function() {
 								'User has been activated successfully.')
 						+ "</p>");
 				break;
+
+			case 15:
+				isUnique = msg.d;
+				break;
 			}
 		},
 
@@ -1538,7 +1543,7 @@ $(function() {
 				break;
 
 			case 12:
-				csscody.info("<h2>"
+				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
@@ -1547,7 +1552,7 @@ $(function() {
 
 			case 13:
 				csscody
-						.info("<h2>"
+						.error("<h2>"
 								+ getLocale(gpmsUsersManagement,
 										'Error Message')
 								+ "</h2><p>"
@@ -1557,11 +1562,19 @@ $(function() {
 				break;
 
 			case 14:
-				csscody.info("<h2>"
+				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
 								'User cannot be activated.') + "</p>");
+				break;
+
+			case 15:
+				csscody.error("<h2>"
+						+ getLocale(gpmsUsersManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsUsersManagement,
+								'Cannot check for unique Username') + "</p>");
 				break;
 			}
 		},
@@ -1734,51 +1747,47 @@ $(function() {
 				}
 			});
 
-			$('#txtUserName')
-					.blur(
-							function() {
-								var errors = '';
-								var attributeName = $(this).val();
-								var user_id = $('#btnSaveUser').prop("name");
-								if (user_id == '') {
-									user_id = 0;
-								}
-								if (!attributeName) {
-									errors += getLocale(gpmsUsersManagement,
-											"Please enter user name");
-								} else if (!usersManage.IsUnique(attributeName,
-										user_id)) {
-									errors += "'"
-											+ getLocale(gpmsUsersManagement,
-													"Please enter Please enter unique user name")
-											+ "'"
-											+ attributeName.trim()
-											+ "'"
-											+ getLocale(gpmsUsersManagement,
-													"already exists.")
-											+ '<br/>';
-								}
+			$('#txtUserName').blur(
+					function() {
+						var errors = '';
+						var userName = $(this).val();
+						var user_id = $('#btnSaveUser').prop("name");
+						if (user_id == '') {
+							user_id = 0;
+						}
+						if (!userName) {
+							errors += getLocale(gpmsUsersManagement,
+									"Please enter user name.");
+						} else if (!usersManage.IsUnique(user_id, userName)) {
+							errors += "'"
+									+ getLocale(gpmsUsersManagement,
+											"Please enter unique user name.")
+									+ " '"
+									+ userName.trim()
+									+ "' "
+									+ getLocale(gpmsUsersManagement,
+											"already exists.") + '<br/>';
+						}
 
-								if (errors) {
-									$('.cssClassRight').hide();
-									$('.cssClassError').show();
-									$(".cssClassError").parent('div').addClass(
-											"diverror");
-									$('.cssClassError').prevAll("input:first")
-											.addClass("error");
-									$('.cssClassError').html(errors);
-									return false;
-								} else {
-									$(this).parent("td").find("span.error")
-											.hide();
-									$('.cssClassRight').show();
-									$('.cssClassError').hide();
-									$(".cssClassError").parent('div')
-											.removeClass("diverror");
-									$('.cssClassError').prevAll("input:first")
-											.removeClass("error");
-								}
-							});
+						if (errors) {
+							$('.cssClassRight').hide();
+							$('.cssClassError').show();
+							$(".cssClassError").parent('div').addClass(
+									"diverror");
+							$('.cssClassError').prevAll("input:first")
+									.addClass("error");
+							$('.cssClassError').html(errors);
+							return false;
+						} else {
+							$(this).parent("td").find("span.error").hide();
+							$('.cssClassRight').show();
+							$('.cssClassError').hide();
+							$(".cssClassError").parent('div').removeClass(
+									"diverror");
+							$('.cssClassError').prevAll("input:first")
+									.removeClass("error");
+						}
+					});
 
 			$(".delbutton").click(function() {
 				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');

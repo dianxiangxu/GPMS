@@ -427,8 +427,11 @@ public class UserService {
 		// response.setContentType("text/html;charset=UTF-8");
 		// response.getWriter().write("Success Data");
 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		response = gson.toJson("Success", String.class);
+		// Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		// response = gson.toJson("Success", String.class);
+
+		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+				"Success");
 		return response;
 	}
 
@@ -487,8 +490,8 @@ public class UserService {
 			userAccountDAO.deleteUserAccountByUserID(userAccount,
 					authorProfile, gpmsCommonObj);
 		}
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		response = gson.toJson("Success", String.class);
+		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+				"Success");
 		return response;
 	}
 
@@ -550,8 +553,47 @@ public class UserService {
 				gpmsCommonObj, isActive);
 		// return Response.ok("Success", MediaType.APPLICATION_JSON).build();
 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		response = gson.toJson("Success", String.class);
+		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+				"Success");
 		return response;
+	}
+
+	@POST
+	@Path("/CheckUniqueUserName")
+	public String checkUniqueUserName(String message)
+			throws JsonProcessingException, IOException {
+		// {"userUniqueObj":{"UserID":"userAccount1","UserName":"55b9225454ffd82dc052a32a"},"gpmsCommonObj":{"UserName":"superuser","UserProfileID":"55b9225454ffd82dc052a32a","CultureName":"en-US"}}
+
+		String userID = new String();
+		String newUserName = new String();
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		JsonNode userUniqueObj = root.get("userUniqueObj");
+		if (userUniqueObj != null && userUniqueObj.has("UserID")) {
+			userID = userUniqueObj.get("UserID").getTextValue();
+		}
+
+		if (userUniqueObj != null && userUniqueObj.has("NewUserName")) {
+			newUserName = userUniqueObj.get("NewUserName").getTextValue();
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
 	}
 }
