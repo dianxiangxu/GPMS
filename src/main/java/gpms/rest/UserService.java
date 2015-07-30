@@ -594,6 +594,7 @@ public class UserService {
 		if (commonObj != null && commonObj.has("CultureName")) {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
+		return cultureName;
 
 	}
 }

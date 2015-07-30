@@ -74,9 +74,9 @@
 	'Sorry! this user is already active.' : 'Sorry! this user is already active.',
 
 	'Please enter user name.' : 'Please enter user name.',
-	'Please enter Please enter unique user name.' : 'Please enter Please enter unique user name.',	
+	'Please enter unique user name.' : 'Please enter unique user name.',
 	"already exists." : "already exists.",
-	
+
 	'Please select at least one item type.' : 'Please select at least one item type.',
 	'Attribute max length must be numeric only.' : 'Attribute max length must be numeric only.',
 	'Please enter attribute Length.' : 'Please enter attribute Length.',
@@ -163,7 +163,7 @@
 	"Deactive" : "Deactive",
 	"Rename" : "Rename",
 	"Remove" : "Remove",
-	
+
 	"Saving.." : "Saving..",
 	"Unassigned Attributes" : "Unassigned Attributes",
 	"Please enter unique attribute set name!" : "Please enter unique attribute set name!",
