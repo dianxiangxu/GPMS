@@ -38,6 +38,10 @@ public class UserAccount extends BaseEntity {
 	private boolean isDeleted;
 
 	@Expose
+	@Property("is active")
+	private boolean isActive;
+
+	@Expose
 	@Property("added on")
 	private Date addedOn = new Date();
 
@@ -78,6 +82,14 @@ public class UserAccount extends BaseEntity {
 
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Date getAddedOn() {

@@ -16,6 +16,7 @@ public class UserInfo {
 	private String lastAuditedBy = new String();
 	private String lastAuditAction = new String();
 	private boolean isDeleted = false;
+	private boolean isActive = false;
 
 	public UserInfo() {
 	}
@@ -116,4 +117,11 @@ public class UserInfo {
 		this.isDeleted = isDeleted;
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 }

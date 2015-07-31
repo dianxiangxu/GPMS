@@ -233,7 +233,7 @@ $(function() {
 					cssclass : 'cssClassHeadCheckBox',
 					coltype : 'checkbox',
 					align : 'center',
-					checkFor : '10', // this is count from 0 column index
+					checkFor : '11', // this is count from 0 column index
 					elemClass : 'attrChkbox',
 					elemDefault : false,
 					controlclass : 'attribHeaderChkbox'
@@ -309,8 +309,17 @@ $(function() {
 					align : 'left',
 					hide : true
 				}, {
+					display : getLocale(gpmsUsersManagement, 'Is Active?'),
+					name : 'is_active',
+					cssclass : 'cssClassHeadBoolean',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'boolean',
+					format : 'Yes/No'
+				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
-					name : 'status',
+					name : 'is_deleted',
 					cssclass : 'cssClassHeadBoolean',
 					controlclass : '',
 					coltype : 'label',
@@ -336,7 +345,7 @@ $(function() {
 					_event : 'click',
 					trigger : '1',
 					callMethod : 'usersManage.EditUser',
-					arguments : '1,2,3,4,5,6,7,8,9,10'
+					arguments : '1,2,3,4,5,6,7,8,9,10,11'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Delete"),
 					name : 'delete',
@@ -344,7 +353,7 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '10'
+					arguments : '11'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
@@ -352,6 +361,14 @@ $(function() {
 					_event : 'click',
 					trigger : '3',
 					callMethod : 'usersManage.ActiveUser',
+					arguments : '10'
+				}, {
+					display : getLocale(gpmsUsersManagement, "Deactivate"),
+					name : 'deactivate',
+					enable : true,
+					_event : 'click',
+					trigger : '4',
+					callMethod : 'usersManage.DeactiveUser',
 					arguments : '10'
 				} ],
 				rp : perpage,
@@ -363,7 +380,7 @@ $(function() {
 					0 : {
 						sorter : false
 					},
-					11 : {
+					12 : {
 						sorter : false
 					}
 				}
@@ -669,12 +686,12 @@ $(function() {
 			});
 
 			$('input[name=chkActive]').prop('checked',
-					!response['userAccount']['isDeleted']);
+					response['userAccount']['isActive']);
 
 			$.each(response['userAccount'], function(index, value) {
 				// alert(index + " :: " + value);
 				$('#txtUserName').val(response['userAccount']['userName']);
-				$('#txtUserName').prop('disabled', 'disabled');
+				// $('#txtUserName').prop('disabled', 'disabled');
 
 				$('#txtPassword').val(response['userAccount']['password']);
 			});
@@ -712,7 +729,7 @@ $(function() {
 				}
 				// $('#txtUserName').val(argus[1]);
 				// $('#txtUserName').prop('disabled', 'disabled');
-				if (argus[10].toLowerCase() != "yes") {
+				if (argus[11].toLowerCase() != "yes") {
 					$(".delbutton").prop("id", argus[0]);
 					$(".delbutton").show();
 				} else {
@@ -815,7 +832,7 @@ $(function() {
 
 		ActivateUser : function(_userId, _isActive) {
 			this.config.url = this.config.baseURL
-					+ "UpdateUserIsDeletedByUserID";
+					+ "UpdateUserIsActiveByUserID";
 			this.config.data = JSON2.stringify({
 				userId : _userId,
 				gpmsCommonObj : gpmsCommonObj(),
@@ -828,7 +845,7 @@ $(function() {
 		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvUsers":
-				if (argus[1].toLowerCase() != "no") {
+				if (argus[1].toLowerCase() != "yes") {
 					usersManage.ActivateUser(argus[0], true);
 				} else {
 					csscody.alert('<h2>'
@@ -836,7 +853,26 @@ $(function() {
 									"Information Alert")
 							+ '</h2><p>'
 							+ getLocale(gpmsUsersManagement,
-									"Sorry! this user is already active.")
+									"Sorry! this user is already actived.")
+							+ '</p>');
+				}
+				break;
+			default:
+				break;
+			}
+		},
+		DeactiveUser : function(tblID, argus) {
+			switch (tblID) {
+			case "gdvUsers":
+				if (argus[1].toLowerCase() != "no") {
+					usersManage.ActivateUser(argus[0], false);
+				} else {
+					csscody.alert('<h2>'
+							+ getLocale(gpmsUsersManagement,
+									"Information Alert")
+							+ '</h2><p>'
+							+ getLocale(gpmsUsersManagement,
+									"Sorry! this user is already deactived.")
 							+ '</p>');
 				}
 				break;

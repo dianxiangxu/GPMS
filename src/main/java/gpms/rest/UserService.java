@@ -21,7 +21,6 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,6 +33,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -496,8 +496,8 @@ public class UserService {
 	}
 
 	@POST
-	@Path("/UpdateUserIsDeletedByUserID")
-	public String updateUserIsDeletedByUserID(String message)
+	@Path("/UpdateUserIsActiveByUserID")
+	public String updateUserIsActiveByUserID(String message)
 			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
 		String response = new String();
@@ -560,7 +560,7 @@ public class UserService {
 
 	@POST
 	@Path("/CheckUniqueUserName")
-	public String checkUniqueUserName(String message)
+	public Boolean checkUniqueUserName(String message)
 			throws JsonProcessingException, IOException {
 		// {"userUniqueObj":{"UserID":"userAccount1","UserName":"55b9225454ffd82dc052a32a"},"gpmsCommonObj":{"UserName":"superuser","UserProfileID":"55b9225454ffd82dc052a32a","CultureName":"en-US"}}
 
@@ -594,7 +594,24 @@ public class UserService {
 		if (commonObj != null && commonObj.has("CultureName")) {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
-		return cultureName;
+
+		ObjectId id = new ObjectId(userID);
+
+		// UserAccount userAccountObj =
+		// userAccountDAO.findByUserName(newUserName);
+
+		// Key<UserProfile> userObj = UserAccount.getKey();
+
+		List<UserProfile> userProfiles = userProfileDAO
+				.findAllUsersWithSameUserName(id, newUserName);
+
+		// UserAccount useraccount = userAccountDAO.findByUserName(newUserName);
+
+		if (userProfiles.size() > 0) {
+			return false;
+		} else {
+			return true;
+		}
 
 	}
 }

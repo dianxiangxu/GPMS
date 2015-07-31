@@ -26,8 +26,10 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.CriteriaContainer;
 import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
@@ -40,11 +42,13 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	private static Morphia morphia;
 	private static Datastore ds;
 	private AuditLog audit;
+	private CriteriaContainer container;
 
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
 		if (morphia == null) {
-			morphia = new Morphia().map(UserProfile.class);
+			morphia = new Morphia().map(UserProfile.class).map(
+					UserAccount.class);
 		}
 		return morphia;
 	}
@@ -174,6 +178,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setLastAuditAction(lastAuditAction);
 
 			user.setDeleted(userProfile.getUserAccount().isDeleted());
+			user.setActive(userProfile.getUserAccount().isActive());
 			users.add(user);
 		}
 		return users;
@@ -806,5 +811,28 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deleteAll() {
 		Datastore ds = getDatastore();
 		ds.delete(ds.createQuery(UserProfile.class));
+	}
+
+	public List<UserProfile> findAllUsersWithSameUserName(ObjectId id,
+			String userName) {
+		Datastore ds = getDatastore();
+		// Query<UserProfile> q = ds.createQuery(UserProfile.class).field("_id")
+		// .equal(id).asList();
+		// q.criteria("_id").notEqual(id);
+		// q.and(q.criteria("_id").notEqual(id),
+		// q.criteria("user id.username").equal(userName));
+		// q.criteria("user id.username").equal(userName);
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
+		accountQuery.criteria("username").containsIgnoreCase(userName);
+		container.add(profileQuery.criteria("user id").in(
+				accountQuery.asKeyList()));
+
+		// container.add(query.criteria("addresses.streetName")
+		// .containsIgnoreCase("mainstreet"));
+
+		System.out.println(profileQuery.asList());
+		return profileQuery.asList();
 	}
 }

@@ -7,6 +7,7 @@ import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.QueryResults;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -77,7 +80,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).field("username")
 				.equal(userName).get();
-	}
+	}	
 
 	/**
 	 * Method to set account name
@@ -129,6 +132,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		userAccount.addEntryToAuditLog(audit);
 
 		userAccount.setDeleted(true);
+		userAccount.setActive(false);
 		ds.save(userAccount);
 	}
 
@@ -141,6 +145,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		userAccount.addEntryToAuditLog(audit);
 
 		userAccount.setDeleted(!isActive);
+		userAccount.setActive(isActive);
 		ds.save(userAccount);
 
 	}

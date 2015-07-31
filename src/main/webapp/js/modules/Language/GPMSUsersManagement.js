@@ -71,7 +71,8 @@
 	// Used
 	"Are you sure you want to delete this user?" : "Are you sure you want to delete this user?",
 	'Sorry! this user is already deleted.' : 'Sorry! this user is already deleted.',
-	'Sorry! this user is already active.' : 'Sorry! this user is already active.',
+	'Sorry! this user is already actived.' : 'Sorry! this user is already actived.',
+	'Sorry! this user is already deactived.' : 'Sorry! this user is already deactived.',
 
 	'Please enter user name.' : 'Please enter user name.',
 	'Please enter unique user name.' : 'Please enter unique user name.',

@@ -20,8 +20,6 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.utils.IndexDirection;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
 
 //{"id":null,"version":null,"auditLog":[],
