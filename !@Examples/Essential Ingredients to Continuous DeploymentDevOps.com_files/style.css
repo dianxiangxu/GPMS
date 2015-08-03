@@ -1,0 +1,190 @@
+/*
+Theme Name: RapidNews
+Theme URI: http://rapid.wp-theme.pro/
+Author: NORDiX
+Author URI:  http://wp-theme.pro
+Description: A Premium Wordpress Blog / Magazine Theme. Author page Themeforest <a href="http://themeforest.net/user/NORDiX?ref=NORDiX">NORDiX</a>.
+Version: 1.3
+License: GNU General Public License
+License URI: license.txt
+Tags: light, white, gray, two-columns, fixed-width, editor-style, featured-images, theme-options
+*/
+.banner_head_right {
+  margin-bottom: 10px;
+}
+.header {
+  margin-top: 10px;
+}
+#qa-page-wrapper {
+  margin-top: 15px;
+}
+#qa-menu .qa-search {
+  width: 50px;
+}
+
+/* header styling */
+.header {
+margin-top:0px;
+background-image: url('/wp-content/themes/rapidnews/images/header-bg-1230x191.png');
+}
+
+.header .span4 img {
+margin: 10px;
+}
+
+#mainmenu li.current-menu-item > a{
+background-color: transparent;
+}
+
+#mainmenu {
+background-color: inherit;
+}
+
+/***** Main Nav *****/
+
+nav select.menuselect{ display:none; margin-top:20px; width:100% !important;}
+nav{ display:inline-block; float:left;}
+nav ul.menu{ margin-bottom:0;}
+nav ul.menu li:hover { visibility: inherit; }
+nav ul.menu li {float:left;position:relative; border-right:4px #ffffff solid;}
+nav ul.menu li > a{display: block;margin:0;padding: 25px 12px 8px 25px;font-size:12px;font-weight: 400;font-family: 'Oswald', sans-serif;text-transform: uppercase;color: #e51c21;}
+nav ul.menu li a:hover,nav ul.menu li a:active, nav ul li.current-menu-item > a,nav ul li.current-menu-parent > a,nav ul li.current_page_parent > a{color: #f8f8f8;border: none;}
+nav ul.menu li ul li a:hover,.menu li ul li.sfHover > a,nav ul.menu li ul li ul li a:hover{ padding-left:12px;}
+nav ul.menu li.sfHover > a:hover{background:#e51c21;}
+nav ul.menu li a em { display:block; margin:0 0 0 5px; text-transform:none;font-weight: 400; font-size:10px; line-height:14px;font-family: 'Oswald', sans-serif;}
+
+/***** Body *****/
+
+/*
+body {
+    -moz-transform: scale(0.94, 0.94); /* Moz-browsers */
+    zoom: 0.94; /* Other non-webkit browsers */
+    zoom: 94%; /* Webkit browsers */
+}
+*/
+
+article ul li {
+list-style: disc;
+}
+
+/* wp business directory plugin styling */
+.wpbdp-categories li.cat-item .icon-chevron-right {
+opacity: .0;
+}
+.wpbdp-categories li.cat-item:hover .icon-chevron-right {
+opacity: .0;
+}
+.wpbdp-categories li.cat-item {
+border: none;
+}
+
+
+/* footer styling */
+
+.footers {
+font-size:16px;
+}
+.menu-f {
+font-size: 16px;
+}
+
+
+/* entry styling */
+.entry-content a{font-weight:700; font-style:normal; text-transform:none; font-size: 100%; color:red; margin-bottom:15px;}
+.entry-content p{font-size:15px;}
+
+/* form styling */
+.gform_wrapper form {
+  margin-bottom: 0;
+}
+.gform_wrapper .gfield_required {
+  padding-left: 1px;
+  color: #0000ff;
+}
+.ginput_container textarea {
+  height: auto;
+}
+.gform_wrapper .gfield_label {
+  color: #6f7072;
+  font-weight:bold;
+}
+.gform_wrapper input,
+.gform_wrapper select,
+.gform_wrapper textarea {
+  border-color: #ff0000;
+  background-color: #ffffff;
+  color: #ff0000;
+}
+
+#gform_submit_button_1 {
+  display: inline-block;
+  *display: inline;
+  padding: 4px 10px 4px;
+  margin-bottom: 0;
+  *margin-left: .3em;
+  font-size: 13px;
+  line-height: 18px;
+  *line-height: 20px;
+  color: #fff;
+  text-align: center;
+  /*text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);*/
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  *background-color: #e6e6e6;
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  *border: 0;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-bottom-color: #b3b3b3;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+  *zoom: 1;
+  /*-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);*/
+/* box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);*/
+  background-color: #0074cc;
+  *background-color: #0055cc;
+  background-image: -ms-linear-gradient(top, #0088cc, #0055cc);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0055cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0055cc);
+  background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
+  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-repeat: repeat-x;
+  border-color: #0055cc #0055cc #003580;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+
+#gform_wrapper_1  {
+border:1px solid #6f7072;
+padding:15px;}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  background-color: #0055cc;
+  *background-color: #004ab3;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #004099 \9;
+}
+
+
