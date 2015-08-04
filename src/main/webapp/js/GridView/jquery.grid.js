@@ -212,7 +212,7 @@ var fromServer = 0;
 				if (fromServer !== 0 || p.data == "") {
 					var params = $.extend({
 						offset : p.pnew,
-						limit : p.rp
+						limit : parseInt(p.rp)
 					}, p.param);
 
 					var mydata = JSON2.stringify(params);
@@ -485,7 +485,7 @@ var fromServer = 0;
 							+ " >" + p.rpOptions[nx] + "</option>";
 				}
 				;
-				var offset = p.pnew + parseInt(p.rp) - 1;
+				var offset = p.pnew + p.rp - 1;
 				if (offset > p.total) {
 					offset = p.total;
 				}
@@ -504,7 +504,7 @@ var fromServer = 0;
 								+ '_pagesize">' + opt + '</select></div>');
 				$(PageWrapper).find('select').change(function() {
 					p.page = 1;
-					p.rp = parseInt(this.value);
+					p.rp = this.value;
 					g.clearAll();
 					p.pnew = 1;
 					p.current = 1;
@@ -579,7 +579,7 @@ var fromServer = 0;
 
 			invokePagination : function(pageno) {
 				p.current = pageno;
-				p.pnew = (pageno - 1) * parseInt(p.rp) + 1; // offset
+				p.pnew = (pageno - 1) * p.rp + 1; // offset
 				// g.clearAll();
 				g.wcf();
 			},

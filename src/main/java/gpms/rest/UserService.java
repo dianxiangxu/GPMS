@@ -560,15 +560,15 @@ public class UserService {
 
 	@POST
 	@Path("/CheckUniqueUserName")
-	public Boolean checkUniqueUserName(String message)
+	public String checkUniqueUserName(String message)
 			throws JsonProcessingException, IOException {
-		// {"userUniqueObj":{"UserID":"userAccount1","UserName":"55b9225454ffd82dc052a32a"},"gpmsCommonObj":{"UserName":"superuser","UserProfileID":"55b9225454ffd82dc052a32a","CultureName":"en-US"}}
-
 		String userID = new String();
 		String newUserName = new String();
 		String userName = new String();
 		String userProfileID = new String();
 		String cultureName = new String();
+
+		String response = new String();
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(message);
@@ -597,21 +597,70 @@ public class UserService {
 
 		ObjectId id = new ObjectId(userID);
 
-		// UserAccount userAccountObj =
-		// userAccountDAO.findByUserName(newUserName);
+		UserProfile userProfile = userProfileDAO.findNextUserWithSameUserName(
+				id, newUserName);
 
-		// Key<UserProfile> userObj = UserAccount.getKey();
-
-		List<UserProfile> userProfiles = userProfileDAO
-				.findAllUsersWithSameUserName(id, newUserName);
-
-		// UserAccount useraccount = userAccountDAO.findByUserName(newUserName);
-
-		if (userProfiles.size() > 0) {
-			return false;
+		if (userProfile != null) {
+			response = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString("false");
 		} else {
-			return true;
+			response = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString("true");
 		}
+		return response;
+
+	}
+
+	@POST
+	@Path("/CheckUniqueEmail")
+	public String checkUniqueEmail(String message)
+			throws JsonProcessingException, IOException {
+		String userID = new String();
+		String newEmail = new String();
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
+
+		String response = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		JsonNode userUniqueObj = root.get("userUniqueObj");
+		if (userUniqueObj != null && userUniqueObj.has("UserID")) {
+			userID = userUniqueObj.get("UserID").getTextValue();
+		}
+
+		if (userUniqueObj != null && userUniqueObj.has("NewEmail")) {
+			newEmail = userUniqueObj.get("NewEmail").getTextValue();
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(userID);
+
+		UserProfile userProfile = userProfileDAO.findNextUserWithSameEmail(id,
+				newEmail);
+
+		if (userProfile != null) {
+			response = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString("false");
+		} else {
+			response = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString("true");
+		}
+		return response;
 
 	}
 }

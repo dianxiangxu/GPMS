@@ -18,7 +18,9 @@ import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -26,7 +28,6 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Key;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.CriteriaContainer;
@@ -96,9 +97,35 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 		ArrayList<UserInfo> users = new ArrayList<UserInfo>();
 
-		List<UserProfile> userProfiles = ds.createQuery(UserProfile.class)
-				.offset(offset - 1).limit(limit).asList();
-		int rowTotal = ds.createQuery(UserProfile.class).asList().size();
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
+
+		if (userName != null) {
+			accountQuery.field("username").containsIgnoreCase(userName);
+			profileQuery.criteria("user id").in(accountQuery.asKeyList());
+		}
+
+		if (college != null) {
+			profileQuery.field("details.college").equal(college);
+		}
+		if (department != null) {
+			profileQuery.field("details.department").equal(department);
+		}
+		if (positionType != null) {
+			profileQuery.field("details.position type").equal(positionType);
+		}
+		if (positionTitle != null) {
+			profileQuery.field("details.position title").equal(positionTitle);
+		}
+		if (isActive != null) {
+			accountQuery.field("is active").equal(isActive);
+		}
+
+		// profileQuery.and(profileQuery.criteria("_id").notEqual(id)
+		List<UserProfile> userProfiles = profileQuery.offset(offset - 1)
+				.limit(limit).asList();
+
+		int rowTotal = profileQuery.asList().size();
 		for (UserProfile userProfile : userProfiles) {
 			UserInfo user = new UserInfo();
 			user.setRowTotal(rowTotal);
@@ -184,90 +211,45 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return users;
 	}
 
-	public List<UserProfile> findUsersForGrid(int offset, int limit,
-			String firstName, String college, String department,
-			String postitionTitle, String postitionType, Boolean isActive)
-			throws UnknownHostException {
-		Datastore ds = getDatastore();
-		// ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-
-		// TODO: add filters based on attributes
-		// Set UserAccount based on userName
-
-		Query<UserProfile> q = ds.createQuery(UserProfile.class);
-
-		if (firstName != null) {
-			q.field("first name").contains(firstName);
-		}
-
-		if (college != null) {
-			q.field("details.college").contains(college);
-		}
-		if (department != null) {
-			q.field("details.department").contains(department);
-		}
-
-		if (postitionTitle != null) {
-			q.field("details.position title").contains(postitionTitle);
-		}
-
-		if (postitionType != null) {
-			q.field("details.position type").contains(postitionType);
-		}
-
-		if (isActive != null) {
-			q.field("is deleted").equals(!isActive);
-		}
-		List<UserProfile> userProfiles = q.offset(offset - 1).limit(limit)
-				.asList();
-
-		return userProfiles;
-
-		// int rowTotal = userProfiles.size();
-		// for (UserProfile userProfile : userProfiles) {
-		// UserInfo user = new UserInfo();
-		// user.setRowTotal(rowTotal);
-		// user.setId(userProfile.getId().toString());
-		// user.setUserName(userProfile.getUserAccount().getUserName());
-		// user.setFullName(userProfile.getFirstName() + " "
-		// + userProfile.getMiddleName() + " "
-		// + userProfile.getLastName());
-		//
-		// // TODO: TO bind the PI, Co-PI and Senior Proposal Count
-		// user.setNoOfPIedProposal(CountPIProposal(userProfile));
-		// user.setNoOfCoPIedProposal(CountCoPIProposal(userProfile));
-		// user.setNoOfSenioredProposal(CountSeniorProposal(userProfile));
-		// // Date today = Calendar.getInstance().getTime();
-		// //
-		// // SimpleDateFormat formatter = new SimpleDateFormat(
-		// // "yyyy-MM-dd hh.mm.ss");
-		// // String folderName = formatter.format(today);
-		// // // DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		// // String d = formatter.parse(userProfile.getUserAccount()
-		// // .getAddedOn());
-		// //
-		// // user.setAddedOn(d);
-		// user.setAddedOn(userProfile.getUserAccount().getAddedOn());
-		// // TODO: get the lastUpdated for User here
-		// Date lastUpdated =
-		// userProfile.getAuditLog().get(userProfile.getAuditLog().size()-1).getActivityDate();
-		// user.setLastUpdated(lastUpdated);
-		//
-		// user.setDeleted(userProfile.getUserAccount().isDeleted());
-		// users.add(user);
-		// }
-		// return users;
-	}
-
 	public List<AuditLogInfo> findAllForUserAuditLogGrid(int offset, int limit,
 			ObjectId userId, String action, String auditedBy,
 			String activityOnFrom, String activityOnTo) throws ParseException,
 			UnknownHostException {
 
 		Datastore ds = getDatastore();
-		UserProfile q = ds.createQuery(UserProfile.class).field("_id")
-				.equal(userId).get();
-		// .order("audit log.activity on")
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		// Query<AuditLog> auditQuery = ds.createQuery(AuditLog.class);
+		Query<UserProfile> auditQuery = ds.createQuery(UserProfile.class);
+
+		profileQuery.field("_id").equal(userId);
+
+		if (auditedBy != null) {
+			auditQuery.field("first name").containsIgnoreCase(auditedBy);
+			profileQuery.criteria("audit log.user id").in(
+					auditQuery.asKeyList());
+		}
+
+		if (action != null) {
+			profileQuery.field("audit log.action").containsIgnoreCase(action);
+		}
+
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		// Need to do Range for give 2 Dates
+		if (activityOnFrom != null) {
+			Date activityDateFrom = formatter.parse(activityOnFrom);
+			profileQuery.field("audit log.activity on").greaterThanOrEq(
+					activityDateFrom);
+		}
+
+		if (activityOnTo != null) {
+			Date activityDateTo = formatter.parse(activityOnTo);
+			profileQuery.field("audit log.activity on").lessThanOrEq(
+					activityDateTo);
+		}
+
+		UserProfile q = profileQuery.get();
+		// UserProfile q = profileQuery.field("_id").equal(userId).get();
 
 		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
 		int rowTotal = 0;
@@ -314,35 +296,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			}
 
 		}
-		// Query<AuditLogInfo> q = ds.createQuery(AuditLogInfo.class);
-		// TODO Filter the AuditLog based on these Filters
-		// if (action != null) {
-		// q.field("first name").contains(action);
-		// }
-		//
-		// if (auditedBy != null) {
-		// q.field("first name").contains(auditedBy);
-		// }
-		//
-		// SimpleDateFormat formatter = new
-		// SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		// // Need to do Range for give 2 Dates
-		// if (activityOnFrom != null) {
-		//
-		// Date activityDateFrom = formatter.parse(activityOnFrom);
-		// q.field("startDate").greaterThanOrEq(activityDateFrom);
-		// }
-		//
-		// if (activityOnTo != null) {
-		// Date activityDateTo = formatter.parse(activityOnTo);
-		// q.field("startDate").lessThanOrEq(activityDateTo);
-		// }
-		//
-		// List<AuditLogInfo> userAuditLogs = q.offset(offset - 1).limit(limit)
-		// .asList();
-
-		// List<AuditLogInfo> userAuditLogs = ds.createQuery(AuditLogInfo.class)
-		// .offset(offset - 1).limit(limit).asList();
 
 		Collections.sort(allAuditLogs);
 
@@ -813,26 +766,29 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		ds.delete(ds.createQuery(UserProfile.class));
 	}
 
-	public List<UserProfile> findAllUsersWithSameUserName(ObjectId id,
-			String userName) {
+	public UserProfile findNextUserWithSameUserName(ObjectId id, String userName) {
 		Datastore ds = getDatastore();
-		// Query<UserProfile> q = ds.createQuery(UserProfile.class).field("_id")
-		// .equal(id).asList();
-		// q.criteria("_id").notEqual(id);
-		// q.and(q.criteria("_id").notEqual(id),
-		// q.criteria("user id.username").equal(userName));
-		// q.criteria("user id.username").equal(userName);
 
 		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
-		accountQuery.criteria("username").containsIgnoreCase(userName);
-		container.add(profileQuery.criteria("user id").in(
-				accountQuery.asKeyList()));
 
-		// container.add(query.criteria("addresses.streetName")
-		// .containsIgnoreCase("mainstreet"));
+		accountQuery.criteria("username").equal(userName);
 
-		System.out.println(profileQuery.asList());
-		return profileQuery.asList();
+		profileQuery.and(profileQuery.criteria("_id").notEqual(id),
+				profileQuery.criteria("user id").in(accountQuery.asKeyList()));
+		return profileQuery.get();
+	}
+
+	public UserProfile findNextUserWithSameEmail(ObjectId id, String newEmail) {
+		Datastore ds = getDatastore();
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		profileQuery.and(
+				profileQuery.criteria("_id").notEqual(id),
+				profileQuery.criteria("work email").hasThisOne(
+						newEmail.toString()),
+				profileQuery.criteria("personal email").hasThisOne(
+						newEmail.toString()));
+		return profileQuery.get();
 	}
 }

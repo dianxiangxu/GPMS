@@ -505,6 +505,11 @@
 																					<input type="email" id="txtWorkEmail"
 																						class="sfInputbox" name="workEmail"
 																						placeholder="Work Email"> <span
+																						class="cssClassRight"> <img
+																						class="cssClassSuccessImg sfLocale" height="13"
+																						width="18" title="Right" src="" alt="Right" />
+																					</span> <b class="cssClassError sfLocale">Ops! found
+																						something error, must be unique with no spaces</b><span
 																						class="cssClassRequired">*</span>
 																				</div>
 																			</td>
@@ -515,7 +520,12 @@
 																					<div class="input-group-addon">@</div>
 																					<input type="email" class="sfInputbox"
 																						id="txtPersonalEmail" name="personalEmail"
-																						placeholder="Personal Email">
+																						placeholder="Personal Email"><span
+																						class="cssClassRight"> <img
+																						class="cssClassSuccessImg sfLocale" height="13"
+																						width="18" title="Right" src="" alt="Right" />
+																					</span> <b class="cssClassError sfLocale">Ops! found
+																						something error, must be unique with no spaces</b>
 																				</div>
 																			</td>
 																		</tr>
@@ -623,38 +633,38 @@
 																<div class="cssClassCommonBox Curve">
 																	<div class="sfGridwrapper">
 																		<div class="sfGridWrapperContent">
-																			<div class="sfFormwrapper sfTableOption">
-																				<table width="100%" cellspacing="0" cellpadding="0"
-																					border="0">
-																					<tbody>
-																						<tr>
-																							<td><label class="cssClassLabel sfLocale">
-																									Action:</label> <input type="text" class="sfInputbox"
-																								id="txtSearchAction" placeholder="Action"></td>
-																							<td><label class="cssClassLabel sfLocale">
-																									Audited By:</label> <input type="text"
-																								class="sfInputbox" id="txtSearchAuditedBy"
-																								placeholder="Audited By"></td>
-																							<td><label class="cssClassLabel sfLocale">
-																									Activity On From:</label> <input type="text"
-																								class="sfTextBoxSmall"
-																								id="txtSearchActivityOnFrom"
-																								placeholder="Activity On From"></td>
-																							<td><label class="cssClassLabel sfLocale">
-																									Activity On To:</label> <input type="text"
-																								class="sfTextBoxSmall"
-																								id="txtSearchActivityOnTo"
-																								placeholder="Activity On To"></td>
+																			<!-- 																			<div class="sfFormwrapper sfTableOption"> -->
+																			<!-- 																				<table width="100%" cellspacing="0" cellpadding="0" -->
+																			<!-- 																					border="0"> -->
+																			<!-- 																					<tbody> -->
+																			<!-- 																						<tr> -->
+																			<!-- 																							<td><label class="cssClassLabel sfLocale"> -->
+																			<!-- 																									Action:</label> <input type="text" class="sfInputbox" -->
+																			<!-- 																								id="txtSearchAction" placeholder="Action"></td> -->
+																			<!-- 																							<td><label class="cssClassLabel sfLocale"> -->
+																			<!-- 																									Audited By:</label> <input type="text" -->
+																			<!-- 																								class="sfInputbox" id="txtSearchAuditedBy" -->
+																			<!-- 																								placeholder="Audited By"></td> -->
+																			<!-- 																							<td><label class="cssClassLabel sfLocale"> -->
+																			<!-- 																									Activity On From:</label> <input type="text" -->
+																			<!-- 																								class="sfTextBoxSmall" -->
+																			<!-- 																								id="txtSearchActivityOnFrom" -->
+																			<!-- 																								placeholder="Activity On From"></td> -->
+																			<!-- 																							<td><label class="cssClassLabel sfLocale"> -->
+																			<!-- 																									Activity On To:</label> <input type="text" -->
+																			<!-- 																								class="sfTextBoxSmall" -->
+																			<!-- 																								id="txtSearchActivityOnTo" -->
+																			<!-- 																								placeholder="Activity On To"></td> -->
 
-																							<td><br>
-																								<button class="sfBtn" id="btnSearchUserAuditLog"
-																									type="button">
-																									<span class="sfLocale icon-search">Search</span>
-																								</button></td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</div>
+																			<!-- 																							<td><br> -->
+																			<!-- 																								<button class="sfBtn" id="btnSearchUserAuditLog" -->
+																			<!-- 																									type="button"> -->
+																			<!-- 																									<span class="sfLocale icon-search">Search</span> -->
+																			<!-- 																								</button></td> -->
+																			<!-- 																						</tr> -->
+																			<!-- 																					</tbody> -->
+																			<!-- 																				</table> -->
+																			<!-- 																			</div> -->
 																			<div class="loading">
 																				<img id="ajaxLoader" src="" class="sfLocale"
 																					alt="loading...." title="loading...." />
