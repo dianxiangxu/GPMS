@@ -219,85 +219,213 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Datastore ds = getDatastore();
 
 		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
-		// Query<AuditLog> auditQuery = ds.createQuery(AuditLog.class);
-		Query<UserProfile> auditQuery = ds.createQuery(UserProfile.class);
 
-		profileQuery.field("_id").equal(userId);
-
-		if (auditedBy != null) {
-			auditQuery.field("first name").containsIgnoreCase(auditedBy);
-			profileQuery.criteria("audit log.user id").in(
-					auditQuery.asKeyList());
-		}
-
-		if (action != null) {
-			profileQuery.field("audit log.action").containsIgnoreCase(action);
-		}
-
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		// Need to do Range for give 2 Dates
-		if (activityOnFrom != null) {
-			Date activityDateFrom = formatter.parse(activityOnFrom);
-			profileQuery.field("audit log.activity on").greaterThanOrEq(
-					activityDateFrom);
-		}
-
-		if (activityOnTo != null) {
-			Date activityDateTo = formatter.parse(activityOnTo);
-			profileQuery.field("audit log.activity on").lessThanOrEq(
-					activityDateTo);
-		}
-
-		UserProfile q = profileQuery.get();
-		// UserProfile q = profileQuery.field("_id").equal(userId).get();
+		UserProfile q = profileQuery.field("_id").equal(userId).get();
 
 		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
 		int rowTotal = 0;
 		if (q.getAuditLog() != null && q.getAuditLog().size() != 0) {
-			rowTotal = q.getAuditLog().size();
+			// rowTotal = q.getAuditLog().size();
+			boolean isActionMatch = false;
+			boolean isAuditedByMatch = false;
+			boolean isActivityDateFromMatch = false;
+			boolean isActivityDateToMatch = false;
 			for (AuditLog userProfileAudit : q.getAuditLog()) {
 				AuditLogInfo userAuditLog = new AuditLogInfo();
-				userAuditLog.setRowTotal(rowTotal);
-				userAuditLog.setUserName(userProfileAudit.getUserProfileId()
-						.getUserAccount().getUserName());
-				userAuditLog.setUserFullName(userProfileAudit
-						.getUserProfileId().getFirstName()
-						+ " "
-						+ userProfileAudit.getUserProfileId().getMiddleName()
-						+ " "
-						+ userProfileAudit.getUserProfileId().getLastName());
-				userAuditLog.setAction(userProfileAudit.getAction());
-				userAuditLog
-						.setActivityDate(userProfileAudit.getActivityDate());
 
-				allAuditLogs.add(userAuditLog);
+				if (action != null) {
+					if (userProfileAudit.getAction().toLowerCase()
+							.contains(action.toLowerCase())) {
+						isActionMatch = true;
+					}
+				} else {
+					isActionMatch = true;
+				}
+
+				if (auditedBy != null) {
+					if (userProfileAudit.getUserProfileId().getUserAccount()
+							.getUserName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (userProfileAudit.getUserProfileId()
+							.getFirstName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (userProfileAudit.getUserProfileId()
+							.getMiddleName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (userProfileAudit.getUserProfileId()
+							.getLastName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					}
+				} else {
+					isAuditedByMatch = true;
+				}
+
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				if (activityOnFrom != null) {
+					Date activityDateFrom = formatter.parse(activityOnFrom);
+					if (userProfileAudit.getActivityDate().compareTo(
+							activityDateFrom) > 0) {
+						isActivityDateFromMatch = true;
+					} else if (userProfileAudit.getActivityDate().compareTo(
+							activityDateFrom) < 0) {
+						isActivityDateFromMatch = false;
+					} else if (userProfileAudit.getActivityDate().compareTo(
+							activityDateFrom) == 0) {
+						isActivityDateFromMatch = true;
+					}
+				} else {
+					isActivityDateFromMatch = true;
+				}
+
+				if (activityOnTo != null) {
+					Date activityDateTo = formatter.parse(activityOnTo);
+					if (userProfileAudit.getActivityDate().compareTo(
+							activityDateTo) > 0) {
+						isActivityDateToMatch = false;
+					} else if (userProfileAudit.getActivityDate().compareTo(
+							activityDateTo) < 0) {
+						isActivityDateToMatch = true;
+					} else if (userProfileAudit.getActivityDate().compareTo(
+							activityDateTo) == 0) {
+						isActivityDateToMatch = true;
+					}
+				} else {
+					isActivityDateToMatch = true;
+				}
+
+				if (isActionMatch && isAuditedByMatch
+						&& isActivityDateFromMatch && isActivityDateToMatch) {
+					// userAuditLog.setRowTotal(rowTotal);
+					userAuditLog.setUserName(userProfileAudit
+							.getUserProfileId().getUserAccount().getUserName());
+					userAuditLog
+							.setUserFullName(userProfileAudit
+									.getUserProfileId().getFirstName()
+									+ " "
+									+ userProfileAudit.getUserProfileId()
+											.getMiddleName()
+									+ " "
+									+ userProfileAudit.getUserProfileId()
+											.getLastName());
+					userAuditLog.setAction(userProfileAudit.getAction());
+					userAuditLog.setActivityDate(userProfileAudit
+							.getActivityDate());
+
+					allAuditLogs.add(userAuditLog);
+				}
 			}
 		}
 
 		if (q.getUserAccount().getAuditLog() != null
 				&& q.getUserAccount().getAuditLog().size() != 0) {
-			rowTotal += q.getUserAccount().getAuditLog().size();
+			// rowTotal += q.getUserAccount().getAuditLog().size();
+			boolean isActionMatch = false;
+			boolean isAuditedByMatch = false;
+			boolean isActivityDateFromMatch = false;
+			boolean isActivityDateToMatch = false;
 			for (AuditLog userAccountAudit : q.getUserAccount().getAuditLog()) {
 				AuditLogInfo userAuditLog = new AuditLogInfo();
-				userAuditLog.setRowTotal(rowTotal);
-				userAuditLog.setUserName(userAccountAudit.getUserProfileId()
-						.getUserAccount().getUserName());
-				userAuditLog.setUserFullName(userAccountAudit
-						.getUserProfileId().getFirstName()
-						+ " "
-						+ userAccountAudit.getUserProfileId().getMiddleName()
-						+ " "
-						+ userAccountAudit.getUserProfileId().getLastName());
-				userAuditLog.setAction(userAccountAudit.getAction());
-				userAuditLog
-						.setActivityDate(userAccountAudit.getActivityDate());
 
-				allAuditLogs.add(userAuditLog);
+				if (action != null) {
+					if (userAccountAudit.getAction().toLowerCase()
+							.contains(action.toLowerCase())) {
+						isActionMatch = true;
+					}
+				} else {
+					isActionMatch = true;
+				}
+
+				if (auditedBy != null) {
+					if (userAccountAudit.getUserProfileId().getUserAccount()
+							.getUserName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (userAccountAudit.getUserProfileId()
+							.getFirstName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (userAccountAudit.getUserProfileId()
+							.getMiddleName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (userAccountAudit.getUserProfileId()
+							.getLastName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					}
+				} else {
+					isAuditedByMatch = true;
+				}
+
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				if (activityOnFrom != null) {
+					Date activityDateFrom = formatter.parse(activityOnFrom);
+					if (userAccountAudit.getActivityDate().compareTo(
+							activityDateFrom) > 0) {
+						isActivityDateFromMatch = true;
+					} else if (userAccountAudit.getActivityDate().compareTo(
+							activityDateFrom) < 0) {
+						isActivityDateFromMatch = false;
+					} else if (userAccountAudit.getActivityDate().compareTo(
+							activityDateFrom) == 0) {
+						isActivityDateFromMatch = true;
+					}
+				} else {
+					isActivityDateFromMatch = true;
+				}
+
+				if (activityOnTo != null) {
+					Date activityDateTo = formatter.parse(activityOnTo);
+					if (userAccountAudit.getActivityDate().compareTo(
+							activityDateTo) > 0) {
+						isActivityDateToMatch = false;
+					} else if (userAccountAudit.getActivityDate().compareTo(
+							activityDateTo) < 0) {
+						isActivityDateToMatch = true;
+					} else if (userAccountAudit.getActivityDate().compareTo(
+							activityDateTo) == 0) {
+						isActivityDateToMatch = true;
+					}
+				} else {
+					isActivityDateToMatch = true;
+				}
+
+				if (isActionMatch && isAuditedByMatch
+						&& isActivityDateFromMatch && isActivityDateToMatch) {
+					// userAuditLog.setRowTotal(rowTotal);
+					userAuditLog.setUserName(userAccountAudit
+							.getUserProfileId().getUserAccount().getUserName());
+					userAuditLog
+							.setUserFullName(userAccountAudit
+									.getUserProfileId().getFirstName()
+									+ " "
+									+ userAccountAudit.getUserProfileId()
+											.getMiddleName()
+									+ " "
+									+ userAccountAudit.getUserProfileId()
+											.getLastName());
+					userAuditLog.setAction(userAccountAudit.getAction());
+					userAuditLog.setActivityDate(userAccountAudit
+							.getActivityDate());
+
+					allAuditLogs.add(userAuditLog);
+				}
 			}
 
 		}
 
 		Collections.sort(allAuditLogs);
+
+		rowTotal = allAuditLogs.size();
+		if (rowTotal > 0) {
+			for (AuditLogInfo t : allAuditLogs) {
+				t.setRowTotal(rowTotal);
+			}
+		}
 
 		if (rowTotal >= (offset + limit - 1)) {
 			return allAuditLogs.subList(offset - 1, offset + limit - 1);
