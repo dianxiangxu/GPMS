@@ -1129,7 +1129,7 @@ $(function() {
 
 			var userId = $('#btnSaveUser').prop("name");
 			if (userId == '') {
-				userId = 0;
+				userId = "0";
 			}
 
 			usersManage.BindUserAuditLogGrid(userId, action, auditedBy,
@@ -1697,7 +1697,7 @@ $(function() {
 					usersManage.SaveUser(user_id, false);
 				} else {
 					editFlag = 0;
-					usersManage.SaveUser(0, true);
+					usersManage.SaveUser("0", true);
 				}
 			});
 
@@ -1707,7 +1707,7 @@ $(function() {
 						var userName = $(this).val();
 						var user_id = $('#btnSaveUser').prop("name");
 						if (user_id == '') {
-							user_id = 0;
+							user_id = "0";
 						}
 						if (!userName) {
 							errors += getLocale(gpmsUsersManagement,

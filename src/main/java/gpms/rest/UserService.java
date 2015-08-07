@@ -603,7 +603,10 @@ public class UserService {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
 
-		ObjectId id = new ObjectId(userID);
+		ObjectId id = new ObjectId();
+		if (!userID.equals("0")) {
+			id = new ObjectId(userID);
+		}
 
 		UserProfile userProfile = userProfileDAO.findNextUserWithSameUserName(
 				id, newUserName);
