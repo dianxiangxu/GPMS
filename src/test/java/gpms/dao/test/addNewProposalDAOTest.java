@@ -82,7 +82,7 @@ public class addNewProposalDAOTest {
 	}
 
 	@Test
-	public void setInitialInfo() {
+	public void setInitialInfo() throws CloneNotSupportedException {
 		System.out.println("Now creating new proposal...");
 
 		System.out.println("Now adding PI info...");
@@ -118,7 +118,8 @@ public class addNewProposalDAOTest {
 	}
 
 	@Test
-	public void setInvestigatorInfo() throws UnknownHostException {
+	public void setInvestigatorInfo() throws UnknownHostException,
+			CloneNotSupportedException {
 		int coPiCount = 0;
 		int seniorPersonnelCount = 0;
 		upList = upDAO.findAll();
@@ -152,7 +153,7 @@ public class addNewProposalDAOTest {
 	}
 
 	@Test
-	public void setProjectInformation() {
+	public void setProjectInformation() throws CloneNotSupportedException {
 		// Project Information Part
 		System.out.println("Now editing Project Information...");
 		ProjectInfo projInf = prop.getProjectInfo().clone();
@@ -232,7 +233,7 @@ public class addNewProposalDAOTest {
 	}
 
 	@Test
-	public void setSponsorAndBudgetInfo() {
+	public void setSponsorAndBudgetInfo() throws CloneNotSupportedException {
 		int count = 0;
 
 		System.out.println("Now editing Sponsor and budget info...");

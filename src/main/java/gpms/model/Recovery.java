@@ -67,4 +67,53 @@ public class Recovery {
 		this.limitedRecoveryInstitutionalWaiver = limitedRecoveryInstitutionalWaiver;
 	}
 
+	@Override
+	public String toString() {
+		return "Recovery [fullRecovery=" + fullRecovery
+				+ ", noRecoveryNormalSponsorPolicy="
+				+ noRecoveryNormalSponsorPolicy
+				+ ", noRecoveryInstitutionalWaiver="
+				+ noRecoveryInstitutionalWaiver
+				+ ", limitedRecoveryNormalSponsorPolicy="
+				+ limitedRecoveryNormalSponsorPolicy
+				+ ", limitedRecoveryInstitutionalWaiver="
+				+ limitedRecoveryInstitutionalWaiver + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (fullRecovery ? 1231 : 1237);
+		result = prime * result
+				+ (limitedRecoveryInstitutionalWaiver ? 1231 : 1237);
+		result = prime * result
+				+ (limitedRecoveryNormalSponsorPolicy ? 1231 : 1237);
+		result = prime * result + (noRecoveryInstitutionalWaiver ? 1231 : 1237);
+		result = prime * result + (noRecoveryNormalSponsorPolicy ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Recovery other = (Recovery) obj;
+		if (fullRecovery != other.fullRecovery)
+			return false;
+		if (limitedRecoveryInstitutionalWaiver != other.limitedRecoveryInstitutionalWaiver)
+			return false;
+		if (limitedRecoveryNormalSponsorPolicy != other.limitedRecoveryNormalSponsorPolicy)
+			return false;
+		if (noRecoveryInstitutionalWaiver != other.noRecoveryInstitutionalWaiver)
+			return false;
+		if (noRecoveryNormalSponsorPolicy != other.noRecoveryNormalSponsorPolicy)
+			return false;
+		return true;
+	}
+	
 }

@@ -1,6 +1,5 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;

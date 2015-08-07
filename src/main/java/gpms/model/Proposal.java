@@ -247,4 +247,143 @@ public class Proposal extends BaseEntity {
 				.append(this.getDateReceived()).append(" Proposal Status : ")
 				.append(this.getProposalStatus()).toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
+		result = prime
+				* result
+				+ ((collaborationInfo == null) ? 0 : collaborationInfo
+						.hashCode());
+		result = prime * result
+				+ ((complianceInfo == null) ? 0 : complianceInfo.hashCode());
+		result = prime
+				* result
+				+ ((confidentialInfo == null) ? 0 : confidentialInfo.hashCode());
+		result = prime
+				* result
+				+ ((conflicOfInterest == null) ? 0 : conflicOfInterest
+						.hashCode());
+		result = prime * result
+				+ ((costShareInfo == null) ? 0 : costShareInfo.hashCode());
+		result = prime * result
+				+ ((dateReceived == null) ? 0 : dateReceived.hashCode());
+		result = prime * result
+				+ ((delegationInfo == null) ? 0 : delegationInfo.hashCode());
+		result = prime
+				* result
+				+ ((investigatorInfo == null) ? 0 : investigatorInfo.hashCode());
+		result = prime * result
+				+ ((oSPSectionInfo == null) ? 0 : oSPSectionInfo.hashCode());
+		result = prime * result
+				+ ((projectInfo == null) ? 0 : projectInfo.hashCode());
+		result = prime * result
+				+ ((proposalNo == null) ? 0 : proposalNo.hashCode());
+		result = prime * result
+				+ ((proposalStatus == null) ? 0 : proposalStatus.hashCode());
+		result = prime * result
+				+ ((signatureInfo == null) ? 0 : signatureInfo.hashCode());
+		result = prime
+				* result
+				+ ((sponsorAndBudgetInfo == null) ? 0 : sponsorAndBudgetInfo
+						.hashCode());
+		result = prime
+				* result
+				+ ((universityCommitments == null) ? 0 : universityCommitments
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Proposal other = (Proposal) obj;
+		if (additionalInfo == null) {
+			if (other.additionalInfo != null)
+				return false;
+		} else if (!additionalInfo.equals(other.additionalInfo))
+			return false;
+		if (collaborationInfo == null) {
+			if (other.collaborationInfo != null)
+				return false;
+		} else if (!collaborationInfo.equals(other.collaborationInfo))
+			return false;
+		if (complianceInfo == null) {
+			if (other.complianceInfo != null)
+				return false;
+		} else if (!complianceInfo.equals(other.complianceInfo))
+			return false;
+		if (confidentialInfo == null) {
+			if (other.confidentialInfo != null)
+				return false;
+		} else if (!confidentialInfo.equals(other.confidentialInfo))
+			return false;
+		if (conflicOfInterest == null) {
+			if (other.conflicOfInterest != null)
+				return false;
+		} else if (!conflicOfInterest.equals(other.conflicOfInterest))
+			return false;
+		if (costShareInfo == null) {
+			if (other.costShareInfo != null)
+				return false;
+		} else if (!costShareInfo.equals(other.costShareInfo))
+			return false;
+		if (dateReceived == null) {
+			if (other.dateReceived != null)
+				return false;
+		} else if (!dateReceived.equals(other.dateReceived))
+			return false;
+		if (delegationInfo == null) {
+			if (other.delegationInfo != null)
+				return false;
+		} else if (!delegationInfo.equals(other.delegationInfo))
+			return false;
+		if (investigatorInfo == null) {
+			if (other.investigatorInfo != null)
+				return false;
+		} else if (!investigatorInfo.equals(other.investigatorInfo))
+			return false;
+		if (oSPSectionInfo == null) {
+			if (other.oSPSectionInfo != null)
+				return false;
+		} else if (!oSPSectionInfo.equals(other.oSPSectionInfo))
+			return false;
+		if (projectInfo == null) {
+			if (other.projectInfo != null)
+				return false;
+		} else if (!projectInfo.equals(other.projectInfo))
+			return false;
+		if (proposalNo == null) {
+			if (other.proposalNo != null)
+				return false;
+		} else if (!proposalNo.equals(other.proposalNo))
+			return false;
+		if (proposalStatus != other.proposalStatus)
+			return false;
+		if (signatureInfo == null) {
+			if (other.signatureInfo != null)
+				return false;
+		} else if (!signatureInfo.equals(other.signatureInfo))
+			return false;
+		if (sponsorAndBudgetInfo == null) {
+			if (other.sponsorAndBudgetInfo != null)
+				return false;
+		} else if (!sponsorAndBudgetInfo.equals(other.sponsorAndBudgetInfo))
+			return false;
+		if (universityCommitments == null) {
+			if (other.universityCommitments != null)
+				return false;
+		} else if (!universityCommitments.equals(other.universityCommitments))
+			return false;
+		return true;
+	}
+
 }

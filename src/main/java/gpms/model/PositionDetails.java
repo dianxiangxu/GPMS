@@ -78,16 +78,56 @@ public class PositionDetails {
 		return posDet;
 	}
 
-	public boolean equals(PositionDetails pd) {
-		return this.positionTitle.equals(pd.positionTitle)
-				&& this.positionType.equals(pd.positionType)
-				&& this.college.equals(pd.college)
-				&& this.department.equals(pd.department);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((college == null) ? 0 : college.hashCode());
+		result = prime * result
+				+ ((department == null) ? 0 : department.hashCode());
+		result = prime * result
+				+ ((positionTitle == null) ? 0 : positionTitle.hashCode());
+		result = prime * result
+				+ ((positionType == null) ? 0 : positionType.hashCode());
+		return result;
 	}
 
 	@Override
-	public PositionDetails clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PositionDetails other = (PositionDetails) obj;
+		if (college == null) {
+			if (other.college != null)
+				return false;
+		} else if (!college.equals(other.college))
+			return false;
+		if (department == null) {
+			if (other.department != null)
+				return false;
+		} else if (!department.equals(other.department))
+			return false;
+		if (positionTitle == null) {
+			if (other.positionTitle != null)
+				return false;
+		} else if (!positionTitle.equals(other.positionTitle))
+			return false;
+		if (positionType == null) {
+			if (other.positionType != null)
+				return false;
+		} else if (!positionType.equals(other.positionType))
+			return false;
+		return true;
+	}
+
+	@Override
+	public PositionDetails clone() throws CloneNotSupportedException{
 		return new PositionDetails(this.positionTitle, this.positionType,
 				this.department, this.college);
 	}
+
 }

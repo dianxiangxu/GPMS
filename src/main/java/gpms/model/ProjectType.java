@@ -103,16 +103,42 @@ public class ProjectType {
 		return outPut;
 	}
 
-	public boolean equals(ProjectType pt) {
-		return this.isResearchBasic == pt.isResearchBasic
-				&& this.isResearchApplied == pt.isResearchApplied
-				&& this.isResearchDevelopment == pt.isResearchDevelopment
-				&& this.isInstruction == pt.isInstruction
-				&& this.isOtherSponsoredActivity == pt.isOtherSponsoredActivity;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isInstruction ? 1231 : 1237);
+		result = prime * result + (isOtherSponsoredActivity ? 1231 : 1237);
+		result = prime * result + (isResearchApplied ? 1231 : 1237);
+		result = prime * result + (isResearchBasic ? 1231 : 1237);
+		result = prime * result + (isResearchDevelopment ? 1231 : 1237);
+		return result;
 	}
 
 	@Override
-	public ProjectType clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProjectType other = (ProjectType) obj;
+		if (isInstruction != other.isInstruction)
+			return false;
+		if (isOtherSponsoredActivity != other.isOtherSponsoredActivity)
+			return false;
+		if (isResearchApplied != other.isResearchApplied)
+			return false;
+		if (isResearchBasic != other.isResearchBasic)
+			return false;
+		if (isResearchDevelopment != other.isResearchDevelopment)
+			return false;
+		return true;
+	}
+	
+	@Override
+	public ProjectType clone() throws CloneNotSupportedException{
 		ProjectType copy = new ProjectType();
 
 		copy.setIsResearchBasic(this.isResearchBasic);
@@ -123,4 +149,5 @@ public class ProjectType {
 
 		return copy;
 	}
+
 }

@@ -64,4 +64,44 @@ public class Base {
 		this.notApplicable = notApplicable;
 	}
 
+	@Override
+	public String toString() {
+		return "Base [MTDC=" + MTDC + ", TDC=" + TDC + ", TC=" + TC
+				+ ", other=" + other + ", notApplicable=" + notApplicable + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (MTDC ? 1231 : 1237);
+		result = prime * result + (TC ? 1231 : 1237);
+		result = prime * result + (TDC ? 1231 : 1237);
+		result = prime * result + (notApplicable ? 1231 : 1237);
+		result = prime * result + (other ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Base other = (Base) obj;
+		if (MTDC != other.MTDC)
+			return false;
+		if (TC != other.TC)
+			return false;
+		if (TDC != other.TDC)
+			return false;
+		if (notApplicable != other.notApplicable)
+			return false;
+		if (this.other != other.other)
+			return false;
+		return true;
+	}	
+
 }

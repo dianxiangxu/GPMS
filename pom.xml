@@ -232,6 +232,14 @@
 			<version>1.0.1</version>
 		</dependency>
 
+		<!-- For lazy=true -->
+		<dependency>
+			<groupId>com.thoughtworks.proxytoys</groupId>
+			<artifactId>proxytoys</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
 		<!-- Using com.google.code.morphia <dependency> <groupId>com.google.code.morphia</groupId> 
 			<artifactId>morphia</artifactId> <version>0.98</version> </dependency> -->
 	</dependencies>

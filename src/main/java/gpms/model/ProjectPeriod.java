@@ -41,12 +41,39 @@ public class ProjectPeriod {
 		return outPut;
 	}
 
-	public boolean equals(ProjectPeriod pp) {
-		return this.from.equals(pp.from) && this.to.equals(pp.to);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((from == null) ? 0 : from.hashCode());
+		result = prime * result + ((to == null) ? 0 : to.hashCode());
+		return result;
 	}
 
 	@Override
-	public ProjectPeriod clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProjectPeriod other = (ProjectPeriod) obj;
+		if (from == null) {
+			if (other.from != null)
+				return false;
+		} else if (!from.equals(other.from))
+			return false;
+		if (to == null) {
+			if (other.to != null)
+				return false;
+		} else if (!to.equals(other.to))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public ProjectPeriod clone() throws CloneNotSupportedException{
 		ProjectPeriod copy = new ProjectPeriod();
 
 		copy.setFrom(new Date(this.from.getTime()));
@@ -54,4 +81,5 @@ public class ProjectPeriod {
 
 		return copy;
 	}
+
 }

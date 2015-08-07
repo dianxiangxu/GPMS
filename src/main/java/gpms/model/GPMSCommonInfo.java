@@ -41,4 +41,11 @@ public class GPMSCommonInfo {
 		this.sessionCode = sessionCode;
 	}
 
+	@Override
+	public String toString() {
+		return "GPMSCommonInfo [userName=" + userName + ", userProfileID="
+				+ userProfileID + ", cultureName=" + cultureName
+				+ ", sessionCode=" + sessionCode + "]";
+	}	
+
 }

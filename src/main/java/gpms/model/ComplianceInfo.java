@@ -121,4 +121,76 @@ public class ComplianceInfo {
 		this.involveEnvironmentalHealthAndSafetyConcerns = involveEnvironmentalHealthAndSafetyConcerns;
 	}
 
+	@Override
+	public String toString() {
+		return "ComplianceInfo [involveUseOfHumanSubjects="
+				+ involveUseOfHumanSubjects + ", IRB=" + IRB + ", IRBPending="
+				+ IRBPending + ", involveUseOfVertebrateAnimals="
+				+ involveUseOfVertebrateAnimals + ", IACUC=" + IACUC
+				+ ", IACUCPending=" + IACUCPending
+				+ ", involveBiosafetyConcerns=" + involveBiosafetyConcerns
+				+ ", IBC=" + IBC + ", IBCPending=" + IBCPending
+				+ ", involveEnvironmentalHealthAndSafetyConcerns="
+				+ involveEnvironmentalHealthAndSafetyConcerns + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((IACUC == null) ? 0 : IACUC.hashCode());
+		result = prime * result + (IACUCPending ? 1231 : 1237);
+		result = prime * result + ((IBC == null) ? 0 : IBC.hashCode());
+		result = prime * result + (IBCPending ? 1231 : 1237);
+		result = prime * result + ((IRB == null) ? 0 : IRB.hashCode());
+		result = prime * result + (IRBPending ? 1231 : 1237);
+		result = prime * result + (involveBiosafetyConcerns ? 1231 : 1237);
+		result = prime * result
+				+ (involveEnvironmentalHealthAndSafetyConcerns ? 1231 : 1237);
+		result = prime * result + (involveUseOfHumanSubjects ? 1231 : 1237);
+		result = prime * result + (involveUseOfVertebrateAnimals ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ComplianceInfo other = (ComplianceInfo) obj;
+		if (IACUC == null) {
+			if (other.IACUC != null)
+				return false;
+		} else if (!IACUC.equals(other.IACUC))
+			return false;
+		if (IACUCPending != other.IACUCPending)
+			return false;
+		if (IBC == null) {
+			if (other.IBC != null)
+				return false;
+		} else if (!IBC.equals(other.IBC))
+			return false;
+		if (IBCPending != other.IBCPending)
+			return false;
+		if (IRB == null) {
+			if (other.IRB != null)
+				return false;
+		} else if (!IRB.equals(other.IRB))
+			return false;
+		if (IRBPending != other.IRBPending)
+			return false;
+		if (involveBiosafetyConcerns != other.involveBiosafetyConcerns)
+			return false;
+		if (involveEnvironmentalHealthAndSafetyConcerns != other.involveEnvironmentalHealthAndSafetyConcerns)
+			return false;
+		if (involveUseOfHumanSubjects != other.involveUseOfHumanSubjects)
+			return false;
+		if (involveUseOfVertebrateAnimals != other.involveUseOfVertebrateAnimals)
+			return false;
+		return true;
+	}	
+
 }

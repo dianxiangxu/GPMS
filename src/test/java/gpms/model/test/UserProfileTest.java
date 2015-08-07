@@ -1,22 +1,11 @@
 package gpms.model.test;
 
 import static org.junit.Assert.assertTrue;
-import gpms.DAL.MongoDBConnector;
-import gpms.dao.TestClassDAO;
-import gpms.model.TestClass;
 import gpms.model.UserProfile;
 
-import java.net.UnknownHostException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.mongodb.morphia.Morphia;
-
-import com.mongodb.MongoException;
 
 public class UserProfileTest {
 	String fName = "Tom";

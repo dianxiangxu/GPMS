@@ -81,27 +81,66 @@ public class SponsorAndBudgetInfo {
 		return outPut;
 	}
 
-	public boolean equals(SponsorAndBudgetInfo sabi) {
-		return this.directCosts == sabi.directCosts
-				&& this.FACosts == sabi.FACosts && this.FARate == sabi.FARate
-				&& this.grantingAgency.equals(sabi.grantingAgency)
-				&& this.totalCosts == sabi.totalCosts;
-	}
-	
 	@Override
-	public SponsorAndBudgetInfo clone()
-	{
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(FACosts);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(FARate);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(directCosts);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((grantingAgency == null) ? 0 : grantingAgency.hashCode());
+		temp = Double.doubleToLongBits(totalCosts);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SponsorAndBudgetInfo other = (SponsorAndBudgetInfo) obj;
+		if (Double.doubleToLongBits(FACosts) != Double
+				.doubleToLongBits(other.FACosts))
+			return false;
+		if (Double.doubleToLongBits(FARate) != Double
+				.doubleToLongBits(other.FARate))
+			return false;
+		if (Double.doubleToLongBits(directCosts) != Double
+				.doubleToLongBits(other.directCosts))
+			return false;
+		if (grantingAgency == null) {
+			if (other.grantingAgency != null)
+				return false;
+		} else if (!grantingAgency.equals(other.grantingAgency))
+			return false;
+		if (Double.doubleToLongBits(totalCosts) != Double
+				.doubleToLongBits(other.totalCosts))
+			return false;
+		return true;
+	}
+
+	@Override
+	public SponsorAndBudgetInfo clone() throws CloneNotSupportedException {
 		SponsorAndBudgetInfo copy = new SponsorAndBudgetInfo();
-		
-		for(String agency : this.grantingAgency)
-		{
+
+		for (String agency : this.grantingAgency) {
 			copy.addGrantingAgency(agency);
 		}
 		copy.setDirectCosts(directCosts);
 		copy.setFACosts(FACosts);
 		copy.setTotalCosts(totalCosts);
 		copy.setFARate(FARate);
-		
+
 		return copy;
 	}
+
 }

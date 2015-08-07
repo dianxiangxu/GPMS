@@ -4,6 +4,7 @@ package gpms.model;
 
 import java.util.ArrayList;
 
+
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Transient;
@@ -43,17 +44,13 @@ public class InvestigatorInfo {
 		}
 	}
 
-	public void addCo_pi(InvestigatorRefAndPosition co_pi)
-	{
-		if(!this.co_pi.contains(co_pi))
-		{
-			if (this.co_pi.size() < MAX_NUM_CO_PI)
-			{
+	public void addCo_pi(InvestigatorRefAndPosition co_pi) {
+		if (!this.co_pi.contains(co_pi)) {
+			if (this.co_pi.size() < MAX_NUM_CO_PI) {
 				this.co_pi.add(co_pi);
 			}
 		}
 	}
-
 
 	public ArrayList<InvestigatorRefAndPosition> getSeniorPersonnel() {
 		return seniorPersonnel;
@@ -65,7 +62,8 @@ public class InvestigatorInfo {
 		}
 	}
 
-	public void setSeniorPersonnel(ArrayList<InvestigatorRefAndPosition> seniorPersonnel) {
+	public void setSeniorPersonnel(
+			ArrayList<InvestigatorRefAndPosition> seniorPersonnel) {
 		if (seniorPersonnel.size() <= MAX_NUM_SENIOR_PERSONNEL) {
 			this.seniorPersonnel = seniorPersonnel;
 		}
@@ -91,6 +89,19 @@ public class InvestigatorInfo {
 			count++;
 		}
 		return outPut;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + MAX_NUM_CO_PI;
+		result = prime * result + MAX_NUM_SENIOR_PERSONNEL;
+		result = prime * result + ((co_pi == null) ? 0 : co_pi.hashCode());
+		result = prime * result + ((pi == null) ? 0 : pi.hashCode());
+		result = prime * result
+				+ ((seniorPersonnel == null) ? 0 : seniorPersonnel.hashCode());
+		return result;
 	}
 
 	public boolean equals(InvestigatorInfo invInf) {
@@ -127,19 +138,17 @@ public class InvestigatorInfo {
 	}
 
 	@Override
-	public InvestigatorInfo clone()
-	{
+	public InvestigatorInfo clone() throws CloneNotSupportedException{
 		InvestigatorInfo copy = new InvestigatorInfo();
 		copy.setPi(this.pi.clone());
 
-		for(InvestigatorRefAndPosition coPi : this.co_pi)
-		{
+		for (InvestigatorRefAndPosition coPi : this.co_pi) {
 			copy.addCo_pi(coPi.clone());
 		}
-		for(InvestigatorRefAndPosition seniorPersonnel : this.seniorPersonnel)
-		{
+		for (InvestigatorRefAndPosition seniorPersonnel : this.seniorPersonnel) {
 			copy.addSeniorPersonnel(seniorPersonnel.clone());
 		}
 		return copy;
 	}
+
 }

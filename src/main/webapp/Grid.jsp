@@ -51,7 +51,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55bb9ff454ffd80ab4d32d8e";
+	var userProfileId = "55c3d589af6e0406c8d9be5d";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -448,7 +448,8 @@
 																			</select> <span class="cssClassRequired">*</span></td>
 																		</tr>
 																		<tr>
-																			<td><span class="cssClassLabel" id="lblZip">Zip:</span></td>
+																			<td><span class="cssClassLabel" id="lblZip">Zip
+																					Code:</span></td>
 																			<td class="cssClassTableRightCol required"><input
 																				type="text" class="sfInputbox" id="txtZip"
 																				name="zip" placeholder="Zip"> <span

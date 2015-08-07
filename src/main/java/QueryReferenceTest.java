@@ -13,7 +13,7 @@ import com.mongodb.MongoClient;
 
 public class QueryReferenceTest 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws CloneNotSupportedException
 	{
 		MongoClient mongoClient = MongoDBConnector.getMongo();
 		Morphia morphia = new Morphia();
@@ -41,7 +41,7 @@ public class QueryReferenceTest
 		}
 		
 		UserAccount ua2 = ua.clone();
-		ua2.setUserName("fdsfs");
+		ua2.setUserName("userAccount0");
 
 		if(!ua2.getUserName().equals(ua.getUserName()))
 		{
@@ -54,7 +54,7 @@ public class QueryReferenceTest
 		
 		UserProfile up = upDAO.findByUserAccount(ua);
 		UserProfile up2 = up.clone();
-		up2.setFirstName("fdsfsd");
+		up2.setFirstName("firstName0");
 		if(!up2.getFirstName().equals(up.getFirstName()))
 		{
 			System.out.println("It works!");

@@ -14,7 +14,7 @@ $(function() {
 	var isUniqueEmail = false;
 
 	var editFlag = 0;
-	var arrAttrValueId = 0;
+
 	usersManage = {
 		config : {
 			isPostBack : false,
@@ -690,9 +690,8 @@ $(function() {
 					response['userAccount']['isActive']);
 
 			$.each(response['userAccount'], function(index, value) {
-				// alert(index + " :: " + value);
 				$('#txtUserName').val(response['userAccount']['userName']);
-				// $('#txtUserName').prop('disabled', 'disabled');
+				$('#txtUserName').prop('disabled', 'disabled');
 
 				$('#txtPassword').val(response['userAccount']['password']);
 			});
@@ -755,6 +754,7 @@ $(function() {
 				usersManage.BindUserAuditLogGrid(argus[0], null, null, null,
 						null);
 				$('#auditLogTab').show();
+
 				break;
 			default:
 				break;
@@ -915,10 +915,7 @@ $(function() {
 		SaveUser : function(_userId, _flag) {
 			$('#iferror').hide();
 			if (checkForm($("#form1"))) {
-				var selectedItemTypeID = '';
 				var validateErrorMessage = '';
-				var itemSelected = false;
-				var isUsedInConfigItem = false;
 
 				var newUserName = $('#txtUserName').val();
 				if (!newUserName) {
@@ -931,238 +928,79 @@ $(function() {
 							+ getLocale(gpmsUsersManagement, "already exists.")
 							+ '<br/>';
 				}
-				var selectedValue = $("#ddlApplyTo").val();
-				if (selectedValue !== "0") {
-					$("#lstItemType").each(function() {
-						if ($("#lstItemType :selected").length != 0) {
-							itemSelected = true;
-							$("#lstItemType option:selected").each(function(i) {
-								selectedItemTypeID += $(this).val() + ',';
-								if ($(this).val() == '3') {
-									isUsedInConfigItem = true;
-								}
-							});
-						}
-					});
-					if (!itemSelected) {
-						validateErrorMessage += getLocale(gpmsUsersManagement,
-								"Please select at least one item type.")
-								+ "<br/>";
-					}
-				} else {
-					isUsedInConfigItem = true;
-					$("#lstItemType option").each(function(i) {
-						selectedItemTypeID += $(this).val() + ',';
-					});
-				}
 
-				selectedItemTypeID = selectedItemTypeID.substring(0,
-						selectedItemTypeID.length - 1);
-
-				if ($('#toggleElement').is(':checked'))
-					var _Length = '';
-				if (!($('#txtLength').is(':disabled'))) {
-					_Length = $('#txtLength').val();
-				}
-				var selectedVal = $("#ddlAttributeType :selected").val();
 				var _saveOptions = '';
-				if (selectedVal == 5 || selectedVal == 6 || selectedVal == 9
-						|| selectedVal == 10 || selectedVal == 11
-						|| selectedVal == 12) {
-					$("#dataTable")
-							.find("tr input")
-							.each(
-									function(i) {
-										$(this).parent('td').find('span')
-												.removeClass('error');
-										$(this).removeClass('error');
-										var optionsText = $(this).val();
-										if ($(this).hasClass("class-text")) {
-											if (!optionsText
-													&& $(this).prop("name") != "Alias") {
-												validateErrorMessage = getLocale(
-														gpmsUsersManagement,
-														"Please enter all option values and display order for your attribute.")
-														+ "<br/>";
-												$(this).parent('td').find(
-														'span').addClass(
-														'error').show();
-												usersManage.SetFirstTabActive();
-												$(this).addClass('error');
-												$(this).focus();
-											} else {
-												if ($(this).prop("name") == "position") {
-													var value = optionsText
-															.replace(/^\s\s*/,
-																	'')
-															.replace(/\s\s*$/,
-																	'');
-													var intRegex = /^\d+$/;
-													if (!intRegex.test(value)) {
-														validateErrorMessage = getLocale(
-																gpmsUsersManagement,
-																"Display order is numeric value.")
-																+ '<br/>';
-														$(this)
-																.parent('td')
-																.find('span')
-																.addClass(
-																		'error')
-																.show();
-														usersManage
-																.SetFirstTabActive();
-														$(this).addClass(
-																'error');
-														$(this).focus();
-													}
-												}
-												_saveOptions += optionsText
-														+ "#!#";
-											}
-										} else if ($(this).hasClass(
-												"class-isdefault")) {
-											var _IsChecked = $(this).prop(
-													'checked');
-											_saveOptions += _IsChecked + "!#!";
-										}
-									});
-				}
+				$("#dataTable")
+						.find("tr select")
+						.each(
+								function(i) {
+									var optionsText = $(this).val();
+									// ddlCollege ddlDepartment ddlPositionType
+									// ddlPositionTitle
+									if (!optionsText
+											&& $(this).prop("name") != "ddlPositionTitle") {
+										validateErrorMessage = getLocale(
+												AspxAttributesManagement,
+												"Please select all position details for this user.")
+												+ "<br/>";
+										attributesManage.SetFirstTabActive();
+										$(this).focus();
+									} else if (optionsText
+											&& $(this).prop("name") != "ddlPositionTitle") {
+										_saveOptions += optionsText + "!#!";
+									} else {
+										_saveOptions += optionsText + "#!#";
+									}
+								});
+
 				_saveOptions = _saveOptions.substring(0,
 						_saveOptions.length - 3);
+
 				if (!validateErrorMessage) {
-					var gpmsCommonInfo = gpmsCommonObj();
-					var _StoreID = gpmsCommonInfo.StoreID;
-					var _PortalID = gpmsCommonInfo.PortalID;
-					var _CultureName = $(".languageSelected").attr("value");
-					var _UserName = gpmsCommonInfo.UserName;
+					var userInfo = {
+						UserId : _userId,
+						FirstName : $.trim($('#txtFirstName').val()),
+						MiddleName : $.trim($('#txtMiddleName').val()),
+						LastName : $.trim($('#txtLastName').val()),
+						DOB : $('#txtDOB').val(),
+						Gender : $('#ddlGender :selected').val(),
+						Street : $.trim($('#txtStreet').val()),
+						Apt : $.trim($('#txtApt').val()),
+						City : $.trim($('#txtCity').val()),
+						State : $('#ddlState :selected').text(),
+						Zip : $.trim($('#txtZip').val()),
+						Country : $('#ddlCountry :selected').text(),
+						OfficeNumber : $('#txtOfficeNumber').val(),
+						MobileNumber : $('#txtMobileNumber').val(),
+						HomeNumber : $('#txtHomeNumber').val(),
+						OtherNumber : $('#txtOtherNumber').val(),
+						WorkEmail : $('#txtWorkEmail').val(),
+						PersonalEmail : $('#txtPersonalEmail').val(),
+						IsActive : $('input[name=chkActive]').prop('checked'),
+						UserName : $.trim($('#txtUserName').val()),
+						Password : $.trim($('#txtPassword').val()),
+						Flag : _flag, // false for Update true for New Add
+						SaveOptions : _saveOptions
+					};
 
-					var _attributeName = $('#txtUserName').val();
-					var _inputTypeID = $('#ddlAttributeType').val();
-
-					var selectedAttributeType = $("#ddlAttributeType :selected")
-							.val();
-					var _DefaultValue = "";
-					switch (selectedAttributeType) {
-					case "1":
-						_DefaultValue = $("#default_value_text").val();
-						break;
-					case "2":
-						_DefaultValue = $("textarea#default_value_textarea")
-								.val();
-						break;
-					case "3":
-						_DefaultValue = $("#default_value_date").val();
-						break;
-					case "4":
-						_DefaultValue = $("#default_value_yesno").val();
-						break;
-					case "8":
-						_DefaultValue = $("#default_value_text").val();
-						break;
-					default:
-						_DefaultValue = '';
-					}
-
-					var _ValidationTypeID = $('#ddlTypeValidation').val();
-					var _AliasName = $('#txtAliasName').val();
-					var _AliasToolTip = $('#txtAliasToolTip').val();
-					var _AliasHelp = $('#txtAliasHelp').val();
-					var _DisplayOrder = $('#txtDisplayOrder').val();
-
-					var _IsUniqueUserName = $('input[name=chkUniqueValue]')
-							.prop('checked');
-					var _IsRequired = $('input[name=chkValuesRequired]').prop(
-							'checked');
-					var _IsEnableEditor = $('input[name=chkIsEnableEditor]')
-							.prop('checked');
-					var _ShowInAdvanceSearch = $(
-							'input[name=chkUseInAdvancedSearch]').prop(
-							'checked');
-					var _ShowInComparison = $('input[name=chkComparable]')
-							.prop('checked');
-					var _IsUseInFilter = $('input[name=chkIsUseInFilter]')
-							.prop('checked');
-					var _IsIncludeInPriceRule = $(
-							'input[name=chkUseForPriceRule]').prop('checked');
-					var _IsShowInItemListing = $(
-							'input[name=chkShowInItemListing]').prop('checked');
-					var _IsShowInItemDetail = $(
-							'input[name=chkShowInItemDetail]').prop('checked');
-					var _IsActive = $('input[name=chkActive]').prop('checked');
-					var _IsModified = true;
-					var _attributeValueId = arrAttrValueId;
-					var _ItemTypes = selectedItemTypeID;
-					var _Flag = _flag;
-					var _IsUsedInConfigItem = isUsedInConfigItem;
-
-					usersManage.AddAttributeInfo(_userId, _attributeName,
-							_inputTypeID, _DefaultValue, _ValidationTypeID,
-							_Length, _AliasName, _AliasToolTip, _AliasHelp,
-							_DisplayOrder, _IsUniqueUserName, _IsRequired,
-							_IsEnableEditor, _ShowInAdvanceSearch,
-							_ShowInComparison, _IsUseInFilter,
-							_IsIncludeInPriceRule, _IsShowInItemListing,
-							_IsShowInItemDetail, _StoreID, _PortalID,
-							_IsActive, _IsModified, _UserName, _CultureName,
-							_ItemTypes, _Flag, _IsUsedInConfigItem,
-							_saveOptions, _attributeValueId);
+					usersManage.AddUserInfo(userInfo);
 
 					return false;
 				}
 			}
 		},
 
-		AddAttributeInfo : function(_userId, _attributeName, _inputTypeID,
-				_DefaultValue, _ValidationTypeID, _Length, _AliasName,
-				_AliasToolTip, _AliasHelp, _DisplayOrder, _IsUniqueUserName,
-				_IsRequired, _IsEnableEditor, _ShowInAdvanceSearch,
-				_ShowInComparison, _IsUseInFilter, _IsIncludeInPriceRule,
-				_IsShowInItemListing, _IsShowInItemDetail, _storeId, _portalId,
-				_IsActive, _IsModified, _userName, _CultureName, _ItemTypes,
-				_flag, _isUsedInConfigItem, _saveOptions, _attributeValueId) {
-
-			var info = {
-				AttributeID : parseInt(_userId),
-				AttributeName : _attributeName,
-				InputTypeID : _inputTypeID,
-				DefaultValue : _DefaultValue,
-				ValidationTypeID : _ValidationTypeID,
-				Length : _Length >= 0 ? _Length : null,
-				AliasName : _AliasName,
-				AliasToolTip : _AliasToolTip,
-				AliasHelp : _AliasHelp,
-				DisplayOrder : _DisplayOrder,
-				IsUniqueUserName : _IsUniqueUserName,
-				IsRequired : _IsRequired,
-				IsEnableEditor : _IsEnableEditor,
-				ShowInAdvanceSearch : _ShowInAdvanceSearch,
-				ShowInComparison : _ShowInComparison,
-				IsIncludeInPriceRule : _IsIncludeInPriceRule,
-				IsShowInItemListing : _IsShowInItemListing,
-				IsShowInItemDetail : _IsShowInItemDetail,
-				IsUseInFilter : _IsUseInFilter,
-				StoreID : _storeId,
-				PortalID : _portalId,
-				IsActive : _IsActive,
-				IsModified : _IsModified,
-				UpdatedBy : _userName,
-				AddedBy : _userName,
-				CultureName : _CultureName,
-				ItemTypes : _ItemTypes,
-				Flag : _flag,
-				IsUsedInConfigItem : _isUsedInConfigItem,
-				SaveOptions : _saveOptions,
-				AttributeValueID : _attributeValueId
-			};
-
-			this.config.url = this.config.baseURL + "SaveUpdateAttribute";
+		AddUserInfo : function(info) {
+			this.config.url = this.config.baseURL + "SaveUpdateUser";
 			this.config.data = JSON2.stringify({
-				attributeInfo : info
+				userInfo : info,
+				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 9;
+			this.config.ajaxCallMode = 16;
 			this.ajaxCall(this.config);
 			return false;
 		},
+
 		BindCollegeDropDown : function() {
 			this.config.url = this.config.baseURL + "GetCollegeList";
 			this.config.data = "{}";
@@ -1294,8 +1132,8 @@ $(function() {
 				userId = 0;
 			}
 
-			usersManage.BindUserAuditLogGrid(userId, action, auditedBy, activityOnFrom,
-					activityOnTo);
+			usersManage.BindUserAuditLogGrid(userId, action, auditedBy,
+					activityOnFrom, activityOnTo);
 		},
 		ajaxSuccess : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
@@ -1525,6 +1363,30 @@ $(function() {
 			case 15:
 				isUniqueUserName = stringToBoolean(msg);
 				break;
+
+			case 16:
+				usersManage.BindUserGrid(null, null, null, null, null, null);
+				$('#divUserGrid').show();
+				if (editFlag > 0) {
+					csscody.info("<h2>"
+							+ getLocale(gpmsUsersManagement,
+									'Successful Message')
+							+ "</h2><p>"
+							+ getLocale(gpmsUsersManagement,
+									'User has been updated successfully.')
+							+ "</p>");
+				} else {
+					csscody.info("<h2>"
+							+ getLocale(gpmsUsersManagement,
+									'Successful Message')
+							+ "</h2><p>"
+							+ getLocale(gpmsUsersManagement,
+									'User has been saved successfully.')
+							+ "</p>");
+				}
+				usersManage.ClearForm();
+				$('#divUserForm').hide();
+				break;
 			}
 		},
 
@@ -1657,6 +1519,16 @@ $(function() {
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
 								'Cannot check for unique Username') + "</p>");
+				break;
+
+			case 16:
+				csscody
+						.error("<h2>"
+								+ getLocale(gpmsUsersManagement,
+										'Error Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsUsersManagement,
+										'Failed to save user!') + "</p>");
 				break;
 			}
 		},

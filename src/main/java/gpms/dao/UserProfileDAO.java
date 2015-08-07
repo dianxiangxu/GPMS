@@ -225,13 +225,12 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
 		int rowTotal = 0;
 		if (q.getAuditLog() != null && q.getAuditLog().size() != 0) {
-			// rowTotal = q.getAuditLog().size();
-			boolean isActionMatch = false;
-			boolean isAuditedByMatch = false;
-			boolean isActivityDateFromMatch = false;
-			boolean isActivityDateToMatch = false;
 			for (AuditLog userProfileAudit : q.getAuditLog()) {
 				AuditLogInfo userAuditLog = new AuditLogInfo();
+				boolean isActionMatch = false;
+				boolean isAuditedByMatch = false;
+				boolean isActivityDateFromMatch = false;
+				boolean isActivityDateToMatch = false;
 
 				if (action != null) {
 					if (userProfileAudit.getAction().toLowerCase()
@@ -299,7 +298,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 				if (isActionMatch && isAuditedByMatch
 						&& isActivityDateFromMatch && isActivityDateToMatch) {
-					// userAuditLog.setRowTotal(rowTotal);
 					userAuditLog.setUserName(userProfileAudit
 							.getUserProfileId().getUserAccount().getUserName());
 					userAuditLog
@@ -322,13 +320,12 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 		if (q.getUserAccount().getAuditLog() != null
 				&& q.getUserAccount().getAuditLog().size() != 0) {
-			// rowTotal += q.getUserAccount().getAuditLog().size();
-			boolean isActionMatch = false;
-			boolean isAuditedByMatch = false;
-			boolean isActivityDateFromMatch = false;
-			boolean isActivityDateToMatch = false;
 			for (AuditLog userAccountAudit : q.getUserAccount().getAuditLog()) {
 				AuditLogInfo userAuditLog = new AuditLogInfo();
+				boolean isActionMatch = false;
+				boolean isAuditedByMatch = false;
+				boolean isActivityDateFromMatch = false;
+				boolean isActivityDateToMatch = false;
 
 				if (action != null) {
 					if (userAccountAudit.getAction().toLowerCase()
@@ -396,7 +393,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 				if (isActionMatch && isAuditedByMatch
 						&& isActivityDateFromMatch && isActivityDateToMatch) {
-					// userAuditLog.setRowTotal(rowTotal);
 					userAuditLog.setUserName(userAccountAudit
 							.getUserProfileId().getUserAccount().getUserName());
 					userAuditLog

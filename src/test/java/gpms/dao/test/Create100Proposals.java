@@ -1,7 +1,5 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
-
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;

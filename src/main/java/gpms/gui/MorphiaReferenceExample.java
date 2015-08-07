@@ -93,7 +93,7 @@ public class MorphiaReferenceExample {
 			Query<Family> familyQuery = ds.find(Family.class);
 			for (Family f : familyQuery.fetch()) {
 				System.out.println("Family: " + f.getSurname());
-				System.out.println("- Dad: " + f.getDad());
+				System.out.println("- Dad: " + f.getDad().getFirstName());
 				System.out.println("- Mom: " + f.getMom());
 				List<User> children = f.getChildren();
 				System.out.println("Children (" + children.size() + ")");

@@ -62,4 +62,45 @@ public class BasePIEligibilityOptions {
 		this.blanket = blanket;
 	}
 
+	@Override
+	public String toString() {
+		return "BasePIEligibilityOptions [yes=" + yes + ", no=" + no
+				+ ", notApplicable=" + notApplicable + ", thisProposalOnly="
+				+ thisProposalOnly + ", blanket=" + blanket + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (blanket ? 1231 : 1237);
+		result = prime * result + (no ? 1231 : 1237);
+		result = prime * result + (notApplicable ? 1231 : 1237);
+		result = prime * result + (thisProposalOnly ? 1231 : 1237);
+		result = prime * result + (yes ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BasePIEligibilityOptions other = (BasePIEligibilityOptions) obj;
+		if (blanket != other.blanket)
+			return false;
+		if (no != other.no)
+			return false;
+		if (notApplicable != other.notApplicable)
+			return false;
+		if (thisProposalOnly != other.thisProposalOnly)
+			return false;
+		if (yes != other.yes)
+			return false;
+		return true;
+	}
+	
 }

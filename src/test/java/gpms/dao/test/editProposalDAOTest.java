@@ -66,7 +66,7 @@ public class editProposalDAOTest
 		uaDAO = new UserAccountDAO(mongo, morphia, "GPMS");
 		upDAO = new UserProfileDAO(mongo, morphia, "GPMS");
 
-		ua = uaDAO.findByUserName("hOrtiz");
+		ua = uaDAO.findByUserName("userAccount0");
 		piProfile = upDAO.findByUserAccount(ua);
 		
 		List<Proposal> pList = pdao.proposalByPiId(piProfile);
@@ -87,7 +87,7 @@ public class editProposalDAOTest
 	}
 	
 	@Test
-	public void editInvestigatorInfo() throws UnknownHostException
+	public void editInvestigatorInfo() throws UnknownHostException, CloneNotSupportedException
 	{
 		upList = upDAO.findAll();
 		
@@ -142,7 +142,7 @@ public class editProposalDAOTest
 	}
 	
 	@Test
-	public void editProjectInfo()
+	public void editProjectInfo() throws CloneNotSupportedException
 	{
 		//Project Information Part
 		System.out.println("Now editing Project Information...");
@@ -202,7 +202,7 @@ public class editProposalDAOTest
 	}
 	
 	@Test
-	public void editSponsorAndBudgetInfo() 
+	public void editSponsorAndBudgetInfo() throws CloneNotSupportedException 
 	{	SponsorAndBudgetInfo sponAndBudg = prop.getSponsorAndBudgetInfo().clone();	
 		List<String> grantingAgencies = sponAndBudg.getGrantingAgency();
 		int grantingAgenciesCount = grantingAgencies.size();

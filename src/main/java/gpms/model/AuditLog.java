@@ -4,19 +4,17 @@ package gpms.model;
 import java.util.Date;
 
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.google.gson.annotations.Expose;
+import org.mongodb.morphia.utils.IndexDirection;
 
 @Embedded
 // @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
 // property = "id")
 public class AuditLog implements Comparable<AuditLog> {
 	// @Expose
-	@Reference(value = "user id" /* , lazy = true */)
+	@Reference(value = "user id", lazy = true)
 	private UserProfile userProfileId = new UserProfile();
 
 	// @Expose
@@ -25,6 +23,7 @@ public class AuditLog implements Comparable<AuditLog> {
 
 	// @Expose
 	@Property("activity on")
+	@Indexed(value = IndexDirection.DESC, name = "activityOnIndex")
 	private Date activityDate = new Date();
 
 	public AuditLog() {
@@ -61,14 +60,48 @@ public class AuditLog implements Comparable<AuditLog> {
 	}
 
 	@Override
-	public AuditLog clone() {
-		return new AuditLog(this.userProfileId, this.action, this.activityDate);
-	}
-
-	@Override
 	public int compareTo(AuditLog o) {
 		if (getActivityDate() == null || o.getActivityDate() == null)
 			return 0;
 		return getActivityDate().compareTo(o.getActivityDate()); // Ascending
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((action == null) ? 0 : action.hashCode());
+		result = prime * result
+				+ ((activityDate == null) ? 0 : activityDate.hashCode());
+		result = prime * result
+				+ ((userProfileId == null) ? 0 : userProfileId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AuditLog other = (AuditLog) obj;
+		if (action == null) {
+			if (other.action != null)
+				return false;
+		} else if (!action.equals(other.action))
+			return false;
+		if (activityDate == null) {
+			if (other.activityDate != null)
+				return false;
+		} else if (!activityDate.equals(other.activityDate))
+			return false;
+		if (userProfileId == null) {
+			if (other.userProfileId != null)
+				return false;
+		} else if (!userProfileId.equals(other.userProfileId))
+			return false;
+		return true;
 	}
 }

@@ -81,23 +81,14 @@
 	'Please enter unique work email id.' : 'Please enter unique work email id.',
 	'Please enter unique personal email id.' : 'Please enter unique personal email id.',
 
-	'Please select at least one item type.' : 'Please select at least one item type.',
-	'Attribute max length must be numeric only.' : 'Attribute max length must be numeric only.',
-	'Please enter attribute Length.' : 'Please enter attribute Length.',
-	'Please enter attribute display order.' : 'Please enter attribute display order.',
-	'Attribute display order must be numeric only.' : 'Attribute display order must be numeric only.',
-	'Please enter attribute alias name.' : 'Please enter attribute alias name.',
-	'Please enter all option values and display order for your attribute.' : 'Please enter all option values and display order for your attribute.',
-	'Display order is numeric value.' : 'Display order is numeric value.',
-
 	// USED
 	"Successful Message" : "Successful Message",
 	"User has been deleted successfully." : "User has been deleted successfully.",
 	"Selected user(s) has been deleted successfully." : "Selected user(s) has been deleted successfully.",
 	"User has been activated successfully." : "User has been activated successfully.",
 
-	"Attribute has been updated successfully." : "Attribute has been updated successfully.",
-	"Attribute has been saved successfully." : "Attribute has been saved successfully.",
+	"User has been updated successfully." : "User has been updated successfully.",
+	"User has been saved successfully." : "User has been saved successfully.",
 
 	'Error Message' : 'Error Message',
 	'Failed to load colleges list.' : 'Failed to load colleges list.',
@@ -109,6 +100,8 @@
 	'Selected user(s) cannot be deleted.' : 'Selected user(s) cannot be deleted.',
 	'User cannot be activated.' : 'User cannot be activated.',
 	'Cannot check for unique Username' : 'Cannot check for unique Username',
+	'Failed to save user!' : 'Failed to save user!',
+	'Please select all position details for this user.' : 'Please select all position details for this user.',
 
 	'Failed to delete attribute.' : 'Failed to delete attribute.',
 	'Failed to delete attributes.' : 'Failed to delete attributes.',

@@ -4,11 +4,9 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.GPMSCommonInfo;
 import gpms.model.JSONTansformer;
 import gpms.model.Proposal;
 import gpms.model.UserAccount;
-import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.io.IOException;
@@ -24,13 +22,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.bson.types.ObjectId;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
-import org.json.JSONObject;
 import org.mongodb.morphia.Morphia;
 
-import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 
 @Path("/jsonServices")

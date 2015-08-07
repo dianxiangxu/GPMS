@@ -101,17 +101,68 @@ public class ProjectInfo {
 		return outPut;
 	}
 
-	public boolean equals(ProjectInfo pinf) {
-		return this.dueDate.equals(pinf.dueDate)
-				&& this.projectLocation.equals(pinf.projectLocation)
-				&& this.projectPeriod.equals(pinf.projectPeriod)
-				&& this.projectTitle.equals(pinf.projectTitle)
-				&& this.projectType.equals(pinf.projectType)
-				&& this.typeOfRequest.equals(pinf.typeOfRequest);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
+		result = prime * result
+				+ ((projectLocation == null) ? 0 : projectLocation.hashCode());
+		result = prime * result
+				+ ((projectPeriod == null) ? 0 : projectPeriod.hashCode());
+		result = prime * result
+				+ ((projectTitle == null) ? 0 : projectTitle.hashCode());
+		result = prime * result
+				+ ((projectType == null) ? 0 : projectType.hashCode());
+		result = prime * result
+				+ ((typeOfRequest == null) ? 0 : typeOfRequest.hashCode());
+		return result;
 	}
 
 	@Override
-	public ProjectInfo clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProjectInfo other = (ProjectInfo) obj;
+		if (dueDate == null) {
+			if (other.dueDate != null)
+				return false;
+		} else if (!dueDate.equals(other.dueDate))
+			return false;
+		if (projectLocation == null) {
+			if (other.projectLocation != null)
+				return false;
+		} else if (!projectLocation.equals(other.projectLocation))
+			return false;
+		if (projectPeriod == null) {
+			if (other.projectPeriod != null)
+				return false;
+		} else if (!projectPeriod.equals(other.projectPeriod))
+			return false;
+		if (projectTitle == null) {
+			if (other.projectTitle != null)
+				return false;
+		} else if (!projectTitle.equals(other.projectTitle))
+			return false;
+		if (projectType == null) {
+			if (other.projectType != null)
+				return false;
+		} else if (!projectType.equals(other.projectType))
+			return false;
+		if (typeOfRequest == null) {
+			if (other.typeOfRequest != null)
+				return false;
+		} else if (!typeOfRequest.equals(other.typeOfRequest))
+			return false;
+		return true;
+	}
+
+	@Override
+	public ProjectInfo clone() throws CloneNotSupportedException {
 		ProjectInfo copy = new ProjectInfo();
 
 		copy.setProjectTitle(this.projectTitle);
@@ -123,4 +174,5 @@ public class ProjectInfo {
 
 		return copy;
 	}
+
 }

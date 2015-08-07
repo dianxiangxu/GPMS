@@ -1,11 +1,6 @@
 package gpms.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Property;
 
 public class ProposalInfo {
 

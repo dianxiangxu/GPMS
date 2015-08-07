@@ -37,12 +37,33 @@ public class ProjectLocation {
 		return outPut;
 	}
 
-	public boolean equals(ProjectLocation pl) {
-		return this.offCampus == pl.offCampus && this.onCampus == pl.onCampus;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (offCampus ? 1231 : 1237);
+		result = prime * result + (onCampus ? 1231 : 1237);
+		return result;
 	}
 
 	@Override
-	public ProjectLocation clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProjectLocation other = (ProjectLocation) obj;
+		if (offCampus != other.offCampus)
+			return false;
+		if (onCampus != other.onCampus)
+			return false;
+		return true;
+	}
+
+	@Override
+	public ProjectLocation clone() throws CloneNotSupportedException{
 		ProjectLocation copy = new ProjectLocation();
 
 		copy.setOnCampus(this.onCampus);
@@ -50,4 +71,5 @@ public class ProjectLocation {
 
 		return copy;
 	}
+
 }

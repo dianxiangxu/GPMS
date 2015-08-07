@@ -7,7 +7,6 @@ import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +14,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
-import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.QueryResults;
-
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 

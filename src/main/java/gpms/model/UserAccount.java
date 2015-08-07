@@ -13,8 +13,6 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
 
 //{"id":null,"version":null,"auditLog":[],
@@ -106,13 +104,53 @@ public class UserAccount extends BaseEntity {
 				.append(" Password : ").append(this.getPassword()).toString();
 	}
 
-	public boolean equals(UserAccount ua) {
-		return this.userName.equals(ua.userName)
-				&& this.password.equals(ua.password);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addedOn == null) ? 0 : addedOn.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
+		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		return result;
 	}
 
 	@Override
-	public UserAccount clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserAccount other = (UserAccount) obj;
+		if (addedOn == null) {
+			if (other.addedOn != null)
+				return false;
+		} else if (!addedOn.equals(other.addedOn))
+			return false;
+		if (isActive != other.isActive)
+			return false;
+		if (isDeleted != other.isDeleted)
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
+	}
+
+	@Override
+	public UserAccount clone() throws CloneNotSupportedException{
 		UserAccount copy = new UserAccount(this.userName, this.password);
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
@@ -122,4 +160,5 @@ public class UserAccount extends BaseEntity {
 		}
 		return copy;
 	}
+
 }

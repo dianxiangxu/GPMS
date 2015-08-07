@@ -129,4 +129,69 @@ public class FundingSource {
 		this.foreign = foreign;
 	}
 
+	@Override
+	public String toString() {
+		return "FundingSource [federal=" + federal + ", federalFlowThrough="
+				+ federalFlowThrough + ", sateOfIdahoEntity="
+				+ sateOfIdahoEntity + ", privateForProfit=" + privateForProfit
+				+ ", nonProfitOrganization=" + nonProfitOrganization
+				+ ", nonIdahoStateEntity=" + nonIdahoStateEntity
+				+ ", collegeOrUniversity=" + collegeOrUniversity
+				+ ", localEntity=" + localEntity + ", nonIdahoLocalEntity="
+				+ nonIdahoLocalEntity + ", tirbalGovernment="
+				+ tirbalGovernment + ", foreign=" + foreign + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (collegeOrUniversity ? 1231 : 1237);
+		result = prime * result + (federal ? 1231 : 1237);
+		result = prime * result + (federalFlowThrough ? 1231 : 1237);
+		result = prime * result + (foreign ? 1231 : 1237);
+		result = prime * result + (localEntity ? 1231 : 1237);
+		result = prime * result + (nonIdahoLocalEntity ? 1231 : 1237);
+		result = prime * result + (nonIdahoStateEntity ? 1231 : 1237);
+		result = prime * result + (nonProfitOrganization ? 1231 : 1237);
+		result = prime * result + (privateForProfit ? 1231 : 1237);
+		result = prime * result + (sateOfIdahoEntity ? 1231 : 1237);
+		result = prime * result + (tirbalGovernment ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FundingSource other = (FundingSource) obj;
+		if (collegeOrUniversity != other.collegeOrUniversity)
+			return false;
+		if (federal != other.federal)
+			return false;
+		if (federalFlowThrough != other.federalFlowThrough)
+			return false;
+		if (foreign != other.foreign)
+			return false;
+		if (localEntity != other.localEntity)
+			return false;
+		if (nonIdahoLocalEntity != other.nonIdahoLocalEntity)
+			return false;
+		if (nonIdahoStateEntity != other.nonIdahoStateEntity)
+			return false;
+		if (nonProfitOrganization != other.nonProfitOrganization)
+			return false;
+		if (privateForProfit != other.privateForProfit)
+			return false;
+		if (sateOfIdahoEntity != other.sateOfIdahoEntity)
+			return false;
+		if (tirbalGovernment != other.tirbalGovernment)
+			return false;
+		return true;
+	}
+
 }

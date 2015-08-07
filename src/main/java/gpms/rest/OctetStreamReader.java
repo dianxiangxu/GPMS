@@ -48,6 +48,7 @@ public class OctetStreamReader extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -57,6 +58,7 @@ public class OctetStreamReader extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter writer = null;
@@ -75,15 +77,15 @@ public class OctetStreamReader extends HttpServlet {
 			is = request.getInputStream();
 			fos = new FileOutputStream(new File(realPath + filename));
 			IOUtils.copy(is, fos);
-			response.setStatus(response.SC_OK);
+			response.setStatus(HttpServletResponse.SC_OK);
 			writer.print("{success: true}");
 		} catch (FileNotFoundException ex) {
-			response.setStatus(response.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			writer.print("{success: false}");
 			log(OctetStreamReader.class.getName() + "has thrown an exception: "
 					+ ex.getMessage());
 		} catch (IOException ex) {
-			response.setStatus(response.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			writer.print("{success: false}");
 			log(OctetStreamReader.class.getName() + "has thrown an exception: "
 					+ ex.getMessage());

@@ -41,4 +41,38 @@ public class BaseOptions {
 		this.notApplicable = notApplicable;
 	}
 
+	@Override
+	public String toString() {
+		return "BaseOptions [yes=" + yes + ", no=" + no + ", notApplicable="
+				+ notApplicable + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (no ? 1231 : 1237);
+		result = prime * result + (notApplicable ? 1231 : 1237);
+		result = prime * result + (yes ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BaseOptions other = (BaseOptions) obj;
+		if (no != other.no)
+			return false;
+		if (notApplicable != other.notApplicable)
+			return false;
+		if (yes != other.yes)
+			return false;
+		return true;
+	}	
+
 }

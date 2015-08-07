@@ -16,19 +16,13 @@ import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.PrePersist;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.utils.IndexDirection;
 
 import com.google.gson.annotations.Expose;
 
-//{"id":null,"version":null,"auditLog":[],
-//"firstName":"Milson","middleName":"","lastName":"Munakami",
-//"officeNumbers":[],"mobileNumbers":[],"homeNumbers":[],
-//"address":{"street":"","city":"","state":"","zipcode":"","country":""},
-//"workEmails":[],"personalEmails":[],
-//"userAccount":{"id":null,"version":null,"auditLog":[],"userName":"","password":"","isDeleted":false},
-//"isDeleted":false,"detailsList":[]}
 @Entity(value = UserProfileDAO.COLLECTION_NAME, noClassnameStored = true)
 // @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
 // property = "id")
@@ -93,7 +87,7 @@ public class UserProfile extends BaseEntity {
 	private List<String> personalEmails = new ArrayList<String>();
 
 	@Expose
-	@Reference(/* idOnly = true, */value = "user id" /* , lazy = true */)
+	@Reference(value = "user id"/* , lazy = true */)
 	private UserAccount userAccount = new UserAccount();
 
 	@Expose
@@ -320,25 +314,126 @@ public class UserProfile extends BaseEntity {
 				.toString();
 	}
 
-	public boolean equals(UserProfile up) {
-		return this.firstName.equals(up.firstName)
-				&& this.middleName.equals(up.middleName)
-				&& this.lastName.equals(up.lastName)
-				&& this.dateOfBirth.equals(up.dateOfBirth)
-				&& this.gender.equals(up.gender)
-				&& this.details.equals(up.details)
-				&& this.officeNumbers.equals(up.officeNumbers)
-				&& this.mobileNumbers.equals(up.mobileNumbers)
-				&& this.homeNumbers.equals(up.homeNumbers)
-				&& this.otherNumbers.equals(up.otherNumbers)
-				&& this.addresses.equals(up.addresses)
-				&& this.workEmails.equals(up.workEmails)
-				&& this.personalEmails.equals(up.personalEmails)
-				&& this.userAccount.equals(up.userAccount);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((addresses == null) ? 0 : addresses.hashCode());
+		result = prime * result
+				+ ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+		result = prime * result + ((details == null) ? 0 : details.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result
+				+ ((homeNumbers == null) ? 0 : homeNumbers.hashCode());
+		result = prime * result + (isDeleted ? 1231 : 1237);
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result
+				+ ((middleName == null) ? 0 : middleName.hashCode());
+		result = prime * result
+				+ ((mobileNumbers == null) ? 0 : mobileNumbers.hashCode());
+		result = prime * result
+				+ ((officeNumbers == null) ? 0 : officeNumbers.hashCode());
+		result = prime * result
+				+ ((otherNumbers == null) ? 0 : otherNumbers.hashCode());
+		result = prime * result
+				+ ((personalEmails == null) ? 0 : personalEmails.hashCode());
+		result = prime * result
+				+ ((userAccount == null) ? 0 : userAccount.hashCode());
+		result = prime * result
+				+ ((workEmails == null) ? 0 : workEmails.hashCode());
+		return result;
 	}
 
 	@Override
-	public UserProfile clone() {
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserProfile other = (UserProfile) obj;
+		if (addresses == null) {
+			if (other.addresses != null)
+				return false;
+		} else if (!addresses.equals(other.addresses))
+			return false;
+		if (dateOfBirth == null) {
+			if (other.dateOfBirth != null)
+				return false;
+		} else if (!dateOfBirth.equals(other.dateOfBirth))
+			return false;
+		if (details == null) {
+			if (other.details != null)
+				return false;
+		} else if (!details.equals(other.details))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
+		if (homeNumbers == null) {
+			if (other.homeNumbers != null)
+				return false;
+		} else if (!homeNumbers.equals(other.homeNumbers))
+			return false;
+		if (isDeleted != other.isDeleted)
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (middleName == null) {
+			if (other.middleName != null)
+				return false;
+		} else if (!middleName.equals(other.middleName))
+			return false;
+		if (mobileNumbers == null) {
+			if (other.mobileNumbers != null)
+				return false;
+		} else if (!mobileNumbers.equals(other.mobileNumbers))
+			return false;
+		if (officeNumbers == null) {
+			if (other.officeNumbers != null)
+				return false;
+		} else if (!officeNumbers.equals(other.officeNumbers))
+			return false;
+		if (otherNumbers == null) {
+			if (other.otherNumbers != null)
+				return false;
+		} else if (!otherNumbers.equals(other.otherNumbers))
+			return false;
+		if (personalEmails == null) {
+			if (other.personalEmails != null)
+				return false;
+		} else if (!personalEmails.equals(other.personalEmails))
+			return false;
+		if (userAccount == null) {
+			if (other.userAccount != null)
+				return false;
+		} else if (!userAccount.equals(other.userAccount))
+			return false;
+		if (workEmails == null) {
+			if (other.workEmails != null)
+				return false;
+		} else if (!workEmails.equals(other.workEmails))
+			return false;
+		return true;
+	}
+
+	@Override
+	public UserProfile clone() throws CloneNotSupportedException {
 		UserProfile copy = new UserProfile();
 		copy.setFirstName(firstName);
 		copy.setMiddleName(middleName);
@@ -382,4 +477,5 @@ public class UserProfile extends BaseEntity {
 
 		return copy;
 	}
+
 }

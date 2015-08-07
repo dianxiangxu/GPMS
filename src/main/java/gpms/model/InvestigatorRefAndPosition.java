@@ -82,17 +82,60 @@ public class InvestigatorRefAndPosition {
 		return output;
 	}
 
-	public boolean equals(InvestigatorRefAndPosition irap) {
-		if (this.userRef == null || irap.userRef == null)
-			return false;
-		return this.userRef.equals(irap.userRef)
-				&& this.college.equals(irap.college)
-				&& this.department.equals(irap.department)
-				&& this.positionType.equals(irap.positionType)
-				&& this.positionTitle.equals(irap.positionTitle);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((college == null) ? 0 : college.hashCode());
+		result = prime * result
+				+ ((department == null) ? 0 : department.hashCode());
+		result = prime * result
+				+ ((positionTitle == null) ? 0 : positionTitle.hashCode());
+		result = prime * result
+				+ ((positionType == null) ? 0 : positionType.hashCode());
+		result = prime * result + ((userRef == null) ? 0 : userRef.hashCode());
+		return result;
 	}
 
-	public InvestigatorRefAndPosition clone() {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InvestigatorRefAndPosition other = (InvestigatorRefAndPosition) obj;
+		if (college == null) {
+			if (other.college != null)
+				return false;
+		} else if (!college.equals(other.college))
+			return false;
+		if (department == null) {
+			if (other.department != null)
+				return false;
+		} else if (!department.equals(other.department))
+			return false;
+		if (positionTitle == null) {
+			if (other.positionTitle != null)
+				return false;
+		} else if (!positionTitle.equals(other.positionTitle))
+			return false;
+		if (positionType == null) {
+			if (other.positionType != null)
+				return false;
+		} else if (!positionType.equals(other.positionType))
+			return false;
+		if (userRef == null) {
+			if (other.userRef != null)
+				return false;
+		} else if (!userRef.equals(other.userRef))
+			return false;
+		return true;
+	}	
+
+	@Override
+	public InvestigatorRefAndPosition clone() throws CloneNotSupportedException{
 		InvestigatorRefAndPosition copy = new InvestigatorRefAndPosition();
 		copy.setUserRef(userRef);
 		copy.setCollege(college);
@@ -101,4 +144,5 @@ public class InvestigatorRefAndPosition {
 		copy.setPositionTitle(positionTitle);
 		return copy;
 	}
+	
 }

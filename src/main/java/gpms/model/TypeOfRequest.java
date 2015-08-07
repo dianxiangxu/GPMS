@@ -61,23 +61,47 @@ public class TypeOfRequest {
 		return outPut;
 	}
 
-	public boolean equals(TypeOfRequest tor) {
-		return this.isContinuation == tor.isContinuation
-				&& this.isNewProposal == tor.isNewProposal
-				&& this.isPreProposal == tor.isPreProposal
-				&& this.isSupplement == tor.isSupplement;
-	}
-	
 	@Override
-	public TypeOfRequest clone()
-	{
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isContinuation ? 1231 : 1237);
+		result = prime * result + (isNewProposal ? 1231 : 1237);
+		result = prime * result + (isPreProposal ? 1231 : 1237);
+		result = prime * result + (isSupplement ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TypeOfRequest other = (TypeOfRequest) obj;
+		if (isContinuation != other.isContinuation)
+			return false;
+		if (isNewProposal != other.isNewProposal)
+			return false;
+		if (isPreProposal != other.isPreProposal)
+			return false;
+		if (isSupplement != other.isSupplement)
+			return false;
+		return true;
+	}
+
+	@Override
+	public TypeOfRequest clone() throws CloneNotSupportedException {
 		TypeOfRequest copy = new TypeOfRequest();
-		
+
 		copy.setContinuation(this.isContinuation);
 		copy.setNewProposal(this.isNewProposal);
 		copy.setPreProposal(this.isPreProposal);
 		copy.setSupplement(this.isSupplement);
-		
+
 		return copy;
 	}
+
 }

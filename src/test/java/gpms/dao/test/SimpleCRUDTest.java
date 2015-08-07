@@ -63,7 +63,7 @@ public class SimpleCRUDTest {
 
 	@After
 	public void terminate() throws UnknownHostException, MongoException {
-		datastore.delete(datastore.createQuery(TestClass.class));
+		// datastore.delete(datastore.createQuery(TestClass.class));
 	}
 
 	@Test

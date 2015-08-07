@@ -7,7 +7,7 @@ public class EditUserTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Accesscontrol ac = new Accesscontrol();
-		ac.initBalana();
+		Accesscontrol.initBalana();
 		String decision = ac.getXACMLdecision("ADMIN", "userProfile","edit");
 		System.out.println(decision);
 		if(decision.equals("Permit"))
