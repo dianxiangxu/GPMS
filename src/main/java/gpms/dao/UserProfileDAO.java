@@ -26,6 +26,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -896,10 +898,26 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
 
+		// CriteriaContainer or3 =
+		// accountQuery.and(accountQuery.criteria("username").equal(userName));
+		// CriteriaBuilder c = new CriteriaBuilder();
+		// c.lower(x);
+		//
 		accountQuery.criteria("username").equal(userName);
 
 		profileQuery.and(profileQuery.criteria("_id").notEqual(id),
 				profileQuery.criteria("user id").in(accountQuery.asKeyList()));
+		return profileQuery.get();
+	}
+
+	public UserProfile findAnyUserWithSameUserName(String newUserName) {
+		Datastore ds = getDatastore();
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
+
+		accountQuery.criteria("username").equal(newUserName);
+		profileQuery.criteria("user id").in(accountQuery.asKeyList());
 		return profileQuery.get();
 	}
 
@@ -915,4 +933,5 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 						newEmail.toString()));
 		return profileQuery.get();
 	}
+
 }

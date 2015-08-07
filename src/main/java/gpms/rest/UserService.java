@@ -604,12 +604,15 @@ public class UserService {
 		}
 
 		ObjectId id = new ObjectId();
+		UserProfile userProfile = new UserProfile();
 		if (!userID.equals("0")) {
 			id = new ObjectId(userID);
+			userProfile = userProfileDAO.findNextUserWithSameUserName(id,
+					newUserName);
+		} else {
+			userProfile = userProfileDAO
+					.findAnyUserWithSameUserName(newUserName);
 		}
-
-		UserProfile userProfile = userProfileDAO.findNextUserWithSameUserName(
-				id, newUserName);
 
 		if (userProfile != null) {
 			response = mapper.writerWithDefaultPrettyPrinter()
