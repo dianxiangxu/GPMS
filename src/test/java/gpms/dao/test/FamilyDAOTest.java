@@ -120,7 +120,7 @@ public class FamilyDAOTest {
 			List<Family> families = familyDao.findBySurname("Haines");
 			for (Family f : families) {
 				System.out.println("Family: " + f.getSurname());
-				System.out.println("- Dad: " + f.getDad());
+				System.out.println("- Dad: " + f.getDad().getFirstName());
 				System.out.println("- Mom: " + f.getMom());
 				List<User> children = f.getChildren();
 				System.out.println("Children (" + children.size() + ")");

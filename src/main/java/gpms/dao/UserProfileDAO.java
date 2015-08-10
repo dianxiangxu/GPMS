@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -903,7 +902,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		// CriteriaBuilder c = new CriteriaBuilder();
 		// c.lower(x);
 		//
-		accountQuery.criteria("username").equal(userName);
+
+		Pattern pattern = Pattern.compile("^" + userName + "$",
+				Pattern.CASE_INSENSITIVE);
+
+		accountQuery.criteria("username").containsIgnoreCase(pattern.pattern());
 
 		profileQuery.and(profileQuery.criteria("_id").notEqual(id),
 				profileQuery.criteria("user id").in(accountQuery.asKeyList()));
@@ -916,7 +919,10 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
 
-		accountQuery.criteria("username").equal(newUserName);
+		Pattern pattern = Pattern.compile("^" + newUserName + "$",
+				Pattern.CASE_INSENSITIVE);
+
+		accountQuery.criteria("username").containsIgnoreCase(pattern.pattern());
 		profileQuery.criteria("user id").in(accountQuery.asKeyList());
 		return profileQuery.get();
 	}
