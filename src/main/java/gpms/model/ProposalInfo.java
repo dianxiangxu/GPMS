@@ -1,5 +1,6 @@
 package gpms.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ProposalInfo {
@@ -13,9 +14,9 @@ public class ProposalInfo {
 	private Status proposalStatus = Status.NEW;
 
 	// PI, CO-PI and Senior UserProfiles
-	private InvestigatorRefAndPosition PIUsers = new InvestigatorRefAndPosition();
-	private InvestigatorRefAndPosition COPIUsers = new InvestigatorRefAndPosition();
-	private InvestigatorRefAndPosition seniorPersonnelUsers = new InvestigatorRefAndPosition();
+	private UserProfile PIUser = new UserProfile();
+	private ArrayList<UserProfile> COPIUsers = new ArrayList<UserProfile>();
+	private ArrayList<UserProfile> seniorPersonnelUsers = new ArrayList<UserProfile>();
 
 	// ProjectInfo
 	private String projectTitle = new String();
@@ -36,7 +37,6 @@ public class ProposalInfo {
 	private Date lastAudited = new Date();
 	private String lastAuditedBy = new String();
 	private String lastAuditAction = new String();
-	private boolean isDeleted = false;
 
 	public ProposalInfo() {
 
@@ -82,28 +82,28 @@ public class ProposalInfo {
 		this.proposalStatus = proposalStatus;
 	}
 
-	public InvestigatorRefAndPosition getPIUsers() {
-		return PIUsers;
+	public UserProfile getPIUser() {
+		return PIUser;
 	}
 
-	public void setPIUsers(InvestigatorRefAndPosition pIUsers) {
-		PIUsers = pIUsers;
+	public void setPIUser(UserProfile pIUser) {
+		PIUser = pIUser;
 	}
 
-	public InvestigatorRefAndPosition getCOPIUsers() {
+	public ArrayList<UserProfile> getCOPIUsers() {
 		return COPIUsers;
 	}
 
-	public void setCOPIUsers(InvestigatorRefAndPosition cOPIUsers) {
+	public void setCOPIUsers(ArrayList<UserProfile> cOPIUsers) {
 		COPIUsers = cOPIUsers;
 	}
 
-	public InvestigatorRefAndPosition getSeniorPersonnelUsers() {
+	public ArrayList<UserProfile> getSeniorPersonnelUsers() {
 		return seniorPersonnelUsers;
 	}
 
 	public void setSeniorPersonnelUsers(
-			InvestigatorRefAndPosition seniorPersonnelUsers) {
+			ArrayList<UserProfile> seniorPersonnelUsers) {
 		this.seniorPersonnelUsers = seniorPersonnelUsers;
 	}
 
@@ -225,14 +225,6 @@ public class ProposalInfo {
 
 	public void setLastAuditAction(String lastAuditAction) {
 		this.lastAuditAction = lastAuditAction;
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
 	}
 
 }

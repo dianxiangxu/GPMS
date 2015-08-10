@@ -8,14 +8,17 @@ $(function() {
 		};
 		return gpmsCommonInfo;
 	};
-	var isUnique = false;
+
+	var isUniqueProjectTitle = false;
+	var isUniqueEmail = false;
+
 	var editFlag = 0;
-	var arrAttrValueId = "";
+
 	proposalsManage = {
 		config : {
 			isPostBack : false,
-			async : true,
-			cache : true,
+			async : false,
+			cache : false,
 			type : 'POST',
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
@@ -57,6 +60,30 @@ $(function() {
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
+			$("#txtDOB").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			});
+
+			$("#txtSearchActivityOnFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtSearchActivityOnTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					});
+			$("#txtSearchActivityOnTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			});
+
+			$("#gdvProposalsAuditLog").empty();
+			$("#gdvProposalsAuditLog_Pagination").remove();
 		},
 		SetFirstTabActive : function() {
 			var $tabs = $('#container-7').tabs({
@@ -142,96 +169,61 @@ $(function() {
 				rmErrorClass(item);
 				$(this).val('');
 				$(this).prop('checked', false);
+				// $(this).find('option').removeAttr('selected');
 			});
+
 			proposalsManage.onInit();
-			$('#lblAttrFormHeading').html(
-					getLocale(gpmsProposalsManagement, "New Proposal Details"));
+			$('#lblFormHeading').html(
+					getLocale(gpmsProposalsManagement, "New User Details"));
 			$(".delbutton").removeAttr("id");
-			$("#btnSaveProposal").removeAttr("name");
-			$('#lblLength').html(getLocale("Length:"));
+			$("#btnSaveUser").removeAttr("name");
 			$(".delbutton").hide();
 			$("#btnReset").show();
 			$(".required:enabled").each(function() {
-
 				if ($(this).parent("td").find("span.error").length == 1) {
 					$(this).removeClass("error").addClass("required");
 					$(this).parent("td").find("span.error").remove();
 				}
-
 			});
-			$('#txtAttributeName').val('');
-			$('#txtAttributeName').removeAttr('disabled');
-			$('#ddlAttributeType').val('1');
-			$('#ddlAttributeType').removeAttr('disabled');
+			$('#txtUserName').removeAttr('disabled');
 
-			$("#default_value_text").prop("class", "sfInputbox");
-			$("#default_value_text").val('');
-			$("#default_value_textarea").val('');
-			$("#default_value_date").val('');
-			$("#trdefaultValue").show();
-			$("#default_value_text").show();
-			$("#fileDefaultTooltip").html('');
-			$("#fileDefaultTooltip").hide();
-			$("#default_value_textarea").hide();
-			$("#div_default_value_date").hide();
-			$("#default_value_yesno").hide();
+			$(".AddOption").val("[+] Add");
 
-			$('#default_value_text').val('');
-			$("#dataTable tr:gt(1)").remove();
-			proposalsManage
-					.ClearOptionTable($("input[type='button'].AddOption"));
-			$('#trOptionsAdd').hide();
+			rowIndex = 0;
+			$("#dataTable tbody>tr:gt(0)").remove();
+			$("#dataTable tbody>tr:first").find("select").find('option').each(
+					function(i) {
+						$(this).removeAttr("selected");
+					});
+			proposalsManage.BindDepartmentDropDown($(
+					'select[name="ddlProposalStatus"]').eq(0).val(), false);
 
-			$('#ddlTypeValidation').val('8');
-			$('#ddlTypeValidation').removeAttr('disabled');
-
-			$('#txtLength').val('');
-			$('#txtLength').removeAttr('disabled');
-			$('#txtLength').next('span').next('span').show();
-			$('#txtAliasName').val('');
-			$('#txtAliasToolTip').val('');
-			$('#txtAliasHelp').val('');
-			$('#txtDisplayOrder').val('');
-			$('#ddlApplyTo').val('0');
-			$('.itemTypes').hide();
-
-			$('input[name=chkUniqueValue]').removeAttr('checked');
-			$('input[name=chkValuesRequired]').removeAttr('checked');
 			$('input[name=chkActive]').prop('checked', 'checked');
-			$('#activeTR').show();
-
-			$('input[name=chkIsEnableEditor]').removeAttr('checked');
-			$('input[name=chkIsEnableEditor]').prop('disabled', 'disabled');
-			$('input[name=chkUseInAdvancedSearch]').removeAttr('disabled');
-			$('input[name=chkUseInAdvancedSearch]').removeAttr('checked');
-			$('input[name=chkComparable]').removeAttr('disabled');
-			$('input[name=chkComparable]').removeAttr('checked');
-			$('input[name=chkUseForPriceRule]').removeAttr('disabled');
-			$('input[name=chkUseForPriceRule]').removeAttr('checked');
-			$('input[name=chkIsUseInFilter]').removeAttr('disabled');
-			$('input[name=chkShowInItemListing]').removeAttr('checked');
-			$('input[name=chkShowInItemDetail]').removeAttr('checked');
-
-			$('input[name=optionValueId]').val('0');
 			return false;
 		},
 
 		BindProposalGrid : function(userName, college, department,
-				postitionType, postitionTitle, isActive) {
+				positionType, positionTitle, isActive) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetUsersList";
 			var offset_ = 1;
 			var current_ = 1;
 			var perpage = ($("#gdvProposals_pagesize").length > 0) ? $(
 					"#gdvProposals_pagesize :selected").text() : 10;
+
 			var userBindObj = {
 				UserName : userName,
 				College : college,
 				Department : department,
-				PostitionType : postitionType,
-				PostitionTitle : postitionTitle,
+				PositionType : positionType,
+				PositionTitle : positionTitle,
 				IsActive : isActive
 			};
+			this.config.data = {
+				userBindObj : userBindObj
+			};
+			var data = this.config.data;
+
 			$("#gdvProposals")
 					.sagegrid(
 							{
@@ -421,7 +413,7 @@ $(function() {
 											_event : 'click',
 											trigger : '1',
 											callMethod : 'proposalsManage.EditUser',
-											arguments : '1,2,3,4,5,6,7,8'
+											arguments : '1,2,3,4,5,6,7,8,9,10,11'
 										},
 										{
 											display : getLocale(
@@ -432,7 +424,7 @@ $(function() {
 											_event : 'click',
 											trigger : '2',
 											callMethod : 'proposalsManage.DeleteUser',
-											arguments : '8'
+											arguments : '11'
 										},
 										{
 											display : getLocale(
@@ -441,9 +433,9 @@ $(function() {
 											name : 'activate',
 											enable : true,
 											_event : 'click',
-											trigger : '4',
+											trigger : '3',
 											callMethod : 'proposalsManage.ActiveUser',
-											arguments : '8'
+											arguments : '10'
 										},
 										{
 											display : getLocale(
@@ -452,16 +444,14 @@ $(function() {
 											name : 'deactivate',
 											enable : true,
 											_event : 'click',
-											trigger : '5',
+											trigger : '4',
 											callMethod : 'proposalsManage.DeactiveUser',
-											arguments : '8'
+											arguments : '10'
 										} ],
 								rp : perpage,
 								nomsg : getLocale(gpmsProposalsManagement,
 										'No Records Found!'),
-								param : {
-									userBindObj : userBindObj
-								},
+								param : data,
 								current : current_,
 								pnew : offset_,
 								sortcol : {
@@ -473,6 +463,76 @@ $(function() {
 									}
 								}
 							});
+		},
+
+		BindUserAuditLogGrid : function(userId, action, auditedBy,
+				activityOnFrom, activityOnTo) {
+			this.config.url = this.config.baseURL;
+			this.config.method = "GetUsersAuditLogList";
+			var offset_ = 1;
+			var current_ = 1;
+			var perpage = ($("#gdvProposalsAuditLog_pagesize").length > 0) ? $(
+					"#gdvProposalsAuditLog_pagesize :selected").text() : 10;
+
+			var auditLogBindObj = {
+				Action : action,
+				AuditedBy : auditedBy,
+				ActivityOnFrom : activityOnFrom,
+				ActivityOnTo : activityOnTo,
+			};
+			this.config.data = {
+				userId : userId,
+				auditLogBindObj : auditLogBindObj
+			};
+			var data = this.config.data;
+
+			$("#gdvProposalsAuditLog").sagegrid(
+					{
+						url : this.config.url,
+						functionMethod : this.config.method,
+						colModel : [ {
+							display : 'User Name',
+							name : 'user_name',
+							cssclass : '',
+							controlclass : '',
+							coltype : 'label',
+							align : 'left'
+						}, {
+							display : 'Full Name',
+							name : 'full_name',
+							cssclass : '',
+							controlclass : '',
+							coltype : 'label',
+							align : 'left'
+						}, {
+							display : 'Action',
+							name : 'action',
+							cssclass : '',
+							controlclass : '',
+							coltype : 'label',
+							align : 'left'
+						}, {
+							display : 'Activity On',
+							name : 'activity_on',
+							cssclass : 'cssClassHeadDate',
+							controlclass : '',
+							coltype : 'label',
+							align : 'left',
+							type : 'date',
+							format : 'yyyy/MM/dd hh:mm:ss a'
+						} ],
+						rp : perpage,
+						nomsg : getLocale(gpmsProposalsManagement,
+								'No Records Found!'),
+						param : data,
+						current : current_,
+						pnew : offset_,
+						sortcol : {
+							4 : {
+								sorter : false
+							}
+						}
+					});
 		},
 		FillDefaultValue : function(defaultVal) {
 			var selectedAttributeType = $("#ddlAttributeType :selected").val();
@@ -496,43 +556,224 @@ $(function() {
 				break;
 			}
 		},
+		BindUserPostionDetails : function(postitionDetails) {
+			// $("#dataTable tr:gt(1)").remove();
+			$
+					.each(
+							postitionDetails,
+							function(i, value) {
+								// alert(index + " :: " +
+								// value['positionTitle']);
+								var btnOption = "[+] Add";
+								var btnName = "AddMore";
+								if (i > 0) {
+									btnOption = "Delete";
+									var btnName = "DeleteOption";
+								}
+								var cloneRow = $('#dataTable tbody>tr:first')
+										.clone(true);
+								$(cloneRow).appendTo("#dataTable");
+
+								rowIndex = i + 1;
+								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
+										.find("select")
+										.each(
+												function(j) {
+													if (this.name == "ddlProposalStatus") {
+														// $(this).val(value['college']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['college']) {
+																				$this
+																						.prop(
+																								'selected',
+																								'selected');
+																				proposalsManage
+																						.BindDepartmentOnly($(
+																								'select[name="ddlProposalStatus"] option:selected')
+																								.eq(
+																										rowIndex)
+																								.val());
+																				return false;
+																			}
+																		});
+													} else if (this.name == "ddlDepartment") {
+														// $(this).val(value['department']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['department']) {
+																				$this
+																						.prop(
+																								'selected',
+																								'selected');
+
+																				proposalsManage
+																						.BindPositionTypeOnly(
+																								$(
+																										'select[name="ddlProposalStatus"] option:selected')
+																										.eq(
+																												rowIndex)
+																										.val(),
+																								$(
+																										'select[name="ddlDepartment"] option:selected')
+																										.eq(
+																												rowIndex)
+																										.val());
+																				return false;
+																			}
+																		});
+													} else if (this.name == "ddlPositionType") {
+														// $(this).val(value['positionType']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['positionType']) {
+																				$this
+																						.prop(
+																								'selected',
+																								'selected');
+
+																				proposalsManage
+																						.BindPositionTitleOnly(
+																								$(
+																										'select[name="ddlProposalStatus"] option:selected')
+																										.eq(
+																												rowIndex)
+																										.val(),
+																								$(
+																										'select[name="ddlDepartment"] option:selected')
+																										.eq(
+																												rowIndex)
+																										.val(),
+																								$(
+																										'select[name="ddlPositionType"] option:selected')
+																										.eq(
+																												rowIndex)
+																										.val());
+																				return false;
+																			}
+																		});
+													} else if (this.name == "ddlPositionTitle") {
+														// $(this).val(value['positionTitle']);
+
+														$(this)
+																.find('option')
+																.each(
+																		function() {
+																			var $this = $(this);
+																			if ($this
+																					.text() == value['positionTitle']) {
+																				$this
+																						.prop(
+																								'selected',
+																								'selected');
+																				return false;
+																			}
+																		});
+													}
+												});
+
+								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
+										.find("input").each(
+												function(k) {
+													if ($(this).hasClass(
+															"AddOption")) {
+														$(this).prop("name",
+																btnName);
+														$(this).prop("value",
+																btnOption);
+													}
+												});
+							});
+			$('#dataTable>tbody tr:first').remove();
+		},
 		FillForm : function(response) {
 			// See this how we can get response object based on fields
-			$('#txtAttributeName').val(response['firstName']);
-			// $('#ddlAttributeType').val(item.InputTypeID);
-			$('#ddlAttributeType').prop('disabled', 'disabled');
+			$('#txtFirstName').val(response['firstName']);
+			$('#txtMiddleName').val(response['middleName']);
+			$('#txtLastName').val(response['lastName']);
+			$('#txtDOB').val(response['dateOfBirth']);
 
-			// proposalsManage.FillDefaultValue(item.DefaultValue);
+			// $('#ddlGender').val(response['gender']);
 
-			// $('#ddlTypeValidation').val(item.ValidationTypeID);
-			// $('#txtLength').val(item.Length);
-			// $('#txtAliasName').val(item.AliasName);
-			// $('#txtAliasToolTip').val(item.AliasToolTip);
-			// $('#txtAliasHelp').val(item.AliasHelp);
-			// $('#txtDisplayOrder').val(item.DisplayOrder);
-			//
-			// $('input[name=chkUniqueValue]').prop('checked',
-			// item.IsUnique);
-			// $('input[name=chkValuesRequired]').prop('checked',
-			// item.IsRequired);
-			// $('input[name=chkActive]').prop('checked', item.IsActive);
-			//
-			// $('input[name=chkIsEnableEditor]').prop('checked',
-			// item.IsEnableEditor);
-			// $('input[name=chkUseInAdvancedSearch]').prop('checked',
-			// item.ShowInAdvanceSearch);
-			// $('input[name=chkComparable]').prop('checked',
-			// item.ShowInComparison);
-			// $('input[name=chkUseForPriceRule]').prop('checked',
-			// item.IsIncludeInPriceRule);
-			// $('input[name=chkIsUseInFilter]').prop('checked',
-			// item.IsUseInFilter);
-			// $('input[name=chkShowInItemListing]').prop('checked',
-			// item.IsShowInItemListing);
-			// $('input[name=chkShowInItemDetail]').prop('checked',
-			// item.IsShowInItemDetail);
-			// proposalsManage.ValidationTypeEnableDisable(item.FillOptionValues,
-			// false);
+			$('#ddlGender option').map(function() {
+				if ($(this).text() == response['gender'])
+					return this;
+			}).prop('selected', 'selected');
+
+			proposalsManage.BindUserPostionDetails(response['details']);
+
+			$.each(response['officeNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtOfficeNumber').val(response['officeNumbers']);
+			});
+
+			$.each(response['mobileNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtMobileNumber').val(response['mobileNumbers']);
+			});
+
+			$.each(response['homeNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtHomeNumber').val(response['homeNumbers']);
+			});
+
+			$.each(response['otherNumbers'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtOtherNumber').val(response['otherNumbers']);
+			});
+
+			$.each(response['addresses'], function(index, value) {
+				$('#txtStreet').val(value['street']);
+				$('#txtApt').val(value['apt']);
+				$('#txtCity').val(value['city']);
+
+				$('#ddlState option').map(function() {
+					if ($(this).text() == value['state'])
+						return this;
+				}).prop('selected', 'selected');
+
+				$('#txtZip').val(value['zipcode']);
+
+				$('#ddlCountry option').map(function() {
+					if ($(this).text() == value['country'])
+						return this;
+				}).prop('selected', 'selected');
+			});
+
+			$.each(response['workEmails'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtWorkEmail').val(response['workEmails']);
+			});
+
+			$.each(response['personalEmails'], function(index, value) {
+				// alert(index + " :: " + value);
+				$('#txtPersonalEmail').val(response['personalEmails']);
+			});
+
+			$('input[name=chkActive]').prop('checked',
+					response['userAccount']['isActive']);
+
+			$.each(response['userAccount'], function(index, value) {
+				$('#txtUserName').val(response['userAccount']['userName']);
+				$('#txtUserName').prop('disabled', 'disabled');
+
+				$('#txtPassword').val(response['userAccount']['password']);
+			});
 
 			// if (item.ItemTypes.length > 0) {
 			// $('#ddlApplyTo').val('1');
@@ -549,76 +790,36 @@ $(function() {
 		},
 
 		EditUser : function(tblID, argus) {
-			proposalsManage.ClearForm();
 			switch (tblID) {
 			case "gdvProposals":
-				$('#lblAttrFormHeading').html(
+				proposalsManage.ClearForm();
+				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
-								'Edit Proposal Details: ')
-								+ argus[3]);
-				$('#txtAttributeName').prop('disabled', 'disabled');
-				if (argus[7].toLowerCase() != "yes") {
-					$(".delbutton").prop("id", 'attributeid' + argus[0]);
-					$(".delbutton").show();
-					$('#activeTR').show();
-					$("#ddlTypeValidation").removeAttr('disabled');
-					$('input[name=chkUseInAdvancedSearch]').removeAttr(
-							'disabled');
-					$('input[name=chkComparable]').removeAttr('disabled');
-					$('input[name=chkIsUseInFilter]').removeAttr('disabled');
-					$('input[name=chkUseForPriceRule]').removeAttr('disabled');
-					$('input[name=chkShowInItemListing]')
-							.removeAttr('disabled');
-					$('input[name=chkShowInItemDetail]').removeAttr('disabled');
+								'Edit User Details for: ')
+								+ argus[2]);
 
-					$("input[class=class-text]").removeAttr('disabled');
-					$("input[class=class-isdefault]").removeAttr('disabled');
-					$("input[name=AddMore]").removeAttr('disabled');
-					$("input[name=DeleteOption]").removeAttr('disabled');
-					$('#lstItemType').removeAttr('disabled');
-					$('#txtDisplayOrder').removeAttr('disabled');
-					$('#txtLength').removeAttr('disabled');
-					$('#ddlApplyTo').removeAttr('disabled');
-					$("input[name=default_value_text]").removeAttr('disabled');
-					$('#txtLength').removeAttr('disabled');
-					$("input[name=chkUniqueValue]").removeAttr('disabled');
-					$("input[name=chkValuesRequired]").removeAttr('disabled');
+				if (argus[7] != null && argus[7] != "") {
+					$('#tblLastAuditedInfo').show();
+					$('#lblLastUpdatedOn').html(argus[7]);
+					$('#lblLastUpdatedBy').html(argus[8]);
+					$('#lblActivity').html(argus[9]);
 				} else {
-					$(".delbutton").hide();
-					$('#activeTR').hide();
-					$("#ddlTypeValidation").prop('disabled', 'disabled');
-					$('input[name=chkUseInAdvancedSearch]').prop('disabled',
-							'disabled');
-					$('input[name=chkComparable]').prop('disabled', 'disabled');
-					$('input[name=chkIsUseInFilter]').prop('disabled',
-							'disabled');
-					$('input[name=chkUseForPriceRule]').prop('disabled',
-							'disabled');
-					$('input[name=chkShowInItemListing]').prop('disabled',
-							'disabled');
-					$('input[name=chkShowInItemDetail]').prop('disabled',
-							'disabled');
-
-					$("input[class=class-text]").prop('disabled', 'disabled');
-					$("input[class=class-isdefault]").prop('disabled',
-							'disabled');
-					$("input[name=AddMore]").attr("disabled", "disabled");
-					$("input[name=DeleteOption]").attr("disabled", "disabled");
-					$("input[name=Alias]").removeAttr('disabled');
-					$('#lstItemType').attr("disabled", "disabled");
-					$('#txtDisplayOrder').attr("disabled", "disabled");
-					$('#txtLength').attr("disabled", "disabled");
-					$('#ddlApplyTo').attr("disabled", "disabled");
-					$("input[name=default_value_text]").prop('disabled',
-							'disabled');
-					$('#txtLength').attr("disabled", "disabled");
-					$("input[name=chkUniqueValue]")
-							.prop('disabled', 'disabled');
-					$("input[name=chkValuesRequired]").prop('disabled',
-							'disabled');
+					$('#tblLastAuditedInfo').hide();
 				}
-				$("#btnSaveProposal").prop("name", argus[0]);
-				proposalsManage.onInit();
+				// $('#txtUserName').val(argus[1]);
+				// $('#txtUserName').prop('disabled', 'disabled');
+				if (argus[11].toLowerCase() != "yes") {
+					$(".delbutton").prop("id", argus[0]);
+					$(".delbutton").show();
+				} else {
+					$(".delbutton").removeAttr("id");
+					$(".delbutton").hide();
+				}
+				$("input[name=AddMore]").removeAttr('disabled');
+				$("input[name=DeleteOption]").removeAttr('disabled');
+				$("#btnSaveUser").prop("name", argus[0]);
+
+				$("#btnReset").hide();
 
 				proposalsManage.config.url = proposalsManage.config.baseURL
 						+ "GetUsersByProfileId";
@@ -626,19 +827,13 @@ $(function() {
 					userId : argus[0],
 					gpmsCommonObj : gpmsCommonObj()
 				});
-				proposalsManage.config.ajaxCallMode = 4;
+				proposalsManage.config.ajaxCallMode = 8;
 				proposalsManage.ajaxCall(proposalsManage.config);
-				var attValType = $("#ddlTypeValidation").val();
-				$("#default_value_text")
-						.prop(
-								"class",
-								"sfInputbox "
-										+ proposalsManage
-												.CreateValidationClass(attValType)
-										+ "");
-				$('#iferror').html(
-						proposalsManage
-								.GetValidationTypeErrorMessage(attValType));
+
+				proposalsManage.BindUserAuditLogGrid(argus[0], null, null,
+						null, null);
+				$('#auditLogTab').show();
+
 				break;
 			default:
 				break;
@@ -648,7 +843,7 @@ $(function() {
 		DeleteUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvProposals":
-				if (argus[3].toLowerCase() != "yes") {
+				if (argus[1].toLowerCase() != "yes") {
 					proposalsManage.DeleteUserById(argus[0]);
 				} else {
 					csscody.alert('<h2>'
@@ -665,20 +860,21 @@ $(function() {
 			}
 		},
 
-		ConfirmDeleteMultiple : function(proposal_ids, event) {
+		ConfirmDeleteMultiple : function(user_ids, event) {
 			if (event) {
-				proposalsManage.DeleteMultipleAttribute(proposal_ids);
+				proposalsManage.DeleteMultipleAttribute(user_ids);
 			}
 		},
 
 		DeleteMultipleAttribute : function(_userIds) {
+			// this.config.dataType = "html";
 			this.config.url = this.config.baseURL
-					+ "DeleteMultipleAttributesByAttributeID";
+					+ "DeleteMultipleUsersByUserID";
 			this.config.data = JSON2.stringify({
 				userIds : _userIds,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 6;
+			this.config.ajaxCallMode = 13;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -693,455 +889,332 @@ $(function() {
 					+ getLocale(gpmsProposalsManagement, "Delete Confirmation")
 					+ "</h2><p>"
 					+ getLocale(gpmsProposalsManagement,
-							"Are you sure you want to delete this attribute?")
+							"Are you sure you want to delete this user?")
 					+ "</p>", properties);
 		},
 
-		ConfirmSingleDelete : function(proposal_id, event) {
+		ConfirmSingleDelete : function(user_id, event) {
 			if (event) {
-				proposalsManage.DeleteSingleAttribute(proposal_id);
+				proposalsManage.DeleteSingleUser(user_id);
 			}
+		},
+
+		DeleteSingleUser : function(_userId) {
+			this.config.url = this.config.baseURL + "DeleteUserByUserID";
+			this.config.data = JSON2.stringify({
+				userId : _userId,
+				gpmsCommonObj : gpmsCommonObj()
+			});
+			this.config.ajaxCallMode = 12;
+			this.ajaxCall(this.config);
 			return false;
 		},
 
-		DeleteSingleAttribute : function(_userId) {
+		ActivateUser : function(_userId, _isActive) {
 			this.config.url = this.config.baseURL
-					+ "DeleteAttributeByAttributeID";
+					+ "UpdateUserIsActiveByUserID";
 			this.config.data = JSON2.stringify({
-				userId : parseInt(_userId),
-				gpmsCommonObj : gpmsCommonObj()
-			});
-			this.config.ajaxCallMode = 5;
-			this.ajaxCall(this.config);
-		},
-
-		ActivateAttribute : function(_userId, _isActive) {
-			this.config.url = this.config.baseURL
-					+ "UpdateAttributeIsActiveByAttributeID";
-			this.config.data = JSON2.stringify({
-				userId : parseInt(_userId),
+				userId : _userId,
 				gpmsCommonObj : gpmsCommonObj(),
 				isActive : _isActive
 			});
-			this.config.ajaxCallMode = 7;
+			this.config.ajaxCallMode = 14;
 			this.ajaxCall(this.config);
 			return false;
-		},
-		DeactiveUser : function(tblID, argus) {
-			switch (tblID) {
-			case "gdvProposals":
-				if (argus[3].toLowerCase() != "yes") {
-					proposalsManage.ActivateAttribute(argus[0], false);
-				} else {
-					csscody
-							.alert('<h2>'
-									+ getLocale(gpmsProposalsManagement,
-											"Information Alert")
-									+ '</h2><p>'
-									+ getLocale(gpmsProposalsManagement,
-											"Sorry! System attribute can not be deactivated.")
-									+ '</p>');
-				}
-				break;
-			default:
-				break;
-			}
 		},
 		ActiveUser : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvProposals":
-				if (argus[3].toLowerCase() != "yes") {
-					proposalsManage.ActivateAttribute(argus[0], true);
+				if (argus[1].toLowerCase() != "yes") {
+					proposalsManage.ActivateUser(argus[0], true);
 				} else {
-					csscody
-							.alert('<h2>'
-									+ getLocale(gpmsProposalsManagement,
-											"Information Alert")
-									+ '</h2><p>'
-									+ getLocale(gpmsProposalsManagement,
-											"Sorry! System attribute can not be activated.")
-									+ '</p>');
+					csscody.alert('<h2>'
+							+ getLocale(gpmsProposalsManagement,
+									"Information Alert")
+							+ '</h2><p>'
+							+ getLocale(gpmsProposalsManagement,
+									"Sorry! this user is already actived.")
+							+ '</p>');
 				}
 				break;
 			default:
 				break;
 			}
 		},
-		IsUnique : function(attributeName, userId) {
-			var attrbuteUniqueObj = {
-				AttributeID : userId,
-				AttributeName : attributeName
+		DeactiveUser : function(tblID, argus) {
+			switch (tblID) {
+			case "gdvProposals":
+				if (argus[1].toLowerCase() != "no") {
+					proposalsManage.ActivateUser(argus[0], false);
+				} else {
+					csscody.alert('<h2>'
+							+ getLocale(gpmsProposalsManagement,
+									"Information Alert")
+							+ '</h2><p>'
+							+ getLocale(gpmsProposalsManagement,
+									"Sorry! this user is already deactived.")
+							+ '</p>');
+				}
+				break;
+			default:
+				break;
+			}
+		},
+		isUniqueProjectTitle : function(userId, newUserName) {
+			var userUniqueObj = {
+				UserID : userId,
+				NewUserName : newUserName
 			};
 			var gpmsCommonInfo = gpmsCommonObj();
-			gpmsCommonInfo.CultureName = $(".languageSelected").attr("value");
-			this.config.url = this.config.baseURL + "CheckUniqueAttributeName";
+			this.config.url = this.config.baseURL + "CheckUniqueUserName";
 			this.config.data = JSON2.stringify({
-				attrbuteUniqueObj : attrbuteUniqueObj,
+				userUniqueObj : userUniqueObj,
 				gpmsCommonObj : gpmsCommonInfo
 			});
-			this.config.ajaxCallMode = 8;
+			this.config.ajaxCallMode = 15;
 			this.ajaxCall(this.config);
-			return isUnique;
+			return isUniqueProjectTitle;
 		},
-		SaveUser : function(_userId, _flag) {
+		IsUniqueEmail : function(userId, newEmail) {
+			var userUniqueObj = {
+				UserID : userId,
+				NewEmail : newEmail
+			};
+			var gpmsCommonInfo = gpmsCommonObj();
+			this.config.url = this.config.baseURL + "CheckUniqueEmail";
+			this.config.data = JSON2.stringify({
+				userUniqueObj : userUniqueObj,
+				gpmsCommonObj : gpmsCommonInfo
+			});
+			this.config.ajaxCallMode = 16;
+			this.ajaxCall(this.config);
+			return isUniqueEmail;
+		},
+
+		SaveProposal : function(_userId, _flag) {
 			$('#iferror').hide();
 			if (checkForm($("#form1"))) {
-				var selectedItemTypeID = '';
 				var validateErrorMessage = '';
-				var itemSelected = false;
-				var isUsedInConfigItem = false;
 
-				var attributeName = $('#txtAttributeName').val();
-				if (!attributeName) {
-					validateErrorMessage += 'Please enter attribute name.<br/>';
-				} else if (!proposalsManage.IsUnique(attributeName, _userId)) {
+				var newUserName = $('#txtUserName').val();
+				if (!newUserName) {
+					validateErrorMessage += 'Please enter username.<br/>';
+				} else if (!proposalsManage.isUniqueProjectTitle(_userId,
+						newUserName)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsProposalsManagement,
-									"Please enter unique attribute name")
-							+ "'"
-							+ attributeName.trim()
-							+ "'"
+									"Please enter unique username.")
+							+ " '"
+							+ proposalsManage.trim()
+							+ "' "
 							+ getLocale(gpmsProposalsManagement,
 									"already exists.") + '<br/>';
 				}
-				var selectedValue = $("#ddlApplyTo").val();
-				if (selectedValue !== "0") {
-					$("#lstItemType").each(function() {
-						if ($("#lstItemType :selected").length != 0) {
-							itemSelected = true;
-							$("#lstItemType option:selected").each(function(i) {
-								selectedItemTypeID += $(this).val() + ',';
-								if ($(this).val() == '3') {
-									isUsedInConfigItem = true;
-								}
-							});
-						}
-					});
-					if (!itemSelected) {
-						validateErrorMessage += getLocale(
-								gpmsProposalsManagement,
-								"Please select at least one item type.")
-								+ "<br/>";
-					}
-				} else {
-					isUsedInConfigItem = true;
-					$("#lstItemType option").each(function(i) {
-						selectedItemTypeID += $(this).val() + ',';
-					});
-				}
 
-				selectedItemTypeID = selectedItemTypeID.substring(0,
-						selectedItemTypeID.length - 1);
-
-				if ($('#toggleElement').is(':checked'))
-					var _Length = '';
-				if (!($('#txtLength').is(':disabled'))) {
-					_Length = $('#txtLength').val();
-				}
-				var selectedVal = $("#ddlAttributeType :selected").val();
 				var _saveOptions = '';
-				if (selectedVal == 5 || selectedVal == 6 || selectedVal == 9
-						|| selectedVal == 10 || selectedVal == 11
-						|| selectedVal == 12) {
-					$("#dataTable")
-							.find("tr input")
-							.each(
-									function(i) {
-										$(this).parent('td').find('span')
-												.removeClass('error');
-										$(this).removeClass('error');
-										var optionsText = $(this).val();
-										if ($(this).hasClass("class-text")) {
-											if (!optionsText
-													&& $(this).prop("name") != "Alias") {
-												validateErrorMessage = getLocale(
-														gpmsProposalsManagement,
-														"Please enter all option values and display order for your attribute.")
-														+ "<br/>";
-												$(this).parent('td').find(
-														'span').addClass(
-														'error').show();
-												proposalsManage
-														.SetFirstTabActive();
-												$(this).addClass('error');
-												$(this).focus();
-											} else {
-												if ($(this).prop("name") == "position") {
-													var value = optionsText
-															.replace(/^\s\s*/,
-																	'')
-															.replace(/\s\s*$/,
-																	'');
-													var intRegex = /^\d+$/;
-													if (!intRegex.test(value)) {
-														validateErrorMessage = getLocale(
-																gpmsProposalsManagement,
-																"Display order is numeric value.")
-																+ '<br/>';
-														$(this)
-																.parent('td')
-																.find('span')
-																.addClass(
-																		'error')
-																.show();
-														proposalsManage
-																.SetFirstTabActive();
-														$(this).addClass(
-																'error');
-														$(this).focus();
-													}
-												}
-												_saveOptions += optionsText
-														+ "#!#";
-											}
-										} else if ($(this).hasClass(
-												"class-isdefault")) {
-											var _IsChecked = $(this).prop(
-													'checked');
-											_saveOptions += _IsChecked + "!#!";
-										}
-									});
-				}
+				$("#dataTable")
+						.find("tr select")
+						.each(
+								function(i) {
+									var optionsText = $(this).val();
+									// ddlProposalStatus ddlDepartment
+									// ddlPositionType
+									// ddlPositionTitle
+									if (!optionsText
+											&& $(this).prop("name") != "ddlPositionTitle") {
+										validateErrorMessage = getLocale(
+												AspxAttributesManagement,
+												"Please select all position details for this user.")
+												+ "<br/>";
+										attributesManage.SetFirstTabActive();
+										$(this).focus();
+									} else if (optionsText
+											&& $(this).prop("name") != "ddlPositionTitle") {
+										_saveOptions += optionsText + "!#!";
+									} else {
+										_saveOptions += optionsText + "#!#";
+									}
+								});
+
 				_saveOptions = _saveOptions.substring(0,
 						_saveOptions.length - 3);
+
 				if (!validateErrorMessage) {
-					var gpmsCommonInfo = gpmsCommonObj();
-					var _StoreID = gpmsCommonInfo.StoreID;
-					var _PortalID = gpmsCommonInfo.PortalID;
-					var _CultureName = $(".languageSelected").attr("value");
-					var _UserName = gpmsCommonInfo.UserName;
+					var userInfo = {
+						UserId : _userId,
+						FirstName : $.trim($('#txtFirstName').val()),
+						MiddleName : $.trim($('#txtMiddleName').val()),
+						LastName : $.trim($('#txtLastName').val()),
+						DOB : $('#txtDOB').val(),
+						Gender : $('#ddlGender :selected').val(),
+						Street : $.trim($('#txtStreet').val()),
+						Apt : $.trim($('#txtApt').val()),
+						City : $.trim($('#txtCity').val()),
+						State : $('#ddlState :selected').text(),
+						Zip : $.trim($('#txtZip').val()),
+						Country : $('#ddlCountry :selected').text(),
+						OfficeNumber : $('#txtOfficeNumber').val(),
+						MobileNumber : $('#txtMobileNumber').val(),
+						HomeNumber : $('#txtHomeNumber').val(),
+						OtherNumber : $('#txtOtherNumber').val(),
+						WorkEmail : $('#txtWorkEmail').val(),
+						PersonalEmail : $('#txtPersonalEmail').val(),
+						IsActive : $('input[name=chkActive]').prop('checked'),
+						UserName : $.trim($('#txtUserName').val()),
+						Password : $.trim($('#txtPassword').val()),
+						Flag : _flag, // false for Update true for New Add
+						SaveOptions : _saveOptions
+					};
 
-					var _attributeName = $('#txtAttributeName').val();
-					var _inputTypeID = $('#ddlAttributeType').val();
-
-					var selectedAttributeType = $("#ddlAttributeType :selected")
-							.val();
-					var _DefaultValue = "";
-					switch (selectedAttributeType) {
-					case "1":
-						_DefaultValue = $("#default_value_text").val();
-						break;
-					case "2":
-						_DefaultValue = $("textarea#default_value_textarea")
-								.val();
-						break;
-					case "3":
-						_DefaultValue = $("#default_value_date").val();
-						break;
-					case "4":
-						_DefaultValue = $("#default_value_yesno").val();
-						break;
-					case "8":
-						_DefaultValue = $("#default_value_text").val();
-						break;
-					default:
-						_DefaultValue = '';
-					}
-
-					var _ValidationTypeID = $('#ddlTypeValidation').val();
-					var _AliasName = $('#txtAliasName').val();
-					var _AliasToolTip = $('#txtAliasToolTip').val();
-					var _AliasHelp = $('#txtAliasHelp').val();
-					var _DisplayOrder = $('#txtDisplayOrder').val();
-
-					var _IsUnique = $('input[name=chkUniqueValue]').prop(
-							'checked');
-					var _IsRequired = $('input[name=chkValuesRequired]').prop(
-							'checked');
-					var _IsEnableEditor = $('input[name=chkIsEnableEditor]')
-							.prop('checked');
-					var _ShowInAdvanceSearch = $(
-							'input[name=chkUseInAdvancedSearch]').prop(
-							'checked');
-					var _ShowInComparison = $('input[name=chkComparable]')
-							.prop('checked');
-					var _IsUseInFilter = $('input[name=chkIsUseInFilter]')
-							.prop('checked');
-					var _IsIncludeInPriceRule = $(
-							'input[name=chkUseForPriceRule]').prop('checked');
-					var _IsShowInItemListing = $(
-							'input[name=chkShowInItemListing]').prop('checked');
-					var _IsShowInItemDetail = $(
-							'input[name=chkShowInItemDetail]').prop('checked');
-					var _IsActive = $('input[name=chkActive]').prop('checked');
-					var _IsModified = true;
-					var _attributeValueId = arrAttrValueId;
-					var _ItemTypes = selectedItemTypeID;
-					var _Flag = _flag;
-					var _IsUsedInConfigItem = isUsedInConfigItem;
-
-					proposalsManage.AddAttributeInfo(_userId, _attributeName,
-							_inputTypeID, _DefaultValue, _ValidationTypeID,
-							_Length, _AliasName, _AliasToolTip, _AliasHelp,
-							_DisplayOrder, _IsUnique, _IsRequired,
-							_IsEnableEditor, _ShowInAdvanceSearch,
-							_ShowInComparison, _IsUseInFilter,
-							_IsIncludeInPriceRule, _IsShowInItemListing,
-							_IsShowInItemDetail, _StoreID, _PortalID,
-							_IsActive, _IsModified, _UserName, _CultureName,
-							_ItemTypes, _Flag, _IsUsedInConfigItem,
-							_saveOptions, _attributeValueId);
+					proposalsManage.AddUserInfo(userInfo);
 
 					return false;
 				}
 			}
 		},
 
-		AddAttributeInfo : function(_userId, _attributeName, _inputTypeID,
-				_DefaultValue, _ValidationTypeID, _Length, _AliasName,
-				_AliasToolTip, _AliasHelp, _DisplayOrder, _IsUnique,
-				_IsRequired, _IsEnableEditor, _ShowInAdvanceSearch,
-				_ShowInComparison, _IsUseInFilter, _IsIncludeInPriceRule,
-				_IsShowInItemListing, _IsShowInItemDetail, _storeId, _portalId,
-				_IsActive, _IsModified, _userName, _CultureName, _ItemTypes,
-				_flag, _isUsedInConfigItem, _saveOptions, _attributeValueId) {
-
-			var info = {
-				AttributeID : parseInt(_userId),
-				AttributeName : _attributeName,
-				InputTypeID : _inputTypeID,
-				DefaultValue : _DefaultValue,
-				ValidationTypeID : _ValidationTypeID,
-				Length : _Length >= 0 ? _Length : null,
-				AliasName : _AliasName,
-				AliasToolTip : _AliasToolTip,
-				AliasHelp : _AliasHelp,
-				DisplayOrder : _DisplayOrder,
-				IsUnique : _IsUnique,
-				IsRequired : _IsRequired,
-				IsEnableEditor : _IsEnableEditor,
-				ShowInAdvanceSearch : _ShowInAdvanceSearch,
-				ShowInComparison : _ShowInComparison,
-				IsIncludeInPriceRule : _IsIncludeInPriceRule,
-				IsShowInItemListing : _IsShowInItemListing,
-				IsShowInItemDetail : _IsShowInItemDetail,
-				IsUseInFilter : _IsUseInFilter,
-				StoreID : _storeId,
-				PortalID : _portalId,
-				IsActive : _IsActive,
-				IsModified : _IsModified,
-				UpdatedBy : _userName,
-				AddedBy : _userName,
-				CultureName : _CultureName,
-				ItemTypes : _ItemTypes,
-				Flag : _flag,
-				IsUsedInConfigItem : _isUsedInConfigItem,
-				SaveOptions : _saveOptions,
-				AttributeValueID : _attributeValueId
-			};
-
-			this.config.url = this.config.baseURL + "SaveUpdateAttribute";
+		AddUserInfo : function(info) {
+			this.config.url = this.config.baseURL + "SaveUpdateUser";
 			this.config.data = JSON2.stringify({
-				attributeInfo : info
+				userInfo : info,
+				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 9;
+			this.config.ajaxCallMode = 16;
 			this.ajaxCall(this.config);
 			return false;
 		},
-		BindProposalStatusDropDown : function() {
+
+		BindCollegeDropDown : function() {
 			this.config.url = this.config.baseURL + "GetCollegeList";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
 			this.ajaxCall(this.config);
+			return false;
 		},
-		SearchUsers : function() {
-			var userName = $.trim($("#txtSearchProjectTitle").val());
-			var college = $.trim($('#ddlCollege').val()) == "" ? null : $
-					.trim($('#ddlCollege').val()) == "0" ? null : $.trim($(
-					'#ddlCollege').val());
-			var department = $.trim($('#ddlDepartment').val()) == "" ? null : $
-					.trim($('#ddlDepartment').val()) == "0" ? null : $.trim($(
-					'#ddlDepartment').val());
-			var postitionType = $.trim($('#ddlPositionType').val()) == "" ? null
-					: $.trim($('#ddlPositionType').val()) == "0" ? null : $
-							.trim($('#ddlPositionType').val());
-			var postitionTitle = $.trim($('#ddlPositionTitle').val()) == "" ? null
-					: $.trim($('#ddlPositionTitle').val()) == "0" ? null : $
-							.trim($('#ddlPositionTitle').val());
-			var isActive = $.trim($("#ddlIsActive").val()) == "" ? null : $
-					.trim($("#ddlIsActive").val()) == "True" ? true : false;
+
+		SearchProposals : function() {
+			var userName = $.trim($("#txtSearchUserName").val());
+			var college = $.trim($('#ddlSearchProposalStatus').val()) == "" ? null
+					: $.trim($('#ddlSearchProposalStatus').val()) == "0" ? null
+							: $.trim($('#ddlSearchProposalStatus').val());
+			var department = $.trim($('#ddlSearchDepartment').val()) == "" ? null
+					: $.trim($('#ddlSearchDepartment').val()) == "0" ? null : $
+							.trim($('#ddlSearchDepartment').val());
+			var positionType = $.trim($('#ddlSearchPositionType').val()) == "" ? null
+					: $.trim($('#ddlSearchPositionType').val()) == "0" ? null
+							: $.trim($('#ddlSearchPositionType').val());
+			var positionTitle = $.trim($('#ddlSearchPositionTitle').val()) == "" ? null
+					: $.trim($('#ddlSearchPositionTitle').val()) == "0" ? null
+							: $.trim($('#ddlSearchPositionTitle').val());
+			var isActive = $.trim($("#ddlSearchIsActive").val()) == "" ? null
+					: $.trim($("#ddlSearchIsActive").val()) == "True" ? true
+							: false;
 			if (userName.length < 1) {
 				userName = null;
 			}
 			proposalsManage.BindProposalGrid(userName, college, department,
-					postitionType, postitionTitle, isActive);
+					positionType, positionTitle, isActive);
+		},
+		SearchProposalAuditLogs : function() {
+			var action = $.trim($("#txtSearchAction").val());
+			if (action.length < 1) {
+				action = null;
+			}
+
+			var auditedBy = $.trim($("#txtSearchAuditedBy").val());
+			if (auditedBy.length < 1) {
+				auditedBy = null;
+			}
+
+			var activityOnFrom = $.trim($("#txtSearchActivityOnFrom").val());
+			if (activityOnFrom.length < 1) {
+				activityOnFrom = null;
+			}
+
+			var activityOnTo = $.trim($("#txtSearchActivityOnTo").val());
+			if (activityOnTo.length < 1) {
+				activityOnTo = null;
+			}
+
+			var userId = $('#btnSaveUser').prop("name");
+			if (userId == '') {
+				userId = "0";
+			}
+
+			proposalsManage.BindUserAuditLogGrid(userId, action, auditedBy,
+					activityOnFrom, activityOnTo);
 		},
 		ajaxSuccess : function(msg) {
 			switch (proposalsManage.config.ajaxCallMode) {
 			case 0:
 				break;
-			case 1: // For College Dropdown Binding
-				$('#ddlCollege').get(0).options.length = 1;
-				$('#ddlDepartment').get(0).options.length = 1;
-				$('#ddlPositionType').get(0).options.length = 1;
-				$('#ddlPositionTitle').get(0).options.length = 1;
-				$.each(msg,
-						function(index, item) {
-							$("#ddlCollege").get(0).options[$("#ddlCollege")
-									.get(0).options.length] = new Option(item,
-									item);
-						});
-				break
-			case 2:// For Department Dropdown Binding
-				$('#ddlDepartment').get(0).options.length = 1;
-				$('#ddlPositionType').get(0).options.length = 1;
-				$('#ddlPositionTitle').get(0).options.length = 1;
-				$.each(msg, function(index, item) {
-					$("#ddlDepartment").get(0).options[$("#ddlDepartment").get(
-							0).options.length] = new Option(item, item);
-				});
-				break;
+			case 1: // For Proposal Status Dropdown Binding for both form and
+				// search
+				$('#ddlSearchProposalStatus').get(rowIndex).options.length = 1;
 
-			case 3: // For College Position Type Binding
-				$('#ddlPositionType').get(0).options.length = 1;
-				$('#ddlPositionTitle').get(0).options.length = 1;
-				$.each(msg, function(index, item) {
-					$("#ddlPositionType").get(0).options[$("#ddlPositionType")
-							.get(0).options.length] = new Option(item, item);
-				});
-				break;
+				$('select[name="ddlProposalStatus"]').get(rowIndex).options.length = 0;
 
-			case 4: // For College Position Title Binding
-				$('#ddlPositionTitle').get(0).options.length = 1;
 				$
 						.each(
 								msg,
 								function(index, item) {
-									$("#ddlPositionTitle").get(0).options[$(
-											"#ddlPositionTitle").get(0).options.length] = new Option(
+									$("#ddlSearchProposalStatus").get(rowIndex).options[$(
+											"#ddlSearchProposalStatus").get(
+											rowIndex).options.length] = new Option(
+											item, item);
+
+									// For form Dropdown Binding
+									$('select[name="ddlProposalStatus"]').get(
+											rowIndex).options[$(
+											'select[name="ddlProposalStatus"]')
+											.get(rowIndex).options.length] = new Option(
 											item, item);
 								});
 				break;
+
+			case 2:
+
+				break;
+
+			case 3:
+
+				break;
+
+			case 4:
+
+				break;
+
 			case 5:
-				$('#lstItemType').get(0).options.length = 0;
-				$('#lstItemType').prop('multiple', 'multiple');
-				$('#lstItemType').prop('size', '5');
-				$.each(msg.d,
-						function(index, item) {
-							$("#lstItemType").get(0).options[$("#lstItemType")
-									.get(0).options.length] = new Option(
-									item.ItemTypeName, item.ItemTypeID);
-						});
+
 				break;
+
 			case 6:
-				proposalsManage.FillForm(msg);
-				$('#divUserGrid').hide();
-				$('#divUserForm').show();
+
 				break;
+
 			case 7:
-				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null, null, null);
-				csscody.info("<h2>"
-						+ getLocale(gpmsProposalsManagement,
-								'Successful Message')
-						+ "</h2><p>"
-						+ getLocale(gpmsProposalsManagement,
-								'Attribute has been deleted successfully.')
-						+ "</p>");
-				$('#divUserForm').hide();
-				$('#divUserGrid').show();
+
 				break;
-			case 8:
+
+			case 8: // For User Edit Action
+				proposalsManage.FillForm(msg);
+				$('#divProposalGrid').hide();
+				$('#divProposalForm').show();
+				break;
+
+			case 9:
+
+				break;
+
+			case 10:
+
+				break;
+
+			case 11:
+
+				break;
+
+			case 12: // Single Deleted
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
 						null);
 				csscody
@@ -1150,27 +1223,53 @@ $(function() {
 										'Successful Message')
 								+ "</h2><p>"
 								+ getLocale(gpmsProposalsManagement,
-										'Selected attribute(s) has been deleted successfully.')
+										'User has been deleted successfully.')
+								+ "</p>");
+
+				$('#divProposalForm').hide();
+				$('#divProposalGrid').show();
+				break;
+
+			case 13: // Multiple Deleted
+				proposalsManage.BindProposalGrid(null, null, null, null, null,
+						null);
+				csscody
+						.info("<h2>"
+								+ getLocale(gpmsProposalsManagement,
+										'Successful Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsProposalsManagement,
+										'Selected user(s) has been deleted successfully.')
 								+ "</p>");
 				break;
-			case 9:
+
+			case 14: // Activated
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
 						null);
+				csscody.info("<h2>"
+						+ getLocale(gpmsProposalsManagement,
+								'Successful Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'User has been activated successfully.')
+						+ "</p>");
 				break;
-			case 10:
-				isUnique = msg.d;
+
+			case 15: // Unique Project Title Check
+				isUniqueProjectTitle = stringToBoolean(msg);
 				break;
-			case 11:
+
+			case 16: // Save Update
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
 						null);
-				$('#divUserGrid').show();
+				$('#divProposalGrid').show();
 				if (editFlag > 0) {
 					csscody.info("<h2>"
 							+ getLocale(gpmsProposalsManagement,
 									'Successful Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsProposalsManagement,
-									'Attribute has been updated successfully.')
+									'User has been updated successfully.')
 							+ "</p>");
 				} else {
 					csscody.info("<h2>"
@@ -1178,14 +1277,15 @@ $(function() {
 									'Successful Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsProposalsManagement,
-									'Attribute has been saved successfully.')
+									'User has been saved successfully.')
 							+ "</p>");
 				}
 				proposalsManage.ClearForm();
-				$('#divUserForm').hide();
+				$('#divProposalForm').hide();
 				break;
 			}
 		},
+
 		ajaxFailure : function(msg) {
 			switch (proposalsManage.config.ajaxCallMode) {
 			case 0:
@@ -1205,6 +1305,13 @@ $(function() {
 								"Failed to load departments list.") + '</p>');
 				break;
 			case 3:
+				csscody.error('<h2>'
+						+ getLocale(gpmsProposalsManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsProposalsManagement,
+								"Failed to load departments list.") + '</p>');
+				break;
+			case 4:
 				csscody
 						.error('<h2>'
 								+ getLocale(gpmsProposalsManagement,
@@ -1214,7 +1321,17 @@ $(function() {
 										"Failed to load position types list.")
 								+ '</p>');
 				break;
-			case 4:
+			case 5:
+				csscody
+						.error('<h2>'
+								+ getLocale(gpmsProposalsManagement,
+										"Error Message")
+								+ '</h2><p>'
+								+ getLocale(gpmsProposalsManagement,
+										"Failed to load position types list.")
+								+ '</p>');
+				break;
+			case 6:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
@@ -1222,96 +1339,124 @@ $(function() {
 								"Failed to load position titles list.")
 						+ '</p>');
 				break;
-			case 5:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to delete attribute.") + '</p>');
-				break;
-			case 6:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to delete attributes.") + '</p>');
-				break;
 			case 7:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to operate.") + '</p>');
+								"Failed to load position titles list.")
+						+ '</p>');
 				break;
+
 			case 8:
+				csscody.error('<h2>'
+						+ getLocale(gpmsProposalsManagement, "Error Message")
+						+ '</h2><p>' + "Failed to load user details." + '</p>');
 				break;
+
 			case 9:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to save attribute.") + '</p>');
+								"Failed to load departments list.") + '</p>');
+				break;
+
+			case 10:
+				csscody
+						.error('<h2>'
+								+ getLocale(gpmsProposalsManagement,
+										"Error Message")
+								+ '</h2><p>'
+								+ getLocale(gpmsProposalsManagement,
+										"Failed to load position types list.")
+								+ '</p>');
+				break;
+
+			case 11:
+				csscody.error('<h2>'
+						+ getLocale(gpmsProposalsManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsProposalsManagement,
+								"Failed to load position titles list.")
+						+ '</p>');
+				break;
+
+			case 12:
+				csscody.error("<h2>"
+						+ getLocale(gpmsProposalsManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'User cannot be deleted.') + "</p>");
+				break;
+
+			case 13:
+				csscody
+						.error("<h2>"
+								+ getLocale(gpmsProposalsManagement,
+										'Error Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsProposalsManagement,
+										'Selected user(s) cannot be deleted.')
+								+ "</p>");
+				break;
+
+			case 14:
+				csscody.error("<h2>"
+						+ getLocale(gpmsProposalsManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'User cannot be activated.') + "</p>");
+				break;
+
+			case 15:
+				csscody.error("<h2>"
+						+ getLocale(gpmsProposalsManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'Cannot check for unique Username') + "</p>");
+				break;
+
+			case 16:
+				csscody.error("<h2>"
+						+ getLocale(gpmsProposalsManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'Failed to save user!') + "</p>");
 				break;
 			}
 		},
 		init : function(config) {
 			proposalsManage.LoadStaticImage();
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
-					null, null, null);
-			$('#divUserForm').hide();
-			$('#divUserGrid').show();
-			proposalsManage.BindProposalStatusDropDown();
-			proposalsManage.BindProposedByDropDown();
+					null, null);
+			$('#divProposalForm').hide();
+			$('#divProposalGrid').show();
+			proposalsManage.BindCollegeDropDown();
 
-			$('#btnDeleteSelected')
-					.click(
-							function() {
-								var proposal_ids = '';
-								proposal_ids = SageData.Get("gdvProposals").Arr
-										.join(',');
-								if (proposal_ids.length > 0) {
-									var properties = {
-										onComplete : function(e) {
-											proposalsManage
-													.ConfirmDeleteMultiple(
-															proposal_ids, e);
-										}
-									};
-									csscody
-											.confirm(
-													"<h2>"
-															+ getLocale(
-																	gpmsProposalsManagement,
-																	'Delete Confirmation')
-															+ "</h2><p>"
-															+ getLocale(
-																	gpmsProposalsManagement,
-																	'Are you sure you want to delete selected user(s)?')
-															+ "</p>",
-													properties);
-								} else {
-									csscody
-											.alert('<h2>'
-													+ getLocale(
-															gpmsProposalsManagement,
-															"Information Alert")
-													+ '</h2><p>'
-													+ getLocale(
-															gpmsProposalsManagement,
-															"Please select at least one user before deleting.")
-													+ '</p>');
-								}
-							});
+			// Form Position details Drop downs
+			$('select[name="ddlProposalStatus"]').on(
+					"change",
+					function() {
+						rowIndex = $(this).closest('tr').prevAll("tr").length;
+						if ($(this).val() != "0") {
+							proposalsManage.BindDepartmentDropDown($(this)
+									.val(), false);
+						} else {
+							$(this).find('option:gt(0)').remove();
+						}
+					});
 
 			$('#btnAddNew').bind("click", function() {
-				$('#divUserGrid').hide();
-				$('#divUserForm').show();
+				$('#auditLogTab').hide();
+				$('#divProposalGrid').hide();
+				$('#divProposalForm').show();
 				proposalsManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {
-				$('#divUserForm').hide();
-				$('#divUserGrid').show();
+				$('#divProposalForm').hide();
+				$('#divProposalGrid').show();
 				proposalsManage.ClearForm();
 			});
 
@@ -1319,82 +1464,142 @@ $(function() {
 				proposalsManage.ClearForm();
 			});
 
-			$('#btnSaveProposal').click(function() {
-				var proposal_id = $(this).prop("name");
-				if (proposal_id != '') {
-					editFlag = proposal_id;
-					proposalsManage.SaveUser(proposal_id, false);
+			$('#btnSaveUser').click(function() {
+				var user_id = $(this).prop("name");
+				if (user_id != '') {
+					editFlag = user_id;
+					proposalsManage.SaveProposal(user_id, false);
 				} else {
 					editFlag = 0;
-					proposalsManage.SaveUser(0, true);
+					proposalsManage.SaveProposal("0", true);
 				}
 			});
 
-			$('#txtAttributeName')
-					.blur(
-							function() {
-								var errors = '';
-								var attributeName = $(this).val();
-								var proposal_id = $('#btnSaveProposal').prop(
-										"name");
-								if (proposal_id == '') {
-									proposal_id = 0;
-								}
-								if (!attributeName) {
-									errors += getLocale(
-											gpmsProposalsManagement,
-											"Please enter user name");
-								} else if (!proposalsManage.IsUnique(
-										attributeName, proposal_id)) {
-									errors += "'"
-											+ getLocale(
-													gpmsProposalsManagement,
-													"Please enter Please enter unique user name")
-											+ "'"
-											+ attributeName.trim()
-											+ "'"
-											+ getLocale(
-													gpmsProposalsManagement,
-													"already exists.")
-											+ '<br/>';
-								}
+			$('#txtUserName').blur(
+					function() {
+						var errors = '';
+						var userName = $(this).val();
+						var user_id = $('#btnSaveUser').prop("name");
+						if (user_id == '') {
+							user_id = "0";
+						}
+						if (!userName) {
+							errors += getLocale(gpmsProposalsManagement,
+									"Please enter username.");
+						} else if (!proposalsManage.isUniqueProjectTitle(
+								user_id, userName)) {
+							errors += getLocale(gpmsProposalsManagement,
+									"Please enter unique username.")
+									+ " '"
+									+ userName.trim()
+									+ "' "
+									+ getLocale(gpmsProposalsManagement,
+											"already exists.") + '<br/>';
+						}
 
-								if (errors) {
-									$('.cssClassRight').hide();
-									$('.cssClassError').show();
-									$(".cssClassError").parent('div').addClass(
-											"diverror");
-									$('.cssClassError').prevAll("input:first")
-											.addClass("error");
-									$('.cssClassError').html(errors);
-									return false;
-								} else {
-									$(this).parent("td").find("span.error")
-											.hide();
-									$('.cssClassRight').show();
-									$('.cssClassError').hide();
-									$(".cssClassError").parent('div')
-											.removeClass("diverror");
-									$('.cssClassError').prevAll("input:first")
-											.removeClass("error");
-								}
-							});
+						if (errors) {
+							$(this).next('.cssClassRight').hide();
+							$(this).siblings('.cssClassError').show();
+							$(this).siblings(".cssClassError").parent('div')
+									.addClass("diverror");
+							$(this).siblings('.cssClassError').prevAll(
+									"input:first").addClass("error");
+							$(this).siblings('.cssClassError').html(errors);
+							return false;
+						} else {
+							$(this).parent("td").find("span.error").hide();
+							$(this).next('.cssClassRight').show();
+							$(this).siblings('.cssClassError').hide();
+							$(this).siblings(".cssClassError").parent('div')
+									.removeClass("diverror");
+							$(this).siblings('.cssClassError').prevAll(
+									"input:first").removeClass("error");
+						}
+					});
 
 			$(".delbutton").click(function() {
-				var proposal_id = $(this).prop("id").replace(/[^0-9]/gi, '');
-				proposalsManage.DeleteUserById(proposal_id);
+				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
+				var user_id = $(this).prop("id");
+				proposalsManage.DeleteUserById(user_id);
 			});
 
-			$("#btnSearchProposal").bind("click", function() {
-				proposalsManage.SearchUsers();
+			// $("td.required input, td select").focusout(function() {
+			// $tdParent = $(this).parent();
+			// if ($tdParent.find('.cssClassRequired')) {
+			// if ($(this).val() != '' && $(this).val() != '0') {
+			// $tdParent.find('.cssClassRequired').hide();
+			// } else {
+			// $tdParent.find('.cssClassRequired').show();
+			// }
+			// }
+			// });
+
+			$("input[type=button].AddOption")
+					.on(
+							"click",
+							function() {
+								if ($(this).prop("name") == "DeleteOption") {
+									var t = $(this).closest('tr');
+
+									t.find("td").wrapInner(
+											"<div style='DISPLAY: block'/>")
+											.parent().find("td div").slideUp(
+													300, function() {
+														t.remove();
+													});
+
+								} else if ($(this).prop("name") == "AddMore") {
+									var cloneRow = $(this).closest('tr').clone(
+											true);
+									$(cloneRow).find("input").each(
+											function(i) {
+												if ($(this).hasClass(
+														"AddOption")) {
+													$(this).prop("name",
+															"DeleteOption");
+													$(this).prop("value",
+															"Delete");
+												}
+												$(this).parent('td').find(
+														'span').removeClass(
+														'error');
+												$(this).removeClass('error');
+											});
+									$(cloneRow).find("select").find("option")
+											.each(function(j) {
+												$(this).removeAttr("selected");
+											});
+									$(cloneRow).appendTo("#dataTable").hide()
+											.fadeIn(1200);
+
+									rowIndex = $('#dataTable > tbody tr')
+											.size() - 1;
+									proposalsManage
+											.BindDepartmentDropDown(
+													$(
+															'select[name="ddlProposalStatus"] option:selected')
+															.eq(rowIndex).val(),
+													false);
+
+									// $('#dataTable tr:last
+									// td').fadeIn('slow');
+								}
+							});
+			$("#btnProposalUser").bind("click", function() {
+				proposalsManage.SearchProposals();
+				return false;
+			});
+
+			$("#btnSearchProposalAuditLog").bind("click", function() {
+				proposalsManage.SearchProposalAuditLogs();
 				return false;
 			});
 
 			$(
-					'#txtSearchProjectTitle,#txtSearchTotalCostsFrom, #txtSearchTotalCostsTo,#ddlSearchProposalStatus,#ddlSearchProposedBy,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlIsActive')
+					'#txtSearchUserName,#ddlSearchProposalStatus,#ddlSearchDepartment,#ddlSearchPositionType,#ddlSearchPositionTitle,#ddlSearchIsActive')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
-							$("#btnSearchProposal").click();
+							$("#btnProposalUser").click();
 						}
 					});
 		}
