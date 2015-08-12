@@ -56,7 +56,7 @@ $(function() {
 					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
 		},
 		onInit : function() {
-			proposalsManage.SetFirstTabActive();
+			// proposalsManage.SetFirstTabActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
@@ -91,8 +91,25 @@ $(function() {
 					height : 'show',
 					opacity : 'show'
 				} ]
+			}, {
+				show : {
+					effect : "slide",
+					direction : "left",
+					duration : 500
+				}
 			});
 			$tabs.tabs('option', 'active', 0);
+		},
+		EnableAccordion : function() {
+			$('div#st_vertical').slideTabs({
+				tabsScroll : false,
+				contentAnim : 'slideH',
+				contentAnimTime : 600,
+				contentEasing : 'easeInOutExpo',
+				orientation : 'vertical',
+				tabsAnimTime : 300
+			});
+
 		},
 		Boolean : function(str) {
 			switch (str) {
@@ -1216,7 +1233,7 @@ $(function() {
 
 			case 12: // Single Deleted
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null);
+						null, null);
 				csscody
 						.info("<h2>"
 								+ getLocale(gpmsProposalsManagement,
@@ -1232,7 +1249,7 @@ $(function() {
 
 			case 13: // Multiple Deleted
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null);
+						null, null);
 				csscody
 						.info("<h2>"
 								+ getLocale(gpmsProposalsManagement,
@@ -1261,7 +1278,7 @@ $(function() {
 
 			case 16: // Save Update
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null);
+						null, null);
 				$('#divProposalGrid').show();
 				if (editFlag > 0) {
 					csscody.info("<h2>"
@@ -1432,20 +1449,20 @@ $(function() {
 					null, null);
 			$('#divProposalForm').hide();
 			$('#divProposalGrid').show();
-			proposalsManage.BindCollegeDropDown();
+			// proposalsManage.BindCollegeDropDown();
 
-			// Form Position details Drop downs
-			$('select[name="ddlProposalStatus"]').on(
-					"change",
-					function() {
-						rowIndex = $(this).closest('tr').prevAll("tr").length;
-						if ($(this).val() != "0") {
-							proposalsManage.BindDepartmentDropDown($(this)
-									.val(), false);
-						} else {
-							$(this).find('option:gt(0)').remove();
-						}
-					});
+			// // Form Position details Drop downs
+			// $('select[name="ddlProposalStatus"]').on(
+			// "change",
+			// function() {
+			// rowIndex = $(this).closest('tr').prevAll("tr").length;
+			// if ($(this).val() != "0") {
+			// proposalsManage.BindDepartmentDropDown($(this)
+			// .val(), false);
+			// } else {
+			// $(this).find('option:gt(0)').remove();
+			// }
+			// });
 
 			$('#btnAddNew').bind("click", function() {
 				$('#auditLogTab').hide();
@@ -1473,6 +1490,10 @@ $(function() {
 					editFlag = 0;
 					proposalsManage.SaveProposal("0", true);
 				}
+			});
+
+			$("#saveForm").bind("click", function() {
+				proposalsManage.SubmitForm('form_8');
 			});
 
 			$('#txtUserName').blur(
