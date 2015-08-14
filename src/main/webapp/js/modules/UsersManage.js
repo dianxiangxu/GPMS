@@ -1339,6 +1339,7 @@ $(function() {
 				break;
 
 			case 13:
+				SageData.Get("gdvUsers").Arr.length = 0;
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody
 						.info("<h2>"
@@ -1640,6 +1641,7 @@ $(function() {
 								var user_ids = '';
 								user_ids = SageData.Get("gdvUsers").Arr
 										.join(',');
+
 								if (user_ids.length > 0) {
 									var properties = {
 										onComplete : function(e) {
