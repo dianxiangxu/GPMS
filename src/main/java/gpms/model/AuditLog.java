@@ -60,6 +60,10 @@ public class AuditLog implements Comparable<AuditLog> {
 	}
 
 	@Override
+	public AuditLog clone() {
+		return new AuditLog(this.userProfileId, this.action, this.activityDate);
+	}
+
 	public int compareTo(AuditLog o) {
 		if (getActivityDate() == null || o.getActivityDate() == null)
 			return 0;

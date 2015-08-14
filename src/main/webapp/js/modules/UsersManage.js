@@ -168,9 +168,8 @@ $(function() {
 			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
 				rmErrorClass(item);
-				$(this).val('');
 				$(this).prop('checked', false);
-				// $(this).find('option').removeAttr('selected');
+				$(this).val($(this).find('option').first().val());
 			});
 
 			usersManage.onInit();
@@ -196,9 +195,6 @@ $(function() {
 					function(i) {
 						$(this).removeAttr("selected");
 					});
-
-			$('select[name="ddlCollege"]').eq(0).val(
-					$('select[name="ddlCollege"] option:first').val());
 
 			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
 					.eq(0).val(), false);

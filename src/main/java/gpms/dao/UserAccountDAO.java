@@ -76,7 +76,7 @@ public class UserAccountDAO extends BasicDAO<UserAccount, String> {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserAccount.class).field("username")
 				.equal(userName).get();
-	}	
+	}
 
 	/**
 	 * Method to set account name

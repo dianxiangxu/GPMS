@@ -177,9 +177,8 @@ $(function() {
 			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
 				rmErrorClass(item);
-				$(this).val('');
 				$(this).prop('checked', false);
-				// $(this).find('option').removeAttr('selected');
+				$(this).val($(this).find('option').first().val());
 			});
 
 			proposalsManage.onInit();
@@ -205,6 +204,10 @@ $(function() {
 					function(i) {
 						$(this).removeAttr("selected");
 					});
+
+			// $('select[name="ddlCollege"]').eq(0).val(
+			// $('select[name="ddlCollege"] option:first').val());
+
 			proposalsManage.BindDepartmentDropDown($(
 					'select[name="ddlProposalStatus"]').eq(0).val(), false);
 
@@ -1461,7 +1464,7 @@ $(function() {
 				$('#auditLogTab').hide();
 				$('#divProposalGrid').hide();
 				$('#divProposalForm').show();
-				// proposalsManage.ClearForm();
+				proposalsManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {

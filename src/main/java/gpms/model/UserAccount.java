@@ -150,7 +150,7 @@ public class UserAccount extends BaseEntity {
 	}
 
 	@Override
-	public UserAccount clone() throws CloneNotSupportedException{
+	public UserAccount clone() throws CloneNotSupportedException {
 		UserAccount copy = new UserAccount(this.userName, this.password);
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
@@ -160,5 +160,4 @@ public class UserAccount extends BaseEntity {
 		}
 		return copy;
 	}
-
 }
