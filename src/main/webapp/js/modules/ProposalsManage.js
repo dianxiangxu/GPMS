@@ -215,25 +215,26 @@ $(function() {
 			return false;
 		},
 
-		BindProposalGrid : function(userName, college, department,
-				positionType, positionTitle, isActive) {
+		BindProposalGrid : function(projectTitle, proposedBy, totalCostsFrom,
+				totalCostsTo, receivedOnFrom, receivedOnTo, proposalStatus) {
 			this.config.url = this.config.baseURL;
-			this.config.method = "GetUsersList";
+			this.config.method = "GetProposalsList";
 			var offset_ = 1;
 			var current_ = 1;
 			var perpage = ($("#gdvProposals_pagesize").length > 0) ? $(
 					"#gdvProposals_pagesize :selected").text() : 10;
 
-			var userBindObj = {
-				UserName : userName,
-				College : college,
-				Department : department,
-				PositionType : positionType,
-				PositionTitle : positionTitle,
-				IsActive : isActive
+			var proposalBindObj = {
+				ProjectTitle : projectTitle,
+				ProposedBy : proposedBy,
+				TotalCostsFrom : totalCostsFrom,
+				TotalCostsTo : totalCostsTo,
+				ReceivedOnFrom : receivedOnFrom,
+				ReceivedOnTo : receivedOnTo,
+				ProposalStatus : proposalStatus
 			};
 			this.config.data = {
-				userBindObj : userBindObj
+				proposalBindObj : proposalBindObj
 			};
 			var data = this.config.data;
 
@@ -1097,6 +1098,14 @@ $(function() {
 			return false;
 		},
 
+		BindProposalStatus : function() {
+			this.config.url = this.config.baseURL + "GetProposalStatusList";
+			this.config.data = "{}";
+			this.config.ajaxCallMode = 1;
+			this.ajaxCall(this.config);
+			return false;
+		},
+
 		BindCollegeDropDown : function() {
 			this.config.url = this.config.baseURL + "GetCollegeList";
 			this.config.data = "{}";
@@ -1163,26 +1172,14 @@ $(function() {
 				break;
 			case 1: // For Proposal Status Dropdown Binding for both form and
 				// search
-				$('#ddlSearchProposalStatus').get(rowIndex).options.length = 1;
+				$('#ddlSearchProposalStatus option').length = 1;
+				$('#ddlProposalStatus option').length = 1;
 
-				$('select[name="ddlProposalStatus"]').get(rowIndex).options.length = 0;
-
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchProposalStatus").get(rowIndex).options[$(
-											"#ddlSearchProposalStatus").get(
-											rowIndex).options.length] = new Option(
-											item, item);
-
-									// For form Dropdown Binding
-									$('select[name="ddlProposalStatus"]').get(
-											rowIndex).options[$(
-											'select[name="ddlProposalStatus"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
-								});
+				$.each(msg, function(index, item) {
+					$('#ddlSearchProposalStatus')
+							.append(new Option(item, item));
+					$('#ddlProposalStatus').append(new Option(item, item));
+				});
 				break;
 
 			case 2:
@@ -1445,6 +1442,8 @@ $(function() {
 					null, null);
 			$('#divProposalForm').hide();
 			$('#divProposalGrid').show();
+
+			proposalsManage.BindProposalStatus();
 			// proposalsManage.BindCollegeDropDown();
 
 			// // Form Position details Drop downs

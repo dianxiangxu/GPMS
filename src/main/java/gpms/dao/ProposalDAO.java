@@ -4,15 +4,20 @@ package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
 import gpms.model.AuditLog;
+import gpms.model.AuditLogInfo;
 import gpms.model.InvestigatorInfo;
 import gpms.model.ProjectInfo;
 import gpms.model.Proposal;
 import gpms.model.ProposalInfo;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
+import gpms.model.UserAccount;
+import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +25,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -203,5 +209,151 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		Datastore ds = getDatastore();
 		return null; // Please make sure it bind every details/ fields on
 						// ProposalInfo Object otherwise Grid can't be binded
+	}
+
+	public List<ProposalInfo> findAllForProposalGrid(int offset, int limit,
+			String projectTitle, String proposedBy, Double totalCostsFrom,
+			Double totalCostsTo, String receivedOnFrom, String receivedOnTo,
+			Boolean proposalStatus) throws UnknownHostException {
+		Datastore ds = getDatastore();
+		ArrayList<ProposalInfo> proposals = new ArrayList<ProposalInfo>();
+
+		Query<Proposal> proposalQuery = ds.createQuery(Proposal.class);
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
+
+		if (projectTitle != null) {
+			proposalQuery.field("project info.project title")
+					.containsIgnoreCase(projectTitle);
+		}
+
+		// if (auditedBy != null) {
+		// if (userProfileAudit.getUserProfileId().getUserAccount()
+		// .getUserName().toLowerCase()
+		// .contains(auditedBy.toLowerCase())) {
+		// isAuditedByMatch = true;
+		// } else if (userProfileAudit.getUserProfileId()
+		// .getFirstName().toLowerCase()
+		// .contains(auditedBy.toLowerCase())) {
+		// isAuditedByMatch = true;
+		// } else if (userProfileAudit.getUserProfileId()
+		// .getMiddleName().toLowerCase()
+		// .contains(auditedBy.toLowerCase())) {
+		// isAuditedByMatch = true;
+		// } else if (userProfileAudit.getUserProfileId()
+		// .getLastName().toLowerCase()
+		// .contains(auditedBy.toLowerCase())) {
+		// isAuditedByMatch = true;
+		// }
+		// } else {
+		// isAuditedByMatch = true;
+		// }
+
+		if (totalCostsFrom != null) {
+			proposalQuery.field("sponsor and budget info.total costs")
+					.greaterThanOrEq(totalCostsFrom);
+		}
+		if (totalCostsTo != null) {
+			proposalQuery.field("sponsor and budget info.total costs")
+					.lessThanOrEq(totalCostsTo);
+		}
+		if (receivedOnFrom != null) {
+			proposalQuery.field("details.position type").equal(receivedOnFrom);
+		}
+		if (receivedOnTo != null) {
+			proposalQuery.field("details.position title").equal(receivedOnTo);
+		}
+		if (proposalStatus != null) {
+			proposalQuery.field("proposal status").equal(proposalStatus);
+		}
+
+		// profileQuery.and(profileQuery.criteria("_id").notEqual(id)
+		List<UserProfile> userProfiles = profileQuery.offset(offset - 1)
+				.limit(limit).asList();
+
+		int rowTotal = profileQuery.asList().size();
+		for (UserProfile userProfile : userProfiles) {
+			UserInfo user = new UserInfo();
+			user.setRowTotal(rowTotal);
+			user.setId(userProfile.getId().toString());
+			user.setUserName(userProfile.getUserAccount().getUserName());
+			user.setFullName(userProfile.getFirstName() + " "
+					+ userProfile.getMiddleName() + " "
+					+ userProfile.getLastName());
+
+			user.setNoOfPIedProposal(countPIProposal(userProfile));
+			user.setNoOfCoPIedProposal(countCoPIProposal(userProfile));
+			user.setNoOfSenioredProposal(countSeniorPersonnel(userProfile));
+
+			user.setAddedOn(userProfile.getUserAccount().getAddedOn());
+
+			ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
+
+			if (userProfile.getAuditLog() != null
+					&& userProfile.getAuditLog().size() != 0) {
+				if (userProfile.getUserAccount().getAuditLog() != null
+						&& userProfile.getUserAccount().getAuditLog().size() != 0) {
+					for (AuditLog userAccountAudit : userProfile
+							.getUserAccount().getAuditLog()) {
+						AuditLogInfo userAuditLog = new AuditLogInfo();
+
+						userAuditLog.setActivityDate(userAccountAudit
+								.getActivityDate());
+						userAuditLog.setUserFullName(userAccountAudit
+								.getUserProfileId().getFirstName()
+								+ " "
+								+ userAccountAudit.getUserProfileId()
+										.getMiddleName()
+								+ " "
+								+ userAccountAudit.getUserProfileId()
+										.getLastName());
+						userAuditLog.setAction(userAccountAudit.getAction());
+
+						allAuditLogs.add(userAuditLog);
+					}
+
+				}
+
+				for (AuditLog userProfileAudit : userProfile.getAuditLog()) {
+					AuditLogInfo userAuditLog = new AuditLogInfo();
+					userAuditLog.setActivityDate(userProfileAudit
+							.getActivityDate());
+					userAuditLog
+							.setUserFullName(userProfileAudit
+									.getUserProfileId().getFirstName()
+									+ " "
+									+ userProfileAudit.getUserProfileId()
+											.getMiddleName()
+									+ " "
+									+ userProfileAudit.getUserProfileId()
+											.getLastName());
+					userAuditLog.setAction(userProfileAudit.getAction());
+
+					allAuditLogs.add(userAuditLog);
+				}
+
+			}
+
+			Collections.sort(allAuditLogs);
+
+			Date lastAudited = null;
+			String lastAuditedBy = new String();
+			String lastAuditAction = new String();
+			if (allAuditLogs.size() > 0) {
+				AuditLogInfo auditLog = allAuditLogs.get(0);
+				lastAudited = auditLog.getActivityDate();
+				lastAuditedBy = auditLog.getUserFullName();
+				lastAuditAction = auditLog.getAction();
+			}
+
+			user.setLastAudited(lastAudited);
+			user.setLastAuditedBy(lastAuditedBy);
+			user.setLastAuditAction(lastAuditAction);
+
+			user.setDeleted(userProfile.getUserAccount().isDeleted());
+			user.setActive(userProfile.getUserAccount().isActive());
+			users.add(user);
+		}
+		return users;
 	}
 }

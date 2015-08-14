@@ -74,7 +74,6 @@ public class UserService {
 
 	@GET
 	@Path("/search/{query}")
-	@Produces({ MediaType.APPLICATION_JSON })
 	public String findByFirstName(@PathParam("query") String query)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
@@ -89,7 +88,6 @@ public class UserService {
 
 	@GET
 	@Path("/{firstname}")
-	@Produces({ MediaType.APPLICATION_JSON })
 	public String findUserDeatilsByFirstName(
 			@PathParam("firstname") String query)
 			throws JsonGenerationException, JsonMappingException, IOException {
