@@ -56,7 +56,7 @@ $(function() {
 					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
 		},
 		onInit : function() {
-			// proposalsManage.SetFirstTabActive();
+			proposalsManage.SetFirstTabActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
@@ -86,19 +86,12 @@ $(function() {
 			$("#gdvProposalsAuditLog_Pagination").remove();
 		},
 		SetFirstTabActive : function() {
-			var $tabs = $('#container-7').tabs({
-				fx : [ null, {
-					height : 'show',
-					opacity : 'show'
-				} ]
-			}, {
-				show : {
-					effect : "slide",
-					direction : "left",
-					duration : 500
-				}
-			});
+			var $tabs = $("#container-7").tabs();
 			$tabs.tabs('option', 'active', 0);
+
+			$("#container-7").addClass("ui-tabs-vertical ui-helper-clearfix");
+			$("#container-7 li").removeClass("ui-corner-top").addClass(
+					"ui-corner-left");
 		},
 		EnableAccordion : function() {
 			$('div#st_vertical').slideTabs({
@@ -1468,7 +1461,7 @@ $(function() {
 				$('#auditLogTab').hide();
 				$('#divProposalGrid').hide();
 				$('#divProposalForm').show();
-				proposalsManage.ClearForm();
+				// proposalsManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {

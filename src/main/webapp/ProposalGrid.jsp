@@ -32,7 +32,7 @@
     <![endif]-->
 <title>Proposal Management</title>
 
-<script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="js/jQuery/jquery-1.11.3.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
@@ -127,6 +127,45 @@
 
 <!-- <link type="text/css" rel="stylesheet" -->
 <!-- 	href="css/Tabs/slidingtabs-vertical.css" /> -->
+<style>
+.ui-tabs-vertical .ui-tabs-nav {
+	padding: .2em .1em .2em .2em;
+	float: left;
+	width: 17em;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li {
+	clear: left;
+	width: 100%;
+	border-bottom-width: 1px !important;
+	border-right-width: 0 !important;
+	margin: 0 -1px .2em 0;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li a {
+	display: block;
+	float: none;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+	padding-bottom: 0;
+	padding-right: .1em;
+	border-right-width: 1px;
+}
+
+.ui-tabs-vertical .ui-tabs-panel {
+	padding: 1em;
+}
+
+.ui-state-default a {
+	border-bottom: 1px solid #ccc;
+}
+
+#fragment-13 > div {
+    float: left;
+    padding: 1em;
+}
+</style>
 </head>
 <body>
 	<form enctype="multipart/form-data" action="Manage-Proposals.jsp"
@@ -383,31 +422,6 @@
 																		</select> <span class="cssClassRequired">*</span></td>
 																	</tr>
 																	<tr>
-																		<td><span class="cssClassLabel"
-																			id="lblProjectType">Project Type:</span></td>
-																		<td class="cssClassTableRightCol required"><select
-																			id="ddlProjectType" name="projectType"
-																			title="Project Type">
-																				<option value="0">Choose Project Type</option>
-																				<option value="1">Research-Basic</option>
-																				<option value="2">Research-Applied</option>
-																				<option value="3">Research-Development</option>
-																				<option value="4">Instruction</option>
-																				<option value="5">Other Sponsored Activity</option>
-																		</select> <span class="cssClassRequired">*</span></td>
-																		<td><span class="cssClassLabel"
-																			id="lblTypeOfRequest">Type of Request:</span></td>
-																		<td class="cssClassTableRightCol"><select
-																			id="ddlTypeOfRequest" name="typeOfRequest"
-																			title="Type of Request">
-																				<option value="0">Choose Type of Request</option>
-																				<option value="1">Pre-Proposal</option>
-																				<option value="2">New Proposal</option>
-																				<option value="3">Continuation</option>
-																				<option value="4">Supplement</option>
-																		</select> <span class="cssClassRequired">*</span></td>
-																	</tr>
-																	<tr>
 																		<td><span id="lblDueDate" class="cssClassLabel">Due
 																				Date:</span></td>
 																		<td class="cssClassTableRightCol required"><input
@@ -462,16 +476,12 @@
 																	</tr>
 
 																	<tr>
-																		<td><span id="lblProposalStatus"
-																			class="cssClassLabel">Proposal Status:</span></td>
-																		<td colspan="2"><label
-																			class="cssClassLabel sfLocale"> Proposal
-																				Status:</label> <select id="ddlProposalStatus"
-																			class="sfListmenu" style="width: 100px;"
-																			title="Proposal Status">
-																				<option value="0" class="sfLocale">Choose
+																		<td><span class="cssClassLabel" id="lblProposalStatus">Proposal
+																				Status:</span></td>
+																		<td class="cssClassTableRightCol required"><select title="Proposal Status" name="proposalStatus" id="ddlProposalStatus">
+																				<option value="0">Choose
 																					Proposal Status</option>
-																		</select></td>
+																		</select> <span class="cssClassRequired">*</span></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -951,14 +961,16 @@
 																		<td></td>
 																	</tr>
 																	<tr id="typeOfProprietaryInfo">
-																		<td><span class="cssClassLabel">Patentable:</span></td>
 																		<td class="cssClassTableRightCol"><input
-																			type="checkbox" name="chkPatentable"
+																			type="checkbox" name="patentable" id="chkPatentable"
 																			class="cssClassCheckBox" /></td>
-																		<td><span class="cssClassLabel">Copyrightable:</span></td>
+																		<td><label class="cssClassLabel"
+																			for="chkPatentable">Patentable</label></td>
 																		<td class="cssClassTableRightCol"><input
-																			type="checkbox" name="chkCopyrightable"
-																			class="cssClassCheckBox" /></td>
+																			type="checkbox" name="copyrightable"
+																			id="chkCopyrightable" class="cssClassCheckBox" /></td>
+																		<td><label class="cssClassLabel"
+																			for="chkCopyrightable">Copyrightable</label></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Will this
@@ -1085,38 +1097,58 @@
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
-																					name="federal" value="Federal"><label>Federal</label><input
+																					id="chkFederal" name="federal" value="Federal"><label
+																					class="cssClassLabel" for="chkFederal">Federal</label><input
 																					type="checkbox" class="cssClassCheckBox"
+																					id="chkFederalFlowThrough"
 																					name="federalFlowThrough"
-																					value="Federal Flow-Through"><label>Federal
+																					value="Federal Flow-Through"><label
+																					class="cssClassLabel" for="chkFederalFlowThrough">Federal
 																					Flow-Through</label><input type="checkbox"
-																					class="cssClassCheckBox" name="stateOfIdahoEntity"
-																					value="State of Idaho Entity"><label>State
+																					class="cssClassCheckBox" id="chkStateOfIdahoEntity"
+																					name="stateOfIdahoEntity"
+																					value="State of Idaho Entity"><label
+																					class="cssClassLabel" for="chkStateOfIdahoEntity">State
 																					of Idaho Entity</label> <input type="checkbox"
-																					class="cssClassCheckBox" name="privateForProfit"
-																					value="Private For Profit"><label>Private
+																					class="cssClassCheckBox" id="chkPrivateForProfit"
+																					name="privateForProfit" value="Private For Profit"><label
+																					class="cssClassLabel" for="chkPrivateForProfit">Private
 																					For Profit</label><input type="checkbox"
 																					class="cssClassCheckBox"
+																					id="chkNonProfitOrganization"
 																					name="nonProfitOrganization"
-																					value="Non-Profit Organization"><label>Non-Profit
+																					value="Non-Profit Organization"><label
+																					class="cssClassLabel"
+																					for="chkNonProfitOrganization">Non-Profit
 																					Organization</label><input type="checkbox"
-																					class="cssClassCheckBox" name="nonIdahoStateEntity"
-																					value="Non-Idaho State Entity"><label>Non-Idaho
+																					class="cssClassCheckBox"
+																					id="chkNonIdahoStateEntity"
+																					name="nonIdahoStateEntity"
+																					value="Non-Idaho State Entity"><label
+																					class="cssClassLabel" for="chkNonIdahoStateEntity">Non-Idaho
 																					State Entity</label> <input type="checkbox"
-																					class="cssClassCheckBox" name="collegeUniversity"
-																					value="College/University"><label>College/University</label><input
+																					class="cssClassCheckBox" id="chkCollegeUniversity"
+																					name="collegeUniversity" value="College/University"><label
+																					class="cssClassLabel" for="chkCollegeUniversity">College/University</label><input
 																					type="checkbox" class="cssClassCheckBox"
-																					name="localEntity" value="Local Entity"><label>Local
+																					id="chkLocalEntity" name="localEntity"
+																					value="Local Entity"><label
+																					class="cssClassLabel" for="chkLocalEntity">Local
 																					Entity</label><input type="checkbox"
-																					class="cssClassCheckBox" name="nonIdahoLocalEntity"
-																					value="Non-Idaho Local Entity"><label>Non-Idaho
+																					class="cssClassCheckBox"
+																					id="chkNonIdahoLocalEntity"
+																					name="nonIdahoLocalEntity"
+																					value="Non-Idaho Local Entity"><label
+																					class="cssClassLabel" for="chkNonIdahoLocalEntity">Non-Idaho
 																					Local Entity</label> <input type="checkbox"
-																					class="cssClassCheckBox" name="tribalGovernment"
-																					value="Tribal Government"><label>Tribal
+																					class="cssClassCheckBox" id="chkTribalGovernment"
+																					name="tribalGovernment" value="Tribal Government"><label
+																					class="cssClassLabel" for="chkTribalGovernment">Tribal
 																					Government</label><input type="checkbox"
-																					class="cssClassCheckBox" name="foreign"
-																					value="Foreign"><label>Foreign</label> <span
-																					class="iferror"></span>
+																					class="cssClassCheckBox" id="chkForeign"
+																					name="foreign" value="Foreign"><label
+																					class="cssClassLabel" for="chkForeign">Foreign</label>
+																				<span class="iferror"></span>
 																			</div></td>
 																	</tr>
 
@@ -1147,22 +1179,35 @@
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
-																					name="fullRecovery" value="Full Recovery"><label>Full
+																					id="chkFullRecovery" name="fullRecovery"
+																					value="Full Recovery"><label
+																					class="cssClassLabel" for="chkFullRecovery">Full
 																					Recovery</label><input type="checkbox"
-																					class="cssClassCheckBox" name="noRecoveryNormal"
-																					value="No Recovery-Normal Sponsor Policy"><label>No
+																					class="cssClassCheckBox" id="chkNoRecoveryNormal"
+																					name="noRecoveryNormal"
+																					value="No Recovery-Normal Sponsor Policy"><label
+																					class="cssClassLabel" for="chkNoRecoveryNormal">No
 																					Recovery-Normal Sponsor Policy</label><input
 																					type="checkbox" class="cssClassCheckBox"
+																					id="chkNoRecoveryInstitutional"
 																					name="noRecoveryInstitutional"
-																					value="No Recovery-Institutional Waiver"><label>No
+																					value="No Recovery-Institutional Waiver"><label
+																					class="cssClassLabel"
+																					for="chkNoRecoveryInstitutional">No
 																					Recovery-Institutional Waiver</label> <input
 																					type="checkbox" class="cssClassCheckBox"
+																					id="chkLimitedRecoveryNormal"
 																					name="limitedRecoveryNormal"
-																					value="Limited Recovery-Normal Sponsor Policy"><label>Limited
+																					value="Limited Recovery-Normal Sponsor Policy"><label
+																					class="cssClassLabel"
+																					for="chkLimitedRecoveryNormal">Limited
 																					Recovery-Normal Sponsor Policy</label><input
 																					type="checkbox" class="cssClassCheckBox"
+																					id="chkLimitedRecoveryInstitutional"
 																					name="limitedRecoveryInstitutional"
-																					value="Limited Recovery-Institutional Waiver"><label>Limited
+																					value="Limited Recovery-Institutional Waiver"><label
+																					class="cssClassLabel"
+																					for="chkLimitedRecoveryInstitutional">Limited
 																					Recovery-Institutional Waiver</label> <span class="iferror"></span>
 																			</div></td>
 																	</tr>
@@ -1172,15 +1217,20 @@
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
-																					name="MTDC" value="MTDC"><label>MTDC</label><input
-																					type="checkbox" class="cssClassCheckBox" name="TDC"
-																					value="TDC"><label>TDC</label><input
-																					type="checkbox" class="cssClassCheckBox" name="TC"
-																					value="TC"><label>TC</label> <input
+																					id="chkMTDC" name="MTDC" value="MTDC"><label
+																					class="cssClassLabel" for="chkMTDC">MTDC</label><input
 																					type="checkbox" class="cssClassCheckBox"
-																					name="other" value="Other"><label>Other</label><input
-																					type="checkbox" class="cssClassCheckBox" name="nA"
-																					value="N/A"><label>N/A</label> <span
+																					id="chkTDC" name="TDC" value="TDC"><label
+																					class="cssClassLabel" for="chkTDC">TDC</label><input
+																					type="checkbox" class="cssClassCheckBox" id="chkTC"
+																					name="TC" value="TC"><label
+																					class="cssClassLabel" for="chkTC">TC</label> <input
+																					type="checkbox" class="cssClassCheckBox"
+																					id="chkOther" name="other" value="Other"><label
+																					class="cssClassLabel" for="chkOther">Other</label><input
+																					type="checkbox" class="cssClassCheckBox" id="chkNA"
+																					name="nA" value="N/A"><label
+																					class="cssClassLabel" for="chkNA">N/A</label> <span
 																					class="iferror"></span>
 																			</div></td>
 																	</tr>
@@ -1336,11 +1386,14 @@
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
-																					name="DF" value="DF"><label>DF</label><input
-																					type="checkbox" class="cssClassCheckBox" name="LG"
-																					value="LG"><label>LG</label><input
-																					type="checkbox" class="cssClassCheckBox" name="LN"
-																					value="LN"><label>LN</label> <span
+																					id="chkDF" name="DF" value="DF"><label
+																					class="cssClassLabel" for="chkDF">DF</label><input
+																					type="checkbox" class="cssClassCheckBox" id="chkLG"
+																					name="LG" value="LG"><label
+																					class="cssClassLabel" for="chkLG">LG</label><input
+																					type="checkbox" class="cssClassCheckBox" id="chkLN"
+																					name="LN" value="LN"><label
+																					class="cssClassLabel" for="chkLN">LN</label> <span
 																					class="iferror"></span>
 																			</div></td>
 																	</tr>
@@ -1357,7 +1410,7 @@
 													</div>
 
 													<div id="fragment-13">
-														<div id="divProposalGrid">
+														<div id="divProposalAuditGrid">
 															<div class="cssClassCommonBox Curve">
 																<div class="sfGridwrapper">
 																	<div class="sfGridWrapperContent">
@@ -1402,8 +1455,7 @@
 																	</div>
 																</div>
 															</div>
-														</div>
-														<table id="tblLastAuditedInfo" cellspacing="0"
+															<table id="tblLastAuditedInfo" cellspacing="0"
 															cellpadding="0" border="0">
 															<tbody>
 																<tr>
@@ -1426,6 +1478,7 @@
 																</tr>
 															</tbody>
 														</table>
+														</div>														
 													</div>
 												</div>
 											</div>

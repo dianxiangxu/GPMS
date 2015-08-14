@@ -196,6 +196,10 @@ $(function() {
 					function(i) {
 						$(this).removeAttr("selected");
 					});
+
+			$('select[name="ddlCollege"]').eq(0).val(
+					$('select[name="ddlCollege"] option:first').val());
+
 			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
 					.eq(0).val(), false);
 

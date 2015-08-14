@@ -32,7 +32,7 @@
     <![endif]-->
 <title>User Management</title>
 
-<script src="js/jQuery/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="js/jQuery/jquery-1.11.3.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	var _aspx_token = "NWExODgyNDctMzA2OS00MWNhLWJjOWEtNGEyODI5N2FiZWJjOlNhZ2VGcmFtZS5BVVRIanhyMzB3eWNqenZwcWQwanYzdmt5Yng0WkFESlg5U0xPQzE6MjAxNTA2MzAxNTA2NTg5NDM5";
@@ -621,7 +621,7 @@
 														</div>
 													</div>
 													<div id="fragment-4">
-														<div id="divUserGrid">
+														<div id="divUserAuditGrid">
 															<div class="cssClassCommonBox Curve">
 																<div class="sfGridwrapper">
 																	<div class="sfGridWrapperContent">
@@ -666,30 +666,30 @@
 																	</div>
 																</div>
 															</div>
+															<table id="tblLastAuditedInfo" cellspacing="0"
+																cellpadding="0" border="0">
+																<tbody>
+																	<tr>
+																		<td><span class="cssClassLabelTitle">Last
+																				Audited On:&nbsp;</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblLastUpdatedOn" class="cssClassLabel"></span></td>
+																	</tr>
+																	<tr>
+																		<td><span class="cssClassLabelTitle">Last
+																				Audited By:&nbsp;</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblLastUpdatedBy" class="cssClassLabel"></span></td>
+																	</tr>
+																	<tr>
+																		<td><span class="cssClassLabelTitle">Last
+																				Activity:&nbsp;</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblActivity" class="cssClassLabel"></span></td>
+																	</tr>
+																</tbody>
+															</table>
 														</div>
-														<table id="tblLastAuditedInfo" cellspacing="0"
-															cellpadding="0" border="0">
-															<tbody>
-																<tr>
-																	<td><span class="cssClassLabelTitle">Last
-																			Audited On:&nbsp;</span></td>
-																	<td class="cssClassTableRightCol"><span
-																		id="lblLastUpdatedOn" class="cssClassLabel"></span></td>
-																</tr>
-																<tr>
-																	<td><span class="cssClassLabelTitle">Last
-																			Audited By:&nbsp;</span></td>
-																	<td class="cssClassTableRightCol"><span
-																		id="lblLastUpdatedBy" class="cssClassLabel"></span></td>
-																</tr>
-																<tr>
-																	<td><span class="cssClassLabelTitle">Last
-																			Activity:&nbsp;</span></td>
-																	<td class="cssClassTableRightCol"><span
-																		id="lblActivity" class="cssClassLabel"></span></td>
-																</tr>
-															</tbody>
-														</table>
 													</div>
 												</div>
 											</div>
