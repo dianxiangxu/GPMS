@@ -227,27 +227,13 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.containsIgnoreCase(projectTitle);
 		}
 
-		// if (auditedBy != null) {
-		// if (userProfileAudit.getUserProfileId().getUserAccount()
-		// .getUserName().toLowerCase()
-		// .contains(auditedBy.toLowerCase())) {
-		// isAuditedByMatch = true;
-		// } else if (userProfileAudit.getUserProfileId()
-		// .getFirstName().toLowerCase()
-		// .contains(auditedBy.toLowerCase())) {
-		// isAuditedByMatch = true;
-		// } else if (userProfileAudit.getUserProfileId()
-		// .getMiddleName().toLowerCase()
-		// .contains(auditedBy.toLowerCase())) {
-		// isAuditedByMatch = true;
-		// } else if (userProfileAudit.getUserProfileId()
-		// .getLastName().toLowerCase()
-		// .contains(auditedBy.toLowerCase())) {
-		// isAuditedByMatch = true;
-		// }
-		// } else {
-		// isAuditedByMatch = true;
-		// }
+		// investigator info.PI.user profile
+		if (proposedBy != null) {
+			accountQuery.field("username").containsIgnoreCase(proposedBy);
+			profileQuery.criteria("user id").in(accountQuery.asKeyList());
+			proposalQuery.criteria("investigator info.PI.user profile").in(
+					profileQuery.asKeyList());
+		}
 
 		if (totalCostsFrom != null) {
 			proposalQuery.field("sponsor and budget info.total costs")
@@ -258,28 +244,28 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.lessThanOrEq(totalCostsTo);
 		}
 		if (receivedOnFrom != null) {
-			proposalQuery.field("details.position type").equal(receivedOnFrom);
+			proposalQuery.field("date received")
+					.greaterThanOrEq(receivedOnFrom);
 		}
 		if (receivedOnTo != null) {
-			proposalQuery.field("details.position title").equal(receivedOnTo);
+			proposalQuery.field("date received").lessThanOrEq(receivedOnTo);
 		}
 		if (proposalStatus != null) {
 			proposalQuery.field("proposal status").equal(proposalStatus);
 		}
 
 		// profileQuery.and(profileQuery.criteria("_id").notEqual(id)
-		List<UserProfile> userProfiles = profileQuery.offset(offset - 1)
+		List<Proposal> allProposals = proposalQuery.offset(offset - 1)
 				.limit(limit).asList();
 
-		int rowTotal = profileQuery.asList().size();
-		for (UserProfile userProfile : userProfiles) {
-			UserInfo user = new UserInfo();
-			user.setRowTotal(rowTotal);
-			user.setId(userProfile.getId().toString());
-			user.setUserName(userProfile.getUserAccount().getUserName());
-			user.setFullName(userProfile.getFirstName() + " "
-					+ userProfile.getMiddleName() + " "
-					+ userProfile.getLastName());
+		int rowTotal = proposalQuery.asList().size();
+		for (Proposal userProposal : allProposals) {
+			ProposalInfo proposal = new ProposalInfo();
+			proposal.setRowTotal(rowTotal);
+			proposal.setId(proposal.getId().toString());
+			proposal.setUserName(proposal.getUserAccount().getUserName());
+			proposal.setFullName(proposal.getFirstName() + " "
+					+ proposal.getMiddleName() + " " + proposal.getLastName());
 
 			user.setNoOfPIedProposal(countPIProposal(userProfile));
 			user.setNoOfCoPIedProposal(countCoPIProposal(userProfile));
