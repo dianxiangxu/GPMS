@@ -2,6 +2,7 @@ package gpms.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ProposalInfo {
 
@@ -14,21 +15,21 @@ public class ProposalInfo {
 	private Status proposalStatus = Status.NEW;
 
 	// PI, CO-PI and Senior UserProfiles
-	private UserProfile PIUser = new UserProfile();
-	private ArrayList<UserProfile> COPIUsers = new ArrayList<UserProfile>();
-	private ArrayList<UserProfile> seniorPersonnelUsers = new ArrayList<UserProfile>();
+	private String PIUser = new String();
+	private List<String> COPIUsers = new ArrayList<String>();
+	private List<String> seniorPersonnelUsers = new ArrayList<String>();
 
 	// ProjectInfo
 	private String projectTitle = new String();
 	private String projectType = new String();
-	private String typeOfRequest = new String();
+	private List<String> typeOfRequest = new ArrayList<String>();
 	private Date dueDate = new Date();
 	private Date projectPeriodFrom = new Date();
 	private Date projectPeriodTo = new Date();
 	private String projectLocation = new String();
 
 	// SponsorAndBudgetInfo
-	private String grantingAgencies = new String();
+	private List<String> grantingAgencies = new ArrayList<String>();
 	private double directCosts;
 	private double FACosts;
 	private double totalCosts;
@@ -82,28 +83,27 @@ public class ProposalInfo {
 		this.proposalStatus = proposalStatus;
 	}
 
-	public UserProfile getPIUser() {
+	public String getPIUser() {
 		return PIUser;
 	}
 
-	public void setPIUser(UserProfile pIUser) {
+	public void setPIUser(String pIUser) {
 		PIUser = pIUser;
 	}
 
-	public ArrayList<UserProfile> getCOPIUsers() {
+	public List<String> getCOPIUsers() {
 		return COPIUsers;
 	}
 
-	public void setCOPIUsers(ArrayList<UserProfile> cOPIUsers) {
+	public void setCOPIUsers(List<String> cOPIUsers) {
 		COPIUsers = cOPIUsers;
 	}
 
-	public ArrayList<UserProfile> getSeniorPersonnelUsers() {
+	public List<String> getSeniorPersonnelUsers() {
 		return seniorPersonnelUsers;
 	}
 
-	public void setSeniorPersonnelUsers(
-			ArrayList<UserProfile> seniorPersonnelUsers) {
+	public void setSeniorPersonnelUsers(List<String> seniorPersonnelUsers) {
 		this.seniorPersonnelUsers = seniorPersonnelUsers;
 	}
 
@@ -123,11 +123,11 @@ public class ProposalInfo {
 		this.projectType = projectType;
 	}
 
-	public String getTypeOfRequest() {
+	public List<String> getTypeOfRequest() {
 		return typeOfRequest;
 	}
 
-	public void setTypeOfRequest(String typeOfRequest) {
+	public void setTypeOfRequest(List<String> typeOfRequest) {
 		this.typeOfRequest = typeOfRequest;
 	}
 
@@ -163,11 +163,11 @@ public class ProposalInfo {
 		this.projectLocation = projectLocation;
 	}
 
-	public String getGrantingAgencies() {
+	public List<String> getGrantingAgencies() {
 		return grantingAgencies;
 	}
 
-	public void setGrantingAgencies(String grantingAgencies) {
+	public void setGrantingAgencies(List<String> grantingAgencies) {
 		this.grantingAgencies = grantingAgencies;
 	}
 

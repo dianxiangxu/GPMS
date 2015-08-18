@@ -1000,9 +1000,9 @@ var fromServer = 0;
 				$(t).append(tbody);
 			},
 			formatContent : function(content, type, formats) {
-				// var returnvalue;
+				var returnvalue = '';
 				switch (type) {
-				case 'date':
+				case "date":
 					// content = String(content);
 					// var isDate = content;
 					// var isDate = /Date\(([-+]?\d+[-+]?\d+)\)/.exec(content);
@@ -1024,6 +1024,10 @@ var fromServer = 0;
 				case "boolean":
 					var txt = formats.split('/');
 					returnvalue = content == true ? txt[0] : txt[1];
+					break;
+
+				case "array":
+					returnvalue = content.join(",");
 					break;
 				}
 				return returnvalue;

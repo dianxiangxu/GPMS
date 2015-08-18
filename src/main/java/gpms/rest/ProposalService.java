@@ -11,6 +11,7 @@ import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,7 +68,8 @@ public class ProposalService {
 	@POST
 	@Path("/GetProposalsList")
 	public List<ProposalInfo> produceProposalsJSON(String message)
-			throws JsonGenerationException, JsonMappingException, IOException {
+			throws JsonGenerationException, JsonMappingException, IOException,
+			ParseException {
 		List<ProposalInfo> proposals = new ArrayList<ProposalInfo>();
 
 		int offset = 0, limit = 0;
@@ -77,7 +79,7 @@ public class ProposalService {
 		Double totalCostsTo = 0.0;
 		String receivedOnFrom = new String();
 		String receivedOnTo = new String();
-		Boolean proposalStatus = null;
+		String proposalStatus = new String();
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(message);
@@ -100,11 +102,17 @@ public class ProposalService {
 		}
 
 		if (proposalObj != null && proposalObj.has("TotalCostsFrom")) {
-			totalCostsFrom = proposalObj.get("TotalCostsFrom").getDoubleValue();
+			if (proposalObj.get("TotalCostsFrom").getTextValue() != null) {
+				totalCostsFrom = Double.valueOf(proposalObj.get(
+						"TotalCostsFrom").getTextValue());
+			}
 		}
 
 		if (proposalObj != null && proposalObj.has("TotalCostsTo")) {
-			totalCostsTo = proposalObj.get("TotalCostsTo").getDoubleValue();
+			if (proposalObj.get("TotalCostsTo").getTextValue() != null) {
+				totalCostsTo = Double.valueOf(proposalObj.get("TotalCostsTo")
+						.getTextValue());
+			}
 		}
 
 		if (proposalObj != null && proposalObj.has("ReceivedOnFrom")) {
@@ -116,12 +124,7 @@ public class ProposalService {
 		}
 
 		if (proposalObj != null && proposalObj.has("ProposalStatus")) {
-			if (!proposalObj.get("ProposalStatus").isNull()) {
-				proposalStatus = proposalObj.get("ProposalStatus")
-						.getBooleanValue();
-			} else {
-				proposalStatus = null;
-			}
+			proposalStatus = proposalObj.get("ProposalStatus").getTextValue();
 		}
 
 		proposals = proposalDAO.findAllForProposalGrid(offset, limit,

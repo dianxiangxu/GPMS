@@ -263,7 +263,8 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left'
+											align : 'left',
+											hide : true
 										},
 										{
 											display : 'Date Received',
@@ -271,7 +272,9 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left'
+											align : 'left',
+											type : 'date',
+											format : 'yyyy/MM/dd hh:mm:ss a'
 										},
 										{
 											display : 'Proposal Status',
@@ -280,6 +283,16 @@ $(function() {
 											controlclass : '',
 											coltype : 'label',
 											align : 'left'
+										},
+										{
+											display : 'Senior Personnel Users',
+											name : 'senior_personnel_users',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'array',
+											hide : true
 										},
 										{
 											display : 'Project Title',
@@ -303,7 +316,9 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left'
+											align : 'left',
+											type : 'array',
+											hide : true
 										},
 										{
 											display : 'Due Date',
@@ -341,7 +356,8 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left'
+											align : 'left',
+											hide : true
 										},
 										{
 											display : 'Granting Agencies',
@@ -349,35 +365,22 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left'
+											align : 'left',
+											type : 'array',
+											hide : true
 										},
 										{
-											display : 'Direct Costs',
+											display : 'Direct Costs($)',
 											name : 'directCosts',
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left'
+											align : 'left',
+											hide : true
 										},
 										{
-											display : 'FA Costs',
-											name : 'FA_costs',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left'
-										},
-										{
-											display : 'Total Costs',
+											display : 'Total Costs($)',
 											name : 'total_costs',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left'
-										},
-										{
-											display : 'FA Rate',
-											name : 'FA_rate',
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
@@ -386,8 +389,8 @@ $(function() {
 										{
 											display : getLocale(
 													gpmsProposalsManagement,
-													'Last Updated'),
-											name : 'last_updated',
+													'Last Audited'),
+											name : 'last_audited',
 											cssclass : 'cssClassHeadDate',
 											controlclass : '',
 											coltype : 'label',
@@ -396,16 +399,59 @@ $(function() {
 											format : 'yyyy/MM/dd hh:mm:ss a'
 										},
 										{
-											display : getLocale(
-													gpmsProposalsManagement,
-													'Is Deleted?'),
-											name : 'status',
-											cssclass : 'cssClassHeadBoolean',
+											display : 'Last Audited By',
+											name : 'last_audited_by',
+											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
-											type : 'boolean',
-											format : 'Yes/No'
+											hide : true
+										},
+										{
+											display : 'Last Audited Action',
+											name : 'last_audited_action',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
+											display : 'PI User',
+											name : 'pi_user',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
+											display : 'Co-PI Users',
+											name : 'co_pi_users',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'array',
+											hide : true
+										},
+										{
+											display : 'FA Costs($)',
+											name : 'FA_costs',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
+											display : 'FA Rate(%)',
+											name : 'FA_rate',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
 										},
 										{
 											display : getLocale(
@@ -1115,27 +1161,38 @@ $(function() {
 		},
 
 		SearchProposals : function() {
-			var userName = $.trim($("#txtSearchUserName").val());
-			var college = $.trim($('#ddlSearchProposalStatus').val()) == "" ? null
+			var projectTitle = $.trim($("#txtSearchProjectTitle").val());
+			var proposedBy = $.trim($("#txtSearchProposedBy").val());
+			var totalCostsFrom = $.trim($("#txtSearchTotalCostsFrom").val());
+			var totalCostsTo = $.trim($("#txtSearchTotalCostsTo").val());
+			var receivedOnFrom = $.trim($("#txtSearchReceivedOnFrom").val());
+			var receivedOnTo = $.trim($("#txtSearchReceivedOnTo").val());
+
+			var proposalStatus = $.trim($('#ddlSearchProposalStatus').val()) == "" ? null
 					: $.trim($('#ddlSearchProposalStatus').val()) == "0" ? null
 							: $.trim($('#ddlSearchProposalStatus').val());
-			var department = $.trim($('#ddlSearchDepartment').val()) == "" ? null
-					: $.trim($('#ddlSearchDepartment').val()) == "0" ? null : $
-							.trim($('#ddlSearchDepartment').val());
-			var positionType = $.trim($('#ddlSearchPositionType').val()) == "" ? null
-					: $.trim($('#ddlSearchPositionType').val()) == "0" ? null
-							: $.trim($('#ddlSearchPositionType').val());
-			var positionTitle = $.trim($('#ddlSearchPositionTitle').val()) == "" ? null
-					: $.trim($('#ddlSearchPositionTitle').val()) == "0" ? null
-							: $.trim($('#ddlSearchPositionTitle').val());
-			var isActive = $.trim($("#ddlSearchIsActive").val()) == "" ? null
-					: $.trim($("#ddlSearchIsActive").val()) == "True" ? true
-							: false;
-			if (userName.length < 1) {
-				userName = null;
+			if (projectTitle.length < 1) {
+				projectTitle = null;
 			}
-			proposalsManage.BindProposalGrid(userName, college, department,
-					positionType, positionTitle, isActive);
+			if (proposedBy.length < 1) {
+				proposedBy = null;
+			}
+			if (totalCostsFrom.length < 1) {
+				totalCostsFrom = null;
+			}
+			if (totalCostsTo.length < 1) {
+				totalCostsTo = null;
+			}
+			if (receivedOnFrom.length < 1) {
+				receivedOnFrom = null;
+			}
+			if (receivedOnTo.length < 1) {
+				receivedOnTo = null;
+			}
+
+			proposalsManage.BindProposalGrid(projectTitle, proposedBy,
+					totalCostsFrom, totalCostsTo, receivedOnFrom, receivedOnTo,
+					proposalStatus);
 		},
 		SearchProposalAuditLogs : function() {
 			var action = $.trim($("#txtSearchAction").val());
@@ -1438,6 +1495,21 @@ $(function() {
 		},
 		init : function(config) {
 			proposalsManage.LoadStaticImage();
+			$("#txtSearchReceivedOnFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtSearchReceivedOnTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					});
+			$("#txtSearchReceivedOnTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			});
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
 			$('#divProposalForm').hide();
@@ -1601,7 +1673,7 @@ $(function() {
 									// td').fadeIn('slow');
 								}
 							});
-			$("#btnProposalUser").bind("click", function() {
+			$("#btnSearchProposal").bind("click", function() {
 				proposalsManage.SearchProposals();
 				return false;
 			});
@@ -1612,10 +1684,10 @@ $(function() {
 			});
 
 			$(
-					'#txtSearchUserName,#ddlSearchProposalStatus,#ddlSearchDepartment,#ddlSearchPositionType,#ddlSearchPositionTitle,#ddlSearchIsActive')
+					'#txtSearchProjectTitle,#txtSearchProposedBy,#txtSearchTotalCostsFrom,#txtSearchTotalCostsTo,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlSearchProposalStatus')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
-							$("#btnProposalUser").click();
+							$("#btnSearchProposal").click();
 						}
 					});
 		}

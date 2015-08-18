@@ -63,7 +63,7 @@ public class ProjectLocation {
 	}
 
 	@Override
-	public ProjectLocation clone() throws CloneNotSupportedException{
+	public ProjectLocation clone() throws CloneNotSupportedException {
 		ProjectLocation copy = new ProjectLocation();
 
 		copy.setOnCampus(this.onCampus);

@@ -1,10 +1,5 @@
 package gpms.dao.test;
 
-import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -12,10 +7,20 @@ import gpms.dao.UserProfileDAO;
 import gpms.model.InvestigatorInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.ProjectInfo;
+import gpms.model.ProjectLocation;
+import gpms.model.ProjectPeriod;
+import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.SponsorAndBudgetInfo;
+import gpms.model.TypeOfRequest;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
+
+import java.net.UnknownHostException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +58,7 @@ public class Create100Proposals {
 		// We'll have up to 4 co-pi's added, and up to 2 senior personnel added
 		List<UserProfile> masterList = newUserProfileDAO.findAll();
 		List<UserProfile> pullList = newUserProfileDAO.findAll();
-		int propNumb = 0;
+		int propNumb = 1;
 
 		while (!pullList.isEmpty()) {
 			// Remove a user from the list
@@ -66,6 +71,44 @@ public class Create100Proposals {
 			// Currently this is set up to just use the first pos det item from
 			// the list of them from each user
 			Proposal newProposal = new Proposal();
+
+			// ProjectInfo newPI = new ProjectInfo();
+			//
+			// // Set Proposal Details here
+			// ProjectLocation newPL = new ProjectLocation();
+			// newPL.setOffCampus(true);
+			//
+			// newPI.setProjectLocation(newPL);
+			//
+			// ProjectPeriod newPP = new ProjectPeriod();
+			// newPP.setFrom(new Date());
+			//
+			// // SimpleDateFormat sdf = new SimpleDateFormat(
+			// // "yyyy-MM-dd'T'HH:mm:ssX");
+			// Calendar c = Calendar.getInstance();
+			// c.setTime(new Date()); // Now use today date.
+			// c.add(Calendar.DATE, 5); // Adding 5 days
+			// newPP.setTo(c.getTime());
+			//
+			// newPI.setProjectPeriod(newPP);
+			//
+			// TypeOfRequest newTR = new TypeOfRequest();
+			// newTR.setContinuation(true);
+			// newPI.setTypeOfRequest(newTR);
+			//
+			// ProjectType newPT = new ProjectType();
+			// newPT.setIsResearchApplied(true);
+			// newPI.setProjectType(newPT);
+			//
+			// c.add(Calendar.DATE, 60); // Adding 60 days
+			//
+			// newPI.setDueDate(c.getTime());
+			//
+			// newProposal.setProjectInfo(newPI);
+
+			// --------------------------------------------------------
+			// newProposalDAO.save(newProposal);
+
 			InvestigatorInfo newInfo = new InvestigatorInfo();
 
 			InvestigatorRefAndPosition newInvPos = new InvestigatorRefAndPosition();
@@ -90,9 +133,10 @@ public class Create100Proposals {
 			for (int b = 0; b < totalSeniors; b++) {
 				newInfo.addSeniorPersonnel(makeSenior(masterList, newInfo));
 			}
-			
-			//REUIERED FOR AUDIT LOG
-			newProposalDAO.setEditInvestigatorInfo(newProposal, newInfo, propProfile);
+
+			// REUIERED FOR AUDIT LOG
+			newProposalDAO.setEditInvestigatorInfo(newProposal, newInfo,
+					propProfile);
 
 			SponsorAndBudgetInfo newSandBud = new SponsorAndBudgetInfo();
 
@@ -100,34 +144,75 @@ public class Create100Proposals {
 
 			if (sponsorChoice == 0) {
 				newSandBud.addGrantingAgency("NSF");
+				newSandBud.addGrantingAgency("NASA");
 			}
 			if (sponsorChoice == 1) {
 				newSandBud.addGrantingAgency("Idaho STEM Grant");
+				newSandBud.addGrantingAgency("BSU");
 			}
-			
-			//REQUIRED FOR AUDIT LOG
-			newProposalDAO.setEditSponsorAndBudgetInfo(newProposal, newSandBud, propProfile);
 
-			String nameString = "Proposal" + propNumb;
+			newSandBud.setDirectCosts(1000.00);
+			newSandBud.setTotalCosts(21000.00);
+			newSandBud.setFACosts(1000.00);
+			newSandBud.setFARate(10.00);
+
+			// REQUIRED FOR AUDIT LOG
+			newProposalDAO.setEditSponsorAndBudgetInfo(newProposal, newSandBud,
+					propProfile);
+
 			String proNumb = "" + propNumb;
 			// newProposal.setProposalNo(proNumb);
-			
-			//REQUIRED FOR AUDIT LOG
-			newProposalDAO.setEditProposalNumber(newProposal, proNumb, propProfile);
+
+			// REQUIRED FOR AUDIT LOG
+			newProposalDAO.setEditProposalNumber(newProposal, proNumb,
+					propProfile);
 
 			ProjectInfo newProjInf = new ProjectInfo();
-			newProjInf.setProjectTitle(nameString);
-			newProjInf.setDueDate(new Date());
-			
-			//REQUIRED FOR AUDIT LOG
-			newProposalDAO.setEditProjectInfo(newProposal, newProjInf, propProfile);
 
-			//newProposal.setSponsorAndBudgetInfo(newSandBud);
-			//newProposal.setInvestigatorInfo(newInfo);
-			//String propNumbString = "" + propNumb;
+			String nameString = "Proposal" + propNumb;
+			newProjInf.setProjectTitle(nameString);
+
+			// Set Proposal Details here
+			ProjectLocation newPL = new ProjectLocation();
+			newPL.setOffCampus(true);
+
+			newProjInf.setProjectLocation(newPL);
+
+			ProjectPeriod newPP = new ProjectPeriod();
+			newPP.setFrom(new Date());
+
+			// SimpleDateFormat sdf = new SimpleDateFormat(
+			// "yyyy-MM-dd'T'HH:mm:ssX");
+			Calendar c = Calendar.getInstance();
+			c.setTime(new Date()); // Now use today date.
+			c.add(Calendar.DATE, 5); // Adding 5 days
+			newPP.setTo(c.getTime());
+
+			newProjInf.setProjectPeriod(newPP);
+
+			TypeOfRequest newTR = new TypeOfRequest();
+			newTR.setContinuation(true);
+			newProjInf.setTypeOfRequest(newTR);
+
+			ProjectType newPT = new ProjectType();
+			newPT.setIsResearchApplied(true);
+			newProjInf.setProjectType(newPT);
+
+			c.add(Calendar.DATE, 60); // Adding 60 days
+
+			newProjInf.setDueDate(c.getTime());
+
+			// REQUIRED FOR AUDIT LOG
+			newProposalDAO.setEditProjectInfo(newProposal, newProjInf,
+					propProfile);
+
+			// newProposal.setSponsorAndBudgetInfo(newSandBud);
+			// newProposal.setInvestigatorInfo(newInfo);
+			// String propNumbString = "" + propNumb;
 			// newProposal.setProposalNo(propNumbString);
-			
-			newProposalDAO.setEditDateReceived(newProposal, new Date(), propProfile);
+
+			newProposalDAO.setEditDateReceived(newProposal, new Date(),
+					propProfile);
 
 			propNumb++;
 
