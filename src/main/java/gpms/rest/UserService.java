@@ -7,21 +7,21 @@ import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
 import gpms.model.AuditLogInfo;
-import gpms.model.Family;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.JSONTansformer;
 import gpms.model.PositionDetails;
-import gpms.model.User;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -40,7 +40,6 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.query.Query;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -99,6 +98,21 @@ public class UserService {
 		response = JSONTansformer.ConvertToJSON(users);
 
 		return response;
+	}
+
+	@POST
+	@Path("/GetAllUserList")
+	public HashMap<String, String> getAllUsers() throws UnknownHostException {
+		HashMap<String, String> users = new HashMap<String, String>();
+		List<UserProfile> userprofiles = userProfileDAO.findAll();
+		for (UserProfile userProfile : userprofiles) {
+			users.put(
+					userProfile.getId().toString(),
+					userProfile.getFirstName() + " "
+							+ userProfile.getMiddleName() + " "
+							+ userProfile.getLastName());
+		}
+		return users;
 	}
 
 	@POST

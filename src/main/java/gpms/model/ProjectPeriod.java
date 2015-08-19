@@ -7,10 +7,15 @@ import java.util.Date;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ProjectPeriod {
+	@Expose
 	@Property("from")
 	private Date from = new Date();
+
+	@Expose
 	@Property("to")
 	private Date to = new Date();
 
@@ -71,9 +76,9 @@ public class ProjectPeriod {
 			return false;
 		return true;
 	}
-	
+
 	@Override
-	public ProjectPeriod clone() throws CloneNotSupportedException{
+	public ProjectPeriod clone() throws CloneNotSupportedException {
 		ProjectPeriod copy = new ProjectPeriod();
 
 		copy.setFrom(new Date(this.from.getTime()));

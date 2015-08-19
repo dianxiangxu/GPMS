@@ -3,38 +3,51 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class FundingSource {
+	@Expose
 	@Property("federal")
 	private boolean federal;
 
+	@Expose
 	@Property("federal flow-through")
 	private boolean federalFlowThrough;
 
+	@Expose
 	@Property("Sate of Idaho entity")
 	private boolean sateOfIdahoEntity;
 
+	@Expose
 	@Property("private for profit")
 	private boolean privateForProfit;
 
+	@Expose
 	@Property("non-profit organization")
 	private boolean nonProfitOrganization;
 
+	@Expose
 	@Property("non-Idaho State entity")
 	private boolean nonIdahoStateEntity;
 
+	@Expose
 	@Property("college or university")
 	private boolean collegeOrUniversity;
 
+	@Expose
 	@Property("local entity")
 	private boolean localEntity;
 
+	@Expose
 	@Property("non-Idaho local entity")
 	private boolean nonIdahoLocalEntity;
 
+	@Expose
 	@Property("tirbal government")
 	private boolean tirbalGovernment;
 
+	@Expose
 	@Property("foreign")
 	private boolean foreign;
 

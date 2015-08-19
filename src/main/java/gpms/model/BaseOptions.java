@@ -3,14 +3,19 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class BaseOptions {
+	@Expose
 	@Property("yes")
 	private boolean yes;
 
+	@Expose
 	@Property("no")
 	private boolean no;
 
+	@Expose
 	@Property("not applicable")
 	private boolean notApplicable;
 

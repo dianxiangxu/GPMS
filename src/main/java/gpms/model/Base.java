@@ -3,21 +3,27 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class Base {
-
+	@Expose
 	@Property("MTDC")
 	private boolean MTDC;
 
+	@Expose
 	@Property("TDC")
 	private boolean TDC;
 
+	@Expose
 	@Property("TC")
 	private boolean TC;
 
+	@Expose
 	@Property("other")
 	private boolean other;
 
+	@Expose
 	@Property("not applicable")
 	private boolean notApplicable;
 

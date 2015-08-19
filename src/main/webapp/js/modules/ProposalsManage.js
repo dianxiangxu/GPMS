@@ -22,6 +22,7 @@ $(function() {
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
 			dataType : 'json',
+			rootURL : GPMS.utils.GetGPMSServicePath(),
 			baseURL : GPMS.utils.GetGPMSServicePath() + "proposals/",
 			method : "",
 			url : "",
@@ -425,6 +426,8 @@ $(function() {
 						null, null);
 				$('#auditLogTab').show();
 
+				proposalsManage.BindUserDropDown();
+
 				break;
 			default:
 				break;
@@ -433,7 +436,7 @@ $(function() {
 
 		FillForm : function(response) {
 			// See this how we can get response object based on fields
-			alert(response);
+			// alert(response);
 		},
 
 		BindUserPostionDetails : function(postitionDetails) {
@@ -952,70 +955,63 @@ $(function() {
 		},
 
 		BindUserDropDown : function() {
-			this.config.url = this.config.baseURL + "GetUserList";
+			// Used User REST API instead Proposal
+			this.config.url = this.config.rootURL + "users/" + "GetAllUserList";
 			this.config.data = "{}";
-			this.config.ajaxCallMode = 1;
+			this.config.ajaxCallMode = 5;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindCollegeDropDown : function() {
-			this.config.url = this.config.baseURL + "GetCollegeList";
+		BindCollegeDropDown : function(userProfile) {
+			this.config.url = this.config.rootURL + "users/" + "GetCollegeList";
 			this.config.data = "{}";
-			this.config.ajaxCallMode = 1;
+			this.config.ajaxCallMode = 6;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindDepartmentDropDown : function(collegeName, flagSearch) {
-			this.config.url = this.config.baseURL + "GetDepartmentList";
+		BindDepartmentDropDown : function(userProfile, collegeName) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetDepartmentList";
 			this.config.data = JSON2.stringify({
 				college : collegeName
 			});
-			if (flagSearch) {
-				this.config.ajaxCallMode = 2;
-			} else {
-				this.config.ajaxCallMode = 3;
-			}
+			this.config.ajaxCallMode = 7;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindPositionTypeDropDown : function(collegeName, departmentName,
-				flagSearch) {
-			this.config.url = this.config.baseURL + "GetPositionTypeList";
+		BindPositionTypeDropDown : function(userProfile, collegeName,
+				departmentName) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetPositionTypeList";
 			this.config.data = JSON2.stringify({
 				college : collegeName,
 				department : departmentName
 			});
-			if (flagSearch) {
-				this.config.ajaxCallMode = 4;
-			} else {
-				this.config.ajaxCallMode = 5;
-			}
+			this.config.ajaxCallMode = 8;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindPositionTitleDropDown : function(collegeName, departmentName,
-				positionTypeName, flagSearch) {
-			this.config.url = this.config.baseURL + "GetPositionTitleList";
+		BindPositionTitleDropDown : function(userProfile, collegeName,
+				departmentName, positionTypeName) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetPositionTitleList";
 			this.config.data = JSON2.stringify({
 				college : collegeName,
 				department : departmentName,
 				positionType : positionTypeName
 			});
-			if (flagSearch) {
-				this.config.ajaxCallMode = 6;
-			} else {
-				this.config.ajaxCallMode = 7;
-			}
+			this.config.ajaxCallMode = 9;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
 		BindDepartmentOnly : function(collegeName) {
-			this.config.url = this.config.baseURL + "GetDepartmentList";
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetDepartmentList";
 			this.config.data = JSON2.stringify({
 				college : collegeName
 			});
@@ -1025,7 +1021,8 @@ $(function() {
 		},
 
 		BindPositionTypeOnly : function(collegeName, departmentName) {
-			this.config.url = this.config.baseURL + "GetPositionTypeList";
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetPositionTypeList";
 			this.config.data = JSON2.stringify({
 				college : collegeName,
 				department : departmentName
@@ -1037,7 +1034,8 @@ $(function() {
 
 		BindPositionTitleOnly : function(collegeName, departmentName,
 				positionTypeName) {
-			this.config.url = this.config.baseURL + "GetPositionTitleList";
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetPositionTitleList";
 			this.config.data = JSON2.stringify({
 				college : collegeName,
 				department : departmentName,
@@ -1100,8 +1098,21 @@ $(function() {
 			$('#divProposalForm').show();
 			break;
 
-		case 5:
-
+		case 5: // Bind User List for Investigator Info
+			$('select[name="ddlName"]').get(rowIndex).options.length = 0;
+			$
+					.each(
+							msg,
+							function(index, item) {
+								// For form Dropdown Binding
+								$('select[name="ddlName"]').get(rowIndex).options[$(
+										'select[name="ddlName"]').get(rowIndex).options.length] = new Option(
+										item, index);
+							});
+			// TODO : Bind College based on UserProfileID
+			usersManage.BindCollegeDropDown($(
+					'select[name="ddlName"] option:selected').eq(rowIndex)
+					.val());
 			break;
 
 		case 6:

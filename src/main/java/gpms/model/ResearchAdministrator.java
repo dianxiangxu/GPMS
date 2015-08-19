@@ -3,14 +3,19 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ResearchAdministrator {
+	@Expose
 	@Property("DF")
 	private boolean DF;
 
+	@Expose
 	@Property("LG")
 	private boolean LG;
 
+	@Expose
 	@Property("LN")
 	private boolean LN;
 

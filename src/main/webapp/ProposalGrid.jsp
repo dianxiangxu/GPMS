@@ -384,7 +384,7 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabelTitle"
-																			id="lblProjectTitle">Project Title</span></td>
+																			id="lblProjectTitle">Project Title:</span></td>
 																		<td class="cssClassTableRightCol required" colspan="3"><textarea
 																				class="cssClassTextArea" cols="15" rows="2"
 																				title="Default Value" name="projectTitle"
@@ -1453,7 +1453,7 @@
 																				alt="loading...." title="loading...." />
 																		</div>
 																		<div class="log"></div>
-																		<table id="gdvUsersAuditLog" cellspacing="0"
+																		<table id="gdvProposalsAuditLog" cellspacing="0"
 																			cellpadding="0" border="0" width="100%"></table>
 																	</div>
 																</div>

@@ -5,14 +5,23 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class TypeOfRequest {
+	@Expose
 	@Property("pre-proposal")
 	private boolean isPreProposal;
+	
+	@Expose
 	@Property("new proposal")
 	private boolean isNewProposal;
+	
+	@Expose
 	@Property("continuation")
 	private boolean isContinuation;
+	
+	@Expose
 	@Property("supplement")
 	private boolean isSupplement;
 

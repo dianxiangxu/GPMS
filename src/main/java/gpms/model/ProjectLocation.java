@@ -3,10 +3,15 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ProjectLocation {
+	@Expose
 	@Property("off-campus")
 	private boolean offCampus;
+
+	@Expose
 	@Property("on-campus")
 	private boolean onCampus;
 

@@ -2,20 +2,26 @@ package gpms.model;
 
 import org.mongodb.morphia.annotations.Property;
 
-public class BasePIEligibilityOptions {
+import com.google.gson.annotations.Expose;
 
+public class BasePIEligibilityOptions {
+	@Expose
 	@Property("yes")
 	private boolean yes;
 
+	@Expose
 	@Property("no")
 	private boolean no;
 
+	@Expose
 	@Property("not applicable")
 	private boolean notApplicable;
 
+	@Expose
 	@Property("this proposal only")
 	private boolean thisProposalOnly;
 
+	@Expose
 	@Property("blanket")
 	private boolean blanket;
 
