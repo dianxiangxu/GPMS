@@ -165,16 +165,16 @@ public class UserService {
 	}
 
 	@POST
-	@Path("/GetUsersByProfileId")
-	public String produceUserByProfileId(String message)
+	@Path("/GetUserDetailsByProfileId")
+	public String produceUserDetailsByProfileId(String message)
 			throws JsonProcessingException, IOException {
 		UserProfile user = new UserProfile();
 		String response = new String();
 
 		String profileId = new String();
-		String userName = new String();
-		String userProfileID = new String();
-		String cultureName = new String();
+		// String userName = new String();
+		// String userProfileID = new String();
+		// String cultureName = new String();
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(message);
@@ -221,7 +221,7 @@ public class UserService {
 		// gpmsCommonObj.setUserProfileID(userProfileID);
 		// gpmsCommonObj.setCultureName(cultureName);
 
-		user = userProfileDAO.findUserByProfileID(id);
+		user = userProfileDAO.findUserDetailsByProfileID(id);
 		// user.getUserAccount();
 		// user.getUserAccount().getUserName();
 		// user.getUserAccount().getPassword();
@@ -243,11 +243,11 @@ public class UserService {
 	}
 
 	@POST
-	@Path("/GetUsersAuditLogList")
-	public List<AuditLogInfo> produceUsersAuditLogJSON(String message)
+	@Path("/GetUserAuditLogList")
+	public List<AuditLogInfo> produceUserAuditLogJSON(String message)
 			throws JsonGenerationException, JsonMappingException, IOException,
 			ParseException {
-		List<AuditLogInfo> usersAuditLogs = new ArrayList<AuditLogInfo>();
+		List<AuditLogInfo> userAuditLogs = new ArrayList<AuditLogInfo>();
 
 		int offset = 0, limit = 0;
 		String profileId = new String();
@@ -291,13 +291,13 @@ public class UserService {
 
 		ObjectId userId = new ObjectId(profileId);
 
-		usersAuditLogs = userProfileDAO.findAllForUserAuditLogGrid(offset,
+		userAuditLogs = userProfileDAO.findAllForUserAuditLogGrid(offset,
 				limit, userId, action, auditedBy, activityOnFrom, activityOnTo);
 
 		// users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
 		// response = JSONTansformer.ConvertToJSON(users);
 
-		return usersAuditLogs;
+		return userAuditLogs;
 	}
 
 	@POST
@@ -419,9 +419,9 @@ public class UserService {
 		gpmsCommonObj.setCultureName(cultureName);
 
 		UserProfile authorProfile = userProfileDAO
-				.findUserByProfileID(authorId);
+				.findUserDetailsByProfileID(authorId);
 
-		UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
+		UserProfile userProfile = userProfileDAO.findUserDetailsByProfileID(id);
 		userProfileDAO.deleteUserProfileByUserID(userProfile, authorProfile,
 				gpmsCommonObj);
 
@@ -483,12 +483,13 @@ public class UserService {
 		gpmsCommonObj.setCultureName(cultureName);
 
 		UserProfile authorProfile = userProfileDAO
-				.findUserByProfileID(authorId);
+				.findUserDetailsByProfileID(authorId);
 
 		for (String profile : profiles) {
 			ObjectId id = new ObjectId(profile);
 
-			UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
+			UserProfile userProfile = userProfileDAO
+					.findUserDetailsByProfileID(id);
 			userProfileDAO.deleteUserProfileByUserID(userProfile,
 					authorProfile, gpmsCommonObj);
 
@@ -548,9 +549,9 @@ public class UserService {
 		gpmsCommonObj.setCultureName(cultureName);
 
 		UserProfile authorProfile = userProfileDAO
-				.findUserByProfileID(authorId);
+				.findUserDetailsByProfileID(authorId);
 
-		UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
+		UserProfile userProfile = userProfileDAO.findUserDetailsByProfileID(id);
 		userProfileDAO.activateUserProfileByUserID(userProfile, authorProfile,
 				gpmsCommonObj, isActive);
 
@@ -733,11 +734,12 @@ public class UserService {
 
 		newProfile.setUserId(newAccount);
 
-		if (userInfo != null && userInfo.has("UserId")) {
-			userID = userInfo.get("UserId").getTextValue();
+		if (userInfo != null && userInfo.has("UserID")) {
+			userID = userInfo.get("UserID").getTextValue();
 			if (userID != "0") {
 				ObjectId id = new ObjectId(userID);
-				existingUserProfile = userProfileDAO.findUserByProfileID(id);
+				existingUserProfile = userProfileDAO
+						.findUserDetailsByProfileID(id);
 				// newProfile.setId(id);
 			}
 		}

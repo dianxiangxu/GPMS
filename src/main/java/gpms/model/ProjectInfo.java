@@ -4,32 +4,40 @@ package gpms.model;
 
 import java.util.Date;
 
+
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
+
+import com.google.gson.annotations.Expose;
 
 //import org.mongodb.morphia.annotations.Id;
 
 @Embedded
 public class ProjectInfo {
-
+	@Expose
 	@Property("project title")
 	// @Indexed(value = IndexDirection.ASC, name = "proposalTitleIndex", unique
 	// = true)
 	private String projectTitle = new String();
 
+	@Expose
 	@Embedded("project type")
 	private ProjectType projectType = new ProjectType();
 
+	@Expose
 	@Embedded("type of request")
 	private TypeOfRequest typeOfRequest = new TypeOfRequest();
 
+	@Expose
 	@Property("due date")
 	private Date dueDate = new Date();
 
+	@Expose
 	@Embedded("project period")
 	private ProjectPeriod projectPeriod = new ProjectPeriod();
 
+	@Expose
 	@Embedded("location of project")
 	private ProjectLocation projectLocation = new ProjectLocation();
 

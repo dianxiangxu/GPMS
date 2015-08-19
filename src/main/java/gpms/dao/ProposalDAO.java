@@ -407,4 +407,124 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		}
 		return proposals;
 	}
+
+	public Proposal findProposalDetailsByProposalID(ObjectId id) {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).field("_id").equal(id).get();
+	}
+
+	public List<AuditLogInfo> findAllForProposalAuditLogGrid(int offset,
+			int limit, ObjectId id, String action, String auditedBy,
+			String activityOnFrom, String activityOnTo) throws ParseException {
+		Datastore ds = getDatastore();
+
+		Query<Proposal> proposalQuery = ds.createQuery(Proposal.class);
+
+		Proposal q = proposalQuery.field("_id").equal(id).get();
+
+		ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
+		int rowTotal = 0;
+		if (q.getAuditLog() != null && q.getAuditLog().size() != 0) {
+			for (AuditLog poposalAudit : q.getAuditLog()) {
+				AuditLogInfo proposalAuditLog = new AuditLogInfo();
+				boolean isActionMatch = false;
+				boolean isAuditedByMatch = false;
+				boolean isActivityDateFromMatch = false;
+				boolean isActivityDateToMatch = false;
+
+				if (action != null) {
+					if (poposalAudit.getAction().toLowerCase()
+							.contains(action.toLowerCase())) {
+						isActionMatch = true;
+					}
+				} else {
+					isActionMatch = true;
+				}
+
+				if (auditedBy != null) {
+					if (poposalAudit.getUserProfileId().getUserAccount()
+							.getUserName().toLowerCase()
+							.contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (poposalAudit.getUserProfileId().getFirstName()
+							.toLowerCase().contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (poposalAudit.getUserProfileId().getMiddleName()
+							.toLowerCase().contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					} else if (poposalAudit.getUserProfileId().getLastName()
+							.toLowerCase().contains(auditedBy.toLowerCase())) {
+						isAuditedByMatch = true;
+					}
+				} else {
+					isAuditedByMatch = true;
+				}
+
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				if (activityOnFrom != null) {
+					Date activityDateFrom = formatter.parse(activityOnFrom);
+					if (poposalAudit.getActivityDate().compareTo(
+							activityDateFrom) > 0) {
+						isActivityDateFromMatch = true;
+					} else if (poposalAudit.getActivityDate().compareTo(
+							activityDateFrom) < 0) {
+						isActivityDateFromMatch = false;
+					} else if (poposalAudit.getActivityDate().compareTo(
+							activityDateFrom) == 0) {
+						isActivityDateFromMatch = true;
+					}
+				} else {
+					isActivityDateFromMatch = true;
+				}
+
+				if (activityOnTo != null) {
+					Date activityDateTo = formatter.parse(activityOnTo);
+					if (poposalAudit.getActivityDate()
+							.compareTo(activityDateTo) > 0) {
+						isActivityDateToMatch = false;
+					} else if (poposalAudit.getActivityDate().compareTo(
+							activityDateTo) < 0) {
+						isActivityDateToMatch = true;
+					} else if (poposalAudit.getActivityDate().compareTo(
+							activityDateTo) == 0) {
+						isActivityDateToMatch = true;
+					}
+				} else {
+					isActivityDateToMatch = true;
+				}
+
+				if (isActionMatch && isAuditedByMatch
+						&& isActivityDateFromMatch && isActivityDateToMatch) {
+					proposalAuditLog.setUserName(poposalAudit
+							.getUserProfileId().getUserAccount().getUserName());
+					proposalAuditLog.setUserFullName(poposalAudit
+							.getUserProfileId().getFirstName()
+							+ " "
+							+ poposalAudit.getUserProfileId().getMiddleName()
+							+ " "
+							+ poposalAudit.getUserProfileId().getLastName());
+					proposalAuditLog.setAction(poposalAudit.getAction());
+					proposalAuditLog.setActivityDate(poposalAudit
+							.getActivityDate());
+
+					allAuditLogs.add(proposalAuditLog);
+				}
+			}
+		}
+
+		Collections.sort(allAuditLogs);
+
+		rowTotal = allAuditLogs.size();
+		if (rowTotal > 0) {
+			for (AuditLogInfo t : allAuditLogs) {
+				t.setRowTotal(rowTotal);
+			}
+		}
+
+		if (rowTotal >= (offset + limit - 1)) {
+			return allAuditLogs.subList(offset - 1, offset + limit - 1);
+		} else {
+			return allAuditLogs.subList(offset - 1, rowTotal);
+		}
+	}
 }

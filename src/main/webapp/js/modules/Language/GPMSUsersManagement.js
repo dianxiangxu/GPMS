@@ -7,7 +7,7 @@
 	"Activate" : "Activate",
 	"Deactivate" : "Deactivate",
 	"New User Details" : "New User Details",
-	"Edit User Details: " : "Edit User Details: ",
+	"Edit User Details for: " : "Edit User Details for: ",
 	"No Records Found!" : "No Records Found!",
 	"Manage Attributes" : "Manage Attributes",
 	"Delete All Selected" : "Delete All Selected",

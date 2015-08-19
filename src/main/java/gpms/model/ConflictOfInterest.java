@@ -5,15 +5,22 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ConflictOfInterest {
 	// c_o_i == conflict_of_interest
+	@Expose
 	@Property("financial COI")
 	private boolean financialCOI;
+
 	// if financial_c_o_i == true
+	@Expose
 	@Property("conflict disclosed")
 	private boolean conflictDisclosed;
+
 	// if disclosure_form_change == true, disclosure must be updated
+	@Expose
 	@Property("disclosure form change")
 	private boolean disclosureFormChange;
 
@@ -77,6 +84,6 @@ public class ConflictOfInterest {
 		if (financialCOI != other.financialCOI)
 			return false;
 		return true;
-	}	
+	}
 
 }

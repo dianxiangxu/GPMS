@@ -6,6 +6,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.GPMSCommonInfo;
 import gpms.model.InvestigatorInfo;
 import gpms.model.PositionDetails;
 import gpms.model.ProjectInfo;
@@ -30,8 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
-public class deleteProposalDAOTest 
-{
+public class deleteProposalDAOTest {
 	private final static Logger logger = LoggerFactory
 			.getLogger(MongoDBConnector.class);
 
@@ -73,12 +73,12 @@ public class deleteProposalDAOTest
 
 	@Test
 	public void deleteProposalTest() throws UnknownHostException {
-		pdao.deleteProposal(prop, piProfile);
+		pdao.deleteProposal(prop, piProfile, new GPMSCommonInfo());
 		assertTrue(prop.getProposalStatus().equals(Status.values()[6]));
 
 		Proposal p;
 		pdao.delete(prop);
-		p = pdao.proposalById(prop.getId());
+		p = pdao.findProposalByProposalID(prop.getId());
 		assertTrue(p == null);
 	}
 

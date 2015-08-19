@@ -3,11 +3,15 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class CollaborationInfo {
+	@Expose
 	@Property("involve non-funded collaborations")
 	private boolean involveNonFundedCollab;
 
+	@Expose
 	@Property("involve collaborators")
 	private String involvedCollaborators = new String();
 

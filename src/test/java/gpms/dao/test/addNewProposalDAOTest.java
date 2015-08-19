@@ -5,6 +5,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.GPMSCommonInfo;
 import gpms.model.InvestigatorInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.PositionDetails;
@@ -113,7 +114,8 @@ public class addNewProposalDAOTest {
 		assertTrue(prop.getDateReceived().equals(date));
 
 		System.out.println("Now adding Proposal Status...");
-		pdao.setEditProposalStatus(prop, Status.values()[3], piProfile);
+		pdao.setEditProposalStatus(prop, Status.values()[3], piProfile,
+				new GPMSCommonInfo());
 		assertTrue(prop.getProposalStatus().equals(Status.values()[3]));
 	}
 

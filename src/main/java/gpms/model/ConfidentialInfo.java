@@ -3,14 +3,19 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ConfidentialInfo {
+	@Expose
 	@Property("contain confidential information")
 	private boolean containConfidentialInformation;
 
+	@Expose
 	@Property("patentable")
 	private boolean patentable;
 
+	@Expose
 	@Property("copyrightable")
 	private boolean copyrightable;
 
@@ -77,5 +82,5 @@ public class ConfidentialInfo {
 			return false;
 		return true;
 	}
-	
+
 }

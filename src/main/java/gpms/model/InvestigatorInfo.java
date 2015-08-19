@@ -5,9 +5,12 @@ package gpms.model;
 import java.util.ArrayList;
 
 
+
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Transient;
+
+import com.google.gson.annotations.Expose;
 
 @Embedded
 public class InvestigatorInfo {
@@ -16,10 +19,13 @@ public class InvestigatorInfo {
 	@Transient
 	public final int MAX_NUM_SENIOR_PERSONNEL = 10;
 
+	@Expose
 	@Embedded("PI")
 	private InvestigatorRefAndPosition pi = new InvestigatorRefAndPosition();
+	@Expose
 	@Embedded("CO-PI")
 	private ArrayList<InvestigatorRefAndPosition> co_pi = new ArrayList<InvestigatorRefAndPosition>();
+	@Expose
 	@Embedded("senior personnel")
 	private ArrayList<InvestigatorRefAndPosition> seniorPersonnel = new ArrayList<InvestigatorRefAndPosition>();
 

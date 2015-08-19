@@ -4,16 +4,27 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class InvestigatorRefAndPosition {
-	@Reference(value = "user profile", lazy = true)
+	@Expose
+	@Reference(value = "user profile" /* , lazy = true */)
 	UserProfile userRef;
+
+	@Expose
 	@Property("college")
 	private String college = new String();
+
+	@Expose
 	@Property("department")
 	private String department = new String();
+
+	@Expose
 	@Property("position type")
 	private String positionType = new String();
+
+	@Expose
 	@Property("position title")
 	private String positionTitle = new String();
 
@@ -132,10 +143,10 @@ public class InvestigatorRefAndPosition {
 		} else if (!userRef.equals(other.userRef))
 			return false;
 		return true;
-	}	
+	}
 
 	@Override
-	public InvestigatorRefAndPosition clone() throws CloneNotSupportedException{
+	public InvestigatorRefAndPosition clone() throws CloneNotSupportedException {
 		InvestigatorRefAndPosition copy = new InvestigatorRefAndPosition();
 		copy.setUserRef(userRef);
 		copy.setCollege(college);
@@ -144,5 +155,5 @@ public class InvestigatorRefAndPosition {
 		copy.setPositionTitle(positionTitle);
 		return copy;
 	}
-	
+
 }

@@ -22,5 +22,15 @@
 	"Proposal has been deleted successfully." : "Proposal has been deleted successfully.",
 	"Selected proposal(s) has been deleted successfully." : "Selected proposal(s) has been deleted successfully.",
 	"Are you sure you want to delete selected proposal(s)?" : "Are you sure you want to delete selected proposal(s)?",
-	"Please select at least one proposal before deleting." : "Please select at least one proposal before deleting.",	
+	"Please select at least one proposal before deleting." : "Please select at least one proposal before deleting.",
+
+	// Edit
+	"Edit Proposal Details for: " : "Edit Proposal Details for: ",
+	"Please enter Project Title." : "Please enter Project Title.",
+	"Please enter unique Project Title." : "Please enter unique Project Title.",
+	"already exists." : "already exists.",
+	"New Proposal Details" : "New Proposal Details",
+	"Failed to load proposal details." : "Failed to load proposal details.",
+
+	"No Records Found!" : "No Records Found!"
 };

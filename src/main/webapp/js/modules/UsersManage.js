@@ -300,10 +300,9 @@ $(function() {
 				$("#btnReset").hide();
 
 				usersManage.config.url = usersManage.config.baseURL
-						+ "GetUsersByProfileId";
+						+ "GetUserDetailsByProfileId";
 				usersManage.config.data = JSON2.stringify({
-					userId : argus[0],
-					gpmsCommonObj : gpmsCommonObj()
+					userId : argus[0]
 				});
 				usersManage.config.ajaxCallMode = 8;
 				usersManage.ajaxCall(usersManage.config);
@@ -585,7 +584,7 @@ $(function() {
 		BindUserAuditLogGrid : function(userId, action, auditedBy,
 				activityOnFrom, activityOnTo) {
 			this.config.url = this.config.baseURL;
-			this.config.method = "GetUsersAuditLogList";
+			this.config.method = "GetUserAuditLogList";
 			var offset_ = 1;
 			var current_ = 1;
 			var perpage = ($("#gdvUsersAuditLog_pagesize").length > 0) ? $(
@@ -905,7 +904,7 @@ $(function() {
 
 				if (!validateErrorMessage) {
 					var userInfo = {
-						UserId : _userId,
+						UserID : _userId,
 						FirstName : $.trim($('#txtFirstName').val()),
 						MiddleName : $.trim($('#txtMiddleName').val()),
 						LastName : $.trim($('#txtLastName').val()),
@@ -937,6 +936,23 @@ $(function() {
 			}
 		},
 
+		IsUniqueUserName : function(userId, newUserName) {
+			var userUniqueObj = {
+				UserID : userId,
+				NewUserName : newUserName
+			};
+			var gpmsCommonInfo = gpmsCommonObj();
+			this.config.url = this.config.baseURL + "CheckUniqueUserName";
+			this.config.data = JSON2.stringify({
+				userUniqueObj : userUniqueObj,
+				gpmsCommonObj : gpmsCommonInfo
+			});
+			this.config.ajaxCallMode = 16;
+			this.ajaxCall(this.config);
+			return isUniqueUserName;
+		},
+
+		// TODO:
 		IsUniqueEmail : function(userId, newEmail) {
 			var userUniqueObj = {
 				UserID : userId,
@@ -952,22 +968,6 @@ $(function() {
 			this.ajaxCall(this.config);
 			return isUniqueEmail;
 		},
-
-		IsUniqueUserName : function(userId, newUserName) {
-			var userUniqueObj = {
-				UserID : userId,
-				NewUserName : newUserName
-			};
-			var gpmsCommonInfo = gpmsCommonObj();
-			this.config.url = this.config.baseURL + "CheckUniqueUserName";
-			this.config.data = JSON2.stringify({
-				userUniqueObj : userUniqueObj,
-				gpmsCommonObj : gpmsCommonInfo
-			});
-			this.config.ajaxCallMode = 16;
-			this.ajaxCall(this.config);
-			return isUniqueUserName;
-		}, // TODO:
 
 		AddUserInfo : function(info) {
 			this.config.url = this.config.baseURL + "SaveUpdateUser";
@@ -1339,7 +1339,6 @@ $(function() {
 			}
 		},
 
-		
 		ajaxFailure : function(msg) {
 			switch (usersManage.config.ajaxCallMode) {
 			case 0:

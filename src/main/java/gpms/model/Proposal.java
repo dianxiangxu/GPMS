@@ -13,55 +13,73 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
+import com.google.gson.annotations.Expose;
+
 @Entity(value = ProposalDAO.COLLECTION_NAME, noClassnameStored = true)
 public class Proposal extends BaseEntity {
+	@Expose
 	@Property("proposal no")
 	@Indexed(value = IndexDirection.ASC, name = "proposalNoIndex", unique = true)
 	private String proposalNo = new String();
 
+	@Expose
 	@Property("date received")
 	private Date dateReceived = new Date();
 
+	@Expose
 	@Property("proposal status")
 	@Enumerated(EnumType.STRING)
 	private Status proposalStatus = Status.NEW;
 
+	@Expose
 	@Embedded("investigator info")
 	private InvestigatorInfo investigatorInfo = new InvestigatorInfo();
 
+	@Expose
 	@Embedded("project info")
 	private ProjectInfo projectInfo = new ProjectInfo();
 
+	@Expose
 	@Embedded("sponsor and budget info")
 	private SponsorAndBudgetInfo sponsorAndBudgetInfo = new SponsorAndBudgetInfo();
 
+	@Expose
 	@Embedded("cost share info")
 	private CostShareInfo costShareInfo = new CostShareInfo();
 
+	@Expose
 	@Embedded("university commitments")
 	private UniversityCommitments universityCommitments = new UniversityCommitments();
 
+	@Expose
 	@Embedded("conflict of interest and commitment info")
 	private ConflictOfInterest conflicOfInterest = new ConflictOfInterest();
 
+	@Expose
 	@Embedded("compliance info")
 	private ComplianceInfo complianceInfo = new ComplianceInfo();
 
+	@Expose
 	@Embedded("additional info")
 	private AdditionalInfo additionalInfo = new AdditionalInfo();
 
+	@Expose
 	@Embedded("collaboration info")
 	private CollaborationInfo collaborationInfo = new CollaborationInfo();
 
+	@Expose
 	@Embedded("proprietary/confidential info")
 	private ConfidentialInfo confidentialInfo = new ConfidentialInfo();
 
+	@Expose
 	@Embedded("OSPSection info")
 	private OSPSectionInfo oSPSectionInfo = new OSPSectionInfo();
 
+	@Expose
 	@Embedded("signature info")
 	private SignatureInfo signatureInfo = new SignatureInfo();
 
+	@Expose
 	@Embedded("delegation info")
 	private DelegationInfo delegationInfo = new DelegationInfo();
 

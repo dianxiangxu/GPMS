@@ -161,9 +161,9 @@
 	border-bottom: 1px solid #ccc;
 }
 
-#fragment-13 > div {
-    float: left;
-    padding: 1em;
+#fragment-13>div {
+	float: left;
+	padding: 1em;
 }
 </style>
 </head>
@@ -373,7 +373,7 @@
 																id="lblTabTitle11"> Certification/Signatures </span></a></li>
 														<li><a href="#fragment-12"><span
 																id="lblTabTitle12"> OSP Section </span></a></li>
-														<li><a href="#fragment-13"><span
+														<li id="auditLogTab"><a href="#fragment-13"><span
 																id="lblTabTitle13"> Audit Logs </span></a></li>
 													</ul>
 
@@ -476,11 +476,12 @@
 																	</tr>
 
 																	<tr>
-																		<td><span class="cssClassLabel" id="lblProposalStatus">Proposal
-																				Status:</span></td>
-																		<td class="cssClassTableRightCol required"><select title="Proposal Status" name="proposalStatus" id="ddlProposalStatus">
-																				<option value="0">Choose
-																					Proposal Status</option>
+																		<td><span class="cssClassLabel"
+																			id="lblProposalStatus">Proposal Status:</span></td>
+																		<td class="cssClassTableRightCol required"><select
+																			title="Proposal Status" name="proposalStatus"
+																			id="ddlProposalStatus">
+																				<option value="0">Choose Proposal Status</option>
 																		</select> <span class="cssClassRequired">*</span></td>
 																	</tr>
 																</tbody>
@@ -533,6 +534,8 @@
 																		<td><select title="Position Title"
 																			class="sfListmenu" name="ddlPositionTitle">
 																		</select></td>
+																		<td><input type="text" class="sfInputbox"
+																			id="txtPhoneNo" placeholder="Phone #"></td>
 																		<td><input type="Button" value="Add More"
 																			name="AddMore"
 																			class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -1456,29 +1459,29 @@
 																</div>
 															</div>
 															<table id="tblLastAuditedInfo" cellspacing="0"
-															cellpadding="0" border="0">
-															<tbody>
-																<tr>
-																	<td><span class="cssClassLabelTitle">Last
-																			Audited On:&nbsp;</span></td>
-																	<td class="cssClassTableRightCol"><span
-																		id="lblLastUpdatedOn" class="cssClassLabel"></span></td>
-																</tr>
-																<tr>
-																	<td><span class="cssClassLabelTitle">Last
-																			Audited By:&nbsp;</span></td>
-																	<td class="cssClassTableRightCol"><span
-																		id="lblLastUpdatedBy" class="cssClassLabel"></span></td>
-																</tr>
-																<tr>
-																	<td><span class="cssClassLabelTitle">Last
-																			Activity:&nbsp;</span></td>
-																	<td class="cssClassTableRightCol"><span
-																		id="lblActivity" class="cssClassLabel"></span></td>
-																</tr>
-															</tbody>
-														</table>
-														</div>														
+																cellpadding="0" border="0">
+																<tbody>
+																	<tr>
+																		<td><span class="cssClassLabelTitle">Last
+																				Audited On:&nbsp;</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblLastUpdatedOn" class="cssClassLabel"></span></td>
+																	</tr>
+																	<tr>
+																		<td><span class="cssClassLabelTitle">Last
+																				Audited By:&nbsp;</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblLastUpdatedBy" class="cssClassLabel"></span></td>
+																	</tr>
+																	<tr>
+																		<td><span class="cssClassLabelTitle">Last
+																				Activity:&nbsp;</span></td>
+																		<td class="cssClassTableRightCol"><span
+																			id="lblActivity" class="cssClassLabel"></span></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -1492,11 +1495,6 @@
 											<p>
 												<button type="button" id="btnReset" class="sfBtn">
 													<span class="sfLocale icon-refresh">Reset</span>
-												</button>
-											</p>
-											<p>
-												<button type="button" class="delbutton sfBtn">
-													<span class="sfLocale icon-delete">Delete</span>
 												</button>
 											</p>
 											<p>

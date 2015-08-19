@@ -5,10 +5,15 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class CostShareInfo {
+	@Expose
 	@Property("institutional committed")
 	boolean institutionalCommitted;
+
+	@Expose
 	@Property("third party committed")
 	boolean thirdPartyCommitted;
 
@@ -63,5 +68,5 @@ public class CostShareInfo {
 			return false;
 		return true;
 	}
-	
+
 }

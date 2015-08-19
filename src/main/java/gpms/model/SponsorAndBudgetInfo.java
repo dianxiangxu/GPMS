@@ -8,18 +8,29 @@ import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 //import org.bson.types.ObjectId;
 
 @Embedded
 public class SponsorAndBudgetInfo {
+	@Expose
 	@Property("granting agency")
 	private List<String> grantingAgency = new ArrayList<String>();
+	
+	@Expose
 	@Property("direct costs")
 	private double directCosts;
+	
+	@Expose
 	@Property("F&A costs")
 	private double FACosts;
+	
+	@Expose
 	@Property("total costs")
 	private double totalCosts;
+	
+	@Expose
 	@Property("F&A rate")
 	private double FARate;
 

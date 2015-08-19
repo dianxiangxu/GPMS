@@ -4,6 +4,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.Proposal;
 import gpms.model.ProposalInfo;
@@ -33,6 +34,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
 
 @Path("/proposals")
@@ -182,7 +185,7 @@ public class ProposalService {
 		gpmsCommonObj.setCultureName(cultureName);
 
 		UserProfile authorProfile = userProfileDAO
-				.findUserByProfileID(authorId);
+				.findUserDetailsByProfileID(authorId);
 		Proposal proposal = proposalDAO.findProposalByProposalID(id);
 
 		proposalDAO.deleteProposal(proposal, authorProfile, gpmsCommonObj);
@@ -234,7 +237,7 @@ public class ProposalService {
 		gpmsCommonObj.setCultureName(cultureName);
 
 		UserProfile authorProfile = userProfileDAO
-				.findUserByProfileID(authorId);
+				.findUserDetailsByProfileID(authorId);
 
 		for (String proposalId : proposals) {
 			ObjectId id = new ObjectId(proposalId);
@@ -246,5 +249,109 @@ public class ProposalService {
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");
 		return response;
+	}
+
+	@POST
+	@Path("/GetProposalDetailsByProposalId")
+	public String produceProposalDetailsByProposalId(String message)
+			throws JsonProcessingException, IOException {
+		Proposal proposal = new Proposal();
+		String response = new String();
+
+		String proposalId = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("proposalId")) {
+			proposalId = root.get("proposalId").getTextValue();
+		}
+
+		// JsonNode commonObj = root.get("gpmsCommonObj");
+		// if (commonObj != null && commonObj.has("UserName")) {
+		// userName = commonObj.get("UserName").getTextValue();
+		// }
+		//
+		// if (commonObj != null && commonObj.has("UserProfileID")) {
+		// userProfileID = commonObj.get("UserProfileID").getTextValue();
+		// }
+		//
+		// if (commonObj != null && commonObj.has("CultureName")) {
+		// cultureName = commonObj.get("CultureName").getTextValue();
+		// }
+		//
+		// GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+		// gpmsCommonObj.setUserName(userName);
+		// gpmsCommonObj.setUserProfileID(userProfileID);
+		// gpmsCommonObj.setCultureName(cultureName);
+
+		ObjectId id = new ObjectId(proposalId);
+
+		proposal = proposalDAO.findProposalDetailsByProposalID(id);
+
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")
+				.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
+				.create();
+		response = gson.toJson(proposal, Proposal.class);
+
+		return response;
+	}
+
+	@POST
+	@Path("/GetProposalAuditLogList")
+	public List<AuditLogInfo> produceProposalAuditLogJSON(String message)
+			throws JsonGenerationException, JsonMappingException, IOException,
+			ParseException {
+		List<AuditLogInfo> proposalAuditLogs = new ArrayList<AuditLogInfo>();
+
+		int offset = 0, limit = 0;
+		String proposalId = new String();
+		String action = new String();
+		String auditedBy = new String();
+		String activityOnFrom = new String();
+		String activityOnTo = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		if (root != null && root.has("offset")) {
+			offset = root.get("offset").getIntValue();
+		}
+
+		if (root != null && root.has("limit")) {
+			limit = root.get("limit").getIntValue();
+		}
+
+		if (root != null && root.has("proposalId")) {
+			proposalId = root.get("proposalId").getTextValue();
+		}
+
+		JsonNode auditLogBindObj = root.get("auditLogBindObj");
+		if (auditLogBindObj != null && auditLogBindObj.has("Action")) {
+			action = auditLogBindObj.get("Action").getTextValue();
+		}
+
+		if (auditLogBindObj != null && auditLogBindObj.has("AuditedBy")) {
+			auditedBy = auditLogBindObj.get("AuditedBy").getTextValue();
+		}
+
+		if (auditLogBindObj != null && auditLogBindObj.has("ActivityOnFrom")) {
+			activityOnFrom = auditLogBindObj.get("ActivityOnFrom")
+					.getTextValue();
+		}
+
+		if (auditLogBindObj != null && auditLogBindObj.has("ActivityOnTo")) {
+			activityOnTo = auditLogBindObj.get("ActivityOnTo").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(proposalId);
+
+		proposalAuditLogs = proposalDAO.findAllForProposalAuditLogGrid(offset,
+				limit, id, action, auditedBy, activityOnFrom, activityOnTo);
+
+		// users = (ArrayList<UserInfo>) userProfileDAO.findAllForUserGrid();
+		// response = JSONTansformer.ConvertToJSON(users);
+
+		return proposalAuditLogs;
 	}
 }

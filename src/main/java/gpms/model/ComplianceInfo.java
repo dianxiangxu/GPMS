@@ -3,35 +3,47 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ComplianceInfo {
+	@Expose
 	@Property("involve use of human subjects")
 	private boolean involveUseOfHumanSubjects;
 
+	@Expose
 	@Property("IRB")
 	private String IRB = new String();
 
+	@Expose
 	@Property("IRB pending status")
 	private boolean IRBPending;
 
+	@Expose
 	@Property("involve use of vertebrate animals")
 	private boolean involveUseOfVertebrateAnimals;
 
+	@Expose
 	@Property("IACUC")
 	private String IACUC = new String();
 
+	@Expose
 	@Property("IACUC pending status")
 	private boolean IACUCPending;
 
+	@Expose
 	@Property("involve biosafety concerns")
 	private boolean involveBiosafetyConcerns;
 
+	@Expose
 	@Property("IBC")
 	private String IBC = new String();
 
+	@Expose
 	@Property("IBC pending status")
 	private boolean IBCPending;
 
+	@Expose
 	@Property("involve environmental health and safety concerns")
 	private boolean involveEnvironmentalHealthAndSafetyConcerns;
 

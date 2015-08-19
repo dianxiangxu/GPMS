@@ -3,65 +3,87 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class OSPSectionInfo {
+	@Expose
 	@Property("list agency")
 	private String listAgency = new String();
 
+	@Expose
 	@Embedded("funding source")
 	private FundingSource fundingSource = new FundingSource();
 
+	@Expose
 	@Property("CFDA no")
 	private String CFDANo = new String();
 
+	@Expose
 	@Property("program no")
 	private String programNo = new String();
 
+	@Expose
 	@Property("program title")
 	private String programTitle = new String();
 
+	@Expose
 	@Embedded("recovery")
 	private Recovery recovery = new Recovery();
 
+	@Expose
 	@Embedded("base")
 	private Base base = new Base();
 
+	@Expose
 	@Property("is PI salary included")
 	private boolean isPISalaryIncluded;
 
+	@Expose
 	@Property("PI salary")
 	private double PISalary;
 
+	@Expose
 	@Property("PI fringe")
 	private double PIFringe;
 
+	@Expose
 	@Property("department id")
 	private String departmentId = new String();
 
+	@Expose
 	@Embedded("institutional cost share documented")
 	private BaseOptions institutionalCostDocumented = new BaseOptions();
 
+	@Expose
 	@Embedded("third party cost share documented")
 	private BaseOptions thirdPartyCostDocumented = new BaseOptions();
 
+	@Expose
 	@Property("is anticipated subrecipients")
 	private boolean isAnticipatedSubRecipients;
 
+	@Expose
 	@Property("anticipated subrecipients names")
 	private boolean anticipatedSubRecipientsNames;
 
+	@Expose
 	@Embedded("PI eligibility waiver on file")
 	private BasePIEligibilityOptions PIEligibilityWaiver = new BasePIEligibilityOptions();
 
+	@Expose
 	@Embedded("conflict of interest forms on file")
 	private BaseOptions conflictOfInterestForms = new BaseOptions();
 
+	@Expose
 	@Embedded("excluded party list checked")
 	private BaseOptions excludedPartyListChecked = new BaseOptions();
 
+	@Expose
 	@Property("proposal notes")
 	private String proposalNotes = new String();
 
+	@Expose
 	@Embedded("research administrator")
 	private ResearchAdministrator researchAdministrator = new ResearchAdministrator();
 
@@ -409,5 +431,5 @@ public class OSPSectionInfo {
 			return false;
 		return true;
 	}
-	
+
 }

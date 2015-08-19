@@ -450,7 +450,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				.equal(userProfile).asList().size();
 	}
 
-	public UserProfile findUserByProfileID(ObjectId id) {
+	public UserProfile findUserDetailsByProfileID(ObjectId id) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).field("_id").equal(id).get();
 	}

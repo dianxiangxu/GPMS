@@ -5,16 +5,27 @@ package gpms.model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
+import com.google.gson.annotations.Expose;
+
 @Embedded
 public class ProjectType {
+	@Expose
 	@Property("research-basic")
 	private boolean isResearchBasic;
+	
+	@Expose
 	@Property("research-applied")
 	private boolean isResearchApplied;
+	
+	@Expose
 	@Property("research-development")
 	private boolean isResearchDevelopment;
+	
+	@Expose
 	@Property("instruction")
 	private boolean isInstruction;
+	
+	@Expose
 	@Property("other sponsored activity")
 	private boolean isOtherSponsoredActivity;
 
