@@ -38,6 +38,7 @@ public class ProposalInfo {
 	private Date lastAudited = new Date();
 	private String lastAuditedBy = new String();
 	private String lastAuditAction = new String();
+	private boolean isDeleted = false;
 
 	public ProposalInfo() {
 
@@ -225,6 +226,14 @@ public class ProposalInfo {
 
 	public void setLastAuditAction(String lastAuditAction) {
 		this.lastAuditAction = lastAuditAction;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 }

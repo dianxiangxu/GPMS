@@ -475,17 +475,18 @@ public class UserService {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
 
+		ObjectId authorId = new ObjectId(userProfileID);
+
+		GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
+		gpmsCommonObj.setUserName(userName);
+		gpmsCommonObj.setUserProfileID(userProfileID);
+		gpmsCommonObj.setCultureName(cultureName);
+
+		UserProfile authorProfile = userProfileDAO
+				.findUserByProfileID(authorId);
+
 		for (String profile : profiles) {
 			ObjectId id = new ObjectId(profile);
-			ObjectId authorId = new ObjectId(userProfileID);
-
-			GPMSCommonInfo gpmsCommonObj = new GPMSCommonInfo();
-			gpmsCommonObj.setUserName(userName);
-			gpmsCommonObj.setUserProfileID(userProfileID);
-			gpmsCommonObj.setCultureName(cultureName);
-
-			UserProfile authorProfile = userProfileDAO
-					.findUserByProfileID(authorId);
 
 			UserProfile userProfile = userProfileDAO.findUserByProfileID(id);
 			userProfileDAO.deleteUserProfileByUserID(userProfile,

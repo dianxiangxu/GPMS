@@ -28,6 +28,7 @@ $(function() {
 			url : "",
 			ajaxCallMode : 0
 		},
+
 		ajaxCall : function(config) {
 			$
 					.ajax({
@@ -51,10 +52,12 @@ $(function() {
 						error : proposalsManage.ajaxFailure
 					});
 		},
+
 		LoadStaticImage : function() {
 			$('.cssClassSuccessImg').prop('src',
 					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
 		},
+
 		onInit : function() {
 			proposalsManage.SetFirstTabActive();
 			$('#btnReset').hide();
@@ -85,6 +88,7 @@ $(function() {
 			$("#gdvProposalsAuditLog").empty();
 			$("#gdvProposalsAuditLog_Pagination").remove();
 		},
+
 		SetFirstTabActive : function() {
 			var $tabs = $("#container-7").tabs();
 			$tabs.tabs('option', 'active', 0);
@@ -93,6 +97,7 @@ $(function() {
 			$("#container-7 li").removeClass("ui-corner-top").addClass(
 					"ui-corner-left");
 		},
+
 		EnableAccordion : function() {
 			$('div#st_vertical').slideTabs({
 				tabsScroll : false,
@@ -104,73 +109,7 @@ $(function() {
 			});
 
 		},
-		Boolean : function(str) {
-			switch (str) {
-			case "1":
-				return true;
-			case "0":
-				return false;
-			default:
-			}
-		},
-		CreateValidationClass : function(attValType) {
-			var validationClass = '';
 
-			switch (attValType) {
-			case "1":
-				validationClass += 'verifyAlphabetsOnly';
-				break;
-			case "2":
-				validationClass += 'verifyAlphaNumeric';
-				break;
-			case "3":
-				validationClass += 'verifyDecimal';
-				break;
-			case "4":
-				validationClass += 'verifyEmail';
-				break;
-			case "5":
-				validationClass += 'verifyInteger';
-				break;
-			case "6":
-				validationClass += 'verifyPrice';
-				break;
-			case "7":
-				validationClass += 'verifyUrl';
-				break;
-			default:
-				validationClass += '';
-				break;
-			}
-			return validationClass;
-		},
-		GetValidationTypeErrorMessage : function(attValType) {
-			var retString = ''
-			switch (attValType) {
-			case "1":
-				retString = getLocale(gpmsProposalsManagement, 'Alphabets Only');
-				break;
-			case "2":
-				retString = getLocale(gpmsProposalsManagement, 'AlphaNumeric');
-				break;
-			case "3":
-				retString = getLocale(gpmsProposalsManagement, 'Decimal Number');
-				break;
-			case "4":
-				retString = getLocale(gpmsProposalsManagement, 'Email Address');
-				break;
-			case "5":
-				retString = getLocale(gpmsProposalsManagement, 'Integer Number');
-				break;
-			case "6":
-				retString = getLocale(gpmsProposalsManagement, 'Price error');
-				break;
-			case "7":
-				retString = getLocale(gpmsProposalsManagement, 'Web URL');
-				break;
-			}
-			return retString;
-		},
 		ClearForm : function() {
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
@@ -222,7 +161,7 @@ $(function() {
 			var offset_ = 1;
 			var current_ = 1;
 			var perpage = ($("#gdvProposals_pagesize").length > 0) ? $(
-					"#gdvProposals_pagesize :selected").text() : 10;
+					"#gdvProposalsProposals_pagesize :selected").text() : 10;
 
 			var proposalBindObj = {
 				ProjectTitle : projectTitle,
@@ -246,13 +185,10 @@ $(function() {
 								colModel : [
 										{
 											display : 'Proposal ID',
-											name : 'proposal_id',
 											cssclass : 'cssClassHeadCheckBox',
 											coltype : 'checkbox',
 											align : 'center',
-											checkFor : '8', // this is count
-											// from 0 column
-											// index
+											checkFor : '18',
 											elemClass : 'attrChkbox',
 											elemDefault : false,
 											controlclass : 'attribHeaderChkbox'
@@ -263,8 +199,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : 'Date Received',
@@ -291,8 +226,7 @@ $(function() {
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
-											type : 'array',
-											hide : true
+											type : 'array'
 										},
 										{
 											display : 'Project Title',
@@ -317,8 +251,7 @@ $(function() {
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
-											type : 'array',
-											hide : true
+											type : 'array'
 										},
 										{
 											display : 'Due Date',
@@ -356,8 +289,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : 'Granting Agencies',
@@ -366,8 +298,7 @@ $(function() {
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
-											type : 'array',
-											hide : true
+											type : 'array'
 										},
 										{
 											display : 'Direct Costs($)',
@@ -375,8 +306,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : 'Total Costs($)',
@@ -404,8 +334,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : 'Last Audited Action',
@@ -413,8 +342,17 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
+											align : 'left'
+										},
+										{
+											display : 'Is Deleted?',
+											name : 'is_deleted',
+											cssclass : 'cssClassHeadBoolean',
+											controlclass : '',
+											coltype : 'label',
 											align : 'left',
-											hide : true
+											type : 'boolean',
+											format : 'Yes/No'
 										},
 										{
 											display : 'PI User',
@@ -422,8 +360,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : 'Co-PI Users',
@@ -432,8 +369,7 @@ $(function() {
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
-											type : 'array',
-											hide : true
+											type : 'array'
 										},
 										{
 											display : 'FA Costs($)',
@@ -441,8 +377,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : 'FA Rate(%)',
@@ -450,8 +385,7 @@ $(function() {
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
-											align : 'left',
-											hide : true
+											align : 'left'
 										},
 										{
 											display : getLocale(
@@ -483,30 +417,8 @@ $(function() {
 											enable : true,
 											_event : 'click',
 											trigger : '2',
-											callMethod : 'proposalsManage.DeleteUser',
-											arguments : '11'
-										},
-										{
-											display : getLocale(
-													gpmsProposalsManagement,
-													"Activate"),
-											name : 'activate',
-											enable : true,
-											_event : 'click',
-											trigger : '3',
-											callMethod : 'proposalsManage.ActiveUser',
-											arguments : '10'
-										},
-										{
-											display : getLocale(
-													gpmsProposalsManagement,
-													"Deactivate"),
-											name : 'deactivate',
-											enable : true,
-											_event : 'click',
-											trigger : '4',
-											callMethod : 'proposalsManage.DeactiveUser',
-											arguments : '10'
+											callMethod : 'proposalsManage.DeleteProposal',
+											arguments : '18'
 										} ],
 								rp : perpage,
 								nomsg : getLocale(gpmsProposalsManagement,
@@ -900,18 +812,18 @@ $(function() {
 			}
 		},
 
-		DeleteUser : function(tblID, argus) {
+		DeleteProposal : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvProposals":
 				if (argus[1].toLowerCase() != "yes") {
-					proposalsManage.DeleteUserById(argus[0]);
+					proposalsManage.DeleteProposalById(argus[0]);
 				} else {
 					csscody.alert('<h2>'
 							+ getLocale(gpmsProposalsManagement,
 									"Information Alert")
 							+ '</h2><p>'
 							+ getLocale(gpmsProposalsManagement,
-									"Sorry! this user is already deleted.")
+									"Sorry! this proposal is already deleted.")
 							+ '</p>');
 				}
 				break;
@@ -920,106 +832,57 @@ $(function() {
 			}
 		},
 
-		ConfirmDeleteMultiple : function(user_ids, event) {
+		ConfirmDeleteMultiple : function(proposal_ids, event) {
 			if (event) {
-				proposalsManage.DeleteMultipleAttribute(user_ids);
+				proposalsManage.DeleteMultipleProposals(proposal_ids);
 			}
 		},
 
-		DeleteMultipleAttribute : function(_userIds) {
+		DeleteMultipleProposals : function(_proposalIds) {
 			// this.config.dataType = "html";
 			this.config.url = this.config.baseURL
-					+ "DeleteMultipleUsersByUserID";
+					+ "DeleteMultipleProposalsByProposalID";
 			this.config.data = JSON2.stringify({
-				userIds : _userIds,
+				proposalIds : _proposalIds,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 13;
+			this.config.ajaxCallMode = 3;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		DeleteUserById : function(_userId) {
+		DeleteProposalById : function(_proposalId) {
 			var properties = {
 				onComplete : function(e) {
-					proposalsManage.ConfirmSingleDelete(_userId, e);
+					proposalsManage.ConfirmSingleDelete(_proposalId, e);
 				}
 			};
 			csscody.confirm("<h2>"
 					+ getLocale(gpmsProposalsManagement, "Delete Confirmation")
 					+ "</h2><p>"
 					+ getLocale(gpmsProposalsManagement,
-							"Are you sure you want to delete this user?")
+							"Are you sure you want to delete this proposal?")
 					+ "</p>", properties);
 		},
 
-		ConfirmSingleDelete : function(user_id, event) {
+		ConfirmSingleDelete : function(proposal_id, event) {
 			if (event) {
-				proposalsManage.DeleteSingleUser(user_id);
+				proposalsManage.DeleteSingleUser(proposal_id);
 			}
 		},
 
-		DeleteSingleUser : function(_userId) {
-			this.config.url = this.config.baseURL + "DeleteUserByUserID";
+		DeleteSingleUser : function(_proposalId) {
+			this.config.url = this.config.baseURL
+					+ "DeleteProposalByProposalID";
 			this.config.data = JSON2.stringify({
-				userId : _userId,
+				proposalId : _proposalId,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 12;
+			this.config.ajaxCallMode = 2;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		ActivateUser : function(_userId, _isActive) {
-			this.config.url = this.config.baseURL
-					+ "UpdateUserIsActiveByUserID";
-			this.config.data = JSON2.stringify({
-				userId : _userId,
-				gpmsCommonObj : gpmsCommonObj(),
-				isActive : _isActive
-			});
-			this.config.ajaxCallMode = 14;
-			this.ajaxCall(this.config);
-			return false;
-		},
-		ActiveUser : function(tblID, argus) {
-			switch (tblID) {
-			case "gdvProposals":
-				if (argus[1].toLowerCase() != "yes") {
-					proposalsManage.ActivateUser(argus[0], true);
-				} else {
-					csscody.alert('<h2>'
-							+ getLocale(gpmsProposalsManagement,
-									"Information Alert")
-							+ '</h2><p>'
-							+ getLocale(gpmsProposalsManagement,
-									"Sorry! this user is already actived.")
-							+ '</p>');
-				}
-				break;
-			default:
-				break;
-			}
-		},
-		DeactiveUser : function(tblID, argus) {
-			switch (tblID) {
-			case "gdvProposals":
-				if (argus[1].toLowerCase() != "no") {
-					proposalsManage.ActivateUser(argus[0], false);
-				} else {
-					csscody.alert('<h2>'
-							+ getLocale(gpmsProposalsManagement,
-									"Information Alert")
-							+ '</h2><p>'
-							+ getLocale(gpmsProposalsManagement,
-									"Sorry! this user is already deactived.")
-							+ '</p>');
-				}
-				break;
-			default:
-				break;
-			}
-		},
 		isUniqueProjectTitle : function(userId, newUserName) {
 			var userUniqueObj = {
 				UserID : userId,
@@ -1239,119 +1102,117 @@ $(function() {
 				});
 				break;
 
-			case 2:
-
-				break;
-
-			case 3:
-
-				break;
-
-			case 4:
-
-				break;
-
-			case 5:
-
-				break;
-
-			case 6:
-
-				break;
-
-			case 7:
-
-				break;
-
-			case 8: // For User Edit Action
-				proposalsManage.FillForm(msg);
-				$('#divProposalGrid').hide();
-				$('#divProposalForm').show();
-				break;
-
-			case 9:
-
-				break;
-
-			case 10:
-
-				break;
-
-			case 11:
-
-				break;
-
-			case 12: // Single Deleted
+			case 2: // Single Proposal Delete
 				proposalsManage.BindProposalGrid(null, null, null, null, null,
 						null, null);
-				csscody
-						.info("<h2>"
-								+ getLocale(gpmsProposalsManagement,
-										'Successful Message')
-								+ "</h2><p>"
-								+ getLocale(gpmsProposalsManagement,
-										'User has been deleted successfully.')
-								+ "</p>");
-
-				$('#divProposalForm').hide();
-				$('#divProposalGrid').show();
-				break;
-
-			case 13: // Multiple Deleted
-				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null, null);
-				csscody
-						.info("<h2>"
-								+ getLocale(gpmsProposalsManagement,
-										'Successful Message')
-								+ "</h2><p>"
-								+ getLocale(gpmsProposalsManagement,
-										'Selected user(s) has been deleted successfully.')
-								+ "</p>");
-				break;
-
-			case 14: // Activated
-				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsProposalsManagement,
 								'Successful Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsProposalsManagement,
-								'User has been activated successfully.')
+								'Proposal has been deleted successfully.')
 						+ "</p>");
-				break;
 
-			case 15: // Unique Project Title Check
-				isUniqueProjectTitle = stringToBoolean(msg);
-				break;
-
-			case 16: // Save Update
-				proposalsManage.BindProposalGrid(null, null, null, null, null,
-						null, null);
-				$('#divProposalGrid').show();
-				if (editFlag > 0) {
-					csscody.info("<h2>"
-							+ getLocale(gpmsProposalsManagement,
-									'Successful Message')
-							+ "</h2><p>"
-							+ getLocale(gpmsProposalsManagement,
-									'User has been updated successfully.')
-							+ "</p>");
-				} else {
-					csscody.info("<h2>"
-							+ getLocale(gpmsProposalsManagement,
-									'Successful Message')
-							+ "</h2><p>"
-							+ getLocale(gpmsProposalsManagement,
-									'User has been saved successfully.')
-							+ "</p>");
-				}
-				proposalsManage.ClearForm();
 				$('#divProposalForm').hide();
+				$('#divProposalGrid').show();
 				break;
+			break;
+
+		case 3: // Multiple Proposal Delete
+			proposalsManage.BindProposalGrid(null, null, null, null, null,
+					null, null);
+			csscody
+					.info("<h2>"
+							+ getLocale(gpmsProposalsManagement,
+									'Successful Message')
+							+ "</h2><p>"
+							+ getLocale(gpmsProposalsManagement,
+									'Selected proposal(s) has been deleted successfully.')
+							+ "</p>");
+			break;
+
+		case 4:
+
+			break;
+
+		case 5:
+
+			break;
+
+		case 6:
+
+			break;
+
+		case 7:
+
+			break;
+
+		case 8: // For User Edit Action
+			proposalsManage.FillForm(msg);
+			$('#divProposalGrid').hide();
+			$('#divProposalForm').show();
+			break;
+
+		case 9:
+
+			break;
+
+		case 10:
+
+			break;
+
+		case 11:
+
+			break;
+
+		case 12:
+
+			break;
+
+		case 13:
+
+			break;
+
+		case 14: // Activated
+			proposalsManage
+					.BindProposalGrid(null, null, null, null, null, null);
+			csscody.info("<h2>"
+					+ getLocale(gpmsProposalsManagement, 'Successful Message')
+					+ "</h2><p>"
+					+ getLocale(gpmsProposalsManagement,
+							'User has been activated successfully.') + "</p>");
+			break;
+
+		case 15: // Unique Project Title Check
+			isUniqueProjectTitle = stringToBoolean(msg);
+			break;
+
+		case 16: // Save Update
+			proposalsManage.BindProposalGrid(null, null, null, null, null,
+					null, null);
+			$('#divProposalGrid').show();
+			if (editFlag > 0) {
+				csscody
+						.info("<h2>"
+								+ getLocale(gpmsProposalsManagement,
+										'Successful Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsProposalsManagement,
+										'User has been updated successfully.')
+								+ "</p>");
+			} else {
+				csscody.info("<h2>"
+						+ getLocale(gpmsProposalsManagement,
+								'Successful Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'User has been saved successfully.') + "</p>");
 			}
-		},
+			proposalsManage.ClearForm();
+			$('#divProposalForm').hide();
+			break;
+		}
+	},
 
 		ajaxFailure : function(msg) {
 			switch (proposalsManage.config.ajaxCallMode) {
@@ -1531,6 +1392,47 @@ $(function() {
 			// }
 			// });
 
+			$('#btnDeleteSelected')
+					.click(
+							function() {
+								var proposal_ids = '';
+								proposal_ids = SageData.Get("gdvProposals").Arr
+										.join(',');
+
+								if (proposal_ids.length > 0) {
+									var properties = {
+										onComplete : function(e) {
+											proposalsManage
+													.ConfirmDeleteMultiple(
+															proposal_ids, e);
+										}
+									};
+									csscody
+											.confirm(
+													"<h2>"
+															+ getLocale(
+																	gpmsProposalsManagement,
+																	'Delete Confirmation')
+															+ "</h2><p>"
+															+ getLocale(
+																	gpmsProposalsManagement,
+																	'Are you sure you want to delete selected proposal(s)?')
+															+ "</p>",
+													properties);
+								} else {
+									csscody
+											.alert('<h2>'
+													+ getLocale(
+															gpmsProposalsManagement,
+															"Information Alert")
+													+ '</h2><p>'
+													+ getLocale(
+															gpmsProposalsManagement,
+															"Please select at least one proposal before deleting.")
+													+ '</p>');
+								}
+							});
+
 			$('#btnAddNew').bind("click", function() {
 				$('#auditLogTab').hide();
 				$('#divProposalGrid').hide();
@@ -1607,8 +1509,8 @@ $(function() {
 
 			$(".delbutton").click(function() {
 				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
-				var user_id = $(this).prop("id");
-				proposalsManage.DeleteUserById(user_id);
+				var proposal_id = $(this).prop("id");
+				proposalsManage.DeleteProposalById(proposal_id);
 			});
 
 			// $("td.required input, td select").focusout(function() {

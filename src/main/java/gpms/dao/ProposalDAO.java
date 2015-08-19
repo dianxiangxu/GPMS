@@ -5,6 +5,7 @@ package gpms.dao;
 import gpms.DAL.MongoDBConnector;
 import gpms.model.AuditLog;
 import gpms.model.AuditLogInfo;
+import gpms.model.GPMSCommonInfo;
 import gpms.model.InvestigatorInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.ProjectInfo;
@@ -42,6 +43,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 
 	private static Morphia morphia;
 	private static Datastore ds;
+	private AuditLog audit = new AuditLog();
 
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
@@ -69,41 +71,70 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		super(mongo, morphia, dbName);
 	}
 
+	public List<Proposal> findAll() throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).asList();
+	}
+
+	public Proposal findProposalByProposalID(ObjectId id)
+			throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(Proposal.class).field("_id").equal(id).get();
+	}
+
+	public void deleteProposal(Proposal proposal, UserProfile authorProfile,
+			GPMSCommonInfo gpmsCommonObj) {
+		Datastore ds = getDatastore();
+		proposal.setProposalStatus(Status.DELETED);
+		AuditLog entry = new AuditLog(authorProfile, "Deleted Proposal for "
+				+ proposal.getProjectInfo().getProjectTitle(), new Date());
+		proposal.addEntryToAuditLog(entry);
+		ds.save(proposal);
+	}
+
+	public void setEditProposalStatus(Proposal proposal, Status status,
+			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
+		if (!proposal.getProposalStatus().equals(status)) {
+			Datastore ds = getDatastore();
+			proposal.setProposalStatus(status);
+			audit = new AuditLog(authorProfile, "Edited Proposal Status for "
+					+ proposal.getProjectInfo().getProjectTitle() + " as "
+					+ status, new Date());
+			proposal.addEntryToAuditLog(audit);
+			ds.save(proposal);
+		}
+	}
+
 	public void setEditProposalNumber(Proposal proposal, String number,
-			UserProfile author) {
+			UserProfile authorProfile) {
 		if (!proposal.getProposalNo().equals(number)) {
 			Datastore ds = getDatastore();
 			proposal.setProposalNo(number);
-			AuditLog entry = new AuditLog(author, "Edited Proposal Number",
-					new Date());
+			AuditLog entry = new AuditLog(authorProfile,
+					"Edited Proposal Number", new Date());
 			proposal.addEntryToAuditLog(entry);
 			ds.save(proposal);
 		}
 	}
 
 	public void setEditDateReceived(Proposal proposal, Date date,
-			UserProfile author) {
+			UserProfile authorProfile) {
 		if (!proposal.getDateReceived().equals(date)) {
 			Datastore ds = getDatastore();
 			proposal.setDateReceived(date);
-			AuditLog entry = new AuditLog(author, "Edited Date Received",
-					new Date());
+			AuditLog entry = new AuditLog(authorProfile,
+					"Edited Date Received", new Date());
 			proposal.addEntryToAuditLog(entry);
 			ds.save(proposal);
 		}
 	}
 
-	public List<Proposal> findAll() throws UnknownHostException {
-		Datastore ds = getDatastore();
-		return ds.createQuery(Proposal.class).asList();
-	}
-
 	public void setEditInvestigatorInfo(Proposal proposal,
-			InvestigatorInfo invInf, UserProfile author) {
+			InvestigatorInfo invInf, UserProfile authorProfile) {
 		if (!proposal.getInvestigatorInfo().equals(invInf)) {
 			Datastore ds = getDatastore();
 			proposal.setInvestigatorInfo(invInf);
-			AuditLog entry = new AuditLog(author,
+			AuditLog entry = new AuditLog(authorProfile,
 					"Edited Investogator Information", new Date());
 			proposal.addEntryToAuditLog(entry);
 			ds.save(proposal);
@@ -111,47 +142,27 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	}
 
 	public void setEditProjectInfo(Proposal proposal, ProjectInfo projInf,
-			UserProfile author) {
+			UserProfile authorProfile) {
 		if (!proposal.getProposalStatus().equals(projInf)) {
 			Datastore ds = getDatastore();
 			proposal.setProjectInfo(projInf);
-			AuditLog entry = new AuditLog(author, "Edited Project Information",
-					new Date());
+			AuditLog entry = new AuditLog(authorProfile,
+					"Edited Project Information", new Date());
 			proposal.addEntryToAuditLog(entry);
 			ds.save(proposal);
 		}
 	}
 
 	public void setEditSponsorAndBudgetInfo(Proposal proposal,
-			SponsorAndBudgetInfo sponAndBudgInf, UserProfile author) {
+			SponsorAndBudgetInfo sponAndBudgInf, UserProfile authorProfile) {
 		if (!proposal.getSponsorAndBudgetInfo().equals(sponAndBudgInf)) {
 			Datastore ds = getDatastore();
 			proposal.setSponsorAndBudgetInfo(sponAndBudgInf);
-			AuditLog entry = new AuditLog(author,
+			AuditLog entry = new AuditLog(authorProfile,
 					"Edited Sponsor and Budget Information", new Date());
 			proposal.addEntryToAuditLog(entry);
 			ds.save(proposal);
 		}
-	}
-
-	public void setEditProposalStatus(Proposal proposal, Status status,
-			UserProfile author) {
-		if (!proposal.getProposalStatus().equals(status)) {
-			Datastore ds = getDatastore();
-			proposal.setProposalStatus(status);
-			AuditLog entry = new AuditLog(author, "Edited Proposal Status",
-					new Date());
-			proposal.addEntryToAuditLog(entry);
-			ds.save(proposal);
-		}
-	}
-
-	public void deleteProposal(Proposal proposal, UserProfile author) {
-		Datastore ds = getDatastore();
-		proposal.setProposalStatus(Status.DELETED);
-		AuditLog entry = new AuditLog(author, "Deleted Proposal", new Date());
-		proposal.addEntryToAuditLog(entry);
-		ds.save(proposal);
 	}
 
 	public List<Proposal> proposalByPiId(UserProfile piId)
@@ -200,11 +211,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		return ds.createQuery(Proposal.class)
 				.field("investigator info.senior personnel.department")
 				.equal(department).asList();
-	}
-
-	public Proposal proposalById(ObjectId id) throws UnknownHostException {
-		Datastore ds = getDatastore();
-		return ds.createQuery(Proposal.class).field("_id").equal(id).get();
 	}
 
 	// TODO: For Grid binding
@@ -280,6 +286,10 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			proposal.setProposalNo(userProposal.getProposalNo());
 			proposal.setDateReceived(userProposal.getDateReceived());
 			proposal.setProposalStatus(userProposal.getProposalStatus());
+
+			if (userProposal.getProposalStatus() == Status.DELETED) {
+				proposal.setDeleted(true);
+			}
 
 			// PI, CO-PI and Senior UserProfiles
 

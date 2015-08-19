@@ -31,7 +31,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
-import org.mongodb.morphia.query.CriteriaContainer;
 import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
@@ -43,8 +42,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 
 	private static Morphia morphia;
 	private static Datastore ds;
-	private AuditLog audit;
-	private CriteriaContainer container;
+	private AuditLog audit = new AuditLog();
 
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
@@ -453,11 +451,6 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	}
 
 	public UserProfile findUserByProfileID(ObjectId id) {
-		Datastore ds = getDatastore();
-		return ds.createQuery(UserProfile.class).field("_id").equal(id).get();
-	}
-
-	public UserProfile findByID(String id) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(UserProfile.class).field("_id").equal(id).get();
 	}
