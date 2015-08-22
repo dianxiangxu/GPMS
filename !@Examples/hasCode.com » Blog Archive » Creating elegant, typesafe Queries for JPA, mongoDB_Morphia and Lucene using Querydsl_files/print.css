@@ -1,0 +1,24 @@
+@media print {
+body { background:white; color:black; margin:0 }
+.nav,
+.navigation,
+.sidebar1,
+.shareaholic-show-on-load,
+.shareaholic-like-buttonset,
+#comments,
+.commentlist,
+#respond,
+#commentform,
+.noprint,
+.wptoc,
+.Header {
+	display:none;
+}
+h1, h2, h3, h4, h5, h6 { page-break-after:avoid; 
+     page-break-inside:avoid }
+img { page-break-inside:avoid; 
+     page-break-after:avoid; }
+blockquote, table, pre { page-break-inside:avoid }
+ul, ol, dl  { page-break-before:avoid }
+a, a:visited {color:#000;}
+}

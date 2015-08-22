@@ -8,6 +8,7 @@ import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
 import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
+import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.JSONTansformer;
 import gpms.model.PositionDetails;
 import gpms.model.UserAccount;
@@ -100,19 +101,48 @@ public class UserService {
 		return response;
 	}
 
+	// For DropDown binding in Proposal Management
 	@POST
-	@Path("/GetAllUserList")
+	@Path("/GetAllUserDropdown")
 	public HashMap<String, String> getAllUsers() throws UnknownHostException {
 		HashMap<String, String> users = new HashMap<String, String>();
 		List<UserProfile> userprofiles = userProfileDAO.findAll();
 		for (UserProfile userProfile : userprofiles) {
-			users.put(
-					userProfile.getId().toString(),
-					userProfile.getFirstName() + " "
-							+ userProfile.getMiddleName() + " "
-							+ userProfile.getLastName());
+			users.put(userProfile.getId().toString(), userProfile.getFullName());
 		}
 		return users;
+	}
+
+	@POST
+	@Path("/GetAllUserList")
+	public List<InvestigatorUsersAndPositions> getAllCollegesForUsers()
+			throws UnknownHostException, JsonProcessingException, IOException {
+		List<InvestigatorUsersAndPositions> usersPositions = userProfileDAO
+				.findAllUsersAndPositions();
+
+		return usersPositions;
+	}
+
+	@POST
+	@Path("/GetAllPositionDetailsForAUser")
+	public List<InvestigatorUsersAndPositions> getAllPositionDetailsForAUser(
+			String message) throws UnknownHostException,
+			JsonProcessingException, IOException {
+		String userId = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("UserId")) {
+			userId = root.get("UserId").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(userId);
+
+		List<InvestigatorUsersAndPositions> userPositions = userProfileDAO
+				.findAllPositionDetailsForAUser(id);
+
+		return userPositions;
 	}
 
 	@POST

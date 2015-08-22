@@ -16,6 +16,7 @@ import gpms.model.Proposal;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
+import gpms.rest.InvestigatorUsersAndPositions;
 
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -130,9 +131,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setRowTotal(rowTotal);
 			user.setId(userProfile.getId().toString());
 			user.setUserName(userProfile.getUserAccount().getUserName());
-			user.setFullName(userProfile.getFirstName() + " "
-					+ userProfile.getMiddleName() + " "
-					+ userProfile.getLastName());
+			user.setFullName(userProfile.getFullName());
 
 			user.setNoOfPIedProposal(countPIProposal(userProfile));
 			user.setNoOfCoPIedProposal(countCoPIProposal(userProfile));
@@ -468,10 +467,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	public void deleteUserProfileByUserID(UserProfile userProfile,
 			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(authorProfile,
-				"Deleted user " + userProfile.getFirstName() + " "
-						+ userProfile.getMiddleName() + " "
-						+ userProfile.getLastName(), new Date());
+		audit = new AuditLog(authorProfile, "Deleted user "
+				+ userProfile.getFullName(), new Date());
 		userProfile.addEntryToAuditLog(audit);
 
 		userProfile.setDeleted(true);
@@ -482,10 +479,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			UserProfile authorProfile, GPMSCommonInfo gpmsCommonObj,
 			Boolean isActive) {
 		Datastore ds = getDatastore();
-		audit = new AuditLog(authorProfile,
-				"Deleted user " + userProfile.getFirstName() + " "
-						+ userProfile.getMiddleName() + " "
-						+ userProfile.getLastName(), new Date());
+		audit = new AuditLog(authorProfile, "Deleted user "
+				+ userProfile.getFullName(), new Date());
 		userProfile.addEntryToAuditLog(audit);
 
 		userProfile.setDeleted(!isActive);
@@ -933,4 +928,51 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return profileQuery.get();
 	}
 
+	public List<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
+		Datastore ds = getDatastore();
+		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
+
+		// Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		// UserProfile q1 = profileQuery.field("_id").equal(id).get();
+
+		Query<UserProfile> q = ds.createQuery(UserProfile.class)
+				.retrievedFields(true, "_id", "first name", "middle name",
+						"last name", "details", "mobile number");
+		List<UserProfile> userProfile = q.asList();
+
+		for (UserProfile user : userProfile) {
+			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
+			userPosition.setId(user.getId().toString());
+			userPosition.setFullName(user.getFullName());
+			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
+			userPosition.setPositions(user.getDetails());
+			userPositions.add(userPosition);
+		}
+		return userPositions;
+
+	}
+
+	public List<InvestigatorUsersAndPositions> findAllPositionDetailsForAUser(
+			ObjectId id) {
+		Datastore ds = getDatastore();
+		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
+
+		Query<UserProfile> q = ds
+				.createQuery(UserProfile.class)
+				.field("_id")
+				.equal(id)
+				.retrievedFields(true, "_id", "first name", "middle name",
+						"last name", "details", "mobile number");
+		List<UserProfile> userProfile = q.asList();
+
+		for (UserProfile user : userProfile) {
+			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
+			userPosition.setId(user.getId().toString());
+			userPosition.setFullName(user.getFullName());
+			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
+			userPosition.setPositions(user.getDetails());
+			userPositions.add(userPosition);
+		}
+		return userPositions;
+	}
 }

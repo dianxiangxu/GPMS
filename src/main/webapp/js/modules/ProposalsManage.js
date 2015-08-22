@@ -426,7 +426,7 @@ $(function() {
 						null, null);
 				$('#auditLogTab').show();
 
-				proposalsManage.BindUserDropDown();
+				// proposalsManage.BindUserDropDown();
 
 				break;
 			default:
@@ -789,9 +789,6 @@ $(function() {
 						$(this).removeAttr("selected");
 					});
 
-			// $('select[name="ddlCollege"]').eq(0).val(
-			// $('select[name="ddlCollege"] option:first').val());
-
 			// proposalsManage.BindDepartmentDropDown($(
 			// 'select[name="ddlProposalStatus"]').eq(0).val(), false);
 			return false;
@@ -956,47 +953,59 @@ $(function() {
 
 		BindUserDropDown : function() {
 			// Used User REST API instead Proposal
-			this.config.url = this.config.rootURL + "users/" + "GetAllUserList";
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetAllUserDropdown";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 5;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindCollegeDropDown : function(userProfile) {
-			this.config.url = this.config.rootURL + "users/" + "GetCollegeList";
-			this.config.data = "{}";
+		BindPositionsForUserDropDown : function(userId) {
+			// Used User REST API instead Proposal
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetAllPositionDetailsForAUser";
+			this.config.data = JSON2.stringify({
+				UserId : userId
+			});
 			this.config.ajaxCallMode = 6;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindDepartmentDropDown : function(userProfile, collegeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetDepartmentList";
-			this.config.data = JSON2.stringify({
-				college : collegeName
-			});
+		BindCollegeDropDown : function() {
+			this.config.url = this.config.rootURL + "users/" + "GetCollegeList";
+			this.config.data = "{}";
 			this.config.ajaxCallMode = 7;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindPositionTypeDropDown : function(userProfile, collegeName,
-				departmentName) {
+		BindDepartmentDropDown : function(collegeName) {
 			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTypeList";
+					+ "GetDepartmentList";
 			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName
+				college : collegeName
 			});
 			this.config.ajaxCallMode = 8;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindPositionTitleDropDown : function(userProfile, collegeName,
-				departmentName, positionTypeName) {
+		BindPositionTypeDropDown : function(collegeName, departmentName) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetPositionTypeList";
+			this.config.data = JSON2.stringify({
+				college : collegeName,
+				department : departmentName
+			});
+			this.config.ajaxCallMode = 9;
+			this.ajaxCall(this.config);
+			return false;
+		},
+
+		BindPositionTitleDropDown : function(collegeName, departmentName,
+				positionTypeName) {
 			this.config.url = this.config.rootURL + "users/"
 					+ "GetPositionTitleList";
 			this.config.data = JSON2.stringify({
@@ -1004,7 +1013,7 @@ $(function() {
 				department : departmentName,
 				positionType : positionTypeName
 			});
-			this.config.ajaxCallMode = 9;
+			this.config.ajaxCallMode = 10;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1015,7 +1024,7 @@ $(function() {
 			this.config.data = JSON2.stringify({
 				college : collegeName
 			});
-			this.config.ajaxCallMode = 9;
+			this.config.ajaxCallMode = 11;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1027,7 +1036,7 @@ $(function() {
 				college : collegeName,
 				department : departmentName
 			});
-			this.config.ajaxCallMode = 10;
+			this.config.ajaxCallMode = 11;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1041,7 +1050,7 @@ $(function() {
 				department : departmentName,
 				positionType : positionTypeName
 			});
-			this.config.ajaxCallMode = 11;
+			this.config.ajaxCallMode = 12;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1109,29 +1118,110 @@ $(function() {
 										'select[name="ddlName"]').get(rowIndex).options.length] = new Option(
 										item, index);
 							});
-			// TODO : Bind College based on UserProfileID
-			usersManage.BindCollegeDropDown($(
-					'select[name="ddlName"] option:selected').eq(rowIndex)
-					.val());
 			break;
 
 		case 6:
+			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			// department positionTitle
+			// positionType fullName id
+			$
+					.each(
+							msg,
+							function(index, item) {
+								// For form Dropdown Binding
+								// $('select[name=ddlName]
+								// option').get(rowIndex)
+								// .map(function() {
+								// return ($(this).val() == item.id);
+								// }).prop('selected', true);
+								//
+								$
+										.each(
+												item.positions,
+												function(index, position) {
+													if ($(
+															'select[name="ddlCollege"] option[value='
+																	+ position.college
+																	+ ']').eq(
+															rowIndex).length <= 0) {
 
+														$(
+																'select[name="ddlCollege"]')
+																.get(rowIndex).options[$(
+																'select[name="ddlCollege"]')
+																.get(rowIndex).options.length] = new Option(
+																position.college,
+																position.college);
+													}
+
+												});
+
+								$('#txtPhoneNo').text(item.mobileNumber);
+							});
 			break;
 
 		case 7:
+			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 
+			$
+					.each(
+							msg,
+							function(index, item) {
+								// For form Dropdown Binding
+								$('select[name="ddlCollege"]').get(rowIndex).options[$(
+										'select[name="ddlCollege"]').get(
+										rowIndex).options.length] = new Option(
+										item, item);
+							});
 			break;
 
 		case 8:
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$
+					.each(
+							msg,
+							function(index, item) {
+								$('select[name="ddlDepartment"]').get(rowIndex).options[$(
+										'select[name="ddlDepartment"]').get(
+										rowIndex).options.length] = new Option(
+										item, item);
+							});
 			break;
 
 		case 9:
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$
+					.each(msg,
+							function(index, item) {
+								$('select[name="ddlPositionType"]').get(
+										rowIndex).options[$(
+										'select[name="ddlPositionType"]').get(
+										rowIndex).options.length] = new Option(
+										item, item);
+							});
 
 			break;
 
 		case 10:
-
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$
+					.each(msg,
+							function(index, item) {
+								$('select[name="ddlPositionTitle"]').get(
+										rowIndex).options[$(
+										'select[name="ddlPositionTitle"]').get(
+										rowIndex).options.length] = new Option(
+										item, item);
+							});
 			break;
 
 		case 11:
@@ -1345,20 +1435,102 @@ $(function() {
 
 			proposalsManage.BindProposalStatus();
 
+			proposalsManage.BindUserDropDown();
+
+			// $('select[name="ddlName"] option').eq(rowIndex).map(function() {
+			// if ($(this).val() == GPMS.utils.GetUserProfileID())
+			// return this;
+			// }).attr('selected', 'selected');
+
+			// TODO : Bind User Name based on logged-in UserProfileID
 			// proposalsManage.BindCollegeDropDown();
 
-			// // Form Position details Drop downs
-			// $('select[name="ddlProposalStatus"]').on(
-			// "change",
-			// function() {
+			// TODO select the user's college
+			proposalsManage.BindPositionsForUserDropDown(GPMS.utils
+					.GetUserProfileID());
+
+			// proposalsManage.BindDepartmentDropDown($(
+			// 'select[name="ddlCollege"] option:selected').eq(rowIndex)
+			// .val());
+			// proposalsManage.BindPositionTypeDropDown($(
+			// 'select[name="ddlCollege"] option:selected').eq(rowIndex)
+			// .val(), $('select[name="ddlDepartment"] option:selected')
+			// .eq(rowIndex).val());
+			// proposalsManage.BindPositionTitleDropDown($(
+			// 'select[name="ddlCollege"] option:selected').eq(rowIndex)
+			// .val(), $('select[name="ddlDepartment"] option:selected')
+			// .eq(rowIndex).val(), $(
+			// 'select[name="ddlPositionType"] option:selected').eq(
+			// rowIndex).val(), false);
+
+			// Form Position details Drop downs
+			// $('select[name="ddlName"]').on("change", function() {
 			// rowIndex = $(this).closest('tr').prevAll("tr").length;
 			// if ($(this).val() != "0") {
-			// proposalsManage.BindDepartmentDropDown($(this)
-			// .val(), false);
+			// // proposalsManage.BindCollegeDropDown($(this).val());
+			// // TODO:
+			// // 1. bind College by userID all positiondetails
+			// // 2. select the college based on user data
+			// // 3. bind Department
+			// // 4. select the college based on user data
+			// // 5. bind positiontype
+			// // 6. select the college based on user data
+			// // 7. bind positiontitle
+			// // 8. select the positiontitle based on user data
+			//
 			// } else {
 			// $(this).find('option:gt(0)').remove();
 			// }
 			// });
+
+			$('select[name="ddlCollege"]').on("change", function() {
+				// rowIndex = $(this).closest('tr').prevAll("tr").length;
+				if ($(this).val() != "0") {
+					proposalsManage.BindDepartmentDropDown($(this).val());
+				} else {
+					$(this).find('option:gt(0)').remove();
+				}
+			});
+
+			$('select[name="ddlDepartment"]')
+					.on(
+							"change",
+							function() {
+								rowIndex = $(this).closest('tr').prevAll("tr").length;
+								if ($('select[name="ddlCollege"]').eq(rowIndex)
+										.val() != "0"
+										&& $(this).val() != "0") {
+									proposalsManage.BindPositionTypeDropDown($(
+											'select[name="ddlCollege"]').eq(
+											rowIndex).val(), $(this).val());
+								} else {
+									$('select[name="ddlPositionType"]').find(
+											'option:gt(0)').remove();
+								}
+							});
+
+			$('select[name="ddlPositionType"]')
+					.on(
+							"change",
+							function() {
+								rowIndex = $(this).closest('tr').prevAll("tr").length;
+								if ($('select[name="ddlCollege"]').eq(rowIndex)
+										.val() != "0"
+										&& $('select[name="ddlDepartment"]')
+												.eq(rowIndex).val() != "0"
+										&& $(this).val() != "0") {
+									proposalsManage.BindPositionTitleDropDown(
+											$('select[name="ddlCollege"]').eq(
+													rowIndex).val(),
+											$('select[name="ddlDepartment"]')
+													.eq(rowIndex).val(),
+											$(this).val());
+								} else {
+									$('select[name="ddlPositionTitle"]').find(
+											'option:gt(0)').remove();
+								}
+
+							});
 
 			$('#btnDeleteSelected')
 					.click(
@@ -1527,11 +1699,9 @@ $(function() {
 									rowIndex = $('#dataTable > tbody tr')
 											.size() - 1;
 									proposalsManage
-											.BindDepartmentDropDown(
-													$(
-															'select[name="ddlProposalStatus"] option:selected')
-															.eq(rowIndex).val(),
-													false);
+											.BindDepartmentDropDown($(
+													'select[name="ddlProposalStatus"] option:selected')
+													.eq(rowIndex).val());
 
 									// $('#dataTable tr:last
 									// td').fadeIn('slow');

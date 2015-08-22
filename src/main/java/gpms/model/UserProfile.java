@@ -478,4 +478,11 @@ public class UserProfile extends BaseEntity {
 		return copy;
 	}
 
+	public String getFullName() {
+		if (this.middleName != null && !this.middleName.isEmpty())
+			return this.firstName + " " + this.middleName + " " + this.lastName;
+		else
+			return this.firstName + " " + this.lastName;
+
+	}
 }

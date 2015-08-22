@@ -1,0 +1,1147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0114)http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/cb=gapi.loaded_1" async=""></script><script src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/ga.js"></script><script async="" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/restserver.php"></script>
+
+
+<title>hasCode.com  » Blog Archive   » Creating elegant, typesafe Queries for JPA, mongoDB/Morphia and Lucene using Querydsl</title>
+
+<meta name="p:domain_verify" content="4e66214569abcf95c929e01e60a8b5c6">
+<link rel="icon" href="http://www.hascode.com/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/style.css" type="text/css" media="screen">
+<link rel="stylesheet" type="text/css" media="print" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/print.css">
+<link rel="alternate" type="application/rss+xml" title="hasCode.com RSS Feed" href="http://www.hascode.com/feed/">
+<link rel="pingback" href="http://www.hascode.com/xmlrpc.php">
+<script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/script.js"></script><style type="text/css"></style>
+<link rel="alternate" type="application/rss+xml" title="hasCode.com » Creating elegant, typesafe Queries for JPA, mongoDB/Morphia and Lucene using Querydsl Comments Feed" href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/feed/">
+<link rel="stylesheet" id="colorbox-theme6-css" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/colorbox.css" type="text/css" media="screen">
+<link rel="stylesheet" id="cssCountdown-style-css" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="jsTwitterCard-css" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/jquery.ui.all.css" type="text/css" media="all">
+<script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/jquery.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var Colorbox = {
+	colorboxInline: "false",
+	colorboxIframe: "false",
+	colorboxGroupId: "",
+	colorboxTitle: "",
+	colorboxWidth: "false",
+	colorboxHeight: "false",
+	colorboxMaxWidth: "false",
+	colorboxMaxHeight: "false",
+	colorboxSlideshow: "false",
+	colorboxSlideshowAuto: "false",
+	colorboxScalePhotos: "false",
+	colorboxPreloading: "false",
+	colorboxOverlayClose: "false",
+	colorboxLoop: "true",
+	colorboxEscKey: "true",
+	colorboxArrowKey: "true",
+	colorboxScrolling: "true",
+	colorboxOpacity: "0.85",
+	colorboxTransition: "elastic",
+	colorboxSpeed: "350",
+	colorboxSlideshowSpeed: "2500",
+	colorboxClose: "close",
+	colorboxNext: "next",
+	colorboxPrevious: "previous",
+	colorboxSlideshowStart: "start slideshow",
+	colorboxSlideshowStop: "stop slideshow",
+	colorboxCurrent: "{current} of {total} images",
+	colorboxImageMaxWidth: "false",
+	colorboxImageMaxHeight: "false",
+	colorboxImageHeight: "false",
+	colorboxImageWidth: "false",
+	colorboxLinkHeight: "false",
+	colorboxLinkWidth: "false",
+	colorboxInitialHeight: "100",
+	colorboxInitialWidth: "300",
+	autoColorboxJavaScript: "",
+	autoHideFlash: "",
+	autoColorbox: "true",
+	autoColorboxGalleries: "",
+	colorboxAddClassToLinks: ""
+};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/jquery-colorbox-wrapper-min.js"></script>
+<script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/recipe.js"></script><script type="text/javascript" id="shr-analytics" async="" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/shareaholic_analytics.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.hascode.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.hascode.com/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="hasCode.com" href="http://www.hascode.com/">
+<link rel="start" title="How to add a local lib directory to Maven" href="http://www.hascode.com/2010/03/how-to-add-a-local-lib-directory-to-maven/">
+<link rel="prev" title="Creating Grammar Parsers in Java and Scala with Parboiled" href="http://www.hascode.com/2014/01/creating-grammar-parsers-in-java-and-scala-with-parboiled/">
+<link rel="next" title="Using Apache Avro with Java and Maven" href="http://www.hascode.com/2014/03/using-apache-avro-with-java-and-maven/">
+<meta name="generator" content="WordPress 3.0.5">
+<link rel="canonical" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl.html">
+<link rel="shortlink" href="http://www.hascode.com/?p=1092">
+
+                            <meta name="twitter:card" content="summary">
+                            <meta name="twitter:site" content="@hascode">
+                            <meta name="twitter:creator" content="@hascode">
+                            <meta name="twitter:url" content="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/">
+                            <meta name="twitter:title" content="Creating elegant, typesafe Queries for JPA, mongoDB/Morphia and Lucene using Querydsl">
+                            <meta name="twitter:description" content="Querydsl is a framework that allows us to create elegant, type-safe queries for a variety of different data-sources like Java Persistence API (JPA) entities, Java Data Objects (JDO), mongoDB with Morphia, SQL, Hibernate Search up to Lucene.
+
+In the following tutorial we&#39;re implementing example queries for different environments - Java Persistence API compared with a JPQL and a criteria API query, mongoDB with Morphia and last but not least for Lucene.
+
+
+
+[caption id=&#39;&#39;attachment_1093&#39;&#39; ali">
+                            <meta name="twitter:image" content="http://www.hascode.com/wp-content/uploads/2014/02/querydsl-jpa-query-300x88.png">
+                            
+
+<!-- Start Shareaholic OgTags -->
+
+	<meta property="og:image" content="http://www.hascode.com/wp-content/uploads/2014/02/querydsl-jpa-query.png">
+
+<!-- End Shareaholic OgTags -->
+
+	<link rel="stylesheet" type="text/css" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/star-rating.css">
+<link rel="stylesheet" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/wp-syntax.css" type="text/css" media="screen">
+<style type="text/css">
+	.wptoc {
+		border: 1px solid #AAAAAA;
+		padding: 5px;
+		float: left;
+		font-size: 0.95em;
+	}
+	.wptoc h2 {
+		text-align: center;
+		font-size: 1em;
+		font-weight: bold;
+	}
+	.wptoc ul, .wptoc ol {
+		list-style: none;
+		padding: 0;
+	}
+	.wptoc ul ul, .wptoc ol ol {
+		margin: 0 0 0 2em;
+	}
+	.wptoc-end {
+		clear: both;
+	}
+</style>
+	  <meta name="jQuery Colorbox" content="4.2">
+  <script type="text/javascript" async="" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/recipe.js"></script><script src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/jquery.min.js" type="text/javascript"></script><script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/wp-loader.js"></script><script type="text/javascript" id="shr-google-analytics" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/ga(1).js" data-cfasync="false"></script><script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/header-notifications.js" data-shr-notificationbase="https://howler.shareaholic.com" data-sorassetbase="//dsms0mj1bbhn4.cloudfront.net/assets"></script><link rel="stylesheet" media="screen" id="shareaholic-publisher-css" href="http://www.hascode.com/wp-content/plugins/sexybookmarks/spritegen_default/sprite.css"><style type="text/css">.shareaholic-arrow-down{ position: absolute !important; left:45% !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 6px solid #000000 !important; }.shareaholic-tip-text{font-size:12px !important; line-height:120% !important; background: #000000 !important; color: #ffffff !important; padding: 5px !important; border-radius: 5px !important; -webkit-border-radius:5px; !important; -moz-border-radius:5px; !important}</style><script async="" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/plusone.js" id="googplusonescript" gapi_processed="true">{"parsetags": "explicit"}</script></head>
+<body><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="padding-bottom: 42px; padding-right: 42px; display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" style="width: 0px; height: 0px; overflow: hidden; float: left;"></div><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><div id="cboxNext" style="float: left;"></div><div id="cboxPrevious" style="float: left;"></div><div id="cboxSlideshow" style="float: left;"></div><div id="cboxClose" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div>
+<div class="PageBackgroundGradient"></div>
+<div class="Main">
+
+<div class="Sheet">
+  <div class="Sheet-body">
+<div class="nav">
+<ul class="menu">
+<li><a class="active" href="http://www.hascode.com/"><span><span>Home</span></span></a></li><li><span class="separator"></span></li><li class="page_item page-item-36"><a href="http://www.hascode.com/site-map/" title="Site Map"><span><span>Site Map</span></span></a></li><li><span class="separator"></span></li>
+<li class="page_item page-item-258"><a href="http://www.hascode.com/about/" title="About"><span><span>About</span></span></a></li><li><span class="separator"></span></li>
+<li class="page_item page-item-645"><a href="http://www.hascode.com/youtube-channel/" title="YouTube Channel"><span><span>YouTube Channel</span></span></a></li><li><span class="separator"></span></li>
+<li class="page_item page-item-612"><a href="http://www.hascode.com/projects/" title="Projects"><span><span>Projects</span></span></a></li><li><span class="separator"></span></li>
+<li class="page_item page-item-865"><a href="http://www.hascode.com/external-articles/" title="External Articles"><span><span>External Articles</span></span></a></li><li><span class="separator"></span></li>
+<li class="page_item page-item-868"><a href="http://www.hascode.com/contact/" title="Contact"><span><span>Contact</span></span></a></li><li><span class="separator"></span></li>
+<li class="page_item page-item-784"><a href="http://www.hascode.com/snippets/" title="Snippets"><span><span>Snippets</span></span></a></li><li><span class="separator"></span></li>
+<li><a href="http://www.hascode.com/feed/"><img width="14" height="14" border="0" alt="RSS feed" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/feed-icon-14x14.png" style="margin-top:6px;margin-left:25px"></a></li>
+</ul>
+<div class="l"></div><div class="r"><div></div></div></div><div class="Header">
+  <div>
+<table class="logo">
+<tbody><tr><td class="logo-name"><a href="http://www.hascode.com/">hasCode.com</a></td></tr>
+<tr><td class="logo-text">micha kops' playground</td></tr>
+</tbody></table>
+
+  </div>
+</div>
+<div class="contentLayout">
+<div class="content">
+
+
+<div class="Block">
+  <div class="Block-body">
+
+
+<div class="BlockContent">
+  <div class="BlockContent-body">
+
+
+		<div class="navigation">
+			<div class="alignleft">« <a href="http://www.hascode.com/2014/01/creating-grammar-parsers-in-java-and-scala-with-parboiled/" rel="prev">Creating Grammar Parsers in Java and Scala with Parboiled</a></div>
+			<div class="alignright"><a href="http://www.hascode.com/2014/03/using-apache-avro-with-java-and-maven/" rel="next">Using Apache Avro with Java and Maven</a> »</div>
+		</div>
+
+		<div class="post" id="post-1092">
+			<h2>Creating elegant, typesafe Queries for JPA, mongoDB/Morphia and Lucene using Querydsl</h2>
+			<small>February 13th, 2014 by <a href="http://www.hascode.com/about/" rel="author">micha kops</a></small>
+			<div class="entry">
+				<!-- Start Shareaholic LikeButtonSetTop Automatic --><!-- End Shareaholic LikeButtonSetTop Automatic --><p>Querydsl is a framework that allows us to create elegant, type-safe queries for a variety of different data-sources like Java Persistence API (JPA) entities, Java Data Objects (JDO), mongoDB with Morphia, SQL, Hibernate Search up to Lucene.</p>
+<p>In the following tutorial we’re implementing example queries for different environments – Java Persistence API compared with a JPQL and a criteria API query, mongoDB with Morphia and last but not least for Lucene.</p>
+<p><span id="more-1092"></span></p>
+<div id="attachment_1093" class="wp-caption alignnone" style="width: 639px"><a onclick="javascript:pageTracker._trackPageview(&#39;/downloads/wp-content/uploads/2014/02/querydsl-jpa-query.png&#39;);" href="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/querydsl-jpa-query.png" class="cboxElement"><img class="size-full wp-image-1093 colorbox-1092" title="Querydsl JPA Query" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/querydsl-jpa-query.png" alt="Querydsl JPA Query" width="629" height="186"></a><p class="wp-caption-text">Querydsl JPA Query</p></div>
+<div class="toc wptoc">
+<h2>Contents</h2>
+<ol class="toc-odd level-1">
+	<li>
+		<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Querydsl_vs_JPA_JPQL_and_Criteria_API">Querydsl vs JPA (JPQL and Criteria API)</a>
+		<ol class="toc-even level-2">
+			<li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Dependencies">Dependencies</a>
+			</li>
+			<li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Persistence_Context_and_Entities">Persistence Context and Entities</a>
+				<ol class="toc-odd level-3">
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Book">Book</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Author">Author</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Tag">Tag</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Persistence_Configuration">Persistence Configuration</a>
+					</li>
+				</ol>
+			</li><li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Querydsl_Example">Querydsl Example</a>
+				<ol class="toc-odd level-3">
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#vs_JPQL">vs JPQL</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#vs_Criteria_API">vs Criteria API</a>
+					</li>
+				</ol>
+</li></ol>
+			</li><li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#mongoDB_and_Morphia">mongoDB and Morphia</a>
+				<ol class="toc-even level-2">
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Dependencies_1">Dependencies</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Entities">Entities</a>
+						<ol class="toc-odd level-3">
+							<li>
+								<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Book_1">Book</a>
+							</li>
+							<li>
+								<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Author_1">Author</a>
+							</li>
+							<li>
+								<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Tag_1">Tag</a>
+							</li>
+						</ol>
+					</li><li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Querydsl_Example_1">Querydsl Example</a>
+					</li>
+				</ol>
+			</li><li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Lucene">Lucene</a>
+				<ol class="toc-even level-2">
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Dependencies_2">Dependencies</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Creating_the_Query_Type">Creating the Query Type</a>
+					</li>
+					<li>
+						<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Querydsl_Example_2">Querydsl Example</a>
+					</li>
+				</ol>
+			</li><li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Tutorial_Sources">Tutorial Sources</a>
+			</li>
+			<li>
+				<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Resources">Resources</a>
+			</li>
+</ol>
+
+
+</div>
+<div class="wptoc-end">&nbsp;</div>
+<span id="Querydsl_vs_JPA_JPQL_and_Criteria_API"><h3>Querydsl vs JPA (JPQL and Criteria API)</h3></span>
+<p>First of all we’re starting to write some queries for a persistence layer using the Java Persistence API and as a comparison we’ll be adding traditional JPA queries using the JPA query language and the criteria API.</p>
+<span id="Dependencies"><h4>Dependencies</h4></span>
+<p>I’m using Maven to add needed dependencies here, but if we need to use another build system like Gradle or SBT it should not be a problem to transfer this information into the corresponding system – especially because the dependencies are available on the global Maven repository.</p>
+<p>This is a snippet from my project’s <em>pom.xml</em> .. please note that we’re recycling <em>com.mysema.querydsl:querydsl-apt</em> for all of the other following examples, too.</p>
+<p>Besides we’re adding the dependency for <em>querydsl-jpa</em> and we’re using the <em>apt-maven-plugin</em> to generate the metamodel sources from our entities. The <em>JPAAnnotationProcessor</em> scans for classes annotated with <em>@Entity</em> and generates meta-model classes for query construction in <em>target/generated/sources/java</em>.</p>
+<p>If you’re not using an IDE with a good Maven builder you might need to recreate your project file to include the directory with the generated sources .. e.g. by running the following command (for Eclipse IDE): <em>mvn eclipse:eclipse</em></p>
+
+<div class="wp_syntax"><div class="code"><pre class="xml" style="font-family:monospace;color: #ddd;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;properties<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;querydsl.version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>3.3.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/querydsl.version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/properties<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.querydsl<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>querydsl-apt<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>${querydsl.version}<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;scope<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>provided<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/scope<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.querydsl<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>querydsl-jpa<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>${querydsl.version}<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;build<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;plugins<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;plugin<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.maven<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>apt-maven-plugin<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>1.0.9<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;executions<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+				<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;execution<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;goals<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+						<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;goal<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>process<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/goal<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/goals<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;configuration<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+						<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;outputDirectory<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>target/generated-sources/java<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/outputDirectory<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+						<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;processor<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.query.apt.jpa.JPAAnnotationProcessor<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/processor<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/configuration<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+				<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/execution<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/executions<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/plugin<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/plugins<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/build<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<span id="Persistence_Context_and_Entities"><h4>Persistence Context and Entities</h4></span>
+<p>Since we’re using the Java Persistence API we first need to setup some entities and the persistence context.</p>
+<p>You might want to<a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Querydsl_Example" target="_blank"> </a><a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Querydsl_Example" target="_self">skip directly to the query examples</a> if not interested in the setup.</p>
+<span id="Book"><h5>Book</h5></span>
+<p>This is our book entity .. a book has an identifier, a title, a publication date and references to its author and a list of tags.</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">@<span style="color: #003399;color: #000;">Entity</span>
+<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> <span style="color: #003399;color: #000;">Book</span> <span style="color: #009900;color: #000;">{</span>
+	@Id
+	@GeneratedValue
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">Long</span> id<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">String</span> title<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> Author author<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	@Temporal<span style="color: #009900;color: #000;">(</span>TemporalType.<span style="color: #006633;">DATE</span><span style="color: #009900;color: #000;">)</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">Date</span> published<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	@OneToMany<span style="color: #009900;color: #000;">(</span>cascade <span style="color: #339933;color: #000;">=</span> CascadeType.<span style="color: #006633;">ALL</span><span style="color: #009900;color: #000;">)</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> List<span style="color: #339933;color: #000;">&lt;</span>Tag<span style="color: #339933;color: #000;">&gt;</span> tags <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> ArrayList<span style="color: #339933;color: #000;">&lt;&gt;</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;color: #000;">// getter, setter ...</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<span id="Author"><h5>Author</h5></span>
+<p>An author simply has an identifier, a name and a back-reference to his books.</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">@<span style="color: #003399;color: #000;">Entity</span>
+<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> Author <span style="color: #009900;color: #000;">{</span>
+	@Id
+	@GeneratedValue
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">Long</span> id<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">String</span> name<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	@OneToMany
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> List<span style="color: #339933;color: #000;">&lt;</span>Book<span style="color: #339933;color: #000;">&gt;</span> books <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> ArrayList<span style="color: #339933;color: #000;">&lt;&gt;</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;color: #000;">// getter, setter ....</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<span id="Tag"><h5>Tag</h5></span>
+<p>Tags are quite simply .. they’ve got a name .. and nothing else …</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">@<span style="color: #003399;color: #000;">Entity</span>
+<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> Tag <span style="color: #009900;color: #000;">{</span>
+	@Id
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">String</span> name<span style="color: #339933;color: #000;">;</span>
+c<span style="color: #339933;color: #000;">/</span>
+	<span style="color: #666666; font-style: italic;color: #000;">// getter, setter</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<span id="Persistence_Configuration"><h5>Persistence Configuration</h5></span>
+<p>Last but not least, we need some configuration for the persistence provider .. so this is my <em>persistence.xml</em> to be put in<em> src/main/resources/META-INF</em>.</p>
+<p>I’m using an HSQL database here, if you’re interested in the complete setup, please feel free to skip to the <a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/#Tutorial_Sources" target="_self">tutorial sources</a> that includes running examples.</p>
+
+<div class="wp_syntax"><div class="code"><pre class="xml" style="font-family:monospace;color: #ddd;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;persistence</span> <span style="color: #000066;">xmlns</span>=<span style="color: #ff0000;color: #000;">"http://java.sun.com/xml/ns/persistence"</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">version</span>=<span style="color: #ff0000;color: #000;">"1.0"</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;persistence-unit</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;color: #000;">"default"</span> <span style="color: #000066;">transaction-type</span>=<span style="color: #ff0000;color: #000;">"RESOURCE_LOCAL"</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;properties<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;property</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;color: #000;">"javax.persistence.jdbc.driver"</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;color: #000;">"org.hsqldb.jdbcDriver"</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;property</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;color: #000;">"javax.persistence.jdbc.url"</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;color: #000;">"jdbc:hsqldb:mem:testdb"</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;property</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;color: #000;">"javax.persistence.jdbc.user"</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;color: #000;">"sa"</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;property</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;color: #000;">"javax.persistence.jdbc.password"</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;color: #000;">""</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;property</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;color: #000;">"eclipselink.ddl-generation"</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;color: #000;">"create-tables"</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/properties<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;exclude-unlisted-classes<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>false<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/exclude-unlisted-classes<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/persistence-unit<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/persistence<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<span id="Querydsl_Example"><h4>Querydsl Example</h4></span>
+<p>Now we’re ready for some JPA, Querydsl fun … but one thing needs to be done before .. we need some persisted entities in our database to query for …</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">EntityManager em <span style="color: #339933;color: #000;">=</span> Persistence.<span style="color: #006633;">createEntityManagerFactory</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"default"</span><span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">createEntityManager</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+EntityTransaction tx <span style="color: #339933;color: #000;">=</span> em.<span style="color: #006633;">getTransaction</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+tx.<span style="color: #006633;">begin</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">Calendar</span> cal1 <span style="color: #339933;color: #000;">=</span> <span style="color: #003399;color: #000;">Calendar</span>.<span style="color: #006633;">getInstance</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+cal1.<span style="color: #006633;">set</span><span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">2010</span>, <span style="color: #cc66cc;color: #000;">0</span>, <span style="color: #cc66cc;color: #000;">0</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Calendar</span> cal2 <span style="color: #339933;color: #000;">=</span> <span style="color: #003399;color: #000;">Calendar</span>.<span style="color: #006633;">getInstance</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+cal2.<span style="color: #006633;">set</span><span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">2011</span>, <span style="color: #cc66cc;color: #000;">0</span>, <span style="color: #cc66cc;color: #000;">0</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Author author <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Author<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Some Guy"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+em.<span style="color: #006633;">persist</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Tag horrorTag <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Horror"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Tag dramaTag <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Drama"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Tag scienceTag <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Science"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Book</span> b1 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Book</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">setTitle</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"The big book of something"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">setAuthor</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">setPublished</span><span style="color: #009900;color: #000;">(</span>cal2.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>horrorTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>dramaTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>scienceTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Book</span> b2 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Book</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b2.<span style="color: #006633;">setTitle</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Another book"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b2.<span style="color: #006633;">setAuthor</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Book</span> b3 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Book</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">setTitle</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"The other book of something"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">setAuthor</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">setPublished</span><span style="color: #009900;color: #000;">(</span>cal2.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>dramaTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+em.<span style="color: #006633;">persist</span><span style="color: #009900;color: #000;">(</span>b1<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+em.<span style="color: #006633;">persist</span><span style="color: #009900;color: #000;">(</span>b2<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+em.<span style="color: #006633;">persist</span><span style="color: #009900;color: #000;">(</span>b3<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span></pre></div></div>
+
+<p>Now we’re able (given that the metaclasses were generated) to construct an elegant query using Querydsl like this one:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">JPAQuery query <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> JPAQuery<span style="color: #009900;color: #000;">(</span>em<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+QBook book <span style="color: #339933;color: #000;">=</span> QBook.<span style="color: #006633;">book</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">Book</span> bookFound1 <span style="color: #339933;color: #000;">=</span> query
+		.<span style="color: #006633;">from</span><span style="color: #009900;color: #000;">(</span>book<span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">where</span><span style="color: #009900;color: #000;">(</span>book.<span style="color: #006633;">title</span>.<span style="color: #006633;">startsWith</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"The"</span><span style="color: #009900;color: #000;">)</span>,
+				book.<span style="color: #006633;">published</span>.<span style="color: #006633;">after</span><span style="color: #009900;color: #000;">(</span>cal1.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>,
+				book.<span style="color: #006633;">author</span>.<span style="color: #006633;">name</span>.<span style="color: #006633;">eq</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Some Guy"</span><span style="color: #009900;color: #000;">)</span>,
+				book.<span style="color: #006633;">tags</span>.<span style="color: #006633;">contains</span><span style="color: #009900;color: #000;">(</span>horrorTag<span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">orderBy</span><span style="color: #009900;color: #000;">(</span>book.<span style="color: #006633;">title</span>.<span style="color: #006633;">asc</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">uniqueResult</span><span style="color: #009900;color: #000;">(</span>book<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Using Querydsl:<span style="color: #000099; font-weight: bold;">\t</span><span style="color: #000099; font-weight: bold;">\t</span><span style="color: #000099; font-weight: bold;">\t</span>"</span> <span style="color: #339933;color: #000;">+</span> bookFound1.<span style="color: #006633;">toString</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span></pre></div></div>
+
+<p>Running the code should produce a similar output:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="bash" style="font-family:monospace;color: #ddd;">Using Querydsl:             Book <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=<span style="color: #000000;color: #000;">2</span>, <span style="color: #007800;">title</span>=The big book of something, <span style="color: #007800;">author</span>=Author <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=<span style="color: #000000;color: #000;">1</span>, <span style="color: #007800;">name</span>=Some Guy<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, <span style="color: #007800;">published</span>=Fri Dec <span style="color: #000000;color: #000;">31</span> <span style="color: #000000;color: #000;">16</span>:<span style="color: #000000;color: #000;">55</span>:00 CET <span style="color: #000000;color: #000;">2010</span>, <span style="color: #007800;">tags</span>=<span style="color: #7a0874; font-weight: bold;color: #000;">[</span>Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Horror<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Drama<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Science<span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span></pre></div></div>
+
+<span id="vs_JPQL"><h5>vs JPQL</h5></span>
+<p>Now as a comparison we’re creating a non type-safe query using JPA’s query language:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;"><span style="color: #003399;color: #000;">Book</span> bookFound3 <span style="color: #339933;color: #000;">=</span> em
+		.<span style="color: #006633;">createQuery</span><span style="color: #009900;color: #000;">(</span>
+				<span style="color: #0000ff;color: #000;">"SELECT book FROM Book book WHERE book.title LIKE 'The%' AND book.published&gt;:published AND book.author.name=:author AND :tag MEMBER OF book.tags ORDER BY book.title ASC"</span>,
+				<span style="color: #003399;color: #000;">Book</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">setParameter</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"published"</span>, cal1.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">setParameter</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"author"</span>, <span style="color: #0000ff;color: #000;">"Some Guy"</span><span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">setParameter</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"tag"</span>, <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Horror"</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">getSingleResult</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Using JPA Query Language:<span style="color: #000099; font-weight: bold;">\t</span>"</span>
+		<span style="color: #339933;color: #000;">+</span> bookFound3.<span style="color: #006633;">toString</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span></pre></div></div>
+
+<p>The code above produces a similar output:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="bash" style="font-family:monospace;color: #ddd;">Using JPA Criteria API:     Book <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=<span style="color: #000000;color: #000;">2</span>, <span style="color: #007800;">title</span>=The big book of something, <span style="color: #007800;">author</span>=Author <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=<span style="color: #000000;color: #000;">1</span>, <span style="color: #007800;">name</span>=Some Guy<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, <span style="color: #007800;">published</span>=Fri Dec <span style="color: #000000;color: #000;">31</span> <span style="color: #000000;color: #000;">16</span>:<span style="color: #000000;color: #000;">55</span>:00 CET <span style="color: #000000;color: #000;">2010</span>, <span style="color: #007800;">tags</span>=<span style="color: #7a0874; font-weight: bold;color: #000;">[</span>Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Horror<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Drama<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Science<span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span></pre></div></div>
+
+<span id="vs_Criteria_API"><h5>vs Criteria API</h5></span>
+<p>Last but not least a fast written example of the same query using the JPA criteria API:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;"><span style="color: #666666; font-style: italic;color: #000;">// Using JPA Criteria API</span>
+CriteriaBuilder cb <span style="color: #339933;color: #000;">=</span> em.<span style="color: #006633;">getCriteriaBuilder</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+CriteriaQuery<span style="color: #339933;color: #000;">&lt;</span>Book<span style="color: #339933;color: #000;">&gt;</span> cq <span style="color: #339933;color: #000;">=</span> cb.<span style="color: #006633;">createQuery</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Book</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Root<span style="color: #339933;color: #000;">&lt;</span>Book<span style="color: #339933;color: #000;">&gt;</span> bk <span style="color: #339933;color: #000;">=</span> cq.<span style="color: #006633;">from</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Book</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+cq.<span style="color: #006633;">select</span><span style="color: #009900;color: #000;">(</span>bk<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Expression<span style="color: #339933;color: #000;">&lt;</span>List<span style="color: #339933;color: #000;">&lt;</span>Tag<span style="color: #339933;color: #000;">&gt;&gt;</span> tags <span style="color: #339933;color: #000;">=</span> bk.<span style="color: #006633;">get</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"tags"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+cq.<span style="color: #006633;">where</span><span style="color: #009900;color: #000;">(</span>cb.<span style="color: #006633;">like</span><span style="color: #009900;color: #000;">(</span>bk.<span style="color: #006633;">get</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"title"</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">as</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">String</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span>, <span style="color: #0000ff;color: #000;">"The%"</span><span style="color: #009900;color: #000;">)</span>,
+		cb.<span style="color: #006633;">greaterThan</span><span style="color: #009900;color: #000;">(</span>bk.<span style="color: #006633;">get</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"published"</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">as</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Date</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span>,
+				cal1.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>, cb.<span style="color: #006633;">equal</span><span style="color: #009900;color: #000;">(</span>bk.<span style="color: #006633;">get</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"author"</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">get</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"name"</span><span style="color: #009900;color: #000;">)</span>
+				.<span style="color: #006633;">as</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">String</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span>, <span style="color: #0000ff;color: #000;">"Some Guy"</span><span style="color: #009900;color: #000;">)</span>, cb.<span style="color: #006633;">isMember</span><span style="color: #009900;color: #000;">(</span>horrorTag,
+				tags<span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+cq.<span style="color: #006633;">orderBy</span><span style="color: #009900;color: #000;">(</span>cb.<span style="color: #006633;">asc</span><span style="color: #009900;color: #000;">(</span>bk.<span style="color: #006633;">get</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"title"</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">Book</span> bookFound2 <span style="color: #339933;color: #000;">=</span> em.<span style="color: #006633;">createQuery</span><span style="color: #009900;color: #000;">(</span>cq<span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">getSingleResult</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Using JPA Criteria API:<span style="color: #000099; font-weight: bold;">\t</span><span style="color: #000099; font-weight: bold;">\t</span>"</span>
+		<span style="color: #339933;color: #000;">+</span> bookFound2.<span style="color: #006633;">toString</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span></pre></div></div>
+
+<p>Again a similar output is produced:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="bash" style="font-family:monospace;color: #ddd;">Using JPA Query Language:   Book <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=<span style="color: #000000;color: #000;">2</span>, <span style="color: #007800;">title</span>=The big book of something, <span style="color: #007800;">author</span>=Author <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=<span style="color: #000000;color: #000;">1</span>, <span style="color: #007800;">name</span>=Some Guy<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, <span style="color: #007800;">published</span>=Fri Dec <span style="color: #000000;color: #000;">31</span> <span style="color: #000000;color: #000;">16</span>:<span style="color: #000000;color: #000;">55</span>:00 CET <span style="color: #000000;color: #000;">2010</span>, <span style="color: #007800;">tags</span>=<span style="color: #7a0874; font-weight: bold;color: #000;">[</span>Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Horror<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Drama<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">name</span>=Science<span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span></pre></div></div>
+
+<span id="mongoDB_and_Morphia"><h3>mongoDB and Morphia</h3></span>
+<p>In the next example we’re using Querydsl combined with mongoDB and Morphia. Morphia itself is a framework that allows us to map entities and their references as we’re used from a JPA environment but ending in the schema-less mongoDB database.</p>
+<span id="Dependencies_1"><h4>Dependencies</h4></span>
+<p>The following dependencies are needed to run the examples below. I am using flapdoodle-embedded-mongo here to setup a mongoDB for test purposes in no time.</p>
+<p>Again we’re using the <em>apt-maven-plugin</em> and the <em>MorhpiaAnnotationProcessor</em> to create the meta-model classes for us.</p>
+
+<div class="wp_syntax"><div class="code"><pre class="xml" style="font-family:monospace;color: #ddd;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.querydsl<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>querydsl-mongodb<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>${querydsl.version}<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;classifier<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>apt<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/classifier<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.mongodb<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>mongo-java-driver<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>2.11.4<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>de.flapdoodle.embed<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>de.flapdoodle.embed.mongo<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>1.42<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.mongodb.morphia<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>morphia<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>0.105<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;build<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;plugins<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;plugin<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.maven<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>apt-maven-plugin<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>1.0.9<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;executions<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+				<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;execution<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;goals<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+						<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;goal<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>process<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/goal<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/goals<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;configuration<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+						<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;outputDirectory<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>target/generated-sources/java<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/outputDirectory<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+						<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;processor<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.query.apt.morphia.MorphiaAnnotationProcessor<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/processor<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+					<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/configuration<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+				<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/execution<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/executions<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/plugin<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/plugins<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/build<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<span id="Entities"><h4>Entities</h4></span>
+<p>Again we’re adding some entities with basic relations.. please note that we’re not using <em>JPA’s @Entity</em> here but <em>org.mongodb.morphia.annotations.Entity</em></p>
+<span id="Book_1"><h5>Book</h5></span>
+<p>This is our book entity .. again a book has an identifier, a title, an author and a list of tags ..</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">@<span style="color: #003399;color: #000;">Entity</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"books"</span><span style="color: #009900;color: #000;">)</span>
+<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> <span style="color: #003399;color: #000;">Book</span> <span style="color: #009900;color: #000;">{</span>
+	@Id
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> ObjectId id<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">String</span> title<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> Author author<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">Date</span> published<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	@<span style="color: #003399;color: #000;">Reference</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> List<span style="color: #339933;color: #000;">&lt;</span>Tag<span style="color: #339933;color: #000;">&gt;</span> tags <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> ArrayList<span style="color: #339933;color: #000;">&lt;&gt;</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;color: #000;">// getter, setter</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<span id="Author_1"><h5>Author</h5></span>
+<p>As in the JPA example, an author has an identifier and a name ..</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">@<span style="color: #003399;color: #000;">Entity</span>
+<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> Author <span style="color: #009900;color: #000;">{</span>
+	@Id
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> ObjectId id<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">String</span> name<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;color: #000;">// getter, setter</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<span id="Tag_1"><h5>Tag</h5></span>
+<p>A tag also has an identifier and a name…</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">@<span style="color: #003399;color: #000;">Entity</span>
+<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> Tag <span style="color: #009900;color: #000;">{</span>
+	@Id
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> ObjectId id<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #003399;color: #000;">String</span> name<span style="color: #339933;color: #000;">;</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<span id="Querydsl_Example_1"><h4>Querydsl Example</h4></span>
+<p>In this example, we’re setting up a new mongoDB database, we’re adding some books and finally we’re running a Querydsl query to search for books with a set of different criteria…</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;"><span style="color: #003399;color: #000;">String</span> dbName <span style="color: #339933;color: #000;">=</span> <span style="color: #0000ff;color: #000;">"testdb"</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #000000; font-weight: bold;color: #000;">new</span> MongodForTestsFactory<span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+MongoClient client <span style="color: #339933;color: #000;">=</span> MongodForTestsFactory
+		.<span style="color: #006633;">with</span><span style="color: #009900;color: #000;">(</span>Version.<span style="color: #006633;">Main</span>.<span style="color: #006633;">PRODUCTION</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">newMongo</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Morphia morphia <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Morphia<span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">map</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Book</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span>, Author.<span style="color: #000000; font-weight: bold;color: #000;">class</span>, Tag.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Datastore ds <span style="color: #339933;color: #000;">=</span> morphia.<span style="color: #006633;">createDatastore</span><span style="color: #009900;color: #000;">(</span>client, dbName<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">Calendar</span> cal1 <span style="color: #339933;color: #000;">=</span> <span style="color: #003399;color: #000;">Calendar</span>.<span style="color: #006633;">getInstance</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+cal1.<span style="color: #006633;">set</span><span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">2010</span>, <span style="color: #cc66cc;color: #000;">0</span>, <span style="color: #cc66cc;color: #000;">0</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Calendar</span> cal2 <span style="color: #339933;color: #000;">=</span> <span style="color: #003399;color: #000;">Calendar</span>.<span style="color: #006633;">getInstance</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+cal2.<span style="color: #006633;">set</span><span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">2011</span>, <span style="color: #cc66cc;color: #000;">0</span>, <span style="color: #cc66cc;color: #000;">0</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Author author <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Author<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Some guy"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+ds.<span style="color: #006633;">save</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Tag horrorTag <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Horror"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Tag dramaTag <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Drama"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Tag scienceTag <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> Tag<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Science"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+ds.<span style="color: #006633;">save</span><span style="color: #009900;color: #000;">(</span>horrorTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+ds.<span style="color: #006633;">save</span><span style="color: #009900;color: #000;">(</span>dramaTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+ds.<span style="color: #006633;">save</span><span style="color: #009900;color: #000;">(</span>scienceTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Book</span> b1 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Book</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">setTitle</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"The big book of something"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">setAuthor</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">setPublished</span><span style="color: #009900;color: #000;">(</span>cal2.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>horrorTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>dramaTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b1.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>scienceTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Book</span> b2 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Book</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b2.<span style="color: #006633;">setTitle</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Another book"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b2.<span style="color: #006633;">setAuthor</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">Book</span> b3 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Book</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">setTitle</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"The other book of something"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">setAuthor</span><span style="color: #009900;color: #000;">(</span>author<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">setPublished</span><span style="color: #009900;color: #000;">(</span>cal2.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+b3.<span style="color: #006633;">addTag</span><span style="color: #009900;color: #000;">(</span>dramaTag<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+ds.<span style="color: #006633;">save</span><span style="color: #009900;color: #000;">(</span>b1<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+ds.<span style="color: #006633;">save</span><span style="color: #009900;color: #000;">(</span>b2<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+QBook book <span style="color: #339933;color: #000;">=</span> QBook.<span style="color: #006633;">book</span><span style="color: #339933;color: #000;">;</span>
+MorphiaQuery<span style="color: #339933;color: #000;">&lt;</span>Book<span style="color: #339933;color: #000;">&gt;</span> query <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> MorphiaQuery<span style="color: #339933;color: #000;">&lt;</span>Book<span style="color: #339933;color: #000;">&gt;</span><span style="color: #009900;color: #000;">(</span>morphia, ds, book<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+List<span style="color: #339933;color: #000;">&lt;</span>Book<span style="color: #339933;color: #000;">&gt;</span> books <span style="color: #339933;color: #000;">=</span> query.<span style="color: #006633;">where</span><span style="color: #009900;color: #000;">(</span>book.<span style="color: #006633;">title</span>.<span style="color: #006633;">startsWith</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"The"</span><span style="color: #009900;color: #000;">)</span>,
+		book.<span style="color: #006633;">published</span>.<span style="color: #006633;">after</span><span style="color: #009900;color: #000;">(</span>cal1.<span style="color: #006633;">getTime</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>,
+		book.<span style="color: #006633;">author</span>.<span style="color: #006633;">name</span>.<span style="color: #006633;">eq</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Some guy"</span><span style="color: #009900;color: #000;">)</span>, book.<span style="color: #006633;">tags</span>.<span style="color: #006633;">contains</span><span style="color: #009900;color: #000;">(</span>horrorTag<span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>
+		.<span style="color: #006633;">list</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #000000; font-weight: bold;color: #000;">for</span> <span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Book</span> bookFound <span style="color: #339933;color: #000;">:</span> books<span style="color: #009900;color: #000;">)</span> <span style="color: #009900;color: #000;">{</span>
+	<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span>bookFound.<span style="color: #006633;">toString</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<p>Running the example above produces the following output:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="bash" style="font-family:monospace;color: #ddd;">Book <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=52fa7cf10fcee8e5948a548b, <span style="color: #007800;">title</span>=The big book of something, <span style="color: #007800;">author</span>=Author <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=52fa7cf10fcee8e5948a5487, <span style="color: #007800;">name</span>=Some guy<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, <span style="color: #007800;">published</span>=Fri Dec <span style="color: #000000;color: #000;">31</span> <span style="color: #000000;color: #000;">20</span>:<span style="color: #000000;color: #000;">41</span>:<span style="color: #000000;color: #000;">37</span> CET <span style="color: #000000;color: #000;">2010</span>, <span style="color: #007800;">tags</span>=<span style="color: #7a0874; font-weight: bold;color: #000;">[</span>Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=52fa7cf10fcee8e5948a5488, <span style="color: #007800;">name</span>=Horror<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=52fa7cf10fcee8e5948a5489, <span style="color: #007800;">name</span>=Drama<span style="color: #7a0874; font-weight: bold;color: #000;">]</span>, Tag <span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #007800;">id</span>=52fa7cf10fcee8e5948a548a, <span style="color: #007800;">name</span>=Science<span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span></pre></div></div>
+
+<span id="Lucene"><h3>Lucene</h3></span>
+<p>In our last example, we’re going to write some queries to find documents from a Lucene index.</p>
+<span id="Dependencies_2"><h4>Dependencies</h4></span>
+<p>We need a bunch of dependencies here, first of all <em>querydsl-lucene4</em> (querydsl-lucene3 does also exist!) and some common Lucene libraries for analyzers, parsers and stuff..</p>
+
+<div class="wp_syntax"><div class="code"><pre class="xml" style="font-family:monospace;color: #ddd;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;properties<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;lucene.version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>4.6.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/lucene.version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/properties<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependencies<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.mysema.querydsl<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>querydsl-lucene4<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>${querydsl.version}<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.lucene<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>lucene-core<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>${lucene.version}<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.lucene<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>lucene-analyzers-common<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>${lucene.version}<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.lucene<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>lucene-queries<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>4.6.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.lucene<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>lucene-misc<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>4.6.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.lucene<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>lucene-sandbox<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>4.6.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.lucene<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>lucene-queryparser<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>4.6.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>joda-time<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>joda-time<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>2.3<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;color: 000;">&lt;/dependencies<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<span id="Creating_the_Query_Type"><h4>Creating the Query Type</h4></span>
+<p>Lucene has no schema so we need to write our meta-model by hand. Because of the special nature of a Lucene index, you might notice that not every query type is possible in this scenario.</p>
+<p>This is done by extending <em>com.mysema.query.types.path.EntityPathBase </em>and specifying the different path elements that are subclasses of <em>com.mysema.query.types.Path</em>.</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;"><span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">class</span> QBook <span style="color: #000000; font-weight: bold;color: #000;">extends</span> EntityPathBase<span style="color: #339933;color: #000;">&lt;</span>Document<span style="color: #339933;color: #000;">&gt;</span> <span style="color: #009900;color: #000;">{</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #000000; font-weight: bold;color: #000;">static</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> <span style="color: #000066; font-weight: bold;color: #000;">long</span> serialVersionUID <span style="color: #339933;color: #000;">=</span> 1L<span style="color: #339933;color: #000;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">public</span> QBook<span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">final</span> <span style="color: #003399;color: #000;">String</span> var<span style="color: #009900;color: #000;">)</span> <span style="color: #009900;color: #000;">{</span>
+		<span style="color: #000000; font-weight: bold;color: #000;">super</span><span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Document</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span>, PathMetadataFactory.<span style="color: #006633;">forVariable</span><span style="color: #009900;color: #000;">(</span>var<span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	<span style="color: #009900;color: #000;">}</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> StringPath title <span style="color: #339933;color: #000;">=</span> createString<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"title"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> StringPath author <span style="color: #339933;color: #000;">=</span> createString<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"author"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> DatePath<span style="color: #339933;color: #000;">&lt;</span>LocalDate<span style="color: #339933;color: #000;">&gt;</span> published <span style="color: #339933;color: #000;">=</span> createDate<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"published"</span>,
+			LocalDate.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	<span style="color: #000000; font-weight: bold;color: #000;">public</span> <span style="color: #000000; font-weight: bold;color: #000;">final</span> NumberPath<span style="color: #339933;color: #000;">&lt;</span>Float<span style="color: #339933;color: #000;">&gt;</span> price <span style="color: #339933;color: #000;">=</span> createNumber<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"price"</span>, <span style="color: #003399;color: #000;">Float</span>.<span style="color: #000000; font-weight: bold;color: #000;">class</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<p>Now we’re ready to construct queries with Querydsl.</p>
+<span id="Querydsl_Example_2"><h4>Querydsl Example</h4></span>
+<p>In the following example, we’re adding a bunch of books to an in-memory Lucene index and we’re constructing a query using the Querydsl syntax afterwards to search for books from the index.</p>
+
+<div class="wp_syntax"><div class="code"><pre class="java" style="font-family:monospace;color: #ddd;">LocalDate date1 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> LocalDate<span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">2010</span>, <span style="color: #cc66cc;color: #000;">1</span>, <span style="color: #cc66cc;color: #000;">1</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+LocalDate date2 <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> LocalDate<span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">2011</span>, <span style="color: #cc66cc;color: #000;">2</span>, <span style="color: #cc66cc;color: #000;">13</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+Directory index <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> RAMDirectory<span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+Analyzer analyzer <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> StandardAnalyzer<span style="color: #009900;color: #000;">(</span>Version.<span style="color: #006633;">LUCENE_46</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+IndexWriterConfig iwc <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> IndexWriterConfig<span style="color: #009900;color: #000;">(</span>Version.<span style="color: #006633;">LUCENE_46</span>,
+		analyzer<span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">setOpenMode</span><span style="color: #009900;color: #000;">(</span>OpenMode.<span style="color: #006633;">CREATE</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+IndexWriter writer <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> IndexWriter<span style="color: #009900;color: #000;">(</span>index, iwc<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+createBook<span style="color: #009900;color: #000;">(</span>writer, <span style="color: #0000ff;color: #000;">"The big book of something"</span>, <span style="color: #0000ff;color: #000;">"Some Guy"</span>, date1,
+		20.50F<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+createBook<span style="color: #009900;color: #000;">(</span>writer, <span style="color: #0000ff;color: #000;">"Another book of something"</span>, <span style="color: #0000ff;color: #000;">"Arthur Someone"</span>,
+		date2, 13.5F<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+createBook<span style="color: #009900;color: #000;">(</span>writer, <span style="color: #0000ff;color: #000;">"Anything, onething, something"</span>, <span style="color: #0000ff;color: #000;">"Some Guy"</span>, date1,
+		29.99F<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+createBook<span style="color: #009900;color: #000;">(</span>writer, <span style="color: #0000ff;color: #000;">"Something, somewhere"</span>, <span style="color: #0000ff;color: #000;">"Some Guy"</span>, date1, 9.50F<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+writer.<span style="color: #006633;">commit</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+writer.<span style="color: #006633;">close</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+QBook book <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> QBook<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"book"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+IndexReader reader <span style="color: #339933;color: #000;">=</span> DirectoryReader.<span style="color: #006633;">open</span><span style="color: #009900;color: #000;">(</span>index<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span>reader.<span style="color: #006633;">numDocs</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span> <span style="color: #339933;color: #000;">+</span> <span style="color: #0000ff;color: #000;">" books stored in index"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+IndexSearcher searcher <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> IndexSearcher<span style="color: #009900;color: #000;">(</span>reader<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+LuceneQuery query <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> LuceneQuery<span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">new</span> LuceneSerializer<span style="color: #009900;color: #000;">(</span><span style="color: #000066; font-weight: bold;color: #000;">true</span>, <span style="color: #000066; font-weight: bold;color: #000;">true</span><span style="color: #009900;color: #000;">)</span>,
+		searcher<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Searching a Lucene Index with Querydsl"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+LuceneQuery bookQuery <span style="color: #339933;color: #000;">=</span> query.<span style="color: #006633;">where</span><span style="color: #009900;color: #000;">(</span>book.<span style="color: #006633;">author</span>.<span style="color: #006633;">eq</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"Some Guy"</span><span style="color: #009900;color: #000;">)</span>,
+		book.<span style="color: #006633;">published</span>.<span style="color: #006633;">before</span><span style="color: #009900;color: #000;">(</span>date2<span style="color: #009900;color: #000;">)</span>, book.<span style="color: #006633;">price</span>.<span style="color: #006633;">between</span><span style="color: #009900;color: #000;">(</span><span style="color: #cc66cc;color: #000;">10</span>.<span style="color: #006633;">F</span>, <span style="color: #cc66cc;color: #000;">30</span>.<span style="color: #006633;">F</span><span style="color: #009900;color: #000;">)</span>,
+		book.<span style="color: #006633;">title</span>.<span style="color: #006633;">endsWith</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"something"</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span>.<span style="color: #006633;">orderBy</span><span style="color: #009900;color: #000;">(</span>book.<span style="color: #006633;">title</span>.<span style="color: #006633;">asc</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"generated lucene query: "</span> <span style="color: #339933;color: #000;">+</span> bookQuery.<span style="color: #006633;">toString</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+List<span style="color: #339933;color: #000;">&lt;</span>Document<span style="color: #339933;color: #000;">&gt;</span> documents <span style="color: #339933;color: #000;">=</span> bookQuery.<span style="color: #006633;">list</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+&nbsp;
+<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span>documents.<span style="color: #006633;">size</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span> <span style="color: #339933;color: #000;">+</span> <span style="color: #0000ff;color: #000;">" books found"</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #000000; font-weight: bold;color: #000;">for</span> <span style="color: #009900;color: #000;">(</span><span style="color: #003399;color: #000;">Document</span> doc <span style="color: #339933;color: #000;">:</span> documents<span style="color: #009900;color: #000;">)</span> <span style="color: #009900;color: #000;">{</span>
+	<span style="color: #003399;color: #000;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;color: #000;">(</span>doc<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #009900;color: #000;">}</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;color: #000;">private</span> <span style="color: #000066; font-weight: bold;color: #000;">void</span> createBook<span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">final</span> IndexWriter writer, <span style="color: #000000; font-weight: bold;color: #000;">final</span> <span style="color: #003399;color: #000;">String</span> title,
+		<span style="color: #000000; font-weight: bold;color: #000;">final</span> <span style="color: #003399;color: #000;">String</span> author, <span style="color: #000000; font-weight: bold;color: #000;">final</span> LocalDate published, <span style="color: #000000; font-weight: bold;color: #000;">final</span> <span style="color: #000066; font-weight: bold;color: #000;">float</span> price<span style="color: #009900;color: #000;">)</span>
+		<span style="color: #000000; font-weight: bold;color: #000;">throws</span> <span style="color: #003399;color: #000;">IOException</span> <span style="color: #009900;color: #000;">{</span>
+	<span style="color: #003399;color: #000;">Document</span> doc <span style="color: #339933;color: #000;">=</span> <span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">Document</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	doc.<span style="color: #006633;">add</span><span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">TextField</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"title"</span>, title, Store.<span style="color: #006633;">YES</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	doc.<span style="color: #006633;">add</span><span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">new</span> <span style="color: #003399;color: #000;">TextField</span><span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"author"</span>, author, Store.<span style="color: #006633;">YES</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	doc.<span style="color: #006633;">add</span><span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">new</span> StringField<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"published"</span>, published.<span style="color: #006633;">toString</span><span style="color: #009900;color: #000;">(</span><span style="color: #009900;color: #000;">)</span>, Store.<span style="color: #006633;">YES</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	doc.<span style="color: #006633;">add</span><span style="color: #009900;color: #000;">(</span><span style="color: #000000; font-weight: bold;color: #000;">new</span> FloatField<span style="color: #009900;color: #000;">(</span><span style="color: #0000ff;color: #000;">"price"</span>, price, Store.<span style="color: #006633;">YES</span><span style="color: #009900;color: #000;">)</span><span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+	writer.<span style="color: #006633;">addDocument</span><span style="color: #009900;color: #000;">(</span>doc<span style="color: #009900;color: #000;">)</span><span style="color: #339933;color: #000;">;</span>
+<span style="color: #009900;color: #000;">}</span></pre></div></div>
+
+<p>Running the examples above should produce the following output:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="bash" style="font-family:monospace;color: #ddd;"><span style="color: #000000;color: #000;">4</span> books stored <span style="color: #000000; font-weight: bold;color: #000;">in</span> index
+Searching a Lucene Index with Querydsl
+generated lucene query: +<span style="color: #7a0874; font-weight: bold;color: #000;">(</span>+<span style="color: #7a0874; font-weight: bold;color: #000;">(</span>+author:<span style="color: #ff0000;color: #000;">"some guy"</span> +published:<span style="color: #7a0874; font-weight: bold;color: #000;">{</span><span style="color: #000000; font-weight: bold;color: #000;">*</span> TO <span style="color: #000000;color: #000;">2011</span>-02-<span style="color: #000000;color: #000;">13</span><span style="color: #7a0874; font-weight: bold;color: #000;">}</span><span style="color: #7a0874; font-weight: bold;color: #000;">)</span> +price:<span style="color: #7a0874; font-weight: bold;color: #000;">[</span><span style="color: #000000;color: #000;">10.0</span> TO <span style="color: #000000;color: #000;">30.0</span><span style="color: #7a0874; font-weight: bold;color: #000;">]</span><span style="color: #7a0874; font-weight: bold;color: #000;">)</span> +title:<span style="color: #000000; font-weight: bold;color: #000;">*</span>something
+<span style="color: #000000;color: #000;">2</span> books found
+Document<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>stored,indexed,tokenized<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>title:The big book of something<span style="color: #000000; font-weight: bold;color: #000;">&gt;</span> stored,indexed,tokenized<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>author:Some Guy<span style="color: #000000; font-weight: bold;color: #000;">&gt;</span> stored,indexed,tokenized,omitNorms,<span style="color: #007800;">indexOptions</span>=DOCS_ONLY<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>published:<span style="color: #000000;color: #000;">2010</span>-01-01<span style="color: #000000; font-weight: bold;color: #000;">&gt;</span> stored<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>price:<span style="color: #000000;color: #000;">20.5</span><span style="color: #000000; font-weight: bold;color: #000;">&gt;&gt;</span>
+Document<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>stored,indexed,tokenized<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>title:Anything, onething, something<span style="color: #000000; font-weight: bold;color: #000;">&gt;</span> stored,indexed,tokenized<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>author:Some Guy<span style="color: #000000; font-weight: bold;color: #000;">&gt;</span> stored,indexed,tokenized,omitNorms,<span style="color: #007800;">indexOptions</span>=DOCS_ONLY<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>published:<span style="color: #000000;color: #000;">2010</span>-01-01<span style="color: #000000; font-weight: bold;color: #000;">&gt;</span> stored<span style="color: #000000; font-weight: bold;color: #000;">&lt;</span>price:<span style="color: #000000;color: #000;">29.99</span><span style="color: #000000; font-weight: bold;color: #000;">&gt;&gt;</span></pre></div></div>
+
+<span id="Tutorial_Sources"><h3>Tutorial Sources</h3></span>
+<p>Please feel free to download the tutorial sources from <a onclick="javascript:pageTracker._trackPageview(&#39;/outgoing/bitbucket.org/hascode/querydsl-tutorial&#39;);" href="https://bitbucket.org/hascode/querydsl-tutorial" target="_blank">my Bitbucket repository</a>, fork it there or clone it using Git:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="bash" style="font-family:monospace;color: #ddd;"><span style="color: #c20cb9; font-weight: bold;color: #000;">git</span> clone https:<span style="color: #000000; font-weight: bold;color: #000;">//</span>bitbucket.org<span style="color: #000000; font-weight: bold;color: #000;">/</span>hascode<span style="color: #000000; font-weight: bold;color: #000;">/</span>querydsl-tutorial.git</pre></div></div>
+
+<span id="Resources"><h3>Resources</h3></span>
+<ul>
+<li><a onclick="javascript:pageTracker._trackPageview(&#39;/outgoing/www.querydsl.com/&#39;);" href="http://www.querydsl.com/" target="_blank">Querydsl Project Homepage</a></li>
+<li><a onclick="javascript:pageTracker._trackPageview(&#39;/outgoing/github.com/mysema/querydsl&#39;);" href="https://github.com/mysema/querydsl" target="_blank">Querydsl GitHub Project</a></li>
+</ul>
+<div class="shr-publisher-1092 shareaholic-show-on-load" style="margin-left: 7px; overflow: hidden; height: 105px;"><div class="shr-bookmarks shr-bookmarks-bg-shr" style="margin-left: 10px; height: 100%; overflow: hidden; display: block; padding: 35px 0px 0px 10px; background: url(http://www.hascode.com/wp-content/plugins/sexybookmarks/images/share-knowledge.png) no-repeat transparent;"><ul class="shr-socials"><li class="shr-5 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=5&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to Facebook">Post to Facebook</a></li><li class="shr-7 shareaholic" style="margin-left:0px !important;"><a rel="nofollow" target="_blank" class="external" orig_title="Post to Twitter">Post to Twitter</a><div class="shr-count"><div class="shr-count-outline" aria-hidden="true" style="left: 9px; top: -10px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 10px; top: -10px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 11px; top: -10px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 9px; top: -11px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 11px; top: -11px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 9px; top: -12px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 10px; top: -12px;">16</div><div class="shr-count-outline" aria-hidden="true" style="left: 11px; top: -12px;">16</div><div class="shr-count-center" aria-label="Number of times this webpage has been shared" style="left: 10px; top: -11px;">16</div></div></li><li class="shr-88 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=88&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to LinkedIn">Add to LinkedIn</a></li><li class="shr-74 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=74&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to Google Bookmarks">Add to Google Bookmarks</a></li><li class="shr-2 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=2&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to Delicious">Post to Delicious</a></li><li class="shr-38 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=38&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to StumbleUpon">Post to StumbleUpon</a></li><li class="shr-40 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=40&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to Reddit">Add to Reddit</a></li><li class="shr-201 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=201&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Send via E-mail program">Send via E-mail program</a></li><li class="shr-219 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=219&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to Blogger">Post to Blogger</a></li><li class="shr-27 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=27&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to BlogMarks">Post to BlogMarks</a></li><li class="shr-102 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=102&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to DZone">Add to DZone</a></li><li class="shr-207 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Creating+elegant%2C+typesafe+Queries+for+JPA%2C+mongoDB%2FMorphia+and+Lucene+using+Querydsl&link=http%3A%2F%2Fwww.hascode.com%2F2014%2F02%2Fcreating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl%2F&notes=Querydsl%2520is%2520a%2520framework%2520that%2520allows%2520us%2520to%2520create%2520elegant%252C%2520type-safe%2520queries%2520for%2520a%2520variety%2520of%2520different%2520data-sources%2520like%2520Java%2520Persistence%2520API%2520%2528JPA%2529%2520entities%252C%2520Java%2520Data%2520Objects%2520%2528JDO%2529%252C%2520mongoDB%2520with%2520Morphia%252C%2520SQL%252C%2520Hibernate%2520Search%2520up%2520to%2520Lucene.%250D%250A%250D%250AIn%2520the%2520following%2520tutorial%2520we%2527re%2520implementing%2520example%2520que&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=207&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Share on Google Reader">Share on Google Reader</a></li></ul><div style="clear: both;"></div><div class="shr-getshr" style="visibility:hidden;font-size:10px !important"><a target="_blank" href="http://www.shareaholic.com/?src=pub">Get Shareaholic for Google Chrome</a></div><div style="clear: both;"></div><style type="text/css">ul.shr-socials li.shareaholic{background-image:url(http://www.hascode.com/wp-content/plugins/sexybookmarks/spritegen_default/sprite.png) !important;}</style></div></div><!-- Start Shareaholic LikeButtonSetBottom Automatic --><div style="clear: both; min-height: 1px; height: 3px; width: 100%;"></div><div class="shareaholic-like-buttonset" style="float:none;height:30px;"><div style="float:left; padding-top:1px !important; margin:0px 0px 0px 10px !important;"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 450px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 450px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1439246019378" name="I0_1439246019378" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div></div><div style="clear: both; min-height: 1px; height: 3px; width: 100%;"></div><!-- End Shareaholic LikeButtonSetBottom Automatic -->
+								<p>Tags: <a href="http://www.hascode.com/tag/builder/" rel="tag">builder</a>, <a href="http://www.hascode.com/tag/database/" rel="tag">database</a>, <a href="http://www.hascode.com/tag/eclipselink/" rel="tag">eclipselink</a>, <a href="http://www.hascode.com/tag/fluent-api/" rel="tag">fluent api</a>, <a href="http://www.hascode.com/tag/hibernate/" rel="tag">hibernate</a>, <a href="http://www.hascode.com/tag/hibernate-search/" rel="tag">hibernate search</a>, <a href="http://www.hascode.com/tag/jdo/" rel="tag">jdo</a>, <a href="http://www.hascode.com/tag/jpa/" rel="tag">jpa</a>, <a href="http://www.hascode.com/tag/lucene/" rel="tag">lucene</a>, <a href="http://www.hascode.com/tag/mongodb/" rel="tag">mongodb</a>, <a href="http://www.hascode.com/tag/morphia/" rel="tag">morphia</a>, <a href="http://www.hascode.com/tag/persistence/" rel="tag">persistence</a>, <a href="http://www.hascode.com/tag/querydsl/" rel="tag">querydsl</a>, <a href="http://www.hascode.com/tag/sql/" rel="tag">sql</a></p>
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+												on Thursday, February 13th, 2014 at 7:59 pm						and is filed under <a href="http://www.hascode.com/category/java/" title="View all posts in Java" rel="category tag">Java</a>.
+						You can follow any responses to this entry through the <a href="http://www.hascode.com/2014/02/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl/feed/">RSS 2.0</a> feed.
+
+													You can skip to the end and leave a response. Pinging is currently not allowed.
+
+						
+					</small>
+				</p>
+
+			</div>
+		</div>
+
+	<h3 id="respond">Leave a Reply</h3>
+<form action="http://www.hascode.com/wp-comments-post.php" method="post" id="commentform">
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1">
+<label for="author"><small>Name (required)</small></label></p>
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2">
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3">
+<label for="url"><small>Website</small></label></p>
+<p><textarea name="comment" id="comment" cols="20" rows="10" tabindex="4"></textarea></p>
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment">
+<input type="hidden" name="comment_post_ID" value="1092"></p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="894dbf21da"></p><div style="display:none">Please leave these two fields as-is: <input type="text" name="indefvalue0" value=""><input type="text" name="indefvalue1" value="1"></div><div><br style="clear:both"><p><small>Protected by <a href="http://www.poradnik-webmastera.com/projekty/invisible_defender/">Invisible Defender</a>. Showed <strong>403</strong> to <strong>111,589</strong> bad guys.</small></p></div></form>
+
+	
+  </div>
+</div>
+
+
+  </div>
+  <div class="Block-tl"></div>
+  <div class="Block-tr"><div></div></div>
+  <div class="Block-bl"><div></div></div>
+  <div class="Block-br"><div></div></div>
+  <div class="Block-tc"><div></div></div>
+  <div class="Block-bc"><div></div></div>
+  <div class="Block-cl"><div></div></div>
+  <div class="Block-cr"><div></div></div>
+  <div class="Block-cc"></div>
+</div>
+
+
+</div>
+<div class="sidebar1">
+
+							
+<div class="Block">
+  <div class="Block-body">
+		<div class="BlockHeader">
+Recent Articles
+  <div class="l"></div>
+  <div class="r"><div></div></div>
+</div>
+
+<div class="BlockContent">
+  <div class="BlockContent-body">
+		<ul>
+				<li><a href="http://www.hascode.com/2015/07/snippet-creating-secure-password-hashes-in-java-with-heimdall/" title="Snippet: Creating secure Password Hashes in Java with Heimdall">Snippet: Creating secure Password Hashes in Java with Heimdall</a></li>
+				<li><a href="http://www.hascode.com/2015/07/integrating-swagger-into-a-spring-boot-restful-webservice-with-springfox/" title="Integrating Swagger into a Spring Boot RESTful Webservice with Springfox">Integrating Swagger into a Spring Boot RESTful Webservice with Springfox</a></li>
+				<li><a href="http://www.hascode.com/2015/06/documenting-restful-webservices-in-swagger-asciidoc-and-plain-text-with-maven-and-the-jax-rs-analyzer/" title="Documenting RESTful Webservices in Swagger, AsciiDoc and Plain Text with Maven and the JAX-RS Analyzer">Documenting RESTful Webservices in Swagger, AsciiDoc and Plain Text with Maven and the JAX-RS Analyzer</a></li>
+				<li><a href="http://www.hascode.com/2015/05/mutation-testing-with-pitest-and-maven/" title="Mutation Testing with Pitest and Maven">Mutation Testing with Pitest and Maven</a></li>
+				<li><a href="http://www.hascode.com/2015/05/creating-a-hybrid-mobile-application-with-ionic-cordova-and-angularjs/" title="Creating a hybrid mobile Application with Ionic, Cordova and AngularJS">Creating a hybrid mobile Application with Ionic, Cordova and AngularJS</a></li>
+				<li><a href="http://www.hascode.com/2015/04/immutables-2-0-for-sexy-immutable-object-creation-and-more/" title="Immutables 2.0 for sexy Immutable Object Creation and more">Immutables 2.0 for sexy Immutable Object Creation and more</a></li>
+				<li><a href="http://www.hascode.com/2015/03/creating-in-memory-file-systems-with-googles-jimfs/" title="Creating In-Memory File Systems with Google’s Jimfs">Creating In-Memory File Systems with Google’s Jimfs</a></li>
+				<li><a href="http://www.hascode.com/2015/02/generating-java-source-files-with-javapoet/" title="Generating Java Source Files with JavaPoet">Generating Java Source Files with JavaPoet</a></li>
+				<li><a href="http://www.hascode.com/2015/01/a-short-overview-of-neo4j-indexing-strategies/" title="A short Overview of Neo4j Indexing Strategies">A short Overview of Neo4j Indexing Strategies</a></li>
+				<li><a href="http://www.hascode.com/2015/01/performance-testing-a-multiuser-web-application-with-jmeter-and-maven/" title="Performance Testing a Multiuser Web Application with JMeter and Maven">Performance Testing a Multiuser Web Application with JMeter and Maven</a></li>
+				</ul>
+		
+  </div>
+</div>
+
+  </div>
+  <div class="Block-tl"></div>
+  <div class="Block-tr"><div></div></div>
+  <div class="Block-bl"><div></div></div>
+  <div class="Block-br"><div></div></div>
+  <div class="Block-tc"><div></div></div>
+  <div class="Block-bc"><div></div></div>
+  <div class="Block-cl"><div></div></div>
+  <div class="Block-cr"><div></div></div>
+  <div class="Block-cc"></div>
+</div>
+
+<div class="Block">
+  <div class="Block-body">
+<div class="BlockHeader">
+Search
+  <div class="l"></div>
+  <div class="r"><div></div></div>
+</div>
+
+<div class="BlockContent">
+  <div class="BlockContent-body">
+<form role="search" method="get" id="searchform" action="http://www.hascode.com/">
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s">
+	<input type="submit" id="searchsubmit" value="Search">
+	</div>
+	</form>
+  </div>
+</div>
+
+  </div>
+  <div class="Block-tl"></div>
+  <div class="Block-tr"><div></div></div>
+  <div class="Block-bl"><div></div></div>
+  <div class="Block-br"><div></div></div>
+  <div class="Block-tc"><div></div></div>
+  <div class="Block-bc"><div></div></div>
+  <div class="Block-cl"><div></div></div>
+  <div class="Block-cr"><div></div></div>
+  <div class="Block-cc"></div>
+</div>
+
+<div class="Block">
+  <div class="Block-body">
+<div class="BlockHeader">
+Archive
+  <div class="l"></div>
+  <div class="r"><div></div></div>
+</div>
+
+<div class="BlockContent">
+  <div class="BlockContent-body">
+		<ul>
+			<li><a href="http://www.hascode.com/2015/07/" title="July 2015">July 2015</a></li>
+	<li><a href="http://www.hascode.com/2015/06/" title="June 2015">June 2015</a></li>
+	<li><a href="http://www.hascode.com/2015/05/" title="May 2015">May 2015</a></li>
+	<li><a href="http://www.hascode.com/2015/04/" title="April 2015">April 2015</a></li>
+	<li><a href="http://www.hascode.com/2015/03/" title="March 2015">March 2015</a></li>
+	<li><a href="http://www.hascode.com/2015/02/" title="February 2015">February 2015</a></li>
+	<li><a href="http://www.hascode.com/2015/01/" title="January 2015">January 2015</a></li>
+	<li><a href="http://www.hascode.com/2014/12/" title="December 2014">December 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/11/" title="November 2014">November 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/10/" title="October 2014">October 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/09/" title="September 2014">September 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/08/" title="August 2014">August 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/07/" title="July 2014">July 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/06/" title="June 2014">June 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/05/" title="May 2014">May 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/04/" title="April 2014">April 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/03/" title="March 2014">March 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/02/" title="February 2014">February 2014</a></li>
+	<li><a href="http://www.hascode.com/2014/01/" title="January 2014">January 2014</a></li>
+	<li><a href="http://www.hascode.com/2013/12/" title="December 2013">December 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/11/" title="November 2013">November 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/10/" title="October 2013">October 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/09/" title="September 2013">September 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/08/" title="August 2013">August 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/07/" title="July 2013">July 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/06/" title="June 2013">June 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/05/" title="May 2013">May 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/04/" title="April 2013">April 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/03/" title="March 2013">March 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/02/" title="February 2013">February 2013</a></li>
+	<li><a href="http://www.hascode.com/2013/01/" title="January 2013">January 2013</a></li>
+	<li><a href="http://www.hascode.com/2012/12/" title="December 2012">December 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/11/" title="November 2012">November 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/10/" title="October 2012">October 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/09/" title="September 2012">September 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/08/" title="August 2012">August 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/07/" title="July 2012">July 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/06/" title="June 2012">June 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/05/" title="May 2012">May 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/04/" title="April 2012">April 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/03/" title="March 2012">March 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/02/" title="February 2012">February 2012</a></li>
+	<li><a href="http://www.hascode.com/2012/01/" title="January 2012">January 2012</a></li>
+	<li><a href="http://www.hascode.com/2011/12/" title="December 2011">December 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/11/" title="November 2011">November 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/10/" title="October 2011">October 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/09/" title="September 2011">September 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/08/" title="August 2011">August 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/07/" title="July 2011">July 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/06/" title="June 2011">June 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/05/" title="May 2011">May 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/04/" title="April 2011">April 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/03/" title="March 2011">March 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/02/" title="February 2011">February 2011</a></li>
+	<li><a href="http://www.hascode.com/2011/01/" title="January 2011">January 2011</a></li>
+	<li><a href="http://www.hascode.com/2010/12/" title="December 2010">December 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/11/" title="November 2010">November 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/10/" title="October 2010">October 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/09/" title="September 2010">September 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/08/" title="August 2010">August 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/07/" title="July 2010">July 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/06/" title="June 2010">June 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/05/" title="May 2010">May 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/04/" title="April 2010">April 2010</a></li>
+	<li><a href="http://www.hascode.com/2010/03/" title="March 2010">March 2010</a></li>
+		</ul>
+
+  </div>
+</div>
+
+  </div>
+  <div class="Block-tl"></div>
+  <div class="Block-tr"><div></div></div>
+  <div class="Block-bl"><div></div></div>
+  <div class="Block-br"><div></div></div>
+  <div class="Block-tc"><div></div></div>
+  <div class="Block-bc"><div></div></div>
+  <div class="Block-cl"><div></div></div>
+  <div class="Block-cr"><div></div></div>
+  <div class="Block-cc"></div>
+</div>
+
+<div class="Block">
+  <div class="Block-body">
+<div class="BlockHeader">
+Categories
+  <div class="l"></div>
+  <div class="r"><div></div></div>
+</div>
+
+<div class="BlockContent">
+  <div class="BlockContent-body">
+		<ul>
+	<li class="cat-item cat-item-3"><a href="http://www.hascode.com/category/android/" title="View all posts filed under Android">Android</a> (17)
+</li>
+	<li class="cat-item cat-item-14"><a href="http://www.hascode.com/category/apps/" title="View all posts filed under Apps">Apps</a> (8)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.hascode.com/category/confluence/" title="View all posts filed under Confluence">Confluence</a> (11)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.hascode.com/category/development/" title="View all posts filed under Development">Development</a> (23)
+</li>
+	<li class="cat-item cat-item-436"><a href="http://www.hascode.com/category/dvcs/" title="View all posts filed under dvcs">dvcs</a> (1)
+</li>
+	<li class="cat-item cat-item-283"><a href="http://www.hascode.com/category/enterprise/" title="View all posts filed under Enterprise">Enterprise</a> (21)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.hascode.com/category/groovygrails/" title="View all posts filed under Groovy/Grails">Groovy/Grails</a> (3)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.hascode.com/category/java/" title="View all posts filed under Java">Java</a> (111)
+</li>
+	<li class="cat-item cat-item-419"><a href="http://www.hascode.com/category/javascript-2/" title="View all posts filed under Javascript">Javascript</a> (3)
+</li>
+	<li class="cat-item cat-item-427"><a href="http://www.hascode.com/category/jira-2/" title="View all posts filed under Jira">Jira</a> (1)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.hascode.com/category/reading-corner/" title="Reading Corner">Reading Corner</a> (1)
+</li>
+	<li class="cat-item cat-item-369"><a href="http://www.hascode.com/category/scala/" title="View all posts filed under Scala">Scala</a> (5)
+</li>
+	<li class="cat-item cat-item-97"><a href="http://www.hascode.com/category/snippet/" title="View all posts filed under Snippet">Snippet</a> (5)
+</li>
+	<li class="cat-item cat-item-244"><a href="http://www.hascode.com/category/testing/" title="View all posts filed under testing">testing</a> (15)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://www.hascode.com/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a> (1)
+</li>
+	<li class="cat-item cat-item-379"><a href="http://www.hascode.com/category/web/" title="View all posts filed under Web">Web</a> (10)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.hascode.com/category/web-services/" title="View all posts filed under Web Services">Web Services</a> (14)
+</li>
+	<li class="cat-item cat-item-465"><a href="http://www.hascode.com/category/xml-2/" title="View all posts filed under XML">XML</a> (3)
+</li>
+		</ul>
+
+  </div>
+</div>
+
+  </div>
+  <div class="Block-tl"></div>
+  <div class="Block-tr"><div></div></div>
+  <div class="Block-bl"><div></div></div>
+  <div class="Block-br"><div></div></div>
+  <div class="Block-tc"><div></div></div>
+  <div class="Block-bc"><div></div></div>
+  <div class="Block-cl"><div></div></div>
+  <div class="Block-cr"><div></div></div>
+  <div class="Block-cc"></div>
+</div>
+
+<div class="Block">
+  <div class="Block-body">
+<div class="BlockHeader">
+Links
+  <div class="l"></div>
+  <div class="r"><div></div></div>
+</div>
+
+<div class="BlockContent">
+  <div class="BlockContent-body">
+
+	<ul class="xoxo blogroll">
+<li><a href="https://plus.google.com/101312240852175091441/" rel="me">Google Profile</a></li>
+<li><a href="http://bitbucket.org/hascode">hasCode on Bitbucket</a></li>
+<li><a href="http://www.scrumalliance.org/profiles/135626-micha-kops" rel="me" title="hasCode on ScrumAlliance" target="_blank">hasCode on ScrumAlliance</a></li>
+<li><a href="http://www.slideshare.net/hascode" rel="me" title="hasCode on Slideshare" target="_blank">hasCode on Slideshare</a></li>
+<li><a href="http://twitter.com/hascode" rel="me" title="hasCode on Twitter" target="_blank">hasCode on Twitter</a></li>
+<li><a href="http://www.youtube.com/user/hascodedotcom" rel="me" title="hasCode.com YouTube Channel" target="_blank">hasCode on YouTube</a></li>
+<li><a href="https://www.pinterest.com/hascode/" rel="me" target="_blank">Pinterest</a></li>
+<li><a href="http://www.pirate-ninja-unicorn.com/" rel="me" target="_blank">Pirate Ninja Unicorn</a></li>
+
+	</ul>
+
+  </div>
+</div>
+
+  </div>
+  <div class="Block-tl"></div>
+  <div class="Block-tr"><div></div></div>
+  <div class="Block-bl"><div></div></div>
+  <div class="Block-br"><div></div></div>
+  <div class="Block-tc"><div></div></div>
+  <div class="Block-bc"><div></div></div>
+  <div class="Block-cl"><div></div></div>
+  <div class="Block-cr"><div></div></div>
+  <div class="Block-cc"></div>
+</div>
+
+					
+</div>
+
+</div>
+
+  </div>
+  <div class="Sheet-tl noprint"></div>
+  <div class="Sheet-tr noprint"><div></div></div>
+  <div class="Sheet-bl noprint"><div></div></div>
+  <div class="Sheet-br noprint"><div></div></div>
+  <div class="Sheet-tc noprint"><div></div></div>
+  <div class="Sheet-bc noprint"><div></div></div>
+  <div class="Sheet-cl noprint"><div></div></div>
+  <div class="Sheet-cr noprint"><div></div></div>
+  <div class="Sheet-cc noprint"></div>
+</div>
+
+<div id="footer" class="noprint">
+<!-- If you'd like to support WordPress, having the "powered by" link somewhere on your blog is the best way; it's our only promotion or advertising. -->
+<p>Powered by <a href="http://wordpress.org/">WordPress</a> and <a href="http://www.l2aelba.com/">WordPress Theme</a> created with l2aelba.<br>
+<a href="http://www.hascode.com/feed/">Entries (RSS)</a> and <a href="http://www.hascode.com/comments/feed/">Comments (RSS)</a>.
+<!-- 15 queries. 1.182 seconds. --></p>
+</div>
+</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var SHRSB_Globals = {
+	src: "http://www.hascode.com/wp-content/plugins/sexybookmarks/spritegen_default",
+	perfoption: "1"
+};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/jquery.shareaholic-publishers-sb.min.js"></script>
+<!-- Start Shareaholic TopSharingBar Automatic --><!-- End Shareaholic TopSharingBar Automatic --><script type="text/javascript">var SHRSB_Settings = {"shr-publisher-1092":{"link":"http:\/\/www.hascode.com\/2014\/02\/creating-elegant-typesafe-queries-for-jpa-mongodbmorphia-and-lucene-using-querydsl\/","shortener":"google","title":"Creating elegant, typesafe Queries for JPA, mongoDB\/Morphia and Lucene using Querydsl","notes":"Querydsl%20is%20a%20framework%20that%20allows%20us%20to%20create%20elegant%2C%20type-safe%20queries%20for%20a%20variety%20of%20different%20data-sources%20like%20Java%20Persistence%20API%20%28JPA%29%20entities%2C%20Java%20Data%20Objects%20%28JDO%29%2C%20mongoDB%20with%20Morphia%2C%20SQL%2C%20Hibernate%20Search%20up%20to%20Lucene.%0D%0A%0D%0AIn%20the%20following%20tutorial%20we%27re%20implementing%20example%20que","service":"5,7,88,74,2,38,40,201,219,27,102,207","apikey":"8afa39428933be41f8afdb8ea21a495c","expand":true,"src":"http:\/\/www.hascode.com\/wp-content\/plugins\/sexybookmarks\/spritegen_default","localize":true,"share_src":"http:\/\/www.shareaholic.com","rel":"nofollow","target":"_blank","bgimg":"http:\/\/www.hascode.com\/wp-content\/plugins\/sexybookmarks\/images\/share-knowledge.png","bgimg_padding":"35px 0 0 10px","center":true,"twitter_template":"%24%7Btitle%7D+-+%24%7Bshort_link%7D+via+%40hasCode.com","mode":"inject","designer_toolTips":"1","tip_bg_color":"#000000","tip_text_color":"#ffffff","shrlink":"1"}};</script>
+<!-- tracker added by Ultimate Google Analytics plugin v1.6.0: http://www.oratransplant.nl/uga -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-15375615-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: enhanced
+Database Caching 11/26 queries in 0.094 seconds using disk: basic
+Object Caching 1074/1093 objects using disk: basic
+
+Served from: www.hascode.com @ 2015-08-10 22:33:36 --><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div><iframe id="shr_oven" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/analytics_frame.html" style="display: none;"></iframe><iframe name="oauth2relay1569259085" id="oauth2relay1569259085" src="./hasCode.com » Blog Archive » Creating elegant, typesafe Queries for JPA, mongoDB_Morphia and Lucene using Querydsl_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
