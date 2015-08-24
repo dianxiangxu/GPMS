@@ -1,0 +1,42 @@
+body {
+    background: url(https://upviral.s3.amazonaws.com/images/1436820771Giveaway-Landing-page-email.jpg);
+    background-repeat: no-repeat;
+   -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+     position:relative;
+}
+
+
+.zoSocial_fromContainer
+{
+    border-top: 6px solid #0c0559;
+}
+.wrapper,.right_side_widget
+{
+    direction: ltr}
+.powered
+{
+    position:fixed;
+    right:5px;
+    bottom:5px;
+}
+.powered img
+{
+    width:41px;
+}
+.get-started
+{   
+    display: inline-block;
+}
+
+.leadpage7 .page
+{
+   padding: 50px 0;
+}
+.leadpage7 .main
+{
+   margin: inherit;
+}
+

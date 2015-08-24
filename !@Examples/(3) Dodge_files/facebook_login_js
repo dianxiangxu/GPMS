@@ -1,0 +1,304 @@
+
+/**
+ * Facebook Login 1.0.1?
+ * Allows user to log into a promotion using their Facebook account.
+ * Authors: gabe.antypas, chun.her, jason.petterson, todd.chapman
+ * Additional changes: karl.loebach, anthony.hessler
+ */
+;(function ($, window, undefined) {
+
+var permissions;
+var fbls = {"permissions":["email"],"copy_nodes":{"includes":{"images_loader":"/srt/public/COMPILED/images/facebook/ajax-loader.b51a41c7190c7125537461694c1fae14.gif","css_login":"/srt/public/COMPILED/css/facebook/viral.4c653cd81b1c0f3ab9277535105f110e.css"},"button":{"login":"Enter Now"}}};
+var user = {};
+var auth_response;
+var directFBLogin = false;
+
+// ???
+var fbl_defaults = {
+    env: 'live'
+};
+
+// URL Param Retrieval
+if (!$.urlParam) {
+    $.urlParam = function (name) {
+        return parseUrlParams(name, window.location.href);
+    }
+}
+function parseUrlParams(name, locat) {
+    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locat);
+    if (results) {
+        return results[1] || "";
+    }
+    return "";
+}
+
+// Initializes Facebook.
+function initialize() {
+    loadCss();
+
+    if ($.urlParam("direct_fb_login") === "0" || $.urlParam("direct_fb_login") === "false") {
+        directFBLogin = false;
+    }
+    window.oneclick.directFBLogin = directFBLogin;
+
+    
+    notifyTestingEnvironment();
+    
+
+    initialize_fb_sdk();
+}
+
+// Loads Facebook-relevant CSS.
+function loadCss() {
+    if (document.createStyleSheet) {
+        document.createStyleSheet(fbls.copy_nodes.includes.css_login);
+    } else {
+        $('head').append('<link rel="stylesheet" href="' + fbls.copy_nodes.includes.css_login + '" />');
+    }
+}
+
+// Notify the user if they are in a testing environment that cannot access Facebook.
+function notifyTestingEnvironment() {
+    var newurl;
+    var paths;
+
+    if (/tbx2-promodev\.int\.eprize\.net/.test(window.location.host)) {
+
+        // Lexbox.
+        if (/tbx2-promodev\.int\.eprize\.net:\d+/.test(window.location.host)) {
+            paths = window.location.href.match(/.*(:\d+)\/(.*)\/(.*)\//);
+            newurl = window.location.protocol + '//fb-promodev.eprize.com' + paths[1] + '/' + paths[2] + '/' + paths[3] + '/';
+        } else {
+            paths = window.location.href.match(/.*\/(.*)\/(.*)\//);
+            newurl = window.location.protocol + '//fb-promodev.eprize.com/' + paths[1] + '/' + paths[2] + '/';
+        }
+    }
+}
+
+// Loads the necessary Facebook code and initializes the SDK.
+function initialize_fb_sdk() {
+
+    // If not already loaded, load the Facebook JavaScript SDK.
+    if (!window.fbSdkLoaded) {
+
+        window.fbSdkLoaded = true;
+
+        // Create the fb-root element to house 'connect.facebook.net/en_US/all.js'.
+        if ($('#fb-root').length === 0) {
+            $('body').prepend('<div id="fb-root"></div>');
+        }
+
+        // Calls fbAsyncInit when loaded.
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+
+    }
+
+    // Export Facebook methods to be called when the FB script is loaded.
+    window.fbAsyncInit = function () {
+        window.FB.init({
+            appId: '804913586282469',
+            channelUrl: 'https://dodge.promo.eprize.com/srt/channel',
+            cookie: true,
+            logging: false,
+            session: null,
+            status: true,
+            xfbml: true,
+            oauth: true
+        });
+
+        FB.Canvas.setAutoGrow();
+
+        window.FB.getLoginStatus(function (response) {
+            $(document).trigger("fbInitialized");
+            if (response.authResponse) {
+                // A user has logged in, and a new cookie has been saved
+                auth_response = response.authResponse;
+                // $('input[name=signed_request]').val(response.authResponse.signedRequest);
+                // $('input[name=access_token]').val(response.authResponse.accessToken);
+                handle_logged_in_user();
+            } else {
+                // The user has logged out, and the cookie has been cleared
+                handle_logged_out_user();
+            }
+        });
+    };
+}
+
+// Initialize the user's profile as soon as they are logged in.
+function handle_logged_in_user() {
+    window.FB.api('/me' + fb_extra_params(), {
+        fields: 'id, name, picture, link'
+    }, function(response) {
+        user.id = response.id;
+        user.name = response.name;
+        user.picture = response.picture.data.url;
+        user.link = response.link;
+    });
+}
+
+// User logged out...
+function handle_logged_out_user() {
+
+}
+
+function fb_extra_params() {
+    var qs = '';
+
+    if (is_site_ssl()) {
+        qs = '?return_ssl_resources=1';
+    }
+
+    return qs;
+}
+
+function is_site_ssl() {
+    if (/https:/.test(document.location.protocol)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
+// Auto-fills the relevant form.
+function fill_form_fields(response) {
+    var field_map = {
+        'age.birth_day': 'birthDay',
+        'age.birth_month': 'birthMonth',
+        'age.birth_year': 'birthYear',
+        birth_date: 'birthday',
+        confirm_email: 'email',
+        gigya_network: 'provider',
+        social_uid: 'id'
+    };
+
+    if (!response.providers) {
+        response.providers = 'facebook';
+    }
+
+    if (response.birthday) {
+        var mdy = response.birthday.split('/');
+
+        if (!response.age) {
+            response.age = getAge(response.birthday);
+        }
+
+        response.birthDay = mdy[1];
+        response.birthMonth = mdy[0];
+        response.birthYear = mdy[2];
+    }
+
+    window.FB.getLoginStatus(function (fbresponse) {
+        if (fbresponse.authResponse) {
+            response.access_token = fbresponse.authResponse.accessToken;
+            response.signed_request = fbresponse.authResponse.signedRequest;
+        }
+
+        window.oneclick.fillFormFields(field_map, window.oneclick.registrationView.$form, response, { minimum_consumer_age: '18' });
+        window.oneclick.fillFormFields(field_map, window.oneclick.loginView.$form, response, { minimum_consumer_age: '18' });
+    });
+}
+
+function compute_permissions() {
+    var perm_map = {};
+    var perms = [];
+
+    $.each(fbls.permissions, function (index, value) {
+        perm_map[value] = 1;
+    });
+
+    if ($('#reg_form input[name=email]').length > 0) {
+        perm_map.email = 1;
+    }
+
+    if ($('#reg_form :input[name=age]').length > 0) {
+        perm_map.user_birthday = 1;
+    }
+
+    $.each(perm_map, function (key, value) {
+        perms.push(key);
+    });
+
+    return perms.join(',');
+}
+
+function facebook_login(options) {
+
+    // If the user's already logged in...
+    if (user.id) {
+        window.FB.api('/me?fields=email,birthday,first_name,last_name', function (response) {
+            if (response.error) {
+                response.operation = "FB.api('/me?fields=email,birthday,first_name,last_name'";
+                options.callback(response);
+                return;
+            } else {
+                fill_form_fields(response);
+            }
+        });
+    } else {
+        permissions = compute_permissions();
+
+        // Go directly to FB URL if var is true. Otherwise, proceed as normal.
+        if (directFBLogin) {
+            var fbAuthURL = 'https://graph.facebook.com/oauth/authorize?client_id=' + '804913586282469' + '&scope=' + permissions + '&redirect_uri=' + window.location.href;
+            window.location = fbAuthURL;
+            return;
+        }
+
+        window.FB.login(function (response) {
+            if (!response || response.error || !response.authResponse) {
+                response.operation = 'FB.login';
+                options.callback(response);
+
+                window.oneclick.track('Facebook Login', 'Deny');
+
+                return;
+            }
+
+            // User successfully logged in and accepted the application.
+            if (response.authResponse) {
+                window.oneclick.track('Facebook Login', 'Accept');
+
+                window.FB.api('/me?fields=email,birthday,first_name,last_name',
+                function(response) {
+                    if (response.error) {
+                        response.operation = "FB.api('/me?fields=email,birthday,first_name,last_name'";
+                        options.callback(response);
+                        return;
+                    } else {
+                        fill_form_fields(response);
+                    }
+                });
+            } else {
+                handle_logged_out_user();
+            }
+        }, {scope: permissions});
+    }
+
+    return false;
+}
+
+// Export facebook_login globally.
+window.facebook_login_func = facebook_login;
+
+// Initialize on DOM ready.
+$(function () {
+     initialize();
+});
+
+})(jQuery, window);

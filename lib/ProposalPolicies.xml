@@ -1,0 +1,370 @@
+<PolicySet xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+	PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:first-applicable"
+	PolicySetId="ProposalManagement" Version="1.0">
+	<Target />
+	<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+		PolicyId="CreateDeleteProposal"
+		RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit"
+		Version="1.0">
+		<!--Policy:Only Tenured, Non-tenured, and Delegated can create new proposal(Faculty 
+			becomes the PI of the proposal it creates) -->
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Proposal</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<Rule Effect="Permit" RuleId="FacultyCreateProposal"><!--Rule:Only Tenures, Non-tenured, and 
+				Delegated can create new proposal -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Create</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+								Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Tenured</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Non-tenured</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Delegated</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+							Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+				</Apply>
+			</Condition>
+		</Rule>
+		<Rule Effect="Permit" RuleId="PIDeletesProposal"><!--Rule:Only PI can delete proposal -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Delete</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+								Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+						Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Apply>
+			</Condition>
+		</Rule>
+	</Policy>
+	<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+		PolicyId="View-Edit-Co-PI-List"
+		RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit"
+		Version="1.0">
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI-List</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<Rule Effect="Permit" RuleId="PI-Views-Edits-Co-PI-List"><!--Rule:PI can view/edit Co-PI -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Edit</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+				</Apply>
+			</Condition>
+		</Rule>
+		<Rule Effect="Permit" RuleId="Co-PI/Senior-Personnel-Views-Co-PI-List"><!--Rule:Co-PI/Senior-Personnel can view Co-PI-List -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Apply>
+			</Condition>
+		</Rule>
+	</Policy>
+	<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+		PolicyId="View-Edit-Senior-Personnel-List"
+		RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit"
+		Version="1.0">
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel-List</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<Rule Effect="Permit" RuleId="PI/Co-PI-View-Edits-Senior-Personnel-List">
+		<!--Rule:PI and Co-PI can view/edit SeniorPersonnel -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Edit</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+				</Apply>
+			</Condition>
+		</Rule>
+		<Rule Effect="Permit" RuleId="Senior-Personnel-View-Senior-Personel-List">
+		<!--Rule:Senior-Personnel can view SeniorPersonnel List -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Apply>
+			</Condition>
+		</Rule>
+	</Policy>
+	<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+		PolicyId="View-Edit-Project-Info"
+		RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit"
+		Version="1.0">
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Project-Info</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<Rule Effect="Permit" RuleId="PI-View-Edits-Project-Info">
+		<!--Rule:PI can view/edit Project-Inf -->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Edit</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+						<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+						<AttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+					</Apply>
+				</Apply>
+			</Condition>
+		</Rule>
+		<Rule Effect="Permit" RuleId="Co-PI/Senior-Personnel-View-Project-Info">
+		<!--Rule:Co-PI/Senior-Personnel can view ProjectInfo-->
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Co-PI</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Senior-Personnel</AttributeValue>
+							<AttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+								DataType="http://www.w3.org/2001/XMLSchema#string"
+								MustBePresent="true" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:any-of">
+					<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">View</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Apply>
+			</Condition>
+		</Rule>
+	</Policy>
+</PolicySet>                                         

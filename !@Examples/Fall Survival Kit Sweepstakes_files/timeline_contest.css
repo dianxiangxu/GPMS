@@ -1,0 +1,2195 @@
+/*--------------------------------------------------------
+Offerpop Contest Style Sheet
+----------------------------------------------------------*/
+
+@media print {
+    .print-hidden {
+        display: none;
+    }
+}
+
+/* General Styles */
+
+body {
+font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
+font-size:13px;
+color:#333;
+}
+
+a {
+color:#3B5998; /*facebook blue*/
+text-decoration:none;
+}
+
+a:hover {
+text-decoration:underline;
+}
+
+.float-clearer {
+    clear: both;
+    margin: 0px;
+    padding: 0px;
+}
+
+#app_fantab {
+}
+
+#app_nonfantab {
+}
+
+#app_canvas {
+}
+
+#app_canvas_header {
+}
+
+div.FullWidthArea{
+    width: 810px;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Vote Styles */
+div.VButton a {
+color:white;
+background:#3B5998; /*facebook blue*/
+padding:6px 15px 6px 15px;
+border: 3px double #D8DFEA; /*facebook light blue*/
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+text-decoration:none;
+font-weight:bold;
+font-size:1.2em;
+}
+
+div.DisabledVButton a {
+color:white;
+background:#CCCCCC; /*facebook grey*/
+padding:6px 15px 6px 15px;
+border: 3px double #F7F7F7; /*facebook light grey*/
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+text-decoration:none;
+font-weight:bold;
+font-size:1.2em;
+}
+
+div.VButton a:hover {
+background:#627AAD; /*facebook med blue*/
+}
+
+div.VStatus {
+margin-top:12px;
+color:#d99;
+font-weight:bold;
+}
+
+div.VWait {
+margin-top:10px;
+margin-left:20px;
+}
+
+/* Tug of War Styles */
+div.TugPageContent {
+width:810px;
+}
+
+div.TLBox {
+font-family:arial, sans-serif;
+text-align:right;
+width:90px;
+padding:8px;
+color:black;
+font-size:12px;
+background:white;
+border:1px solid #ccc;
+position: absolute;
+right: 0;
+}
+
+div.TLBox .TLTitle {
+margin-bottom:5px;
+color:#333;
+}
+
+div.TLBox .TLInfo {
+color:red;
+font-weight:bold;
+line-height:default;
+}
+
+table.TTable {
+margin:auto;
+}
+
+table.TTable td {
+vertical-align:top;
+}
+
+table.TTable .LBox {
+border-right:1px solid #ccc;
+padding-right:20px;
+}
+
+table.TTable .RBox {
+padding-left:20px;
+}
+
+div.TStatus {
+width: 810px;
+margin-top:10px;
+}
+
+div.TStatus .can_vote{
+text-align: center;
+}
+
+div.TStatus .TImage {
+text-align:center;
+margin-bottom:10px;
+}
+
+div.TStatus img {
+border:0;
+}
+
+div#app_fantab .TStatus .TImage img, #app_nonfantab .TStatus .TImage img{
+width:370px;
+}
+
+div#app_canvas .TStatus .TImage img{
+width:350px;
+}
+
+div.TStatus .TName {
+font-size:15pt;
+font-weight:bold;
+text-align:center;
+color:#333;
+font-family:arial,sans-serif;
+margin: 0 auto;
+}
+
+div.TStatus .TCount, div.TStatus .TPct {
+text-align:center;
+color:#ccc;
+font-size:24pt;
+font-weight:bold;
+font-family:arial,sans-serif;
+margin-bottom:10px;
+}
+div.TStatus .TPct {
+    display: none;
+}
+
+div.TInstructions {
+margin:20px 0 3px 0;
+text-align:left;
+color:#333;
+font-size:14px;
+font-weight:bold;
+font-family:arial,sans-serif;
+}
+
+div.TVoteLink {
+margin-bottom:15px;
+}
+
+div.THeader {
+font-family:arial,sans-serif;
+font-size:15pt;
+color:#333;
+width:810px;
+position:relative;
+min-height:100px;
+}
+
+div.THeadline {
+font-weight:bold;
+margin-bottom:10px;
+}
+
+div.THeadlineImageContainer .THeadlineImage {
+width: 810px;
+margin-bottom: 10px;
+}
+
+div.TDescription {
+color:#888;
+margin-bottom:40px;
+width: 685px;
+float: left;
+}
+
+div.TDesc-and-countdown-container {
+float: left;
+width: 810px;
+position: relative;
+min-height: 100px;
+}
+
+div.view_countdown_container {
+top:0;
+right:0;
+opacity:0.95;
+filter:alpha(opacity=95);
+}
+
+img.FullWidthImage{
+    width:       810px !important;
+    border:       none;
+    padding-left:  0px;
+    padding-right: 0px;
+    margin-left:   0px;
+    margin-right:  0px;
+}
+
+#share_button {
+font-size:11px;
+text-align:left;
+margin-top:20px;
+}
+
+#powered_by {
+color:#888;
+font-size:11px;
+text-align:left;
+}
+
+#powered_by a {
+color:#888;
+}
+
+#powered_by a:hover {
+color:#3B5998; /*facebook blue*/
+}
+
+#teconsent {
+    float:right; 
+    padding-left:5px;
+    /* The content is located dynamically. By hard-coding the dimensions,
+     * we ensure the FB Canvas will be sized properly. */
+    width: 92px;
+    height: 20px;
+}
+
+#teconsent a img {
+    height: 20px;
+}
+
+#pop_email, #pop_unauthorized, #facebook_unauthorized {
+position:absolute;
+z-index:10;
+top:300px;
+width:440px;
+left:125px;
+background:white;
+padding:20px;
+border:2px solid #ccc;
+border-radius:6px;
+-moz-border-radius:6px;
+-webkit-border-radius:6px;
+}
+
+#facebook_unauthorized {
+    margin-top: -20px;
+    top: auto;
+    z-index: 2000;
+}
+
+#signup_image {
+width:435px;
+border:2px solid #333;
+margin-bottom: 15px;
+}
+
+#offer_div {
+font-size:18px;
+margin-bottom:10px;
+}
+
+#form_div {
+}
+
+div.TVoteNotes {
+text-align:right;
+font-size:11px;
+color:#888;
+}
+
+/* Contest Styles */
+
+div.CNav {
+font-size:12px;
+font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
+background:white;
+padding:7px 0 4px 5px;
+border-bottom:1px solid #D8DFEA; /*facebook light blue*/
+}
+
+div.CNav a {
+color:#3B5998; /*facebook blue*/
+background:#D8DFEA; /*facebook light blue*/
+padding:6px 10px 4px 10px;
+border:0;
+text-decoration:none;
+font-weight:bold;
+}
+
+div.CNav a:hover {
+background:#627AAD; /*facebook med blue*/
+text-decoration:none;
+border:0;
+color:white;
+}
+
+div.CNav a.Sel {
+background:white;
+color:black;
+border:1px solid #D8DFEA; /*facebook light blue*/
+border-bottom:0;
+padding-bottom:5px;
+}
+
+div.CNav a.Disabled {
+background:#D8DFEA; /*facebook light blue*/
+color:#9DB0D9; /*facebook disabled blue*/
+}
+
+div.CNav a.Disabled:hover {
+background:#D8DFEA; /*facebook light blue*/
+color:#9DB0D9; /*facebook disabled blue*/
+}
+
+div.CNav a.RightMenu {
+float:right;
+font-weight:normal;
+margin:-6px 5px 0 0;
+}
+
+/* CSS for Category Feature for Photo Contest*/
+    /* CSS for Category Nav */
+div.CNavC {
+font-size:11px;
+font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
+background:white;
+padding:15px 0 12px 5px;
+border-bottom:1px dotted #D8DFEA; /*facebook light blue*/
+}
+
+a.CatNav {
+color:#3B5998; /*facebook blue*/
+background:#F4F7F9; /*facebook light blue*/
+padding:6px 10px 4px 10px;
+line-height:300%;
+}
+
+a.CatNavSel{
+background:white;
+padding:6px 10px 4px 10px;
+color:black;
+border:2px solid #627AAD; /*facebook med blue*/
+}
+
+a.CatNav:hover {
+background:#627AAD; /*facebook med blue*/
+text-decoration:none;
+border:0;
+color:white;
+}
+    /* End of CSS for Category Nav */
+
+div.CThumbCategory {
+font-size:9px;
+text-align:right;
+margin-right:15px;
+color:#888;
+}
+
+div.EntryCategory {
+text-align:right;
+font-size:11px;
+}
+/* End of CSS for Category Feature */
+
+/* ------------Fundraise CSS------------ */
+
+div.SideBar {
+float:left;
+padding-top:15px;
+}
+
+div.FundraiseGallaryGrid, div.ContestGallery {
+padding-top:20px;
+margin-left:125px;
+}
+
+input.SearchField {
+text-align:center;
+margin:4px 0 4px 0;
+width:100px;
+padding:6px 4px 6px 4px;
+border:1px solid #CCCCCC;
+}
+
+div.SideBarTitle {
+font-size:15px;
+color:#3B5998;
+font-weight:bold;
+margin:10px 0 4px 0;
+}
+
+div.CatSideBar, div.SortSideBar {
+font-size:12px;
+font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
+background:white;
+}
+
+div.CatSideBar div, div.SortSideBar {
+margin-bottom:5px;
+}
+
+a.Category, div.SortSideBar a {
+color:#666666; /*grey*/
+}
+
+a.SelectedCategory, div.SortSideBar a.SelectedSort{
+color:black;
+font-weight:bold;
+text-decoration:none;
+}
+
+a.Category:hover, a.SelectedCategory:hover, div.SortSideBar a:hover {
+font-weight:bold;
+color:#627AAD; /* Facebook light blue */
+text-decoration:none;
+}
+
+div.FThumbnail, div.VThumbnail {
+background:#EEEEEE; /* Qwhite */
+border:1px solid #CCCCCC; /* GAINSBORO */
+padding:8px 8px 8px 8px;
+margin:0 8px 3px 0;
+height:128px;
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+}
+
+div.VThumbnail {
+width:172px;
+text-align:center;
+}
+
+div.FThumbnail img {
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+width: 100%;
+height: 100%;
+}
+
+div.HoverImage{
+    position: relative;
+}
+div.FThumbHoverImage{
+    position: absolute;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    bottom: 0px;
+    padding: 7px 0px;
+    background: #627AAD; /* Facebook med blue */
+    filter:alpha(opacity=95);
+    opacity:0.95;
+    width: 100%;
+}
+
+div.FPrompt {
+background:#EEEEEE; /* Qwhite */
+padding:20px 10px 20px 20px;
+border:1px solid #CCCCCC; /* GAINSBORO */
+margin:10px 0 0 20px;
+line-height:1.2em;
+font-weight:bold;
+width:400px;
+}
+
+div.FPrompt img {
+position:relative;
+float:left;
+margin-right:20px;
+}
+
+div.FFoldPrompt {
+border:6px double #CCCCCC;
+width:685px;
+background:#ffe;
+margin:10px 0 0 10px;
+padding:20px 10px 20px 20px;
+line-height:1.2em;
+font-weight:bold;
+}
+
+div.FFoldPrompt p.FAttention {
+font-size:16px;
+text-align:center;
+}
+
+div.TotalFundsRaised {
+position:relative;
+color:#3B5998;
+font-weight:bold;
+margin-left:30px;
+}
+
+div.TotalFundsRaised span {
+font-size:280%;
+}
+
+/* ------------end of Fundraise CSS------------ */
+
+/* ------------Video Contest CSS------------ */
+
+div.ValidFormatsBox {
+background-color:#EEEEEE;
+border: 2px double #CCC;
+padding: 0 14px;
+margin:14px 0;
+font-size:11px;
+width:572px;
+}
+
+div.UploadStatusBox {
+background-color:#ffe;
+border: 6px double #CCC;
+padding: 12px;
+width:790px;
+margin:14px 0;
+}
+
+div.UploadMediaBox {
+background-color:#D8DFEA;
+border: 6px double #CCC;
+padding: 6px 20px 20px 20px;
+width:600px;
+margin:14px 0;
+}
+
+div.VThumbDuration {
+position:relative;
+text-align:center;
+font-size: 11px;
+width:35px;
+color:white;
+bottom:27px;
+left:1px;
+margin-left:135px;
+padding:5px 0;
+background:black; /* Facebook med blue */
+filter:alpha(opacity=85);
+opacity:0.85;
+}
+
+/* ------------end of Video Contest CSS------------ */
+
+div.CRules {
+width:750px;
+padding:10px 0 0 0;
+font-size:11px;
+}
+
+div.CResults {
+padding:10px;
+}
+
+div.CTop {
+margin:0 0 20px 0;
+}
+
+div.CBody {
+width:750px;
+margin:10px 0 -50px 0;
+}
+
+div.CSub {
+}
+
+div.CHeader {
+font-family:arial,sans-serif;
+font-size:14pt;
+color:#333;
+}
+
+div.CHeader img {
+width:750px;
+}
+
+div.CHeader img.tab {
+width:810px;
+margin-bottom:10px;
+border:0;
+}
+
+div.CHeader .CHeadline {
+/*The line below causes FB.canvas.setAutoGrow() to run indefinitely on Referral's fan page.*/
+/*margin:10px 0 20px 0;*/
+font-weight:bold;
+color:#333;
+}
+
+div.CDescription {
+width:750px;
+margin-top:15px;
+/*The line below causes FB.canvas.setAutoGrow() to run indefinitely on Referral's non-fan page.*/
+/*margin-bottom:10px;*/
+}
+
+div.CDescription h1 {
+font-size:12pt;
+margin-bottom:5px;
+font-weight:normal;
+}
+
+div.CSubmit {
+padding:10px 0 0 10px;
+}
+
+div.CSubmit img{
+}
+
+div.CFooter {
+font-size:10px;
+color: #888;
+}
+
+div.CFooterDivider{
+border-top: 1px dotted #CCCCCC;
+margin-top: 7px;
+padding-top: 10px;
+}
+
+div.CShare {
+margin:10px 0 0 0;
+font-size:10px;
+}
+
+div.CAdmin {
+margin-top:15px;
+border:1px solid #ddd;
+padding:6px;
+background:white;
+float:left;
+}
+
+div.CPhoto {
+background:white;
+border:1px solid #ccc;
+padding:7px 7px 4px 7px;
+width:390px;
+margin-bottom:20px;
+}
+
+div.next_arrow {
+display: inline-block;
+float: right;
+width: 50%;
+margin-bottom: 5px;
+text-align: right;
+}
+
+div.prev_arrow {
+display: inline-block;
+float: left;
+width: 50%;
+margin-bottom: 5px;
+}
+
+div.CPhoto a{
+text-decoration: none;
+}
+
+div.CPhoto img.nav_arrow{
+width: 16px;
+vertical-align: middle;
+}
+
+div.CPhoto img {
+width:390px;
+}
+
+div.CPhoto:hover {
+border:1px solid #3B5998; /*facebook blue*/
+background:#ECEEF5; /*facebook off white*/
+}
+
+div.CSmallPhoto {
+background:white;
+border:1px solid #ccc;
+padding:4px 4px 2px 4px;
+width:50px;
+float:left;
+margin:0 5px 5px 0
+}
+
+div.CSmallPhoto.Sel {
+border:1px solid red;
+}
+
+div.CSmallPhoto.Sel:hover {
+border:1px solid red;
+background:white;
+}
+
+div.CSmallPhoto img {
+border:0;
+width:50px;
+height:50px;
+}
+
+div.CSmallPhoto:hover {
+border:1px dashed red;
+background:#ECEEF5; /*facebook off white*/
+}
+
+div.CSmallPhotoSubmit {
+color:#3B5998; /*facebook blue*/
+background:#D8DFEA; /*facebook light blue*/
+font-weight:bold;
+font-size:10px;
+text-align:center;
+padding:10px 5px 10px 5px;
+height:40px;
+width:50px;
+float:left;
+margin:0 5px 5px 0;
+}
+
+div.CSmallPhotoSubmit:hover {
+background:#627AAD; /*facebook med blue*/
+}
+
+div.CSmallPhotoSubmit a:hover {
+border:0;
+text-decoration:none;
+color:white;
+}
+
+div.CThumbnail {
+background:white;
+border:1px solid #ccc;
+padding:3px 3px 0 3px;
+margin:0 15px 3px 0;
+}
+
+div.CThumbnail:hover {
+border:1px dashed #3B5998; /*facebook blue*/
+background:#627AAD; /*facebook med blue*/
+}
+
+div.CThumbnail img {
+height:128px;
+width:128px;
+border:0;
+}
+
+div.CThumbName {
+margin:0;
+font-weight:bold;
+width: 128px;
+}
+
+div.CThumbPlace {
+margin:0;
+color:#666;
+font-size:10px;
+width:128px;
+}
+
+div.CThumbCaption {
+margin:0;
+color:#666;
+font-size:10px;
+width:128px;
+}
+
+div.CThumbAction {
+font-size:10px;
+margin-top:3px;
+}
+
+div.CThumbAction img {
+vertical-align:middle;
+border:0;
+}
+
+div.CThumbAction span {
+font-size:11px;
+color:#3B5998; /*facebook blue*/
+}
+
+div.CThumbPreview {
+border: 1px solid #ccc;
+width: 128px;
+height: 128px;
+overflow: hidden;
+}
+
+div.CGrid {
+font-size:11px;
+text-align:left;
+float:left;
+}
+
+div.WithCaptions {
+height:270px;
+}
+
+div.WithoutCaptions {
+height:230px;
+}
+
+a.CButton {
+    padding: 7px 15px 7px 15px;
+    border-left: 1px solid #ccccca;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #a9a9a9;
+    border-right: 1px solid #c6c6c6;
+
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    
+    /* Background gradient css */
+    background-color: #fefefe;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#edece7));
+    background-image: -moz-linear-gradient(top, #ffffff, #edece7);
+    background-image: -o-linear-gradient(top, #ffffff, #edece7);
+    background-image: linear-gradient(top, #ffffff, #edece7);
+    -pie-background: linear-gradient(top, #ffffff, #edece7);
+
+    /* Box-Shadow */
+    box-shadow: 1px 2px 2px #e2e2e2;
+    -webkit-box-shadow: 1px 2px 2px #e2e2e2;
+    -moz-box-shadow: 1px 2px 2px #e2e2e2;
+    
+    behavior: url('/css/htc/PIE.htc');
+    
+    /* Button Style */
+    color: #3b5998; /* Facebook Blue */
+    float: left;
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: arial, sans-serif;
+    margin-right: 6px;
+    text-decoration: none;
+    position: relative;
+}
+
+a.CButton:active {
+    color: black;
+    outline: none;
+    position: relative;
+}
+
+a.CButton:hover {
+    text-decoration: none;
+}
+
+a.CButton:active span {
+    top: 1px;
+    position: relative;
+}
+
+div.CSearch {
+float:right;
+}
+
+div.CSearch input {
+margin-top:4px;
+width:100px;
+padding:6px 4px 6px 4px;
+font-size:14px;
+background:white;
+border:1px solid #ccc;
+}
+
+div.CPrompt {
+width:360px;
+background:#ffe;
+padding:20px 10px 20px 20px;
+border:1px dotted #ddd;
+margin:10px 0 0 20px;
+line-height:1.2em;
+}
+
+div.CAfterSubmitPrompt {
+width:95%;
+background:#ffe;
+padding:6px 16px;
+border:1px dotted #ddd;
+margin:20px;
+line-height:1.2em;
+text-align:center;
+margin:auto;
+}
+
+div.CAfterSubmitPrompt h4 {
+font-size:16px;
+font-weight:bold;
+margin:16px 0;
+}
+
+div.CAfterSubmitPrompt div.divider {
+border-top:1px dotted #CCCCCC;
+margin:7px;
+}
+
+div.CAfterSubmitSubDiv {
+margin:10px 0;
+text-align:left;
+font-size:11px;
+}
+
+a.CEditButton {
+margin:auto;
+text-align:center; 
+width:204px; 
+float:none;
+}
+
+div.CSidePrompt {
+width:300px;
+background:#ffe;
+padding:20px 10px 20px 10px;
+border:1px dotted #ddd;
+margin-bottom:20px;
+line-height:1.2em;
+}
+
+a.CConnect {
+border:0;
+}
+
+a.CConnect img{
+border:0;
+}
+
+div.CDeclare {
+width:360px;
+font-size:12px;
+vertical-align:middle;
+margin-left:20px;
+}
+
+div.CDeclare input {
+margin-right:5px;
+margin-left:-20px;
+vertical-align:middle;
+}
+
+div.CDeclare label {
+font-weight:normal;
+vertical-align:middle;
+}
+
+div.CDeclare .Notes {
+font-size:10px;
+color:#888;
+}
+
+div.CAction {
+padding:0;
+margin:20px 0 0 0;
+color:#42AE42; /*medium green*/
+font-size:15px;
+}
+
+div.CFile input {
+padding:5px;
+}
+
+div.CFile input.Invalid {
+border:1px solid red;
+background:#fee
+}
+
+div.CField {
+margin:0 0 20px 0;
+width:400px;
+}
+
+div.CField input {
+margin-top:3px;
+width:400px;
+padding:6px 4px 6px 4px;
+font-size:14px;
+background:white;
+border:1px solid #ccc;
+}
+
+div.CField input.Invalid {
+border:1px solid red;
+background:#fee;
+}
+
+div.CField .Notes {
+font-size:10px;
+color:#888;
+}
+
+div.CField textarea {
+font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
+font-size:12px;
+background:white;
+padding:7px;
+width:300px;
+height:50px;
+color:#333;
+border:1px solid #ccc;
+overflow:hidden;
+}
+
+div.CField textarea:hover {
+border:1px solid #3B5998; /*facebook blue*/
+}
+
+div.CField select {
+margin-top:2px;
+font-size:14px;
+}
+
+div.CField select.Invalid {
+background:#fee;
+border:1px solid red;
+}
+
+div.CCaption {
+font-size:13px;
+text-align:center;
+padding:20px 15px 15px 15px;
+margin-top:5px;
+border-top:1px dashed #ddd;
+color:#333;
+}
+
+span.CCount {
+font-size:11px;
+background:#ECEEF5; /*facebook off white*/
+border:1px solid rgb(202,212,231);
+padding:2px 5px 2px 5px;
+}
+
+#CLoading {
+text-align:center;
+margin:0 20px 0 20px;
+}
+
+div.CMessage {
+text-align:left;
+background:#fc0;
+padding:10px 0 10px 20px;
+color: #333;
+margin:5px 0 10px 0;
+font-size:13px;
+width:450px;
+}
+
+#pop_email div.CMessage {
+width: 400px;
+}
+
+#pop_email .SField.field-first-name {
+    float: left;
+    width: 160px;
+    margin-right: 10px;
+}
+
+#pop_email .SField.field-last-name {
+    float: left;
+    width: 230px;
+    margin-left: 10px;
+}
+
+div.CTopNote {
+color:#333;
+background:#F7F7F7;
+border:1px solid #ccc;
+font-size:13px;
+line-height:17px;
+padding:37px 20px 39px 20px;
+margin-bottom:15px;
+text-align:center;
+}
+
+div.link_img img {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+div.CQuote {
+background-image: url('../images/open_quotes.png');
+background-repeat: no-repeat;
+background-position: left top;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+font-size:16px;
+color:#333;
+margin-top:10px;
+margin-bottom:30px;
+}
+
+div.CQuote span {
+text-align:left;
+background-image: url('../images/close_quotes.png');
+background-repeat: no-repeat;
+background-position: right bottom;
+margin: 0px 0px 0px 0px;
+padding: 0px 25px 0px 25px;
+display: block;
+}
+
+div.SocialNetworkHandle {
+font-size:11px;
+}
+
+#ContestGrid {
+padding:20px 0 0 10px;
+}
+
+div.CVoteNotes {
+text-align:right;
+font-size:11px;
+color:#888;
+}
+
+div.CEmbeds {
+width:390px;
+padding:0 7px 0 7px;
+margin-bottom:20px;
+}
+
+div.CLike {
+margin-bottom:10px;
+}
+
+div.CMore {
+font-size:13px;
+color:#888;
+}
+
+div.CName {
+font-size:20px;
+font-weight:bold;
+margin-bottom:2px
+}
+
+div.CLocation {
+color:#666;
+font-size:11px;
+}
+
+div.CSubmission {
+margin-bottom:15px;
+}
+
+div#CVoteCountBox {
+font-size:24px;
+margin-bottom:15px;
+}
+
+.CReportProblem {
+color:#888;
+font-size: 11px;
+}
+
+div.CEditEntry {
+margin:15px auto 0 auto;
+border:3px solid #CCCCCC;
+width:310px;
+font-size:11px;
+padding:20px 10px 20px 20px;
+font-weight:bold;
+}
+
+div.CEditEntry td{
+vertical-align: middle;
+}
+
+div.CApprovalStatus {
+background-color:#edeff4;
+padding:10px;
+font-size:16px;
+font-weight:bold;
+margin:20px;
+border:2px solid #CCCCCC;
+}
+
+div.CProcessingStatus {
+background-color:#edeff4;
+padding:10px;
+font-size:12px;
+font-weight:bold;
+margin:8px 0 16px 0;
+border:2px solid #CCCCCC;
+}
+
+div.CProcessingFailedStatus {
+background-color:#ffbcc5;
+padding:10px 15px;
+font-size:14px;
+margin:20px;
+border:2px solid #CCCCCC;
+}
+
+/* Instructions box for photo submission via Twitter/Instagram */
+#external_submission_instruction {
+float:right;
+border:1px solid #aaa;
+padding:10px;
+width:200px;
+}
+
+img.PlatformIcon {
+vertical-align:top;
+display:inline-block;
+}
+
+div.SubmitInstruction {
+display:inline-block;
+width:175px
+}
+/* End of instructions box */
+
+/* Share bar styles */
+
+.requestbutton {
+color:white;
+background:#3B5998; /*facebook blue*/
+padding:2px 10px 2px 10px;
+border: 2px double #D8DFEA; /*facebook light blue*/
+font-weight:bold;
+}
+
+.requestbutton:hover {
+background:#627AAD; /*facebook med blue*/
+text-decoration:none;
+}
+
+#sharebar {
+height: 40px;
+padding: 5px 5px 5px 10px;
+border-bottom:1px dotted #cccccc;
+margin: 0 0 10px 0;
+}
+
+input.bitlyLink {
+border:0;
+font-size:11px;
+width:140px;
+background:transparent;
+}
+
+#requestsection {
+padding: 0px;
+float: left;
+margin-top: 3px;
+}
+
+#sharesection {
+    margin-left: 100px;
+}
+
+#signup-share,
+#sharesection {
+padding: 0px 5px 0px 5px;
+float: right;
+font-size: 11px;
+height: 25px;
+line-height: 24px;
+}
+
+#signup-share > div,
+#sharesection > div { /* direct descendant selector works in IE7+ */
+margin-left: 5px;
+float: left;
+padding: 0px 3px 0px 3px;
+}
+
+.social-logo {
+vertical-align: middle;
+margin: 0 4px 2px 2px;
+border: 0;
+}
+
+/* Facebook Connect styles */
+#facebook-profile-connect {
+    border: 1px solid #CCC;
+    background-color: #E7EBF2;
+    margin: 12px 0;
+    padding: 10px;
+    width: 378px; /* 400px [same as email input => div.SField input] - (2 x 10px padding) - (2 x 1px border) */
+    display: inline-block;
+}
+
+#facebook-profile-connect.Invalid {
+    background:#fee;
+    border:1px solid red;
+}
+
+#facebook-image {
+    float: left;
+    margin-right: 10px;
+    border: 1px solid #CCC;
+}
+
+#facebook-connect-link, #facebook-name {
+    position: absolute;
+    top: 24px;
+    left: 70px;
+}
+
+#facebook-connect-link {
+    text-decoration: underline;
+}
+
+#facebook-name {
+    font-weight: bold;
+    color: #3B5998;
+}
+
+#facebook-connect-button {
+    color:white;
+    background:#3B5998; /*facebook blue*/
+    padding:6px 15px 6px 15px;
+    border: 3px double #D8DFEA; /*facebook light blue*/
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:1.2em;
+    position: absolute;
+    top: 14px;
+    left: 70px;
+}
+
+#facebook-connect-button:hover {
+    cursor:pointer;
+}
+
+#facebook-profile-connect-why {
+    margin-bottom: 0;
+    color: gray;
+    font-size: 8pt;
+}
+
+/* Sign Up Styles */
+
+div.SDescription {
+width:790px;
+margin-top:15px;
+margin-bottom:20px;
+font-size:12px;
+line-height:1.4em;
+}
+
+div.SDescription h1 {
+font-size:12pt;
+margin-bottom:5px;
+font-weight:normal;
+}
+
+h1.page-submit-form-heading-step-snap-photo,
+h1.page-submit-form-heading-step-complete-profile {
+    display: none;
+}
+
+div.SFields {
+margin-bottom:25px;
+}
+
+div.SSubmit button, div.SSubmit input[type=button] {
+padding:5px 10px 5px 10px;
+font-size:18px;
+}
+
+div.SField {
+margin:0 0 12px 0;
+width:400px;
+}
+
+div.SField select {
+margin-top:2px;
+font-size:14px;
+}
+
+div.SField option {
+}
+
+div.SField input {
+margin-top:3px;
+width:400px;
+padding:6px 4px 6px 4px;
+font-size:14px;
+background:white;
+border:1px solid #ccc;
+}
+
+div.Invalid {
+color:red;
+}
+
+
+div.SField input.Invalid {
+background:#fee;
+border:1px solid red;
+}
+
+
+div.SField textarea.Invalid {
+background:#fee;
+border:1px solid red;
+}
+
+div.SField select.Invalid {
+background:#fee;
+border:1px solid red;
+}
+div.SDeclare label.Invalid
+{
+color:red !important;
+}
+div.SDeclare label input.Invalid {
+background:#fee;
+border:1px solid red;
+}
+
+div.SFields .Notes {
+font-size:10px;
+color:#aaa;
+}
+
+div.SField textarea {
+font-family:'lucida grande', tahoma, verdana, arial, sans-serif;
+font-size:12px;
+background:white;
+padding:7px;
+width:300px;
+height:50px;
+color:#333;
+border:1px solid #ccc;
+overflow:hidden;
+}
+
+div.SField textarea:hover {
+border:1px solid #3B5998; /*facebook blue*/
+}
+
+div.SField label {
+font-weight:bold;
+}
+
+div.SDeclare {
+width:360px;
+font-size:12px;
+vertical-align:middle;
+margin-bottom:10px;
+}
+
+div.SDeclare input {
+margin-right:5px;
+vertical-align:middle;
+}
+
+div.SDeclare label {
+font-weight:normal;
+vertical-align:middle;
+}
+
+div.SRules, div.TRules {
+width:750px;
+font-size:12px;
+margin-top:25px;
+max-height: 200px;
+overflow: auto;
+border: 1px #EEE solid;
+padding: 5px;
+}
+
+#sfield_name {width:160px;display:inline-block;padding-right: 10px;}
+#sfield_surname {width:230px;display:inline-block;padding-right: 10px;}
+#sfield_firstname {width:160px;display:inline-block;padding-right: 10px;}
+#sfield_lastname {width:500px;display:inline-block;padding-right: 10px;}
+
+#firstname {
+width:160px;
+}
+
+#lastname {
+width:200px;
+}
+
+#location {
+width:200px;
+}
+
+#city {
+width:200px;
+}
+
+#state {
+width:80px;
+}
+
+#zip {
+width:100px;
+}
+
+#post {
+width:100px;
+}
+
+#name {
+width:160px;
+}
+
+#surname {
+width:160px;
+}
+
+#password {
+width:160px;
+}
+
+#cell {
+width:200px;
+}
+
+#entry {
+width:400px;
+height:200px;
+}
+
+#customtext1, #customtext2 {
+width:400px;
+height:50px;
+}
+
+#FanTab {
+width:790px;
+}
+
+#NonFanTab {
+width:810px;
+}
+
+#SCount {
+border-bottom:1px solid #ccc;
+font-size:14px;
+font-weight:bold;
+padding:10px 10px 10px 0;
+margin-bottom:10px;
+width:510px;
+}
+
+div.did_not_signup {
+font-size: 10px;
+margin-top: 20px;
+color: #888;
+}
+
+/* Referral Styles */
+
+#app_step3 {
+width:280px;
+margin:30px 0 50px 0;
+padding:35px;
+border:2px dashed #ccc;
+background:#ffe;
+font-size:12pt;
+text-align:center;
+}
+
+#RStatus {
+width:280px;
+margin:30px 0 50px 0;
+padding:35px;
+border:1px solid #ccc;
+font-size:12pt;
+text-align:center;
+word-wrap:break-word;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+
+div.RActions {
+font-size:13px;
+}
+
+div.RAction {
+margin-bottom:10px;
+word-wrap:break-word;
+}
+
+a.RLink {
+font-weight:bold;
+font-size:13px;
+}
+
+a.RUnlock {
+padding:5px;
+border:1px dotted #ccc;
+text-decoration:none;
+outline:none;
+background:#eee;
+}
+
+a.RDisabled {
+color:#aaa;
+}
+
+a.REnabled {
+border:1px dotted #3B5998; /*facebook blue*/
+}
+
+a.REnabled:hover {
+background:#3B5998; /*facebook blue*/
+color:white;
+border:1px solid #3B5998; /*facebook blue*/
+}
+
+#RCount {
+font-size:14pt;
+font-weight:bold;
+}
+
+div.SField select.Multi {
+height:100px;
+}
+
+/* Quiz Styles */
+div.QChoice {
+width: 150px;
+margin: 0 18px 25px 0;
+float: left;
+text-align: center;
+height: 300px;
+}
+
+div.QChoice img {
+width: 150px;
+max-height: 200px;
+border: 2px solid transparent;
+}
+
+div.QuizChoice {
+width: 240px;
+height: 300px;
+margin:0 18px 25px 0;
+float:left;
+text-align:center;
+border: 2px solid transparent;
+}
+
+div.QChoiceSelected {
+border: 2px solid #3c5a9a; 
+background-color: #ebeef5;
+}
+
+div.QuizChoice img {
+max-width:200px;
+max-height: 200px;
+border: 2px solid transparent;
+}
+
+div.QChoice img.hover, .QuizChoice img.hover {
+opacity: .8;
+filter: alpha(opacity=80);
+cursor: pointer;
+}
+
+div.QChoice .your_choice, .QuizChoice .your_choice {
+vertical-align: middle;
+font-weight: bold;
+font-size: 14px;
+margin-top: 10px;
+}
+
+div.QuizQuestionCaption {
+width: 750px;
+max-width: 750px;
+float: left;
+font-size:16px;
+font-weight:bold;
+text-align:left;
+max-height: 75px;
+overflow: auto;
+padding-bottom: 5px;
+}
+
+div.QCaptionContainer {
+position: relative;
+width: 810px;
+}
+
+div.QCaption {
+font-size: 13px;
+font-weight: bold;
+margin: 5px 0;
+max-height: 75px;
+overflow: auto;
+text-align: center;
+width: 150px;
+}
+
+div.QChoiceCaption{
+width: 240px;
+font-size:13px;
+font-weight:bold;
+text-align:center;
+margin:5px 0 5px 0;
+max-height: 75px;
+overflow: auto;
+}
+
+div.QQuestion{
+width:810px; 
+text-align: center;
+}
+
+div.your_choice{
+height:30px;
+}
+
+div.QQuestionNumber{
+max-width: 60px;
+float: left;
+}
+
+div.QQuestionDivider{
+border-top: 1px solid #CCCCCC;
+padding-top: 10px;
+clear:both;
+}
+
+div.QLike, .QChoiceSelect {
+text-align:center;
+}
+
+div.next_question {
+text-align:center;
+height: 40px;
+/*position: relative;*/
+}
+
+a.next_question_button {
+position: absolute;
+background: transparent url('../images/bg_button_b.png') no-repeat scroll top right;
+color: #3B5998;;
+float: left;
+font: bold 16px arial, sans-serif;
+height: 44px;
+text-decoration: none;
+padding-right: 20px;
+margin-right: 18px;
+}
+a.next_question_button span {
+background: transparent url('../images/bg_button_a.png') no-repeat;
+display: block;
+line-height: 29px;
+padding: 4px 3px 11px 30px;
+}
+
+div.choice_selector {
+    display: block;
+    padding-top: 10px;
+}
+
+div.choice_selector a{
+    border: solid 1px #3b5998;
+    background-color: #ebeef5;
+    padding: 7px 25px 7px 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div.choice_selector a:hover{
+    background-color: #C2CFF2;
+    cursor: pointer;
+}
+
+div.QInstructions {
+margin-bottom:15px;
+}
+
+div.QHeader {
+}
+
+div.QHeader .QHeadline {
+color:#1C2A47;
+font-size:20px;
+font-weight:bold;
+margin:10px 0 20px 0;
+}
+
+div.QPick {
+width:300px;
+margin-bottom:20px;
+}
+
+div.QPick img {
+width:300px;
+}
+
+div.QPick .QPickTitle {
+font-size:18px;
+font-weight:bold;
+text-align:center;
+margin-bottom:5px;
+}
+
+div.QPick .QCaption {
+width:300px;
+font-size:16px;
+}
+
+.QChoices .QLike .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr
+{
+display: none;
+}
+
+#QuizShareAfterSubmission {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#QuizShareAfterSubmission a{
+    cursor: pointer;
+}
+
+#CommentsWidget {
+    margin-top:20px;
+    text-align: center;
+}
+
+.quiz_result_image_container {
+    width:810px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+/* Exclusive styles */
+.ExclusiveCodeArea{
+    width: 810px;
+}
+a.BlueButton{
+    color:white;
+    background:#3B5998; /*facebook blue*/
+    padding:6px 15px 6px 15px;
+    border: 2px double #D8DFEA; /*facebook light blue*/
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    text-decoration:none;
+    font-weight:bold;
+}
+a.BlueButton:hover{
+    background:#627AAD; /*facebook med blue*/
+}
+
+/* Donation styles */
+#CDonations ul {
+    padding: 0 0 0 15px;
+}
+
+#CDonations li {
+    list-style-type:none;
+}
+
+/* Single Use Codes style */
+div#view_code{
+    text-align:center;
+    margin:10px 10px 30px 10px;
+    border:4px dashed #d7dfe9;
+    padding:20px 0 20px 0;
+    font-size:20px;
+}
+
+div#view_code div#instructions{
+    padding:0 0 20px 0;
+    color:#333;
+    font-size:14px;
+    font-weight:normal;
+}
+
+div#view_code div#actual_code{
+    color:#42AE42;
+    font-size:40px;
+    font-weight:bold;
+}
+div#view_code div#error_message{
+    color:#DD0000;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+div#view_code div#print_code{
+    margin:10px 0 0 0;
+    font-size:18px;
+}
+a.from_facebook_button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    text-decoration:none;
+    padding: 5px 10px 5px 10px;
+}
+a.from_facebook_button img {
+    border:0;
+}
+#photo-upload-note {
+    color: gray;
+}
+
+/* LookBook App Styles */
+html body div#comment_wrapper,
+#promo_comment, #comment_wrapper{
+    width:   520px;
+    margin: 0 auto;
+}
+
+/* reCAPTCHA Widget */
+div.SReCAPTCHA {
+    display:inline-block;
+    margin-bottom: 20px;
+}
+
+div.SReCAPTCHA.Invalid {
+    border: 1px solid red;
+}
+
+/* Photo Contest 4 */
+div.isotope_error {
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+div#share-option-pinterest {
+    text-align: center;
+    width: 60px;
+    padding-top: 2px;
+}
+span.pin-it {
+    display: none;
+}
+/* Photo Contest 4 gallery */
+#gallery-controls {
+    float:left;
+    width:100%;
+    font-size:11px;
+    margin: 6px 0;
+    padding: 8px 0;
+    border-top: 1px solid #D8DFEA;
+    border-bottom: 1px solid #D8DFEA;
+}
+
+#gallery-controls ul {
+    float:left;
+    margin:0;
+    padding:0;
+    width:100%;
+}
+
+#gallery-controls li {
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+    display: block;
+}
+
+#gallery-controls .search {
+    color:#000;
+}
+
+#gallery-controls .empty {
+    color:gray;
+}
+
+#gallery-friends-filter-block {
+    padding-top: 2px;
+}
+
+#gallery-search-block {
+    float:right !important;
+    margin-right:0 !important;
+}
+
+#gallery-search-input {
+    width:100px;
+}
+
+#gallery-content {
+    clear:both;
+    min-height: 240px;
+}
+
+#gallery-loading,
+#gallery-show-more,
+#gallery-refreshing {
+    width: 100%;
+    text-align: center;
+    padding: 24px 0 12px 0;
+    margin-top: 40px;
+}
+
+#gallery-loading {
+    display: none;
+}
+
+.highlight-border {
+    border: 2px #08C solid !important;
+}
+
+.CGrid {
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+
+.Thumbnail {
+    border: 2px transparent solid;
+    position: relative;
+}
+
+.VideoThumbnail {
+    height: 146px;
+    overflow: hidden;
+}
+
+.gallery-photo-info-background {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 33%;
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 36%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(36%,rgba(0,0,0,0.15)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.15) 36%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.15) 36%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.15) 36%,rgba(0,0,0,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.15) 36%,rgba(0,0,0,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+.gallery-photo-info {
+    position: absolute;
+    bottom: 0;
+    color:#FFFFFF;
+    text-shadow: 0 0 3px black;
+    z-index: 2;
+    padding: 3%;
+    width: 94%;
+}
+
+.info-left-col {
+    float: left;
+    width: 50%;
+}
+
+.info-right-col {
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+
+.gallery-photo-firstname, .gallery-photo-vote-count {
+    font-size: 16px;
+}
+
+.gallery-photo-city {
+    font-size: 11px;
+}
+
+.gallery-photo-caption {
+    height: 3.6em;
+    overflow: hidden;
+    margin-top: 2px;
+    word-wrap: break-word;
+}
+/* end of Photo Contest 4 gallery */
+/* End Photo Contest 4 */
+
+/* UGC Contest App */
+div.gallery-video-duration {
+    position: absolute;
+    text-align: center;
+    font-size: 11px;
+    width: 35px;
+    color: white;
+    top: 5px;
+    right: 5px;
+    padding: 5px 0;
+    background: black;
+    filter: alpha(opacity=85);
+    opacity: 0.85;
+}
+
+/* Video Contest 2 */
+#upload_entry {
+    margin-bottom: 10px;
+}
+
+.upload-box {
+    background-color:#D8DFEA;
+    border: 6px double #CCC;
+    padding: 6px 20px;
+    width:500px;
+    margin:14px 0;
+}
+
+.ui-progressbar-value {
+    background-image: url("../images/pbar-ani.gif") !important;
+    border: 0 !important;
+    margin: 0 !important;
+}
+
+.ui-progressbar-value,
+.progressbar {
+    background-color: #FFF !important;
+    height: 20px !important;
+}
+
+.vc-thumbnail-preview {
+    width: 128px;
+    height: 96px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+/* End Video Contest 2 */
+
+/*
+   For auto-generated landing page.
+   Uncomment the following lines
+   to change the background of the
+   landing page to red:
+
+   #campaign_container {
+       background: red;
+   }
+*/
+
+/* CSS applied to readonly textareas */
+#sfield_caption textarea.readonly_textarea {
+    color: rgb(84, 84, 84);
+    background-color: rgb(235, 235, 228);
+}
+/* End CSS applied to readonly textareas */
+
+.small {
+    color: #888888;
+    font-size: 10px;
+}

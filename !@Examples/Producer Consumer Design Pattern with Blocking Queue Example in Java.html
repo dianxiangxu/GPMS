@@ -1,0 +1,3206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0084)http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html -->
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr" xmlns:g="http://www.google.com/2005/gml/g"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script async="" type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/v2"></script><script src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/cb=gapi.loaded_2" async=""></script><script async="" type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/dU3ek4CPmr4Ai1acwqm_6r.js"></script><script src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/cb=gapi.loaded_1" async=""></script><script src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/ga.js"></script><script async="" type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/ti.js"></script><script type="text/javascript">(function() { var b=window,f="chrome",g="tick",k="jstiming";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[g]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[k].srt=h-c)}if(a){var e=b[k].load;0<c&&h>=c&&(e[g]("_wtsrt",void 0,c),e[g]("wtsrt_","_wtsrt",h),e[g]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[g]("_tbnd",void 0,b[f].csi().startE),e[g]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[g]("_tbnd",void 0,b.external.startE),e[g]("tbnd_","_tbnd",c))),a&&(b[k].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[k].load[g]("aft")};var l=!1;function m(){l||(l=!0,b[k].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://javarevisited.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/Producer Consumer Design Pattern with Blocking Queue Example in Java.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Javarevisited - Atom" href="http://javarevisited.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Javarevisited - RSS" href="http://javarevisited.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Javarevisited - Atom" href="https://www.blogger.com/feeds/8712770457197348465/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Javarevisited - Atom" href="http://javarevisited.blogspot.com/feeds/8379818278416374862/comments/default">
+<link href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/java_logo_50_50.jpg" rel="image_src">
+<link href="https://plus.google.com/114528699166048052030" rel="publisher">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<meta content="Producer Consumer design pattern is based on problem of Producer consumer in multi-threading. BlockingQueue in Java5 Solved this effectively without any hassle." name="description">
+<meta content="producer consumer problem java,  producer consumer with blocking queue java" name="keywords">
+<!-- place future descriptions and keywords here -->
+<script type="text/javascript">
+      if(document.location.protocol=='http:'){
+         var Tynt=Tynt||[];Tynt.push('dU3ek4CPmr4Ai1acwqm_6r');Tynt.i={"ap":"Read more:"};
+         (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+                                                  }
+    </script>
+<title>
+Producer Consumer Design Pattern with Blocking Queue Example in Java
+</title>
+<link type="text/css" rel="stylesheet" href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/859616579-widget_css_bundle.css">
+<link type="text/css" rel="stylesheet" href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/gsearch.css">
+<link type="text/css" rel="stylesheet" href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/authorization.css">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Rounders 3
+Date:     27 Feb 2004
+Updated by: Blogger Team
+----------------------------------------------- */
+#navbar-iframe {
+display: none !important;
+}
+/* Variable definitions
+====================
+<Variable name="mainBgColor" description="Main Background Color"
+type="color" default="#ffffff">
+<Variable name="mainTextColor" description="Text Color" type="color"
+default="#333">
+<Variable name="postTitleColor" description="Post Title Color" type="color"
+default="#333">
+<Variable name="dateHeaderColor" description="Date Header Color"
+type="color" default="#586">
+<Variable name="borderColor" description="Post Border Color" type="color"
+default="#bbb">
+<Variable name="mainLinkColor" description="Link Color" type="color"
+default="#456">
+<Variable name="mainVisitedLinkColor" description="Visited Link Color"
+type="color" default="#234">
+<Variable name="mainHoverLinkColor" description="Hover Link Color"
+type="color" default="#234">
+<Variable name="titleBgColor" description="Page Header Background Color"
+type="color" default="#357">
+<Variable name="titleTextColor" description="Blog Title Color"
+type="color" default="#fff">
+<Variable name="topSidebarHeaderColor"
+description="Top Sidebar Title Color"
+type="color" default="#fff">
+<Variable name="topSidebarBgColor"
+description="Top Sidebar Background Color"
+type="color" default="#586">
+<Variable name="topSidebarTextColor" description="Top Sidebar Text Color"
+type="color" default="#fff">
+<Variable name="topSidebarLinkColor" description="Top Sidebar Link Color"
+type="color" default="#fff">
+<Variable name="topSidebarVisitedLinkColor"
+description="Top Sidebar Visited Link Color"
+type="color" default="#fff">
+<Variable name="bottomSidebarHeaderColor"
+description="Bottom Sidebar Title Color"
+type="color" default="#abc">
+<Variable name="bottomSidebarLinkColor"
+description="Bottom Sidebar Link Color"
+type="color" default="#99ddbb">
+<Variable name="bottomSidebarVisitedLinkColor"
+description="Bottom Sidebar Visited Link Color"
+type="color" default="#ffffff">
+<Variable name="bodyFont" description="Text Font" type="font"
+default="normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="pageTitleFont" description="Blog Title Font" type="font"
+default="normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="descriptionFont" description="Blog Description Font" type="font"
+default="normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="headerFont" description="Sidebar Title Font" type="font"
+default="normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="postTitleFont" description="Post Title Font" type="font"
+default="normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="startSide" description="Start side in blog language"
+type="automatic" default="left">
+<Variable name="endSide" description="End side in blog language"
+type="automatic" default="right">
+*/
+body, .body-fauxcolumn-outer {
+background:#123;
+margin:0;
+text-align:center;
+line-height: 1.5em;
+font: x-small Trebuchet MS, Verdana, Arial, Sans-serif;
+color:#333333;
+font-size/* */:/**/small;
+font-size: /**/small;
+}
+/* Page Structure
+----------------------------------------------- */
+/* The images which help create rounded corners depend on the
+following widths and measurements. If you want to change
+these measurements, the images will also need to change.
+*/
+#outer-wrapper {
+width:1072px;
+margin:0 auto;
+text-align:left;
+font: normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+#main-wrap1 {
+width:732px;
+float:left;
+background:#ffffff url("") no-repeat left bottom;
+margin:0px 0 0;
+padding:0 0 10px;
+color:#333333;
+font-size:97%;
+line-height:1.5em;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+#main-wrap2 {
+float:left;
+width:100%;
+padding:10px 0 0;
+}
+#main {
+padding:0;
+width:732px;
+}
+#sidebar-wrap {
+width:340px;
+float:right;
+margin:0px 0 0;
+font-size:97%;
+line-height:1.5em;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+.main .widget {
+margin-top: 4px;
+width: 686px;
+padding: 0 13px;
+}
+.main .Blog {
+margin: 0;
+padding: 0;
+width: 732px;
+}
+/* Links
+----------------------------------------------- */
+a:link {
+color: #0066CC;
+}
+a:visited {
+color: #660099;
+}
+a:hover {
+color: #000066;
+}
+a img {
+border-width:0;
+}
+/* Blog Header
+----------------------------------------------- */
+#header-wrapper {
+background:#335577 url("") no-repeat left top;
+margin-top:4px;
+margin-right:0;
+margin-bottom:0;
+margin-left:0;
+padding-top:2px;
+padding-right:0;
+padding-bottom:0;
+padding-left:0;
+color:#ffffff;
+}
+#header {
+background:url("") no-repeat left bottom;
+padding:0 15px 4px;
+}
+#header h1 {
+margin:0;
+padding:5px 30px 0px;
+line-height:1.2em;
+font: normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+#header a,
+#header a:visited {
+text-decoration:none;
+color: #ffffff;
+}
+#header .description {
+margin:0;
+padding:1px 30px 15px;
+line-height:0.5em;
+font: normal normal 75% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+p.title {
+margin:0;
+padding:5px 30px 0px;
+line-height:1.2em;
+font: normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+p.title a{
+text-decoration:none;
+color: #ffffff;
+}
+/* Posts
+----------------------------------------------- */
+h2.date-header {
+margin-top:0;
+margin-right:28px;
+margin-bottom:0;
+margin-left:43px;
+font-size:85%;
+line-height:2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#558866;
+}
+h4.date-header {
+margin-top:0;
+margin-right:28px;
+margin-bottom:0;
+margin-left:43px;
+font-size:85%;
+line-height:2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#558866;
+}
+.post {
+margin:.3em 0 25px;
+padding:0 13px;
+border:1px dotted #bbbbbb;
+border-width:1px 0;
+}
+h2.post-title {
+margin:0;
+line-height:1.5em;
+background:url("") no-repeat 10px .5em;
+display:block;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+h2.post-title a, h2.post-title a:visited {
+text-decoration:none;
+color: #333333;
+}
+h1.post-title {
+margin:0;
+line-height:1.5em;
+background:url("") no-repeat 10px .5em;
+display:block;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+h1.post-title a, h1.post-title a:visited {
+text-decoration:none;
+color: #333333;
+}
+.post h3 {
+margin:0;
+line-height:1.5em;
+display:block;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:0px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.post h3 a, .post h3 a:visited {
+text-decoration:none;
+color: #333333;
+}
+a.title-link:hover {
+background-color: #bbbbbb;
+color: #333333;
+}
+.post-body {
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+border-bottom-color:#ffffff;
+padding-top:10px;
+padding-right:14px;
+padding-bottom:1px;
+padding-left:29px;
+font-size:12pt;
+line-height:1.5
+}
+html>body .post-body {
+border-bottom-width:0;
+}
+.post-body {
+margin:0 0 .75em;
+}
+.post-body blockquote {
+line-height:1.3em;
+}
+.post-footer {
+background: #ffffff;
+margin:0;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+border:1px dotted #bbbbbb;
+border-width:1px;
+font-size:100%;
+line-height:1.5em;
+color: #666666;
+}
+/*
+The first line of the post footer might only have floated text, so we need to give it a height.
+The height comes from the post-footer line-height
+*/
+.post-footer-line-1 {
+min-height:1.5em;
+_height:1.5em;
+}
+.post-footer p {
+margin: 0;
+}
+html>body .post-footer {
+border-bottom-color:transparent;
+}
+.uncustomized-post-template .post-footer {
+text-align: right;
+}
+.uncustomized-post-template .post-author,
+.uncustomized-post-template .post-timestamp {
+display: block;
+float: left;
+text-align:left;
+margin-right: 4px;
+}
+.post-footer a {
+color: #456;
+}
+.post-footer a:hover {
+color: #234;
+}
+a.comment-link {
+/* IE5.0/Win doesn't apply padding to inline elements,
+so we hide these two declarations from it */
+background/* */:/**/url("http://www.blogblog.com/rounders/icon_comment_left.gif") no-repeat left 45%;
+padding-left:14px;
+}
+html>body a.comment-link {
+/* Respecified, for IE5/Mac's benefit */
+background:url("http://www.blogblog.com/rounders3/icon_comment_left.gif") no-repeat left 45%;
+padding-left:14px;
+}
+.post img, table.tr-caption-container {
+margin-top:0;
+margin-right:0;
+margin-bottom:5px;
+margin-left:0;
+padding:4px;
+border:1px solid #bbbbbb;
+}
+.tr-caption-container img {
+border: none;
+margin: 0;
+padding: 0;
+}
+blockquote {
+margin:.75em 0;
+border:1px dotted #bbbbbb;
+border-width:1px 0;
+padding:5px 15px;
+color: #558866;
+}
+.post blockquote p {
+margin:.5em 0;
+}
+#blog-pager-newer-link {
+float: left;
+margin-left: 13px;
+}
+#blog-pager-older-link {
+float: right;
+margin-right: 13px;
+}
+#blog-pager {
+text-align: center;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+margin-left: 13px;
+}
+/* Comments
+----------------------------------------------- */
+#comments {
+margin:-25px 13px 0;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:20px;
+padding-right:0;
+padding-bottom:15px;
+padding-left:0;
+}
+#comments h4 {
+margin:0 0 10px;
+padding-top:0;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+border-bottom:1px dotted #bbbbbb;
+font-size:120%;
+line-height:1.4em;
+color:#333333;
+}
+#comments-block {
+margin-top:0;
+margin-right:15px;
+margin-bottom:0;
+margin-left:9px;
+}
+.comment-author {
+background:url("http://www.blogblog.com/rounders3/icon_comment_left.gif") no-repeat 2px .3em;
+margin:.5em 0;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+font-weight:bold;
+}
+.comment-body {
+margin:0 0 1.25em;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+}
+.comment-body p {
+margin:0 0 .5em;
+}
+.comment-footer {
+margin:0 0 .5em;
+padding-top:0;
+padding-right:0;
+padding-bottom:.75em;
+padding-left:20px;
+}
+.comment-footer a:link {
+color: #333;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+.comment-form {
+padding-left:20px;
+padding-right:5px;
+}
+#comments .comment-form h4 {
+padding-left:0px;
+}
+/* Profile
+----------------------------------------------- */
+.profile-img {
+float: left;
+margin-top: 5px;
+margin-right: 5px;
+margin-bottom: 5px;
+margin-left: 0;
+border: 4px solid #ffffff;
+}
+.profile-datablock {
+margin-top:0;
+margin-right:15px;
+margin-bottom:.5em;
+margin-left:0;
+padding-top:8px;
+}
+.profile-link {
+background:url("http://www.blogblog.com/rounders3/icon_profile_left.gif") no-repeat left .1em;
+padding-left:15px;
+font-weight:bold;
+}
+.profile-textblock {
+clear: both;
+margin: 0;
+}
+.sidebar .clear, .main .widget .clear {
+clear: both;
+}
+#sidebartop-wrap {
+background:#558866 url("") no-repeat left bottom;
+margin:0px 0px 15px;
+padding:0px 0px 10px;
+color:#ffffff;
+}
+#sidebartop-wrap2 {
+background:url("") no-repeat left top;
+padding: 10px 0 0;
+margin:0;
+border-width:0;
+}
+#sidebartop h2 {
+line-height:1.5em;
+color:#ffffff;
+border-bottom: 1px dotted #ffffff;
+font: normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+margin-bottom: 0.5em;
+}
+#sidebartop h4 {
+line-height:1.5em;
+color:#ffffff;
+border-bottom: 1px dotted #ffffff;
+font: normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+margin-bottom: 0.5em;
+}
+#sidebartop a {
+color: #ffffff;
+}
+#sidebartop a:hover {
+color: #ffffff;
+}
+#sidebartop a:visited {
+color: #ffffff;
+}
+#sidebar a {
+color: #99ddbb;
+}
+#sidebar a:hover,
+#sidebar a:visited {
+color: #ffffff;
+}
+/* Sidebar Boxes
+----------------------------------------------- */
+.sidebar .widget {
+margin:.5em 13px 1.25em;
+padding:0 0px;
+}
+.widget-content {
+margin-top: 0.5em;
+}
+#sidebarbottom-wrap1 {
+background:#335577 url("") no-repeat left top;
+margin:0 0 15px;
+padding:10px 0 0;
+color: #ffffff;
+}
+#sidebarbottom-wrap2 {
+background:url("") no-repeat left bottom;
+padding:0 0 8px;
+}
+.sidebar h2 {
+margin-top:0;
+margin-right:0;
+margin-bottom:.5em;
+margin-left:0;
+padding:0 0 .2em;
+line-height:1.5em;
+font:normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.sidebar h4 {
+margin-top:0;
+margin-right:0;
+margin-bottom:.5em;
+margin-left:0;
+padding:0 0 .2em;
+line-height:1.5em;
+font:normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.sidebar ul {
+list-style:none;
+margin:0 0 1.25em;
+padding:0;
+}
+.sidebar ul li {
+background:url("http://www2.blogblog.com/rounders3/icon_arrow_sm.gif") no-repeat 2px .25em;
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:3px;
+padding-left:16px;
+margin-bottom:3px;
+border-bottom:1px dotted #bbbbbb;
+line-height:1.4em;
+}
+.sidebar p {
+margin:0 0 .6em;
+}
+#sidebar h2 {
+color: #aabbcc;
+border-bottom: 1px dotted #aabbcc;
+}
+#sidebar h4 {
+color: #aabbcc;
+border-bottom: 1px dotted #aabbcc;
+}
+/* Footer
+----------------------------------------------- */
+#footer-wrap1 {
+clear:both;
+margin:0 0 10px;
+padding:15px 0 0;
+}
+#footer-wrap2 {
+background:#335577 url("") no-repeat left top;
+color:#ffffff;
+}
+#footer {
+background:url("") no-repeat left bottom;
+padding:8px 15px;
+}
+#footer hr {display:none;}
+#footer p {margin:0;}
+#footer a {color:#ffffff;}
+#footer .widget-content {
+margin:0;
+}
+/** Page structure tweaks for layout editor wireframe */
+body#layout #main-wrap1,
+body#layout #sidebar-wrap,
+body#layout #header-wrapper {
+margin-top: 0;
+}
+body#layout #header, body#layout #header-wrapper,
+body#layout #outer-wrapper {
+margin-left:0,
+margin-right: 0;
+padding: 0;
+}
+body#layout #outer-wrapper {
+width: 1030px;
+}
+body#layout #footer-wrap1 {
+padding-top: 0;
+}
+#CustomSearch1{
+margin-top:-55px;
+margin-left:750px;
+width: 300px;
+display: block;
+position: absolute;
+}
+#HTML6{
+padding-left:-10px;
+margin-left:2px;
+}
+
+--></style><style type="text/css"></style>
+<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19004659-1']);
+                 _gaq.push(['_trackPageview']);
+                 _gaq.push(['_trackPageLoadTime']);
+                 (function() {
+                 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                 })();
+    </script>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/js/google_top_exp.js"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0} </style><script id="OB_settings_call" async="async" type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/get"></script><script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/saved_resource"></script><link type="text/css" href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/default+en.css" rel="stylesheet"><script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/default+en.I.js"></script><script id="outbrainPostRecRankRequestID_0" async="async" type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/get(1)"></script><link rel="stylesheet" type="text/css" id="cssLinkID" href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/outbrainWidget.css"></head>
+<body>
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" width="100%" id="navbar-iframe" name="navbar-iframe" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/navbar.html"></iframe></div>
+<script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+        gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+          if (gapi.iframes && gapi.iframes.getContext) {
+            gapi.iframes.getContext().openChild({
+                url: 'https://www.blogger.com/navbar.g?targetBlogID\758712770457197348465\46blogName\75Javarevisited\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75//javarevisited.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://javarevisited.blogspot.com/\46targetPostID\758379818278416374862\46blogPostOrPageUrl\75http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html\46blogFollowUrl\75https://plus.google.com/103515296667914706982\46vt\75-246327699432307275',
+                where: document.getElementById("navbar-iframe-container"),
+                id: "navbar-iframe"
+            });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<!--INFOLINKS_OFF-->
+<div id="outer-wrapper">
+<div id="header-wrapper">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<p class="title">
+<a href="http://javarevisited.blogspot.com/">
+Javarevisited
+</a>
+</p>
+</div>
+<div class="descriptionwrapper">
+<p class="description">
+<span>
+Blog about  Java programming language, FIX Protocol, Tibco Rendezvous and related Java technology stack.
+</span>
+</p>
+</div>
+</div>
+</div></div>
+</div>
+<div id="crosscol-wrapper" style="text-align:center">
+<div class="crosscol section" id="crosscol"><div class="widget CustomSearch" id="CustomSearch1">
+<div class="widget-content">
+<div id="CustomSearch1_form"><form class="gsc-search-box" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><input autocomplete="off" type="text" size="10" class=" gsc-input" name="search" title="search"><input type="hidden" name="bgresponse" id="bgresponse"></td><td class="gsc-search-button"><input type="submit" value="Search" class="gsc-search-button" title="search"></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img-noclear"><img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/small-logo.png" class="gsc-branding-img-noclear"></td></tr></tbody></table></form></div>
+</div>
+<style type="text/css">
+      #uds-searchControl .gs-result .gs-title,
+      #uds-searchControl .gs-result .gs-title *,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results * {
+        color:#0066CC;
+      }
+
+      #uds-searchControl .gs-result .gs-title a:visited,
+      #uds-searchControl .gs-result .gs-title a:visited * {
+        color:#660099;
+      }
+
+      #uds-searchControl .gs-relativePublishedDate,
+      #uds-searchControl .gs-publishedDate {
+        color: #558866;
+      }
+
+      #uds-searchControl .gs-result a.gs-visibleUrl,
+      #uds-searchControl .gs-result .gs-visibleUrl {
+        color: #333333;
+      }
+
+      #uds-searchControl .gsc-results {
+        border-color: #bbbbbb;
+        background-color: #ffffff;
+      }
+
+      #uds-searchControl .gsc-tabhActive {
+        border-color: #bbbbbb;
+        border-top-color: #333333;
+        background-color: #ffffff;
+        color: #333333;
+      }
+
+      #uds-searchControl .gsc-tabhInactive {
+        border-color: #bbbbbb;
+        background-color: transparent;
+        color: #0066CC;
+      }
+
+      #uds-searchClearResults {
+        border-color: #bbbbbb;
+      }
+
+      #uds-searchClearResults:hover {
+        border-color: #333333;
+      }
+
+      #uds-searchControl .gsc-cursor-page {
+        color: #0066CC;
+      }
+
+      #uds-searchControl .gsc-cursor-current-page {
+        color: #333333;
+      }
+    </style>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=CustomSearch&widgetId=CustomSearch1&action=editWidget&sectionId=crosscol" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;CustomSearch1&quot;));" target="configCustomSearch1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+<!--INFOLINKS_ON-->
+<div id="main-wrap1">
+<div id="main-wrap2">
+<div class="main section" id="main"><div id="uds-searchControl"><a name="uds-search-results"></a><div id="uds-searchResults"><div class="gsc-control" dir="ltr"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">This Blog</div><span class="gs-spacer"> </span></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table cellspacing="0" cellpadding="0" class="gsc-resultsHeader"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">This Blog</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-more-results-active"><div class="gsc-result-selector gsc-one-result" title="show one result">&nbsp;</div><div class="gsc-result-selector gsc-more-results" title="show more results">&nbsp;</div><div class="gsc-result-selector gsc-all-results" title="show all results">&nbsp;</div></div></td><td class="gsc-configLabelCell"><span class="gsc-configLabel gsc-twiddle-closed" title="settings">&nbsp;</span></td></tr></tbody></table><div class="gsc-config gsc-blogConfig" style="display: none;"><form class="gsc-config gsc-blogConfig"></form></div><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div><div id="uds-searchClearResults" class="gsc-clear-button" style="display: none;">&nbsp;</div></div><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+                        <div class="date-outer">
+                      
+<h4 class="date-header">
+<span>
+Thursday, February 16, 2012
+</span>
+</h4>
+
+                        <div class="date-posts">
+                      
+<div class="post-outer">
+<div class="post hentry">
+<a name="8379818278416374862"></a>
+<h1 class="post-title entry-title">
+<a href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/Producer Consumer Design Pattern with Blocking Queue Example in Java.html" title="Producer Consumer Design Pattern with Blocking Queue Example in Java">
+Producer Consumer Design Pattern with Blocking Queue Example in Java
+</a>
+</h1>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+<div style="float:right; margin:5px 6px 0px 5px">
+
+                        <script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- 300x250 Medium Rectangle -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="3870191442"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                      
+</div>
+<div style="float:right; margin:5px 6px 0px 5px">
+</div>
+</div>
+<div class="post-body entry-content">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="MsoNormal">
+<span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Producer Consumer Design pattern</span></b></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> is a classic concurrency or threading pattern which reduces coupling between</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Producer and Consumer by separating Identification of work with Execution of Work. In producer consumer design pattern a shared queue is used to control the flow and this separation allows you to code producer and consumer separately. It also addresses the issue of different timing require to produce item or consuming item. by using <b style="mso-bidi-font-weight: normal;">producer consumer pattern</b> both Producer and Consumer Thread can work with different speed. In this article we will see <i style="mso-bidi-font-style: normal;">What is producer consumer problem</i> which is very </span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2011/07/java-multi-threading-interview.html"><span style="font-family: Arial;">popular multi-threading interview question</span></a></span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">, How to solve producer consumer problem using Blocking Queue and Benefits of using Producer Consumer design pattern.</span></span></div>
+<a name="more"></a><br>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp;<span style="text-decoration: none;"> </span></span></span></div>
+<h2>
+<u><b><span class="MsoHyperlink"><span style="color: windowtext; font-style: normal; font-weight: normal;">Real World Example of Producer Consumer Design Pattern</span></span></b></u></h2>
+<div class="MsoNormal">
+<a href="http://javarevisited.blogspot.com/2011/11/ldap-authentication-active-directory.html" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="Producer Consumer design pattern BlockingQueue example Java" border="0" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/java_logo_50_50.jpg"></a><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Producer consumer pattern</span></b></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> is every where in real life and depict coordination and collaboration. Like one</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">person is preparing food (Producer) while other one is serving food (Consumer), both will use shared table</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">for putting food plates and taking food plates. Producer which is the person preparing food will wait if</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">table is full and Consumer (Person who is serving food) will wait if table is empty. table is a shared</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">object here. On Java library <b style="mso-bidi-font-weight: normal;">Executor framework</b> itself implement Producer Consumer design pattern be separating</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">responsibility of addition and execution of task.</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp;<span style="text-decoration: none;"> </span></span></span></div>
+<h2>
+<u><b><span class="MsoHyperlink"><span style="color: windowtext; font-style: normal; font-weight: normal;">Benefit of Producer Consumer Pattern</span></span></b></u></h2>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Its indeed a useful </span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2011/12/factory-design-pattern-java-example.html"><span style="font-family: Arial;">design pattern</span></a></span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> and used most commonly while writing multi-threaded or concurrent code. here</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">is few of its benefit:</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">1) Producer Consumer Pattern simple development. you can Code Producer and Consumer independently and Concurrently, they just need to know shared object.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">2) Producer doesn't need to know about who is consumer or how many consumers are there. Same is true with Consumer.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">3) Producer and Consumer can work with different speed. There is no risk of Consumer consuming half-baked item.</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">In fact by monitoring consumer speed one can introduce more consumer for better utilization.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">4) Separating producer and Consumer functionality result in more clean, readable and manageable code.</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp;<span style="text-decoration: none;"> </span></span></span></div>
+<h2>
+<u><span class="MsoHyperlink"><span style="color: windowtext; font-style: normal; font-weight: normal;">Producer Consumer Problem in Multi-threading</span></span></u></h2>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Producer-Consumer Problem</span></b></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> is a</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">lso a <a href="http://javarevisited.blogspot.com/2011/04/top-20-core-java-interview-questions.html"><span style="font-family: Arial;">popular java interview question</span></a></span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> where interviewer ask to implement producer consumer design pattern so that Producer should wait if Queue or bucket is full and Consumer should wait if queue or</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">bucket is empty. This problem can be implemented or solved by different ways in Java, classical way is using</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> <a href="http://javarevisited.blogspot.com/2011/05/wait-notify-and-notifyall-in-java.html"><span style="font-family: Arial;">wait and notify method</span></a></span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> to communicate between <b style="mso-bidi-font-weight: normal;">Producer and Consumer thread</b> and blocking each of them on individual condition like full queue and empty queue. With introduction of <b style="mso-bidi-font-weight: normal;">BlockingQueue</b> Data Structure in Java</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">5 Its now much simpler because BlockingQueue provides this control implicitly by introducing </span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2012/02/what-is-blocking-methods-in-java-and.html"><span style="font-family: Arial;">blocking methods</span></a></span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> put() and take(). Now you don't require to use wait and notify to communicate between Producer and Consumer. BlockingQueue put() method will block if Queue is full in case of Bounded Queue and take() will block if Queue is empty. In next section we will see a <i style="mso-bidi-font-style: normal;">code example of Producer Consumer design pattern</i>.</span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"><span style="text-decoration: none;">&nbsp;</span> </span></span></div>
+<h2>
+<u><span class="MsoHyperlink"><span style="color: windowtext; font-style: normal; font-weight: normal;">Using Blocking Queue to implement Producer Consumer Pattern</span></span></u></h2>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><i style="mso-bidi-font-style: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">BlockingQueue</span></i></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> amazingly simplifies implementation of Producer-Consumer design pattern by providing outofbox support of blocking on put() and take(). Developer doesn't need to write confusing and critical piece of wait-notify code</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">to implement communication. </span></span><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt; text-decoration: none;">BlockingQuue</span></b></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> is an interface and Java 5 provides different implantation like </span></span><span class="MsoHyperlink"><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt; text-decoration: none;">ArrayBlockingQueue</span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> and </span></span><span class="MsoHyperlink"><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt; text-decoration: none;">LinkedBlockingQueue</span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> , both implement FIFO order or elements, while </span></span><span class="MsoHyperlink"><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt; text-decoration: none;">ArrayLinkedQueue</span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> is</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> </span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">bounded in nature </span></span><span class="MsoHyperlink"><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt; text-decoration: none;">LinkedBlockingQueue</span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> is optionally bounded. here is a complete <b style="mso-bidi-font-weight: normal;">code example of Producer Consumer pattern</b> with BlockingQueue. Compare it with classic </span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2012/02/why-wait-notify-and-notifyall-is.html"><span style="font-family: Arial;">wait notify</span></a></span></span><span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"> code, its much simpler and easy to understand.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div style="background: #F3F3F3; border: dotted windowtext 1.0pt; mso-border-alt: dotted windowtext .75pt; mso-element: para-border-div; padding: 1.0pt 1.0pt 1.0pt 1.0pt;">
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">import java.util.concurrent.BlockingQueue;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">import java.util.concurrent.LinkedBlockingQueue;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">import java.util.logging.Level;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">import java.util.logging.Logger;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">public class <b style="mso-bidi-font-weight: normal;">ProducerConsumerPattern</b> {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; public static void main(String args[]){</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"></span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp;&nbsp; </span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp;&nbsp;&nbsp;&nbsp; <b style="mso-bidi-font-weight: normal;">//Creating shared object</b></span></span><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"></span></b></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp; BlockingQueue sharedQueue = new LinkedBlockingQueue();</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"></span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp; </span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-size: 9pt;">&nbsp;&nbsp;&nbsp;&nbsp; //Creating Producer and Consumer Thread</span></b></span><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"></span></b></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; &nbsp;Thread prodThread = new Thread(new Producer(sharedQueue));</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp; Thread consThread = new Thread(new Consumer(sharedQueue));</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"></span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">&nbsp;&nbsp; &nbsp;&nbsp;<b style="mso-bidi-font-weight: normal;">//Starting producer and Consumer thread</b></span></span><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"></span></b></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp; prodThread.start();</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp; consThread.start();</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp; </span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">}</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-size: 9pt;">//Producer Class in java</span></b></span><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"></span></b></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">class <b style="mso-bidi-font-weight: normal;">Producer</b> implements <b style="mso-bidi-font-weight: normal;">Runnable</b> {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; private final <b style="mso-bidi-font-weight: normal;">BlockingQueue</b> sharedQueue;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; public Producer(BlockingQueue sharedQueue) {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.sharedQueue = sharedQueue;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; @Override</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; public void run() {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int i=0; i&lt;10; i++){</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Produced: " + i);</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sharedQueue.put(i);</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (InterruptedException ex) {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">}</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-size: 9pt;">//Consumer Class in Java</span></b></span><span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;"></span></b></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">class Consumer implements Runnable{</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; private final BlockingQueue sharedQueue;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; public Consumer (BlockingQueue sharedQueue) {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.sharedQueue = sharedQueue;</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp; </span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; @Override</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; public void run() {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while(true){</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Consumed: "+ sharedQueue.take());</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (InterruptedException ex) {</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp;&nbsp; }</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp; </span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">&nbsp;&nbsp; </span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">}</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><b style="mso-bidi-font-weight: normal;"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Output:</span></b></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 0</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 1</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 0</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 2</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 1</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 3</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 2</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 4</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 3</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 5</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 4</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 6</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 5</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 7</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 6</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 8</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 7</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Produced: 9</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 8</span></span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .75pt; mso-padding-alt: 1.0pt 1.0pt 1.0pt 1.0pt; padding: 0in;">
+<span class="MsoHyperlink"><span style="color: black; font-family: Arial; font-size: 9pt; text-decoration: none;">Consumed: 9</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"></span></span></div>
+</div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">You see </span></span><span class="MsoHyperlink"><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">Producer Thread&nbsp; produced number and Consumer thread</span></span><span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"> consumes it in FIFO order because blocking queue allows elements to be accessed in FIFO.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">That’s all on <b style="mso-bidi-font-weight: normal;">How to use Blocking Queue to solve Producer Consumer problem</b> or <b style="mso-bidi-font-weight: normal;">example of Producer consumer design pattern</b>. I am sure its much better than wait notify example but be prepare with both if you are going for any Java Interview as Interview may ask you both way.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;">Other Java threading tutorial you may like:</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2012/01/difference-thread-vs-runnable-interface.html">When to use Thread or Runnable interface in Java?</a></span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html">What does Volatile keyword do in Java</a></span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2011/10/how-to-stop-thread-java-example.html">How to Stop Thread in Java</a></span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2010/10/what-is-deadlock-in-java-how-to-fix-it.html">How to prevent deadlock in Java Code</a></span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2011/02/how-to-implement-thread-in-java.html">How to implement Thread in Java</a></span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://www.blogger.com/How%20to%20implement%20Thread%20in%20Java"><span style="font-family: Arial;">How to deal with blocking method in Java</span></a></span></span></div>
+<div class="MsoNormal">
+<span class="MsoHyperlink"><span style="color: black; font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2011/12/factory-design-pattern-java-example.html"><span style="font-family: Arial;">How to use Factory Design pattern in Java</span></a></span></span></div>
+</div>
+<div style="clear: both; margin-left:-40px">
+
+                        <script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- 728x90 Leaderboard -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="3886401219"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                      
+</div>
+<div dir="ltr" style="text-align: left; background-color:white; margin-top:10px; margin-bottom:5px; padding: 3px" trbidi="on">
+<div class="MsoNormal">
+</div>
+</div>
+<div style="clear: both;"></div>
+</div><div id="outbrain_widget_0" class="OB_default" style="display: block;"><div id="outbrain_container_0_rec" class="div-wrapper" style="clear:both;;padding:0 0 10px 0;"><div class="voterDiv" style="display: block;" id="OutbrainVoterDiv_0_rec"><fieldset style="display: block; padding-left: 8px; padding-right: 8px;" id="recommendationsFieldset_0_rec" class="outbrain-recommendationsFieldset-sc outbrain-border">      <div id="recommendationsWait_outer_0" class="Outbrain_recommendationsWait_outer" style="display:none;"><div class="Outbrain_recommendationsWait_inner">               <p><img style="border:0px !important"></p>       </div></div>  <legend class="Outbrain_recommendations_legend">You might like:</legend>    <ul id="recommendationsList_0_rec" class="recommendations_ul">    <li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2012/12/blocking-queue-in-java-example-ArrayBlockingQueue-LinkedBlockingQueue.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=ky3xD_ZpywbBQAaTKT3Xqr4fpFnxZ3yYm5a2-3J1qtNfafS8Jz9fySumvDR9XlN0U9JH3wdRNbQqw0VTiFiZbdx2y6ZVaEG3_yupPTlXuClVMRHqt5zemyilz2EF4GGsGZAy64FCadv3h75lOnFBl9pu-xApYNYCK1jERVHKNpRaQNbfm-mVyflmu2drmALLHIShUdWqpCH5YG_MZazzW6ffsaOY70hOUpQFywxwXgvcTtKJ23je8Opn6pQyXMr3tjlm1qpGaI3YFAgHtEBAtJMlKtif4vZGEbDBkON4-REyM3IbU8w5m1rU4IcMJA8JW-5nGfvwIsXYhmFDDBO-NBseLwcKFiYrnXFjyN-SKLWS0dxDOOTeQzmvto7TZy1FIk8A9o5qe6jisA-xyS_ZFuibAlHLCbHo0BdLBp7ylac8G-mWlWHE7CSmwPjB-kTuMy34c2ohYbRHVL7-qPi0TQHCCLQV550uXRLhiu7Mqh4xUecG3mXUWPbr3OSkHYQQ&amp;c=89344797&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">BlockingQueue in Java – ArrayBlockingQueue vs LinkedBlockingQueue Example program Tutorial</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2013/03/reentrantlock-example-in-java-synchronized-difference-vs-lock.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=vfO3V5VxQJuCTJhLFEKrpOE2KHZ1msbXA1l6x3kl1n_dNMuAXMtW06ZThoQV1if8l1xCGQRd0uHvF-b0thVAygvbT-z1hnbRL86qY4yoESLi0OpEHaJkXokq-MJ3CoOxhc2WKBP-SJw3mmJZUOu6WbRee47F8vFWpURYPj1cx9apOVXslhwz_5xTQA4CyiVJwEuGc4zp9Q1bC27fU6ICkrFkwLtzmqOj3E-ESXl_zP0lv77t5cIJk748LUkBddnu2Nyt72JSGFgPq8cfosWvLRiIq3JOt2NTMP_MSwkN2CtU1kuhXRzQ8Argto5BpVWXz_RfMq4coblfhqlI8v8MPqsnJfhmvTDFE2NQuczIt0ym6Ufzw2d30IMq41hYKOzr72w445DBgiUxracds4PtrQxD3h7jStQfwS4kuJpLdBolOYeqYC3dOB9AYtU7Z0KoqPRlgx6CjapQwI1E7LzL3y9DLbxsIdeiQtOPrqSTbUHvTc0FuT6os6xlpHG6p6lc&amp;c=8a0dc727&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">ReentrantLock Example in Java, Difference between synchronized vs ReentrantLock</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2011/05/wait-notify-and-notifyall-in-java.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=idZ9KCkqnXtvGQuKa2jTZ75960h9L5tc6W9wJgx7sOcMS2hrPKoO3wUmwJqoibFNBF1OUwydrhpdwLhsoh5SOc40jbyNVvU76E5TIBZ5pkJCzW96No3cD_Jbh_7Uri5RaAHT4p2zQusMTEcejIb85dMr4xS1xUBlmI1mKBsmX76gZiOC8Sd3RxfJFc0h42AnJ7jOgyBgtVNeK9YSKr08J050yGgbvvIXWN3ThlfurIdqVfNGEUGhkeufZ72bwxd9qIt2WG2swZg3ImTK_dzaeikDUkLxVan0Wl2l06NPV_X3jXs3Zoufdofgt6be8_0qZw6HxtarTF0sgC0nrIkMkQZbuRawNGT4WXYnk3DJ9N3qPfq5XXd9tTaOgBNe9p-E7XLreBinoQzRIkdfrCFtz7ECc_UK3Vbu3x_X0WMpEX8JzR23tP9TQHL5n_aTrWGjFTGjtx4v6uBJh104puILuW2-sTffkhW6ST34aSnm6KxrTkmViILdI6JMaoGPouff&amp;c=138814c3&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">Why wait notify and notifyAll called from synchronized block or method in Java</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2012/02/what-is-race-condition-in.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=6wUJFAEq5dJPfmXPP2a6SlpOaSh3nJM1tu6_6dRi7zvUo1GuWzIUQjNJD46eISv2wK3tMQUx_YhfxhEx6lY4atSg5IX5rwxjRfVqZR5I3gPcvRdT2CUje6EBdtH89OxZi7F5JTXfYnZJvUqKj2u6n4cHZmUPi2W_UUIcjEJawQQBka1GxrwGa7vxvEQ1Ti022sHzgJaOyOo-8wLEwX5dP2JcGq34X0DqLxdkuoZTNmrD5FHm8W1LO52GJJiZ2x7V2irPKeWZ90QDuqki41KXML7-BZ6rMBQiStBCXZ6f9ZH7KdypJuHCMez6bQqJZlzyKctGNaRf4e2wMfexDVX0nPBEYwOd6WKyax7OXAHLONcl3UFFPstaKa2oSgK-S6H5XP7Qxaj6BW311uIVqcSl4-tSWYI1h9sdV15OZYg4_Q04PAz0ulJT2AuTp0csT-05zUAz84F76AemMtumTi_HIPdVv7gZtlYhd4kU0x_jLnoaTganNYsJ6DfQSvy2PGnd&amp;c=62edf447&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">What is Race Condition in multithreading – 2 Examples in Java</a></li></ul></fieldset><table id="outbrainTableRecommendation_0_rec" class="outbrain-table-recommendations-bottom" style="display:none;"><tbody><tr><td>  <div id="recommendationsPcLegend_0_rec" class="Outbrain_recommendations_pc_legend" style="display:none;"></div></td><td>  <div id="recommendationsMoreDiv_0_rec" class="moreRecommendationsLinkDiv" style="display:none;"></div></td></tr></tbody></table><div id="outbrain_whatIs_0_rec" class="what_is_container" style="direction:LTR"><a class="what_is_link" onclick="OBR.extern.callWhatIsBranding(&#39;http://www.outbrain.com/what-is/default/en&#39;,500,480);">Recommended by <span class="ob_amelia" title="Outbrain"></span></a></div></div></div> </div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Posted by
+<span class="fn">
+Javin Paul
+</span>
+</span>
+<span class="post-timestamp">
+at
+<a class="timestamp-link" href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/Producer Consumer Design Pattern with Blocking Queue Example in Java.html" rel="bookmark" title="permanent link">
+<abbr class="published" title="2012-02-16T05:44:00-08:00">
+5:44 AM
+</abbr>
+</a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-action">
+<a href="https://www.blogger.com/email-post.g?blogID=8712770457197348465&postID=8379818278416374862" title="Email Post">
+<img alt="" class="icon-action" height="13" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_email.gif" width="18">
+</a>
+</span>
+<span class="item-control blog-admin pid-1367717747">
+<a href="https://www.blogger.com/post-edit.g?blogID=8712770457197348465&postID=8379818278416374862&from=pencil" title="Edit Post">
+<img alt="" class="icon-action" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons">
+<a class="goog-inline-block share-button sb-email" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=8379818278416374862&target=email" target="_blank" title="Email This">
+<span class="share-button-link-text">
+Email This
+</span>
+</a>
+<a class="goog-inline-block share-button sb-blog" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=8379818278416374862&target=blog" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=270,width=475&quot;); return false;" target="_blank" title="BlogThis!">
+<span class="share-button-link-text">
+BlogThis!
+</span>
+</a>
+<a class="goog-inline-block share-button sb-twitter" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=8379818278416374862&target=twitter" target="_blank" title="Share to Twitter">
+<span class="share-button-link-text">
+Share to Twitter
+</span>
+</a>
+<a class="goog-inline-block share-button sb-facebook" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=8379818278416374862&target=facebook" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=430,width=640&quot;); return false;" target="_blank" title="Share to Facebook">
+<span class="share-button-link-text">
+Share to Facebook
+</span>
+</a>
+<div class="goog-inline-block dummy-container">
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1438269863881" name="I0_1438269863881" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="post-labels">
+Labels:
+<a href="http://javarevisited.blogspot.com/search/label/core%20java?max-results=3" rel="tag">
+core java
+</a>
+
+                              ,
+                            
+<a href="http://javarevisited.blogspot.com/search/label/core%20java%20interview%20question?max-results=3" rel="tag">
+core java interview question
+</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class="post-location">
+Location:
+<a href="https://maps.google.com/maps?q=United+States@37.09024,-95.71289100000001&z=10" target="_blank">
+United States
+</a>
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>
+11 comments
+                      :
+                    </h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="" id="comments-block">
+<dt class="comment-author anon-comment-icon" id="c3127277342129431681">
+<a name="c3127277342129431681"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3127277342129431681">
+<p>
+Recently I got this question in interview with different scenario. How to resolve the producer and  consumer problem so that my CPU cycle can be used to 100%. For ex if producer is producing less and consumer is consuming fast then your CPU cycle is getting wasted which is associated with cost. So what would be strategy to resolve this. Any suggestion?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1362514537644#c3127277342129431681" title="comment permalink">
+March 5, 2013 at 12:15 PM
+</a>
+<span class="item-control blog-admin pid-2128098257">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=3127277342129431681" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c3749112458624197733">
+<a name="c3749112458624197733"></a>
+<a href="https://www.blogger.com/profile/03961194831826056132" rel="nofollow">
+Mudit Srivastava
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3749112458624197733">
+<p>
+Well i see something is missing, how to define the size of queue ?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1362675982971#c3749112458624197733" title="comment permalink">
+March 7, 2013 at 9:06 AM
+</a>
+<span class="item-control blog-admin pid-558570079">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=3749112458624197733" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c7203381276585069806">
+<a name="c7203381276585069806"></a>
+<a href="https://www.blogger.com/profile/01084233786047386880" rel="nofollow">
+SARAL SAXENA
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7203381276585069806">
+<p>
+Hi Javin, ..gr8 article few things that I want to add in this is... <br><br>BlockingQueue Code Example<br><br>Here is an example of how to use a BlockingQueue. The example uses the ArrayBlockingQueue implementation of the BlockingQueue interface.<br><br>First, the BlockingQueueExample class which starts a Producer and a Consumer in separate threads. The Producer inserts strings into a shared BlockingQueue, and the Consumer takes them out.<br><br>public class BlockingQueueExample {<br><br>    public static void main(String[] args) throws Exception {<br><br>        BlockingQueue queue = new ArrayBlockingQueue(1024);<br><br>        Producer producer = new Producer(queue);<br>        Consumer consumer = new Consumer(queue);<br><br>        new Thread(producer).start();<br>        new Thread(consumer).start();<br><br>        Thread.sleep(4000);<br>    }<br>}<br>Here is the Producer class. Notice how it sleeps a second between each put() call. This will cause the Consumer to block, while waiting for objects in the queue.<br><br>public class Producer implements Runnable{<br><br>    protected BlockingQueue queue = null;<br><br>    public Producer(BlockingQueue queue) {<br>        this.queue = queue;<br>    }<br><br>    public void run() {<br>        try {<br>            queue.put("1");<br>            Thread.sleep(1000);<br>            queue.put("2");<br>            Thread.sleep(1000);<br>            queue.put("3");<br>        } catch (InterruptedException e) {<br>            e.printStackTrace();<br>        }<br>    }<br>}<br>Here is the Consumer class. It just takes out the objects from the queue, and prints them to System.out.<br><br>public class Consumer implements Runnable{<br><br>    protected BlockingQueue queue = null;<br><br>    public Consumer(BlockingQueue queue) {<br>        this.queue = queue;<br>    }<br><br>    public void run() {<br>        try {<br>            System.out.println(queue.take());<br>            System.out.println(queue.take());<br>            System.out.println(queue.take());<br>        } catch (InterruptedException e) {<br>            e.printStackTrace();<br>        }<br>    }<br>}<br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1365913584683#c7203381276585069806" title="comment permalink">
+April 13, 2013 at 9:26 PM
+</a>
+<span class="item-control blog-admin pid-853111555">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=7203381276585069806" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c2588246233170708402">
+<a name="c2588246233170708402"></a>
+<a href="https://www.blogger.com/profile/01699762369204618098" rel="nofollow">
+yyc
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2588246233170708402">
+<p>
+The above example is good but too simple. Would you minding providing a example with multiple producers and consumers and stopping the program once producers have done their jobs?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1381289421967#c2588246233170708402" title="comment permalink">
+October 8, 2013 at 8:30 PM
+</a>
+<span class="item-control blog-admin pid-204838162">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2588246233170708402" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c6485431193796974821">
+<a name="c6485431193796974821"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6485431193796974821">
+<p>
+I tried out following implementation of Producer-Consumer and it doesn't list out all the elements from the list. Few of them are missing. <br><br>I wanted to have one producer &amp; multiple consumers and have the consumers take data out of the list in round robin fashion, but not working as expected. Would you be able to point me out the error in the code? Thanks.<br><br>public class ProdConController {<br>    public static void main(String[] args) throws Exception {<br>        List stringList = new ArrayList();<br>        SignalObject signalObject = new SignalObject();<br>        ProdWorker prodWorker = new ProdWorker(stringList, signalObject);<br>        ConWorker conWorker1 = new ConWorker(stringList, signalObject, "worker1");<br>        ConWorker conWorker2 = new ConWorker(stringList, signalObject, "worker2");<br>        Thread prodThrd = new Thread(prodWorker);<br>        Thread conThrd1 = new Thread(conWorker1);<br>        Thread conThrd2 = new Thread(conWorker2);<br>        prodThrd.start();<br>        conThrd1.start();<br>        conThrd2.start();<br><br>        prodThrd.join();<br>        conThrd1.join();<br>        conThrd2.join();<br>    }<br>}<br><br>public class SignalObject {<br>    private boolean isDataAvailable = false;<br><br>    public synchronized boolean isDataAvailable() {<br>        return isDataAvailable;<br>    }<br><br>    public synchronized void setDataAvailable(boolean dataAvailable) {<br>        isDataAvailable = dataAvailable;<br>    }<br>}<br><br>public class ProdWorker implements Runnable {<br>    private List stringList;<br>    private SignalObject signalObject;<br><br>    public ProdWorker(List stringList, SignalObject signalObject) {<br>        this.stringList = stringList;<br>        this.signalObject = signalObject;<br>    }<br><br>    @Override<br>    public void run() {<br>        for (int i = 1; i &lt;= 10; i++) {<br>            System.out.println("Adding " + i + " to queue");<br>            stringList.add(String.valueOf(i));<br>        }<br><br>        try {<br>            Thread.sleep(1000);<br>        } catch (InterruptedException e) {<br>            e.printStackTrace();<br>        }<br><br>        synchronized (signalObject) {<br>            signalObject.setDataAvailable(true);<br>            signalObject.notifyAll();<br>        }<br>    }<br>}<br><br>public class ConWorker implements Runnable {<br>    private final List stringList;<br>    private String name;<br>    private SignalObject signalObject;<br><br>    public ConWorker(List stringList, SignalObject signalObject, String name) {<br>        this.stringList = stringList;<br>        this.name = name;<br>        this.signalObject = signalObject;<br>    }<br><br>    @Override<br>    public void run() {<br>        while (!signalObject.isDataAvailable()) {<br>            try {<br>                synchronized (signalObject) {<br>                    signalObject.wait();<br>                }<br>            } catch (InterruptedException ex) {<br>                System.out.println("Received interrupt");<br>                ex.printStackTrace();<br>            }<br>        }<br><br>        synchronized (stringList) {<br>            for (int i = 0; i &lt; stringList.size(); i++) {<br>                System.out.println("Received:" + stringList.get(i) + " by worker:" + name);<br>                stringList.remove(i);<br>//                if (i % 2 == 0 &amp;&amp; this.name.equals("worker1")) {<br>//                    System.out.println("Received:" + stringList.get(i) + " by worker:" + name);<br>//                }<br>//                else {<br>//                    System.out.println("Received:" + stringList.get(i) + " by worker:" + name);<br>//                }<br>            }<br>        }<br><br>        System.out.println("Finished consuming all data");<br>    }<br>}
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1383681969768#c6485431193796974821" title="comment permalink">
+November 5, 2013 at 12:06 PM
+</a>
+<span class="item-control blog-admin pid-172966295">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6485431193796974821" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c2402831147828628897">
+<a name="c2402831147828628897"></a>
+<a href="https://www.blogger.com/profile/14371581858849848974" rel="nofollow">
+Stanislav Lorents
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2402831147828628897">
+<p>
+Recently I got this question in interview with different scenario. How to resolve the producer and consumer problem so that my CPU cycle can be used to 100%. For ex if producer is producing less and consumer is consuming fast then your CPU cycle is getting wasted which is associated with cost. So what would be strategy to resolve this. Any suggestion?<br>====================<br>(Count of Producers == Count of Consumers ) &gt;= max CPU threads (cores / hyper threads) While consumers are waiting, producers will allocate all CPU resources and vice versa. Also the queue size &gt;= max CPU threads.<br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1385889988369#c2402831147828628897" title="comment permalink">
+December 1, 2013 at 1:26 AM
+</a>
+<span class="item-control blog-admin pid-364419804">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2402831147828628897" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c767314916364396487">
+<a name="c767314916364396487"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-767314916364396487">
+<p>
+Can you please share solution of Producer Consumer problem using Semaphore? I know it can be solved using multiple way including BlockingQueue, wait and notify as shown above, but I am really interested in using Semaphore. Thanks
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1392357068652#c767314916364396487" title="comment permalink">
+February 13, 2014 at 9:51 PM
+</a>
+<span class="item-control blog-admin pid-492603010">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=767314916364396487" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c6805327561190785090">
+<a name="c6805327561190785090"></a>
+<a href="https://www.blogger.com/profile/16548176154083945507" rel="nofollow">
+sathish
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6805327561190785090">
+<p>
+package Thread;<br><br>import java.util.concurrent.Semaphore;<br><br>class SharedResource<br>{<br> int n;<br> static Semaphore semCons = new Semaphore(0);<br> static Semaphore semProd = new Semaphore(1);<br> <br> void put(int n)<br> {<br>  try {<br>   semProd.acquire();<br>  } catch (InterruptedException e) {<br>   // TODO Auto-generated catch block<br>   e.printStackTrace();<br>  }<br>  this.n=n;<br>  System.out.println("Put : " + n);<br>  semCons.release();<br> }<br> <br> void get()<br> {<br>  try {<br>   semCons.acquire();<br>  } catch (InterruptedException e) {<br>   // TODO Auto-generated catch block<br>   e.printStackTrace();<br>  }<br>  System.out.println("Got : "+n);<br>  semProd.release();<br> }<br>}<br><br>class Consumer implements Runnable<br>{<br> SharedResource sr;<br> public Consumer(SharedResource sr) <br> {<br>  this.sr = sr;<br>  new Thread(this, "Consumer").start();<br> }<br> @Override<br> public void run() <br> {<br>  for(int i=0;i&lt;10;i++)<br>  {<br>   sr.get();<br>  }<br> }<br>}<br><br>class Producer implements Runnable<br>{<br> SharedResource sr;<br> public Producer(SharedResource sr) <br> {<br>  this.sr= sr;<br>  new Thread(this,"Producer").start();<br> }<br><br> @Override<br> public void run() <br> {<br>  for(int i=0;i&lt;10;i++)<br>  {<br>   sr.put(i);<br>  }<br> }<br>}<br>public class ProducerConsumer {<br>public static void main(String[] args) {<br> SharedResource sr = new SharedResource();<br> <br> new Consumer(sr);<br> new Producer(sr);<br> <br>}<br>}<br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1400759910269#c6805327561190785090" title="comment permalink">
+May 22, 2014 at 4:58 AM
+</a>
+<span class="item-control blog-admin pid-517160434">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6805327561190785090" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c5651807260537720591">
+<a name="c5651807260537720591"></a>
+<a href="https://www.blogger.com/profile/07650612181243410422" rel="nofollow">
+Gourav
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5651807260537720591">
+<p>
+seems like your method ain't right.<br>how about this son:<br>import java.util.concurrent.*;<br><br>class Producer implements Runnable {<br> <br>    private BlockingQueue queue;<br>     <br>    Producer(BlockingQueue q){<br>        this.queue=q;<br>    }<br>    <br>    public void run() {<br>        //produce messages<br>        for(int i=1; i&lt;11; i++){<br>            try {<br>                Thread.sleep(i);<br>                queue.put(i);<br>                System.out.println("Produced  "+i);<br>            } catch (InterruptedException e) {<br>                <br>            }<br>        }<br>        <br>    }<br> <br>}<br> <br><br>class Consumer implements Runnable{<br> <br>private BlockingQueue queue;<br>     <br>    Consumer(BlockingQueue q){<br>        this.queue=q;<br>    }<br> <br>    <br>    public void run() {<br>        try{<br>            int i;<br>            //consuming messages until exit message is received<br>            while(true){<br>            Thread.sleep(10);<br>   i = queue.take();<br>            System.out.println("Consumed- "+i);<br>   if(i==10) break;<br>            }<br>        }catch(InterruptedException e) {<br>            <br>        }<br>    }<br>}<br><br>public class ProducerConsumerService {<br> <br>    public static void main(String[] args) {<br>        //Creating BlockingQueue of size 10<br>        BlockingQueue queue = new ArrayBlockingQueue&lt;&gt;(10);<br>        Producer producer = new Producer(queue);<br>        Consumer consumer = new Consumer(queue);<br>        //starting producer to produce messages in queue<br>        new Thread(producer).start();<br>        //starting consumer to consume messages from queue<br>        new Thread(consumer).start();<br>        System.out.println("Producer and Consumer has been started");<br>    }<br> <br>}
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1436727105269#c5651807260537720591" title="comment permalink">
+July 12, 2015 at 11:51 AM
+</a>
+<span class="item-control blog-admin pid-189652837">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=5651807260537720591" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blog-author blogger-comment-icon" id="c1648714269458650632">
+<a name="c1648714269458650632"></a>
+<a href="https://www.blogger.com/profile/15028902221295732276" rel="nofollow">
+Javin Paul
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1648714269458650632">
+<p>
+@Gaurav, what was the problem and how did you fixed it?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1436802770643#c1648714269458650632" title="comment permalink">
+July 13, 2015 at 8:52 AM
+</a>
+<span class="item-control blog-admin pid-1367717747">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=1648714269458650632" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c2971589965739973759">
+<a name="c2971589965739973759"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2971589965739973759">
+<p>
+Javin,<br><br>In your example the program will never exit and @Gaurav is trying to break the program after 10 iteration.<br>please let us know your thoughts.<br><br>Thanks, <br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html?showComment=1438012574875#c2971589965739973759" title="comment permalink">
+July 27, 2015 at 8:56 AM
+</a>
+<span class="item-control blog-admin pid-1477528504">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2971589965739973759" title="Delete Comment">
+<img src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+</dl>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<h4 id="comment-post-message">
+Post a Comment
+</h4>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=8712770457197348465&postID=8379818278416374862&blogspotRpcToken=7983763" id="comment-editor-src"></a>
+<iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="254px" id="comment-editor" name="comment-editor" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/comment-iframe.html" width="100%"></iframe>
+<script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/3996186021-comment_from_post_iframe.js"></script>
+<script type="text/javascript">
+                    BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html', '03974492238039089807');
+                  </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+                      </div></div>
+                    
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://javarevisited.blogspot.com/2012/02/how-to-encode-decode-string-in-java.html" id="Blog1_blog-pager-newer-link" title="Newer Post">
+Newer Post
+</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://javarevisited.blogspot.com/2012/02/why-non-static-variable-cannot-be.html" id="Blog1_blog-pager-older-link" title="Older Post">
+Older Post
+</a>
+</span>
+<a class="home-link" href="http://javarevisited.blogspot.com/">
+Home
+</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Subscribe to:
+<a class="feed-link" href="http://javarevisited.blogspot.com/feeds/8379818278416374862/comments/default" target="_blank" type="application/atom+xml">
+Post Comments
+                      (
+                      Atom
+                      )
+                    </a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en'};</script>
+</div></div>
+</div>
+</div>
+<div id="sidebar-wrap">
+<div id="sidebartop-wrap">
+<div id="sidebartop-wrap2">
+<div class="sidebar section" id="sidebartop"><div class="widget LinkList" id="LinkList1">
+<h2>Recommended Books for Java Developer</h2>
+<div class="widget-content">
+<ul>
+<li><a href="http://javarevisited.blogspot.com/2013/01/top-5-java-programming-books-best-good.html">9 Must Read Books for Java Developers</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/11/java-8-tutorials-resources-and-examples-lambda-expression-stream-api-functional-interfaces.html">3 Good Books to Learn Java 8</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/09/top-6-books-to-learn-programming-coding.html">6 Books to Learn and Master Programming</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/07/2-books-to-prepare-oracle-java-7-certification-OCA-OCP-OCPJP.html">2 Books to Prepare Oracle Java Certification</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/03/5-good-books-to-learn-spring-framework-mvc-java-programmer.html">5 Books to Learn Spring Framework for Java Programmers</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/06/5-must-read-books-to-learn-object.html">5 Books to Learn Design Patterns and OOP</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/01/top-5-free-books-to-learn-scala-programming-PDF.html">5 Free Scala Programming Books PDF</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/01/top-5-hibernate-books-for-java-programmers-learning.html">5 Books to Learn Hibernate for Java Developers</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/07/top-5-java-performance-tuning-books.html">Top 5 Java Performance Tuning Books</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/07/top-5-jquery-books-for-web-developers-learn.html">Top 5 jQuery Books for Java Web Developer</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/08/top-5-books-to-learn-unit-testing-junit-tdd-Java-programmers.html">5 Java Unit Testing Book Every Developer Should Read</a></li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=LinkList&widgetId=LinkList1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;LinkList1&quot;));" target="configLinkList1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML5">
+<div class="widget-content">
+<div id="GoogleAds1" style="margin-top:-5px">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5808379456926196";
+google_ad_host = "pub-1556223355139109";
+/* 300 x 600 Right Side Bar Above the Fold */
+google_ad_slot = "1677562743";
+google_ad_width = 300;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML5&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML5&quot;));" target="configHTML5" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML6">
+<div class="widget-content">
+<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- 336x280_Top_Right_Above_The_Fold -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="9776759940"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML6&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML6&quot;));" target="configHTML6" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML7">
+<div class="widget-content">
+<div id="ShowOnlyOnItemPages">
+<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300x250_Javarevisited_Right_Sidebar_Middle -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="6527085541"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML7&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML7&quot;));" target="configHTML7" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Followers" id="Followers1">
+<h2 class="title">Followers</h2>
+<div class="widget-content">
+<div id="Followers1-wrapper">
+<div style="margin-right:2px;">
+<div><script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/plusone.js" gapi_processed="true"></script>
+<div id="followers-iframe-container"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" width="100%" id="I0_1438269863899" name="I0_1438269863899" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/followers.html" height="242"></iframe></div>
+<script type="text/javascript">
+    window.followersIframe = null;
+    function followersIframeOpen(url) {
+      gapi.load("gapi.iframes", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          window.followersIframe = gapi.iframes.getContext().openChild({
+            url: url,
+            where: document.getElementById("followers-iframe-container"),
+            messageHandlersFilter: gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
+            messageHandlers: {
+              '_ready': function(obj) {
+                window.followersIframe.getIframeEl().height = obj.height;
+              },
+              'reset': function() {
+                window.followersIframe.close();
+                followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d8712770457197348465\x26origin\x3dhttp://javarevisited.blogspot.com/\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaBjMzMzMzMyIGMDAwMDAwKgZmZmZmZmYyBjAwMDAwMDoGMzMzMzMzQgYwMDAwMDBKBjAwMDAwMFIGRkZGRkZGWgt0cmFuc3BhcmVudA%3D%3D\x26postID\x3d8379818278416374862");
+              },
+              'open': function(url) {
+                window.followersIframe.close();
+                followersIframeOpen(url);
+              }
+            }
+          });
+        }
+      });
+    }
+    followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d8712770457197348465\x26origin\x3dhttp://javarevisited.blogspot.com/\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaBjMzMzMzMyIGMDAwMDAwKgZmZmZmZmYyBjAwMDAwMDoGMzMzMzMzQgYwMDAwMDBKBjAwMDAwMFIGRkZGRkZGWgt0cmFuc3BhcmVudA%3D%3D\x26postID\x3d8379818278416374862");
+  </script></div>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=Followers&widgetId=Followers1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Followers1&quot;));" target="configFollowers1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML1">
+<div class="widget-content">
+<script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/getads.js"></script>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+aax_getad_mpb({
+  "slot_uuid":"392ffdf9-b1c9-44b2-9e3e-c43ecd0faabd"
+});
+//]]>
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML1&quot;));" target="configHTML1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML11">
+<div class="widget-content">
+<script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/getads.js"></script>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+aax_getad_mpb({
+  "slot_uuid":"1a631a27-7478-440e-ac7f-355dbed82b58"
+});
+//]]>
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML11&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML11&quot;));" target="configHTML11" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML9">
+<div class="widget-content">
+<script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/getads.js"></script>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+aax_getad_mpb({
+  "slot_uuid":"04fe6626-7404-4356-b895-1fd4d298071a"
+});
+//]]>
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML9&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML9&quot;));" target="configHTML9" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget BlogArchive" id="BlogArchive1">
+<h4>
+Blog Archive
+</h4>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2015-01-01T00:00:00-08:00&updated-max=2016-01-01T00:00:00-08:00&max-results=50">
+2015
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          81
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          5
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2014-01-01T00:00:00-08:00&updated-max=2015-01-01T00:00:00-08:00&max-results=50">
+2014
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          106
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          6
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2013-01-01T00:00:00-08:00&updated-max=2014-01-01T00:00:00-08:00&max-results=50">
+2013
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          136
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          5
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          7
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          3
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          3
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          13
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+                          ▼&nbsp;
+                        </span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2012-01-01T00:00:00-08:00&updated-max=2013-01-01T00:00:00-08:00&max-results=50">
+2012
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          217
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          52
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          28
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+                          ▼&nbsp;
+                        </span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+<ul class="posts">
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/java-mistake-1-using-float-and-double.html">
+Java Mistake 1 - Using float and double for moneta...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/how-to-convert-char-to-string-in-java.html">
+How to convert Char to String in Java with Example...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/how-to-check-or-detect-duplicate.html">
+How to check or detect duplicate elements in Array...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/how-to-solve-javautilnosuchelementexcep.html">
+How to solve java.util.NoSuchElementException in J...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/how-to-set-javahome-environment-in.html">
+How to set JAVA_HOME environment in Linux, Unix an...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/what-is-race-condition-in.html">
+What is Race Condition in multithreading – 2 Examp...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/jstl-tag-examples-in-jsp-java-j2ee.html">
+JSTL Set tag examples or &lt;c:set&gt; in JSP – Java J2E...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/difference-between-throw-and-throws-in.html">
+Difference between throw and throws in Exception h...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/difference-between-linkedlist-vs.html">
+Difference between LinkedList vs ArrayList in Java...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/how-to-encode-decode-string-in-java.html">
+How to encode decode String in Java base64 Encodin...
+</a>
+</li>
+<li>
+<a href="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/Producer Consumer Design Pattern with Blocking Queue Example in Java.html">
+Producer Consumer Design Pattern with Blocking Que...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/why-non-static-variable-cannot-be.html">
+Why non-static variable cannot be referenced from ...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/fail-safe-vs-fail-fast-iterator-in-java.html">
+fail-safe vs fail-fast Iterator in Java
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/orgapachecommonslogginglogfactory-error.html">
+How to fix java.lang.ClassNotFoundException: org.a...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/what-is-blocking-methods-in-java-and.html">
+What is blocking methods in Java and how do deal w...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/why-wait-notify-and-notifyall-is.html">
+Why wait, notify and notifyAll is defined in Objec...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/3-example-to-compare-two-dates-in-java.html">
+3 Example to Compare two Dates in Java
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2012/02/difference-between-instance-class-and.html">
+Difference between instance class and local variab...
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          35
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2011-01-01T00:00:00-08:00&updated-max=2012-01-01T00:00:00-08:00&max-results=50">
+2011
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          145
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          28
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          22
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          7
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          6
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2010-01-01T00:00:00-08:00&updated-max=2011-01-01T00:00:00-08:00&max-results=33">
+2010
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          33
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2010_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2010_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          29
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;BlogArchive1&quot;));" target="configBlogArchive1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML13">
+<div class="widget-content">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=273082&u=javarevisited&width=300&height=250"></script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML13&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML13&quot;));" target="configHTML13" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript">
+    google_ad_client = "ca-pub-5808379456926196";
+    google_ad_host = "ca-host-pub-1556223355139109";
+    google_ad_host_channel = "L0001";
+    google_ad_slot = "8160425940";
+    google_ad_width = 180;
+    google_ad_height = 90;
+</script>
+<!-- javarevisited_sidebar_AdSense1_180x90_0ads_al_s -->
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=AdSense&widgetId=AdSense1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;AdSense1&quot;));" target="configAdSense1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+</div>
+</div>
+<div id="sidebarbottom-wrap1">
+<div id="sidebarbottom-wrap2">
+<div class="sidebar section" id="sidebar"><div class="widget HTML" id="HTML14">
+<div class="widget-content">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=273082&u=javarevisited&width=300&height=250"></script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML14&action=editWidget&sectionId=sidebar" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML14&quot;));" target="configHTML14" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML4">
+<h4 class="title">
+References
+</h4>
+<div class="widget-content">
+<ul><br><li><a href="http://docs.oracle.com/javase/6/docs/api/" rel="nofollow">Java API documentation JDK 6</a></li><br><li><a href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/" rel="nofollow">Spring framework doc</a></li><br><li><a href="http://struts.apache.org/" rel="nofollow">Struts</a></li><br><li><a href="http://jdk7.java.net/" rel="nofollow">JDK 7 API</a></li><br><li><a href="http://dev.mysql.com/doc/refman/5.5/en/" rel="nofollow">MySQL</a></li><br><li><a href="http://www.linux.org/" rel="nofollow">Linux</a></li><br><li><a href="http://www.eclipse.org/" rel="nofollow">Eclipse</a></li><br><li><a href="http://jquery.com/" rel="nofollow">jQuery</a></li><br></ul>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML4&action=editWidget&sectionId=sidebar" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML4&quot;));" target="configHTML4" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Copyright by Javin Paul 2010-2015. Powered by <a href="https://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=Attribution&widgetId=Attribution1&action=editWidget&sectionId=sidebar" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Attribution1&quot;));" target="configAttribution1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footer-wrap1">
+<div id="footer-wrap2">
+<div class="footer section" id="footer"><div class="widget HTML" id="HTML3">
+<script language="JavaScript">var OB_platformType = 1; var OB_langJS = 'http://widgets.outbrain.com/lang_en.js'; var OBITm = '1287894986691';var OB_raterMode = 'singleThumb';var OB_recMode = 'rec';</script><script language="JavaScript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/OutbrainRater.js"></script><div id="outbrain_manager_helper_div" style="display:none;"></div><iframe id="odbPingIframeId" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/comScore.html" frameborder="0" name="odbFrame" style="width:0px;height:0px;display:none;"></iframe><span id="outbrainCurrentPosition"></span> 
+<input type="hidden" name="OBKey" value="+OCjH50Z4DIVqrUFp64IDQ=="> <script language="JavaScript">var OBCTm='1287894986691'; </script><script language="JavaScript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/claim.js"></script>
+</div><div class="widget PageList" id="PageList1">
+<div class="widget-content">
+<ul>
+<li>
+<a href="http://javarevisited.blogspot.com/p/about-me.html">
+About Me
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/p/privacy-policy.html">
+Privacy Policy
+</a>
+</li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=PageList&widgetId=PageList1&action=editWidget&sectionId=footer" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;PageList1&quot;));" target="configPageList1" title="Edit">
+<img alt="" height="18" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+<!-- infolinks -->
+<script type="text/javascript">
+      var infolink_pid = 258201;
+      var infolink_wsid = 0;
+    </script>
+<script src="http://resources.infolinks.com/js/infolinks_main.js" type="text/javascript"></script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/1514304437-widgets.js"></script>
+<script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/jsapi"></script>
+<script type="text/javascript" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '8712770457197348465';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d8712770457197348465','//javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html','8712770457197348465');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '8712770457197348465', 'bloggerUrl': 'https://www.blogger.com', 'title': 'Javarevisited', 'pageType': 'item', 'postId': '8379818278416374862', 'url': 'http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html', 'canonicalUrl': 'http://javarevisited.blogspot.com/2012/02/producer-consumer-design-pattern-with.html', 'canonicalHomepageUrl': 'http://javarevisited.blogspot.com/', 'homepageUrl': 'http://javarevisited.blogspot.com/', 'blogspotFaviconUrl': 'http://javarevisited.blogspot.com/favicon.ico', 'enabledCommentProfileImages': false, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-19004659-1', 'searchLabel': '', 'searchQuery': '', 'pageName': 'Producer Consumer Design Pattern with Blocking Queue Example in Java', 'pageTitle': 'Javarevisited: Producer Consumer Design Pattern with Blocking Queue Example in Java', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://javarevisited.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Javarevisited - RSS\42 href\75\42http://javarevisited.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42https://www.blogger.com/feeds/8712770457197348465/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://javarevisited.blogspot.com/feeds/8379818278416374862/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'googleProfileUrl': 'https://plus.google.com/114528699166048052030', 'postImageThumbnailUrl': 'http://2.bp.blogspot.com/-wrzDeQGAe1I/TWu8pLuLr4I/AAAAAAAAADE/V017G-6Q61w/s72-c/java_logo_50_50.jpg', 'postImageUrl': 'http://2.bp.blogspot.com/-wrzDeQGAe1I/TWu8pLuLr4I/AAAAAAAAADE/V017G-6Q61w/s1600/java_logo_50_50.jpg', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42tick\42,k\75\42jstiming\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[g](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[k].srt\75h-c)}if(a){var e\75b[k].load;0\74c\46\46h\76\75c\46\46(e[g](\42_wtsrt\42,void 0,c),e[g](\42wtsrt_\42,\42_wtsrt\42,h),e[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b[f].csi().startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b.external.startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[k].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[k].load[g](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[k].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'ca-pub-5808379456926196', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/cda3ddef07a85452', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'titleTextColor': '#ffffff', 'bottomSidebarVisitedLinkColor': '#ffffff', 'borderColor': '#bbbbbb', 'topSidebarVisitedLinkColor': '#ffffff', 'pageTitleFont': 'normal bold 200% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'startSide': 'left', 'topSidebarLinkColor': '#ffffff', 'descriptionFont': 'normal normal 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'topSidebarBgColor': '#558866', 'mainLinkColor': '#0066CC', 'topSidebarTextColor': '#ffffff', 'endSide': 'right', 'headerFont': 'normal bold 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'bodyFont': 'normal normal 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'bottomSidebarLinkColor': '#99ddbb', 'mainHoverLinkColor': '#000066', 'mainBgColor': '#ffffff', 'topSidebarHeaderColor': '#ffffff', 'dateHeaderColor': '#558866', 'titleBgColor': '#335577', 'bottomSidebarHeaderColor': '#aabbcc', 'postTitleColor': '#333333', 'postTitleFont': 'normal bold 135% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'mainTextColor': '#333333', 'mainVisitedLinkColor': '#660099'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_CustomSearchView', new _WidgetInfo('CustomSearch1', 'crosscol', null, document.getElementById('CustomSearch1'), {'title': '', 'includeBlog': true, 'includePostLinks': false, 'includeWeb': false, 'linkLists': [], 'blogUrl': 'http://javarevisited.blogspot.com/', 'loadingMsg': 'Loading...', 'thisBlogMsg': 'This Blog', 'linkedFromHereMsg': 'Linked From Here', 'theWebMsg': 'The Web', 'backgroundColor': '#ffffff', 'textColor': '#333333', 'dateColor': '#558866', 'linkColor': '#0066CC', 'urlColor': '#333333', 'visitedLinkColor': '#660099', 'borderColor': '#bbbbbb', 'activeBorderColor': '#333333', 'cse_ua': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebartop', null, document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML5', 'sidebartop', null, document.getElementById('HTML5'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML6', 'sidebartop', null, document.getElementById('HTML6'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML7', 'sidebartop', null, document.getElementById('HTML7'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebartop', null, document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebartop', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML11', 'sidebartop', null, document.getElementById('HTML11'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML9', 'sidebartop', null, document.getElementById('HTML9'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebartop', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading...'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML13', 'sidebartop', null, document.getElementById('HTML13'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebartop', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML14', 'sidebar', null, document.getElementById('HTML14'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'sidebar', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'sidebar', null, document.getElementById('Attribution1'), {'attribution': 'Copyright by Javin Paul 2010-2015. Powered by \74a href\75\47https://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'footer', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'footer', null, document.getElementById('PageList1'), {'title': '', 'links': [{'href': 'http://javarevisited.blogspot.com/p/about-me.html', 'title': 'About Me', 'isCurrentPage': false, 'id': '6312557353959475498'}, {'href': 'http://javarevisited.blogspot.com/p/privacy-policy.html', 'title': 'Privacy Policy', 'isCurrentPage': false, 'id': '7683233013767637665'}], 'mobile': false}, 'displayModeFull'));
+</script>
+
+<iframe name="oauth2relay625387492" id="oauth2relay625387492" src="./Producer Consumer Design Pattern with Blocking Queue Example in Java_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div></body></html>

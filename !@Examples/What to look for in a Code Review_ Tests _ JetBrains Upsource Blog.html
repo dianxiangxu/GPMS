@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)http://blog.jetbrains.com/upsource/2015/08/03/what-to-look-for-in-a-code-review-tests/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>What to look for in a Code Review: Tests | JetBrains Upsource Blog</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/style.css">
+<link rel="pingback" href="http://blog.jetbrains.com/upsource/xmlrpc.php">
+
+<!-- Google Tag Manager for WordPress by DuracellTomi - http://duracelltomi.com -->
+<script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/munchkin.js"></script><script async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/fbds.js"></script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/watch.js"></script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/ec.js"></script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/linkid.js"></script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/analytics.js"></script><script src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/cb=gapi.loaded_1" async=""></script><script src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/cb=gapi.loaded_0" async=""></script><script async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/gtm.js"></script><script id="twitter-wjs" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/widgets.js"></script><script id="facebook-jssdk" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/all.js"></script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/buttons.js"></script><script type="text/javascript">
+	var gtm4wp_datalayer_name = "dataLayer";
+	if ( "undefined" == typeof dataLayer ) {
+		dataLayer = new Array();
+	}
+</script><style type="text/css"></style>
+<!-- End Google Tag Manager for WordPress by DuracellTomi --><link rel="alternate" type="application/rss+xml" title="JetBrains Upsource Blog » Feed" href="http://blog.jetbrains.com/upsource/feed/">
+<link rel="alternate" type="application/rss+xml" title="JetBrains Upsource Blog » Comments Feed" href="http://blog.jetbrains.com/upsource/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="JetBrains Upsource Blog » What to look for in a Code Review: Tests Comments Feed" href="http://blog.jetbrains.com/upsource/2015/08/03/what-to-look-for-in-a-code-review-tests/feed/">
+<link rel="stylesheet" id="crayon-css" href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpsr-socialbuttons-css" href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/wp-socializer-buttons-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="sccss_style-css" href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/upsource" type="text/css" media="all">
+<script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/jquery.js"></script>
+<script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/jquery-migrate.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.6.9","is_admin":"0","ajaxurl":"http:\/\/blog.jetbrains.com\/upsource\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/crayon.min.js"></script>
+<script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/gtm4wp-form-move-tracker.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.jetbrains.com/upsource/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.jetbrains.com/upsource/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="What to look for in a Code Review" href="http://blog.jetbrains.com/upsource/2015/07/23/what-to-look-for-in-a-code-review/">
+<link rel="next" title="What to look for in a Code Review: Performance" href="http://blog.jetbrains.com/upsource/2015/08/06/what-to-look-for-in-a-code-review-performance/">
+<meta name="generator" content="WordPress 3.8.10">
+<link rel="canonical" href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/What to look for in a Code Review_ Tests _ JetBrains Upsource Blog.html">
+<link rel="shortlink" href="http://blog.jetbrains.com/upsource/?p=322">
+<!-- WP Socializer - ShareThis Config -->
+<script type="text/javascript">
+var switchTo5x=false;
+var sharethisLoad = function(){
+	stLight.options({publisher: 'wp.84d79d98-2dc4-43f9-990a-94f76d0d2dbb', doNotHash: true, doNotCopy: true, hashAddressBar: false});
+};
+if(window.addEventListener) window.addEventListener("load", sharethisLoad, false); 
+else if (window.attachEvent) window.attachEvent("onload", sharethisLoad);
+</script>
+<!-- WP Socializer - End ShareThis Config -->
+<!--WP Socializer v2.4.9.8 - Scripts Loader-->
+<script type="text/javascript">
+var wu=["http://w.sharethis.com/button/buttons.js","https://apis.google.com/js/plusone.js"],wc=2;
+function wpsrload(){ for(var i=0;i<wc;i++){wpsrasync(wu[i]);} }
+function wpsrasync(u){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=u;var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(a,s);} wpsrload();
+</script>
+<!--End WP Socializer - Scripts Loader-->
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f1f1f1; }
+</style>
+
+<!-- Google Tag Manager for WordPress by DuracellTomi -->
+<script type="text/javascript">
+	dataLayer.push({"pagePostType":"post","pagePostType2":"single-post","pageCategory":["practices"],"pagePostAuthor":"Trisha Gee"});
+</script><script type="text/javascript" async="" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/munchkin(1).js"></script><script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/getAllAppDefault.esi"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script async="true" type="text/javascript" src="http://a.adroll.com/j/roundtrip.js"></script><script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/checkOAuth.esi"></script><link rel="stylesheet" type="text/css" href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/buttons.4d4008011051a133a045fe92d3143ad4.css"></head>
+
+<body class="single single-post postid-322 single-format-standard custom-background"><iframe id="twttrHubFrameSecure" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" name="twttrHubFrameSecure" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/hub.e959fce2f580398966631b5e34fc915c(1).html" style="position: absolute; top: -9999em; width: 10px; height: 10px;"></iframe><iframe id="twttrHubFrame" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" name="twttrHubFrame" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/hub.e959fce2f580398966631b5e34fc915c.html" style="position: absolute; top: -9999em; width: 10px; height: 10px;"></iframe>
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="http://blog.jetbrains.com/upsource/" title="JetBrains Upsource Blog" rel="home">JetBrains Upsource Blog</a>
+					</span>
+				</div>
+				<div id="site-description">JetBrains Upsource is a repository browser and code review tool</div>
+
+										<img src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/upsource_blog_header2.jpg" width="940" height="198" alt="">
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="http://blog.jetbrains.com/upsource/2015/08/03/what-to-look-for-in-a-code-review-tests/#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-upsource-menu" class="menu"><li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16"><a href="http://www.jetbrains.com/upsource/">Upsource Website</a></li>
+<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18"><a href="http://www.twitter.com/upsource_jb">Twitter</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19"><a href="http://youtrack.jetbrains.com/issues/up">Issue Tracker</a></li>
+<li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20"><a href="https://www.jetbrains.com/upsource/download/">Downloads</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="http://blog.jetbrains.com/upsource/2015/07/23/what-to-look-for-in-a-code-review/" rel="prev"><span class="meta-nav">←</span> What to look for in a Code Review</a></div>
+					<div class="nav-next"><a href="http://blog.jetbrains.com/upsource/2015/08/06/what-to-look-for-in-a-code-review-performance/" rel="next">What to look for in a Code Review: Performance <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-322" class="post-322 post type-post status-publish format-standard hentry category-practices">
+					<h1 class="entry-title">What to look for in a Code Review: Tests</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/What to look for in a Code Review_ Tests _ JetBrains Upsource Blog.html" title="1:21 pm" rel="bookmark"><span class="entry-date">August 3, 2015</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://blog.jetbrains.com/upsource/author/Trisha%20Gee/" title="View all posts by Trisha Gee">Trisha Gee</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/BhKMRj1sUPu.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/BhKMRj1sUPu(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<p style="margin-top:-20px;">
+</p><div style=" float:left; margin-top:4px; ">
+<!-- Start WP Socializer Plugin - +1 Button -->
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1439331092186" name="I0_1439331092186" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div>
+<!-- End WP Socializer Plugin - +1 Button -->
+</div>
+<div style="float:left; margin-left:-15px; margin-top:4px;"><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/tweet_button.bd0320cab493e168513c7173184c1d5c.en.html" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="position: static; visibility: visible; width: 81px; height: 20px;"></iframe></div> 
+<div style="float:left;  margin-top:0px; margin-left:-15px; " class="fb-like fb_iframe_widget" data-send="false" data-layout="button_count" data-show-faces="false" data-width="450" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=http%3A%2F%2Fblog.jetbrains.com%2Fupsource%2F2015%2F08%2F03%2Fwhat-to-look-for-in-a-code-review-tests%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=450"><span style="vertical-align: bottom; width: 76px; height: 20px;"><iframe name="f17c1bbd4c" width="450px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/like.html" style="border: none; visibility: visible; width: 76px; height: 20px;" class=""></iframe></span></div>
+
+<div style="padding-top:0; margin-top:0; padding-left:9px; border: solid 1px #ffffff;">
+<!-- Start WP Socializer Plugin - Sharethis Button -->
+<p><span class="st_sharethis" st_title="What to look for in a Code Review: Tests" st_via="" st_url="http://blog.jetbrains.com/upsource/2015/08/03/what-to-look-for-in-a-code-review-tests/" displaytext="ShareThis" st_processed="yes"><span style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;" class="stButton"><span class="chicklets sharethis">ShareThis</span></span></span></p>
+<!-- End WP Socializer Plugin - Sharethis Button -->
+</div>
+
+<p></p>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><p>In the <a href="http://blog.jetbrains.com/upsource/2015/07/23/what-to-look-for-in-a-code-review/">last post</a> we talked about a wide variety of things you could look for&nbsp;in a code review. Now we’ll focus on one area: what to look for in the&nbsp;test code.</p>
+<p>This article assumes:</p>
+<ul>
+<li>Your team already writes automated tests for code.</li>
+<li>The tests are regularly run in a Continuous Integration (CI) environment.</li>
+<li>The code under review has been through an automated compile/test process and passed.</li>
+</ul>
+<p>In this post we’ll cover some of the things a reviewer could be thinking&nbsp;about when looking at the tests in a code review.</p>
+<h3 id="does-this-break-any-existing-tests:e49bb25edf62b34017ea72c340f0c27c">Are there tests for this new/amended code?</h3>
+<p>It would be rare that new code, whether a bug fix or new feature, wouldn’t&nbsp;need a new or updated test to cover it. Even changes for “non-functional”&nbsp;reasons like performance can frequently be proved via a test. If there are no&nbsp;tests included in the code review, as a reviewer the first question you&nbsp;should ask is “why not?”.</p>
+<h3 id="do-the-tests-at-least-cover-confusing-or-complicated-sections-of-code:e49bb25edf62b34017ea72c340f0c27c">Do the tests at least cover confusing or complicated sections of code?</h3>
+<p>One step beyond simply “is there a test?”, is to answer the question “is the&nbsp;important code actually covered by at least one test?“.</p>
+<p>Checking test coverage is certainly something we should be automating. But we&nbsp;can do more than just check for specific percentages in our coverage, we can&nbsp;use coverage tools to ensure the <em>correct</em> areas of code are covered.</p>
+<p>Consider this for example:<br>
+<a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/code-review-changes.png"><img class=" wp-image-347   aligncenter" title="New lines of code added" alt="New lines of code added" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/code-review-changes.png" width="560" height="240"></a></p>
+<p>You can check the coverage report for the new lines of code (which should be easy to identify, especially if you’re&nbsp;using a tool like <a href="https://www.jetbrains.com/upsource">Upsource</a>) to make sure it’s adequately covered.</p>
+<p><a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/code-review-coverage.png"><img class=" wp-image-349 " title="Code coverage" alt="Code coverage" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/code-review-coverage.png" width="560" height="144"></a></p>
+<p>In this example above, the reviewer may ask the author to&nbsp;add a test to cover the case where the <code>if</code> on line 303 evaluates to true, as the coverage tool has marked lines&nbsp;304-306 with red to show they aren’t tested.</p>
+<p>100% test coverage is an unrealistic goal for pretty much any team, so the&nbsp;numbers coming out of your coverage tool might not be as valuable as insights&nbsp;into which specific areas are covered.</p>
+<p>In particular, you want to check that all logic branches are covered, and&nbsp;that complex areas of code are covered.</p>
+<p><a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/code-review-logic-coverage.png"><img class=" wp-image-353 " title="Coverage of branches" alt="Coverage of branches" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/code-review-logic-coverage.png" width="560" height="194"></a></p>
+<h3 id="can-i-understand-the-tests:e49bb25edf62b34017ea72c340f0c27c">Can I understand the tests?</h3>
+<p>Having tests that provide adequate coverage is one thing, but if I, as a human, can’t understand the tests, they have&nbsp;limited use – what happens when they break? It’ll be hard to know how to fix them.</p>
+<p>Consider the following:</p>
+<p><a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/hard-to-read-test.png"><img class=" wp-image-350 " title="Hard to read test" alt="Hard to read test" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/hard-to-read-test.png" width="560" height="142"></a></p>
+<p>It’s a fairly simple test, but I’m not entirely sure what it’s testing. Is it&nbsp;testing the <code>save</code> method? Or <code>getMyLongId</code>? And why does it need to do the&nbsp;same thing twice?</p>
+<p>The intent behind the test might be clearer as:</p>
+<p><a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/clearer-test.png"><img class=" wp-image-351 " title="Clearer test" alt="Clearer test" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/clearer-test.png" width="560" height="202"></a></p>
+<p>The specific steps you take in order to clarify a test’s purpose&nbsp;will depend upon your language, libraries, team and personal preferences. This example demonstrates that by choosing clearer names, inlining constants and even adding&nbsp;comments, an author can make a test more readable by developers other than&nbsp;him- or herself.</p>
+<h3 id="do-the-tests-match-the-requirements:e49bb25edf62b34017ea72c340f0c27c">Do the tests match the requirements?</h3>
+<p>Here’s an area that really requires human expertise. Whether the requirements&nbsp;being met by the code under review are encoded in some formal document,&nbsp;on a piece of card in a user story, or contained in a bug raised by a user,&nbsp;the code being reviewed should relate to some initial requirement.</p>
+<p>The reviewer should locate the original requirements and see if:</p>
+<ol>
+<li>The tests, whether they’re unit, end-to-end, or something else, match the&nbsp;requirements. For example, if the requirements are “should allow the special&nbsp;characters ‘#’, ‘!’ and ‘&amp;’ in the password field”, there should be a test&nbsp;using these values in the password field. If the test uses different special characters&nbsp;then it’s not proving the code meets the criteria.</li>
+<li>The tests cover all the criteria mentioned. In our example of&nbsp;special characters, the requirements might go on to say “…and give the&nbsp;user an error message if other special characters are used”. Here, the&nbsp;reviewer should be checking there’s a test for what happens when an invalid&nbsp;character is used.</li>
+</ol>
+<h3 id="can-you-the-reviewer-think-of-cases-that-are-not-covered-by-the-existing-tests:e49bb25edf62b34017ea72c340f0c27c">Can I think of cases that are not covered by the existing tests?</h3>
+<p>Often our requirements aren’t clearly specified. Under these circumstances, the reviewer should think of edge&nbsp;cases that weren’t covered in the original bug/issue/story.</p>
+<p>If our new features is, for example, “Give the user the ability to log on to the system”, the reviewer could&nbsp;be thinking “What happens if the user enters null for the username?”,&nbsp;or “What sort of error occurs if the user doesn’t exist in the system?”. If&nbsp;these tests exist in the code being reviewed, then the reviewer has&nbsp;increased confidence that the code itself handles these circumstances. If the&nbsp;tests for these exceptional cases don’t exist, then the reviewer has to go&nbsp;through the code to see if they have been handled.</p>
+<p>If the code exists but the tests don’t, it’s up to your team to decide what&nbsp;your policies are – do you make the author add those tests? Or are you satisfied that the code review proved the&nbsp;edge cases were covered?</p>
+<h3 id="are-there-tests-to-document-the-limitations-of-the-code:e49bb25edf62b34017ea72c340f0c27c">Are there tests to document the limitations of the code?</h3>
+<p>As a reviewer, it’s often possible to see limitations in the code being&nbsp;reviewed. These limitations are sometimes intentional – for example, a batch&nbsp;process that can only handle a maximum of 1000 items per batch.</p>
+<p>One approach to documenting these intentional limitations would be to&nbsp;explicitly test them. In our example above, we might have a test that&nbsp;proves that some sort of exception is thrown if your batch size is bigger&nbsp;than 1000.</p>
+<p>It’s not mandatory to express these limitations in an automated test, but if&nbsp;an author has written a test that shows the limits of what they’ve&nbsp;implemented, having a test implies these limits are intentional (and documented)&nbsp;and not merely an oversight.</p>
+<h3 id="are-the-tests-in-the-code-review-the-right-type-level:e49bb25edf62b34017ea72c340f0c27c">Are the tests in the code review the right type/level?</h3>
+<p>For example, is the author doing expensive integration tests where a unit&nbsp;test might suffice? Have they written performance micro-benchmarks that will&nbsp;not run effectively or in a consistent fashion in the CI environment?</p>
+<p>Ideally your automated tests will run as quickly as possible, which means&nbsp;that expensive end-to-end tests may not be required to check all types of&nbsp;features. A method that performs some mathematical function, or boolean&nbsp;logic check, seems like a good candidate for a method-level unit test.</p>
+<h3 id="are-there-security-tests-that-need-to-be-written:e49bb25edf62b34017ea72c340f0c27c">Are there tests for security aspects?</h3>
+<p>Security is one area that code reviews can really benefit. We’ll do a whole&nbsp;post on security later, but on the testing topic, we can write tests for&nbsp;a number of common problems. For example, if we were writing the log-in code&nbsp;above, we might want to also write a test that shows that we cannot enter&nbsp;the protected area of the site (or call protected API methods) without first&nbsp;authenticating.</p>
+<h3 id="performance-tests:e49bb25edf62b34017ea72c340f0c27c">Performance Tests</h3>
+<p>In the <a href="http://blog.jetbrains.com/upsource/2015/07/23/what-to-look-for-in-a-code-review/">previous post</a> I talked about performance as being an area a reviewer&nbsp;might be examining. Automated performance tests are obviously another type of&nbsp;test that I could have explored in this article, but I will leave discussion&nbsp;of these types of tests for a later article about looking specifically at performance&nbsp;aspects in a code review.</p>
+<h3 id="reviewers-can-write-tests-too:e49bb25edf62b34017ea72c340f0c27c">Reviewers can write tests too.</h3>
+<p>Different organisations have different approaches to code reviews – sometimes&nbsp;it’s very clear that the author is responsible for making all the code&nbsp;changes required, sometimes it’s more collaborative with the reviewer&nbsp;committing suggestions to the code themselves.</p>
+<p>Whichever approach you take, as a reviewer you may find that writing some&nbsp;additional tests to poke at the code in the review can be very valuable for&nbsp;understanding that code, in the same way that firing up the UI and playing&nbsp;with a new feature is valuable. Some methods and code review tools make it easier to experiment with the code than&nbsp;others. It’s in the team’s interest to make it as easy as possible to view and play with the code&nbsp;in a code review.</p>
+<p>It may be valuable to submit the additional tests as part of the review, but&nbsp;equally it may not be necessary, for example if experimentation has given me,&nbsp;the reviewer, satisfactory answers to my questions.</p>
+<h3 id="in-summary:e49bb25edf62b34017ea72c340f0c27c">In Summary</h3>
+<p>There are many advantages to performing a code review, no matter how you approach the process in your organisation.&nbsp;It’s possible to use code reviews to find potential problems with the code <em>before</em> it is integrated into the main&nbsp;code base, while it’s still inexpensive to fix and the context is still in the developer’s head.</p>
+<p>As a code reviewer, you should be checking&nbsp;that the original developer has put some thought into the ways his or her&nbsp;code could be used, under which conditions it might break, and dealt with&nbsp;edge cases, possibly “documenting” the expected behaviour (both under&nbsp;normal use and exceptional circumstances) with automated tests.</p>
+<p>If the reviewer looks for the existence of tests and checks the correctness of&nbsp;the tests, as a team you can have pretty high confidence that the code works.&nbsp;Moreover, if these tests are run regularly in a CI environment, you can see&nbsp;that the code <em>continues</em> to work – they provide automated regression&nbsp;checking. If code reviewers place a high value on having good quality&nbsp;tests for the code they are reviewing, the value of this code review&nbsp;continues long after the reviewer presses the “Accept” button.</p>
+<p style="text-align: center"><a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/accept-reject.png"><img class="size-full wp-image-352 aligncenter" title="Accept and Reject buttons" alt="Accept and Reject buttons" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/accept-reject.png" width="170" height="24"></a></p>
+											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="http://blog.jetbrains.com/upsource/category/practices/" title="View all posts in Code review practices" rel="category tag">Code review practices</a>. Bookmark the <a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/What to look for in a Code Review_ Tests _ JetBrains Upsource Blog.html" title="Permalink to What to look for in a Code Review: Tests" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="http://blog.jetbrains.com/upsource/2015/07/23/what-to-look-for-in-a-code-review/" rel="prev"><span class="meta-nav">←</span> What to look for in a Code Review</a></div>
+					<div class="nav-next"><a href="http://blog.jetbrains.com/upsource/2015/08/06/what-to-look-for-in-a-code-review-performance/" rel="next">What to look for in a Code Review: Performance <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+
+								<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://blog.jetbrains.com/upsource/2015/08/03/what-to-look-for-in-a-code-review-tests/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://blog.jetbrains.com/upsource/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required="true"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-required="true"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30"></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code class="" title="" data-url=""&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre class="" title="" data-url=""&gt; &lt;span class="" title="" data-url=""&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment">
+							<input type="hidden" name="comment_post_ID" value="322" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="5c4a741baa"></p><p style="display: none;"></p>					<input type="hidden" id="ak_js" name="ak_js" value="1439331092101"></form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-2" class="widget-container widget_search"><h3 class="widget-title">Search this blog</h3><form role="search" method="get" id="searchform" class="searchform" action="http://blog.jetbrains.com/upsource/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s">
+					<input type="submit" id="searchsubmit" value="Search">
+				</div>
+			</form></li>		<li id="recent-posts-2" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://blog.jetbrains.com/upsource/2015/08/06/what-to-look-for-in-a-code-review-performance/">What to look for in a Code Review: Performance</a>
+						</li>
+					<li>
+				<a href="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/What to look for in a Code Review_ Tests _ JetBrains Upsource Blog.html">What to look for in a Code Review: Tests</a>
+						</li>
+					<li>
+				<a href="http://blog.jetbrains.com/upsource/2015/07/23/what-to-look-for-in-a-code-review/">What to look for in a Code Review</a>
+						</li>
+					<li>
+				<a href="http://blog.jetbrains.com/upsource/2015/07/22/case-study-upsource-in-zando-co-za/">Case study: Upsource in Zando.co.za</a>
+						</li>
+					<li>
+				<a href="http://blog.jetbrains.com/upsource/2015/06/29/upsource-2-0-2-bug-fix-update/">Upsource 2.0.2 bug-fix update</a>
+						</li>
+				</ul>
+		</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-8"><a href="http://blog.jetbrains.com/upsource/category/announcements/" title="View all posts filed under Announcements">Announcements</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://blog.jetbrains.com/upsource/category/case-study/" title="View all posts filed under Case study">Case study</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://blog.jetbrains.com/upsource/category/practices/" title="View all posts filed under Code review practices">Code review practices</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://blog.jetbrains.com/upsource/category/eap/" title="View all posts filed under EAP">EAP</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://blog.jetbrains.com/upsource/category/feature/" title="View all posts filed under Feature">Feature</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://blog.jetbrains.com/upsource/category/release/" title="View all posts filed under Release">Release</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://blog.jetbrains.com/upsource/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://blog.jetbrains.com/upsource/category/update/" title="View all posts filed under Update">Update</a>
+</li>
+		</ul>
+</li><li id="text-2" class="widget-container widget_text"><h3 class="widget-title">JetBrains Blogs</h3>			<div class="textwidget"><ul>
+  <li><a target="_blank" href="http://blog.jetbrains.com/">JetBrains Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/idea">IntelliJ IDEA Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/teamcity/">TeamCity Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/youtrack/">YouTrack Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/dotnet/">.NET Tools Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/webstorm/">WebStorm Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/phpstorm/">PhpStorm Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/pycharm/">PyCharm Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/ruby">RubyMine Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/objc/">AppCode Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/clion/">CLion Blog</a></li>
+  <li><a target="_blank" href="http://blog.jetbrains.com/mps/">MPS Blog</a></li>
+</ul></div>
+		</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="http://blog.jetbrains.com/upsource/wp-login.php">Log in</a></li>
+			<li><a href="http://blog.jetbrains.com/upsource/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://blog.jetbrains.com/upsource/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>						</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="http://blog.jetbrains.com/upsource/" title="JetBrains Upsource Blog" rel="home">
+					JetBrains Upsource Blog				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+
+<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-5P98"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5P98');</script>
+<!-- End Google Tag Manager --><script type="text/javascript" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/form.js"></script>
+
+
+
+<!-- Dynamic page generated in 0.719 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2015-08-07 17:33:25 -->
+<iframe name="oauth2relay1139417536" id="oauth2relay1139417536" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div><div style="display: none; visibility: hidden;"><script type="text/javascript">dataLayer.push({ecommerce:{detail:{products:[{id:"Upsource",name:"Upsource",price:"",brand:"JetBrains",category:"US",position:0}]}}});</script></div><div style="display: none; visibility: hidden;"><script src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid("l5wl4",{tw_sale_amount:0,tw_order_quantity:0});</script>
+<noscript></noscript></div><div style="display: none; visibility: hidden;"><script type="text/javascript">(function(){function b(){!1===c&&(c=!0,Munchkin.init("426-QVD-114"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script></div><div style="display: none; visibility: hidden;">
+<script type="text/javascript">(function(b,c,a){(c[a]=c[a]||[]).push(function(){try{c.yaCounter16823155=new Ya.Metrika({id:16823155,webvisor:!0,clickmap:!0,trackLinks:!0,accurateTrackBounce:!0})}catch(a){}});var e=b.getElementsByTagName("script")[0],d=b.createElement("script");a=function(){e.parentNode.insertBefore(d,e)};d.type="text/javascript";d.async=!0;d.src=("https:"==b.location.protocol?"https:":"http:")+"//mc.yandex.ru/metrika/watch.js";"[object Opera]"==c.opera?b.addEventListener("DOMContentLoaded",a,!1):a()})(document,
+window,"yandex_metrika_callbacks");</script>
+<noscript></noscript>
+</div><div style="display: none; visibility: hidden;"><script>(function(){var a=window._fbq||(window._fbq=[]);if(!a.loaded){var b=document.createElement("script");b.async=!0;b.src="//connect.facebook.net/en_US/fbds.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);a.loaded=!0}a.push(["addPixelId","614099138684330"])})();window._fbq=window._fbq||[];window._fbq.push(["track","PixelInitialized",{}]);</script>
+<noscript></noscript></div><div style="display: none; visibility: hidden;"><script type="text/javascript">adroll_adv_id="SND226Z2TBCWRAYTZNSP5W";adroll_pix_id="FEPR2VURIRD3DE2RSE4OOU";(function(){var b=window.onload;window.onload=function(){__adroll_loaded=!0;var a=document.createElement("script"),c="https:"==document.location.protocol?"https://s.adroll.com":"http://a.adroll.com";a.setAttribute("async","true");a.type="text/javascript";a.src=c+"/j/roundtrip.js";((document.getElementsByTagName("head")||[null])[0]||document.getElementsByTagName("script")[0].parentNode).appendChild(a);b&&b()}})();</script></div><iframe id="stSegmentFrame" name="stSegmentFrame" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/getSegment.html" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe><div id="stwrapper" class="stwrapper stwrapper4x" style="display: none;"><iframe allowtransparency="true" id="stLframe" class="stLframe" name="stLframe" frameborder="0" scrolling="no" src="./What to look for in a Code Review_ Tests _ JetBrains Upsource Blog_files/index.e04a19abf1c276d639d3e98702185dab.html"></iframe></div><div id="stOverlay" onclick="javascript:stWidget.closeWidget();"></div></body></html>

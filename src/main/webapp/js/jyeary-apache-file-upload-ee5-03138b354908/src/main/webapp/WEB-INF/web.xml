@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>ApacheFileUploadEE5</display-name>
+    <servlet>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <servlet-class>com.bluelotussoftware.apache.commons.fileupload.example.FileUploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommonsFileUploadServlet</servlet-name>
+        <servlet-class>com.bluelotussoftware.apache.commons.fileupload.example.CommonsFileUploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OctetStreamReader</servlet-name>
+        <servlet-class>com.bluelotussoftware.apache.commons.fileupload.example.OctetStreamReader</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MultiContentServlet</servlet-name>
+        <servlet-class>com.bluelotussoftware.apache.commons.fileupload.example.MultiContentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <url-pattern>/FileUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommonsFileUploadServlet</servlet-name>
+        <url-pattern>/CommonsFileUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OctetStreamReader</servlet-name>
+        <url-pattern>/OctetStreamReader</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MultiContentServlet</servlet-name>
+        <url-pattern>/MultiContentServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

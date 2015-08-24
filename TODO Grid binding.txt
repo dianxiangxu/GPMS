@@ -1,0 +1,260 @@
+I have two tables : UserAccount and UserProfile 
+UserAccount {
+    "_id" : ObjectId("55a52253af6e041ec8e406ff"),
+    "username" : "userAccount0",
+    "password" : "userAccount0",
+    "is deleted" : true,
+    "added on" : ISODate("2015-07-14T14:53:07.017Z"),
+    "version" : NumberLong(1)
+}
+
+UserProfile {
+    "_id" : ObjectId("55a52253af6e041ec8e40700"),
+    "first name" : "firstName0",
+    "middle name" : "",
+    "last name" : "lastName0",
+    "details" : [ 
+        {
+            "position title" : "Professor",
+            "position type" : "Tenured/tenure-track faculty",
+            "department" : "Physics",
+            "college" : "Science"
+        }, 
+        {
+            "position title" : "Lecturer",
+            "position type" : "Teaching faculty",
+            "department" : "Physics",
+            "college" : "Science"
+        }
+    ],
+    "user id" : {
+        "$ref" : "useraccount",
+        "$id" : ObjectId("55a52253af6e041ec8e406ff")
+    },
+    "is deleted" : false,
+    "version" : NumberLong(1)
+}
+
+Proposal {
+    "_id" : ObjectId("55a5294faf6e0418b435c5ef"),
+    "proposal no" : "",
+    "date received" : ISODate("2015-07-14T15:22:55.348Z"),
+    "proposal status" : "NEW",
+    "investigator info" : {
+        "PI" : {
+            "user profile" : {
+                "$ref" : "userprofile",
+                "$id" : ObjectId("55a5294eaf6e0418b435c52f")
+            },
+            "college" : "Science",
+            "department" : "Physics",
+            "position type" : "Research staff",
+            "position title" : "Research Associate"
+        },
+        "CO-PI" : [ 
+            {
+                "user profile" : {
+                    "$ref" : "userprofile",
+                    "$id" : ObjectId("55a5294eaf6e0418b435c54f")
+                },
+                "college" : "Engineering",
+                "department" : "Electrical Engineering",
+                "position type" : "Professional staff",
+                "position title" : "University Research Administrator"
+            }, 
+            {
+                "user profile" : {
+                    "$ref" : "userprofile",
+                    "$id" : ObjectId("55a5294eaf6e0418b435c57b")
+                },
+                "college" : "Engineering",
+                "department" : "Computer Science",
+                "position type" : "Non-tenure-track research faculty",
+                "position title" : "Clinical Associate Professor"
+            }
+        ],
+        "senior personnel" : [ 
+            {
+                "user profile" : {
+                    "$ref" : "userprofile",
+                    "$id" : ObjectId("55a5294eaf6e0418b435c571")
+                },
+                "college" : "Engineering",
+                "department" : "Computer Science",
+                "position type" : "Administrator",
+                "position title" : "University Research Director"
+            }, 
+            {
+                "user profile" : {
+                    "$ref" : "userprofile",
+                    "$id" : ObjectId("55a5294faf6e0418b435c5e1")
+                },
+                "college" : "Science",
+                "department" : "Chemistry",
+                "position type" : "Research staff",
+                "position title" : "Research Associate"
+            }
+        ]
+    },
+    "project info" : {
+        "project title" : "",
+        "project type" : {
+            "research-basic" : false,
+            "research-applied" : false,
+            "research-development" : false,
+            "instruction" : false,
+            "other sponsored activity" : false
+        },
+        "type of request" : {
+            "pre-proposal" : false,
+            "new proposal" : false,
+            "continuation" : false,
+            "supplement" : false
+        },
+        "due date" : ISODate("2015-07-14T15:22:55.348Z"),
+        "project period" : {
+            "from" : ISODate("2015-07-14T15:22:55.348Z"),
+            "to" : ISODate("2015-07-14T15:22:55.348Z")
+        },
+        "location of project" : {
+            "off-campus" : false,
+            "on-campus" : false
+        }
+    },
+    "sponsor and budget info" : {
+        "direct costs" : 0.0000000000000000,
+        "F&A costs" : 0.0000000000000000,
+        "total costs" : 0.0000000000000000,
+        "F&A rate" : 0.0000000000000000
+    },
+    "cost share info" : {
+        "institutional committed" : false,
+        "third party committed" : false
+    },
+    "university commitments" : {
+        "new renovated facilities required" : false,
+        "rental space required" : false,
+        "institutional commitment required" : false
+    },
+    "conflict of interest and commitment info" : {
+        "financial COI" : false,
+        "conflict disclosed" : false,
+        "disclosure form change" : false
+    },
+    "compliance info" : {
+        "involve use of human subjects" : false,
+        "IRB" : "",
+        "IRB pending status" : false,
+        "involve use of vertebrate animals" : false,
+        "IACUC" : "",
+        "IACUC pending status" : false,
+        "involve biosafety concerns" : false,
+        "IBC" : "",
+        "IBC pending status" : false,
+        "involve environmental health and safety concerns" : false
+    },
+    "additional info" : {
+        "anticipates foreign nationals payment" : false,
+        "anticipates course release time" : false,
+        "related to center for advanced energy studies" : false
+    },
+    "collaboration info" : {
+        "involve non-funded collaborations" : false,
+        "involve collaborators" : ""
+    },
+    "proprietary/confidential info" : {
+        "contain confidential information" : false,
+        "patentable" : false,
+        "copyrightable" : false
+    },
+    "OSPSection info" : {
+        "list agency" : "",
+        "funding source" : {
+            "federal" : false,
+            "federal flow-through" : false,
+            "Sate of Idaho entity" : false,
+            "private for profit" : false,
+            "non-profit organization" : false,
+            "non-Idaho State entity" : false,
+            "college or university" : false,
+            "local entity" : false,
+            "non-Idaho local entity" : false,
+            "tirbal government" : false,
+            "foreign" : false
+        },
+        "CFDA no" : "",
+        "program no" : "",
+        "program title" : "",
+        "recovery" : {
+            "full recovery" : false,
+            "no recovery normal sponsor policy" : false,
+            "no recovery institutional waiver" : false,
+            "limited recovery normal sponsor policy" : false,
+            "limited recovery institutional waiver" : false
+        },
+        "base" : {
+            "MTDC" : false,
+            "TDC" : false,
+            "TC" : false,
+            "other" : false,
+            "not applicable" : false
+        },
+        "is PI salary included" : false,
+        "PI salary" : 0.0000000000000000,
+        "PI fringe" : 0.0000000000000000,
+        "department id" : "",
+        "institutional cost share documented" : {
+            "yes" : false,
+            "no" : false,
+            "not applicable" : false
+        },
+        "third party cost share documented" : {
+            "yes" : false,
+            "no" : false,
+            "not applicable" : false
+        },
+        "is anticipated subrecipients" : false,
+        "anticipated subrecipients names" : false,
+        "PI eligibility waiver on file" : {
+            "yes" : false,
+            "no" : false,
+            "not applicable" : false,
+            "this proposal only" : false,
+            "blanket" : false
+        },
+        "conflict of interest forms on file" : {
+            "yes" : false,
+            "no" : false,
+            "not applicable" : false
+        },
+        "excluded party list checked" : {
+            "yes" : false,
+            "no" : false,
+            "not applicable" : false
+        },
+        "proposal notes" : "",
+        "research administrator" : {
+            "DF" : false,
+            "LG" : false,
+            "LN" : false
+        }
+    },
+    "version" : NumberLong(1)
+}
+
+I want to bind a grid based on these both tables' fields information like: 
+1. Users Management Grid
+UserProfile.TotalRecord, UserProfile._id, UserAccount.userName, UserProfile.fullName, Proposal.investigator info.CountTotalNoOfOfProposalsAsPI, Proposal.investigator info.CountTotalNoOfOfProposalsAsCoPI, Proposal.investigator info.CountTotalNoOfOfProposalsAsSeniorPersonnel, UserAccount.addedOn, UserProfile.BasedOnAuditLogGetLatestChangedDate, UserAccount.isDeleted
+
+In this grid I have a Search panel like this: 
+
+
+2. Proposals Management Grid
+Proposal.TotalRecord, Proposal._id, Proposal.proposalNo, Proposal.dateReceived, Proposal.investigator info.ListOfPIUserProfileObject, Proposal.investigator info.ListOfCoPIUserProfileObject, Proposal.investigator info.ListOfSeniorPersonnelUserProfileObject, Proposal.project info.projectTitle, Proposal.project info.projectType, Proposal.project info.typeOfRequest, Proposal.project info.dueDate, Proposal.project info.project period.projectPeriodFrom, Proposal.project info.project period.projectPeriodTo, Proposal.project info.location of project.projectLocation, Proposal.grantingAgencies, Proposal.sponsor and budget info.directCosts, Proposal.sponsor and budget info.FACosts, Proposal.sponsor and budget info.totalCosts, Proposal.sponsor and budget info.FARate, Proposal.BasedOnAuditLogGetLatestChangedDate, Proposal.proposalStatus
+
+3. AuditLog Grid For both Tables
+TotalRecordOfAuditLogForThatUser/Proposal
+UserAccount.UserName
+UserProfile.userFullNameWhoAuditIt
+actionForThatUser/Proposal
+activityDateForThatUser/Proposal

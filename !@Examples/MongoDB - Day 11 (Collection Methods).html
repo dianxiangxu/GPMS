@@ -1,0 +1,1474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0080)http://www.c-sharpcorner.com/uploadfile/f0b2ed/mongodb-day11-collection-methods/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+MongoDB - Day 11 (Collection Methods)
+</title> <title>MongoDB - Day 11 (Collection Methods)</title> <meta name="Keywords" content="collection methods,MongoDB"> <meta name="DESCRIPTION" content="In this article you will learn about the Collection methods in MongoDB. This is Part 11 of the MongoDB series."> <meta name="Search.TopicType" content="kbArticle"> <meta name="Search.PublishDate" content="13 Aug 2015 12:00:00 GMT"> <meta name="Search.RevisedDate" content="13 Aug 2015 02:56:01 GMT"> <meta name="Search.UserRating" content="0%"> <meta name="CODE_LANGUAGE" content="C#"> <meta name="MS.LOCALE" content="en-US">  <meta name="Author" content="Pankaj  Kumar Choudhary"> <link rel="stylesheet" type="text/css" href="./MongoDB - Day 11 (Collection Methods)_files/csharp_articles_15062015.css"><link href="./MongoDB - Day 11 (Collection Methods)_files/responsive_19062015.css" rel="stylesheet" type="text/css"><link href="./MongoDB - Day 11 (Collection Methods)_files/SyntaxHighlighter.css" rel="stylesheet" type="text/css"><link rel="Shortcut Icon" href="http://www.c-sharpcorner.com/Images/McnIcon.ico"><meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(duration=.3)"><meta property="fb:app_id" content="440531902678919"> <script src="./MongoDB - Day 11 (Collection Methods)_files/cb=gapi.loaded_0" async=""></script><script src="./MongoDB - Day 11 (Collection Methods)_files/in.js"></script><script src="./MongoDB - Day 11 (Collection Methods)_files/widgets.js"></script><script type="text/javascript" async="" src="./MongoDB - Day 11 (Collection Methods)_files/client-plusone.js" gapi_processed="true"></script><script id="facebook-jssdk" async="" src="./MongoDB - Day 11 (Collection Methods)_files/sdk.js"></script><script type="text/javascript" async="" src="./MongoDB - Day 11 (Collection Methods)_files/ga.js"></script><script src="./MongoDB - Day 11 (Collection Methods)_files/jquery.TrendingNow_09032014.js"></script><script src="./MongoDB - Day 11 (Collection Methods)_files/MindcrackerJScript.js"></script><script src="./MongoDB - Day 11 (Collection Methods)_files/jquery.min.js" type="text/javascript"></script><style type="text/css"></style> <script type="text/javascript">
+var $j = jQuery.noConflict();
+$j(document).ready(function() {
+$j(".expand").click(function () {
+$j('#ctl00_LabelMessageBox').text('');
+var thisBtn = $j(this);
+if (!thisBtn.hasClass('hideExpand')) {
+$j(this).addClass("hideExpand");
+$j(".innerArticleIcons").css("height", "36px");
+// var iconSCount = $j(".innerArticleIcons ul li a").length;
+var iconSCount = $j(".innerArticleIcons ul li a:visible").length;
+var innerArticlesWidth = iconSCount * 42;
+$j(".innerArticleIcons").animate({
+width: innerArticlesWidth,
+opacity: 1.0
+}, 1500);
+$j(".viewBar").animate({
+opacity: 0
+}, 1500);
+}
+else {
+$j(".innerArticleIcons").animate({
+width: "1px",
+opacity: 0.4
+}, 1500);
+setTimeout(function() {
+$j(".innerArticleIcons").css("height", "1px");
+}, 1500);
+$j(".viewBar").animate({
+opacity: 1
+}, 1500);
+$j(this).removeClass("hideExpand");
+}
+});
+});
+// Script for share popup window
+function popupwindowAtCenter(url, title, w, h) {
+var left = (screen.width / 2) - (w / 2);
+var top = (screen.height / 2) - (h / 2);
+return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+}
+</script> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><script src="./MongoDB - Day 11 (Collection Methods)_files/secureAnonymousFramework"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head> <body id="MasterBody"> <form method="post" action="" id="aspnetForm"> <div class="aspNetHidden"> <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""> <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""> <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY1NDU2MTA1Mg8WAh4TVmFsaWRhdGVSZXF1ZXN0TW9kZQIBFgJmDw8WDh4IQXV0aG9ySUQFBmYwYjJlZB4NQ3VycmVudFJhdGluZwUBMB4GU3RhdHVzBQEyHgtIYXNGZWVkYmFja2geCUFydGljbGVJRAUkMmM2MmRiN2EtMTJjMS00NGM1LWE1MzktNzU0YTZkNWE2NmQ2Hg9NaW5vckNhdGVnb3J5SWQFAzIyMB4OVHdpdHRlckhhbmRsZXIFDnBhbmtham1hbGhhbjMwZBYCAgEPZBYoZg9kFggCAQ9kFgwCAg8WAh4HVmlzaWJsZWcWBAIBDw8WAh4ISW1hZ2VVcmwFVmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9BdXRob3JJbWFnZS9hNDhmNzgucG5nLmFzaHg/d2lkdGg9MjUmaGVpZ2h0PTI1ZGQCAw8PFgIeBFRleHQFCE1pbHN0ZWluZGQCAw8PFgIeC05hdmlnYXRlVXJsBUtodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VzZXJSZWdpc3RyYXRpb24vVXNlclJlZ2lzdHJhdGlvbi5hc3B4P2NoZWNrPXJkZAIIDxYEHgV0aXRsZQUfWW91IGhhdmUgMCBuZXcgYXJ0aWNsZSBjb21tZW50cx8IZ2QCCw8WBB8MBRdZb3UgaGF2ZSAwIG5ldyBtZXNzYWdlcx8IZ2QCDw8WBB8MBRxZb3UgaGF2ZSAwIG5ldyBub3RpZmljYXRpb25zHwhnZAIUDw8WAh8IaGRkAgMPZBYCAgEPFgIeC18hSXRlbUNvdW50AgUWCmYPZBYCZg8VAkpodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL0Jsb2dzLzQ5ODEyL2hhcHB5LWluZGVwZW5kZW5jZS1kYXktaW5kaWEuYXNweB1IYXBweSBJbmRlcGVuZGVuY2UgRGF5LCBJbmRpYWQCAQ9kFgJmDxUCcGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9wcnZuXzEzMTk3MS9wcmF5YW4tYS1DLVNoYXJwLWNvcm5lci1pbml0aWF0aXZlLWVtcG93ZXJpbmctdmlsbGFnZS15b3V0aC85UFJBWUFOIC0gQSBDIyBDb3JuZXIgSW5pdGlhdGl2ZTogRW1wb3dlcmluZyBWaWxsYWdlIFlvdXRoZAICD2QWAmYPFQJNaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9OZXdzLzQ5OTAvanVseS0yMDE1LW1vbnRoLXdpbm5lcnMtYW5ub3VuY2VkLmFzcHgyQ09OR1JBVFVMQVRJT05TOiBKdWx5IDIwMTUgTW9udGggV2lubmVycyBBbm5vdW5jZWRkAgMPZBYCZg8VAk9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL05ld3MvNDkyOC92aXN1YWwtc3R1ZGlvLTIwMTUtaXMtYXZhaWxhYmxlLW5vdy5hc3B4HlZpc3VhbCBTdHVkaW8gMjAxNSBpcyBsYXVuY2hlZGQCBA9kFgJmDxUCS2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vTmV3cy80ODU3LzIwMTUtaGFsZi15ZWFybHktbXZwcy1hbm5vdW5jZWQuYXNweB4yMDE1IEZpcnN0IEhhbGYgTVZQcyBBbm5vdW5jZWRkAgUPZBYEAgEPFgIeBGhyZWYFHGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb21kAgMPZBYCAgEPDxYCHwhoZGQCBw9kFgICAQ9kFgICAQ88KwAJAQAPFgQeCERhdGFLZXlzFgAfDQJRZBaiAWYPZBYCZg8VAjBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjM3L25ldC0yMDE1LmFzcHgJLk5FVCAyMDE1ZAIBD2QWAmYPFQI1aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzU3L25ldC1hc3NlbWJsaWVzLmFzcHgPLk5FVCBBc3NlbWJsaWVzZAICD2QWAmYPFQI2aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzEvYWN0aXZlLWRpcmVjdG9yeS5hc3B4EEFjdGl2ZSBEaXJlY3RvcnlkAgMPZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTMxL2Fkby1uZXQuYXNweAdBRE8uTkVUZAIED2QWAmYPFQIsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE3Ni9hamF4LmFzcHgEQUpBWGQCBQ9kFgJmDxUCPGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS81Ni9hbGdvcml0aG1zLWluLUMtU2hhcnAuYXNweBBBbGdvcml0aG1zIGluIEMjZAIGD2QWAmYPFQI7aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI0Ny9hbmRyb2lkLXByb2dyYW1taW5nLmFzcHgTQW5kcm9pZCBQcm9ncmFtbWluZ2QCBw9kFgJmDxUCMWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMDIvYW5ndWxhcmpzLmFzcHgJQW5ndWxhckpTZAIID2QWAmYPFQI0aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNi9hcmNoaXRlY3R1cmUuYXNweAxBcmNoaXRlY3R1cmVkAgkPZBYCZg8VAjtodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjI0L0FzcC1OZXQtcHJvZ3JhbW1pbmcuYXNweBNBU1AuTkVUIFByb2dyYW1taW5nZAIKD2QWAmYPFQItaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzMi9henVyZS5hc3B4BUF6dXJlZAILD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNC9iaWctZGF0YS5hc3B4CEJpZyBEYXRhZAIMD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwOS9idXNpbmVzcy5hc3B4CEJ1c2luZXNzZAIND2QWAmYPFQI7aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0NC9DLVNoYXJwLXByb2dyYW1taW5nLmFzcHgOQyMgUHJvZ3JhbW1pbmdkAg4PZBYCZg8VAjFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjgyL2MtY3BwLW1mYy5hc3B4C0MsIEMrKywgTUZDZAIPD2QWAmYPFQI1aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzOC9jYXJlZXItYWR2aWNlLmFzcHgNQ2FyZWVyIEFkdmljZWQCEA9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yODAvY2hhcHRlcnMuYXNweAhDaGFwdGVyc2QCEQ9kFgJmDxUCLWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMjQvY2xvdWQuYXNweAVDbG91ZGQCEg9kFgJmDxUCPGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82OC9jb2RpbmctYmVzdC1wcmFjdGljZXMuYXNweBVDb2RpbmcgQmVzdCBQcmFjdGljZXNkAhMPZBYCZg8VAjNodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNjAvY3J5cHRvZ3JhcGh5LmFzcHgMQ3J5cHRvZ3JhcGh5ZAIUD2QWAmYPFQI3aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE3MC9jdXJyZW50LWFmZmFpcnMuYXNweA9DdXJyZW50IEFmZmFpcnNkAhUPZBYCZg8VAjVodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjIwL2RhdGFiYXNlcy1kYmEuYXNweA9EYXRhYmFzZXMgJiBEQkFkAhYPZBYCZg8VAkBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvNjIvZGVzaWduLXBhdHRlcm5zLXByYWN0aWNlcy5hc3B4G0Rlc2lnbiBQYXR0ZXJucyAmIFByYWN0aWNlc2QCFw9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTMvZHluYW1pY3MtY3JtLmFzcHgMRHluYW1pY3MgQ1JNZAIYD2QWAmYPFQI+aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE1OS9lbnRlcnByaXNlLWRldmVsb3BtZW50LmFzcHgWRW50ZXJwcmlzZSBEZXZlbG9wbWVudGQCGQ9kFgJmDxUCQGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82NS9nYW1lcy1wcm9ncmFtbWluZy1DLVNoYXJwLmFzcHgUR2FtZXMgUHJvZ3JhbW1pbmcgQyNkAhoPZBYCZg8VAjpodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzIzL2dvb2dsZS1kZXZlbG9wbWVudC5hc3B4Ekdvb2dsZSBEZXZlbG9wbWVudGQCGw9kFgJmDxUCN2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yOTQvZ3JhcGhpY3MtZGVzaWduLmFzcHgPR3JhcGhpY3MgRGVzaWduZAIcD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIyMS9oYXJkd2FyZS5hc3B4CEhhcmR3YXJlZAIdD2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0My9ob3ctZG8taS5hc3B4CUhvdyBkbyBJIGQCHg9kFgJmDxUCLmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNDQvaHRtbC01LmFzcHgGSFRNTCA1ZAIfD2QWAmYPFQIzaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzY2L2ludGVybmV0LXdlYi5hc3B4DkludGVybmV0ICYgV2ViZAIgD2QWAmYPFQI6aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMyMC9pbnRlcm5ldC1vZi10aGluZ3MuYXNweBJJbnRlcm5ldCBvZiBUaGluZ3NkAiEPZBYCZg8VAitodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjM1L2lvcy5hc3B4A2lPU2QCIg9kFgJmDxUCLGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNTgvamF2YS5hc3B4BEphdmFkAiMPZBYCZg8VAjJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjMzL2phdmFzY3JpcHQuYXNweApKYXZhU2NyaXB0ZAIkD2QWAmYPFQIuaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzIzNi9qcXVlcnkuYXNweAZKUXVlcnlkAiUPZBYCZg8VAjBodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzAwL2tub2Nrb3V0LmFzcHgIS25vY2tvdXRkAiYPZBYCZg8VAjFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTg2L2xlYXJuLW5ldC5hc3B4CkxlYXJuIC5ORVRkAicPZBYCZg8VAixodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTgwL2xpbnEuYXNweARMSU5RZAIoD2QWAmYPFQI4aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxMy9tYWNoaW5lLWxlYXJuaW5nLmFzcHgQTWFjaGluZSBMZWFybmluZ2QCKQ9kFgJmDxUCOGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yODgvbWljcm9zb2Z0LW9mZmljZS5hc3B4EE1pY3Jvc29mdCBPZmZpY2VkAioPZBYCZg8VAjdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjQ1L21pY3Jvc29mdC1waG9uZS5hc3B4D01pY3Jvc29mdCBQaG9uZWQCKw9kFgJmDxUCLWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS82Ny9tb2JpbGUuYXNweAZNb2JpbGVkAiwPZBYCZg8VAjZodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTQ5L211bHRpdGhyZWFkaW5nLmFzcHgOTXVsdGl0aHJlYWRpbmdkAi0PZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzA0L25vZGUtanMuYXNweAdOb2RlLmpzZAIuD2QWAmYPFQI6aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE0Ni9vZmZpY2UtZGV2ZWxvcG1lbnQuYXNweBJPZmZpY2UgRGV2ZWxvcG1lbnRkAi8PZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjA4L29vcG9vZC5hc3B4B09PUC9PT0RkAjAPZBYCZg8VAjNodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjc2L29wZW4tc291cmNlLmFzcHgLT3BlbiBTb3VyY2VkAjEPZBYCZg8VAjlodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjIyL29wZXJhdGluZy1zeXN0ZW1zLmFzcHgRT3BlcmF0aW5nIFN5c3RlbXNkAjIPZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjk5L29yYWNsZS5hc3B4Bk9yYWNsZWQCMw9kFgJmDxUCK2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNzkvcGhwLmFzcHgDUEhQZAI0D2QWAmYPFQIwaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI4My9wcm9kdWN0cy5hc3B4CFByb2R1Y3RzZAI1D2QWAmYPFQI6aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE5OC9wcm9qZWN0LW1hbmFnZW1lbnQuYXNweBJQcm9qZWN0IE1hbmFnZW1lbnRkAjYPZBYCZg8VAi5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzIyL3B5dGhvbi5hc3B4BlB5dGhvbmQCNw9kFgJmDxUCPWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xODgvcmVwb3J0cy11c2luZy1DLVNoYXJwLmFzcHgQUmVwb3J0cyB1c2luZyBDI2QCOA9kFgJmDxUCOWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xOTYvcm9ib3RpY3MtaGFyZHdhcmUuYXNweBNSb2JvdGljcyAmIEhhcmR3YXJlZAI5D2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMxNy9zYWxlc2ZvcmNlLmFzcHgKU2FsZXNmb3JjZWQCOg9kFgJmDxUCNmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83MS9zZWN1cml0eS1pbi1uZXQuYXNweBBTZWN1cml0eSBpbiAuTkVUZAI7D2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE4My9zaGFyZXBvaW50LmFzcHgKU2hhcmVQb2ludGQCPA9kFgJmDxUCM2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMTAvc2lsdmVybGlnaHQuYXNweAtTaWx2ZXJsaWdodGQCPQ9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMTYvc3FsLWxhbmd1YWdlLmFzcHgMU1FMIExhbmd1YWdlZAI+D2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI5Ny9zcWwtc2VydmVyLmFzcHgKU1FMIFNlcnZlcmQCPw9kFgJmDxUCMGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8zMTIvc3RhcnR1cHMuYXNweAhTdGFydHVwc2QCQA9kFgJmDxUCL2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xNzQvdGVzdGluZy5hc3B4B1Rlc3RpbmdkAkEPZBYCZg8VAjJodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMjkxL3R5cGVzY3JpcHQuYXNweApUeXBlU2NyaXB0ZAJCD2QWAmYPFQI+aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzEzOC91bml2ZXJzYWwtd2luZG93cy1hcHBzLmFzcHgWVW5pdmVyc2FsIFdpbmRvd3MgQXBwc2QCQw9kFgJmDxUCOGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNzcvdmlzdWFsLWJhc2ljLW5ldC5hc3B4EVZpc3VhbCBCYXNpYyAuTkVUZAJED2QWAmYPFQI1aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI5Ni92aXN1YWwtc3R1ZGlvLmFzcHgNVmlzdWFsIFN0dWRpb2QCRQ9kFgJmDxUCK2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xOTIvd2NmLmFzcHgDV0NGZAJGD2QWAmYPFQIxaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzMwNy93ZWFyYWJsZXMuYXNweAlXZWFyYWJsZXNkAkcPZBYCZg8VAjdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMTU0L3dlYi1kZXZlbG9wbWVudC5hc3B4D1dlYiBEZXZlbG9wbWVudGQCSA9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8xMzMvd2ViLXNlcnZpY2VzLmFzcHgMV2ViIFNlcnZpY2VzZAJJD2QWAmYPFQIyaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzI3NS93aW5kb3dzLTEwLmFzcHgKV2luZG93cyAxMGQCSg9kFgJmDxUCNGh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83Ni93aW5kb3dzLWZvcm1zLmFzcHgNV2luZG93cyBGb3Jtc2QCSw9kFgJmDxUCOmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yNDMvd2luZG93cy1wb3dlcnNoZWxsLmFzcHgSV2luZG93cyBQb3dlclNoZWxsZAJMD2QWAmYPFQI3aHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzc4L3dpbmRvd3Mtc2VydmljZXMuYXNweBBXaW5kb3dzIFNlcnZpY2VzZAJND2QWAmYPFQIraHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE5MS93cGYuYXNweANXUEZkAk4PZBYCZg8VAi9odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tLzEvMzE5L3hhbWFyaW4uYXNweAdYYW1hcmluZAJPD2QWAmYPFQIsaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS8xLzE5MC94YW1sLmFzcHgEWEFNTGQCUA9kFgJmDxUCKmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS83OS94bWwuYXNweANYTUxkAgEPZBYCAgEPFgIfDQIKFhRmD2QWAmYPFQJhaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2I2Y2I0Yi93aHktZGV2ZWxvcGVycy1zaG91bGQtbm90LXRlc3QtdGhlaXItb3duLXNvZnR3YXJlLydXaHkgRGV2ZWxvcGVycyBTaG91bGQgTm90IFRlc3QgVGhlaSAuLi5kAgEPZBYCZg8VAlFodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvNzQ2NzY1L3dpbmRvd3MtMTAtc2V0dXAtYW5kLWl0cy1mZWF0dXJlcy8hV2luZG93cyAxMCBTZXR1cCBhbmQgSXRzIEZlYXR1cmVzZAICD2QWAmYPFQJbaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlLzIxOWQ0ZC9iYXNpY3Mtb2YtanF1ZXJ5LXBhcnQtMi1zZWxlY3RvcnMtaW4tanF1ZXJ5LydCYXNpY3Mgb2YgalF1ZXJ5IC0gUGFydCAyIChTZWxlY3RvciAuLi5kAgMPZBYCZg8VAlhodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvNzQ2NzY1L2VudGl0eS1mcmFtZXdvcmstZGF0YWJhc2UtZmlyc3QtYXBwcm9hY2gvJ0VudGl0eSBGcmFtZXdvcmsgLSBEYXRhYmFzZSBGaXJzdCBBIC4uLmQCBA9kFgJmDxUCZWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS9hc21hYmVnYW0vZHluYW1pYy1wcm9qZWN0LXNjaGVkdWxpbmctdXNpbmctbXZjLWFuZC1hbmd1bGFyanMvJ0R5bmFtaWMgUHJvamVjdCBTY2hlZHVsaW5nIFVzaW5nIE1WIC4uLmQCBQ9kFgJmDxUCWmh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS8xZjUxNTAvdW5kZXJzdGFuZGluZy1hbmd1bGFyanMtaW4tZmFzdC10cmFjay1tb2RlLydVbmRlcnN0YW5kaW5nIEFuZ3VsYXJKUyBpbiBGYXN0LXRyYSAuLi5kAgYPZBYCZg8VAk5odHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL1VwbG9hZEZpbGUvZjBiMmVkL2ludHJvZHVjdGlvbi1vZi1ub3NxbC1kYXRhYmFzZS8fSW50cm9kdWN0aW9uIFRvIE5vU1FMIERhdGFiYXNlc2QCBw9kFgJmDxUCamh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vVXBsb2FkRmlsZS8wOTI1ODkvY3J1ZC1vcGVyYXRpb25zLXVzaW5nLXN0b3JlZC1wcm9jZWR1cmUtZW50aXR5LWZyYW1ld29yay1pbi8nQ1JVRCBPcGVyYXRpb25zIFVzaW5nIFN0b3JlZCBQcm9jZWQgLi4uZAIID2QWAmYPFQJJaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL2U1Mjc2Zi9hbmd1bGFyanMtd2l0aC1yZXF1aXJlLWpzLxlBbmd1bGFySlMgV2l0aCBSZXF1aXJlLmpzZAIJD2QWAmYPFQJKaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlLzc0Njc2NS9hbmd1bGFyanMtdGlkYml0cy1vdmVydmlldy8aQW5ndWxhckpTIFRpZEJpdHMgT3ZlcnZpZXdkAgIPZBYCAgEPDxYGHghDc3NDbGFzcwUXc3ByaXRlIGRldGFpbHMgYmVnaW5uZXIeB1Rvb2xUaXAFCEJlZ2lubmVyHgRfIVNCAgJkZAIFDxYCHw4FNWh0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vMS8yMjAvZGF0YWJhc2VzLWRiYS5hc3B4FgICAQ8PFgQfCQUnL1VwbG9hZEZpbGUvTWlub3JDYXRJbWFnZXMvMDI0NDEwQU0ucG5nHxEFD0RhdGFiYXNlcyAmIERCQWRkAgYPFgIeCWlubmVyaHRtbAUlTW9uZ29EQiAtIERheSAxMSAoQ29sbGVjdGlvbiBNZXRob2RzKWQCBw8WBB8OBUdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL0F1dGhvcnMvZjBiMmVkL3Bhbmthai1rdW1hci1jaG91ZGhhcnkuYXNweB8TBRdQYW5rYWogIEt1bWFyIENob3VkaGFyeWQCCA8PFgIfCgUMQXVnIDEzLCAyMDE1ZGQCCQ8WAh8TBZ0CPGEgY2xhc3M9J0xpbmtOb3JtYWxHcmF5TGlnaHQnIGhyZWY9J2h0dHA6Ly93d3cuYy1zaGFycGNvcm5lci5jb20vdGFncy9jb2xsZWN0aW9uLW1ldGhvZHMnPmNvbGxlY3Rpb24gbWV0aG9kczwvYT4sIDxhIGNsYXNzPSdMaW5rTm9ybWFsR3JheUxpZ2h0JyBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL3RhZ3MvTW9uZ29EQic+TW9uZ29EQjwvYT4sIDxhIGNsYXNzPSdMaW5rTm9ybWFsR3JheUxpZ2h0JyBocmVmPSdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL3RhZ3MvJz48L2E+ZAIKDxYCHxMFbkluIHRoaXMgYXJ0aWNsZSB5b3Ugd2lsbCBsZWFybiBhYm91dCB0aGUgQ29sbGVjdGlvbiBtZXRob2RzIGluIE1vbmdvREIuIFRoaXMgaXMgUGFydCAxMSBvZiB0aGUgTW9uZ29EQiBzZXJpZXMuZAIMDxYCHxMFHjEuNTxzcGFuIGNsYXNzPSd1bml0Jz5rPC9zcGFuPmQCDQ8PFgIfCgUBMGRkAhEPFgIfDgUZL0F1dGhvcnMvZjBiMmVkL2FydGljbGVzL2QCEg8WAh8OBUUvQXJ0aWNsZXMvRGVmYXVsdC5hc3B4P0FydGljbGVJZD0yYzYyZGI3YS0xMmMxLTQ0YzUtYTUzOS03NTRhNmQ1YTY2ZDZkAhQPDxYGHxAFI25ld1Nwcml0ZUljb25zIG1ha2VfYXJ0aWNsZV9mZWF0dXJlHxEFGk1ha2UgdGhpcyBhcnRpY2xlIGZlYXR1cmVkHxICAmRkAhkPDxYCHxEFCVNhbSBIb2Jic2RkAhsPFgIeBXN0eWxlBS9tYXJnaW4tdG9wOjEwcHg7bWFyZ2luLWJvdHRvbTowcHg7ZGlzcGxheTpub25lOxYCAgEPFgIfCGhkAh0PZBYCAgMPFgIfCGhkAh4PDxYCHghBdXRob3JJZAUGZjBiMmVkZBYaZg8WAh8OBUdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL0F1dGhvcnMvZjBiMmVkL3Bhbmthai1rdW1hci1jaG91ZGhhcnkuYXNweBYCAgEPFgIeA3NyYwVMaHR0cDovL3d3dy5jLXNoYXJwY29ybmVyLmNvbS9VcGxvYWRGaWxlL0F1dGhvckltYWdlL2YwYjJlZDIwMTUwODA0MDI0MTUzLnBuZ2QCAQ8WBB8TBRdQYW5rYWogIEt1bWFyIENob3VkaGFyeR8OBUdodHRwOi8vd3d3LmMtc2hhcnBjb3JuZXIuY29tL0F1dGhvcnMvZjBiMmVkL3Bhbmthai1rdW1hci1jaG91ZGhhcnkuYXNweGQCAg8WAh8TBckBSSBhbSBzdHVkZW50IG9mIDNyZCBZZWFyIEIuVGVjaCZuYnNwOyBhbmQmbmJzcDsgYWxzbyB3b3JraW5nIGluIFNVQ0NFU1MgTEFEREVSIFRlY2hub2xvZ3kgQWx3YXIgb25seSBmb3IgIEV4cGVyaWVuY2Ugbm90IGZvciBNb25leSAuIEkgYmUgYWx3YXlzIFJlYWR5IHRvJm5ic3A7IGxlYXJuIG5ldyBUaGluZ3MgUmVsYXRlZCBNeSBGaWVsZCAuJm5ic3A7ZAIDDxYCHwhoZAIEDxYCHw4FPGh0dHBzOi8vdHdpdHRlci5jb20vaW50ZW50L2ZvbGxvdz9zY3JlZW5fbmFtZT1wYW5rYWptYWxoYW4zMGQCBQ8WAh8OBTxodHRwczovL3d3dy5mYWNlYm9vay5jb20vYXBwX3Njb3BlZF91c2VyX2lkLzY1NjQ4NTI3NzgyODYyNy9kAgYPFgIfDgVaaHR0cHM6Ly93d3cubGlua2VkaW4uY29tL3Byb2ZpbGUvcHVibGljLXByb2ZpbGUtc2V0dGluZ3M/dHJrPXByb2YtZWRpdC1lZGl0LXB1YmxpY19wcm9maWxlZAIIDxYCHxMFAjY1ZAIJDxYCHxMFBDEyOGtkAgoPFgQeBWNsYXNzBQxtZWRhbCBTaWx2ZXIfDAUNU2lsdmVyIE1lbWJlcmQCCw8WBB8XBQxjb3VudCBTaWx2ZXIfEwUGU2lsdmVyZAIMD2QWAmYPFgIfEwUBMWQCDQ8WAh8IaGQCIA8PFgYeCUNvbnRlbnRJZAUkMmM2MmRiN2EtMTJjMS00NGM1LWE1MzktNzU0YTZkNWE2NmQ2Hg1Db250ZW50VXNlcklkBQZmMGIyZWQeDENvbnRlbnRUaXRsZQUlTW9uZ29EQiAtIERheSAxMSAoQ29sbGVjdGlvbiBNZXRob2RzKWQWBGYPZBYCAgEPEA9kFgIeB29uY2xpY2sFKkNvbW1lbnRzX2FydGljbGUuVXBkYXRlRm9sbG93U3RhdHVzKHRoaXMpO2RkZAIBDxYCHwhnZAIhD2QWAgIBD2QWBAICD2QWAgIBDw8WAh4LXyFEYXRhQm91bmRnZGQCCA9kFgICAQ8PFgIfHGdkZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUeY3RsMDAkQ29tbWVudHMxJEZvbGxvd0NoZWNrQm94VJytpKHpmoG8y0ex4UD3GdV6Jno="> </div> <script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+theForm.__EVENTTARGET.value = eventTarget;
+theForm.__EVENTARGUMENT.value = eventArgument;
+theForm.submit();
+}
+}
+//]]> </script> <script src="./MongoDB - Day 11 (Collection Methods)_files/WebResource.axd" type="text/javascript"></script> <div class="master"> <a name="Top"></a> <div class="responsiveHeader"> <script type="text/javascript">
+$j(document).ready(function() {
+var flag;
+var textBoxClientId = '#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId';
+var value = $j(textBoxClientId).val();
+$j(textBoxClientId).click(function() {
+if (value == "Invalid ID / Password")
+$j(textBoxClientId).val('');
+});
+//login popup js start here//
+$j('#ctl00_HeaderWithoutAjax1_Login1_loginBtn').click(function() {
+flag = 1;
+$j('#ctl00_HeaderWithoutAjax1_Login1_LoginSpan').slideToggle("slow");
+$j('#ctl00_HeaderWithoutAjax1_Login1_TextBoxUserId').focus();
+});
+$j('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').mouseover(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').show();
+});
+$j('.loginPopup.loggedIn').mouseover(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').show();
+$j('.userdetailCntr').addClass('hover');
+});
+$j('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').mouseout(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+});
+$j('.loginPopup.loggedIn').mouseout(function() {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+$j('.userdetailCntr').removeClass('hover');
+});
+$j('.loginPopup').click(function() {
+flag = 1;
+});
+$j('#ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer').click(function() {
+flag = 1;
+});
+$j(document).click(function() {
+if (flag != 1) {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LoginSpan').hide();
+$j('#ctl00_HeaderWithoutAjax1_Login1_LogoutSpan').hide();
+}
+flag = 0;
+});
+//login popup js end here//
+});
+</script> <script>
+$j(document).ready(function() {
+var flag = true;
+var close = true;
+$j('.notificationMessageCntr').click(function() {
+var id = $j(this)[0].id;
+if (id != 'askQuestion') {
+if ($j(this).next().is(':visible')) {
+$j(this).find('.arrow').hide();
+$j(this).next().hide();
+}
+else {
+$j('.msg_container').hide();
+$j('.notificationMessageCntr .arrow').hide();
+flag = false;
+close = false;
+$j(this).find('.arrow').show();
+$j(this).next().show();
+ResetNotificationCount(this);
+}
+}
+});
+$j('.msg_container').click(function() {
+close = false;
+});
+$j(document).click(function() {
+if (close) {
+$j('.notificationMessageCntr .arrow').hide();
+$j('.msg_container').hide();
+flag = true;
+}
+close = true;
+});
+//        if ($j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoData').length > 0)
+//            $j('#ctl00_HeaderWithoutAjax1_Login1_LinkButtonAllMessages').hide();
+});
+//Reset notification count
+//type: 1- Message Notification, 2- Comment Notification
+function ResetNotificationCount(container) {
+var type = 0;
+if ($j(container).attr('id') == 'messageNotification')
+type = 1;
+else if ($j(container).attr('id') == 'commentNotification')
+type = 2;
+else if ($j(container).attr('id') == 'generalNotifications')
+type = 3;
+if (type != 0) {
+$j.ajax({
+url: "/Handlers/CsharpCommon.ashx?method=reset_notification_message_count&type=" + type,
+type: "POST",
+async: false,
+beforeSend: function() {
+if (type == 1)
+$j('#imgComments').show();
+if (type == 2)
+$j('#imgMessages').show();
+if (type == 3)
+$j('#imgGeneralNotifications').show();
+},
+success: function(response) {
+$j(container).find('.messageCount').hide();
+if (response[0] == undefined)
+var response = "";
+if (response == 'login')
+var response = "";
+if (type == 1) {
+if (response != "") {
+$j('#dvMessages').empty();
+$j('#dvMessages').html(response);
+}
+else {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoData').show();
+}
+}
+if (type == 2) {
+if (response != "") {
+$j('#dvComments').empty();
+$j('#dvComments').html(response);
+}
+else {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoComments').show();
+}
+}
+if (type == 3) {
+if (response != "") {
+$j('#dvGeneralNotifications').empty();
+$j('#dvGeneralNotifications').html(response);
+}
+else {
+$j('#ctl00_HeaderWithoutAjax1_Login1_LabelNoDataNotifications').show();
+}
+}
+},
+complete: function() {
+if (type == 1)
+$j('#imgComments').hide();
+if (type == 2)
+$j('#imgMessages').hide();
+if (type == 3)
+$j('#imgGeneralNotifications').hide();
+}
+});
+}
+}
+</script> <div class="page" style="position: relative; z-index: 999;"> <div class="loginControl"> <div id="ctl00_HeaderWithoutAjax1_Login1_UserDetailContainer" class="userdetailCntr"> <div class="image"> <img id="ctl00_HeaderWithoutAjax1_Login1_UserImage" src="./MongoDB - Day 11 (Collection Methods)_files/a48f78.png.ashx"> </div> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelUserName" class="display_none_mobile">Milstein</span> </div> <div id="askQuestion" class="notificationMessageCntr display_none_mobile"> <a id="ctl00_HeaderWithoutAjax1_Login1_PostForum" class="icons askaquestion" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$PostForum','')"></a> </div> <div id="commentNotification" class="notificationMessageCntr"> <span id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonComments" class="icons comments" title="You have 0 new article comments"> </span><span class="arrow">&nbsp;</span> </div> <div id="userCommentBox" class="msg_container" style="display: none;"> <div class="NoticationLoading"> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelNoComments" style="color:Red;display: none; text-align: center;">No new comments.</span> <a id="imgComments" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif"></a> </div> <ul> <div id="dvComments"> </div> </ul> <a class="LinkNormalBlue" style="margin-right: 10px; float: right; margin-top: 10px;
+font-size: 13px;" href="http://www.c-sharpcorner.com/notification/">Go to all comments &gt;&gt;</a> </div> <div id="messageNotification" class="notificationMessageCntr"> <span id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonMessages" class="icons message" title="You have 0 new messages"> </span><span class="arrow">&nbsp;</span> </div> <div id="userMsgBox" class="msg_container" style="display: none;"> <div class="NoticationLoading"> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelNoData" style="color:Red;display: none; text-align: center;">No new messages.</span> <a id="imgMessages" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif"></a> </div> <ul> <div id="dvMessages"> </div> </ul> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonAllMessages" class="LinkNormalBlue" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonAllMessages','')" style="margin-right: 10px;
+float: right; margin-top: 10px;">Go to all messages &gt;&gt;</a> </div> <div id="generalNotifications" class="notificationMessageCntr"> <span id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonGeneralNotifications" class="icons notification" title="You have 0 new notifications"></span><span class="arrow">&nbsp;</span> </div> <div id="generalNotificationContainer" class="msg_container general_notifications" style="display: none;"> <div class="NoticationLoading"> <span id="ctl00_HeaderWithoutAjax1_Login1_LabelNoDataNotifications" style="color:Red;display: none; text-align: center;">No new notifications.</span> <a id="imgGeneralNotifications" href="javascript:void(0)" class="loadmore" style="display: none;
+text-align: center"> <img src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif"></a> </div> <ul> <div id="dvGeneralNotifications"> </div> </ul> <a class="LinkNormalBlue" style="margin-right: 10px; float: right; margin-top: 10px;
+color: #06c; font-size: 13px;" href="http://www.c-sharpcorner.com/notification/GeneralNotification.aspx">Go
+to all notifications &gt;&gt;</a> </div> <div class="notificationMessageCntr display_none_mobile"> <span class="arrow">&nbsp;</span> </div> <div class="msg_container" style="display: none;"> <ul id="ctl00_HeaderWithoutAjax1_Login1_UnapprovedContentStats" class="unapproved_stats"> </ul> </div> </div> <div id="ctl00_HeaderWithoutAjax1_Login1_LogoutSpan" class="loginPopup loggedIn" style="display: none;"> <ul> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonMyAccount" class="myac" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonMyAccount','')">My Account</a> </li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonProfile" class="profileview" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonProfile','')">View Profile</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonEditProfile" class="editprofile" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonEditProfile','')">Edit Profile</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonChangePassword" class="changepassword" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonChangePassword','')">Change Password</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_LinkButtonSetting" class="setting" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$LinkButtonSetting','')">Settings</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Login1_ImageButtonLogout" class="signout" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Login1$ImageButtonLogout','')">Logout</a> </li> </ul> </div> <a class="menuButton"></a><a href="http://www.c-sharpcorner.com/" class="logo_responsive">
+&nbsp;</a> </div> <input type="hidden" id="HiddenErrorMessage" value="Unable to fetch your account data!"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldUserId" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldUserId"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldEmail" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldFirstName" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldLastName" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName"> <input type="hidden" name="ctl00$HeaderWithoutAjax1$Login1$HiddenFieldType" id="ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType"> <input type="submit" name="ctl00$HeaderWithoutAjax1$Login1$ButtonLoginSocial" value="" id="ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial" style="display: none;"> <script>
+function FacebookLogin() {
+FB.login(function(response) {
+if (response.authResponse) {
+FB.api('/me', function(response) {
+try {
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldUserId').val(response.id.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail').val(response.email.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName').val(response.first_name.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName').val(response.last_name.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType').val('facebook');
+$j('#ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial').click();
+}
+catch (err) {
+alert($j('#HiddenErrorMessage').val());
+}
+});
+} else {
+console.log('User cancelled login or did not fully authorize.');
+}
+}, { scope: 'publish_actions, email' });
+}
+</script> <script>
+$j(document).ready(function() {
+function signinCallback(authResult) {
+if (authResult['status']['signed_in']) {
+try {
+gapi.client.load('plus', 'v1', function() {
+var request = gapi.client.plus.people.get({
+'userId': 'me'
+});
+request.execute(function(resp) {
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldEmail').val(resp.emails[0].value.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldFirstName').val(resp.name.givenName.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldLastName').val(resp.name.familyName.toString());
+$j('#ctl00_HeaderWithoutAjax1_Login1_HiddenFieldType').val('google');
+$j('#ctl00_HeaderWithoutAjax1_Login1_ButtonLoginSocial').click();
+});
+});
+}
+catch (err) {
+alert($j('#HiddenErrorMessage').val());
+}
+} else {
+console.log('Sign-in state: ' + authResult['error']);
+}
+}
+var additionalParams = {
+'callback': signinCallback
+};
+var signinButton = document.getElementById('googleLoginHeader');
+if (signinButton != null) {
+signinButton.addEventListener('click', function() {
+gapi.auth.signIn(additionalParams);
+console.log(gapi);
+});
+}
+});
+</script> <!-- PopUp Start--> <!-- PopUp End--> <div class="header"> <div class="topHeaderConainer" style="width: 100%; float: left;"> <script>
+$j(document).ready(function() {
+$j.getScript('/JQuery/ticker_21122013.js', function() {
+$j('#js-news').ticker();
+});
+});
+</script> <style type="text/css">
+.ticker
+{
+width: 538px;
+height: 30px;
+display: block;
+position: relative;
+overflow: hidden;
+}
+.ticker-title
+{
+padding-top: 9px;
+color: #900;
+font-weight: bold;
+text-transform: uppercase;
+}
+.ticker-content
+{
+margin: 0;
+padding-top: 9px;
+position: absolute;
+color: #1f527b;
+overflow: hidden;
+white-space: nowrap;
+line-height: 1.2em;
+}
+.ticker-content a:hover
+{
+text-decoration: none;
+color: #0d3059;
+}
+.ticker-swipe
+{
+padding-top: 9px;
+position: absolute;
+top: 0;
+background-color: #f60;
+display: block;
+width: 800px;
+height: 23px;
+}
+.ticker-swipe span
+{
+margin-left: 1px;
+border-bottom: 1px solid #fff;
+height: 14px;
+width: 7px;
+display: block;
+}
+.js-hidden
+{
+display: none;
+}
+.ticker-controls
+{
+padding: 8px 0 0 0;
+list-style-type: none;
+float: left;
+}
+.left .ticker-controls, .left .ticker-content, .left .ticker-title, .left .ticker
+{
+float: left;
+}
+</style> <div class="InFocusNews display_none" id="InFocus"> <div class="page" style="position: relative;"> <h2>
+In Focus</h2> <div class="rightNew" style="display: inline;"> <div id="ticker-wrapper-1439749290654" class="ticker-wrapper has-js left"><div id="ticker-1439749290654" class="ticker"><div id="ticker-title-1439749290654" class="ticker-title"><span></span></div><p id="ticker-content-1439749290654" class="ticker-content" style="display: block; opacity: 1; left: 0px;"><a href="http://www.c-sharpcorner.com/News/4990/july-2015-month-winners-announced.aspx" style="color: White;" rel="nofollow">
+CONGRATULATIONS: July 2015 Month Winners Announced</a></p><div id="ticker-swipe-1439749290654" class="ticker-swipe" style="left: 0px; margin-left: 300.2px;"><span style="display: block;"><!-- --></span></div></div><ul id="ticker-controls-1439749290654" class="ticker-controls"><li id="play-pause-1439749290654" class="jnt-play-pause controls"><a href=""><!-- --></a></li><li id="prev-1439749290654" class="jnt-prev controls"><a href=""><!-- --></a></li><li id="next-1439749290654" class="jnt-next controls"><a href=""><!-- --></a></li></ul></div> </div> </div> </div> <div class="display_none"> <div class="page"> <a href="http://www.c-sharpcorner.com/" id="ctl00_HeaderWithoutAjax1_Contribution1_LogoLink"> <span id="ctl00_HeaderWithoutAjax1_Contribution1_LogoImage" class="logo"></span> </a> <div class="headerBanner"> </div> <div id="ctl00_HeaderWithoutAjax1_Contribution1_ContributionLinks"> <div class="contributeList"> <a href="javascript:void(0);" class="contributeOnHeader">Contribute</a> <ul> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostArticle" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostArticle','')">An Article</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_LinkButtonCodeSnippet" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$LinkButtonCodeSnippet','')">A Code Snippet</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostBlog" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostBlog','')">A Blog</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostNews" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostNews','')">A News</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostVideo" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostVideo','')">A Video</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostResource" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostResource','')">A Link</a></li> <li> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostInterview" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostInterview','')">An Interview Question</a></li> </ul> </div> <a id="ctl00_HeaderWithoutAjax1_Contribution1_PostForum" class="askQuestionOnHeader" href="javascript:__doPostBack('ctl00$HeaderWithoutAjax1$Contribution1$PostForum','')">Ask a Question</a> </div> </div> </div> <div id="ctl00_HeaderWithoutAjax1_HeaderMenu" class="HeadermenuStripBlue" style="position: fixed; top: 0px;"> <div class="page" style="position: relative;"> <div class="responsiveMenu" style="height: auto;"> <div class="SearchBox"> <div id="ctl00_HeaderWithoutAjax1_Panal1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_HeaderWithoutAjax1_searchImageButton&#39;)"> <input name="ctl00$HeaderWithoutAjax1$searchTextBox" type="text" id="ctl00_HeaderWithoutAjax1_searchTextBox" class="searchTextBox" placeholder="C# Corner Search" style="font-family:Calibri;"> <input type="submit" name="ctl00$HeaderWithoutAjax1$searchImageButton" value="" id="ctl00_HeaderWithoutAjax1_searchImageButton" class="button"> </div> </div> <ul class="headerMenu"> <li class="display_none" style="background:none;"><a href="http://www.c-sharpcorner.com/" class="csharpHome" title="C# Corner Home">&nbsp;</a></li> <li class="first display_none"><a href="http://www.c-sharpcorner.com/pulse/" title="C# Corner Pulse" class="pulse"></a></li> <li><a href="http://www.c-sharpcorner.com/category/" class="show-dropdown menuLinkBlue">
+TECHNOLOGIES </a> <div class="dropDownMenu" id="dropDown"> <div id="ctl00_HeaderWithoutAjax1_divTechnology" style="overflow: hidden; margin-bottom: 10px;"> <span id="ctl00_HeaderWithoutAjax1_DataListTechnologyTop"><span> <a href="http://www.c-sharpcorner.com/1/237/net-2015.aspx">
+.NET 2015
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/324/cloud.aspx">
+Cloud
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/235/ios.aspx">
+iOS
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/222/operating-systems.aspx">
+Operating Systems
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/291/typescript.aspx">
+TypeScript
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/57/net-assemblies.aspx">
+.NET Assemblies
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/68/coding-best-practices.aspx">
+Coding Best Practices
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/258/java.aspx">
+Java
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/299/oracle.aspx">
+Oracle
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/138/universal-windows-apps.aspx">
+Universal Windows Apps
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/1/active-directory.aspx">
+Active Directory
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/60/cryptography.aspx">
+Cryptography
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/233/javascript.aspx">
+JavaScript
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/279/php.aspx">
+PHP
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/277/visual-basic-net.aspx">
+Visual Basic .NET
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/131/ado-net.aspx">
+ADO.NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/170/current-affairs.aspx">
+Current Affairs
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/236/jquery.aspx">
+JQuery
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/283/products.aspx">
+Products
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/296/visual-studio.aspx">
+Visual Studio
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/176/ajax.aspx">
+AJAX
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/220/databases-dba.aspx">
+Databases &amp; DBA
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/300/knockout.aspx">
+Knockout
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/198/project-management.aspx">
+Project Management
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/192/wcf.aspx">
+WCF
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/56/algorithms-in-C-Sharp.aspx">
+Algorithms in C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/62/design-patterns-practices.aspx">
+Design Patterns &amp; Practices
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/186/learn-net.aspx">
+Learn .NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/322/python.aspx">
+Python
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/307/wearables.aspx">
+Wearables
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/247/android-programming.aspx">
+Android Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/293/dynamics-crm.aspx">
+Dynamics CRM
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/180/linq.aspx">
+LINQ
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/188/reports-using-C-Sharp.aspx">
+Reports using C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/154/web-development.aspx">
+Web Development
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/302/angularjs.aspx">
+AngularJS
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/159/enterprise-development.aspx">
+Enterprise Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/313/machine-learning.aspx">
+Machine Learning
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/196/robotics-hardware.aspx">
+Robotics &amp; Hardware
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/133/web-services.aspx">
+Web Services
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/316/architecture.aspx">
+Architecture
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/65/games-programming-C-Sharp.aspx">
+Games Programming C#
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/288/microsoft-office.aspx">
+Microsoft Office
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/317/salesforce.aspx">
+Salesforce
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/275/windows-10.aspx">
+Windows 10
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/224/Asp-Net-programming.aspx">
+ASP.NET Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/323/google-development.aspx">
+Google Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/245/microsoft-phone.aspx">
+Microsoft Phone
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/71/security-in-net.aspx">
+Security in .NET
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/76/windows-forms.aspx">
+Windows Forms
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/232/azure.aspx">
+Azure
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/294/graphics-design.aspx">
+Graphics Design
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/67/mobile.aspx">
+Mobile
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/183/sharepoint.aspx">
+SharePoint
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/243/windows-powershell.aspx">
+Windows PowerShell
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/314/big-data.aspx">
+Big Data
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/221/hardware.aspx">
+Hardware
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/149/multithreading.aspx">
+Multithreading
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/210/silverlight.aspx">
+Silverlight
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/78/windows-services.aspx">
+Windows Services
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/309/business.aspx">
+Business
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/143/how-do-i.aspx">
+How do I 
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/304/node-js.aspx">
+Node.js
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/216/sql-language.aspx">
+SQL Language
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/191/wpf.aspx">
+WPF
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/144/C-Sharp-programming.aspx">
+C# Programming
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/244/html-5.aspx">
+HTML 5
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/146/office-development.aspx">
+Office Development
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/297/sql-server.aspx">
+SQL Server
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/319/xamarin.aspx">
+Xamarin
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/282/c-cpp-mfc.aspx">
+C, C++, MFC
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/66/internet-web.aspx">
+Internet &amp; Web
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/208/oopood.aspx">
+OOP/OOD
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/312/startups.aspx">
+Startups
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/190/xaml.aspx">
+XAML
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/238/career-advice.aspx">
+Career Advice
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/320/internet-of-things.aspx">
+Internet of Things
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/276/open-source.aspx">
+Open Source
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/174/testing.aspx">
+Testing
+</a> </span><span> <a href="http://www.c-sharpcorner.com/1/79/xml.aspx">
+XML
+</a> </span><br><span> <a href="http://www.c-sharpcorner.com/1/280/chapters.aspx">
+Chapters
+</a> </span></span> </div> <div style="position: absolute; bottom: 0px; left: 0px;"> <a href="http://www.c-sharpcorner.com/ContactUs.aspx?type=7" class="LinkNormalBlue" style="color: #ff6600; background: none; text-transform: none; float: left;">Request
+a new Category</a><span style="float: left; color: #8D8D8D; margin-top: 4px;">|</span> <a href="http://www.c-sharpcorner.com/Category/" class="LinkNormalBlue viewAll" style="color: #36c; background: none!important; text-transform: none; float: left;">
+View All</a> </div> </div> </li> <li><a href="http://www.c-sharpcorner.com/forums/" title="Ask a Question">ANSWERS</a></li> <li><a href="http://www.c-sharpcorner.com/blogs/" title="Share a Blog">BLOGS</a></li> <li><a href="http://www.c-sharpcorner.com/videos/" title="Share a Video">VIDEOS</a></li><li> <a href="http://www.c-sharpcorner.com/interviews/" title="Ask an Interview Question">
+INTERVIEWS</a></li><li><a href="http://www.c-sharpcorner.com/ebooks/" title="Share a Book">
+BOOKS</a></li> <li><a href="http://www.c-sharpcorner.com/news/" title="Submit a News">NEWS</a></li> <li><a href="http://www.c-sharpcorner.com/chapters/" title="Attend an Event">
+CHAPTERS</a></li> <li><a href="http://www.c-sharpcorner.com/careerAdvice/" title="Get career advice">
+CAREER ADVICE</a></li> <li><a href="http://www.c-sharpcorner.com/jobs/" title="Get Jobs">Jobs</a></li> </ul> </div> </div> </div> </div> </div> </div> <script type="text/javascript" language="javascript">
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '/JavaScripts/MindcrackerJScript.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+</script> <script type="text/javascript">
+$j(window).scroll(function() {
+var topS = $j(window).scrollTop();
+var winWidth = $j(window).width();
+var headerHe = $j(".topHeaderConainer").height() - $j(".HeadermenuStripBlue").height();
+// header js
+if (topS > headerHe) {
+if (parseInt(winWidth) < 767) {
+$j(".HeadermenuStripBlue").css("position", "relative");
+}
+else {
+$j(".HeadermenuStripBlue").css({ "position": "fixed", "top": 0 });
+}
+}
+else if (topS <= (headerHe + $j(".HeadermenuStripBlue").height())) {
+$j(".HeadermenuStripBlue").css("position", "relative");
+}
+});
+</script> <script type="text/javascript">
+// media query js
+$j(document).ready(function() {
+$j(window).resize(function() {
+if ($j(".menuButton").is(':visible')) {
+var windowHeight = $j(window).height();
+$j('.responsiveHeader .responsiveMenu').css("height", windowHeight);
+}
+else {
+$j('.responsiveHeader .responsiveMenu').css("height", 'auto');
+}
+});
+// responsive jquery 
+$j(".menuButton").click(function() {
+var windowHeight = $j(window).height();
+var menu_container = $j('.responsiveHeader .responsiveMenu');
+if (!menu_container.hasClass('hidden')) {
+menu_container.animate({ left: 0 });
+$j('body, .responsiveHeader').animate({ left: 260 + 'px' });
+menu_container.addClass('hidden');
+menu_container.css("height", windowHeight);
+$j('body').css({ 'height': windowHeight, 'overflow': 'hidden', 'position': 'fixed' });
+//$j('.SearchBox').animate({ left: 0 });
+} else {
+menu_container.animate({ left: -260 + 'px' });
+$j('body ,.responsiveHeader').animate({ left: 0 + 'px' });
+menu_container.removeClass('hidden');
+$j('body').css({ 'height': windowHeight, 'overflow-y': 'auto', 'position': 'relative' });
+//$j('.SearchBox').animate({ left: -260 + 'px' });
+}
+});
+});
+// add 'active' class to active menu
+var path = window.location.href.replace(/^https?:\/\//, '').split('/');
+var hostName = window.location.hostname;
+var activeCategory = hostName + '/' + path[1].toLowerCase();
+if (path[1].toLowerCase() === 'uploadfile') {
+var contentHeadingText = document.querySelector('div.article a.HeadingBold').textContent.trim() || document.querySelector('div.article a.HeadingBold').innerText.trim();
+activeCategory = hostName + '/' + contentHeadingText.toLowerCase();
+}
+else {
+if (path[1] === '1') {
+activeCategory = hostName + '/category';
+}
+}
+var activeMenuItem = document.querySelector('ul.headerMenu li a[href*="' + activeCategory + '"]');
+if (activeMenuItem !== null) {
+activeMenuItem.classList.add('active');
+}
+// ends here
+</script> <div class="page"> <div class="clear"> </div> <div class="main responsive_marginTop"> <div class="leftCntr"> <div class="trendingNowBox display_none_mobile"> <div class="left" id="example1_wrap"> <div class="bx_wrap"><a href="" class="prev"></a><a href="" class="next"></a><div class="bx_container" style="position: relative; width: 275px; overflow: hidden;"><ul id="example1" style="width: 999999px; position: relative; left: -275px;"><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/746765/angularjs-tidbits-overview/" class="LinkNormalStyle" style="color: Gray;">
+AngularJS TidBits Overview</a></li><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/why-developers-should-not-test-their-own-software/" class="LinkNormalStyle" style="color: Gray;">
+Why Developers Should Not Test Thei ...</a></li><li style="float: left; list-style: none; margin-right: 0px;"><a href="http://www.c-sharpcorner.com/UploadFile/746765/windows-10-setup-and-its-features/" class="LinkNormalStyle" style="color: Gray;">
+Windows 10 Setup and Its Features</a></li></ul></div></div> </div> <div class="right"> <div id="ctl00_TrendingNow1_Panal1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_TrendingNow1_searchImageButton&#39;)"> <input name="ctl00$TrendingNow1$searchTextBox" type="text" id="ctl00_TrendingNow1_searchTextBox" class="searchTextBox" placeholder="C# Corner Search" style="font-family:Calibri;"> <input type="submit" name="ctl00$TrendingNow1$searchImageButton" value="" id="ctl00_TrendingNow1_searchImageButton" class="button">  </div> </div> </div> <div class="article" id="div1"> <div class="HeadingAr"> <div class="floatRight marginTop"> <div id="ctl00_AuthorRank" class="AuthorRank"> <span id="ctl00_ImageReaderLevel" title="Beginner" class="sprite details beginner"></span>
+Reader Level:
+</div> </div> <span id="ctl00_spanArticle" class="floatLeft marginTop5"> <a href="http://www.c-sharpcorner.com/Articles/" id="ctl00_A1" class="HeadingBold grayHeading">
+Article</a> </span> </div> <div class="clear"> </div> <div class="image display_none_mobile"> <a href="http://www.c-sharpcorner.com/1/220/databases-dba.aspx" id="ctl00_AnchorAuthorImage"> <img id="ctl00_imgAuthor" title="Databases &amp; DBA" class="image90" src="./MongoDB - Day 11 (Collection Methods)_files/024410AM.png"></a> </div> <div class="detail"> <div class="grayText"> <h1> <span id="ctl00_LabelArticleTitle" cssclass="BlogsWelcomeHeading">MongoDB - Day 11 (Collection Methods)</span> </h1> </div> <div class="LinkNormalGrayLight">
+By <span><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx" id="ctl00_AuthorLink" class="LinkOrange">Pankaj  Kumar Choudhary</a></span>
+on
+<span id="ctl00_LabelDate">Aug 13, 2015</span> </div> <div class="LinkNormalGrayLight" style="display: none;"> <span style="color: Black;"></span><span id="ctl00_spanTags"><a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/collection-methods">collection methods</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/MongoDB">MongoDB</a>, <a class="LinkNormalGrayLight" href="http://www.c-sharpcorner.com/tags/"></a></span> </div> <div id="ctl00_DivDescription" class="normalGray">In this article you will learn about the Collection methods in MongoDB. This is Part 11 of the MongoDB series.</div> </div> <div class="clear"> </div> <div class="tweetIcon"> </div> </div> <div class="clear"> </div> <div> <span id="ctl00_LabelMessageBox" style="color:Red;"></span> </div> <div class="clear"> </div> <div class="clear"> </div> <div class="contentHeaderArticleIcons"> <ul class="right viewBar"> <li><a title="Views" class="newSpriteIcons like"><span class="point"><span id="ctl00_spanArticleViews">1.5<span class="unit">k</span></span></span></a></li> <li><a href="http://www.c-sharpcorner.com/uploadfile/f0b2ed/mongodb-day11-collection-methods/#ReadAndPostComment" class="newSpriteIcons comments" title="Comments"><span class="point"><span id="spanComments">24</span></span></a></li> <li><a class="newSpriteIcons views" title="Like" onclick="Like();"><span><span class="point"> <span id="ctl00_LabelLikeCount">0</span></span></span></a></li> </ul> <ul class="leftIcons"> <li><a class="newSpriteIcons facebook" href="https://www.facebook.com/sharer.php?u=http%3a%2f%2fgoo.gl%2fVVRIXc" onclick="popupwindowAtCenter(this.href,&#39;Share on Facebook&#39;,600,600);return false;" target="_blank">facebook</a></li> <li><a class="newSpriteIcons twitter" href="https://twitter.com/intent/tweet?&url=http%3a%2f%2fgoo.gl%2fVVRIXc&via=CsharpCorner&related=CsharpCorner&text=MongoDB+-+Day+11+(Collection+Methods)" target="_blank">twitter</a></li> <li><a class="newSpriteIcons linkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fgoo.gl%2fVVRIXc" onclick="popupwindowAtCenter(this.href,&#39;Share on LinkedIn&#39;,600,600);return false;" target="_blank">linkedIn</a></li> <li><a class="newSpriteIcons googlePlus" href="https://plus.google.com/share?url=http%3a%2f%2fgoo.gl%2fVVRIXc" onclick="popupwindowAtCenter(this.href,&#39;Share on Google+&#39;,600,600);return false;" target="_blank">google Plus</a></li> <li class="innerArticleIcons display_none_mobile"> <ul> <li> <a id="ctl00_ImageButtonEmail" title="Email this article to friend" class="newSpriteIcons email" href="javascript:__doPostBack('ctl00$ImageButtonEmail','')"></a></li> <li class="display_none"> <a id="ctl00_ImageButtonAddToMyBookmarks" title="Bookmark this article" class="newSpriteIcons bookmark" href="javascript:__doPostBack('ctl00$ImageButtonAddToMyBookmarks','')"></a> </li> <li class="display_none"><a href="javascript:void(GetPrintVersion())" id="ctl00_AnchorPrintArticle" title="Print" class="newSpriteIcons print"></a></li> <li><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/articles/" id="ctl00_AuthorsOtherArticles" title="Author&#39;s other article" class="newSpriteIcons author_other_article"></a> </li> <li><a href="http://www.c-sharpcorner.com/Articles/Default.aspx?ArticleId=2c62db7a-12c1-44c5-a539-754a6d5a66d6" id="ctl00_AnchorSimilarArticles" title="Similar articles" class="newSpriteIcons similar_article"></a></li> <li class="display_none"> </li> <li class="display_none"> </li> <li> <a id="ctl00_ImageButtonHistory" title="Article History" class="newSpriteIcons article_history" href="javascript:__doPostBack('ctl00$ImageButtonHistory','')"></a> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> <li class="display_none"> </li> </ul> </li> <li><a href="javascript:void(0);" class="newSpriteIcons expand display_none_mobile">
+expand</a></li> </ul> </div> <div class="clear"> </div> <div id="ctl00_downloadFiles" class="ratingTilte" style="margin-top:10px;margin-bottom:0px;display:none;">
+&nbsp;
+</div> <div id="div2" class="PaddingLeft5"><p align="justify"></p><p>Before reading this article, I highly recommend reading the following previous parts of the series:</p> <ul> <li><a style="color: #0000ff;" href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-1-introduction-of-mongodb/">MongoDB - Day 1 (Introduction To MongoDB)</a> </li><li><a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mondodb-day-2-install-mondodb-in-window/">MongoDB - Day 2 (Install MongoDB in Windows)</a> </li><li><a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-3-basic-of-database/">MongoDB - Day 3 (Database Basics)</a> </li><li><a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-4-basic-of-collection/">MongoDB - Day 4 (Basics of Collection)</a> </li><li><a style="color: #0000ff;" href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-5-data-types-is-mongodb/">MongoDB - Day 5 (Data Types in MongoDB)</a> </li><li><span style="color: #0000ff;"><a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-6-insert-method/">MongoDB - Day 6 (Insert Method)</a></span> </li><li><span style="color: #0000ff;"><a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-7-find-method-part-1/">MongoDB - Day 7 (Find Method Part 1)</a></span> </li><li><span style="color: #0000ff;"><a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-8-find-method-part-2/"><span style="color: #000080;"><span style="color: #0000ff;">MongoDB - Day 8 (Find Method Part </span></span></a></span> </li><li><span style="color: #000080;"><span style="color: #0000ff;"><a style="color: #0000ff;" href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-9-update-method/" target="_blank">MongoDB- Day 9(Update Method)</a></span></span> </li><li><span style="color: #000080;"><span style="color: #0000ff;">MongoDB- Day10(Remove Method)</span></span></li></ul> <p>MongoDB provide various methods for query and data manipulation. MongoDB supports the following collection methods for query and data manipulation.</p> <table width="100%" style="outline: 0px; color: #333333; font-family: &quot;segoe UI&quot;; font-size: 13px; border-collapse: collapse;" bgcolor="#ffffff" border="1" cellspacing="1"> <tbody style="outline: 0px;"> <tr style="outline: 0px;" bgcolor="#0270bf"> <td><span style="color: #ffffff;">Method_Name</span></td> <td><span style="color: #ffffff;">Description</span></td></tr> <tr> <td>Insert</td> <td>Create a new document</td></tr> <tr> <td>Remove</td> <td>Delete documents from collection</td></tr> <tr> <td>Update</td> <td>Modify documents in collection</td></tr> <tr> <td>Find</td> <td>Select document from collection and return a cursor object</td></tr> <tr> <td>Count</td> <td>Return a count of numbers of documents in a collection</td></tr> <tr> <td>Distinct</td> <td>Return array of document that have distinct values</td></tr> <tr> <td>Findone</td> <td>Execute query and return a single document</td></tr> <tr> <td>Save</td> <td>Replace existing document with new document</td></tr></tbody></table> <p>Insert, Update, Remove and Find are the four methods we have already covered. You can learn how these methods work from previous parts of the series. Today we will cover the remaining methods.<br><br>First we create a collection as in the following:</p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.createCollection(</span><span class="string">"Post"</span><span>,{capped:</span><span class="keyword">false</span><span>,autoIndexID:</span><span class="keyword">false</span><span>,size:5040320,max:50}) &nbsp;</span></span></li></ol></div>Now insert the following data into the “Post” Collection.<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c547eaacae58b1a7d7dff7"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:02.191Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"Introduction&nbsp;of&nbsp;MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;4,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c547feacae58b1a7d7dff8"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:22.805Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day1"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;5,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span> </li><li><span>{&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5480cacae58b1a7d7dff9"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:36.452Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day2"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"SQL"</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;3,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;}&nbsp;&nbsp;</span> </li><li><span>&nbsp;{&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5481bacae58b1a7d7dffa"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:51.436Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day3"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;6,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>}&nbsp;&nbsp;</span></li></ol></div>After inserting the data above, the data structure of the collection looks as in the following:<br><br><img width="600" height="432" alt="" src="./MongoDB - Day 11 (Collection Methods)_files/insert.png"><br><br>We will use this “Post” collection in all the examples.<br><br><strong>count() Method</strong> <p>The count() method returns the number of documents that match the find() query. The find() method searches documents and returns a cursor object whereas the count method returns the number of results that match a query. <br><br><strong>Syntax</strong><br></p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Collection_Name.count(&nbsp;&lt;query&gt;) &nbsp;</span></span></li></ol></div><strong>Parameters<br></strong> <br> <table width="100%" style="outline: 0px; color: #333333; font-family: &quot;segoe UI&quot;; font-size: 13px; border-collapse: collapse;" bgcolor="#ffffff" border="1" cellspacing="1"> <tbody style="outline: 0px;"> <tr style="outline: 0px;" bgcolor="#0270bf"> <td><span style="color: #ffffff;">Parameter</span> </td> <td><span style="color: #ffffff;">Type</span></td> <td><span style="color: #ffffff;">Description</span></td></tr> <tr> <td>Query</td> <td>Document</td> <td>Define the selection criteria</td></tr></tbody></table> <p><strong>Count all documents</strong><br><br>To count all the documents of a collection use the count method without any selection criteria (query).<br><br><strong>Example</strong><br></p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.count() &nbsp;</span></span></li></ol></div>This query counts all the documents of the “Post” collection and returns the number of documents.<br><br><strong>Output</strong><br><br>4<br><br><strong>Count all Documents that match the selection criteria</strong><br><br>To count the documents that match a specific selection criteria use the &lt;query&gt; option in the count() method.<br><br><strong>Example 1</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.count({Likes:{$gt:4}})&nbsp;</span></span></li></ol></div>This query returns the number of posts that get more than 4 likes.<br><br><strong>Output</strong><br><br>2<br><br><strong>Example 2</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.count({Likes:{$gt:5},Tags:</span><span class="string">"NoSQL"</span><span>}) &nbsp;</span></span></li></ol></div>This query returns the number of posts that get more than 5 likes and the “Tags” array contains the “NoSQL” value.<br><br><strong>Output</strong><br><br>1<br><br><strong>Note</strong><br><br>The db.collection.count(&lt;query&gt;) method is equivalent to db.collection.find(&lt;query&gt;).count(). Let's see an example.<br><br><strong>Example 1</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.count() &nbsp;</span></span></li></ol></div><strong>Output</strong><br><br>4<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.find().count() &nbsp;</span></span></li></ol></div><strong>Output</strong><br><br>4<br><br><strong>Example 2</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.count({Likes:{$gt:5},Tags:</span><span class="string">"NoSQL"</span><span>}) &nbsp;</span></span></li></ol></div><strong>Output</strong><br><br>1<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.find({Likes:{$gt:5},Tags:</span><span class="string">"NoSQL"</span><span>}).count() &nbsp;</span></span></li></ol></div><strong>Output</strong><br><br>1<br><br><strong>Distinct() Method</strong><br><br>The Distinct() method finds the distinct values for a specified field and returns the results in an array for a single collection. The returned result must not be larger than the maximum BSON size.<br><br><strong>Syntax<br></strong> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Collection_Name.distinct(&lt;field&gt;,&lt;query&gt;) &nbsp;</span></span></li></ol></div><strong>Parameters<br><br></strong> <table width="100%" style="outline: 0px; color: #333333; font-family: &quot;segoe UI&quot;; font-size: 13px; border-collapse: collapse;" bgcolor="#ffffff" border="1" cellspacing="1"> <tbody style="outline: 0px;"> <tr style="outline: 0px;" bgcolor="#0270bf"> <td><span style="color: #ffffff;">Parameter</span> </td> <td><span style="color: #ffffff;">Type</span> </td> <td><span style="color: #ffffff;">Description</span></td></tr> <tr> <td>Field</td> <td>String</td> <td>The field for which to return distinct values.</td></tr> <tr> <td>Query</td> <td>Document </td> <td>Specify the document selection criteria </td></tr></tbody></table> <p><strong>Return distinct value for a field</strong><br><br>To return the distinct value from a field use the “Field” parameter of the distinct method.<br><br><strong>Example</strong><br><br>db.Post.distinct("Tags")<br><br>This query returns the distinct value from the “Tags” array field.<br><br><strong>Output</strong><br><br>[ "Database", "MongoDB", "NoSQL", "SQL" ]<br><br><strong>Return distinct value for fields that match the selection criteria</strong><br><br>To return the distinct value from a field that match a specific selection criteria use the &lt;query&gt; option in the distinct() method.<br><br><strong>Example</strong><br></p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.distinct(</span><span class="string">"Tags"</span><span>,{Likes:{$gt:5}}) &nbsp;</span></span></li></ol></div>This query returns the distinct value from the “Tags” field of documents where the value of the “Likes” field is greater than 5.<br><br><strong>Output</strong><br><br>[ "Database", "MongoDB", "NoSQL" ]<br><br><strong>Note</strong><br><br>If the value of a specific field is an array then the distinct() method considers each value as a separate value. In other words the [“Name”] and “Name” values of a field are treated as separate values in the distinct method. <br><br>Let's see an example.<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"56c5298bacae58b1a7d7dffa"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:51.436Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day5"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"NoSQL"</span><span>],&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;9&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;}&nbsp;&nbsp;</span></li></ol></div>Now we will use the distinct() method for the “Tags” array and examine the result.<br><br><strong>Query</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.distinct(</span><span class="string">"Tags"</span><span>,{Likes:9}) &nbsp;</span></span></li></ol></div><strong>Output</strong><br><br>[ "MongoDB", "NoSQL", [ "NoSQL" ] ]<br><br><br><strong>findOne() Method</strong><br><br>The findOne() method is used to return a document that satisfies the specified selection criteria. If more than one document matches the selection criteria then the first document will return a value that reflects the order of documents on the disk.<br><br><strong>Syntax</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Collection_Name.findOne(&lt;query&gt;,&lt;projection&gt;) &nbsp;</span></span></li></ol></div><strong>Parameters</strong><br><br> <table width="100%" style="outline: 0px; color: #333333; font-family: &quot;segoe UI&quot;; font-size: 13px; border-collapse: collapse;" bgcolor="#ffffff" border="1" cellspacing="1"> <tbody style="outline: 0px;"> <tr style="outline: 0px;" bgcolor="#0270bf"> <td><span style="color: #ffffff;">Parameter</span></td> <td><span style="color: #ffffff;">Type</span></td> <td><span style="color: #ffffff;">Description</span></td></tr> <tr> <td>Query</td> <td>Document</td> <td>Specify selection criteria</td></tr> <tr> <td>Projection</td> <td>Document</td> <td>Specify the field that the findOne method will return. I or true for include and 0 or false to exclude the field </td></tr></tbody></table> <p><br><strong>Return single document</strong><br><br>To return the single document without any selection criteria use the findOne method without the &lt;query&gt; parameter.<br><br><strong>Example</strong><br><br>db.Post.findOne()<br><br>This query returns the first document from the collection.<br><br><strong>Output</strong><br></p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c547eaacae58b1a7d7dff7"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:02.191Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"Introduction&nbsp;of&nbsp;MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;4&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;} &nbsp;</span></li></ol></div><strong>findOne() method with selection criteria</strong><br><br>To determine the first document that match a specified selection criteria, use the &lt;query&gt; parameter in the findOne() method.<br><br><strong>Example</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.findOne({</span><span class="string">"Likes"</span><span>:{$gt:5}}) &nbsp;</span></span></li></ol></div>This query returns the first document in which the value of the “Likes” field is greater than 5.<br><br><strong>Output</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5481bacae58b1a7d7dffa"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:51.436Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day3"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;6&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;} &nbsp;</span></li></ol></div><strong>Return specific field</strong><br><br>To return the specific field from the document use the &lt;projection&gt; parameter in the findOne() method.<br><br><strong>Example</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.findOne({</span><span class="string">"Likes"</span><span>:{$gt:5}},{_id:0,Title:1,Tags:1}) &nbsp;</span></span></li></ol></div>This query returns the “Title” and “Tags” fields from first document that match the selection criteria.<br><br><strong>Output</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day3"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;</span> </li><li><span>&nbsp;} &nbsp;</span></li></ol></div><strong>Note<br></strong><br>We cannot apply cursor methods (hasNext, Next) to the result of findOne() because the findOne() method returns only a single document. If we try to use the cursor method then MongoDB will throw an error.<br><br><strong>Example</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>var&nbsp;ab=db.Post.findOne({</span><span class="string">"Likes"</span><span>:{$gt:5}},{_id:0,Title:1,Tags:1})&nbsp;&nbsp;&nbsp;</span></span> </li><li><span>var&nbsp;mc=ab.hasNext()?ab.next():<span class="keyword">null</span><span>&nbsp;&nbsp;</span></span></li></ol></div> <div><strong>Output</strong><br><br>2015-08-12T22:35:20.220+0530 E QUERY TypeError: Object [object Object] has no method 'hasNext' at (shell):1:11<br><br><strong>Save method</strong><br><br>The Save method either replaces the existing document or inserts a new document. It depends upon the _id field of the document. If we don't provide the _id field, then the save() method calls the insert() method and inserts a new document.<br><br><strong>Syntax</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Collection_Name.save(&lt;document&gt;) &nbsp;</span></span></li></ol></div><strong>Parameters<br><br></strong></div> <table width="100%" style="outline: 0px; color: #333333; font-family: &quot;segoe UI&quot;; font-size: 13px; border-collapse: collapse;" bgcolor="#ffffff" border="1" cellspacing="1"> <tbody style="outline: 0px;"> <tr style="outline: 0px;" bgcolor="#0270bf"> <td><span style="color: #ffffff;">Parameters</span> </td> <td><span style="color: #ffffff;">Type</span></td> <td><span style="color: #ffffff;">Description</span></td></tr> <tr> <td>Document</td> <td>Document</td> <td>Specify document to save to the collection</td></tr></tbody></table> <p><strong>Document without _id field</strong><br><br>If we use a document without defining a _id field then the save() method calls the insert() method and a new document will be inserted into the collection.<br><br><strong>Example</strong><br></p> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.save({Title:</span><span class="string">"MongoDB-Day11"</span><span>,Tage:[</span><span class="string">"Collection&nbsp;Method"</span><span>]}) &nbsp;</span></span></li></ol></div>This query inserts a new document into the collection.<br><br>Now we will check the existence of the newly inserted document.<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.find({Title:</span><span class="string">"MongoDB-Day11"</span><span>}).pretty() &nbsp;</span></span></li></ol></div><strong>Output</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55cb830e732675a928bf2f48"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB-Day11"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tage"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Collection&nbsp;Method"</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;} &nbsp;</span></li></ol></div><strong>Document with _id field</strong><br><br>If a document contains a _id field then the save() method is the equivalent of the update method with upsert method set to true. In other words, if the document contains a _id field then there are the following two possibilities.<br><br><strong>Case 1:</strong> _id already exist.<br><br>If _id already exists then the field of an existing document will replace the new document's field.<br><br><strong>Example:</strong><br><br>We use the document whose _id is ObjectId("55c5481bacae58b1a7d7dffa").<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5481bacae58b1a7d7dffa"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBY"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pankaj&nbsp;choudhary"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Time"</span><span>&nbsp;:&nbsp;ISODate(</span><span class="string">"2015-08-08T00:06:51.436Z"</span><span>),&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB&nbsp;Day3"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"MongoDB"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database"</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;</span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Likes"</span><span>&nbsp;:&nbsp;6&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;</span> </li><li><span>} &nbsp;</span></li></ol></div>Now we execute the save method and retrieve the document.<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.save({</span><span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5481bacae58b1a7d7dffa"</span><span>),PostBy:</span><span class="string">"Nitin&nbsp;Yadav"</span><span>,Title:"MongoD&nbsp;&nbsp;</span></span> </li><li><span>B-Day6<span class="string">",Tage:["</span><span>Collection&nbsp;Method"]}) &nbsp;</span></span></li></ol></div>Document after replace.<br><br><strong>Query</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.find({</span><span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5481bacae58b1a7d7dffa"</span><span>)}).pretty() &nbsp;</span></span></li></ol></div><strong>Output</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"55c5481bacae58b1a7d7dffa"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBy"</span><span>&nbsp;:&nbsp;</span><span class="string">"Nitin&nbsp;Yadav"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB-Day6"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tage"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Collection&nbsp;Method"</span><span>&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;</span> </li><li><span>&nbsp;} &nbsp;</span></li></ol></div><strong>Case 2: </strong>_id doesn't exist<br><br>If _id does not already exist in the collection, then a new document will be inserted.<br><br><strong>Example</strong><br><br>First we check that _id already exists.<br><br><strong>Query</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.find({</span><span class="string">"_id"</span><span>:ObjectId(</span><span class="string">"123456789abcdef123456789"</span><span>)}).pretty() &nbsp;</span></span></li></ol></div>When we execute the preceding query, we did not retrieve a document. In other words this _id does not exist.<br><br>Now we insert a new document using the save() method.<br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.save({</span><span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"123456789abcdef123456789"</span><span>),PostBy:</span><span class="string">"Pradeep&nbsp;Yadav"</span><span>,Title:"Mong&nbsp;&nbsp;</span></span> </li><li><span>oDB-Day7<span class="string">",Tags:["</span><span>NoSQL</span><span class="string">","</span><span>asp.Net"]}) &nbsp;</span></span></li></ol></div>Now we check this document.<br><br><strong>Query</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>db.Post.find({</span><span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"123456789abcdef123456789"</span><span>)}).pretty() &nbsp;</span></span></li></ol></div><strong>Output</strong><br> <div class="dp-highlighter"> <div class="bar"></div> <ol class="dp-c"> <li class="alt"><span><span>{&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"_id"</span><span>&nbsp;:&nbsp;ObjectId(</span><span class="string">"123456789abcdef123456789"</span><span>),&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"PostBy"</span><span>&nbsp;:&nbsp;</span><span class="string">"Pradeep&nbsp;Yadav"</span><span>,&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Title"</span><span>&nbsp;:&nbsp;</span><span class="string">"MongoDB-Day7"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Tags"</span><span>&nbsp;:&nbsp;[&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"NoSQL"</span><span>,&nbsp;&nbsp;</span></span> </li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"asp.Net"</span><span>&nbsp;&nbsp;</span></span> </li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;</span> </li><li class="alt"><span>&nbsp;} &nbsp;</span></li></ol></div>The preceding result ensures that a new document is inserted into the “Post” collection.<br><br>Today we learned some collection methods. In the next article I will explain a new topic. Until then keep coding and continue practicing.<br><br>Thanks for reading this article.
+<p></p></div> <div class="clear"> </div> <div class="clear"> </div> <div class="auther_bio"> <a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx" id="ctl00_AboutAuthor1_AuthorImageAnchor" class="image"> <img src="./MongoDB - Day 11 (Collection Methods)_files/f0b2ed20150804024153.png" id="ctl00_AboutAuthor1_AuthorImage"></a> <div class="autherDetail"> <a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx" id="ctl00_AboutAuthor1_AuthorName" class="userName">Pankaj  Kumar Choudhary</a> <p id="ctl00_AboutAuthor1_Description" class="description">I am student of 3rd Year B.Tech&nbsp; and&nbsp; also working in SUCCESS LADDER Technology Alwar only for  Experience not for Money . I be always Ready to&nbsp; learn new Things Related My Field .&nbsp;</p> <ul class="social"> <li class="twitter"><a href="https://twitter.com/intent/follow?screen_name=pankajmalhan30" id="ctl00_AboutAuthor1_TwitterFollow" title="Follow on Twitter">Follow</a></li> <li class="facebook"><a href="https://www.facebook.com/app_scoped_user_id/656485277828627/" id="ctl00_AboutAuthor1_FacebookProfileUrl" title="Facebook">Facebook</a></li> <li class="linkedIn"><a href="https://www.linkedin.com/profile/public-profile-settings?trk=prof-edit-edit-public_profile" id="ctl00_AboutAuthor1_LinkedInProfileUrl" title="LinkedIn">LinkedIn</a></li> <li class="message"> <a id="ctl00_AboutAuthor1_SendMessageImageButton" title="Send Message" href="javascript:__doPostBack('ctl00$AboutAuthor1$SendMessageImageButton','')">message</a></li> </ul> </div> <div class="clear"> </div> <div class="autherIcons"> <ul> <li class="li_1"><a href="http://www.c-sharpcorner.com/Members/rank/"><span class="rank"> </span><span class="text">rank</span><span id="ctl00_AboutAuthor1_Rank" class="count">65</span></a> </li> <li class="li_2"><a href="http://www.c-sharpcorner.com/Articles/AuthorTopArticles.aspx?authorid=f0b2ed"> <span class="reader"></span><span id="ctl00_AboutAuthor1_Readers" class="count">128k</span> <span class="text">readers</span> </a></li> <li class="li_4"><span id="ctl00_AboutAuthor1_Medal" class="medal Silver" title="Silver Member"></span><span id="ctl00_AboutAuthor1_MedalText" class="count Silver">Silver</span><span class="text">Member</span></li> <li id="ctl00_AboutAuthor1_CSharpMVP" class="li_3" title="C# Corner MVP"><a href="http://www.c-sharpcorner.com/Members/mvps/"> <span class="csharpmvp"></span><span id="ctl00_AboutAuthor1_MVP" class="count">1</span> <span class="text">
+time</span> </a></li> </ul> </div> </div> <div class="clear"> </div> <div id="ctl00_RelatedArticles" class="relatedArticle"> <h3>
+Related Articles
+</h3> <ul> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl00_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-4-basic-of-collection/">MongoDB - Day 4 (Basics of Collection)</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl01_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/mongodb-day-6-insert-method/">MongoDB - Day 6 (Insert Method)</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl02_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/pmfawas/mongodb-with-C-Sharp/">MongoDB With C#</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl03_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/fba95d/introduction-to-mongodb/">Introduction to MongoDB</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl04_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/87b416/getting-started-mongodbwithcsharp/">Getting Started MongoDB With C#</a> </li> <li><span class="bullet"></span> <a id="ctl00_RepeaterSimilarArticles_ctl05_HyperLinkTitle" href="http://www.c-sharpcorner.com/UploadFile/dhananjaycoder/mongodb-on-windows-a-look-in-5-minute/">MongoDB on Windows a Look in 5 Minute</a> </li> </ul> </div> <script src="./MongoDB - Day 11 (Collection Methods)_files/jquery-Mention-Combined.js" type="text/javascript"></script> <script type="text/javascript">
+var mentionarraydata=[];
+var Comments_article = (function () {
+var pageSize = 10;
+var rootClass = '.article ';
+return {
+//Get Comments
+GetComments: function (parent_id) {
+var pageNumber = $j('#HiddenPageNumber_article').val();
+var rootComments = $j(rootClass + '#RootComments');
+var items = 0;
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/Comments.asmx/GetComments",
+data: "{'id':'2c62db7a-12c1-44c5-a539-754a6d5a66d6','type':'article','pageNumber':'" + pageNumber + "', 'pageSize':'" + pageSize + "', 'parentId':" + parent_id + "}",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#mainLoader').show();
+},
+success: function (response) {
+var d = response.d;
+var data = d[0];
+var totalComments;
+$j.each(data, function (index) {
+rootComments.prepend(BuildComment(data[index])); //Prepend root comments
+if (pageNumber == 1 && index == 0) {
+$j(rootClass + '#HiddenTotalComments').val(data[index].TotalComments);
+if (d[2][index] == null || d[2][index] == undefined) {
+totalComments = data[index].TotalComments;
+}
+else {
+totalComments = parseFloat(data[index].TotalComments) + parseFloat(d[2][index].TotalComments);
+}
+$j(rootClass + '#TotalComments').text(totalComments); //set total comments only once.
+$j('#spanComments').text(totalComments); //Manages Header Comment Count
+}
+items = parseFloat(items) + 1; //track for number of comments to show
+ManageAlternateColor();
+});
+//Reply Binding starts here
+var reply = d[1];
+var element;
+$j.each(reply, function (index) {
+element = $j(rootClass + '#CommentReplies_' + reply[index].ParentId);
+element.prepend(BulildCommentReply(reply[index]));
+items = parseFloat(items) + 1;
+});
+//Reply Binding ends here
+//Manage paging
+{
+if (items != 0 && parseFloat(pageNumber) >= 1) {
+if (parseFloat(pageNumber) == 1)
+$j(rootClass + '#CommentCount').text(items);
+else
+$j(rootClass + '#CommentCount').text(parseFloat($j(rootClass + '#CommentCount').text()) + items);
+}
+else {
+$j(rootClass + '#Paging').hide();
+}
+ManageViewMoreVisibility();
+}
+$j(rootClass + '#mainLoader').hide();
+}
+});
+},
+//Like Comment
+LikeComment: function (id) {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=like_comment&id=" + id + "&type=article",
+type: "POST",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#ajaxLoader_' + id).show(); //Show Ajax Loader
+},
+success: function (response) {
+status = response;
+$j(rootClass + '#ajaxLoader_' + id).hide(); //Hide Ajax Loader
+},
+Error: ShowError
+});
+if (status == '1') {
+var likes = $j(rootClass + '#Likes_' + id).text();
+$j(rootClass + '#Likes_' + id).text(parseFloat(likes) + 1);
+}
+else if (status == '2') {
+}
+},
+//Delete Comment
+DeleteComment: function (id, parent_id) {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=delte_comment&id=" + id + "&type=article",
+type: "POST",
+async: false,
+success: function (response) {
+status = response;
+},
+Error: ShowError
+});
+if (status == '1') {
+var count = $j(rootClass + '#Replies_' + id).text();
+$j(rootClass + '#comment_' + id).remove();
+if (parent_id == 0) {
+ManageAlternateColor();
+ManagePaging('d', count);
+if (GetParentCommentsCount() == 0)
+Comments_article.GetComments(0);
+}
+else {
+var replies = $j(rootClass + '#Replies_' + parent_id).text();
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+$j(rootClass + '#Replies_' + parent_id).text(parseFloat(replies) - 1);
+totalComments.text(parseFloat(totalComments.text()) - 1);
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+}
+}
+},
+//Post Comment
+PostComment: function (parent_id, e) {
+if (e.keyCode == 13) {
+var rootComments = $j(rootClass + '#RootComments');
+var totalComments = $j(rootClass + '#HiddenTotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var comment = null;
+$j('textarea.mention').mentionsInput('val', function(text) {
+comment=text;
+});
+comment=FormatText(comment);
+comment=GetCommentData(comment,'textarea.mention');
+if (comment != '') {
+VerifyUser();
+$j.ajax({
+url: "/WebServices/Comments.asmx/InsertComment",
+data: "{'user_id':'a48f78','content_id':'2c62db7a-12c1-44c5-a539-754a6d5a66d6','type':'article','parent_id':'" + parent_id + "', 'description':'" + comment + "'}",
+type: "POST",
+contentType: "application/json; charset=utf-8",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader').show(); //Show Ajax Loader
+},
+success: function (response) {
+var data = response.d[0];
+var mailtosendids=[];
+var mailtobesendids=null;
+$j('textarea.mention').mentionsInput('getMentions', function(data) {
+$j.each(data, function(idx, obj) {
+mailtosendids.push(obj.id);
+});
+});
+$j('textarea.mention').mentionsInput('reset', function(data) {
+});                          
+rootComments.append(BuildComment(data));
+ManageAlternateColor();
+$j(rootClass + '#InputCommentText_' + parent_id).val('').trigger('autosize.resize');
+//if (!(parseFloat(totalComments.val()) == parseFloat(commentCount.text()) && parseFloat($j('#HiddenPageNumber_article').val()) > 1))
+if (parseFloat(GetParentCommentsCount()) > parseFloat(pageSize))
+rootComments.find('div').first().remove();
+ManagePaging('i', 0);
+SendMail(comment, '0', data.ParentUserId, data.CommentId);
+if (mailtosendids.length > 0)
+{
+mailtobesendids=mailtosendids.join(",");
+SendNotification(comment,mailtobesendids)
+}
+$j(rootClass + '#PostLoader').hide(); //Hide Ajax Loader
+PreventDefault(e);
+},
+Error: ShowError
+});
+}
+else { PreventDefault(e); }
+}
+},
+//Show Reply TextBox
+ShowReplyBox: function (id) {
+var element = $j(rootClass + '#CommentReplies_' + id);
+if ($j(rootClass + '#CommentReplies_' + id + ' #ReplyContainer_' + id).length)
+{ $j(rootClass + '#CommentReplies_' + id + ' #ReplyContainer_' + id).toggle(); }
+else {
+var postReply = '<div id="ReplyContainer_' + id + '" class="ReplyComment" style="padding-bottom:5px;">\
+<div class="image level1"><img src="http://www.c-sharpcorner.com/UploadFile/AuthorImage/a48f78.png" alt=""></div>\
+<div class="commentcontent">\
+<textarea id="ReplyComment_' + id + '" onkeypress="Comments_article.PostCommentReply(' + id + ',event);" class="mention" style="height:18px;" spellcheck="true" placeholder="Type your comment here and press Enter Key...."></textarea>\
+</div>\
+<img id="PostLoader_' + id + '" src="/Images/csharp/ajax-loader_12x9.gif"\
+style="margin: 5px 7px 0px 0px; clear:both; float:right; display:none;" />\
+</div>';
+element.append(postReply);
+$j(rootClass + 'textarea#ReplyComment_' + id).elastic();
+GetValueAtTheRate(rootClass + 'textarea#ReplyComment_' + id);
+$j(rootClass + '#ReplyComment_' + id).focus();
+}
+$j(rootClass + '#CommentReplies_' + id).show();
+},
+//Show Replies
+ShowReplies: function (id, anchr) {
+var element = $j(rootClass + '#CommentReplies_' + id);
+var commentCount = $j(rootClass + '#CommentCount');
+//if (element.is(":visible") &&  == '')
+var pageSize = 50;
+if ($j(rootClass + '#Replies_' + id).text() != '0') {
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/Comments.asmx/GetComments",
+data: "{'id':'2c62db7a-12c1-44c5-a539-754a6d5a66d6','type':'article','pageNumber':'1', 'pageSize':'" + pageSize + "', 'parentId':" + id + "}",
+beforeSend: function () {
+$j(rootClass + '#ajaxLoader_' + id).show(); //Show Ajax Loader
+},
+success: function (response) {
+var d = response.d;
+element.html('');
+var data = d[0];                                                        
+$j.each(data, function (index) {
+data[index].CommentId;
+element.prepend(BulildCommentReply(data[index])); //Prepend root comments
+});
+$j(rootClass + '#ajaxLoader_' + id).hide(); //Hide Ajax Loader
+$j(anchr).remove();
+$j('#CommentReplies_' + id).show();
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+}
+});
+}
+},
+//Expend/Collapse Comment Replies
+ToggleReplies: function (id) {
+$j(rootClass + '#CommentReplies_' + id).toggle();
+},
+//Post Comment Reply
+PostCommentReply: function (parent_id, e) {
+if (e.keyCode == 13) {
+var replyContainer = $j(rootClass + '#ReplyContainer_' + parent_id);
+//var comment = FormatText($j(rootClass + '#ReplyComment_' + parent_id).val());
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var comment=null;
+$j(rootClass + '#ReplyComment_' + parent_id).mentionsInput('val', function(text) {
+comment=text;
+});
+comment =FormatText(comment);
+comment=GetCommentData(comment,rootClass + '#ReplyComment_' + parent_id);
+$j(rootClass +'#ReplyComment_' + parent_id).mentionsInput('reset', function(data) {
+});
+if (comment != '') {
+VerifyUser();
+$j.ajax({
+url: "/WebServices/Comments.asmx/InsertComment",
+data: "{'user_id':'a48f78','content_id':'2c62db7a-12c1-44c5-a539-754a6d5a66d6','type':'article','parent_id':'" + parent_id + "', 'description':'" + comment + "'}",
+type: "POST",
+contentType: "application/json; charset=utf-8",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader_' + parent_id).show(); //Show Ajax Loader
+},
+success: function (response) {
+var data = response.d[0];
+replyContainer.before(BulildCommentReply(data));
+$j(rootClass + '#ReplyComment_' + parent_id).val('').trigger('autosize.resize');
+var replies = $j(rootClass + '#Replies_' + parent_id).text();
+$j(rootClass + '#Replies_' + parent_id).text(parseFloat(replies) + 1);
+totalComments.text(parseFloat(totalComments.text()) + 1);
+commentCount.text(parseFloat(GetParentCommentsCount()) + parseFloat(GetChildCommentsCount()));
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+SendMail(comment, '1', data.ParentUserId, data.CommentId); //SendMail(comment, is_child_comment, parent_user_id)
+$j(rootClass + '#PostLoader_' + parent_id).hide(); //Hide Ajax Loader
+PreventDefault(e);
+},
+Error: ShowError
+});
+}
+else { PreventDefault(e); }
+}
+},
+//Show Edit Panel
+ShowEditView: function (commentId) {
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var editButton = $j(rootClass + '#comment_' + commentId + ' div:eq(0) .edit');
+var editView = '<textarea id="CommentToEdit_' + commentId + '" onkeypress="Comments_article.EditComment(' + commentId + ',event);" class="inputText" spellcheck="true"  ></textarea>\
+<img id="ajaxLoaderEdit_' + commentId + '" src=\'/Images/csharp/ajax-loader_12x9.gif\' style="margin:4px 0px 0px 5px; display:none;" />';
+editButton.hide().next().hide();
+content.after(editView);
+var edittext=content.html();
+var existingusers= edittext.match(/<a[^>]+>([^<]+)<\/a>/g);
+var hyperlink=null;
+var username=null;
+//var userid=null;
+//var pieces=null;
+if(existingusers)
+{
+for(var i=0;i<=existingusers.length-1;i++)
+{
+hyperlink= $j(existingusers[i]).attr('href');
+//pieces=hyperlink.split('/');
+//userid=pieces[pieces.length-2];
+username=existingusers[i].match(/<a[^>]+>([^<]+)<\/a>/)[1];           
+mentionarraydata.push(username+'/^g*~o0#g*^/'+hyperlink);
+edittext=edittext.replace(existingusers[i],username);
+}
+}
+$j(rootClass + '#CommentToEdit_' + commentId).val(edittext);
+$j(rootClass + '#CommentToEdit_' + commentId).focus();
+content.hide();
+$j(rootClass + 'textarea#CommentToEdit_' + commentId).elastic();
+},
+//Edit Comment
+EditComment: function (commentId, e) {
+if (e.keyCode == 13) {  
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var textBox = $j(rootClass + '#CommentToEdit_' + commentId);
+textBox.val(textBox.val().replace('\n', ''));
+var comment = $j(rootClass + '#CommentToEdit_' + commentId).val().trim();
+comment = FormatText(comment);
+comment=GetEditData(comment);                    
+if (comment == content.text() || comment == '') {
+RemoveEditView(commentId);
+PreventDefault(e);
+}
+else {
+VerifyUser();
+var status;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=edit_comment&id=" + commentId + "&type=article",
+type: "POST",
+async: false,
+data: { description: comment },
+beforeSend: function () {
+$j(rootClass + '#ajaxLoaderEdit_' + commentId).show(); //Show Ajax Loader
+},
+success: function (response) {
+status = response;
+PreventDefault(e);
+mentionarraydata.length=0;
+},
+Error: ShowError
+});
+if (status == '1') {
+content.html(decodeURIComponent(comment));
+RemoveEditView(commentId);
+}
+}
+}
+else if (e.keyCode == 27) {
+RemoveEditView(commentId);
+}
+},
+//Update Comment Follow Status
+UpdateFollowStatus: function (checkBox) {
+var status;
+status = ($j(checkBox).is(':checked'))?true:false;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=comment_follow_status&id=2c62db7a-12c1-44c5-a539-754a6d5a66d6&type=article&status=" + status,
+type: "POST",
+async: false,
+beforeSend: function () {
+$j(rootClass + '#PostLoader').show(); //Show Ajax Loader
+},
+success: function (response) {
+if(response=='1')
+$j(rootClass + '#PostLoader').hide();
+},
+Error: ShowError
+});
+},
+//View Previous Comments
+ViewPreviousComments: function () {
+var pageNumber = $j('#HiddenPageNumber_article').val();
+var totalComment = $j(rootClass + '#HiddenTotalComments').val();
+if (parseFloat(totalComment) > (parseFloat(pageNumber) * pageSize)) {
+$j('#HiddenPageNumber_article').val(parseFloat(pageNumber) + 1);
+}
+else {
+$j(rootClass + '#RootComments').text('');
+$j('#HiddenPageNumber_article').val('1');
+}
+Comments_article.GetComments(0);
+},
+//Show editor options
+ShowEditorOptions: function (container,e) {
+$j(container).find('.pulseDelete:first').show();
+},
+//Hide editor options
+HideEditorOptions: function (container,e) {
+$j(container).find('.pulseDelete:first').hide();
+},
+//Show editor options
+ShowEditorOptionsReply: function (container,e) {
+$j(container).find('.pulseDeleteReply:first').show();
+$j(container).parents().eq(2).find('.pulseDelete').hide();
+e.stopPropagation();
+},
+//Hide editor options
+HideEditorOptionsReply: function (container,e) {
+$j(container).find('.pulseDeleteReply:first').hide();
+e.stopPropagation();
+}
+}// End of return
+function PreventDefault(e)//Function to prevent Default Events. Working in IE8
+{
+if (e.preventDefault)
+e.preventDefault();
+else
+e.returnValue = false;
+}
+function BuildComment(obj) {
+var authorUrl = obj.AuthorUrl;
+var desc=unescape(obj.Description);
+var commentHtml;
+commentHtml = '<div id="comment_' + obj.CommentId + '" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);" >';
+if ('a48f78' == obj.UserId || '' == 'E' || '' == 'A') {
+commentHtml += '<div class="pulseDelete">';
+commentHtml += '<span onclick="Comments_article.ShowEditView(' + obj.CommentId + ')" title="Edit" class="sprite edit"></span>';
+if ('a48f78' == obj.UserId || '' == 'A')
+commentHtml += '<span onclick="Comments_article.DeleteComment(' + obj.CommentId + ',' + obj.ParentId + ')" title="Delete" class="sprite delete"></span>';
+commentHtml += '</div>';
+}
+commentHtml += '<div class="image level0"><a href="' + authorUrl + '"><img alt="" title="' + obj.FullName + '" src="' + obj.PhotoUrl + '" /></a></div>\
+<div class="commentcontent">\
+<div class="commentDescription"  >' + desc + '</div>\
+<div>\
+<a class="LinkRed" href="'  + authorUrl + '">' + obj.FullName + '</a>\
+<span class="floatRight responsive_Commenttime"  style="font-size: 11px;"><span class="watchICon"></span>' + obj.CreatedDate + '</span>\
+</div>\
+<div style="margin-top: 4px;">\
+<ul class="rpv"><li class="newSpriteIcons rank" title="Rank" ><span>'+obj.AuthorRank+'</span></li><li class="newSpriteIcons point" title="Points" ><span>'+obj.AuthorPoints+'</span></li><li class="newSpriteIcons views" title="Total Views" ><span>'+obj.AuthorReadCount+'</span></li></ul>\
+<div class="floatRight pulseAction">\
+<img id="ajaxLoader_' + obj.CommentId + '" src=\'/Images/csharp/ajax-loader_12x9.gif\' style="margin:4px 0px 0px 5px; display:none;" />\
+<a class="newSpriteIcons like" onclick="Comments_article.LikeComment(' + obj.CommentId + ')"><span id="Likes_' + obj.CommentId + '">' + obj.Likes + '</span> </a>\
+<a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(' + obj.CommentId + ')" ><span id="Replies_' + obj.CommentId + '">' + obj.Replies + '</span> </a>';
+if ('True' == 'True')
+commentHtml += '<a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(' + obj.CommentId + ')">Post Reply</a>';
+if (parseFloat(obj.Replies) > 3)
+commentHtml += '<a class="newSpriteIcons showAll" onclick="Comments_article.ShowReplies(' + obj.CommentId + ', this)">Show All</a>';
+commentHtml += '</div>\
+</div>\
+<div class="clear"></div>\
+<div id="CommentReplies_' + obj.CommentId + '"></div>\
+</div>\
+</div>';
+return commentHtml;
+}
+function BulildCommentReply(obj) {
+var authorUrl = obj.AuthorUrl;
+var commentHtml = '<div id="comment_' + obj.CommentId + '" class="ReplyComment" onmouseover="Comments_article.ShowEditorOptionsReply(this,event);" onmouseout="Comments_article.HideEditorOptionsReply(this,event);" >';
+if ('a48f78' == obj.UserId || '' == 'E' || '' == 'A') {
+commentHtml += '<div class="pulseDeleteReply">';
+commentHtml += '<span onclick="Comments_article.ShowEditView(' + obj.CommentId + ')" title="Edit" class="sprite edit"></span>';
+if ('a48f78' == obj.UserId || '' == 'A')
+commentHtml += '<span onclick="Comments_article.DeleteComment(' + obj.CommentId + ',' + obj.ParentId + ')" title="Delete" class="sprite delete"></span>';
+commentHtml += '</div>';
+}
+commentHtml += '<div class="image level1"><a href="' + authorUrl + '"><img title="' + obj.FullName + '" src="' + obj.PhotoUrl + '" alt="" /></a></div>\
+<div class="commentcontent">\
+<div class="commentDescription" >' + unescape(obj.Description) + '</div>\
+<div>\
+<a href="' + authorUrl + '" class="LinkRed">' + obj.FullName + '</a>\
+<span class="floatRight responsive_Commenttime"  style="font-size: 11px;"><span class="watchICon"></span>' + obj.CreatedDate + '</span>\
+</div>\
+<div style="margin-top: 4px;">\
+<ul class="rpv"><li class="newSpriteIcons rank" title="Rank" ><span>'+obj.AuthorRank+'</span></li><li class="newSpriteIcons point" title="Points" ><span>'+obj.AuthorPoints+'</span></li><li class="newSpriteIcons views" title="Total Views" ><span>'+obj.AuthorReadCount+'</span></li></ul>\
+<div class="floatRight pulseAction">\
+<img id="ajaxLoader_' + obj.CommentId + '" src=\'/Images/csharp/ajax-loader_12x9.gif\' style="margin:4px 0px 0px 5px; display:none;" />\
+<a onclick="Comments_article.LikeComment(' + obj.CommentId + ')" class="newSpriteIcons like"> <span id="Likes_' + obj.CommentId + '">' + obj.Likes + '</span></a>\
+</div>\
+</div>\
+</div>';
+return commentHtml;
+}
+function GetParentCommentsCount() {
+var count = 0;
+//$j(rootClass + '#RootComments > div.pulsecomment').each(function () {
+//    count = count + 1;
+//});
+count = $j(rootClass + '#RootComments > div.pulsecomment').size();
+return count;
+}
+function GetChildCommentsCount() {
+var childNodes = $j(rootClass + '#RootComments > div.pulsecomment div.commentcontent div div.ReplyComment').size();
+var textareas = $j(rootClass + '#RootComments > div.pulsecomment div.commentcontent textarea').size();
+if (childNodes > 0)
+return childNodes - textareas;
+else return 0;
+}
+function ManageAlternateColor() {
+$j(rootClass + '#RootComments > div').removeClass("BackgroundWhite");
+$j(rootClass + '#RootComments > div:odd').addClass("BackgroundWhite");
+}
+//        function FormatTextToInsert(text) {
+//            return escape(($j.trim(text)).replace('<', '&lt;').replace('>', '&gt;').replace('/', '&#47;').replace('"', '&quot;').replace('\n', ''));
+//        }
+function SendMail(comment, is_child_comment, parent_user, commentId) {
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=send_mail&type=article",
+data: { description: unescape(comment),
+content_title:'MongoDB - Day 11 (Collection Methods)',
+content_user_id:'f0b2ed',
+is_child_comment:is_child_comment,
+content_id: '2c62db7a-12c1-44c5-a539-754a6d5a66d6',
+parent_user_id: parent_user,
+request_url:'http://www.c-sharpcorner.com/uploadfile/f0b2ed/mongodb-day11-collection-methods/default.aspx',
+content_url:'',
+content_user_email:'',
+comment_id:commentId
+},
+type: "POST",
+async: false,
+success: function (response) {
+}
+});
+}
+function SendNotification(comment,mailtosendids)
+{
+var pathname = 'http://www.c-sharpcorner.com/uploadfile/f0b2ed/mongodb-day11-collection-methods/default.aspx';
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=send_notification&type=article",
+data: { description: unescape(comment),
+mailtosend:mailtosendids,
+currenturl:pathname
+},
+type: "POST",
+async: false,
+success: function (response) {
+}
+});
+}
+function VerifyUser() {
+var data;
+$j.ajax({
+url: "/Handlers/CommentsHandler.ashx?method=current_user",
+type: "GET",
+async: false,
+success: function (response) {
+data = $j.parseJSON(response)[0].user_name;
+}
+});
+if (data == null || data == '') {
+var url = 'http://www.c-sharpcorner.com/UserRegistration/Logincheck.aspx?ReturnURL=/uploadfile/f0b2ed/mongodb-day11-collection-methods/';
+window.location = url;
+}
+}
+function ManagePaging(action, count) {
+var totalComments = $j(rootClass + '#TotalComments');
+var commentCount = $j(rootClass + '#CommentCount');
+var total_comments = $j.trim($j(rootClass + '#HiddenTotalComments').val());
+switch (action) {
+case 'i': //increase
+total_comments = parseFloat(total_comments) + 1;
+if ($j.trim(totalComments.text()) == '')
+totalComments.text('1');
+else
+totalComments.text(parseFloat(totalComments.text()) + 1);
+$j(rootClass + '#Paging').show();
+break;
+case 'd': //decrease
+if (parseFloat(total_comments) <= 0) {
+totalComments.text('');
+commentCount.text('');
+$j(rootClass + '#Paging').hide();
+}
+else {
+totalComments.text(parseFloat(totalComments.text()) - (1 + parseFloat(count)));
+total_comments = parseFloat(total_comments) - 1;
+}
+break;
+}
+var parentComments = parseFloat(GetParentCommentsCount());
+commentCount.text(parentComments + parseFloat(GetChildCommentsCount()));
+$j(rootClass + '#HiddenTotalComments').val(total_comments);
+$j('#HiddenPageNumber_article').val(parseInt((parentComments - 1) / pageSize) + 1);
+ManageViewMoreVisibility();
+$j('#spanComments').text(totalComments.text()); //Manages Header Comment Count
+}
+function ManageViewMoreVisibility() {
+var previousComments = $j(rootClass + '#ViewPreviousComments');
+if (parseFloat($j(rootClass + '#HiddenTotalComments').val()) > parseFloat(GetParentCommentsCount()))
+previousComments.show();
+else
+previousComments.hide();
+}
+function RemoveEditView(commentId) {
+var content = $j(rootClass + '#comment_' + commentId + ' .commentcontent div:eq(0)');
+var editButton = $j(rootClass + '#comment_' + commentId + ' div:eq(0) .edit');
+var textBox = $j(rootClass + '#CommentToEdit_' + commentId);
+var ajaxLoader = $j(rootClass + '#ajaxLoaderEdit_' + commentId);
+editButton.show().next().show();
+textBox.val('');
+textBox.remove();
+ajaxLoader.remove();
+content.show();
+}
+function ShowError() {
+alert('There is some error processing your request');
+}
+}());
+$j(document).ready(function () {
+$j.ajaxSetup({ cache: false });
+if ('True' == 'False') {
+$j('#RootPostComment').remove();
+}
+Comments_article.GetComments(0);
+GetValueAtTheRate('textarea.mention');
+$j(document).on("click",function(event) {
+var classname = event.target.className;
+if(classname=== 'mention')
+{
+$j('.mentions-autocomplete-list').has('ul').show();
+}
+else
+{
+$j('.mentions-autocomplete-list').hide();
+}
+});
+//        $j('.commentcontent').not('.ReplyComment').mouseover(function(e){
+//          $j(this).prev().prev().show(); 
+//          e.stopPropagation();
+//        });
+//        
+//        $j('.commentcontent').mouseout(function(e){
+//          $j(this).prev().prev().hide(); 
+//          e.stopPropagation();
+//        });
+//        $j('.pulsecomment').not('.commentcontent .ReplyComment').mouseover(function(e){
+//          $j(this).find('.pulseDelete').show(); 
+//          e.stopPropagation();
+//        });
+//        
+//        $j('.pulsecomment').mouseout(function(e){
+//          $j(this).find('.pulseDelete').hide(); 
+//          $j(this).find('.pulseDeleteReply').hide();
+//           e.stopPropagation();
+//        });
+//        
+//        $j('.pulsecomment .commentcontent .ReplyComment').mouseover(function(e){
+//         $j(this).find('.pulseDeleteReply').show();  
+//         $j('.pulseDelete').hide(); 
+//         e.stopPropagation();
+//        });
+});    
+function GetValueAtTheRate(id) {
+$j(id).mentionsInput({
+minChars:1,
+onDataRequest:function (mode, query, callback) {
+$j.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "/WebServices/CSharpSearch.asmx/GetAllFriendsFollowers",
+data: "{'name':'"+query+"','user_id':'a48f78','content_id':'2c62db7a-12c1-44c5-a539-754a6d5a66d6','type':'article'}",
+async:false,
+success: function (response) {
+var data = response.d;
+var jasondata= [];
+var Id=null,Name=null,Avatar=null,Type=null;
+for(var i=0;i<=data.length-1;i++)
+{
+Id= data[i].Id
+Name= data[i].Name;
+Avatar=data[i].PhotoUrl;
+Type=data[i].AuthorUrl;
+var jasonobj= new JasonObj(Id,Name,Avatar,Type);
+jasondata.push(jasonobj);
+}
+//jasondata = _.filter(jasondata, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+callback.call(this, jasondata);
+}
+});
+}
+});
+}
+var JasonObj =function(Id, Name, Avatar,Type){
+this.id = Id;
+this.name = Name;
+this.avatar= Avatar;
+this.type = Type;
+};
+function GetCommentData(comment,id)
+{
+var value=null;
+var valuetobereplaced=null; 
+var userURL=null;
+$j(id).mentionsInput('getMentions', function(data) {
+$j.each(data, function(idx, obj) {
+value = '@['+obj.value+']('+obj.type+':'+obj.id+')';
+valuetobereplaced=FormatText(value);
+userURL= '<a target=_blank class=LinkNormalBlue href='+decodeURIComponent(obj.type)+'>'+obj.value+'</a>';
+comment=comment.replace(valuetobereplaced, userURL);
+});
+});
+return comment;            
+}
+function FormatText(text) {
+return escape(($j.trim(text)).replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('/', '&#47;').replace('"', '&quot;').replace('\n', '').replace('\\', '&#92;'));
+}  
+function GetEditData(comment) {
+comment = unescape(comment);
+if (mentionarraydata) {
+var username = null;
+var userlink = null;
+for (var i = 0; i <= mentionarraydata.length - 1; i++) {
+username = mentionarraydata[i].split('/^g*~o0#g*^/')[0];
+userlink = mentionarraydata[i].split('/^g*~o0#g*^/')[1];
+if (comment.indexOf(username) !== -1) {
+comment = comment.replace(username, '<a target=_blank class=LinkNormalGray href=' + userlink + '>' + username + '</a>')
+}
+}
+mentionarraydata.length = 0;
+}
+return escape(comment);
+}
+</script> <div class="clear"> </div> <div style="position: relative;" class="article"> <a name="ReadAndPostComment"></a> <div class="commentHeader"> <h2 class="headerControls">
+comments</h2> <img id="mainLoader" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="position: absolute; left: 315px; top: 26px; display: none;"> <div id="Paging" class="commentPaging"> <div class="commentpage"> <label id="TotalComments" class="floatRight" style="margin-right: 3px;">24</label> <label class="floatRight" style="margin-right: 3px;">
+of
+</label> <label id="CommentCount" class="floatRight" style="margin-right: 3px;">10</label> <input id="HiddenPageNumber_article" type="hidden" value="1"> <input id="HiddenTotalComments" type="hidden" value="24"> </div> <a id="ViewPreviousComments" class="previousComments" onclick="Comments_article.ViewPreviousComments();return false;">
+View Previous Comments &gt;&gt;</a> </div> </div> <div class="clear"> </div> <div id="ctl00_Comments1_Panel1" class="pulseMainComment" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_Comments1_Button1&#39;)"> <div class="pulseCommentSectionMain" style="padding: 0px; overflow: inherit"> <div class="pulseCommentSection"> <div id="RootComments"><div id="comment_80047" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/da55bf/ankit-bansal.aspx"><img alt="" title="Ankit Bansal" src="./MongoDB - Day 11 (Collection Methods)_files/da55bf20150808112402.jpg"></a></div><div class="commentcontent"><div class="commentDescription">good one..</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/da55bf/ankit-bansal.aspx">Ankit Bansal</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>328</span></li><li class="newSpriteIcons point" title="Points"><span>474</span></li><li class="newSpriteIcons views" title="Total Views"><span>43.8k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80047" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80047)"><span id="Likes_80047">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80047)"><span id="Replies_80047">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80047)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80047"></div></div></div><div id="comment_80094" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/b926a6/rakesh-chavda.aspx"><img alt="" title="Rakesh Chavda" src="./MongoDB - Day 11 (Collection Methods)_files/b926a620150720012157.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Good work</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/b926a6/rakesh-chavda.aspx">Rakesh Chavda</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>170</span></li><li class="newSpriteIcons point" title="Points"><span>1.1k</span></li><li class="newSpriteIcons views" title="Total Views"><span>60k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80094" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80094)"><span id="Likes_80094">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80094)"><span id="Replies_80094">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80094)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80094"></div></div></div><div id="comment_80097" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/1d8cfe/sandeep-kumar.aspx"><img alt="" title="Sandeep Kumar" src="./MongoDB - Day 11 (Collection Methods)_files/1d8cfe20150807080548.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Again good contribution sir :)</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/1d8cfe/sandeep-kumar.aspx">Sandeep Kumar</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>549</span></li><li class="newSpriteIcons point" title="Points"><span>134</span></li><li class="newSpriteIcons views" title="Total Views"><span>5.5k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80097" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80097)"><span id="Likes_80097">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80097)"><span id="Replies_80097">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80097)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80097"></div></div></div><div id="comment_80105" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/9a9e6f/gopi-chand.aspx"><img alt="" title="Gopi Chand" src="./MongoDB - Day 11 (Collection Methods)_files/9a9e6f20150504031745.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Great series..want more :)</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/9a9e6f/gopi-chand.aspx">Gopi Chand</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>66</span></li><li class="newSpriteIcons point" title="Points"><span>2.6k</span></li><li class="newSpriteIcons views" title="Total Views"><span>201.1k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80105" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80105)"><span id="Likes_80105">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80105)"><span id="Replies_80105">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80105)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80105"></div></div></div><div id="comment_80117" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx"><img alt="" title="Pankaj  Kumar Choudhary" src="./MongoDB - Day 11 (Collection Methods)_files/f0b2ed20150804024153.png"></a></div><div class="commentcontent"><div class="commentDescription">Thanks Ankit.............</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx">Pankaj  Kumar Choudhary</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>65</span></li><li class="newSpriteIcons point" title="Points"><span>2.6k</span></li><li class="newSpriteIcons views" title="Total Views"><span>128k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80117" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80117)"><span id="Likes_80117">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80117)"><span id="Replies_80117">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80117)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80117"></div></div></div><div id="comment_80118" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx"><img alt="" title="Pankaj  Kumar Choudhary" src="./MongoDB - Day 11 (Collection Methods)_files/f0b2ed20150804024153.png"></a></div><div class="commentcontent"><div class="commentDescription">Thanks Sandeep..........</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx">Pankaj  Kumar Choudhary</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>65</span></li><li class="newSpriteIcons point" title="Points"><span>2.6k</span></li><li class="newSpriteIcons views" title="Total Views"><span>128k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80118" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80118)"><span id="Likes_80118">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80118)"><span id="Replies_80118">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80118)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80118"></div></div></div><div id="comment_80119" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx"><img alt="" title="Pankaj  Kumar Choudhary" src="./MongoDB - Day 11 (Collection Methods)_files/f0b2ed20150804024153.png"></a></div><div class="commentcontent"><div class="commentDescription">Thanks <a target="_blank" class="LinkNormalBlue" href="http://www.c-sharpcorner.com/Authors/b926a6/rakesh-chavda.aspx">Rakesh Chavda</a>  sir.......</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx">Pankaj  Kumar Choudhary</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>65</span></li><li class="newSpriteIcons point" title="Points"><span>2.6k</span></li><li class="newSpriteIcons views" title="Total Views"><span>128k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80119" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80119)"><span id="Likes_80119">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80119)"><span id="Replies_80119">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80119)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80119"></div></div></div><div id="comment_80120" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx"><img alt="" title="Pankaj  Kumar Choudhary" src="./MongoDB - Day 11 (Collection Methods)_files/f0b2ed20150804024153.png"></a></div><div class="commentcontent"><div class="commentDescription">Thanks <a target="_blank" class="LinkNormalBlue" href="http://www.c-sharpcorner.com/Authors/9a9e6f/gopi-chand.aspx">Gopi Chand</a> sir..........</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx">Pankaj  Kumar Choudhary</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>65</span></li><li class="newSpriteIcons point" title="Points"><span>2.6k</span></li><li class="newSpriteIcons views" title="Total Views"><span>128k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80120" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80120)"><span id="Likes_80120">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80120)"><span id="Replies_80120">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80120)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80120"></div></div></div><div id="comment_80121" class="pulsecomment" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx"><img alt="" title="Pankaj  Kumar Choudhary" src="./MongoDB - Day 11 (Collection Methods)_files/f0b2ed20150804024153.png"></a></div><div class="commentcontent"><div class="commentDescription">Thanks <a target="_blank" class="LinkNormalBlue" href="http://www.c-sharpcorner.com/Authors/2a6dc5/rajeesh-menoth.aspx">Rajeesh Menoth</a>   sir...........</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/f0b2ed/pankaj-kumar-choudhary.aspx">Pankaj  Kumar Choudhary</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>Aug 13, 2015</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>65</span></li><li class="newSpriteIcons point" title="Points"><span>2.6k</span></li><li class="newSpriteIcons views" title="Total Views"><span>128k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80121" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80121)"><span id="Likes_80121">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80121)"><span id="Replies_80121">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80121)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80121"></div></div></div><div id="comment_80519" class="pulsecomment BackgroundWhite" onmouseover="Comments_article.ShowEditorOptions(this,event);" onmouseout="Comments_article.HideEditorOptions(this,event);"><div class="image level0"><a href="http://www.c-sharpcorner.com/Authors/f2823e/santhakumar-munuswamy.aspx"><img alt="" title="Santhakumar Munuswamy" src="./MongoDB - Day 11 (Collection Methods)_files/f2823e20150612020708.jpg"></a></div><div class="commentcontent"><div class="commentDescription">Good Article. Thanks for sharing</div><div><a class="LinkRed" href="http://www.c-sharpcorner.com/Authors/f2823e/santhakumar-munuswamy.aspx">Santhakumar Munuswamy</a><span class="floatRight responsive_Commenttime" style="font-size: 11px;"><span class="watchICon"></span>11h 49m ago</span></div><div style="margin-top: 4px;"><ul class="rpv"><li class="newSpriteIcons rank" title="Rank"><span>63</span></li><li class="newSpriteIcons point" title="Points"><span>2.7k</span></li><li class="newSpriteIcons views" title="Total Views"><span>62.9k</span></li></ul><div class="floatRight pulseAction"><img id="ajaxLoader_80519" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="margin:4px 0px 0px 5px; display:none;"><a class="newSpriteIcons like" onclick="Comments_article.LikeComment(80519)"><span id="Likes_80519">0</span> </a><a class="newSpriteIcons reply" onclick="Comments_article.ToggleReplies(80519)"><span id="Replies_80519">0</span> </a><a class="newSpriteIcons postReply" onclick="Comments_article.ShowReplyBox(80519)">Post Reply</a></div></div><div class="clear"></div><div id="CommentReplies_80519"></div></div></div> </div> <div class="pulsecomment borderNone" id="RootPostComment" style="min-height: 42px;"> <div class="image level0"> <img src="./MongoDB - Day 11 (Collection Methods)_files/a48f78.png" alt=""> </div> <div id="ctl00_Comments1_PanelPostComment" class="commentcontentPost" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_Comments1_ButtonPost&#39;)"> <div class="mentions-input-box"><div class="mentions"><div></div></div><textarea id="InputCommentText_0" style="height: 35px; overflow: hidden;" onkeypress="Comments_article.PostComment(&#39;0&#39;,event);" class="mention" spellcheck="true" placeholder="Type your comment here and press Enter Key...." data-mentions-input="true"></textarea><div style="position: absolute; display: none; word-wrap: break-word; white-space: pre-wrap; border: 1px solid rgb(220, 220, 220); font-weight: normal; width: 573px; font-family: pt_sansregular; line-height: normal; font-size: 14px; padding: 5px;">&nbsp;</div><div class="mentions-autocomplete-list"></div></div> <input type="submit" name="ctl00$Comments1$ButtonPost" value="" id="ctl00_Comments1_ButtonPost" style="display: none;"> </div> <span title="If checked, you&#39;ll get email notification for any comment posted" style="display: inline-block;
+margin-top: 6px; clear: both;"><input id="ctl00_Comments1_FollowCheckBox" type="checkbox" name="ctl00$Comments1$FollowCheckBox" checked="checked" onclick="Comments_article.UpdateFollowStatus(this);"><label for="ctl00_Comments1_FollowCheckBox">Follow Comments</label></span> <img id="PostLoader" src="./MongoDB - Day 11 (Collection Methods)_files/ajax-loader_12x9.gif" style="clear: both; margin: 10px 5px 0px 0px; float: right; display: none;"> </div> </div> </div> <input type="submit" name="ctl00$Comments1$Button1" value="" onclick="return false;" id="ctl00_Comments1_Button1" style="display: none;"> <input type="hidden" name="ctl00$Comments1$HiddenFieldEmailComment" id="ctl00_Comments1_HiddenFieldEmailComment"> <input type="hidden" name="ctl00$Comments1$HiddenFieldIsChildComment" id="ctl00_Comments1_HiddenFieldIsChildComment"> <input type="hidden" name="ctl00$Comments1$HiddenFieldParentUserId" id="ctl00_Comments1_HiddenFieldParentUserId"> </div> <div class="clear"> </div> <div id="ctl00_Comments1_SocialComments" class="socialComments"> <div class="commentHeader"> <h2 class="headerControls floatLeft">
+COMMENT USING</h2> <span class="facebookComments" style="margin: 3px 5px;"></span> </div> <div class="fb-comments fb_iframe_widget" data-href="http://www.c-sharpcorner.com/uploadfile/f0b2ed/mongodb-day11-collection-methods/" data-width="675" data-num-posts="5" fb-xfbml-state="rendered"><span style="height: 175px; width: 675px;"><iframe id="f353175b44" name="fb1a761e8" scrolling="no" title="Facebook Social Plugin" class="fb_ltr" src="./MongoDB - Day 11 (Collection Methods)_files/comments.html" style="border: none; overflow: hidden; height: 175px; width: 675px;"></iframe></span></div> </div> </div> <div> </div> </div> <div class="rightCntr"> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_SponsorWithImage" updatemode="Conditional"> <h2 class="headerControls">
+SPONSORED BY
+</h2> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_SponsorAdWithImage" class="adBox"> <div class="adImage"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=89&target=http://www.e-iceblue.com/Introduce/free-doc-component.html?aff_id=64" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_HrefSponsorLinkImage" rel="nofollow" target="_blank"> <img src="./MongoDB - Day 11 (Collection Methods)_files/002549AM.jpg" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_imgSponsor" width="75" height="90" class="image90"> </a> </div> <div class="adRight"> <a href="http://www.c-sharpcorner.com/AdRedirector.aspx?AdId=89&target=http://www.e-iceblue.com/Introduce/free-doc-component.html?aff_id=64" id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_HrefSponsorLink" class="MemberoftheMonth" target="_blank">Spire.Doc - Free .NET Word API</a> <div id="ctl00_RightBar_ArticleDetailRightBar1_PremiumSponsorTextAd1_divSponsorDetail">Use Spire.Doc to create, read, write, print, and convert word documents to OpenXML, RTF, TXT, XPS, EPUB, EMF, HTML, Image and PDF.</div> </div> </div> </div> <div class="clear"> </div> <div style="width: 336px; margin:10px 0;"> <a id="ctl00_RightBar_ArticleDetailRightBar1_NewsArticleAd1_AdRotatorArticle" href="http://www.c-sharpcorner.com/AdRedirector.aspx?BannerId=730&target=http://www.syncfusion.com/resources/techportal/ebooks?utm_source=csharpcorner&utm_medium=mindcrackerebAug15&utm_campaign=ebook" target="_blank"><img src="./MongoDB - Day 11 (Collection Methods)_files/336X280.jpg" alt="Download Free E-books" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a> </div> <h2 class="headerControls">
+Trending up <a href="http://www.c-sharpcorner.com/RSS/TopArticles.aspx" id="ctl00_RightBar_ArticleDetailRightBar1_TrendingUp1_RssEnabledImageButton" class="headerRss" target="_blank"></a> </h2> <div class="rightBox"> <ul class="trendingBox"> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+01</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/b6cb4b/why-developers-should-not-test-their-own-software/">
+Why Developers Should Not Test Their Own Software</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+02</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/746765/windows-10-setup-and-its-features/">
+Windows 10 Setup and Its Features</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+03</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/219d4d/basics-of-jquery-part-2-selectors-in-jquery/">
+Basics of jQuery - Part 2 (Selectors in JQuery)</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+04</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/746765/entity-framework-database-first-approach/">
+Entity Framework - Database First Approach</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+05</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/asmabegam/dynamic-project-scheduling-using-mvc-and-angularjs/">
+Dynamic Project Scheduling Using MVC and AngularJS</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+06</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/1f5150/understanding-angularjs-in-fast-track-mode/">
+Understanding AngularJS in Fast-track Mode</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+07</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/f0b2ed/introduction-of-nosql-database/">
+Introduction To NoSQL Databases</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+08</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/092589/crud-operations-using-stored-procedure-entity-framework-in/">
+CRUD Operations Using Stored Procedure and Entity Framework in ASP.Net MVC</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+09</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/0cefc4/getting-started-with-sql-server-reporting-services-(ssrs)-/">
+Getting Started With SQL Server Reporting Services (SSRS) - Part 2</a> </div> </li> <li> <div class="numbers"> <span title="Pulse rate/hour" style="cursor: pointer;">
+10</span> </div> <div class="trendingDetail"> <a href="http://www.c-sharpcorner.com/UploadFile/e5276f/angularjs-with-require-js/">
+AngularJS With Require.js</a> </div> </li> </ul> <a href="http://www.c-sharpcorner.com/Articles/TopArticles.aspx" class="viewAllLink">
+View All </a> </div> <div style="padding-bottom: 10px;"> <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./MongoDB - Day 11 (Collection Methods)_files/follow_button.a64cf823bcb784855b86e2970134bd2a.en.html" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="position: static; visibility: visible; width: 231px; height: 20px;"></iframe> </div> <div id="fb-root" class=" fb_reset"> <div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./MongoDB - Day 11 (Collection Methods)_files/7tUlZKGPU61.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./MongoDB - Day 11 (Collection Methods)_files/7tUlZKGPU61(1).html" style="border: none;"></iframe></div></div></div> <div class="fb-like-box fb_iframe_widget" data-href="https://www.facebook.com/pages/C-Corner/194086953935286" data-width="336px" data-show-faces="true" data-stream="false" data-header="true" data-border-color="#c6c6c6" data-max-rows="2" style="padding-bottom: 10px;
+border: none 0px" async="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=440531902678919&amp;container_width=336&amp;header=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FC-Corner%2F194086953935286&amp;locale=en_US&amp;sdk=joey&amp;show_faces=true&amp;stream=false&amp;width=336"><span style="vertical-align: bottom; width: 336px; height: 214px;"><iframe name="f1276bd2c8" width="336px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="./MongoDB - Day 11 (Collection Methods)_files/like_box.html" style="border: none; visibility: visible; width: 336px; height: 214px;" class=""></iframe></span></div> <div class="clear"> </div> <div style="width: 336px; margin-bottom: 10px;"> <a id="ctl00_RightBar_ArticleDetailRightBar1_NewsArticleAdMiddle11_AdRotatorArticle" href="http://www.c-sharpcorner.com/AdRedirector.aspx?BannerId=729&target=http://www.e-iceblue.com/Introduce/free-doc-component.html?aff_id=64" target="_blank"><img src="./MongoDB - Day 11 (Collection Methods)_files/336x280_3.jpg" alt="Spire.Doc" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a> </div> <div class="clear"> </div> </div> </div> </div> <div class="footer"> <div class="menuStripGray"> <div class="page"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/Members/mvps/">MVPs</a></li> <li><a href="http://www.c-sharpcorner.com/Articles/mostviewed.aspx">MOST VIEWED</a></li> <li><a href="http://www.c-sharpcorner.com/Members/legend/">LEGENDS</a></li> <li><a href="http://www.c-sharpcorner.com/articles/">NOW</a></li> <li><a href="http://www.c-sharpcorner.com/prizes/">PRIZES</a></li> <li><a href="http://www.c-sharpcorner.com/reviews/">REVIEWS</a></li> <li><a href="http://www.c-sharpcorner.com/survey/">SURVEY</a></li> <li><a href="http://www.c-sharpcorner.com/exam/">CERTIFICATIONS</a></li> <li><a href="http://www.c-sharpcorner.com/downloads/">DOWNLOADS</a></li> </ul> <div class="rightlink"> <a href="http://www.cbeyond.net/" target="_blank"><span class="hosted">Hosted By </span>
+CBeyond Cloud Services</a></div> </div> </div> <div class="menuStripBlue"> <div class="page"> <div class="menu"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/photos/">PHOTOS</a></li> <li><a href="http://www.c-sharpcorner.com/code/">CODE SNIPPETS</a> </li> <li class="display_none"><a href="http://www.c-sharpcorner.com/consulting/">CONSULTING</a> </li> <li class="display_none"><a href="http://www.c-sharpcorner.com/training/">TRAINING</a> </li> <li><a href="http://www.c-sharpcorner.com/beginners/">STUDENTS</a> </li> <li><a href="http://www.c-sharpcorner.com/Members/">MEMBERS</a> </li> <li><a href="http://www.c-sharpcorner.com/media/ContactUs.aspx">MEDIA KIT</a></li> <li><a href="http://www.c-sharpcorner.com/resources/aboutus.aspx">ABOUT US</a></li> <li><a href="http://www.c-sharpcorner.com/resources/">LINKS</a></li> <li><a href="http://www.c-sharpcorner.com/ideas/">IDEAS</a> </li> </ul> </div> </div> </div> <div class="footerBottom"> <div class="page"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/contactus.aspx">CONTACT
+US</a></li> <li><a href="http://www.c-sharpcorner.com/privacypolicy.aspx">PRIVACY POLICY</a></li> <li><a href="http://www.c-sharpcorner.com/termsconditions.aspx">TERMS &amp;
+CONDITIONS</a></li> <li><a href="http://www.c-sharpcorner.com/sitemap/">SITEMAP</a></li> <li><a href="http://www.c-sharpcorner.com/contactus.aspx?Type=6">REPORT ABUSE</a></li> </ul> <div class="social_link"> <ul> <li><a target="_blank" href="http://www.facebook.com/pages/C-Corner/194086953935286" class="facebook">facebook</a></li> <li><a target="_blank" href="http://twitter.com/csharpcorner" class="twitter">twitter</a></li> <li><a target="_blank" href="https://plus.google.com/u/0/114221266846457741050/posts" class="google">google</a></li> <li><a target="_blank" href="http://www.youtube.com/user/CsharpCorner1/" class="media">
+media</a></li> </ul> <p class="copyright">
+©2015
+C# Corner. All contents are copyright of their authors.</p> </div> </div> </div> </div> <div class="responsive_footer"> <ul> <li class="first"><a href="http://www.c-sharpcorner.com/contactus.aspx">Contact
+Us</a></li> <li><a href="http://www.c-sharpcorner.com/privacypolicy.aspx">Privacy Policy</a></li> <li><a href="http://www.c-sharpcorner.com/termsconditions.aspx">Terms &amp;
+Conditions</a></li> <li><a href="http://www.c-sharpcorner.com/resources/aboutus.aspx">About Us</a></li> </ul> <p>
+©2015
+C# Corner. All contents are copyright of their authors.</p> </div> </div> <input type="hidden" name="ctl00$hiddenFieldNext" id="ctl00_hiddenFieldNext"> <input type="hidden" name="ctl00$hiddenFieldPrevious" id="ctl00_hiddenFieldPrevious"> <meta name="google-signin-clientid" content="1008907732563-jaf78g0pj7k52q8efh0r22c58iol91cg.apps.googleusercontent.com"> <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read profile"> <meta name="google-signin-requestvisibleactions" content="http://schemas.google.com/AddActivity"> <meta name="google-signin-cookiepolicy" content="single_host_origin"> <script type="text/javascript">
+$j(window).load(function() {
+window.fbAsyncInit = function() {
+// init the FB JS SDK
+FB.init({
+appId: '440531902678919', // App ID from the App Dashboard
+xfbml: true,  // parse XFBML tags on this page?
+version: 'v2.3'
+});
+// Additional initialization code such as adding Event Listeners goes here
+};
+// Load the SDK's source Asynchronously
+(function(d, debug) {
+var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+if (d.getElementById(id)) { return; }
+js = d.createElement('script'); js.id = id; js.async = true;
+js.src = "//connect.facebook.net/en_US/sdk" + (debug ? "/debug" : "") + ".js";
+ref.parentNode.insertBefore(js, ref);
+} (document, /*debug*/false));
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/client:plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '//platform.twitter.com/widgets.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '//platform.linkedin.com/in.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+});
+</script> <div id="fb-root"> </div> <input type="hidden" name="ctl00$HiddenFieldCurrentPageUrl" id="ctl00_HiddenFieldCurrentPageUrl" value="http%3a%2f%2fgoo.gl%2fVVRIXc"> <div class="aspNetHidden"> <input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0"> <input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0"> <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdACjjm6l9niLxUo0D8x3v4YmiEy1huKVeY8kONobUPpk6sOVrApc3eB8eSCUhEIWDI7cxezkLMNfzLaKelbXDaJNqEUPfKl76+rGoFeHJhSz9Qejy4axdVz4j0cOvA5BCoqW/yzsLnXnhMHdYXIPThjbzssgbqn8QXcNRL/w88i6a/TuPZTDQysYW2wZYwIUs1qLwznqG3IoqhobN2pJNC7O+9IDXpt6NvXv7DTpcdzZXTwP+dbuK8Z5etDi5E4Wsp2Tgtm5YmDq3N5boA+gdrPIoCwhtK5fA+IUqo3qH9GFflV5Uo1E8ARoa6MJKGI0DMXSGs31WukNwZSO6ZuTk2MRRCpIS4Z7qG4fd9/OW52jIc6XlBap4dowqIv4hr84qp3fsSJgxHui5JwMv1yD0Ay1Dac1gE5zJ8IqJyObvqBQF1DPNnVEBIWc0XzVpShLPWCUKd6jQcWcf//36CqPt8hLonzr0m1cbfDUdHBFytJtWS+TadRrB9G4wGou5hUpgSLgq1Wg/IoO6wEw5vKmv+/LYcAS3o7MuLLeNoDo5X48C1J1n03yx26nZQzpsiNCOdFrBBqlcCAmMzjtjJo+LbkJZVsL/FSTx/oxWiN50H1UTPP0NRr87S+7iQtmVow6Bx0wPXoAgcSPYUSDsCVDdWeasYa/8WYlFwKgimFT4z4tluo9uIM93xU0N6NMOAsRUHcFKdBPij3jAXdY6WJtoFgRp3j77KE7VE/0Uo6mLh4oLlRtxLzu2lAOOWLaAxnDiDz1SrY1qY/NSoLINz2RvLrux6qhP3V9gL7OeiOwa74vDlSs9tie4yN/UniM6QSSSl8qvbcOpc9rurvJw3eKwuAsM2snk8hpOPsvsKKMcK3bwvMd/0bU="> </div> <script type="text/javascript">
+//<![CDATA[
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]> </script> </form> <script type="text/javascript">
+(function(d, t) {
+var g = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+g.src = '/JQuery/jquery.TrendingNow_09032014.js';
+s.parentNode.insertBefore(g, s);
+} (document, 'script'));
+function Like() {
+$j.ajax({
+url: "/Handlers/CsharpCommon.ashx?method=like_content&type=Article",
+data: { article_id: '2c62db7a-12c1-44c5-a539-754a6d5a66d6' },
+type: "POST",
+async: false,
+success: function(response) {
+var label = $j('#ctl00_LabelLikeCount');
+if (response == "login")
+window.location = 'http://www.c-sharpcorner.com/UserRegistration/Logincheck.aspx?ReturnURL=/uploadfile/f0b2ed/mongodb-day11-collection-methods/';
+else if (parseInt(response) == 1) {
+label.text(parseInt(label.text()) + 1);
+//                        label.css('color', 'green');
+}
+else {
+label.css('color', 'red');
+}
+}
+});
+}
+</script> <script type="text/javascript">
+$j(document).ready(function() {
+$j('a.show-dropdown').mouseover(function() {
+//get the height position of the current object
+var elementHeight = $j(this).height();
+var offsetWidth = 10;
+var offsetHeight = 10;
+//Get the tool tip container width adn height
+var toolTipWidth = $j("#dropDown").width();
+var toolTipHeight = $j("#dropDown").height();
+//Get the HTML document width and height
+var documentWidth = $j(document).width();
+var documentHeight = $j(document).height();
+//Set top and bottom position of the tool tip
+var top = $j(this).offset().top;
+if (top + toolTipHeight > documentHeight) {
+top = documentHeight - toolTipHeight - offsetHeight - (2 * elementHeight);
+}
+var left = $j(this).offset().left + offsetWidth;
+if (left + toolTipWidth > documentWidth) {
+left = documentWidth - toolTipWidth - (2 * offsetWidth);
+}
+$j('#dropDown').show();
+});
+$j('a.show-dropdown').mouseout(function() {
+$j("#dropDown").hide();
+});
+$j('#dropDown').mouseover(function() {
+$j('#dropDown').show();
+});
+$j('#dropDown').mouseout(function() {
+$j('#dropDown').hide();
+});
+});
+</script> <script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-535360-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>  <iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div><iframe name="oauth2relay843272906" id="oauth2relay843272906" src="./MongoDB - Day 11 (Collection Methods)_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

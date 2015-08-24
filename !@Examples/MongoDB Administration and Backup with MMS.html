@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<!-- saved from url=(0170)https://www.airpair.com/mongodb/posts/mongodb-advanced-administration-mon-and-backup?utm_content=buffer7800c&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" ng-app="AP" ng-strict-di="" class="ng-scope pw-locale-en ra1-pw-desktop"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+  <title>MongoDB Administration and Backup with MMS</title>
+  <meta name="description" content="MongoDB Administration and Backup techniques using MMS and other tools such as Zabbix and AWS.">
+  
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MongoDB Administration with MMS">
+  <meta property="og:description" content="MongoDB Administration and Backup techniques using MMS and other tools such as Zabbix and AWS.">
+  <meta property="og:image" content="https://i.imgur.com/DlL1vTp.png">
+  <meta property="og:url" content="https://www.airpair.com/mongodb/posts/mongodb-advanced-administration-mon-and-backup">
+  <link rel="canonical" href="https://www.airpair.com/mongodb/posts/mongodb-advanced-administration-mon-and-backup">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./MongoDB Administration and Backup with MMS_files/libs-588bf637.css" type="text/css">
+  <link rel="stylesheet" href="./MongoDB Administration and Backup with MMS_files/index-2443a96d.css" type="text/css">
+  <link rel="alternate" type="application/rss+xml" href="https://www.airpair.com/rss" title="AirPair Rss">
+  <!--<base href="/">--><base href=".">
+<style type="text/css"></style><style id="ace_editor">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><style>.ace_snippet-marker {    -moz-box-sizing: border-box;    box-sizing: border-box;    background: rgba(194, 193, 208, 0.09);    border: 1px dotted rgba(211, 208, 235, 0.62);    position: absolute;}</style><style>.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {    background-color: #CAD6FA;    z-index: 1;}.ace_editor.ace_autocomplete .ace_line-hover {    border: 1px solid #abbffe;    margin-top: -1px;    background: rgba(233,233,253,0.4);}.ace_editor.ace_autocomplete .ace_line-hover {    position: absolute;    z-index: 2;}.ace_editor.ace_autocomplete .ace_scroller {   background: none;   border: none;   box-shadow: none;}.ace_rightAlignedText {    color: gray;    display: inline-block;    position: absolute;    right: 4px;    text-align: right;    z-index: -1;}.ace_editor.ace_autocomplete .ace_completion-highlight{    color: #000;    text-shadow: 0 0 0.01em;}.ace_editor.ace_autocomplete {    width: 280px;    z-index: 200000;    background: #fbfbfb;    color: #444;    border: 1px lightgray solid;    position: fixed;    box-shadow: 2px 3px 5px rgba(0,0,0,.2);    line-height: 1.4;}</style><script async="true" type="text/javascript" src="https://s.adroll.com/j/roundtrip.js"></script><link rel="stylesheet" type="text/css" href="./MongoDB Administration and Backup with MMS_files/r1post.css" media="all"><link rel="stylesheet" type="text/css" href="./MongoDB Administration and Backup with MMS_files/r1post_retina.css" media="all"></head>
+<body><script id="post_script" type="text/javascript" async="" src="./MongoDB Administration and Backup with MMS_files/post-widget.js"></script><script type="text/javascript">
+//<![CDATA[
+try{(function(a){var b="https://",c="www.airpair.com",d="/cdn-cgi/cl/",e="img.gif",f=new a;f.src=[b,c,d,e].join("")})(Image)}catch(e){}
+//]]>
+</script>
+<header>
+  <a href="https://www.airpair.com/" tile="airpair.com pair programming"></a>
+
+  <ul>
+    
+    <li class="find nomob"><a href="https://www.airpair.com/find-an-expert" target="_self">Find an expert</a></li>
+    <li class="exp nomob"><a href="https://www.airpair.com/be-an-expert" target="_self">Help others</a></li>
+    <li class="ps"><a href="https://www.airpair.com/posts" target="_self">Posts</a></li>
+      </ul>
+</header>
+
+<div class="main-wrap">
+  <div notifications="" class="notify"><!-- ngIf: serverErrors.length > 0 -->
+<!-- ngIf: (!serverErrors || serverErrors.length==0) && notifications -->
+</div>
+  <!-- ngView:  --><main ng-view="" class="ng-scope">
+        
+<div class="banner-top ng-scope" banner-posttop=""><a rel="nofollow" href="https://www.airpair.com/visit/keen.io-082015" class="banner banner-top banner-keenio-pain" target="_self">
+  <img src="./MongoDB Administration and Backup with MMS_files/900x90-keenio-embed-data-querying.gif" alt="Embed data querying in any app with Keen.io" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;">
+</a>
+
+</div>
+
+<article class="blogpost ng-scope">
+
+  <h1 class="entry-title" itemprop="headline">MongoDB: Advanced Administration, Monitoring and Backup</h1>
+
+
+  <div class="railMarker"></div>
+
+  <h4 id="table-of-contents" style="position: fixed; left: 911.5px; top: 260px;">Table of Contents</h4>
+  <ul style="position: fixed; left: 911.5px; top: 300px;">
+<li><a href="https://www.airpair.com/#managing-mongodb-a-dba-s-tale">Managing MongoDB: A DBA's Tale</a><ul>
+<li><a href="https://www.airpair.com/#a-mongodb-developer-or-mongodb-dba-">A MongoDB Developer or MongoDB DBA?</a></li>
+<li><a href="https://www.airpair.com/#mongodb-vs-other-datastores">MongoDB vs Other Datastores</a><ul>
+<li><a href="https://www.airpair.com/#replica-sets-built-in-redundancy">Replica Sets - Built in Redundancy</a></li>
+<li><a href="https://www.airpair.com/#sharded-clusters-automated-horizontal-scaling">Sharded Clusters - Automated Horizontal Scaling</a></li>
+<li><a href="https://www.airpair.com/#shard-keys-application-specific-distribution">Shard keys - Application Specific Distribution</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#do-i-still-need-a-dba-for-mongo-">Do I still need a DBA for Mongo?</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#tales-of-dba-struggle">Tales of DBA Struggle</a><ul>
+<li><a href="https://www.airpair.com/#backups-mms-vs-hybrid-cloud">Backups: MMS vs Hybrid Cloud</a><ul>
+<li><a href="https://www.airpair.com/#hybrid-cloud-backups">Hybrid cloud backups</a></li>
+<li><a href="https://www.airpair.com/#mongodb-managed-mms-backups">MongoDB managed MMS backups</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#monitoring-mms-and-zabbix">Monitoring: MMS and Zabbix</a><ul>
+<li><a href="https://www.airpair.com/#mongodb-hosted-mms-monitoring">MongoDB hosted MMS monitoring</a></li>
+<li><a href="https://www.airpair.com/#mongodb-monitoring-with-zabbix">MongoDB monitoring with Zabbix</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#migrating-data-out-of-mongo-and-into-mongo">Migrating data out of Mongo and into Mongo</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#what-should-i-do-to-be-a-better-mongo-user-">What should I do to be a better Mongo User?</a><ul>
+<li><a href="https://www.airpair.com/#have-a-care-for-how-your-data-will-be-used">Have a care for how your data will be used</a></li>
+<li><a href="https://www.airpair.com/#design-and-document-your-schemas">Design and document your schemas</a></li>
+<li><a href="https://www.airpair.com/#consider-other-datastores">Consider other datastores</a></li>
+<li><a href="https://www.airpair.com/#decouple-and-build-in-abstraction">Decouple and build in abstraction</a></li>
+</ul>
+</li>
+<li><a href="https://www.airpair.com/#the-landscape-of-databases-is-changing">The landscape of Databases is changing</a></li>
+</ul>
+
+
+  <figure class="author">
+    <img alt="Jeffrey Berger" src="./MongoDB Administration and Backup with MMS_files/87811ab251ada226311e3c2d614f7cb5">
+    <hr>
+    <div>
+      <label>Jeffrey Berger</label>
+      <social-links profile="{&quot;gh&quot;:{&quot;username&quot;:&quot;JeffBerger&quot;},&quot;bb&quot;:{&quot;username&quot;:&quot;JeffBerger&quot;},&quot;in&quot;:{&quot;id&quot;:&quot;4QFpMEv1u7&quot;}}" class="ng-isolate-scope"><div class="sociallinks">
+  <!-- ngIf: p.gh --><a ng-if="p.gh" href="https://github.com/JeffBerger" target="_blank" class="gh-white icon ng-scope"></a><!-- end ngIf: p.gh -->
+
+  <!-- ngIf: p.so -->
+
+  <!-- ngIf: p.bb --><a ng-if="p.bb" href="https://bitbucket.org/" target="_blank" class="bb-white icon ng-scope"></a><!-- end ngIf: p.bb -->
+
+  <!-- ngIf: p.in --><a ng-if="p.in" href="https://linkedin.com/x/profile/sy5n2q8o2i49/4QFpMEv1u7" target="_blank" class="in-white icon ng-scope"></a><!-- end ngIf: p.in -->
+
+  <!-- ngIf: p.tw -->
+
+  <!-- ngIf: p.gp -->
+
+  <!-- ngIf: p.al -->
+</div>
+</social-links>
+      <figcaption>
+        Dr. Jeffrey Berger is a particle physicist turned MongoDB master who enjoys distributed systems and concurrent processing.
+      </figcaption>
+    </div>
+    <hr>
+  </figure>
+
+  <p class="asset"><img src="./MongoDB Administration and Backup with MMS_files/DlL1vTp.png"></p>
+  <hr>
+
+  <div class="book-cta">
+    <b>Want help from a top MongoDB developer?</b> Jeffrey Berger is available for live MongoDB pair programming on AirPair.
+    <a id="postTopBookAuthor" data="5583b8bf94a16f11001fa16b" track-click="book" href="https://www.airpair.com/billing/book/5583b8bf94a16f11001fa16b">&gt;&gt; Video chat with Jeffrey Berger</a>
+  </div>
+
+  <post no-compile=""><h2 id="managing-mongodb-a-dba-s-tale">Managing MongoDB: A DBA's Tale</h2>
+<p>This blog post was based on (but is not identical to) my talk given at the MongoDB World 2015 conference.  If you would like to see the talk then luckily for you it was recorded and it can be found <a href="https://www.mongodb.com/world2015">here</a> under the sessions category and the operations track.</p>
+<h3 id="a-mongodb-developer-or-mongodb-dba-">A MongoDB Developer or MongoDB DBA?</h3>
+<p>The land of NoSQL is changing rapidly and it is easy to get caught up in a lot of the hype, especially with MongoDB.  I'm going to be talking about how you can take control of a MongoDB deployment and begin imposing order, stability, and determinism when your stack gets out of hand.  If you are looking to make sure your MongoDB implementation will not take a team to fix, or have a deployment and don't know where to start fixing it then I hope my experiences make your task a bit easier.</p>
+<p>Whether you are a developer or a DBA this post can be useful to you.  I personally believe the line between DBA and Dev is going to blur more and more as these databases designed for developers in mind gain more and more traction.  I'm going to assume some working familiarity with MongoDB in this post so if you are looking for something more basic then don't worry, there are a lot of resources out there for you.  The free courses offered by <a href="https://university.mongodb.com/">MongoDB University</a> are excellent both in the content covered and in the help from experts you can get during the courses.  There are also many <a href="https://www.mongodb.org/user-groups">Mongo User Groups</a> around the country where you can get involved with other MongoDB users.</p>
+<h3 id="mongodb-vs-other-datastores">MongoDB vs Other Datastores</h3>
+<p>MongoDB isn't the only database that one can store unstructured data in, nor is it the only one that you can store unstructured JSON data in and query on the contents of that JSON (for example Postgres has a JSON data field and you can use it like Mongo in that regard.).  What really sets MongoDB apart is that replication and horizontal data distribution (sharding) come prepackaged with the database and are easy to use.</p>
+<h4 id="replica-sets-built-in-redundancy">Replica Sets - Built in Redundancy</h4>
+<p>In production all MongoDB instances should be part of replica sets.  A replica set is two or more <code>mongod</code> (mongo daemon) instances that are linked together as primaries and secondaries.  All writes must go to the primary and are then replicated automatically to the secondary.  Reads may be executed on the secondary to relieve load on the primary if the application can handle data that is stale.  In the event of a failure of the primary then a secondary will assume the role of primary and begin accepting writes, this keeps your database highly available and your data copied across machines for redundancy.</p>
+<h4 id="sharded-clusters-automated-horizontal-scaling">Sharded Clusters - Automated Horizontal Scaling</h4>
+<p>In a sharded cluster several replica sets are assembled into a cluster which is connected to through <code>mongos</code> (s for server, it is really just a routing proxy) instances.  The <code>mongos</code> router will, depending on your query, figure out which one of the servers has the data you are interested in - route your query to those servers - then merge the results and return them to you.  The wire protocol and the driver calls to a <code>mongos</code> are identical to that of calls that are going to individual nodes or replica sets, so your application does not need to know if it is talking to a cluster or not (however all access to a cluster should go through a <code>mongos</code> instance to prevent data corruption).</p>
+<h4 id="shard-keys-application-specific-distribution">Shard keys - Application Specific Distribution</h4>
+<p>The data is distributed across all of the shards by the choice of a shard key.  The shard key is the value that determines what server a document will reside on.  For example if the shard key is chosen to be clientId then all documents for client 1 would reside on one server, and client 2 on one server, and client 3 on one server.  It could be that client 3 has a lot of documents so it takes up all the space in serverB, but that is ok because mongo will then put clients 1 and 2 on serverA to try and keep the servers as neatly balanced as possible.  It does this all for you automatically.</p>
+<p>There are a lot of subtleties in choosing the shard key and implications which could take up an entire other post, so we'll leave an in depth discussion of shard key choice for another day - we don't need to go down that road for the topics discussed here.  The <a href="https://university.mongodb.com/">MongoDB University</a> course for DBAs has a very nice treatment of sharding if you would like to learn more.</p>
+<h3 id="do-i-still-need-a-dba-for-mongo-">Do I still need a DBA for Mongo?</h3>
+<p>A school of thought has emerged that with these schema-less datastores which are easy and fast to set up and tie into applications that the DBA is no longer needed.  This has led many down the path of letting the development team own the data.  Monitoring and backups then fall onto the shoulders of, perhaps, the operations team.  Effectively the role of DBA was split up between the operations and development team - both whom have their focus on things other than the data.</p>
+<p>The role of the DBA in the NoSQL future is as strong as it has been in the past.  The tools change and your codebase may change but your data will remain, and you need people who will speak for your data for it has no tongue.  These are the DBAs.</p>
+<h2 id="tales-of-dba-struggle">Tales of DBA Struggle</h2>
+<p>When I joined Sailthru as a DBA the team was newly formed, the MongoDB deployment had been left to some combination of Operations members and Development for some time.  Many people had their hands in the pie but few knew or had ownership over what was going on.</p>
+<h3 id="backups-mms-vs-hybrid-cloud">Backups: MMS vs Hybrid Cloud</h3>
+<p>As a DBA the first thing to assess is how backed up is the data.  If your data access is slow it can be sped up later, if your monitoring is poor it can be shored up later, but if your backups are not working and you lose your data you cannot fix your backups later.  I'm going to discuss two options to backing up data for MongoDB: hybrid cloud and MMS backups.</p>
+<h4 id="hybrid-cloud-backups">Hybrid cloud backups</h4>
+<p>A hybrid cloud is where you have part of your application running on physical machines that you manage and the other part is running in a cloud provider such as AWS.  A hybrid cloud system with MongoDB is essentially having part of each replica set in the cloud syncing to part of the replica set that is running on your hardware.</p>
+<p><img src="./MongoDB Administration and Backup with MMS_files/6zfybHh.png" alt="A schematic of a hybrid cloud setup" title="Schematic of a hybrid cloud"></p>
+<p>This has several benefits:</p>
+<ol>
+<li><strong>Redundancy.</strong> Disaster recovery is immediate.  You have a working copy of your data offsite so you can immediately begin using that set.</li>
+<li><strong>Backups.</strong>  Snapshots can be taken easily and are also stored off site.</li>
+</ol>
+<p>However there are also downsides:</p>
+<ol>
+<li><strong>Cost.</strong>  This system could end up costing a lot of money, especially as you must make sure the MongoDB instances are provisioned so they can keep up with the instances in your datacenter.</li>
+<li><strong>Security.</strong>  You must maintain a secure connection to the cloud provider as replication in MongoDB occurs without encryption.</li>
+<li><strong>Bandwidth.</strong>  You must have enough bandwidth to be able to keep this data set in sync or it will quickly become useless, requiring manual intervention.</li>
+<li><strong>Time.</strong>  It will in all likelihood take a lot of time to maintain, especially if members in the cloud fall out of sync and a manual re-sync operation is required.  Additionally maintaining a separate cloud infrastructure and the connection to it requires time from the team.</li>
+</ol>
+<p>It can look like the costs outweigh the benefits by sheer numbers, but let's be fair those two benefits are really big benefits.  What got me to give up a hybrid cloud was when we used this technique with a sharded cluster.</p>
+<p>In a single replica set it is easy to say if we have a consistent backup of it or not, easy to monitor and if there is a problem it is easy to rectify.  However when you have a cluster all replica sets (shards) that compose the cluster must be backed up successfully for the entire cluster to be backed up.  As traffic and load increase it may be hard to do this, and if you have a single shard unable to keep up then your entire backup - no matter if it is a hundred shard cluster - is now incomplete.  This was a big problem, big enough to scrap our hybrid cloud architecture.</p>
+<h4 id="mongodb-managed-mms-backups">MongoDB managed MMS backups</h4>
+<p>We moved to MMS, MongoDB's backup solution.  MongoDB will stream your data to their datacenter in a compressed and encrypted format.  It will then take snapshots for you off site and store them, giving you very granular (between 15min and to the second in many cases) restore capabilities and redundancy.  Surprisingly this was also cheaper than our hybrid cloud solution and it was clear that migrating to this would give us more time to focus on other tasks.  The MMS backup has been relatively straightforward and has worked quite well.  It works by placing a MMS Backup agent within your datacenter / cloud which tails the oplog of the servers being backed up.  It then ships the data over the wire to MongoDB's data center where they keep an up to date copy, taking periodic snapshots and automating the point in time recovery operation through oplog replays.</p>
+<p><img src="./MongoDB Administration and Backup with MMS_files/PrY781g.png" alt="A schematic of the MMS Backup process"></p>
+<p>Some things to keep in mind however:</p>
+<ol>
+<li><strong>Automation.</strong>  Currently there is no automation tied into the MMS backup solution, which means you will have to go through their relatively new API to try and get your backup tasks done and write your own automation, or you will have to use the UI.  For any sizable deployment automation will be required for any speedy response time, so keep this in mind.</li>
+<li><strong>Offsite.</strong>  You will need to stream the data over the internet to its destination, these backups are not close to your servers, so it will take time to move the data.  Factor this into your disaster recovery plan.  However you will not need to execute mongorestore on the data that MongoDB ships you, it is all in datafiles that you can point mongod to immediately and begin using.</li>
+</ol>
+<p>MMS backup can be a very good solution and it shouldn't be discounted, especially if your manpower is limited.  Not having backups is not an option for any organization.</p>
+<h3 id="monitoring-mms-and-zabbix">Monitoring: MMS and Zabbix</h3>
+<p>Monitoring is the second most crucial thing for a DBA to set up.  Being able to know if your system is behaving as expected or outside normal bounds, and being able to quickly narrow problems down to the source is necessary for confidence in the operation of the data layer.</p>
+<h4 id="mongodb-hosted-mms-monitoring">MongoDB hosted MMS monitoring</h4>
+<p>Anyone playing with MongoDB out of the box should set up MMS, this will be an excellent monitoring and alerting system for you.  This gives you a lot of information but it might not be very helpful without context, especially if you are using this to alert you by SMS or by some third party such as PagerDuty (MMS does have integration with PagerDuty).  Here are some things to look out for:</p>
+<ol>
+<li><strong>Read / Write Queues.</strong>  These are real good indicators if you have overloaded what MongoDB can get done, even if your lock percent is high if you don't have queues you often don't have a problem.  If you do start to sustain a queue you'll see slowdown in your application. <br><div style="text-align:center"><img src="./MongoDB Administration and Backup with MMS_files/xJgk55j.png" alt="A MMS Queue graph" title="A graph of MongoDB queues as recorded by MMS.  We can see that the queue length rises as times goes on, response time in the application would be seen as increasing"></div></li>
+<li><strong>Network Traffic.</strong>  MongoDB can push as many bits as the network interface can handle, and at times this has been the only indicator as to why things are getting slow.  If you see your network graph plateau then there is a problem and likely where your performance bottleneck lies. <br><div style="text-align:center"><img src="./MongoDB Administration and Backup with MMS_files/m3Ev6Q9.png" alt="A MMS Network Graph" title="Spikes in network egress can be a sign of queries pulling too much data and can impact performance as well"></div></li>
+<li><strong> Background Flush Average.</strong>  This represents how long it takes to flush the data to disk, a high value of the background flush will indicate that the disk is overloaded.  A background flush is executed every 60 seconds so keep that in mind, a background flush of 40 seconds is extremely high.<br><div style="text-align:center"><img src="./MongoDB Administration and Backup with MMS_files/n2kWHmC.png" alt="A MMS background flush graph" title="The background flush average can warn you if your diskio cannot keep up with the demand being put on Mongo"></div></li>
+<li><strong>Lock Percentage.</strong>  Depending on your workload a spike or a maintained high lock percentage can be a very bad sign.  This is very workload and even namespace dependent so I can't tell you what to look for, I'm sorry!<br><div style="text-align:center"><img src="./MongoDB Administration and Backup with MMS_files/l99X7ec.png" alt="A MMS Lock percent graph" title="Increasing lock percentage means that there is an increasingly intensive write load coming into Mongo, perhaps due to a change in acces patterns.  As long as it does not impact other expected operations on the DB lock percent is perfectly fine"></div></li>
+</ol>
+<p>The most important thing is to know what your application needs in order to work effectively, and what will cause it to have problems.  Sometimes to do this you will need to implement custom alerting scripts that cannot be put into MMS currently.  Here you need to look elsewhere to new monitoring systems such as Nagios or Zabbix.  I have used Zabbix and I will talk a little bit about it here.</p>
+<h4 id="mongodb-monitoring-with-zabbix">MongoDB monitoring with Zabbix</h4>
+<p>Zabbix is an <a href="http://www.zabbix.com/">open source</a> monitoring framework that has been around for a long time, you can host it inside your own network and it allows you to utilize custom scripts.  A Zabbix template and script for monitoring MongoDB can be found <a href="https://github.com/sailthru/mongodb-zabbix">here</a>.  The alerting thresholds in the Zabbix template are set to set to some reasonable defaults and should hopefully suit you well if you choose to go down this path.  This also allows you to consolidate all of your monitoring for your system into a single location, which can be very helpful.  There are many other monitoring frameworks and what works best for your organization will vary.  Don't be afraid to strike out on your own, the benefits of having your monitoring exactly what is needed for your organization will outweigh the setup costs in the long run.</p>
+<p><img src="./MongoDB Administration and Backup with MMS_files/hS9Yaqn.png," alt="An example Zabbix dashboard" title="An example Zabbix monitoring dashboard"></p>
+<h3 id="migrating-data-out-of-mongo-and-into-mongo">Migrating data out of Mongo and into Mongo</h3>
+<p>Code changes, requirements change, and sometimes so must the data.  Many times migrating data from one store to another also falls on the DBA.  Even Mongo to Mongo migrations might be required to restructure the data or in order to shard effectively (by either changing the shard key or moving data into a cluster).  There are many ways to move data from Mongo instance to another.  I'll discuss utilizing some of the out of the box mongo tools in order to quickly move data.</p>
+<ol>
+<li><strong>Mongodump and Mongorestore.</strong>  These are good tools that come packaged with mongo, and especially in their 3.0 variants where much better multithreading and batching increases their performance as well as the vital ability of mongorestore to be able to restore from standard input rather than only from static files.  However it is important that if you are looking for speed that you pipe directly from mongodump to mongorestore.  This will only be possible if you are piping one collection to another collection, if you dump an entire database to a file then you are going to be working at the speed of your disk.  In the end if you touch disk you lose the performance battle.  An example of what this might look like (using the 3.0 tools): <br><blockquote>
+<p><code>mongodump --host &lt;SOURCE_HOST&gt; --port &lt;SOURCE_PORT&gt; --db &lt;SOURCE_DB&gt; --collection &lt;SOURCE_COLLECTION&gt; --out - | mongorestore --host &lt;TARGET_HOST&gt; --port &lt;TARGET_PORT&gt; --db &lt;TARGET_DB&gt; --collection &lt;TARGET_COLLECTION&gt; -</code></p>
+</blockquote>
+</li>
+<li><strong>Mongoconnector.</strong>  This is an <a href="https://github.com/10gen-labs/mongo-connector">open source</a> python tool from mongo that allows you to tail the oplog of a replica set or cluster and apply these changes to your target datastore.  Unlike mongodump and mongorestore it is possible to use mongoconnector for more than just mongo to mongo and you can write your own document manager to write to any datastore you like.  The downside is that the initial sync of data is slow, however it is possible to use the previous technique to copy data over quickly and then use MongoConnector to copy what you missed during that migration.  You can do this by recording the oplog timestamp just before you start the mongodump -&gt; mongorestore operation in the file that mongoconnector specifies in the --oplog-ts argument.  Then when the dump and restore operation is complete you can start mongoconnector and it will run all operations from that timestamp forward (Be sure your oplog is long enough, if the oplog is not long enough to pick back up at that timestamp you will need to do something else.).</li>
+</ol>
+<p><img src="./MongoDB Administration and Backup with MMS_files/04JUSsg.png" alt="A schematic of how Mongoconnector works"></p>
+<h2 id="what-should-i-do-to-be-a-better-mongo-user-">What should I do to be a better Mongo User?</h2>
+<h3 id="have-a-care-for-how-your-data-will-be-used">Have a care for how your data will be used</h3>
+<p>Building your data to suit your access patterns is what you hear all the time with MongoDB, but that is because it is true.  If you are looking up many documents individually then a hashed shard key is ideal (as may be a keystore lookup, which you can hear described more in my talk from MongoDB World 2015).  If you are doing longer running queries more often then be sure to choose a shard key that has your query localized to a single shard.  You are the best one to choose how to structure your data as you know how it will be used.</p>
+<h3 id="design-and-document-your-schemas">Design and document your schemas</h3>
+<p>MongoDB is heralded as having no schema, but if you talk to anyone who has worked with it they will tell you that their data has a schema.  All data has some sort of structure and defining it beforehand and documenting it will help you in the long run.  Maintenance will be easier, bringing people onboard will be much more rapid, and engaging external expertise will be much quicker and more productive when you know what you have.  This isn't to say that your data can't change over time, but if it does then document that and know what fields may or may not be there.  Additionally Mongo does allow you to have whatever data type you want in a field and it can vary from document to document - mixing datatypes in the same field name in the same collection is a very bad idea for performance and deterministic data access!  If your application expects a float and gets an int, especially if it is a statically typed language, you could force yourself to check and validate everything coming out of your database (a lot of overhead) or you might unexpectedly have your process crash, all bad things to have to do.</p>
+<h3 id="consider-other-datastores">Consider other datastores</h3>
+<p>Mongo is very powerful and flexible, what it is good at it is quite good at.  However it is not ideal for all datasets.  Keep an open mind when other datasets are better suited for your access patterns, it is dangerous to become so dependent on a single technology that you cannot innovate.  I'll list some brief patterns of access that could be examples of different datastores to use (but it is by far from comprehensive in the access patterns or in the technologies listed).</p>
+<ol>
+<li><strong>Link Shortening</strong>.  If you are constructing some link shortening for your own domain then you might be creating some string that maps to a URL, effectively creating a hash map of these shortened links to the actual URL.  This can be stored in MongoDB as a document whose _id field is the shortened key and a single field of the URL, creating a key-value pair as a document.  You can get rapid insertion rates and speedy lookups from Mongo but there are other technologies, such as Redis or Aerospike, that may give you even greater performance and flexibility as key-value stores.</li>
+<li><strong>Customer Accounts</strong>.  The traditional problem of maintaining a balance or an account for a customer is fraught with potential race conditions.  You want to put a credit or deduction on their account balance and make sure the event is recorded as well.  You cannot change the account balance without making sure the event is recorded or the other way around.  Instead of implementing a system of locks using your application a database that supports transactions will save you (If you are trying to implement ACID in your application, stop!  Someone else has already spent a long time working on this, just stand on the shoulders of giants!).  Traditional relational databases such as Postgres, or MySQL would serve you better.</li>
+<li><strong>Statistics Rollup</strong>.  What if you would like to record the traffic on your site down to the number of clicks per minute and be able to quickly access this data by minute or hour granularity?  For this MongoDB's nested structures are extremely efficient and make sense.  You will almost always be pulling many of these data points at once to form reports or graphs.  Structuring the data so that your access requires you to only pull a single document from MongoDB when a more relational schema would require many rows to be queried then your use case is perfect for MongoDB.  There is a very well done and comprehensive blog post by Rick Copeland <a href="http://blog.pythonisito.com/2012/09/mongodb-schema-design-at-scale.html">here</a> that describes this use case.</li>
+<li><strong>Music Albums</strong>.  What if you are storing data for music artists?  Do you want to use a relational system or a document store?  If you are often pulling just the albums and are rarely delving into the information of every song on the album it might be better for the application to make a single call and the album to be a single document with the tracks nested within it.  If your application will want to access tracks across albums often then the album should be another table that is joined to the tracks by a foreign key.  Here we see we can either go with a relational database such as MySQL or a document store such as MongoDB, what will sway us is how will the application actually use this data.</li>
+</ol>
+<p>Using the right tool for the job, not just a tool that will work, can get you very far.  This is often easier said than done, there are many technologies (There are entire categories of datastores such as graph databases I haven't even mentioned) and other considerations such as in house expertise and current infrastructure also must weigh heavily on the decision.  So long as you consider other technologies for your problems your application will be stronger for it.</p>
+<h3 id="decouple-and-build-in-abstraction">Decouple and build in abstraction</h3>
+<p>My final piece of advice is to decouple and abstract your application as much as possible away from the datastore.  Taken to its end you could access the database through an entirely RESTful API that abstracts the database away from the application (the microservice architecture is extremely well suited to this and can solve a lot of tight-coupling issues before they start). A specific module where all database access is contained in the application would serve a similar purpose.  It is important to make sure that all parts of the application are as loosely coupled as possible.  Modifications in structure or access of the data as your application grows then become a localized task rather than a global task, leading to more flexibility and reliability in development.</p>
+<h2 id="the-landscape-of-databases-is-changing">The landscape of Databases is changing</h2>
+<p>For decades SQL databases were the lords of the land and recently there has been a huge explosion of new datastores, NoSQL and MongoDB being only one facet of this.  The field of databases is changing rapidly and with it must come a changing of the idea of a DBA.  I have begun to use the term Database Engineer (DBE) to describe what is needed for this changing field.  A DBE must be able to choose a datastore that is ideal for the work of the application and cannot simply expect to be given what data is being stored and normalize it across many tables; a developer and a DBA at once (Indeed I find myself writing programs and reading code more often than I find myself optimizing queries, building indexes, or tailing logs!).  However as we have seen there are many facets of the old DBA mindset, such as backups, that are still just as vital as they once were.  Using MongoDB does not mean that an organization does not need a DBA because someone must still manage the datastore with new skills and new insights that were not so needed even five years ago.</p>
+</post>
+
+  <div class="share" style="position: fixed; left: 911.5px; top: 8px;">
+    <div class="pw pw-widget ra1-pw-classicWidget ra1-pw_size_large pw-layout-horizontal pw-counter-horizontal" pw:twitter-via="airpair">
+      <a class="pw-button pw-button-twitter button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-twitter"></span></a><a class="pw-button pw-button-facebook button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-facebook"></span></a><a class="pw-button pw-button-linkedin button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-linkedin"></span></a><a class="pw-button pw-button-googleplus button-type-square pw-size-large"><span class="pw-icon ra1-pw-icon ra1-pw-icon-googleplus"></span></a>
+      <a class="pw-button pw-button-post button-type-square pw-size-large pw-button-counter-horizontal" aria-haspopup="true"><span class="pw-icon ra1-pw-icon ra1-pw-icon-post"></span><span class="pw-button-counter"><i class="pw-button-counter__brd"></i><span class="pw-button-counter__count ra1-pw-button-counter-value">43</span></span></a>
+    </div>
+  </div>
+
+
+  <div class="rail1CTA railBookmarkCTA" style="position: fixed; left: 911.5px; top: 73px;">
+      <post-rail-stars class="ng-scope"><div class="railstars">
+  <!-- ngIf: notReviewed --><h6 ng-if="notReviewed" class="ng-binding ng-scope">Community Rating<!-- ngIf: count > 1 --><span ng-if="count &gt; 1" class="ng-scope">s</span><!-- end ngIf: count > 1 -->
+    (3)
+  </h6><!-- end ngIf: notReviewed -->
+  <stars val="starsAvg" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</stars>
+
+</div>
+</post-rail-stars>
+    <h6>Need 1 on 1 expert help?</h6>
+    <div class="gethelp">
+      <img src="./MongoDB Administration and Backup with MMS_files/87811ab251ada226311e3c2d614f7cb5">
+      <span><b>PAIR UP</b> with<br> experts like <br>Jeffrey Berger</span>
+      <a href="https://www.airpair.com/login" class="btn btn-sm">Login</a>
+    </div>
+  </div>
+
+
+</article>
+
+  <div id="reviews" post-reviews="" reviews="[{&quot;_id&quot;:&quot;55843d3d35fa9211001650a3&quot;,&quot;by&quot;:{&quot;_id&quot;:&quot;557d8f6b99ee3c11003a4a61&quot;,&quot;name&quot;:&quot;Pablo Villoslada Puigcerber&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/572f6a6a92530dffed7ecd7979cf261d&quot;},&quot;updated&quot;:&quot;2015-06-20T10:10:38.092Z&quot;,&quot;votes&quot;:[{&quot;_id&quot;:&quot;558c66f04ce7701100f4097b&quot;,&quot;val&quot;:1,&quot;by&quot;:{&quot;_id&quot;:&quot;5175efbfa3802cc4d5a5e6ed&quot;,&quot;name&quot;:&quot;Jonathon Kresner&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/19183084115c4a79d34cdc3110adef37&quot;}}],&quot;replies&quot;:[{&quot;by&quot;:{&quot;_id&quot;:&quot;557e46d876b13f110079be87&quot;,&quot;name&quot;:&quot;Dr. Jeffrey Berger&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5&quot;},&quot;comment&quot;:&quot;Hi Pablo\n\nYea the post started getting longer than I would have liked.  I’ll shorten up some of the paragraphs.  Do you think that the description I have of sharding is in the right place / is the right length?\n\nAs far as the zabbix link goes, currently the repo is private and it is supposed to have been made public by the owner by now but I am going to ping him again.  The other changes will be done shortly.\n\n-Jeff&quot;,&quot;_id&quot;:&quot;5584618835fa921100165758&quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;557e46d876b13f110079be87&quot;,&quot;name&quot;:&quot;Dr. Jeffrey Berger&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5&quot;},&quot;comment&quot;:&quot;Pablo\n\nI’ve trimmed down some of the introduction and added a bit about replication.  I’ve also taken more of Johnathon’s advice and added some more headers and changed the heading.  And I did not realize how atrocious I was spelling when the spellchecker was off during that flight - so I fixed a lot of that too.  I’m going to leave the link to the zabbix repo in there because it should be open sourced soon, that is a problem I need to work in parallel on my end with.  Please let me know if you think that I can trim some more of this down and still give enough context for this discussion.\n\nThanks for taking your time to review this!&quot;,&quot;_id&quot;:&quot;5584731994a16f11001fc447&quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;557d8f6b99ee3c11003a4a61&quot;,&quot;name&quot;:&quot;Pablo Villoslada Puigcerber&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/572f6a6a92530dffed7ecd7979cf261d&quot;},&quot;comment&quot;:&quot;Hi Jeffrey! I’ve updated my rating. Now I like way more the introduction, it’s more concise and clear. Good job!&quot;,&quot;_id&quot;:&quot;55853ca0f54a5511000a9890&quot;}],&quot;questions&quot;:[{&quot;key&quot;:&quot;rating&quot;,&quot;answer&quot;:&quot;4&quot;},{&quot;key&quot;:&quot;feedback&quot;,&quot;answer&quot;:&quot;Hi Jeffrey! \n\nQuite the long read here. Actually I feel that some of the paragraphs and specially the introduction are too long, so it’s hard to keep focused on the reading. Besides that I think you need to throw on the spelling checker and correct the links because the one to https://github.com/sailthru/mongodb-zabbix throws a 404 and the link to blog.pythonisito.com is missing the http:// part.\n\nFrom the technical part it  wouldn’t hurt the post to add short descriptions of sharding, cluster and replica sets because developers might not be that familiar with those terms as DBAs. Finally I would wrap the `mongos` with the code tag because as it is written now it might look just like the plural form of Mongo.\n\nCheers, Pablo.&quot;}],&quot;rating&quot;:&quot;4&quot;,&quot;feedback&quot;:&quot;Hi Jeffrey! \n\nQuite the long read here. Actually I feel that some of the paragraphs and specially the introduction are too long, so it’s hard to keep focused on the reading. Besides that I think you need to throw on the spelling checker and correct the links because the one to https://github.com/sailthru/mongodb-zabbix throws a 404 and the link to blog.pythonisito.com is missing the http:// part.\n\nFrom the technical part it  wouldn’t hurt the post to add short descriptions of sharding, cluster and replica sets because developers might not be that familiar with those terms as DBAs. Finally I would wrap the `mongos` with the code tag because as it is written now it might look just like the plural form of Mongo.\n\nCheers, Pablo.&quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;55847bf335fa921100165ce0&quot;,&quot;name&quot;:&quot;Josh Wickman&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/d6ad32370c19259df1597f1a6ebe43c9&quot;},&quot;_id&quot;:&quot;558489da586b941100f03907&quot;,&quot;votes&quot;:[{&quot;by&quot;:{&quot;_id&quot;:&quot;5175efbfa3802cc4d5a5e6ed&quot;,&quot;name&quot;:&quot;Jonathon Kresner&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/19183084115c4a79d34cdc3110adef37&quot;},&quot;val&quot;:1,&quot;_id&quot;:&quot;558c66e44ce7701100f40976&quot;}],&quot;replies&quot;:[{&quot;by&quot;:{&quot;_id&quot;:&quot;557e46d876b13f110079be87&quot;,&quot;name&quot;:&quot;Dr. Jeffrey Berger&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5&quot;},&quot;comment&quot;:&quot;Hi Josh\n\nI did add a few sentances to the post to address the concerns that you listed.  Thanks for the feedback!&quot;,&quot;_id&quot;:&quot;558492e6586b941100f03adc&quot;}],&quot;questions&quot;:[{&quot;answer&quot;:&quot;4&quot;,&quot;key&quot;:&quot;rating&quot;},{&quot;answer&quot;:&quot;Hi Jeffrey!  Good post.  A couple thoughts:  First, you mention that the wire protocol doesn’t distinguish between queries coming from a mongos and those going to individual shards.  It might be useful to give a disclaimer (for those who may not know) that circumventing the mongos and directly querying the shards in a cluster is not at all recommended.  Second, in your discussion of the hybrid cloud scenario, you list \&quot;time\&quot; as a drawback, but the only specific time sink you mention is if a manual resync is needed (which you already mention in the preceding \&quot;bandwidth\&quot; bullet).  Are there any other significant time sinks, or is this one sufficiently likely in your opinion to justify a separate mention?&quot;,&quot;key&quot;:&quot;feedback&quot;}],&quot;rating&quot;:&quot;4&quot;,&quot;feedback&quot;:&quot;Hi Jeffrey!  Good post.  A couple thoughts:  First, you mention that the wire protocol doesn’t distinguish between queries coming from a mongos and those going to individual shards.  It might be useful to give a disclaimer (for those who may not know) that circumventing the mongos and directly querying the shards in a cluster is not at all recommended.  Second, in your discussion of the hybrid cloud scenario, you list \&quot;time\&quot; as a drawback, but the only specific time sink you mention is if a manual resync is needed (which you already mention in the preceding \&quot;bandwidth\&quot; bullet).  Are there any other significant time sinks, or is this one sufficiently likely in your opinion to justify a separate mention?&quot;},{&quot;by&quot;:{&quot;_id&quot;:&quot;52127d4066a6f999a465f637&quot;,&quot;name&quot;:&quot;Ra’Shaun Stovall&quot;,&quot;avatar&quot;:&quot;//0.gravatar.com/avatar/64436c814e3b8422fc25c0112760168c&quot;},&quot;_id&quot;:&quot;5589879c9202d8110073a8cf&quot;,&quot;votes&quot;:[],&quot;replies&quot;:[],&quot;questions&quot;:[{&quot;answer&quot;:&quot;4&quot;,&quot;key&quot;:&quot;rating&quot;},{&quot;answer&quot;:&quot;Great opening. I loved how you mentioined and referenced why I should be reading your post. You are truly an expert. I also did not know the best way to do graphing of analytics within Mongo DB. I actually learned from the post. \n\nIn the future I would split this down to two posts as it is much to consume. \n\nMaybe I need to ask myself \&quot;What is the difference between a post and a learning track\&quot; Just a thought.\n\nThe intro was perfect because You described who you were in a warm way. I was able to take something that I can immediately use. And a Great closing.\n&quot;,&quot;key&quot;:&quot;feedback&quot;}],&quot;rating&quot;:&quot;4&quot;,&quot;feedback&quot;:&quot;Great opening. I loved how you mentioined and referenced why I should be reading your post. You are truly an expert. I also did not know the best way to do graphing of analytics within Mongo DB. I actually learned from the post. \n\nIn the future I would split this down to two posts as it is much to consume. \n\nMaybe I need to ask myself \&quot;What is the difference between a post and a learning track\&quot; Just a thought.\n\nThe intro was perfect because You described who you were in a warm way. I was able to take something that I can immediately use. And a Great closing.\n&quot;}]" byid="557e46d876b13f110079be87" class="ng-scope ng-isolate-scope"><div survey-post="" class="ng-scope"><!-- ngIf: data && show --><form ng-if="data &amp;&amp; show" id="postReviewForm" novalidate="" name="postReviewForm" ng-submit="submitReview(postReviewForm.$valid, data)" class="ng-pristine ng-scope ng-invalid ng-invalid-required">
+
+  <div class="question multiple-choice stars ng-scope form-group" data-key="rating" form-group="">
+    <label class="control-label" for="postRating">How would you rate the quality of this post?</label>
+    <select form-control="" id="postRating" name="rating" ng-model="data.rating" required="" tabindex="1203" class="ng-pristine ng-untouched ng-valid form-control ng-valid-required">
+      <option value="1">1 star (not ready)</option>
+      <option value="2">2 stars (needs works)</option>
+      <option value="3">3 stars (average)</option>
+      <option value="4">4 stars (good)</option>
+      <option value="5">5 stars (exceptional)</option>
+    </select>
+    <!-- ngIf: formGroup.showError(postReviewForm.rating) -->
+  </div>
+
+  <!-- ngIf: session._id --><div ng-if="session._id" class="question paragraph ng-scope form-group" data-key="feedback" form-group="">
+    <label class="control-label" for="postFeedback" style="display:none">Overall comment</label>
+    <textarea textarea-grow="" form-control="" id="postFeedback" name="feedback" ng-model="data.feedback" placeholder="Why did you give this post 3 stars?" required="" tabindex="1204" ng-disabled="!data.rating" class="ng-pristine ng-untouched form-control ng-invalid ng-invalid-required" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 100px;"></textarea>
+    <!-- ngIf: formGroup.showError(postReviewForm.feedback) -->
+  </div><!-- end ngIf: session._id -->
+
+  <!-- ngIf: session._id --><div ng-if="session._id" ng-class="unsaved(data, existing) ? &#39;unsaved&#39; : &#39;saved&#39;" class="ng-scope unsaved">
+    <input ng-disabled="!data.feedback" type="submit" value="Save review" class="btn" disabled="disabled">
+    <p class="edit">Review saved. Edit it any time right from this widget.</p>
+  </div><!-- end ngIf: session._id -->
+
+
+
+  <!-- ngIf: !session._id -->
+
+  <div form-errors=""><div class="form-errors">
+  <!-- ngIf: serverErrors.length > 0 -->
+</div>
+</div>
+
+</form><!-- end ngIf: data && show -->
+</div>
+<div post-comments="" class="ng-scope"><!-- ngIf: reviews --><div class="reviewsthread ng-scope" ng-if="reviews">
+
+  <header post-comments-header=""><h3 class="ng-binding">Reviews (3) <!-- ngIf: reviews.length > 0 --><span style="float:right" ng-if="reviews.length &gt; 0" class="ng-binding ng-scope">Rating 4.0/5</span><!-- end ngIf: reviews.length > 0 --></h3>
+
+<!-- ngIf: reviews.length == 0 -->
+</header>
+
+  <!-- ngIf: reviews.length > 0 --><ul class="reviews ng-scope" ng-if="reviews.length &gt; 0">
+    <!-- ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="55843d3d35fa9211001650a3" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/572f6a6a92530dffed7ecd7979cf261d?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/572f6a6a92530dffed7ecd7979cf261d">
+  <label class="ng-binding">Pablo Villoslada Puigcerber</label>
+  <time class="ng-binding">2 months ago <!-- ngIf: r.updated --><span ng-if="r.updated" class="ng-binding ng-scope">+ updated 2 months ago</span><!-- end ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Hi Jeffrey! 
+
+Quite the long read here. Actually I feel that some of the paragraphs and specially the introduction are too long, so it’s hard to keep focused on the reading. Besides that I think you need to throw on the spelling checker and correct the links because the one to https://github.com/sailthru/mongodb-zabbix throws a 404 and the link to blog.pythonisito.com is missing the http:// part.
+
+From the technical part it  wouldn’t hurt the post to add short descriptions of sharding, cluster and replica sets because developers might not be that familiar with those terms as DBAs. Finally I would wrap the `mongos` with the code tag because as it is written now it might look just like the plural form of Mongo.
+
+Cheers, Pablo.</p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">1 Vote<!-- ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies --><li ng-repeat="reply in r.replies" class="ng-scope">
+      <img ng-src="//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/87811ab251ada226311e3c2d614f7cb5(1)">
+      <label class="ng-binding">Dr. Jeffrey Berger</label>
+      <time class="ng-binding">2 months ago</time>
+      <p class="ng-binding">Hi Pablo
+
+Yea the post started getting longer than I would have liked.  I’ll shorten up some of the paragraphs.  Do you think that the description I have of sharding is in the right place / is the right length?
+
+As far as the zabbix link goes, currently the repo is private and it is supposed to have been made public by the owner by now but I am going to ping him again.  The other changes will be done shortly.
+
+-Jeff</p>
+    </li><!-- end ngRepeat: reply in r.replies --><li ng-repeat="reply in r.replies" class="ng-scope">
+      <img ng-src="//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/87811ab251ada226311e3c2d614f7cb5(1)">
+      <label class="ng-binding">Dr. Jeffrey Berger</label>
+      <time class="ng-binding">2 months ago</time>
+      <p class="ng-binding">Pablo
+
+I’ve trimmed down some of the introduction and added a bit about replication.  I’ve also taken more of Johnathon’s advice and added some more headers and changed the heading.  And I did not realize how atrocious I was spelling when the spellchecker was off during that flight - so I fixed a lot of that too.  I’m going to leave the link to the zabbix repo in there because it should be open sourced soon, that is a problem I need to work in parallel on my end with.  Please let me know if you think that I can trim some more of this down and still give enough context for this discussion.
+
+Thanks for taking your time to review this!</p>
+    </li><!-- end ngRepeat: reply in r.replies --><li ng-repeat="reply in r.replies" class="ng-scope">
+      <img ng-src="//0.gravatar.com/avatar/572f6a6a92530dffed7ecd7979cf261d?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/572f6a6a92530dffed7ecd7979cf261d">
+      <label class="ng-binding">Pablo Villoslada Puigcerber</label>
+      <time class="ng-binding">2 months ago</time>
+      <p class="ng-binding">Hi Jeffrey! I’ve updated my rating. Now I like way more the introduction, it’s more concise and clear. Good job!</p>
+    </li><!-- end ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="558489da586b941100f03907" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/d6ad32370c19259df1597f1a6ebe43c9?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/d6ad32370c19259df1597f1a6ebe43c9">
+  <label class="ng-binding">Josh Wickman</label>
+  <time class="ng-binding">2 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Hi Jeffrey!  Good post.  A couple thoughts:  First, you mention that the wire protocol doesn’t distinguish between queries coming from a mongos and those going to individual shards.  It might be useful to give a disclaimer (for those who may not know) that circumventing the mongos and directly querying the shards in a cluster is not at all recommended.  Second, in your discussion of the hybrid cloud scenario, you list "time" as a drawback, but the only specific time sink you mention is if a manual resync is needed (which you already mention in the preceding "bandwidth" bullet).  Are there any other significant time sinks, or is this one sufficiently likely in your opinion to justify a separate mention?</p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 --><span class="updatable count ng-binding ng-scope" data-role="likes" ng-if="r.votes.length &gt; 0">1 Vote<!-- ngIf: r.votes.length > 1 --></span><!-- end ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies --><li ng-repeat="reply in r.replies" class="ng-scope">
+      <img ng-src="//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/87811ab251ada226311e3c2d614f7cb5(1)">
+      <label class="ng-binding">Dr. Jeffrey Berger</label>
+      <time class="ng-binding">2 months ago</time>
+      <p class="ng-binding">Hi Josh
+
+I did add a few sentances to the post to address the concerns that you listed.  Thanks for the feedback!</p>
+    </li><!-- end ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true --><li ng-repeat="r in reviews | orderBy : &#39;votes.length&#39;:true" class="5589879c9202d8110073a8cf" post-comments-review-thread=""><header>
+  <img ng-src="//0.gravatar.com/avatar/64436c814e3b8422fc25c0112760168c?s=40" class="user" src="./MongoDB Administration and Backup with MMS_files/64436c814e3b8422fc25c0112760168c">
+  <label class="ng-binding">Ra’Shaun Stovall</label>
+  <time class="ng-binding">2 months ago <!-- ngIf: r.updated --></time>
+  <stars val="r.rating" class="ng-isolate-scope"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</stars>
+</header>
+<p class="ng-binding">Great opening. I loved how you mentioined and referenced why I should be reading your post. You are truly an expert. I also did not know the best way to do graphing of analytics within Mongo DB. I actually learned from the post. 
+
+In the future I would split this down to two posts as it is much to consume. 
+
+Maybe I need to ask myself "What is the difference between a post and a learning track" Just a thought.
+
+The intro was perfect because You described who you were in a warm way. I was able to take something that I can immediately use. And a Great closing.
+</p>
+<footer>
+  <menu>
+
+    <li class="voting" data-role="voting">
+      <!-- ngIf: r.votes.length > 0 -->
+
+      <!-- ngIf: canVote(r) --><a ng-if="canVote(r)" ng-click="upVote(r._id)" class="vote-up count-0 ng-scope" data-action="upvote" title="Vote up">
+        <span class="control">Upvote</span>
+      </a><!-- end ngIf: canVote(r) -->
+
+      <!-- ngIf: isEditor -->
+
+    <!-- <span role="button" class="vote-down  count-0" title="Vote down">
+    <span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+    <span class="tooltip">You must sign in to down-vote this post.</span>
+    </span> -->
+    </li>
+    <!-- ngIf: r.votes.length > 0 || canVote(r) --><li ng-if="r.votes.length &gt; 0 || canVote(r)" class="bullet ng-scope" aria-hidden="true">-</li><!-- end ngIf: r.votes.length > 0 || canVote(r) -->
+
+    <li class="reply" data-role="reply-link">
+      <a ng-click="toggleReply(r._id)" data-action="reply">
+        <i class="icon icon-mobile icon-reply"></i>
+          <!-- ngIf: !replyOpen --><span ng-if="!replyOpen" class="text ng-scope">Reply</span><!-- end ngIf: !replyOpen -->
+          <!-- ngIf: replyOpen -->
+      </a>
+    </li>
+    <!-- <li class="bullet" aria-hidden="true">•</li> -->
+
+    <!-- <li class="share">
+    </li> -->
+
+  </menu>
+  <ul class="replies">
+    <!-- ngRepeat: reply in r.replies -->
+  </ul>
+  <!-- ngIf: replyOpen -->
+</footer>
+</li><!-- end ngRepeat: r in reviews | orderBy : 'votes.length':true -->
+  </ul><!-- end ngIf: reviews.length > 0 -->
+
+</div><!-- end ngIf: reviews -->
+
+</div>
+</div>
+
+<article class="blogpost ng-scope">
+<div id="bodyCTA1" class="bodyCTA1 bodyCTA">
+  <!-- ngIf: !session._id -->
+  <!-- ngIf: session._id --><div ng-if="session._id" request="" class="ng-scope"><request-widget req="request" class="ng-isolate-scope"><!-- ngIf: r && r.type -->
+</request-widget>
+
+<!-- ngIf: request --><form ng-if="request" class="requestForm ng-pristine ng-scope ng-invalid ng-invalid-required" novalidate="" name="requestForm" ng-submit="RequestFormCtrl.submit(requestForm.$valid, request)">
+
+<!-- ngIf: request.type && !entercard -->
+
+<request-progress><div class="requestProgress">
+  <div ng-class="stepClass(&#39;type&#39;)" class="type current">
+    <label>Help</label>
+    <a ng-click="setCurrent(&#39;type&#39;)">Help</a>
+  </div>
+  <div ng-class="stepClass(&#39;tags&#39;)" class="tags">
+    <label>Tags</label>
+    <a ng-click="setCurrent(&#39;tags&#39;)">Tags</a>
+  </div>
+  <div ng-class="stepClass(&#39;experience&#39;)" class="experience">
+    <label>Difficulty</label>
+    <a ng-click="setCurrent(&#39;experience&#39;)">Difficulty</a>
+  </div>
+  <div ng-class="stepClass(&#39;brief&#39;)" class="brief">
+    <label>Brief</label>
+    <a ng-click="setCurrent(&#39;brief&#39;)">Brief</a>
+  </div>
+  <div ng-class="stepClass(&#39;time&#39;)" class="time">
+    <label>Speed</label>
+    <a ng-click="setCurrent(&#39;time&#39;)">Speed</a>
+  </div>
+  <div ng-class="stepClass(&#39;hours&#39;)" class="hours">
+    <label>Hours</label>
+    <a ng-click="setCurrent(&#39;hours&#39;)">Hours</a>
+  </div>
+  <div ng-class="stepClass(&#39;budget&#39;)" class="budget">
+    <label>Budget</label>
+    <a ng-click="setCurrent(&#39;budget&#39;)">Budget</a>
+  </div>
+  <div ng-class="stepClass(&#39;submit&#39;)" class="submit">
+    <label>Submit</label>
+    <a ng-click="setCurrent(&#39;submit&#39;)">Submit</a>
+  </div>
+</div>
+</request-progress>
+
+<section ng-class="stepClass(&#39;submit&#39;)" class="submit">
+
+  <!-- ngIf: request._id -->
+
+  <a ng-click="submit()" class="btn">Submit request with max budget of <b class="ng-binding">$</b>/Hr</a>
+
+  <i>An AirPair Matchmaker will email you within 5-15 minutes if you haven't already spoken with one.</i>
+
+</section>
+
+<section ng-class="stepClass(&#39;budget&#39;)" class="budget">
+
+  <div form-group="" class="radios ng-scope form-group">
+    <label class="control-label" for="requestTime">What is your max hourly budget?</label>
+
+    <div>
+      <input id="requestBudget300" name="budget" ng-model="request.budget" type="radio" value="300" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestBudget300">
+        <b>$300<span>/hr</span></b>
+        <i>Our best experts, the fastest responses.</i>
+      </label>
+    </div>
+
+    <div>
+      <input id="requestBudget210" name="budget" ng-model="request.budget" type="radio" value="210" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestBudget210">
+        <b>$210<span>/hr</span></b>
+        <i>Our best experts, normal response times.</i>
+      </label>
+    </div>
+
+    <div>
+      <!-- ngIf: !nonCurrentBudget --><input ng-if="!nonCurrentBudget" id="requestBudget150" name="budget" ng-model="request.budget" type="radio" value="150" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid ng-scope"><!-- end ngIf: !nonCurrentBudget -->
+      <!-- ngIf: !nonCurrentBudget --><label ng-if="!nonCurrentBudget" for="requestBudget150" class="ng-scope">
+        <b>$150<span>/hr</span></b>
+        <i>Proven experts, fast responses <em>* Most popular</em>.</i>
+      </label><!-- end ngIf: !nonCurrentBudget -->
+    </div>
+
+    <div>
+      <input id="requestBudget100" name="budget" ng-model="request.budget" type="radio" value="100" ng-click="setBuget()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestBudget100">
+        <b>$100<span>/hr</span></b>
+        <i>Proven experts, normal response times.</i>
+      </label>
+    </div>
+
+    <!-- ngIf: request.time == 'rush' -->
+
+<!--     <div class="{{request.time}}">
+      <input id="requestBudget70" name="budget" ng-model="request.budget" type="radio" value="70" ng-click="setBuget()">
+      <label for="requestBudget70">
+        <b>$70<span>/hr</span></b>
+        <i ng-if="request.time != 'rush'">Available experts, normal response times.</i>
+        <i ng-if="request.time == 'rush'">Rate not available with RUSH timing.</i>
+      </label>
+    </div>
+
+ -->
+    <!-- ngIf: nonCurrentBudget -->
+
+    <hr>
+  </div>
+
+
+  <div class="info nomob">
+    <b>$10/hr Discount</b>
+    <p>Off these rates, <br>if you choose to <em>open source</em> your video recording later.</p>
+  </div>
+
+</section>
+
+
+<section ng-class="stepClass(&#39;hours&#39;)" class="hours">
+
+  <div form-group="" class="radios ng-scope form-group">
+    <label class="control-label" for="requestHours">How many hours do you think you'll need?</label>
+
+    <div>
+      <input id="requestHours1" name="hours" ng-model="request.hours" type="radio" value="1" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours1">1</label>
+    </div>
+
+    <div>
+      <input id="requestHours2" name="hours" ng-model="request.hours" type="radio" value="2" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours2">2</label>
+    </div>
+
+    <!-- ngIf: request.time == 'rush' -->
+
+    <div class="">
+      <input id="requestHours5" name="hours" ng-model="request.hours" type="radio" value="5" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours5">5</label>
+    </div>
+
+    <div class="">
+      <input id="requestHours10" name="hours" ng-model="request.hours" type="radio" value="10" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHours10">10</label>
+    </div>
+
+    <div class="">
+      <input id="requestHoursMore" name="hours" ng-model="request.hours" type="radio" value="10+" ng-click="setHours()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestHoursMore">More</label>
+    </div>
+
+
+  </div>
+  <hr>
+
+</section>
+
+<section ng-class="stepClass(&#39;time&#39;)" class="time">
+
+  <!-- ngIf: !entercard --><div form-group="" ng-if="!entercard" class="ng-scope form-group">
+    <label class="control-label" for="requestTime">How soon would you like to speak to an expert?</label>
+
+    <div class="radios">
+      <input id="requestTimeRegular" name="time" ng-model="request.time" type="radio" value="regular" ng-click="setTime()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestTimeRegular"><img src="./MongoDB Administration and Backup with MMS_files/time-regular.png">In 1-2 Days</label>
+    </div>
+
+    <div class="radios">
+      <input id="requestTimeRush" name="time" ng-model="request.time" type="radio" value="rush" ng-click="setTime()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestTimeRush"><img src="./MongoDB Administration and Backup with MMS_files/time-rush.png">In 1-2 Hours <i>+ $20/hr rush fee paid to expert</i></label>
+    </div>
+
+    <div class="radios">
+      <input id="requestTimeLater" name="time" ng-model="request.time" type="radio" value="later" ng-click="setTime()" class="ng-pristine ng-untouched ng-valid">
+      <label for="requestTimeLater"><img src="./MongoDB Administration and Backup with MMS_files/time-later.png">I don't know yet
+    </label></div>
+
+  </div><!-- end ngIf: !entercard -->
+
+  <!-- ngIf: entercard -->
+
+</section>
+
+
+<section ng-class="stepClass(&#39;brief&#39;)" class="brief">
+
+  <div form-group="" class="ng-scope form-group">
+    <label class="control-label" for="requestBrief">Specifically what do you need help with?</label>
+    <textarea id="requestBrief" form-control="" placeholder="describe your requirements in as much detail as possible" ng-model="request.brief" required="" class="ng-pristine ng-untouched form-control ng-invalid ng-invalid-required">    </textarea>
+  </div>
+  <a href="https://guides.github.com/features/mastering-markdown/" target="_blank" class="md">
+    <img src="./MongoDB Administration and Backup with MMS_files/markdown.png">
+    markdown supported
+  </a>
+  <hr>
+
+</section>
+
+
+<section ng-class="stepClass(&#39;experience&#39;)" class="experience">
+
+  <!-- ngIf: request.tags && request.tags.length > 0 && session.emailVerified --><div form-group="" ng-if="request.tags &amp;&amp; request.tags.length &gt; 0 &amp;&amp; session.emailVerified" class="ng-scope form-group">
+
+    <!-- ngIf: request.tags.length == 1 -->
+    <!-- ngIf: request.tags.length > 1 --><label class="control-label ng-binding ng-scope" for="requestExperience" ng-if="request.tags.length &gt; 1">What's your experience using mongodb, java and node.js together?</label><!-- end ngIf: request.tags.length > 1 -->
+
+    <!-- <i>Well make sure to match you with an equal or more experienced expert.</i> -->
+
+     <div class="experienceOptions radios">
+      <span>
+        <input id="requestExperienceBeginner" name="experience" ng-model="request.experience" type="radio" value="beginner" ng-change="setExperience()" class="ng-pristine ng-untouched ng-valid">
+        <label for="requestExperienceBeginner"><img src="./MongoDB Administration and Backup with MMS_files/experience-beginner.png"> Beginner</label> <i>Basic setup and functionality</i>
+      </span>
+
+      <span>
+        <input id="requestExperienceProficient" name="experience" ng-model="request.experience" type="radio" value="proficient" ng-change="setExperience()" class="ng-pristine ng-untouched ng-valid">
+        <label for="requestExperienceProficient"><img src="./MongoDB Administration and Backup with MMS_files/experience-proficient.png"> Proficient</label> <i>Typical development issues</i>
+      </span>
+
+      <span>
+        <input id="requestExperienceAdvanced" name="experience" ng-model="request.experience" type="radio" value="advanced" ng-change="setExperience()" class="ng-pristine ng-untouched ng-valid">
+        <label for="requestExperienceAdvanced"><img src="./MongoDB Administration and Backup with MMS_files/experience-advanced.png"> Advanced</label> <i>Trying to do something crazy here</i>
+      </span>
+    </div>
+
+  </div><!-- end ngIf: request.tags && request.tags.length > 0 && session.emailVerified -->
+
+ <!-- ngIf: request.tags && request.tags.length > 0 && !session.emailVerified -->
+
+  
+  <hr>
+
+</section>
+
+<section ng-class="stepClass(&#39;tags&#39;)" class="tags">
+
+  <div form-group="" class="ng-scope form-group">
+    <label class="control-label" for="requestTags">What technologies are you using?</label>
+    <div class="form-group">
+      <div tag-input="" class="ng-isolate-scope"><div class="form-group tag-input-group">
+  <div class="nomobile">This feature is not available on mobile</div>
+
+  <div class="drag">
+    <!-- ngIf: tags() && tags().length > 1 --><p ng-if="tags() &amp;&amp; tags().length &gt; 1" class="ng-scope">
+      <!-- <img src="/static/img/css/sort-arrows.png" style="margin:0px 0px 7px 0px" /> -->
+      <br><b>drag in order of importance</b>
+      <br>place most used first
+      <br>
+    </p><!-- end ngIf: tags() && tags().length > 1 -->
+  </div>
+  <div class="selected">
+    <label for="tagInput">Your stack</label>
+
+    <ul class="tags ui-sortable" sortable="" get="tags" set="updateTags">
+      <!-- ngRepeat: tag in tags() | orderBy:'sort' --><li ng-repeat="tag in tags() | orderBy:&#39;sort&#39;" ng-attr-data-id="{{tag._id}}" class="ng-binding ng-scope" data-id="514825fa2a26ea0200000025">
+        mongodb
+        <a class="remove" ng-click="deselectMatch(tag)">x</a>
+        <!-- ngIf: tags().length > 1 --><a ng-if="tags().length &gt; 1" class="order ng-scope"></a><!-- end ngIf: tags().length > 1 -->
+      </li><!-- end ngRepeat: tag in tags() | orderBy:'sort' --><li ng-repeat="tag in tags() | orderBy:&#39;sort&#39;" ng-attr-data-id="{{tag._id}}" class="ng-binding ng-scope" data-id="514825fa2a26ea020000001e">
+        java
+        <a class="remove" ng-click="deselectMatch(tag)">x</a>
+        <!-- ngIf: tags().length > 1 --><a ng-if="tags().length &gt; 1" class="order ng-scope"></a><!-- end ngIf: tags().length > 1 -->
+      </li><!-- end ngRepeat: tag in tags() | orderBy:'sort' --><li ng-repeat="tag in tags() | orderBy:&#39;sort&#39;" ng-attr-data-id="{{tag._id}}" class="ng-binding ng-scope" data-id="514825fa2a26ea0200000028">
+        node.js
+        <a class="remove" ng-click="deselectMatch(tag)">x</a>
+        <!-- ngIf: tags().length > 1 --><a ng-if="tags().length &gt; 1" class="order ng-scope"></a><!-- end ngIf: tags().length > 1 -->
+      </li><!-- end ngRepeat: tag in tags() | orderBy:'sort' -->
+    </ul>
+
+    <!-- ngIf: !tags() || tags().length == 0 -->
+  </div>
+
+  <label for="tagInput">Search technologies</label>
+  <input type="text" class="tagInput form-control ng-pristine ng-untouched ng-valid" placeholder="Type a technology (e.g. javascript)" ng-model="q" typeahead="t as t for t in getTags($viewValue) | filter:$viewValue" typeahead-editable="false" typeahead-input-formatter="keypressSelect($model)" tabindex="351" typeahead-template-url="tagMatch.html" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-207-4102"><!-- ngIf: isOpen() -->
+  <!-- typeahead-loading="loading"
+  <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+   -->
+  <div class="nomob">
+    <!-- ngIf: none && !addErrorMsg && !adding -->
+    <!-- ngIf: adding -->
+    <!-- ngIf: addErrorMsg -->
+  </div>
+</div>
+
+<script type="text/ng-template" id="tagMatch.html">
+  <div>
+    <a class="tagSelect">
+      <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+      <p bind-html-unsafe="match.model.desc | typeaheadHighlight:query"></p>
+    </a>
+  </div>
+</script>
+</div>
+    </div>
+    <i>* Choose up to 3 tags</i>
+  </div>
+  <hr>
+
+</section>
+
+<section ng-class="stepClass(&#39;type&#39;)" class="type current">
+
+  <div form-group="" class="ng-scope form-group">
+    <label class="control-label" for="requestType">What type of coding help could you use?</label>
+    <div class="requestTypes">
+      <a ng-click="setType(&#39;troubleshooting&#39;)">Troubleshooting</a>
+      <a ng-click="setType(&#39;mentoring&#39;)">Mentoring</a>
+      <a ng-click="setType(&#39;code-review&#39;)">Code review</a>
+      <a ng-click="setType(&#39;resources&#39;)">Extra resources</a>
+      <a ng-click="setType(&#39;advice&#39;)">Technology advice</a>
+      <a ng-click="setType(&#39;other&#39;)">Other</a>
+    </div>
+    <select id="requestType" form-control="" ng-model="request.type" class="ng-pristine ng-untouched ng-valid form-control"><option value="? undefined:undefined ?"></option>
+      <option value="troubleshooting">Troubleshooting</option>
+      <option value="mentoring">Mentoring</option>
+      <option value="code-review">Code review</option>
+      <option value="resources">Extra resources</option>
+      <option value="advice">Technology advice</option>
+      <option value="other">Other</option>
+    </select>
+
+    <div class="nomob info">
+      <img class="user" ng-src="/static/img/css/request/ap-circle-mediumm.png" src="./MongoDB Administration and Backup with MMS_files/ap-circle-mediumm.png">
+      <p><b>Get live programming help over video chat</b>
+        <span>Tell us what you need and get matched with an expert in
+        as little as 30 minutes.</span>
+      </p>
+    </div>
+  </div>
+  <hr>
+
+</section>
+
+</form><!-- end ngIf: request -->
+
+<!-- <section ng-if="customers" class="happy nomob">
+
+  <section ng-if="done.current == 'type' || done.current == 'tags'" class="customers">
+
+    <h3>Happy customers this month</h3>
+
+    <ul>
+      <li ng-repeat="c in customers">
+        <img class="user" ng-src="{{c.avatar}}" />
+        <p>{{c.review}}
+          <label>- {{c.name}}</label>
+        </p>
+        <img class="recording" ng-src="https://i.ytimg.com/vi/{{c.youtubeId}}/default.jpg">
+      </li>
+    </ul>
+
+  </section>
+
+  <section ng-if="done.current == 'experience' || done.current == 'brief'"
+   class="expertReviews">
+
+    <h3>Expert reviews this month</h3>
+
+    <ul>
+      <li ng-repeat="r in reviews">
+        <img class="user" ng-src="{{r.avatar}}" />
+        <p>{{r.review}}
+          <label>- {{r.name}}</label>
+        </p>
+      </li>
+    </ul>
+
+  </section>
+
+  <section ng-if="done.current == 'time' || done.current == 'hours'"
+   class="expertReviews">
+
+    <h3>Customer service feedback</h3>
+
+    <ul>
+      <li ng-repeat="r in reviews">
+        <img class="user" ng-src="{{r.avatar}}" />
+        <p>{{r.review}}
+          <label>- {{r.name}}</label>
+        </p>
+      </li>
+    </ul>
+
+  </section>
+
+</section> -->
+
+
+</div><!-- end ngIf: session._id -->
+</div>
+</article>
+
+
+<footer id="posts" class="postfooter similar  ng-scope">
+  <hr>
+  <h5>Tagged under</h5>
+  <ul class="tags">
+    <li><a href="https://www.airpair.com/posts/tag/mongodb">MongoDB</a></li>
+  </ul>
+
+  <div class="share-horizontal">
+    <div class="pw pw-widget ra1-pw-classicWidget ra1-pw_size_small pw-layout-horizontal pw-counter-vertical pw-widget-look-native" pw:twitter-via="airpair">
+      <a class="pw-button pw-button-twitter button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">33</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-twitter"></span><span class="pw-button-type-looknative__txt">Tweet</span></span></a>
+      <a class="pw-button pw-button-googleplus button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">1</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-googleplus"></span><span class="pw-button-type-looknative__txt">Share</span></span></a>
+      <a class="pw-button pw-button-facebook button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">7</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-facebook"></span><span class="pw-button-type-looknative__txt">Share</span></span></a>
+      <a class="pw-button pw-button-linkedin button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">2</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-linkedin"></span><span class="pw-button-type-looknative__txt">Share</span></span></a>
+      <a class="pw-button pw-button-tumblr button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">0</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-tumblr"></span><span class="pw-button-type-looknative__txt">Tumblr</span></span></a>
+      <a class="pw-button pw-button-reddit button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">0</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-reddit"></span><span class="pw-button-type-looknative__txt">Reddit</span></span></a>
+      <a class="pw-button pw-button-email button-type-looknative pw-size-small pw-button-counter-vertical look-native"><span class="pw-button-counter-top"><i class="pw-button-counter-top__brd"></i><span class="pw-button-counter-top__count ra1-pw-button-counter-value">0</span></span><span class="pw-button-type-looknative"><span class="pw-icon ra1-pw-icon ra1-pw-icon-email"></span><span class="pw-button-type-looknative__txt">Email</span></span></a>
+    </div>
+  </div>
+
+  <section id="allposts">
+    <h3 class="underline">Similar posts <a href="https://www.airpair.com/posts" class="btn btn-sm btn-inverse" target="_self">All posts</a></h3>
+    <div class="similar nostars">
+      <article class="posttile" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+  <a href="https://www.airpair.com/mongodb/posts/mongodb-advanced-administration-mon-and-backup" title="MongoDB: Advanced Administration, Monitoring and Backup" target="_self" rel="bookmark">
+    <header class="entry-header">
+      <img class="entry-header-image" itemprop="image" src="./MongoDB Administration and Backup with MMS_files/DlL1vTp.png" align="left">
+      <div class="glass"></div>
+      <p>
+        <span class="entry-categories">
+          <em>mongodb</em>
+        </span>
+        MongoDB Administration and Backup techniques using MMS and other tools such as Zabbix and AWS.
+      </p>
+    </header>
+
+    <div class="entry-content" itemprop="text">
+      <h6><b>4</b> x</h6>
+      <div class="stars ng-isolate-scope" stars="" val="4"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</div>
+      <h2 class="entry-title" itemprop="headline">MongoDB: Advanced Administration, Monitoring and Backup</h2>
+
+      <span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <span class="entry-author-name" itemprop="name">Jeffrey Berger</span>
+      </span>
+
+    </div>
+  </a>
+  <footer class="entry-footer">
+    <bookmarkerserver type="&#39;post&#39;" object-id="&#39;5583362972978911003b881b&#39;" class="ng-isolate-scope"><img class="bookmark" ng-src="/static/img/css/bookmark.png" ng-click="bookmarker.toggle()" src="./MongoDB Administration and Backup with MMS_files/bookmark.png">
+</bookmarkerserver>
+    <img class="entry-author-img" itemprop="image" ng-src="//0.gravatar.com/avatar/87811ab251ada226311e3c2d614f7cb5?s=50" src="./MongoDB Administration and Backup with MMS_files/87811ab251ada226311e3c2d614f7cb5(2)">
+  </footer>
+
+</article>
+<article class="posttile" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+  <a href="https://www.airpair.com/ionic-framework/posts/push-notifications-using-ionic-framework" title="Build an iOS app with Push Notifications using Ionic Framework" target="_self" rel="bookmark">
+    <header class="entry-header">
+      <img class="entry-header-image" itemprop="image" src="./MongoDB Administration and Backup with MMS_files/push_notifications.png" align="left">
+      <div class="glass"></div>
+      <p>
+        <span class="entry-categories">
+          <em>ionic-framework</em>
+          <em>angularjs</em>
+          <em>mongodb</em>
+          <em>push-notification</em>
+          <em>node.js</em>
+          <em>cordova</em>
+        </span>
+        Unfortunately, there are a lot of bad things happening every day. So we are going to create an iOS application to show some good news with push notifications.
+      </p>
+    </header>
+
+    <div class="entry-content" itemprop="text">
+      <h6><b>19</b> x</h6>
+      <div class="stars ng-isolate-scope" stars="" val="4.7894736842105265"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 --><li class="half ng-scope" ng-if="stars &gt;= 4.5 &amp;&amp; stars &lt; 5"></li><!-- end ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</div>
+      <h2 class="entry-title" itemprop="headline">Build an iOS app with Push Notifications using Ionic Framework</h2>
+
+      <span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <span class="entry-author-name" itemprop="name">Oleksandr Telnov</span>
+      </span>
+
+    </div>
+  </a>
+  <footer class="entry-footer">
+    <bookmarkerserver type="&#39;post&#39;" object-id="&#39;550c23c0bbbbef0c004b4caf&#39;" class="ng-isolate-scope"><img class="bookmark" ng-src="/static/img/css/bookmark.png" ng-click="bookmarker.toggle()" src="./MongoDB Administration and Backup with MMS_files/bookmark.png">
+</bookmarkerserver>
+    <img class="entry-author-img" itemprop="image" ng-src="//0.gravatar.com/avatar/eed006e4f965a673444400199c1b6b62?s=50" src="./MongoDB Administration and Backup with MMS_files/eed006e4f965a673444400199c1b6b62">
+  </footer>
+
+</article>
+<article class="posttile" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+  <a href="https://www.airpair.com/meteor/posts/choose-meteor-for-your-next-software-project" title="Why you should use Meteor for your next software project" target="_self" rel="bookmark">
+    <header class="entry-header">
+      <img class="entry-header-image" itemprop="image" src="./MongoDB Administration and Backup with MMS_files/MwJRpR3.png" align="left">
+      <div class="glass"></div>
+      <p>
+        <span class="entry-categories">
+          <em>meteor</em>
+          <em>mongodb</em>
+          <em>node.js</em>
+        </span>
+        Give Meteor a try on your next project. It exposes a new paradigm in web software development that will inform everything else you do afterwards.
+      </p>
+    </header>
+
+    <div class="entry-content" itemprop="text">
+      <h6><b>7</b> x</h6>
+      <div class="stars ng-isolate-scope" stars="" val="4.428571428571429"><ul class="stars">
+  <!-- ngIf: stars >= 1 --><li ng-if="stars &gt;= 1" class="ng-scope"></li><!-- end ngIf: stars >= 1 -->
+  <!-- ngIf: stars >= 1.5 && stars < 2 -->
+  <!-- ngIf: stars >= 2 --><li ng-if="stars &gt;= 2" class="ng-scope"></li><!-- end ngIf: stars >= 2 -->
+  <!-- ngIf: stars >= 2.5 && stars < 3 -->
+  <!-- ngIf: stars >= 3 --><li ng-if="stars &gt;= 3" class="ng-scope"></li><!-- end ngIf: stars >= 3 -->
+  <!-- ngIf: stars >= 3.5 && stars < 4 -->
+  <!-- ngIf: stars >= 4 --><li ng-if="stars &gt;= 4" class="ng-scope"></li><!-- end ngIf: stars >= 4 -->
+  <!-- ngIf: stars >= 4.5 && stars < 5 -->
+  <!-- ngIf: stars >= 5 -->
+</ul>
+</div>
+      <h2 class="entry-title" itemprop="headline">Why you should use Meteor for your next software project</h2>
+
+      <span class="entry-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <span class="entry-author-name" itemprop="name">Ry Walker</span>
+      </span>
+
+    </div>
+  </a>
+  <footer class="entry-footer">
+    <bookmarkerserver type="&#39;post&#39;" object-id="&#39;551b041210cb481100e318d7&#39;" class="ng-isolate-scope"><img class="bookmark" ng-src="/static/img/css/bookmark.png" ng-click="bookmarker.toggle()" src="./MongoDB Administration and Backup with MMS_files/bookmark.png">
+</bookmarkerserver>
+    <img class="entry-author-img" itemprop="image" ng-src="//0.gravatar.com/avatar/7cf61c7c25b97dd624c7beadfb202153?s=50" src="./MongoDB Administration and Backup with MMS_files/7cf61c7c25b97dd624c7beadfb202153">
+  </footer>
+
+</article>
+
+    </div>
+  </section>
+
+</footer>
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </main>
+
+</div>
+
+<!-- ngIf: session._id --><nav id="side" ng-if="session._id" class="collapse ng-scope" side-nav="" style="top: 0px; display: block;"><!-- ngIf: session._id --><div ng-if="session._id" class="ng-scope">
+
+<header>
+  <div class="toggle" id="sideNavToggle" track-click="sideNav" data="Show" track-click-if="!session._id" ng-click="sideNav.toggle()"></div>
+</header>
+
+
+<section class="help">
+  <a href="https://www.airpair.com/help/request" class="btn btn-inverse" target="_self">
+    <div class="pair"></div><span>get help</span>
+  </a>
+</section>
+
+
+<section class="main">
+  <ul>
+    <li><a href="https://www.airpair.com/me" class="avatar"><div><img ng-src="//0.gravatar.com/avatar/e330d9e72eeaab635aa06a619cbca4e1?s=31" src="./MongoDB Administration and Backup with MMS_files/e330d9e72eeaab635aa06a619cbca4e1"></div><span>me</span></a></li>
+    <li><a href="https://www.airpair.com/dashboard"><div class="dashboard"></div><span>dashboard</span></a></li>
+    <!-- <li><a id="navStackToggle" track-click="sideNav" href="#" ng-click="openStack()">
+        <div class="stack"></div><span>stack</span>
+      </a>
+    </li> -->
+    <!--<li><a href="/experts">experts</a></li>
+    <li><a href="#">airpairs</a></li> -->
+<!--     <li>
+      <a id="navBookmarksToggle" track-click="sideNav" href="#" ng-click="openBookmarks()"><div class="bookmarks"></div><span>bookmarks</span>
+      </a>
+    </li> -->
+    <li><a href="https://www.airpair.com/billing"><div class="billing"></div><span>billing</span></a></li>
+    <li><a href="https://www.airpair.com/posts/me"><div class="posts"></div><span>my posts</span></a></li>
+    <li><a href="https://www.airpair.com/settings"><div class="settings"></div><span>settings</span></a></li>
+    <!-- <li><a href="/logout" target="_self"><div class="logout"></div><span>logout</span></a></li> -->
+  </ul>
+
+  <footer>
+    <ul class="more">
+      <li><a href="https://www.airpair.com/rss" target="_self" class="rss">Rss</a></li>
+      <li class="nomob"><a href="https://www.airpair.com/workshops" target="_self" class="wk">2014 Workshops</a></li>
+      <li><a href="https://www.airpair.com/tos" target="_blank" class="pp">Terms of Service</a></li>
+      <li><a href="https://www.airpair.com/privacy" target="_blank" class="pp">Privacy Policy</a></li>
+      <li><a href="https://www.airpair.com/logout" target="_self" class="logout">Logout</a></li>
+      <li>© 2015 airpair, inc.</li>
+    </ul>
+  </footer>
+
+</section>
+
+<section class="expert">
+  <ul>
+    <li><a href="https://www.airpair.com/be-an-expert" class="avatar"><div><img ng-src="//0.gravatar.com/avatar/e330d9e72eeaab635aa06a619cbca4e1?s=31" src="./MongoDB Administration and Backup with MMS_files/e330d9e72eeaab635aa06a619cbca4e1"></div><span>profile</span></a></li>
+    <li><a href="https://www.airpair.com/office"><div class="dashboard"></div><span>office</span></a></li>
+<!--     <li><a href="/availability"><div class="deals"></div><span>availability</span></a></li> -->
+    <!-- <li><a href="/deals"><div class="deals"></div><span>deals</span></a></li> -->
+    <li><a href="https://www.airpair.com/payouts"><div class="billing"></div><span>payouts</span></a></li>
+    <li><a href="https://www.airpair.com/settings"><div class="settings"></div><span>settings</span></a></li>
+  </ul>
+
+
+  <footer>
+    <ul class="more">
+      <li><a href="https://www.airpair.com/tos" target="_blank" class="pp">terms of service</a></li>
+      <li><a href="https://www.airpair.com/privacy" target="_blank" class="pp">privacy policy</a></li>
+      <li>© 2015 airpair, inc.</li>
+    </ul>
+  </footer>
+
+</section>
+
+
+</div><!-- end ngIf: session._id -->
+
+<div stack=""></div>
+</nav><!-- end ngIf: session._id -->
+
+
+<script type="text/javascript" src="./MongoDB Administration and Backup with MMS_files/index-35861113.js"></script>
+<script type="text/javascript">
+
+function bindTracking() {
+  ga('send', 'pageview')
+}
+
+window.viewData = { canonical: 'https://www.airpair.com/mongodb/posts/mongodb-advanced-administration-mon-and-backup', post : {"_id":"5583362972978911003b881b"}, session: {"_id":"553946c93e9c0011008bab81","google":{"id":"112948496169152478560","_json":{"url":"https://plus.google.com/+MilsonMunakami","email":"milsonmun@gmail.com"}},"email":"milsonmun@gmail.com","emailVerified":true,"name":"Milson Munakami","username":"milstein","tags":[{"name":"MongoDB","slug":"mongodb","sort":0,"tagId":"514825fa2a26ea0200000025","_id":"5578a9f7fc784111004ecefc"},{"name":"java","slug":"java","_id":"5578a9fafc784111004ecefe","tagId":"514825fa2a26ea020000001e","sort":0},{"name":"Node.JS","slug":"node.js","sort":0,"tagId":"514825fa2a26ea0200000028","_id":"5578a9fefc784111004ecf00"},{"name":"asp.net","slug":"asp.net","_id":"5578aa04ed0e0d1100d7d231","tagId":"514a3f2ebf82130200000030","sort":0},{"name":"c#","slug":"c%23","sort":0,"tagId":"514825fa2a26ea020000000e","_id":"5578aa08ed0e0d1100d7d233"}],"bookmarks":[{"title":"Selenium Tutorial - Get started using Java","url":"https://www.airpair.com/selenium/posts/selenium-tutorial-with-java","sort":0,"type":"post","objectId":"54f245230701170c002d1339","_id":"5578aae3ed0e0d1100d7d25c"},{"title":"Modelling game economy with Neo4j","url":"https://www.airpair.com/neo4j/posts/modelling-game-economy-with-neo4j","_id":"5578aae8ed0e0d1100d7d25d","objectId":"54f5d05c5e76ff0c00e577e5","type":"post","sort":0},{"title":"Seven ineffective coding habits many F# programmers don’t have","url":"https://www.airpair.com/f%23/tips-n-tricks/seven-ineffective-coding-habits-many-fsharp-programmers-dont-have","sort":0,"type":"post","objectId":"55060c664ffec50c00ce0e1a","_id":"5578aaeded0e0d1100d7d260"},{"title":"Scalable Architecture DR CoN: Docker, Registrator, Consul, Consul Template and Nginx","url":"https://www.airpair.com/scalable-architecture-with-docker-consul-and-nginx","_id":"5578aaf5ed0e0d1100d7d265","objectId":"550106c2f1377c0c0051cbef","type":"post","sort":0},{"title":"How to Create a Complete Express.js + Node.js + MongoDB CRUD and REST Skeleton","url":"https://www.airpair.com/javascript/complete-expressjs-nodejs-mongodb-crud-skeleton","sort":0,"type":"post","objectId":"54f70cdb8438550c00e989d1","_id":"5578aafbfc784111004ecf25"},{"title":"D3 force layout internals","url":"https://www.airpair.com/javascript/posts/d3-force-layout-internals","_id":"5578aafeed0e0d1100d7d269","objectId":"54f319905450820c00d1bdd1","type":"post","sort":0},{"title":"Realtime AngularJS Pub/Sub Messaging using PubNub","url":"https://www.airpair.com/pubnub/posts/realtime-angularjs-pubsub-messaging-using-pubnub1","sort":0,"type":"post","objectId":"54dd479af9cf4b0a0016d071","_id":"5578ab04fc784111004ecf26"},{"title":"Getting Started with Docker for the Node.js Developer","url":"https://www.airpair.com/node.js/posts/getting-started-with-docker-for-the-nodejs-dev","_id":"5578ab1dfc784111004ecf2d","objectId":"5516f8187fb1af1100e5a297","type":"post","sort":0},{"title":"Database migration in NodeJS and MongoDB","url":"https://www.airpair.com/javascript/posts/database-migration-in-nodejs-and-mongodb","sort":0,"type":"post","objectId":"5510256f49565d11006d5702","_id":"5578ab20ed0e0d1100d7d276"},{"title":"Unit testing Ajax requests with Mocha","url":"https://www.airpair.com/javascript/posts/unit-testing-ajax-requests-with-mocha","_id":"5578ab22ed0e0d1100d7d277","objectId":"550b4908f8c4420c006feb18","type":"post","sort":0},{"title":"Express/Angular/Redis/Node Stack","url":"https://www.airpair.com/express/posts/earn-stack","sort":0,"type":"post","objectId":"550898091e53dd0c005ff5ae","_id":"5578ab25fc784111004ecf30"},{"title":"Distributed PageRank Using Apache Spark and Neo4j","url":"https://www.airpair.com/apache-spark/posts/distributed-pagerank-using-apache-spark-and-neo4j","_id":"5578ab27ed0e0d1100d7d278","objectId":"54f398587ec03b0c008b69e2","type":"post","sort":0}],"cohort":{"engagement":{"visits":["2015-04-23T00:00:00.000Z"],"visit_first":"2015-04-23T19:21:48.631Z","visit_signup":"2015-04-23T19:23:53.115Z","visit_last":"2015-04-23T19:23:53.115Z"}},"localization":{"location":"Boise, ID, USA","timezone":"Mountain Daylight Time","timezoneData":{"timeZoneId":"America/Denver"}},"social":{"gh":{"username":"Milstein"},"gp":{"link":"https://plus.google.com/+MilsonMunakami","email":"milsonmun@gmail.com"}},"timeZoneId":"America/Denver","avatar":"//0.gravatar.com/avatar/e330d9e72eeaab635aa06a619cbca4e1"} };
+
+</script>
+
+
+<script type="text/javascript">
+adroll_adv_id = "XF634YIRAZHM5AG2HSQDII";
+adroll_pix_id = "RJLKZHU5IFD2NP5M3C6X35";
+(function () {
+var oldonload = window.onload;
+window.onload = function(){
+   __adroll_loaded=true;
+   var scr = document.createElement("script");
+   var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+   scr.setAttribute('async', 'true');
+   scr.type = "text/javascript";
+   scr.src = host + "/j/roundtrip.js";
+   ((document.getElementsByTagName('head') || [null])[0] ||
+    document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+   if(oldonload){oldonload()}};
+}());
+</script>
+
+<script type="text/javascript">
+  window.analytics = {};
+  window.analytics.track = function(event, props) { console.log('off.track', event, props); }
+</script>
+
+
+
+
+
+<script src="./MongoDB Administration and Backup with MMS_files/braintree.js"></script><textarea tabindex="-1" style="position: absolute; top: -999px; right: auto; bottom: auto;left: 0; overflow: hidden; -webkit-box-sizing: content-box;-moz-box-sizing: content-box; box-sizing: content-box;min-height: 0 !important; height: 0 !important; padding: 0;word-wrap: break-word; border: 0;font-family:;font-size:;font-weight:;font-style:;letter-spacing:;line-height:;text-transform:;word-spacing:;text-indent:;"></textarea><textarea tabindex="-1" style="position: absolute; top: -999px; right: auto; bottom: auto; left: 0px; overflow: hidden; box-sizing: content-box; padding: 0px; word-wrap: break-word; border: 0px; font-family: &#39;Open Sans&#39;, &#39;Century Gothic&#39;; font-size: 14px; font-weight: normal; font-style: normal; letter-spacing: normal; line-height: 20px; text-transform: none; word-spacing: 0px; text-indent: 0px; min-height: 0px !important; height: 0px !important; width: 604px;"></textarea><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div></body></html>

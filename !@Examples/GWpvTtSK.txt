@@ -1,0 +1,13 @@
+var carlike = function(obj, loc) { // this function is called carlike and has 2 parametres, obj and loc
+    obj.loc = loc; // what does this do exactly?? I get the dot notation, but I'm not sure exactly what is happening
+    return obj; // returns the value of object, but what was the point of setting obj.loc = loc if going to return obj?
+}; // ends the function
+
+var move = function(car) { //
+    car.loc++; //
+}; // ends the function
+
+
+amy.move(); // how does this work? I know its dot notation and                       is calling the function move(), but I don't get exactly what it is doing //
+var ben = carlike({}, 9);
+ben.move(); // same thing as amy()

@@ -1,0 +1,53 @@
+TODO:
+
+1.Need lastUpdated based on Audit Log for UserAccount/ Profile ( More Checking needed if there is log in both tables get latest only one of them!)
+
+and 
+2. For Proposal  ( Easier then User)
+
+else return null
+
+3. For each User get
+private int PIProposalCount = 0;
+	private int CoPIedProposalCount = 0;
+	private int SenioredProposalCount = 0;
+	
+	
+	
+4. Wew don;t need to make Model dirty like this:
+for (String email : this.workEmails) {
+			copy.addWorkEmail(email);
+		}
+		
+we can do: // THis is true for any Class object inside a class just getter and setter going to work for us
+
+for (String email : this.workEmails) {
+			copy.getWorkEmails.add(email);
+		}
+		
+Remove by Object also works fine why we need IndexOf(Object)
+		
+		
+5. addProposalKey How this is used and where?
+
+UserProfileDAO////
+@Property("Keychain")
+	private List<String> proposalKeys = new ArrayList<String>();
+
+6. Why we need this : irap.setCollege(up.getDetails(0).getCollege()); index getDetails?
+
+7. findUsersForGrid(int offset, int limit,
+			String userName, String college, String department,
+			String postitionType, String postitionTitle, String isActive)
+			
+Create Filter to bind GRID with null value
+
+-- Also how to use UserAccount --> is deleted to the find()
+
+8. Lazy=true
+
+9. Bind Grid of Proposals
+
+10. Added Proposal section classed with Delegation and Signature additional Info classes!!!
+
+

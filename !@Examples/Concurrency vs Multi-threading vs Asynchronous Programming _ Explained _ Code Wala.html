@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/ -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Concurrency vs Multi-threading vs Asynchronous Programming : Explained | Code Wala</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://codewala.net/xmlrpc.php">
+<!--[if lt IE 9]>
+	<script src="https://s0.wp.com/wp-content/themes/pub/able/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<meta name="google-site-verification" content="Gp-fpP2DRaZhqD9IeD1TZFiRltLU-H3_ixHJu1CxnEI">
+		<script id="facebook-jssdk" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/sdk.js"></script><script src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/remote-login.php" type="text/javascript"></script><style type="text/css"></style>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="alternate" type="application/rss+xml" title="Code Wala » Feed" href="http://codewala.net/feed/">
+<link rel="alternate" type="application/rss+xml" title="Code Wala » Comments Feed" href="http://codewala.net/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Code Wala » Concurrency vs Multi-threading vs Asynchronous Programming : Explained Comments Feed" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" id="all-css-0" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource" type="text/css" media="all">
+<link rel="stylesheet" id="droid-serif-css" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-2" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource(1)" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource(2)"></script>
+<link rel="stylesheet" id="all-css-0" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://brijbhushan.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="How to test email functionality using Smtp Client" href="http://codewala.net/2015/07/27/how-to-test-email-functionality-using-smtp-client/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala.html">
+<link rel="shortlink" href="http://wp.me/pT2AF-Dn">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&url=http%3A%2F%2Fcodewala.net%2F2015%2F07%2F29%2Fconcurrency-vs-multi-threading-vs-asynchronous-programming-explained%2F&for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&url=http%3A%2F%2Fcodewala.net%2F2015%2F07%2F29%2Fconcurrency-vs-multi-threading-vs-asynchronous-programming-explained%2F&for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Concurrency vs Multi-threading vs Asynchronous Programming : Explained">
+<meta property="og:url" content="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/">
+<meta property="og:description" content="Recently, I was speaking in an event and I asked a question to the audience in between my talk about Asynchronous programming , I found that some of the people were confused between multi-threading...">
+<meta property="article:published_time" content="2015-07-29T04:53:01+00:00">
+<meta property="article:modified_time" content="2015-07-30T17:46:08+00:00">
+<meta property="og:site_name" content="Code Wala">
+<meta property="og:image" content="https://brijbhushan.files.wordpress.com/2015/07/async-mutlithreaded.png">
+<meta property="og:image:width" content="734">
+<meta property="og:image:height" content="207">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="https://brijbhushan.files.wordpress.com/2015/07/singlethreaded.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="http://0.gravatar.com/blavatar/ee4d6fcc06a6b6a5a65b1ee824d6b747?s=16" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="http://0.gravatar.com/blavatar/ee4d6fcc06a6b6a5a65b1ee824d6b747?s=16" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="http://0.gravatar.com/blavatar/663275c635ffaa29f7eff3fcedfdea30?s=114">
+<link rel="openid.server" href="http://brijbhushan.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="http://brijbhushan.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="http://codewala.net/osd.xml" title="Code Wala">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wordpress.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">
+			body {
+				background-image: none;
+			}
+		</style>
+	<meta name="application-name" content="Code Wala"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Designing and coding"><meta name="msapplication-task" content="name=Subscribe;action-uri=http://codewala.net/feed/;icon-uri=http://0.gravatar.com/blavatar/ee4d6fcc06a6b6a5a65b1ee824d6b747?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="title" content="Concurrency vs Multi-threading vs Asynchronous Programming : Explained | Code Wala on WordPress.com">
+<meta name="description" content="Recently, I was speaking in an event and I asked a question to the audience in between my talk about Asynchronous programming , I found that some of the people were confused between multi-threading and asynchronous programming and some were saying that both are same. So I thought of explaining these terms and add one…">
+	<style type="text/css">
+			.site-title a,
+		.site-description {
+			color: #262626 !important;
+		}
+		</style>
+	<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #efefef; }
+</style>
+		<script type="text/javascript" src="http://c.amazon-adsystem.com/aax2/amzn_ads.js"></script>
+		<script type="text/javascript">
+		try { amznads.getAds("3033"); } catch(e) { /* ignore */ }
+		</script>
+		<script type="text/javascript">
+		var a9_p = amznads.getKeys(),
+		_ipw_custom = {
+			wordAds: '0',
+			adSafe: '1',
+			domain: 'codewala.net',
+			pageURL: 'http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/'
+		};
+		if("undefined"!=typeof a9_p&&""!=a9_p&&null!==a9_p&&"[object Array]"===Object.prototype.toString.call(a9_p)){var a="",b=0,c=a9_p.length;a9_p.sort();for(var d=0;d<c;d++){a9_p[d-b]=a9_p[d-b].replace(/a1x6p/,"a160x600p");var e=a9_p[d-b].split("p");e[0]==a&&(a9_p.splice(d-b,1),b++);a=e[0]}_ipw_custom.amznPay=a9_p};document.close();
+		</script>		<!-- IPONWEB header script -->
+		<script type="text/javascript">
+			window.__ATA = {
+				scriptSrc: '//s.pubmine.com/showad.js',
+				slotPrefix: 'automattic-id-',
+				isSync: true,
+				initAd: function(o) {
+					var o = o || {},
+						g = window,
+						d = g.document,
+						wr = d.write,
+						id = g.__ATA.id();
+					wr.call(d, '<div id="' + id + '" data-section="' + (o.sectionId || 0) + '"' + (o.type ? ('data-type="' + o.type + '"') : '') + ' ' + (o.forcedUrl ? ('data-forcedurl="' + o.forcedUrl + '"') : '') + ' style="width:' + (o.width || 0) + 'px; height:' + (o.height || 0) + 'px;">');
+					g.__ATA.displayAd(id);
+					wr.call(d, '</div>');
+				},
+				displayAd: function(id) {
+					window.__ATA.ids = window.__ATA.ids || {};
+					window.__ATA.ids[id] = 1;
+				},
+				customParams: _ipw_custom,
+				id: function() {
+					return window.__ATA.slotPrefix + (parseInt(Math.random() * 10000, 10) + 1 + (new Date()).getMilliseconds());
+				}
+			};
+
+			// including ad delivery script
+			(function(g, d, ata, sync) {
+				var pr = "https:" === d.location.protocol ? "https:" : "http:",
+					src = pr + ata.scriptSrc,
+					st = "text/javascript";
+				(sync === true) ? d.write('<scr' + 'ipt type="' + st + '" src="' + src + '"><\/scr' + 'ipt>'): inj(src, st);
+
+				function inj(url, st) {
+					var s = d.createElement("script"),
+						n = d.getElementsByTagName("script")[0],
+						p = n.parentNode,
+						ib = p.insertBefore;
+					s.type = st;
+					s.src = url;
+					s.async = true;
+					(navigator.userAgent.indexOf("Opera") !== -1) ? setTimeout(function() {
+						ib.call(p, s, n);
+					}, 0): ib.call(p, s, n);
+				}
+			})(window, window.document, window.__ATA, window.__ATA.isSync);
+		</script><script type="text/javascript" src="http://s.pubmine.com/showad.js"></script>
+		<script type="text/javascript">
+		jQuery(window).ready(function () {
+			jQuery("a.wpa-about").text("About these ads");
+		});
+		</script><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/ga.js"></script>
+<script type="text/javascript" async="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource(3)"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/services.css"><script type="text/javascript" async="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource(4)"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+
+<body class="single single-post postid-2441 single-format-standard custom-background mp6 customizer-styles-applied left-sidebar chrome highlander-enabled highlander-light">
+<div id="page" class="hfeed site">
+	<div id="site-introduction">
+		<h1 class="site-title"><a href="http://codewala.net/" title="Code Wala" rel="home">Code Wala</a></h1>
+		<h2 class="site-description">Designing and coding</h2>
+	</div><!-- #site-title -->
+	<div id="page-liner">
+		<header id="masthead" class="site-header" role="banner">
+			
+			<nav role="navigation" class="site-navigation main-navigation">
+				<h1 class="assistive-text">Menu</h1>
+				<div class="assistive-text skip-link"><a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#content" title="Skip to content">Skip to content</a></div>
+
+				<div class="menu-front-container"><ul id="menu-front" class="menu"><li id="menu-item-141" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-141"><a href="http://codewala.net/">Posts</a></li>
+<li id="menu-item-2150" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2150"><a href="http://codewala.net/category/video/">Videos</a></li>
+<li id="menu-item-1296" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1296"><a href="http://codewala.net/events/">Talks</a></li>
+<li id="menu-item-139" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-139"><a href="http://codewala.net/awards/">Awards</a></li>
+<li id="menu-item-140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-140"><a href="http://codewala.net/about/">About me</a></li>
+</ul></div>			</nav><!-- .site-navigation .main-navigation -->
+		</header><!-- #masthead .site-header -->
+
+		<div id="main">
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+		
+			
+<article id="post-2441" class="post-2441 post type-post status-publish format-standard hentry category-c-3-0 category-c-2-0 category-c-4-0 category-asp-net category-iis tag-iis tag-async tag-asynchronous tag-multithreading-2 tag-concurrency">
+	<header class="entry-header">
+		<h1 class="entry-title">Concurrency vs Multi-threading vs Asynchronous Programming :&nbsp;Explained</h1>
+
+		<div class="entry-meta">
+			Posted on <a href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala.html" title="10:23 am" rel="bookmark"><time class="entry-date" datetime="2015-07-29T10:23:01+00:00" pubdate="">July 29, 2015</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="http://codewala.net/author/brijbhushan/" title="View all posts by Brij" rel="author">Brij</a></span></span>		</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>Recently, I was speaking in an event and I asked a question to the audience in between my talk about <em>Asynchronous</em> programming , I found that some of the people were confused between multi-threading and asynchronous programming and some were saying that both are same. So I thought of explaining these terms and add one more term <em>Concurrency</em>. Here there are two concepts involved and both are completely different, First – <em>Synchronous</em> and&nbsp; <em>Asynchronous</em> programming and second – <em>Single threaded</em> and <em>multi-threaded</em> applications. Each programming model (Synchronous and Asynchronous ) can run in single threaded and multi-threaded environment. Let’s discuss these in detail.</p>
+<p><strong>Synchronous Programming model</strong> – In this programming model, when a thread assigned to one task and start executing. Then completes the executing task then able to take up another task. In this model, it can not leave the executing task in between to take up some another task. Lte’s discuss how this model works in single and multi-threaded scenario.</p>
+<p><span style="text-decoration:underline;">Single Threaded</span> – If we have couple of tasks to be worked on and the current system provides a single thread which can work all those, then it takes one by one and process as</p>
+<p><a href="https://brijbhushan.files.wordpress.com/2015/07/singlethreaded.png"><img class="aligncenter size-full wp-image-2444" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/singlethreaded.png" alt="singlethreaded"></a>Here we can see that we have a thread (Thread 1 ) and four tasks to be completed. Thread starts processing one by one and completes all. (The order in which tasks will be taken up, does not affect the execution, we can have different algorithm which can define the priorities of tasks)</p>
+<p>Multi-Threaded – In this scenario, we used to have multiple threads which can take up the tasks and start working on that. It mans we have pools of threads (new threads also created based on the requirement and available resources) and bunch of tasks. So these thread can work on it as</p>
+<p><a href="https://brijbhushan.files.wordpress.com/2015/07/multithreaded.png"><img class="aligncenter size-full wp-image-2445" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/multithreaded.png" alt="multithreaded"></a>Here we can see that we have four threads and same number of tasks to complete and each thread start working on that This is ideal scenario but in normal cases, we used to have more number of tasks then number of available threads so whichever thread gets free takes up another task. As already said that spawning new thread is not an option every time because it requires system resources like CPU, memory and based on that number of threads should be decided.</p>
+<p>Now Let’s talk about Asynchronous model and how does it behave in single and multi-threaded environment.</p>
+<p><strong>Asynchronous Programming Model</strong> – In contrary to Synchronous programming model, here a thread once start executing a task it can hold it in between and save the current state and start executing another task.</p>
+<p><a href="https://brijbhushan.files.wordpress.com/2015/07/async-single.png"><img class="aligncenter size-full wp-image-2446" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/async-single.png" alt="async-single"></a>Here we can see that a single thread is responsible to complete all the tasks and tasks are interleaved to each other.</p>
+<p>If our system is capable of having multiple threads then all the threads can work in asynchronous model as well a below</p>
+<p><a href="https://brijbhushan.files.wordpress.com/2015/07/async-mutlithreaded.png"><img class="aligncenter size-full wp-image-2447" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/async-mutlithreaded.png" alt="Async-mutlithreaded"></a>Here we can see that same task say T4, T5, T6.. are handled by multiple thread. This is the beauty of this scenario. As you can see that T4 was started first Thread 1 and completed by Thread 2. Similarly T6 is completed by Thread 2, Thread 3 and Thread 4.It shows the maximum utilization of the threads.</p>
+<p>So till now we have discussed four scenarios –</p>
+<ol>
+<li>Synchronous Single Threaded</li>
+<li>Synchronous Multi-Threaded</li>
+<li>Asynchronous Single Threaded</li>
+<li>Asynchronous Multi-Threaded</li>
+</ol>
+<p>Let’s discuss one more term – Concurrency.</p>
+<p><strong>Concurrency</strong></p>
+<p>In simple terms, concurrency means processing multiple requests at a time. As we have discussed two scenarios where multiple requests were getting processed, Multi-threaded programming and asynchronous model ( single and multi-threaded both). In case of asynchronous model whether single or multi-threaded at a time multiple tasks are in progress, some are in hold state and some is getting <span class="skimlinks-unlinked">executed.There</span> are many flavors of it bt that is beyond the scope of this post.</p>
+<p>As discussed earlier, the new age is of asynchronous programming. Why is it so important?</p>
+<p><strong>Benefits of Asynchronous Programming</strong></p>
+<p>There are two things are very important for any application – Usability and Performance. Usability because say an user clicked on button to save some data as it requires multiple tasks like reading and populating data in internal object, establishing connection with SQL and saving it there etc. As SQL runs on another machine in network and runs under different process, it could be time consuming may take bit long. So If the request is handled by single thread then the screen will be in hanged state till the process completes. That’s why now a days many application and new framework completely rely asynchronous model.</p>
+<p>Performance of application and system is also very important. It has been seen that while executing a request, around 70-80% of the the gets wasted in while waiting the dependent tasks. So this can be maximum utilized by asynchronous programming where once once the task is passed to another process (say SQL) current thread save the state and available to take another process and when the sql task completes any thread which is free can take up the task.</p>
+<p><strong>Asynchrony in <span class="skimlinks-unlinked">ASP.NET</span></strong></p>
+<p>Async in <span class="skimlinks-unlinked">ASP.NET</span> can be a major boost in the throughput of your application. Lets how IIS processes a request.</p>
+<p><a href="https://brijbhushan.files.wordpress.com/2015/07/clr1.png"><img class="aligncenter size-full wp-image-2449" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/clr1.png" alt="CLR"></a>When a request is received by IIS, it takes a thread from CLR thread pool (IIS does not own any thread-pool itself instead uses CLR thread pool) and assigns to it which further processes the request. As number of threads are limited and new ones can be created at a certain limit then if the thread wastes most of the time in waiting state then it is going to hit hard your server or you can assume it is reality. But if you write asynchronous code (which now become very easy and can be written almost similar to synchronous using the new keywords async/await) then it will way faster for you and throughput of your server will increase significantly because instead of waiting something to complete, it will be available to thread pool to take new request. If the application has a lots of dependency and long running process then for those application, async programming will be bot less than a boon</p>
+<p>So now we have understood the difference in multi-threading, asynchronous programming and the kind f benefit we can get using asynchronous programming model.</p>
+<p>Cheers<br>
+Brij</p>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<a class="wpa-about" href="https://wordpress.com/about-these-ads/" rel="nofollow">About these ads</a>
+				<div class="u">
+					<script type="text/javascript">
+					(function(g){g.__ATA.initAd({sectionId:26942, width:300, height:250});})(window);
+					</script><div id="automattic-id-2473" data-section="26942" style="width:300px; height:250px;"></div>
+				</div>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-2441" class="share-twitter sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?share=twitter&nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter<span class="share-count">18</span></span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-2441" class="share-facebook sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?share=facebook&nb=1" target="_blank" title="Share on Facebook"><span>Facebook<span class="share-count">29</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-2441" class="share-google-plus-1 sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?share=google-plus-1&nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-tumblr"><a rel="nofollow" data-shared="" class="share-tumblr sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?share=tumblr&nb=1" target="_blank" title="Click to share on Tumblr"><span>Tumblr</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-2441" class="share-linkedin sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?share=linkedin&nb=1" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn<span class="share-count">11</span></span></a></li><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?share=email&nb=1" target="_blank" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-13118001-2441-55bf0f3608978" data-src="//widgets.wp.com/likes/#blog_id=13118001&amp;post_id=2441&amp;origin=brijbhushan.wordpress.com&amp;obj_id=13118001-2441-55bf0f3608978" data-name="like-post-frame-13118001-2441-55bf0f3608978"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-13118001-2441-55bf0f3608978" height="55px" width="100%" frameborder="0" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="1701" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://codewala.net/2014/03/11/writing-asynchronous-web-pages-with-asp-net-part-1/" title="Writing Asynchronous Web Pages with ASP.NET- Part 1
+
+Asynchronous programming is not new but recently getting precedence over synchronous model. As user experience is now our top priority, we provide our considerable amount of effort to provide user a seamless experience. Asynchrony is one way to achieve it. I am going to write a series of posts on…" rel="nofollow" data-origin="2441" data-position="0">Writing Asynchronous Web Pages with ASP.NET- Part 1</a></span><span class="jp-relatedposts-post-context">In "ASP.NET"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="693" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://codewala.net/2012/04/24/writing-asynchronous-http-module-in-asp-net-4-5/" title="Writing asynchronous HTTP Module in ASP.NET 4.5
+
+Today again, I am going to discuss , one of the new features that got enhanced in ASP.NET 4.5. And It is Asynchronous HTTP Module . And it&#39;s going to be very useful if used meticulously. First Just to give a brief Idea, why Asynchronous HTTPModules are important ? As…" rel="nofollow" data-origin="2441" data-position="1">Writing asynchronous HTTP Module in ASP.NET 4.5</a></span><span class="jp-relatedposts-post-context">In "ASP.NET"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="357" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://codewala.net/2011/06/20/asp-net-asynchronous-programming/" title="ASP.NET: Asynchronous Programming
+
+Click here to download the sample code Introduction What is Async Programming Async Programming in ASP.NET Detail about Asyncronous programming An example of Asynchrounous programming When to use Async pages Conclusion Introduction: Have you ever tried using Async pages in asp.net? Did you ever explore it in respect of ASP.NET?…" rel="nofollow" data-origin="2441" data-position="2">ASP.NET: Asynchronous Programming</a></span><span class="jp-relatedposts-post-context">In "ASP.NET"</span></p></div></div></div>			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		This entry was posted in <a href="http://codewala.net/category/c-3-0/" rel="category tag">C# 3.0</a>, <a href="http://codewala.net/category/c-2-0/" rel="category tag">C# 2.0</a>, <a href="http://codewala.net/category/c-4-0/" rel="category tag">C# 4.0</a>, <a href="http://codewala.net/category/asp-net/" rel="category tag">ASP.NET</a>, <a href="http://codewala.net/category/iis/" rel="category tag">IIS</a> and tagged <a href="http://codewala.net/tag/iis/" rel="tag">IIS</a>, <a href="http://codewala.net/tag/async/" rel="tag">Async</a>, <a href="http://codewala.net/tag/asynchronous/" rel="tag">Asynchronous</a>, <a href="http://codewala.net/tag/multithreading-2/" rel="tag">multithreading</a>, <a href="http://codewala.net/tag/concurrency/" rel="tag">concurrency</a>. Bookmark the <a href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala.html" title="Permalink to Concurrency vs Multi-threading vs Asynchronous Programming : Explained" rel="bookmark">permalink</a>.
+			</footer><!-- .entry-meta -->
+</article><!-- #post-## -->
+
+				
+		<nav role="navigation" id="nav-below" class="site-navigation post-navigation">
+			<h1 class="assistive-text">Post navigation</h1>
+
+							<div class="nav-previous"><a href="http://codewala.net/2015/07/27/how-to-test-email-functionality-using-smtp-client/" rel="prev"><span class="meta-nav">←</span> How to test email functionality using Smtp&nbsp;Client</a></div>			
+					</nav><!-- #nav-below -->
+
+	
+			
+	<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			4 thoughts on “<span>Concurrency vs Multi-threading vs Asynchronous Programming :&nbsp;Explained</span>”		</h2>
+
+		
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-16797">
+		<article id="comment-16797" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/129539e205e60e80d25451029bb8b609" class="avatar avatar-52 grav-hashed grav-hijack" height="52" width="52" id="grav-129539e205e60e80d25451029bb8b609-0">					<cite class="fn"><a href="http://alittech.com/" rel="external nofollow" class="url">Haider Ali</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-16797"><time pubdate="" datetime="2015-07-29T12:00:43+00:00">
+					July 29, 2015 at 12:00 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I really liked this article. I was also confused in synchronous and asynchronous approach. Thank you for making it clear in a very easy way. I request if you can post some examples of await or asynchronous model.</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?replytocom=16797#respond" onclick="return addComment.moveForm( &quot;comment-16797&quot;, &quot;16797&quot;, &quot;respond&quot;, &quot;2441&quot; )" aria-label="Reply to Haider Ali">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-brijbhushan comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-16811">
+		<article id="comment-16811" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/b079ad5d8d93bb09730c5acd4a6dab38" class="avatar avatar-52 grav-hashed grav-hijack" height="52" width="52" id="grav-b079ad5d8d93bb09730c5acd4a6dab38-0">					<cite class="fn"><a href="http://brijbhushan.wordpress.com/" rel="external nofollow" class="url">Brij</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-16811"><time pubdate="" datetime="2015-07-29T20:42:07+00:00">
+					July 29, 2015 at 8:42 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Thanks Haider. Glad that you liked it. Will publish post soon as you suggested.</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?replytocom=16811#respond" onclick="return addComment.moveForm( &quot;comment-16811&quot;, &quot;16811&quot;, &quot;respond&quot;, &quot;2441&quot; )" aria-label="Reply to Brij">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-16832">
+		<article id="comment-16832" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/1e4926ac815edb4e94c68c84824ec231" class="avatar avatar-52 grav-hashed grav-hijack" height="52" width="52" id="grav-1e4926ac815edb4e94c68c84824ec231-0">					<cite class="fn">Madhu</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-16832"><time pubdate="" datetime="2015-07-30T22:36:07+00:00">
+					July 30, 2015 at 10:36 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Very nice article …Thanks.</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?replytocom=16832#respond" onclick="return addComment.moveForm( &quot;comment-16832&quot;, &quot;16832&quot;, &quot;respond&quot;, &quot;2441&quot; )" aria-label="Reply to Madhu">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-brijbhushan comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-16833">
+		<article id="comment-16833" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/b079ad5d8d93bb09730c5acd4a6dab38" class="avatar avatar-52 grav-hashed grav-hijack" height="52" width="52" id="grav-b079ad5d8d93bb09730c5acd4a6dab38-1">					<cite class="fn"><a href="http://brijbhushan.wordpress.com/" rel="external nofollow" class="url">Brij</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-16833"><time pubdate="" datetime="2015-07-30T22:58:28+00:00">
+					July 30, 2015 at 10:58 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Glad to know that you like it. Thanks</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/?replytocom=16833#respond" onclick="return addComment.moveForm( &quot;comment-16833&quot;, &quot;16833&quot;, &quot;respond&quot;, &quot;2441&quot; )" aria-label="Reply to Brij">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .commentlist -->
+
+		
+	
+	
+							<div id="respond" class="comment-respond js">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://codewala.net/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																										
+
+
+												<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="62f84aa4f6"><input type="hidden" name="_wp_http_referer" value="/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 300; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 18px; width: 899px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 38px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</li></ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/wplogo.png" alt="WordPress.com Logo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your <span class="skimlinks-unlinked">WordPress.com</span> account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/ad516503a11cd5ca435acc9bb6523536" alt="Twitter picture" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/ad516503a11cd5ca435acc9bb6523536" alt="Facebook photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+						
+						<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="2441" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="53cea860be"></p>
+<input type="hidden" name="genseq" value="1438584630">
+<p style="display: none;"></p>					<input type="hidden" id="ak_js" name="ak_js" value="1438584630126"></form>
+							</div><!-- #respond -->
+			<div style="clear: both"></div>
+</div><!-- #comments .comments-area -->
+
+		
+		</div><!-- #content -->
+	</div><!-- #primary .site-content -->
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<aside id="search-2" class="widget widget_search"><form method="get" id="searchform" action="http://codewala.net/" role="search">
+	<label for="s" class="assistive-text">Search</label>
+	<input type="text" class="field" name="s" id="s" placeholder="Search …">
+	<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search">
+</form></aside><aside id="text-8" class="widget widget_text">			<div class="textwidget"><table>
+<tbody><tr><td>
+ <a href="http://www.infragistics.com/products/ultimate?utm_source=codewala&utm_medium=banner&utm_campaign=ultimate" target="_blank"><img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/ultimate_200x200.jpg"> </a></td></tr></tbody></table></div>
+		</aside><aside id="text-7" class="widget widget_text"><h1 class="widget-title">Awarded</h1>			<div class="textwidget"><table>
+<tbody><tr><td>
+ <a href="http://mvp.microsoft.com/en-us/MVP/Brij%20Bhushan%20Mishra-4033473" title="MVP-Brij"><img alt="MVP-Brij" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/mvp-1.png"> </a></td><td>&nbsp;&nbsp;
+</td></tr></tbody></table></div>
+		</aside><aside id="facebook-likebox-3" class="widget widget_facebook_likebox"><h1 class="widget-title"><a href="https://www.facebook.com/codewala">Like us on Facebook</a></h1>		<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/4B2NplaqNF3.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/4B2NplaqNF3(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+		<div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/codewala" data-width="340" data-height="250" data-hide-cover="false" data-show-facepile="true" data-show-posts="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=249643311490&amp;container_width=230&amp;height=250&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcodewala&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=false&amp;width=340"><span style="vertical-align: bottom; width: 230px; height: 214px;"><iframe name="f6e391b44" width="340px" height="250px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/page.html" style="border: none; visibility: visible; width: 230px; height: 214px;" class=""></iframe></span></div>
+		<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=249643311490&version=v2.3'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+		</aside><aside id="text-4" class="widget widget_text"><h1 class="widget-title">Connect me at…</h1>			<div class="textwidget"><table>
+<tbody><tr><td>&nbsp;&nbsp;</td>
+<td>
+    <a href="http://in.linkedin.com/in/brijbhushan" title="Linkedin-Brij"><img alt="Linkedin-Brij" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/in.png"> </a>
+</td>
+<td>&nbsp;&nbsp;</td>
+<td>
+    <a href="http://twitter.com/code_wala" title="Follow me @code_wala"><img alt="Follow me @brij_bhushan" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/twitter.png"> </a>
+</td>
+<td>&nbsp;&nbsp;</td></tr><tr>
+<td>&nbsp;&nbsp;</td>
+<td>
+    <a href="http://www.facebook.com/brijmishra1406" title="Facebook Profile"><img alt="Facebook Profile" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/facebook.png"> </a>
+</td>
+<td>&nbsp;&nbsp;</td>
+<td>
+    <a href="https://www.youtube.com/channel/UC-M3PBOvcRHVj0TT-itzgPA" title="YouTube Channel"><img alt="YouTube Channel" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/youtube-image.png"> </a>
+</td><td>&nbsp;&nbsp;</td>
+
+</tr>
+</tbody></table></div>
+		</aside><aside id="blog_subscription-3" class="widget widget_blog_subscription"><h1 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h1>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog">
+											<p>Liked this blog? Enter your email address to follow and receive notifications of new posts by email.</p>
+<p>Join 1,149 other followers</p>
+						<p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Enter your email address" value="" id="subscribe-field"></p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="13118001">
+						<input type="hidden" name="source" value="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-3">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="71d1c4d908">						<input type="submit" value="Follow">
+					</p>
+				</form>
+			
+</aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h1 class="widget-title">Recent Posts</h1>		<ul>
+					<li>
+				<a href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala.html">Concurrency vs Multi-threading vs Asynchronous Programming :&nbsp;Explained</a>
+						</li>
+					<li>
+				<a href="http://codewala.net/2015/07/27/how-to-test-email-functionality-using-smtp-client/">How to test email functionality using Smtp&nbsp;Client</a>
+						</li>
+					<li>
+				<a href="http://codewala.net/2015/07/22/dependency-injection-annotation-process-angularjs/">Dependency Injection Annotation Process in {{AngularJS}} – Part&nbsp;18</a>
+						</li>
+					<li>
+				<a href="http://codewala.net/2015/07/20/presented-on-asp-net-performance-tuning-in-c-corner-hyd-chapter-event-12th-july-15/">Presented on ASP.NET performance tuning in C# Corner Hyd Chapter Event : 12th July&nbsp;15</a>
+						</li>
+					<li>
+				<a href="http://codewala.net/2015/07/15/dependency-injection-di-in-angularjs-contd/">Dependency Injection (DI) in {{AngularJS}} Contd.– Part&nbsp;17</a>
+						</li>
+				</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h1 class="widget-title">Categories</h1>		<ul>
+	<li class="cat-item cat-item-141"><a href="http://codewala.net/category/ajax/">AJAX</a> (1)
+</li>
+	<li class="cat-item cat-item-68515894"><a href="http://codewala.net/category/angularjs/">AngularJS</a> (20)
+</li>
+	<li class="cat-item cat-item-94234"><a href="http://codewala.net/category/asp-net/">ASP.NET</a> (55)
+</li>
+	<li class="cat-item cat-item-21091134"><a href="http://codewala.net/category/asp-net-4-0/" title="ASP.NET 4.0">ASP.NET 4.0</a> (6)
+</li>
+	<li class="cat-item cat-item-64536701"><a href="http://codewala.net/category/asp-net-4-5/" title="ASP.NET 4.5">ASP.NET 4.5</a> (13)
+</li>
+	<li class="cat-item cat-item-37812965"><a href="http://codewala.net/category/asp-net-5/">ASP.NET 5</a> (5)
+</li>
+	<li class="cat-item cat-item-14210236"><a href="http://codewala.net/category/asp-net-mvc/">ASP.NET MVC</a> (14)
+</li>
+	<li class="cat-item cat-item-222239316"><a href="http://codewala.net/category/asp-net-mvc/asp-net-mvc-5-1/">ASP.NET MVC 5.1</a> (2)
+</li>
+	<li class="cat-item cat-item-201236230"><a href="http://codewala.net/category/asp-net-mvc/asp-net-mvc5/">ASP.NET MVC5</a> (1)
+</li>
+	<li class="cat-item cat-item-79514413"><a href="http://codewala.net/category/asp-net-web-api/">ASP.NET Web API</a> (1)
+</li>
+	<li class="cat-item cat-item-44620"><a href="http://codewala.net/category/authentication/">Authentication</a> (4)
+</li>
+	<li class="cat-item cat-item-6758"><a href="http://codewala.net/category/awards/">Awards</a> (7)
+</li>
+	<li class="cat-item cat-item-335778"><a href="http://codewala.net/category/azure/">Azure</a> (2)
+</li>
+	<li class="cat-item cat-item-2364"><a href="http://codewala.net/category/book/">Book</a> (1)
+</li>
+	<li class="cat-item cat-item-20321984"><a href="http://codewala.net/category/c-2-0/">C# 2.0</a> (14)
+</li>
+	<li class="cat-item cat-item-20868728"><a href="http://codewala.net/category/c-3-0/">C# 3.0</a> (14)
+</li>
+	<li class="cat-item cat-item-20669058"><a href="http://codewala.net/category/c-4-0/">C# 4.0</a> (15)
+</li>
+	<li class="cat-item cat-item-54461131"><a href="http://codewala.net/category/c-basic-things/">C# basic things</a> (14)
+</li>
+	<li class="cat-item cat-item-29733"><a href="http://codewala.net/category/cache/">Cache</a> (2)
+</li>
+	<li class="cat-item cat-item-69816"><a href="http://codewala.net/category/cloud/">Cloud</a> (3)
+</li>
+	<li class="cat-item cat-item-37116"><a href="http://codewala.net/category/contest/">Contest</a> (2)
+</li>
+	<li class="cat-item cat-item-169"><a href="http://codewala.net/category/css/">CSS</a> (3)
+</li>
+	<li class="cat-item cat-item-5784"><a href="http://codewala.net/category/event/">Event</a> (24)
+</li>
+	<li class="cat-item cat-item-54"><a href="http://codewala.net/category/general/">General</a> (5)
+</li>
+	<li class="cat-item cat-item-38068"><a href="http://codewala.net/category/globalisation/">Globalisation</a> (1)
+</li>
+	<li class="cat-item cat-item-53242"><a href="http://codewala.net/category/html5/">HTML5</a> (1)
+</li>
+	<li class="cat-item cat-item-14013"><a href="http://codewala.net/category/iis/">IIS</a> (6)
+</li>
+	<li class="cat-item cat-item-457"><a href="http://codewala.net/category/javascript/">Javascript</a> (15)
+</li>
+	<li class="cat-item cat-item-203308"><a href="http://codewala.net/category/jquery/">jQuery</a> (10)
+</li>
+	<li class="cat-item cat-item-35497060"><a href="http://codewala.net/category/json-2/">JSON</a> (3)
+</li>
+	<li class="cat-item cat-item-338814"><a href="http://codewala.net/category/multithreading/">MultiThreading</a> (1)
+</li>
+	<li class="cat-item cat-item-17358"><a href="http://codewala.net/category/new-releases/">New Releases</a> (1)
+</li>
+	<li class="cat-item cat-item-136535"><a href="http://codewala.net/category/performance-improvement/">Performance Improvement</a> (1)
+</li>
+	<li class="cat-item cat-item-342083"><a href="http://codewala.net/category/recognition/">Recognition</a> (3)
+</li>
+	<li class="cat-item cat-item-15314"><a href="http://codewala.net/category/rest/">REST</a> (1)
+</li>
+	<li class="cat-item cat-item-1745"><a href="http://codewala.net/category/review/">Review</a> (2)
+</li>
+	<li class="cat-item cat-item-50206120"><a href="http://codewala.net/category/sass-2/">Sass</a> (2)
+</li>
+	<li class="cat-item cat-item-801"><a href="http://codewala.net/category/security/">Security</a> (4)
+</li>
+	<li class="cat-item cat-item-68523697"><a href="http://codewala.net/category/signalr/">SignalR</a> (3)
+</li>
+	<li class="cat-item cat-item-672"><a href="http://codewala.net/category/tips-and-tricks/">Tips and Tricks</a> (3)
+</li>
+	<li class="cat-item cat-item-27731"><a href="http://codewala.net/category/troubleshooting/">Troubleshooting</a> (2)
+</li>
+	<li class="cat-item cat-item-203726"><a href="http://codewala.net/category/validators/">Validators</a> (2)
+</li>
+	<li class="cat-item cat-item-412"><a href="http://codewala.net/category/video/">Video</a> (5)
+</li>
+	<li class="cat-item cat-item-140497190"><a href="http://codewala.net/category/visual-studio-2013/">Visual Studio 2013</a> (1)
+</li>
+	<li class="cat-item cat-item-41032664"><a href="http://codewala.net/category/visual-studio-tricks/">Visual Studio Tricks</a> (4)
+</li>
+	<li class="cat-item cat-item-46648"><a href="http://codewala.net/category/wcf/">WCF</a> (5)
+</li>
+	<li class="cat-item cat-item-35139034"><a href="http://codewala.net/category/web-services-2/">Web Services</a> (2)
+</li>
+	<li class="cat-item cat-item-3433984"><a href="http://codewala.net/category/web-config/">web.config</a> (2)
+</li>
+	<li class="cat-item cat-item-7489581"><a href="http://codewala.net/category/webfarm/">WebFarm</a> (1)
+</li>
+	<li class="cat-item cat-item-17001"><a href="http://codewala.net/category/wif/">WIF</a> (4)
+</li>
+	<li class="cat-item cat-item-46142649"><a href="http://codewala.net/category/workflow-4/">WorkFlow 4</a> (1)
+</li>
+		</ul>
+</aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">Archives</h1>		<label class="screen-reader-text" for="archives-dropdown-2">Archives</label>
+		<select id="archives-dropdown-2" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+			
+			<option value="">Select Month</option>
+				<option value="http://codewala.net/2015/07/"> July 2015 &nbsp;(8)</option>
+	<option value="http://codewala.net/2015/06/"> June 2015 &nbsp;(3)</option>
+	<option value="http://codewala.net/2015/05/"> May 2015 &nbsp;(2)</option>
+	<option value="http://codewala.net/2015/04/"> April 2015 &nbsp;(4)</option>
+	<option value="http://codewala.net/2015/03/"> March 2015 &nbsp;(2)</option>
+	<option value="http://codewala.net/2015/02/"> February 2015 &nbsp;(2)</option>
+	<option value="http://codewala.net/2015/01/"> January 2015 &nbsp;(3)</option>
+	<option value="http://codewala.net/2014/12/"> December 2014 &nbsp;(1)</option>
+	<option value="http://codewala.net/2014/11/"> November 2014 &nbsp;(1)</option>
+	<option value="http://codewala.net/2014/10/"> October 2014 &nbsp;(1)</option>
+	<option value="http://codewala.net/2014/09/"> September 2014 &nbsp;(2)</option>
+	<option value="http://codewala.net/2014/08/"> August 2014 &nbsp;(2)</option>
+	<option value="http://codewala.net/2014/07/"> July 2014 &nbsp;(4)</option>
+	<option value="http://codewala.net/2014/06/"> June 2014 &nbsp;(5)</option>
+	<option value="http://codewala.net/2014/05/"> May 2014 &nbsp;(5)</option>
+	<option value="http://codewala.net/2014/04/"> April 2014 &nbsp;(6)</option>
+	<option value="http://codewala.net/2014/03/"> March 2014 &nbsp;(3)</option>
+	<option value="http://codewala.net/2014/02/"> February 2014 &nbsp;(2)</option>
+	<option value="http://codewala.net/2014/01/"> January 2014 &nbsp;(6)</option>
+	<option value="http://codewala.net/2013/12/"> December 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/11/"> November 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/10/"> October 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/09/"> September 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/08/"> August 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/07/"> July 2013 &nbsp;(4)</option>
+	<option value="http://codewala.net/2013/06/"> June 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/05/"> May 2013 &nbsp;(4)</option>
+	<option value="http://codewala.net/2013/04/"> April 2013 &nbsp;(4)</option>
+	<option value="http://codewala.net/2013/03/"> March 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2013/02/"> February 2013 &nbsp;(4)</option>
+	<option value="http://codewala.net/2013/01/"> January 2013 &nbsp;(3)</option>
+	<option value="http://codewala.net/2012/12/"> December 2012 &nbsp;(2)</option>
+	<option value="http://codewala.net/2012/09/"> September 2012 &nbsp;(1)</option>
+	<option value="http://codewala.net/2012/08/"> August 2012 &nbsp;(1)</option>
+	<option value="http://codewala.net/2012/07/"> July 2012 &nbsp;(5)</option>
+	<option value="http://codewala.net/2012/06/"> June 2012 &nbsp;(1)</option>
+	<option value="http://codewala.net/2012/05/"> May 2012 &nbsp;(3)</option>
+	<option value="http://codewala.net/2012/04/"> April 2012 &nbsp;(4)</option>
+	<option value="http://codewala.net/2012/03/"> March 2012 &nbsp;(2)</option>
+	<option value="http://codewala.net/2012/02/"> February 2012 &nbsp;(1)</option>
+	<option value="http://codewala.net/2011/12/"> December 2011 &nbsp;(2)</option>
+	<option value="http://codewala.net/2011/11/"> November 2011 &nbsp;(5)</option>
+	<option value="http://codewala.net/2011/10/"> October 2011 &nbsp;(4)</option>
+	<option value="http://codewala.net/2011/09/"> September 2011 &nbsp;(2)</option>
+	<option value="http://codewala.net/2011/08/"> August 2011 &nbsp;(2)</option>
+	<option value="http://codewala.net/2011/07/"> July 2011 &nbsp;(4)</option>
+	<option value="http://codewala.net/2011/06/"> June 2011 &nbsp;(3)</option>
+	<option value="http://codewala.net/2011/05/"> May 2011 &nbsp;(4)</option>
+	<option value="http://codewala.net/2011/04/"> April 2011 &nbsp;(3)</option>
+	<option value="http://codewala.net/2011/03/"> March 2011 &nbsp;(2)</option>
+	<option value="http://codewala.net/2011/02/"> February 2011 &nbsp;(4)</option>
+	<option value="http://codewala.net/2011/01/"> January 2011 &nbsp;(4)</option>
+	<option value="http://codewala.net/2010/12/"> December 2010 &nbsp;(3)</option>
+	<option value="http://codewala.net/2010/11/"> November 2010 &nbsp;(1)</option>
+	<option value="http://codewala.net/2010/10/"> October 2010 &nbsp;(3)</option>
+	<option value="http://codewala.net/2010/09/"> September 2010 &nbsp;(4)</option>
+	<option value="http://codewala.net/2010/08/"> August 2010 &nbsp;(2)</option>
+	<option value="http://codewala.net/2010/05/"> May 2010 &nbsp;(1)</option>
+	<option value="http://codewala.net/2010/04/"> April 2010 &nbsp;(1)</option>
+
+		</select>
+</aside><aside id="text-6" class="widget widget_text"><h1 class="widget-title">Disclaimer</h1>			<div class="textwidget"> This is my personal weblog. All the contents in this blog are purely my personal opinion and do not reflect the views of my current and past employers. © Copyright 2014</div>
+		</aside>	</div><!-- #secondary -->
+
+
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+			
+			<div class="site-info">
+				<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com</a>.
+				<span class="sep"> | </span>
+				<a href="https://wordpress.com/themes/able/" title="Learn more about this theme">The Able Theme</a>.			</div><!-- .site-info -->
+		</footer><!-- #colophon .site-footer -->
+	</div><!-- #page-liner -->
+</div><!-- #page .hfeed .site -->
+
+<!-- wpcom_wp_footer -->
+<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-129539e205e60e80d25451029bb8b609">
+	</div>
+	<div class="grofile-hash-map-b079ad5d8d93bb09730c5acd4a6dab38">
+	</div>
+	<div class="grofile-hash-map-1e4926ac815edb4e94c68c84824ec231">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/brijbhushan.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/brijbhushan.wordpress.com\/wp-login.php?action=logout&_wpnonce=fe3d226c26","homeURL":"http:\/\/codewala.net\/","postID":"2441","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource(5)"></script>
+
+	<div id="bit" class="loggedout-follow-normal" style="bottom: -255px;">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “Code Wala”</label></h3>
+
+			<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 1,149 other followers</p>
+			<p><input type="email" name="email" value="Enter your email address" onfocus="this.value=(this.value==&quot;Enter your email address&quot;) ? &quot;&quot; : this.value;" onblur="this.value=(this.value==&quot;&quot;) ? &quot;Enter your email address&quot; : this.value;" id="loggedout-follow-field"></p>
+
+			<input type="hidden" name="action" value="subscribe">
+			<input type="hidden" name="blog_id" value="13118001">
+			<input type="hidden" name="source" value="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/">
+			<input type="hidden" name="sub-type" value="loggedout-follow">
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="71d1c4d908"><input type="hidden" name="_wp_http_referer" value="/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/">
+			<p id="bsub-subscribe-button"><input type="submit" value="Sign me up"></p>
+			</form>
+					<div id="bsub-credit"><a href="https://wordpress.com/?ref=lof">Build a website with WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/codewala.net\/2015\/07\/29\/concurrency-vs-multi-threading-vs-asynchronous-programming-explained\/":2441};
+		window.WPCOM_jetpack = false;
+				window.WPCOM_site_ID = 13118001;
+			</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-tumblr' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+			
+		<iframe src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var jetpackLikesWidgetQueue = [];
+			var jetpackLikesWidgetBatch = [];
+			var jetpackLikesMasterReady = false;
+
+			function JetpackLikespostMessage( message, target ) {
+				if ( "string" === typeof message ){
+					try{
+						message = JSON.parse( message );
+					}
+					catch(e) {
+						return;
+					}
+				}
+
+				pm( {
+					target: target,
+					type: 'likesMessage',
+					data: message,
+					origin: '*'
+				} );
+			}
+
+			function JetpackLikesBatchHandler() {
+				var requests = [];
+				jQuery( 'div.jetpack-likes-widget-unloaded' ).each( function( i ) {
+					if ( jetpackLikesWidgetBatch.indexOf( this.id ) > -1 )
+						return;
+					jetpackLikesWidgetBatch.push( this.id );
+					var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/;
+					var match = regex.exec( this.id );
+					if ( ! match || match.length != 5 )
+						return;
+
+					var info = {
+						blog_id: match[2],
+						width:   this.width
+					};
+
+					if ( 'post' == match[1] ) {
+						info.post_id = match[3];
+					} else if ( 'comment' == match[1] ) {
+						info.comment_id = match[3];
+					}
+
+					info.obj_id = match[4];
+
+					requests.push( info );
+				});
+
+				if ( requests.length > 0 ) {
+					JetpackLikespostMessage( { event: 'initialBatch', requests: requests }, window.frames['likes-master'] );
+				}
+			}
+
+			function JetpackLikesMessageListener( event ) {
+				if ( "undefined" == typeof event.event )
+					return;
+
+				if ( 'masterReady' == event.event ) {
+					jQuery( document ).ready( function() {
+						jetpackLikesMasterReady = true;
+
+						var stylesData = {
+								event: 'injectStyles'
+						};
+
+						if ( jQuery( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+							JetpackLikespostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+							stylesData.adminBarStyles = {
+								background: jQuery( '#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a' ).css( 'background' ),
+								isRtl: ( 'rtl' == jQuery( '#wpadminbar' ).css( 'direction' ) )
+							};
+						}
+
+						if ( !window.addEventListener )
+							jQuery( '#wp-admin-bar-admin-bar-likes-widget' ).hide();
+
+						stylesData.textStyles = {
+							color: jQuery( '.sd-text-color').css( 'color' ),
+							fontFamily: jQuery( '.sd-text-color' ).css( 'font-family' ),
+							fontSize: jQuery( '.sd-text-color' ).css( 'font-size' ),
+							direction: jQuery( '.sd-text-color' ).css( 'direction' ),
+							fontWeight: jQuery( '.sd-text-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-text-color' ).css( 'font-style' ),
+							textDecoration: jQuery( '.sd-text-color' ).css('text-decoration')
+						};
+
+						stylesData.linkStyles = {
+							color: jQuery( '.sd-link-color' ).css('color'),
+							fontFamily: jQuery( '.sd-link-color' ).css('font-family'),
+							fontSize: jQuery( '.sd-link-color' ).css('font-size'),
+							textDecoration: jQuery( '.sd-link-color' ).css('text-decoration'),
+							fontWeight: jQuery( '.sd-link-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-link-color' ).css( 'font-style' )
+						};
+
+						JetpackLikespostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+						JetpackLikesBatchHandler();
+
+						jQuery( document ).on( 'inview', 'div.jetpack-likes-widget-unloaded', function() {
+							jetpackLikesWidgetQueue.push( this.id );
+						});
+					});
+				}
+
+				if ( 'showLikeWidget' == event.event ) {
+					jQuery( '#' + event.id + ' .post-likes-widget-placeholder'  ).fadeOut( 'fast', function() {
+						jQuery( '#' + event.id + ' .post-likes-widget' ).fadeIn( 'fast', function() {
+							JetpackLikespostMessage( { event: 'likeWidgetDisplayed', blog_id: event.blog_id, post_id: event.post_id, obj_id: event.obj_id }, window.frames['likes-master'] );
+						});
+					});
+				}
+
+				if ( 'clickReblogFlair' == event.event ) {
+					wpcom_reblog.toggle_reblog_box_flair( event.obj_id );
+				}
+
+				if ( 'showOtherGravatars' == event.event ) {
+					var $container = jQuery( '#likes-other-gravatars' );
+					var $list = $container.find( 'ul' );
+
+					$container.hide();
+					$list.html( '' );
+
+					$container.find( '.likes-text span' ).text( event.total );
+
+					jQuery.each( event.likers, function( i, liker ) {
+						$list.append( '<li class="' + liker.css_class + '"><a href="' + liker.profile_URL + '" class="wpl-liker" rel="nofollow" target="_parent"><img src="' + liker.avatar_URL + '" alt="' + liker.name + '" width="30" height="30" style="padding-right: 3px;" /></a></li>');
+					} );
+
+					var offset = jQuery( "[name='" + event.parent + "']" ).offset();
+
+					$container.css( 'left', offset.left + event.position.left - 10 + 'px' );
+					$container.css( 'top', offset.top + event.position.top - 33 + 'px' );
+
+					var rowLength = Math.floor( event.width / 37 );
+					var height = ( Math.ceil( event.likers.length / rowLength ) * 37 ) + 13;
+					if ( height > 204 ) {
+						height = 204;
+					}
+
+					$container.css( 'height', height + 'px' );
+					$container.css( 'width', rowLength * 37 - 7 + 'px' );
+
+					$list.css( 'width', rowLength * 37 + 'px' );
+
+					$container.fadeIn( 'slow' );
+
+					var scrollbarWidth = $list[0].offsetWidth - $list[0].clientWidth;
+					if ( scrollbarWidth > 0 ) {
+						$container.width( $container.width() + scrollbarWidth );
+						$list.width( $list.width() + scrollbarWidth );
+					}
+				}
+			}
+
+			pm.bind( 'likesMessage', function(e) { JetpackLikesMessageListener(e); } );
+
+			jQuery( document ).click( function( e ) {
+				var $container = jQuery( '#likes-other-gravatars' );
+
+				if ( $container.has( e.target ).length === 0 ) {
+					$container.fadeOut( 'slow' );
+				}
+			});
+
+			function JetpackLikesWidgetQueueHandler() {
+				var wrapperID;
+				if ( ! jetpackLikesMasterReady ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				if ( jetpackLikesWidgetQueue.length > 0 ) {
+					// We may have a widget that needs creating now
+					var found = false;
+					while( jetpackLikesWidgetQueue.length > 0 ) {
+						// Grab the first member of the queue that isn't already loading.
+						wrapperID = jetpackLikesWidgetQueue.splice( 0, 1 )[0];
+						if ( jQuery( '#' + wrapperID ).hasClass( 'jetpack-likes-widget-unloaded' ) ) {
+							found = true;
+							break;
+						}
+					}
+					if ( ! found ) {
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				} else if ( jQuery( 'div.jetpack-likes-widget-unloaded' ).length > 0 ) {
+					// Grab any unloaded widgets for a batch request
+					JetpackLikesBatchHandler();
+
+					// Get the next unloaded widget
+					wrapperID = jQuery( 'div.jetpack-likes-widget-unloaded' ).first()[0].id;
+					if ( ! wrapperID ) {
+						// Everything is currently loaded
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				}
+
+				if ( 'undefined' === typeof wrapperID ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				var $wrapper = jQuery( '#' + wrapperID );
+				$wrapper.find( 'iframe' ).remove();
+
+				if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='22px' width='68px' frameBorder='0' scrolling='no' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				} else {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='55px' width='100%' frameBorder='0' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				}
+
+				$wrapper.removeClass( 'jetpack-likes-widget-unloaded' ).addClass( 'jetpack-likes-widget-loading' );
+
+				$wrapper.find( 'iframe' ).load( function( e ) {
+					var $iframe = jQuery( e.target );
+					$wrapper.removeClass( 'jetpack-likes-widget-loading' ).addClass( 'jetpack-likes-widget-loaded' );
+
+					JetpackLikespostMessage( { event: 'loadLikeWidget', name: $iframe.attr( 'name' ), width: $iframe.width() }, window.frames[ 'likes-master' ] );
+
+					if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+						$wrapper.find( 'iframe' ).Jetpack( 'resizeable' );
+					}
+				});
+				setTimeout( JetpackLikesWidgetQueueHandler, 250 );
+			}
+			JetpackLikesWidgetQueueHandler();
+		//]]>
+		</script>
+<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/form.js"></script>
+<link rel="stylesheet" id="all-css-0" href="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/style(1).css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var JetpackEmojiSettings = {"base_url":"http:\/\/s0.wp.com\/wp-content\/mu-plugins\/emoji\/twemoji\/"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/saved_resource(6)"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "brijbhushan.wordpress.com";
+	</script>
+	<script type="text/javascript" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/725X1342.skimlinks.js"></script><script src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'13118001','blog_tz':'5','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'13118001','v':'wpcom','tz':'5','user_id':'0','post':'2441','subd':'brijbhushan'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3AlSGN8YmRCSmtFZUxQcmVlSTE3JSUwbi96cF1IZlBvTlhQK10/My5ERHxXVSYzNS1zSlJtTi4lQz9udUwzQVRfJmt4cmpvQVNZZD0sOXVyeXFSOSUtTSt8fl1mZ2hhU3VMUW5OYyxvb3dYb1FiZ3VRXWcrOVgzW1tHLl1aTmJCL1hraGZyQnN1aGwlXy8tZV85UDNKYkJLUDU4SlBTYTd0X20/djFZc3RwZSZKVklWNTZKVlozSnNBR0pRUU5jWFNYWzZHcDd3NkxodTFsWX5tTiZMV0o4Q3d+dDFCakZTY0VVP29uamFoVVUsW2pBflglXUUsbURCLHN6K0d6Lg=='}]);
+_stq.push([ 'clickTrackerInit', '13118001', '2441' ]);
+	</script>
+<noscript>&lt;img src="http://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+
+<!--
+	generated in 0.607 seconds
+	81711 bytes batcached for 300 seconds
+-->
+<div id="sharing_email" style="display: none;">
+		<form action="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala.html" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="">
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="">
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="">
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off">
+			<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+			<div class="recaptcha" id="sharing_recaptcha"></div><input type="hidden" name="recaptcha_public_key" id="recaptcha_public_key" value="6LcYW8MSAAAAADBAuEH9yaPcF7lWh11Iq62ZKtoo">
+			<img style="float: right; display: none" class="loading" src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/loading.gif" alt="loading" width="16" height="16">
+			<input type="submit" value="Send Email" class="sharing_send">
+			<a rel="nofollow" href="http://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div><img src="./Concurrency vs Multi-threading vs Asynchronous Programming _ Explained _ Code Wala_files/g.gif" id="wpstats"><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div></body></html>

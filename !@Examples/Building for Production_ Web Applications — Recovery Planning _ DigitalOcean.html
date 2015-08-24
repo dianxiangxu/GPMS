@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<!-- saved from url=(0208)https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image -->
+<html class="wf-proximanova-n3-active wf-proximanova-n4-active wf-proximanova-n6-active wf-proximanova-n7-active wf-proximanova-i4-active wf-proximanova-n1-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Building for Production: Web Applications — Recovery Planning | DigitalOcean</title>
+
+<meta name="description" content="In this part of the &amp;quot;Building for Production: Web Applications&amp;quot; series (3 of 6), we will devise a recovery plan. A recovery plan is a set of documented procedures to recover from potential failures or administration errors within your server">
+<meta name="keywords" content="Miscellaneous Backups">
+
+<meta name="og:title" content="Building for Production: Web Applications — Recovery Planning | DigitalOcean">
+<meta name="og:description" content="In this part of the &amp;quot;Building for Production: Web Applications&amp;quot; series (3 of 6), we will devise a recovery plan. A recovery plan is a set of documented procedures to recover from potential failures or administration errors within your server">
+<meta name="og:site_name" content="DigitalOcean">
+<meta name="og:type" content="article">
+
+<meta name="twitter:site" content="DigitalOcean">
+<meta name="twitter:title" content="Building for Production: Web Applications — Recovery Planning | DigitalOcean">
+<meta name="twitter:description" content="In this part of the &amp;quot;Building for Production: Web Applications&amp;quot; series (3 of 6), we will devise a recovery plan. A recovery plan is a set of documented procedures to recover from potential failures or administration errors within your server">
+<meta name="twitter:creator" content="DigitalOcean">
+
+  <meta property="og:image" content="https://community-cdn-digitalocean-com.global.ssl.fastly.net/assets/tutorials/images/large/WebApplication.recovery-twitter.png?1436557982">
+
+  <meta name="twitter:card" content="photo">
+  <meta name="twitter:image" content="https://community-cdn-digitalocean-com.global.ssl.fastly.net/assets/tutorials/images/large/WebApplication.recovery-twitter.png?1436557982">
+  <meta name="twitter:url" content="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&amp;utm_source=facebook&amp;utm_campaign=production_web_app_recovery_tut&amp;utm_content=image">
+
+  <link rel="canonical" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning">
+
+
+    <link rel="stylesheet" media="all" href="https://www.digitalocean.com/assets/community/application-76f9345d49f2bf97f7113472b9e68d98.css">
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="MR+oLmMSspgODuq11O9JzzDOiUK/gOmEatyArvup0+5O1iJTmkUWa6DtDRWERUYvEC3+s6Pd2hPZ9aBdLJSV4w==">
+    <script src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/bat.js" async=""></script><script async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/fbds.js"></script><script src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/quant.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/conversion_async.js"></script><script type="text/javascript" async="" src="https://s.adroll.com/j/roundtrip.js"></script><script type="text/javascript" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/analytics.js"></script><script src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/analytics.js"></script><script type="text/javascript" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/track.js" id="cio-tracker" data-site-id="e7cc779295927747a7c2"></script><script async="" id="hn-button.js" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/hn-button.js"></script><script type="text/javascript" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/plusone.js" gapi_processed="true"></script><script id="facebook-jssdk" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/all.js"></script><script id="twitter-wjs" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/widgets.js"></script><script async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/gtm.js"></script><script type="text/javascript" async="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/analytics.min.js"></script><script type="text/javascript" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/njm7orv.js"></script><style type="text/css"></style>
+    <style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style><link rel="stylesheet" href="https://use.typekit.net/c/3630c0/1w;proxima-nova,2,gbm:V:i4,gbg:V:n1,gbj:V:n3,gbl:V:n4,gbq:V:n6,gbs:V:n7/d?3bb2a6e53c9684ffdc9a99ff1a5b2a6236e3628d53226ac77c5f92111ae5f6920cb48cddf84302e7111f93a832ec07dbd04c86ed1235e670c45f37f6392e92d088c67b93ef02ef5f75f15656339824d61ac572b957a0e150535a8f2c21b9430f372abfc8923719c13863433c4dcc8c50d375c29b0714d96a12f5cda32b7379fa743bb8bc18c270d25fb35b2a4af29e25574a664e8a90b7b5c9e7bb1351875a36bbb992b2f23099c7589629692e1cda7e46e809464b8af25dd150ddf34198de032c10cdca80f7d6c606a717dee00419721ae9ec49aaafdcfff2b2f6f6dd78bcc2757e6441e11ff8fe5e35af3e1259fce40c35df3193b4f9be41fad50f5793cbef7570970a0dc79300404b661057b1e7df3fff33a127b79ac14c6bca453d9d3aa7b6e85c288e0bd44ac214e7dbe868b215d6412a3f4cb42eedbfe0f7c6c49d88271d059f0b2fa74c28f2ccd9893dcefebe7c28dde9f1a59b014f3bf54b5b6252efdb8ba169df2bc25efc5dfc45e65feb1f11b7bfb42ce97a74d09196d68458e8b19ade723f2f60" media="all"><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/701281621.js"></script>
+    <script type="text/javascript">
+      if(window.analytics=window.analytics||[],window.analytics.included)window.console&&console.error&&console.error("analytics.js included twice");else{window.analytics.included=!0,window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(a){return function(){var n=Array.prototype.slice.call(arguments);return n.unshift(a),window.analytics.push(n),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(a){var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+a+"/analytics.min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(n,t)},window.analytics.SNIPPET_VERSION="2.0.9",
+      window.analytics.load("puo3uv968t")}
+      window.analytics.page();
+    </script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://www.digitalocean.com/community/tutorials/feed">
+    <script src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/application-e8c82b40bd6ab5d0a70317a4c83b3bab.js"></script>
+  <style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+  <body class="tutorials-controller tutorial-single" data-env="production" ,="" data-prefix="/community" data-user-id="" data-facebook-app-id="694818843983011">
+    <script>
+//<![CDATA[
+
+    $(function() {
+      dataLayer = [$.parseJSON('{\"user_id\":\"\",\"is_community_page\":true,\"content_type\":\"tutorial\",\"author\":\"Mitchell Anicas\",\"difficulty\":\"advanced\",\"created_at\":\"2015-05-28T18:17:39.009Z\",\"published_at\":\"2015-06-01T19:32:40.530Z\",\"updated_at\":\"2015-07-10T19:53:03.407Z\",\"article_tags\":\"Backups, Miscellaneous\"}')];
+    });
+
+//]]>
+</script>
+<!-- Google Tag Manager -->
+<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-KHWBBT"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KHWBBT');</script>
+<!-- End Google Tag Manager -->
+    
+
+    <div class="outside_viewport">
+        <div id="share-modal" class="modal fade mini-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Share</h1>
+          <a class="close-button" data-dismiss="modal" href=""><span class="icon icon-close-light"></span></a>
+        </div>
+        <div class="modal-body">
+
+          <div class="social-sharing social-sharing-container">
+            <ul class="bottom ">
+              <li class="shareBtn" id="sbTwitter">
+                <a href="http://twitter.com/share?text=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=twshare" class="share-icon share-popup" title="Share on Twitter">
+                  <span class="sIcon icon-bird"></span>
+                </a>
+                
+                <a href="http://twitter.com/share?text=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=twshare" class="share-link share-popup" title="Share on Twitter">
+                  Twitter
+                </a>
+                
+              </li>
+
+              <li class="shareBtn" id="sbFacebook">
+                <a class="share-icon facebook-share" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=fbshare" onclick="" title="Share on Facebook">
+                  <span class="sIcon icon-facebook-B"></span>
+                </a>
+
+                <a class="share-link facebook-share" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=fbshare" onclick="" title="Share on Facebook">
+                  Facebook
+                </a>
+              </li>
+              <li class="shareBtn" id="sbGoogle">
+                <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=gpshare" class="share-icon share-popup" title="Share on Google+">
+                  <span class="sIcon icon-google-plus-B"></span>
+                </a>
+
+                <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=gpshare" class="share-link share-popup" title="Share on Google+">
+                  Google+
+                </a>
+              </li>
+              <li class="shareBtn" id="sbYC">
+                <a href="https://news.ycombinator.com/submitlink?t=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&u=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=hnshare" class="share-icon share-popup " target="_blank" title="Submit to Hacker News">
+                  <span class="sIcon icon-hacker-news"></span>
+                </a>
+
+                <a href="https://news.ycombinator.com/submitlink?t=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&u=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=hnshare" class="share-link share-popup" target="_blank" title="Submit to Hacker News">
+                  Hacker News
+                </a>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="contents-modal" class="modal fade mini-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Contents</h1>
+          <a class="close-button" data-dismiss="modal" href=""><span class="icon icon-close-light"></span></a>
+        </div>
+        <div class="modal-body">
+
+          <div class="table-of-contents-modal open tocify"><ul id="tocify-header0" class="tocify-header" style="display: none;"><li class="tocify-item tocify-focus" data-unique="recovery-plan-requirements"><a>Recovery Plan Requirements</a></li></ul><ul id="tocify-header1" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="database-server"><a>Database Server</a></li></ul><ul id="tocify-header2" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="application-servers"><a>Application Servers</a></li></ul><ul id="tocify-header3" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="load-balancer-server"><a>Load Balancer Server</a></li></ul><ul id="tocify-header4" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="other-considerations"><a>Other Considerations</a></li></ul><ul id="tocify-header5" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="conclusion"><a>Conclusion</a></li></ul></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tutorial-info-bar-container top">
+  <div class="tutorial-info-bar">
+    <div class="left-section">
+        <div class="tutorial-author-avatar">
+          <a href="https://www.digitalocean.com/community/users/manicas"><div class="mod-avatar mod-avatar-small"><img alt="manicas" class="avatar avatar-small" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/695da9dd73504edfc622c9be380cb3cb" width="80" height="80"><span class="mod-star" title="" data-toggle="tooltip" data-container="body" data-original-title="MOD"><span class="mod-star-icon"></span></span></div></a>
+        </div>
+
+        <div class="author-and-date">
+          <div class="tutorial-author">
+            <div class="by">By: </div><a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a>
+          </div>
+        </div>
+
+      <div class="upvotes upvoted tutorial-upvote"><form data-upvotable="tutorial_1619" data-upvotable-type="tutorial" class="upvote-form upvote signed-out-upvote" action="https://www.digitalocean.com/community/upvotes/toggle?upvote%5Bupvotable_id%5D=1619&upvote%5Bupvotable_type%5D=Tutorial" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="MR+oLmMSspgODuq11O9JzzDOiUK/gOmEatyArvup0+5O1iJTmkUWa6DtDRWERUYvEC3+s6Pd2hPZ9aBdLJSV4w==">
+    <button type="submit" disabled="disabled" data-toggle="modal" data-target="#sign-in-modal"><span class="icon-upvote-heart-small upvote-heart" data-toggle="modal" data-target="#sign-in-modal" data-return-url="" title="Do you find this post helpful? Show the author by Hearting it!" data-placement="bottom"></span></button>
+
+</form><span class="upvote-text"><span class="hearted-text">Hearted</span><span class="heart-text">Heart</span></span><div class="upvote-count ">2</div></div>
+
+      <div class="tutorial-comments-count">
+        <span class="icon icon-new-comment"></span>
+        1
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="section-item social-sharing-item"><div class="sharing">
+  <a class="share-button" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image#" data-toggle="modal" data-target="#share-modal">
+    <span class="icon icon-share-square"></span>
+    Share
+  </a>
+</div>
+
+</div>
+      <div class="section-item table-of-contents-triggers"><div class="toc-trigger ">
+  <a href="javascript:void(0);">
+    <span class="title">Contents</span>
+    <span class="icon icon-close-light"></span>
+    <span class="icon icon-arrow-down"></span>
+  </a>
+</div>
+
+
+
+<div class="toc-trigger-mobile" data-toggle="modal" data-target="#contents-modal">
+  <a href="javascript:void(0);">
+    <span class="title">Contents</span>
+    <span class="icon icon-arrow-down"></span>
+  </a>
+</div>
+
+
+</div>
+    </div>
+  </div>
+</div>
+
+  <div class="table-of-contents  tocify sticky" style="top: 72px;"><ul id="tocify-header0" class="tocify-header" style="display: none;"><li class="tocify-item tocify-focus" data-unique="recovery-plan-requirements"><a>Recovery Plan Requirements</a></li></ul><ul id="tocify-header1" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="database-server"><a>Database Server</a></li></ul><ul id="tocify-header2" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="application-servers"><a>Application Servers</a></li></ul><ul id="tocify-header3" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="load-balancer-server"><a>Load Balancer Server</a></li></ul><ul id="tocify-header4" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="other-considerations"><a>Other Considerations</a></li></ul><ul id="tocify-header5" class="tocify-header" style="display: none;"><li class="tocify-item" data-unique="conclusion"><a>Conclusion</a></li></ul></div>
+  <div id="share-modal" class="modal fade mini-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Share</h1>
+          <a class="close-button" data-dismiss="modal" href=""><span class="icon icon-close-light"></span></a>
+        </div>
+        <div class="modal-body">
+
+          <div class="social-sharing social-sharing-container">
+            <ul class="top ">
+              <li class="shareBtn" id="sbTwitter">
+                <a href="http://twitter.com/share?text=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=twshare" class="share-icon share-popup" title="Share on Twitter">
+                  <span class="sIcon icon-bird"></span>
+                </a>
+                
+                <a href="http://twitter.com/share?text=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=twshare" class="share-link share-popup" title="Share on Twitter">
+                  Twitter
+                </a>
+                
+              </li>
+
+              <li class="shareBtn" id="sbFacebook">
+                <a class="share-icon facebook-share" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=fbshare" onclick="" title="Share on Facebook">
+                  <span class="sIcon icon-facebook-B"></span>
+                </a>
+
+                <a class="share-link facebook-share" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=fbshare" onclick="" title="Share on Facebook">
+                  Facebook
+                </a>
+              </li>
+              <li class="shareBtn" id="sbGoogle">
+                <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=gpshare" class="share-icon share-popup" title="Share on Google+">
+                  <span class="sIcon icon-google-plus-B"></span>
+                </a>
+
+                <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=gpshare" class="share-link share-popup" title="Share on Google+">
+                  Google+
+                </a>
+              </li>
+              <li class="shareBtn" id="sbYC">
+                <a href="https://news.ycombinator.com/submitlink?t=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&u=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=hnshare" class="share-icon share-popup " target="_blank" title="Submit to Hacker News">
+                  <span class="sIcon icon-hacker-news"></span>
+                </a>
+
+                <a href="https://news.ycombinator.com/submitlink?t=Building%20for%20Production:%20Web%20Applications%20%E2%80%94%20Recovery%20Planning&u=https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_content=building-for-production-web-applications-recovery-planning&utm_medium=community&utm_source=hnshare" class="share-link share-popup" target="_blank" title="Submit to Hacker News">
+                  Hacker News
+                </a>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div id="newsletter-signup-dialog" class="newsletter-signups-dialog optimizely-newsletter-hide" data-newsletter-signup-dialog="" data-article-target=".content-body" style="display: block;">
+  <div class="pull-right">
+  <a href="javascript:;" class="newsletter-signups-dialog-dismiss" data-newsletter-signup-dismiss="">×</a>
+
+</div>
+<h4 class="newsletter-signups-dialog-title">
+  Infrastructure as a Newsletter
+</h4>
+<p class="newsletter-signups-dialog-description">
+  Subscribe to get the latest on all things infrastructure for developers.
+
+</p>
+<form class="newsletter-signup" id="new_newsletter_signup" data-newsletter-signup="true" action="https://www.digitalocean.com/community/newsletter_signup" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
+
+  <div class="newsletter-signup-ajax-error" data-newsletter-signup-ajax-error=""></div>
+
+
+  <div class="form-group">
+    <input placeholder="email@example.com" required="required" class="field" type="email" name="newsletter_signup[email]" id="newsletter_signup_email">
+  </div>
+
+  <button data-disable-with="Sign Up" class="button blue-button">
+    Sign Up
+  </button>
+
+</form>
+
+</div>
+
+
+    </div>
+
+      <div class="mobile-nav">
+  
+<div class="account-buttons">
+    <div id="entrance">
+      <a id="sign-up" class="button" href="https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register">Sign Up</a>
+      <a id="log-in" class="button" href="https://www.digitalocean.com/community/auth/digitalocean">Log In</a>
+    </div>
+</div>
+    
+  <a class="close-panel icon-close" href="javascript:void(0);"></a>
+
+  <form class="mobile-search" action="https://www.digitalocean.com/community/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+    <span class="icon icon-search-thin"></span>
+    <input type="text" name="q" id="q" placeholder="Search">
+    <button name="button" type="submit" class="icon-btn">submit</button>
+</form>
+  
+<nav>
+
+  <ul>
+    <li><a href="https://www.digitalocean.com/community/tutorials">Tutorials</a></li>
+    <li><a href="https://www.digitalocean.com/community/questions">Questions</a></li>
+    <li><a href="https://www.digitalocean.com/community/projects">Projects</a></li>
+    <li class="mobile-nav-only"><a href="https://www.digitalocean.com/">Main Site</a></li>
+  </ul>
+</nav>
+
+  
+</div>
+
+
+      
+    	<header>
+  <div class="main-menu-container">
+    <div class="wrapper">
+      <div class="logo">
+        <a class="" href="https://www.digitalocean.com/">
+          <span class="icon icon-cloud"></span>
+</a>
+        <a class="" href="https://www.digitalocean.com/community">
+          <span class="logo-community-text">Community</span>
+</a>      </div>
+      
+      <a class="mobile-nav-toggle icon-menu-thin" data-role="left">
+        <span>Menu</span>
+      </a>
+
+      
+<nav>
+
+  <ul>
+    <li><a href="https://www.digitalocean.com/community/tutorials">Tutorials</a></li>
+    <li><a href="https://www.digitalocean.com/community/questions">Questions</a></li>
+    <li><a href="https://www.digitalocean.com/community/projects">Projects</a></li>
+    <li class="mobile-nav-only"><a href="https://www.digitalocean.com/">Main Site</a></li>
+  </ul>
+</nav>
+
+      
+      
+<div class="account-buttons">
+    <div id="entrance">
+      <a id="sign-up" class="button" href="https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register">Sign Up</a>
+      <a id="log-in" class="button" href="https://www.digitalocean.com/community/auth/digitalocean">Log In</a>
+    </div>
+</div>
+      <div class="header-search open">
+  <form action="https://www.digitalocean.com/community/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+    <span class="icon icon-search-thin"></span>
+    <input type="text" name="q" id="q" placeholder="Search" autocomplete="off" spellcheck="off" class="header-search-input" data-algolia-application-id="6ZHEUVKJ88" data-algolia-api-key="c5470567eae7fa1177d43222e18ba086">
+    <button name="button" type="submit" class="icon-btn">submit</button>
+</form></div>
+
+<div class="search-results-dropdown dropdown" data-root-path="https://www.digitalocean.com/community">
+  <div class="container">
+    <div class="header-search-results-list"></div>
+
+    <div id="btn-wrap">
+      <a class="more-search-results" data-search-path="/community/search" href="https://www.digitalocean.com/community/search">
+        <span class="icon-mag"></span>
+        View All Results
+</a>    </div>
+  </div>
+</div>
+
+<script type="text/template" id="autocomplete-hits-template">
+  <div class="inner-search">
+    <ul>
+        {{#hits}}
+          <li>
+            <span class='icon icon-{{type}}'></span>
+            <a href='{{url}}'>{{{_highlightResult.title.value}}}</a>
+          </li>
+        {{/hits}}
+    </ul>
+  </div>
+</script>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  
+
+  <div class="wrapper">
+    
+  </div>
+</header>
+      
+        <div class="flash-container"></div>
+
+
+      
+      
+      <div class="wrapper layout-wrapper">
+
+        
+
+
+
+  <img alt="Building for Production: Web Applications — Recovery Planning" title="Building for Production: Web Applications — Recovery Planning" class="tutorial-image-mobile" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/WebApplication.recovery-twitter.png">
+
+<div class="section-content section-content-growable content content-has-mobile-image">
+  <div class="container">
+    <img alt="Building for Production: Web Applications — Recovery Planning" title="Building for Production: Web Applications — Recovery Planning" class="tutorial-image" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/WebApplication.recovery-twitter.png">
+
+      <div class="info-cta">
+    <a class="icon-close-light" href="javascript:void();"></a>
+    We hope you find this tutorial helpful. In addition to guides like this one, we provide simple cloud infrastructure for developers. <a href="https://www.digitalocean.com/?utm_medium=community&utm_source=community_gencta&utm_campaign=needaserver&utm_content=building-for-production-web-applications-recovery-planning">
+        Learn more →
+</a>  </div>
+
+  
+    <h1 class="content-title">Building for Production: Web Applications — Recovery Planning</h1>
+
+    <span class="meta-section tags">
+      <span class="meta-value"><span class="tutorial-date">Jun  1, 2015</span> <spanc class="hashtag-icon"></spanc></span> <a class="" href="https://www.digitalocean.com/community/tags/miscellaneous?type=tutorials">Miscellaneous</a>, <a class="" href="https://www.digitalocean.com/community/tags/backups?type=tutorials">Backups</a> </span>
+    
+
+      <div class="tutorial-series-container collapsed">
+    <div class="section-content">
+
+      <h2 class="tutorial-series-heading">Tutorial Series</h2>
+
+          <div class="tutorial-series-toggle">
+            This tutorial is part 3 of 6 in the series:
+            <a data-reveal="fast" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image#tutorial_series_45">Building for Production: Web Applications</a>
+          </div>
+
+        <div id="tutorial_series_45" class="tutorial-series hidden">
+          <a class="icon-close" href="javascript:void(0);"></a>
+          <h3 class="series-title"><a href="https://www.digitalocean.com/community/tutorial_series/building-for-production-web-applications">Building for Production: Web Applications</a></h3>
+
+            <div class="description">
+              This 6-part tutorial will show you how to build out a multi-server production application setup from scratch. The final setup will be supported by backups, monitoring, and centralized logging systems, which will help you ensure that you will be able to detect problems and recover from them. The ultimate goal of this series is to build on standalone system administration concepts, and introduce you to some of the practical considerations of creating a production server setup. 
+            </div>
+          <ol class="tutorial-series-list">
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-overview">Building for Production: Web Applications — Overview</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          31
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          3
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-deploying">Building for Production: Web Applications — Deploying</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          8
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          7
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="active">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning">Building for Production: Web Applications — Recovery Planning</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          2
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          1
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-backups">Building for Production: Web Applications — Backups</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          2
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          0
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-monitoring">Building for Production: Web Applications — Monitoring</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          5
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          6
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-centralized-logging">Building for Production: Web Applications — Centralized Logging</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          7
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          0
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+</ol>
+  <a class="prev-tutorial" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-deploying">Previous Tutorial</a>
+  <a class="next-tutorial" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-backups">Next Tutorial</a>
+
+        </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="content-body tutorial-content" data-growable-markdown="">
+    <h3 id="introduction">Introduction</h3>
+
+<p>Now that we have our example application setup, we should devise a recovery plan. A recovery plan is a set of documented procedures to recover from potential failures or administration errors within your server setup. Creating a recovery plan will also help you identify the essential components and data of your application server setup.</p>
+
+<p>A very basic recovery plan for a server failure could consist of the list of steps that you took to perform your initial server deployment, with extra procedures for restoring application data from backups. A better recovery plan might, in addition to good documentation, leverage deployment scripts and configuration management tools, such as Ansible, Chef, or Puppet, to help automate and quicken the recovery process.</p>
+
+<p><img src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/recovery_plans.png" alt="Recovery Plan Diagram"></p>
+
+<p>In this part of the tutorial, we will demonstrate how to create a basic recovery plan for the example WordPress application that we set up. Your needs will probably differ, but this should help you get started with devising a recovery plan of your own.</p>
+
+<div name="recovery-plan-requirements" data-unique="recovery-plan-requirements"></div><h2 id="recovery-plan-requirements">Recovery Plan Requirements</h2>
+
+<p>Our basic requirements are that we are able to recover from the loss of any server in the setup, and restore the application functionality and data (up to a reasonable point in time). To fulfill this goal, we will create an inventory of each server, determine which data needs to be backed up, and write a recovery plan based on our available assets. Of course, if any of these recovery plans are executed, the application should be tested to verify that it was restored properly.</p>
+
+<p>We will come up with a recovery plan for each type of server that our application consists of:</p>
+
+<ul>
+<li>Database Server</li>
+<li>Application Servers</li>
+<li>Load Balancer Server</li>
+</ul>
+
+<p>Let's get started with the database server.</p>
+
+<div name="database-server" data-unique="database-server"></div><h2 id="database-server">Database Server</h2>
+
+<p>By retracing our steps (and looking at the preceding tutorial), we know that our database server was created by following these steps:</p>
+
+<ol>
+<li>Install MySQL</li>
+<li>Configure MySQL</li>
+<li>Restart MySQL</li>
+<li>Create database and users</li>
+</ol>
+
+<h3 id="database-server-recovery-plan">Database Server Recovery Plan</h3>
+
+<p>By looking at how we created the database server, we know that it can be recreated from scratch aside from the contents of the database itself (created in step 4). In our WordPress example, most of the application data (i.e. blog posts) is stored in the database. This means that we must maintain backups of the database if we want to be able to recover the database server. We will also back up the MySQL configuration file since it was modified slightly.</p>
+
+<p>Based on our inventory of the database server, here is an outline of our database server recovery plan:</p>
+
+<blockquote>
+<p>Required Backups:</p>
+
+<ul>
+<li>MySQL database</li>
+<li>MySQL configuration</li>
+</ul>
+
+<p>Recovery Steps:</p>
+
+<ol>
+<li>Install MySQL</li>
+<li>Restore MySQL configuration file, and (if it changes) update listening IP address</li>
+<li>Restore database</li>
+<li>Restart MySQL</li>
+</ol>
+</blockquote>
+
+<p>Now that we have an outline of the database server recovery plan, we should work out the details of the recovery steps and ensure that we maintain the required backups. We will leave it as an exercise to the reader to detail the recovery steps, as they will differ depending on the actual setup. In the example case, we can use the application deployment tutorial as the documentation to base our recovery steps on.</p>
+
+<div name="application-servers" data-unique="application-servers"></div><h2 id="application-servers">Application Servers</h2>
+
+<p>By retracing our steps (and looking at the preceding tutorial), we know that the application servers were created by following these steps:</p>
+
+<ol>
+<li>Install and configure Apache and PHP</li>
+<li>Download and configure application (WordPress)</li>
+<li>Copy application files to DocumentRoot</li>
+<li>Replicate application files across all application servers</li>
+</ol>
+
+<h3 id="application-server-recovery-plan">Application Server Recovery Plan</h3>
+
+<p>By looking at the set up steps, we know that our application server can be recreated from scratch aside from the application files. In our WordPress example, the application files include the WordPress configuration files (which includes the database connection information), installed WordPress plugins, and file uploads. This means that we must maintain backups of the application files if we want to be able to recover an application server.</p>
+
+<p>Because the application files are set up to be replicated across multiple application servers, we only need to restore the data from backups if all of the application servers fail or if the data is corrupted somehow. If at least one application server is running fine, with the correct application files, setting up file replication again will restore the proper files to the new application server.</p>
+
+<p>Based on our inventory of the application servers, let's make an outline of our application server recovery plan:</p>
+
+<blockquote>
+<p>Required Backups:</p>
+
+<ul>
+<li>Application files (<code>/var/www/html/</code>, in our example)</li>
+</ul>
+
+<p>Recovery Steps:</p>
+
+<ol>
+<li>Install and configure Apache and PHP</li>
+<li>Replicate application files from working application server</li>
+<li>If application files can't be replicated (all application servers are dead), restore from backups</li>
+</ol>
+</blockquote>
+
+<p>Now that we have an outline of the application server recovery plan, we should work out the details of the recovery steps and ensure that we maintain the required backups. We will leave it as an exercise to the reader to detail the recovery steps, as they will differ depending on the actual setup. In the example case, we can use the application deployment tutorial as the documentation to base our recovery steps on.</p>
+
+<div name="load-balancer-server" data-unique="load-balancer-server"></div><h2 id="load-balancer-server">Load Balancer Server</h2>
+
+<p>By retracing our steps (and looking at the preceding tutorial), we know that the load balancer server was created by following these steps:</p>
+
+<ol>
+<li>Obtained SSL Certificate and related files</li>
+<li>Installed HAProxy</li>
+<li>Configured HAProxy</li>
+<li>Restarted HAProxy</li>
+</ol>
+
+<h3 id="load-balancer-server-recovery-plan">Load Balancer Server Recovery Plan</h3>
+
+<p>By looking at this inventory, we know that our load balancer server can be recreated from scratch aside from the files related to the SSL certificate. This means that we must maintain backups of the SSL certificate files if we want to be able to recover the load balancer server. We will also include the HAProxy configuration file in our backups.</p>
+
+<p>Based on our inventory of the load balancer server, let's make an outline of our load balancer server recovery plan:</p>
+
+<blockquote>
+<p>Required Backups:</p>
+
+<ul>
+<li>SSL Certificate (PEM) and related files</li>
+<li>HAProxy configuration file</li>
+</ul>
+
+<p>Recovery Steps:</p>
+
+<ol>
+<li>Restore SSL Certificate files</li>
+<li>Install HAProxy</li>
+<li>Restore HAProxy configuration file</li>
+<li>Restart HAProxy</li>
+</ol>
+</blockquote>
+
+<p>Now that we have an outline of the load balancer server recovery plan, we should work out the details of the recovery steps and ensure that we maintain the required backups. We will leave it as an exercise to the reader to detail the recovery steps, as they will differ depending on the actual setup. In the example case, we can use the application deployment tutorial as the documentation to base our recovery steps on.</p>
+
+<div name="other-considerations" data-unique="other-considerations"></div><h2 id="other-considerations">Other Considerations</h2>
+
+<p>If the recovery of one of the components requires you to reconfigure any other components, e.g. the database server IP address changes, make sure to include the appropriate steps in your recovery plans.</p>
+
+<p>You will also want to write up recovery plans for all of the other components that exist in your setup, such as your DNS, and for all the components that you will add in the future, such as your backups servers, monitoring, and logging. As your server setup evolves, you should iterate on your existing recovery plans.</p>
+
+<p>We also haven't covered how to create and restore backups yet, so we will have to fill those details in later. We will cover backups in the next part of this tutorial.</p>
+
+<div name="conclusion" data-unique="conclusion"></div><h2 id="conclusion">Conclusion</h2>
+
+<p>After preparing the recovery plans for your various servers, you should keep this information somewhere that is accessible to whoever needs to be able to perform a recovery, completely separate from your server setup.</p>
+
+<p>Continue to the next tutorial to start setting up the backups that are required to support your new recovery plan: <a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-backups">Building for Production: Web Applications — Backups</a>.</p>
+
+  </div>
+</div>
+
+<div class="tutorial-footer">
+  <div class="tutorial-footer-details">
+  <div class="section-content tutorial-public-actions">
+    <div class="upvotes upvoted tutorial-upvote large-upvotes"><form data-upvotable="tutorial_1619" data-upvotable-type="tutorial" class="upvote-form upvote signed-out-upvote" action="https://www.digitalocean.com/community/upvotes/toggle?upvote%5Bupvotable_id%5D=1619&upvote%5Bupvotable_type%5D=Tutorial" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="MR+oLmMSspgODuq11O9JzzDOiUK/gOmEatyArvup0+5O1iJTmkUWa6DtDRWERUYvEC3+s6Pd2hPZ9aBdLJSV4w==">
+    <button type="submit" disabled="disabled" data-toggle="modal" data-target="#sign-in-modal"><span class="icon-upvote-heart-small upvote-heart" data-toggle="modal" data-target="#sign-in-modal" data-return-url="" title="Do you find this post helpful? Show the author by Hearting it!" data-placement="top"></span></button>
+
+</form><span class="upvote-text"><span class="hearted-text">Hearted</span><span class="heart-text">Heart</span></span><div class="upvote-count ">2</div></div>
+
+    <div class="share-subscribe-actions">
+      <span class="meta-section opt-in-switch off signed-out-subscribe">
+  <span class="meta-label subscribe-label">
+    <span class="subscription-label subscribe">Subscribe</span>
+    <span class="subscription-label subscribed">Subscribed</span>
+  </span>
+  <span class="meta-value"><a data-toggle="modal" data-target="#sign-in-modal" class="mini-switch-container" href="javascript:void(0);"><div class="mini-switch off signed-out-subscribe"><div class="switch-handle"></div></div></a></span>
+</span>
+      <div class="sharing">
+  <a class="share-button" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image#" data-toggle="modal" data-target="#share-modal">
+    <span class="icon icon-share-square"></span>
+    Share
+  </a>
+</div>
+
+
+    </div>
+  </div>
+
+  <div class="section-content tutorial-contributors one">
+      <div class="tutorial-footer-user">
+        <div class="tutorial-footer-user-avatar-container">
+          <a href="https://www.digitalocean.com/community/users/manicas"><div class="mod-avatar mod-avatar-small"><img alt="manicas" class="avatar avatar-small" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/695da9dd73504edfc622c9be380cb3cb" width="80" height="80"><span class="mod-star" title="" data-toggle="tooltip" data-container="body" data-original-title="MOD"><span class="mod-star-icon"></span></span></div></a>
+        </div>
+        <div class="user-info">
+          <div class="tutorial-user-type">Author:</div>
+          <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+    <div class="tutorial-series-container ">
+    <div class="section-content">
+
+      <h2 class="tutorial-series-heading">Tutorial Series</h2>
+
+
+        <div id="tutorial_series_45" class="tutorial-series ">
+          
+          <h3 class="series-title"><a href="https://www.digitalocean.com/community/tutorial_series/building-for-production-web-applications">Building for Production: Web Applications</a></h3>
+
+            <div class="description">
+              This 6-part tutorial will show you how to build out a multi-server production application setup from scratch. The final setup will be supported by backups, monitoring, and centralized logging systems, which will help you ensure that you will be able to detect problems and recover from them. The ultimate goal of this series is to build on standalone system administration concepts, and introduce you to some of the practical considerations of creating a production server setup. 
+            </div>
+          <ol class="tutorial-series-list">
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-overview">Building for Production: Web Applications — Overview</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          31
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          3
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-deploying">Building for Production: Web Applications — Deploying</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          8
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          7
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="active">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning">Building for Production: Web Applications — Recovery Planning</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          2
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          1
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-backups">Building for Production: Web Applications — Backups</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          2
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          0
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-monitoring">Building for Production: Web Applications — Monitoring</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          5
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          6
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+    <li class="">
+      <h2><a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-centralized-logging">Building for Production: Web Applications — Centralized Logging</a></h2>
+
+      <div class="feedable-date">May 28, 2015</div>
+      <div class="meta">
+        <div class="points">
+          <span class="icon-upvote-heart-small"></span>
+          7
+        </div>
+
+        <div class="response-count">
+          <span class="icon icon-new-comment"></span>
+          0
+        </div>
+
+          <span class="author">By <a href="https://www.digitalocean.com/community/users/manicas">Mitchell Anicas</a></span>
+      </div>
+      <div class="arrow-left"></div>
+    </li>
+</ol>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="tutorial-ctas">
+  <div class="section-content">
+    <div class="cta-description">
+      <h2>Spin up an SSD cloud server in under a minute.</h2>
+
+      <p>Simple setup. Full root access. Straightforward pricing.</p>
+
+      <a class="cloud-tutorial-cta" href="https://www.digitalocean.com/?utm_medium=community&utm_source=community_gencta&utm_campaign=needaserver&utm_content=building-for-production-web-applications-recovery-planning">Deploy Server</a>
+    </div>
+  </div>
+</div>
+    <div class="related-tutorials">
+    <div class="section-content">
+      <h2>Related Tutorials</h2>
+
+      <ul>
+            <li><a class="related-link" href="https://www.digitalocean.com/community/tutorials/how-to-find-broken-links-on-your-website-using-wget-on-debian-7">How To Find Broken Links on Your Website Using Wget on Debian 7</a></li>
+            <li><a class="related-link" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-seti-home-on-ubuntu-14-04-or-debian-7">How To Set Up SETI@home on Ubuntu 14.04 or Debian 7</a></li>
+            <li><a class="related-link" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-osrm-server-on-ubuntu-14-04">How To Set Up an OSRM Server on Ubuntu 14.04</a></li>
+            <li><a class="related-link" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-sphinx-on-ubuntu-14-04">How To Install and Configure Sphinx on Ubuntu 14.04</a></li>
+            <li><a class="related-link" href="https://www.digitalocean.com/community/tutorials/how-to-use-pageant-to-streamline-ssh-key-authentication-with-putty">How To Use Pageant to Streamline SSH Key Authentication with PuTTY</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="content-comments">
+  <div class="section-content">
+    <div class="tutorial commentable" id="tutorial_1619">
+
+  <div class="comments-header">
+    <h4 class="comments-count"><span>1 Comment</span></h4>
+  </div>
+
+  <div class="response no-avatar  response-form">
+
+  <div class="js-display-on-error flash error hidden"></div>
+  <form class="content-form disabled-form" id="new_comment" action="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓" disabled="disabled">
+    <div class="meltdown_wrap" style="height: auto;"><div class="meltdown_topmargin"></div><div class="meltdown_bar"><div class="preview-header">Markdown Preview</div><ul class="meltdown_controls meltdown_controls_main"><li class="meltdown_control-bold meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Bold"><span unselectable="on">B</span></li><li class="meltdown_control-italics meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Italics"><span unselectable="on">I</span></li><li class="meltdown_control-h1 meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Header 1"><span unselectable="on">H1</span></li><li class="meltdown_control-h2 meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Header 2"><span unselectable="on">H2</span></li><li class="meltdown_control-h3 meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Header 3"><span unselectable="on">H3</span></li><li class="meltdown_control-ul meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Unordered List"><span unselectable="on">UL</span></li><li class="meltdown_control-ol meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Ordered List"><span unselectable="on">OL</span></li><li class="meltdown_control-link meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Link"><span unselectable="on">Link</span></li><li class="meltdown_control-code meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Code"><span unselectable="on">Code</span></li><li class="meltdown_control-highlight meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Highlight"><span unselectable="on">Highlight</span></li><li class="meltdown_control-table meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Table"><span unselectable="on">Table</span></li></ul><ul class="meltdown_controls meltdown_controls_preview"><li class="meltdown_control-preview meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Toggle Preview"><span>Preview</span></li></ul></div><div class="meltdown_editor-wrap"><div class="meltdown_editor-deco"><textarea name="comment[content]" id="comment_content" placeholder="Leave a comment..." class="js-comment-content tutorial-comment-field meltdown_editor" data-markdown="true" disabled="disabled" style="overflow: hidden; word-wrap: break-word; resize: none; height: 120px;"></textarea></div></div><div class="meltdown_preview-wrap"><div class="meltdown_preview-wrap2"><div class="meltdown_preview-error-message">Could not load preview. <a href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image#">Try again</a></div><div class="meltdown_preview-loading-message">Loading preview...</div><div class="meltdown_preview content-body"></div></div></div><div class="meltdown_bottommargin"></div></div>
+
+      <div class="log-in-notice "><a href="https://www.digitalocean.com/community/auth/digitalocean">Log In to Comment</a></div>
+
+    <div class="clearfix"></div>
+</form></div>
+
+
+  <div class="comments">
+    <ul class="response-list">
+          <a class="hidden" rel="nofollow" data-remote="true" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning/comments">Load</a>
+    <li class="response    " id="comment_35375">
+    <div class="moderation-actions small comment-moderation inline">
+      <ul id="moderate_35375" class="">
+        
+
+
+
+
+
+
+      </ul>
+    </div>
+
+    <div class="response-avatar comment-response-avatar">
+      <a href="https://www.digitalocean.com/community/users/fhr-501d39fa-3fe1-4328-9543-c447646245ff"><img alt="FHR" class="avatar avatar-small" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/e799feee647131186e8d453cb90081c9" width="80" height="80"></a>
+    </div>
+
+    <div>
+      <span class="response-name"><a class="username" href="https://www.digitalocean.com/community/users/fhr-501d39fa-3fe1-4328-9543-c447646245ff">FHR</a></span>
+      <span class="response-time"><a rel="nofollow" class="post-time-link" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?comment=35375">July 22, 2015</a></span>
+
+      
+    </div>
+
+        <div class="response-body content-body "><p>I always make a list of installed packages on Linux servers. It help a lot when migrating/restoring servers. Especially on webservers because of various language modules. (PHP extensions for example)</p>
+
+<p><strong>Make a list of packages on CentOS:</strong></p>
+<pre class="code-pre "><code langs="">rpm -qa &gt; installed.dump
+</code></pre>
+<p><strong>Install from that list:</strong></p>
+<pre class="code-pre "><code langs="">yum install $(cat installed.dump)
+</code></pre></div>
+
+    
+
+    <div class="spinner spinner-large">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+  
+</div>
+
+
+    <div class="content-actions">
+  <div class="upvotes upvoted comment-upvote"><form data-upvotable="comment_35375" data-upvotable-type="comment" class="upvote-form upvote signed-out-upvote" action="https://www.digitalocean.com/community/upvotes/toggle?upvote%5Bupvotable_id%5D=35375&upvote%5Bupvotable_type%5D=Comment" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="umSonok+YLsh/w0QgGuqmMOVrUQ3UwoSl1v1IEF7UPPFrSLjcGnESI8c6rDQwaV443batSsOOYUkctXTlkYW/g==">
+    <button type="submit" disabled="disabled" data-toggle="modal" data-target="#sign-in-modal"><span class="icon-upvote-heart-small upvote-heart" data-toggle="modal" data-target="#sign-in-modal" data-return-url="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?comment=35375" title="Do you find this post helpful? Show the author by Hearting it!" data-placement="top"></span></button>
+
+</form><span class="upvote-text"><span class="hearted-text">Hearted</span><span class="heart-text">Heart</span></span><div class="upvote-count ">1</div></div>
+
+
+  
+</div>
+
+
+    <div class="response-comments">
+      <div class="comment commentable" id="comment_35375">
+
+
+  <div class="comments">
+    <ul class="response-list">
+      
+    </ul>
+  </div>
+
+
+  <div id="reply_anchor_comment_35375"></div>
+</div>
+    </div>
+
+    <div class="clear"></div>
+  </li></ul>
+
+      <div class="comments-spinner" style="display: none;"><div class="spinner spinner-large">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+  
+</div>
+</div>
+  </div>
+
+
+  <div class="load-more-container"></div>
+</div>
+
+  </div>
+</div>
+
+<div class="creative-commons">
+  <a class="creative-commons-image" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img rel="license" alt="Creative Commons License" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/creativecommons-9c86f7905fb655a10c78331faeca4e1f.png"></a>
+    <div class="license-text">This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</div>
+</div>
+
+
+
+
+
+        <div class="clearfix"></div>
+    	</div>
+
+    	<footer class="footer">
+  <div class="footer-icon">
+    <span class="icon icon-sammy"></span>
+  </div>
+
+  <div class="copyright">
+    Copyright © 2015 DigitalOcean™ Inc.
+  </div>
+
+  <ul class="main-nav-links">
+    <li><a href="https://www.digitalocean.com/community">Community</a></li>
+    <li><a href="https://www.digitalocean.com/community/tutorials">Tutorials</a></li>
+    <li><a href="https://www.digitalocean.com/community/questions">Questions</a></li>
+    <li><a href="https://www.digitalocean.com/community/projects">Projects</a></li>
+    <li><a href="https://www.digitalocean.com/community/tags">Tags</a></li>
+    <li>
+      <a href="https://www.digitalocean.com/community/tutorials/feed">
+        RSS <span class="icon-rss"></span>
+</a>    </li>
+  </ul>
+
+  <br>
+
+  <ul class="secondary-nav-links">
+
+    <li><a href="https://www.digitalocean.com/legal/terms/">Terms, Privacy, &amp; Copyright</a></li>
+    <li><a href="https://www.digitalocean.com/security/">Security</a></li>
+    <li><a data-toggle="modal" data-target="#report-a-bug-modal" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image#">Report a Bug</a></li>
+    <li><a href="https://www.digitalocean.com/community/get-paid-to-write">Get Paid to Write</a></li>
+  </ul>
+</footer>
+
+
+
+
+
+    <div id="sign-in-modal" class="modal fade mini-modal" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1>Sign Up</h1>
+        <a class="close-button" data-dismiss="modal" href=""><span class="icon icon-close-light"></span></a>
+      </div>
+      <div class="modal-body">
+        <div class="sign-in-message">Not so fast, you must have an account before you can do that.</div>
+
+        <div class="sign-in-modal-actions">
+          <a class="sign-in-link button blue-button" data-default-url="/community/auth/digitalocean" href="https://www.digitalocean.com/community/auth/digitalocean">Log In</a>
+          <a class="sign-up-link button green-button" data-default-url="/community/auth/digitalocean?display=sessionless+register" href="https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+  <script>
+    $(function() {
+      init_sharing();
+      new NewsletterSignup();
+      new GrowableMarkdown({ target: '[data-growable-markdown]' });
+    });
+  </script>
+
+  <div id="report-a-bug-modal" class="modal fade mini-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Report a Bug</h1>
+          <a class="close-button" data-dismiss="modal" href=""><span class="icon icon-close-light"></span></a>
+        </div>
+        <div class="modal-body">
+          <div class="report-a-bug-message text-center">Use this form to report bugs related to the Community</div>
+          <div class="report-a-bug-actions do-form">
+            <div class="form-wrap">
+              <form class="new_bug_report" id="new_bug_report" action="https://www.digitalocean.com/community/bug_reports" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="MR+oLmMSspgODuq11O9JzzDOiUK/gOmEatyArvup0+5O1iJTmkUWa6DtDRWERUYvEC3+s6Pd2hPZ9aBdLJSV4w==">
+                <fieldset>
+                  <div class="field">
+                    <input placeholder="Name" type="text" name="bug_report[name]" id="bug_report_name">
+                  </div>
+                  <div class="field">
+                    <input placeholder="Email" required="required" type="text" name="bug_report[email]" id="bug_report_email">
+                  </div>
+                  <div class="field">
+                      <textarea placeholder="Message" required="required" name="bug_report[message]" id="bug_report_message" style="overflow: hidden; word-wrap: break-word; resize: none; height: 125px;"></textarea>
+                  </div>
+
+                  <div class="field actions">
+                    <input type="submit" name="commit" value="Submit" class="button">
+                  </div>
+                </fieldset>
+</form>            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+<textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: proxima-nova, sans-serif; font-size: 17px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 23.7999992370605px; width: 58px;" class="autosizejs" id="autosizejs"></textarea><a id="scrollUp" href="https://www.digitalocean.com/community/tutorials/building-for-production-web-applications-recovery-planning?utm_medium=social&utm_source=facebook&utm_campaign=production_web_app_recovery_tut&utm_content=image#top" style="position: fixed; z-index: 2147483647;">Scroll to top</a><div id="scrollUp-active" style="position: absolute; top: 300px; width: 100%; border-top-width: 1px; border-top-style: dotted; border-top-color: rgb(0, 255, 255); z-index: 2147483647;"></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/PqAPbTuc2cR.html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><script type="text/javascript" id="">adroll_custom_data={article_tag:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440993'),tutorial_difficulty:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440994'),content_type:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440995'),author:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440996'),is_community_page:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440997'),user_signed_in:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440998'),user_droplet_count:google_tag_manager["GTM-KHWBBT"].macro('gtm1440254440999')};</script>
+<script type="text/javascript" id="">var _qevents=_qevents||[];(function(){var a=document.createElement("script");a.src=("https:"==document.location.protocol?"https://secure":"http://edge")+".quantserve.com/quant.js";a.async=!0;a.type="text/javascript";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();_qevents.push({qacct:"p-ezk6DY8pwNxCt",labels:"_fp.event.Community"});</script>
+<noscript>
+&lt;img src="//pixel.quantserve.com/pixel/p-ezk6DY8pwNxCt.gif?labels=_fp.event.Community" style="display: none;" border="0" height="1" width="1" alt="Quantcast"&gt;
+</noscript>
+<script type="text/javascript" id="">(function(){var a=window._fbq||(window._fbq=[]);if(!a.loaded){var b=document.createElement("script");b.async=!0;b.src="//connect.facebook.net/en_US/fbds.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);a.loaded=!0}a.push(["addPixelId","1428881624071898"])})();window._fbq=window._fbq||[];window._fbq.push(["track","PixelInitialized",{}]);</script>
+<noscript>&lt;img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1428881624071898&amp;amp;ev=PixelInitialized"&gt;</noscript><script type="text/javascript" id="">(function(b,c,e,g,d){var f,a;b[d]=b[d]||[];f=function(){var a={ti:"4047822"};a.q=b[d];b[d]=new UET(a);b[d].push("pageLoad")};a=c.createElement(e);a.src=g;a.async=1;a.onload=a.onreadystatechange=function(){var b=this.readyState;b&&"loaded"!==b&&"complete"!==b||(f(),a.onload=a.onreadystatechange=null)};c=c.getElementsByTagName(e)[0];c.parentNode.insertBefore(a,c)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script><noscript>&lt;img src="//bat.bing.com/action/0?ti=4047822&amp;amp;Ver=2" height="0" width="0" style="display:none; visibility: hidden;"&gt;</noscript>
+<script type="text/javascript" id="" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/pixel"></script><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.8316374993883073"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.49075670540332794" width="0" height="0" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/0"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon0.6497316330205649" width="0" height="0" src="./Building for Production_ Web Applications — Recovery Planning _ DigitalOcean_files/0(1)"></div>
+<iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div></body></html>

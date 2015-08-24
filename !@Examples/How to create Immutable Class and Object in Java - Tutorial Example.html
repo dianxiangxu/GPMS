@@ -1,0 +1,3590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0105)http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html -->
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr" xmlns:g="http://www.google.com/2005/gml/g"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script async="" type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/v2"></script><script src="./How to create Immutable Class and Object in Java - Tutorial Example_files/cb=gapi.loaded_2" async=""></script><script async="" type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/dU3ek4CPmr4Ai1acwqm_6r.js"></script><script src="./How to create Immutable Class and Object in Java - Tutorial Example_files/cb=gapi.loaded_1" async=""></script><script src="./How to create Immutable Class and Object in Java - Tutorial Example_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/ga.js"></script><script async="" type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/ti.js"></script><script type="text/javascript">(function() { var b=window,f="chrome",g="tick",k="jstiming";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[g]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[k].srt=h-c)}if(a){var e=b[k].load;0<c&&h>=c&&(e[g]("_wtsrt",void 0,c),e[g]("wtsrt_","_wtsrt",h),e[g]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[g]("_tbnd",void 0,b[f].csi().startE),e[g]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[g]("_tbnd",void 0,b.external.startE),e[g]("tbnd_","_tbnd",c))),a&&(b[k].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[k].load[g]("aft")};var l=!1;function m(){l||(l=!0,b[k].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://javarevisited.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="./How to create Immutable Class and Object in Java - Tutorial Example_files/How to create Immutable Class and Object in Java - Tutorial Example.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Javarevisited - Atom" href="http://javarevisited.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Javarevisited - RSS" href="http://javarevisited.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Javarevisited - Atom" href="https://www.blogger.com/feeds/8712770457197348465/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Javarevisited - Atom" href="http://javarevisited.blogspot.com/feeds/9012990450998814198/comments/default">
+<link href="./How to create Immutable Class and Object in Java - Tutorial Example_files/java_logo_50_50.jpg" rel="image_src">
+<link href="https://plus.google.com/114528699166048052030" rel="publisher">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<!-- place future descriptions and keywords here -->
+<script type="text/javascript">
+      if(document.location.protocol=='http:'){
+         var Tynt=Tynt||[];Tynt.push('dU3ek4CPmr4Ai1acwqm_6r');Tynt.i={"ap":"Read more:"};
+         (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+                                                  }
+    </script>
+<title>
+How to create Immutable Class and Object in Java - Tutorial Example
+</title>
+<link type="text/css" rel="stylesheet" href="./How to create Immutable Class and Object in Java - Tutorial Example_files/859616579-widget_css_bundle.css">
+<link type="text/css" rel="stylesheet" href="./How to create Immutable Class and Object in Java - Tutorial Example_files/gsearch.css">
+<link type="text/css" rel="stylesheet" href="./How to create Immutable Class and Object in Java - Tutorial Example_files/authorization.css">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Rounders 3
+Date:     27 Feb 2004
+Updated by: Blogger Team
+----------------------------------------------- */
+#navbar-iframe {
+display: none !important;
+}
+/* Variable definitions
+====================
+<Variable name="mainBgColor" description="Main Background Color"
+type="color" default="#ffffff">
+<Variable name="mainTextColor" description="Text Color" type="color"
+default="#333">
+<Variable name="postTitleColor" description="Post Title Color" type="color"
+default="#333">
+<Variable name="dateHeaderColor" description="Date Header Color"
+type="color" default="#586">
+<Variable name="borderColor" description="Post Border Color" type="color"
+default="#bbb">
+<Variable name="mainLinkColor" description="Link Color" type="color"
+default="#456">
+<Variable name="mainVisitedLinkColor" description="Visited Link Color"
+type="color" default="#234">
+<Variable name="mainHoverLinkColor" description="Hover Link Color"
+type="color" default="#234">
+<Variable name="titleBgColor" description="Page Header Background Color"
+type="color" default="#357">
+<Variable name="titleTextColor" description="Blog Title Color"
+type="color" default="#fff">
+<Variable name="topSidebarHeaderColor"
+description="Top Sidebar Title Color"
+type="color" default="#fff">
+<Variable name="topSidebarBgColor"
+description="Top Sidebar Background Color"
+type="color" default="#586">
+<Variable name="topSidebarTextColor" description="Top Sidebar Text Color"
+type="color" default="#fff">
+<Variable name="topSidebarLinkColor" description="Top Sidebar Link Color"
+type="color" default="#fff">
+<Variable name="topSidebarVisitedLinkColor"
+description="Top Sidebar Visited Link Color"
+type="color" default="#fff">
+<Variable name="bottomSidebarHeaderColor"
+description="Bottom Sidebar Title Color"
+type="color" default="#abc">
+<Variable name="bottomSidebarLinkColor"
+description="Bottom Sidebar Link Color"
+type="color" default="#99ddbb">
+<Variable name="bottomSidebarVisitedLinkColor"
+description="Bottom Sidebar Visited Link Color"
+type="color" default="#ffffff">
+<Variable name="bodyFont" description="Text Font" type="font"
+default="normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="pageTitleFont" description="Blog Title Font" type="font"
+default="normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="descriptionFont" description="Blog Description Font" type="font"
+default="normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="headerFont" description="Sidebar Title Font" type="font"
+default="normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="postTitleFont" description="Post Title Font" type="font"
+default="normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif">
+<Variable name="startSide" description="Start side in blog language"
+type="automatic" default="left">
+<Variable name="endSide" description="End side in blog language"
+type="automatic" default="right">
+*/
+body, .body-fauxcolumn-outer {
+background:#123;
+margin:0;
+text-align:center;
+line-height: 1.5em;
+font: x-small Trebuchet MS, Verdana, Arial, Sans-serif;
+color:#333333;
+font-size/* */:/**/small;
+font-size: /**/small;
+}
+/* Page Structure
+----------------------------------------------- */
+/* The images which help create rounded corners depend on the
+following widths and measurements. If you want to change
+these measurements, the images will also need to change.
+*/
+#outer-wrapper {
+width:1072px;
+margin:0 auto;
+text-align:left;
+font: normal normal 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+#main-wrap1 {
+width:732px;
+float:left;
+background:#ffffff url("") no-repeat left bottom;
+margin:0px 0 0;
+padding:0 0 10px;
+color:#333333;
+font-size:97%;
+line-height:1.5em;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+#main-wrap2 {
+float:left;
+width:100%;
+padding:10px 0 0;
+}
+#main {
+padding:0;
+width:732px;
+}
+#sidebar-wrap {
+width:340px;
+float:right;
+margin:0px 0 0;
+font-size:97%;
+line-height:1.5em;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+.main .widget {
+margin-top: 4px;
+width: 686px;
+padding: 0 13px;
+}
+.main .Blog {
+margin: 0;
+padding: 0;
+width: 732px;
+}
+/* Links
+----------------------------------------------- */
+a:link {
+color: #0066CC;
+}
+a:visited {
+color: #660099;
+}
+a:hover {
+color: #000066;
+}
+a img {
+border-width:0;
+}
+/* Blog Header
+----------------------------------------------- */
+#header-wrapper {
+background:#335577 url("") no-repeat left top;
+margin-top:4px;
+margin-right:0;
+margin-bottom:0;
+margin-left:0;
+padding-top:2px;
+padding-right:0;
+padding-bottom:0;
+padding-left:0;
+color:#ffffff;
+}
+#header {
+background:url("") no-repeat left bottom;
+padding:0 15px 4px;
+}
+#header h1 {
+margin:0;
+padding:5px 30px 0px;
+line-height:1.2em;
+font: normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+#header a,
+#header a:visited {
+text-decoration:none;
+color: #ffffff;
+}
+#header .description {
+margin:0;
+padding:1px 30px 15px;
+line-height:0.5em;
+font: normal normal 75% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+p.title {
+margin:0;
+padding:5px 30px 0px;
+line-height:1.2em;
+font: normal bold 200% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+p.title a{
+text-decoration:none;
+color: #ffffff;
+}
+/* Posts
+----------------------------------------------- */
+h2.date-header {
+margin-top:0;
+margin-right:28px;
+margin-bottom:0;
+margin-left:43px;
+font-size:85%;
+line-height:2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#558866;
+}
+h4.date-header {
+margin-top:0;
+margin-right:28px;
+margin-bottom:0;
+margin-left:43px;
+font-size:85%;
+line-height:2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#558866;
+}
+.post {
+margin:.3em 0 25px;
+padding:0 13px;
+border:1px dotted #bbbbbb;
+border-width:1px 0;
+}
+h2.post-title {
+margin:0;
+line-height:1.5em;
+background:url("") no-repeat 10px .5em;
+display:block;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+h2.post-title a, h2.post-title a:visited {
+text-decoration:none;
+color: #333333;
+}
+h1.post-title {
+margin:0;
+line-height:1.5em;
+background:url("") no-repeat 10px .5em;
+display:block;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+h1.post-title a, h1.post-title a:visited {
+text-decoration:none;
+color: #333333;
+}
+.post h3 {
+margin:0;
+line-height:1.5em;
+display:block;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:0px;
+color: #333333;
+font: normal bold 135% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.post h3 a, .post h3 a:visited {
+text-decoration:none;
+color: #333333;
+}
+a.title-link:hover {
+background-color: #bbbbbb;
+color: #333333;
+}
+.post-body {
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+border-bottom-color:#ffffff;
+padding-top:10px;
+padding-right:14px;
+padding-bottom:1px;
+padding-left:29px;
+font-size:12pt;
+line-height:1.5
+}
+html>body .post-body {
+border-bottom-width:0;
+}
+.post-body {
+margin:0 0 .75em;
+}
+.post-body blockquote {
+line-height:1.3em;
+}
+.post-footer {
+background: #ffffff;
+margin:0;
+padding-top:2px;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+border:1px dotted #bbbbbb;
+border-width:1px;
+font-size:100%;
+line-height:1.5em;
+color: #666666;
+}
+/*
+The first line of the post footer might only have floated text, so we need to give it a height.
+The height comes from the post-footer line-height
+*/
+.post-footer-line-1 {
+min-height:1.5em;
+_height:1.5em;
+}
+.post-footer p {
+margin: 0;
+}
+html>body .post-footer {
+border-bottom-color:transparent;
+}
+.uncustomized-post-template .post-footer {
+text-align: right;
+}
+.uncustomized-post-template .post-author,
+.uncustomized-post-template .post-timestamp {
+display: block;
+float: left;
+text-align:left;
+margin-right: 4px;
+}
+.post-footer a {
+color: #456;
+}
+.post-footer a:hover {
+color: #234;
+}
+a.comment-link {
+/* IE5.0/Win doesn't apply padding to inline elements,
+so we hide these two declarations from it */
+background/* */:/**/url("http://www.blogblog.com/rounders/icon_comment_left.gif") no-repeat left 45%;
+padding-left:14px;
+}
+html>body a.comment-link {
+/* Respecified, for IE5/Mac's benefit */
+background:url("http://www.blogblog.com/rounders3/icon_comment_left.gif") no-repeat left 45%;
+padding-left:14px;
+}
+.post img, table.tr-caption-container {
+margin-top:0;
+margin-right:0;
+margin-bottom:5px;
+margin-left:0;
+padding:4px;
+border:1px solid #bbbbbb;
+}
+.tr-caption-container img {
+border: none;
+margin: 0;
+padding: 0;
+}
+blockquote {
+margin:.75em 0;
+border:1px dotted #bbbbbb;
+border-width:1px 0;
+padding:5px 15px;
+color: #558866;
+}
+.post blockquote p {
+margin:.5em 0;
+}
+#blog-pager-newer-link {
+float: left;
+margin-left: 13px;
+}
+#blog-pager-older-link {
+float: right;
+margin-right: 13px;
+}
+#blog-pager {
+text-align: center;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+margin-left: 13px;
+}
+/* Comments
+----------------------------------------------- */
+#comments {
+margin:-25px 13px 0;
+border:1px dotted #bbbbbb;
+border-width:0 1px 1px;
+padding-top:20px;
+padding-right:0;
+padding-bottom:15px;
+padding-left:0;
+}
+#comments h4 {
+margin:0 0 10px;
+padding-top:0;
+padding-right:14px;
+padding-bottom:2px;
+padding-left:29px;
+border-bottom:1px dotted #bbbbbb;
+font-size:120%;
+line-height:1.4em;
+color:#333333;
+}
+#comments-block {
+margin-top:0;
+margin-right:15px;
+margin-bottom:0;
+margin-left:9px;
+}
+.comment-author {
+background:url("http://www.blogblog.com/rounders3/icon_comment_left.gif") no-repeat 2px .3em;
+margin:.5em 0;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+font-weight:bold;
+}
+.comment-body {
+margin:0 0 1.25em;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+}
+.comment-body p {
+margin:0 0 .5em;
+}
+.comment-footer {
+margin:0 0 .5em;
+padding-top:0;
+padding-right:0;
+padding-bottom:.75em;
+padding-left:20px;
+}
+.comment-footer a:link {
+color: #333;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+.comment-form {
+padding-left:20px;
+padding-right:5px;
+}
+#comments .comment-form h4 {
+padding-left:0px;
+}
+/* Profile
+----------------------------------------------- */
+.profile-img {
+float: left;
+margin-top: 5px;
+margin-right: 5px;
+margin-bottom: 5px;
+margin-left: 0;
+border: 4px solid #ffffff;
+}
+.profile-datablock {
+margin-top:0;
+margin-right:15px;
+margin-bottom:.5em;
+margin-left:0;
+padding-top:8px;
+}
+.profile-link {
+background:url("http://www.blogblog.com/rounders3/icon_profile_left.gif") no-repeat left .1em;
+padding-left:15px;
+font-weight:bold;
+}
+.profile-textblock {
+clear: both;
+margin: 0;
+}
+.sidebar .clear, .main .widget .clear {
+clear: both;
+}
+#sidebartop-wrap {
+background:#558866 url("") no-repeat left bottom;
+margin:0px 0px 15px;
+padding:0px 0px 10px;
+color:#ffffff;
+}
+#sidebartop-wrap2 {
+background:url("") no-repeat left top;
+padding: 10px 0 0;
+margin:0;
+border-width:0;
+}
+#sidebartop h2 {
+line-height:1.5em;
+color:#ffffff;
+border-bottom: 1px dotted #ffffff;
+font: normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+margin-bottom: 0.5em;
+}
+#sidebartop h4 {
+line-height:1.5em;
+color:#ffffff;
+border-bottom: 1px dotted #ffffff;
+font: normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+margin-bottom: 0.5em;
+}
+#sidebartop a {
+color: #ffffff;
+}
+#sidebartop a:hover {
+color: #ffffff;
+}
+#sidebartop a:visited {
+color: #ffffff;
+}
+#sidebar a {
+color: #99ddbb;
+}
+#sidebar a:hover,
+#sidebar a:visited {
+color: #ffffff;
+}
+/* Sidebar Boxes
+----------------------------------------------- */
+.sidebar .widget {
+margin:.5em 13px 1.25em;
+padding:0 0px;
+}
+.widget-content {
+margin-top: 0.5em;
+}
+#sidebarbottom-wrap1 {
+background:#335577 url("") no-repeat left top;
+margin:0 0 15px;
+padding:10px 0 0;
+color: #ffffff;
+}
+#sidebarbottom-wrap2 {
+background:url("") no-repeat left bottom;
+padding:0 0 8px;
+}
+.sidebar h2 {
+margin-top:0;
+margin-right:0;
+margin-bottom:.5em;
+margin-left:0;
+padding:0 0 .2em;
+line-height:1.5em;
+font:normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.sidebar h4 {
+margin-top:0;
+margin-right:0;
+margin-bottom:.5em;
+margin-left:0;
+padding:0 0 .2em;
+line-height:1.5em;
+font:normal bold 100% 'Trebuchet MS',Verdana,Arial,Sans-serif;
+}
+.sidebar ul {
+list-style:none;
+margin:0 0 1.25em;
+padding:0;
+}
+.sidebar ul li {
+background:url("http://www2.blogblog.com/rounders3/icon_arrow_sm.gif") no-repeat 2px .25em;
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:3px;
+padding-left:16px;
+margin-bottom:3px;
+border-bottom:1px dotted #bbbbbb;
+line-height:1.4em;
+}
+.sidebar p {
+margin:0 0 .6em;
+}
+#sidebar h2 {
+color: #aabbcc;
+border-bottom: 1px dotted #aabbcc;
+}
+#sidebar h4 {
+color: #aabbcc;
+border-bottom: 1px dotted #aabbcc;
+}
+/* Footer
+----------------------------------------------- */
+#footer-wrap1 {
+clear:both;
+margin:0 0 10px;
+padding:15px 0 0;
+}
+#footer-wrap2 {
+background:#335577 url("") no-repeat left top;
+color:#ffffff;
+}
+#footer {
+background:url("") no-repeat left bottom;
+padding:8px 15px;
+}
+#footer hr {display:none;}
+#footer p {margin:0;}
+#footer a {color:#ffffff;}
+#footer .widget-content {
+margin:0;
+}
+/** Page structure tweaks for layout editor wireframe */
+body#layout #main-wrap1,
+body#layout #sidebar-wrap,
+body#layout #header-wrapper {
+margin-top: 0;
+}
+body#layout #header, body#layout #header-wrapper,
+body#layout #outer-wrapper {
+margin-left:0,
+margin-right: 0;
+padding: 0;
+}
+body#layout #outer-wrapper {
+width: 1030px;
+}
+body#layout #footer-wrap1 {
+padding-top: 0;
+}
+#CustomSearch1{
+margin-top:-55px;
+margin-left:750px;
+width: 300px;
+display: block;
+position: absolute;
+}
+#HTML6{
+padding-left:-10px;
+margin-left:2px;
+}
+
+--></style>
+<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19004659-1']);
+                 _gaq.push(['_trackPageview']);
+                 _gaq.push(['_trackPageLoadTime']);
+                 (function() {
+                 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                 })();
+    </script><style type="text/css"></style>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/js/google_top_exp.js"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0} </style><script id="OB_settings_call" async="async" type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/get"></script><script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/saved_resource"></script><link type="text/css" href="./How to create Immutable Class and Object in Java - Tutorial Example_files/default+en.css" rel="stylesheet"><script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/default+en.I.js"></script><script id="outbrainPostRecRankRequestID_0" async="async" type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/get(1)"></script><link rel="stylesheet" type="text/css" id="cssLinkID" href="./How to create Immutable Class and Object in Java - Tutorial Example_files/outbrainWidget.css"></head>
+<body>
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" width="100%" id="navbar-iframe" name="navbar-iframe" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/navbar.html"></iframe></div>
+<script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+        gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+          if (gapi.iframes && gapi.iframes.getContext) {
+            gapi.iframes.getContext().openChild({
+                url: 'https://www.blogger.com/navbar.g?targetBlogID\758712770457197348465\46blogName\75Javarevisited\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75//javarevisited.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://javarevisited.blogspot.com/\46targetPostID\759012990450998814198\46blogPostOrPageUrl\75http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html\46blogFollowUrl\75https://plus.google.com/103515296667914706982\46vt\75-3724151894825016972',
+                where: document.getElementById("navbar-iframe-container"),
+                id: "navbar-iframe"
+            });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<!--INFOLINKS_OFF-->
+<div id="outer-wrapper">
+<div id="header-wrapper">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<p class="title">
+<a href="http://javarevisited.blogspot.com/">
+Javarevisited
+</a>
+</p>
+</div>
+<div class="descriptionwrapper">
+<p class="description">
+<span>
+Blog about  Java programming language, FIX Protocol, Tibco Rendezvous and related Java technology stack.
+</span>
+</p>
+</div>
+</div>
+</div></div>
+</div>
+<div id="crosscol-wrapper" style="text-align:center">
+<div class="crosscol section" id="crosscol"><div class="widget CustomSearch" id="CustomSearch1">
+<div class="widget-content">
+<div id="CustomSearch1_form"><form class="gsc-search-box" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><input autocomplete="off" type="text" size="10" class=" gsc-input" name="search" title="search"><input type="hidden" name="bgresponse" id="bgresponse"></td><td class="gsc-search-button"><input type="submit" value="Search" class="gsc-search-button" title="search"></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img-noclear"><img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/small-logo.png" class="gsc-branding-img-noclear"></td></tr></tbody></table></form></div>
+</div>
+<style type="text/css">
+      #uds-searchControl .gs-result .gs-title,
+      #uds-searchControl .gs-result .gs-title *,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results * {
+        color:#0066CC;
+      }
+
+      #uds-searchControl .gs-result .gs-title a:visited,
+      #uds-searchControl .gs-result .gs-title a:visited * {
+        color:#660099;
+      }
+
+      #uds-searchControl .gs-relativePublishedDate,
+      #uds-searchControl .gs-publishedDate {
+        color: #558866;
+      }
+
+      #uds-searchControl .gs-result a.gs-visibleUrl,
+      #uds-searchControl .gs-result .gs-visibleUrl {
+        color: #333333;
+      }
+
+      #uds-searchControl .gsc-results {
+        border-color: #bbbbbb;
+        background-color: #ffffff;
+      }
+
+      #uds-searchControl .gsc-tabhActive {
+        border-color: #bbbbbb;
+        border-top-color: #333333;
+        background-color: #ffffff;
+        color: #333333;
+      }
+
+      #uds-searchControl .gsc-tabhInactive {
+        border-color: #bbbbbb;
+        background-color: transparent;
+        color: #0066CC;
+      }
+
+      #uds-searchClearResults {
+        border-color: #bbbbbb;
+      }
+
+      #uds-searchClearResults:hover {
+        border-color: #333333;
+      }
+
+      #uds-searchControl .gsc-cursor-page {
+        color: #0066CC;
+      }
+
+      #uds-searchControl .gsc-cursor-current-page {
+        color: #333333;
+      }
+    </style>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=CustomSearch&widgetId=CustomSearch1&action=editWidget&sectionId=crosscol" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;CustomSearch1&quot;));" target="configCustomSearch1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+<!--INFOLINKS_ON-->
+<div id="main-wrap1">
+<div id="main-wrap2">
+<div class="main section" id="main"><div id="uds-searchControl"><a name="uds-search-results"></a><div id="uds-searchResults"><div class="gsc-control" dir="ltr"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">This Blog</div><span class="gs-spacer"> </span></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table cellspacing="0" cellpadding="0" class="gsc-resultsHeader"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">This Blog</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-more-results-active"><div class="gsc-result-selector gsc-one-result" title="show one result">&nbsp;</div><div class="gsc-result-selector gsc-more-results" title="show more results">&nbsp;</div><div class="gsc-result-selector gsc-all-results" title="show all results">&nbsp;</div></div></td><td class="gsc-configLabelCell"><span class="gsc-configLabel gsc-twiddle-closed" title="settings">&nbsp;</span></td></tr></tbody></table><div class="gsc-config gsc-blogConfig" style="display: none;"><form class="gsc-config gsc-blogConfig"></form></div><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div><div id="uds-searchClearResults" class="gsc-clear-button" style="display: none;">&nbsp;</div></div><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+                        <div class="date-outer">
+                      
+<h4 class="date-header">
+<span>
+Monday, March 4, 2013
+</span>
+</h4>
+
+                        <div class="date-posts">
+                      
+<div class="post-outer">
+<div class="post hentry">
+<a name="9012990450998814198"></a>
+<h1 class="post-title entry-title">
+<a href="./How to create Immutable Class and Object in Java - Tutorial Example_files/How to create Immutable Class and Object in Java - Tutorial Example.html" title="How to create Immutable Class and Object in Java - Tutorial Example">
+How to create Immutable Class and Object in Java - Tutorial Example
+</a>
+</h1>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+<div style="float:right; margin:5px 6px 0px 5px">
+
+                        <script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- 300x250 Medium Rectangle -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="3870191442"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                      
+</div>
+<div style="float:right; margin:5px 6px 0px 5px">
+</div>
+</div>
+<div class="post-body entry-content">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">Writing or creating immutable classes in Java is becoming popular day by day, because
+of concurrency and multithreading advantage provided by immutable objects. Immutable
+objects offers several benefits over conventional mutable object, especially while
+creating concurrent Java application. Immutable object not only guarantees safe
+publication of object’s state, but also can be shared among other threads
+without any externa<span style="font-family: Arial,Helvetica,sans-serif;">l <a href="http://javarevisited.blogspot.com/2011/04/synchronization-in-java-synchronized.html">synchronization</a>. In </span>fact JDK
+itself contains several immutable classes l<span style="font-family: Arial,Helvetica,sans-serif;">ike <a href="http://javarevisited.blogspot.com/2012/03/how-to-compare-two-string-in-java.html">String</a>, <a href="http://javarevisited.blogspot.com/2011/08/convert-string-to-integer-to-string.html">Integer</a> an</span>d other wrapper
+classes. For those, who doesn’t know what is immutable class or object,
+Immutable objects are those, whose state can not be changed once created e.g. </span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">java.lang.String</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">, once
+created can not be modified e.g. trim, uppercase, lowercase. All modification in
+</span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">String</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;"> result in new object, see<span style="font-family: Arial,Helvetica,sans-serif;"> <a href="http://javarevisited.blogspot.com/2010/10/why-string-is-immutable-in-java.html">why String is immutable in Java</a>
+for mor</span>e details. In this Java programming tutorial, we will learn, how to
+write immutable class in Java or how to make a class immutable. By the way making
+a class immutable is not difficult on code level, but its the decision to make,
+which class mutable or immutable which makes difference. I also suggest rea<span style="font-family: Arial,Helvetica,sans-serif;">ding,
+Java Concurrency in Practice
+to learn</span> more about concurrency benefit offered by Immutable object.</span><br>
+<a name="more"></a></div>
+<div class="MsoNormal">
+<br></div>
+<h2>
+<u><span style="font-style: normal; font-weight: normal; mso-bidi-font-style: italic; mso-bidi-font-weight: bold;">What is immutable class in Java</span></u></h2>
+<div class="MsoNormal">
+<a href="./How to create Immutable Class and Object in Java - Tutorial Example_files/java_logo_50_50.jpg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="What is Immutable class and object, how to create Immutable in Java with example" border="0" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/java_logo_50_50.jpg" title=""></a><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">As said earlier, Immutable classes are those cla<span style="font-family: Arial,Helvetica,sans-serif;">ss, whose <a href="http://javarevisited.blogspot.com/2012/12/what-is-object-in-java-or-oops-example.html">object</a> can not be</span> modified
+once created, it means any modification on immutable object will result in
+another immutable object. best example to understand immutable and mutable
+objects ar<span style="font-family: Arial,Helvetica,sans-serif;">e, <a href="http://javarevisited.blogspot.com/2011/07/string-vs-stringbuffer-vs-stringbuilder.html">String and StringBuffer</a>. Si</span>nce
+String is immutable class, any change on existing string object will result in
+another string e.g. replacing a character into S<span style="font-family: Arial,Helvetica,sans-serif;">tring, <a href="http://javarevisited.blogspot.in/2011/10/how-substring-in-java-works.html">creating substring from String</a>,
+a</span>ll result in a new objects. While in case of mutable object like </span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">StringBuffer,</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;"> any
+modification is done on object itself and no new objects are created. Some times
+this immutability of String can also cause security hole, and that the r<span style="font-family: Arial,Helvetica,sans-serif;">eason <a href="http://javarevisited.blogspot.com/2012/03/why-character-array-is-better-than.html">why password should be stored on char
+array instead of String</a>.</span></span></div>
+<span style="font-family: Arial,Helvetica,sans-serif;">
+
+</span><br>
+<div class="MsoNormal">
+<br></div>
+<h2>
+<u><span style="font-style: normal; font-weight: normal; mso-bidi-font-style: italic; mso-bidi-font-weight: bold;">How to write immutable class in Java</span></u></h2>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">Despite of few disadvantages, Immutable object still offers several
+benefits in multi-threaded programming and it’s a great choice to achiev<span style="font-family: Arial,Helvetica,sans-serif;">e <a href="http://javarevisited.blogspot.com/2012/12/how-to-create-thread-safe-singleton-in-java-example.html">thread safety</a> in Ja</span>va code.
+here are few rules, which helps to make a class immutable in Java :</span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">1. State of immutable object can not be modified after construction, any
+modification should result in new immutable object.</span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">2. All fields of Immutable class should be final.</span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">3. Object must be properly constructed i.e. object reference must not
+leak during construction process.</span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">4. Object should be final in order to restrict sub-class for altering
+immutability of parent class.</span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">By the way, you can still create immutable object by violating few rules,
+like Strin<span style="font-family: Arial,Helvetica,sans-serif;">g has its <a href="http://javarevisited.blogspot.com/2011/10/override-hashcode-in-java-example.html">hashcode</a> in </span>non final field,
+but its always guaranteed to be same. No matter how many times you calculate it,
+because it’s calculated from final fields, which is guaranteed to be same. This
+required a deep knowledge of Java memory model, and can create su<span style="font-family: Arial,Helvetica,sans-serif;">btle <a href="http://javarevisited.blogspot.com/2012/02/what-is-race-condition-in.html">race conditions</a> if n</span>ot
+addressed properly. In next section we will see simple example of writing
+immutable class in Java. By the way, if your Immutable class has lots of optional and mandatory fields, then you can also use <a href="http://javarevisited.blogspot.com/2012/06/builder-design-pattern-in-java-example.html">Builder design pattern</a> to make a class Immutable in Java. </span></div>
+<div class="MsoNormal">
+<br></div>
+<h2>
+<u><span style="font-style: normal; font-weight: normal; mso-bidi-font-style: italic; mso-bidi-font-weight: bold;">Immutable Class Example in Java</span></u></h2>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">Here is complete code example of writing immutable class in Java. We have
+followed simplest approach and all rules for making a class immutable,
+includin<span style="font-family: Arial,Helvetica,sans-serif;">g it <a href="http://javarevisited.blogspot.com/2011/12/final-variable-method-class-java.html">making class final</a> to a</span>void
+putting immutability at risk due <span style="font-family: Arial,Helvetica,sans-serif;">to <a href="http://javarevisited.blogspot.com/2012/10/what-is-inheritance-in-java-and-oops-programming.html">Inheritance</a> and <a href="http://javarevisited.blogspot.com/2011/08/what-is-polymorphism-in-java-example.html">Polymorphism</a>.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div style="background: #F1F1F1; border: dotted windowtext 1.0pt; mso-border-alt: dotted windowtext .5pt; mso-element: para-border-div; padding: 1.0pt 4.0pt 1.0pt 4.0pt;">
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">final</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">class</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> Contacts {</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<br></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">private</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">final</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">String</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> name;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">private</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">final</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">String</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> mobile;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<br></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: maroon; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">Contacts</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">(</span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">String</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> name, </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">String</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> mobile) {</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>this</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">name </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">=</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> name;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>this</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">mobile </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">=</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> mobile;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>}</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;
+</span></span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">String</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: maroon; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">getName</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">(){</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">return</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> name;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>}</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;
+</span></span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">String</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: maroon; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">getMobile</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">(){</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">return</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> mobile;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>}</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">}</span></div>
+</div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">This Java class is immutable, because its state can not be changed once
+created. You can see that all of it’s fields are final. This is one of the most
+simple way of creating immutable class in Java, where all fields of class also
+remains immutable like String in above case. Some time you may need to write
+immutable class which includes mutable classes like<span style="font-family: Arial,Helvetica,sans-serif;"> <a href="http://javarevisited.blogspot.com/2012/04/difference-between-javautildate-and.html">java.util.Date</a>, </span><b><span style="font-family: Arial,Helvetica,sans-serif;">d</span>espite
+storing Date into final field it can be modified</b> <b>internally,</b> if
+internal date is returned to the client. In order to preserve immutability in
+such cases, its advised to <b>return copy of original object</b>, which is also
+one of th<span style="font-family: Arial,Helvetica,sans-serif;">e <a href="http://javarevisited.blogspot.co.uk/2012/08/top-10-jdbc-best-practices-for-java.html">Java best practice</a>. her</span>e is
+another example of making a class immutable in Java, which includes mutable member
+variable.</span></div>
+<div class="MsoNormal">
+<br></div>
+<div style="background: #F1F1F1; border: dotted windowtext 1.0pt; mso-border-alt: dotted windowtext .5pt; mso-element: para-border-div; padding: 1.0pt 4.0pt 1.0pt 4.0pt;">
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">final</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">class</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">
+ImmutableReminder{</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span><span style="mso-spacerun: yes;">&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">private</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">final</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">Date</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> remindingDate;</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;
+</span></span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: maroon; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">ImmutableReminder</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> (</span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">Date</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> remindingDate)
+{</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">if</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">(remindingDate</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">getTime() </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">&lt;</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">System</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">currentTimeMillis()){</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">throw</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">new</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">IllegalArgumentException</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">(</span><span style="color: #c03030; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">"Can not
+set reminder” </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">+</span><span style="color: #c03030; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: #c03030; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;</span>“ for past time: "</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">+</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> remindingDate);</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>this</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">remindingDate </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">=</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">new</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">Date</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">(remindingDate</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">getTime());</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>}</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;
+</span></span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span></span><span style="color: teal; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">public</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">Date</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> </span><span style="color: maroon; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">getRemindingDate</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">() {</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">return</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"> (</span><span style="color: #a08000; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">Date</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">) remindingDate</span><span style="color: #2060a0; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">.</span><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">clone();</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>}</span></div>
+<div class="MsoNormal" style="background: #F1F1F1; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;">
+<span style="color: black; font-family: &quot;Courier New&quot;; font-size: 10.0pt;">}</span></div>
+</div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">In above example of creating immutable cla<span style="font-family: Arial,Helvetica,sans-serif;">ss, <a href="http://javarevisited.blogspot.com/2011/09/convert-date-to-string-simpledateformat.html">Date</a> is a mut</span>able object. If </span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">getRemindingDate()</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;"> returns
+actual Date object than despite </span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">remindingDate</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;"> bein<span style="font-family: Arial,Helvetica,sans-serif;">g final variable, internals</span> of
+Date can be modified by client code. By returning </span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">clone()</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;"> or copy of
+</span><span style="font-family: &quot;Courier New&quot;; font-size: 9.0pt; mso-bidi-font-weight: bold;">remindingDate,</span><span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;"> we avoid that danger and preserves immutability of
+class.</span></div>
+<div class="MsoNormal">
+<br></div>
+<h2>
+<u><span style="font-style: normal; font-weight: normal; mso-bidi-font-style: italic; mso-bidi-font-weight: bold;">Benefits of Immutable Classes in Java</span></u></h2>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">As I said earlier Immutable classes offers several benefits, here are few
+to mention:</span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">1) Immutable objects are by defau<span style="font-family: Arial,Helvetica,sans-serif;">lt <a href="http://javarevisited.blogspot.com/2012/01/how-to-write-thread-safe-code-in-java.html">thread safe</a>, can </span>be shared
+without synchronization in concurrent environment.</span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">2) Immutable object simplifies development, because its easier to share
+between multiple threads without external synchronization.</span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">3) Immutable object boost performance of Java application by re<span style="font-family: Arial,Helvetica,sans-serif;">ducing <a href="http://java67.blogspot.com/2013/01/difference-between-synchronized-block-vs-method-java-example.html">synchronization</a> in co</span>de.</span><br>
+<br>
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">4) Another important benefit of Immutable objects is <b>reusability</b>, you can cache Immutable object and reuse them, much like String literals and Integers.&nbsp; You can use <a href="http://javarevisited.blogspot.it/2011/12/factory-design-pattern-java-example.html">static factory methods</a> to provide methods like <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">valueOf()</span>, which can return an existing Immutable object from cache, instead of creating a new one.</span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">Apart from above advantages, immutable object has disadvantage of
+creating garbage as well. Since immutable object can not be reused and they are
+just a use and throw. String being a prime example, which can create lot of
+garbage and can potentially slow down application due<span style="font-family: Arial,Helvetica,sans-serif;"> to <a href="http://javarevisited.blogspot.com/2011/04/garbage-collection-in-java.html">heavy garbage collection</a>, but
+</span>again that's extreme case and if used properly Immutable object adds lot of
+value.</span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">That's all on <b>how to write immutable class in Java</b>. we have seen
+rules of writing immutable classes, benefits offered by immutable objects and
+how we can create immutable class in Java which involves mutable fields. Don’t
+forget to read more about concurrency benefit offered by Immutable object in
+one of the best Java book recommended to Java pro<span style="font-family: Arial,Helvetica,sans-serif;">grammers, Concurrency Practice in Java.</span></span></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9.0pt; mso-bidi-font-weight: bold;">Related <b>Java programming concepts</b> and tutorials</span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 9pt;"><a href="http://javarevisited.blogspot.de/2012/03/10-object-oriented-design-principles.html">10 Object oriented principles Java programmer
+should know</a></span></span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 9pt;"><a href="http://javarevisited.blogspot.com.au/2013/01/difference-between-stack-and-heap-java.html">Difference between stack and heap in Java</a></span></span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2013/01/top-5-java-programming-books-best-good.html">5 must read books for Java programmers</a></span></span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 9pt;"><a href="http://javarevisited.blogspot.sg/2013/02/swap-two-numbers-without-third-temp-variable-java-program-example-tutorial.html">How to swap two numbers without using
+temp variable – Interview question</a></span></span></div>
+<div class="MsoNormal">
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 9pt;"><a href="http://javarevisited.blogspot.com/2012/12/how-to-sort-hashmap-java-by-key-and-value.html">How to sort HashMap by keys and values in
+Java</a></span></span></div>
+</div>
+<div style="clear: both; margin-left:-40px">
+
+                        <script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- 728x90 Leaderboard -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="3886401219"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                      
+</div>
+<div dir="ltr" style="text-align: left; background-color:white; margin-top:10px; margin-bottom:5px; padding: 3px" trbidi="on">
+<div class="MsoNormal">
+</div>
+</div>
+<div style="clear: both;"></div>
+</div><div id="outbrain_widget_0" class="OB_default" style="display: block;"><div id="outbrain_container_0_rec" class="div-wrapper" style="clear:both;;padding:0 0 10px 0;"><div class="voterDiv" style="display: block;" id="OutbrainVoterDiv_0_rec"><fieldset style="display: block; padding-left: 8px; padding-right: 8px;" id="recommendationsFieldset_0_rec" class="outbrain-recommendationsFieldset-sc outbrain-border">      <div id="recommendationsWait_outer_0" class="Outbrain_recommendationsWait_outer" style="display:none;"><div class="Outbrain_recommendationsWait_inner">               <p><img style="border:0px !important"></p>       </div></div>  <legend class="Outbrain_recommendations_legend">You might like:</legend>    <ul id="recommendationsList_0_rec" class="recommendations_ul">    <li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2013/05/difference-between-abstract-class-vs-interface-java-when-prefer-over-design-oops.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=zG8wJiacO2LULjLy-QWNAiBc7V8zKkQvDKywCsRNHarb5oR25oxdCtKcDHJty5Wi3eieDaBBoL7HgJP6WqW68vajIYvzKGNKaIiI3VLwcc_hzMFj1f-e8gNsdH2WXU2zbWeAF5K7gHU6k5JFbBqSyZ9VPpJTAge0vK7cOTIpua9TI8f_MtuxgpF5LSUqSjE7bsu7lVzYSnfMjwR9jz1JX6SRTFyb75moh1cn7tmKyGs9w80Fn45TGzE3cYgDJQDxi-Y8oIPtTOS81IE1YhM5XyGn5FfEBdxHIOtAJ8I2aAh82lDnp1wQeNVzqkSpQNKQbpqE3lX3LdUECxgFRokI5um5YnI0D41JmflgE2uKx8FvBPmEPHMtfbHUXW3CuauFx5RqDaZEGXyBpJpkWn7tQrTuoE52MAplQpes5ra_HhLzBP3YciIHARH9rWSuOsO1B8E5dtUrDROqb-2EEKIClSAmiqGs4LV-_06Xa2zuyp1YHLmyKSdYwW3nIeI5EKL4&amp;c=96f86f22&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">Difference between Abstract class vs Interface in Java</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2012/06/20-design-pattern-and-software-design.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=Rjmn9C020iGK0bGjBBRwpVnmMp-7LVgYR9zViymUlJafWCqOqWR5l7ywdwGBTJ1cT7yvxtQz-X3RFvP8Fe8ldYKgQFjSlSX5ri_MA14HZSNiMw1A2TfJ1jlTaCcLoWyxxIZnk4-ji9_egdKCEw305o1ZS88vQLujPEc09r7uoP8U3FODFIOoYE7Sd0ulc7z659wVlyO9XfaZ0NOivlc3iVBtXKL-jQDqNQj4iVdbryJGjrPTrMiyoaT5tshM86TduCqn9RetCB7V19WtV2Lf9XNetX5Zrze3hc1wcZvHeS0jw55Kn3e2IGM6_EoN67IRvPF-PI85loYoEtB5WrY_uEMscFvyDoFOvpI9czQTsLy5YsYuGCOD3Zr3W21ttgV5hVv-YXIyAtqUgnKNez8JpUOsTe7BwF107iJTGT1aEn29tfAAa-ETZOfj1tzZWLUhThRbgjuXwpUumdYDqQn1kriCBU5laWeTP1X77ZYX8cWf2KQFuJKI9DBOcljM8h6G&amp;c=22f627cd&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">20 Design pattern and Software design interview questions for Programmers</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2013/08/10-equals-and-hashcode-interview.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=vNFzI69bTnepyVDKPgv-bNKFQ6XOLJfa529YkC5N6czxMbz4_61ogcN2_IVvMoRqCWOy6Bp0rnNhWQa1WOfBVeoQNcO7nUJ2gQwITRBNM57_8IvZ2dwqDX3YfAsus60eLKATBg0OTYpIFzPzcW3wQ8gfoNAMl-H6ZoDwkaHZFWfvKRUZg-Uta8wTL9HlzsNgsM_xdvECf4xBhyeg2oHJy9EYRtmQUN9Gly8_4hWbKK2QW58RMGLpNo5mQ6RLqJ3x-rIQOB9k1rv_a9zrUgoeap7-3sO4oVmiqIwDCwE7ey1Kh2VKsKzEHF6j72p6f4MdTdaFa4-Dp8_0xfRTEAo4g-_fItsqxBTPVWohBoqQTCL1gMRRN45JVf4o6ZkKhF5_BAGuxi5F5ZF8bxp9Iv8ojFZCNO2P_9p0mcdNcUn7FucRDLwJzzk2C0b4tmbtZY0-PE7ZEfOoPaLJMqIEd_Il33HDbplzbQRI91T9B1bTXUMpxnFwfKJI3fmJTu99pkai&amp;c=8b58b02e&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">10 Equals and HashCode Interview Questions in Java</a></li><li class="outbrain_rec_li"><a class="rec-link" target="_self" href="http://javarevisited.blogspot.com/2011/02/how-to-write-equals-method-in-java.html" onmousedown="this.href=&#39;http://traffic.outbrain.com/network/redir?p=vnfa8CxXg6FV_PfXtYG3Vf6nj2-9k2IkNqf3D9B_4eGXNvZInsvz8W1AE01JiSr2SGOEKcsJmmNJX6CbOlxI-90iPW8tVTFLxBbv8AJtHou20O_d3U3pEkhtguft59Asy9VMXTC6UwyziteNl5A9dL75Jhwrp3kLJmMfyTCVLWuoI9Xoy5DDCYqjINJ8-MWk0KLbmdY_Y10OPhD37MWli11pczisxTF9ubkkWR0CCqgVeex3Kj7K7X4SD42Vc2aFfydrrbExaS-lELD3CqMsT59hldJsrV24W4-ExABAsCm2Ch8QICr0ly7LBhxi9y11nc1nfIC-A3Kw-tciZVvZkcv8Z3V0TMMo3gaOToBcGEoApkP90cExNWiHz1U_vNt-1dT-TE_OfAPCduIcK_9rEW9P20wck-PaEujlUPclDPqikVjKz_jUtTzbALh4NmAsH2B_Cj5xjiUKjXpSk67zFx9qJR9_c-OF6AVKgk32j52g5ahFoZAOD77aoa6q8pj4&amp;c=347c5399&amp;v=3&amp;version=251672&#39;;return true;" onclick="javascript:return(true)">Overriding equals() and hashCode() method in Java and Hibernate</a></li></ul></fieldset><table id="outbrainTableRecommendation_0_rec" class="outbrain-table-recommendations-bottom" style="display:none;"><tbody><tr><td>  <div id="recommendationsPcLegend_0_rec" class="Outbrain_recommendations_pc_legend" style="display:none;"></div></td><td>  <div id="recommendationsMoreDiv_0_rec" class="moreRecommendationsLinkDiv" style="display:none;"></div></td></tr></tbody></table><div id="outbrain_whatIs_0_rec" class="what_is_container" style="direction:LTR"><a class="what_is_link" onclick="OBR.extern.callWhatIsBranding(&#39;http://www.outbrain.com/what-is/default/en&#39;,500,480);">Recommended by <span class="ob_amelia" title="Outbrain"></span></a></div></div></div> </div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Posted by
+<span class="fn">
+Javin Paul
+</span>
+</span>
+<span class="post-timestamp">
+at
+<a class="timestamp-link" href="./How to create Immutable Class and Object in Java - Tutorial Example_files/How to create Immutable Class and Object in Java - Tutorial Example.html" rel="bookmark" title="permanent link">
+<abbr class="published" title="2013-03-04T04:28:00-08:00">
+4:28 AM
+</abbr>
+</a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-action">
+<a href="https://www.blogger.com/email-post.g?blogID=8712770457197348465&postID=9012990450998814198" title="Email Post">
+<img alt="" class="icon-action" height="13" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_email.gif" width="18">
+</a>
+</span>
+<span class="item-control blog-admin pid-1367717747">
+<a href="https://www.blogger.com/post-edit.g?blogID=8712770457197348465&postID=9012990450998814198&from=pencil" title="Edit Post">
+<img alt="" class="icon-action" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons">
+<a class="goog-inline-block share-button sb-email" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=9012990450998814198&target=email" target="_blank" title="Email This">
+<span class="share-button-link-text">
+Email This
+</span>
+</a>
+<a class="goog-inline-block share-button sb-blog" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=9012990450998814198&target=blog" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=270,width=475&quot;); return false;" target="_blank" title="BlogThis!">
+<span class="share-button-link-text">
+BlogThis!
+</span>
+</a>
+<a class="goog-inline-block share-button sb-twitter" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=9012990450998814198&target=twitter" target="_blank" title="Share to Twitter">
+<span class="share-button-link-text">
+Share to Twitter
+</span>
+</a>
+<a class="goog-inline-block share-button sb-facebook" href="https://www.blogger.com/share-post.g?blogID=8712770457197348465&postID=9012990450998814198&target=facebook" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=430,width=640&quot;); return false;" target="_blank" title="Share to Facebook">
+<span class="share-button-link-text">
+Share to Facebook
+</span>
+</a>
+<div class="goog-inline-block dummy-container">
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1438269913764" name="I0_1438269913764" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="post-labels">
+Labels:
+<a href="http://javarevisited.blogspot.com/search/label/best%20practices?max-results=3" rel="tag">
+best practices
+</a>
+
+                              ,
+                            
+<a href="http://javarevisited.blogspot.com/search/label/coding?max-results=3" rel="tag">
+coding
+</a>
+
+                              ,
+                            
+<a href="http://javarevisited.blogspot.com/search/label/core%20java?max-results=3" rel="tag">
+core java
+</a>
+
+                              ,
+                            
+<a href="http://javarevisited.blogspot.com/search/label/core%20java%20interview%20question?max-results=3" rel="tag">
+core java interview question
+</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class="post-location">
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>
+29 comments
+                      :
+                    </h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="" id="comments-block">
+<dt class="comment-author blogger-comment-icon" id="c516173672727535496">
+<a name="c516173672727535496"></a>
+<a href="https://www.blogger.com/profile/01084233786047386880" rel="nofollow">
+SARAL SAXENA
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-516173672727535496">
+<p>
+Hi Javin,<br>Nice article , Just want to add few more things..<br><br>1) All the fields must be private and preferably final<br>2) Ensure the class cannot be overridden - make the class final, or use static factories and keep constructors private<br>3) Fields must be populated from the Constructor/Factory<br>4) Don't provide any setters for the fields<br>5) Watch out for collections. Use Collections.unmodifiable*. Also, collections should contain only immutable Objects<br>6) All the getters must provide immutable objects or use defensive copying<br>7) Don't provide any methods that change the internal state of the Object<br><br>Guys please also refer to this url.. http://www.javaranch.com/journal/2003/04/immutable.htm
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362416935074#c516173672727535496" title="comment permalink">
+March 4, 2013 at 9:08 AM
+</a>
+<span class="item-control blog-admin pid-853111555">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=516173672727535496" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c2774339459384436986">
+<a name="c2774339459384436986"></a>
+<a href="https://www.blogger.com/profile/16035858247768461766" rel="nofollow">
+Raj
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2774339459384436986">
+<p>
+Hi Javin,<br><br>Thanks for posting such very useful posts.<br><br>It would have been very very useful if the site consists a search option to check for a particular topic in specific.<br> 
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362465549840#c2774339459384436986" title="comment permalink">
+March 4, 2013 at 10:39 PM
+</a>
+<span class="item-control blog-admin pid-1490719678">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2774339459384436986" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c6678912032076711713">
+<a name="c6678912032076711713"></a>
+<a href="https://www.blogger.com/profile/01084233786047386880" rel="nofollow">
+SARAL SAXENA
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6678912032076711713">
+<p>
+One more thing that I would like to add Javin regarding the example shown that is..<br><br>we should make a copy of remindingDate.getTime() BEFORE checking it against your class invariants. Otherwise an attacker with a reference(long time = remindingDate.getTime();) to your remindingDate could call a .set method on it to change the value after you've checked it's validity.The program should be like ...<br><br>public final class ImmutableReminder{<br>    private final Date remindingDate;<br><br>    public ImmutableReminder (Date remindingDate) {<br>        long incomingTime = remindingDate.getTime()<br><br>        if(incomingTime &lt; System.currentTimeMillis()){<br>            throw new IllegalArgumentException("Can not set reminder” +<br>                        “ for past time: " + remindingDate);<br>        }<br>        this.remindingDate = new Date(incomingTime);<br>    }<br><br>    public Date getRemindingDate() {<br>        return (Date) remindingDate.clone();<br>    }<br>}
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362467169799#c6678912032076711713" title="comment permalink">
+March 4, 2013 at 11:06 PM
+</a>
+<span class="item-control blog-admin pid-853111555">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6678912032076711713" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c1097451001574281857">
+<a name="c1097451001574281857"></a>
+<a href="http://javarevisited.blogspot.com.au/2011/08/convert-string-to-integer-to-string.html" rel="nofollow">
+Javin @ Use valueof to convert String to int
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1097451001574281857">
+<p>
+@Saral, Once again great comment. Your point is perfectly valid while using mutable class like Date here, This once again highlight, importance of Immutable classes for security reasons as well. 
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362484726271#c1097451001574281857" title="comment permalink">
+March 5, 2013 at 3:58 AM
+</a>
+<span class="item-control blog-admin pid-1531295892">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=1097451001574281857" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c7729081498622752937">
+<a name="c7729081498622752937"></a>
+<a href="https://www.blogger.com/profile/01084233786047386880" rel="nofollow">
+SARAL SAXENA
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7729081498622752937">
+<p>
+Thanks Javin..One must think before making an class as immutable as we know..<br><br>1) With immutability, any time you need to modify data, you need to create a new object. This can be expensive.<br><br>2)Reflection based frameworks are complicated by immutable objects since they requires constructor injection<br><br>3)constructor argument names are not usually available through reflection, which forces us to depend on argument order for dependency resolution<br><br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362503406250#c7729081498622752937" title="comment permalink">
+March 5, 2013 at 9:10 AM
+</a>
+<span class="item-control blog-admin pid-853111555">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=7729081498622752937" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c3218019938047645428">
+<a name="c3218019938047645428"></a>
+John
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3218019938047645428">
+<p>
+How do you decide to make a class Immutable in Java? I understand about value classes like String, Integer, but again How about java.util.Date, should that's a value class, should it should be immutable. Why Java designer keeps java.util.Date mutable, please advise.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362536137793#c3218019938047645428" title="comment permalink">
+March 5, 2013 at 6:15 PM
+</a>
+<span class="item-control blog-admin pid-531873872">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=3218019938047645428" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c6077064948019290722">
+<a name="c6077064948019290722"></a>
+John
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6077064948019290722">
+<p>
+@Raj, there is Google search text box in top right. Did you try that?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362536221274#c6077064948019290722" title="comment permalink">
+March 5, 2013 at 6:17 PM
+</a>
+<span class="item-control blog-admin pid-531873872">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6077064948019290722" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c6977396701589793358">
+<a name="c6977396701589793358"></a>
+Shruti
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6977396701589793358">
+<p>
+Over the year, I learned that value object, which is usually domain specific must be immutable. Class es like Order, Trade, Customer, Product are couple of examples of value Object. Interestingly you should be having corresponding database table for them and each row is equal to one instance of value object.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362536862184#c6977396701589793358" title="comment permalink">
+March 5, 2013 at 6:27 PM
+</a>
+<span class="item-control blog-admin pid-814520974">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6977396701589793358" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c135257091011438239">
+<a name="c135257091011438239"></a>
+Jo
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-135257091011438239">
+<p>
+Is making field final is necessary to create Immutable class? I guess when you make your class final, it means no one can sub class, which means no overriding of methods. Also if you don't provide setter than no one can modify state of object. What is the point of making member variable final inside Immutable class?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362537381317#c135257091011438239" title="comment permalink">
+March 5, 2013 at 6:36 PM
+</a>
+<span class="item-control blog-admin pid-531873872">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=135257091011438239" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c1870569926262157343">
+<a name="c1870569926262157343"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1870569926262157343">
+<p>
+BigDecimal and BigInteger are also good example of Immutable classes from JDK.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362537500774#c1870569926262157343" title="comment permalink">
+March 5, 2013 at 6:38 PM
+</a>
+<span class="item-control blog-admin pid-814520974">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=1870569926262157343" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c3041319285705559504">
+<a name="c3041319285705559504"></a>
+<a href="https://www.blogger.com/profile/16539618370362116733" rel="nofollow">
+Graham Allan
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3041319285705559504">
+<p>
+Hi,<br><br>You and your readers may be interested in an open source tool I created which allows you to test if your class is immutable or not. For example, you could have a JUnit test like this:<br><br>    @Test<br>    public void testIsImmutable() {<br>        MutabilityDetector.assertImmutable(Contacts.class);<br>    }<br><br>Then, if someone came along and added a setter method, or took away the final modifiers, the test would fail. This would give you confidence that not only are you correctly writing an immutable class now, but if anyone accidentally breaks it later, they'll be notified.<br><br>(Note that Mutability Detector would raise an error for ImmutableReminder by default, but that can be configured)
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362602596424#c3041319285705559504" title="comment permalink">
+March 6, 2013 at 12:43 PM
+</a>
+<span class="item-control blog-admin pid-1609468423">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=3041319285705559504" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c4177819285971029796">
+<a name="c4177819285971029796"></a>
+<a href="http://javarevisited.blogspot.com.au/2011/08/convert-string-to-integer-to-string.html" rel="nofollow">
+Javin @ String to Integer Java
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4177819285971029796">
+<p>
+@Graham, Thanks for writing such a useful tool, that can definitely complement some one's Junit test. I wish, if static analyzers can also do that or you may wish to let them know about your open source tool. Anyway, great work, please share link with us.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1362655273537#c4177819285971029796" title="comment permalink">
+March 7, 2013 at 3:21 AM
+</a>
+<span class="item-control blog-admin pid-1531295892">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=4177819285971029796" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c8400861473249308824">
+<a name="c8400861473249308824"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8400861473249308824">
+<p>
+Hi Javin,<br><br>I have one Quick Question.If there is no Setter method then how will we set the value initially.<br><br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1366483788954#c8400861473249308824" title="comment permalink">
+April 20, 2013 at 11:49 AM
+</a>
+<span class="item-control blog-admin pid-1524538725">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=8400861473249308824" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c8185825087627289045">
+<a name="c8185825087627289045"></a>
+Gaurav
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8185825087627289045">
+<p>
+@Anonymous, value is initially set in constructor, when object is created. So Immutable object state remains same in its life. 
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1370939294156#c8185825087627289045" title="comment permalink">
+June 11, 2013 at 1:28 AM
+</a>
+<span class="item-control blog-admin pid-1306858028">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=8185825087627289045" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c5402868658734349076">
+<a name="c5402868658734349076"></a>
+Ashwin
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5402868658734349076">
+<p>
+Apart from the way mentioned here, is there any other way to make a class Immutable in Java?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1370939343234#c5402868658734349076" title="comment permalink">
+June 11, 2013 at 1:29 AM
+</a>
+<span class="item-control blog-admin pid-1320684052">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=5402868658734349076" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c1137216734997630762">
+<a name="c1137216734997630762"></a>
+<a href="https://www.blogger.com/profile/12083403244483727471" rel="nofollow">
+Subrat
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1137216734997630762">
+<p>
+Hi,<br>We are creating our custom immutable class by the help of<br>1)making the class as final<br>2)providing the variable as final and initialize them in constructor<br>3)and providing only the getter methods<br><br>My doubt is String class is final and is immutable, I agree.But StringBuffer/StringBuilder class is also final that means it will not inherit by other class also.So internally what implementation has done so that it made the StringBuilder as mutable .<br>Please clarify my doubt.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1373442758783#c1137216734997630762" title="comment permalink">
+July 10, 2013 at 12:52 AM
+</a>
+<span class="item-control blog-admin pid-1427243389">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=1137216734997630762" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c9015659320882850916">
+<a name="c9015659320882850916"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-9015659320882850916">
+<p>
+@jo I think that is a fair point for the class in question. However it may help to declare it final if you have some methods which uses these variables within the class to prevent from modifying it as compiler would complain in that case 
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1375648906259#c9015659320882850916" title="comment permalink">
+August 4, 2013 at 1:41 PM
+</a>
+<span class="item-control blog-admin pid-1924532784">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=9015659320882850916" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c7659769812874991969">
+<a name="c7659769812874991969"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7659769812874991969">
+<p>
+Is it require that immutable class must have Private constructor? I think no. As String in immutable class and we can create as many objects of it. But still in interviews people are asking why and why not to create the private constructor? Please help me to resolve my query.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1376889494738#c7659769812874991969" title="comment permalink">
+August 18, 2013 at 10:18 PM
+</a>
+<span class="item-control blog-admin pid-226966503">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=7659769812874991969" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c2403690078866880005">
+<a name="c2403690078866880005"></a>
+<a href="https://www.blogger.com/profile/03255350384253069275" rel="nofollow">
+Palak Joshi Raval
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2403690078866880005">
+<p>
+Hi anonymous..<br><br><br>I have one Quick Question.If there is no Setter method then how will we set the value initially.<br><br>You can refere the below link for that:  http://howtodoinjava.com/2012/10/28/how-to-make-a-java-class-immutable/<br><br>You can pass the parameter value into the private constructor first time. <br><br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1385100245061#c2403690078866880005" title="comment permalink">
+November 21, 2013 at 10:04 PM
+</a>
+<span class="item-control blog-admin pid-208913269">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2403690078866880005" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c2725367186479735191">
+<a name="c2725367186479735191"></a>
+<a href="https://www.blogger.com/profile/05569192110375135341" rel="nofollow">
+Parthasarathi Muthairam
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2725367186479735191">
+<p>
+Please suggest the below scnario to make immutable<br><br>public final class A{<br>public final B c;<br>public A(B c){<br>this.c = c;<br>}<br>public B getB(){<br>return c;<br>}<br>}<br><br>// Look at the below code<br><br>A a = new A(new B());<br><br>s.getB().setC(c); // it is change the state of the object. how can overcome that one.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1392280176348#c2725367186479735191" title="comment permalink">
+February 13, 2014 at 12:29 AM
+</a>
+<span class="item-control blog-admin pid-1519322075">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2725367186479735191" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c6232409315156998681">
+<a name="c6232409315156998681"></a>
+<a href="https://www.blogger.com/profile/01199367398633322011" rel="nofollow">
+indhu
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6232409315156998681">
+<p>
+hi,i just read your post and i am little confused about the re-usability that you have explained in the point no (4).you have explained that it is re-usable in point no (4)_ and if you notice again in the para after point no (4) you have explained that it cannot be re-used.Please clarify it.<br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1393238474313#c6232409315156998681" title="comment permalink">
+February 24, 2014 at 2:41 AM
+</a>
+<span class="item-control blog-admin pid-257541386">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6232409315156998681" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c8621693506156738157">
+<a name="c8621693506156738157"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8621693506156738157">
+<p>
+Have getB return (B)B.clone()
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1395855439576#c8621693506156738157" title="comment permalink">
+March 26, 2014 at 10:37 AM
+</a>
+<span class="item-control blog-admin pid-1035307239">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=8621693506156738157" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c6971209133784177109">
+<a name="c6971209133784177109"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6971209133784177109">
+<p>
+Hi, As Indhu specified, can you please explain the two contradicting statements :<br>1. "4) Another important benefit of Immutable objects is reusability, "<br>2. "Apart from above advantages, immutable object has disadvantage of creating garbage as well. Since immutable object can not be reused and they are just a use and throw."
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1395873706156#c6971209133784177109" title="comment permalink">
+March 26, 2014 at 3:41 PM
+</a>
+<span class="item-control blog-admin pid-551154937">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=6971209133784177109" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c3485068899335464113">
+<a name="c3485068899335464113"></a>
+<a href="https://www.blogger.com/profile/11978760524350353490" rel="nofollow">
+Ponselvan Francis Infant Anto
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-3485068899335464113">
+<p>
+Hi Javin,<br>What is the necessity of making the member variables final?<br>as anyways we are not providing any setters to alter  the value,<br>and in case of mutable fields, we are returning a clone to the callee.<br><br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1402366425438#c3485068899335464113" title="comment permalink">
+June 9, 2014 at 7:13 PM
+</a>
+<span class="item-control blog-admin pid-2070873097">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=3485068899335464113" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c2247972728836309226">
+<a name="c2247972728836309226"></a>
+<a href="https://www.blogger.com/profile/15151192967134772305" rel="nofollow">
+manju
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2247972728836309226">
+<p>
+@Ponselvan Francis Infant Anto . If you dont make the fields final, class methods could change the value of the private fields their by breaking the immutability. 
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1404183525694#c2247972728836309226" title="comment permalink">
+June 30, 2014 at 7:58 PM
+</a>
+<span class="item-control blog-admin pid-1647277271">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2247972728836309226" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c4764692654401645744">
+<a name="c4764692654401645744"></a>
+<a href="https://www.blogger.com/profile/15151192967134772305" rel="nofollow">
+manju
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4764692654401645744">
+<p>
+Could some one explain me why fields has to be private? IMHO making them final would suffice .<br>and Why are we making class final ?  Subclass cann't change the values of Superclass in any manner. It only inherits the values from the Superclass. The reason for making String class was different . Jave guys dint want people to extend the functionality of String class , thats why they made it final. It will be very helpfull if someone shed light on this :)<br>
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1404183873679#c4764692654401645744" title="comment permalink">
+June 30, 2014 at 8:04 PM
+</a>
+<span class="item-control blog-admin pid-1647277271">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=4764692654401645744" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author anon-comment-icon" id="c2740043736540830498">
+<a name="c2740043736540830498"></a>
+Anonymous
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-2740043736540830498">
+<p>
+Hi javin , its great work . I wann ur  advice om this If class have reference variable as mutable class how can u make reference variable as immutable. ?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1407229951823#c2740043736540830498" title="comment permalink">
+August 5, 2014 at 2:12 AM
+</a>
+<span class="item-control blog-admin pid-510907653">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=2740043736540830498" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c4152288571886070491">
+<a name="c4152288571886070491"></a>
+<a href="https://www.blogger.com/profile/16534817055378781633" rel="nofollow">
+saimanojkumar
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4152288571886070491">
+<p>
+/* package whatever; // don't place package name! */<br><br>import java.util.*;<br>import java.lang.*;<br>import java.io.*;<br><br>/* Name of the class has to be "Main" only if the class is public. */<br>public final class coffee{<br>    {<br>/*private*/ public final String coffee;<br>/*private*/ public final String code;<br>public void coder(String coffee,String code)<br>{<br>this.coffee=coffee;<br>this.code=code;<br>}<br>public String getcoffee()<br>{<br>return coffee;<br>} <br>public String getCode()<br>{<br>return code;<br>}<br>//do<br>//{<br>System.out.println("It's time to drink coffee");<br>//}<br>//While(coffee==coffee)<br>}<br><br>     public static void main(String []args)<br>     {<br>       // System.out.println("Hello World");<br>       coffee c=new coffee();<br>       c.coder();<br>     }<br>}<br>Could any one help me to solve this code?<br>Kinda getting errors and have doubt near do while block
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1410717337283#c4152288571886070491" title="comment permalink">
+September 14, 2014 at 10:55 AM
+</a>
+<span class="item-control blog-admin pid-1337261088">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=4152288571886070491" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blogger-comment-icon" id="c4578220487541336802">
+<a name="c4578220487541336802"></a>
+<a href="https://www.blogger.com/profile/08041028207977186383" rel="nofollow">
+Morten Christensen
+</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4578220487541336802">
+<p>
+I also like to use immutable value objects but they can be a hassle without tool support and the tools I could found had problems, so I just released my own open source tool for generating java value objects that used 100% standard java features and is extremely customisable. You can check it out at "http://valjogen.41concepts.com". Let me know what you think?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html?showComment=1414002147534#c4578220487541336802" title="comment permalink">
+October 22, 2014 at 11:22 AM
+</a>
+<span class="item-control blog-admin pid-1565952466">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=8712770457197348465&postID=4578220487541336802" title="Delete Comment">
+<img src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+</dl>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<h4 id="comment-post-message">
+Post a Comment
+</h4>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=8712770457197348465&postID=9012990450998814198&blogspotRpcToken=2244909" id="comment-editor-src"></a>
+<iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="254px" id="comment-editor" name="comment-editor" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/comment-iframe.html" width="100%"></iframe>
+<script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/3996186021-comment_from_post_iframe.js"></script>
+<script type="text/javascript">
+                    BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html', '03974492238039089807');
+                  </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+                      </div></div>
+                    
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://javarevisited.blogspot.com/2013/03/5-good-books-to-learn-spring-framework-mvc-java-programmer.html" id="Blog1_blog-pager-newer-link" title="Newer Post">
+Newer Post
+</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://javarevisited.blogspot.com/2013/03/how-to-write-unit-test-in-java-eclipse-netbeans-example-run.html" id="Blog1_blog-pager-older-link" title="Older Post">
+Older Post
+</a>
+</span>
+<a class="home-link" href="http://javarevisited.blogspot.com/">
+Home
+</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Subscribe to:
+<a class="feed-link" href="http://javarevisited.blogspot.com/feeds/9012990450998814198/comments/default" target="_blank" type="application/atom+xml">
+Post Comments
+                      (
+                      Atom
+                      )
+                    </a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en'};</script>
+</div></div>
+</div>
+</div>
+<div id="sidebar-wrap">
+<div id="sidebartop-wrap">
+<div id="sidebartop-wrap2">
+<div class="sidebar section" id="sidebartop"><div class="widget LinkList" id="LinkList1">
+<h2>Recommended Books for Java Developer</h2>
+<div class="widget-content">
+<ul>
+<li><a href="http://javarevisited.blogspot.com/2013/01/top-5-java-programming-books-best-good.html">9 Must Read Books for Java Developers</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/11/java-8-tutorials-resources-and-examples-lambda-expression-stream-api-functional-interfaces.html">3 Good Books to Learn Java 8</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/09/top-6-books-to-learn-programming-coding.html">6 Books to Learn and Master Programming</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/07/2-books-to-prepare-oracle-java-7-certification-OCA-OCP-OCPJP.html">2 Books to Prepare Oracle Java Certification</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/03/5-good-books-to-learn-spring-framework-mvc-java-programmer.html">5 Books to Learn Spring Framework for Java Programmers</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/06/5-must-read-books-to-learn-object.html">5 Books to Learn Design Patterns and OOP</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/01/top-5-free-books-to-learn-scala-programming-PDF.html">5 Free Scala Programming Books PDF</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/01/top-5-hibernate-books-for-java-programmers-learning.html">5 Books to Learn Hibernate for Java Developers</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/07/top-5-java-performance-tuning-books.html">Top 5 Java Performance Tuning Books</a></li>
+<li><a href="http://javarevisited.blogspot.com/2013/07/top-5-jquery-books-for-web-developers-learn.html">Top 5 jQuery Books for Java Web Developer</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/08/top-5-books-to-learn-unit-testing-junit-tdd-Java-programmers.html">5 Java Unit Testing Book Every Developer Should Read</a></li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=LinkList&widgetId=LinkList1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;LinkList1&quot;));" target="configLinkList1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML5">
+<div class="widget-content">
+<div id="GoogleAds1" style="margin-top:-5px">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5808379456926196";
+google_ad_host = "pub-1556223355139109";
+/* 300 x 600 Right Side Bar Above the Fold */
+google_ad_slot = "1677562743";
+google_ad_width = 300;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML5&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML5&quot;));" target="configHTML5" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML6">
+<div class="widget-content">
+<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- 336x280_Top_Right_Above_The_Fold -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="9776759940"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML6&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML6&quot;));" target="configHTML6" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML7">
+<div class="widget-content">
+<div id="ShowOnlyOnItemPages">
+<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300x250_Javarevisited_Right_Sidebar_Middle -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5808379456926196" data-ad-slot="6527085541"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML7&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML7&quot;));" target="configHTML7" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Followers" id="Followers1">
+<h2 class="title">Followers</h2>
+<div class="widget-content">
+<div id="Followers1-wrapper">
+<div style="margin-right:2px;">
+<div><script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/plusone.js" gapi_processed="true"></script>
+<div id="followers-iframe-container"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" width="100%" id="I0_1438269913782" name="I0_1438269913782" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/followers.html" height="242"></iframe></div>
+<script type="text/javascript">
+    window.followersIframe = null;
+    function followersIframeOpen(url) {
+      gapi.load("gapi.iframes", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          window.followersIframe = gapi.iframes.getContext().openChild({
+            url: url,
+            where: document.getElementById("followers-iframe-container"),
+            messageHandlersFilter: gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
+            messageHandlers: {
+              '_ready': function(obj) {
+                window.followersIframe.getIframeEl().height = obj.height;
+              },
+              'reset': function() {
+                window.followersIframe.close();
+                followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d8712770457197348465\x26origin\x3dhttp://javarevisited.blogspot.com/\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaBjMzMzMzMyIGMDAwMDAwKgZmZmZmZmYyBjAwMDAwMDoGMzMzMzMzQgYwMDAwMDBKBjAwMDAwMFIGRkZGRkZGWgt0cmFuc3BhcmVudA%3D%3D\x26postID\x3d9012990450998814198");
+              },
+              'open': function(url) {
+                window.followersIframe.close();
+                followersIframeOpen(url);
+              }
+            }
+          });
+        }
+      });
+    }
+    followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d8712770457197348465\x26origin\x3dhttp://javarevisited.blogspot.com/\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaBjMzMzMzMyIGMDAwMDAwKgZmZmZmZmYyBjAwMDAwMDoGMzMzMzMzQgYwMDAwMDBKBjAwMDAwMFIGRkZGRkZGWgt0cmFuc3BhcmVudA%3D%3D\x26postID\x3d9012990450998814198");
+  </script></div>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=Followers&widgetId=Followers1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Followers1&quot;));" target="configFollowers1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML1">
+<div class="widget-content">
+<script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/getads.js"></script>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+aax_getad_mpb({
+  "slot_uuid":"392ffdf9-b1c9-44b2-9e3e-c43ecd0faabd"
+});
+//]]>
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML1&quot;));" target="configHTML1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML11">
+<div class="widget-content">
+<script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/getads.js"></script>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+aax_getad_mpb({
+  "slot_uuid":"1a631a27-7478-440e-ac7f-355dbed82b58"
+});
+//]]>
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML11&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML11&quot;));" target="configHTML11" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML9">
+<div class="widget-content">
+<script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/getads.js"></script>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+aax_getad_mpb({
+  "slot_uuid":"04fe6626-7404-4356-b895-1fd4d298071a"
+});
+//]]>
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML9&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML9&quot;));" target="configHTML9" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget BlogArchive" id="BlogArchive1">
+<h4>
+Blog Archive
+</h4>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2015-01-01T00:00:00-08:00&updated-max=2016-01-01T00:00:00-08:00&max-results=50">
+2015
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          81
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          5
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2015_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2014-01-01T00:00:00-08:00&updated-max=2015-01-01T00:00:00-08:00&max-results=50">
+2014
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          106
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          6
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2014_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+                          ▼&nbsp;
+                        </span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2013-01-01T00:00:00-08:00&updated-max=2014-01-01T00:00:00-08:00&max-results=50">
+2013
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          136
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          5
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          7
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          3
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          3
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          13
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+                          ▼&nbsp;
+                        </span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          16
+                          )
+                        </span>
+<ul class="posts">
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/convert-and-print-byte-array-to-hex-string-java-example-tutorial.html">
+How to Convert and Print Byte array to Hex String ...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/0-exception-handling-best-practices-in-Java-Programming.html">
+10 Exception handling Best Practices in Java Progr...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-reverse-array-in-java-int-String-array-example.html">
+How to Reverse Array in Java - Int and String Arra...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/Anagram-how-to-check-if-two-string-are-anagrams-example-tutorial.html">
+How to check if two String are Anagram in Java - P...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/generate-md5-hash-in-java-string-byte-array-example-tutorial.html">
+How to generate MD5 Hash in Java - String Byte Arr...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/10-famous-laws-of-software-and-computer-programming-world.html">
+10 Famous Laws of Computer Programming and Softwar...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/can-we-overload-and-override-static-method-java.html">
+Can You Overload or Override Static methods in Jav...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/top-15-data-structures-algorithm-interview-questions-answers-java-programming.html">
+Top 15 Data Structures and Algorithm Interview Que...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/difference-between-struts-1-and-struts-2-mvc-framework-jakarta.html">
+Difference between Struts 1 and Struts 2 framework...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/bitwise-and-bitshift-operators-in-java-and-or-xor-left-right-shift-example-tutorial.html">
+Bitwise and BitShift Operators in Java - AND, OR, ...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/difference-between-singleton-pattern-vs-static-class-java.html">
+Difference between Singleton Pattern vs Static Cla...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-increase-console-buffer-size-in.html">
+How to Increase Console Buffer Size in Eclipse IDE...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/reentrantlock-example-in-java-synchronized-difference-vs-lock.html">
+ReentrantLock Example in Java, Difference between ...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/5-good-books-to-learn-spring-framework-mvc-java-programmer.html">
+5 books to learn Spring framework and Spring MVC f...
+</a>
+</li>
+<li>
+<a href="./How to create Immutable Class and Object in Java - Tutorial Example_files/How to create Immutable Class and Object in Java - Tutorial Example.html">
+How to create Immutable Class and Object in Java -...
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/2013/03/how-to-write-unit-test-in-java-eclipse-netbeans-example-run.html">
+Steps to Create JUnit Test in Eclipse and Netbeans...
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2013_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2012-01-01T00:00:00-08:00&updated-max=2013-01-01T00:00:00-08:00&max-results=50">
+2012
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          217
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          52
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          8
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          12
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          28
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          18
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2012_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          35
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2011-01-01T00:00:00-08:00&updated-max=2012-01-01T00:00:00-08:00&max-results=50">
+2011
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          145
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          28
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_11_01_archive.html">
+November
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          14
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_09_01_archive.html">
+September
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          22
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_08_01_archive.html">
+August
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          11
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_07_01_archive.html">
+July
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          7
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_06_01_archive.html">
+June
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          9
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_05_01_archive.html">
+May
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          6
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_04_01_archive.html">
+April
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_03_01_archive.html">
+March
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_02_01_archive.html">
+February
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2011_01_01_archive.html">
+January
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          10
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/search?updated-min=2010-01-01T00:00:00-08:00&updated-max=2011-01-01T00:00:00-08:00&max-results=33">
+2010
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          33
+                          )
+                        </span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2010_12_01_archive.html">
+December
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          4
+                          )
+                        </span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+                            ►&nbsp;
+                          
+</span>
+</a>
+<a class="post-count-link" href="http://javarevisited.blogspot.com/2010_10_01_archive.html">
+October
+</a>
+<span class="post-count" dir="ltr">
+                          (
+                          29
+                          )
+                        </span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;BlogArchive1&quot;));" target="configBlogArchive1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML13">
+<div class="widget-content">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=273082&u=javarevisited&width=300&height=250"></script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML13&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML13&quot;));" target="configHTML13" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript">
+    google_ad_client = "ca-pub-5808379456926196";
+    google_ad_host = "ca-host-pub-1556223355139109";
+    google_ad_host_channel = "L0001";
+    google_ad_slot = "8160425940";
+    google_ad_width = 180;
+    google_ad_height = 90;
+</script>
+<!-- javarevisited_sidebar_AdSense1_180x90_0ads_al_s -->
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=AdSense&widgetId=AdSense1&action=editWidget&sectionId=sidebartop" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;AdSense1&quot;));" target="configAdSense1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+</div>
+</div>
+<div id="sidebarbottom-wrap1">
+<div id="sidebarbottom-wrap2">
+<div class="sidebar section" id="sidebar"><div class="widget HTML" id="HTML14">
+<div class="widget-content">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=273082&u=javarevisited&width=300&height=250"></script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML14&action=editWidget&sectionId=sidebar" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML14&quot;));" target="configHTML14" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML4">
+<h4 class="title">
+References
+</h4>
+<div class="widget-content">
+<ul><br><li><a href="http://docs.oracle.com/javase/6/docs/api/" rel="nofollow">Java API documentation JDK 6</a></li><br><li><a href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/" rel="nofollow">Spring framework doc</a></li><br><li><a href="http://struts.apache.org/" rel="nofollow">Struts</a></li><br><li><a href="http://jdk7.java.net/" rel="nofollow">JDK 7 API</a></li><br><li><a href="http://dev.mysql.com/doc/refman/5.5/en/" rel="nofollow">MySQL</a></li><br><li><a href="http://www.linux.org/" rel="nofollow">Linux</a></li><br><li><a href="http://www.eclipse.org/" rel="nofollow">Eclipse</a></li><br><li><a href="http://jquery.com/" rel="nofollow">jQuery</a></li><br></ul>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=HTML&widgetId=HTML4&action=editWidget&sectionId=sidebar" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML4&quot;));" target="configHTML4" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Copyright by Javin Paul 2010-2015. Powered by <a href="https://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=Attribution&widgetId=Attribution1&action=editWidget&sectionId=sidebar" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Attribution1&quot;));" target="configAttribution1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footer-wrap1">
+<div id="footer-wrap2">
+<div class="footer section" id="footer"><div class="widget HTML" id="HTML3">
+<script language="JavaScript">var OB_platformType = 1; var OB_langJS = 'http://widgets.outbrain.com/lang_en.js'; var OBITm = '1287894986691';var OB_raterMode = 'singleThumb';var OB_recMode = 'rec';</script><script language="JavaScript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/OutbrainRater.js"></script><div id="outbrain_manager_helper_div" style="display:none;"></div><iframe id="odbPingIframeId" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/comScore.html" frameborder="0" name="odbFrame" style="width:0px;height:0px;display:none;"></iframe><span id="outbrainCurrentPosition"></span> 
+<input type="hidden" name="OBKey" value="+OCjH50Z4DIVqrUFp64IDQ=="> <script language="JavaScript">var OBCTm='1287894986691'; </script><script language="JavaScript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/claim.js"></script>
+</div><div class="widget PageList" id="PageList1">
+<div class="widget-content">
+<ul>
+<li>
+<a href="http://javarevisited.blogspot.com/p/about-me.html">
+About Me
+</a>
+</li>
+<li>
+<a href="http://javarevisited.blogspot.com/p/privacy-policy.html">
+Privacy Policy
+</a>
+</li>
+</ul>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=8712770457197348465&widgetType=PageList&widgetId=PageList1&action=editWidget&sectionId=footer" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;PageList1&quot;));" target="configPageList1" title="Edit">
+<img alt="" height="18" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+</div>
+</div>
+</div><iframe name="oauth2relay836500432" id="oauth2relay836500432" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe>
+<!-- infolinks -->
+<script type="text/javascript">
+      var infolink_pid = 258201;
+      var infolink_wsid = 0;
+    </script>
+<script src="http://resources.infolinks.com/js/infolinks_main.js" type="text/javascript"></script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/1514304437-widgets.js"></script>
+<script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/jsapi"></script>
+<script type="text/javascript" src="./How to create Immutable Class and Object in Java - Tutorial Example_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '8712770457197348465';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d8712770457197348465','//javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html','8712770457197348465');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '8712770457197348465', 'bloggerUrl': 'https://www.blogger.com', 'title': 'Javarevisited', 'pageType': 'item', 'postId': '9012990450998814198', 'url': 'http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html', 'canonicalUrl': 'http://javarevisited.blogspot.com/2013/03/how-to-create-immutable-class-object-java-example-tutorial.html', 'canonicalHomepageUrl': 'http://javarevisited.blogspot.com/', 'homepageUrl': 'http://javarevisited.blogspot.com/', 'blogspotFaviconUrl': 'http://javarevisited.blogspot.com/favicon.ico', 'enabledCommentProfileImages': false, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-19004659-1', 'searchLabel': '', 'searchQuery': '', 'pageName': 'How to create Immutable Class and Object in Java - Tutorial Example', 'pageTitle': 'Javarevisited: How to create Immutable Class and Object in Java - Tutorial Example', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://javarevisited.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Javarevisited - RSS\42 href\75\42http://javarevisited.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42https://www.blogger.com/feeds/8712770457197348465/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Javarevisited - Atom\42 href\75\42http://javarevisited.blogspot.com/feeds/9012990450998814198/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'googleProfileUrl': 'https://plus.google.com/114528699166048052030', 'postImageThumbnailUrl': 'http://2.bp.blogspot.com/-wrzDeQGAe1I/TWu8pLuLr4I/AAAAAAAAADE/V017G-6Q61w/s72-c/java_logo_50_50.jpg', 'postImageUrl': 'http://2.bp.blogspot.com/-wrzDeQGAe1I/TWu8pLuLr4I/AAAAAAAAADE/V017G-6Q61w/s1600/java_logo_50_50.jpg', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42tick\42,k\75\42jstiming\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[g](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[k].srt\75h-c)}if(a){var e\75b[k].load;0\74c\46\46h\76\75c\46\46(e[g](\42_wtsrt\42,void 0,c),e[g](\42wtsrt_\42,\42_wtsrt\42,h),e[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b[f].csi().startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b.external.startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[k].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[k].load[g](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[k].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'ca-pub-5808379456926196', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/cda3ddef07a85452', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'titleTextColor': '#ffffff', 'bottomSidebarVisitedLinkColor': '#ffffff', 'borderColor': '#bbbbbb', 'topSidebarVisitedLinkColor': '#ffffff', 'pageTitleFont': 'normal bold 200% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'startSide': 'left', 'topSidebarLinkColor': '#ffffff', 'descriptionFont': 'normal normal 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'topSidebarBgColor': '#558866', 'mainLinkColor': '#0066CC', 'topSidebarTextColor': '#ffffff', 'endSide': 'right', 'headerFont': 'normal bold 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'bodyFont': 'normal normal 100% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'bottomSidebarLinkColor': '#99ddbb', 'mainHoverLinkColor': '#000066', 'mainBgColor': '#ffffff', 'topSidebarHeaderColor': '#ffffff', 'dateHeaderColor': '#558866', 'titleBgColor': '#335577', 'bottomSidebarHeaderColor': '#aabbcc', 'postTitleColor': '#333333', 'postTitleFont': 'normal bold 135% \47Trebuchet MS\47,Verdana,Arial,Sans-serif', 'mainTextColor': '#333333', 'mainVisitedLinkColor': '#660099'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_CustomSearchView', new _WidgetInfo('CustomSearch1', 'crosscol', null, document.getElementById('CustomSearch1'), {'title': '', 'includeBlog': true, 'includePostLinks': false, 'includeWeb': false, 'linkLists': [], 'blogUrl': 'http://javarevisited.blogspot.com/', 'loadingMsg': 'Loading...', 'thisBlogMsg': 'This Blog', 'linkedFromHereMsg': 'Linked From Here', 'theWebMsg': 'The Web', 'backgroundColor': '#ffffff', 'textColor': '#333333', 'dateColor': '#558866', 'linkColor': '#0066CC', 'urlColor': '#333333', 'visitedLinkColor': '#660099', 'borderColor': '#bbbbbb', 'activeBorderColor': '#333333', 'cse_ua': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebartop', null, document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML5', 'sidebartop', null, document.getElementById('HTML5'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML6', 'sidebartop', null, document.getElementById('HTML6'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML7', 'sidebartop', null, document.getElementById('HTML7'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebartop', null, document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebartop', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML11', 'sidebartop', null, document.getElementById('HTML11'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML9', 'sidebartop', null, document.getElementById('HTML9'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebartop', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading...'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML13', 'sidebartop', null, document.getElementById('HTML13'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebartop', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML14', 'sidebar', null, document.getElementById('HTML14'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'sidebar', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'sidebar', null, document.getElementById('Attribution1'), {'attribution': 'Copyright by Javin Paul 2010-2015. Powered by \74a href\75\47https://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'footer', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'footer', null, document.getElementById('PageList1'), {'title': '', 'links': [{'href': 'http://javarevisited.blogspot.com/p/about-me.html', 'title': 'About Me', 'isCurrentPage': false, 'id': '6312557353959475498'}, {'href': 'http://javarevisited.blogspot.com/p/privacy-policy.html', 'title': 'Privacy Policy', 'isCurrentPage': false, 'id': '7683233013767637665'}], 'mobile': false}, 'displayModeFull'));
+</script>
+
+<iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div></body></html>

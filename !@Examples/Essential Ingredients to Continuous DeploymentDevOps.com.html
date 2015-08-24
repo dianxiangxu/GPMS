@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="csstransforms csstransforms3d csstransitions js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/saved_resource"></script><script type="text/javascript" async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/cc.js"></script>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+Essential Ingredients to Continuous DeploymentDevOps.com</title>
+<link rel="shortcut icon" href="http://devops.wpengine.com/wp-content/uploads/2014/01/favicon-flat.ico">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://devops.com/xmlrpc.php">
+
+
+<!-- removed google maps Js -->
+
+<!-- relocated google analytics -->
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+
+
+
+<link href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/style.css">
+
+<style type="text/css"></style><!-- This site is optimized with the Yoast SEO plugin v2.3.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Essential Ingredients to Continuous Deployment</title>
+<meta name="description" content="Continuous Deployment, Continuous Delivery and continuous Integration">
+<link rel="canonical" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Essential Ingredients to Continuous DeploymentDevOps.com.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Essential Ingredients to Continuous Deployment">
+<meta property="og:description" content="Continuous Deployment, Continuous Delivery and continuous Integration">
+<meta property="og:url" content="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/">
+<meta property="og:site_name" content="DevOps.com">
+<meta property="article:publisher" content="https://www.facebook.com/devopscom">
+<meta property="article:tag" content="continuous delivery">
+<meta property="article:tag" content="continuous deployment">
+<meta property="article:tag" content="continuous integration">
+<meta property="article:tag" content="release management">
+<meta property="article:tag" content="SCM">
+<meta property="article:section" content="Blogs">
+<meta property="article:published_time" content="2015-08-03T01:50:05+00:00">
+<meta property="article:modified_time" content="2015-08-02T14:59:13+00:00">
+<meta property="og:updated_time" content="2015-08-02T14:59:13+00:00">
+<meta property="og:image" content="http://devops.com/wp-content/uploads/2015/07/EssentialIngredients.jpg">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="DevOps.com » Feed" href="http://devops.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="DevOps.com » Comments Feed" href="http://devops.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="DevOps.com » Essential Ingredients for Continuous Deployment Comments Feed" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/feed/">
+		<script type="text/javascript" async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/recaptcha__en.js"></script><script id="facebook-jssdk" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/sdk.js"></script><script id="twitter-wjs" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/widgets.js"></script><script type="text/javascript" async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/ga.js"></script><script async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/analytics.js"></script><script type="text/javascript" async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/recaptcha__en.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/devops.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.3"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/wp-emoji-release.min.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="my_css_dsslider-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="bmp-googleFonts-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="style-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/style.less" type="text/css" media="all">
+<link rel="stylesheet" id="wpdm-front-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/front.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpdm-bootstrap-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpdm-bootstrap-theme-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/bootstrap-theme.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="swiftype-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/autocomplete.css" type="text/css" media="all">
+<link rel="stylesheet" id="prettyPhoto-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/prettyPhoto.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="nivo-slider-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/nivo-slider.css" type="text/css" media="all">
+<link rel="stylesheet" id="flex-slider-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/flexslider.css" type="text/css" media="all">
+<link rel="stylesheet" id="vegas-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.vegas.css" type="text/css" media="all">
+<link rel="stylesheet" id="mediaelementplayer-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/mediaelementplayer.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="google-code-prettify-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/prettify.css" type="text/css" media="all">
+<link rel="stylesheet" id="csc-style-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/csc-style.css" type="text/css" media="all">
+<link rel="stylesheet" id="author-avatars-widget-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/widget.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpbdp-widgets-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/widgets.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="author-avatars-shortcode-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/shortcode.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpm-styles-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/wp-meetup.css" type="text/css" media="all">
+<link rel="stylesheet" id="genericons-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/genericons.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jscolor.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.cookie.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/front.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/chosen.jquery.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var swiftypeParams = {"engineKey":"o9RuicyPd5jwmbvpPg8c"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/install_swiftype.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/recaptcha.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/api.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://devops.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://devops.com/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="http://wp.me/p4upoP-2h2">
+
+<!-- This site is using AdRotate v3.13 Professional to display their advertisements - https://ajdg.solutions/products/adrotate-for-wordpress/ -->
+<!-- AdRotate CSS -->
+<style type="text/css" media="screen">
+	.g { margin:0px; padding:0px; overflow:hidden; line-height:1; zoom:1; }
+	.g img { height:auto; }
+	.g-col { position:relative; float:left; }
+	.g-col:first-child { margin-left: 0; }
+	.g-col:last-child { margin-right: 0; }
+	.g-1 { margin:1px 1px 1px 1px; }
+	.g-2 { margin:1px 1px 1px 1px; }
+	.g-3 { margin:1px 1px 1px 1px; }
+	.g-4 { margin:1px 1px 1px 1px;width:100%; max-width:300px; height:100%; max-height:250px; }
+	.g-5 { margin:1px 1px 1px 1px; }
+	@media only screen and (max-width: 480px) {
+		.g-col, .g-dyn, .g-single { width:100%; margin-left:0; margin-right:0; }
+	}
+</style>
+<!-- /AdRotate CSS -->
+
+
+<link rel="dns-prefetch" href="http://jetpack.wordpress.com/">
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://s1.wp.com/">
+<link rel="dns-prefetch" href="http://s2.wp.com/">
+<link rel="dns-prefetch" href="http://public-api.wordpress.com/">
+<link rel="dns-prefetch" href="http://0.gravatar.com/">
+<link rel="dns-prefetch" href="http://1.gravatar.com/">
+<link rel="dns-prefetch" href="http://2.gravatar.com/">
+
+<!-- BEGIN recaptcha, injected by plugin wp-recaptcha-integration  -->
+
+<!-- END recaptcha -->
+<style type="text/css">
+.avatar {vertical-align:middle}
+.credit {font-size: 50%;}
+</style>
+		<style type="text/css">ul.wpbdp-categories > li {width: 25% !important;}</style>			<link rel="stylesheet" id="custom-css-css" type="text/css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/saved_resource(1)">
+			
+<!-- relocated google analytics -->
+
+<!-- relocated adroll Js -->
+
+
+<script type="text/javascript" async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/embed.js"></script><script async="" type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/count.js"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/services.css"><script async="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/count-data.js"></script><script async="true" type="text/javascript" src="http://a.adroll.com/j/roundtrip.js"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head><body class="single single-post postid-8744 single-format-standard" style="background: url(http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/) 50% 0% repeat scroll rgb(255, 255, 255);"><div class="vegas-overlay" style="margin: 0px; padding: 0px; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0.5; background-image: url(http://devops.com/wp-content/themes/rapidnews/images/overlays/0.png);"></div><div class="vegas-loading" style="display: block;"></div>
+
+
+<style type="text/css">
+html,body {font-family: 'PT Sans', sans, serif; font-weight:300;
+color:#242426; font-size:24px}
+h1, h1.post-title {font-family: 'PT Sans', sans, serif; font-weight:400;
+color:#6F7072; font-size:28px; line-height:35px;}
+h2,h2.post-title {font-family: 'PT Sans', sans, serif; font-weight:400;
+color:#6F7072; font-size:20px;line-height:27px;}
+h3{font-family: 'Open Sans Condensed', sans, serif; font-weight:700;
+color:#6F7072; font-size:18px; line-height:18px}
+p{font-family: 'PT Sans', sans, serif; font-weight:400;
+color:#242426; font-size:26px;}
+.logotext a h1{font-family: 'Oswald', sans, serif; font-weight:700;
+color:#6F7072; font-size:42px}
+.logotext a h3{font-family: 'Oswald', sans, serif; font-weight:700;
+color:#a81c1c; font-size:16px}
+.widget-title h3{font-family: 'PT Sans', sans, serif; font-weight:700;
+color:#f8f8f8; font-size:16px;line-height:16px}
+.tops{font-family: 'PT Sans', sans, serif;}
+.breaking-title{background-color:#D01F3C}
+a,
+#change-small i,#change-small2 i,
+.blog-meta .data .month,
+.blog-meta .data .day,
+.blog-meta .data .year,
+#commentform label,
+ul.price li.cost,
+ul.price li.cost h3,
+#container-ch .item-block-isotope .description,
+.item-block-isotope .symbol,
+.item-block-isotope .name ,
+.item-block-isotope .summary p,
+.sidebar_block h3,
+.sidebar_block h4,.page-header h1,
+.block-info .home-title,
+a.description,
+.promo-slogan h1 span,
+nav ul.menu li a:hover, nav ul li.current-menu-item > a,nav ul li.current-menu-parent > a,nav ul li.current_page_parent > a,
+.divider-strip h1,.divider-strip h3, h3.widget-title{color:#242426;}
+a:hover,#top a:hover,
+#commentform label small,
+#footers .tweets ul li a,.divider-strip.author h3 span,.menu-csc-side-navigation-container .menu li.current-menu-item a,.post-title.top a,.breadcrumbs_menu .current,ul.control-menu li a:hover,#wp-calendar tbody td a,.not-mes,.scoreinfo,.scorehome,.breaking-roll li a,#magflexslider .slider-caption a h1{color:#f50c0c;}
+.menu-csc-side-navigation-container .menu li.current-menu-item a{ border-left-color:#f50c0c}
+#top .info-text li{color:;}
+#top .info-text li a{color:;}
+.carousel-right:hover,
+.item-block:hover > a.description,
+ul.control-menu li a:hover,
+#container-ch .item-block-isotope:hover > .description,
+.item-block-isotope .zoomi:hover,.item-block-isotope .linki:hover,.item-block-isotope .info:hover,.open-block-acc.active,.open-block.active a,.cat-slider,#wp-calendar tbody td#today a{ background-color:#f50c0c;}
+ul.control-menu li a,
+.button:hover, .button:focus,
+ul.control-menu li a,.button.blue,.port-info .port-info-back,a.all_break:hover,a.all_cat:hover{ background-color:#f50c0c; }
+a.all_cat,.overall-score{ background-color:#f50c0c !important; }
+.top-bar{background:#4d4d4d ;}
+.top-bar{border-top:3px #f50c0c solid;}
+.hot_top_news{border-top:2px #D01F3C solid;border-bottom:2px #D01F3C solid;}
+#top-search .search-query.span4 { background-color:;}
+nav ul.menu{background-color:#4d4d4d;}
+i{color:;}
+#change-small .change-select,#change-small2 .change-select,ul.filter-change li a:hover,ul#portfolio-filter li a:hover,
+ul.control-menu li a,
+ul#portfolio-filter li a.currents,ul.filter-data li a.selected,
+ul.price.best li.cost,
+.progress-warning.progress-striped .bar,
+.button.blue:hover{background-color:#6f7072}
+ul.control-menu li a,
+ul.filter-data li a:hover{ background-color:#6f7072;color: #f8f8f8;}
+#change-small i,#change-small2 i{ color:#f8f8f8;}
+.dropcap,
+.button,
+.hover-desc-bottom{background:#6f7072;}
+.theme-default2 .nivo-caption{background:;}
+.theme-default2 a.nivo-nextNav{ background-color:}
+.theme-default2 a.nivo-prevNav{ background-color:}
+nav ul.menu li a{font-family: 'PT Sans', sans, serif; font-weight:700;
+font-size:16px;color:#f8f8f8;background-color:#f50c0c}
+nav ul.menu li a{ background-color:#4d4d4d}
+nav ul.menu li a:hover{color:#f8f8f8;background-color:#f50c0c}
+nav ul li.current-menu-item > a,nav ul li.current-menu-parent > a,nav ul li.current_page_parent > a{color:#f8f8f8}
+nav ul li.current-menu-item > a,nav ul li.current-menu-parent > a,nav ul li.current_page_parent > a,.flex-control-paging li a.flex-active,.flex-control-paging li a:hover,#magflexslider .flex-control-paging li a.flex-active,#magflexslider .flex-control-paging li a:hover , .scorebar,.scoreimage{background-color:#f50c0c}
+nav ul.menu li ul li a{background:#4d4d4d;color:#f8f8f8;}
+nav ul.menu li ul li a:hover{background:#f50c0c;color:#f8f8f8;}
+nav ul.menu li ul li{background-color:#f50c0c;}
+nav ul.menu li.sfHover > a{background-color:#f50c0c}
+nav ul.menu li.sfHover > a:hover{background-color:#f50c0c;}
+.nav-tabs > li.active > a,.nav-tabs > li.active > a:hover,.nav-tabs > li > a:hover  { border-top:#f50c0c 5px solid;}
+.scorehome,#wp-calendar thead th{ background-color:#f50c0c}
+.stripe-dots{ border-bottom:5px #f50c0c solid; }
+.stripe-dots,a.all_cat{background-color:#4d4d4d}
+#share_post a.soc-follow.facebook { background-color:#c2c2c2}
+#share_post a.soc-follow.twitter { background-color:#c2c2c2}
+#share_post a.soc-follow.linkedin { background-color:#c2c2c2}
+#share_post a.soc-follow.tumblr{ background-color:#c2c2c2 }
+#share_post a.soc-follow.google{ background-color:#c2c2c2 }
+a.soc-follow.dribbble { background-color:#f50c0c }
+a.soc-follow.facebook { background-color:#f50c0c}
+a.soc-follow.twitter { background-color:#f50c0c}
+a.soc-follow.flickr { background-color:#f50c0c }
+a.soc-follow.linkedin { background-color:#f50c0c}
+a.soc-follow.vimeo{ background-color:#f50c0c }
+a.soc-follow.google{ background-color:#f50c0c }
+a.soc-follow.ember{ background-color:#f50c0c }
+a.soc-follow.evernote{ background-color:#f50c0c }
+a.soc-follow.forrst{ background-color:#f50c0c }
+a.soc-follow.github{ background-color:#f50c0c }
+a.soc-follow.last-fm{ background-color:#f50c0c }
+a.soc-follow.paypal{ background-color:#f50c0c }
+a.soc-follow.rss{ background-color:#f50c0c }
+a.soc-follow.sharethis{ background-color:#f50c0c }
+a.soc-follow.skype{ background-color:#f50c0c }
+a.soc-follow.tumblr{ background-color:#f50c0c }
+a.soc-follow.wordpress{ background-color:#f50c0c }
+a.soc-follow.yahoo{ background-color:#f50c0c }
+a.soc-follow.youtube{ background-color:#f50c0c }
+a.soc-follow.zerply{ background-color:#f50c0c }
+a.soc-follow.aim{ background-color:#f50c0c }
+a.soc-follow.behance{ background-color:#f50c0c }
+a.soc-follow.digg{ background-color:#f50c0c }
+#top a.soc-follow.dribbble { background-color:#666363 }
+#top a.soc-follow.facebook { background-color:#666363}
+#top a.soc-follow.twitter { background-color:#666363}
+#top a.soc-follow.flickr { background-color:#666363 }
+#top a.soc-follow.linkedin { background-color:#666363 }
+#top a.soc-follow.vimeo{ background-color:#666363 }
+#top a.soc-follow.google{ background-color:#666363}
+#top a.soc-follow.ember{ background-color:#666363 }
+#top a.soc-follow.evernote{ background-color:#666363 }
+#top a.soc-follow.forrst{ background-color:#666363 }
+#top a.soc-follow.github{ background-color:#666363}
+#top a.soc-follow.last-fm{ background-color:#666363 }
+#top a.soc-follow.paypal{ background-color:#666363 }
+#top a.soc-follow.rss{ background-color:#666363 }
+#top a.soc-follow.sharethis{ background-color:#666363 }
+#top a.soc-follow.skype{ background-color:#666363 }
+#top a.soc-follow.tumblr{ background-color:#666363 }
+#top a.soc-follow.wordpress{ background-color:#666363 }
+#top a.soc-follow.yahoo{ background-color:#666363 }
+#top a.soc-follow.youtube{ background-color:#666363 }
+#top a.soc-follow.zerply{ background-color:#666363 }
+#top a.soc-follow.aim{ background-color:#666363 }
+#top a.soc-follow.behance{ background-color:#666363 }
+#top a.soc-follow.digg{ background-color:#666363 }
+.blog-meta .post-format span{background-color:#f50c0c;}
+.post-format span,.post-format-s span{background-color:#f50c0c;}
+.menu-t li a {color:#f8f8f8;}
+</style>
+
+
+ 
+ 
+  
+ 
+ 
+
+ <div class="top-bar">
+ <div class="container" style="position:relative;">
+
+
+<!-- Ad script begins -->
+
+
+
+
+<div style="position:absolute; right:-175px; z-index:1001; top:35px;">
+<a href="http://www.microsoftvirtualacademy.com/training-courses/managing-your-systems-on-microsoft-azure-with-chef">
+<img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Microsoft1.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a>
+</div>
+
+<div style="position:absolute; left:-175px; z-index:1001; top:35px;">
+<a href="http://www.microsoftvirtualacademy.com/training-courses/managing-your-systems-on-microsoft-azure-with-chef">
+<img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Microsoft1.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a>
+</div>
+    
+
+
+
+<!--Ad script ends -->
+ 
+ 
+ 
+ 
+ <div class="row" style=" margin-left:-30px; margin-right:-30px; padding-top:5px; padding-bottom:5px;">
+  
+  <div class="span4" id="top">
+ <ul class="socicon-2 pull-left">
+
+			            <li><a href="https://twitter.com/devopsdotcom" class="soc-follow twitter" title="twitter"></a></li>
+                        
+                        <li><a href="https://www.facebook.com/devopscom" class="soc-follow facebook" title="facebook"></a></li>
+                        
+
+                                  
+            
+                                    
+            
+                                   
+            
+                        <li><a href="http://www.linkedin.com/groups/DevOpscom-6619007" class="soc-follow linkedin" title="linkedin"></a></li>
+                        
+            
+                        <li><a href="https://plus.google.com/u/0/105939795122860171376/" class="soc-follow google" title="google plus"></a></li>
+                        
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                         
+            
+                                    
+                                    
+                        
+            
+           
+
+
+      </ul>
+      
+  <span style="color:#fff; float:left; margin-left:25px; margin-top:2px; font-size:12px !important;">August 3, 2015</span>
+  </div>
+
+  
+  <div class="span8">
+   
+<div class="menu-t sf-js-enabled"><ul><li class="page_item page-item-15 page_item_has_children"><a href="http://devops.com/about/">About DevOps.com</a><ul class="children" style="display: none; visibility: hidden;"><li class="page_item page-item-1040"><a href="http://devops.com/about/sponsor/">DevOps.com Sponsor Info</a></li></ul></li><li class="page_item page-item-1461"><a href="http://devops.com/authors-page/">Authors Page</a></li><li class="page_item page-item-6792"><a href="http://devops.com/bloor-research-the-economics-of-cloud-managed-integration/">Bloor Research: The Economics of Cloud-Managed Integration</a></li><li class="page_item page-item-1049"><a href="http://devops.com/business-directory/">Business Directory</a></li><li class="page_item page-item-209"><a href="http://devops.com/copyright/">Copyright</a></li><li class="page_item page-item-7598"><a href="http://devops.com/7598-2/">DevOps Connect: RSA Conference 2015 Video Recordings</a></li><li class="page_item page-item-7600"><a href="http://devops.com/devops-connect-secdevops-edition-10-hours-of-video/">DevOps Connect: SecDevOps Edition, 10+ Hours of Video Available</a></li><li class="page_item page-item-1591"><a href="http://devops.com/jobs/">DevOps Jobs</a></li><li class="page_item page-item-264"><a href="http://devops.com/devops-meetup/">DevOps Meetup Calendar</a></li><li class="page_item page-item-6749"><a href="http://devops.com/downloads/">Downloads</a></li><li class="page_item page-item-1874 page_item_has_children"><a href="http://devops.com/devops-events/">Events</a><ul class="children" style="display: none; visibility: hidden;"><li class="page_item page-item-4265"><a href="http://devops.com/devops-events/conferences/">Conferences</a></li><li class="page_item page-item-4264"><a href="http://devops.com/devops-events/webinars/">Webinars &amp; Hangouts</a></li></ul></li><li class="page_item page-item-6477"><a href="http://devops.com/forrester-devops-white-paper/">Forrester White Paper</a></li><li class="page_item page-item-6801"><a href="http://devops.com/gartner-report-selecting-the-most-suitable-platform-for-cloud-service-integration/">Gartner Report: Selecting the Most Suitable Platform for Cloud Service Integration</a></li><li class="page_item page-item-54"><a href="http://devops.com/">Home</a></li><li class="page_item page-item-6798"><a href="http://devops.com/how-ipaas-supports-todays-hybrid-it-environments/">How iPaaS Supports Today’s Hybrid IT Environments</a></li><li class="page_item page-item-6221"><a href="http://devops.com/kickstarting-devops-ebook/">Kickstarting DevOps – eBook</a></li><li class="page_item page-item-1013 page_item_has_children"><a href="http://devops.com/listings/">Listings</a><ul class="children" style="display: none; visibility: hidden;"><li class="page_item page-item-1014"><a href="http://devops.com/listings/my-listings/">My Listings</a></li><li class="page_item page-item-1019"><a href="http://devops.com/listings/signup-2/">Signup</a></li></ul></li><li class="page_item page-item-6805"><a href="http://devops.com/magic-quadrant-for-enterprise-integration-platform-as-a-service/">Magic Quadrant for Enterprise Integration Platform as a Service</a></li><li class="page_item page-item-6223"><a href="http://devops.com/navigating-devops-ebook/">Navigating DevOps – eBook</a></li><li class="page_item page-item-6232"><a href="http://devops.com/newrelic-video1/">New Relic Video</a></li><li class="page_item page-item-6803"><a href="http://devops.com/ovum-case-study-adoption-of-dell-boomi-atomsphere-ipaas-by-novartis/">OVUM Case Study: Adoption of Dell Boomi AtomSphere iPaaS by Novartis</a></li><li class="page_item page-item-208"><a href="http://devops.com/privacy-policy/">Privacy Policy</a></li><li class="page_item page-item-6565"><a href="http://devops.com/6565-2/">Quest Software/Dell</a></li><li class="page_item page-item-1592"><a href="http://devops.com/resumes/">Resumes</a></li><li class="page_item page-item-6796"><a href="http://devops.com/salesforce-integration-guidebook/">SalesForce Integration Guidebook</a></li><li class="page_item page-item-793"><a href="http://devops.com/sign-up-for-our-newsletter/">Sign Up for our Newsletter</a></li><li class="page_item page-item-6229"><a href="http://devops.com/three-key-trends-ebook/">Three Key Trends Defining the Future of DevOps</a></li><li class="page_item page-item-207"><a href="http://devops.com/tos/">TOS</a></li></ul></div>
+
+  </div>
+  
+</div>
+</div> 
+</div>
+
+
+     
+<div class="container basis" style="position:relative; background:#ffffff;">
+
+
+ <div class="row" style="margin-left:0;">
+
+ 
+<!-- Main
+================================================== -->
+
+ 
+<div class="container" style="position:relative;">
+
+
+<!-- Logo / ads
+================================================== -->
+<header class="header default">
+<div class="row">
+
+      <div class="span4">
+      
+      <a href="http://devops.com/" title="DevOps.com" rel="home"><img class="logoimg" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/logo-DevOps1.png"></a>
+                            
+                          
+      </div>
+      <div class="span8 banner_head_right">
+        
+        <div style="text-align:right; float:right;margin-top:10px">        
+		        
+			<div class="g g-2"><div class="g-single a-197"><a class="gofollow" data-track="MTk3LDIsMSw2MA==" href="http://agile2015.agilealliance.org/"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/197-IBM-728x90.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div></div>            
+				
+		</div>      
+      </div>
+</div>
+<!-- Main menu
+================================================== -->
+
+<div class="row">
+ <div class="span12">
+
+
+<nav id="menu-top" class="row"><ul id="mainmenu" class="menu span12 sf-js-enabled"><li id="menu-item-185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-185"><a href="http://devops.com/">Home</a></li>
+<li id="menu-item-95" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-95"><a href="http://devops.com/category/features">Features</a></li>
+<li id="menu-item-96" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-96"><a href="http://devops.com/category/blogs">Blogs</a>
+<ul class="sub-menu" style="display: none; visibility: hidden;">
+	<li id="menu-item-2454" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2454"><a href="http://devops.com/category/blogs/devops-in-the-cloud/">DevOps in the Cloud<em></em></a></li>
+	<li id="menu-item-5854" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5854"><a href="http://devops.com/category/blogs/variable-speed-devops/">Variable Speed DevOps<em></em></a></li>
+	<li id="menu-item-5862" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5862"><a href="http://devops.com/category/blogs/devops-at-interconnect/">DevOps @ InterConnect<em></em></a></li>
+	<li id="menu-item-2451" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-2451"><a href="http://devops.com/category/blogs/devops-life/">Doin’ DevOps<em></em></a></li>
+	<li id="menu-item-2450" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2450"><a href="http://devops.com/category/blogs/enterprise-devops/">Enterprise DevOps<em></em></a></li>
+	<li id="menu-item-2449" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2449"><a href="http://devops.com/category/blogs/business-of-devops/">Business of DevOps<em></em></a></li>
+	<li id="menu-item-2453" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2453"><a href="http://devops.com/category/blogs/devops-toolbox/">DevOps Toolbox<em></em></a></li>
+	<li id="menu-item-2452" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2452"><a href="http://devops.com/category/blogs/secops/">Rugged DevOps<em></em></a></li>
+	<li id="menu-item-5941" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5941"><a href="http://devops.com/category/blogs/local-devops/">Local DevOps<em></em></a></li>
+</ul>
+</li>
+<li id="menu-item-1385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1385"><a href="http://devops.com/business-directory/">Business Directory</a></li>
+<li id="menu-item-1606" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1606"><a href="http://devops.com/jobs/">DevOps Jobs</a></li>
+<li id="menu-item-2529" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2529"><a href="http://devops.com/devops-events/">Events</a>
+<ul class="sub-menu" style="display: none; visibility: hidden;">
+	<li id="menu-item-4316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4316"><a href="http://devops.com/devops-events/webinars/">Webinars &amp; Hangouts<em></em></a></li>
+	<li id="menu-item-4315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4315"><a href="http://devops.com/devops-events/conferences/">Conferences<em></em></a></li>
+	<li id="menu-item-1899" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1899"><a href="http://devops.com/devops-meetup/">Meetups<em></em></a></li>
+</ul>
+</li>
+<li id="menu-item-6896" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6896"><a href="http://devops.com/downloads/">Downloads</a></li>
+<li id="menu-item-93" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-93"><a href="http://devops.com/category/news">News</a></li>
+<li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-23"><a href="http://devops.com/about/">About</a>
+<ul class="sub-menu" style="display: none; visibility: hidden;">
+	<li id="menu-item-1152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1152"><a href="http://devops.com/about/sponsor/">Sponsor Info<em></em></a></li>
+	<li id="menu-item-90" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90"><a href="http://devops.com/wp-login.php">Register<em></em></a></li>
+</ul>
+</li>
+</ul><select class="menuselect"><option value="" selected="">SITE MENU</option><option value="/"> Home</option><option value="/category/features"> Features</option><option value="/category/blogs"> Blogs</option><option value="http://devops.com/category/blogs/devops-in-the-cloud/">-- DevOps in the Cloud</option><option value="http://devops.com/category/blogs/variable-speed-devops/">-- Variable Speed DevOps</option><option value="http://devops.com/category/blogs/devops-at-interconnect/">-- DevOps @ InterConnect</option><option value="http://devops.com/category/blogs/devops-life/">-- Doin’ DevOps</option><option value="http://devops.com/category/blogs/enterprise-devops/">-- Enterprise DevOps</option><option value="http://devops.com/category/blogs/business-of-devops/">-- Business of DevOps</option><option value="http://devops.com/category/blogs/devops-toolbox/">-- DevOps Toolbox</option><option value="http://devops.com/category/blogs/secops/">-- Rugged DevOps</option><option value="http://devops.com/category/blogs/local-devops/">-- Local DevOps</option><option value="http://devops.com/business-directory/"> Business Directory</option><option value="http://devops.com/jobs/"> DevOps Jobs</option><option value="http://devops.com/devops-events/"> Events</option><option value="http://devops.com/devops-events/webinars/">-- Webinars &amp; Hangouts</option><option value="http://devops.com/devops-events/conferences/">-- Conferences</option><option value="http://devops.com/devops-meetup/">-- Meetups</option><option value="http://devops.com/downloads/"> Downloads</option><option value="/category/news"> News</option><option value="http://devops.com/about/"> About</option><option value="http://devops.com/about/sponsor/">-- Sponsor Info</option><option value="/wp-login.php">-- Register</option></select></nav>
+ </div>
+</div>
+
+<!-- google analytics Js -->
+
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48656547-1', 'devops.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- adroll Js -->
+
+<script type="text/javascript"> 
+adroll_adv_id = "QMSFLR7M5FCWJGBWOOYFPT"; 
+adroll_pix_id = "DZIKFOJDGFC3RC5STGYEBM"; 
+(function () { 
+var oldonload = window.onload; 
+window.onload = function(){ 
+  __adroll_loaded=true; 
+     var scr = document.createElement("script"); 
+     var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com"); 
+    scr.setAttribute('async', 'true'); 
+    scr.type = "text/javascript"; 
+   scr.src = host + "/j/roundtrip.js"; 
+   ((document.getElementsByTagName('head') || [null])[0] || 
+   document.getElementsByTagName('script')[0].parentNode).appendChild(scr); 
+  if(oldonload){oldonload()}}; 
+}()); 
+</script>
+
+<!-- slideshow Js-->
+
+<script type="text/javascript">
+jQuery( function() {
+jQuery.vegas( 'slideshow', { 
+        backgrounds:[ ],
+fade: 500,
+delay: 5000,
+valign:'center', 
+align:'center' 
+     })('overlay', {
+src:'http://devops.com/wp-content/themes/rapidnews/images/overlays/0.png',
+opacity:0.5
+  });
+
+});
+</script>
+
+<!-- template directory Js -->
+
+<script type="text/javascript">
+jQuery( function() {
+  jQuery.vegas({
+    src:'',
+fade:500, // milliseconds,
+valign:'center', // top, center, bottom or %
+    align:'center' // left, center, right or %
+  })('overlay', {
+src:'http://devops.com/wp-content/themes/rapidnews/images/overlays/0.png',
+opacity:0.5
+  });
+  
+});
+</script>
+
+
+
+</header>
+
+</div>
+<div class="container slider-cont"> 
+  <div class="row">
+
+
+
+
+<div class="span12">
+<div class="row">
+<section>
+
+
+<div class="span8" id="blog_page">
+<div class="row">
+
+
+					
+					
+
+<article style="margin-top:0;" id="post-8744" class="post-8744 post type-post status-publish format-standard has-post-thumbnail hentry category-blogs category-devops-life tag-continuous-delivery tag-continuous-deployment tag-continuous-integration tag-release-management tag-scm">
+<div class="span8">
+<div class="row">
+
+
+
+<div class="span8">
+
+
+
+
+
+                <div class="row">
+                 <div class="span8 post-img">
+                  <a href="http://devops.com/wp-content/uploads/2015/07/EssentialIngredients.jpg" rel="prettyPhoto" title="Essential Ingredients for Continuous Deployment">
+                    <img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/EssentialIngredients-770x300.jpg">
+                    <div class="post-format"><span></span></div>
+                  </a>
+                  
+                  </div>
+                 </div>
+
+
+</div>
+ 
+ 
+<div class="span8">
+ <header class="entry-header">
+<h1 class="post-title"><a href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Essential Ingredients to Continuous DeploymentDevOps.com.html" title="Permalink to Essential Ingredients for Continuous Deployment" rel="bookmark">Essential Ingredients for Continuous Deployment</a>
+</h1>
+                          
+</header><!-- .entry-header -->
+
+<div class="row">
+ <div class="span8 entry-info" style="margin-top:0px;"> 
+              
+ Aug 3, 2015             
+          
+				<span class="sep">Posted </span><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="http://devops.com/author/vishal-sahasrabuddhe/" title="View all posts by vishal sahasrabuddhe" rel="author">vishal sahasrabuddhe</a></span> In </span>			
+			            
+             			<a href="http://devops.com/category/blogs/" rel="category tag">Blogs</a>, <a href="http://devops.com/category/blogs/devops-life/" rel="category tag">Doin' DevOps</a>			            
+        
+             						<span class="entry-utility-prep entry-utility-prep-tag-links">Tagged</span> <a href="http://devops.com/tag/continuous-delivery/" rel="tag">continuous delivery</a>, <a href="http://devops.com/tag/continuous-deployment/" rel="tag">continuous deployment</a>, <a href="http://devops.com/tag/continuous-integration/" rel="tag">continuous integration</a>, <a href="http://devops.com/tag/release-management/" rel="tag">release management</a>, <a href="http://devops.com/tag/scm/" rel="tag">SCM</a>			 
+            			<span class="comments-link"><a href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/#disqus_thread" class="comments-link" data-disqus-identifier="8744 http://devops.com/?p=8744">0 Comments</a></span>
+			  
+               
+</div>
+
+<div class="divider-post span8" style="margin-bottom:0px;"></div>
+</div>
+  
+
+<div class="entry-content">
+
+<p>To build the system to automate the build and deployment (continuous deployment) process there are few main areas which need to be covered. Following are our prerequisites.</p>
+<ul>
+<li>Source code</li>
+<li>Builds System</li>
+<li>Deployments</li>
+<li>QA Automation</li>
+</ul>
+<p>To describe above here are the main ingredients<br>
+<em>– Configuration Management</em><br>
+<em> – continuous integration/ Automated Build</em><br>
+<em> – Automated Deployment</em><br>
+<em> –&nbsp; Automated testing</em></p>
+<p><strong></strong><strong>Configuration management</strong><br>
+Very fist step to align your development practice is to select the right source control tool. Once you have the tool then you need to think of branching policy to make sure the starting point of the workflow is well defined and accepted by developers during their development phase.<br>
+There could be lot of process around merging, branching code review etc which needs to be address and policy driven. Some key points could be<br>
+<em>– Developments and release branch should be separate.</em><br>
+<em> – Each change goes qualifies for next stage only if reviewed.</em><br>
+<em> – Code quality should not go down.</em></p>
+<p>Following are a few options<br>
+<strong>&nbsp;Source control tool</strong><br>
+– SVN (Free)<br>
+– CVS (Free)<br>
+– Git (Free)<br>
+-Perforce (Paid)<br>
+-Clearcase (Paid)</p>
+<p><strong></strong><strong>Build system</strong><br>
+Team needs to have robust and automated build system which can take care of all our needs (build, analysis, deployment etc).<br>
+<em>– Need to have automated build system which can keep building the source code from various branches to make sure we catch the broken piece fast.</em><br>
+<em> – Build can run the unit test and provide report</em><br>
+<em> – Build can check the health of the code by running findbugs and checkstyle (if any).</em></p>
+<p>Above checks can verify the heath and quality of the code (static analysis).<br>
+Nothing should go beyond this point if any of the above is not matching with our criteria.</p>
+<p>Till this point we have reached to qualify the minimum criteria for continuous Integration.<br>
+Here are few tools which comes under Build system<br>
+<strong>Build Tools</strong><br>
+– Ant<br>
+– Maven<br>
+– Gradle<br>
+– Make<br>
+<strong>CI tool</strong><br>
+– Jenkins<br>
+– Cruise control<br>
+– Luntbuild<br>
+-Bamboo<br>
+<strong>Repository management</strong><br>
+– Nexus<br>
+– Artifactory<br>
+(Above are not open source but they are free to use with limited features).<br>
+<strong>Code quality check</strong><br>
+– Findbugs<br>
+– jacoco<br>
+– cobertura</p>
+<p><strong>**Deployments **</strong></p>
+<p>Deployments are the next big bottleneck for continuous deployment.<br>
+We need to have a deployment tool to move ahead,<br>
+<em>– configuration management tool like puppet or chef</em><br>
+<em> – Private cloud management (Openstack)</em><br>
+<em> – Third party tool like xl deploy, Udeploy, Opsworks etc..</em></p>
+<p>Deployment strategy can be chosen on the basis of our need and the tool we are using, most of the plugins are available in jenkins (or bamboo) to make tight integration of build and deployment.</p>
+<p>(At this stage I am not considering the dynamic provisioning of hardware in this section).</p>
+<p><strong></strong><strong>Automated testing</strong></p>
+<p>Once deployment phase is over QA regression suite can be triggered via jenkins (or any other tool) and entire reports can be published to central QA metrics board.<br>
+This this point we can even use jacoco/cobertura to provide functional code coverage(for Java code) to demonstrate how much % of code QA regression/automation is covering and what is the level of automation.<br>
+Similar way job can be setup to raise jira/bug ticket to file issues found during any of the above step.</p>
+<p>Finally we can have last step which can perform the final release build and push to staging /production in similar fashion.</p>
+<p><strong>&nbsp;Resource Provisioning</strong></p>
+<p>Developers/QA can just get the hardware either from infra team or if auto provisioning is enabled they can setup the environment and use the jenkins to perform build+deployment+QA<br>
+If we talk about automatic scaling of environment, we can use AWS for same.<br>
+Jenkins has AWS plugin to launch instance, This can be setup to launch instance dynamically and run the application and perform the QA Automation. Once need is over aws instance can be terminated automatically.</p>
+<p><a href="http://www.scmtechblog.net/2014/02/continuous-delivery-and-deployment.html" target="_blank">Reference-1</a></p>
+<p><a href="https://www.linkedin.com/pulse/essential-ingredients-continuous-deployment-vishal-sahasrabuddhe?trk=pulse-det-nav_art" target="_blank">Reference-2</a></p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-8744" class="share-facebook sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=facebook&nb=1" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-8744" class="share-linkedin sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=linkedin&nb=1" target="_blank" title="Click to share on LinkedIn"><span><span class="share-count">1</span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)<span class="share-count">1</span></span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=reddit&nb=1" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-8744" class="share-twitter sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=twitter&nb=1" target="_blank" title="Click to share on Twitter"><span><span class="share-count">1</span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)<span class="share-count">1</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-8744" class="share-google-plus-1 sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=google-plus-1&nb=1" target="_blank" title="Click to share on Google+"><span></span><span class="sharing-screen-reader-text">Click to share on Google+ (Opens in new window)</span></a></li><li class="share-tumblr"><a rel="nofollow" data-shared="" class="share-tumblr sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=tumblr&nb=1" target="_blank" title="Click to share on Tumblr"><span></span><span class="sharing-screen-reader-text">Click to share on Tumblr (Opens in new window)</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-8744" class="share-pinterest sd-button share-icon no-text" href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/?share=pinterest&nb=1" target="_blank" title="Click to share on Pinterest"><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>
+</div><!-- .entry-content -->
+
+</div>
+<div class="navigation span8">
+<style>
+.pagenavi span {padding: 5px 10px 6px 10px;font-size: 12px;line-height: 12px; border:1px #e8e8e3 solid;}
+.pagenavi a > span { margin-right:0px; margin-left:0px; padding:0; border:none !important;}
+</style>
+
+
+</div>
+
+</div>
+</div>
+
+
+
+
+<div class="divider" style="margin:0;"></div>
+
+
+<section><div class="span8"><div class="row"><div class="span8 divider-strip author"><h3>About the author &nbsp;⁄&nbsp;<span><a href="http://www.scmtechblog.net/" title="Visit vishal sahasrabuddhe’s website" rel="author external">vishal sahasrabuddhe</a></span></h3></div><div class="span1"><img alt="vishal sahasrabuddhe" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/vishal-sahasrabuddhe_avatar_1418732941-60x60.png" class="avatar avatar-60 photo" height="60" width="60"></div><div class="span7"><p>I am Vishal Sahasrabuddhe, a Software Engineer specializing in SCM (Software Configuration Management), Builds, Deployment and Release Engineering, DevOps.
+I have worked in many companies like Oracle, Sabre, Travelocity, Inmobi in various roles   
+
+Well I am here to share my experiences with the world and walk through this journey along with you all.</p></div></div></div></section>
+<div class="span8 share" style="margin-top:0; background:none">
+<ul class="socicon-2 pull-right">
+
+            <li><a href="https://twitter.com/vishal_vsh1" class="soc-follow twitter" title="twitter"></a></li>
+                        
+                                    
+                                    
+            
+                                    
+            
+                                   
+            
+                        <li><a href="https://www.linkedin.com/in/vishalsahasrabuddhe" class="soc-follow linkedin" title="linkedin"></a></li>
+                        
+                                    
+                                               
+</ul>
+</div>
+
+
+
+<div class="divider-post span8" style="margin-bottom:0px;"></div>
+<style>
+ul.control-menu { margin:0px; margin-bottom:30px; margin-top:40px;}
+ul.control-menu li{ max-width:50%}
+ul.control-menu li a{ background: none !important; border:none !important; font-weight:700; font-size:15px; color:#868585 !important;}
+ul.control-menu li a:hover{background: none;border:none;}
+ul.control-menu .prev{ text-align:left; float:left; }
+ul.control-menu .next{ text-align: right; float:right;}
+ul.control-menu li.prev a { text-align:left; padding:0; }
+ul.control-menu li.next a { text-align: right; padding:0; }
+ul.control-menu li.prev a span{ font-weight:400; display:block; text-align:left;font-size:12px; margin-top:5px; color:#999999}
+ul.control-menu li.next a span{ font-weight:400; display:block; text-align: right; font-size:12px; margin-top:5px;color:#999999}
+</style>
+
+<ul class="control-menu span8">
+     <li class="prev"></li>
+     <li class="next"><a class="itemload" href="http://devops.com/2015/07/31/devops-in-a-hybrid-model/" data-ajax="devops-in-a-hybrid-model">Next <i class="icon-arrow-right"></i> <span>DevOps in a Hybrid Model</span></a></li>		
+</ul> 
+
+
+    
+	<div class="span8">
+        
+        <div class="widget-title" style="margin-top:30px;">
+          <h3>Related Posts</h3>
+          <span class="stripe-dots"></span>
+        </div>
+        
+        
+		<div class="row">
+			             <div class="span2">
+						
+                	
+					<a href="http://devops.com/2015/07/22/software-bom-squad/" title="The Software BOM Squad">
+						                                                
+                    <img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/BOMsquad1-170x80.jpg" style="margin-bottom:10px">
+                  </a>
+
+					
+                <header class="entry-header"><h2 class="post-title-small"><a href="http://devops.com/2015/07/22/software-bom-squad/" title="The Software BOM Squad">The Software BOM Squad</a></h2></header>		
+				<div class="entry-info" style="margin-top:0px;">Jul 22, 2015</div>
+                
+                                
+              </div>
+			             <div class="span2">
+						
+                	
+					<a href="http://devops.com/2015/07/22/good-code-goes-bad/" title="When Good Code Goes Bad">
+						                                                
+                    <img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/GoodCodeGoesBad-170x80.jpg" style="margin-bottom:10px">
+                  </a>
+
+					
+                <header class="entry-header"><h2 class="post-title-small"><a href="http://devops.com/2015/07/22/good-code-goes-bad/" title="When Good Code Goes Bad">When Good Code Goes Bad</a></h2></header>		
+				<div class="entry-info" style="margin-top:0px;">Jul 22, 2015</div>
+                
+                                
+              </div>
+			             <div class="span2">
+						
+                	
+					<a href="http://devops.com/2015/07/13/webinar-introducing-cloudbees-jenkins-platform-your-foundation-for-devops-and-cd-with-docker-containers/" title="Webinar: Introducing CloudBees Jenkins Platform – your foundation for DevOps and CD with Docker Containers">
+						                                                
+                    <img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/devops_Banner_cloudbees_v2-170x80.jpg" style="margin-bottom:10px">
+                  </a>
+
+					
+                <header class="entry-header"><h2 class="post-title-small"><a href="http://devops.com/2015/07/13/webinar-introducing-cloudbees-jenkins-platform-your-foundation-for-devops-and-cd-with-docker-containers/" title="Webinar: Introducing CloudBees Jenkins Platform – your foundation for DevOps and CD with Docker Containers">Webinar: Introducing CloudBees Jenkins Platform – your foundation for DevOps and CD with Docker Containers</a></h2></header>		
+				<div class="entry-info" style="margin-top:0px;">Jul 13, 2015</div>
+                
+                                
+              </div>
+			             <div class="span2">
+						
+                	
+					<a href="http://devops.com/2015/07/13/continuous-delivery-changing-software-development/" title="How Continuous Delivery is Changing Software Development">
+						                                                
+                    <img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/cdspeeds-170x80.jpg" style="margin-bottom:10px">
+                  </a>
+
+					
+                <header class="entry-header"><h2 class="post-title-small"><a href="http://devops.com/2015/07/13/continuous-delivery-changing-software-development/" title="How Continuous Delivery is Changing Software Development">How Continuous Delivery is Changing Software Development</a></h2></header>		
+				<div class="entry-info" style="margin-top:0px;">Jul 13, 2015</div>
+                
+                                
+              </div>
+			
+		</div>
+        
+  </div>
+	
+<div class="divider"></div>
+</article><!-- #post-8744 -->
+					
+<div id="disqus_thread"><iframe id="dsq-1" data-disqus-uid="1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 611px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="dsq-indicator-north" data-disqus-uid="indicator-north" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 800px !important; border: none !important; overflow: hidden !important; top: 0px !important; min-width: 800px !important; max-width: 800px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important;"></iframe><iframe id="dsq-indicator-south" data-disqus-uid="indicator-south" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 800px !important; border: none !important; overflow: hidden !important; bottom: 0px !important; min-width: 800px !important; max-width: 800px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important;"></iframe></div>
+
+	
+
+
+</div>
+</div>
+
+
+<div class="span4">
+
+<div class="row">
+<div class="span4">
+
+<aside id="search-4" class="widget widget_search"><form role="search" class="form-search row" method="get" id="searchform" action="http://devops.com/">
+    <div class="span4">
+    <input class="input-medium search-query" type="text" value="" name="s" id="s" autocomplete="off">
+    </div>
+    </form></aside><aside id="text-2" class="widget widget_text"><div class="widget-title"><h3>Sign up for our Newsletter</h3><span class="stripe-dots"></span></div>			<div class="textwidget">
+                <div class="gf_browser_gecko gform_wrapper" id="gform_wrapper_21"><form method="post" enctype="multipart/form-data" id="gform_21" action="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Essential Ingredients to Continuous DeploymentDevOps.com.html">
+                        <div class="gform_heading">
+                            <span class="gform_description"></span>
+                        </div>
+                        <div class="gform_body"><ul id="gform_fields_21" class="gform_fields top_label form_sublabel_below description_above"><li id="field_21_3" class="gfield gfield_contains_required field_sublabel_below field_description_above"><label class="gfield_label" for="input_21_3">Email<span class="gfield_required">*</span></label><div class="ginput_container">
+                            <input name="input_3" id="input_21_3" type="email" value="" class="medium" tabindex="1">
+                        </div></li><li id="field_21_2" class="gfield field_sublabel_below field_description_above"><label class="gfield_label" for="input_21_2">Newsletter Frequency?</label><div class="ginput_container"><select name="input_2" id="input_21_2" class="medium gfield_select" tabindex="2"><option value="twice a week" selected="selected">twice a week</option><option value="weekly">weekly</option><option value="bi-weekly">bi-weekly</option><option value="Events and Webinars Only">Events and Webinars Only</option></select></div></li>
+                            </ul></div>
+        <div class="gform_footer top_label"> <input type="submit" id="gform_submit_button_21" class="gform_button button" value="Subscribe" tabindex="3" onclick="if(window[&quot;gf_submitting_21&quot;]){return false;}  if( !jQuery(&quot;#gform_21&quot;)[0].checkValidity || jQuery(&quot;#gform_21&quot;)[0].checkValidity()){window[&quot;gf_submitting_21&quot;]=true;}  "> 
+            <input type="hidden" class="gform_hidden" name="is_submit_21" value="1">
+            <input type="hidden" class="gform_hidden" name="gform_submit" value="21">
+            
+            <input type="hidden" class="gform_hidden" name="gform_unique_id" value="">
+            <input type="hidden" class="gform_hidden" name="state_21" value="WyJbXSIsIjRlMzYyYzc4NjMxNTE4NzYzYWNjZDMxMGRkOTg5NzM0Il0=">
+            <input type="hidden" class="gform_hidden" name="gform_target_page_number_21" id="gform_target_page_number_21" value="0">
+            <input type="hidden" class="gform_hidden" name="gform_source_page_number_21" id="gform_source_page_number_21" value="1">
+            <input type="hidden" name="gform_field_values" value="">
+            
+        </div>
+                        </form>
+                        </div><script type="text/javascript"> jQuery(document).bind('gform_post_render', function(event, formId, currentPage){if(formId == 21) {} } );jQuery(document).bind('gform_post_conditional_logic', function(event, formId, fields, isInit){} );</script><script type="text/javascript"> jQuery(document).ready(function(){jQuery(document).trigger('gform_post_render', [21, 1]) } ); </script>
+<br>
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/follow_button.a64cf823bcb784855b86e2970134bd2a.en.html" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="position: static; visibility: visible; width: 189px; height: 28px;"></iframe>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
+		</aside><aside id="text-5" class="widget widget_text">			<div class="textwidget"><div class="g g-4"><div class="g-dyn a-165 c-1"><a class="gofollow" data-track="MTY1LDQsMSw2MA==" href="https://www14.software.ibm.com/webapp/iwm/web/signup.do?source=swg-rtl-sd-wp&S_PKG=ov30841"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/IBM-wordCloud-300x250.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div><div class="g-dyn a-173 c-2"><a href="http://ad.doubleclick.net/ddm/jump/N6040.1915404DEVOPS.COM/B8797979.118984341;sz=300x250;ord=[timestamp]?">
+
+<img src="http://ad.doubleclick.net/ddm/ad/N6040.1915404DEVOPS.COM/B8797979.118984341;sz=300x250;ord=[timestamp]?" border="0" width="0" height="0" alt="Advertisement" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 300px 250px;"></a></div><div class="g-dyn a-196 c-3"><a class="gofollow" data-track="MTk2LDQsMSw2MA==" href="http://agile2015.agilealliance.org/"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/196-IBM-330x250.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div><div class="g-dyn a-188 c-4"><a class="gofollow" data-track="MTg4LDQsMSw2MA==" href="http://bit.ly/1JUdxlB"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/CA OwnTheFuture 300x250.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div><div class="g-dyn a-178 c-5"><a href="http://ad.doubleclick.net/ddm/jump/N6040.1915404DEVOPS.COM/B8757129.119477620;sz=300x250;ord=[timestamp]?">
+
+<img src="http://ad.doubleclick.net/ddm/ad/N6040.1915404DEVOPS.COM/B8757129.119477620;sz=300x250;ord=[timestamp]?" border="0" width="0" height="0" alt="Advertisement" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 300px 250px;"></a></div><div class="g-dyn a-176 c-6"><a class="gofollow" data-track="MTc2LDQsMSw2MA==" href="https://pages.cloudbees.com/Online-Display---DevOpscom_7-Ways-To-Optimize-Jenkins.html?lsd=2015_DevOps.com_7Ways"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/CloudBees-300x250.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div><div class="g-dyn a-177 c-7"><a href="http://ad.doubleclick.net/ddm/jump/N6040.1915404DEVOPS.COM/B8757129.119471864;sz=300x250;ord=[timestamp]?">
+
+<img src="http://ad.doubleclick.net/ddm/ad/N6040.1915404DEVOPS.COM/B8757129.119471864;sz=300x250;ord=[timestamp]?" border="0" width="0" height="0" alt="Advertisement" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 300px 250px;"></a></div><div class="g-dyn a-148 c-8"><a class="gofollow" data-track="MTQ4LDQsMSw2MA==" href="http://www.microsoft.com/click/services/Redirect2.ashx?CR_CC=200618490"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Microsoft-brick-300x250.png" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div></div></div>
+		</aside><aside id="text-3" class="widget widget_text">			<div class="textwidget"><div class="g g-5"><div class="g-single a-196"><a class="gofollow" data-track="MTk2LDUsMSw2MA==" href="http://agile2015.agilealliance.org/"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/196-IBM-330x250.jpg" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></a></div></div></div>
+		</aside>		<aside id="authors-2" class="widget widget_authors">			<div class="widget-title"><h3>Authors</h3><span class="stripe-dots"></span></div>			<ul><li><img alt="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/b3a820e676b24cc8cc5e281be957e456" srcset="http://2.gravatar.com/avatar/b3a820e676b24cc8cc5e281be957e456?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo grav-hashed grav-hijack" height="80" width="80" id="grav-b3a820e676b24cc8cc5e281be957e456-0"><a href="http://devops.com/author/ashimmy/" title="Posts by Alan Shimel">Alan Shimel</a> </li>
+<li><img alt="Tony Bradley" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Tony-Bradley_avatar_1420645020-80x80.jpg" class="avatar avatar-80 photo" height="80" width="80"><a href="http://devops.com/author/tonybsg/" title="Posts by Tony Bradley">Tony Bradley</a> </li>
+<li><img alt="Chris Riley" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/Chris-Riley_avatar_1431015083-80x80.jpg" class="avatar avatar-80 photo" height="80" width="80"><a href="http://devops.com/author/chrisriley/" title="Posts by Chris Riley">Chris Riley</a> </li>
+<li><img alt="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/a419c29d0e3022da29d2455e6d1f801e" srcset="http://1.gravatar.com/avatar/a419c29d0e3022da29d2455e6d1f801e?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo grav-hashed grav-hijack" height="80" width="80" id="grav-a419c29d0e3022da29d2455e6d1f801e-0"><a href="http://devops.com/author/ericka-chickowski/" title="Posts by Ericka Chickowski">Ericka Chickowski</a> </li>
+<li><img alt="" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/0ea41e2afa777aa80b0c21c3091ba7eb" srcset="http://0.gravatar.com/avatar/0ea41e2afa777aa80b0c21c3091ba7eb?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo grav-hashed grav-hijack" height="80" width="80" id="grav-0ea41e2afa777aa80b0c21c3091ba7eb-0"><a href="http://devops.com/author/george-hulme/" title="Posts by George V. Hulme">George V. Hulme</a> </li>
+<li><img alt="David Geer" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/geercom_avatar_1408708167-80x80.jpg" class="avatar avatar-80 photo" height="80" width="80"><a href="http://devops.com/author/geercom/" title="Posts by David Geer">David Geer</a> </li>
+</ul>					</aside>	<aside id="text-6" class="widget widget_text">			<div class="textwidget"><a href="http://devops.com/authors-page/">Complete Author List</a></div>
+		</aside><aside id="facebook-likebox-2" class="widget widget_facebook_likebox">		<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/4B2NplaqNF3.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/4B2NplaqNF3(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+		<div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/devopscom" data-height="250" data-hide-cover="false" data-show-facepile="true" data-show-posts="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=249643311490&amp;container_width=300&amp;height=250&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fdevopscom&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=false"><span style="vertical-align: bottom; width: 300px; height: 214px;"><iframe name="f1d2393e6" width="1000px" height="250px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/page.html" style="border: none; visibility: visible; width: 300px; height: 214px;" class=""></iframe></span></div>
+		<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=249643311490&version=v2.3'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+		</aside>
+</div>
+</div>
+
+</div>
+
+
+
+</section>
+</div>
+</div>
+	
+
+ </div>
+ <div class="divider"></div>
+</div>
+<!-- boxed
+================================================== -->
+</div>
+</div>
+
+<!-- Footer
+================================================== -->
+
+<div class="footers">
+
+<div class="container">
+
+
+
+<div class="row" style="margin-left:0;">
+
+<footer class="container" id="footers">
+
+    <div class="row">
+    
+      <div class="span4">
+        <aside id="text-4" class="widget widget_text">			<div class="textwidget"><a href="https://www.facebook.com/devopscom"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/facebookIconSmall.gif"></a>
+<a href="https://twitter.com/devopsdotcom"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/twitter-bird-light-bgs_small.png"></a>
+<a href="https://plus.google.com/u/0/105939795122860171376"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/google_plus_icon_20x20.jpg"></a>
+<a href="http://www.linkedin.com/groups/DevOpscom-6619007"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/icon_20x20_linkedin.png"></a></div>
+		</aside>      </div>
+      
+      <div class="span4">
+             </div>
+      
+      <div class="span4">
+        <aside id="rss_links-2" class="widget widget_rss_links"><p><a target="_self" href="http://devops.com/feed/" title="Subscribe to Posts"><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/red-medium.png" alt="RSS Feed"></a>&nbsp;<a target="_self" href="http://devops.com/feed/" title="Subscribe to Posts">RSS - Posts</a></p>
+</aside><aside id="text-7" class="widget widget_text">			<div class="textwidget"><a href="http://swiftype.com/?ref=pb">
+  <img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/swiftype-logo-darkbg-small.png" alt="Search by Swiftype" style="border: none; width: 169px; height: 20px;">
+</a></div>
+		</aside>      </div>
+      
+    </div>
+
+  
+  <div class="bottom_copy">
+
+    <div class="row">
+    
+    <div class="span6 copy">© 2015 <a>Mediaops</a>, LLC. All Rights Reserved.</div>
+    <div class="span6">
+
+
+<div class="menu-csc-footer-navigation-container"><ul id="menu-csc-footer-navigation" class="menu-f"><li id="menu-item-129" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-129"><a href="http://devops.com/">Home</a></li>
+<li id="menu-item-1384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1384"><a href="http://devops.com/business-directory/">Business Directory</a></li>
+<li id="menu-item-213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-213"><a href="http://devops.com/about/">About DevOps.com</a></li>
+<li id="menu-item-5573" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5573"><a href="http://devops.com/mediakit">Media Kit</a></li>
+<li id="menu-item-1153" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1153"><a href="http://devops.com/about/sponsor/">DevOps.com Sponsor Info</a></li>
+<li id="menu-item-210" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-210"><a href="http://devops.com/copyright/">Copyright</a></li>
+<li id="menu-item-212" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-212"><a href="http://devops.com/tos/">TOS</a></li>
+<li id="menu-item-211" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-211"><a href="http://devops.com/privacy-policy/">Privacy Policy</a></li>
+ </ul></div>     </div>
+     
+  </div>
+  
+</div>
+
+</footer>
+
+</div>
+</div>
+
+</div>
+         <div class="w3eden">
+            <div id="wpdm-popup-link" class="modal fade">
+                <div class="modal-dialog" style="width: 750px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                              <h4 class="modal-title">WordPress Download Manager</h4>
+                        </div>
+                        <div class="modal-body" id="wpdm-modal-body">
+                            <p><a href="http://www.wpdownloadmanager.com/">WordPress Download Manager - Best Download Management Plugin</a></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
+        </div>
+        <script language="JavaScript">
+            <!--
+            jQuery(function () {
+                //jQuery('#wpdm-popup-link').modal('hide');
+                jQuery('.wpdm-popup-link').click(function (e) {
+                    e.preventDefault();
+                    jQuery('#wpdm-popup-link .modal-title').html(jQuery(this).data('title'));
+                    jQuery('#wpdm-modal-body').html('<i class="icon"><img align="left" style="margin-top: -1px" src="http://devops.com/wp-content/plugins/download-manager/images/loading-new.gif" /></i>&nbsp;Please Wait...');
+                    jQuery('#wpdm-popup-link').modal('show');
+                    jQuery('#wpdm-modal-body').load(this.href,{mode:'popup'});
+                    return false;
+                });
+            });
+            //-->
+        </script>
+        <style type="text/css">
+            #wpdm-modal-body img {
+                max-width: 100% !important;
+            }
+        </style>
+    	<div style="display:none">
+	<div class="grofile-hash-map-bdb7abd911b13ef047df99748ae0cc1b">
+	</div>
+	<div class="grofile-hash-map-feb447cc517cb0640bba0c05d32bcf4e">
+	</div>
+	<div class="grofile-hash-map-9bbffe8dbdc4442022c2d0881e9628b8">
+	</div>
+	<div class="grofile-hash-map-2c8ead64d8801af5b8155f275398e93f">
+	</div>
+	<div class="grofile-hash-map-5ce22ca46994ca1fc989444a8894014f">
+	</div>
+	<div class="grofile-hash-map-5f45286839a71409da19be075ec78f28">
+	</div>
+	<div class="grofile-hash-map-b3a820e676b24cc8cc5e281be957e456">
+	</div>
+	<div class="grofile-hash-map-e76e2dde4bf30993819d01f17b57db8b">
+	</div>
+	<div class="grofile-hash-map-bec684bc8989c290bb73640055c2fe1f">
+	</div>
+	<div class="grofile-hash-map-45d6bc7057e9b2ef83ea3358f5e8c87a">
+	</div>
+	<div class="grofile-hash-map-2ed8c6850a86a3fde30120d7dcaca070">
+	</div>
+	<div class="grofile-hash-map-d2a16b3b286682e300adec2a4c680cd4">
+	</div>
+	<div class="grofile-hash-map-fcef31b8cb71e97083011c611968c384">
+	</div>
+	<div class="grofile-hash-map-c035096bb8c4a4f5b8e631a45176aac5">
+	</div>
+	<div class="grofile-hash-map-c34bd5a4769da7a8ee18e002196994e3">
+	</div>
+	<div class="grofile-hash-map-165b8919fd61fdade644c38230e65c8b">
+	</div>
+	<div class="grofile-hash-map-97f075121884f30e969ddf0ef2c8109f">
+	</div>
+	<div class="grofile-hash-map-0d2db6e9b95f2ca0b86fb2033e8b07d7">
+	</div>
+	<div class="grofile-hash-map-0a43122f3727a0e6d4d5547b72d2aca0">
+	</div>
+	<div class="grofile-hash-map-2989008fe35a1a9c8720bb81b4a94532">
+	</div>
+	<div class="grofile-hash-map-76df49106ff1fa9687b0939b70906532">
+	</div>
+	<div class="grofile-hash-map-1a9cc694ab8f058fad77cdf16a6a9161">
+	</div>
+	<div class="grofile-hash-map-6f666c7febe20bf12a57415dbf519b0f">
+	</div>
+	<div class="grofile-hash-map-9e1cb4cba22a09c3fd81cd75f6ec6244">
+	</div>
+	<div class="grofile-hash-map-5867ff727522cf9079e5473cec22d107">
+	</div>
+	<div class="grofile-hash-map-c68076a95db65b177a26afc63b6aa470">
+	</div>
+	<div class="grofile-hash-map-0782bb1d2980eeca9527c5a9535f2e6e">
+	</div>
+	<div class="grofile-hash-map-c6933d9d0ef2143b97cb3c5fb6cd2633">
+	</div>
+	<div class="grofile-hash-map-4b3dca0cff9bdf3a60234f3583005eff">
+	</div>
+	<div class="grofile-hash-map-0f39416e294a1e0d75fbce5040cc526d">
+	</div>
+	<div class="grofile-hash-map-5c90d60d1d3ae2b66b7b26d1a4a432d3">
+	</div>
+	<div class="grofile-hash-map-28abf562f65de1a15834c6dab8d9a4cc">
+	</div>
+	<div class="grofile-hash-map-d69cc2ee2cb2a67d29987c87f40874de">
+	</div>
+	<div class="grofile-hash-map-2164017f1a56eed9bfc017b0e804516f">
+	</div>
+	<div class="grofile-hash-map-4d356488caf5f3e2e4c3a9b5fdb24793">
+	</div>
+	<div class="grofile-hash-map-546d2015cd19fe8550005fb4971b5e28">
+	</div>
+	<div class="grofile-hash-map-62860c14dc524753db31a5a291aeb76f">
+	</div>
+	<div class="grofile-hash-map-ba19fdcf6ff3f2a43655adda21714db3">
+	</div>
+	<div class="grofile-hash-map-3f14e8ab183bacb8fc561d831ee5043f">
+	</div>
+	<div class="grofile-hash-map-fab51f342d6aa49be136426e4f6908d8">
+	</div>
+	<div class="grofile-hash-map-f728d944e2a681e7ffc10e342b963496">
+	</div>
+	<div class="grofile-hash-map-f10259067e78ef1b92b0783d68ff35e4">
+	</div>
+	<div class="grofile-hash-map-ca8e3d450fe91dd4f6a8e066a4ac1a6c">
+	</div>
+	<div class="grofile-hash-map-19ca6661d6fc0ab8a0eaf3eeb1a181de">
+	</div>
+	<div class="grofile-hash-map-14aa2dd9565df5e500f40cbca5d19393">
+	</div>
+	<div class="grofile-hash-map-0debfc4bd877132d7a1a1c158acf83fd">
+	</div>
+	<div class="grofile-hash-map-937f410c36775e784d08a085ea1394ee">
+	</div>
+	<div class="grofile-hash-map-973a93b94b3c53b5192164c8fcf7d53f">
+	</div>
+	<div class="grofile-hash-map-bf0844f43dc8269d1cf40af3df2daf88">
+	</div>
+	<div class="grofile-hash-map-96150bd88e5e5185b7c7f2aae09f6fe1">
+	</div>
+	<div class="grofile-hash-map-3adf823ba602f72dc050a1a244e40d2e">
+	</div>
+	<div class="grofile-hash-map-678e8761a42ecbe6b9efdfd9dd0f06fc">
+	</div>
+	<div class="grofile-hash-map-924e0cd4517aa7f6344d49f8be668ec0">
+	</div>
+	<div class="grofile-hash-map-d73f079dfea05841a7c3102d143231b6">
+	</div>
+	<div class="grofile-hash-map-aefcd9939e4b58dd49e4cfb5ca81c8b0">
+	</div>
+	<div class="grofile-hash-map-ab0bc3629135c3fefac6c8c7ab2ea75e">
+	</div>
+	<div class="grofile-hash-map-49e2828f144721d76b67c3d54941df9e">
+	</div>
+	<div class="grofile-hash-map-2de3e20c9985a99ab6ec3a6e91faaf34">
+	</div>
+	<div class="grofile-hash-map-63c9375c0825392ff4d3252888be0dbd">
+	</div>
+	<div class="grofile-hash-map-564111be1198b7ee874101736e60de60">
+	</div>
+	<div class="grofile-hash-map-378b59045bca657e81566e47b9bea8bc">
+	</div>
+	<div class="grofile-hash-map-a73ca227c26acd5d701b5c955ec8dda9">
+	</div>
+	<div class="grofile-hash-map-8fcda24f1c63a3ac5f271dcb863c1951">
+	</div>
+	<div class="grofile-hash-map-ef0044116213b977f534e069ed0cacf6">
+	</div>
+	<div class="grofile-hash-map-0ca1ab44fa605d12e5aef51baa818423">
+	</div>
+	<div class="grofile-hash-map-c53e96de92ddae4ceb64247e7a558fb5">
+	</div>
+	<div class="grofile-hash-map-d3a08cca6ef5e7d3b82cb3ca68872d4b">
+	</div>
+	<div class="grofile-hash-map-dcbe1f0176d0cbe2c622d1947080079c">
+	</div>
+	<div class="grofile-hash-map-e19b630d9218c17a725451dfdf449a1c">
+	</div>
+	<div class="grofile-hash-map-7fccfdd600ded90a4fb8512af2f26263">
+	</div>
+	<div class="grofile-hash-map-3a15ce8a28152458135f47e70dd6a47d">
+	</div>
+	<div class="grofile-hash-map-49f4b07293cf1f28ace5392a7612da9f">
+	</div>
+	<div class="grofile-hash-map-c689bc40f4007eebbdfd812638f04056">
+	</div>
+	<div class="grofile-hash-map-d355c557a4a8b78f96b41f99e92b76c3">
+	</div>
+	<div class="grofile-hash-map-8a21ce8c06d9268fa7d8005b71d1c570">
+	</div>
+	<div class="grofile-hash-map-640a3a6db95a92b761a109fed638f009">
+	</div>
+	<div class="grofile-hash-map-3cc9e72ff67051dc22e2e774a68be962">
+	</div>
+	<div class="grofile-hash-map-a5c72062b321717d0854dc264ed87935">
+	</div>
+	<div class="grofile-hash-map-b52fe0abfec6df5ebe3286e5c0711c83">
+	</div>
+	<div class="grofile-hash-map-ae3ffd9d940d5f7d2d91fc170c2d4346">
+	</div>
+	<div class="grofile-hash-map-927ee490243ae1d949c7e491bdc7b7d9">
+	</div>
+	<div class="grofile-hash-map-ba5dc191b560311094f36601f7a08590">
+	</div>
+	<div class="grofile-hash-map-6a5187ff6c562b13282fb6a4e3d5f8e1">
+	</div>
+	<div class="grofile-hash-map-31c635abdda7d06125ab323f9f39c0d7">
+	</div>
+	<div class="grofile-hash-map-f7f1f4a83462133f6280cfd5e2f86165">
+	</div>
+	<div class="grofile-hash-map-216f6c164836b75c12540bcd649e2850">
+	</div>
+	<div class="grofile-hash-map-3ed0d56f25b8f23cb24d5e0f03d6af59">
+	</div>
+	<div class="grofile-hash-map-421ddf84d9763f554162aef87cd6dd0d">
+	</div>
+	<div class="grofile-hash-map-9fb85af8c9147865ad0403a1df950e15">
+	</div>
+	<div class="grofile-hash-map-41aeaaef5040ea13af16cd8c614a4e83">
+	</div>
+	<div class="grofile-hash-map-8a7c643f93ff7dd728499a00a1a39619">
+	</div>
+	<div class="grofile-hash-map-c6daf39916f28f18d3a21a72890bfa64">
+	</div>
+	<div class="grofile-hash-map-bf8b207c98c45553b977bb5b3d769ab2">
+	</div>
+	<div class="grofile-hash-map-ec6ffaafa922674dfa717016de2fda8d">
+	</div>
+	<div class="grofile-hash-map-65331d10fa9f4fe05844768f7e4815e2">
+	</div>
+	<div class="grofile-hash-map-0d95249bc7581a47dce7af3614f85c86">
+	</div>
+	<div class="grofile-hash-map-59a1faac785b3bcac9c2397ee8028d3f">
+	</div>
+	<div class="grofile-hash-map-9c4f0d6b60d91846bb13943d8ca383f8">
+	</div>
+	<div class="grofile-hash-map-2498d31049a1fa2f9deca73903796102">
+	</div>
+	<div class="grofile-hash-map-c70ec7325b89adbb7ac016b0775487b5">
+	</div>
+	<div class="grofile-hash-map-1c37f84832b454415cccf538dac9f1fe">
+	</div>
+	<div class="grofile-hash-map-8216161e1d2c4b1e6eecbbd532d27405">
+	</div>
+	<div class="grofile-hash-map-5f5e4d1909f37ad9926d7ac709b940f7">
+	</div>
+	<div class="grofile-hash-map-926e4095d7b5ea3df41d8d9d3894b8cd">
+	</div>
+	<div class="grofile-hash-map-713ee441d45fdf1bb778477237e7007c">
+	</div>
+	<div class="grofile-hash-map-c4966733b47dd272ffed7a4a5ed8cfc6">
+	</div>
+	<div class="grofile-hash-map-5c1fcd5446fec478526e7f536d4482f3">
+	</div>
+	<div class="grofile-hash-map-1e6efb472e78710bee5a24d68262049e">
+	</div>
+	<div class="grofile-hash-map-6a865763c2a8a98b3d3c5f43f15f84da">
+	</div>
+	<div class="grofile-hash-map-44845889cc5dcb34221d4f72a3c05efc">
+	</div>
+	<div class="grofile-hash-map-ff68c0951b0f74a37d41cee9ad74055a">
+	</div>
+	<div class="grofile-hash-map-5b11964a268698d84d4f31ce49832a26">
+	</div>
+	<div class="grofile-hash-map-1c32ef01b258b3b5ca43d8da88653fb4">
+	</div>
+	<div class="grofile-hash-map-a419c29d0e3022da29d2455e6d1f801e">
+	</div>
+	<div class="grofile-hash-map-a2a2e2d0c1eda51cbcdf5208cf9336c6">
+	</div>
+	<div class="grofile-hash-map-5f9433bdf5d9be398a98558d0452c987">
+	</div>
+	<div class="grofile-hash-map-4df51c0959a16c30de16b83b53522b7f">
+	</div>
+	<div class="grofile-hash-map-632d40573a1a75785aa3f3836f4b472d">
+	</div>
+	<div class="grofile-hash-map-b38db4e23abeccfe07cb0868a6558eb7">
+	</div>
+	<div class="grofile-hash-map-e782f5c1f5fc211720b499dfdc84fbd0">
+	</div>
+	<div class="grofile-hash-map-c0e4c5cc04a6e4db8fcb3790efd5f480">
+	</div>
+	<div class="grofile-hash-map-96ef74ed03e0d6a2918156baedc5b0c3">
+	</div>
+	<div class="grofile-hash-map-73d739efd46ca296dca802794612f4d1">
+	</div>
+	<div class="grofile-hash-map-289498e8b8ac13b889832e920cdac1b2">
+	</div>
+	<div class="grofile-hash-map-e2f1e9586c46d7339adf5aece4eeaffe">
+	</div>
+	<div class="grofile-hash-map-1f5dd69ca86e92ce3bc039c63f511d40">
+	</div>
+	<div class="grofile-hash-map-f3c1552863e6b7569ce7101128a2de5e">
+	</div>
+	<div class="grofile-hash-map-991cdca11dc795b39bffabd979ab5731">
+	</div>
+	<div class="grofile-hash-map-ff08d15a968729f28a600ab3381f39f3">
+	</div>
+	<div class="grofile-hash-map-ef4647469a73e990f5c226fe174aabf1">
+	</div>
+	<div class="grofile-hash-map-9d4d49daf55896d961bb4dcf380ec7c0">
+	</div>
+	<div class="grofile-hash-map-8a4d10c555c93941dd0e9681c362e57b">
+	</div>
+	<div class="grofile-hash-map-0ea41e2afa777aa80b0c21c3091ba7eb">
+	</div>
+	<div class="grofile-hash-map-c6b43dd67349bfa571d636c4416c19ae">
+	</div>
+	<div class="grofile-hash-map-06042da0e3092d5220fd718a4f7ee902">
+	</div>
+	<div class="grofile-hash-map-010067b9b77bf8423e5681b5cb6d3cd7">
+	</div>
+	<div class="grofile-hash-map-af4060e29fa2448a7379fdb0386e7e44">
+	</div>
+	<div class="grofile-hash-map-267031f760866474c7a1adfe0ac96035">
+	</div>
+	<div class="grofile-hash-map-dd8a0d896fd6a653caab5c6c429325cd">
+	</div>
+	<div class="grofile-hash-map-b50a0c4f4c034170cb04720253725d5a">
+	</div>
+	<div class="grofile-hash-map-7851af07643ba4ab4b4e7b2428713f90">
+	</div>
+	<div class="grofile-hash-map-6646f0361f9c17c1e04a040db1d7b619">
+	</div>
+	<div class="grofile-hash-map-78aa57c9464583cfb4d47f41dcb525a7">
+	</div>
+	<div class="grofile-hash-map-bc1a178e6bc16868a11598ed2913b09f">
+	</div>
+	<div class="grofile-hash-map-a3532026830006ac5f3bdbdc1ca22a7b">
+	</div>
+	<div class="grofile-hash-map-2ed549e49e3763978d6e24e7c01ebcf3">
+	</div>
+	<div class="grofile-hash-map-1cf1430a5e88777911b18a742060c880">
+	</div>
+	<div class="grofile-hash-map-c4cc3d27045843cd30deb646c2ac8592">
+	</div>
+	<div class="grofile-hash-map-e3050fd96d7f15d28a529ea0ddd70f55">
+	</div>
+	<div class="grofile-hash-map-ff15fc8d67845efc775c6ac3487d94aa">
+	</div>
+	<div class="grofile-hash-map-ebf289fdad503ac9a15840f2789453d0">
+	</div>
+	<div class="grofile-hash-map-4b97716f86860bb15bdad0a560bcafdf">
+	</div>
+	<div class="grofile-hash-map-80398c1c57537d453aaf692a6cd45a2a">
+	</div>
+	<div class="grofile-hash-map-e282b892c2d96a5ab956a8063a256e90">
+	</div>
+	<div class="grofile-hash-map-701083cf66d9d11d439bc96107c75a10">
+	</div>
+	<div class="grofile-hash-map-a35155e39b314ae9f63c4c387e3e1f88">
+	</div>
+	<div class="grofile-hash-map-3498b45e77b0c88b690315dd930ddda8">
+	</div>
+	<div class="grofile-hash-map-daa64ef39edde1693141aabf1d4845c3">
+	</div>
+	<div class="grofile-hash-map-1a5e42bcbbe1962bebcbfc96c588187d">
+	</div>
+	<div class="grofile-hash-map-cf31ce53c17292916f1cf8793a0eb54f">
+	</div>
+	<div class="grofile-hash-map-2f81efc9903798e3a246f0cc3acb1c1e">
+	</div>
+	<div class="grofile-hash-map-c78e13fa9dfc8a3a81d9ab360b1b649b">
+	</div>
+	<div class="grofile-hash-map-57b9b733e8855e4c3731a5a9cd78d321">
+	</div>
+	<div class="grofile-hash-map-4791a127f3560f22651015b0caf53aff">
+	</div>
+	<div class="grofile-hash-map-efb340a0bfdf076d8aaf55d505054073">
+	</div>
+	<div class="grofile-hash-map-479e230bc6a08e5fb373e80f535fc891">
+	</div>
+	<div class="grofile-hash-map-aa41f9ed128c382cd973cbbaf96df8f9">
+	</div>
+	<div class="grofile-hash-map-27f07eaf523edbcb1a21c11bd5f05852">
+	</div>
+	<div class="grofile-hash-map-2b63910051d01316e41a4b64352fa4f3">
+	</div>
+	<div class="grofile-hash-map-49b2d8b1975d10cf4fb2a4e94671544c">
+	</div>
+	<div class="grofile-hash-map-92081ee2876e4076841edc6150e57abf">
+	</div>
+	<div class="grofile-hash-map-264cfe91d40a94271453c7093fad2458">
+	</div>
+	<div class="grofile-hash-map-1f4ee3493443ed7d7f411f0a9eb65cff">
+	</div>
+	<div class="grofile-hash-map-3ec8cbf718181bc4724018fa0356803c">
+	</div>
+	<div class="grofile-hash-map-60636eeee208412f90a65c436ba5503a">
+	</div>
+	<div class="grofile-hash-map-c1f6bff9f78ee5af6dead327470f83f6">
+	</div>
+	<div class="grofile-hash-map-c9a0db3193314a37be6ab04ef027b31f">
+	</div>
+	<div class="grofile-hash-map-517674be4eb70f7cc0e3155c18a8140d">
+	</div>
+	<div class="grofile-hash-map-f59aa6630445ada8c26c3e16f75379a7">
+	</div>
+	<div class="grofile-hash-map-9e20c3549cc581757c74de8356d7bf40">
+	</div>
+	<div class="grofile-hash-map-e212c4a4c9eac663cfe562bed236e1d5">
+	</div>
+	<div class="grofile-hash-map-d0e6dc30f764e9f28436ab71298f9906">
+	</div>
+	<div class="grofile-hash-map-6720bca0d07a3f8e9dfd04936c1e04b2">
+	</div>
+	<div class="grofile-hash-map-70c3ed959180fa778b1b5b23bc5cae5d">
+	</div>
+	<div class="grofile-hash-map-40c0a40395de61d61e9eea1617e80d52">
+	</div>
+	<div class="grofile-hash-map-b62add3282326daba63c16325dc9b632">
+	</div>
+	<div class="grofile-hash-map-7e1821450ce06f36751e9bb8a898988b">
+	</div>
+	<div class="grofile-hash-map-9363987543eea3ade3d63e57b6b42cdc">
+	</div>
+	<div class="grofile-hash-map-2e613d0f39462997b6912b6b87c30d67">
+	</div>
+	<div class="grofile-hash-map-ec2da0759a1c4f066abad3bac33c9512">
+	</div>
+	<div class="grofile-hash-map-8f0b376f21f29ba1e3bc366266b1b215">
+	</div>
+	<div class="grofile-hash-map-4e016673490933e34c6bdb48324ab5e0">
+	</div>
+	<div class="grofile-hash-map-839b8793761d0e95023401f6add49a15">
+	</div>
+	<div class="grofile-hash-map-209c1accdeb1f8292b851335931584da">
+	</div>
+	<div class="grofile-hash-map-b1a8ecf0a38145fff968d9185d14ae87">
+	</div>
+	<div class="grofile-hash-map-3ec1b31a9154599bc620fea0a2a3039b">
+	</div>
+	<div class="grofile-hash-map-4ed87e8c7930b0b71e28842825ff9796">
+	</div>
+	<div class="grofile-hash-map-d5381fb12885098526a9645dcc2dc0bf">
+	</div>
+	<div class="grofile-hash-map-23e5772b108233b578390887c0eb1fe8">
+	</div>
+	<div class="grofile-hash-map-78255cfa2853cb82541716cf1a7e86bb">
+	</div>
+	<div class="grofile-hash-map-cbe29e72ba9bb2ea3dfed2a2dc681598">
+	</div>
+	<div class="grofile-hash-map-341b18a6056a0334b4a2325e8ccc6bcc">
+	</div>
+	<div class="grofile-hash-map-9e88bd348a5ad19d54568e06703178bf">
+	</div>
+	<div class="grofile-hash-map-a4cbdf78ced5905d4d4d80d12231466c">
+	</div>
+	<div class="grofile-hash-map-3e45c4fc602b3b1eab95425691dbd80e">
+	</div>
+	<div class="grofile-hash-map-5b77e898e66fe3a9e0354d86e4d2164b">
+	</div>
+	<div class="grofile-hash-map-7bfa51faaf11469e7b29f6de5412db08">
+	</div>
+	<div class="grofile-hash-map-7bc1b251088cf5049af50119bff72443">
+	</div>
+	<div class="grofile-hash-map-e29082bd9f73fd6fd0119361e91f4246">
+	</div>
+	<div class="grofile-hash-map-1ee7bd08e5ba309de7346537b7a1b27b">
+	</div>
+	<div class="grofile-hash-map-2efc93db95b5f9c93007b347fb03dc9d">
+	</div>
+	<div class="grofile-hash-map-646dee8c05633c212aa577127da8c27e">
+	</div>
+	<div class="grofile-hash-map-e6d38ce6905268aee4b701cd867ed576">
+	</div>
+	<div class="grofile-hash-map-8b0b1f79deae0457c2fe71ff8acbc7f2">
+	</div>
+	<div class="grofile-hash-map-7586b74526dc4ef59eb6f8b6d4cb6a94">
+	</div>
+	<div class="grofile-hash-map-617db817b5c6b4e46b1e56aeb2c6e056">
+	</div>
+	<div class="grofile-hash-map-118538fc439146fe92936a9d42456fc3">
+	</div>
+	<div class="grofile-hash-map-b82c3ce67a006c0f7d13703e76af05f1">
+	</div>
+	<div class="grofile-hash-map-0f3f489c0ea21dd927de1e2b8dc7ff64">
+	</div>
+	<div class="grofile-hash-map-049795ab8c5eee9c1c1a601427802dbb">
+	</div>
+	<div class="grofile-hash-map-ddddfc6786e06b0edf4474d048cb9be5">
+	</div>
+	<div class="grofile-hash-map-096a274df8728f6cb2f560a836d7f573">
+	</div>
+	<div class="grofile-hash-map-14dffd823aba4920e5716d321aaf5135">
+	</div>
+	<div class="grofile-hash-map-99e424b03d4153f2c52086fe12e6772a">
+	</div>
+	<div class="grofile-hash-map-8658620d944a512f65b54b468ff8aa2a">
+	</div>
+	<div class="grofile-hash-map-f7ad8a16d019af6c42fb2a57446dc3b9">
+	</div>
+	<div class="grofile-hash-map-89bb59a3e633341bc7b8443b5244f6c5">
+	</div>
+	<div class="grofile-hash-map-88da72c4b843159bd05895e0c8ef5593">
+	</div>
+	<div class="grofile-hash-map-332eb800ac29a0bb4f6775f8de988353">
+	</div>
+	<div class="grofile-hash-map-f804e5775ae20c9c58b2dfc8d29d3d0e">
+	</div>
+	<div class="grofile-hash-map-956ecb14023c5e527326ca1d5a396cb1">
+	</div>
+	<div class="grofile-hash-map-cc715668e7a9bd4f09ecad50f37e0e82">
+	</div>
+	<div class="grofile-hash-map-37f7f996e1b3acc976e9df3aa826d7ee">
+	</div>
+	<div class="grofile-hash-map-7f09f934af7271ba513e5bf70774a778">
+	</div>
+	<div class="grofile-hash-map-3b35a54dc62279489d1ac764b598b812">
+	</div>
+	<div class="grofile-hash-map-4b6830afe287d303eac95f4b7287573d">
+	</div>
+	<div class="grofile-hash-map-815a87dcc0589c206019dd3961a9b243">
+	</div>
+	<div class="grofile-hash-map-99ea8f4268b328172477a0fa6d65df4b">
+	</div>
+	<div class="grofile-hash-map-3054136ef6a8ae3ef7aa3e542a551602">
+	</div>
+	<div class="grofile-hash-map-24e2ed9ae3a0cd8660e9466a964b0f44">
+	</div>
+	<div class="grofile-hash-map-1b9ec5702f1303e455eb3f97cb8ed24b">
+	</div>
+	<div class="grofile-hash-map-4e343f738a07f522e18a3ebfdf8e79f7">
+	</div>
+	<div class="grofile-hash-map-814ab49b5491643779f56e0e3b5aacaa">
+	</div>
+	<div class="grofile-hash-map-afaa96d715fd44821e11bd8c95b6ac17">
+	</div>
+	<div class="grofile-hash-map-ef39e4faa938a5ba0014c158dad96330">
+	</div>
+	<div class="grofile-hash-map-e7bbc4b6decbcfbfe84a285ba0354085">
+	</div>
+	<div class="grofile-hash-map-26b02f00ce8fd64669c23afeb2dca952">
+	</div>
+	<div class="grofile-hash-map-d3008b2afc0fbd585601c6e3f7ee9b08">
+	</div>
+	<div class="grofile-hash-map-c44ed8f17030745aaf70123c7276108e">
+	</div>
+	<div class="grofile-hash-map-9ee53907ed0545c8396fcfbef7693ca2">
+	</div>
+	<div class="grofile-hash-map-4249c9d1a2346beb89eebb69b1ea114c">
+	</div>
+	<div class="grofile-hash-map-9c1674fbfe647f54f8b8db5a60d09b29">
+	</div>
+	<div class="grofile-hash-map-d6b3d42d68d9f1b1cc108aa6aad97979">
+	</div>
+	<div class="grofile-hash-map-4af259c3836839270c6fda02d580a831">
+	</div>
+	<div class="grofile-hash-map-beabaf0a9e23e9bcafcb309f636e7c41">
+	</div>
+	<div class="grofile-hash-map-020e69e852d370aaabf7a7ed39c3672d">
+	</div>
+	<div class="grofile-hash-map-50e64551d2cfc23caf013eccddb310c2">
+	</div>
+	<div class="grofile-hash-map-17c9dc2a5a8ed432c252c983d57d9bca">
+	</div>
+	<div class="grofile-hash-map-f6604be10240c6f291c65184bd74551b">
+	</div>
+	<div class="grofile-hash-map-a89e84668fd365770795be49cb933df3">
+	</div>
+	<div class="grofile-hash-map-c4b0c582e03a8cbf7ca6c35057d2184d">
+	</div>
+	<div class="grofile-hash-map-9d5d651e88df4dc632113dfd79b06f66">
+	</div>
+	<div class="grofile-hash-map-a5b7f74b1d12b144470212925e321cd5">
+	</div>
+	<div class="grofile-hash-map-147ef18fa1a664941bdb21c5c81f6129">
+	</div>
+	<div class="grofile-hash-map-61fa1ecc64b496c40124c8309a41d15b">
+	</div>
+	<div class="grofile-hash-map-a6592935458ea3ac035d4dacc96a95c5">
+	</div>
+	<div class="grofile-hash-map-0a63b91c524c8afe05174122a643db2c">
+	</div>
+	<div class="grofile-hash-map-a81272ce19e98001cc2a775b07588f83">
+	</div>
+	<div class="grofile-hash-map-1086e54fc019094bcfb78be1f4305985">
+	</div>
+	<div class="grofile-hash-map-6cf9f4be233c4eb2e8069af9deda8b30">
+	</div>
+	<div class="grofile-hash-map-3085db72c7a0a65646e2accf9663df9f">
+	</div>
+	<div class="grofile-hash-map-d7fdfc8c62e83e0820a7cc53805ede91">
+	</div>
+	<div class="grofile-hash-map-5dfe4fb66cc41a2bf71bbe4fef464f1e">
+	</div>
+	<div class="grofile-hash-map-6fa0d8d1e07487cde3318c7c5f527cd4">
+	</div>
+	<div class="grofile-hash-map-32a4f7d361af24901f45178a60c32376">
+	</div>
+	<div class="grofile-hash-map-fe7450179c6f802be690cf800091f11a">
+	</div>
+	<div class="grofile-hash-map-30f6df0986cce2d70e6d8737c14a9e00">
+	</div>
+	<div class="grofile-hash-map-ef20e5336238edf9830815f1c9e72afd">
+	</div>
+	<div class="grofile-hash-map-91b732aef1b8cd6fc8b223d7dbd2eee0">
+	</div>
+	<div class="grofile-hash-map-3c2a5960a191e7bf5db93715ed5717b6">
+	</div>
+	<div class="grofile-hash-map-9aad0d3cc8e93596637843600e6f381f">
+	</div>
+	<div class="grofile-hash-map-f21e06fa9014cf22b642b041cefbeacc">
+	</div>
+	<div class="grofile-hash-map-97399eef4512971d9b90044092a0cdad">
+	</div>
+	<div class="grofile-hash-map-78a7899a4dc9fedd866bf4ab236de98b">
+	</div>
+	<div class="grofile-hash-map-b6d3ac0447231f9be5fc2cb0dd42a72e">
+	</div>
+	<div class="grofile-hash-map-60c063abf29d17b6949a3d768f7a7335">
+	</div>
+	<div class="grofile-hash-map-fa5b3028459b287313e8540e29083d3f">
+	</div>
+	<div class="grofile-hash-map-e1a4a48f895ee9610f0a5ac6f25b1926">
+	</div>
+	<div class="grofile-hash-map-95ec902ce81847e5aa0c8d998b47cacd">
+	</div>
+	<div class="grofile-hash-map-f91edbdbab12e276843650993324c2d7">
+	</div>
+	<div class="grofile-hash-map-265100c37a1278f37d966474df49055b">
+	</div>
+	<div class="grofile-hash-map-541fa0a755a270e050f4fe9dbff141fd">
+	</div>
+	<div class="grofile-hash-map-f83f657ef0bd8bc15ad449d5d88ff4c3">
+	</div>
+	<div class="grofile-hash-map-4e42df53075cd7d4a8397c3f4c2b4529">
+	</div>
+	<div class="grofile-hash-map-a24cfd339c7592feaf3c9241eecd9e60">
+	</div>
+	<div class="grofile-hash-map-9a725dab740278713b389e955976ec6d">
+	</div>
+	<div class="grofile-hash-map-bf74832070f694ca8ecf307f64295d14">
+	</div>
+	<div class="grofile-hash-map-1d8f7aef6ff09111bbe5412cc78f13b0">
+	</div>
+	<div class="grofile-hash-map-879250d2f4b86c3da70fbf03f7452934">
+	</div>
+	<div class="grofile-hash-map-318f18e2a0df24ece06e62a0714e3562">
+	</div>
+	<div class="grofile-hash-map-f0e89c58499c896c9aff6fc35fe4aff7">
+	</div>
+	<div class="grofile-hash-map-a5799c379a34c93046240baa25084298">
+	</div>
+	<div class="grofile-hash-map-d207dfc04524519f516e3f32df986d2e">
+	</div>
+	<div class="grofile-hash-map-f927004fc6f51464fce2849774b39ca4">
+	</div>
+	<div class="grofile-hash-map-6d09da69168299b03b0711b834803dd9">
+	</div>
+	<div class="grofile-hash-map-589f73a935ab65cbc8d499f91479474f">
+	</div>
+	<div class="grofile-hash-map-8e74f2ded1dff052053113c1bacd5d0b">
+	</div>
+	<div class="grofile-hash-map-d3ed8fbdbc9e5746304bf24b16bafa41">
+	</div>
+	<div class="grofile-hash-map-83856c1d204a18ef4ec52a77c41729b8">
+	</div>
+	<div class="grofile-hash-map-5f189617e56a0b8b73f27c6803b52392">
+	</div>
+	<div class="grofile-hash-map-4a24c9b81c14956ee9a8eb4df243f59b">
+	</div>
+	<div class="grofile-hash-map-2a94cb7a7886de0b381b30b11ea472ba">
+	</div>
+	<div class="grofile-hash-map-030eb307f12dcfa4554887afb355be5b">
+	</div>
+	<div class="grofile-hash-map-0de01542fbc76af1a623d7f25525190b">
+	</div>
+	<div class="grofile-hash-map-29735ad025a4666578c720c2f44ef0cc">
+	</div>
+	<div class="grofile-hash-map-43ba6f268817bd213577918b818db300">
+	</div>
+	<div class="grofile-hash-map-41cbb62b5ed8d1d7c3b5c3bf8691963d">
+	</div>
+	<div class="grofile-hash-map-40278ceb0dde2fdc097ed218ad421d59">
+	</div>
+	<div class="grofile-hash-map-53a6b9133bee001a603030a0299c5239">
+	</div>
+	<div class="grofile-hash-map-859c71f4d1e8cce2282f49569459c41c">
+	</div>
+	<div class="grofile-hash-map-36ee1d13fe52f1b7967be566032078aa">
+	</div>
+	<div class="grofile-hash-map-653e4b11ae36aefbd1d82327189dcdf6">
+	</div>
+	<div class="grofile-hash-map-ed5d4dfb12b681897c9e37ffa2df2d28">
+	</div>
+	<div class="grofile-hash-map-14182eac1a29e240b82d095b48a53da4">
+	</div>
+	<div class="grofile-hash-map-90fe13bafb2078bc6fdb3d4ae42b54df">
+	</div>
+	<div class="grofile-hash-map-4ae9529da4246fc0b731ef9ba40d0537">
+	</div>
+	<div class="grofile-hash-map-581864513411c2b92074dbf66161faac">
+	</div>
+	<div class="grofile-hash-map-f0047e07635f15d3de23f5c3cff015c3">
+	</div>
+	<div class="grofile-hash-map-b8d4b74865f26d9b4782c76d8691cb50">
+	</div>
+	<div class="grofile-hash-map-79ec028393de20e45203f032af271dd2">
+	</div>
+	<div class="grofile-hash-map-dcccc11a0e0988c40d61835dc6acaf1b">
+	</div>
+	<div class="grofile-hash-map-01007bdf1ce13d9c78aff5a2ad8950f5">
+	</div>
+	<div class="grofile-hash-map-e92bc9ac530c40cd503cc6853cec1312">
+	</div>
+	<div class="grofile-hash-map-f078617329ecdd7073476d8ed09a9a6c">
+	</div>
+	<div class="grofile-hash-map-0cacf8fde32e711f7528787132f78e67">
+	</div>
+	<div class="grofile-hash-map-0ee79a7296fd1637ea3c3465314c74e4">
+	</div>
+	<div class="grofile-hash-map-267a0f517a4ae06e3ddf648a435c9c9e">
+	</div>
+	<div class="grofile-hash-map-b442ea885cb327bfbe2dc942140e024e">
+	</div>
+	<div class="grofile-hash-map-b96a3004be8a5aced3e1c20226b18a59">
+	</div>
+	<div class="grofile-hash-map-2df1d821baa51a946bf47af7e590401c">
+	</div>
+	<div class="grofile-hash-map-c585253a5b999aca15f353f201eb1f74">
+	</div>
+	<div class="grofile-hash-map-afce3d064f536a0352d2590a1e16d13a">
+	</div>
+	<div class="grofile-hash-map-58829a780976201326d8ea80f37da2fb">
+	</div>
+	<div class="grofile-hash-map-0b44d646fd93b19b777a51226c6bf1a8">
+	</div>
+	<div class="grofile-hash-map-68117bcb44ad5fb7ca999b9ceff47b1e">
+	</div>
+	<div class="grofile-hash-map-a60dc703e8af88f6c762efbb2c081488">
+	</div>
+	<div class="grofile-hash-map-de3f30959f6622f5d8f0c0c10b09fc3b">
+	</div>
+	<div class="grofile-hash-map-b042777c1d70df5e0796287a347534c7">
+	</div>
+	<div class="grofile-hash-map-14760673d7154fd84bbca1ecae1dfe43">
+	</div>
+	<div class="grofile-hash-map-ef6387d74bc170c6cf954375bc86bfbc">
+	</div>
+	<div class="grofile-hash-map-e64d4aaebf11ec213999f9be6589f0fd">
+	</div>
+	<div class="grofile-hash-map-e92971438e165df4554a6868abc8a4e1">
+	</div>
+	<div class="grofile-hash-map-7dcf9cdea5b54d850536d1dfe3de96f4">
+	</div>
+	<div class="grofile-hash-map-ff829794771060da5a0cd40ade613cc2">
+	</div>
+	<div class="grofile-hash-map-6f354f97b8b6325fae01a9d4f2d73c80">
+	</div>
+	<div class="grofile-hash-map-567e641f2382b6be8416cac0289e5b72">
+	</div>
+	<div class="grofile-hash-map-26480f79259948cffc6615a44c94fbfd">
+	</div>
+	<div class="grofile-hash-map-bef9db9826aedf883c9c5e426a784b21">
+	</div>
+	<div class="grofile-hash-map-80a7e9930caca780eeb6660cc8a49ea7">
+	</div>
+	<div class="grofile-hash-map-221f86786bf127ffd723004e4f07d4bb">
+	</div>
+	<div class="grofile-hash-map-b4d669234dfef85550fd265723b8ee79">
+	</div>
+	<div class="grofile-hash-map-90149d84fba1f88250433e9167643d39">
+	</div>
+	<div class="grofile-hash-map-7f6724100bb38ac2e2966cf96a15f9ad">
+	</div>
+	<div class="grofile-hash-map-035dcbb1839b1a902a86dfd607743363">
+	</div>
+	<div class="grofile-hash-map-805ab81f71525ee93f7f9579bef4802c">
+	</div>
+	<div class="grofile-hash-map-865a28f3676a1ec7f1087e833d477ce9">
+	</div>
+	<div class="grofile-hash-map-56ae4678449254327ed32f5ffa0b0418">
+	</div>
+	<div class="grofile-hash-map-a9b49b96273ba326b4adf2d76f9a20ad">
+	</div>
+	<div class="grofile-hash-map-6c09c0d612a3fcd5a7cb07d79204adcb">
+	</div>
+	<div class="grofile-hash-map-afccee4ba181ea5da319f13b3109d866">
+	</div>
+	<div class="grofile-hash-map-d55a5f1bc195557109289febee31fb85">
+	</div>
+	<div class="grofile-hash-map-c0b856cee8163f426d1cd71831e7e31c">
+	</div>
+	<div class="grofile-hash-map-36431654917f3d49f9ea2f1accf3c11d">
+	</div>
+	<div class="grofile-hash-map-708f11f2138235fff89a225ca6a65f58">
+	</div>
+	<div class="grofile-hash-map-1926c3ace99b6f4d7602ddb10ee3b8fa">
+	</div>
+	<div class="grofile-hash-map-c4ab95bdb23bc757e25527acc1a39c5f">
+	</div>
+	<div class="grofile-hash-map-0ec9e3def3d274dd381f2636086f74d2">
+	</div>
+	<div class="grofile-hash-map-27f7613a6ed5b80ba2864d3c747a3e78">
+	</div>
+	<div class="grofile-hash-map-89a4ebf88e577f147609d7737a93aac1">
+	</div>
+	<div class="grofile-hash-map-2bdc60c00bdf408f1d088624290a0ef4">
+	</div>
+	<div class="grofile-hash-map-fb352f70266e5c3a2f2c37bda7c7d2b6">
+	</div>
+	<div class="grofile-hash-map-6e6fb3bed8c504d5c6cc0531e7dbeac7">
+	</div>
+	<div class="grofile-hash-map-4703106fbcc2c23cd95c00bb83e14e12">
+	</div>
+	<div class="grofile-hash-map-77ba499279175b8f7a78332bf6978a51">
+	</div>
+	<div class="grofile-hash-map-5fe0355ec8721240bb016e365e04c54c">
+	</div>
+	<div class="grofile-hash-map-238ade60188828091524e76f3f7c8e42">
+	</div>
+	<div class="grofile-hash-map-33a4486e9e8c9c6fdb5ff0154cfbaa37">
+	</div>
+	<div class="grofile-hash-map-2057f727298e18a7d9bc20ef23fd7f73">
+	</div>
+	<div class="grofile-hash-map-8fa455fbd88b43ef884697ea835b44f1">
+	</div>
+	<div class="grofile-hash-map-7456629dea8a9d7c98f14b56009e1a64">
+	</div>
+	<div class="grofile-hash-map-7ba0bcd7903cd50745b0adbc23eb088b">
+	</div>
+	<div class="grofile-hash-map-fce35ecb960d0f7cf52ab5a193a73131">
+	</div>
+	<div class="grofile-hash-map-996f73ba17591e43f7a4181f05745c9e">
+	</div>
+	<div class="grofile-hash-map-fdb106f7813d6ffd6b00f19651d0ea87">
+	</div>
+	<div class="grofile-hash-map-3e7ac3803e2d44cfa3a7898acf9c4144">
+	</div>
+	<div class="grofile-hash-map-43619245802ff9ae3a93255cffc5bade">
+	</div>
+	<div class="grofile-hash-map-9fe092565f1822ef66892151b21f130c">
+	</div>
+	<div class="grofile-hash-map-cd7832e971d4e3d86bcaacf3f238930a">
+	</div>
+	<div class="grofile-hash-map-3e0594a7380c524045f2ca237bd68f58">
+	</div>
+	<div class="grofile-hash-map-36fed52a14d6ccae998232970c1b7ac7">
+	</div>
+	<div class="grofile-hash-map-1f56332f124efb028d4ac607ce7ffa35">
+	</div>
+	<div class="grofile-hash-map-a0cb24646a9fab6cd32ce68025e69019">
+	</div>
+	<div class="grofile-hash-map-c457f30fc07ae4d408bd2b4bd0e3141c">
+	</div>
+	<div class="grofile-hash-map-e1a4b723bd4a5e1887eb535301a5bfe0">
+	</div>
+	<div class="grofile-hash-map-96ae9fc3d139307abe27d91dbe032d77">
+	</div>
+	<div class="grofile-hash-map-9315f6ce3baebb09c86901c4497d57b7">
+	</div>
+	<div class="grofile-hash-map-b08f1c91083052ff3479c76005806c17">
+	</div>
+	<div class="grofile-hash-map-3f6ae61e2e0de95f1c938e0feed5c84e">
+	</div>
+	<div class="grofile-hash-map-feae60db35e7e03e303c90ecdefe7e31">
+	</div>
+	<div class="grofile-hash-map-2d75d775a8e4b568278a21b576a5912e">
+	</div>
+	<div class="grofile-hash-map-c438d9f52868b5f6aae3aa480b3f8529">
+	</div>
+	<div class="grofile-hash-map-410165fc88cb8eb2456612987d752e07">
+	</div>
+	<div class="grofile-hash-map-480584a79610450b511f16da9e37a58b">
+	</div>
+	</div>
+
+<!-- BEGIN recaptcha, injected by plugin wp-recaptcha-integration  -->
+<script type="text/javascript">
+				function get_form_submits(el){
+					var form,current=el,ui,type,slice = Array.prototype.slice,self=this;
+					this.submits=[];
+					this.form=false;
+				
+					this.setEnabled=function(e){
+						for ( var s=0;s<self.submits.length;s++ ) {
+							if (e) self.submits[s].removeAttribute('disabled');
+							else  self.submits[s].setAttribute('disabled','disabled');
+						}
+						return this;
+					};
+					while ( current && current.nodeName != 'BODY' && current.nodeName != 'FORM' ) {
+						current = current.parentNode;
+					}
+					if ( !current || current.nodeName != 'FORM' ) 
+						return false;
+					this.form=current;
+					ui=slice.call(this.form.getElementsByTagName('input')).concat(slice.call(this.form.getElementsByTagName('button')));
+					for (var i = 0; i < ui.length; i++) if ( (type=ui[i].getAttribute('TYPE')) && type=='submit' ) this.submits.push(ui[i]);
+					return this;
+				}
+				</script><script type="text/javascript">
+		var recaptcha_widgets={};
+		function recaptchaLoadCallback(){ 
+			try {
+				grecaptcha;
+			} catch(err){
+				return;
+			}
+			var e=document.querySelectorAll ? document.querySelectorAll('.g-recaptcha') : document.getElementsByClassName('g-recaptcha'),form_submits;
+
+			for (var i=0;i<e.length;i++) {
+				(function(el){
+					var form_submits = get_form_submits(el).setEnabled(false),wid;
+					// check if captcha element is unrendered
+					if ( ! el.childNodes.length) {
+						wid = grecaptcha.render(el,{
+							'sitekey':'6Leg2QETAAAAAAf_MmJa9cnj2O79gUgWKMPY6P-7',
+							'theme':el.getAttribute('data-theme') || 'light'
+							,
+							'callback' : function(r){ get_form_submits(el).setEnabled(true); /* enable submit buttons */ }
+						});
+						el.setAttribute('data-widget-id',wid);
+					} else {
+						wid = el.getAttribute('data-widget-id');
+						grecaptcha.reset(wid);
+					}
+				})(e[i]);
+			}
+		}
+		
+		// if jquery present re-render jquery/ajax loaded captcha elements 
+		if ( typeof jQuery !== 'undefined' )
+			jQuery(document).ajaxComplete( function(evt,xhr,set){
+				if( xhr.responseText && xhr.responseText.indexOf('6Leg2QETAAAAAAf_MmJa9cnj2O79gUgWKMPY6P-7') !== -1)
+					recaptchaLoadCallback();
+			} );
+		
+		</script><script src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/api(1).js" async="" defer=""></script>
+<!-- END recaptcha -->
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/devops.com\/2015\/08\/03\/essential-ingredients-continuous-deployment\/":8744};
+		window.WPCOM_jetpack = true;
+				window.WPCOM_site_ID = 66352823;
+			</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-tumblr' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<link rel="stylesheet" id="color_stylesheet-css" href="./Essential Ingredients to Continuous DeploymentDevOps.com_files/carmine.css" type="text/css" media="">
+<!-- Inline jetpack_facebook_likebox -->
+<style id="jetpack_facebook_likebox-inline-css" type="text/css">
+.widget_facebook_likebox {
+	overflow: hidden;
+}
+
+</style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var impression_object = {"ajax_url":"http:\/\/devops.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://devops.com/wp-content/plugins/adrotate-pro/library/jquery.adrotate.dyngroup.js"></script>
+<script type="text/javascript" src="http://devops.com/wp-content/plugins/adrotate-pro/library/jquery.adrotate.responsive.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var click_object = {"ajax_url":"http:\/\/devops.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://devops.com/wp-content/plugins/adrotate-pro/library/jquery.adrotate.clicktracker.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.form.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/devicepx-jetpack.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/wpgroho.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.ui.totop.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/prettify.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/bootstrap.min(1).js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/application.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var mejsL10n = {"language":"en-US","strings":{"Close":"Close","Fullscreen":"Fullscreen","Download File":"Download File","Download Video":"Download Video","Play\/Pause":"Play\/Pause","Mute Toggle":"Mute Toggle","None":"None","Turn off Fullscreen":"Turn off Fullscreen","Go Fullscreen":"Go Fullscreen","Unmute":"Unmute","Mute":"Mute","Captions\/Subtitles":"Captions\/Subtitles"}};
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/mediaelement-and-player.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/gmap3.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.csctip.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/superfish.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/modernizr.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/jquery.vegas.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/custom.js"></script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/comment-reply.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.2.3","language":""},"disqusIdentifier":"8744 http:\/\/devops.com\/?p=8744","disqusShortname":"devopscom","disqusTitle":"Essential Ingredients for Continuous Deployment","disqusUrl":"http:\/\/devops.com\/2015\/08\/03\/essential-ingredients-continuous-deployment\/","options":{"manualSync":false},"postId":"8744"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/disqus.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"devopscom"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/count(1).js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/sharing.js"></script>
+<!-- AdRotate JS -->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+if(jQuery.fn.gslider) {
+	jQuery('.g-4').gslider({ groupid: 4, speed: 60000 });
+}
+});
+</script>
+<!-- /AdRotate JS -->
+
+<script type="text/javascript" src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/e-201532.js" async="" defer=""></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.6',blog:'66352823',post:'8744',tz:'-4',srv:'devops.com'} ]);
+	_stq.push([ 'clickTrackerInit', '66352823', '8744' ]);
+</script>
+        <script type="text/javascript">
+        jQuery(document).ready(function(){
+           jQuery.ajax({
+                url:"http://devops.com/wp-admin/admin-ajax.php",
+                type: "POST",
+                dataType:"json",
+                data:({
+                    btns:'2',
+                    action:"bmp_map_post_type_show"
+                }),
+                success: function(data) {
+                }
+            });
+           
+           jQuery('.mybtn').click(function(){
+                var btnid = this.id;
+				//id is anything after last underscore
+				var parts = btnid.split('_');
+				var id = parts[parts.length-1];
+                //var id = btnid.replace("custombtn","");
+                jQuery.ajax({
+                    url:"http://devops.com/wp-admin/admin-ajax.php",
+                    type: "POST",
+                    dataType:"json",
+                    data:({
+                        btn_id:id,
+                        action:"bmp_map_post_type_show"
+                    }),
+                    success: function(data) {
+                        if(data.output === 'yes') {
+                            document.location.href = data.url;
+                        }
+                    }
+                 });
+           });
+           
+           jQuery('.mybtn').mouseover(function(){
+                var alt = jQuery(this).attr('alt');
+                var getcolors = alt.split('_');
+                var hovercolor = getcolors[0];
+                jQuery(this).find('#btnAddProfile').css('background','#'+hovercolor);
+           });
+           
+           jQuery('.mybtn').mouseout(function(){
+                var alt = jQuery(this).attr('alt');
+                var getcolors = alt.split('_');
+                var backcolor = getcolors[1];
+                jQuery(this).find('#btnAddProfile').css('background','#'+backcolor);
+           });
+        });
+        </script>
+                <script type="text/javascript">
+        jQuery(document).ready(function(){
+           jQuery.ajax({
+                url:"http://devops.com/wp-admin/admin-ajax.php",
+                type: "POST",
+                dataType:"json",
+                data:({
+                    btns:'2',
+                    action:"map_post_type_show"
+                }),
+                success: function(data) {
+                }
+            });
+           
+           jQuery('.mybtn').click(function(){
+                var btnid = this.id;
+                var id = btnid.replace("custombtn","");
+                jQuery.ajax({
+                    url:"http://devops.com/wp-admin/admin-ajax.php",
+                    type: "POST",
+                    dataType:"json",
+                    data:({
+                        btn_id:id,
+                        action:"map_post_type_show"
+                    }),
+                    success: function(data) {
+                        if(data.output === 'yes') {
+                            //document.location.href = data.url;//open in same window
+							window.open(data.url,"_blank");//open in new tab/window
+                        }
+                    }
+                 });
+           });
+           
+           jQuery('.mybtn').mouseover(function(){
+                var alt = jQuery(this).attr('alt');
+                var getcolors = alt.split('_');
+                var hovercolor = getcolors[0];
+                jQuery(this).find('#btnAddProfile').css('background','#'+hovercolor);
+           });
+           
+           jQuery('.mybtn').mouseout(function(){
+                var alt = jQuery(this).attr('alt');
+                var getcolors = alt.split('_');
+                var backcolor = getcolors[1];
+                jQuery(this).find('#btnAddProfile').css('background','#'+backcolor);
+           });
+        });
+        </script>
+        
+
+<!-- Powered by Whitelist IP For Limit Login Attempts | URL: http://club.orbisius.com/products/wordpress-plugins/whitelist-ip-for-limit-login-attempts/ -->
+
+
+<a href="http://devops.com/2015/08/03/essential-ingredients-continuous-deployment/#" id="toTop" style="display: inline;"><span id="toTopHover"></span>To Top</a><div class="swiftype-widget"><div class="autocomplete" style="position: absolute; z-index: 9999; top: 179px; left: 889.5px; width: 300px; display: none;"><ul></ul></div></div><img src="./Essential Ingredients to Continuous DeploymentDevOps.com_files/g.gif" id="wpstats"><iframe frameborder="0" scrolling="no" style="border: 0px; display: none; background-color: transparent;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div></body></html>
