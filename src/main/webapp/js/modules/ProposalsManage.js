@@ -292,6 +292,17 @@ $(function() {
 											hide : true
 										},
 										{
+											display : 'Is Deleted?',
+											name : 'is_deleted',
+											cssclass : 'cssClassHeadBoolean',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'boolean',
+											format : 'Yes/No',
+											hide : true
+										},
+										{
 											display : 'PI User',
 											name : 'pi_user',
 											cssclass : '',
@@ -308,17 +319,6 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'array',
-											hide : true
-										},
-										{
-											display : 'Is Deleted?',
-											name : 'is_deleted',
-											cssclass : 'cssClassHeadBoolean',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											type : 'boolean',
-											format : 'Yes/No',
 											hide : true
 										},
 										{
@@ -759,13 +759,16 @@ $(function() {
 		ClearForm : function() {
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
-			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
+			var container = $("#container-7 div:gt(1)");
+			var inputs = container.find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
 				rmErrorClass(item);
 				$(this).prop('checked', false);
 				$(this).val('');
 				$(this).val($(this).find('option').first().val());
 			});
+
+			// $('select[name=ddlName]').val(item.id);
 
 			proposalsManage.onInit();
 			$('#lblFormHeading').html(
@@ -788,6 +791,16 @@ $(function() {
 					function(i) {
 						$(this).removeAttr("selected");
 					});
+
+			// For form Dropdown Binding
+			$('select[name=ddlRole]').eq(0).val(0);
+			$('select[name=ddlRole]').eq(0).prop('disabled', 'disabled');
+			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID());
+			$('select[name=ddlName]').eq(0).prop('disabled', 'disabled');
+
+			// $('select[name=ddlName] option').get(rowIndex).map(function() {
+			// return ($(this).val() == GPMS.utils.GetUserProfileID());
+			// }).prop('selected', true);
 
 			// proposalsManage.BindDepartmentDropDown($(
 			// 'select[name="ddlProposalStatus"]').eq(0).val(), false);
@@ -1131,21 +1144,17 @@ $(function() {
 					.each(
 							msg,
 							function(index, item) {
-								// For form Dropdown Binding
-								// $('select[name=ddlName]
-								// option').get(rowIndex)
-								// .map(function() {
-								// return ($(this).val() == item.id);
-								// }).prop('selected', true);
-								//
+								$('input[name="txtPhoneNo"]').val(
+										item.mobileNumber);
+
 								$
 										.each(
 												item.positions,
 												function(index, position) {
 													if ($(
-															'select[name="ddlCollege"] option[value='
+															'select[name="ddlCollege"] option[value="'
 																	+ position.college
-																	+ ']').eq(
+																	+ '"]').eq(
 															rowIndex).length <= 0) {
 
 														$(
@@ -1157,9 +1166,52 @@ $(function() {
 																position.college);
 													}
 
-												});
+													if ($(
+															'select[name="ddlDepartment"] option[value="'
+																	+ position.department
+																	+ '"]').eq(
+															rowIndex).length <= 0) {
 
-								$('#txtPhoneNo').text(item.mobileNumber);
+														$(
+																'select[name="ddlDepartment"]')
+																.get(rowIndex).options[$(
+																'select[name="ddlDepartment"]')
+																.get(rowIndex).options.length] = new Option(
+																position.department,
+																position.department);
+													}
+
+													if ($(
+															'select[name="ddlPositionType"] option[value="'
+																	+ position.positionType
+																	+ '"]').eq(
+															rowIndex).length <= 0) {
+
+														$(
+																'select[name="ddlPositionType"]')
+																.get(rowIndex).options[$(
+																'select[name="ddlPositionType"]')
+																.get(rowIndex).options.length] = new Option(
+																position.positionType,
+																position.positionType);
+													}
+
+													if ($(
+															'select[name="ddlPositionTitle"] option[value="'
+																	+ position.positionTitle
+																	+ '"]').eq(
+															rowIndex).length <= 0) {
+
+														$(
+																'select[name="ddlPositionTitle"]')
+																.get(rowIndex).options[$(
+																'select[name="ddlPositionTitle"]')
+																.get(rowIndex).options.length] = new Option(
+																position.positionTitle,
+																position.positionTitle);
+													}
+
+												});
 							});
 			break;
 
