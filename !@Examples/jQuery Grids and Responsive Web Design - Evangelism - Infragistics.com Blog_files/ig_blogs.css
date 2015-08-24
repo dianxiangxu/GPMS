@@ -1,0 +1,442 @@
+﻿.container blockquote
+{
+    margin: 0;
+}
+#leftBlogsColumn
+{
+    float: left;
+    width: 710px;
+    padding: 0px;
+    margin: 0 10px 0 0;
+    overflow: hidden;
+}
+
+#leftBlogsColumn .content table
+{
+    margin-bottom: 20px;
+}
+
+#rightBlogsColumn
+{
+    float: left;
+    width: 304px;
+    padding: 0px;
+    margin: 0px;
+}
+#leftBlogsColumn p
+{
+    margin-bottom: 10px;
+}
+#leftBlogsColumn .content ul
+{
+    overflow: auto;
+    margin: 0px;
+}
+#leftBlogsColumn .content ol
+{
+    color: #656565;
+    padding-left: 2.5em;
+    margin-bottom: 10px;
+    font-size: 0.857em;
+}
+#leftBlogsColumn .content div.dp-highlighter ol
+{
+    font-size: inherit;
+}
+.blogPostsListItem,
+#leftBlogsColumn .content ol .blogPostsListItem
+{
+    padding: 30px 30px 40px;
+    border-top: 1px solid #c4c4c4;
+    position: relative;
+    line-height: inherit;
+    background-color: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#fff));
+    background: -moz-linear-gradient(top,  #f5f5f5,  #fff);
+    background: -o-linear-gradient(top, #f5f5f5, #fff);
+}
+.blogPostsListItem > h2
+{
+    color: #000 !important;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+.blogPostsListItem > h2 > a
+{
+    color: #000 !important;
+}
+
+.CommonMessageSuccess
+{
+    color: white;
+    margin-bottom: 10px;
+    background: #5EB57D;
+    padding: 5px;
+}
+
+.commonUserAndPostDetails
+{
+    margin-bottom: 5px;
+    line-height: 1.7;
+    color: #b3b3b3;
+    clear: both;
+    overflow: auto;
+}
+.commonUserAndPostDetails > li
+{
+    float: left;
+    margin-right: 10px;
+}
+.commonUserAndPostDetails > li > a
+{
+    font-size: inherit;
+    line-height: inherit;
+}
+.blogPostExcerpt
+{
+    margin-bottom: 15px;
+}
+
+h1.CommonTitle
+{
+    margin: 0 0 5px 30px;
+    padding-top: 20px;
+    border-bottom: none;
+}
+
+.blogSidebarBox
+{
+    margin-bottom: 10px;
+    border: 0px solid #000;
+    border-top: 10px solid #000;
+}
+.blogSidebarBox h2
+{
+    font-size: 1.85em !important;
+    font-weight: normal !important;
+    color: black !important;
+    padding-top: 5px;
+}
+.blackBackground
+{
+    color: #fff;
+    background-color: #000;
+}
+
+#blogginCommunityBox
+{
+    display: block;
+    padding: 0px 0px 10px 20px;
+}
+
+#blogginCommunityBox > h2
+{
+    font-size: 26px;
+    font-family: Arial;
+    color: #fff !important;
+    font-weight: 200;
+    margin-top: 0px;
+    border-bottom: 0px;
+}
+
+#blogginCommunityTabLinks > a
+{
+    color: #fff !important;
+    padding: 5px 5px;
+    margin: 0px 3px 0px 0px;
+    display: inline-block;
+}
+
+#blogginCommunityTabLinks
+{
+    padding-left: 20px;
+}
+
+#blogginCommunityTabLinks > a.selected, #blogginCommunityTabLinks > a:hover
+{
+    color: #000 !important;
+    background-color: #fff;
+    text-decoration: none;
+}
+
+.sidebarInnerContentWrapper
+{
+    padding: 4px 20px 10px 20px;
+}
+#productBlogsList, #servicesBlogList, .evangelistsBlogList
+{
+    margin: 10px 0 20px;
+}
+#productBlogsList > li, #servicesBlogList > li, .evangelistsBlogList > li
+{
+    line-height: 30px;
+    border-bottom: 1px solid #c4c4c4;
+    display: block;
+    padding: 5px 0px;
+}
+
+#productBlogsList > li.last, #servicesBlogList > li.last, .evangelistsBlogList > li.last
+{
+    border-style: none;
+}
+
+.blogPostBreadCrubmArea
+{
+    margin: 15px 0;
+}
+
+.innerBlogContainerWrapper
+{
+    padding: 10px 25px;
+}
+
+.CommonSidebarTagCloud, CommonTagCloud
+{
+    list-style: none;
+}
+
+.CommonTag1, .CommonTag2, .CommonTag3, .CommonTag4, .CommonTag5, .CommonTag6
+{
+    float: left;
+    font-size: 8pt;
+    line-height: 1.5em;
+}
+
+.CommonTag1 > a, .CommonTag2 > a, .CommonTag3 > a, .CommonTag4 > a, .CommonTag5 > a, .CommonTag6 > a
+{
+    text-decoration: underline;
+    color: #999 !important;
+}
+
+.CommonTag1 > a:hover, .CommonTag2 > a:hover, .CommonTag3 > a:hover, .CommonTag4 > a:hover, .CommonTag5 > a:hover, .CommonTag6 > a:hover
+{
+    text-decoration: underline;
+    color: #fff !important;
+    background-color: #3FC3FA !important;
+}
+
+.CommonTag1 a:link, .CommonTag1 a:visited, .CommonTag1 a:active
+{
+    font-size: 180%;
+    margin-right: 6px;
+    text-decoration: none;
+}
+
+.CommonTag2 a:link, .CommonTag2 a:visited, .CommonTag2 a:active
+{
+    font-size: 175%;
+    margin-right: 6px;
+    text-decoration: none;
+}
+
+.CommonTag3 a:link, .CommonTag3 a:visited, .CommonTag3 a:active
+{
+    font-size: 150%;
+    margin-right: 6px;
+    text-decoration: none;
+}
+
+.CommonTag4 a:link, .CommonTag4 a:visited, .CommonTag4 a:active
+{
+    font-size: 120%;
+    margin-right: 6px;
+    text-decoration: none;
+}
+
+.CommonTag5 a:link, .CommonTag5 a:visited, .CommonTag5 a:active
+{
+    font-size: 100%;
+    margin-right: 6px;
+    text-decoration: none;
+}
+
+.CommonTag6 a:link, .CommonTag6 a:visited, .CommonTag6 a:active
+{
+    font-size: 80% !important;
+    margin-right: 6px;
+    text-decoration: none;
+}
+
+.sidebarInnerContentWrapper h2
+{
+    font-size: 26px;
+    border-bottom: 1px solid #c4c4c4;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    color: #000;
+}
+
+.noTopBoder
+{
+    border-top-style: none !important;
+}
+
+.CommonSidebarList
+{
+    list-style-type: none;
+}
+
+.CommonSidebarList > .rss
+{
+    text-indent: -9999px;
+}
+
+.CommonSidebarList > .rss > a
+{
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+#RecentPostsSideBar ul > li
+{
+    margin-bottom: 5px;
+}
+
+#ArchiveSideBar > ul
+{
+    list-style-type: none;
+}
+
+#tagCloudSelectorWrapper
+{
+    background-color: #eee;
+    padding: 10px 10px 10px 20px;
+}
+
+#tagCloudSelectorWrapper .CommonTag1, #tagCloudSelectorWrapper .CommonTag2, #tagCloudSelectorWrapper .CommonTag3, #tagCloudSelectorWrapper .CommonTag4, #tagCloudSelectorWrapper .CommonTag5, #tagCloudSelectorWrapper .CommonTag6
+{
+    font-size: 10pt !important;
+    line-height: 1.7em;
+}
+
+#innerBlogPostCommentBoxContainer
+{
+    background-color: #e4e4e4;
+    margin: 5px -25px -10px -25px;
+    padding: 10px 25px;
+}
+
+#CommentBoxTitle
+{
+    color: #000;
+    font-size: 24px;
+    font-weight: 200;
+}
+
+.commentFormTextField
+{
+    background-color: #f4f4f4;
+    border: 1px solid #c4c4c4;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    color: #000;
+    padding: 0 3px;
+}
+
+.commentFormTextField.multiline
+{
+    height: 60px;
+}
+
+.blogPostsListItem > h2 > a
+{
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.sidebarInnerContentWrapper > ul.blogList > li
+{
+    line-height: 28px;
+    vertical-align: middle;
+    border-top: 1px solid #c4c4c4;
+}
+
+.sidebarInnerContentWrapper > ul.blogList
+{
+    margin-top: 5px;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.pf_list
+{
+    padding: 0px !important;
+}
+.pf_list a
+{
+    color: #656565 !important;
+}
+#productBlogsList.pf_list a
+{
+	font-size: 1em;
+	color: #656565;
+	display: block;
+	line-height: 30px;
+}
+.blogPostData
+{
+    line-height: 1.7em;
+    color: #b3b3b3;
+}
+.blogPostData a
+{
+    font-size: inherit;
+    line-height: inherit;
+}
+.blogPostData span
+{
+    font-size: 0.875em;
+    line-height: inherit;
+}
+#servicesTab
+{
+    margin-top: 10px;
+}
+#servicesTab > h3
+{
+    font-size: 1.2em;
+    font-weight: normal;
+}
+div.blogpost-body h1
+{
+    font-size: 1.4em;
+}
+div.blogpost-body h1
+{
+    font-size: 1.3em;
+}
+div.blogpost-body h2
+{
+    border:none;
+    padding:0px;
+    margin-bottom: 10px;
+    font-size:1.5em;
+}
+.blogpost-body ul > li
+{
+    background-image: url("/community/assets/images/fpo/lauren_fpo/bullet.jpg");
+    background-position: 30px 6px;
+    background-repeat: no-repeat;
+    padding-left: 43px;
+}
+
+
+.socialwrapper ul > li
+{
+    background: none;
+    padding-left: 0px;
+}
+
+.RecaptchaInvalidMessage
+{
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: red;
+    display: block;
+    margin-bottom: 10px
+}

@@ -1,0 +1,59 @@
+/*div.TmgOffers input[type="radio"] {
+display:block !important;
+}
+.TmgCampaignControl0Theme, .TmgCampaignControl1Theme {
+width:40px !important;
+}*/
+#TmgOffers .tmgFieldControlThemeRequired
+{
+background-color:#ff9999 !important;
+}
+
+#TmgOffers input[type='text']
+{
+	height:25px !important;
+	padding:3px !important;	
+	box-sizing: content-box !important;	
+	line-height: 25px !important;	
+}
+#TmgOffers select
+{
+	height:33px !important;
+	line-height:33px !important;
+	padding:3px !important;
+}
+//#TmgOffers
+//{
+//    margin:0 auto;
+//}
+#TmgOffers a
+{
+	color: #0000FF !important;
+	text-decoration: underline !important;
+}
+#TmgOffers a::after
+{
+   content:"";
+}
+#TmgOffers div
+{
+   padding:0px;
+}
+#TmgOffers, #TmgOffers img
+{
+   padding:0px;
+}
+#tmgCallPixelSrc
+{
+   padding:0px !important;  
+}
+#TmgOffers .TmgImgCampaignLogo
+{
+   width:120px;
+   margin:0px;
+   padding:0px
+}
+.TmgRadioButton
+{
+  margin-left:0px !important;
+}

@@ -1,0 +1,250 @@
+body {
+color: #000;
+background-image: url("/cards/acq/acq/img/shellACQ/bg_gradient.png");
+}
+
+body #content-wrapper h1 sup {
+font-size: 15px;
+}
+
+body #content-wrapper h2 sup {
+font-size: 12px;
+}
+
+body #content-wrapper a {
+color: #a7220b;
+}
+
+#header {
+background-image: url("/cards/acq/acq/img/shellACQ/header_bg_gradient.png");
+background-position: -26px -2px;
+}
+
+#header .branding-logo {
+padding-top: 37px;
+padding-right: 10px;
+padding-left: 29px;
+}
+
+#header h1 {
+color: #444;
+padding-top: 15px;
+padding-left: 18px;
+}
+
+#header h1 span {
+display: block;
+color: #666;
+}
+
+.card-art {
+top: 0;
+left: 19px;
+margin: 0;
+}
+
+.approval-status .divider {
+background: none;
+}
+
+
+.exclusive {
+background: #222;
+}
+
+.exclusive h3 {
+background: none;
+padding-left: 22px;
+}
+
+#side-nav {
+width: 242px;
+}
+
+#side-nav-content ul.checkmark li {
+background-image: url("/cards/acq/acq/img/shellACQ/checkmark_list.png");
+color: #000;
+}
+
+#side-nav-content-top {
+background-image: url("/cards/acq/acq/img/shellACQ/bg_leftrail_dg-top.png");
+}
+
+#side-nav-inner-top {
+padding-bottom: 5px;
+border-bottom: 1px solid #cbcbcb;
+}
+
+#side-nav-inner-middle, #side-nav-inner-bottom {
+padding: 5px 0 0;
+background: #e6e6e6;
+}
+
+#side-nav-inner-middle {
+border-top: 1px solid #f7f7f7;
+border-bottom: 1px solid #cbcbcb;
+}
+
+#side-nav-inner-bottom {
+border-top: 1px solid #f7f7f7;
+}
+
+#side-nav-inner-middle-divider {
+background: none;
+}
+
+#side-nav-content-bottom {
+background-image: url("/cards/acq/acq/img/shellACQ/bg_leftrail_lg-bottom.png");
+}
+
+#side-nav-content {
+width: 242px;
+padding-top: 82px;
+background: #eee;
+}
+
+#help-center {
+margin-top: 5px;
+background-image: url("/cards/acq/acq/img/shellACQ/info-icon.gif");
+}
+
+#secure-app {
+margin-top: 5px;
+background-image: url("/cards/acq/acq/img/shellACQ/lock.gif");
+}
+
+#main-content-body {
+border-top: none;
+border-right: 1px solid #e9eaea;
+border-bottom: 1px solid #e9eaea;
+border-left: 1px solid #e9eaea;
+}
+
+.section {
+background: none;
+border-top: 1px solid #e9eaea;
+}
+
+.continue_section {
+border-right: 1px solid #e9eaea;
+border-left: 1px solid #e9eaea;
+}
+
+.continue_section p {
+width: 330px;
+}
+
+.legal {
+width: auto;
+border-right: 1px solid #e9eaea;
+border-bottom: 1px solid #e9eaea;
+border-left: 1px solid #e9eaea;
+padding-right: 30px;
+padding-left: 30px;
+margin: 0;
+}
+
+#footer.apply {
+border-top: 1px solid #e2e3e4;
+height: 113px;
+margin: 40px 53px 0 0;
+padding-top: 15px;
+}
+
+#content-wrapper #footer a {
+color: #a7220b;
+}
+
+.pending #footer.apply {
+margin-right: 30px;
+margin-left: 25px;
+}
+
+#customer-service-contact p {
+padding: 10px;
+}
+
+a.arrow-link {
+background-image: url('/cards/acq/acq/img/shellACQ/arrow-icon.gif');
+}
+
+.focus {
+border: 3px solid #0065B5;
+}
+
+input.error-textbox[type="text"] {
+padding: 8px !important;
+border: 3px solid #d20000;
+}
+
+.required, .err-msg {
+color: #d20000;
+}
+
+.focusselect {
+border: 3px solid #0065B5;
+}
+
+#show-addtional-phone {
+text-decoration: none;
+font-weight: bold;
+}
+
+#approval-status-banner {
+background-image: url("/cards/acq/acq/img/shellACQ/step4_banner.png");
+}
+
+#approval-status-banner.SHELLD45 {
+background-image: url("/cards/acq/acq/img/shellACQ/step4_banner_CC_D45.png");
+}
+
+#enroll-in-ao-btn {
+background-image: url("/cards/acq/acq/img/shellACQ/enroll_in_ao_btn.png");
+}
+
+a#close-print-btn {
+background-image: url("/cards/acq/acq/img/shellACQ/close_btn.png");
+width: 105px;
+height: 48px;
+}
+
+#shop-now-btn {
+background-image: url("/cards/acq/acq/img/shellACQ/shop_now_btn.jpg");
+display: block;
+width: 167px;
+height: 55px;
+margin: 25px 0;
+}
+
+.shop-now-btn {
+background-image: url("/cards/acq/acq/img/shellACQ/shop_now_btn.jpg");
+display: block;
+width: 167px;
+height: 55px;
+margin: 25px 0;
+}
+
+#continue-enrollment-btn {
+background-image: url("/cards/acq/acq/img/shellACQ/continue_enroll.png");
+}
+
+a#continue-btn {
+background-image: url("/cards/acq/acq/img/shellACQ/continue_btn.png");
+}
+
+.slider-carousel-nav a.current {
+background-image: url("/cards/acq/acq/img/shellACQ/slider_nav_active_btn.gif");
+}
+
+/* Create User ID */
+
+.check_availability-disabled,
+.check_availability-checking {
+	color: #a7220b;
+}
+
+.check_availability-ready {
+	background: #0C459E;
+	background: -webkit-linear-gradient(top, #ff4c1a 0%, #d62e10 100%); /* Chrome & Safari */
+	background: linear-gradient(to bottom,  #ff4c1a 0%, #d62e10 100%);
+}

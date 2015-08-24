@@ -1,0 +1,85 @@
+/* FuturaStd */
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-Light.eot');
+	src: url('../fonts/FuturaStd-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-Light.otf') format('opentype'), url('../fonts/FuturaStd-Light.woff') format('woff'), url('../fonts/FuturaStd-Light.ttf') format('truetype'), url('../fonts/FuturaStd-Light.svg#FuturaStd') format('svg');
+	font-style: normal;
+	font-weight: 200;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-LightOblique.eot');
+	src: url('../fonts/FuturaStd-LightOblique.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-LightOblique.otf') format('opentype'), url('../fonts/FuturaStd-LightOblique.woff') format('woff'), url('../fonts/FuturaStd-LightOblique.ttf') format('truetype'), url('../fonts/FuturaStd-LightOblique.svg#FuturaStd') format('svg');
+	font-style: italic;
+	font-weight: 200;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-Book.eot');
+	src: url('../fonts/FuturaStd-Book.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-Book.otf') format('opentype'), url('../fonts/FuturaStd-Book.woff') format('woff'), url('../fonts/FuturaStd-Book.ttf') format('truetype'), url('../fonts/FuturaStd-Book.svg#FuturaStd') format('svg');
+	font-style: normal;
+	font-weight: 300;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-BookOblique.eot');
+	src: url('../fonts/FuturaStd-BookOblique.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-BookOblique.otf') format('opentype'), url('../fonts/FuturaStd-BookOblique.woff') format('woff'), url('../fonts/FuturaStd-BookOblique.ttf') format('truetype'), url('../fonts/FuturaStd-BookOblique.svg#FuturaStd') format('svg');
+	font-style: italic;
+	font-weight: 300;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-Medium.eot');
+	src: url('../fonts/FuturaStd-Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-Medium.otf') format('opentype'), url('../fonts/FuturaStd-Medium.woff') format('woff'), url('../fonts/FuturaStd-Medium.ttf') format('truetype'), url('../fonts/FuturaStd-Medium.svg#FuturaStd') format('svg');
+	font-style: normal;
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-MediumOblique.eot');
+	src: url('../fonts/FuturaStd-MediumOblique.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-MediumOblique.otf') format('opentype'), url('../fonts/FuturaStd-MediumOblique.woff') format('woff'), url('../fonts/FuturaStd-MediumOblique.ttf') format('truetype'), url('../fonts/FuturaStd-MediumOblique.svg#FuturaStd') format('svg');
+	font-style: italic;
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-Heavy.eot');
+	src: url('../fonts/FuturaStd-Heavy.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-Heavy.otf') format('opentype'), url('../fonts/FuturaStd-Heavy.woff') format('woff'), url('../fonts/FuturaStd-Heavy.ttf') format('truetype'), url('../fonts/FuturaStd-Heavy.svg#FuturaStd') format('svg');
+	font-style: normal;
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-HeavyOblique.eot');
+	src: url('../fonts/FuturaStd-HeavyOblique.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-HeavyOblique.otf') format('opentype'), url('../fonts/FuturaStd-HeavyOblique.woff') format('woff'), url('../fonts/FuturaStd-HeavyOblique.ttf') format('truetype'), url('../fonts/FuturaStd-HeavyOblique.svg#FuturaStd') format('svg');
+	font-style: italic;
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-Bold.eot');
+	src: url('../fonts/FuturaStd-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-Bold.otf') format('opentype'), url('../fonts/FuturaStd-Bold.woff') format('woff'), url('../fonts/FuturaStd-Bold.ttf') format('truetype'), url('../fonts/FuturaStd-Bold.svg#FuturaStd') format('svg');
+	font-style: normal;
+	font-weight: 700;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-BoldOblique.eot');
+	src: url('../fonts/FuturaStd-BoldOblique.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-BoldOblique.otf') format('opentype'), url('../fonts/FuturaStd-BoldOblique.woff') format('woff'), url('../fonts/FuturaStd-BoldOblique.ttf') format('truetype'), url('../fonts/FuturaStd-BoldOblique.svg#FuturaStd') format('svg');
+	font-style: italic;
+	font-weight: 700;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-ExtraBold.eot');
+	src: url('../fonts/FuturaStd-ExtraBold.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-ExtraBold.otf') format('opentype'), url('../fonts/FuturaStd-ExtraBold.woff') format('woff'), url('../fonts/FuturaStd-ExtraBold.ttf') format('truetype'), url('../fonts/FuturaStd-ExtraBold.svg#FuturaStd') format('svg');
+	font-style: normal;
+	font-weight: 900;
+}
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-ExtraBoldOblique.eot');
+	src: url('../fonts/FuturaStd-ExtraBoldOblique.eot?#iefix') format('embedded-opentype'), url('../fonts/FuturaStd-ExtraBoldOblique.otf') format('opentype'), url('../fonts/FuturaStd-ExtraBoldOblique.woff') format('woff'), url('../fonts/FuturaStd-ExtraBoldOblique.ttf') format('truetype'), url('../fonts/FuturaStd-ExtraBoldOblique.svg#FuturaStd') format('svg');
+	font-style: italic;
+	font-weight: 900;
+}

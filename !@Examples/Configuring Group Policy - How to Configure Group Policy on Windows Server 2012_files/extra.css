@@ -1,0 +1,21 @@
+.menu .dashicons,
+.nav-menu .dashicons,
+.menu .genericon,
+.nav-menu .genericon {
+	vertical-align: middle;
+	margin-top: -.265em;
+	width: auto;
+	height: auto;
+	font-size: 1.2em;
+	margin-right: -0.75em;	
+	line-height: 1;
+	margin-top:5px;
+	float:right;
+	/*.25em*/
+}
+.menu .dashicons,
+.nav-menu .dashicons {
+}
+.menu .genericon,
+.nav-menu .genericon {
+}

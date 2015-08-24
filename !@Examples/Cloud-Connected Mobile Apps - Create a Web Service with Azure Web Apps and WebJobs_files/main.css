@@ -1,0 +1,397 @@
+body {
+  color: #3b3b3b;
+  font-family: "Segoe UI","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;
+  font-weight: normal;
+}
+
+pre {
+  background-color: #ededed;
+  border: none;
+}
+.mag .row {
+    margin-right: -19px;
+    margin-left: -19px;
+}
+
+.bg-notice {
+  background-color: #E2F4FD;
+  padding: 15px;
+}
+
+.mag h1 {
+  font-family: "Segoe UI Light", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 40px;
+  color: #3b3b3b;
+  line-height: 48px;
+  margin-top:0;
+  letter-spacing:-0.01em;
+}
+
+.mag h2, .mag h3, .mag h4 {
+  font-family: "Segoe UI Semibold", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+.article h2 {
+margin-top: 25px;
+margin-bottom: 15px;
+}
+.mag a, .mag a:link, .mag a:visited {
+  color: #3d7dfe;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mag p {
+  margin: 0px 0px 20px;
+}
+
+.mag .headshot {
+  float: left;
+  margin: 0 1em 30px 0;
+}
+
+.mag a:focus,.mag a:hover {
+  color: #3d7dfe;
+  text-decoration: underline;
+}
+
+.caption {
+  font-family: "Segoe UI Bold", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  padding-top: 2.8em;
+  padding-bottom: 2.5em;
+}
+
+.codeCaption {
+  background-color: #ededed;
+  padding-top: 30px;
+  margin-top: 45px;
+  margin-bottom: 0;
+  padding-left: 35px;
+  font-family: "Segoe UI Bold", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.codeSnippetContainer {
+  background-color: #ededed;
+  padding: 1.66em;
+  padding-bottom: 15px;
+  margin-top: 45px;
+  padding-top: 15px;
+  margin-bottom: 45px;
+  padding-left: 50px;
+}
+
+.codeCaption + .codeSnippetContainer {
+  margin-top: 0;
+}
+
+.codeSnippetContainer span {
+  color: #000 !important;
+}
+
+.codeSnippetContainerTabs {
+  display: none;
+}
+
+.codeSnippetContainerCode {
+  background-color: transparent;
+  padding: 0;
+}
+
+#RightContent {
+  font-size: 1.0em;
+  line-height: 1.5em;
+}
+
+#RightContent h3 {
+  font-size: 1.2em;
+}
+
+#RightContent #sidebarBox {
+    border: 0 !important;
+}
+
+#RightContent .entry-title {
+    display: none;
+}
+
+
+#RightContent .sidebarLine {
+    height: 0px !important;
+}
+
+
+
+.articleImg {
+    position:relative;
+}
+.articleCategory {
+    display: inline;
+    background-color: #000;
+    color: #fff;
+    font-size:0.89em;
+    padding: 3px;
+    position: absolute;
+    top: 0px;
+    width: 120px;
+margin: 0px auto;
+text-align: center;
+}
+
+.columnArticle::after {
+    content: "Column";
+    color: #fff;
+    background-color: #000;
+    font-size:0.89em;
+    position: absolute;
+    padding: 3px;
+    top: 0;
+    width: 120px;
+margin: 0px auto;
+text-align: center;
+}
+.articleImg img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+.noimage .articleImg {
+  display: none;
+}
+
+.noimage .articleBlock {
+  min-height: 265px;
+}
+
+h2.articleTitle {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1.3em;
+  margin-bottom: 5px;
+  line-height: 28px;
+  letter-spacing:
+}
+
+h2.articleTitle a:link , h2.articleTitle a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+.articleAuthor {
+  font-size: 16px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+}
+
+.articleAuthor a, .articleAuthor a:link, .articleAuthor a:active, .articleAuthor a:visited , .articleAuthor a:hover {
+  color: #0066dd;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.issueDate {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  float: left;
+}
+
+.issueNum {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  float: right;
+  position: relative;
+}
+.issueHeader {
+    margin-top: -15px;
+    margin-bottom: 22px;
+}
+.issueHeader hr {
+  clear: both;
+  height: 2px;
+  color:#dcdcdc;
+  margin-bottom:5px;
+}
+.homeHeader {
+    margin-top: -5px;
+margin-bottom: 25px;
+}
+
+.issueBlock {
+  background-color: #eee;
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+.issueImg {
+  float: left;
+  margin-right: 20px;
+  box-shadow: 5px 0px 5px 0px #bdbfba;
+  border: solid 1px #e2e2e2;
+}
+
+.issueTxt {
+  float: left;
+}
+
+.issueTxt h3 {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 1.3em;
+}
+.issueTxt p {
+    margin-bottom: 5px;
+}
+.months p {
+    text-align: center;
+}
+
+.archive {
+  background-color: #0072cb;
+  color: #fff;
+  padding-bottom: 30px;
+}
+
+.archive a, .archive a:link, .archive a:visited {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+.bottomspace{padding-bottom:1em;}
+#allIssues {
+  color: #494949;
+  width: 100%;
+}
+
+#viewIssue {
+  background-color: #494949;
+  height: 50px;
+  left: -16px;
+  position: relative;
+  border: solid 1px #494949;
+}
+#feedContent {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.feedItem {
+  padding-bottom: 50px;
+  display: block;
+}
+
+.fiDesc {
+  padding-bottom: 30px;
+}
+
+h2.fiTitle {
+  font-family: "Segoe UI", arial, helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 1.2em;
+  margin-bottom:5px;
+}
+.fiDate{margin-bottom:20px;}
+
+a.button {
+  background-color: #0071BA;
+  padding: 10px 20px;
+  font-size: 14px;
+  position: relative;
+  top: 2em;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.archive a:focus,.archive a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 769px) {
+  div#content {
+    margin-bottom: 0;
+  }
+
+  .allWidth {
+    width: calc(100% + 338px);
+    height: 30px;
+  }
+
+  #LeftContent {
+    width: calc(100% - 345px);
+  }
+
+  .mag {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .article {
+    max-width: 842px;
+    float: left;
+    margin-right: 30px;
+    width: 100%;
+  }
+
+  .headshot{float:left;margin:0 1em .5em 0;}
+  #RightContent {
+    margin-top: 30px;
+    float: right;
+    margin-top: 50px;
+  }
+
+  .sidebar {
+    max-width: 340px;
+    float: right;
+    background-color: #ededed;
+    padding: 20px;
+  }
+
+  .articleBlock {
+    padding: 0;
+    margin-bottom: 40px;
+    display: block;
+  margin: 0 5px;
+  padding-bottom:25px;
+  }
+}
+
+.subscribe h3 {
+    font-family: "Segoe ui", arial,helvetica, sans-serif;
+    font-size: 1.55em;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+.subscribe ol{margin-left:35px;}
+.subscbTable tr {
+    border-bottom: solid 2px #dcdcdc;
+    height: 60px; vertical-align:middle;
+}
+@media screen and (max-width: 768px) {
+  .allWidth {
+    width: 100%;
+  }
+
+
+  .noimage .articleBlock {
+    min-height: auto;
+  }
+
+  #LeftContent {
+    width: 100%;
+  }
+
+  #RightContent {
+    float: none;
+  }
+
+  .articleBlock p {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+}

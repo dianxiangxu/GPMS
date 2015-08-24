@@ -1,0 +1,2028 @@
+/* 20140925RF */
+body {
+	padding-top:10px;
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+}
+
+strong {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 26px;
+	line-height: 34px;
+	font-weight: normal;
+}
+
+img {
+    vertical-align: top;     /* Add this */
+}
+
+fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+fieldset label {
+	padding-right: 10px;
+}
+
+legend {
+	font-weight: bold;
+}
+
+fieldset h2, .fieldset h2 {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+fieldset, .fieldset {
+	position: relative;
+}
+
+.fieldset {
+	overflow: visible;
+}
+
+.hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+h2.overlay-header {
+	display:inline-block;
+	float:left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.overlay-required{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	clear: left;
+}
+
+h2 {
+
+	line-height: 34px;
+	font-weight: normal;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+a.arrow-link {
+	background: url("/cards/acq/acq/img/genericACQ/arrow-icon.gif") no-repeat;
+	padding-left: 20px;
+	color: black !important;
+}
+
+#header a.arrow-link {
+	background-position: 0 1px;
+}
+
+a.form-link{
+	color: #7f6954;
+	font-weight: bold;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.jump_to_main {
+	background-color: #fff;
+	border: 0;
+	clip: rect(0 0 0 0);
+	color: #000;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.jump_to_main:focus {
+	background: #4d4d4d;
+	background: rgba(77,77,77,0.9);
+	border-bottom: solid 1px #3c3c3c;
+	color: #FFF !important;
+	clip: auto;
+	display: block;
+	height: auto;
+	font-size: 14px;
+	left: 0;
+	margin: 0;
+	outline: none;
+	padding: 11px 0 9px;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	text-decoration: underline;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+#content-wrapper{
+	background: url("../acq/img/genericACQ/bg_main.png") no-repeat;
+	margin:0 auto;
+	padding:5px 0 0 30px;
+	width:985px;
+}
+
+
+#content-wrapper.nogradient{
+	background: url("/cards/acq/acq/img/genericACQ/bg_nogradient.png") repeat-y;
+	margin:0 auto;
+	padding:5px 0 100px 30px;
+	width:985px;
+}
+
+/* Reset for buttons that contain image elements */
+.button_image {
+	background: none;
+	border: none;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+
+
+.overlay {
+	width: 769px !important;
+	display:none;
+}
+
+
+
+.overlay-close-btn {
+	position: absolute;
+	cursor: pointer;
+	height: 14px;
+	width: 14px;
+	background: url("/cards/acq/acq/img/genericACQ/overlay_close_btn.gif") no-repeat;
+	top: 10px;
+	right: 10px;
+	text-indent: -9999px;
+}
+
+.overlay-content {
+	width: 100%;
+	background: url("/cards/acq/acq/img/genericACQ/overlay_bg.png") repeat-y;
+	background-color: white;
+}
+
+.overlay-content > div {
+	padding: 1px 20px;
+}
+
+.overlay-top {
+	width: 100%;
+	height: 11px;
+	background: url("/cards/acq/acq/img/genericACQ/overlay_top.png") no-repeat;
+}
+
+.overlay-bottom {
+	width: 100%;
+	height: 14px;
+	background: url("/cards/acq/acq/img/genericACQ/overlay_bottom.png") no-repeat;
+}
+
+.radio{
+	margin-right: 200px !important;
+	display: inline-block;
+}
+
+.center{
+	text-align: center;
+}
+
+.float-left{
+	float:left;
+}
+
+.submitleft{
+	width:300px;
+}
+
+.clear{
+	clear:both;
+}
+.summary-print{
+	background-image: none;
+}
+
+
+/** HEADER **/
+#header {
+	position: relative;
+	left: 0px;
+	height: 140px;
+	background: url("/cards/acq/acq/img/genericACQ/header_bg_gradient.png") no-repeat;
+	background-position: -20px 0;
+}
+
+#header > * {
+	float: left;
+}
+
+#header .branding-logo {
+	padding: 20px 0 0 35px;
+	width: 208px;
+}
+
+
+
+#header h1 {
+	margin-top: 17px;
+	width: 407px;
+	padding-left: 14px;
+}
+#header h1+div {
+	width: 267px;
+	text-align: right;
+	padding-top: 15px;
+}
+
+
+#header h1+div ul {
+padding: 0;
+}
+
+
+#header h1+div li {
+display: inline;
+list-style-type: none;
+padding-left: 15px;
+}
+
+/*#header ul {
+	margin: 40px 0 0 30px;
+	padding-left: 0;
+}
+
+#header ul.nohelp {
+	margin: 40px 0 0 153px;
+	padding-left: 0;
+}
+
+
+#header li {
+	list-style-type: none;
+	display: inline;
+}*/
+
+#header li:last-child {
+	margin-left: 22px;
+}
+
+#header .arrow-link {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.selectcellpersonal{
+		margin-right: 43px !important;
+}
+
+.selectcell{
+	margin-right:103px !important;
+}
+
+.selectcellfinancial{
+	margin-right:125px !important;
+}
+
+.bold-black{
+	color:black;
+	font-weight: bold;
+	position: relative;
+}
+
+/** Left Rail **/
+#side-nav{
+	position:absolute;
+	width:242px;
+	z-index:200;
+	top:155px;
+	margin-top: 7px;
+}
+
+#side-nav.fixed{
+	top:1px;
+	position: fixed;
+}
+
+
+.card-art{
+	position: absolute;
+	z-index:2;
+	margin:0 auto;
+	width:243px;
+}
+
+.card-art h2{
+	margin:0;
+}
+
+.bold-black-terms-underline {
+	color: black;
+	font-weight: bold;
+	position: relative;
+	text-decoration: underline;
+	text-align: left;
+	margin-left: 32px;
+	width:190px;
+}
+
+#side-nav-content-top{
+	position: absolute;
+	top:43px;
+	width:100%;
+	height:10px;
+	background:url("/cards/acq/acq/img/genericACQ/bg_leftrail_dg-top.png") no-repeat;
+}
+
+#side-nav-content-bottom{
+	background:url("/cards/acq/acq/img/genericACQ/bg_leftrail_lg-bottom.png") no-repeat;
+	width:100%;
+	height:10px;
+}
+
+#side-nav-content{
+	background:url("/cards/acq/acq/img/genericACQ/bg_leftrail_dg.png") repeat-y;
+	width:242px;
+	padding:57px 0 0 0;
+	position: absolute;
+	text-align: center;
+	top:52px;
+}
+
+
+
+#side-nav-content ul.checkmark{
+	list-style:none;
+	padding:0;
+	width:180px;
+}
+
+#side-nav-content ul.checkmark li{
+	text-align: left;
+	padding-bottom: 5px;
+	color:white;
+	padding:0 0 0 40px;
+	background: url(/cards/acq/acq/img/genericACQ/checkmark_list.png) 20px -1px no-repeat;
+}
+
+#side-nav-inner-top #card-benefits .flyout_text ul{
+	padding: 0 0 20px 15px;
+	margin: 0;
+
+}
+
+.terms{
+	text-align: left;
+	margin-left: 33px;
+}
+
+#side-nav .content{
+	padding-left: 50px;
+}
+
+#side-nav #side-nav-inner-middle #long > a {
+	width: 160px;
+}
+
+#side-nav #side-nav-inner-middle #safe > a {
+	width: 160px;
+}
+
+#side-nav #side-nav-inner-top #card-benefits > a {
+	width: 160px;
+	text-align: left;
+}
+
+#side-nav .contentul{
+	padding-left: 20px;
+
+}
+
+.content ul{
+	margin-left:0;
+}
+
+.exclusive {
+	text-align: left;
+	padding:5px 10px 5px 10px;
+	background: url("/cards/acq/acq/img/genericACQ/star_gradient_bg.gif") repeat-y;
+	color: white;
+}
+
+.exclusive h3 {
+	padding-left: 28px;	
+	background: url("/cards/acq/acq/img/genericACQ/star.png") no-repeat 0 50%;
+}
+
+#side-nav-inner-top p {
+margin:0;
+padding:0;
+}
+
+
+#side-nav-inner-top a{
+	display: block;
+	padding: 0 0 10px 0;
+
+}
+
+#side-nav-inner-top h3{
+	margin:0;
+	font-size: 12px;
+}
+#side-nav-inner-middle{
+	background:url("/cards/acq/acq/img/genericACQ/bg_leftrail_lg.png") repeat-y;
+	padding-right:30px;
+
+
+}
+
+#side-nav-inner-middle-divider{
+	clear:both;
+	padding-top: 20px;
+	height:10px;
+	width:100%;
+	background:url("/cards/acq/acq/img/genericACQ/divider_sidenav.gif") no-repeat left bottom;
+}
+
+#side-nav-inner-middle ul li{
+	list-style: none;
+	text-align: left;
+	margin-bottom: 5px;
+}
+
+#side-nav-inner-top ul{
+	margin-bottom: 0;
+
+}
+
+#side-nav-inner-middle ul{
+	margin-bottom:0;
+	padding-bottom: 20px;
+	padding-left: 10px;
+}
+
+#side-nav-inner-middle a{
+	text-align: left;
+
+}
+#side-nav-inner-bottom{
+	background:url("/cards/acq/acq/img/genericACQ/bg_leftrail_lg.png") repeat-y;
+}
+#side-nav-inner-bottom a{
+
+	text-align: left;
+
+}
+#side-nav h2{
+	margin: 0;
+	padding: 0;
+}
+
+#help-center{
+	margin: 0 auto auto 36px;
+	background:url("/cards/acq/acq/img/genericACQ/info-icon.gif") no-repeat left center;
+
+}
+
+#side-nav-bottom{
+	padding-right:30px;
+
+}
+
+#secure-app{
+	margin: 0 auto auto 36px;
+	background:url("/cards/acq/acq/img/genericACQ/lock.gif") no-repeat left center;
+}
+
+#side-nav-content h2{
+	margin-left: 23px;
+	text-align: left;
+}
+
+#side-nav-content .flyout_content h2{
+	margin-left: 0px;
+
+}
+
+#side-nav-content .flyout_content a {
+	display:inline;
+	padding: 0;
+    text-decoration: underline;
+}
+
+
+#side-nav-inner-bottom .norton{
+	margin: 0;
+	padding-top: 20px;
+	text-align: left;
+}
+
+.norton img{
+	padding-left: 10px;
+}
+
+
+.bold-grey{
+	color:black;
+	font-weight: bold;
+	font-size:11px;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.normal{
+	font-weight: normal;
+}
+
+.checkbox_container > .floatleft {
+    width: 4%;
+}
+
+.checkbox_container > .normal {
+    width: 95%;
+}
+
+
+/** Main Form Area **/
+form{
+	margin: 0;
+}
+
+#main-content {
+	float: right;
+	margin-right: 53px;
+	width: 690px;
+	min-height: 500px;
+}
+
+
+#main-content-header{
+	margin:0;
+ 	margin-top: 10px;
+ 	padding:0;
+}
+
+#main-content-banner{
+}
+
+#main-content-body{
+	border: 1px solid #e2e3e4;
+	width:688px;
+}
+
+
+.info{
+	padding-top: 25px;
+}
+.section{
+	background:url("/cards/acq/acq/img/genericACQ/section_gradient.gif") repeat-x top;
+	border:none;
+	padding-top: 5px;
+	padding-left: 30px;
+	padding-right: 6px;
+	padding-bottom: 40px;
+	margin: 0;
+}
+
+.section h2{
+	font-size:24px;
+	font-weight: normal;
+}
+
+
+/** Form **/
+fieldset label, .fieldset label {
+	padding-left: 2px;
+
+}
+
+.checkbox_container {
+	overflow: hidden;
+}
+
+.checkbox_container input {
+	display: block;
+}
+
+.checkbox_container label {
+	display: block;
+	float: left;
+	width: 615px;
+}
+
+.checkbox_container label p {
+	margin: 0 0 0.6em;
+}
+
+.textbox{
+	border:1px solid #8d8b8c;
+	margin-top: 5px;
+	overflow: hidden;
+	padding:10px;
+	float:left;
+	font-weight: bold;
+}
+
+.size330 {
+width: 330px;
+}
+
+.size215{
+	width:215px;
+}
+
+.size190{
+	width:190px;
+}
+
+.size150{
+	width:150px;
+}
+
+.size140{
+	width:140px;
+}
+
+.size137{
+	width:133px;
+}
+
+.size35{
+	width:35px;
+}
+
+.size45{
+	width:45px;
+}
+
+.size55{
+	width:65px;
+}
+
+.size20{
+	width:20px;
+}
+
+.size50{
+	width:50px;
+}
+
+.size250{
+	width:250px;
+}
+
+.focus {
+	padding: 8px !important;
+	position: relative;
+}
+
+.focusselect {
+	position: relative;
+}
+
+.none{
+	display: none;
+}
+
+.visible{
+	display:block;
+
+}
+
+.form-hidden-section{
+	display: inline-block;
+	padding-bottom: 25px;
+}
+
+#apply_form .spanfocus{
+	padding-right:17px;
+	padding-bottom: 12px;
+}
+
+input[type=text]:focus, input[type=password]:focus, select:focus {
+	outline: none;
+}
+
+form > span {
+	display: inline-block;
+	position: relative;
+	z-index: 2;
+}
+
+#apply_form span.inputContainer{
+	display: inline-block;
+	float: left;
+	margin-right: 15px;
+	padding-right: 0px;
+	padding-bottom: 30px;
+	position: relative;
+}
+
+span.inputContainer{
+	z-index:50;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+
+.checkboxList{
+	display: block;
+	position: relative;
+}
+
+.checkboxList a{
+	z-index: 9000;
+	display: inline-block;
+
+}
+
+fieldset ul li .checkboxList label.normal, .fieldset ul li .checkboxList label.normal {
+	width: auto;
+    padding-bottom: 0;
+}
+
+fieldset ul li .checkboxList .required, .fieldset ul li .checkboxList .required {
+	float: left;
+}
+
+fieldset ul li .checkboxList, .fieldset ul li .checkboxList {
+	clear: both;
+}
+
+span.no-float{
+	float:none !important;
+
+}
+
+span.dash{
+
+	float:left;
+	margin-top: 15px;
+	padding: 0px 5px 0 5px;
+}
+
+#main-content-body input[type=text], #main-content-body input[type=password] {
+	margin:0;
+	padding:10px;
+	height:13px;
+	float:left;
+	font-weight: bold;
+}
+
+span.inputContainer input[type=radio] {
+	margin-top: 15px;
+	float: left;
+}
+
+input[type=radio].nomargin{
+	margin: 0;
+}
+
+input[disabled] {
+	background-color: #d8d8d8;
+}
+
+label{
+	font-weight: bold;
+
+}
+
+span.inputContainer label{
+		display: inline-block;
+		padding-bottom: 5px;
+		width:100%;
+}
+
+span.inputContainer .visuallyhidden {
+	display: inline;
+}
+
+.esp label{
+   position: absolute;
+   white-space: nowrap;
+}
+
+.esp label .err-msg{
+	white-space:normal;
+}
+
+.esp input[type="text"]{
+	margin-top: 5px !important;
+}
+
+.esp select{
+	margin-top: 12px !important;
+}
+
+label.radio-value {
+	width: auto !important;
+	vertical-align: middle;
+	float: left;
+	margin: 15px 0 10px;
+	padding-top: 2px;
+}
+
+.inputContainer label[for="PURCHASE_ORDER_REQ"] {
+	float: left;
+}
+
+.underline{
+	text-decoration: underline;
+}
+
+.dollar{
+	padding-top: 15px;
+	padding-right: 7px;
+}
+
+.cents{
+	padding-top: 15px;
+	padding-left: 7px;
+}
+
+select{
+	background: url("/cards/acq/acq/img/genericACQ/bg_dropdown.gif") repeat-x;
+	border:1px solid gray;
+	color:black;
+	float:left;
+	font-weight: bold;
+	width:120px;
+	display: inline-block;
+	margin-top: 8px;
+}
+
+
+input[type=checkbox]{
+	margin-right: 15px;
+	vertical-align: bottom;
+	position: relative;
+	top: -3px;
+
+}
+input[type=radio]{
+	margin-bottom: 10px;
+}
+
+
+fieldset ul, .fieldset ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+fieldset ul li, .fieldset ul li{
+	display: block;
+}
+fieldset .lists-in-fieldset ul, .fieldset .lists-in-fieldset ul {
+                padding-left: 40px;
+                margin: 1em 0;
+                list-style-type: disc;
+}
+
+fieldset .lists-in-fieldset ul li, .fieldset .lists-in-fieldset ul li {
+                display: list-item;
+}
+
+fieldset ul li span, fieldset ul li label, fieldset ul li .checkboxList label, .fieldset ul li span, .fieldset ul li label, .fieldset ul li .checkboxList label{
+	padding-bottom: 15px;
+}
+
+.overlay-content span.checkbox{
+	padding-bottom: 60px;
+}
+
+.floatleft{
+	float:left;
+}
+
+
+.floatright{
+	float:right;
+}
+
+.nofloat{
+	float:none !important;
+}
+
+.verifyleft{
+	float:left;
+	text-align: right;
+}
+
+.verifyright{
+
+	float:left;
+	font-weight: bold;
+	padding-left: 15px;
+	text-align: left;
+}
+
+
+
+
+.continue_section{
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 30px;
+	padding-bottom: 90px;
+}
+
+.continue_section_overlay{
+	padding-left: 30px;
+	padding-right: 0px;
+	padding-top: 30px;
+	padding-bottom: 90px;
+}
+
+.legal{
+	background: url("/cards/acq/acq/img/genericACQ/divider_bottom.png") no-repeat top center;
+	width:600px;
+	margin:0 0 0 30px;
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+
+/*Footer*/
+#footer{
+
+	clear: both;
+	margin: 10px 30px;
+	height: 130px;
+	padding-top: 8px;
+}
+
+#footer.apply{
+	border-top: 1px solid #e2e3e4;
+	clear: both;
+	margin: 10px 30px;
+	height: 130px;
+	padding-top: 8px;
+}
+
+#footer div{
+	float: left;
+}
+
+#footer img{
+	float: right;
+}
+
+#footer ul{
+
+	list-style: none;
+	padding: 0;
+	margin: 12px 0 5px 0;
+}
+
+#footer li{
+	display: inline;
+}
+
+#footer a {
+	color: black;
+}
+
+/* APPROVAL-STATUS PAGES */
+
+.disabled{
+	cursor: default;
+	color:gray;
+	opacity: 0.5;
+}
+
+.approval-status ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.approval-status #content-wrapper{
+	padding:5px 0 0 5px;
+	width:985px;
+}
+
+.approval-status .divider {
+
+	height: 10px;
+	width: 100%;
+	background: url("/cards/acq/acq/img/genericACQ/divider.gif") no-repeat;
+	background-position: center;
+}
+
+.disclosure-approval{
+	padding: 0 50px 0 30px;
+}
+
+.disclosure-approval ul{
+	list-style-type: none;
+	margin-left: 5px;
+}
+
+#approval-status-banner, #approval-status-banner-commercial, #approval-status-banner-prox {
+	position: relative;
+	top: -20px;
+	margin-bottom: -20px;
+	height: 146px;
+	padding-top: 20px;
+}
+
+#approval-status-banner h2, #approval-status-banner-commercial h2, #approval-status-banner-prox h2 {
+	color: white;
+	font-size: 25px;
+	line-height: 1.15;
+	margin: 0;
+	padding: 30px 0 0 35px;
+	position: relative;
+	width: 500px;
+}
+
+#approval-status-banner h2 strong, #approval-status-banner-commercial h2 strong, #approval-status-banner-prox h2 strong {
+	position: relative;
+	font-size: 45px;
+	line-height: 1.25;
+	font-weight: normal;
+}
+
+#approval-status-banner.spanish h2, #approval-status-banner-commercial.spanish h2, #approval-status-banner-prox.spanish h2 {
+	font-size: 25px;
+}
+
+#approval-status-banner.spanish h2 strong, #approval-status-banner-commercial.spanish h2 strong, #approval-status-banner-prox.spanish h2 strong {
+	font-size: 37px;
+}
+
+.approval-status #main-content {
+	float: none;
+	margin: 0 0 0 25px;
+	position: relative;
+	top: -23px;
+	width: 930px;
+}
+
+.approval-status #main-content-body {
+	width: 928px;
+	padding-bottom: 20px;
+	background:url("/cards/acq/acq/img/genericACQ/main-content-body-gradient.jpg") repeat-x;
+	min-height: 605px;
+}
+
+.approval-status #main-content-body li {
+	padding-bottom: 8px;
+}
+
+.approval-status .approval-section {
+	padding: 15px 28px 10px 33px;
+}
+
+.approval-status .approval-section h2, .approval-status .approval-section h3 {
+	padding-bottom: 10px;
+}
+
+.approval-status .approval-section h3 {
+	font-size: 1.5em;
+	font-weight: normal;
+	line-height: 34px;
+	margin: 0;
+}
+
+.approval-status .approval-section ul{
+	margin-left: 0;
+}
+
+.approval-status form {
+	position: relative;
+}
+
+.required-aside {
+	position: absolute;
+	right: 60px;
+}
+
+.required {
+	color: #9D0000;
+	position: relative;
+	top: -1px;
+}
+
+.form-buttons-container {
+	float: right;
+	margin: 47px 40px 0 0;
+	height: 50px;
+}
+
+
+.form-buttons-container > * {
+	float: left;
+	border: none;
+}
+
+.form-buttons-container .arrow-link {
+	margin: 15px 35px 0 0;
+	font-weight: bold;
+	display: block;
+}
+
+#paperless-overlay input[type=radio]{
+	margin: 5px 10px 0 0;
+}
+
+#paperless-overlay input[type=radio]:nth-of-type(1n + 2) {
+	margin: 15px 10px 0 0;
+}
+
+#paperless-overlay .close {
+	display: none;
+}
+
+#paperless-overlay .overlay-content > div {
+	padding: 1px 56px;
+}
+
+#paperless-overlay .form-buttons-container {
+	margin-right: 0;
+}
+
+.paperless-overlay-docs {
+	margin: 15px 0 0;
+}
+
+#cancel-paperless-warning-overlay .form-buttons-container{
+	margin-right:0px;
+	height: auto;
+}
+
+#cancel-paperless-warning-overlay .form-buttons-container .arrow-link {
+    margin-bottom: 10px;
+}
+
+#cancel-paperless-warning-overlay #continue-enrollment-btn{
+	float:right;
+}
+
+#cancel-paperless-warning-overlay {
+	display: none;
+}
+
+.accessible_modal_overlay,.session_accessible_modal_overlay{
+  background: #000;
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  visibility: visible;
+  z-index: 9997;
+}
+
+#account-online-details #show-benefit-details {
+	display: none;
+}
+
+#account-online-details ul {
+	padding-left: 12px;
+	list-style-type: disc;
+}
+
+#shop-now-details, #account-details, #reference-information, #pending-details, #declined-details {
+	float: left;
+	padding-bottom: 50px;
+}
+
+#shop-now-details, #pending-details, #declined-details {
+	background: url("/cards/acq/acq/img/genericACQ/approval-section-gradient.jpg") no-repeat right top;
+	width: 435px;
+}
+
+#account-details {
+	width: 370px;
+}
+
+#account-details table, #reference-information table {
+	margin: 7px 0 17px 0;
+	font-size: 13px;
+	table-layout: fixed;
+	width:100%;
+}
+
+#account-details .detail-label {
+	width: 47%;
+	padding-bottom: 7px;
+	padding-right: 15px;
+}
+
+#account-details .detail-value {
+	text-align: left;
+	font-weight: bold;
+	padding-bottom: 7px;
+	width:53%;
+	white-space: nowrap;
+}
+#reference-information .detail-value {
+    TEXT-ALIGN: left; PADDING-BOTTOM: 7px; WIDTH: 50%; FONT-WEIGHT: bold
+}
+
+#reference-information .detail-label {
+    text-align: left;
+    font-weight: normal;
+    PADDING-BOTTOM: 7px; WIDTH: 50%; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top
+}
+
+#reference-information {
+    WIDTH: 360px;
+}
+
+#reference-information caption, #account-details caption {
+	display: none;
+}
+
+#other-credit-offers {
+	position: relative;
+	left: -30px;
+	margin-top: 50px;
+	height: 325px;
+	width: 928px;
+	padding-top: 20px;
+	background: url("/cards/acq/acq/img/genericACQ/carousel_bg.jpg") repeat-x;
+}
+
+#other-credit-offers h2 {
+	margin-left: 30px;
+}
+
+.slider-carousel {
+	width: 100%;
+	height: 250px;
+}
+
+.slider-btn {
+	position: absolute;
+	top: 140px;
+	cursor: pointer;
+}
+
+.backward {
+	left: 0px;
+}
+
+.forward {
+	right: 0px;
+}
+
+.slider-carousel-contents {
+	height: 165px;
+	padding: 45px 74px 10px 74px;
+}
+
+.slider-carousel-page {
+	display: none;
+	float: left;
+}
+
+.slider-carousel-item {
+	float: left;
+	margin-left: 10px;
+	width: 380px;
+	height: 145px;
+}
+
+.slider-carousel-item .offer-item-logo {
+	float: left;
+}
+
+.slider-carousel-item .offer-item-description {
+	float: left;
+	width: 215px;
+	padding-left: 15px;
+}
+
+.slider-carousel-nav {
+	text-align: center;
+}
+
+.slider-carousel-nav a {
+	background: url("/cards/acq/acq/img/genericACQ/slider_nav_btn.gif") no-repeat;
+	height: 17px;
+	width: 17px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.slider-carousel-nav a.current {
+	background: url("/cards/acq/acq/img/genericACQ/slider_nav_active_btn.gif") no-repeat;
+}
+
+.termscheck{
+	vertical-align: top;
+}
+
+.termslabel{
+	display: inline-block;
+}
+
+#customer-service-contact {
+	margin-top: 20px;
+	width: 446px;
+	text-align: center;
+	background: #E2E3E5;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+#customer-service-contact div.top-shape {
+	width: 100%;
+	height: 7px;
+	background: url("/cards/acq/acq/img/thdACQ/customer_service_top.jpg") no-repeat;
+}
+
+#customer-service-contact p {
+	margin: 0;
+	padding: 0 5px;
+}
+
+#customer-service-contact div.bottom-shape {
+	width: 100%;
+	height: 7px;
+	background: url("/cards/acq/acq/img/thdACQ/customer_service_bottom.jpg") no-repeat;
+}
+
+.approval-status .check-availability {
+	position: absolute;
+	top: 30px;
+	left: 240px;
+	display: block;
+	width: 150px;
+}
+
+#enroll-in-ao-btn {
+	display: block;
+	width: 309px;
+	height: 48px;
+	text-indent: -9999px;
+}
+
+input#enroll-in-ao-btn:hover {
+    cursor: pointer;
+}
+
+#continue-enrollment-btn {
+	height: 51px;
+	width: 452px;
+	display: block;
+	text-indent: -9999px;
+}
+
+a#continue-btn {
+	height: 51px;
+	width: 180px;
+	display: block;
+	text-indent: -9999px;
+}
+
+a#continue-btn-esp {
+	height: 51px;
+	width: 180px;
+	display: block;
+	text-indent: -9999px;
+}
+
+.approval-status #header {
+	margin-left: 25px;
+}
+
+
+/* VERIFY PAGE */
+ul.verify{
+
+	display: block;
+	margin: 0 auto;
+	width:600px;
+}
+
+.verify span{
+
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.verify-table{
+	width: 650px;
+	margin: 0 auto;
+}
+
+.verify-table th, .verify-table td {
+	width: 50%;
+}
+
+/* Verify table is no longer being used as a table for AT users. Removing captions prevents redundancy. */
+.verify-table caption {
+	display: none;
+}
+
+
+.textright{
+	font-weight: normal;
+	text-align: right;
+	padding-bottom: 5px;
+	padding-right: 5px;
+
+}
+
+.textleft{
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-right: 5px;
+}
+
+#content-wrapper
+.save{
+
+	background:url("/cards/acq/acq/img/genericACQ/save-btn.png") no-repeat;
+	color:white;
+}
+
+.labelMode{
+
+	width:415px;
+
+}
+
+
+.editMode{
+	display: none;
+}
+
+
+.changes{
+	position: absolute;
+	margin-top: 25px;
+	margin-right: 10px;
+	left:550px;
+	top:0px;
+}
+
+.changes a{
+	display:block;
+	padding:12px 0 12px 0;
+	text-align: center;
+	width:109px;
+}
+
+
+
+
+
+/*PROCESSING*/
+
+#processing-status-banner {
+	float:left;
+	position: relative;
+	top: -20px;
+	margin-bottom: -20px;
+	padding-top: 20px;
+	width: 850px;
+}
+
+#processing-status-banner p, #processing-status-banner h2 {
+	color: white;
+	font-size: 25px;
+	line-height: 1.2;
+	margin: 30px 32px 0;
+}
+
+#processing-status-banner h2 {
+	font-weight: bold;
+}
+
+#processing-status-banner p.large{
+	font-size: 45px;
+	margin-top: 18px;
+	width:800px;
+	line-height: 50px !important;
+}
+
+
+#top-main{
+
+
+	background: url("/cards/acq/acq/img/genericACQ/top_processing.png") no-repeat;
+	height:10px;
+	margin: 0 auto;
+	padding: 5px 0 0 30px;
+	width: 985px;
+}
+
+#header .branding-logo-processing {
+	padding: 10px 0 0 53px;
+	width: 208px;
+}
+
+#main{
+	background-color: #4d4b4e;
+	border:1px solid black;
+	height: 400px;
+	width:930px;
+
+}
+
+#main img{
+	padding: 20px;
+	float:right;
+}
+
+
+#content-wrapper.nogradient .divider{
+	height: 20px;
+	width: 100%;
+	background: url("/cards/acq/acq/img/genericACQ/divider.gif") no-repeat;
+	background-position: center;
+}
+
+#bottom-main{
+
+
+	background: url("/cards/acq/acq/img/genericACQ/bottom_processing.png") no-repeat;
+	height:40px;
+	margin: 0 auto;
+	padding: 5px 0 0 30px;
+	width: 985px;
+}
+
+/*PRINT FRIENDLY*/
+
+.print-friendly, .print-friendly #content-wrapper div {
+	background-image: none !important;
+}
+
+.print-friendly #reference-information{
+	border-left: 1px solid #e2e3e4;
+	min-height: 165px;
+}
+
+.print-friendly ul{
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.print-friendly #main-content-body {
+	padding-left: 0;
+}
+
+.print-friendly #main-content {
+	top: 0;
+}
+
+.print-friendly #account-details{
+	border-left: 1px solid #e2e3e4;
+}
+
+.print-friendly #print-footer {
+	border-top: 1px solid #e2e3e4;
+	padding: 15px 30px;
+	padding-bottom: 80px;
+}
+
+.overlay:focus{
+	outline: none;
+}
+
+.flyout_content:focus{
+	outline: none;
+}
+
+#loading-content{
+	width:800px;
+	height:300px;
+	margin:0 auto;
+	text-align: center;
+}
+
+a#close-print-btn {
+	float: right;
+	display: block;
+	width: 122px;
+	height: 52px;
+	text-indent: -9999px;
+}
+
+a#close-print-btn-esp {
+	float: right;
+	display: block;
+	width: 122px;
+	height: 52px;
+	text-indent: -9999px;
+}
+
+/**MULTI STEP APPLY**/
+
+
+
+
+#multistep-nav{
+        height:49px;
+        font-size: 15px;
+        overflow: hidden;
+}
+
+#multistep-nav ul{
+	margin: 0;
+	padding: 5px 0 0 0;
+	color:#666666;
+	list-style-type:none;
+}
+
+#multistep-nav ul li{
+	display: inline;
+	border-right: 1px solid #666666;
+	padding-right:10px;
+	padding-left:10px;
+}
+
+#multistep-nav ul li.current{
+	color:white;
+}
+
+#multistep-nav ul li.no-border{
+	border: none;
+}
+
+
+/** PASSWORD METER **/
+.pw_passwordStrengthIndicator{
+	float:left;
+
+	width:200px;
+}
+
+.meter{
+	left: 33px;
+	top: 17px;
+	height:40px;
+	position: relative;
+	display: inline-block;
+}
+
+#pw_passwordStrengthBar{
+	border:1px solid #A09B9C;
+	background-color: #EFEFEF;
+	clear:both;
+	margin-top: 5px;
+	width:200px;
+	height:15px;
+
+	}
+
+.pw_bar{
+	height:15px;
+}
+
+.pw_label{
+	color: #333333;
+	white-space: nowrap;
+}
+
+.pw_left{
+	padding-bottom: 5px;
+	float: left;
+}
+
+.pw_right{
+	float:right;
+}
+
+#long{
+	width:50px;
+}
+
+.apply-msg {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/*Session Timeout Overrides*/
+
+.ui-dialog.jfpw-confirm .ui-dialog-titlebar.ui-widget-header {
+	display: none !important;
+}
+
+.jfpw-confirm-navButtons ul{
+	overflow: hidden;
+	padding-left: 25px;
+}
+
+.jfpw-confirm-sessionHeader {
+	padding: 22px 0 0;
+}
+
+.jfpw-confirm .jfpw-confirm-negErrIcon{
+	float:left;
+	background-position:-1px -212px;
+	top:2px;
+	height:12px;
+	width:12px;
+	background-image:url("/cards/acq/acq/img/genericACQ/global_sprite.png");
+	background-repeat:repeat-x;
+	display:inline-block;
+	position:relative
+	}
+	
+.ui-button.jfpw-confirm-button-ok, .ui-button.jfpw-confirm-button-cancel {
+	background: #005b9e;
+	color: white;
+	padding: 9px 18px;
+}
+
+.ui-button.jfpw-confirm-button-ok .ui-button-text, .ui-button.jfpw-confirm-button-cancel .ui-button-text {
+	background-image: none !important;
+	background-position: 0;
+	color: inherit;
+	font-size: 21px;
+	font-weight: normal;
+	height: auto;
+	line-height: 1.1;
+	margin: 0;
+	padding: 0;
+}
+
+.jfpw-confirm .jfpw-confirm-button-carat {
+	display: none;
+}
+
+.jfpw-confirm .jfpw-confirm-cancel-container {
+	margin: 0 10px 0 0;
+}
+
+.jfpw-confirm .jfpw-confirm-navButtons {
+	bottom: 0;
+	float: none;
+	position: relative;
+	width: auto;
+}
+
+.jfpw-confirm-navButtons button {
+	border-radius: 5px;
+}
+
+/* GENERIC PARTNER BRANDING */
+body {
+	 background: url("/cards/acq/acq/img/genericACQ/bg_gradient.jpg") top repeat-x;
+}
+
+.focus {
+	border:3px solid orange;
+}
+
+.focusselect {
+	border:3px solid orange;
+}
+
+a#continue-btn {
+	background: url("/cards/acq/acq/img/thdACQ/continue_btn.png") no-repeat;
+}
+
+a {
+	color:#0065b4;
+}
+
+.slider-carousel-nav a.current {
+	background: url("/cards/acq/acq/img/genericACQ/slider_nav_active_btn.gif") no-repeat;
+}
+
+/* SPANISH VERSION OF LEFT RAIL */
+
+#help-center-esp{
+	margin: 0 auto auto 36px;
+	background: url("/cards/acq/acq/img/genericACQ/info-icon.gif") no-repeat left center;
+}
+
+#help-center-esp h2{
+	font-size: 16px !important;
+}
+
+#secure-app-esp{
+	margin: 0 auto auto 36px;
+	background: url("/cards/acq/acq/img/genericACQ/lock.gif") no-repeat left center;
+}
+
+#secure-app-esp h2{
+	font-size: 16px !important;
+}
+
+
+
+/* ================================================== IE Fixes */
+span.inputContainer {
+	z-index: auto;
+}
+
+#apply_form span.requiredIndicator {
+	position: absolute;
+	top: 0px;
+	right: 10px;
+}
+
+span.date {
+	float: left;
+	margin-top: 15px;
+	padding: 0px 15px 0px 5px;
+}
+
+#main-content-body input[type="text"].placeholder {
+	color: #999999;
+}
+
+select#PHOTO_ID_TYPE {
+	width: auto;
+}
+#apply_form span.inputContainer {
+	z-index: 1;
+}
+
+#apply_form span.inputContainer:hover {
+	z-index: 2;
+	visibility: visible;
+}
+
+.error_red, .error_content p {
+	color: #BF0000;
+}
+
+/* accessible modal additions*/
+.modal{
+  width: 560px;
+  background-color: #fff;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  color: #474747;
+  position: relative;
+  z-index: 11;
+}
+
+.modal .title-background {
+  background-color: #eee;
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  top: 37px;
+  left: 0;
+}
+
+.modal .content {
+  width: 480px;
+  display: block;
+  margin: 0 40px;
+  padding: 55px 0 0;
+  position: relative;
+}
+
+.modal .title {
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: bold;
+}
+
+.modal .description {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 40px;
+  margin-bottom: 35px;
+}
+/* end accessible modal additions*/
+
+}
+/* Create User ID */
+
+.err-msg .create_user_id_serverside_error {
+	padding-left: 0;
+}
+
+#choose_user_id_container {
+	display: none;
+	position: relative;
+	float: left;
+	width: 100%;
+	height: auto;
+	margin-bottom: 30px;
+}
+
+#choose_user_id_container legend { padding: 0; }
+
+#choose_user_id_container input {
+	clear: both;
+	float: left;
+	margin-left: 30px;
+}
+
+#choose_user_id_container label {
+	float: left;
+	margin-top: 3px;
+	margin-left: 5px;
+}
+
+#check_availability_button {
+	display: block;
+	position: absolute;
+	left: 237px;
+	top: 18px;
+	width: 120px;
+	height: 36px;
+	text-align: center;
+	font-weight: bold;
+	outline: none;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#check_availability_button:focus {
+	outline: 1px dotted gray;
+}
+
+.check_availability-disabled,
+.check_availability-checking {
+	text-shadow: none;
+	border: 1px solid #aaa;
+	background: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); /* FF */
+	background: -webkit-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); /* Chrome & Safari */
+	background: -o-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); /* Opera */
+	background: -ms-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%, #f1f1f1 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=0 ); /* IE6-9 */
+}
+
+.check_availability-disabled { opacity: 1; }
+
+.check_availability-ready {
+	color: white;
+	border: none;
+}
+
+.check_availability-ready:hover {
+	cursor: pointer;
+}
+
+.check_availability-disabled:hover {
+	cursor: default;
+}
+
+.check_availability-available,
+.check_availability-unavailable {
+	background: #eeeeee;
+	border: none;
+}
+
+.check_availability-available {
+	color: #428103;
+}
+
+.check_availability-available .icon_checkmark {
+	display: inline-block;
+	background: url('/cards/acq/acq/img/genericACQ/uid-check.png') no-repeat left center;
+	height: 10px;
+	width: 13px;
+	margin-top: 2px;
+}
+
+.check_availability-unavailable {
+	color: #bf0000;
+}
+
+
+.choose_user_id_label {
+	display: block;
+}
+
+.choose_user_id_messaging {
+	display: block;
+	clear: both;
+	color: #BF0000;
+	font-weight: normal;
+	margin-top: 7px;
+	width: 390px;
+	padding-bottom: 10px;
+}
+
+.choose_user_id_messaging > img {
+	float: left;
+	padding-right: 10px;
+}
