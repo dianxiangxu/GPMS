@@ -1,5 +1,0 @@
-repo: b867815e539096ea82d4f780bbb7be2f666e5ab8
-node: 03138b3549080ff370d3ea467fa6ea316d6de237
-branch: ApacheFileUploadEE5
-latesttag: null
-latesttagdistance: 14
