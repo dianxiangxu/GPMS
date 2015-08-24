@@ -975,4 +975,41 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 		return userPositions;
 	}
+
+	public List<String> findDepartmentsForAUser(ObjectId id, String college) {
+		Datastore ds = getDatastore();
+		List<String> userDepartments = new ArrayList<String>();
+
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("_id")
+				.equal(id).retrievedFields(true, "details");
+		List<UserProfile> userProfile = q.asList();
+		for (UserProfile user : userProfile) {
+			for (PositionDetails userDetails : user.getDetails()) {
+				if (userDetails.getCollege().equalsIgnoreCase(college)) {
+					userDepartments.add(userDetails.getDepartment());
+				}
+			}
+		}
+		return userDepartments;
+	}
+
+	public List<String> findPositionTypesForAUser(ObjectId id, String college,
+			String department) {
+		Datastore ds = getDatastore();
+		List<String> userPositionTypes = new ArrayList<String>();
+
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("_id")
+				.equal(id).retrievedFields(true, "details");
+		List<UserProfile> userProfile = q.asList();
+		for (UserProfile user : userProfile) {
+			for (PositionDetails userDetails : user.getDetails()) {
+				if (userDetails.getCollege().equalsIgnoreCase(college)
+						&& userDetails.getDepartment().equalsIgnoreCase(
+								department)) {
+					userPositionTypes.add(userDetails.getPositionType());
+				}
+			}
+		}
+		return userPositionTypes;
+	}
 }
