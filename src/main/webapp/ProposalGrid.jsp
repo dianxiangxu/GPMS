@@ -348,10 +348,10 @@
 											<div class="cssClassTabPanelTable">
 												<div id="container-7">
 													<ul>
-														<li><a href="#fragment-1"><span id="lblTabTitle1">
+														<li><a href="#fragment-1"> <span
+																id="lblTabTitle1">Investigator Information </span></a></li>
+														<li><a href="#fragment-2"><span id="lblTabTitle2">
 																	Project Information </span></a></li>
-														<li><a href="#fragment-2"> <span
-																id="lblTabTitle2">Investigator Information </span></a></li>
 														<li><a href="#fragment-3"><span id="lblTabTitle3">
 																	Sponsor And Budget Information </span></a></li>
 														<li><a href="#fragment-4"><span id="lblTabTitle4">
@@ -377,8 +377,64 @@
 																id="lblTabTitle13"> Audit Logs </span></a></li>
 													</ul>
 
-
 													<div id="fragment-1">
+														<div class="sfFormwrapper">
+															<table cellspacing="0" cellpadding="0" border="0"
+																id="dataTable">
+																<thead>
+																	<tr>
+																		<th><span class="cssClassLabel">Role:</span><span
+																			class="cssClassRequired">*</span></th>
+																		<th><span class="cssClassLabel">Name:</span><span
+																			class="cssClassRequired">*</span></th>
+																		<th><span class="cssClassLabel">College:</span><span
+																			class="cssClassRequired">*</span></th>
+																		<th><span class="cssClassLabel">Department:</span><span
+																			class="cssClassRequired">*</span></th>
+																		<th><span class="cssClassLabel">Position
+																				Type:</span><span class="cssClassRequired">*</span></th>
+																		<th><span class="cssClassLabel">Position
+																				Title:</span><span class="cssClassRequired">*</span></th>
+																		<th><span class="cssClassLabel">Phone #:</span><span
+																			class="cssClassRequired">*</span></th>
+																		<th></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td><select title="Role" class="sfListmenu"
+																			name="ddlRole">
+																				<option value="0">PI</option>
+																				<option value="1">Co-PI</option>
+																				<option value="2">Senior Personnel</option>
+																		</select></td>
+																		<td><select title="Name" class="sfListmenu"
+																			name="ddlName">
+																		</select></td>
+																		<td><select title="College Name"
+																			class="sfListmenu" name="ddlCollege">
+																		</select></td>
+																		<td><select title="Department Name"
+																			class="sfListmenu" name="ddlDepartment">
+																		</select></td>
+																		<td><select title="Position Type"
+																			class="sfListmenu" name="ddlPositionType">
+																		</select></td>
+																		<td><select title="Position Title"
+																			class="sfListmenu" name="ddlPositionTitle">
+																		</select></td>
+																		<td><input type="text" class="sfInputbox"
+																			name="txtPhoneNo" placeholder="Phone #"></td>
+																		<td><input type="Button" value="Add More"
+																			name="AddMore"
+																			class="AddOption cssClassButtonSubmit sfLocale" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+
+													<div id="fragment-2">
 														<div class="sfFormwrapper">
 															<table cellspacing="0" cellpadding="0" border="0">
 																<tbody>
@@ -483,62 +539,6 @@
 																			id="ddlProposalStatus">
 																				<option value="0">Choose Proposal Status</option>
 																		</select> <span class="cssClassRequired">*</span></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-
-													<div id="fragment-2">
-														<div class="sfFormwrapper">
-															<table cellspacing="0" cellpadding="0" border="0">
-																<thead>
-																	<tr>
-																		<th><span class="cssClassLabel">Role:</span><span
-																			class="cssClassRequired">*</span></th>
-																		<th><span class="cssClassLabel">Name:</span><span
-																			class="cssClassRequired">*</span></th>
-																		<th><span class="cssClassLabel">College:</span><span
-																			class="cssClassRequired">*</span></th>
-																		<th><span class="cssClassLabel">Department:</span><span
-																			class="cssClassRequired">*</span></th>
-																		<th><span class="cssClassLabel">Position
-																				Type:</span><span class="cssClassRequired">*</span></th>
-																		<th><span class="cssClassLabel">Position
-																				Title:</span><span class="cssClassRequired">*</span></th>
-																		<th><span class="cssClassLabel">Phone #:</span><span
-																			class="cssClassRequired">*</span></th>
-																		<th></th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td><select title="Role" class="sfListmenu"
-																			name="ddlRole">
-																				<option value="0">PI</option>
-																				<option value="1">Co-PI</option>
-																				<option value="2">Senior Personnel</option>
-																		</select></td>
-																		<td><select title="Name" class="sfListmenu"
-																			name="ddlName">
-																		</select></td>
-																		<td><select title="College Name"
-																			class="sfListmenu" name="ddlCollege">
-																		</select></td>
-																		<td><select title="Department Name"
-																			class="sfListmenu" name="ddlDepartment">
-																		</select></td>
-																		<td><select title="Position Type"
-																			class="sfListmenu" name="ddlPositionType">
-																		</select></td>
-																		<td><select title="Position Title"
-																			class="sfListmenu" name="ddlPositionTitle">
-																		</select></td>
-																		<td><input type="text" class="sfInputbox"
-																			id="txtPhoneNo" placeholder="Phone #"></td>
-																		<td><input type="Button" value="Add More"
-																			name="AddMore"
-																			class="AddOption cssClassButtonSubmit sfLocale" /></td>
 																	</tr>
 																</tbody>
 															</table>
