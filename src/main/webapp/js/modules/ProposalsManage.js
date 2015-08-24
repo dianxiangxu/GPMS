@@ -1166,19 +1166,25 @@ $(function() {
 																position.college);
 													}
 
-													if ($(
-															'select[name="ddlDepartment"] option[value="'
-																	+ position.department
-																	+ '"]').eq(
-															rowIndex).length <= 0) {
+													if (position.college == $(
+															'select[name="ddlCollege"]')
+															.eq(rowIndex).val()) {
+														if ($(
+																'select[name="ddlDepartment"] option[value="'
+																		+ position.department
+																		+ '"]')
+																.eq(rowIndex).length <= 0) {
 
-														$(
-																'select[name="ddlDepartment"]')
-																.get(rowIndex).options[$(
-																'select[name="ddlDepartment"]')
-																.get(rowIndex).options.length] = new Option(
-																position.department,
-																position.department);
+															$(
+																	'select[name="ddlDepartment"]')
+																	.get(
+																			rowIndex).options[$(
+																	'select[name="ddlDepartment"]')
+																	.get(
+																			rowIndex).options.length] = new Option(
+																	position.department,
+																	position.department);
+														}
 													}
 
 													if ($(
