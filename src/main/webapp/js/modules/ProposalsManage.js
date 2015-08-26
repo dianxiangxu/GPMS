@@ -986,47 +986,42 @@ $(function() {
 			return false;
 		},
 
-		BindCollegeDropDown : function() {
-			this.config.url = this.config.rootURL + "users/" + "GetCollegeList";
-			this.config.data = "{}";
+		BindDepartmentDropDown : function(userId, collegeName) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetDepartmentsForAUser";
+			this.config.data = JSON2.stringify({
+				UserId : userId,
+				college : collegeName
+			});
 			this.config.ajaxCallMode = 7;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindDepartmentDropDown : function(collegeName) {
+		BindPositionTypeDropDown : function(userId, collegeName, departmentName) {
 			this.config.url = this.config.rootURL + "users/"
-					+ "GetDepartmentList";
+					+ "GetPositionTypeForAUser";
 			this.config.data = JSON2.stringify({
-				college : collegeName
+				UserId : userId,
+				college : collegeName,
+				department : departmentName
 			});
 			this.config.ajaxCallMode = 8;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindPositionTypeDropDown : function(collegeName, departmentName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTypeList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName
-			});
-			this.config.ajaxCallMode = 9;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTitleDropDown : function(collegeName, departmentName,
-				positionTypeName) {
+		BindPositionTitleDropDown : function(userId, collegeName,
+				departmentName, positionTypeName) {
 			this.config.url = this.config.rootURL + "users/"
 					+ "GetPositionTitleList";
 			this.config.data = JSON2.stringify({
+				UserId : userId,
 				college : collegeName,
 				department : departmentName,
 				positionType : positionTypeName
 			});
-			this.config.ajaxCallMode = 10;
+			this.config.ajaxCallMode = 9;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1187,34 +1182,61 @@ $(function() {
 														}
 													}
 
-													if ($(
-															'select[name="ddlPositionType"] option[value="'
-																	+ position.positionType
-																	+ '"]').eq(
-															rowIndex).length <= 0) {
+													if (position.college == $(
+															'select[name="ddlCollege"]')
+															.eq(rowIndex).val()
+															&& position.department == $(
+																	'select[name="ddlDepartment"]')
+																	.eq(
+																			rowIndex)
+																	.val()) {
+														if ($(
+																'select[name="ddlPositionType"] option[value="'
+																		+ position.positionType
+																		+ '"]')
+																.eq(rowIndex).length <= 0) {
 
-														$(
-																'select[name="ddlPositionType"]')
-																.get(rowIndex).options[$(
-																'select[name="ddlPositionType"]')
-																.get(rowIndex).options.length] = new Option(
-																position.positionType,
-																position.positionType);
+															$(
+																	'select[name="ddlPositionType"]')
+																	.get(
+																			rowIndex).options[$(
+																	'select[name="ddlPositionType"]')
+																	.get(
+																			rowIndex).options.length] = new Option(
+																	position.positionType,
+																	position.positionType);
+														}
 													}
 
-													if ($(
-															'select[name="ddlPositionTitle"] option[value="'
-																	+ position.positionTitle
-																	+ '"]').eq(
-															rowIndex).length <= 0) {
+													if (position.college == $(
+															'select[name="ddlCollege"]')
+															.eq(rowIndex).val()
+															&& position.department == $(
+																	'select[name="ddlDepartment"]')
+																	.eq(
+																			rowIndex)
+																	.val()
+															&& position.positionType == $(
+																	'select[name="ddlPositionType"]')
+																	.eq(
+																			rowIndex)
+																	.val()) {
+														if ($(
+																'select[name="ddlPositionTitle"] option[value="'
+																		+ position.positionTitle
+																		+ '"]')
+																.eq(rowIndex).length <= 0) {
 
-														$(
-																'select[name="ddlPositionTitle"]')
-																.get(rowIndex).options[$(
-																'select[name="ddlPositionTitle"]')
-																.get(rowIndex).options.length] = new Option(
-																position.positionTitle,
-																position.positionTitle);
+															$(
+																	'select[name="ddlPositionTitle"]')
+																	.get(
+																			rowIndex).options[$(
+																	'select[name="ddlPositionTitle"]')
+																	.get(
+																			rowIndex).options.length] = new Option(
+																	position.positionTitle,
+																	position.positionTitle);
+														}
 													}
 
 												});
@@ -1222,7 +1244,7 @@ $(function() {
 			break;
 
 		case 7:
-			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+			// $('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
@@ -1232,23 +1254,24 @@ $(function() {
 							msg,
 							function(index, item) {
 								// For form Dropdown Binding
-								$('select[name="ddlCollege"]').get(rowIndex).options[$(
-										'select[name="ddlCollege"]').get(
+								$('select[name="ddlDepartment"]').get(rowIndex).options[$(
+										'select[name="ddlDepartment"]').get(
 										rowIndex).options.length] = new Option(
 										item, item);
 							});
 			break;
 
 		case 8:
-			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			// $('select[name="ddlDepartment"]').get(rowIndex).options.length =
+			// 0;
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 			$
-					.each(
-							msg,
+					.each(msg,
 							function(index, item) {
-								$('select[name="ddlDepartment"]').get(rowIndex).options[$(
-										'select[name="ddlDepartment"]').get(
+								$('select[name="ddlPositionType"]').get(
+										rowIndex).options[$(
+										'select[name="ddlPositionType"]').get(
 										rowIndex).options.length] = new Option(
 										item, item);
 							});
@@ -1541,14 +1564,21 @@ $(function() {
 			// }
 			// });
 
-			$('select[name="ddlCollege"]').on("change", function() {
-				// rowIndex = $(this).closest('tr').prevAll("tr").length;
-				if ($(this).val() != "0") {
-					proposalsManage.BindDepartmentDropDown($(this).val());
-				} else {
-					$(this).find('option:gt(0)').remove();
-				}
-			});
+			$('select[name="ddlCollege"]').on(
+					"change",
+					function() {
+						rowIndex = $(this).closest('tr').prevAll("tr").length;
+						if ($(this).val() != "0") {
+							proposalsManage.BindDepartmentDropDown(GPMS.utils
+									.GetUserProfileID(), $(this).val());
+							proposalsManage.BindPositionTypeDropDown(GPMS.utils
+									.GetUserProfileID(), $(this).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val());
+						} else {
+							$(this).find('option:gt(0)').remove();
+						}
+					});
 
 			$('select[name="ddlDepartment"]')
 					.on(
