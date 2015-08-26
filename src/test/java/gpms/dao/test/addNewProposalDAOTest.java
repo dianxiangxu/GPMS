@@ -138,6 +138,7 @@ public class addNewProposalDAOTest {
 			if (!up.equals(prop.getInvestigatorInfo().getPi().getUserRef())) {
 				irap = new InvestigatorRefAndPosition();
 				irap.setUserRef(up);
+				irap.setUserProfileId(up.getId().toString());
 				irap.setCollege(up.getDetails(0).getCollege());
 				irap.setDepartment(up.getDetails(0).getDepartment());
 				irap.setPositionTitle(up.getDetails(0).getPositionTitle());

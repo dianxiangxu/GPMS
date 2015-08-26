@@ -198,6 +198,7 @@ public class JUnitCreateTwoUsersTest {
 
 		InvestigatorRefAndPosition pi = new InvestigatorRefAndPosition();
 		pi.setUserRef(newUserProfile);
+		pi.setUserProfileId(newUserProfile.getId().toString());
 		pi.setCollege("College of Krypton Studies");
 		pi.setDepartment("Headquarters Personnel");
 		pi.setPositionType("Tenured Faculty");

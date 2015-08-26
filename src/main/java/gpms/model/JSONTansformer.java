@@ -36,6 +36,7 @@ public class JSONTansformer {
 
 		return response;
 	}
+
 	// public static Object ConvertFromJSON(String sendData)
 	// throws JsonParseException, JsonMappingException, IOException {
 	// UserInfo response = new UserInfo();
@@ -49,6 +50,16 @@ public class JSONTansformer {
 	//
 	// return response;
 	// }
+
+	public static String ConvertToJSON(String value)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		String response = new String();
+		ObjectMapper mapper = new ObjectMapper();
+		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+				value);
+
+		return response;
+	}
 
 	// public static String toJSON(UserInfo messageData) {
 	// String response = new String();

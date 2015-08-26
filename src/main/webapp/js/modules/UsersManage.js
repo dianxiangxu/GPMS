@@ -1489,15 +1489,13 @@ $(function() {
 			case 18:
 				if (editFlag > 0) {
 					csscody.info("<h2>"
-							+ getLocale(gpmsUsersManagement,
-									'Successful Message')
+							+ getLocale(gpmsUsersManagement, 'Error Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsUsersManagement,
 									'Failed to update user!') + "</p>");
 				} else {
 					csscody.info("<h2>"
-							+ getLocale(gpmsUsersManagement,
-									'Successful Message')
+							+ getLocale(gpmsUsersManagement, 'Error Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsUsersManagement,
 									'Failed to save user!') + "</p>");

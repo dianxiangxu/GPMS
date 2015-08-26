@@ -213,16 +213,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				.equal(department).asList();
 	}
 
-	// TODO: For Grid binding
-	public List<ProposalInfo> findProposalsForGrid(int offset, int limit,
-			String projectTitle, String totalCostsFrom, String totalCostsTo,
-			Boolean proposalStatus, String proposedBy, Date receivedOnFrom,
-			Date receivedOnTo, Boolean isActive) throws UnknownHostException {
-		Datastore ds = getDatastore();
-		return null; // Please make sure it bind every details/ fields on
-						// ProposalInfo Object otherwise Grid can't be binded
-	}
-
 	public List<ProposalInfo> findAllForProposalGrid(int offset, int limit,
 			String projectTitle, String proposedBy, Double totalCostsFrom,
 			Double totalCostsTo, String receivedOnFrom, String receivedOnTo,
@@ -273,10 +263,10 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			proposalQuery.field("proposal status").equal(proposalStatus);
 		}
 
+		int rowTotal = proposalQuery.asList().size();
 		List<Proposal> allProposals = proposalQuery.offset(offset - 1)
 				.limit(limit).asList();
 
-		int rowTotal = proposalQuery.asList().size();
 		for (Proposal userProposal : allProposals) {
 			ProposalInfo proposal = new ProposalInfo();
 
