@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -123,6 +123,65 @@
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 </head>
 <body>
+	<div class="registration_container">
+		<div id="registration_page">
+			<div class="form_login">
+				<h3>
+					The date is
+					<%=new java.util.Date()%></h3>
+				<form id="registrationForm" action="RESTQ/user/Register"
+					method="POST">
+					<div class="form_signup">
+						<h2>New User Registration</h2>
+						<h3>Moo Cow Goes Moo</h3>
 
+						<form id="signupForm" action="RESTQ/user/Register" method="POST">
+							<label for="first_name">First name :</label>
+							<div>
+								<input id="first_name" type="text" name="firstname"
+									class="input" minlength="2" required>
+							</div>
+							<label for="last_name">Last name :</label>
+							<div>
+								<input id="last_name" type="text" name="lastname" class="input"
+									minlength="2" required>
+							</div>
+							<br /> <label for="username">User name :</label>
+							<div>
+								<input id="username" type="username" name="username"
+									class="input" required>
+							</div>
+							<br /> <label for="signup_email">Work Email :</label>
+							<div>
+								<input id="signup_email" type="email" name="email" class="input"
+									required>
+							</div>
+							<div>
+								<h3>Address Information</h3>
+								<div>
+									<h4>City</h4>
+								</div>
+							</div>
+							<br /> <label for="signup_password">Password :</label>
+							<div>
+								<input id="signup_password" type="password" name="password"
+									class="input" minlength="5" maxlength="12" required>
+							</div>
+							<div>
+								<input type="submit" value="Sign Up" class=".btn signup_btn">
+							</div>
+						</form>
+						<%
+							String error = request.getParameter("error");
+							if (error != null) {
+						%>
+						<br />
+						<div class="error_msg" id="divemailalready">Username/ Email
+							address already registered.</div>
+						<%
+							}
+						%>
+					</div>
+			</div>
 </body>
 </html>
