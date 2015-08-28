@@ -9,6 +9,150 @@ $(function() {
 		return gpmsCommonInfo;
 	};
 
+	var validator = $("#form1")
+			.validate(
+					{
+						rules : {
+							firstName : {
+								required : true,
+								maxlength : 40
+							},
+							lastName : {
+								required : true,
+								maxlength : 40
+							},
+							dob : {
+								required : true,
+								dpDate : true
+							},
+							gender : {
+								required : true
+							},
+							street : {
+								required : true,
+								minlength : 3
+							},
+							city : {
+								required : true
+							},
+							state : {
+								required : true
+							},
+							zip : {
+								required : true
+							},
+							country : {
+								required : true
+							},
+							officeNumber : {
+								phoneUS : true
+							},
+							mobileNumber : {
+								required : true,
+								phoneUS : true
+							},
+							homeNumber : {
+								phoneUS : true
+							},
+							otherNumber : {
+								phoneUS : true
+							},
+							workEmail : {
+								required : true,
+								email : true
+							},
+							personalEmail : {
+								email : true
+							},
+							// username : {
+							// required : true,
+							// minlength : 3
+							// },
+							password : {
+								required : true,
+								minlength : 6,
+								maxlength : 15
+							},
+							confirm_password : {
+								required : true,
+								minlength : 6,
+								maxlength : 15,
+								equalTo : "#txtPassword"
+							}
+						},
+						errorElement : "span",
+						messages : {
+							firstName : {
+								required : "Please enter your firstname",
+								maxlength : "Your firstname must be at most 40 characters long"
+							},
+							LastName : {
+								required : "Please enter your lastname",
+								maxlength : "Your lastname must be at most 40 characters long"
+							},
+							dob : {
+								required : "Please enter your date of birth",
+								dpDate : "Please enter valid date"
+							},
+							gender : {
+								required : "Please select your gender"
+							},
+							street : {
+								required : "Please enter your street address",
+								minlength : "Please enter valid your street address"
+							},
+							city : {
+								required : "Please enter your city"
+							},
+							state : {
+								required : "Please select your city"
+							},
+							zip : {
+								required : "Please enter your zip code"
+							},
+							country : {
+								required : "Please select your country"
+							},
+							officeNumber : {
+								phoneUS : "Please enter your valid office phone number"
+							},
+							mobileNumber : {
+								required : "Please enter your mobile phone number",
+								phoneUS : "Please enter your valid mobile phone number",
+							},
+							homeNumber : {
+								phoneUS : "Please enter your valid home phone number",
+							},
+							otherNumber : {
+								phoneUS : "Please enter your valid additional phone number",
+							},
+							workEmail : {
+								required : "Please enter your work email",
+								email : "Please enter valid email id"
+							},
+							personalEmail : {
+								email : "Please enter valid email id"
+							},
+							// username : {
+							// required : "Please enter a username",
+							// minlength : "Your username must be at least 3
+							// characters long"
+							// },
+							password : {
+								required : "Please provide a password",
+								minlength : "Your password must be between 6 and 15 characters",
+								maxlength : "Your password must be between 6 and 15 characters"
+							},
+							confirm_password : {
+								required : "Please confirm your password",
+								minlength : "Your password must be between 6 and 15 characters",
+								equalTo : "Please enter the same password as above",
+								maxlength : "Your password must be between 6 and 15 characters"
+							}
+						},
+						ignore : ":hidden"
+					});
+
 	var rowIndex = 0;
 	var editFlag = 0;
 	var isUniqueUserName = false;
@@ -335,22 +479,26 @@ $(function() {
 
 			$.each(response['officeNumbers'], function(index, value) {
 				// alert(index + " :: " + value);
-				$('#txtOfficeNumber').val(response['officeNumbers']);
+				$('#txtOfficeNumber').val(response['officeNumbers']).mask(
+						"(999) 999-9999");
 			});
 
 			$.each(response['mobileNumbers'], function(index, value) {
 				// alert(index + " :: " + value);
-				$('#txtMobileNumber').val(response['mobileNumbers']);
+				$('#txtMobileNumber').val(response['mobileNumbers']).mask(
+						"(999) 999-9999");
 			});
 
 			$.each(response['homeNumbers'], function(index, value) {
 				// alert(index + " :: " + value);
-				$('#txtHomeNumber').val(response['homeNumbers']);
+				$('#txtHomeNumber').val(response['homeNumbers']).mask(
+						"(999) 999-9999");
 			});
 
 			$.each(response['otherNumbers'], function(index, value) {
 				// alert(index + " :: " + value);
-				$('#txtOtherNumber').val(response['otherNumbers']);
+				$('#txtOtherNumber').val(response['otherNumbers']).mask(
+						"(999) 999-9999");
 			});
 
 			$.each(response['addresses'], function(index, value) {
@@ -777,6 +925,7 @@ $(function() {
 		},
 
 		ClearForm : function() {
+			validator.resetForm();
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
 			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
@@ -813,7 +962,9 @@ $(function() {
 			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
 					.eq(0).val(), false);
 
+			// var checked = $('input[name=chkActive]').is(":checked");
 			$('input[name=chkActive]').prop('checked', 'checked');
+
 			return false;
 		},
 
@@ -822,27 +973,6 @@ $(function() {
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
-			$("#txtDOB").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			});
-
-			$("#txtSearchActivityOnFrom").datepicker(
-					{
-						dateFormat : 'yy-mm-dd',
-						changeMonth : true,
-						changeYear : true,
-						onSelect : function(selectedDate) {
-							$("#txtSearchActivityOnTo").datepicker("option",
-									"minDate", selectedDate);
-						}
-					});
-			$("#txtSearchActivityOnTo").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			});
 
 			$("#gdvUsersAuditLog").empty();
 			$("#gdvUsersAuditLog_Pagination").remove();
@@ -916,10 +1046,10 @@ $(function() {
 						State : $('#ddlState :selected').text(),
 						Zip : $.trim($('#txtZip').val()),
 						Country : $('#ddlCountry :selected').text(),
-						OfficeNumber : $('#txtOfficeNumber').val(),
-						MobileNumber : $('#txtMobileNumber').val(),
-						HomeNumber : $('#txtHomeNumber').val(),
-						OtherNumber : $('#txtOtherNumber').val(),
+						OfficeNumber : $('#txtOfficeNumber').mask(),
+						MobileNumber : $('#txtMobileNumber').mask(),
+						HomeNumber : $('#txtHomeNumber').mask(),
+						OtherNumber : $('#txtOtherNumber').mask(),
 						WorkEmail : $('#txtWorkEmail').val(),
 						PersonalEmail : $('#txtPersonalEmail').val(),
 						IsActive : $('input[name=chkActive]').prop('checked'),
@@ -1647,10 +1777,10 @@ $(function() {
 							});
 
 			$('#btnAddNew').bind("click", function() {
+				usersManage.ClearForm();
 				$('#auditLogTab').hide();
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
-				usersManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {
@@ -1684,7 +1814,7 @@ $(function() {
 						}
 						if (!userName) {
 							errors += getLocale(gpmsUsersManagement,
-									"Please enter username.");
+									"Please enter a username.");
 						} else if (!usersManage.IsUniqueUserName(user_id,
 								userName)) {
 							errors += getLocale(gpmsUsersManagement,
@@ -1693,7 +1823,7 @@ $(function() {
 									+ userName.trim()
 									+ "' "
 									+ getLocale(gpmsUsersManagement,
-											"already exists.") + '<br/>';
+											"already exists.");
 						}
 
 						if (errors) {
@@ -1891,13 +2021,65 @@ $(function() {
 				return false;
 			});
 
+			// propose username by combining first- and lastname
+			$("#txtUserName").focus(function() {
+				var firstname = $("#txtFirstName").val();
+				var lastname = $("#txtLastName").val();
+				if (firstname && lastname && !this.value) {
+					this.value = firstname + "." + lastname;
+				}
+			});
+
+			$("#txtOfficeNumber").mask("(999) 999-9999");
+			$("#txtMobileNumber").mask("(999) 999-9999");
+			$("#txtHomeNumber").mask("(999) 999-9999");
+			$("#txtOtherNumber").mask("(999) 999-9999");
+			$("#txtZip").mask("99999");
+
+			$("#txtDOB").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
+			$("#txtSearchActivityOnFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtSearchActivityOnTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+			$("#txtSearchActivityOnTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
 			$(
-					'#txtSearchUserName,#ddlSearchCollege,#ddlSearchDepartment,#ddlSearchPositionType,#ddlSearchPositionTitle,#ddlSearchIsActive')
+					'#txtSearchUserName, #ddlSearchCollege, #ddlSearchDepartment, #ddlSearchPositionType, #ddlSearchPositionTitle, #ddlSearchIsActive')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
 							$("#btnSearchUser").click();
 						}
 					});
+
+			$(
+					'#txtSearchAction, #txtSearchAuditedBy, #txtSearchActivityOnFrom, #txtSearchActivityOnTo')
+					.keyup(function(event) {
+						if (event.keyCode == 13) {
+							$("#btnSearchUserAuditLog").click();
+						}
+					});
+
 		}
 	};
 	usersManage.init();

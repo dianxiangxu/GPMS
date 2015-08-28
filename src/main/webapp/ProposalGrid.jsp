@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55de0dbcaf6e042068dfea74";
+	var userProfileId = "55df8b79af6e0420a84d53ff";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -76,6 +76,15 @@
 
 <script type="text/javascript"
 	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
+<script type="text/javascript"
+	src="js/FormValidation/jquery.validate.js"></script>
+<script type="text/javascript"
+	src="js/FormValidation/jquery.ui.datepicker.validation.js"></script>
+
+<script type="text/javascript"
+	src="js/FormValidation/jquery.maskedinput.js"></script>
+
+<script type="text/javascript" src="js/FormValidation/autoNumeric.js"></script>
 
 <!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
 <script type="text/javascript"
@@ -169,7 +178,7 @@
 </head>
 <body>
 	<form enctype="multipart/form-data" action="Manage-Proposals.jsp"
-		method="post" name="form1">
+		method="post" name="form1" id="form1">
 		<div style="display: none;" id="UpdateProgress1">
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
@@ -441,78 +450,79 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabelTitle"
-																			id="lblProjectTitle">Project Title:</span></td>
-																		<td class="cssClassTableRightCol required" colspan="3"><textarea
+																			id="lblProjectTitle">Project Title:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" colspan="3"><textarea
 																				class="cssClassTextArea" cols="15" rows="2"
 																				title="Default Value" name="projectTitle"
-																				id="txtProjectTitle" placeholder="Project Title"></textarea><span
-																			class="cssClassRight"> <img
-																				class="cssClassSuccessImg sfLocale" height="13"
+																				id="txtProjectTitle" placeholder="Project Title"
+																				required></textarea><span class="cssClassRight">
+																				<img class="cssClassSuccessImg sfLocale" height="13"
 																				width="18" title="Right" src="" alt="Right" />
-																		</span> <b class="cssClassError sfLocale">Ops! found
-																				something error, must be unique with no spaces</b><span
-																			class="cssClassRequired">*</span></td>
+																		</span> <span class="cssClassError sfLocale">Project
+																				title must be unique with no spaces</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
-																			id="lblProjectType">Project Type:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																			id="lblProjectType">Project Type:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			id="ddlProjectType" name="projectType"
 																			title="Project Type">
-																				<option value="0">Choose Project Type</option>
+																				<option value="">Choose Project Type</option>
 																				<option value="1">Research-Basic</option>
 																				<option value="2">Research-Applied</option>
 																				<option value="3">Research-Development</option>
 																				<option value="4">Instruction</option>
 																				<option value="5">Other Sponsored Activity</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																		<td><span class="cssClassLabel"
-																			id="lblTypeOfRequest">Type of Request:</span></td>
+																			id="lblTypeOfRequest">Type of Request:</span> <span
+																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			id="ddlTypeOfRequest" name="typeOfRequest"
 																			title="Type of Request">
-																				<option value="0">Choose Type of Request</option>
+																				<option value="">Choose Type of Request</option>
 																				<option value="1">Pre-Proposal</option>
 																				<option value="2">New Proposal</option>
 																				<option value="3">Continuation</option>
 																				<option value="4">Supplement</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span id="lblDueDate" class="cssClassLabel">Due
-																				Date:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				Date:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" id="txtDueDate" class="sfInputbox"
-																			name="dueDate" placeholder="Due Date"> <span
-																			class="cssClassRequired">*</span></td>
+																			name="dueDate" placeholder="Due Date"></td>
 
 																		<td><span id="lblLocationOfProject"
-																			class="cssClassLabel">Location of Project:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																			class="cssClassLabel">Location of Project:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			id="ddlLocationOfProject" name="locationOfProject"
 																			title="Location of Project">
-																				<option value="0">Choose Location of
-																					Project</option>
+																				<option value="">Choose Location of Project</option>
 																				<option value="1">Off-campus</option>
 																				<option value="2">On-campus</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span id="lblProjectPeriod"
-																			class="cssClassLabel">Project Period: From:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																			class="cssClassLabel">Project Period: From:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" id="txtProjectPeriodFrom"
 																			class="sfInputbox" name="projectPeriodFrom"
-																			placeholder="From"> <span
-																			class="cssClassRequired">*</span></td>
+																			placeholder="From"></td>
 
 																		<td><span id="lblProjectPeriodTo"
-																			class="cssClassLabel">To:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																			class="cssClassLabel">To:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" id="txtProjectPeriodTo"
 																			class="sfInputbox" name="projectPeriodTo"
-																			placeholder="To"> <span
-																			class="cssClassRequired">*</span></td>
+																			placeholder="To"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -520,12 +530,11 @@
 															<table id="tblProposalGeneralInfo" cellspacing="0"
 																cellpadding="0" border="0">
 																<tbody>
-																	<tr>
+																	<tr id="trProposalInfo">
 																		<td><span class="cssClassLabel">Proposal
 																				No:</span></td>
 																		<td class="cssClassTableRightCol"><span
 																			id="lblProposalNo" class="cssClassLabel"></span></td>
-
 																		<td><span class="cssClassLabel">Proposal
 																				Date Received:</span></td>
 																		<td class="cssClassTableRightCol"><span
@@ -534,12 +543,13 @@
 
 																	<tr>
 																		<td><span class="cssClassLabel"
-																			id="lblProposalStatus">Proposal Status:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																			id="lblProposalStatus">Proposal Status:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Proposal Status" name="proposalStatus"
 																			id="ddlProposalStatus">
-																				<option value="0">Choose Proposal Status</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																				<option value="">Choose Proposal Status</option>
+																		</select></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -553,45 +563,42 @@
 																	<tr>
 																		<td><span class="cssClassLabel"
 																			id="lblNameOfGrantingAgency">Name of Granting
-																				Agency:</span></td>
-																		<td class="cssClassTableRightCol required" colspan="2"><input
+																				Agency:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" colspan="2"><input
 																			type="text" class="sfInputbox"
 																			id="txtNameOfGrantingAgency"
 																			placeholder="Name of Granting
 																					Agency">
-																			<span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel">Enter comma separated
-																				names.</span></td>
+																			<span class="cssClassLabel">Enter comma
+																				separated names.</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
-																			id="lblDirectCosts">Direct Costs:</span></td>
-																		<td class="cssClassTableRightCol required"><span>$</span><input
-																			type="text" class="sfInputbox" id="txtDirectCosts"
-																			placeholder="Direct Costs"> <span
+																			id="lblDirectCosts">Direct Costs:</span> <span
 																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
+																			type="text" class="sfInputbox" id="txtDirectCosts"
+																			placeholder="Direct Costs"></td>
 
 																		<td><span class="cssClassLabel" id="lblFACosts">F&A
-																				Costs:</span></td>
-																		<td class="cssClassTableRightCol required"><span>$</span>
-																			<input type="text" class="sfInputbox" id="txtFACosts"
-																			placeholder="F&A Costs"> <span
-																			class="cssClassRequired">*</span></td>
+																				Costs:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
+																			type="text" class="sfInputbox" id="txtFACosts"
+																			placeholder="F&A Costs"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
-																			id="lblTotalCosts">Total Costs:</span></td>
-																		<td class="cssClassTableRightCol required"><span>$</span>
-																			<input type="text" class="sfInputbox"
-																			id="txtTotalCosts" placeholder="Total Costs">
-																			<span class="cssClassRequired">*</span></td>
+																			id="lblTotalCosts">Total Costs:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
+																			type="text" class="sfInputbox" id="txtTotalCosts"
+																			placeholder="Total Costs"></td>
 																		<td><span class="cssClassLabel" id="lblPassword">F&A
-																				Rate:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				Rate:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtFARate"
 																			placeholder="F&A
-																					Rate">
-																			<span>%</span><span class="cssClassRequired">*</span></td>
+																					Rate"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -605,29 +612,29 @@
 																	<tr>
 																		<td><span class="cssClassLabel">Is
 																				Institutional commited cost share included in the
-																				proposal?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				proposal?</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Institutional Commitment Cost"
 																			class="sfListmenu"
 																			id="ddlInstitutionalCommitmentCost">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblConfirmCommitment">Complete
+																		</select> <span class="cssClassLabel" id="lblConfirmCommitment">Complete
 																				the OSP Cost Share Form</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Is Third
-																				Party commited cost share included in the proposal?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				Party commited cost share included in the proposal?</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Third
 																					Party commitment Cost"
 																			class="sfListmenu" id="ddlThirdPartyCommitmentCost">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -640,41 +647,44 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Will new
-																				or renovated space/facilities be required?</span></td>
-																		<td class="cssClassTableRightCol required"><select
-																			title="New Space Required" class="sfListmenu"
+																				or renovated space/facilities be?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
+																			title="New Space" class="sfListmenu"
 																			id="ddlNewSpaceRequired">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Will
-																				rental space be required?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				rental space be required?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Rental Space Required" class="sfListmenu"
 																			id="ddlRentalSpaceRequired">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
 																				project require institutional commitments beyond the
-																				end date of the project?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				end date of the project?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Institutional Commitments Required"
 																			class="sfListmenu"
 																			id="ddlInstitutionalCommitmentsRequired">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblCommitmentsRequired">Please
-																				refer to the OSP Proposal Data Sheet Instructions
-																				for required documents.</span></td>
+																		</select> <span class="cssClassLabel"
+																			id="lblCommitmentsRequired">Please refer to
+																				the OSP Proposal Data Sheet Instructions for
+																				required documents.</span></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -689,40 +699,40 @@
 																		<td><span class="cssClassLabel">Is there a
 																				finanacial conflict of interest <b>related to
 																					this proposal</b>?
-																		</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																		</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Finanacial Conflict of Interest"
 																			class="sfListmenu" id="ddlFinancialCOI">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr id="disclosedFinancialCOI">
 																		<td><span class="cssClassLabel">Has the
-																				financial conflict been disclosed?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				financial conflict been disclosed?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Financial Conflict been Disclosed?"
 																			class="sfListmenu" id="ddlDisclosedFinancialCOI">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblDisclosureRequired">Your
-																				disclosure must be updated.</span></td>
+																		</select> <span class="cssClassLabel"
+																			id="lblDisclosureRequired">Your disclosure
+																				must be updated.</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Has there
 																				been a material change to your annual disclosure
-																				form? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				form? </span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Material changed to Annual Disclosure Form?"
 																			class="sfListmenu" id="ddlMaterialChanged">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblMaterialChanged">Your
+																		</select> <span class="cssClassLabel" id="lblMaterialChanged">Your
 																				disclosure must be updated.</span></td>
 																	</tr>
 																</tbody>
@@ -736,103 +746,107 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
-																				project involve the use of Human Subjects? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				project involve the use of Human Subjects? </span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Involves Use of Human Subjects?"
 																			class="sfListmenu" id="ddlUseHumanSubjects">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblUseHumanSubjects">Provide
+																		</select> <span class="cssClassLabel" id="lblUseHumanSubjects">Provide
 																				IRB # or indicate pending.</span></td>
 
 																		<td id="tdHumanSubjectsOption"><span
-																			class="cssClassLabel">Choose Option? </span></td>
-																		<td class="cssClassTableRightCol required"
-																			id="tdIRBOption"><select title="IRB Option"
-																			class="sfListmenu" id="ddlIRBOptions">
-																				<option value="0">Select Option</option>
+																			class="cssClassLabel">Choose Option?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" id="tdIRBOption"><select
+																			title="IRB Option" class="sfListmenu"
+																			id="ddlIRBOptions">
+																				<option value="">Select Option</option>
 																				<option value="1">IRB #</option>
 																				<option value="2">Pending</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 
-																		<td class="cssClassTableRightCol required"
-																			id="tdIRBtxt"><input type="text"
-																			class="sfInputbox" id="txtIRB" placeholder="IRB #">
-																			</select> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" id="tdIRBtxt"><input
+																			type="text" class="sfInputbox" id="txtIRB"
+																			placeholder="IRB #"> </select> <span
+																			class="cssClassRequired">*</span></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
-																				project involve the use of Vertebrate Animals? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				project involve the use of Vertebrate Animals?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Involves Use of Vertebrate Animals?"
 																			class="sfListmenu" id="ddlUseVertebrateAnimals">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblUseVertebrateAnimals">Provide
-																				IACUC # or indicate pending.</span></td>
+																		</select> <span class="cssClassLabel"
+																			id="lblUseVertebrateAnimals">Provide IACUC #
+																				or indicate pending.</span></td>
 
 																		<td id="tdVertebrateAnimalsOption"><span
-																			class="cssClassLabel">Choose Option? </span></td>
-																		<td class="cssClassTableRightCol required"
-																			id="tdIACUCOption"><select title="IACUC Option"
-																			class="sfListmenu" id="ddlIACUCOptions">
-																				<option value="0">Select Option</option>
+																			class="cssClassLabel">Choose Option?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" id="tdIACUCOption"><select
+																			title="IACUC Option" class="sfListmenu"
+																			id="ddlIACUCOptions">
+																				<option value="">Select Option</option>
 																				<option value="1">IACUC #</option>
 																				<option value="2">Pending</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 
-																		<td class="cssClassTableRightCol required"
-																			id="tdIACUCtxt"><input type="text"
-																			class="sfInputbox" id="txtIACUC"
+																		<td class="cssClassTableRightCol" id="tdIACUCtxt"><input
+																			type="text" class="sfInputbox" id="txtIACUC"
 																			placeholder="IACUC #"> </select> <span
 																			class="cssClassRequired">*</span></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
-																				project involve Biosafety concerns? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				project involve Biosafety concerns?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Involves Biosafety Concerns?"
 																			class="sfListmenu" id="ddlInvovleBioSafety">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblHasBiosafetyConcerns">Provide
-																				IBC # or indicate pending.</span></td>
+																		</select> <span class="cssClassLabel"
+																			id="lblHasBiosafetyConcerns">Provide IBC # or
+																				indicate pending.</span></td>
 
 																		<td id="tdBiosafetyOption"><span
-																			class="cssClassLabel">Choose Option? </span></td>
-																		<td class="cssClassTableRightCol required"
-																			id="tdIBCOption"><select title="IBC Option"
-																			class="sfListmenu" id="ddlIBCOptions">
-																				<option value="0">Select Option</option>
+																			class="cssClassLabel">Choose Option?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" id="tdIBCOption"><select
+																			title="IBC Option" class="sfListmenu"
+																			id="ddlIBCOptions">
+																				<option value="">Select Option</option>
 																				<option value="1">IBC #</option>
 																				<option value="2">Pending</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 
-																		<td class="cssClassTableRightCol required"
-																			id="tdIBCtxt"><input type="text"
-																			class="sfInputbox" id="txtIBC" placeholder="IBC #">
-																			</select> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" id="tdIBCtxt"><input
+																			type="text" class="sfInputbox" id="txtIBC"
+																			placeholder="IBC #"> <span
+																			class="cssClassRequired">*</span></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
-																				project have Environmental Health & Safety concerns?
-																		</span></td>
-																		<td class="cssClassTableRightCol required" colspan="2"><select
+																				project have Environmental Health & Safety concerns?</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" colspan="2"><select
 																			title="Have Environmental Health & Safety Concerns?"
 																			class="sfListmenu" id="ddlEnvironmentalConcerns">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -846,38 +860,40 @@
 																	<tr>
 																		<td><span class="cssClassLabel">Do you
 																				anticipate payment(s) to foreign nationals or on
-																				behalf of foreign nationals? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				behalf of foreign nationals?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Anticipate Payment to/on behalf Foreign Nationals?"
 																			class="sfListmenu" id="ddlAnticipateForeignNationals">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Do you
-																				anticipate course release time?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				anticipate course release time?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Anticipate Course Release Time?"
 																			class="sfListmenu" id="ddlAnticipateReleaseTime">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Are the
 																				proposed activities related to Center for Advanced
-																				Energy Studies? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				Energy Studies?</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Related to Center for Advanced
 																					Energy Studies?"
 																			class="sfListmenu" id="ddlRelatedToEnergyStudies">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -890,23 +906,24 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
-																				project involve non-funded collaborations? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				project involve non-funded collaborations? </span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Involves Non-funded Collaborations?"
 																			class="sfListmenu" id="ddlInvolveNonFundedCollabs">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblInvolveNonFundedCollabs">Provide
-																				list collaborating institutions/organizations below.</span></td>
+																		</select> <span class="cssClassLabel"
+																			id="lblInvolveNonFundedCollabs">Provide list
+																				collaborating institutions/organizations below.</span></td>
 																	</tr>
 																	<tr id="trInvolveNonFundedCollabs">
-																		<td><span class="cssClassLabel">Collaborators:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																		<td><span class="cssClassLabel">Collaborators:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtCollaborators"
 																			placeholder="Collaborators"> <span
-																			class="cssClassRequired">*</span> <span
 																			class="cssClassLabel">Enter comma separated
 																				names.</span></td>
 																	</tr>
@@ -922,19 +939,21 @@
 																	<tr>
 																		<td><span class="cssClassLabel">Does this
 																				proposal contain any confidential information which
-																				is Proprietary that should not be publicly released?
-																		</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				is Proprietary that should not be publicly released?</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Contains Confidential Information Which
 																					Is Proprietary?"
 																			class="sfListmenu" id="ddlProprietaryInformation">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes, on pages</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
-																		<td><input type="text" class="sfInputbox"
+																		</select></td>
+																		<td id="tdPagesWithProprietaryInfo"><input
+																			type="text" class="sfInputbox"
 																			id="txtPagesWithProprietaryInfo"
-																			placeholder="Pages With Proprietary/Confidential Information"></td>
+																			placeholder="Pages With Proprietary/Confidential Information">
+																			<span class="cssClassRequired">*</span></td>
 																		<td></td>
 																	</tr>
 																	<tr id="trTypeOfProprietaryInfo">
@@ -952,14 +971,15 @@
 																	<tr>
 																		<td><span class="cssClassLabel">Will this
 																				project involve intellectual property in which the
-																				University may own or have an interest? </span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				University may own or have an interest?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Own Intellectual Property?" class="sfListmenu"
 																			id="ddlOwnIntellectualProperty">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																		<td></td>
 																		<td></td>
 																	</tr>
@@ -1011,8 +1031,8 @@
 																				and policies of both the sponsor and the University.
 																				PIs should refer to <a
 																				href="http://web1.boisestate.edu/research/osp/standard-compliance.shtml"
-																				target="_blank">http://web1.boisestate.edu/research/osp/standard-compliance.shtml
-																					for a list of responsibilities.</a></span></td>
+																				target="_blank">http://web1.boisestate.edu/research/osp/standard-compliance.shtml</a>
+																				for a list of responsibilities.</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"><b>Department
@@ -1044,10 +1064,10 @@
 																	<tr>
 																		<td><span class="cssClassLabel">Business
 																				Manager (if applicable) has reviewed this proposal.
-																				Initials:</span></td>
+																				Initials:</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
 																			id="txtSignBusinessManager"
-																			placeholder="-----------------------------------"></td>
+																			placeholder="Business Manager Initials"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -1066,17 +1086,17 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Flow-Through,
-																				List Agency</span></td>
+																				List Agency</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
 																			id="txtAgencyList"
-																			placeholder="-------------------------------------------------------------------------------------------">
-																			<span class="cssClassLabel">Enter comma
-																				separated names.</span></td>
+																			placeholder="Flow-Through, List Agency"> <span
+																			class="cssClassLabel">Enter comma separated
+																				names.</span></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Funding
-																				Source:</span></td>
+																				Source:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
@@ -1131,26 +1151,26 @@
 																					class="cssClassCheckBox" id="chkForeign"
 																					name="foreign" value="Foreign"><label
 																					class="cssClassLabel" for="chkForeign">Foreign</label>
-																				<span class="iferror"></span>
 																			</div></td>
 																	</tr>
 
 																	<tr>
-																		<td><span class="cssClassLabel">CFDA No.:</span></td>
+																		<td><span class="cssClassLabel">CFDA No.:</span>
+																			<span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
-																			id="txtCFDANo" placeholder="-------------------"></td>
+																			id="txtCFDANo" placeholder="CFDA No."></td>
 																		<td><span class="cssClassLabel">Program
-																				No.:</span></td>
+																				No.:</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
-																			id="txtProgramNo" placeholder="-------------------"></td>
+																			id="txtProgramNo" placeholder="Program No."></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Program/Solicitation
-																				Title:</span></td>
+																				Title:</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
 																			id="txtProgramTitle"
-																			placeholder="---------------------------------------"></td>
+																			placeholder="Program/Solicitation Title"></td>
 																	</tr>
 																	<tr>
 																		<td>-----------------------------------------------------------</td>
@@ -1158,7 +1178,8 @@
 																	</tr>
 
 																	<tr>
-																		<td><span class="cssClassLabel">Recovery:</span></td>
+																		<td><span class="cssClassLabel">Recovery:</span>
+																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
@@ -1191,12 +1212,13 @@
 																					value="Limited Recovery-Institutional Waiver"><label
 																					class="cssClassLabel"
 																					for="chkLimitedRecoveryInstitutional">Limited
-																					Recovery-Institutional Waiver</label> <span class="iferror"></span>
+																					Recovery-Institutional Waiver</label>
 																			</div></td>
 																	</tr>
 
 																	<tr>
-																		<td><span class="cssClassLabel">Base:</span></td>
+																		<td><span class="cssClassLabel">Base:</span> <span
+																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"
@@ -1213,8 +1235,7 @@
 																					class="cssClassLabel" for="chkOther">Other</label><input
 																					type="checkbox" class="cssClassCheckBox" id="chkNA"
 																					name="nA" value="N/A"><label
-																					class="cssClassLabel" for="chkNA">N/A</label> <span
-																					class="iferror"></span>
+																					class="cssClassLabel" for="chkNA">N/A</label>
 																			</div></td>
 																	</tr>
 																	<tr>
@@ -1224,64 +1245,65 @@
 
 																	<tr>
 																		<td><span class="cssClassLabel">Is PI
-																				salary included in the proposal?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				salary included in the proposal?</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Is PI salary included in the proposal?"
 																			class="sfListmenu" id="ddlPISalaryIncluded">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span> <span
-																			class="cssClassLabel" id="lblPISalaryIncluded">Provide
+																		</select> <span class="cssClassLabel" id="lblPISalaryIncluded">Provide
 																				a Department ID for 1% minimun.</span></td>
 																	</tr>
 
 																	<tr>
-																		<td><span class="cssClassLabel">PI Salary:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																		<td><span class="cssClassLabel">PI Salary:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtPISalary"
-																			placeholder="----------------------"> <span
-																			class="cssClassRequired">*</span></td>
+																			placeholder="PI Salary"></td>
 
-																		<td><span class="cssClassLabel">PI Fringe:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																		<td><span class="cssClassLabel">PI Fringe:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtPIFringe"
-																			placeholder="----------------------"> <span
-																			class="cssClassRequired">*</span></td>
+																			placeholder="PI Fringe"></td>
 
 																		<td><span class="cssClassLabel">Department
-																				ID:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				ID:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtDepartmentID"
-																			placeholder="----------------------"> <span
-																			class="cssClassRequired">*</span></td>
+																			placeholder="Department ID"></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Institutional
-																				Cost Share Documented:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				Cost Share Documented:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Is Institutional
 																					Cost Share Documented?"
 																			class="sfListmenu"
 																			id="ddlInstitutionalCostDocumented">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 
 																		<td><span class="cssClassLabel">Third
-																				Party Cost Share Documented:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				Party Cost Share Documented:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Is Third Party
 																					Cost Share Documented?"
 																			class="sfListmenu" id="ddlThirdPartyCostDocumented">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 
 																	<tr>
@@ -1291,23 +1313,23 @@
 
 																	<tr>
 																		<td><span class="cssClassLabel">Are
-																				subrecipients (subcontracts/subawards) anticipated?</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				subrecipients (subcontracts/subawards) anticipated?</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Are subrecipients (subcontracts/subawards) anticipated?"
 																			class="sfListmenu" id="ddlSubrecipients">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr id="trSubrecipientsNames">
 																		<td><span class="cssClassLabel">Names of
-																				subrecipients:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				subrecipients:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox"
 																			id="txtNamesSubrecipients"
-																			placeholder="-----------------------------------------------------">
-																			<span class="cssClassRequired">*</span></td>
+																			placeholder="Names of subrecipients"></td>
 																	</tr>
 
 																	<tr>
@@ -1317,56 +1339,59 @@
 
 																	<tr>
 																		<td><span class="cssClassLabel">PI
-																				Eligibility Waiver on File:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				Eligibility Waiver on File:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="PI Eligibility Waiver on File"
 																			class="sfListmenu" id="ddlPIEligibilityWaiver">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
 																				<option value="4">This Proposal Only</option>
 																				<option value="5">Blanket</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Conflict
-																				of Interest Forms on File:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				of Interest Forms on File:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Conflict
 																					of Interest Forms on File"
 																			class="sfListmenu" id="ddlCOIForms">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 
 																		<td><span class="cssClassLabel">Excluded
-																				party list has been checked:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																				party list has been checked:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			title="Excluded
 																					party list has been checked"
 																			class="sfListmenu" id="ddlCheckedExcludedPartyList">
-																				<option value="0">Select Option</option>
+																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Proposal
-																				Notes:</span></td>
-																		<td class="cssClassTableRightCol required" colspan="3"><textarea
+																				Notes:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol" colspan="3"><textarea
 																				class="cssClassTextArea" cols="15" rows="2"
 																				title="Proposal Notes" name="proposalNotes"
-																				id="txtProposalNotes" placeholder="Proposal Notes"></textarea>
-																			<span class="cssClassRequired">*</span></td>
+																				id="txtProposalNotes" placeholder="Proposal Notes"
+																				required></textarea></td>
 
 																		<td><span class="cssClassLabel">Research
-																				Administrator:</span></td>
+																				Administrator:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
 																				class="cssClassCheckBox ">
 																				<input type="checkbox" class="cssClassCheckBox"

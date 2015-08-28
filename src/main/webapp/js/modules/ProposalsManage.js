@@ -9,6 +9,140 @@ $(function() {
 		return gpmsCommonInfo;
 	};
 
+	var validator = $("#form1").validate({
+		rules : {
+			firstName : {
+				required : true,
+				maxlength : 40
+			},
+			lastName : {
+				required : true,
+				maxlength : 40
+			},
+			dob : {
+				required : true,
+				dpDate : true
+			},
+			gender : {
+				required : true
+			},
+			street : {
+				required : true
+			},
+			city : {
+				required : true
+			},
+			state : {
+				required : true
+			},
+			zip : {
+				required : true
+			},
+			country : {
+				required : true
+			},
+			officeNumber : {
+				phoneUS : true
+			},
+			mobileNumber : {
+				required : true,
+				phoneUS : true
+			},
+			homeNumber : {
+				phoneUS : true
+			},
+			otherNumber : {
+				phoneUS : true
+			},
+			workEmail : {
+				required : true,
+				email : true
+			},
+			personalEmail : {
+				email : true
+			},
+			username : {
+				required : true,
+				minlength : 6
+			},
+			password : {
+				required : true,
+				minlength : 6
+			},
+			confirm_password : {
+				required : true,
+				minlength : 6,
+				equalTo : "#txtPassword"
+			}
+		},
+		messages : {
+			firstName : {
+				required : "Please enter your firstname",
+				maxlength : "Your firstname must be at most 40 characters long"
+			},
+			LastName : {
+				required : "Please enter your lastname",
+				maxlength : "Your lastname must be at most 40 characters long"
+			},
+			dob : {
+				required : "Please enter your date of birth",
+				dpDate : "Please enter valid date"
+			},
+			gender : {
+				required : "Please select your gender"
+			},
+			street : {
+				required : "Please enter your street address"
+			},
+			city : {
+				required : "Please enter your city"
+			},
+			state : {
+				required : "Please select your city"
+			},
+			zip : {
+				required : "Please enter your zip code"
+			},
+			country : {
+				required : "Please select your country"
+			},
+			officeNumber : {
+				phoneUS : "Please enter your valid office phone number"
+			},
+			mobileNumber : {
+				required : "Please enter your mobile phone number",
+				phoneUS : "Please enter your valid mobile phone number",
+			},
+			homeNumber : {
+				phoneUS : "Please enter your valid home phone number",
+			},
+			otherNumber : {
+				phoneUS : "Please enter your valid additional phone number",
+			},
+			workEmail : {
+				required : "Please enter your work email",
+				email : "Please enter valid email id"
+			},
+			personalEmail : {
+				email : "Please enter valid email id"
+			},
+			username : {
+				required : "Please enter a username",
+				minlength : "Your username must be at least 6 characters long"
+			},
+			password : {
+				required : "Please provide a password",
+				minlength : "Your password must be at least 6 characters long",
+			},
+			confirm_password : {
+				required : "Please confirm your password",
+				minlength : "Your password must be at least 6 characters long",
+				equalTo : "Please enter the same password as above"
+			}
+		},
+		ignore : ":hidden"
+	});
+
 	var rowIndex = 0;
 	var editFlag = 0;
 	var isUniqueProjectTitle = false;
@@ -303,6 +437,15 @@ $(function() {
 											hide : true
 										},
 										{
+											display : 'PI User',
+											name : 'pi_user',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
 											display : 'Co-PI Users',
 											name : 'co_pi_users',
 											cssclass : '',
@@ -310,15 +453,6 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'array',
-											hide : true
-										},
-										{
-											display : 'PI User',
-											name : 'pi_user',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
 											hide : true
 										},
 										{
@@ -393,6 +527,9 @@ $(function() {
 			switch (tblID) {
 			case "gdvProposals":
 				proposalsManage.ClearForm();
+
+				$("#trProposalInfo").show();
+
 				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
 								'Edit Proposal Details for: ')
@@ -454,7 +591,7 @@ $(function() {
 			} else if (response.projectInfo.projectType.isOtherSponsoredActivity) {
 				$("#ddlProjectType").val(5);
 			} else {
-				$("#ddlProjectType").val(0);
+				$("#ddlProjectType").prop("selectedIndex", 0);
 			}
 
 			if (response.projectInfo.typeOfRequest.isPreProposal) {
@@ -466,7 +603,7 @@ $(function() {
 			} else if (response.projectInfo.typeOfRequest.isSupplement) {
 				$("#ddlTypeOfRequest").val(4);
 			} else {
-				$("#ddlTypeOfRequest").val(0);
+				$("#ddlTypeOfRequest").prop("selectedIndex", 0);
 			}
 
 			$("#txtDueDate").val(response.projectInfo.dueDate);
@@ -476,7 +613,7 @@ $(function() {
 			} else if (response.projectInfo.projectLocation.onCampus) {
 				$("#ddlLocationOfProject").val(2);
 			} else {
-				$("#ddlLocationOfProject").val(0);
+				$("#ddlLocationOfProject").prop("selectedIndex", 0);
 			}
 
 			$("#txtProjectPeriodFrom").val(
@@ -491,10 +628,14 @@ $(function() {
 			// }
 			$("#txtNameOfGrantingAgency").val(
 					response.sponsorAndBudgetInfo.grantingAgency);
-			$("#txtDirectCosts").val(response.sponsorAndBudgetInfo.directCosts);
-			$("#txtFACosts").val(response.sponsorAndBudgetInfo.FACosts);
-			$("#txtTotalCosts").val(response.sponsorAndBudgetInfo.totalCosts);
-			$("#txtFARate").val(response.sponsorAndBudgetInfo.FARate);
+			$("#txtDirectCosts").autoNumeric('set',
+					response.sponsorAndBudgetInfo.directCosts);
+			$("#txtFACosts").autoNumeric('set',
+					response.sponsorAndBudgetInfo.directCosts);
+			$("#txtTotalCosts").autoNumeric('set',
+					response.sponsorAndBudgetInfo.totalCosts);
+			$("#txtFARate").val(response.sponsorAndBudgetInfo.FARate).mask(
+					"99.99 %");
 
 			// Cost Share Information
 			if (response.costShareInfo.institutionalCommitted) {
@@ -504,7 +645,7 @@ $(function() {
 				$("#ddlInstitutionalCommitmentCost").val(2);
 				$("#lblConfirmCommitment").hide();
 			} else {
-				$("#ddlInstitutionalCommitmentCost").val(0);
+				$("#ddlInstitutionalCommitmentCost").prop("selectedIndex", 0);
 				$("#lblConfirmCommitment").hide();
 			}
 
@@ -513,7 +654,7 @@ $(function() {
 			} else if (!response.costShareInfo.thirdPartyCommitted) {
 				$("#ddlThirdPartyCommitmentCost").val(2);
 			} else {
-				$("#ddlThirdPartyCommitmentCost").val(0);
+				$("#ddlThirdPartyCommitmentCost").prop("selectedIndex", 0);
 			}
 
 			// University Commitments
@@ -522,7 +663,7 @@ $(function() {
 			} else if (!response.costShareInfo.newRenovatedFacilitiesRequired) {
 				$("#ddlNewSpaceRequired").val(2);
 			} else {
-				$("#ddlNewSpaceRequired").val(0);
+				$("#ddlNewSpaceRequired").prop("selectedIndex", 0);
 			}
 
 			if (response.universityCommitments.rentalSpaceRequired) {
@@ -530,7 +671,7 @@ $(function() {
 			} else if (!response.costShareInfo.rentalSpaceRequired) {
 				$("#ddlRentalSpaceRequired").val(2);
 			} else {
-				$("#ddlRentalSpaceRequired").val(0);
+				$("#ddlRentalSpaceRequired").prop("selectedIndex", 0);
 			}
 
 			if (response.universityCommitments.institutionalCommitmentRequired) {
@@ -540,7 +681,8 @@ $(function() {
 				$("#ddlInstitutionalCommitmentsRequired").val(2);
 				$("#lblCommitmentsRequired").hide();
 			} else {
-				$("#ddlInstitutionalCommitmentsRequired").val(0);
+				$("#ddlInstitutionalCommitmentsRequired").prop("selectedIndex",
+						0);
 				$("#lblCommitmentsRequired").hide();
 			}
 
@@ -550,7 +692,7 @@ $(function() {
 			} else if (!response.conflicOfInterest.financialCOI) {
 				$("#ddlFinancialCOI").val(2);
 			} else {
-				$("#ddlFinancialCOI").val(0);
+				$("#ddlFinancialCOI").prop("selectedIndex", 0);
 			}
 
 			if (response.conflicOfInterest.conflictDisclosed) {
@@ -560,7 +702,7 @@ $(function() {
 				$("#ddlDisclosedFinancialCOI").val(2);
 				$("#lblDisclosureRequired").hide();
 			} else {
-				$("#ddlDisclosedFinancialCOI").val(0);
+				$("#ddlDisclosedFinancialCOI").prop("selectedIndex", 0);
 				$("#lblDisclosureRequired").hide();
 			}
 
@@ -571,7 +713,7 @@ $(function() {
 				$("#ddlMaterialChanged").val(2);
 				$("#lblMaterialChanged").hide();
 			} else {
-				$("#ddlMaterialChanged").val(0);
+				$("#ddlMaterialChanged").prop("selectedIndex", 0);
 				$("#lblMaterialChanged").hide();
 			}
 
@@ -597,7 +739,7 @@ $(function() {
 				$("#tdIRBOption").hide();
 				$("#tdIRBtxt").hide();
 			} else {
-				$("#ddlUseHumanSubjects").val(0);
+				$("#ddlUseHumanSubjects").prop("selectedIndex", 0);
 				$("#lblUseHumanSubjects").hide();
 				$("#tdHumanSubjectsOption").hide();
 				$("#tdIRBOption").hide();
@@ -625,7 +767,7 @@ $(function() {
 				$("#tdIACUCOption").hide();
 				$("#tdIACUCtxt").hide();
 			} else {
-				$("#ddlUseVertebrateAnimals").val(0);
+				$("#ddlUseVertebrateAnimals").prop("selectedIndex", 0);
 				$("#lblUseVertebrateAnimals").hide();
 				$("#tdVertebrateAnimalsOption").hide();
 				$("#tdIACUCOption").hide();
@@ -653,7 +795,7 @@ $(function() {
 				$("#tdIBCOption").hide();
 				$("#tdIBCtxt").hide();
 			} else {
-				$("#ddlInvovleBioSafety").val(0);
+				$("#ddlInvovleBioSafety").prop("selectedIndex", 0);
 				$("#lblHasBiosafetyConcerns").hide();
 				$("#tdBiosafetyOption").hide();
 				$("#tdIBCOption").hide();
@@ -665,7 +807,7 @@ $(function() {
 			} else if (!response.complianceInfo.involveEnvironmentalHealthAndSafetyConcerns) {
 				$("#ddlEnvironmentalConcerns").val(2);
 			} else {
-				$("#ddlEnvironmentalConcerns").val(0);
+				$("#ddlEnvironmentalConcerns").prop("selectedIndex", 0);
 			}
 
 			// Additional Information
@@ -674,7 +816,7 @@ $(function() {
 			} else if (!response.additionalInfo.anticipatesForeignNationalsPayment) {
 				$("#ddlAnticipateForeignNationals").val(2);
 			} else {
-				$("#ddlAnticipateForeignNationals").val(0);
+				$("#ddlAnticipateForeignNationals").prop("selectedIndex", 0);
 			}
 
 			if (response.additionalInfo.anticipatesCourseReleaseTime) {
@@ -682,7 +824,7 @@ $(function() {
 			} else if (!response.additionalInfo.anticipatesCourseReleaseTime) {
 				$("#ddlAnticipateReleaseTime").val(2);
 			} else {
-				$("#ddlAnticipateReleaseTime").val(0);
+				$("#ddlAnticipateReleaseTime").prop("selectedIndex", 0);
 			}
 
 			if (response.additionalInfo.relatedToCenterForAdvancedEnergyStudies) {
@@ -690,7 +832,7 @@ $(function() {
 			} else if (!response.additionalInfo.relatedToCenterForAdvancedEnergyStudies) {
 				$("#ddlRelatedToEnergyStudies").val(2);
 			} else {
-				$("#ddlRelatedToEnergyStudies").val(0);
+				$("#ddlRelatedToEnergyStudies").prop("selectedIndex", 0);
 			}
 
 			// Collaboration Information
@@ -707,7 +849,7 @@ $(function() {
 				$("#trInvolveNonFundedCollabs").hide();
 				$("#txtCollaborators").val('');
 			} else {
-				$("#ddlInvolveNonFundedCollabs").val(0);
+				$("#ddlInvolveNonFundedCollabs").prop("selectedIndex", 0);
 				$("#lblInvolveNonFundedCollabs").hide();
 				$("#trInvolveNonFundedCollabs").hide();
 				$("#txtCollaborators").val('');
@@ -718,7 +860,7 @@ $(function() {
 				$("#ddlProprietaryInformation").val(1);
 				$("#txtPagesWithProprietaryInfo").val(
 						response.confidentialInfo.onPages);
-				$("#txtPagesWithProprietaryInfo").show();
+				$("#tdPagesWithProprietaryInfo").show();
 				$("#trTypeOfProprietaryInfo").show();
 				$("#chkPatentable").prop("checked",
 						response.confidentialInfo.patentable);
@@ -726,13 +868,13 @@ $(function() {
 						response.confidentialInfo.copyrightable);
 			} else if (!response.confidentialInfo.containConfidentialInformation) {
 				$("#ddlProprietaryInformation").val(2);
-				$("#txtPagesWithProprietaryInfo").hide();
+				$("#tdPagesWithProprietaryInfo").hide();
 				$("#trTypeOfProprietaryInfo").hide();
 				$("#txtPagesWithProprietaryInfo").val('');
 			} else {
-				$("#ddlProprietaryInformation").val(0);
-				$("#txtPagesWithProprietaryInfo").hide();
-				$("#txtPagesWithProprietaryInfo").hide();
+				$("#ddlProprietaryInformation").prop("selectedIndex", 0);
+				$("#tdPagesWithProprietaryInfo").hide();
+				$("#trTypeOfProprietaryInfo").hide();
 				$("#txtPagesWithProprietaryInfo").val('');
 			}
 
@@ -741,7 +883,7 @@ $(function() {
 			} else if (!response.confidentialInfo.involveIntellectualProperty) {
 				$("#ddlOwnIntellectualProperty").val(2);
 			} else {
-				$("#ddlOwnIntellectualProperty").val(0);
+				$("#ddlOwnIntellectualProperty").prop("selectedIndex", 0);
 			}
 
 			// OSP Section
@@ -809,7 +951,7 @@ $(function() {
 				$("#ddlPISalaryIncluded").val(2);
 				$("#lblPISalaryIncluded").show();
 			} else {
-				$("#ddlPISalaryIncluded").val(0);
+				$("#ddlPISalaryIncluded").prop("selectedIndex", 0);
 				$("#lblPISalaryIncluded").hide();
 			}
 
@@ -824,7 +966,7 @@ $(function() {
 			} else if (response.oSPSectionInfo.institutionalCostDocumented.notApplicable) {
 				$("#ddlInstitutionalCostDocumented").val(3);
 			} else {
-				$("#ddlInstitutionalCostDocumented").val(0);
+				$("#ddlInstitutionalCostDocumented").prop("selectedIndex", 0);
 			}
 
 			if (response.oSPSectionInfo.thirdPartyCostDocumented.yes) {
@@ -834,7 +976,7 @@ $(function() {
 			} else if (response.oSPSectionInfo.thirdPartyCostDocumented.notApplicable) {
 				$("#ddlThirdPartyCostDocumented").val(3);
 			} else {
-				$("#ddlThirdPartyCostDocumented").val(0);
+				$("#ddlThirdPartyCostDocumented").prop("selectedIndex", 0);
 			}
 
 			if (response.oSPSectionInfo.isAnticipatedSubRecipients) {
@@ -847,7 +989,7 @@ $(function() {
 				$("#trSubrecipientsNames").hide();
 				$("#txtNamesSubrecipients").val('');
 			} else {
-				$("#ddlSubrecipients").val(0);
+				$("#ddlSubrecipients").prop("selectedIndex", 0);
 				$("#trSubrecipientsNames").hide();
 				$("#txtNamesSubrecipients").val('');
 			}
@@ -863,7 +1005,7 @@ $(function() {
 			} else if (response.oSPSectionInfo.PIEligibilityWaiver.blanket) {
 				$("#ddlPIEligibilityWaiver").val(5);
 			} else {
-				$("#ddlPIEligibilityWaiver").val(0);
+				$("#ddlPIEligibilityWaiver").prop("selectedIndex", 0);
 			}
 
 			if (response.oSPSectionInfo.conflictOfInterestForms.yes) {
@@ -873,7 +1015,7 @@ $(function() {
 			} else if (response.oSPSectionInfo.conflictOfInterestForms.notApplicable) {
 				$("#ddlCOIForms").val(3);
 			} else {
-				$("#ddlCOIForms").val(0);
+				$("#ddlCOIForms").prop("selectedIndex", 0);
 			}
 
 			if (response.oSPSectionInfo.excludedPartyListChecked.yes) {
@@ -883,7 +1025,7 @@ $(function() {
 			} else if (response.oSPSectionInfo.excludedPartyListChecked.notApplicable) {
 				$("#ddlCheckedExcludedPartyList").val(3);
 			} else {
-				$("#ddlCheckedExcludedPartyList").val(0);
+				$("#ddlCheckedExcludedPartyList").prop("selectedIndex", 0);
 			}
 
 			$("#txtProposalNotes").val(response.oSPSectionInfo.proposalNotes);
@@ -954,9 +1096,13 @@ $(function() {
 								$(this).removeAttr('disabled');
 							}
 
-							proposalsManage.BindUserMobileNo($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
+							// proposalsManage.BindUserMobileNo($(
+							// 'select[name="ddlName"]').eq(rowIndex)
+							// .val());
+							$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+							$('input[name="txtPhoneNo"]').eq(rowIndex).val(
+									userDetails.userRef.mobileNumbers[0]);
+
 							proposalsManage.BindCollegeDropDown($(
 									'select[name="ddlName"]').eq(rowIndex)
 									.val());
@@ -1174,6 +1320,7 @@ $(function() {
 		},
 
 		ClearForm : function() {
+			validator.resetForm();
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
 			var container = $("#container-7 div:gt(1)");
@@ -1207,6 +1354,27 @@ $(function() {
 						$(this).removeAttr("selected");
 					});
 
+			// For form Dropdown Binding
+			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
+					.prop('disabled', 'disabled');
+			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID())
+					.prop('selected', 'selected').prop('disabled', 'disabled');
+
+			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
+					.val());
+			proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
+					0).val());
+			proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
+					.eq(0).val(), $('select[name="ddlCollege"]').eq(0).val());
+			proposalsManage.BindPositionTypeDropDown(
+					$('select[name="ddlName"]').eq(0).val(), $(
+							'select[name="ddlCollege"]').eq(0).val(), $(
+							'select[name="ddlDepartment"]').eq(0).val());
+			proposalsManage.BindPositionTitleDropDown($(
+					'select[name="ddlName"]').eq(0).val(), $(
+					'select[name="ddlCollege"]').eq(0).val(), $(
+					'select[name="ddlDepartment"]').eq(0).val(), $(
+					'select[name="ddlPositionType"]').eq(0).val());
 			return false;
 		},
 
@@ -1215,27 +1383,33 @@ $(function() {
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
-			$("#txtDOB").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			});
 
-			$("#txtSearchActivityOnFrom").datepicker(
-					{
-						dateFormat : 'yy-mm-dd',
-						changeMonth : true,
-						changeYear : true,
-						onSelect : function(selectedDate) {
-							$("#txtSearchActivityOnTo").datepicker("option",
-									"minDate", selectedDate);
-						}
-					});
-			$("#txtSearchActivityOnTo").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			});
+			// Hide all instrcution information
+			$("#lblConfirmCommitment").hide();
+			$("#lblCommitmentsRequired").hide();
+			$("#lblDisclosureRequired").hide();
+			$("#lblMaterialChanged").hide();
+			$("#lblUseHumanSubjects").hide();
+			$("#tdHumanSubjectsOption").hide();
+			$("#tdIRBOption").hide();
+			$("#tdIRBtxt").hide();
+			$("#lblUseVertebrateAnimals").hide();
+			$("#tdVertebrateAnimalsOption").hide();
+			$("#tdIACUCOption").hide();
+			$("#tdIACUCtxt").hide();
+			$("#lblHasBiosafetyConcerns").hide();
+			$("#tdBiosafetyOption").hide();
+			$("#tdIBCOption").hide();
+			$("#tdIBCtxt").hide();
+			$("#lblInvolveNonFundedCollabs").hide();
+			$("#trInvolveNonFundedCollabs").hide();
+			$("#txtCollaborators").val('');
+			$("#tdPagesWithProprietaryInfo").hide();
+			$("#trTypeOfProprietaryInfo").hide();
+			$("#txtPagesWithProprietaryInfo").val('');
+			$("#lblPISalaryIncluded").hide();
+			$("#trSubrecipientsNames").hide();
+			$("#txtNamesSubrecipients").val('');
 
 			$("#gdvProposalsAuditLog").empty();
 			$("#gdvProposalsAuditLog_Pagination").remove();
@@ -1318,6 +1492,11 @@ $(function() {
 						IsActive : $('input[name=chkActive]').prop('checked'),
 						UserName : $.trim($('#txtProjectTitle').val()),
 						Password : $.trim($('#txtPassword').val()),
+
+						// $('#txtDirectCosts').autoNumeric('get');
+						// $('#txtFACosts').autoNumeric('get');
+						// $('#txtTotalCosts').autoNumeric('get');
+						// $('#txtFARate').mask();
 						Flag : _flag, // false for Update true for New Add
 						SaveOptions : _saveOptions
 					};
@@ -1822,11 +2001,15 @@ $(function() {
 							$("#txtSearchReceivedOnTo").datepicker("option",
 									"minDate", selectedDate);
 						}
-					});
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
 			$("#txtSearchReceivedOnTo").datepicker({
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
 				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
 			});
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
@@ -1838,6 +2021,8 @@ $(function() {
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
 				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
 			});
 
 			$("#txtProjectPeriodFrom").datepicker(
@@ -1849,11 +2034,15 @@ $(function() {
 							$("#txtProjectPeriodTo").datepicker("option",
 									"minDate", selectedDate);
 						}
-					});
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
 			$("#txtProjectPeriodTo").datepicker({
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
 				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
 			});
 
 			proposalsManage.BindProposalStatus();
@@ -1891,16 +2080,6 @@ $(function() {
 									.eq(rowIndex).val(), $(
 									'select[name="ddlPositionType"]').eq(
 									rowIndex).val());
-							// TODO:
-							// 1. bind College by userID all positiondetails
-							// 2. select the college based on user data
-							// 3. bind Department
-							// 4. select the college based on user data
-							// 5. bind positiontype
-							// 6. select the college based on user data
-							// 7. bind positiontitle
-							// 8. select the positiontitle based on user data
-
 						} else {
 							$(this).find('option:gt(0)').remove();
 						}
@@ -2025,8 +2204,9 @@ $(function() {
 							});
 
 			$('#btnAddNew').bind("click", function() {
-				$('#auditLogTab').hide();
 				proposalsManage.ClearForm();
+				$('#auditLogTab').hide();
+				$("#trProposalInfo").hide();
 				$('#divProposalGrid').hide();
 				$('#divProposalForm').show();
 			});
@@ -2075,7 +2255,7 @@ $(function() {
 									+ userName.trim()
 									+ "' "
 									+ getLocale(gpmsProposalsManagement,
-											"already exists.") + '<br/>';
+											"already exists.");
 						}
 
 						if (errors) {
@@ -2220,7 +2400,7 @@ $(function() {
 			$("#ddlUseHumanSubjects").on("change", function() {
 				if ($("#ddlUseHumanSubjects").val() == "1") {
 					$("#lblUseHumanSubjects").show();
-					// $("#ddlIRBOptions").val(0);
+					// $("#ddlIRBOptions").prop("selectedIndex", 0);
 					$("#tdHumanSubjectsOption").show();
 					$("#tdIRBOption").show();
 					if ($("#ddlIRBOptions").val() == "1") {
@@ -2232,7 +2412,7 @@ $(function() {
 					}
 				} else {
 					$("#lblUseHumanSubjects").hide();
-					// $("#ddlIRBOptions").val(0);
+					// $("#ddlIRBOptions").prop("selectedIndex", 0);
 					$("#tdHumanSubjectsOption").hide();
 					$("#tdIRBOption").hide();
 					$("#tdIRBtxt").hide();
@@ -2252,7 +2432,7 @@ $(function() {
 			$("#ddlUseVertebrateAnimals").on("change", function() {
 				if ($("#ddlUseVertebrateAnimals").val() == "1") {
 					$("#lblUseVertebrateAnimals").show();
-					// $("#ddlIACUCOptions").val(0);
+					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
 					$("#tdVertebrateAnimalsOption").show();
 					$("#tdIACUCOption").show();
 					if ($("#ddlIACUCOptions").val() == "1") {
@@ -2264,7 +2444,7 @@ $(function() {
 					}
 				} else {
 					$("#lblUseVertebrateAnimals").hide();
-					// $("#ddlIACUCOptions").val(0);
+					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
 					$("#tdVertebrateAnimalsOption").hide();
 					$("#tdIACUCOption").hide();
 					$("#tdIACUCtxt").hide();
@@ -2284,7 +2464,7 @@ $(function() {
 			$("#ddlInvovleBioSafety").on("change", function() {
 				if ($("#ddlInvovleBioSafety").val() == "1") {
 					$("#lblHasBiosafetyConcerns").show();
-					// $("#ddlIBCOptions").val(0);
+					// $("#ddlIBCOptions").prop("selectedIndex", 0);
 					$("#tdBiosafetyOption").show();
 					$("#tdIBCOption").show();
 					if ($("#ddlIBCOptions").val() == "1") {
@@ -2296,7 +2476,7 @@ $(function() {
 					}
 				} else {
 					$("#lblHasBiosafetyConcerns").hide();
-					// $("#ddlIBCOptions").val(0);
+					// $("#ddlIBCOptions").prop("selectedIndex", 0);
 					$("#tdBiosafetyOption").hide();
 					$("#tdIBCOption").hide();
 					$("#tdIBCtxt").hide();
@@ -2325,10 +2505,10 @@ $(function() {
 
 			$("#ddlProprietaryInformation").on("change", function() {
 				if ($("#ddlProprietaryInformation").val() == "1") {
-					$("#txtPagesWithProprietaryInfo").show();
+					$("#tdPagesWithProprietaryInfo").show();
 					$("#trTypeOfProprietaryInfo").show();
 				} else {
-					$("#txtPagesWithProprietaryInfo").hide();
+					$("#tdPagesWithProprietaryInfo").hide();
 					$("#trTypeOfProprietaryInfo").hide();
 				}
 			});
@@ -2349,11 +2529,74 @@ $(function() {
 				}
 			});
 
+			$("#txtDOB").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
+			$("#txtSearchActivityOnFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtSearchActivityOnTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+			$("#txtSearchActivityOnTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
+			$("#txtDirectCosts").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+			$("#txtFACosts").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+			$("#txtTotalCosts").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+
+			$("#txtFARate").mask("99.99 %");
+
 			$(
 					'#txtSearchProjectTitle,#txtSearchProposedBy,#txtSearchTotalCostsFrom,#txtSearchTotalCostsTo,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlSearchProposalStatus')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
 							$("#btnSearchProposal").click();
+						}
+					});
+
+			$(
+					'#txtSearchAction, #txtSearchAuditedBy, #txtSearchActivityOnFrom, #txtSearchActivityOnTo')
+					.keyup(function(event) {
+						if (event.keyCode == 13) {
+							$("#btnSearchUserAuditLog").click();
 						}
 					});
 		}

@@ -76,9 +76,9 @@ public class Create100UsersTest {
 
 			newProfile.setLastName(lastName);
 			newProfile.setUserId(newAccount);
-			newProfile.getHomeNumbers().add("208-466-1200");
-			newProfile.getOfficeNumbers().add("208-494-7492");
-			newProfile.getMobileNumbers().add("208-702-4522");
+			newProfile.getHomeNumbers().add("2084661200");
+			newProfile.getOfficeNumbers().add("2084947492");
+			newProfile.getMobileNumbers().add("2087024522");
 			// newProfile.getWorkEmails().add("workman@worksite.org");
 			newProfile.getPersonalEmails().add("supercoolbro@yahoo.com");
 
@@ -138,7 +138,7 @@ public class Create100UsersTest {
 			newUserProfileDAO.setGender(newProfile, newProfile, "Male");
 
 			newUserProfileDAO.addOtherNumber(newProfile, newProfile,
-					"208-938-9302");
+					"2089389302");
 			newUserProfileDAO.addWorkEmail(newProfile, newProfile,
 					"alternatecontact@officialplace.com");
 
