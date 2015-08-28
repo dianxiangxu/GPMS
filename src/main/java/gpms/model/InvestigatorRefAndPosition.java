@@ -13,6 +13,10 @@ public class InvestigatorRefAndPosition {
 	UserProfile userRef;
 
 	@Expose
+	@Property("user profile id")
+	private String userProfileId = new String();
+
+	@Expose
 	@Property("college")
 	private String college = new String();
 
@@ -32,9 +36,11 @@ public class InvestigatorRefAndPosition {
 
 	}
 
-	public InvestigatorRefAndPosition(UserProfile userRef, String college,
-			String department, String positionType, String positionTitle) {
+	public InvestigatorRefAndPosition(UserProfile userRef,
+			String userProfileId, String college, String department,
+			String positionType, String positionTitle) {
 		this.userRef = userRef;
+		this.userProfileId = userProfileId;
 		this.college = college;
 		this.department = department;
 		this.positionType = positionType;
@@ -47,6 +53,14 @@ public class InvestigatorRefAndPosition {
 
 	public void setUserRef(UserProfile userRef) {
 		this.userRef = userRef;
+	}
+
+	public String getUserProfileId() {
+		return userProfileId;
+	}
+
+	public void setUserProfileId(String userProfileId) {
+		this.userProfileId = userProfileId;
 	}
 
 	public String getCollege() {
@@ -85,6 +99,7 @@ public class InvestigatorRefAndPosition {
 	public String toString() {
 		String output = "";
 		output += "User Reference : " + userRef + "\n";
+		output += "User Profile ID : " + userProfileId + "\n";
 		output += "College        : " + college + "\n";
 		output += "Department     : " + department + "\n";
 		output += "Position Type  : " + positionType + "\n";
@@ -104,6 +119,8 @@ public class InvestigatorRefAndPosition {
 				+ ((positionTitle == null) ? 0 : positionTitle.hashCode());
 		result = prime * result
 				+ ((positionType == null) ? 0 : positionType.hashCode());
+		result = prime * result
+				+ ((userProfileId == null) ? 0 : userProfileId.hashCode());
 		result = prime * result + ((userRef == null) ? 0 : userRef.hashCode());
 		return result;
 	}
@@ -137,6 +154,11 @@ public class InvestigatorRefAndPosition {
 				return false;
 		} else if (!positionType.equals(other.positionType))
 			return false;
+		if (userProfileId == null) {
+			if (other.userProfileId != null)
+				return false;
+		} else if (!userProfileId.equals(other.userProfileId))
+			return false;
 		if (userRef == null) {
 			if (other.userRef != null)
 				return false;
@@ -149,6 +171,7 @@ public class InvestigatorRefAndPosition {
 	public InvestigatorRefAndPosition clone() throws CloneNotSupportedException {
 		InvestigatorRefAndPosition copy = new InvestigatorRefAndPosition();
 		copy.setUserRef(userRef);
+		copy.setUserProfileId(userProfileId);
 		copy.setCollege(college);
 		copy.setDepartment(department);
 		copy.setPositionType(positionType);

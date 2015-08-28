@@ -1011,11 +1011,20 @@ td.sfSelectleftright {
 	display:block;
 	height:10px;
 }
-.sfRequired, .sfError, .cssClassError, .cssClassRequired, .cssClassrequired, .cssClassRegisterInputBg  {
+.sfRequired, .sfError, .cssClassRequired, .cssClassrequired, .cssClassRegisterInputBg  {
 	color:red;
 	font-size:11px;
 }
-.error{ color:red;}
+.cssClassError, .error{ color:red; display: block; width: auto;}
+label.error {
+		display: block;
+		margin-left: 1em;
+		width: auto;
+}
+
+#txtWorkEmail-error{ display: table-caption; !important}
+#txtPersonalEmail-error{ display: table-caption; !important}
+
 .sfRadiobutton {
 	overflow:hidden; line-height:25px;
 }

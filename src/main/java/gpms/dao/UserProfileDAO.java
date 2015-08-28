@@ -121,11 +121,11 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			accountQuery.field("is active").equal(isActive);
 		}
 
+		int rowTotal = profileQuery.asList().size();
 		// profileQuery.and(profileQuery.criteria("_id").notEqual(id)
 		List<UserProfile> userProfiles = profileQuery.offset(offset - 1)
 				.limit(limit).asList();
 
-		int rowTotal = profileQuery.asList().size();
 		for (UserProfile userProfile : userProfiles) {
 			UserInfo user = new UserInfo();
 			user.setRowTotal(rowTotal);
@@ -928,6 +928,36 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return profileQuery.get();
 	}
 
+	// public List<InvestigatorUsersAndPositions> findAllUsers() {
+	// Datastore ds = getDatastore();
+	// List<InvestigatorUsersAndPositions> users = new
+	// ArrayList<InvestigatorUsersAndPositions>();
+	//
+	// Query<UserProfile> q = ds.createQuery(UserProfile.class)
+	// .retrievedFields(true, "_id", "first name", "middle name",
+	// "last name", "mobile number");
+	// List<UserProfile> userProfile = q.asList();
+	//
+	// for (UserProfile user : userProfile) {
+	// InvestigatorUsersAndPositions userInfo = new
+	// InvestigatorUsersAndPositions();
+	// userInfo.setId(user.getId().toString());
+	// userInfo.setFullName(user.getFullName());
+	// userInfo.setMobileNumber(user.getMobileNumbers().get(0));
+	// users.add(userInfo);
+	// }
+	// return users;
+	// }
+
+	public String findMobileNoForAUser(ObjectId id) {
+		Datastore ds = getDatastore();
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+
+		UserProfile q = profileQuery.field("_id").equal(id)
+				.retrievedFields(true, "mobile number").get();
+		return q.getMobileNumbers().get(0).toString();
+	}
+
 	public List<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
 		Datastore ds = getDatastore();
 		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
@@ -976,6 +1006,23 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return userPositions;
 	}
 
+	public List<String> findCollegesForAUser(ObjectId id) {
+		Datastore ds = getDatastore();
+		List<String> userColleges = new ArrayList<String>();
+
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("_id")
+				.equal(id).retrievedFields(true, "details");
+		List<UserProfile> userProfile = q.asList();
+		for (UserProfile user : userProfile) {
+			for (PositionDetails userDetails : user.getDetails()) {
+				if (!userColleges.contains(userDetails.getCollege())) {
+					userColleges.add(userDetails.getCollege());
+				}
+			}
+		}
+		return userColleges;
+	}
+
 	public List<String> findDepartmentsForAUser(ObjectId id, String college) {
 		Datastore ds = getDatastore();
 		List<String> userDepartments = new ArrayList<String>();
@@ -985,7 +1032,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		List<UserProfile> userProfile = q.asList();
 		for (UserProfile user : userProfile) {
 			for (PositionDetails userDetails : user.getDetails()) {
-				if (userDetails.getCollege().equalsIgnoreCase(college)) {
+				if (userDetails.getCollege().equalsIgnoreCase(college)
+						&& !userDepartments.contains(userDetails
+								.getDepartment())) {
 					userDepartments.add(userDetails.getDepartment());
 				}
 			}
@@ -1005,11 +1054,38 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			for (PositionDetails userDetails : user.getDetails()) {
 				if (userDetails.getCollege().equalsIgnoreCase(college)
 						&& userDetails.getDepartment().equalsIgnoreCase(
-								department)) {
+								department)
+						&& !userPositionTypes.contains(userDetails
+								.getPositionType())) {
 					userPositionTypes.add(userDetails.getPositionType());
 				}
 			}
 		}
 		return userPositionTypes;
 	}
+
+	public List<String> findPositionTitlesForAUser(ObjectId id, String college,
+			String department, String positionType) {
+		Datastore ds = getDatastore();
+		List<String> userPositionTitles = new ArrayList<String>();
+
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("_id")
+				.equal(id).retrievedFields(true, "details");
+		List<UserProfile> userProfile = q.asList();
+		for (UserProfile user : userProfile) {
+			for (PositionDetails userDetails : user.getDetails()) {
+				if (userDetails.getCollege().equalsIgnoreCase(college)
+						&& userDetails.getDepartment().equalsIgnoreCase(
+								department)
+						&& userDetails.getPositionType().equalsIgnoreCase(
+								positionType)
+						&& !userPositionTitles.contains(userDetails
+								.getPositionTitle())) {
+					userPositionTitles.add(userDetails.getPositionTitle());
+				}
+			}
+		}
+		return userPositionTitles;
+	}
+
 }

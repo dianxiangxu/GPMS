@@ -12,12 +12,20 @@ public class ConfidentialInfo {
 	private boolean containConfidentialInformation;
 
 	@Expose
+	@Property("on pages")
+	private String onPages = new String();
+
+	@Expose
 	@Property("patentable")
 	private boolean patentable;
 
 	@Expose
 	@Property("copyrightable")
 	private boolean copyrightable;
+
+	@Expose
+	@Property("involve intellectual property")
+	private boolean involveIntellectualProperty;
 
 	public ConfidentialInfo() {
 	}
@@ -29,6 +37,14 @@ public class ConfidentialInfo {
 	public void setContainConfidentialInformation(
 			boolean containConfidentialInformation) {
 		this.containConfidentialInformation = containConfidentialInformation;
+	}
+
+	public String getOnPages() {
+		return onPages;
+	}
+
+	public void setOnPages(String onPages) {
+		this.onPages = onPages;
 	}
 
 	public boolean isPatentable() {
@@ -47,11 +63,22 @@ public class ConfidentialInfo {
 		this.copyrightable = copyrightable;
 	}
 
+	public boolean isInvolveIntellectualProperty() {
+		return involveIntellectualProperty;
+	}
+
+	public void setInvolveIntellectualProperty(
+			boolean involveIntellectualProperty) {
+		this.involveIntellectualProperty = involveIntellectualProperty;
+	}
+
 	@Override
 	public String toString() {
 		return "ConfidentialInfo [containConfidentialInformation="
-				+ containConfidentialInformation + ", patentable=" + patentable
-				+ ", copyrightable=" + copyrightable + "]";
+				+ containConfidentialInformation + ", onPages=" + onPages
+				+ ", patentable=" + patentable + ", copyrightable="
+				+ copyrightable + ", involveIntellectualProperty="
+				+ involveIntellectualProperty + "]";
 	}
 
 	@Override
@@ -61,6 +88,8 @@ public class ConfidentialInfo {
 		result = prime * result
 				+ (containConfidentialInformation ? 1231 : 1237);
 		result = prime * result + (copyrightable ? 1231 : 1237);
+		result = prime * result + (involveIntellectualProperty ? 1231 : 1237);
+		result = prime * result + ((onPages == null) ? 0 : onPages.hashCode());
 		result = prime * result + (patentable ? 1231 : 1237);
 		return result;
 	}
@@ -77,6 +106,13 @@ public class ConfidentialInfo {
 		if (containConfidentialInformation != other.containConfidentialInformation)
 			return false;
 		if (copyrightable != other.copyrightable)
+			return false;
+		if (involveIntellectualProperty != other.involveIntellectualProperty)
+			return false;
+		if (onPages == null) {
+			if (other.onPages != null)
+				return false;
+		} else if (!onPages.equals(other.onPages))
 			return false;
 		if (patentable != other.patentable)
 			return false;

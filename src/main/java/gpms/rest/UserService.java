@@ -114,6 +114,27 @@ public class UserService {
 	}
 
 	@POST
+	@Path("/GetMobileNoForAUser")
+	public String getMobileNoForAUser(String message)
+			throws UnknownHostException, JsonProcessingException, IOException {
+		String userId = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(userId);
+
+		String mobileNo = userProfileDAO.findMobileNoForAUser(id);
+		String response = JSONTansformer.ConvertToJSON(mobileNo);
+
+		return response;
+	}
+
+	@POST
 	@Path("/GetAllUserList")
 	public List<InvestigatorUsersAndPositions> getAllCollegesForUsers()
 			throws UnknownHostException, JsonProcessingException, IOException {
@@ -133,8 +154,8 @@ public class UserService {
 		ObjectMapper mapper = new ObjectMapper();
 
 		JsonNode root = mapper.readTree(message);
-		if (root != null && root.has("UserId")) {
-			userId = root.get("UserId").getTextValue();
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
 		}
 
 		ObjectId id = new ObjectId(userId);
@@ -143,6 +164,25 @@ public class UserService {
 				.findAllPositionDetailsForAUser(id);
 
 		return userPositions;
+	}
+
+	@POST
+	@Path("/GetCollegesForAUser")
+	public List<String> getCollegesForAUser(String message)
+			throws UnknownHostException, JsonProcessingException, IOException {
+		String userId = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
+		}
+		ObjectId id = new ObjectId(userId);
+
+		List<String> userColleges = userProfileDAO.findCollegesForAUser(id);
+
+		return userColleges;
 	}
 
 	@POST
@@ -155,8 +195,8 @@ public class UserService {
 		ObjectMapper mapper = new ObjectMapper();
 
 		JsonNode root = mapper.readTree(message);
-		if (root != null && root.has("UserId")) {
-			userId = root.get("UserId").getTextValue();
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
 		}
 		if (root != null && root.has("college")) {
 			college = root.get("college").getTextValue();
@@ -181,8 +221,8 @@ public class UserService {
 		ObjectMapper mapper = new ObjectMapper();
 
 		JsonNode root = mapper.readTree(message);
-		if (root != null && root.has("UserId")) {
-			userId = root.get("UserId").getTextValue();
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
 		}
 		if (root != null && root.has("college")) {
 			college = root.get("college").getTextValue();
@@ -193,10 +233,44 @@ public class UserService {
 
 		ObjectId id = new ObjectId(userId);
 
-		List<String> userDepartments = userProfileDAO
+		List<String> userPositionTypes = userProfileDAO
 				.findPositionTypesForAUser(id, college, department);
 
-		return userDepartments;
+		return userPositionTypes;
+	}
+
+	@POST
+	@Path("/GetPositionTitleForAUser")
+	public List<String> getPositionTitleForAUser(String message)
+			throws UnknownHostException, JsonProcessingException, IOException {
+		String userId = new String();
+		String college = new String();
+		String department = new String();
+		String positionType = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
+		}
+		if (root != null && root.has("college")) {
+			college = root.get("college").getTextValue();
+		}
+		if (root != null && root.has("department")) {
+			department = root.get("department").getTextValue();
+		}
+		if (root != null && root.has("positionType")) {
+			positionType = root.get("positionType").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(userId);
+
+		List<String> userPositionTitles = userProfileDAO
+				.findPositionTitlesForAUser(id, college, department,
+						positionType);
+
+		return userPositionTitles;
 	}
 
 	@POST

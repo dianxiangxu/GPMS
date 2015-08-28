@@ -38,7 +38,7 @@ public class Create100Proposals {
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
 	String dbName = "GPMS";
-	final int MAXIMUM_PROPOSALS = 2; // Adjust this to make more or less
+	final int MAXIMUM_PROPOSALS = 10; // Adjust this to make more or less
 										// profiles with the generator.
 
 	@Before
@@ -119,6 +119,7 @@ public class Create100Proposals {
 					.getPositionType());
 			newInvPos.setPositionTitle(propProfile.getDetails(0)
 					.getPositionTitle());
+			newInvPos.setUserProfileId(propProfile.getId().toString());
 			newInvPos.setUserRef(propProfile);
 
 			newInfo.setPi(newInvPos);
@@ -231,6 +232,7 @@ public class Create100Proposals {
 		newInvPos.setDepartment(copProfile.getDetails(0).getDepartment());
 		newInvPos.setPositionType(copProfile.getDetails(0).getPositionType());
 		newInvPos.setPositionTitle(copProfile.getDetails(0).getPositionTitle());
+		newInvPos.setUserProfileId(copProfile.getId().toString());
 		newInvPos.setUserRef(copProfile);
 
 		return newInvPos;
@@ -247,6 +249,7 @@ public class Create100Proposals {
 		newInvPos.setDepartment(copProfile.getDetails(0).getDepartment());
 		newInvPos.setPositionType(copProfile.getDetails(0).getPositionType());
 		newInvPos.setPositionTitle(copProfile.getDetails(0).getPositionTitle());
+		newInvPos.setUserProfileId(copProfile.getId().toString());
 		newInvPos.setUserRef(copProfile);
 
 		return newInvPos;

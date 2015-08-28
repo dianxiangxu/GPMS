@@ -74,7 +74,7 @@
 	"Sorry! this user is already actived." : "Sorry! this user is already actived.",
 	"Sorry! this user is already deactived." : "Sorry! this user is already deactived.",
 
-	"Please enter username." : "Please enter username.",
+	"Please enter a username." : "Please enter a username.",
 	"Please enter unique username." : "Please enter unique username.",
 	"already exists." : "already exists.",
 	"Please enter work email id." : "Please enter work email id.",

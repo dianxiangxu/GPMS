@@ -9,6 +9,140 @@ $(function() {
 		return gpmsCommonInfo;
 	};
 
+	var validator = $("#form1").validate({
+		rules : {
+			firstName : {
+				required : true,
+				maxlength : 40
+			},
+			lastName : {
+				required : true,
+				maxlength : 40
+			},
+			dob : {
+				required : true,
+				dpDate : true
+			},
+			gender : {
+				required : true
+			},
+			street : {
+				required : true
+			},
+			city : {
+				required : true
+			},
+			state : {
+				required : true
+			},
+			zip : {
+				required : true
+			},
+			country : {
+				required : true
+			},
+			officeNumber : {
+				phoneUS : true
+			},
+			mobileNumber : {
+				required : true,
+				phoneUS : true
+			},
+			homeNumber : {
+				phoneUS : true
+			},
+			otherNumber : {
+				phoneUS : true
+			},
+			workEmail : {
+				required : true,
+				email : true
+			},
+			personalEmail : {
+				email : true
+			},
+			username : {
+				required : true,
+				minlength : 6
+			},
+			password : {
+				required : true,
+				minlength : 6
+			},
+			confirm_password : {
+				required : true,
+				minlength : 6,
+				equalTo : "#txtPassword"
+			}
+		},
+		messages : {
+			firstName : {
+				required : "Please enter your firstname",
+				maxlength : "Your firstname must be at most 40 characters long"
+			},
+			LastName : {
+				required : "Please enter your lastname",
+				maxlength : "Your lastname must be at most 40 characters long"
+			},
+			dob : {
+				required : "Please enter your date of birth",
+				dpDate : "Please enter valid date"
+			},
+			gender : {
+				required : "Please select your gender"
+			},
+			street : {
+				required : "Please enter your street address"
+			},
+			city : {
+				required : "Please enter your city"
+			},
+			state : {
+				required : "Please select your city"
+			},
+			zip : {
+				required : "Please enter your zip code"
+			},
+			country : {
+				required : "Please select your country"
+			},
+			officeNumber : {
+				phoneUS : "Please enter your valid office phone number"
+			},
+			mobileNumber : {
+				required : "Please enter your mobile phone number",
+				phoneUS : "Please enter your valid mobile phone number",
+			},
+			homeNumber : {
+				phoneUS : "Please enter your valid home phone number",
+			},
+			otherNumber : {
+				phoneUS : "Please enter your valid additional phone number",
+			},
+			workEmail : {
+				required : "Please enter your work email",
+				email : "Please enter valid email id"
+			},
+			personalEmail : {
+				email : "Please enter valid email id"
+			},
+			username : {
+				required : "Please enter a username",
+				minlength : "Your username must be at least 6 characters long"
+			},
+			password : {
+				required : "Please provide a password",
+				minlength : "Your password must be at least 6 characters long",
+			},
+			confirm_password : {
+				required : "Please confirm your password",
+				minlength : "Your password must be at least 6 characters long",
+				equalTo : "Please enter the same password as above"
+			}
+		},
+		ignore : ":hidden"
+	});
+
 	var rowIndex = 0;
 	var editFlag = 0;
 	var isUniqueProjectTitle = false;
@@ -100,7 +234,7 @@ $(function() {
 			var offset_ = 1;
 			var current_ = 1;
 			var perpage = ($("#gdvProposals_pagesize").length > 0) ? $(
-					"#gdvProposalsProposals_pagesize :selected").text() : 10;
+					"#gdvProposals_pagesize :selected").text() : 10;
 
 			var proposalBindObj = {
 				ProjectTitle : projectTitle,
@@ -359,7 +493,7 @@ $(function() {
 											_event : 'click',
 											trigger : '1',
 											callMethod : 'proposalsManage.EditProposal',
-											arguments : '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,21,22'
+											arguments : '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22'
 										},
 										{
 											display : getLocale(
@@ -370,7 +504,7 @@ $(function() {
 											_event : 'click',
 											trigger : '2',
 											callMethod : 'proposalsManage.DeleteProposal',
-											arguments : '20'
+											arguments : '18'
 										} ],
 								rp : perpage,
 								nomsg : getLocale(gpmsProposalsManagement,
@@ -393,6 +527,9 @@ $(function() {
 			switch (tblID) {
 			case "gdvProposals":
 				proposalsManage.ClearForm();
+
+				$("#trProposalInfo").show();
+
 				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
 								'Edit Proposal Details for: ')
@@ -426,8 +563,6 @@ $(function() {
 						null, null);
 				$('#auditLogTab').show();
 
-				// proposalsManage.BindUserDropDown();
-
 				break;
 			default:
 				break;
@@ -435,154 +570,582 @@ $(function() {
 		},
 
 		FillForm : function(response) {
-			// See this how we can get response object based on fields
-			// alert(response);
+			// Investigator Information
+			proposalsManage.BindInvestigatorInfo(response.investigatorInfo);
+
+			// Peoject Information
+			$("#lblProposalNo").text(response.proposalNo);
+			$("#lblProposalDateReceived").text(response.dateReceived);
+			$("#ddlProposalStatus").val(response.proposalStatus);
+
+			$("#txtProjectTitle").val(response.projectInfo.projectTitle);
+
+			if (response.projectInfo.projectType.isResearchBasic) {
+				$("#ddlProjectType").val(1);
+			} else if (response.projectInfo.projectType.isResearchApplied) {
+				$("#ddlProjectType").val(2);
+			} else if (response.projectInfo.projectType.isResearchDevelopment) {
+				$("#ddlProjectType").val(3);
+			} else if (response.projectInfo.projectType.isInstruction) {
+				$("#ddlProjectType").val(4);
+			} else if (response.projectInfo.projectType.isOtherSponsoredActivity) {
+				$("#ddlProjectType").val(5);
+			} else {
+				$("#ddlProjectType").prop("selectedIndex", 0);
+			}
+
+			if (response.projectInfo.typeOfRequest.isPreProposal) {
+				$("#ddlTypeOfRequest").val(1);
+			} else if (response.projectInfo.typeOfRequest.isNewProposal) {
+				$("#ddlTypeOfRequest").val(2);
+			} else if (response.projectInfo.typeOfRequest.isContinuation) {
+				$("#ddlTypeOfRequest").val(3);
+			} else if (response.projectInfo.typeOfRequest.isSupplement) {
+				$("#ddlTypeOfRequest").val(4);
+			} else {
+				$("#ddlTypeOfRequest").prop("selectedIndex", 0);
+			}
+
+			$("#txtDueDate").val(response.projectInfo.dueDate);
+
+			if (response.projectInfo.projectLocation.offCampus) {
+				$("#ddlLocationOfProject").val(1);
+			} else if (response.projectInfo.projectLocation.onCampus) {
+				$("#ddlLocationOfProject").val(2);
+			} else {
+				$("#ddlLocationOfProject").prop("selectedIndex", 0);
+			}
+
+			$("#txtProjectPeriodFrom").val(
+					response.projectInfo.projectPeriod.from);
+			$("#txtProjectPeriodTo").val(response.projectInfo.projectPeriod.to);
+
+			// Sponsor And Budget Information
+			// for (var int = 0; int <
+			// response.sponsorAndBudgetInfo.grantingAgency.length; int++) {
+			// var array_element = array[int];
+			//				
+			// }
+			$("#txtNameOfGrantingAgency").val(
+					response.sponsorAndBudgetInfo.grantingAgency);
+			$("#txtDirectCosts").autoNumeric('set',
+					response.sponsorAndBudgetInfo.directCosts);
+			$("#txtFACosts").autoNumeric('set',
+					response.sponsorAndBudgetInfo.directCosts);
+			$("#txtTotalCosts").autoNumeric('set',
+					response.sponsorAndBudgetInfo.totalCosts);
+			$("#txtFARate").val(response.sponsorAndBudgetInfo.FARate).mask(
+					"99.99 %");
+
+			// Cost Share Information
+			if (response.costShareInfo.institutionalCommitted) {
+				$("#ddlInstitutionalCommitmentCost").val(1);
+				$("#lblConfirmCommitment").show();
+			} else if (!response.costShareInfo.institutionalCommitted) {
+				$("#ddlInstitutionalCommitmentCost").val(2);
+				$("#lblConfirmCommitment").hide();
+			} else {
+				$("#ddlInstitutionalCommitmentCost").prop("selectedIndex", 0);
+				$("#lblConfirmCommitment").hide();
+			}
+
+			if (response.costShareInfo.thirdPartyCommitted) {
+				$("#ddlThirdPartyCommitmentCost").val(1);
+			} else if (!response.costShareInfo.thirdPartyCommitted) {
+				$("#ddlThirdPartyCommitmentCost").val(2);
+			} else {
+				$("#ddlThirdPartyCommitmentCost").prop("selectedIndex", 0);
+			}
+
+			// University Commitments
+			if (response.universityCommitments.newRenovatedFacilitiesRequired) {
+				$("#ddlNewSpaceRequired").val(1);
+			} else if (!response.costShareInfo.newRenovatedFacilitiesRequired) {
+				$("#ddlNewSpaceRequired").val(2);
+			} else {
+				$("#ddlNewSpaceRequired").prop("selectedIndex", 0);
+			}
+
+			if (response.universityCommitments.rentalSpaceRequired) {
+				$("#ddlRentalSpaceRequired").val(1);
+			} else if (!response.costShareInfo.rentalSpaceRequired) {
+				$("#ddlRentalSpaceRequired").val(2);
+			} else {
+				$("#ddlRentalSpaceRequired").prop("selectedIndex", 0);
+			}
+
+			if (response.universityCommitments.institutionalCommitmentRequired) {
+				$("#ddlInstitutionalCommitmentsRequired").val(1);
+				$("#lblCommitmentsRequired").show();
+			} else if (!response.universityCommitments.institutionalCommitmentRequired) {
+				$("#ddlInstitutionalCommitmentsRequired").val(2);
+				$("#lblCommitmentsRequired").hide();
+			} else {
+				$("#ddlInstitutionalCommitmentsRequired").prop("selectedIndex",
+						0);
+				$("#lblCommitmentsRequired").hide();
+			}
+
+			// Conflict of Interest And Commitment Information
+			if (response.conflicOfInterest.financialCOI) {
+				$("#ddlFinancialCOI").val(1);
+			} else if (!response.conflicOfInterest.financialCOI) {
+				$("#ddlFinancialCOI").val(2);
+			} else {
+				$("#ddlFinancialCOI").prop("selectedIndex", 0);
+			}
+
+			if (response.conflicOfInterest.conflictDisclosed) {
+				$("#ddlDisclosedFinancialCOI").val(1);
+				$("#lblDisclosureRequired").show();
+			} else if (!response.conflicOfInterest.conflictDisclosed) {
+				$("#ddlDisclosedFinancialCOI").val(2);
+				$("#lblDisclosureRequired").hide();
+			} else {
+				$("#ddlDisclosedFinancialCOI").prop("selectedIndex", 0);
+				$("#lblDisclosureRequired").hide();
+			}
+
+			if (response.conflicOfInterest.disclosureFormChange) {
+				$("#ddlMaterialChanged").val(1);
+				$("#lblMaterialChanged").show();
+			} else if (!response.conflicOfInterest.disclosureFormChange) {
+				$("#ddlMaterialChanged").val(2);
+				$("#lblMaterialChanged").hide();
+			} else {
+				$("#ddlMaterialChanged").prop("selectedIndex", 0);
+				$("#lblMaterialChanged").hide();
+			}
+
+			// Compliance Information
+			if (response.complianceInfo.involveUseOfHumanSubjects) {
+				$("#ddlUseHumanSubjects").val(1);
+				$("#lblUseHumanSubjects").show();
+				$("#tdHumanSubjectsOption").show();
+				$("#tdIRBOption").show();
+				if (response.complianceInfo.IRBPending) {
+					$("#ddlIRBOptions").val(2);
+					$("#tdIRBtxt").hide();
+				} else if (!response.complianceInfo.IRBPending
+						&& response.complianceInfo.IRB != "") {
+					$("#ddlIRBOptions").val(1);
+					$("#txtIRB").val(response.complianceInfo.IRB);
+					$("#tdIRBtxt").show();
+				}
+			} else if (!response.complianceInfo.involveUseOfHumanSubjects) {
+				$("#ddlUseHumanSubjects").val(2);
+				$("#lblUseHumanSubjects").hide();
+				$("#tdHumanSubjectsOption").hide();
+				$("#tdIRBOption").hide();
+				$("#tdIRBtxt").hide();
+			} else {
+				$("#ddlUseHumanSubjects").prop("selectedIndex", 0);
+				$("#lblUseHumanSubjects").hide();
+				$("#tdHumanSubjectsOption").hide();
+				$("#tdIRBOption").hide();
+				$("#tdIRBtxt").hide();
+			}
+
+			if (response.complianceInfo.involveUseOfVertebrateAnimals) {
+				$("#ddlUseVertebrateAnimals").val(1);
+				$("#lblUseVertebrateAnimals").show();
+				$("#tdVertebrateAnimalsOption").show();
+				$("#tdIACUCOption").show();
+				if (response.complianceInfo.IACUCPending) {
+					$("#ddlIACUCOptions").val(2);
+					$("#tdIACUCtxt").hide();
+				} else if (!response.complianceInfo.IACUCPending
+						&& response.complianceInfo.IACUC != "") {
+					$("#ddlIACUCOptions").val(1);
+					$("#txtIACUC").val(response.complianceInfo.IACUC);
+					$("#tdIACUCtxt").show();
+				}
+			} else if (!response.complianceInfo.involveUseOfVertebrateAnimals) {
+				$("#ddlUseVertebrateAnimals").val(2);
+				$("#lblUseVertebrateAnimals").hide();
+				$("#tdVertebrateAnimalsOption").hide();
+				$("#tdIACUCOption").hide();
+				$("#tdIACUCtxt").hide();
+			} else {
+				$("#ddlUseVertebrateAnimals").prop("selectedIndex", 0);
+				$("#lblUseVertebrateAnimals").hide();
+				$("#tdVertebrateAnimalsOption").hide();
+				$("#tdIACUCOption").hide();
+				$("#tdIACUCtxt").hide();
+			}
+
+			if (response.complianceInfo.involveBiosafetyConcerns) {
+				$("#ddlInvovleBioSafety").val(1);
+				$("#lblHasBiosafetyConcerns").show();
+				$("#tdBiosafetyOption").show();
+				$("#tdIBCOption").show();
+				if (response.complianceInfo.IBCPending) {
+					$("#ddlIBCOptions").val(2);
+					$("#tdIBCtxt").hide();
+				} else if (!response.complianceInfo.IBCPending
+						&& response.complianceInfo.IBC != "") {
+					$("#ddlIBCOptions").val(1);
+					$("#txtIBC").val(response.complianceInfo.IBC);
+					$("#tdIBCtxt").show();
+				}
+			} else if (!response.complianceInfo.involveBiosafetyConcerns) {
+				$("#ddlInvovleBioSafety").val(2);
+				$("#lblHasBiosafetyConcerns").hide();
+				$("#tdBiosafetyOption").hide();
+				$("#tdIBCOption").hide();
+				$("#tdIBCtxt").hide();
+			} else {
+				$("#ddlInvovleBioSafety").prop("selectedIndex", 0);
+				$("#lblHasBiosafetyConcerns").hide();
+				$("#tdBiosafetyOption").hide();
+				$("#tdIBCOption").hide();
+				$("#tdIBCtxt").hide();
+			}
+
+			if (response.complianceInfo.involveEnvironmentalHealthAndSafetyConcerns) {
+				$("#ddlEnvironmentalConcerns").val(1);
+			} else if (!response.complianceInfo.involveEnvironmentalHealthAndSafetyConcerns) {
+				$("#ddlEnvironmentalConcerns").val(2);
+			} else {
+				$("#ddlEnvironmentalConcerns").prop("selectedIndex", 0);
+			}
+
+			// Additional Information
+			if (response.additionalInfo.anticipatesForeignNationalsPayment) {
+				$("#ddlAnticipateForeignNationals").val(1);
+			} else if (!response.additionalInfo.anticipatesForeignNationalsPayment) {
+				$("#ddlAnticipateForeignNationals").val(2);
+			} else {
+				$("#ddlAnticipateForeignNationals").prop("selectedIndex", 0);
+			}
+
+			if (response.additionalInfo.anticipatesCourseReleaseTime) {
+				$("#ddlAnticipateReleaseTime").val(1);
+			} else if (!response.additionalInfo.anticipatesCourseReleaseTime) {
+				$("#ddlAnticipateReleaseTime").val(2);
+			} else {
+				$("#ddlAnticipateReleaseTime").prop("selectedIndex", 0);
+			}
+
+			if (response.additionalInfo.relatedToCenterForAdvancedEnergyStudies) {
+				$("#ddlRelatedToEnergyStudies").val(1);
+			} else if (!response.additionalInfo.relatedToCenterForAdvancedEnergyStudies) {
+				$("#ddlRelatedToEnergyStudies").val(2);
+			} else {
+				$("#ddlRelatedToEnergyStudies").prop("selectedIndex", 0);
+			}
+
+			// Collaboration Information
+			if (response.collaborationInfo.involveNonFundedCollab) {
+				$("#ddlInvolveNonFundedCollabs").val(1);
+				$("#lblInvolveNonFundedCollabs").show();
+				$("#trInvolveNonFundedCollabs").show();
+				$("#txtCollaborators").val(
+						response.collaborationInfo.involvedCollaborators);
+
+			} else if (!response.collaborationInfo.involveNonFundedCollab) {
+				$("#ddlInvolveNonFundedCollabs").val(2);
+				$("#lblInvolveNonFundedCollabs").hide();
+				$("#trInvolveNonFundedCollabs").hide();
+				$("#txtCollaborators").val('');
+			} else {
+				$("#ddlInvolveNonFundedCollabs").prop("selectedIndex", 0);
+				$("#lblInvolveNonFundedCollabs").hide();
+				$("#trInvolveNonFundedCollabs").hide();
+				$("#txtCollaborators").val('');
+			}
+
+			// Collaboration Information
+			if (response.confidentialInfo.containConfidentialInformation) {
+				$("#ddlProprietaryInformation").val(1);
+				$("#txtPagesWithProprietaryInfo").val(
+						response.confidentialInfo.onPages);
+				$("#tdPagesWithProprietaryInfo").show();
+				$("#trTypeOfProprietaryInfo").show();
+				$("#chkPatentable").prop("checked",
+						response.confidentialInfo.patentable);
+				$("#chkCopyrightable").prop("checked",
+						response.confidentialInfo.copyrightable);
+			} else if (!response.confidentialInfo.containConfidentialInformation) {
+				$("#ddlProprietaryInformation").val(2);
+				$("#tdPagesWithProprietaryInfo").hide();
+				$("#trTypeOfProprietaryInfo").hide();
+				$("#txtPagesWithProprietaryInfo").val('');
+			} else {
+				$("#ddlProprietaryInformation").prop("selectedIndex", 0);
+				$("#tdPagesWithProprietaryInfo").hide();
+				$("#trTypeOfProprietaryInfo").hide();
+				$("#txtPagesWithProprietaryInfo").val('');
+			}
+
+			if (response.confidentialInfo.involveIntellectualProperty) {
+				$("#ddlOwnIntellectualProperty").val(1);
+			} else if (!response.confidentialInfo.involveIntellectualProperty) {
+				$("#ddlOwnIntellectualProperty").val(2);
+			} else {
+				$("#ddlOwnIntellectualProperty").prop("selectedIndex", 0);
+			}
+
+			// OSP Section
+			$("#txtAgencyList").val(response.oSPSectionInfo.listAgency);
+
+			$("#chkFederal").prop("checked",
+					response.oSPSectionInfo.fundingSource.federal);
+			$("#chkFederalFlowThrough").prop("checked",
+					response.oSPSectionInfo.fundingSource.federalFlowThrough);
+			$("#chkStateOfIdahoEntity").prop("checked",
+					response.oSPSectionInfo.fundingSource.sateOfIdahoEntity);
+			$("#chkPrivateForProfit").prop("checked",
+					response.oSPSectionInfo.fundingSource.privateForProfit);
+			$("#chkNonProfitOrganization")
+					.prop(
+							"checked",
+							response.oSPSectionInfo.fundingSource.nonProfitOrganization);
+			$("#chkNonIdahoStateEntity").prop("checked",
+					response.oSPSectionInfo.fundingSource.nonIdahoStateEntity);
+			$("#chkCollegeUniversity").prop("checked",
+					response.oSPSectionInfo.fundingSource.collegeOrUniversity);
+			$("#chkLocalEntity").prop("checked",
+					response.oSPSectionInfo.fundingSource.localEntity);
+			$("#chkNonIdahoLocalEntity").prop("checked",
+					response.oSPSectionInfo.fundingSource.nonIdahoLocalEntity);
+			$("#chkTribalGovernment").prop("checked",
+					response.oSPSectionInfo.fundingSource.tirbalGovernment);
+			$("#chkForeign").prop("checked",
+					response.oSPSectionInfo.fundingSource.foreign);
+
+			$("#txtCFDANo").val(response.oSPSectionInfo.CFDANo);
+			$("#txtProgramNo").val(response.oSPSectionInfo.programNo);
+			$("#txtProgramTitle").val(response.oSPSectionInfo.programTitle);
+
+			$("#chkFullRecovery").prop("checked",
+					response.oSPSectionInfo.recovery.fullRecovery);
+			$("#chkNoRecoveryNormal")
+					.prop(
+							"checked",
+							response.oSPSectionInfo.recovery.noRecoveryNormalSponsorPolicy);
+			$("#chkNoRecoveryInstitutional")
+					.prop(
+							"checked",
+							response.oSPSectionInfo.recovery.noRecoveryInstitutionalWaiver);
+			$("#chkLimitedRecoveryNormal")
+					.prop(
+							"checked",
+							response.oSPSectionInfo.recovery.limitedRecoveryNormalSponsorPolicy);
+			$("#chkLimitedRecoveryInstitutional")
+					.prop(
+							"checked",
+							response.oSPSectionInfo.recovery.limitedRecoveryInstitutionalWaiver);
+
+			$("#chkMTDC").prop("checked", response.oSPSectionInfo.base.MTDC);
+			$("#chkTDC").prop("checked", response.oSPSectionInfo.base.TDC);
+			$("#chkTC").prop("checked", response.oSPSectionInfo.base.TC);
+			$("#chkOther").prop("checked", response.oSPSectionInfo.base.other);
+			$("#chkNA").prop("checked",
+					response.oSPSectionInfo.base.notApplicable);
+
+			if (response.oSPSectionInfo.isPISalaryIncluded) {
+				$("#ddlPISalaryIncluded").val(1);
+				$("#lblPISalaryIncluded").hide();
+			} else if (!response.oSPSectionInfo.isPISalaryIncluded) {
+				$("#ddlPISalaryIncluded").val(2);
+				$("#lblPISalaryIncluded").show();
+			} else {
+				$("#ddlPISalaryIncluded").prop("selectedIndex", 0);
+				$("#lblPISalaryIncluded").hide();
+			}
+
+			$("#txtPISalary").val(response.oSPSectionInfo.PISalary);
+			$("#txtPIFringe").val(response.oSPSectionInfo.PIFringe);
+			$("#txtDepartmentID").val(response.oSPSectionInfo.departmentId);
+
+			if (response.oSPSectionInfo.institutionalCostDocumented.yes) {
+				$("#ddlInstitutionalCostDocumented").val(1);
+			} else if (response.oSPSectionInfo.institutionalCostDocumented.no) {
+				$("#ddlInstitutionalCostDocumented").val(2);
+			} else if (response.oSPSectionInfo.institutionalCostDocumented.notApplicable) {
+				$("#ddlInstitutionalCostDocumented").val(3);
+			} else {
+				$("#ddlInstitutionalCostDocumented").prop("selectedIndex", 0);
+			}
+
+			if (response.oSPSectionInfo.thirdPartyCostDocumented.yes) {
+				$("#ddlThirdPartyCostDocumented").val(1);
+			} else if (response.oSPSectionInfo.thirdPartyCostDocumented.no) {
+				$("#ddlThirdPartyCostDocumented").val(2);
+			} else if (response.oSPSectionInfo.thirdPartyCostDocumented.notApplicable) {
+				$("#ddlThirdPartyCostDocumented").val(3);
+			} else {
+				$("#ddlThirdPartyCostDocumented").prop("selectedIndex", 0);
+			}
+
+			if (response.oSPSectionInfo.isAnticipatedSubRecipients) {
+				$("#ddlSubrecipients").val(1);
+				$("#txtNamesSubrecipients").val(
+						response.oSPSectionInfo.anticipatedSubRecipientsNames);
+				$("#trSubrecipientsNames").show();
+			} else if (!response.oSPSectionInfo.isAnticipatedSubRecipients) {
+				$("#ddlSubrecipients").val(2);
+				$("#trSubrecipientsNames").hide();
+				$("#txtNamesSubrecipients").val('');
+			} else {
+				$("#ddlSubrecipients").prop("selectedIndex", 0);
+				$("#trSubrecipientsNames").hide();
+				$("#txtNamesSubrecipients").val('');
+			}
+
+			if (response.oSPSectionInfo.PIEligibilityWaiver.yes) {
+				$("#ddlPIEligibilityWaiver").val(1);
+			} else if (response.oSPSectionInfo.PIEligibilityWaiver.no) {
+				$("#ddlPIEligibilityWaiver").val(2);
+			} else if (response.oSPSectionInfo.PIEligibilityWaiver.notApplicable) {
+				$("#ddlPIEligibilityWaiver").val(3);
+			} else if (response.oSPSectionInfo.PIEligibilityWaiver.thisProposalOnly) {
+				$("#ddlPIEligibilityWaiver").val(4);
+			} else if (response.oSPSectionInfo.PIEligibilityWaiver.blanket) {
+				$("#ddlPIEligibilityWaiver").val(5);
+			} else {
+				$("#ddlPIEligibilityWaiver").prop("selectedIndex", 0);
+			}
+
+			if (response.oSPSectionInfo.conflictOfInterestForms.yes) {
+				$("#ddlCOIForms").val(1);
+			} else if (response.oSPSectionInfo.conflictOfInterestForms.no) {
+				$("#ddlCOIForms").val(2);
+			} else if (response.oSPSectionInfo.conflictOfInterestForms.notApplicable) {
+				$("#ddlCOIForms").val(3);
+			} else {
+				$("#ddlCOIForms").prop("selectedIndex", 0);
+			}
+
+			if (response.oSPSectionInfo.excludedPartyListChecked.yes) {
+				$("#ddlCheckedExcludedPartyList").val(1);
+			} else if (response.oSPSectionInfo.excludedPartyListChecked.no) {
+				$("#ddlCheckedExcludedPartyList").val(2);
+			} else if (response.oSPSectionInfo.excludedPartyListChecked.notApplicable) {
+				$("#ddlCheckedExcludedPartyList").val(3);
+			} else {
+				$("#ddlCheckedExcludedPartyList").prop("selectedIndex", 0);
+			}
+
+			$("#txtProposalNotes").val(response.oSPSectionInfo.proposalNotes);
+
+			$("#chkDF").prop("checked",
+					response.oSPSectionInfo.researchAdministrator.DF);
+			$("#chkLG").prop("checked",
+					response.oSPSectionInfo.researchAdministrator.LG);
+			$("#chkLN").prop("checked",
+					response.oSPSectionInfo.researchAdministrator.LN);
+
+			// Certification/ Signatures Info
+			// Delegation Info
+
 		},
 
-		BindUserPostionDetails : function(postitionDetails) {
-			// $("#dataTable tr:gt(1)").remove();
-			$
-					.each(
-							postitionDetails,
-							function(i, value) {
-								// alert(index + " :: " +
-								// value['positionTitle']);
-								var btnOption = "[+] Add";
-								var btnName = "AddMore";
-								if (i > 0) {
-									btnOption = "Delete";
-									var btnName = "DeleteOption";
-								}
-								var cloneRow = $('#dataTable tbody>tr:first')
-										.clone(true);
-								$(cloneRow).appendTo("#dataTable");
+		BindInvestigatorInfo : function(investigatorInfo) {
+			rowIndex = 0;
+			proposalsManage
+					.BindUserToPositionDetails(investigatorInfo.pi, "PI");
 
-								rowIndex = i + 1;
-								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
-										.find("select")
-										.each(
-												function(j) {
-													if (this.name == "ddlProposalStatus") {
-														// $(this).val(value['college']);
+			$.each(investigatorInfo.co_pi, function(i, coPI) {
+				proposalsManage.BindUserToPositionDetails(coPI, "Co-PI");
+			});
 
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['college']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
-																				proposalsManage
-																						.BindDepartmentOnly($(
-																								'select[name="ddlProposalStatus"] option:selected')
-																								.eq(
-																										rowIndex)
-																								.val());
-																				return false;
-																			}
-																		});
-													} else if (this.name == "ddlDepartment") {
-														// $(this).val(value['department']);
+			$.each(investigatorInfo.seniorPersonnel, function(j, senior) {
+				proposalsManage.BindUserToPositionDetails(senior, "Senior");
+			});
 
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['department']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
-
-																				proposalsManage
-																						.BindPositionTypeOnly(
-																								$(
-																										'select[name="ddlProposalStatus"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val(),
-																								$(
-																										'select[name="ddlDepartment"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val());
-																				return false;
-																			}
-																		});
-													} else if (this.name == "ddlPositionType") {
-														// $(this).val(value['positionType']);
-
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['positionType']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
-
-																				proposalsManage
-																						.BindPositionTitleOnly(
-																								$(
-																										'select[name="ddlProposalStatus"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val(),
-																								$(
-																										'select[name="ddlDepartment"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val(),
-																								$(
-																										'select[name="ddlPositionType"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val());
-																				return false;
-																			}
-																		});
-													} else if (this.name == "ddlPositionTitle") {
-														// $(this).val(value['positionTitle']);
-
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['positionTitle']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
-																				return false;
-																			}
-																		});
-													}
-												});
-
-								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
-										.find("input").each(
-												function(k) {
-													if ($(this).hasClass(
-															"AddOption")) {
-														$(this).prop("name",
-																btnName);
-														$(this).prop("value",
-																btnOption);
-													}
-												});
-							});
 			$('#dataTable>tbody tr:first').remove();
+
+		},
+
+		BindUserToPositionDetails : function(userDetails, userType) {
+			var cloneRow = $('#dataTable tbody>tr:first').clone(true);
+			$(cloneRow).appendTo("#dataTable");
+
+			rowIndex += 1;
+			var btnOption = "[+] Add";
+			var btnName = "AddMore";
+			if (rowIndex > 1) {
+				btnOption = "Delete";
+				var btnName = "DeleteOption";
+			}
+
+			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("select").each(
+					function(k) {
+						if (this.name == "ddlRole") {
+							if (userType == "PI") {
+								$(this).val(0).prop('selected', 'selected');
+								$(this).prop('disabled', 'disabled');
+							} else if (userType == "Co-PI") {
+								$(this).val(1).prop('selected', 'selected');
+								$(this).removeAttr('disabled');
+							} else if (userType == "Senior") {
+								$(this).val(2).prop('selected', 'selected');
+								$(this).removeAttr('disabled');
+							}
+						} else if (this.name == "ddlName") {
+							$(this).val(userDetails.userProfileId).prop(
+									'selected', 'selected');
+
+							if (userType == "PI") {
+								$(this).prop('disabled', 'disabled');
+							} else if (userType == "Co-PI") {
+								$(this).removeAttr('disabled');
+							} else if (userType == "Senior") {
+								$(this).removeAttr('disabled');
+							}
+
+							// proposalsManage.BindUserMobileNo($(
+							// 'select[name="ddlName"]').eq(rowIndex)
+							// .val());
+							$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+							$('input[name="txtPhoneNo"]').eq(rowIndex).val(
+									userDetails.userRef.mobileNumbers[0]);
+
+							proposalsManage.BindCollegeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val());
+						} else if (this.name == "ddlCollege") {
+							$(this).val(userDetails.college).prop('selected',
+									'selected');
+							proposalsManage.BindDepartmentDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val());
+						} else if (this.name == "ddlDepartment") {
+							$(this).val(userDetails.department).prop(
+									'selected', 'selected');
+							proposalsManage.BindPositionTypeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val());
+						} else if (this.name == "ddlPositionType") {
+							$(this).val(userDetails.positionType).prop(
+									'selected', 'selected');
+							proposalsManage.BindPositionTitleDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val(), $(
+									'select[name="ddlPositionType"]').eq(
+									rowIndex).val());
+						} else if (this.name == "ddlPositionTitle") {
+							$(this).val(userDetails.positionTitle).prop(
+									'selected', 'selected');
+						}
+					});
+
+			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("input").each(
+					function(l) {
+						if ($(this).hasClass("AddOption")) {
+							$(this).prop("name", btnName);
+							$(this).prop("value", btnOption);
+						}
+					});
 		},
 
 		SearchProposalAuditLogs : function() {
@@ -757,6 +1320,7 @@ $(function() {
 		},
 
 		ClearForm : function() {
+			validator.resetForm();
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
 			var container = $("#container-7 div:gt(1)");
@@ -767,8 +1331,6 @@ $(function() {
 				$(this).val('');
 				$(this).val($(this).find('option').first().val());
 			});
-
-			// $('select[name=ddlName]').val(item.id);
 
 			proposalsManage.onInit();
 			$('#lblFormHeading').html(
@@ -793,17 +1355,26 @@ $(function() {
 					});
 
 			// For form Dropdown Binding
-			$('select[name=ddlRole]').eq(0).val(0);
-			$('select[name=ddlRole]').eq(0).prop('disabled', 'disabled');
-			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID());
-			$('select[name=ddlName]').eq(0).prop('disabled', 'disabled');
+			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
+					.prop('disabled', 'disabled');
+			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID())
+					.prop('selected', 'selected').prop('disabled', 'disabled');
 
-			// $('select[name=ddlName] option').get(rowIndex).map(function() {
-			// return ($(this).val() == GPMS.utils.GetUserProfileID());
-			// }).prop('selected', true);
-
-			// proposalsManage.BindDepartmentDropDown($(
-			// 'select[name="ddlProposalStatus"]').eq(0).val(), false);
+			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
+					.val());
+			proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
+					0).val());
+			proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
+					.eq(0).val(), $('select[name="ddlCollege"]').eq(0).val());
+			proposalsManage.BindPositionTypeDropDown(
+					$('select[name="ddlName"]').eq(0).val(), $(
+							'select[name="ddlCollege"]').eq(0).val(), $(
+							'select[name="ddlDepartment"]').eq(0).val());
+			proposalsManage.BindPositionTitleDropDown($(
+					'select[name="ddlName"]').eq(0).val(), $(
+					'select[name="ddlCollege"]').eq(0).val(), $(
+					'select[name="ddlDepartment"]').eq(0).val(), $(
+					'select[name="ddlPositionType"]').eq(0).val());
 			return false;
 		},
 
@@ -812,27 +1383,33 @@ $(function() {
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
-			$("#txtDOB").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			});
 
-			$("#txtSearchActivityOnFrom").datepicker(
-					{
-						dateFormat : 'yy-mm-dd',
-						changeMonth : true,
-						changeYear : true,
-						onSelect : function(selectedDate) {
-							$("#txtSearchActivityOnTo").datepicker("option",
-									"minDate", selectedDate);
-						}
-					});
-			$("#txtSearchActivityOnTo").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			});
+			// Hide all instrcution information
+			$("#lblConfirmCommitment").hide();
+			$("#lblCommitmentsRequired").hide();
+			$("#lblDisclosureRequired").hide();
+			$("#lblMaterialChanged").hide();
+			$("#lblUseHumanSubjects").hide();
+			$("#tdHumanSubjectsOption").hide();
+			$("#tdIRBOption").hide();
+			$("#tdIRBtxt").hide();
+			$("#lblUseVertebrateAnimals").hide();
+			$("#tdVertebrateAnimalsOption").hide();
+			$("#tdIACUCOption").hide();
+			$("#tdIACUCtxt").hide();
+			$("#lblHasBiosafetyConcerns").hide();
+			$("#tdBiosafetyOption").hide();
+			$("#tdIBCOption").hide();
+			$("#tdIBCtxt").hide();
+			$("#lblInvolveNonFundedCollabs").hide();
+			$("#trInvolveNonFundedCollabs").hide();
+			$("#txtCollaborators").val('');
+			$("#tdPagesWithProprietaryInfo").hide();
+			$("#trTypeOfProprietaryInfo").hide();
+			$("#txtPagesWithProprietaryInfo").val('');
+			$("#lblPISalaryIncluded").hide();
+			$("#trSubrecipientsNames").hide();
+			$("#txtNamesSubrecipients").val('');
 
 			$("#gdvProposalsAuditLog").empty();
 			$("#gdvProposalsAuditLog_Pagination").remove();
@@ -854,12 +1431,12 @@ $(function() {
 
 				var newUserName = $('#txtProjectTitle').val();
 				if (!newUserName) {
-					validateErrorMessage += 'Please enter username.<br/>';
+					validateErrorMessage += 'Please enter Project Title.';
 				} else if (!proposalsManage.isUniqueProjectTitle(_proposalId,
 						newUserName)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsProposalsManagement,
-									"Please enter unique username.")
+									"Please enter unique Project Title.")
 							+ " '"
 							+ proposalsManage.trim()
 							+ "' "
@@ -873,9 +1450,6 @@ $(function() {
 						.each(
 								function(i) {
 									var optionsText = $(this).val();
-									// ddlProposalStatus ddlDepartment
-									// ddlPositionType
-									// ddlPositionTitle
 									if (!optionsText
 											&& $(this).prop("name") != "ddlPositionTitle") {
 										validateErrorMessage = getLocale(
@@ -918,6 +1492,11 @@ $(function() {
 						IsActive : $('input[name=chkActive]').prop('checked'),
 						UserName : $.trim($('#txtProjectTitle').val()),
 						Password : $.trim($('#txtPassword').val()),
+
+						// $('#txtDirectCosts').autoNumeric('get');
+						// $('#txtFACosts').autoNumeric('get');
+						// $('#txtTotalCosts').autoNumeric('get');
+						// $('#txtFARate').mask();
 						Flag : _flag, // false for Update true for New Add
 						SaveOptions : _saveOptions
 					};
@@ -979,9 +1558,31 @@ $(function() {
 			this.config.url = this.config.rootURL + "users/"
 					+ "GetAllPositionDetailsForAUser";
 			this.config.data = JSON2.stringify({
-				UserId : userId
+				userId : userId
+			});
+			this.config.ajaxCallMode = 6000;
+			this.ajaxCall(this.config);
+			return false;
+		},
+
+		BindUserMobileNo : function(userId) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetMobileNoForAUser";
+			this.config.data = JSON2.stringify({
+				userId : userId
 			});
 			this.config.ajaxCallMode = 6;
+			this.ajaxCall(this.config);
+			return false;
+		},
+
+		BindCollegeDropDown : function(userId) {
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetCollegesForAUser";
+			this.config.data = JSON2.stringify({
+				userId : userId
+			});
+			this.config.ajaxCallMode = 7;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -990,10 +1591,10 @@ $(function() {
 			this.config.url = this.config.rootURL + "users/"
 					+ "GetDepartmentsForAUser";
 			this.config.data = JSON2.stringify({
-				UserId : userId,
+				userId : userId,
 				college : collegeName
 			});
-			this.config.ajaxCallMode = 7;
+			this.config.ajaxCallMode = 8;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1002,11 +1603,11 @@ $(function() {
 			this.config.url = this.config.rootURL + "users/"
 					+ "GetPositionTypeForAUser";
 			this.config.data = JSON2.stringify({
-				UserId : userId,
+				userId : userId,
 				college : collegeName,
 				department : departmentName
 			});
-			this.config.ajaxCallMode = 8;
+			this.config.ajaxCallMode = 9;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1014,14 +1615,14 @@ $(function() {
 		BindPositionTitleDropDown : function(userId, collegeName,
 				departmentName, positionTypeName) {
 			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTitleList";
+					+ "GetPositionTitleForAUser";
 			this.config.data = JSON2.stringify({
-				UserId : userId,
+				userId : userId,
 				college : collegeName,
 				department : departmentName,
 				positionType : positionTypeName
 			});
-			this.config.ajaxCallMode = 9;
+			this.config.ajaxCallMode = 10;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -1109,7 +1710,7 @@ $(function() {
 							+ "</p>");
 			break;
 
-		case 4:// For User Edit Action
+		case 4:// For Proposal Edit Action
 			proposalsManage.FillForm(msg);
 			$('#divProposalGrid').hide();
 			$('#divProposalForm').show();
@@ -1117,134 +1718,44 @@ $(function() {
 
 		case 5: // Bind User List for Investigator Info
 			$('select[name="ddlName"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
 			$
 					.each(
 							msg,
 							function(index, item) {
-								// For form Dropdown Binding
 								$('select[name="ddlName"]').get(rowIndex).options[$(
 										'select[name="ddlName"]').get(rowIndex).options.length] = new Option(
 										item, index);
 							});
 			break;
 
-		case 6:
+		case 6: // Bind User Mobile No
+			$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+			$('input[name="txtPhoneNo"]').eq(rowIndex).val(msg);
+			break;
+
+		case 7:// Bind User Colleges
 			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-			// department positionTitle
-			// positionType fullName id
+
 			$
 					.each(
 							msg,
 							function(index, item) {
-								$('input[name="txtPhoneNo"]').val(
-										item.mobileNumber);
-
-								$
-										.each(
-												item.positions,
-												function(index, position) {
-													if ($(
-															'select[name="ddlCollege"] option[value="'
-																	+ position.college
-																	+ '"]').eq(
-															rowIndex).length <= 0) {
-
-														$(
-																'select[name="ddlCollege"]')
-																.get(rowIndex).options[$(
-																'select[name="ddlCollege"]')
-																.get(rowIndex).options.length] = new Option(
-																position.college,
-																position.college);
-													}
-
-													if (position.college == $(
-															'select[name="ddlCollege"]')
-															.eq(rowIndex).val()) {
-														if ($(
-																'select[name="ddlDepartment"] option[value="'
-																		+ position.department
-																		+ '"]')
-																.eq(rowIndex).length <= 0) {
-
-															$(
-																	'select[name="ddlDepartment"]')
-																	.get(
-																			rowIndex).options[$(
-																	'select[name="ddlDepartment"]')
-																	.get(
-																			rowIndex).options.length] = new Option(
-																	position.department,
-																	position.department);
-														}
-													}
-
-													if (position.college == $(
-															'select[name="ddlCollege"]')
-															.eq(rowIndex).val()
-															&& position.department == $(
-																	'select[name="ddlDepartment"]')
-																	.eq(
-																			rowIndex)
-																	.val()) {
-														if ($(
-																'select[name="ddlPositionType"] option[value="'
-																		+ position.positionType
-																		+ '"]')
-																.eq(rowIndex).length <= 0) {
-
-															$(
-																	'select[name="ddlPositionType"]')
-																	.get(
-																			rowIndex).options[$(
-																	'select[name="ddlPositionType"]')
-																	.get(
-																			rowIndex).options.length] = new Option(
-																	position.positionType,
-																	position.positionType);
-														}
-													}
-
-													if (position.college == $(
-															'select[name="ddlCollege"]')
-															.eq(rowIndex).val()
-															&& position.department == $(
-																	'select[name="ddlDepartment"]')
-																	.eq(
-																			rowIndex)
-																	.val()
-															&& position.positionType == $(
-																	'select[name="ddlPositionType"]')
-																	.eq(
-																			rowIndex)
-																	.val()) {
-														if ($(
-																'select[name="ddlPositionTitle"] option[value="'
-																		+ position.positionTitle
-																		+ '"]')
-																.eq(rowIndex).length <= 0) {
-
-															$(
-																	'select[name="ddlPositionTitle"]')
-																	.get(
-																			rowIndex).options[$(
-																	'select[name="ddlPositionTitle"]')
-																	.get(
-																			rowIndex).options.length] = new Option(
-																	position.positionTitle,
-																	position.positionTitle);
-														}
-													}
-
-												});
+								$('select[name="ddlCollege"]').get(rowIndex).options[$(
+										'select[name="ddlCollege"]').get(
+										rowIndex).options.length] = new Option(
+										item, item);
 							});
 			break;
 
-		case 7:
-			// $('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+		case 8:// Bind User Departments
 			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
@@ -1253,7 +1764,6 @@ $(function() {
 					.each(
 							msg,
 							function(index, item) {
-								// For form Dropdown Binding
 								$('select[name="ddlDepartment"]').get(rowIndex).options[$(
 										'select[name="ddlDepartment"]').get(
 										rowIndex).options.length] = new Option(
@@ -1261,11 +1771,10 @@ $(function() {
 							});
 			break;
 
-		case 8:
-			// $('select[name="ddlDepartment"]').get(rowIndex).options.length =
-			// 0;
+		case 9:// Bind User Postition Types
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
 			$
 					.each(msg,
 							function(index, item) {
@@ -1277,23 +1786,9 @@ $(function() {
 							});
 			break;
 
-		case 9:
-			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+		case 10:// Bind User Postition Titles
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-			$
-					.each(msg,
-							function(index, item) {
-								$('select[name="ddlPositionType"]').get(
-										rowIndex).options[$(
-										'select[name="ddlPositionType"]').get(
-										rowIndex).options.length] = new Option(
-										item, item);
-							});
 
-			break;
-
-		case 10:
-			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 			$
 					.each(msg,
 							function(index, item) {
@@ -1303,6 +1798,7 @@ $(function() {
 										rowIndex).options.length] = new Option(
 										item, item);
 							});
+
 			break;
 
 		case 11:
@@ -1367,21 +1863,22 @@ $(function() {
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load colleges list.") + '</p>');
+								"Failed to load Proposal Status.") + '</p>');
 				break;
 			case 2:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load departments list.") + '</p>');
+								"Failed to delete the proposal.") + '</p>');
 				break;
 			case 3:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load departments list.") + '</p>');
+								"Failed to delete multiple proposals.")
+						+ '</p>');
 				break;
 			case 4:
 				csscody.error('<h2>'
@@ -1390,33 +1887,35 @@ $(function() {
 						+ '</p>');
 				break;
 			case 5:
-				csscody
-						.error('<h2>'
-								+ getLocale(gpmsProposalsManagement,
-										"Error Message")
-								+ '</h2><p>'
-								+ getLocale(gpmsProposalsManagement,
-										"Failed to load position types list.")
-								+ '</p>');
+				csscody.error('<h2>'
+						+ getLocale(gpmsProposalsManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsProposalsManagement,
+								"Failed to load user list.") + '</p>');
 				break;
 			case 6:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load position titles list.")
-						+ '</p>');
+								"Failed to load user's Mobile No.") + '</p>');
 				break;
 			case 7:
 				csscody.error('<h2>'
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load position titles list.")
+								"Failed to load user's colleges list.")
 						+ '</p>');
 				break;
 
 			case 8:
+				csscody.error('<h2>'
+						+ getLocale(gpmsProposalsManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsProposalsManagement,
+								"Failed to load user's departments list.")
+						+ '</p>');
 				break;
 
 			case 9:
@@ -1424,18 +1923,17 @@ $(function() {
 						+ getLocale(gpmsProposalsManagement, "Error Message")
 						+ '</h2><p>'
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load departments list.") + '</p>');
+								"Failed to load user's position types list.")
+						+ '</p>');
 				break;
 
 			case 10:
-				csscody
-						.error('<h2>'
-								+ getLocale(gpmsProposalsManagement,
-										"Error Message")
-								+ '</h2><p>'
-								+ getLocale(gpmsProposalsManagement,
-										"Failed to load position types list.")
-								+ '</p>');
+				csscody.error('<h2>'
+						+ getLocale(gpmsProposalsManagement, "Error Message")
+						+ '</h2><p>'
+						+ getLocale(gpmsProposalsManagement,
+								"Failed to load user's position titles list.")
+						+ '</p>');
 				break;
 
 			case 11:
@@ -1503,78 +2001,110 @@ $(function() {
 							$("#txtSearchReceivedOnTo").datepicker("option",
 									"minDate", selectedDate);
 						}
-					});
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
 			$("#txtSearchReceivedOnTo").datepicker({
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
 				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
 			});
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
 			$('#divProposalForm').hide();
 			$('#divProposalGrid').show();
 
+			// For Filling Form
+			$("#txtDueDate").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
+			$("#txtProjectPeriodFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtProjectPeriodTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+			$("#txtProjectPeriodTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
 			proposalsManage.BindProposalStatus();
 
 			proposalsManage.BindUserDropDown();
 
-			// $('select[name="ddlName"] option').eq(rowIndex).map(function() {
-			// if ($(this).val() == GPMS.utils.GetUserProfileID())
-			// return this;
-			// }).attr('selected', 'selected');
-
-			// TODO : Bind User Name based on logged-in UserProfileID
-			// proposalsManage.BindCollegeDropDown();
-
-			// TODO select the user's college
-			proposalsManage.BindPositionsForUserDropDown(GPMS.utils
-					.GetUserProfileID());
-
-			// proposalsManage.BindDepartmentDropDown($(
-			// 'select[name="ddlCollege"] option:selected').eq(rowIndex)
-			// .val());
-			// proposalsManage.BindPositionTypeDropDown($(
-			// 'select[name="ddlCollege"] option:selected').eq(rowIndex)
-			// .val(), $('select[name="ddlDepartment"] option:selected')
-			// .eq(rowIndex).val());
-			// proposalsManage.BindPositionTitleDropDown($(
-			// 'select[name="ddlCollege"] option:selected').eq(rowIndex)
-			// .val(), $('select[name="ddlDepartment"] option:selected')
-			// .eq(rowIndex).val(), $(
-			// 'select[name="ddlPositionType"] option:selected').eq(
-			// rowIndex).val(), false);
-
 			// Form Position details Drop downs
-			// $('select[name="ddlName"]').on("change", function() {
-			// rowIndex = $(this).closest('tr').prevAll("tr").length;
-			// if ($(this).val() != "0") {
-			// // proposalsManage.BindCollegeDropDown($(this).val());
-			// // TODO:
-			// // 1. bind College by userID all positiondetails
-			// // 2. select the college based on user data
-			// // 3. bind Department
-			// // 4. select the college based on user data
-			// // 5. bind positiontype
-			// // 6. select the college based on user data
-			// // 7. bind positiontitle
-			// // 8. select the positiontitle based on user data
-			//
-			// } else {
-			// $(this).find('option:gt(0)').remove();
-			// }
-			// });
+			$('select[name="ddlName"]').on(
+					"change",
+					function() {
+						rowIndex = $(this).closest('tr').prevAll("tr").length;
+						if ($(this).val() != "0") {
+							proposalsManage.BindUserMobileNo($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val());
+							proposalsManage.BindCollegeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val());
+
+							proposalsManage.BindDepartmentDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val());
+							proposalsManage.BindPositionTypeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val());
+							proposalsManage.BindPositionTitleDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val(), $(
+									'select[name="ddlPositionType"]').eq(
+									rowIndex).val());
+						} else {
+							$(this).find('option:gt(0)').remove();
+						}
+					});
 
 			$('select[name="ddlCollege"]').on(
 					"change",
 					function() {
 						rowIndex = $(this).closest('tr').prevAll("tr").length;
 						if ($(this).val() != "0") {
-							proposalsManage.BindDepartmentDropDown(GPMS.utils
-									.GetUserProfileID(), $(this).val());
-							proposalsManage.BindPositionTypeDropDown(GPMS.utils
-									.GetUserProfileID(), $(this).val(), $(
+							proposalsManage.BindDepartmentDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $(this).val());
+							proposalsManage.BindPositionTypeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $(this).val(), $(
 									'select[name="ddlDepartment"]')
 									.eq(rowIndex).val());
+							proposalsManage.BindPositionTitleDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $(this).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val(), $(
+									'select[name="ddlPositionType"]').eq(
+									rowIndex).val());
 						} else {
 							$(this).find('option:gt(0)').remove();
 						}
@@ -1589,8 +2119,18 @@ $(function() {
 										.val() != "0"
 										&& $(this).val() != "0") {
 									proposalsManage.BindPositionTypeDropDown($(
+											'select[name="ddlName"]').eq(
+											rowIndex).val(), $(
 											'select[name="ddlCollege"]').eq(
 											rowIndex).val(), $(this).val());
+									proposalsManage.BindPositionTitleDropDown(
+											$('select[name="ddlName"]').eq(
+													rowIndex).val(),
+											$('select[name="ddlCollege"]').eq(
+													rowIndex).val(), $(this)
+													.val(),
+											$('select[name="ddlPositionType"]')
+													.eq(rowIndex).val());
 								} else {
 									$('select[name="ddlPositionType"]').find(
 											'option:gt(0)').remove();
@@ -1608,6 +2148,8 @@ $(function() {
 												.eq(rowIndex).val() != "0"
 										&& $(this).val() != "0") {
 									proposalsManage.BindPositionTitleDropDown(
+											$('select[name="ddlName"]').eq(
+													rowIndex).val(),
 											$('select[name="ddlCollege"]').eq(
 													rowIndex).val(),
 											$('select[name="ddlDepartment"]')
@@ -1662,10 +2204,11 @@ $(function() {
 							});
 
 			$('#btnAddNew').bind("click", function() {
+				proposalsManage.ClearForm();
 				$('#auditLogTab').hide();
+				$("#trProposalInfo").hide();
 				$('#divProposalGrid').hide();
 				$('#divProposalForm').show();
-				proposalsManage.ClearForm();
 			});
 
 			$('#btnBack').bind("click", function() {
@@ -1712,7 +2255,7 @@ $(function() {
 									+ userName.trim()
 									+ "' "
 									+ getLocale(gpmsProposalsManagement,
-											"already exists.") + '<br/>';
+											"already exists.");
 						}
 
 						if (errors) {
@@ -1746,55 +2289,72 @@ $(function() {
 			// }
 			// });
 
-			$("input[type=button].AddOption")
-					.on(
-							"click",
-							function() {
-								if ($(this).prop("name") == "DeleteOption") {
-									var t = $(this).closest('tr');
+			$("input[type=button].AddOption").on(
+					"click",
+					function() {
+						if ($(this).prop("name") == "DeleteOption") {
+							var t = $(this).closest('tr');
 
-									t.find("td").wrapInner(
-											"<div style='DISPLAY: block'/>")
-											.parent().find("td div").slideUp(
-													300, function() {
-														t.remove();
-													});
+							t.find("td").wrapInner(
+									"<div style='DISPLAY: block'/>").parent()
+									.find("td div").slideUp(300, function() {
+										t.remove();
+									});
 
-								} else if ($(this).prop("name") == "AddMore") {
-									var cloneRow = $(this).closest('tr').clone(
-											true);
-									$(cloneRow).find("input").each(
-											function(i) {
-												if ($(this).hasClass(
-														"AddOption")) {
-													$(this).prop("name",
+						} else if ($(this).prop("name") == "AddMore") {
+							var cloneRow = $(this).closest('tr').clone(true);
+							$(cloneRow).find("input").each(
+									function(i) {
+										if ($(this).hasClass("AddOption")) {
+											$(this)
+													.prop("name",
 															"DeleteOption");
-													$(this).prop("value",
-															"Delete");
-												}
-												$(this).parent('td').find(
-														'span').removeClass(
-														'error');
-												$(this).removeClass('error');
-											});
-									$(cloneRow).find("select").find("option")
-											.each(function(j) {
-												$(this).removeAttr("selected");
-											});
-									$(cloneRow).appendTo("#dataTable").hide()
-											.fadeIn(1200);
-
-									rowIndex = $('#dataTable > tbody tr')
-											.size() - 1;
-									proposalsManage
-											.BindDepartmentDropDown($(
-													'select[name="ddlProposalStatus"] option:selected')
-													.eq(rowIndex).val());
-
-									// $('#dataTable tr:last
-									// td').fadeIn('slow');
+											$(this).prop("value", "Delete");
+										}
+										$(this).parent('td').find('span')
+												.removeClass('error');
+										$(this).removeClass('error');
+									});
+							$(cloneRow).find("select").each(function(j) {
+								// Remove PI option after first row
+								if (j == 0) {
+									$(this).find('option:first').remove();
 								}
+
+								$(this).removeAttr("disabled");
+								$(this).find("option").removeAttr("selected");
 							});
+							$(cloneRow).appendTo("#dataTable").hide().fadeIn(
+									1200);
+
+							rowIndex = $('#dataTable > tbody tr').size() - 1;
+
+							proposalsManage.BindUserMobileNo($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val());
+							proposalsManage.BindCollegeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val());
+							proposalsManage.BindDepartmentDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val());
+							proposalsManage.BindPositionTypeDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val());
+							proposalsManage.BindPositionTitleDropDown($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val(), $('select[name="ddlCollege"]').eq(
+									rowIndex).val(), $(
+									'select[name="ddlDepartment"]')
+									.eq(rowIndex).val(), $(
+									'select[name="ddlPositionType"]').eq(
+									rowIndex).val());
+						}
+					});
 			$("#btnSearchProposal").bind("click", function() {
 				proposalsManage.SearchProposals();
 				return false;
@@ -1805,11 +2365,238 @@ $(function() {
 				return false;
 			});
 
+			$("#ddlInstitutionalCommitmentCost").on("change", function() {
+				if ($("#ddlInstitutionalCommitmentCost").val() == "1") {
+					$("#lblConfirmCommitment").show();
+				} else {
+					$("#lblConfirmCommitment").hide();
+				}
+			});
+
+			$("#ddlInstitutionalCommitmentsRequired").on("change", function() {
+				if ($("#ddlInstitutionalCommitmentsRequired").val() == "1") {
+					$("#lblCommitmentsRequired").show();
+				} else {
+					$("#lblCommitmentsRequired").hide();
+				}
+			});
+
+			$("#ddlDisclosedFinancialCOI").on("change", function() {
+				if ($("#ddlDisclosedFinancialCOI").val() == "1") {
+					$("#lblDisclosureRequired").show();
+				} else {
+					$("#lblDisclosureRequired").hide();
+				}
+			});
+
+			$("#ddlMaterialChanged").on("change", function() {
+				if ($("#ddlMaterialChanged").val() == "1") {
+					$("#lblMaterialChanged").show();
+				} else {
+					$("#lblMaterialChanged").hide();
+				}
+			});
+
+			$("#ddlUseHumanSubjects").on("change", function() {
+				if ($("#ddlUseHumanSubjects").val() == "1") {
+					$("#lblUseHumanSubjects").show();
+					// $("#ddlIRBOptions").prop("selectedIndex", 0);
+					$("#tdHumanSubjectsOption").show();
+					$("#tdIRBOption").show();
+					if ($("#ddlIRBOptions").val() == "1") {
+						// $("#txtIRB").val('');
+						$("#tdIRBtxt").show();
+					} else {
+						// $("#txtIRB").val('');
+						$("#tdIRBtxt").hide();
+					}
+				} else {
+					$("#lblUseHumanSubjects").hide();
+					// $("#ddlIRBOptions").prop("selectedIndex", 0);
+					$("#tdHumanSubjectsOption").hide();
+					$("#tdIRBOption").hide();
+					$("#tdIRBtxt").hide();
+				}
+			});
+
+			$("#ddlIRBOptions").on("change", function() {
+				if ($("#ddlIRBOptions").val() == "1") {
+					// $("#txtIRB").val('');
+					$("#tdIRBtxt").show();
+				} else {
+					// $("#txtIRB").val('');
+					$("#tdIRBtxt").hide();
+				}
+			});
+
+			$("#ddlUseVertebrateAnimals").on("change", function() {
+				if ($("#ddlUseVertebrateAnimals").val() == "1") {
+					$("#lblUseVertebrateAnimals").show();
+					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
+					$("#tdVertebrateAnimalsOption").show();
+					$("#tdIACUCOption").show();
+					if ($("#ddlIACUCOptions").val() == "1") {
+						// $("#txtIACUC").val('');
+						$("#tdIACUCtxt").show();
+					} else {
+						// $("#txtIACUC").val('');
+						$("#tdIACUCtxt").hide();
+					}
+				} else {
+					$("#lblUseVertebrateAnimals").hide();
+					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
+					$("#tdVertebrateAnimalsOption").hide();
+					$("#tdIACUCOption").hide();
+					$("#tdIACUCtxt").hide();
+				}
+			});
+
+			$("#ddlIACUCOptions").on("change", function() {
+				if ($("#ddlIACUCOptions").val() == "1") {
+					// $("#txtIACUC").val('');
+					$("#tdIACUCtxt").show();
+				} else {
+					// $("#txtIACUC").val('');
+					$("#tdIACUCtxt").hide();
+				}
+			});
+
+			$("#ddlInvovleBioSafety").on("change", function() {
+				if ($("#ddlInvovleBioSafety").val() == "1") {
+					$("#lblHasBiosafetyConcerns").show();
+					// $("#ddlIBCOptions").prop("selectedIndex", 0);
+					$("#tdBiosafetyOption").show();
+					$("#tdIBCOption").show();
+					if ($("#ddlIBCOptions").val() == "1") {
+						// $("#txtIBC").val('');
+						$("#tdIBCtxt").show();
+					} else {
+						// $("#txtIBC").val('');
+						$("#tdIBCtxt").hide();
+					}
+				} else {
+					$("#lblHasBiosafetyConcerns").hide();
+					// $("#ddlIBCOptions").prop("selectedIndex", 0);
+					$("#tdBiosafetyOption").hide();
+					$("#tdIBCOption").hide();
+					$("#tdIBCtxt").hide();
+				}
+			});
+
+			$("#ddlIBCOptions").on("change", function() {
+				if ($("#ddlIBCOptions").val() == "1") {
+					// $("#txtIBC").val('');
+					$("#tdIBCtxt").show();
+				} else {
+					// $("#txtIBC").val('');
+					$("#tdIBCtxt").hide();
+				}
+			});
+
+			$("#ddlInvolveNonFundedCollabs").on("change", function() {
+				if ($("#ddlInvolveNonFundedCollabs").val() == "1") {
+					$("#lblInvolveNonFundedCollabs").show();
+					$("#trInvolveNonFundedCollabs").show();
+				} else {
+					$("#lblInvolveNonFundedCollabs").hide();
+					$("#trInvolveNonFundedCollabs").hide();
+				}
+			});
+
+			$("#ddlProprietaryInformation").on("change", function() {
+				if ($("#ddlProprietaryInformation").val() == "1") {
+					$("#tdPagesWithProprietaryInfo").show();
+					$("#trTypeOfProprietaryInfo").show();
+				} else {
+					$("#tdPagesWithProprietaryInfo").hide();
+					$("#trTypeOfProprietaryInfo").hide();
+				}
+			});
+
+			$("#ddlPISalaryIncluded").on("change", function() {
+				if ($("#ddlPISalaryIncluded").val() == "2") {
+					$("#lblPISalaryIncluded").show();
+				} else {
+					$("#lblPISalaryIncluded").hide();
+				}
+			});
+
+			$("#ddlSubrecipients").on("change", function() {
+				if ($("#ddlSubrecipients").val() == "1") {
+					$("#trSubrecipientsNames").show();
+				} else {
+					$("#trSubrecipientsNames").hide();
+				}
+			});
+
+			$("#txtDOB").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
+			$("#txtSearchActivityOnFrom").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						onSelect : function(selectedDate) {
+							$("#txtSearchActivityOnTo").datepicker("option",
+									"minDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+			$("#txtSearchActivityOnTo").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
+			$("#txtDirectCosts").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+			$("#txtFACosts").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+			$("#txtTotalCosts").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+
+			$("#txtFARate").mask("99.99 %");
+
 			$(
 					'#txtSearchProjectTitle,#txtSearchProposedBy,#txtSearchTotalCostsFrom,#txtSearchTotalCostsTo,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlSearchProposalStatus')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
 							$("#btnSearchProposal").click();
+						}
+					});
+
+			$(
+					'#txtSearchAction, #txtSearchAuditedBy, #txtSearchActivityOnFrom, #txtSearchActivityOnTo')
+					.keyup(function(event) {
+						if (event.keyCode == 13) {
+							$("#btnSearchUserAuditLog").click();
 						}
 					});
 		}

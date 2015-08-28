@@ -32,5 +32,17 @@
 	"New Proposal Details" : "New Proposal Details",
 	"Failed to load proposal details." : "Failed to load proposal details.",
 
-	"No Records Found!" : "No Records Found!"
+	"No Records Found!" : "No Records Found!",
+
+	"Failed to load Proposal Status." : "Failed to load Proposal Status.",
+	"Failed to delete the proposal." : "Failed to delete the proposal.",
+	"Failed to delete multiple proposals." : "Failed to delete multiple proposals.",
+	"Failed to load proposal details." : "Failed to load proposal details.",
+	"Failed to load user list." : "Failed to load user list.",
+	"Failed to load user's Mobile No." : "Failed to load user's Mobile No.",
+	"Failed to load user's colleges list." : "Failed to load user's colleges list.",
+	"Failed to load user's departments list." : "Failed to load user's departments list.",
+	"Failed to load user's position types list." : "Failed to load user's position types list.",
+	"Failed to load user's position titles list." : "Failed to load user's position titles list.",
+
 };

@@ -53,7 +53,11 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
+<<<<<<< HEAD
 	var userProfileId = "55db85812cd6851a70759858";
+=======
+	var userProfileId = "55df8b79af6e0420a84d53ff";
+>>>>>>> 7c7c259adfa6c82334f0f5f5480aa8ccc7d2a4dd
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -76,6 +80,13 @@
 
 <script type="text/javascript"
 	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
+<script type="text/javascript"
+	src="js/FormValidation/jquery.validate.js"></script>
+<script type="text/javascript"
+	src="js/FormValidation/jquery.ui.datepicker.validation.js"></script>
+
+<script type="text/javascript"
+	src="js/FormValidation/jquery.maskedinput.js"></script>
 
 <!-- <script type="text/javascript" src="js/SystemLocale/systemlocale.js"></script> -->
 <script type="text/javascript"
@@ -125,7 +136,7 @@
 </head>
 <body>
 	<form enctype="multipart/form-data" action="Manage-Users.jsp"
-		method="post" name="form1">
+		method="post" name="form1" id="form1">
 		<div style="display: none;" id="UpdateProgress1">
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
@@ -309,20 +320,16 @@
 														<div class="sfFormwrapper">
 															<table cellspacing="0" cellpadding="0" border="0">
 																<tbody>
-
 																	<tr class="rule dashed">
 																		<td><span class="cssClassLabelTitle" id="lblName">Name</span></td>
 																		<td class="cssClassTableRightCol"></td>
-
-
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblUserName">First
-																				Name:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				Name:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtFirstName"
-																			name="firstName" placeholder="First Name"> <span
-																			class="cssClassRequired">*</span></td>
+																			name="firstName" placeholder="First Name"></td>
 																		<td><span class="cssClassLabel"
 																			id="lblMiddleName">Middle Name:</span></td>
 																		<td class="cssClassTableRightCol"><input
@@ -331,42 +338,40 @@
 																	</tr>
 																	<tr>
 																		<td><span id="lblLastName" class="cssClassLabel">Last
-																				Name:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				Name:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" id="txtLastName" class="sfInputbox"
-																			name="lastName" placeholder="Last Name"> <span
-																			class="cssClassRequired">*</span></td>
+																			name="lastName" placeholder="Last Name"></td>
 																		<td></td>
 																		<td></td>
 																	</tr>
 																	<tr>
 																		<td><span id="lblDOB" class="cssClassLabel">Date
-																				of Birth:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				of Birth:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" id="txtDOB" class="sfInputbox" name="dob"
-																			placeholder="Date of Birth"> <span
-																			class="cssClassRequired">*</span></td>
-																		<td><span id="lblGender" class="cssClassLabel">Gender:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																			placeholder="Date of Birth"></td>
+																		<td><span id="lblGender" class="cssClassLabel">Gender:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			id="ddlGender" name="gender" title="Gender">
-																				<option value="0">Choose Gender</option>
+																				<option value="">Choose Gender</option>
 																				<option value="Male">Male</option>
 																				<option value="Female">Female</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr class="rule dashed">
-
 																		<td><span id="lblAddress"
-																			class="cssClassLabelTitle">Address</span></td>
+																			class="cssClassLabelTitle">Current Address</span></td>
 																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 
 																	<tr>
-																		<td><span class="cssClassLabel" id="lblStreet">Street:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																		<td><span class="cssClassLabel" id="lblStreet">Street:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtStreet"
-																			name="street" placeholder="Street"> <span
-																			class="cssClassRequired">*</span></td>
+																			name="street" placeholder="Street"></td>
 																		<td><span class="cssClassLabel" id="lblApt">Apt.,
 																				Suit, Floor, etc:</span></td>
 																		<td class="cssClassTableRightCol"><input
@@ -374,15 +379,16 @@
 																			placeholder="Apt., Suite, Floor, etc. (optional)"></td>
 																	</tr>
 																	<tr>
-																		<td><span class="cssClassLabel" id="lblCity">City:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																		<td><span class="cssClassLabel" id="lblCity">City:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtCity"
-																			name="city" placeholder="City"> <span
-																			class="cssClassRequired">*</span></td>
-																		<td><span class="cssClassLabel" id="lblState">State:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																			name="city" placeholder="City"></td>
+																		<td><span class="cssClassLabel" id="lblState">State:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			id="ddlState" name="state" title="State"><option
-																					value="0">Choose State</option>
+																					value="">Choose State</option>
 																				<option value="1">Alabama</option>
 																				<option value="2">Alaska</option>
 																				<option value="4">Arizona</option>
@@ -436,21 +442,21 @@
 																				<option value="54">West Virginia</option>
 																				<option value="55">Wisconsin</option>
 																				<option value="56">Wyoming</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblZip">Zip
-																				Code:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				Code:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtZip" name="zip"
-																			placeholder="Zip"> <span
-																			class="cssClassRequired">*</span></td>
-																		<td><span class="cssClassLabel" id="lblCountry">Country:</span></td>
-																		<td class="cssClassTableRightCol required"><select
+																			placeholder="Zip"></td>
+																		<td><span class="cssClassLabel" id="lblCountry">Country:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><select
 																			id="ddlCountry" name="country" title="Country"><option
-																					value="0">Choose Country</option>
+																					value="">Choose Country</option>
 																				<option value="1">United States</option>
-																		</select> <span class="cssClassRequired">*</span></td>
+																		</select></td>
 																	</tr>
 																	<tr class="rule dashed">
 																		<td><span class="cssClassLabelTitle"
@@ -464,11 +470,11 @@
 																			type="text" class="sfInputbox" id="txtOfficeNumber"
 																			name="officeNumber" placeholder="Office Number"></td>
 																		<td><span class="cssClassLabel"
-																			id="lblMobileNumber">Mobile Number:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																			id="lblMobileNumber">Mobile Number:</span> <span
+																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtMobileNumber"
-																			name="mobileNumber" placeholder="Mobile Number">
-																			<span class="cssClassRequired">*</span></td>
+																			name="mobileNumber" placeholder="Mobile Number"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
@@ -490,8 +496,8 @@
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblWorkEmail">Work
-																				Email:</span></td>
-																		<td class="cssClassTableRightCol required">
+																				Email:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol">
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
 																				<input type="email" id="txtWorkEmail"
@@ -500,9 +506,8 @@
 																					class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />
-																				</span> <b class="cssClassError sfLocale">Ops! found
-																					something error, must be unique with no spaces</b><span
-																					class="cssClassRequired">*</span>
+																				</span> <span class="cssClassError sfLocale">Work
+																					email must be unique with no spaces</span>
 																			</div>
 																		</td>
 																		<td><span class="cssClassLabel"
@@ -516,8 +521,8 @@
 																					class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />
-																				</span> <b class="cssClassError sfLocale">Ops! found
-																					something error, must be unique with no spaces</b>
+																				</span> <span class="cssClassError sfLocale">Personal
+																					email must be unique with no spaces</span>
 																			</div>
 																		</td>
 																	</tr>
@@ -543,14 +548,14 @@
 																				border="0" width="100%">
 																				<thead>
 																					<tr>
-																						<th><span class="cssClassLabel">College:</span><span
-																							class="cssClassRequired">*</span></th>
-																						<th><span class="cssClassLabel">Department:</span><span
-																							class="cssClassRequired">*</span></th>
+																						<th><span class="cssClassLabel">College:</span>
+																							<span class="cssClassRequired">*</span></th>
+																						<th><span class="cssClassLabel">Department:</span>
+																							<span class="cssClassRequired">*</span></th>
 																						<th><span class="cssClassLabel">Position
-																								Type:</span><span class="cssClassRequired">*</span></th>
+																								Type:</span> <span class="cssClassRequired">*</span></th>
 																						<th><span class="cssClassLabel">Position
-																								Title:</span><span class="cssClassRequired">*</span></th>
+																								Title:</span> <span class="cssClassRequired">*</span></th>
 
 																						<th></th>
 																					</tr>
@@ -588,33 +593,33 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblUserName">User
-																				Name:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																				Name:</span> <span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtUserName"
+																			name="username"
 																			placeholder="User
 																					Name">
 																			<span class="cssClassRight"> <img
 																				class="cssClassSuccessImg sfLocale" height="13"
 																				width="18" title="Right" src="" alt="Right" />
-																		</span> <b class="cssClassError sfLocale">Ops! found
-																				something error, must be unique with no spaces</b> <span
-																			class="cssClassRequired">*</span></td>
+																		</span> <span class="cssClassError sfLocale">Username
+																				must be unique with no spaces</span></td>
 																	</tr>
 																	<tr>
-																		<td><span class="cssClassLabel" id="lblPassword">Password:</span></td>
-																		<td class="cssClassTableRightCol required"><input
+																		<td><span class="cssClassLabel" id="lblPassword">Password:</span>
+																			<span class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
 																			type="password" class="sfInputbox" id="txtPassword"
-																			placeholder="Password"> <span
-																			class="cssClassRequired">*</span></td>
+																			name="password" placeholder="Password"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
-																			id="lblConfirmPassword">Confirm Password:</span></td>
-																		<td class="cssClassTableRightCol required"><input
-																			type="password" class="sfInputbox"
-																			id="txtConfirmPassword"
-																			placeholder="Password (Again)"> <span
+																			id="lblConfirmPassword">Confirm Password:</span> <span
 																			class="cssClassRequired">*</span></td>
+																		<td class="cssClassTableRightCol"><input
+																			type="password" class="sfInputbox"
+																			id="txtConfirmPassword" name="confirm_password"
+																			placeholder="Password (Again)"></td>
 																	</tr>
 																</tbody>
 															</table>
