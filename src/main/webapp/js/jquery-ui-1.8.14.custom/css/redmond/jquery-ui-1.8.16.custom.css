@@ -1261,7 +1261,7 @@ padding: 0;
 .ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
-	padding:15px;
+	padding:10px;
 	background: none;
 }
 .ui-tabs .ui-tabs-hide {

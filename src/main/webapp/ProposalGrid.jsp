@@ -138,7 +138,6 @@
 <!-- 	href="css/Tabs/slidingtabs-vertical.css" /> -->
 <style>
 .ui-tabs-vertical .ui-tabs-nav {
-	padding: .2em .1em .2em .2em;
 	float: left;
 	width: 17em;
 }
@@ -163,16 +162,20 @@
 }
 
 .ui-tabs-vertical .ui-tabs-panel {
-	padding: 1em;
+	padding: 0px ! important;
 }
 
 .ui-state-default a {
 	border-bottom: 1px solid #ccc;
 }
 
-#fragment-13>div {
+.ui-tabs>div {
 	float: left;
-	padding: 1em;
+	width: 87%;
+}
+
+#fragment-13>div {
+	padding: 5px 0 0 10px;
 }
 </style>
 </head>
@@ -412,27 +415,31 @@
 																<tbody>
 																	<tr>
 																		<td><select title="Role" class="sfListmenu"
-																			name="ddlRole">
+																			name="ddlRole" style="width: 100px;">
 																				<option value="0">PI</option>
 																				<option value="1">Co-PI</option>
 																				<option value="2">Senior Personnel</option>
 																		</select></td>
 																		<td><select title="Name" class="sfListmenu"
-																			name="ddlName">
+																			name="ddlName" style="width: 150px;">
 																		</select></td>
 																		<td><select title="College Name"
-																			class="sfListmenu" name="ddlCollege">
+																			class="sfListmenu" name="ddlCollege"
+																			style="width: 150px;">
 																		</select></td>
 																		<td><select title="Department Name"
-																			class="sfListmenu" name="ddlDepartment">
+																			class="sfListmenu" name="ddlDepartment"
+																			style="width: 150px;">
 																		</select></td>
 																		<td><select title="Position Type"
-																			class="sfListmenu" name="ddlPositionType">
+																			class="sfListmenu" name="ddlPositionType"
+																			style="width: 150px;">
 																		</select></td>
 																		<td><select title="Position Title"
-																			class="sfListmenu" name="ddlPositionTitle">
+																			class="sfListmenu" name="ddlPositionTitle"
+																			style="width: 150px;">
 																		</select></td>
-																		<td><input type="text" class="sfInputbox"
+																		<td><input type="text" class="sfTextBoxSmall"
 																			name="txtPhoneNo" placeholder="Phone #"
 																			disabled="disabled"></td>
 																		<td><input type="Button" value="Add More"
@@ -524,12 +531,6 @@
 																			class="sfInputbox" name="projectPeriodTo"
 																			placeholder="To"></td>
 																	</tr>
-																</tbody>
-															</table>
-
-															<table id="tblProposalGeneralInfo" cellspacing="0"
-																cellpadding="0" border="0">
-																<tbody>
 																	<tr id="trProposalInfo">
 																		<td><span class="cssClassLabel">Proposal
 																				No:</span></td>
@@ -541,7 +542,7 @@
 																			id="lblProposalDateReceived" class="cssClassLabel"></span></td>
 																	</tr>
 
-																	<tr>
+																	<tr id="trProposalStatus">
 																		<td><span class="cssClassLabel"
 																			id="lblProposalStatus">Proposal Status:</span> <span
 																			class="cssClassRequired">*</span></td>
@@ -550,6 +551,8 @@
 																			id="ddlProposalStatus">
 																				<option value="">Choose Proposal Status</option>
 																		</select></td>
+																		<td></td>
+																		<td></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -567,6 +570,7 @@
 																		<td class="cssClassTableRightCol" colspan="2"><input
 																			type="text" class="sfInputbox"
 																			id="txtNameOfGrantingAgency"
+																			name="nameOfGrantingAgency"
 																			placeholder="Name of Granting
 																					Agency">
 																			<span class="cssClassLabel">Enter comma
@@ -578,13 +582,13 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtDirectCosts"
-																			placeholder="Direct Costs"></td>
+																			name="directCosts" placeholder="Direct Costs"></td>
 
 																		<td><span class="cssClassLabel" id="lblFACosts">F&A
 																				Costs:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtFACosts"
-																			placeholder="F&A Costs"></td>
+																			name="FACosts" placeholder="F&A Costs"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
@@ -592,11 +596,12 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtTotalCosts"
-																			placeholder="Total Costs"></td>
-																		<td><span class="cssClassLabel" id="lblPassword">F&A
+																			name="totalCosts" placeholder="Total Costs"></td>
+																		<td><span class="cssClassLabel" id="lblFARate">F&A
 																				Rate:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtFARate"
+																			name="FARate"
 																			placeholder="F&A
 																					Rate"></td>
 																	</tr>
@@ -611,12 +616,13 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Is
-																				Institutional commited cost share included in the
+																				Institutional committed cost share included in the
 																				proposal?</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Institutional Commitment Cost"
 																			class="sfListmenu"
-																			id="ddlInstitutionalCommitmentCost">
+																			id="ddlInstitutionalCommitmentCost"
+																			name="institutionalCommitmentCost">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -625,12 +631,13 @@
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Is Third
-																				Party commited cost share included in the proposal?</span>
+																				Party committed cost share included in the proposal?</span>
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Third
 																					Party commitment Cost"
-																			class="sfListmenu" id="ddlThirdPartyCommitmentCost">
+																			class="sfListmenu" id="ddlThirdPartyCommitmentCost"
+																			name="thirdPartyCommitmentCost">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -647,11 +654,11 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Will new
-																				or renovated space/facilities be?</span> <span
+																				or renovated space/facilities be required?</span> <span
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="New Space" class="sfListmenu"
-																			id="ddlNewSpaceRequired">
+																			id="ddlNewSpaceRequired" name="newSpaceRequired">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -663,7 +670,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Rental Space Required" class="sfListmenu"
-																			id="ddlRentalSpaceRequired">
+																			id="ddlRentalSpaceRequired"
+																			name="rentalSpaceRequired">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -677,7 +685,8 @@
 																		<td class="cssClassTableRightCol"><select
 																			title="Institutional Commitments Required"
 																			class="sfListmenu"
-																			id="ddlInstitutionalCommitmentsRequired">
+																			id="ddlInstitutionalCommitmentsRequired"
+																			name="institutionalCommitmentsRequired">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -697,24 +706,26 @@
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Is there a
-																				finanacial conflict of interest <b>related to
+																				financial conflict of interest <b>related to
 																					this proposal</b>?
 																		</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
-																			title="Finanacial Conflict of Interest"
-																			class="sfListmenu" id="ddlFinancialCOI">
+																			title="Financial Conflict of Interest"
+																			class="sfListmenu" id="ddlFinancialCOI"
+																			name="financialCOI">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																		</select></td>
 																	</tr>
-																	<tr id="disclosedFinancialCOI">
+																	<tr>
 																		<td><span class="cssClassLabel">Has the
 																				financial conflict been disclosed?</span> <span
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Financial Conflict been Disclosed?"
-																			class="sfListmenu" id="ddlDisclosedFinancialCOI">
+																			class="sfListmenu" id="ddlDisclosedFinancialCOI"
+																			name="disclosedFinancialCOI">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -728,7 +739,8 @@
 																				form? </span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Material changed to Annual Disclosure Form?"
-																			class="sfListmenu" id="ddlMaterialChanged">
+																			class="sfListmenu" id="ddlMaterialChanged"
+																			name="materialChanged">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -750,7 +762,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Involves Use of Human Subjects?"
-																			class="sfListmenu" id="ddlUseHumanSubjects">
+																			class="sfListmenu" id="ddlUseHumanSubjects"
+																			name="useHumanSubjects">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -762,14 +775,14 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol" id="tdIRBOption"><select
 																			title="IRB Option" class="sfListmenu"
-																			id="ddlIRBOptions">
+																			id="ddlIRBOptions" name="IRBOptions">
 																				<option value="">Select Option</option>
 																				<option value="1">IRB #</option>
 																				<option value="2">Pending</option>
 																		</select></td>
 
 																		<td class="cssClassTableRightCol" id="tdIRBtxt"><input
-																			type="text" class="sfInputbox" id="txtIRB"
+																			type="text" class="sfInputbox" id="txtIRB" name="IRB"
 																			placeholder="IRB #"> </select> <span
 																			class="cssClassRequired">*</span></td>
 																	</tr>
@@ -780,7 +793,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Involves Use of Vertebrate Animals?"
-																			class="sfListmenu" id="ddlUseVertebrateAnimals">
+																			class="sfListmenu" id="ddlUseVertebrateAnimals"
+																			name="useVertebrateAnimals">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -793,7 +807,7 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol" id="tdIACUCOption"><select
 																			title="IACUC Option" class="sfListmenu"
-																			id="ddlIACUCOptions">
+																			id="ddlIACUCOptions" name="IACUCOptions">
 																				<option value="">Select Option</option>
 																				<option value="1">IACUC #</option>
 																				<option value="2">Pending</option>
@@ -801,7 +815,7 @@
 
 																		<td class="cssClassTableRightCol" id="tdIACUCtxt"><input
 																			type="text" class="sfInputbox" id="txtIACUC"
-																			placeholder="IACUC #"> </select> <span
+																			name="IACUC" placeholder="IACUC #"> </select> <span
 																			class="cssClassRequired">*</span></td>
 																	</tr>
 
@@ -811,7 +825,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Involves Biosafety Concerns?"
-																			class="sfListmenu" id="ddlInvovleBioSafety">
+																			class="sfListmenu" id="ddlInvovleBioSafety"
+																			name="invovleBioSafety">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -824,14 +839,14 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol" id="tdIBCOption"><select
 																			title="IBC Option" class="sfListmenu"
-																			id="ddlIBCOptions">
+																			id="ddlIBCOptions" name="IBCOptions">
 																				<option value="">Select Option</option>
 																				<option value="1">IBC #</option>
 																				<option value="2">Pending</option>
 																		</select></td>
 
 																		<td class="cssClassTableRightCol" id="tdIBCtxt"><input
-																			type="text" class="sfInputbox" id="txtIBC"
+																			type="text" class="sfInputbox" id="txtIBC" name="IBC"
 																			placeholder="IBC #"> <span
 																			class="cssClassRequired">*</span></td>
 																	</tr>
@@ -842,7 +857,8 @@
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol" colspan="2"><select
 																			title="Have Environmental Health & Safety Concerns?"
-																			class="sfListmenu" id="ddlEnvironmentalConcerns">
+																			class="sfListmenu" id="ddlEnvironmentalConcerns"
+																			name="environmentalConcerns">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -864,7 +880,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Anticipate Payment to/on behalf Foreign Nationals?"
-																			class="sfListmenu" id="ddlAnticipateForeignNationals">
+																			class="sfListmenu" id="ddlAnticipateForeignNationals"
+																			name="anticipateForeignNationals">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -876,7 +893,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Anticipate Course Release Time?"
-																			class="sfListmenu" id="ddlAnticipateReleaseTime">
+																			class="sfListmenu" id="ddlAnticipateReleaseTime"
+																			name="anticipateReleaseTime">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -889,7 +907,8 @@
 																		<td class="cssClassTableRightCol"><select
 																			title="Related to Center for Advanced
 																					Energy Studies?"
-																			class="sfListmenu" id="ddlRelatedToEnergyStudies">
+																			class="sfListmenu" id="ddlRelatedToEnergyStudies"
+																			name="relatedToEnergyStudies">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -910,7 +929,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Involves Non-funded Collaborations?"
-																			class="sfListmenu" id="ddlInvolveNonFundedCollabs">
+																			class="sfListmenu" id="ddlInvolveNonFundedCollabs"
+																			name="involveNonFundedCollabs">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -923,9 +943,9 @@
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtCollaborators"
-																			placeholder="Collaborators"> <span
-																			class="cssClassLabel">Enter comma separated
-																				names.</span></td>
+																			name="collaborators" placeholder="Collaborators">
+																			<span class="cssClassLabel">Enter comma
+																				separated names.</span></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -944,7 +964,8 @@
 																		<td class="cssClassTableRightCol"><select
 																			title="Contains Confidential Information Which
 																					Is Proprietary?"
-																			class="sfListmenu" id="ddlProprietaryInformation">
+																			class="sfListmenu" id="ddlProprietaryInformation"
+																			name="proprietaryInformation">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes, on pages</option>
 																				<option value="2">No</option>
@@ -952,21 +973,22 @@
 																		<td id="tdPagesWithProprietaryInfo"><input
 																			type="text" class="sfInputbox"
 																			id="txtPagesWithProprietaryInfo"
+																			name="pagesWithProprietaryInfo"
 																			placeholder="Pages With Proprietary/Confidential Information">
 																			<span class="cssClassRequired">*</span></td>
 																		<td></td>
 																	</tr>
 																	<tr id="trTypeOfProprietaryInfo">
+																		<td></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="checkbox" name="patentable" id="chkPatentable"
-																			class="cssClassCheckBox" /></td>
-																		<td><label class="cssClassLabel"
-																			for="chkPatentable">Patentable</label></td>
+																			class="cssClassCheckBox" /> <label
+																			class="cssClassLabel" for="chkPatentable">Patentable</label></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="checkbox" name="copyrightable"
-																			id="chkCopyrightable" class="cssClassCheckBox" /></td>
-																		<td><label class="cssClassLabel"
-																			for="chkCopyrightable">Copyrightable</label></td>
+																			id="chkCopyrightable" class="cssClassCheckBox" /> <label
+																			class="cssClassLabel" for="chkCopyrightable">Copyrightable</label></td>
+																		<td></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel">Will this
@@ -975,7 +997,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Own Intellectual Property?" class="sfListmenu"
-																			id="ddlOwnIntellectualProperty">
+																			id="ddlOwnIntellectualProperty"
+																			name="ownIntellectualProperty">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -1067,6 +1090,7 @@
 																				Initials:</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
 																			id="txtSignBusinessManager"
+																			name="signBusinessManager"
 																			placeholder="Business Manager Initials"></td>
 																	</tr>
 																</tbody>
@@ -1076,19 +1100,17 @@
 
 													<div id="fragment-12">
 														<div class="sfFormwrapper">
+															<div class="cssClassHeader">
+																<span>Office of Sponsored Programs Administrative
+																	Use Only</span>
+															</div>
 															<table cellspacing="0" cellpadding="0" border="0">
-																<thead>
-																	<tr>
-																		<th>Office of Sponsored Programs Administrative
-																			Use Only</th>
-																	</tr>
-																</thead>
 																<tbody>
 																	<tr>
 																		<td><span class="cssClassLabel">Flow-Through,
 																				List Agency</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
-																			id="txtAgencyList"
+																			id="txtAgencyList" name="agencyList"
 																			placeholder="Flow-Through, List Agency"> <span
 																			class="cssClassLabel">Enter comma separated
 																				names.</span></td>
@@ -1098,7 +1120,7 @@
 																		<td><span class="cssClassLabel">Funding
 																				Source:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
-																				class="cssClassCheckBox ">
+																				class="cssClassCheckBox">
 																				<input type="checkbox" class="cssClassCheckBox"
 																					id="chkFederal" name="federal" value="Federal"><label
 																					class="cssClassLabel" for="chkFederal">Federal</label><input
@@ -1158,18 +1180,21 @@
 																		<td><span class="cssClassLabel">CFDA No.:</span>
 																			<span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
-																			id="txtCFDANo" placeholder="CFDA No."></td>
+																			id="txtCFDANo" name="CFDANo" placeholder="CFDA No."></td>
+																	</tr>
+																	<tr>
 																		<td><span class="cssClassLabel">Program
 																				No.:</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
-																			id="txtProgramNo" placeholder="Program No."></td>
+																			id="txtProgramNo" name="programNo"
+																			placeholder="Program No."></td>
 																	</tr>
 
 																	<tr>
 																		<td><span class="cssClassLabel">Program/Solicitation
 																				Title:</span> <span class="cssClassRequired">*</span></td>
 																		<td><input type="text" class="sfInputbox"
-																			id="txtProgramTitle"
+																			id="txtProgramTitle" name="programTitle"
 																			placeholder="Program/Solicitation Title"></td>
 																	</tr>
 																	<tr>
@@ -1181,7 +1206,7 @@
 																		<td><span class="cssClassLabel">Recovery:</span>
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
-																				class="cssClassCheckBox ">
+																				class="cssClassCheckBox">
 																				<input type="checkbox" class="cssClassCheckBox"
 																					id="chkFullRecovery" name="fullRecovery"
 																					value="Full Recovery"><label
@@ -1220,7 +1245,7 @@
 																		<td><span class="cssClassLabel">Base:</span> <span
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
-																				class="cssClassCheckBox ">
+																				class="cssClassCheckBox">
 																				<input type="checkbox" class="cssClassCheckBox"
 																					id="chkMTDC" name="MTDC" value="MTDC"><label
 																					class="cssClassLabel" for="chkMTDC">MTDC</label><input
@@ -1249,7 +1274,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Is PI salary included in the proposal?"
-																			class="sfListmenu" id="ddlPISalaryIncluded">
+																			class="sfListmenu" id="ddlPISalaryIncluded"
+																			name="PISalaryIncluded">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -1262,19 +1288,21 @@
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtPISalary"
-																			placeholder="PI Salary"></td>
-
+																			name="PISalary" placeholder="PI Salary"></td>
+																	</tr>
+																	<tr>
 																		<td><span class="cssClassLabel">PI Fringe:</span>
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtPIFringe"
-																			placeholder="PI Fringe"></td>
-
+																			name="PIFringe" placeholder="PI Fringe"></td>
+																	</tr>
+																	<tr>
 																		<td><span class="cssClassLabel">Department
 																				ID:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox" id="txtDepartmentID"
-																			placeholder="Department ID"></td>
+																			name="departmentID" placeholder="Department ID"></td>
 																	</tr>
 
 																	<tr>
@@ -1285,20 +1313,23 @@
 																			title="Is Institutional
 																					Cost Share Documented?"
 																			class="sfListmenu"
-																			id="ddlInstitutionalCostDocumented">
+																			id="ddlInstitutionalCostDocumented"
+																			name="institutionalCostDocumented">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
 																		</select></td>
-
+																	</tr>
+																	<tr>
 																		<td><span class="cssClassLabel">Third
 																				Party Cost Share Documented:</span> <span
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Is Third Party
 																					Cost Share Documented?"
-																			class="sfListmenu" id="ddlThirdPartyCostDocumented">
+																			class="sfListmenu" id="ddlThirdPartyCostDocumented"
+																			name="thirdPartyCostDocumented">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -1317,7 +1348,8 @@
 																			<span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Are subrecipients (subcontracts/subawards) anticipated?"
-																			class="sfListmenu" id="ddlSubrecipients">
+																			class="sfListmenu" id="ddlSubrecipients"
+																			name="subrecipients">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -1328,7 +1360,7 @@
 																				subrecipients:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><input
 																			type="text" class="sfInputbox"
-																			id="txtNamesSubrecipients"
+																			id="txtNamesSubrecipients" name="namesSubrecipients"
 																			placeholder="Names of subrecipients"></td>
 																	</tr>
 
@@ -1343,7 +1375,8 @@
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="PI Eligibility Waiver on File"
-																			class="sfListmenu" id="ddlPIEligibilityWaiver">
+																			class="sfListmenu" id="ddlPIEligibilityWaiver"
+																			name="PIEligibilityWaiver">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -1360,20 +1393,22 @@
 																		<td class="cssClassTableRightCol"><select
 																			title="Conflict
 																					of Interest Forms on File"
-																			class="sfListmenu" id="ddlCOIForms">
+																			class="sfListmenu" id="ddlCOIForms" name="COIForms">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
 																				<option value="3">N/A</option>
 																		</select></td>
-
+																	</tr>
+																	<tr>
 																		<td><span class="cssClassLabel">Excluded
 																				party list has been checked:</span> <span
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><select
 																			title="Excluded
 																					party list has been checked"
-																			class="sfListmenu" id="ddlCheckedExcludedPartyList">
+																			class="sfListmenu" id="ddlCheckedExcludedPartyList"
+																			name="checkedExcludedPartyList">
 																				<option value="">Select Option</option>
 																				<option value="1">Yes</option>
 																				<option value="2">No</option>
@@ -1389,11 +1424,12 @@
 																				title="Proposal Notes" name="proposalNotes"
 																				id="txtProposalNotes" placeholder="Proposal Notes"
 																				required></textarea></td>
-
+																	</tr>
+																	<tr>
 																		<td><span class="cssClassLabel">Research
 																				Administrator:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol"><div
-																				class="cssClassCheckBox ">
+																				class="cssClassCheckBox">
 																				<input type="checkbox" class="cssClassCheckBox"
 																					id="chkDF" name="DF" value="DF"><label
 																					class="cssClassLabel" for="chkDF">DF</label><input

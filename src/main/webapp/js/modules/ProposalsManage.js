@@ -9,139 +9,351 @@ $(function() {
 		return gpmsCommonInfo;
 	};
 
-	var validator = $("#form1").validate({
-		rules : {
-			firstName : {
-				required : true,
-				maxlength : 40
-			},
-			lastName : {
-				required : true,
-				maxlength : 40
-			},
-			dob : {
-				required : true,
-				dpDate : true
-			},
-			gender : {
-				required : true
-			},
-			street : {
-				required : true
-			},
-			city : {
-				required : true
-			},
-			state : {
-				required : true
-			},
-			zip : {
-				required : true
-			},
-			country : {
-				required : true
-			},
-			officeNumber : {
-				phoneUS : true
-			},
-			mobileNumber : {
-				required : true,
-				phoneUS : true
-			},
-			homeNumber : {
-				phoneUS : true
-			},
-			otherNumber : {
-				phoneUS : true
-			},
-			workEmail : {
-				required : true,
-				email : true
-			},
-			personalEmail : {
-				email : true
-			},
-			username : {
-				required : true,
-				minlength : 6
-			},
-			password : {
-				required : true,
-				minlength : 6
-			},
-			confirm_password : {
-				required : true,
-				minlength : 6,
-				equalTo : "#txtPassword"
-			}
-		},
-		messages : {
-			firstName : {
-				required : "Please enter your firstname",
-				maxlength : "Your firstname must be at most 40 characters long"
-			},
-			LastName : {
-				required : "Please enter your lastname",
-				maxlength : "Your lastname must be at most 40 characters long"
-			},
-			dob : {
-				required : "Please enter your date of birth",
-				dpDate : "Please enter valid date"
-			},
-			gender : {
-				required : "Please select your gender"
-			},
-			street : {
-				required : "Please enter your street address"
-			},
-			city : {
-				required : "Please enter your city"
-			},
-			state : {
-				required : "Please select your city"
-			},
-			zip : {
-				required : "Please enter your zip code"
-			},
-			country : {
-				required : "Please select your country"
-			},
-			officeNumber : {
-				phoneUS : "Please enter your valid office phone number"
-			},
-			mobileNumber : {
-				required : "Please enter your mobile phone number",
-				phoneUS : "Please enter your valid mobile phone number",
-			},
-			homeNumber : {
-				phoneUS : "Please enter your valid home phone number",
-			},
-			otherNumber : {
-				phoneUS : "Please enter your valid additional phone number",
-			},
-			workEmail : {
-				required : "Please enter your work email",
-				email : "Please enter valid email id"
-			},
-			personalEmail : {
-				email : "Please enter valid email id"
-			},
-			username : {
-				required : "Please enter a username",
-				minlength : "Your username must be at least 6 characters long"
-			},
-			password : {
-				required : "Please provide a password",
-				minlength : "Your password must be at least 6 characters long",
-			},
-			confirm_password : {
-				required : "Please confirm your password",
-				minlength : "Your password must be at least 6 characters long",
-				equalTo : "Please enter the same password as above"
-			}
-		},
-		ignore : ":hidden"
-	});
+	var validator = $("#form1")
+			.validate(
+					{
+						rules : {
+							// projectTitle : {
+							// required : true
+							// },
+							projectType : {
+								required : true
+							},
+							typeOfRequest : {
+								required : true
+							},
+							dueDate : {
+								required : true,
+								dpDate : true
+							},
+							locationOfProject : {
+								required : true
+							},
+							projectPeriodFrom : {
+								required : true,
+								dpDate : true
+							},
+							projectPeriodTo : {
+								required : true,
+								dpDate : true
+							},
+							proposalStatus : {
+								required : true
+							},
+							nameOfGrantingAgency : {
+								required : true
+							},
+							directCosts : {
+								required : true
+							},
+							FACosts : {
+								required : true
+							},
+							totalCosts : {
+								required : true
+							},
+							FARate : {
+								required : true
+							},
+							institutionalCommitmentCost : {
+								required : true
+							},
+							thirdPartyCommitmentCost : {
+								required : true
+							},
+							newSpaceRequired : {
+								required : true
+							},
+							rentalSpaceRequired : {
+								required : true
+							},
+							institutionalCommitmentsRequired : {
+								required : true
+							},
+							financialCOI : {
+								required : true
+							},
+							disclosedFinancialCOI : {
+								required : true
+							},
+							materialChanged : {
+								required : true
+							},
+							useHumanSubjects : {
+								required : true
+							},
+							IRBOptions : {
+								required : true
+							},
+							IRB : {
+								required : true
+							},
+							useVertebrateAnimals : {
+								required : true
+							},
+							IACUCOptions : {
+								required : true
+							},
+							IACUC : {
+								required : true
+							},
+							invovleBioSafety : {
+								required : true
+							},
+							IBCOptions : {
+								required : true
+							},
+							IBC : {
+								required : true
+							},
+							environmentalConcerns : {
+								required : true
+							},
+							anticipateForeignNationals : {
+								required : true
+							},
+							anticipateReleaseTime : {
+								required : true
+							},
+							relatedToEnergyStudies : {
+								required : true
+							},
+							involveNonFundedCollabs : {
+								required : true
+							},
+							collaborators : {
+								required : true
+							},
+							proprietaryInformation : {
+								required : true
+							},
+							pagesWithProprietaryInfo : {
+								required : true
+							},
+							ownIntellectualProperty : {
+								required : true
+							},
+							agencyList : {
+								required : true
+							},
+							CFDANo : {
+								required : true
+							},
+							programNo : {
+								required : true
+							},
+							programTitle : {
+								required : true
+							},
+							PISalaryIncluded : {
+								required : true
+							},
+							PISalary : {
+								required : true
+							},
+							PIFringe : {
+								required : true
+							},
+							departmentID : {
+								required : true
+							},
+							institutionalCostDocumented : {
+								required : true
+							},
+							thirdPartyCostDocumented : {
+								required : true
+							},
+							subrecipients : {
+								required : true
+							},
+							namesSubrecipients : {
+								required : true
+							},
+							PIEligibilityWaiver : {
+								required : true
+							},
+							COIForms : {
+								required : true
+							},
+							checkedExcludedPartyList : {
+								required : true
+							},
+							proposalNotes : {
+								required : true
+							}
+						},
+						messages : {
+							// projectTitle : {
+							// required : "Please enter project title."
+							// },
+							projectType : {
+								required : "Please select your project type"
+							},
+							typeOfRequest : {
+								required : "Please select project type of request"
+							},
+							dueDate : {
+								required : "Please enter due date",
+								dpDate : "Please enter valid date"
+							},
+							locationOfProject : {
+								required : "Please enter location of project"
+							},
+							projectPeriodFrom : {
+								required : "Please enter project period from date",
+								dpDate : "Please enter valid date"
+							},
+							projectPeriodTo : {
+								required : "Please enter project period to date",
+								dpDate : "Please enter valid date"
+							},
+							proposalStatus : {
+								required : "Please select project status"
+							},
+							nameOfGrantingAgency : {
+								required : "Please enter names of granting agencies"
+							},
+							directCosts : {
+								required : "Please enter direct costs for your project"
+							},
+							FACosts : {
+								required : "Please enter F&A costs for your project"
+							},
+							totalCosts : {
+								required : "Please enter total costs for your project"
+							},
+							FARate : {
+								required : "Please enter F&A rate for your project"
+							},
+							institutionalCommitmentCost : {
+								required : "Please select institutional committed cost share included in the proposal"
+							},
+							thirdPartyCommitmentCost : {
+								required : "Please select third party committed committed cost share included in the proposal"
+							},
+							newSpaceRequired : {
+								required : "Please select new or renovated space/facilities required"
+							},
+							rentalSpaceRequired : {
+								required : "Please select rental space be required"
+							},
+							institutionalCommitmentsRequired : {
+								required : "Please select this project require institutional commitments beyond the end date"
+							},
+							financialCOI : {
+								required : "Please select this project has financial conflict of interest"
+							},
+							disclosedFinancialCOI : {
+								required : "Please select this project has disclosed financial conflict of interest"
+							},
+							materialChanged : {
+								required : "Please select this project has a material change to your annual disclosure form"
+							},
+							useHumanSubjects : {
+								required : "Please select this project involves the use of Human Subjects"
+							},
+							IRBOptions : {
+								required : "Please select IRB # or indicate pending"
+							},
+							IRB : {
+								required : "Please enter IRB #"
+							},
+							useVertebrateAnimals : {
+								required : "Please select this project involves the use of Vertebrate Animals"
+							},
+							IACUCOptions : {
+								required : "Please select IACUC # or indicate pending"
+							},
+							IACUC : {
+								required : "Please enter IACUC #"
+							},
+							invovleBioSafety : {
+								required : "Please select this project involves Biosafety concerns"
+							},
+							IBCOptions : {
+								required : "Please select IBC # or indicate pending"
+							},
+							IBC : {
+								required : "Please enter IBC #"
+							},
+							environmentalConcerns : {
+								required : "Please select this project involves Environmental Health & Safety concerns"
+							},
+							anticipateForeignNationals : {
+								required : "Please select if you anticipate payment(s) to foreign nationals or on behalf of foreign nationals"
+							},
+							anticipateReleaseTime : {
+								required : "Please select if you anticipate course release time"
+							},
+							relatedToEnergyStudies : {
+								required : "Please select your proposed activities are related to Center for Advanced Energy Studies"
+							},
+							involveNonFundedCollabs : {
+								required : "Please select this project involves non-funded collaborations"
+							},
+							collaborators : {
+								required : "Please enter list collaborating institutions/organizations"
+							},
+							proprietaryInformation : {
+								required : "Please select this proposal contains any confidential information which is Proprietary that should not be publicly released"
+							},
+							pagesWithProprietaryInfo : {
+								required : "Please enter pages numbers where Proprietary/Confidential Information are"
+							},
+							ownIntellectualProperty : {
+								required : "Please select this project involves intellectual property in which the University may own or have an interest"
+							},
+							agencyList : {
+								required : "Please enter Flow-Through, List Agency"
+							},
+							CFDANo : {
+								required : "Please enter CFDA No."
+							},
+							programNo : {
+								required : "Please enter Program No."
+							},
+							programTitle : {
+								required : "Please enter Program/Solicitation title"
+							},
+							PISalaryIncluded : {
+								required : "Please select this proposal includes PI salary"
+							},
+							PISalary : {
+								required : "Please enter PI salary"
+							},
+							PIFringe : {
+								required : "Please enter PI Fringe"
+							},
+							departmentID : {
+								required : "Please enter Department ID"
+							},
+							institutionalCostDocumented : {
+								required : "Please select if Institutional Cost Share documented"
+							},
+							thirdPartyCostDocumented : {
+								required : "Please select if Third Party Cost Share documented"
+							},
+							subrecipients : {
+								required : "Please select if subrecipients (subcontracts/subawards) anticipated"
+							},
+							namesSubrecipients : {
+								required : "Please enter names of subrecipients"
+							},
+							PIEligibilityWaiver : {
+								required : "Please select if PI Eligibility Waiver on file"
+							},
+							COIForms : {
+								required : "Please select if Conflict of Interest Forms on file"
+							},
+							checkedExcludedPartyList : {
+								required : "Please select if excluded party list has been checked"
+							},
+							proposalNotes : {
+								required : "Please enter proposal notes"
+							}
+						},
+						ignore : ":hidden"
+					});
 
 	var rowIndex = 0;
 	var editFlag = 0;
@@ -437,15 +649,6 @@ $(function() {
 											hide : true
 										},
 										{
-											display : 'PI User',
-											name : 'pi_user',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											hide : true
-										},
-										{
 											display : 'Co-PI Users',
 											name : 'co_pi_users',
 											cssclass : '',
@@ -453,6 +656,15 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'array',
+											hide : true
+										},
+										{
+											display : 'PI User',
+											name : 'pi_user',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
 											hide : true
 										},
 										{
@@ -529,6 +741,7 @@ $(function() {
 				proposalsManage.ClearForm();
 
 				$("#trProposalInfo").show();
+				$("#trProposalStatus").show();
 
 				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
@@ -2207,6 +2420,7 @@ $(function() {
 				proposalsManage.ClearForm();
 				$('#auditLogTab').hide();
 				$("#trProposalInfo").hide();
+				$("#trProposalStatus").hide();
 				$('#divProposalGrid').hide();
 				$('#divProposalForm').show();
 			});

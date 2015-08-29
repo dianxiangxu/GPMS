@@ -227,7 +227,7 @@ input [type="radio"] {
 * html .button, *+html .button {
 	padding: 2px 0 !important; /*IE 6 & 7*/
 }
-input[type="radio"], input[type="checkbox"] { margin-right:5px;}
+input[type="radio"], input[type="checkbox"] { margin-right:5px; margin-left:5px;}
 .inputbox {
 	border: 1px solid #ccc;
 	background: #fff;
@@ -883,7 +883,7 @@ input.sfDisable, select.sfDisable {
 	outline:none;
 }
 .sfFormwrapper select.sfListmenu {
-	width:150px;
+	width:200px;
 }
 .sfButtonwrapper p {
 	float:left;
