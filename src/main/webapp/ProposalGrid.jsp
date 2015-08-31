@@ -288,10 +288,9 @@
 																			Total Costs:</label> <br> <span class="label sfLocale">
 																			From :</span> <input type="text"
 																		id="txtSearchTotalCostsFrom" class="sfTextBoxSmall"
-																		style="width: 80px !important;" placeholder="From">
-																		<span class="label sfLocale"> To :</span> <input
-																		type="text" id="txtSearchTotalCostsTo"
-																		class="sfTextBoxSmall" style="width: 80px !important;"
+																		placeholder="From"> <span
+																		class="label sfLocale"> To :</span> <input type="text"
+																		id="txtSearchTotalCostsTo" class="sfTextBoxSmall"
 																		placeholder="To"></td>
 																	</td>
 
@@ -316,15 +315,14 @@
 																			Received On:</label><br> <span class="label sfLocale">
 																			From :</span> <input type="text"
 																		id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
-																		style="width: 80px !important;" placeholder="From">
-																		<span class="label sfLocale"> To :</span> <input
-																		type="text" id="txtSearchReceivedOnTo"
-																		class="sfTextBoxSmall" style="width: 80px !important;"
+																		placeholder="From"> <span
+																		class="label sfLocale"> To :</span> <input type="text"
+																		id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
 																		placeholder="To"></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Proposal Status:</label> <select id="ddlSearchProposalStatus"
-																		class="sfListmenu" style="width: 100px;"
+																		class="sfListmenu" style="width: 80px;"
 																		title="Proposal Status">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
@@ -415,7 +413,7 @@
 																<tbody>
 																	<tr>
 																		<td><select title="Role" class="sfListmenu"
-																			name="ddlRole" style="width: 100px;">
+																			name="ddlRole" style="width: 80px;">
 																				<option value="0">PI</option>
 																				<option value="1">Co-PI</option>
 																				<option value="2">Senior Personnel</option>
@@ -425,23 +423,23 @@
 																		</select></td>
 																		<td><select title="College Name"
 																			class="sfListmenu" name="ddlCollege"
-																			style="width: 150px;">
+																			style="width: 100px;">
 																		</select></td>
 																		<td><select title="Department Name"
 																			class="sfListmenu" name="ddlDepartment"
-																			style="width: 150px;">
+																			style="width: 100px;">
 																		</select></td>
 																		<td><select title="Position Type"
 																			class="sfListmenu" name="ddlPositionType"
-																			style="width: 150px;">
+																			style="width: 100px;">
 																		</select></td>
 																		<td><select title="Position Title"
 																			class="sfListmenu" name="ddlPositionTitle"
-																			style="width: 150px;">
+																			style="width: 100px;">
 																		</select></td>
 																		<td><input type="text" class="sfTextBoxSmall"
 																			name="txtPhoneNo" placeholder="Phone #"
-																			disabled="disabled"></td>
+																			disabled="disabled" style="width: 50px;"></td>
 																		<td><input type="Button" value="Add More"
 																			name="AddMore"
 																			class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -1474,12 +1472,11 @@
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input type="text"
 																							class="sfTextBoxSmall"
-																							id="txtSearchActivityOnFrom"
-																							placeholder="Activity On From"></td>
+																							id="txtSearchActivityOnFrom" placeholder="From"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On To:</label> <input type="text"
 																							class="sfTextBoxSmall" id="txtSearchActivityOnTo"
-																							placeholder="Activity On To"></td>
+																							placeholder="To"></td>
 
 																						<td><br>
 																							<button class="sfBtn"

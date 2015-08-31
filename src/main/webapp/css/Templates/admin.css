@@ -847,7 +847,7 @@ select.sfListmenusmall { width:50px;}
 	width:auto
 }
 .sfTextBoxSmall {
-	width:auto !important;
+	width:80px !important;
 }
 .sfListmenubig option {
 	margin-bottom:1px;

@@ -641,12 +641,11 @@
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input type="text"
 																							class="sfTextBoxSmall"
-																							id="txtSearchActivityOnFrom"
-																							placeholder="Activity On From"></td>
+																							id="txtSearchActivityOnFrom" placeholder="From"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On To:</label> <input type="text"
 																							class="sfTextBoxSmall" id="txtSearchActivityOnTo"
-																							placeholder="Activity On To"></td>
+																							placeholder="To"></td>
 
 																						<td><br>
 																							<button class="sfBtn" id="btnSearchUserAuditLog"
