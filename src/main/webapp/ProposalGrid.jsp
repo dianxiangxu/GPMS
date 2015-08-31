@@ -1474,7 +1474,7 @@
 																						<td><label class="cssClassLabel sfLocale">
 																								Audited By:</label> <input type="text"
 																							class="sfInputbox" id="txtSearchAuditedBy"
-																							style="width: 150px !important;"
+																							style="width: 140px !important;"
 																							placeholder="Audited By"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input type="text"
