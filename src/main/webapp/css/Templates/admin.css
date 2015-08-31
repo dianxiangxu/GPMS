@@ -719,7 +719,7 @@ th.header { white-space: nowrap;}
 .sfGridwrapper table tr { border-bottom:1px solid #dbdbdb; }
 
 
-.sfGridwrapper table tr td {color:#515357; border:none; vertical-align:top;}
+.sfGridwrapper table tr td {color:#515357; border:none; vertical-align:middle;}
 .sfGridwrapper table tr:hover td { background:#f2f2f2;} 
 .sfGridwrapper a.sfFormlabel {color:#0B4B83;}
 

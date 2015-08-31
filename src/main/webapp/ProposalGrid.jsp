@@ -1464,10 +1464,10 @@
 																					<tr>
 																						<td><label class="cssClassLabel sfLocale">
 																								Action:</label> <input type="text" class="sfInputbox"
-																							id="txtSearchAction" placeholder="Action"></td>
+																							id="txtSearchAction" style="width: 150px !important;" placeholder="Action"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Audited By:</label> <input type="text"
-																							class="sfInputbox" id="txtSearchAuditedBy"
+																							class="sfInputbox" id="txtSearchAuditedBy" style="width: 150px !important;"
 																							placeholder="Audited By"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input type="text"
