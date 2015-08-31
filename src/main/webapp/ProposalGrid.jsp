@@ -171,7 +171,7 @@
 
 .ui-tabs>div {
 	float: left;
-	width: 87%;
+	width: 78%;
 }
 
 #fragment-13>div {
@@ -413,33 +413,33 @@
 																<tbody>
 																	<tr>
 																		<td><select title="Role" class="sfListmenu"
-																			name="ddlRole" style="width: 80px;">
+																			name="ddlRole" style="width: 50px;">
 																				<option value="0">PI</option>
 																				<option value="1">Co-PI</option>
 																				<option value="2">Senior Personnel</option>
 																		</select></td>
 																		<td><select title="Name" class="sfListmenu"
-																			name="ddlName" style="width: 150px;">
+																			name="ddlName" style="width: 100px;">
 																		</select></td>
 																		<td><select title="College Name"
 																			class="sfListmenu" name="ddlCollege"
-																			style="width: 100px;">
+																			style="width: 85px;">
 																		</select></td>
 																		<td><select title="Department Name"
 																			class="sfListmenu" name="ddlDepartment"
-																			style="width: 100px;">
+																			style="width: 80px;">
 																		</select></td>
 																		<td><select title="Position Type"
 																			class="sfListmenu" name="ddlPositionType"
-																			style="width: 100px;">
+																			style="width: 80px;">
 																		</select></td>
 																		<td><select title="Position Title"
 																			class="sfListmenu" name="ddlPositionTitle"
-																			style="width: 100px;">
+																			style="width: 80px;">
 																		</select></td>
 																		<td><input type="text" class="sfTextBoxSmall"
 																			name="txtPhoneNo" placeholder="Phone #"
-																			disabled="disabled" style="width: 50px;"></td>
+																			disabled="disabled" style="width: 65px !important"></td>
 																		<td><input type="Button" value="Add More"
 																			name="AddMore"
 																			class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -1464,10 +1464,13 @@
 																					<tr>
 																						<td><label class="cssClassLabel sfLocale">
 																								Action:</label> <input type="text" class="sfInputbox"
-																							id="txtSearchAction" style="width: 150px !important;" placeholder="Action"></td>
+																							id="txtSearchAction"
+																							style="width: 150px !important;"
+																							placeholder="Action"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Audited By:</label> <input type="text"
-																							class="sfInputbox" id="txtSearchAuditedBy" style="width: 150px !important;"
+																							class="sfInputbox" id="txtSearchAuditedBy"
+																							style="width: 150px !important;"
 																							placeholder="Audited By"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input type="text"

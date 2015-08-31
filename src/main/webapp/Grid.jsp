@@ -559,10 +559,12 @@
 																				<tbody>
 																					<tr>
 																						<td><select title="College Name"
-																							class="sfListmenu" name="ddlCollege">
+																							class="sfListmenu" name="ddlCollege"
+																							style="width: 85px;">
 																						</select></td>
 																						<td><select title="Department Name"
-																							class="sfListmenu" name="ddlDepartment">
+																							class="sfListmenu" name="ddlDepartment"
+																							style="width: 135px;">
 																						</select></td>
 																						<td><select title="Position Type"
 																							class="sfListmenu" name="ddlPositionType">
@@ -633,10 +635,13 @@
 																					<tr>
 																						<td><label class="cssClassLabel sfLocale">
 																								Action:</label> <input type="text" class="sfInputbox"
-																							id="txtSearchAction" style="width: 150px !important;" placeholder="Action"></td>
+																							id="txtSearchAction"
+																							style="width: 150px !important;"
+																							placeholder="Action"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Audited By:</label> <input type="text"
-																							class="sfInputbox" id="txtSearchAuditedBy" style="width: 150px !important;"
+																							class="sfInputbox" id="txtSearchAuditedBy"
+																							style="width: 150px !important;"
 																							placeholder="Audited By"></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input type="text"
