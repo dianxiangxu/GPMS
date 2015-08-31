@@ -123,65 +123,59 @@
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 </head>
 <body>
-	<div class="registration_container">
-		<div id="registration_page">
-			<div class="form_login">
-				<h3>
-					The date is
-					<%=new java.util.Date()%></h3>
-				<form id="registrationForm" action="RESTQ/user/Register"
-					method="POST">
-					<div class="form_signup">
-						<h2>New User Registration</h2>
-						<h3>Moo Cow Goes Moo</h3>
+	<form id="registrationForm" action="RESTQ/user/Register" method="POST">
+		<noscript>
+			<span>This page requires java-script to be enabled. Please
+				adjust your browser-settings.</span>
+		</noscript>
+		<div id="sfOuterwrapper">
+			<div class="sfSagewrapper">
+				<div class="sfMaincontent">
+					<div style="display: block" class="sfCpanel sfInnerwrapper"
+						id="divBottompanel">
+						<div class="sfModulecontent clearfix">
 
-						<form id="signupForm" action="RESTQ/user/Register" method="POST">
-							<label for="first_name">First name :</label>
-							<div>
-								<input id="first_name" type="text" name="firstname"
-									class="input" minlength="2" required>
-							</div>
-							<label for="last_name">Last name :</label>
-							<div>
-								<input id="last_name" type="text" name="lastname" class="input"
-									minlength="2" required>
-							</div>
-							<br /> <label for="username">User name :</label>
-							<div>
-								<input id="username" type="username" name="username"
-									class="input" required>
-							</div>
-							<br /> <label for="signup_email">Work Email :</label>
-							<div>
-								<input id="signup_email" type="email" name="email" class="input"
-									required>
-							</div>
-							<div>
-								<h3>Address Information</h3>
-								<div>
-									<h4>City</h4>
+							<script type="text/javascript">
+								//<![CDATA[
+								$(function() {
+									$(".sfLocale").localize({
+										moduleKey : gpmsUserRegistration
+									});
+								});
+								//]]>
+							</script>
+
+							<!-- form -->
+							<div id="divProposalForm">
+								<div class="cssClassCommonBox Curve">
+									<div class="cssClassHeader">
+										<h1>
+											<span id="lblFormHeading">User Registration</span>
+										</h1>
+									</div>
+									<div class="cssClassTabPanelTable">
+										<span class="cssClassLabel">First name:</span> <input
+											id="first_name" type="text" name="firstname" class="input"
+											minlength="2" required>
+
+									</div>
+								</div>
+								<div class="sfButtonwrapper">
+									<p>
+										<button type="button" id="btnBack" class="sfBtn">
+											<span class="sfLocale icon-arrow-slim-w">Back</span>
+										</button>
+									</p>
 								</div>
 							</div>
-							<br /> <label for="signup_password">Password :</label>
-							<div>
-								<input id="signup_password" type="password" name="password"
-									class="input" minlength="5" maxlength="12" required>
-							</div>
-							<div>
-								<input type="submit" value="Sign Up" class=".btn signup_btn">
-							</div>
-						</form>
-						<%
-							String error = request.getParameter("error");
-							if (error != null) {
-						%>
-						<br />
-						<div class="error_msg" id="divemailalready">Username/ Email
-							address already registered.</div>
-						<%
-							}
-						%>
+							<!-- End form -->
+						</div>
 					</div>
+				</div>
+				<!-- END sfMaincontent -->
 			</div>
+		</div>
+		<!-- END Body Content sfContentwrapper -->
+	</form>
 </body>
 </html>
