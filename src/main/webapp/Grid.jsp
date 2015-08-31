@@ -497,9 +497,9 @@
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
 																				<input type="email" id="txtWorkEmail"
-																					class="sfInputbox" name="workEmail"
-																					placeholder="Work Email"> <span
-																					class="cssClassRight"> <img
+																					class="sfInputbox" style="width: 160px;"
+																					name="workEmail" placeholder="Work Email">
+																				<span class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />
 																				</span> <span class="cssClassError sfLocale">Work
@@ -512,8 +512,8 @@
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
 																				<input type="email" class="sfInputbox"
-																					id="txtPersonalEmail" name="personalEmail"
-																					placeholder="Personal Email"><span
+																					style="width: 160px;" id="txtPersonalEmail"
+																					name="personalEmail" placeholder="Personal Email"><span
 																					class="cssClassRight"> <img
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" title="Right" src="" alt="Right" />

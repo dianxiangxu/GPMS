@@ -559,7 +559,8 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'date',
-											format : 'yyyy/MM/dd hh:mm:ss a'
+											format : 'yyyy/MM/dd hh:mm:ss a',
+											hide : true
 										},
 										{
 											display : 'Project Period To',
@@ -569,7 +570,8 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'date',
-											format : 'yyyy/MM/dd hh:mm:ss a'
+											format : 'yyyy/MM/dd hh:mm:ss a',
+											hide : true
 										},
 										{
 											display : 'Project Location',
@@ -617,7 +619,8 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'date',
-											format : 'yyyy/MM/dd hh:mm:ss a'
+											format : 'yyyy/MM/dd hh:mm:ss a',
+											hide : true
 										},
 										{
 											display : 'Last Audited By',
@@ -649,6 +652,15 @@ $(function() {
 											hide : true
 										},
 										{
+											display : 'PI User',
+											name : 'pi_user',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
 											display : 'Co-PI Users',
 											name : 'co_pi_users',
 											cssclass : '',
@@ -656,15 +668,6 @@ $(function() {
 											coltype : 'label',
 											align : 'left',
 											type : 'array',
-											hide : true
-										},
-										{
-											display : 'PI User',
-											name : 'pi_user',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
 											hide : true
 										},
 										{
@@ -1637,21 +1640,37 @@ $(function() {
 					"ui-corner-left");
 		},
 
+		isUniqueProjectTitle : function(proposalId, newProjectTitle) {
+			var proposalUniqueObj = {
+				ProposalID : proposalId,
+				NewProjectTitle : newProjectTitle
+			};
+			var gpmsCommonInfo = gpmsCommonObj();
+			this.config.url = this.config.baseURL + "CheckUniqueProjectTitle";
+			this.config.data = JSON2.stringify({
+				proposalUniqueObj : proposalUniqueObj,
+				gpmsCommonObj : gpmsCommonInfo
+			});
+			this.config.ajaxCallMode = 11;
+			this.ajaxCall(this.config);
+			return isUniqueProjectTitle;
+		},
+
 		SaveProposal : function(_proposalId, _flag) {
 			$('#iferror').hide();
 			if (checkForm($("#form1"))) {
 				var validateErrorMessage = '';
 
-				var newUserName = $('#txtProjectTitle').val();
-				if (!newUserName) {
+				var newProjectTitle = $.trim($('#txtProjectTitle').val());
+				if (!newProjectTitle) {
 					validateErrorMessage += 'Please enter Project Title.';
 				} else if (!proposalsManage.isUniqueProjectTitle(_proposalId,
-						newUserName)) {
+						newProjectTitle)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsProposalsManagement,
 									"Please enter unique Project Title.")
 							+ " '"
-							+ proposalsManage.trim()
+							+ newProjectTitle.trim()
 							+ "' "
 							+ getLocale(gpmsProposalsManagement,
 									"already exists.") + '<br/>';
@@ -1719,22 +1738,6 @@ $(function() {
 					return false;
 				}
 			}
-		},
-
-		isUniqueProjectTitle : function(proposalId, newUserName) {
-			var userUniqueObj = {
-				ProposalID : proposalId,
-				NewUserName : newUserName
-			};
-			var gpmsCommonInfo = gpmsCommonObj();
-			this.config.url = this.config.baseURL + "CheckUniqueUserName";
-			this.config.data = JSON2.stringify({
-				userUniqueObj : userUniqueObj,
-				gpmsCommonObj : gpmsCommonInfo
-			});
-			this.config.ajaxCallMode = 15;
-			this.ajaxCall(this.config);
-			return isUniqueProjectTitle;
 		},
 
 		AddUserInfo : function(info) {
@@ -1836,43 +1839,6 @@ $(function() {
 				positionType : positionTypeName
 			});
 			this.config.ajaxCallMode = 10;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindDepartmentOnly : function(collegeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetDepartmentList";
-			this.config.data = JSON2.stringify({
-				college : collegeName
-			});
-			this.config.ajaxCallMode = 11;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTypeOnly : function(collegeName, departmentName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTypeList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName
-			});
-			this.config.ajaxCallMode = 11;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTitleOnly : function(collegeName, departmentName,
-				positionTypeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTitleList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName,
-				positionType : positionTypeName
-			});
-			this.config.ajaxCallMode = 12;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -2014,8 +1980,8 @@ $(function() {
 
 			break;
 
-		case 11:
-
+		case 11:// Unique Project Title Check
+			isUniqueProjectTitle = stringToBoolean(msg);
 			break;
 
 		case 12:
@@ -2026,18 +1992,12 @@ $(function() {
 
 			break;
 
-		case 14: // Activated
-			proposalsManage
-					.BindProposalGrid(null, null, null, null, null, null);
-			csscody.info("<h2>"
-					+ getLocale(gpmsProposalsManagement, 'Successful Message')
-					+ "</h2><p>"
-					+ getLocale(gpmsProposalsManagement,
-							'User has been activated successfully.') + "</p>");
+		case 14:
+
 			break;
 
-		case 15: // Unique Project Title Check
-			isUniqueProjectTitle = stringToBoolean(msg);
+		case 15:
+
 			break;
 
 		case 16: // Save Update
@@ -2150,47 +2110,28 @@ $(function() {
 				break;
 
 			case 11:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
+				csscody.error("<h2>"
+						+ getLocale(gpmsProposalsManagement, 'Error Message')
+						+ "</h2><p>"
 						+ getLocale(gpmsProposalsManagement,
-								"Failed to load position titles list.")
-						+ '</p>');
+								'Cannot check for unique project title')
+						+ "</p>");
 				break;
 
 			case 12:
-				csscody.error("<h2>"
-						+ getLocale(gpmsProposalsManagement, 'Error Message')
-						+ "</h2><p>"
-						+ getLocale(gpmsProposalsManagement,
-								'User cannot be deleted.') + "</p>");
+
 				break;
 
 			case 13:
-				csscody
-						.error("<h2>"
-								+ getLocale(gpmsProposalsManagement,
-										'Error Message')
-								+ "</h2><p>"
-								+ getLocale(gpmsProposalsManagement,
-										'Selected user(s) cannot be deleted.')
-								+ "</p>");
+
 				break;
 
 			case 14:
-				csscody.error("<h2>"
-						+ getLocale(gpmsProposalsManagement, 'Error Message')
-						+ "</h2><p>"
-						+ getLocale(gpmsProposalsManagement,
-								'User cannot be activated.') + "</p>");
+
 				break;
 
 			case 15:
-				csscody.error("<h2>"
-						+ getLocale(gpmsProposalsManagement, 'Error Message')
-						+ "</h2><p>"
-						+ getLocale(gpmsProposalsManagement,
-								'Cannot check for unique Username') + "</p>");
+
 				break;
 
 			case 16:
@@ -2453,20 +2394,20 @@ $(function() {
 			$('#txtProjectTitle').blur(
 					function() {
 						var errors = '';
-						var userName = $(this).val();
+						var projectTitle = $.trim($(this).val());
 						var proposal_id = $('#btnSaveProposal').prop("name");
 						if (proposal_id == '') {
 							proposal_id = "0";
 						}
-						if (!userName) {
+						if (!projectTitle) {
 							errors += getLocale(gpmsProposalsManagement,
-									"Please enter username.");
+									"Please enter project title.");
 						} else if (!proposalsManage.isUniqueProjectTitle(
-								proposal_id, userName)) {
+								proposal_id, projectTitle)) {
 							errors += getLocale(gpmsProposalsManagement,
-									"Please enter unique username.")
+									"Please enter unique project title.")
 									+ " '"
-									+ userName.trim()
+									+ projectTitle.trim()
 									+ "' "
 									+ getLocale(gpmsProposalsManagement,
 											"already exists.");

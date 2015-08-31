@@ -315,7 +315,8 @@ $(function() {
 					coltype : 'label',
 					align : 'left',
 					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
+					format : 'yyyy/MM/dd hh:mm:ss a',
+					hide : true
 				}, {
 					display : 'Last Audited By',
 					name : 'last_audited_by',
@@ -993,14 +994,14 @@ $(function() {
 			if (checkForm($("#form1"))) {
 				var validateErrorMessage = '';
 
-				var newUserName = $('#txtUserName').val();
+				var newUserName = $.trim($('#txtUserName').val());
 				if (!newUserName) {
 					validateErrorMessage += 'Please enter username.<br/>';
 				} else if (!usersManage.IsUniqueUserName(_userId, newUserName)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsUsersManagement,
 									"Please enter unique username.") + " '"
-							+ usersManage.trim() + "' "
+							+ newUserName.trim() + "' "
 							+ getLocale(gpmsUsersManagement, "already exists.")
 							+ '<br/>';
 				}
@@ -1807,7 +1808,7 @@ $(function() {
 			$('#txtUserName').blur(
 					function() {
 						var errors = '';
-						var userName = $(this).val();
+						var userName = $.trim($(this).val());
 						var user_id = $('#btnSaveUser').prop("name");
 						if (user_id == '') {
 							user_id = "0";

@@ -277,20 +277,20 @@
 															<tbody>
 																<tr>
 																	<td><label class="cssClassLabel sfLocale">Project
-																			Title:</label> <input type="text" class="sfTextBoxSmall"
+																			Title:</label> <input type="text" class="sfTextBoxFix"
 																		id="txtSearchProjectTitle" placeholder="Project Title"></td>
 																	<td><label class="cssClassLabel sfLocale">
 																			Proposed By:</label><input id="txtSearchProposedBy"
-																		class="sfTextBoxSmall" type="text"
+																		class="sfTextBoxFix" type="text"
 																		placeholder="Proposed By"></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Total Costs:</label> <br> <span class="label sfLocale">
 																			From :</span> <input type="text"
-																		id="txtSearchTotalCostsFrom" class="sfTextBoxSmall"
+																		id="txtSearchTotalCostsFrom" class="sfTextBoxFix"
 																		placeholder="From"> <span
 																		class="label sfLocale"> To :</span> <input type="text"
-																		id="txtSearchTotalCostsTo" class="sfTextBoxSmall"
+																		id="txtSearchTotalCostsTo" class="sfTextBoxFix"
 																		placeholder="To"></td>
 																	</td>
 
@@ -314,10 +314,10 @@
 																	<td><label class="cssClassLabel sfLocale">
 																			Received On:</label><br> <span class="label sfLocale">
 																			From :</span> <input type="text"
-																		id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
+																		id="txtSearchReceivedOnFrom" class="sfTextBoxFix"
 																		placeholder="From"> <span
 																		class="label sfLocale"> To :</span> <input type="text"
-																		id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
+																		id="txtSearchReceivedOnTo" class="sfTextBoxFix"
 																		placeholder="To"></td>
 
 																	<td><label class="cssClassLabel sfLocale">
@@ -419,7 +419,7 @@
 																				<option value="2">Senior Personnel</option>
 																		</select></td>
 																		<td><select title="Name" class="sfListmenu"
-																			name="ddlName" style="width: 100px;">
+																			name="ddlName" style="width: 90px;">
 																		</select></td>
 																		<td><select title="College Name"
 																			class="sfListmenu" name="ddlCollege"
@@ -439,7 +439,7 @@
 																		</select></td>
 																		<td><input type="text" class="sfTextBoxSmall"
 																			name="txtPhoneNo" placeholder="Phone #"
-																			disabled="disabled" style="width: 65px !important"></td>
+																			disabled="disabled" style="width: 70px !important"></td>
 																		<td><input type="Button" value="Add More"
 																			name="AddMore"
 																			class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -458,11 +458,11 @@
 																			id="lblProjectTitle">Project Title:</span> <span
 																			class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol" colspan="3"><textarea
-																				class="cssClassTextArea" cols="15" rows="2"
+																				class="cssClassTextArea" cols="26" rows="2"
 																				title="Default Value" name="projectTitle"
-																				id="txtProjectTitle" placeholder="Project Title"
-																				required></textarea><span class="cssClassRight">
-																				<img class="cssClassSuccessImg sfLocale" height="13"
+																				id="txtProjectTitle" placeholder="Project Title"></textarea><span
+																			class="cssClassRight"> <img
+																				class="cssClassSuccessImg sfLocale" height="13"
 																				width="18" title="Right" src="" alt="Right" />
 																		</span> <span class="cssClassError sfLocale">Project
 																				title must be unique with no spaces</span></td>
@@ -1418,7 +1418,7 @@
 																		<td><span class="cssClassLabel">Proposal
 																				Notes:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol" colspan="3"><textarea
-																				class="cssClassTextArea" cols="15" rows="2"
+																				class="cssClassTextArea" cols="26" rows="2"
 																				title="Proposal Notes" name="proposalNotes"
 																				id="txtProposalNotes" placeholder="Proposal Notes"
 																				required></textarea></td>

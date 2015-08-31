@@ -849,6 +849,9 @@ select.sfListmenusmall { width:50px;}
 .sfTextBoxSmall {
 	width:80px !important;
 }
+.sfTextBoxFix {
+	width:141px !important;
+}
 .sfListmenubig option {
 	margin-bottom:1px;
 	padding:2px 5px;
@@ -1016,6 +1019,7 @@ td.sfSelectleftright {
 	font-size:11px;
 }
 .cssClassError, .error{ color:red; display: block; width: auto;}
+.cssClassTextArea .error{ width: 200px;}
 label.error {
 		display: block;
 		margin-left: 1em;
