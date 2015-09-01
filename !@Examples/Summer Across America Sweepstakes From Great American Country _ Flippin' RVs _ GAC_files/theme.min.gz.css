@@ -1,0 +1,733 @@
+@import url('//www.greatamericancountry.com/etc/clientlibs/assets/dist/css/gac/fonts-only.min.css');.font-icon,.xComboInput:after{display:block;text-transform:none;font-weight:normal;font-style:normal;font-variant:normal;font-family:'socialvetica';line-height:1;speak:none;-webkit-font-smoothing:antialiased}
+form,label,ul,ol,dl,fieldset,address,blockquote{margin-bottom:10px}
+form:last-child,label:last-child,ul:last-child,ol:last-child,dl:last-child,fieldset:last-child,address:last-child,blockquote:last-child{margin-bottom:0}
+h1,h2,h3,h4,h5,h6,p{margin-bottom:10px}
+h1:last-child,h2:last-child,h3:last-child,h4:last-child,h5:last-child,h6:last-child,p:last-child{margin-bottom:0}
+body{color:#666;font-size:13px;font-size:1.3rem}
+hr{background-color:#971212}
+a{color:#266f9b}
+a:focus,a:hover{color:#081720}
+.xPage{background-color:none}
+.xComponent{padding:14px}
+.xPageHeader{background-color:#971212;color:white;padding:0;text-align:center}
+.xPageHeader .xButton,.xPageHeader .xPagingButton{background-color:white;color:#266f9b}
+.xPageHeader .xButton:hover,.xPageHeader .xPagingButton:hover{background-color:#1c5272;color:white}
+.xPageHeader a,.xPageHeader a:hover,.xPageHeader a:focus{color:white}
+.xCampaignHeader{padding:0;background-color:#971212;color:white}
+.xCampaignHeader h1,.xCampaignHeader h2{color:white}
+.xPageHeader .xTargetContainer{padding:14px}
+.xPageHeader .xCopyContainer{margin:0;padding:14px}
+.xNavigation{padding:14px}
+.xTabLink{display:-moz-inline-stack;display:inline-block;vertical-align:middle;padding:5px}
+.xPageHeader .xActionSharing{padding:14px}
+.xContestTimeline{background-color:white;color:#666}
+.xTimelineTab{padding:14px}
+.xTimelineTab:last-child{border-bottom:0}
+.timelinePhaseHeader{margin-bottom:5px}
+.timelinePhaseDate{font-size:.8em}
+.timelineActiveTab{font-weight:bold}
+.xCopyContainer{margin-bottom:10px}
+.xCopyContainer:last-child{margin-bottom:0}
+.xContainer{margin-bottom:10px}
+.xContainer:last-child{margin-bottom:0}
+.xHeader{margin-bottom:10px}
+.xHeader:last-child{margin-bottom:0}
+.xCTAContainer{margin-bottom:10px}
+.xCTAContainer:last-child{margin-bottom:0}
+.xActivateContainer{margin-top:10px}
+.xClassVideo .xIconContainer{display:none}
+.xIconContainer{margin-bottom:10px}
+.xIconContainer:last-child{margin-bottom:0}
+.xToolbar,.xPaginationContainer{font-size:0;font-size:0rem}
+.xToolbar>*,.xPaginationContainer>*{font-size:13px;font-size:1.3rem}
+.xToolbar:last-child,.xPaginationContainer:last-child{margin-bottom:-10px}
+.xToolbar li,.xPaginationContainer>*{display:-moz-inline-stack;display:inline-block;vertical-align:middle;margin-bottom:10px;margin-right:10px}
+.xToolbar li:last-child,.xPaginationContainer>*:last-child{margin-right:0}
+.xIconToolbar{margin-bottom:10px}
+.xIconToolbar:last-child{margin-bottom:0}
+.xIconToolbar li{margin-bottom:0}
+.xActionContainer{margin-bottom:10px}
+.xActionContainer:last-child{margin-bottom:0}
+.xActionPrevious{margin-right:10px}
+.xButtonToolbar{margin-bottom:10px}
+.xButtonToolbar .xAction{margin-right:0}
+.xPagingThumb{margin:0;padding:5px}
+.xPaginateShowMore{text-align:center}
+.buttons .xPaginationContainer{margin-bottom:-10px}
+.buttons .xActionPaginate{margin-right:10px}
+.buttons .xActionPaginate:last-child{margin-right:0}
+.xActionPaginate span{font-size:16px;font-size:1.6rem}
+.xFilter.xComboWrapper{margin-top:5px}
+.xFilterWrapper{margin-bottom:10px}
+.xProfileWrapper{margin-bottom:10px}
+.xProfileWrapper:last-child{margin-bottom:0}
+.xProfileContainer{margin-bottom:0;padding-right:10px}
+.xProfileContainer:last-child{padding-right:0}
+.xActionProfile .xIconLabel{display:none}
+.xActionProfile .xToolbar{margin-bottom:0;padding-bottom:0}
+.xActionProfile .xAction{margin-bottom:0}
+.xUserAvatar{padding-right:10px}
+.xClassCarousel .xActionsPagination{font-size:0;font-size:0rem;position:absolute;z-index:999;top:0;left:0;bottom:0;right:0;height:100%;width:100%}
+.xClassCarousel .xActionsPagination>*{font-size:13px;font-size:1.3rem}
+.xClassCarousel .xActionsPagination:before{display:-moz-inline-stack;display:inline-block;vertical-align:middle;content:'';height:100%}
+.xClassCarousel .xPaginationContainer{display:-moz-inline-stack;display:inline-block;vertical-align:middle;width:100%}
+.xClassCarousel .xPaginationContainer:last-child{margin:0}
+.xClassCarousel .xActionPaginate{font-size:40px;font-size:4rem;margin:0;position:relative}
+.xClassCarousel .xActionNext{float:right}
+.xPaginateThumb{padding-bottom:10px}
+.xPagingThumb{margin:0}
+.xIconPager{color:#ccc}
+.activeSlide .xIconPager{color:#971212}
+.xMetaContainer{margin-bottom:10px}
+.xMetaContainer:last-child{margin-bottom:0}
+.xMetaDate{font-size:.8em}
+.xOverlay-shareModal .xOverlayInner{text-align:center}
+.xOverlay-shareModal .xToolbarSharing .xIcon{font-size:40px;font-size:4rem}
+.xOverlay{padding:14px;background-color:rgba(0,0,0,0.5);overflow-y:scroll}
+.xOverlay .xActionContainer li,.xOverlay .xToolbar li{margin-bottom:0}
+.xOverlay .xActionContainer:last-child,.xOverlay .xToolbar:last-child{margin-bottom:0}
+.xOverlayInner{color:#666;background-color:white;padding:14px;margin-bottom:14px;position:relative}
+.xOverlayContent{overflow:hidden;margin-bottom:14px}
+.xMediaContainer{margin-bottom:10px}
+.xMediaContainer:last-child{margin-bottom:0}
+.xActionNative{font-size:0;font-size:0rem}
+.xActionNative>*{font-size:13px;font-size:1.3rem}
+.xButton,.xPagingButton,.picker__button--today,.picker__button--clear{border:0;color:white;background-color:#266f9b}
+.xButton:hover,.xPagingButton:hover,.xButton:focus,.xPagingButton:focus,.picker__button--today:hover,.picker__button--clear:hover{background-color:#1c5272;color:white}
+.xButton.xDisabled,.xPagingButton.xDisabled,.xButton.xDisabled:hover,.xPagingButton.xDisabled:hover{background-color:#ccc;color:#666}
+.xButton span,.xPagingButton span{padding:10px 20px}
+.xIcon{font-size:24px;font-size:2.4rem}
+.xIconLabel{display:-moz-inline-stack;display:inline-block;vertical-align:middle;margin-left:5px}
+.xIconPlay{display:-moz-inline-stack;display:inline-block;vertical-align:middle;text-shadow:0 0 20px #000;color:white;position:relative}
+.xIconPlay:before{font-size:50px;font-size:5rem}
+.xActionHybrid{font-size:0;font-size:0rem}
+.xActionHybrid>*{font-size:13px;font-size:1.3rem}
+.xPrimaryColor{color:#971212}
+.xBackgrondPrimaryColor{background-color:#971212}
+.xBorderPrimaryColor{border-color:#971212}
+.xSeconaryColor{color:#176684}
+.xBackgrondSeconaryColor{background-color:#176684}
+.xBorderSeconaryColor{border-color:#176684}
+.xDefaultFontColor{color:#666}
+.xDefaultFontSize{font-size:13px;font-size:1.3rem}
+.xDisabledColor{color:#ccc}
+.xErrorColor{color:#971212}
+.xBackgroundErrorColor{background-color:#971212}
+input,textarea{padding:6px;border:1px solid #ccc;color:inherit;background-color:white}
+input:focus,textarea:focus{border-color:#971212}
+.xActionsForm{margin-bottom:0}
+.xForm .buttons{margin-bottom:0}
+.xFormPages{margin-bottom:10px}
+.xFormPages:last-child{margin-bottom:0}
+.xQuizHeader{margin-bottom:10px}
+.xQuizHeader:last-child{margin-bottom:0}
+.xField{margin-bottom:10px}
+.xField .xTypeImage{margin-bottom:5px}
+.xFieldItem,.xLabelContainer,.multiUploadComponent,.xFieldRadioChoice,.xFieldCheckboxChoice,.xField,.xFieldContainer,.xRatingHint,.parsley-error-list,.xHelpContainer,.xHelpLabel{margin-bottom:5px}
+.xFieldItem:last-child,.xLabelContainer:last-child,.multiUploadComponent:last-child,.xFieldRadioChoice:last-child,.xFieldCheckboxChoice:last-child,.xField:last-child,.xFieldContainer:last-child,.xRatingHint:last-child,.parsley-error-list:last-child,.xHelpContainer:last-child,.xHelpLabel:last-child{margin-bottom:0}
+.xFieldContainer{font-size:0;font-size:0rem}
+.xFieldContainer>*{font-size:13px;font-size:1.3rem}
+.xControlSummary{margin-bottom:10px}
+.xControlSummary:last-child{margin-bottom:0}
+.xControlQuestion{margin-bottom:0}
+.xFieldRadioChoice .xFieldLabel,.xFieldCheckboxChoice .xFieldLabel{margin:0;padding-left:5px}
+.xRadiobox span:before,.xCheckbox span:before{color:#ccc}
+.xSubLabel{display:none}
+.xRulesOverlayTrigger{text-decoration:underline}
+.picker__button--today,.picker__button--clear{width:100%}
+.picker__nav--next,.picker__nav--prev{font-size:30px;font-size:3rem;margin-top:5px}
+.picker__day--outfocus{background-color:#ccc;color:#666}
+.picker__day--infocus.picker__day--selected,.picker__day--infocus:hover{background-color:#971212;color:white}
+.picker__table td{padding:0}
+.xFileAction{padding:6px;background-color:#176684;color:white}
+.xFilename{padding:6px;background-color:white;border:1px solid #ccc}
+.xComboInput{font-size:0;font-size:0rem;padding:6px;border:1px solid #ccc;background-color:white}
+.xComboInput>*{font-size:13px;font-size:1.3rem}
+.xComboInput:after{font-size:20px;font-size:2rem;content:"\a8";padding-top:6px;position:absolute;top:0;right:0;bottom:0;display:block;width:21px;border-left:1px solid #ccc;color:#ccc;text-align:center}
+.xComboInput input[type="text"]{display:-moz-inline-stack;display:inline-block;vertical-align:middle;padding:0;border:0}
+.xComboOptions{background-color:white;border:1px solid #ccc;border-top:0;z-index:4}
+.option{padding:6px}
+.option:hover{background-color:#176684;color:white}
+.xDateWrapper{position:relative}
+.xDatePicker{margin:10px auto 0;border:1px solid #ccc;background-color:white}
+.xDatePicker .picker__button--today,.xDatePicker .picker__button--clear{display:-moz-inline-stack;display:inline-block;vertical-align:middle;width:50%}
+.xDatePicker thead th{padding:5px}
+.picker__header{padding:10px}
+.picker__nav--prev,.picker__nav--next{top:10px}
+.picker__nav--next{right:10px}
+.picker__nav--prev{left:10px}
+.picker__month{font-weight:bold}
+.picker__footer{font-size:0;font-size:0rem}
+.picker__footer>*{font-size:13px;font-size:1.3rem}
+.picker__day--selected{font-weight:bold}
+.timeRow{position:relative}
+.xTimePicker{margin:10px auto 0;border:1px solid #666;background-color:white}
+.xTimePicker li{padding:5px;list-style-type:none;text-align:center}
+.xTimePicker li:last-child{padding:0;border-bottom:0}
+.xTimePicker li:hover{background-color:#971212;color:white}
+.xTimePicker li:hover:last-child{background-color:inherit;color:inherit}
+li.picker__list-item--selected{font-weight:bold}
+.xRatingIcons{margin-bottom:5px}
+.xRatingIcons:last-child{margin-bottom:0}
+.xFieldError{color:#c00}
+.xFieldError input,.xFieldError textarea{border-color:#c00;background-color:#fcc;color:#c00}
+.xFieldError input::-webkit-input-placeholder,.xFieldError textarea::-webkit-input-placeholder{color:#c00}
+.xFieldError input:-moz-placeholder,.xFieldError textarea:-moz-placeholder{color:#c00}
+.xFieldError input::-moz-placeholder,.xFieldError textarea::-moz-placeholder{color:#c00}
+.xFieldError input:-ms-input-placeholder,.xFieldError textarea:-ms-input-placeholder{color:#c00}
+.xFieldError .xComboInput{border-color:#c00;background-color:#fcc}
+.xFieldError .xComboInput:after{border-color:#c00;color:#c00}
+.xFieldError .xComboOptions{border-color:#c00;color:#666}
+.xFieldError .xDatePicker{color:#666}
+.xFieldError .xTimePicker{color:#666}
+.xFieldError .xUploader{border-color:#c00}
+.xFieldError .xFileAction{background-color:#c00}
+.xFieldError .xFilename{border-color:#c00;background-color:#fcc}
+.xFieldError .xRadiobox span:before,.xFieldError .xCheckbox span:before{color:#c00}
+.xQuestionWrapper{margin-bottom:10px}
+.xQuestionWrapper:last-child{margin-bottom:0}
+.xPostcard .xMediaContainer{margin-bottom:0}
+.xTemplateGrid .xItem{padding:7px}
+.xTemplateGrid .xMedialayer{padding:0}
+.xTemplateList{margin-bottom:0;text-align:center}
+.xTemplateList:first-child{margin-top:0}
+.xTemplateList .xItem{margin-bottom:20px}
+.xTemplateList .xItem:last-child{margin-bottom:0}
+.xTemplateList .xScore{margin:0 10px}
+.xTemplateList .xUserName{font-size:20px;font-size:2rem}
+.xUserProfile{text-align:center}
+.xUserProfile .xProfileContainer{padding-bottom:20px}
+.xUserProfile .xScore{margin:0;padding:0 10px}
+.xUserProfile .xLevel{padding:0 10px}
+.xUserProfile .xLevel .xValue{font-size:22px;font-size:2.2rem}
+.xTmpl-Grid{background:0;border:0;padding:0}
+.xTmpl-Grid .xTemplateGrid{margin-left:-7px;margin-right:-7px;margin-top:-7px}
+.xTmpl-Grid .xTemplateGrid:last-child{margin-bottom:-7px}
+.xTemplateGrid{padding:14px}
+.xTmpl-Masonry{padding:0;background:0;border:0}
+.xTemplateMasonry{margin-left:-7px;margin-right:-7px;margin-top:-7px}
+.xTemplateMasonry:last-child{margin-bottom:-7px}
+.xTemplateMasonry{padding:14px}
+.xTemplateColumn{margin-left:-7px;margin-right:-7px;margin-top:-7px}
+.xTemplateColumn:last-child{margin-bottom:-7px}
+.xTemplateColumn .xItemInner{background-color:#971212;color:white;padding:10px}
+.xTemplateColumn .xItemInner .xButton,.xTemplateColumn .xItemInner .xPagingButton{background-color:white;color:#266f9b}
+.xTemplateColumn .xItemInner .xButton:hover,.xTemplateColumn .xItemInner .xPagingButton:hover{background-color:#1c5272;color:white}
+.xTemplateColumn .xItemInner a,.xTemplateColumn .xItemInner a:hover,.xTemplateColumn .xItemInner a:focus{color:white}
+.xTemplateColumn .xItem{padding:7px}
+.xTmpl-Column{border:0;padding:0}
+.xTemplateColumn{padding:14px}
+.xMediacard .xIconPlay{position:absolute;bottom:9px;right:14px}
+.xMedialayer .xItemInner{background-color:#971212;color:white;top:7px;right:7px;bottom:7px;left:7px;padding:10px}
+.xMedialayer .xItemInner .xButton,.xMedialayer .xItemInner .xPagingButton{background-color:white;color:#266f9b}
+.xMedialayer .xItemInner .xButton:hover,.xMedialayer .xItemInner .xPagingButton:hover{background-color:#1c5272;color:white}
+.xMedialayer .xItemInner a,.xMedialayer .xItemInner a:hover,.xMedialayer .xItemInner a:focus{color:white}
+.xMedialayer.xContentImage .xItemInner:before,.xMedialayer.xContentVideo .xItemInner:before{background-color:#971212;position:absolute;top:0;left:0;right:0;bottom:0;content:'';z-index:1}
+.xMedialayer.xContentVideo .xIconContainer{display:none}
+.xMedialayer.xContentVideo .xItemInner .xPlayable{zoom:1;-webkit-opacity:1;-moz-opacity:1;opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100);position:absolute;top:0;left:0;right:0;bottom:0}
+.xMedialayer .xIcon{font-size:20px;font-size:2rem}
+.xMedialayer .xMediaVideo{font-size:0;font-size:0rem;text-align:center}
+.xMedialayer .xMediaVideo>*{font-size:13px;font-size:1.3rem}
+.xMedialayer .xMediaVideo:before{display:-moz-inline-stack;display:inline-block;vertical-align:middle;content:'';height:100%}
+.xMedialayer .xCopyContainer{text-align:center}
+.xMedialayer .xIconContainer{margin:0}
+.xMedialayer .xIconContainer{position:absolute;bottom:10px;right:10px}
+.xMedialayer .xActionNetwork{position:absolute;bottom:10px;left:10px}
+.xMedialayer.xContentImage .xItemInner:before,.xMedialayer.xContentVideo .xItemInner:before{-webkit-transition:opacity .2s ease-in;-moz-transition:opacity .2s ease-in;-o-transition:opacity .2s ease-in;transition:opacity .2s ease-in;zoom:1;-webkit-opacity:0;-moz-opacity:0;opacity:0;-ms-filter:"alpha(opacity=0)";filter:alpha(opacity=0)}
+.uaMSIE8 .xMedialayer.xContentImage .xItemInner:before,.uaMSIE8 .xMedialayer.xContentVideo .xItemInner:before{display:none}
+.xMedialayer.xContentImage .xItemInner>*,.xMedialayer.xContentVideo .xItemInner>*{zoom:1;-webkit-opacity:0;-moz-opacity:0;opacity:0;-ms-filter:"alpha(opacity=0)";filter:alpha(opacity=0);-webkit-transition:opacity .2s ease-in;-moz-transition:opacity .2s ease-in;-o-transition:opacity .2s ease-in;transition:opacity .2s ease-in;z-index:2}
+.xMedialayer.xContentImage .xItemInner .xIconContainer,.xMedialayer.xContentVideo .xItemInner .xIconContainer{zoom:1;-webkit-opacity:1;-moz-opacity:1;opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100)}
+.xMedialayer.xContentImage .xItemInner:hover:before,.xMedialayer.xContentVideo .xItemInner:hover:before{zoom:1;-webkit-opacity:1;-moz-opacity:1;opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100)}
+.uaMSIE8 .xMedialayer.xContentImage .xItemInner:hover:before,.uaMSIE8 .xMedialayer.xContentVideo .xItemInner:hover:before{display:block}
+.xMedialayer.xContentImage .xItemInner:hover>*,.xMedialayer.xContentVideo .xItemInner:hover>*{zoom:1;-webkit-opacity:1;-moz-opacity:1;opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100)}
+.xMedialayer.xContentImage .xItemInner:hover .xPlayable,.xMedialayer.xContentVideo .xItemInner:hover .xPlayable{zoom:1;-webkit-opacity:0;-moz-opacity:0;opacity:0;-ms-filter:"alpha(opacity=0)";filter:alpha(opacity=0)}
+.uaMSIE8 .xVariantS{width:33.33333333%}
+.uaMSIE8 .xVariantS.xMedialayer{padding-bottom:33.33333333%}
+.uaMSIE8 .xVariantM{width:33.33333333%}
+.uaMSIE8 .xVariantM.xMedialayer{padding-bottom:33.33333333%}
+.uaMSIE8 .xVariantL{width:50%}
+.uaMSIE8 .xVariantL.xMedialayer{padding-bottom:50%}
+.uaMSIE8 .xPagingThumb{width:16.66666667%}
+.uaMSIE8 .xTemplateColumn .xItem{width:33.33333333%}
+.uaMSIE8 .xTemplateMasonry .xDisplaySpotlight{width:66.66666667%;padding-bottom:66.66666667%}
+.uaMSIE8 .xTemplateMasonry .xDisplayFeature{width:33.33333333%;padding-bottom:66.66666667%}
+.uaMSIE8 .xTemplateMasonry .xDisplayCommentary{width:66.66666667%;padding-bottom:33.33333333%}
+.uaMSIE8 .xTemplateMasonry .xDisplayShow{width:33.33333333%;padding-bottom:33.33333333%}
+.uaMSIE8 .xTemplateMasonry .xItemInner{font-size:16px}
+@media all and (max-width:480px){.xVariantS,.xVariantM,.xVariantL{width:100%!important}
+.xVariantS.xMedialayer,.xVariantM.xMedialayer,.xVariantL.xMedialayer{padding-bottom:100%!important}
+}
+@media all and (min-width:0){.xVariantL{width:100%}
+.xVariantL.xMedialayer{padding-bottom:100%}
+}
+@media all and (min-width:0){.xVariantM{width:100%}
+.xVariantM.xMedialayer{padding-bottom:100%}
+}
+@media all and (min-width:0){.xVariantS{width:100%}
+.xVariantS.xMedialayer{padding-bottom:100%}
+}
+@media all and (min-width:0){.xPagingThumb{width:100%}
+.xPagingThumb.xMedialayer{padding-bottom:100%}
+}
+@media all and (min-width:150px){.xPagingThumb{width:50%}
+.xPagingThumb.xMedialayer{padding-bottom:50%}
+}
+@media all and (min-width:300px){.xPagingThumb{width:33.33333333%}
+.xPagingThumb.xMedialayer{padding-bottom:33.33333333%}
+}
+@media all and (min-width:450px){.xPagingThumb{width:25%}
+.xPagingThumb.xMedialayer{padding-bottom:25%}
+}
+@media all and (max-width:480px){.xTemplateColumn .xItem{width:100%!important}
+}
+@media all and (min-width:0){.xTemplateColumn .xItem{width:100%}
+}
+@media all and (max-width:480px){.xTemplateMasonry .xItem{width:100%!important;padding-bottom:100%!important}
+}
+@media all and (min-width:0){.xTemplateMasonry .xDisplaySpotlight{padding-bottom:200%;width:200%}
+.xTemplateMasonry .xDisplayFeature{padding-bottom:100%;width:200%}
+.xTemplateMasonry .xDisplayCommentary{padding-bottom:200%;width:100%}
+.xTemplateMasonry .xDisplayShow{padding-bottom:100%;width:100%}
+}
+.xCallout{padding:0}
+.xCallout .xCopyContainer,.xCallout .xMediaContainer{padding:0}
+.xCallout .xBodyContainer{padding:14px}
+.xMasthead{padding:14px}
+.xCountdownWrapper{text-align:center}
+.xCountdownBody{font-size:2em}
+.xCountdownSuffix,.xCountdownPrefix{margin:0}
+.xIconCountdown{margin-bottom:10px}
+@media all and (max-width:28.75em){.xIconCountdown{font-size:2em}
+.xCountdownBody{font-size:2em}
+}
+.uaMSIE8 .xIconCountdown{font-size:51.2px;font-size:5.12rem}
+.uaMSIE8 .xCountdownBody{font-size:25.6px;font-size:2.56rem}
+@media all and (min-width:480px){.full .xCountdownBody{font-size:2em}
+.extrawide .xCountdownBody{font-size:1.32em}
+.mid .xCountdownBody{font-size:1em}
+.third .xCountdownBody,.thin .xCountdownBody{font-size:.66em}
+.full .xIconCountdown{font-size:4em}
+.extrawide .xIconCountdown{font-size:2.64em}
+.mid .xIconCountdown{font-size:2em}
+.third .xIconCountdown,.thin .xIconCountdown{font-size:1.32em}
+}
+@media all and (min-width:580px){.full .xCountdownBody{font-size:2.5em}
+.extrawide .xCountdownBody{font-size:1.65em}
+.mid .xCountdownBody{font-size:1.25em}
+.third .xCountdownBody,.thin .xCountdownBody{font-size:.825em}
+.full .xIconCountdown{font-size:5em}
+.extrawide .xIconCountdown{font-size:3.3em}
+.mid .xIconCountdown{font-size:2.5em}
+.third .xIconCountdown,.thin .xIconCountdown{font-size:1.65em}
+}
+@media all and (min-width:680px){.full .xCountdownBody{font-size:3em}
+.extrawide .xCountdownBody{font-size:1.98em}
+.mid .xCountdownBody{font-size:1.5em}
+.third .xCountdownBody,.thin .xCountdownBody{font-size:.99em}
+.full .xIconCountdown{font-size:6em}
+.extrawide .xIconCountdown{font-size:3.96em}
+.mid .xIconCountdown{font-size:3em}
+.third .xIconCountdown,.thin .xIconCountdown{font-size:1.98em}
+}
+@media all and (min-width:780px){.full .xCountdownBody{font-size:3.5em}
+.extrawide .xCountdownBody{font-size:2.31em}
+.mid .xCountdownBody{font-size:1.75em}
+.third .xCountdownBody,.thin .xCountdownBody{font-size:1.155em}
+.full .xIconCountdown{font-size:7em}
+.extrawide .xIconCountdown{font-size:4.62em}
+.mid .xIconCountdown{font-size:3.5em}
+.third .xIconCountdown,.thin .xIconCountdown{font-size:2.31em}
+}
+.xCountdownSuffix,.xCountdownPrefix{font-size:.5em}
+.xGallery .xClassCarousel .xItem{font-size:0;font-size:0rem}
+.xGallery .xClassCarousel .xItem>*{font-size:13px;font-size:1.3rem}
+.xFormMetricItemWrapper{margin-bottom:10px}
+.xFormMetricItemWrapper:last-child{margin-bottom:0}
+.xFormMetricItemLabel{display:block;margin-bottom:5px}
+.xFormMetricItemBar{background-color:#971212;height:30px}
+.xFormMetricItemBarWrapper{padding-right:42px}
+.xFormMetricItemCountWrapper{font-size:0;font-size:0rem;right:42px}
+.xFormMetricItemCountWrapper>*{font-size:13px;font-size:1.3rem}
+.xFormMetricItemCount{padding-left:14px}
+.qtip{padding:10px;max-width:500px;border:2px solid #971212}
+.qtip-titlebar{margin-bottom:10px}
+.xGroupLives[data-livescount="0"]{color:#c00}
+.xGroupLives[data-livescount="1"]{color:#c00}
+.xGroupLives[data-livescount="2"]{color:#c00}
+.xGroupLives[data-livescount="3"]{color:#c00}
+.xScore,.xLevel{text-align:center}
+.xScore .xValue,.xLevel .xValue{font-size:40px;font-size:4rem;line-height:1;margin-bottom:0}
+.xScore .xMeta,.xLevel .xMeta{margin:0}
+.xMessage:after{padding-left:10px}
+.xVideo .xIconContainer{text-align:left}
+.xVideoGallery .xIconContainer{display:none}
+.xSocialContentWall .xHeader{text-align:center}
+@media all and (min-width:480px){.xRowInner{font-size:0;font-size:0rem}
+.xRowInner>*{font-size:13px;font-size:1.3rem}
+.xPage{max-width:630px}
+.xRowInner{font-size:0;font-size:0rem}
+.xRowInner>*{font-size:13px;font-size:1.3rem}
+.xPageHeader{padding:0;text-align:left}
+.xCampaignHeader{padding:0}
+.xTimelineTabs{font-size:0;font-size:0rem}
+.xTimelineTabs>*{font-size:13px;font-size:1.3rem}
+.xNavShareWrapper{font-size:0;font-size:0rem}
+.xNavShareWrapper>*{font-size:13px;font-size:1.3rem}
+.xNavigation{display:-moz-inline-stack;display:inline-block;vertical-align:middle;padding:14px 14px 7px;width:50%}
+.xNavigation:last-child{width:100%}
+.xTabs{font-size:0;font-size:0rem}
+.xTabs>*{font-size:13px;font-size:1.3rem}
+.xTab{display:-moz-inline-stack;display:inline-block;vertical-align:middle;margin-right:14px;margin-bottom:7px}
+.xTab:last-child{margin-right:0}
+.xTabLink{font-size:inherit;padding:0}
+.xCampaignHeader .xActionSharing{display:-moz-inline-stack;display:inline-block;vertical-align:middle;width:50%;padding:14px;text-align:right}
+.xCampaignHeader .xActionSharing:first-child{width:100%}
+.xTimelineTab{padding:14px}
+.xIconContainer{margin-bottom:10px}
+.xIconContainer:last-child{margin-bottom:0}
+.xProfileContainer{margin-bottom:10px}
+.xProfileContainer:last-child{margin-bottom:0}
+.xButtonToolbar .xAction{display:-moz-inline-stack;display:inline-block;vertical-align:middle;margin-right:10px}
+.xButton span,.xPagingButton span{padding:10px 20px}
+.xOverlay{padding:14px;max-width:630px;margin-right:auto;margin-left:auto;width:100%}
+.xOverlayInner{margin-right:auto;margin-left:auto;padding:14px;max-width:75%;max-height:90%}
+.xOverlayContent{margin-bottom:0;overflow-y:auto}
+.xActionClose.hasButton{display:none}
+.xFieldCheckboxChoice,.xFieldRadioChoice{margin-bottom:5px}
+.xComposite .xFieldContainer .xField{padding-right:5px}
+.xComposite .xFieldContainer .xField:nth-last-child(2){padding-right:0}
+.xComposite .xFieldContainer .xField.xCompositeItem-Address2,.xComposite .xFieldContainer .xField.xCompositeItem-Zip{padding-right:0}
+.xAnswerContainer input{width:auto}
+.xDatePicker{margin:10px 0 0}
+.xTimePicker{margin:10px 0 0}
+.picker__button--today,.picker__button--clear{font-size:13px;font-size:1.3rem;padding:10px 20px}
+.has3Fields,.has2Fields{font-size:0;font-size:0rem}
+.has3Fields>*,.has2Fields>*{font-size:13px;font-size:1.3rem}
+.xActionFiltersContainer{border-spacing:0 10px}
+.xFilterWrapper{padding-bottom:10px}
+.xFilterWrapper .xFieldLabel{padding-right:20px}
+.xVariantLeft .xItemInner,.xVariantRight .xItemInner,.xMasthead .xItemInner{font-size:0;font-size:0rem}
+.xVariantLeft .xItemInner>*,.xVariantRight .xItemInner>*,.xMasthead .xItemInner>*{font-size:13px;font-size:1.3rem}
+.xVariantLeft .xMediaContainer,.xVariantRight .xMediaContainer,.xMasthead .xMediaContainer,.xVariantLeft .xBodyContainer,.xVariantRight .xBodyContainer,.xMasthead .xBodyContainer{margin-bottom:0}
+.xVariantLeft .xBodyContainer,.xVariantRight .xBodyContainer,.xMasthead .xBodyContainer{padding:14px}
+.xMasthead .xBodyContainer,.xClassHeadline .xBodyContainer{padding:0}
+.xMasthead.hasMainAsset .xBodyContainer,.xClassHeadline.hasMainAsset .xBodyContainer{padding:0 0 0 14px}
+.xMasthead.hasMainAsset .xCopyContainer,.xClassHeadline.hasMainAsset .xCopyContainer{padding-bottom:10px}
+.xTemplateList{text-align:left}
+.xTemplateList .xItemInner>*{padding:7px}
+.uaMSIE8 .xTemplateList .xMediaContainer .xThumbnail{width:200px;max-width:none}
+.xTmpl-Grid{padding:0}
+.xTemplateGrid{padding:14px}
+.xTmpl-Masonry{padding:0}
+.xTemplateMasonry{padding:14px}
+.xTmpl-Column{border:0;padding:0}
+.xTemplateColumn{padding:14px}
+.xMasthead .xCopyContainer{padding-right:14px}
+.xCountdownWrapper{text-align:inherit}
+.xCountdownBody{display:-moz-inline-stack;display:inline-block;vertical-align:middle}
+.xIconCountdown{display:-moz-inline-stack;display:inline-block;vertical-align:middle;margin-bottom:0;margin-right:5px}
+.xMetricGraphWrapper{border-spacing:0 5px}
+.xFormMetricItemLabel{padding-right:10px;display:table-cell;vertical-align:middle;white-space:nowrap}
+.xFormMetricItemGraphWrapper{position:relative}
+.xActionShowMoreButton{text-align:center}
+.xActionSortButtons{text-align:center}
+.xContainerMyRewards .xMain{width:99999px}
+}
+@font-face{font-family:'FranklinGothicCondDemi';src:url('../fonts/FranklinGothicCondDemi/FranklinGothicCondDemi.eot');src:url('../fonts/FranklinGothicCondDemi/FranklinGothicCondDemi.eot?#iefix') format('embedded-opentype'),url('../fonts/FranklinGothicCondDemi/FranklinGothicCondDemi.woff') format('woff'),url('../fonts/FranklinGothicCondDemi/FranklinGothicCondDemi.ttf') format('truetype'),url('../fonts/FranklinGothicCondDemi/FranklinGothicCondDemi.svg#ywftsvg') format('svg');font-weight:normal;font-style:normal}
+@font-face{font-family:'FranklinGothicCompDemi';src:url('../fonts/FranklinGothicCompDemi/FranklinGothicCompDemi.eot');src:url('../fonts/FranklinGothicCompDemi/FranklinGothicCompDemi.eot?#iefix') format('embedded-opentype'),url('../fonts/FranklinGothicCompDemi/FranklinGothicCompDemi.woff') format('woff'),url('../fonts/FranklinGothicCompDemi/FranklinGothicCompDemi.ttf') format('truetype'),url('../fonts/FranklinGothicCompDemi/FranklinGothicCompDemi.svg#ywftsvg') format('svg');font-weight:normal;font-style:normal}
+@font-face{font-family:'FranklinGothicExtCompDemi';src:url('../fonts/FranklinGothicExtCompDemi/FranklinGothicExtCompDemi.eot');src:url('../fonts/FranklinGothicExtCompDemi/FranklinGothicExtCompDemi.eot?#iefix') format('embedded-opentype'),url('../fonts/FranklinGothicExtCompDemi/FranklinGothicExtCompDemi.woff') format('woff'),url('../fonts/FranklinGothicExtCompDemi/FranklinGothicExtCompDemi.ttf') format('truetype'),url('../fonts/FranklinGothicExtCompDemi/FranklinGothicExtCompDemi.svg#ywftsvg') format('svg');font-weight:normal;font-style:normal}
+body{font-family:Helvetica,Arial,sans-serif;color:#666}
+h1{font-family:'Dispatch Light',Arial,Helvetica,sans-serif;font-size:22px;font-size:2.2rem;line-height:22px;padding-top:10px;padding-bottom:4px}
+h2{font-family:Arial,Helvetica,sans-serif;font-size:17px;font-size:1.7rem;margin-bottom:15px;line-height:18px}
+h3{font-size:17px;font-size:1.7rem}
+h1,h2,h3{color:#333}
+a{text-decoration:none}
+a:hover{text-decoration:none}
+hr{margin-top:20px;height:1px;background-color:#e6e6e6}
+.xPage{padding-left:10px;padding-right:10px}
+.xRules{margin-top:20px}
+#cover{position:fixed;top:0;bottom:0;left:0;right:0;z-index:99999}
+.xComponent{padding:0;margin-bottom:14px}
+.xComponent:last-child{margin-bottom:0}
+.xSectionContent .xRow{margin-bottom:20px}
+.xSectionContent .xRow:last-child{padding-bottom:0}
+.xSectionContent .xRow:first-child{border:0;margin-top:20px}
+.xSectionEntry .xRow:last-child{border:0}
+.xActionSharing{text-align:center;margin-bottom:14px}
+.xActionSharing .xShareLabel{display:none}
+.xActionSharing .xActionIcon{-webkit-border-radius:100px;-webkit-background-clip:padding-box;-moz-border-radius:100px;-moz-background-clip:padding;border-radius:100px;background-clip:padding-box;position:relative;height:35px;width:35px}
+.xActionSharing .xActionShareFacebook{background:#3b5998}
+.xActionSharing .xActionShareTwitter{background:#55acee}
+.xActionSharing .xActionSharePinterest{background:#c92228}
+.xActionSharing .xIcon{font-size:18px;font-size:1.8rem;position:absolute;top:0;left:0;right:0;bottom:0;text-align:center;color:white}
+.xActionSharing .xIcon:after{display:-moz-inline-stack;display:inline-block;vertical-align:middle;content:'';height:100%}
+.xActionSharing .xIcon:before{display:-moz-inline-stack;display:inline-block;vertical-align:middle}
+.xCampaignHeader,.xPageHeader{background:0}
+.xCampaignHeader .xActionSharing,.xPageHeader .xActionSharing{padding:0;margin-top:14px}
+.xNavigation{padding:0}
+a.xTabLink{display:block;padding:15px 15px;background-color:#f6f6f6;color:#000;font-weight:bold;font-size:14px;font-size:1.4rem;text-decoration:none}
+a.xTabLink:hover{text-decoration:none;color:#000}
+a.xTabLink.current{border:1px solid #e7e7e7;background-color:white}
+.xNavShareWrapper{border-bottom:1px solid #e7e7e7}
+.xNavShareWrapper .xNavigation{font-size:0;text-align:left}
+.xNavShareWrapper .xActionContainer.xActionSharing{width:20%}
+ul.xNavMain{margin-top:20px;overflow:visible}
+li.xTab{display:inline-block;padding:0;margin:0}
+.xTabs{display:inline-block}
+a.xTabLink{padding:15px 15px;background-color:#f6f6f6;color:#000;font-weight:bold;font-size:14px;font-size:1.4rem}
+a.xTabLink:hover{text-decoration:none;color:#000}
+a.xTabLink.current{border-top:1px solid #e7e7e7;border-left:1px solid #e7e7e7;border-right:1px solid #e7e7e7;border-bottom:0;background-color:white;margin-bottom:-1px}
+.xButton,.xPagingButton,.xButton.xCTA,.picker__button--today,.picker__button--clear{-webkit-border-radius:0;-webkit-background-clip:padding-box;-moz-border-radius:0;-moz-background-clip:padding;border-radius:0;background-clip:padding-box;font-size:14px;font-size:1.4rem;font-family:Arial,Helvetica,sans-serif;text-transform:none;text-decoration:none;padding:15px}
+.xButton:active,.xPagingButton:active,.xButton.xCTA:active{background-color:#123449}
+.xButton.xDisabled,.xPagingButton.xDisabled,.xButton.xCTA.xDisabled{display:none}
+.xButton span,.xPagingButton span,.xButton.xCTA span{padding:0}
+.xAvatarWall{margin-bottom:20px}
+.xAvatarWall .xContainer{text-align:center;margin:-2px}
+.xAvatarWall .xUserDummy{height:0;width:20%;padding-bottom:20%;max-height:none;max-width:none;position:relative}
+.xAvatarWall .xUserDummy .xMediaAvatar{display:none}
+.xAvatarWall .xUserDummy .xItemInner{position:absolute;top:2px;left:2px;right:2px;bottom:2px;background:url('../images/avatar.jpg') 0 0 no-repeat;background-size:contain}
+.xIconTwitter{color:#55acee}
+.xUserDetails{font-size:18px;font-size:1.8rem}
+.xUserHandle{color:#176684;font-weight:bold}
+.xActionProfile{display:none}
+.xCopyContainer{margin-bottom:15px}
+.xOverlay{background-color:rgba(255,255,255,0.8)}
+.xOverlayInner{max-height:350px;border:1px solid #ccc;bottom:21px;left:21px;right:21px}
+.xOverlayInner:before{display:block;content:'';border-top:5px solid black;margin-bottom:5px}
+.xOverlayContent{max-height:310px}
+@media all and (max-width:480px){.xOverlayInner{top:21px!important}
+}
+.xOverlayContent{height:100%}
+.xActionClose.hasIcon{top:-12px;right:-12px}
+.xActionClose.hasIcon .xActionCloseOverlay{background:url(../images/popup-close.png) 0 0 no-repeat;height:24px;width:24px;display:block;position:relative}
+.xActionClose.hasIcon .xIconClose{position:absolute;height:100%;width:100%;top:0;left:0;right:0;bottom:0}
+.xActionClose.hasIcon .xIconClose:before{content:''}
+select{width:100%}
+#Poll_kitchen_SabotageWrapper .xLabelContainer{margin-bottom:20px}
+#Poll_kitchen_SabotageWrapper .xFieldRadioChoice{margin-bottom:12px}
+.xFormPage .xControlSummary{margin-bottom:30px}
+.xHelpLabel{display:none}
+input:focus,textarea:focus{border-color:#ccc}
+.xFieldError input:focus,.xFieldError textarea:focus{border-color:#c00}
+.xFieldItem{margin-bottom:20px}
+input[type="text"],input[type="email"],input[type="number"],.xComboInput{-webkit-border-radius:3px;-webkit-background-clip:padding-box;-moz-border-radius:3px;-moz-background-clip:padding;border-radius:3px;background-clip:padding-box}
+.xComboInput{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9Imxlc3NoYXQtZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+PC9saW5lYXJHcmFkaWVudD48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2xlc3NoYXQtZ2VuZXJhdGVkKSIgLz48L3N2Zz4=);background-image:-webkit-linear-gradient(top,#fff 0,#eee 100%);background-image:-moz-linear-gradient(top,#fff 0,#eee 100%);background-image:-o-linear-gradient(top,#fff 0,#eee 100%);background-image:linear-gradient(to bottom,#fff 0,#eee 100%)}
+.xComboInput:after{font-size:12px;font-size:1.2rem;padding-top:10px;width:26px;content:"\a8";color:#176684}
+.xComboInput input[type="text"]{background:0}
+.xFieldError .xComboInput{background:#fcc}
+.xComboInput.dropdown-active{z-index:99999}
+.xComboOptions{margin-top:-5px}
+.xComboOption{padding:10px 7px}
+.xComboOption .option{border-bottom:1px dotted #666}
+.xComboOption .option:last-child{border-bottom:0;padding-bottom:0}
+.xComboOption .option:hover{background-color:inherit;color:#176684;border-color:#176684}
+.xRadiobox,.xCheckbox{padding-left:1px;vertical-align:top}
+.xRadiobox span:before,.xCheckbox span:before,.xRadiobox span.xChecked:before,.xCheckbox span.xChecked:before{display:none;content:''}
+.xCheckbox{padding-top:1px}
+.radioField,.checkField{zoom:1;-webkit-opacity:1;-moz-opacity:1;opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100);font-size:16px;font-size:1.6rem;position:static;height:auto;width:auto}
+.xControlCheckbox .xLabelContainer{font-weight:bold;margin-bottom:15px}
+.xFieldCheckboxChoice{margin-bottom:10px}
+.xFieldCheckboxChoice .xFieldLabel{color:#000}
+.xFieldCheckboxChoice .xFieldLabel span{color:#666;display:block;padding-top:5px}
+#GenderWrapper .xFieldRadioChoice{display:-moz-inline-stack;display:inline-block;vertical-align:middle}
+#GenderWrapper .xFieldRadioChoice:first-child{margin-right:20px}
+.buttons{text-align:center;padding-top:10px}
+.buttons .xButton,.buttons .xPagingButton{font-size:16px;font-size:1.6rem;margin:0;display:block}
+.buttons .xButton:last-child,.buttons .xPagingButton:last-child{margin-bottom:0}
+.buttons .xButton.xDisabled,.buttons .xPagingButton.xDisabled{display:none}
+.buttons .xActivateContainer{margin-bottom:10px}
+.buttons .xPaginationContainer{margin-bottom:0}
+::-webkit-input-placeholder{color:#b5b5b5}
+:-moz-placeholder{color:#b5b5b5}
+::-moz-placeholder{color:#b5b5b5}
+:-ms-input-placeholder{color:#b5b5b5}
+.xFieldError input::-webkit-input-placeholder{color:#db7272}
+.xFieldError input:-moz-placeholder{color:#db7272}
+.xFieldError input::-moz-placeholder{color:#db7272}
+.xFieldError input:-ms-input-placeholder{color:#db7272}
+.xTemplateColumn{font-size:14px;font-size:1.4rem;line-height:30px}
+.xTemplateColumn .xItemInner{background:0;color:#464646;border:1px solid #ccc;position:relative}
+.xTemplateColumn .xItemInner a{color:#176684}
+.xTemplateColumn .xItemInner a:hover{color:#0f4459}
+.xTemplateColumn .xMetaDate{display:none}
+.xTemplateColumn .xIconContainer{margin-bottom:0}
+.xTemplateColumn .xSourceLogo{font-size:34px;font-size:3.4rem}
+.xTemplateColumn .xActionNetwork{position:absolute;bottom:10px;right:18px}
+.xTemplateColumn .xActionNetwork .xIcon{font-size:28px;font-size:2.8rem;color:#939598}
+.xTemplateColumn .xActionNetwork .xIcon:hover{color:#176684}
+.xTemplateColumn .xMediaContainer{margin-bottom:20px}
+.xTemplateColumn .xProfileWrapper{margin-bottom:15px}
+.xCountdownWrapper{text-align:left}
+.xCountdownWrapper .xCountdownPrefix,.xCountdownWrapper .xCountdownSuffix{font-size:21px;font-size:2.1rem;font-family:'Dispatch Light',Georgia,Arial,Helvetica,sans-serif;font-style:normal;color:#333!important}
+.xCountdownWrapper .xCountdownPrefix{margin-bottom:10px}
+.xIconCountdown{display:none}
+.xItemCountdown{font-size:0;font-size:0rem;font-family:'FranklinGothicExtCompDemi';padding-bottom:10px}
+.xItemCountdown>span{font-size:36px;font-size:3.6rem;color:#333;margin-right:2px;font-family:'Arial','Helvetica Neue',sans-serif;text-align:center;text-transform:uppercase;display:inline-block;width:73.5px}
+.countdownValue{background:#f4f4f4;display:block;width:100%;padding:4px 9px;margin-bottom:0}
+.countdownLabel{margin:3px;display:block;font-size:0;font-size:0rem;padding-bottom:0;color:#666}
+.countdownLabel:before{font-size:14px;font-size:1.4rem}
+#daysWrapper .countdownLabel:before{content:'Days'}
+#hoursWrapper .countdownLabel:before{content:'Hours'}
+#minutesWrapper .countdownLabel:before{content:'Mins'}
+#secondsWrapper .countdownLabel:before{content:'Sec'}
+#daysWrapper{font-weight:bold;margin-right:12px}
+.xSocialContentWall .xHeader{text-align:left}
+.xCallout .xVariantTop .xMediaContainer,.xCallout .xVariantBottom .xMediaContainer{margin-bottom:10px}
+.xCallout .xVariantTop .xMediaContainer:last-child,.xCallout .xVariantBottom .xMediaContainer:last-child{margin-bottom:0}
+.xCallout .xVariantTop .xContentBody,.xCallout .xVariantBottom .xContentBody{margin-bottom:20px}
+.xCallout .xVariantTop .xContentBody:last-child,.xCallout .xVariantBottom .xContentBody:last-child{margin-bottom:0}
+.xCallout .xVariantLeft .xBodyContainer,.xCallout .xVariantRight .xBodyContainer{padding:0}
+.xFormMetricItemWrapper:first-child .xFormMetricItemBar{height:40px}
+.xFormMetricItemWrapper .xFormMetricItemBar{height:28px}
+.xFormMetricItemBarWrapper{display:table-cell;vertical-align:middle;padding-right:0;background:url('../images/poll-result-bg.png') 0 0}
+.xFormMetricItemBar{background-color:#fae929}
+.xFormMetricItemLabel{font-weight:bold}
+.xFormMetricItemCountWrapper{display:table-cell;vertical-align:middle;position:relative}
+.xFormMetricItemCount{font-weight:bold;margin-left:auto!important}
+.xFormMetricTitle{font-size:16px;font-size:1.6rem}
+.xVideo .xMediaContainer{margin-bottom:0}
+.xVideo .xIconContainer{display:none}
+#campaign-cover{font-size:0;font-size:0rem;position:fixed;top:0;bottom:0;left:0;right:0;background:black;color:white;z-index:2;text-align:center}
+#campaign-cover>*{font-size:13px;font-size:1.3rem}
+#campaign-cover:before{display:-moz-inline-stack;display:inline-block;vertical-align:middle;content:'';height:100%}
+.campaign-cover-content{display:-moz-inline-stack;display:inline-block;vertical-align:middle;padding:14px}
+.campaign-cover-content p{font-size:40px;font-size:4rem}
+.xCustom-sponsors .xItemInner{border:0}
+.xCustom-sponsors .xMediaContainer{margin-bottom:0}
+.xCustom-sponsors .xCTAContainer{display:none}
+.xCustom-footer{border-top:1px solid #e6e6e6;padding-top:20px;padding-bottom:20px}
+.xCustom-footer p{font-size:12px;font-size:1.2rem;line-height:22px}
+body.xStateRules .xCustom-footer,body.xStateConfirmation .xCustom-footer{display:none}
+.xSectionDetails p{font-size:14px;font-size:1.4rem;line-height:22px}
+.xSectionDetails h1{color:#000;text-align:center}
+.xSectionDetails .xRow.n4 .xComponent.xCallout{margin-bottom:20px}
+.xControlEmail .step,.xFormPage .stepWrapper h2,.xFormPage .stepWrapper h3{font-family:'Dispatch Light',Arial,Helvetica,sans-serif}
+.xSectionEntry .xComponent.xForm form{padding-top:20px;border-top:1px solid #e6e6e6}
+.xSectionEntry #xReturningUserForm .xLabelContainer{margin-bottom:10px;font-size:18px;font-size:1.8rem;font-weight:bold}
+.xSectionEntry #xReturningUserForm .xLabelContainer span{font-size:14px;font-size:1.4rem;font-weight:normal}
+.xSectionEntry .stepWrapper h2{font-size:17px;font-size:1.7rem;font-weight:normal}
+.xSectionEntry .stepWrapper h2 span{font-size:17px;font-size:1.7rem;font-weight:normal}
+.xSectionEntry .stepWrapper h3{margin:0;padding:0;margin-bottom:0;font-size:17px;font-size:1.7rem}
+.xSectionEntry .stepWrapper p{margin:0;padding:0;font-size:11px;font-size:1.1rem}
+.xSectionEntry .dobWhyWeNeedThis{display:inline-block;position:relative}
+.xSectionEntry .dobWhyWeNeedThisHover{position:absolute;top:10px;left:10px;z-index:99999;max-width:250px;border:1px solid #e6e6e6;padding:10px;background-color:white}
+.xSectionEntry #sponsorsWrapper .xField{display:block;width:100%}
+.xSectionEntry #sponsorsWrapper .xField .xCheckbox{vertical-align:top}
+.xSectionEntry #sponsorsWrapper .xField .xFormLabel span{display:block;font-size:12px;font-size:1.2rem}
+.xSectionEntry .custom-finalPrivacy{width:100%;margin-top:20px}
+.xSectionEntry .custom-finalPrivacy .xFieldContainer{width:100%}
+.xSectionEntry .custom-finalPrivacy .xFieldContainer p{text-align:center;font-size:12px;font-size:1.2rem}
+.xSectionEntry .xControlMultioptin{margin-bottom:20px}
+.xSectionEntry .xControlMultioptin .xLabelContainer{font-weight:bold;margin-bottom:15px}
+.xSectionEntry .xCustom-formPrivacyStatement{margin-top:20px}
+.xSectionEntry .xCustom-formPrivacyStatement .xBodyContainer p{text-align:center;font-size:12px;font-size:1.2rem}
+.xSectionEntry input[type=number]{-moz-appearance:textfield}
+.xSectionContent h1{text-align:center}
+.xSectionContent p{font-size:14px;font-size:1.4rem;line-height:22px}
+.xSectionContent ul{list-style-type:square}
+.xSectionContent ul li{margin-bottom:10px}
+.xSectionContent .xCustom-prizeList{margin-top:20px;padding-bottom:20px;border-bottom:1px solid #e6e6e6}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor .xItem .xItemInner .xBodyContainer{padding-bottom:20px}
+.xSectionContent .xCustom-sponsorContactDetails{padding-top:28px;padding-bottom:28px;border-bottom:1px solid #e6e6e6}
+.xSectionContent .xCustom-sponsorContactDetails ul{list-style:none;text-align:center}
+.xSectionContent .xCustom-sponsorContactDetails ul li{display:inline-block;margin-right:6px}
+.xSectionContent .xCustom-sponsorContactDetails ul li::before{font-family:'socialvetica';content:"\57";margin-right:8px;color:grey;font-size:5px;vertical-align:middle}
+.xSectionContent .xCustom-sponsorContactDetails ul li:first-child::before{display:none}
+.xSectionContent .xRow.n5{margin-bottom:0}
+.xSectionContent .xRow.n5 .xCustom-sponsorContactDetails{border-bottom:0}
+.xSectionRules li{margin-bottom:10px}
+.xSectionRules .sponsoredByWrapper{border:1px solid #e6e6e6;padding:10px;width:150px;float:right;margin-left:10px;margin-bottom:10px;margin-top:50px}
+.xSectionRules .sponsoredByWrapper h2{font-size:14px;font-size:1.4rem;text-align:center}
+.xSectionRules .sponsoredByWrapper a{display:block;margin-top:10px}
+.xSectionRules .sponsoredByWrapper a img{margin:auto}
+@media screen and (min-width:480px){.xStateRules{min-height:615px}
+.xOverlayInner{max-height:none}
+.xPage{padding:0}
+.xSectionContent .xRow{padding-bottom:0}
+.xActionSharing .xActionIcon{height:25px;width:25px;margin-right:5px}
+.xActionSharing .xIcon{font-size:13px;font-size:1.3rem}
+.xCampaignHeader{overflow:visible;background:0}
+.xCampaignHeader .xActionSharing{padding:0;margin-top:0}
+.xPageHeader{margin-bottom:15px;background:0}
+.xNavShareWrapper{border-bottom:1px solid #e7e7e7}
+.xNavShareWrapper .xNavigation{width:80%}
+.xNavShareWrapper .xActionContainer.xActionSharing{width:20%}
+ul.xNavMain{margin-top:20px;overflow:visible}
+li.xTab{padding:0;margin:0}
+a.xTabLink{padding:15px 15px;background-color:#f6f6f6;color:#000;font-weight:bold;font-size:14px;font-size:1.4rem}
+a.xTabLink:hover{text-decoration:none;color:#000}
+a.xTabLink.current{border-top:1px solid #e7e7e7;border-left:1px solid #e7e7e7;border-right:1px solid #e7e7e7;border-bottom:0;background-color:white;margin-bottom:-1px}
+.xButton,.xPagingButton,.picker__button--today,.picker__button--clear{font-size:16px;font-size:1.6rem}
+.xButton span,.xPagingButton span{padding:0;padding-left:145px;padding-right:145px}
+.xCTAContainer{margin-top:25px}
+.xAvatarWall .xUserDummy{width:11.11111111%;padding-bottom:11.11111111%}
+.xActionPaginate span{font-size:13px;font-size:1.3rem}
+.xOverlay{padding:30px}
+.xOverlayInner{max-width:none;left:0;right:0;bottom:0;max-width:580px;padding:20px;overflow:visible}
+.xOverlayContent{max-height:700px}
+.xActionClose.hasButton{position:static;margin-top:20px}
+.xCompositeItem-City{width:100%}
+.xCompositeItem-State{width:60%}
+#GenderWrapper .xFieldRadioChoice{display:-moz-inline-stack;display:inline-block;vertical-align:middle;width:auto}
+#GenderWrapper .xFieldRadioChoice:first-child{margin-right:20px}
+.xFieldItem{margin-bottom:10px}
+.xControlHtml{margin-bottom:20px}
+.xControlHtml .xFieldContainer{width:100%}
+.xControlCheckbox .xFieldCheckboxChoice,.xControlMultioptin .xFieldCheckboxChoice{width:50%}
+.xControlTerms_and_conditions{margin-top:30px}
+.buttons{text-align:left}
+.buttons .xButton,.buttons .xPagingButton{display:-moz-inline-stack;display:inline-block;vertical-align:middle;font-size:13px;font-size:1.3rem}
+.buttons .xButton.xDisabled,.buttons .xPagingButton.xDisabled{display:none}
+.xSubmitContainer{text-align:center}
+.xComposite .xFieldContainer .xCompositeItem-City{padding-right:0}
+.xCountdownPrefix,.xItemCountdown{display:inline-block;vertical-align:middle}
+.xCountdownPrefix{margin-right:15px;width:160px}
+.xFormMetricItemLabel{display:block;text-align:left}
+.xAvatarWall .xUserDummy:nth-last-child(1),.xAvatarWall .xUserDummy:nth-last-child(2),.xAvatarWall .xUserDummy:nth-last-child(3){display:none}
+.custom-clickable{cursor:pointer}
+.xCustom-sponsors{border:1px solid #e6e6e6;background-color:white;padding:13px}
+.xCustom-sponsors h1{font-size:14px;font-size:1.4rem;margin:0;padding:0}
+.xCustom-sponsors .xItem{display:-moz-inline-stack;display:inline-block;vertical-align:middle;width:auto}
+.xCustom-footer{border-top:1px solid #e6e6e6;padding-top:20px;padding-bottom:20px}
+.xCustom-footer p{font-size:12px;font-size:1.2rem;color:#aaa}
+body.xStateEntry .xCustom-footer{border:0}
+.xSectionDetails p{font-size:14px;font-size:1.4rem;line-height:22px;color:#2b2b2b}
+.xSectionDetails h1{color:#000;text-align:left}
+.xSectionDetails .xRow.n1 .xClassCallout{border:1px solid #e6e6e6;background-color:white}
+.xSectionDetails .xRow.n1 .xClassCallout .xItemInner{padding:13px}
+.xSectionDetails .xRow.n1 .xClassCallout .xItemInner h1{margin-bottom:10px}
+.xSectionDetails .xRow.n1 .xClassCallout .xItemInner .xMediaContainer{vertical-align:top}
+.xSectionDetails .xRow.n1 .xClassCallout .xItemInner .xCTAContainer{margin-top:10px}
+.xSectionDetails .xRow.n3{margin-top:40px}
+.xSectionDetails .xRow.n3 .xComponent.xCallout{margin-bottom:30px}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xMediaContainer{width:26%;vertical-align:top}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer{width:74%;padding-left:30px}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer *{margin:0;padding:0}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer h1{margin-bottom:10px;font-size:18px;font-size:1.8rem}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer .xCTAContainer{margin-top:10px}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer .xCTAContainer .xButton{background:0}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer .xCTAContainer .xButton span{padding:0;color:#000;font-size:14px;font-size:1.4rem}
+.xSectionDetails .xRow.n3 .xComponent.xCallout .xItem .xItemInner .xBodyContainer .xCTAContainer .xButton:hover span{text-decoration:underline}
+.xSectionDetails .xRow.n4 .xComponent.xCallout{margin-bottom:0}
+.xSectionDetails .xRow.n4 .xComponent.xCallout .xItem .xItemInner .xMediaContainer{width:30%;vertical-align:top;border:2px solid black}
+.xSectionDetails .xRow.n4 .xComponent.xCallout .xItem .xItemInner .xBodyContainer{width:70%;padding-left:20px}
+.xSectionDetails .xRow.n4 .xComponent.xCallout .xItem .xItemInner .xBodyContainer *{margin:0;padding:0}
+.xSectionDetails .xRow.n4 .xComponent.xCallout .xItem .xItemInner .xBodyContainer h1{margin-bottom:10px;font-size:18px;font-size:1.8rem}
+.xSectionEntry #xReturningUserForm .xFieldContainer{width:100%}
+.xSectionEntry #xReturningUserForm .xActionContainer.xActionsForm{margin-top:20px;text-align:center}
+.xSectionEntry #xReturningUserForm .xActionContainer.xActionsForm span{padding-left:50px;padding-right:50px}
+.xSectionEntry .xFormContainer .xFieldItem.xControlDate[data-ngx-control="date_of_birth"] .xFieldContainer .dobWhyWeNeedThis{position:relative;display:block;clear:both;width:100%}
+.xSectionEntry .dobWhyWeNeedThisHover{display:block;position:relative;width:100%;max-width:100%;min-width:100%;margin-left:0;left:0;margin-bottom:20px}
+.xSectionContent h1{text-align:left}
+.xSectionContent .xComponent.xImage img{margin:0}
+.xSectionContent .xComponent.xCallout .xClassCallout.xVariantRight{padding:0}
+.xSectionContent .xComponent.xCallout .xClassCallout.xVariantRight img{margin:0}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor{margin-bottom:0}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor .xItem .xItemInner .xMediaContainer{width:30%;vertical-align:top}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor .xItem .xItemInner .xMediaContainer img{width:100%}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor .xItem .xItemInner .xBodyContainer{width:70%;padding-right:30px;padding-bottom:0}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor .xItem .xItemInner .xBodyContainer h1{display:none}
+.xSectionContent .xComponent.xCallout.xCustom-sponsor .xItem .xItemInner .xBodyContainer *{margin:0;padding:0}
+.xSectionContent .xCustom-sponsorContactDetails ul{text-align:left}
+.xSectionConfirmation .xCTAContainer .xButton.xCTA span{padding-left:50px;padding-right:50px}
+}

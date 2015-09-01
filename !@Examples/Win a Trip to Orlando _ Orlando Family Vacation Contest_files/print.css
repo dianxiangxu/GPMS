@@ -1,0 +1,17 @@
+.c1-c2, .c2-c3, .content { 
+	width:540px;
+}
+.itin-itemContainer {
+	padding:0;
+}
+.option, #sv-headContainer, #sv-footer, .c3, .addthis_toolbox, .contentFiller {
+	display:none;
+}
+body.bodyBG, #sv-contentHolder {
+	background:none;
+}
+h2.subHeading { font-size:18px; }
+/*Coldfusion debugging */
+table.cfdebug,#sideNav,#topper,#topNav,.nav,#topNav-lvl2{
+	display:none;
+}

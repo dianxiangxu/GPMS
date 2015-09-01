@@ -1632,12 +1632,16 @@ $(function() {
 		},
 
 		SetFirstTabActive : function() {
+			var icons = {
+				header : "ui-icon-circle-arrow-e",
+				activeHeader : "ui-icon-circle-arrow-s"
+			};
+			$("#accordion").accordion({
+				heightStyle : "content",
+				icons : icons
+			});
 			var $tabs = $("#container-7").tabs();
 			$tabs.tabs('option', 'active', 0);
-
-			$("#container-7").addClass("ui-tabs-vertical ui-helper-clearfix");
-			$("#container-7 li").removeClass("ui-corner-top").addClass(
-					"ui-corner-left");
 		},
 
 		isUniqueProjectTitle : function(proposalId, newProjectTitle) {

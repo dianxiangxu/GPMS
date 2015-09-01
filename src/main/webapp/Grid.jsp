@@ -64,8 +64,7 @@
 	//]]>
 </script>
 
-<script type="text/javascript"
-	src="js/jquery-ui-1.8.14.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
 
@@ -121,7 +120,7 @@
 <!-- <script type="text/javascript" src="js/modules/Language/AspxRssFeedLocale.js"></script> -->
 
 <link type="text/css" rel="stylesheet"
-	href="js/jquery-ui-1.8.14.custom/css/redmond/jquery-ui-1.8.16.custom.css" />
+	href="css/Templates/jquery-ui.css" />
 <link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
 <link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
 
@@ -560,7 +559,7 @@
 																					<tr>
 																						<td><select title="College Name"
 																							class="sfListmenu" name="ddlCollege"
-																							style="width: 85px;">
+																							style="width: 90px;">
 																						</select></td>
 																						<td><select title="Department Name"
 																							class="sfListmenu" name="ddlDepartment"

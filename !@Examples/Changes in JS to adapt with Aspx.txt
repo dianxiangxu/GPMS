@@ -1,0 +1,32 @@
+AspxCommerce --> gpms
+
+GetAspxServicePath -->GetgpmsServicePath
+
+aspxservicePath --> gpmsServicePath
+SageFrame --> gpms
+GetCustomerID -> GetUserAccountID
+customerID --> userAccountId
+
+GetgpmsRootPath
+GetAspxClientCountry --> GetgpmsClientCountry
+
+//StartUp Variables
+gpmsUserName
+userAccountId
+gpmsCurrentCulture
+sessionCode
+clientIPAddress
+aspxRootPath-->gpmsRootPath
+gpmsServicePath
+aspxCountryName--> gpmsCountryName
+
+
+
+AspxCommonObj --> gpmsCommonObj
+
+aspxCommonInfo --> gpmsCommonInfo
+
+id='aspxcommereloading' --> gpmsloading
+ajaxAttributeImageLoader --> ajaxLoader
+
+SageFrameAppPath -- > 

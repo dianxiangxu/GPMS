@@ -1,0 +1,14 @@
+Before saving :
+ var description = Encoder.htmlEncode(CKEDITOR.instances.editor1.getData());
+ 
+While Binding from DB:
+ success: function (msg) {
+                    if (msg.d.length>0) {
+                        CKEDITOR.instances.editor1.setData('');
+                        CKEDITOR.instances.editor1.setData(Encoder.htmlDecode(msg.d[0].BrandDescription));
+                    }
+                },
+
+				
+Clear Form:
+CKEDITOR.instances.editor1.setData('');

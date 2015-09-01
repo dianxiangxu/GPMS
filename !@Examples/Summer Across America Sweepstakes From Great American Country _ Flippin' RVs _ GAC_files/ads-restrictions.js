@@ -1,0 +1,1 @@
+// Deprecated file. Only ads-config file required now.

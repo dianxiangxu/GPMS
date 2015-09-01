@@ -1087,5 +1087,4 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 		return userPositionTitles;
 	}
-
 }

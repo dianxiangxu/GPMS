@@ -707,7 +707,7 @@ line-height: 1;
 th.header { white-space: nowrap;}
 
 .sfGridwrapper tr td {
-	padding:13px 15px;
+	padding:12px 15px;
 }
 .sfGridwrapper table, .sfGridwrapper td, .ajax__tab_xp .ajax__tab_body {
 	background:#fff;
@@ -2170,36 +2170,7 @@ p.cssClassActionImg a {
 	font-weight:bold; font-size:12px; line-height:24px;
 }
 .cssClassToAddress h2{ padding-top:15px;}
-.cssClassAccordionWrapper .ui-accordion .ui-widget-content {
-	border:1px solid #ccc
-}
-.cssClassAccordionWrapper .ui-accordion .ui-accordion-header {
-	background: #0084B7
-}
-.cssClassAccordionWrapper .ui-accordion .ui-accordion-header:hover {
-	background:#039DD9;
-	color:#fff;
-}
-.cssClassAccordionWrapper .ui-accordion .ui-state-active {
-	background:#055E7F
-}
-.ui-accordion .ui-state-active .ui-icon {
-	background: url(../../images/up-arrow.png) no-repeat !important;
-}
-.ui-accordion .ui-state-default .ui-icon {
-	background: url(../../images/down-arrow.png) no-repeat !important;
-}
-.cssClassAccordionWrapper .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
-	color:#fff
-}
-.cssClassAccordionWrapper .ui-accordion .ui-accordion-header a {
-	color: #fff;
-	display: block;
-	font-weight:bold; font-size:12px; line-height:22px;
-}
-/*.cssClassTabPanelTable .ui-widget-content {
-	margin:10px !important;
-}*/
+
 .iferror {
 	display:none;
 	margin: 0;
