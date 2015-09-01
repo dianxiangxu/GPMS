@@ -506,16 +506,6 @@ $(function() {
 											align : 'left'
 										},
 										{
-											display : 'Senior Personnel Users',
-											name : 'senior_personnel_users',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											type : 'array',
-											hide : true
-										},
-										{
 											display : 'Project Title',
 											name : 'project_title',
 											cssclass : '',
@@ -602,12 +592,30 @@ $(function() {
 											hide : true
 										},
 										{
+											display : 'FA Costs($)',
+											name : 'FA_costs',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
 											display : 'Total Costs($)',
 											name : 'total_costs',
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
 											align : 'left'
+										},
+										{
+											display : 'FA Rate(%)',
+											name : 'FA_rate',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
 										},
 										{
 											display : getLocale(
@@ -641,17 +649,6 @@ $(function() {
 											hide : true
 										},
 										{
-											display : 'Is Deleted?',
-											name : 'is_deleted',
-											cssclass : 'cssClassHeadBoolean',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											type : 'boolean',
-											format : 'Yes/No',
-											hide : true
-										},
-										{
 											display : 'PI User',
 											name : 'pi_user',
 											cssclass : '',
@@ -671,21 +668,24 @@ $(function() {
 											hide : true
 										},
 										{
-											display : 'FA Costs($)',
-											name : 'FA_costs',
+											display : 'Senior Personnel Users',
+											name : 'senior_personnel_users',
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
+											type : 'array',
 											hide : true
 										},
 										{
-											display : 'FA Rate(%)',
-											name : 'FA_rate',
-											cssclass : '',
+											display : 'Is Deleted?',
+											name : 'is_deleted',
+											cssclass : 'cssClassHeadBoolean',
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
+											type : 'boolean',
+											format : 'Yes/No',
 											hide : true
 										},
 										{

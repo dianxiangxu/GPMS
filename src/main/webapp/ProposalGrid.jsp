@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55df8b79af6e0420a84d5403";
+	var userProfileId = "55b1e835d8ca82289c12a1de";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -64,8 +64,7 @@
 	//]]>
 </script>
 
-<script type="text/javascript"
-	src="js/jQuery/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
 
@@ -343,33 +342,33 @@
 															<tbody>
 																<tr>
 																	<td><select title="Role" class="sfListmenu"
-																		name="ddlRole" style="width: 50px;">
+																		name="ddlRole" style="width: 55px;">
 																			<option value="0">PI</option>
 																			<option value="1">Co-PI</option>
 																			<option value="2">Senior Personnel</option>
 																	</select></td>
 																	<td><select title="Name" class="sfListmenu"
-																		name="ddlName" style="width: 90px;">
+																		name="ddlName" style="width: 150px;">
 																	</select></td>
 																	<td><select title="College Name"
 																		class="sfListmenu" name="ddlCollege"
-																		style="width: 85px;">
+																		style="width: 110px;">
 																	</select></td>
 																	<td><select title="Department Name"
 																		class="sfListmenu" name="ddlDepartment"
-																		style="width: 80px;">
+																		style="width: 110px;">
 																	</select></td>
 																	<td><select title="Position Type"
 																		class="sfListmenu" name="ddlPositionType"
-																		style="width: 80px;">
+																		style="width: 110px;">
 																	</select></td>
 																	<td><select title="Position Title"
 																		class="sfListmenu" name="ddlPositionTitle"
-																		style="width: 80px;">
+																		style="width: 145px;">
 																	</select></td>
 																	<td><input type="text" class="sfTextBoxSmall"
 																		name="txtPhoneNo" placeholder="Phone #"
-																		disabled="disabled" style="width: 70px !important"></td>
+																		disabled="disabled" style="width: 80px !important"></td>
 																	<td><input type="Button" value="Add More"
 																		name="AddMore"
 																		class="AddOption cssClassButtonSubmit sfLocale" /></td>

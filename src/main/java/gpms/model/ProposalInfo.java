@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public class ProposalInfo {
-
 	private int rowTotal;
 	private String id = new String();
 
@@ -13,11 +12,6 @@ public class ProposalInfo {
 	private String proposalNo = new String();
 	private Date dateReceived = new Date();
 	private Status proposalStatus = Status.NEW;
-
-	// PI, CO-PI and Senior UserProfiles
-	private String PIUser = new String();
-	private List<String> COPIUsers = new ArrayList<String>();
-	private List<String> seniorPersonnelUsers = new ArrayList<String>();
 
 	// ProjectInfo
 	private String projectTitle = new String();
@@ -31,13 +25,19 @@ public class ProposalInfo {
 	// SponsorAndBudgetInfo
 	private List<String> grantingAgencies = new ArrayList<String>();
 	private double directCosts;
-	private double FACosts;
+	private double faCosts;
 	private double totalCosts;
-	private double FARate;
+	private double faRate;
 
 	private Date lastAudited = new Date();
 	private String lastAuditedBy = new String();
 	private String lastAuditAction = new String();
+
+	// PI, CO-PI and Senior UserProfiles
+	private String piUser = new String();
+	private List<String> copiUsers = new ArrayList<String>();
+	private List<String> seniorUsers = new ArrayList<String>();
+
 	private boolean isDeleted = false;
 
 	public ProposalInfo() {
@@ -82,30 +82,6 @@ public class ProposalInfo {
 
 	public void setProposalStatus(Status proposalStatus) {
 		this.proposalStatus = proposalStatus;
-	}
-
-	public String getPIUser() {
-		return PIUser;
-	}
-
-	public void setPIUser(String pIUser) {
-		PIUser = pIUser;
-	}
-
-	public List<String> getCOPIUsers() {
-		return COPIUsers;
-	}
-
-	public void setCOPIUsers(List<String> cOPIUsers) {
-		COPIUsers = cOPIUsers;
-	}
-
-	public List<String> getSeniorPersonnelUsers() {
-		return seniorPersonnelUsers;
-	}
-
-	public void setSeniorPersonnelUsers(List<String> seniorPersonnelUsers) {
-		this.seniorPersonnelUsers = seniorPersonnelUsers;
 	}
 
 	public String getProjectTitle() {
@@ -180,12 +156,12 @@ public class ProposalInfo {
 		this.directCosts = directCosts;
 	}
 
-	public double getFACosts() {
-		return FACosts;
+	public double getFaCosts() {
+		return faCosts;
 	}
 
-	public void setFACosts(double fACosts) {
-		FACosts = fACosts;
+	public void setFaCosts(double faCosts) {
+		this.faCosts = faCosts;
 	}
 
 	public double getTotalCosts() {
@@ -196,12 +172,12 @@ public class ProposalInfo {
 		this.totalCosts = totalCosts;
 	}
 
-	public double getFARate() {
-		return FARate;
+	public double getFaRate() {
+		return faRate;
 	}
 
-	public void setFARate(double fARate) {
-		FARate = fARate;
+	public void setFaRate(double faRate) {
+		this.faRate = faRate;
 	}
 
 	public Date getLastAudited() {
@@ -226,6 +202,30 @@ public class ProposalInfo {
 
 	public void setLastAuditAction(String lastAuditAction) {
 		this.lastAuditAction = lastAuditAction;
+	}
+
+	public String getPiUser() {
+		return piUser;
+	}
+
+	public void setPiUser(String piUser) {
+		this.piUser = piUser;
+	}
+
+	public List<String> getCopiUsers() {
+		return copiUsers;
+	}
+
+	public void setCopiUsers(List<String> copiUsers) {
+		this.copiUsers = copiUsers;
+	}
+
+	public List<String> getSeniorUsers() {
+		return seniorUsers;
+	}
+
+	public void setSeniorUsers(List<String> seniorUsers) {
+		this.seniorUsers = seniorUsers;
 	}
 
 	public boolean isDeleted() {

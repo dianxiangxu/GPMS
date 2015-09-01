@@ -284,20 +284,20 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 
 			// PI, CO-PI and Senior UserProfiles
 
-			proposal.setPIUser(userProposal.getInvestigatorInfo().getPi()
+			proposal.setPiUser(userProposal.getInvestigatorInfo().getPi()
 					.getUserRef().getId().toString());
 
 			ArrayList<InvestigatorRefAndPosition> allCoPI = userProposal
 					.getInvestigatorInfo().getCo_pi();
 			for (InvestigatorRefAndPosition coPI : allCoPI) {
-				proposal.getCOPIUsers().add(
+				proposal.getCopiUsers().add(
 						coPI.getUserRef().getId().toString());
 			}
 
 			ArrayList<InvestigatorRefAndPosition> allSeniors = userProposal
 					.getInvestigatorInfo().getSeniorPersonnel();
 			for (InvestigatorRefAndPosition senior : allSeniors) {
-				proposal.getSeniorPersonnelUsers().add(
+				proposal.getSeniorUsers().add(
 						senior.getUserRef().getId().toString());
 			}
 
@@ -349,11 +349,11 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.getGrantingAgency());
 			proposal.setDirectCosts(userProposal.getSponsorAndBudgetInfo()
 					.getDirectCosts());
-			proposal.setFACosts(userProposal.getSponsorAndBudgetInfo()
+			proposal.setFaCosts(userProposal.getSponsorAndBudgetInfo()
 					.getFACosts());
 			proposal.setTotalCosts(userProposal.getSponsorAndBudgetInfo()
 					.getTotalCosts());
-			proposal.setFARate(userProposal.getSponsorAndBudgetInfo()
+			proposal.setFaRate(userProposal.getSponsorAndBudgetInfo()
 					.getFARate());
 
 			ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
