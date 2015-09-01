@@ -777,7 +777,9 @@ $(function() {
 
 				proposalsManage.BindProposalAuditLogGrid(argus[0], null, null,
 						null, null);
-				$('#auditLogTab').show();
+				$('#ui-id-21').show();
+				$('#ui-id-23').show();
+				$('#ui-id-25').show();
 
 				break;
 			default:
@@ -1539,7 +1541,7 @@ $(function() {
 			validator.resetForm();
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
-			var container = $("#container-7 div:gt(1)");
+			var container = $("#accordion div:gt(1)");
 			var inputs = container.find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
 				rmErrorClass(item);
@@ -1595,7 +1597,7 @@ $(function() {
 		},
 
 		onInit : function() {
-			proposalsManage.SetFirstTabActive();
+			proposalsManage.SetFirstAccordionActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
@@ -1631,17 +1633,17 @@ $(function() {
 			$("#gdvProposalsAuditLog_Pagination").remove();
 		},
 
-		SetFirstTabActive : function() {
+		SetFirstAccordionActive : function() {
 			var icons = {
 				header : "ui-icon-circle-arrow-e",
 				activeHeader : "ui-icon-circle-arrow-s"
 			};
-			$("#accordion").accordion({
+			var $accordion = $("#accordion").accordion({
 				heightStyle : "content",
-				icons : icons
+				icons : icons,
+				collapsible : true
 			});
-			var $tabs = $("#container-7").tabs();
-			$tabs.tabs('option', 'active', 0);
+			$accordion.accordion("option", "active", 0);
 		},
 
 		isUniqueProjectTitle : function(proposalId, newProjectTitle) {
@@ -1692,7 +1694,8 @@ $(function() {
 												AspxAttributesManagement,
 												"Please select all position details for this user.")
 												+ "<br/>";
-										attributesManage.SetFirstTabActive();
+										attributesManage
+												.SetFirstAccordionActive();
 										$(this).focus();
 									} else if (optionsText
 											&& $(this).prop("name") != "ddlPositionTitle") {
@@ -2363,7 +2366,9 @@ $(function() {
 
 			$('#btnAddNew').bind("click", function() {
 				proposalsManage.ClearForm();
-				$('#auditLogTab').hide();
+				$('#ui-id-21').hide();
+				$('#ui-id-23').hide();
+				$('#ui-id-25').hide();
 				$("#trProposalInfo").hide();
 				$("#trProposalStatus").hide();
 				$('#divProposalGrid').hide();

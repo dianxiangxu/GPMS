@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55b1e835d8ca82289c12a1de";
+	var userProfileId = "55e615c179a4b82928f96a0e";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -558,12 +558,10 @@
 																				<tbody>
 																					<tr>
 																						<td><select title="College Name"
-																							class="sfListmenu" name="ddlCollege"
-																							style="width: 90px;">
+																							class="sfListmenu" name="ddlCollege">
 																						</select></td>
 																						<td><select title="Department Name"
-																							class="sfListmenu" name="ddlDepartment"
-																							style="width: 135px;">
+																							class="sfListmenu" name="ddlDepartment">
 																						</select></td>
 																						<td><select title="Position Type"
 																							class="sfListmenu" name="ddlPositionType">

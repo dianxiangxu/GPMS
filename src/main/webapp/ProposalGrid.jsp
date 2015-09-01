@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55b1e835d8ca82289c12a1de";
+	var userProfileId = "55e615c179a4b82928f96a0e";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -175,14 +175,6 @@
 															{
 																moduleKey : gpmsProposalsManagement
 															});
-
-											$("#container-7")
-													.tabs()
-													.addClass(
-															"ui-tabs-vertical ui-helper-clearfix");
-											$("#container-7 li").removeClass(
-													"ui-corner-top").addClass(
-													"ui-corner-left");
 										});
 										//]]>
 									</script>
