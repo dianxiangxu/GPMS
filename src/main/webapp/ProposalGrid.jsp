@@ -44,7 +44,7 @@
 </script>
 
 <script type="text/javascript">
-	//<![CDATA[
+	//_$tag____
 	var gpmsAppPath = "";
 	var gpmsUserName = "superuser";
 	var gpmsCurrentCulture = "en-US";
@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e615c179a4b82928f96a0e";
+	var userProfileId = "55df8b79af6e0420a84d5407";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -61,7 +61,7 @@
 
 	var logInURL = "login";
 	var pageExtension = ".jsp";
-	//]]>
+	//_$t
 </script>
 
 <script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
@@ -488,7 +488,7 @@
 																	<td><span class="cssClassLabel"
 																		id="lblNameOfGrantingAgency">Name of Granting
 																			Agency:</span> <span class="cssClassRequired">*</span></td>
-																	<td class="cssClassTableRightCol" colspan="2"><input
+																	<td class="cssClassTableRightCol" colspan="3"><input
 																		type="text" class="sfInputbox"
 																		id="txtNameOfGrantingAgency"
 																		name="nameOfGrantingAgency"
@@ -776,7 +776,7 @@
 																	<td><span class="cssClassLabel">Does this
 																			project have Environmental Health & Safety concerns?</span>
 																		<span class="cssClassRequired">*</span></td>
-																	<td class="cssClassTableRightCol" colspan="2"><select
+																	<td class="cssClassTableRightCol"><select
 																		title="Have Environmental Health & Safety Concerns?"
 																		class="sfListmenu" id="ddlEnvironmentalConcerns"
 																		name="environmentalConcerns">
@@ -1336,7 +1336,7 @@
 																<tr>
 																	<td><span class="cssClassLabel">Proposal
 																			Notes:</span> <span class="cssClassRequired">*</span></td>
-																	<td class="cssClassTableRightCol" colspan="3"><textarea
+																	<td class="cssClassTableRightCol"><textarea
 																			class="cssClassTextArea" cols="26" rows="2"
 																			title="Proposal Notes" name="proposalNotes"
 																			id="txtProposalNotes" placeholder="Proposal Notes"

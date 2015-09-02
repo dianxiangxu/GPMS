@@ -282,25 +282,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				proposal.setDeleted(true);
 			}
 
-			// PI, CO-PI and Senior UserProfiles
-
-			proposal.setPiUser(userProposal.getInvestigatorInfo().getPi()
-					.getUserRef().getId().toString());
-
-			ArrayList<InvestigatorRefAndPosition> allCoPI = userProposal
-					.getInvestigatorInfo().getCo_pi();
-			for (InvestigatorRefAndPosition coPI : allCoPI) {
-				proposal.getCopiUsers().add(
-						coPI.getUserRef().getId().toString());
-			}
-
-			ArrayList<InvestigatorRefAndPosition> allSeniors = userProposal
-					.getInvestigatorInfo().getSeniorPersonnel();
-			for (InvestigatorRefAndPosition senior : allSeniors) {
-				proposal.getSeniorUsers().add(
-						senior.getUserRef().getId().toString());
-			}
-
 			// ProjectInfo
 			proposal.setProjectTitle(userProposal.getProjectInfo()
 					.getProjectTitle());
@@ -364,15 +345,8 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					AuditLogInfo userAuditLog = new AuditLogInfo();
 					userAuditLog.setActivityDate(userProfileAudit
 							.getActivityDate());
-					userAuditLog
-							.setUserFullName(userProfileAudit
-									.getUserProfileId().getFirstName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getMiddleName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getLastName());
+					userAuditLog.setUserFullName(userProfileAudit
+							.getUserProfileId().getFullName());
 					userAuditLog.setAction(userProfileAudit.getAction());
 
 					allAuditLogs.add(userAuditLog);
@@ -393,6 +367,24 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			proposal.setLastAudited(lastAudited);
 			proposal.setLastAuditedBy(lastAuditedBy);
 			proposal.setLastAuditAction(lastAuditAction);
+
+			// PI, CO-PI and Senior UserProfiles
+			proposal.setPiUser(userProposal.getInvestigatorInfo().getPi()
+					.getUserRef().getId().toString());
+
+			ArrayList<InvestigatorRefAndPosition> allCoPI = userProposal
+					.getInvestigatorInfo().getCo_pi();
+			for (InvestigatorRefAndPosition coPI : allCoPI) {
+				proposal.getCopiUsers().add(
+						coPI.getUserRef().getId().toString());
+			}
+
+			ArrayList<InvestigatorRefAndPosition> allSeniors = userProposal
+					.getInvestigatorInfo().getSeniorPersonnel();
+			for (InvestigatorRefAndPosition senior : allSeniors) {
+				proposal.getSeniorUsers().add(
+						senior.getUserRef().getId().toString());
+			}
 
 			proposals.add(proposal);
 		}
@@ -489,11 +481,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					proposalAuditLog.setUserName(poposalAudit
 							.getUserProfileId().getUserAccount().getUserName());
 					proposalAuditLog.setUserFullName(poposalAudit
-							.getUserProfileId().getFirstName()
-							+ " "
-							+ poposalAudit.getUserProfileId().getMiddleName()
-							+ " "
-							+ poposalAudit.getUserProfileId().getLastName());
+							.getUserProfileId().getFullName());
 					proposalAuditLog.setAction(poposalAudit.getAction());
 					proposalAuditLog.setActivityDate(poposalAudit
 							.getActivityDate());

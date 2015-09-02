@@ -473,7 +473,7 @@ $(function() {
 											cssclass : 'cssClassHeadCheckBox',
 											coltype : 'checkbox',
 											align : 'center',
-											checkFor : '18',
+											checkFor : '22',
 											elemClass : 'attrChkbox',
 											elemDefault : false,
 											controlclass : 'attribHeaderChkbox'
@@ -719,7 +719,7 @@ $(function() {
 											_event : 'click',
 											trigger : '2',
 											callMethod : 'proposalsManage.DeleteProposal',
-											arguments : '18'
+											arguments : '22'
 										} ],
 								rp : perpage,
 								nomsg : getLocale(gpmsProposalsManagement,
@@ -749,17 +749,17 @@ $(function() {
 				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
 								'Edit Proposal Details for: ')
-								+ argus[5]);
+								+ argus[4]);
 
-				if (argus[15] != null && argus[15] != "") {
+				if (argus[16] != null && argus[16] != "") {
 					$('#tblLastAuditedInfo').show();
-					$('#lblLastUpdatedOn').html(argus[15]);
-					$('#lblLastUpdatedBy').html(argus[16]);
-					$('#lblActivity').html(argus[17]);
+					$('#lblLastUpdatedOn').html(argus[16]);
+					$('#lblLastUpdatedBy').html(argus[17]);
+					$('#lblActivity').html(argus[18]);
 				} else {
 					$('#tblLastAuditedInfo').hide();
 				}
-				// $('#txtProjectTitle').val(argus[1]);
+				// $('#txtProjectTitle').val(argus[4]);
 				// $('#txtProjectTitle').prop('disabled', 'disabled');
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
