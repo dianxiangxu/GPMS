@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e615c179a4b82928f96a0e";
+	var userProfileId = "55e89430af6e0427c0c2cf63";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -536,8 +536,6 @@
 															<table cellspacing="0" cellpadding="0" border="0">
 																<tbody>
 																	<tr>
-																		<td><span class="cssClassLabel">Position
-																				Details:</span> <span class="cssClassRequired">*</span></td>
 																		<td class="cssClassTableRightCol">
 																			<table id="dataTable" cellspacing="0" cellpadding="0"
 																				border="0" width="100%">

@@ -1006,6 +1006,12 @@ $(function() {
 							+ '<br/>';
 				}
 
+				if (validateErrorMessage != '') {
+					$('#txtUserName').removeClass("error");
+				} else {
+					$('#txtUserName').addClass("error");
+				}
+
 				var _saveOptions = '';
 				$("#dataTable")
 						.find("tr select")
@@ -1828,22 +1834,16 @@ $(function() {
 						}
 
 						if (errors) {
+							$(this).addClass("error");
 							$(this).next('.cssClassRight').hide();
-							$(this).siblings('.cssClassError').show();
-							$(this).siblings(".cssClassError").parent('div')
-									.addClass("diverror");
-							$(this).siblings('.cssClassError').prevAll(
-									"input:first").addClass("error");
 							$(this).siblings('.cssClassError').html(errors);
+							$(this).siblings('.cssClassError').show();
 							return false;
 						} else {
-							$(this).parent("td").find("span.error").hide();
+							$(this).removeClass("error");
 							$(this).next('.cssClassRight').show();
 							$(this).siblings('.cssClassError').hide();
-							$(this).siblings(".cssClassError").parent('div')
-									.removeClass("diverror");
-							$(this).siblings('.cssClassError').prevAll(
-									"input:first").removeClass("error");
+							$(this).siblings('.cssClassError').html('');
 						}
 					});
 

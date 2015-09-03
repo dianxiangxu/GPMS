@@ -137,10 +137,12 @@ $(function() {
 								required : true
 							},
 							CFDANo : {
-								required : true
+								required : true,
+								number : true
 							},
 							programNo : {
-								required : true
+								required : true,
+								number : true
 							},
 							programTitle : {
 								required : true
@@ -155,7 +157,8 @@ $(function() {
 								required : true
 							},
 							departmentID : {
-								required : true
+								required : true,
+								number : true
 							},
 							institutionalCostDocumented : {
 								required : true
@@ -791,12 +794,13 @@ $(function() {
 			// Investigator Information
 			proposalsManage.BindInvestigatorInfo(response.investigatorInfo);
 
-			// Peoject Information
+			// Project Information
 			$("#lblProposalNo").text(response.proposalNo);
 			$("#lblProposalDateReceived").text(response.dateReceived);
 			$("#ddlProposalStatus").val(response.proposalStatus);
 
-			$("#txtProjectTitle").val(response.projectInfo.projectTitle);
+			$("#txtProjectTitle").val(response.projectInfo.projectTitle).prop(
+					"disabled", "disabled");
 
 			if (response.projectInfo.projectType.isResearchBasic) {
 				$("#ddlProjectType").val(1);
@@ -852,8 +856,8 @@ $(function() {
 					response.sponsorAndBudgetInfo.directCosts);
 			$("#txtTotalCosts").autoNumeric('set',
 					response.sponsorAndBudgetInfo.totalCosts);
-			$("#txtFARate").val(response.sponsorAndBudgetInfo.FARate).mask(
-					"99.99 %");
+			$("#txtFARate").autoNumeric('set',
+					response.sponsorAndBudgetInfo.FARate);
 
 			// Cost Share Information
 			if (response.costShareInfo.institutionalCommitted) {
@@ -1173,8 +1177,11 @@ $(function() {
 				$("#lblPISalaryIncluded").hide();
 			}
 
-			$("#txtPISalary").val(response.oSPSectionInfo.PISalary);
-			$("#txtPIFringe").val(response.oSPSectionInfo.PIFringe);
+			$("#txtPISalary").autoNumeric('set',
+					response.oSPSectionInfo.PISalary);
+			$("#txtPIFringe").autoNumeric('set',
+					response.oSPSectionInfo.PIFringe);
+
 			$("#txtDepartmentID").val(response.oSPSectionInfo.departmentId);
 
 			if (response.oSPSectionInfo.institutionalCostDocumented.yes) {
@@ -1314,12 +1321,10 @@ $(function() {
 								$(this).removeAttr('disabled');
 							}
 
-							// proposalsManage.BindUserMobileNo($(
-							// 'select[name="ddlName"]').eq(rowIndex)
-							// .val());
 							$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
 							$('input[name="txtPhoneNo"]').eq(rowIndex).val(
-									userDetails.userRef.mobileNumbers[0]);
+									userDetails.userRef.mobileNumbers[0]).mask(
+									"(999) 999-9999");
 
 							proposalsManage.BindCollegeDropDown($(
 									'select[name="ddlName"]').eq(rowIndex)
@@ -1541,7 +1546,7 @@ $(function() {
 			validator.resetForm();
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
-			var container = $("#accordion div:gt(1)");
+			var container = $("#accordion div:gt(0)");
 			var inputs = container.find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
 				rmErrorClass(item);
@@ -1682,6 +1687,12 @@ $(function() {
 									"already exists.") + '<br/>';
 				}
 
+				if (validateErrorMessage != '') {
+					$('#txtProjectTitle').removeClass("error");
+				} else {
+					$('#txtProjectTitle').addClass("error");
+				}
+
 				var _saveOptions = '';
 				$("#dataTable")
 						.find("tr select")
@@ -1735,7 +1746,7 @@ $(function() {
 						// $('#txtDirectCosts').autoNumeric('get');
 						// $('#txtFACosts').autoNumeric('get');
 						// $('#txtTotalCosts').autoNumeric('get');
-						// $('#txtFARate').mask();
+						// $('#txtFARate').autoNumeric('get');
 						Flag : _flag, // false for Update true for New Add
 						SaveOptions : _saveOptions
 					};
@@ -1921,7 +1932,8 @@ $(function() {
 
 		case 6: // Bind User Mobile No
 			$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
-			$('input[name="txtPhoneNo"]').eq(rowIndex).val(msg);
+			$('input[name="txtPhoneNo"]').eq(rowIndex).val(msg).mask(
+					"(999) 999-9999");
 			break;
 
 		case 7:// Bind User Colleges
@@ -2423,22 +2435,16 @@ $(function() {
 						}
 
 						if (errors) {
+							$(this).addClass("error");
 							$(this).next('.cssClassRight').hide();
-							$(this).siblings('.cssClassError').show();
-							$(this).siblings(".cssClassError").parent('div')
-									.addClass("diverror");
-							$(this).siblings('.cssClassError').prevAll(
-									"input:first").addClass("error");
 							$(this).siblings('.cssClassError').html(errors);
+							$(this).siblings('.cssClassError').show();
 							return false;
 						} else {
-							$(this).parent("td").find("span.error").hide();
+							$(this).removeClass("error");
 							$(this).next('.cssClassRight').show();
 							$(this).siblings('.cssClassError').hide();
-							$(this).siblings(".cssClassError").parent('div')
-									.removeClass("diverror");
-							$(this).siblings('.cssClassError').prevAll(
-									"input:first").removeClass("error");
+							$(this).siblings('.cssClassError').html('');
 						}
 					});
 
@@ -2721,6 +2727,14 @@ $(function() {
 				placeholder : "yyyy-mm-dd"
 			});
 
+			$("#txtBusinesManagerDate").datepicker({
+				dateFormat : 'yy-mm-dd',
+				changeMonth : true,
+				changeYear : true
+			}).mask("9999-99-99", {
+				placeholder : "yyyy-mm-dd"
+			});
+
 			$("#txtDirectCosts").autoNumeric('init', {
 				aSep : ',',
 				dGroup : '3',
@@ -2746,7 +2760,32 @@ $(function() {
 				aPad : true
 			});
 
-			$("#txtFARate").mask("99.99 %");
+			$("#txtFARate").autoNumeric('init', {
+				aDec : '.',
+				aSign : '% ',
+				pSign : 's',
+				aPad : true,
+				vMin : "0.00",
+				vMax : "99.99"
+			});
+
+			$("#txtPISalary").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
+
+			$("#txtPIFringe").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$ ',
+				pSign : 'p',
+				aPad : true
+			});
 
 			$(
 					'#txtSearchProjectTitle,#txtSearchProposedBy,#txtSearchTotalCostsFrom,#txtSearchTotalCostsTo,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlSearchProposalStatus')

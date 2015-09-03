@@ -1868,6 +1868,11 @@ td.sfSelectleftright {
 	height: 10px;
 }
 
+.cssClassInfo {
+	display: block;
+	width: auto;
+}
+
 .sfRequired, .sfError, .cssClassRequired, .cssClassrequired,
 	.cssClassRegisterInputBg {
 	color: red;
@@ -1880,26 +1885,18 @@ td.sfSelectleftright {
 	width: auto;
 }
 
-.cssClassTextArea .error {
-	width: 200px;
-}
-
 label.error {
 	display: block;
-	margin-left: 1em;
+	/*margin-left: 1em;*/
 	width: auto;
 }
 
 #txtWorkEmail-error {
-	display: table-caption;
-	!
-	important
+	display: table-caption;!important
 }
 
 #txtPersonalEmail-error {
-	display: table-caption;
-	!
-	important
+	display: table-caption;!important
 }
 
 .sfRadiobutton {
@@ -5582,9 +5579,16 @@ tr.sfTableRowBrd-btm td {
 	text-align: right;
 }
 
-input.error, .textarea.error {
+input.error {
 	border: 1px dashed #F00 !important;
 	padding: 8px;
+}
+
+.cssClassTextArea.error {
+	border: 1px dashed #F00 !important;
+	padding: 8px;
+	color: #737373;
+    width: 200px;
 }
 
 .divLayoutContainer .sfMainContent {
