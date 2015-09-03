@@ -358,7 +358,7 @@
 																</select></td>
 																<td><input type="text" class="sfTextBoxSmall"
 																	name="txtPhoneNo" placeholder="Phone #"
-																	disabled="disabled" style="width: 80px !important"></td>
+																	disabled="disabled" style="width: 81px !important"></td>
 																<td><input type="Button" value="Add More"
 																	name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -1072,7 +1072,8 @@
 																<td><input type="text" class="sfInputbox"
 																	id="txtSignBusinessManager" name="signBusinessManager"
 																	placeholder="Business Manager Signature"></td>
-																<td><input type="text" class="sfInputbox" id="txtBusinesManagerDate"
+																<td><input type="text" class="sfInputbox"
+																	id="txtBusinesManagerDate"
 																	name="signBusinesManagerDate" placeholder="Signed Date"></td>
 															</tr>
 														</tbody>
