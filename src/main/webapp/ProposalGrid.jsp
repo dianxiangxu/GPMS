@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e8c7c096f52c00e8c429b5";
+	var userProfileId = "55e89430af6e0427c0c2cf63";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -134,7 +134,7 @@
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 
 <!-- <link type="text/css" rel="stylesheet" -->
-<!-- 	href="css/Tabs/slidingtabs-vertical.css" /> -->
+<!-- 	href="css/Tabs/slidingtabs-vertical.css"/> -->
 </head>
 <body>
 	<form enctype="multipart/form-data" action="Manage-Proposals.jsp"
@@ -142,9 +142,9 @@
 		<div style="display: none;" id="UpdateProgress1">
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
-				<img style="border-width: 0px;" alt="Loading..."
-					src="images/ajax-loader.gif" title="Loading..." id="imgProgress">
-				<br> <span id="lblPrgress">Please wait...</span>
+				<img id="imgProgress" src="images/ajax-loader.gif"
+					style="border-width: 0px;" alt="Loading..." title="Loading..." /> <br>
+				<span id="lblPrgress">Please wait...</span>
 			</div>
 		</div>
 		<noscript>
@@ -188,26 +188,29 @@
 												<div class="cssClassHeaderRight">
 													<div class="sfButtonwrapper">
 														<p>
-															<button type="button" id="btnAddNew" class="sfBtn">
+															<button title="Add New Proposal" type="button"
+																id="btnAddNew" class="sfBtn">
 																<span class="sfLocale icon-addnew">Add New
 																	Proposal</span>
 															</button>
 														</p>
 														<p>
-															<button type="button" id="btnDeleteSelected"
-																class="sfBtn">
+															<button title="Delete All Selected" type="button"
+																id="btnDeleteSelected" class="sfBtn">
 																<span class="sfLocale icon-delete">Delete All
 																	Selected</span>
 															</button>
 														</p>
 														<p>
-															<button type="button" id="btnExportToExcel" class="sfBtn">
+															<button title="Export to Excel" type="button"
+																id="btnExportToExcel" class="sfBtn">
 																<span class="sfLocale icon-showall">Export to
 																	Excel</span>
 															</button>
 														</p>
 														<p>
-															<button type="button" id="btnExportToCSV" class="sfBtn">
+															<button title="Export to CSV" type="button"
+																id="btnExportToCSV" class="sfBtn">
 																<span class="sfLocale icon-showall">Export to CSV</span>
 															</button>
 														</p>
@@ -226,58 +229,60 @@
 															<tbody>
 																<tr>
 																	<td><label class="cssClassLabel sfLocale">Project
-																			Title:</label> <input type="text" class="sfTextBoxFix"
-																		id="txtSearchProjectTitle" placeholder="Project Title"></td>
+																			Title:</label> <input title="Project Title" type="text"
+																		class="sfTextBoxFix" id="txtSearchProjectTitle"
+																		placeholder="Project Title" /></td>
 																	<td><label class="cssClassLabel sfLocale">
-																			Proposed By:</label><input id="txtSearchProposedBy"
-																		class="sfTextBoxFix" type="text"
-																		placeholder="Proposed By"></td>
+																			Proposed By:</label><input title="Proposed By"
+																		id="txtSearchProposedBy" class="sfTextBoxFix"
+																		type="text" placeholder="Proposed By" /></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Total Costs:</label> <br> <span class="label sfLocale">
-																			From :</span> <input type="text"
+																			From :</span> <input title="Total Costs From" type="text"
 																		id="txtSearchTotalCostsFrom" class="sfTextBoxFix"
-																		placeholder="From"> <span
-																		class="label sfLocale"> To :</span> <input type="text"
+																		placeholder="From" /> <span class="label sfLocale">
+																			To :</span> <input title="Total Costs To" type="text"
 																		id="txtSearchTotalCostsTo" class="sfTextBoxFix"
-																		placeholder="To"></td>
+																		placeholder="To" /></td>
 																	</td>
 
 																	<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
-																	<!-- 																				Project Type:</label> <select id="ddlProjectType" -->
-																	<!-- 																			class="sfListmenu" style="width: 100px;" title="Project Type"> -->
+																	<!-- 																				Project Type:</label> <select title="Choose Project Type" id="ddlProjectType" -->
+																	<!-- 																			class="sfListmenu" style="width: 100px;"> -->
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 																	<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
-																	<!-- 																				Type of Request:</label> <select id="ddlTypeOfRequest" -->
-																	<!-- 																			class="sfListmenu" style="width: 100px;" title="Type of Request"> -->
+																	<!-- 																				Type of Request:</label> <select title="Choose Type of Request" id="ddlTypeOfRequest" -->
+																	<!-- 																			class="sfListmenu" style="width: 100px;"> -->
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 																	<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
-																	<!-- 																				Location of Project:</label> <select id="ddlLocationOfProject" -->
-																	<!-- 																			class="sfListmenu" style="width: 100px;" title="Location of Project"> -->
+																	<!-- 																				Location of Project:</label> <select  title="Choose Location of Project" id="ddlLocationOfProject" -->
+																	<!-- 																			class="sfListmenu" style="width: 100px;"> -->
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Received On:</label><br> <span class="label sfLocale">
-																			From :</span> <input type="text"
+																			From :</span> <input title="Received On From" type="text"
 																		id="txtSearchReceivedOnFrom" class="sfTextBoxFix"
-																		placeholder="From"> <span
-																		class="label sfLocale"> To :</span> <input type="text"
+																		placeholder="From" /> <span class="label sfLocale">
+																			To :</span> <input title="Received On To" type="text"
 																		id="txtSearchReceivedOnTo" class="sfTextBoxFix"
-																		placeholder="To"></td>
+																		placeholder="To" /></td>
 
 																	<td><label class="cssClassLabel sfLocale">
-																			Proposal Status:</label> <select id="ddlSearchProposalStatus"
-																		class="sfListmenu" style="width: 80px;"
-																		title="Proposal Status">
+																			Proposal Status:</label> <select
+																		title="Choose Proposal Status"
+																		id="ddlSearchProposalStatus" class="sfListmenu"
+																		style="width: 80px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 																	<td><br>
-																		<button class="sfBtn" id="btnSearchProposal"
-																			type="button">
+																		<button title="Search Proposal" class="sfBtn"
+																			id="btnSearchProposal" type="button">
 																			<span class="sfLocale icon-search">Search</span>
 																		</button></td>
 																</tr>
@@ -286,7 +291,7 @@
 													</div>
 													<div class="loading">
 														<img id="ajaxLoader" src="" class="sfLocale"
-															alt="loading...." title="loading...." />
+															alt="Loading..." title="Loading..." />
 													</div>
 													<div class="log"></div>
 													<table id="gdvProposals" cellspacing="0" cellpadding="0"
@@ -303,6 +308,11 @@
 												<h1>
 													<span id="lblFormHeading">New Proposal Details</span>
 												</h1>
+												<div>
+													<span class="cssClassRequired">*</span> <span
+														class="cssClassLabelTitle">indicates required
+														fields</span>
+												</div>
 											</div>
 											<div id="accordion">
 												<h3>
@@ -332,35 +342,37 @@
 														</thead>
 														<tbody>
 															<tr>
-																<td><select title="Role" class="sfListmenu"
+																<td><select title="Choose Role" class="sfListmenu"
 																	name="ddlRole" style="width: 55px;">
 																		<option value="0">PI</option>
 																		<option value="1">Co-PI</option>
 																		<option value="2">Senior Personnel</option>
 																</select></td>
-																<td><select title="Name" class="sfListmenu"
-																	name="ddlName" style="width: 150px;">
+																<td><select title="Choose Full Name"
+																	class="sfListmenu" name="ddlName" style="width: 150px;">
 																</select></td>
-																<td><select title="College Name" class="sfListmenu"
-																	name="ddlCollege" style="width: 110px;">
+																<td><select title="Choose College Name"
+																	class="sfListmenu" name="ddlCollege"
+																	style="width: 110px;">
 																</select></td>
-																<td><select title="Department Name"
+																<td><select title="Choose Department Name"
 																	class="sfListmenu" name="ddlDepartment"
 																	style="width: 125px;">
 																</select></td>
-																<td><select title="Position Type"
+																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
 																	style="width: 110px;">
 																</select></td>
-																<td><select title="Position Title"
+																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
 																	style="width: 145px;">
 																</select></td>
-																<td><input type="text" class="sfTextBoxSmall"
-																	name="txtPhoneNo" placeholder="Phone #"
-																	disabled="disabled" style="width: 81px !important"></td>
-																<td><input type="Button" value="Add More"
-																	name="AddMore"
+																<td><input title="Phone #" type="text"
+																	class="sfTextBoxSmall" name="txtPhoneNo"
+																	placeholder="Phone #" disabled="disabled"
+																	style="width: 81px !important" /></td>
+																<td><input title="Add More" type="Button"
+																	value="Add More" name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>
 															</tr>
 														</tbody>
@@ -378,12 +390,12 @@
 																	id="lblProjectTitle">Project Title:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" colspan="3"><textarea
-																		class="cssClassTextArea" cols="26" rows="2"
-																		title="Default Value" name="projectTitle"
+																		title="Project Title" class="cssClassTextArea"
+																		cols="26" rows="2" name="projectTitle"
 																		id="txtProjectTitle" placeholder="Project Title"></textarea><span
-																	class="cssClassRight"> <img
+																	class="cssClassRight"> <img src=""
 																		class="cssClassSuccessImg sfLocale" height="13"
-																		width="18" title="Right" src="" alt="Right" />
+																		width="18" alt="Right" title="Right" />
 																</span> <span class="cssClassError sfLocale">Project
 																		title must be unique with no spaces</span></td>
 															</tr>
@@ -391,8 +403,8 @@
 																<td><span class="cssClassLabel" id="lblProjectType">Project
 																		Type:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	id="ddlProjectType" name="projectType"
-																	title="Project Type">
+																	title="Choose Project Type" id="ddlProjectType"
+																	name="projectType">
 																		<option value="">Choose Project Type</option>
 																		<option value="1">Research-Basic</option>
 																		<option value="2">Research-Applied</option>
@@ -404,8 +416,8 @@
 																	id="lblTypeOfRequest">Type of Request:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	id="ddlTypeOfRequest" name="typeOfRequest"
-																	title="Type of Request">
+																	title="Choose Type of Request" id="ddlTypeOfRequest"
+																	name="typeOfRequest">
 																		<option value="">Choose Type of Request</option>
 																		<option value="1">Pre-Proposal</option>
 																		<option value="2">New Proposal</option>
@@ -417,15 +429,16 @@
 																<td><span id="lblDueDate" class="cssClassLabel">Due
 																		Date:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" id="txtDueDate" class="sfInputbox"
-																	name="dueDate" placeholder="Due Date"></td>
+																	title="Due Date" type="text" id="txtDueDate"
+																	class="sfInputbox" name="dueDate"
+																	placeholder="Due Date" /></td>
 
 																<td><span id="lblLocationOfProject"
 																	class="cssClassLabel">Location of Project:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	id="ddlLocationOfProject" name="locationOfProject"
-																	title="Location of Project">
+																	title="Choose Location of Project"
+																	id="ddlLocationOfProject" name="locationOfProject">
 																		<option value="">Choose Location of Project</option>
 																		<option value="1">Off-campus</option>
 																		<option value="2">On-campus</option>
@@ -436,16 +449,17 @@
 																	class="cssClassLabel">Project Period: From:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" id="txtProjectPeriodFrom"
-																	class="sfInputbox" name="projectPeriodFrom"
-																	placeholder="From"></td>
+																	title="Project Period From" type="text"
+																	id="txtProjectPeriodFrom" class="sfInputbox"
+																	name="projectPeriodFrom" placeholder="From" /></td>
 
 																<td><span id="lblProjectPeriodTo"
 																	class="cssClassLabel">To:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" id="txtProjectPeriodTo" class="sfInputbox"
-																	name="projectPeriodTo" placeholder="To"></td>
+																	title="Project Period To" type="text"
+																	id="txtProjectPeriodTo" class="sfInputbox"
+																	name="projectPeriodTo" placeholder="To" /></td>
 															</tr>
 															<tr id="trProposalInfo">
 																<td><span class="cssClassLabel">Proposal No:</span></td>
@@ -462,7 +476,7 @@
 																	id="lblProposalStatus">Proposal Status:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" colspan="3"><select
-																	title="Proposal Status" name="proposalStatus"
+																	title="Choose Proposal Status" name="proposalStatus"
 																	id="ddlProposalStatus">
 																		<option value="">Choose Proposal Status</option>
 																</select></td>
@@ -483,40 +497,39 @@
 																	id="lblNameOfGrantingAgency">Name of Granting
 																		Agency:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" colspan="3"><input
-																	type="text" class="sfInputbox"
-																	id="txtNameOfGrantingAgency"
+																	title="Name of Granting Agency" type="text"
+																	class="sfInputbox" id="txtNameOfGrantingAgency"
 																	name="nameOfGrantingAgency"
-																	placeholder="Name of Granting
-																					Agency">
-																	<span class="cssClassLabel cssClassInfo">Enter
-																		comma separated names.</span></td>
+																	placeholder="Name of Granting Agency" /> <span
+																	class="cssClassLabel cssClassInfo">Enter comma
+																		separated names.</span></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel" id="lblDirectCosts">Direct
 																		Costs:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtDirectCosts"
-																	name="directCosts" placeholder="Direct Costs"></td>
+																	title="Direct Costs" type="text" class="sfInputbox"
+																	id="txtDirectCosts" name="directCosts"
+																	placeholder="Direct Costs" /></td>
 
 																<td><span class="cssClassLabel" id="lblFACosts">F&A
 																		Costs:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtFACosts"
-																	name="FACosts" placeholder="F&A Costs"></td>
+																	title="F&A Costs" type="text" class="sfInputbox"
+																	id="txtFACosts" name="FACosts" placeholder="F&A Costs" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel" id="lblTotalCosts">Total
 																		Costs:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtTotalCosts"
-																	name="totalCosts" placeholder="Total Costs"></td>
+																	title="Total Costs" type="text" class="sfInputbox"
+																	id="txtTotalCosts" name="totalCosts"
+																	placeholder="Total Costs" /></td>
 																<td><span class="cssClassLabel" id="lblFARate">F&A
 																		Rate:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtFARate"
-																	name="FARate"
-																	placeholder="F&A
-																					Rate"></td>
+																	title="F&A Rate" type="text" class="sfInputbox"
+																	id="txtFARate" name="FARate" placeholder="F&A Rate" /></td>
 															</tr>
 														</tbody>
 													</table>
@@ -533,7 +546,7 @@
 																		Institutional committed cost share included in the
 																		proposal?</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Institutional Commitment Cost"
+																	title="Choose Institutional Commitment Cost"
 																	class="sfListmenu" id="ddlInstitutionalCommitmentCost"
 																	name="institutionalCommitmentCost">
 																		<option value="">Select Option</option>
@@ -548,8 +561,7 @@
 																		Party committed cost share included in the proposal?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Third
-																					Party commitment Cost"
+																	title="Choose Third Party commitment Cost"
 																	class="sfListmenu" id="ddlThirdPartyCommitmentCost"
 																	name="thirdPartyCommitmentCost">
 																		<option value="">Select Option</option>
@@ -572,7 +584,7 @@
 																		renovated space/facilities be required?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="New Space" class="sfListmenu"
+																	title="Choose New Space" class="sfListmenu"
 																	id="ddlNewSpaceRequired" name="newSpaceRequired">
 																		<option value="">Select Option</option>
 																		<option value="1">Yes</option>
@@ -583,7 +595,7 @@
 																<td><span class="cssClassLabel">Will rental
 																		space be required?</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Rental Space Required" class="sfListmenu"
+																	title="Choose Rental Space Required" class="sfListmenu"
 																	id="ddlRentalSpaceRequired" name="rentalSpaceRequired">
 																		<option value="">Select Option</option>
 																		<option value="1">Yes</option>
@@ -596,7 +608,7 @@
 																		end date of the project?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Institutional Commitments Required"
+																	title="Choose Institutional Commitments Required"
 																	class="sfListmenu"
 																	id="ddlInstitutionalCommitmentsRequired"
 																	name="institutionalCommitmentsRequired">
@@ -625,7 +637,7 @@
 																			proposal</b>?
 																</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Financial Conflict of Interest"
+																	title="Choose Financial Conflict of Interest"
 																	class="sfListmenu" id="ddlFinancialCOI"
 																	name="financialCOI">
 																		<option value="">Select Option</option>
@@ -638,7 +650,7 @@
 																		financial conflict been disclosed?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Financial Conflict been Disclosed?"
+																	title="Choose Financial Conflict been Disclosed?"
 																	class="sfListmenu" id="ddlDisclosedFinancialCOI"
 																	name="disclosedFinancialCOI">
 																		<option value="">Select Option</option>
@@ -653,7 +665,7 @@
 																		been a material change to your annual disclosure form?
 																</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Material changed to Annual Disclosure Form?"
+																	title="Choose Material changed to Annual Disclosure Form?"
 																	class="sfListmenu" id="ddlMaterialChanged"
 																	name="materialChanged">
 																		<option value="">Select Option</option>
@@ -678,7 +690,7 @@
 																		project involve the use of Human Subjects? </span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Involves Use of Human Subjects?"
+																	title="Choose Involves Use of Human Subjects?"
 																	class="sfListmenu" id="ddlUseHumanSubjects"
 																	name="useHumanSubjects">
 																		<option value="">Select Option</option>
@@ -692,7 +704,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIRBOption"><select
-																	title="IRB Option" class="sfListmenu"
+																	title="Choose IRB Option" class="sfListmenu"
 																	style="width: 100px;" id="ddlIRBOptions"
 																	name="IRBOptions">
 																		<option value="">Select Option</option>
@@ -701,8 +713,8 @@
 																</select></td>
 
 																<td class="cssClassTableRightCol" id="tdIRBtxt"><input
-																	type="text" class="sfTextBoxSmall" id="txtIRB"
-																	name="IRB" placeholder="IRB #"> </select> <span
+																	title="IRB #" type="text" class="sfTextBoxSmall"
+																	id="txtIRB" name="IRB" placeholder="IRB #" /> <span
 																	class="cssClassRequired">*</span></td>
 															</tr>
 
@@ -725,7 +737,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIACUCOption"><select
-																	title="IACUC Option" class="sfListmenu"
+																	title="Choose IACUC Option" class="sfListmenu"
 																	style="width: 100px;" id="ddlIACUCOptions"
 																	name="IACUCOptions">
 																		<option value="">Select Option</option>
@@ -734,8 +746,8 @@
 																</select></td>
 
 																<td class="cssClassTableRightCol" id="tdIACUCtxt"><input
-																	type="text" class="sfTextBoxSmall" id="txtIACUC"
-																	name="IACUC" placeholder="IACUC #"> </select> <span
+																	title="IACUC #" type="text" class="sfTextBoxSmall"
+																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /> <span
 																	class="cssClassRequired">*</span></td>
 															</tr>
 
@@ -744,8 +756,9 @@
 																		project involve Biosafety concerns?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Involves Biosafety Concerns?" class="sfListmenu"
-																	id="ddlInvovleBioSafety" name="invovleBioSafety">
+																	title="Choose Involves Biosafety Concerns?"
+																	class="sfListmenu" id="ddlInvovleBioSafety"
+																	name="invovleBioSafety">
 																		<option value="">Select Option</option>
 																		<option value="1">Yes</option>
 																		<option value="2">No</option>
@@ -757,7 +770,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIBCOption"><select
-																	title="IBC Option" class="sfListmenu"
+																	title="Choose IBC Option" class="sfListmenu"
 																	style="width: 100px;" id="ddlIBCOptions"
 																	name="IBCOptions">
 																		<option value="">Select Option</option>
@@ -766,8 +779,8 @@
 																</select></td>
 
 																<td class="cssClassTableRightCol" id="tdIBCtxt"><input
-																	type="text" class="sfTextBoxSmall" id="txtIBC"
-																	name="IBC" placeholder="IBC #"> <span
+																	title="IBC #" type="text" class="sfTextBoxSmall"
+																	id="txtIBC" name="IBC" placeholder="IBC #" /> <span
 																	class="cssClassRequired">*</span></td>
 															</tr>
 
@@ -776,7 +789,7 @@
 																		project have Environmental Health & Safety concerns?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" colspan="4"><select
-																	title="Have Environmental Health & Safety Concerns?"
+																	title="Choose Have Environmental Health & Safety Concerns?"
 																	class="sfListmenu" id="ddlEnvironmentalConcerns"
 																	name="environmentalConcerns">
 																		<option value="">Select Option</option>
@@ -800,7 +813,7 @@
 																		behalf of foreign nationals?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Anticipate Payment to/on behalf Foreign Nationals?"
+																	title="Choose Anticipate Payment to/on behalf Foreign Nationals?"
 																	class="sfListmenu" id="ddlAnticipateForeignNationals"
 																	name="anticipateForeignNationals">
 																		<option value="">Select Option</option>
@@ -813,7 +826,7 @@
 																		anticipate course release time?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Anticipate Course Release Time?"
+																	title="Choose Anticipate Course Release Time?"
 																	class="sfListmenu" id="ddlAnticipateReleaseTime"
 																	name="anticipateReleaseTime">
 																		<option value="">Select Option</option>
@@ -826,7 +839,7 @@
 																		proposed activities related to Center for Advanced
 																		Energy Studies?</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Related to Center for Advanced
+																	title="Choose Related to Center for Advanced
 																					Energy Studies?"
 																	class="sfListmenu" id="ddlRelatedToEnergyStudies"
 																	name="relatedToEnergyStudies">
@@ -850,7 +863,7 @@
 																		project involve non-funded collaborations? </span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Involves Non-funded Collaborations?"
+																	title="Choose Involves Non-funded Collaborations?"
 																	class="sfListmenu" id="ddlInvolveNonFundedCollabs"
 																	name="involveNonFundedCollabs">
 																		<option value="">Select Option</option>
@@ -864,10 +877,11 @@
 																<td><span class="cssClassLabel">Collaborators:</span>
 																	<span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtCollaborators"
-																	name="collaborators" placeholder="Collaborators">
-																	<span class="cssClassLabel cssClassInfo">Enter
-																		comma separated names.</span></td>
+																	title="Collaborators" type="text" class="sfInputbox"
+																	id="txtCollaborators" name="collaborators"
+																	placeholder="Collaborators" /> <span
+																	class="cssClassLabel cssClassInfo">Enter comma
+																		separated names.</span></td>
 															</tr>
 														</tbody>
 													</table>
@@ -886,7 +900,7 @@
 																		Proprietary that should not be publicly released?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Contains Confidential Information Which
+																	title="Choose Contains Confidential Information Which
 																					Is Proprietary?"
 																	class="sfListmenu" style="width: 105px;"
 																	id="ddlProprietaryInformation"
@@ -896,10 +910,11 @@
 																		<option value="2">No</option>
 																</select></td>
 																<td id="tdPagesWithProprietaryInfo"><input
+																	title="Pages With Proprietary/Confidential Information"
 																	type="text" class="sfInputbox" style="width: 285px;"
 																	id="txtPagesWithProprietaryInfo"
 																	name="pagesWithProprietaryInfo"
-																	placeholder="Pages With Proprietary/Confidential Information">
+																	placeholder="Pages With Proprietary/Confidential Information" />
 																	<span class="cssClassRequired">*</span> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated page numbers.</span></td>
@@ -908,12 +923,13 @@
 															<tr id="trTypeOfProprietaryInfo">
 																<td></td>
 																<td class="cssClassTableRightCol"><input
-																	type="checkbox" name="patentable" id="chkPatentable"
-																	class="cssClassCheckBox" /> <label
+																	title="Patentable" type="checkbox" name="patentable"
+																	id="chkPatentable" class="cssClassCheckBox" /> <label
 																	class="cssClassLabel" for="chkPatentable">Patentable</label></td>
 																<td class="cssClassTableRightCol"><input
-																	type="checkbox" name="copyrightable"
-																	id="chkCopyrightable" class="cssClassCheckBox" /> <label
+																	title="Copyrightable" type="checkbox"
+																	name="copyrightable" id="chkCopyrightable"
+																	class="cssClassCheckBox" /> <label
 																	class="cssClassLabel" for="chkCopyrightable">Copyrightable</label></td>
 															</tr>
 															<tr>
@@ -922,8 +938,9 @@
 																		University may own or have an interest?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" colspan="2"><select
-																	title="Own Intellectual Property?" class="sfListmenu"
-																	style="width: 105px;" id="ddlOwnIntellectualProperty"
+																	title="Choose Own Intellectual Property?"
+																	class="sfListmenu" style="width: 105px;"
+																	id="ddlOwnIntellectualProperty"
 																	name="ownIntellectualProperty">
 																		<option value="">Select Option</option>
 																		<option value="1">Yes</option>
@@ -996,85 +1013,101 @@
 
 													<table cellspacing="0" cellpadding="0" border="0"
 														id="trSignPICOPI">
-														<tbody>
+														<thead>
 															<tr>
-																<td><span class="cssClassLabel">Principal/Co-Investigator(s)</span></td>
-																<td><span class="cssClassLabel">Name(s)</span></td>
-																<td><span class="cssClassLabel">Date</span></td>
+																<th><span class="cssClassLabel">Principal/Co-Investigator(s)</span></th>
+																<th><span class="cssClassLabel">Name(s)</span></th>
+																<th><span class="cssClassLabel">Date</span></th>
 															</tr>
+														</thead>
+														<tbody>
 															<tr>
 																<td><span class="cssClassLabel" id="lblSignPIName"
 																	name="signPIName">Bind
 																		Principal/Co-Investigator(s) Name here</span></td>
-																<td><input type="text" class="sfInputbox"
-																	name="signPIBox" placeholder="PI's Signature"></td>
-																<td><input type="text" class="sfInputbox"
-																	name="signPIDate" placeholder="Signed Date"></td>
+																<td><input title="PI's Signature" type="text"
+																	class="sfInputbox" name="signPIBox"
+																	placeholder="PI's Signature" /></td>
+																<td><input title="Signed Date" type="text"
+																	class="sfInputbox" name="signPIDate"
+																	placeholder="Signed Date" /></td>
 															</tr>
 														</tbody>
 													</table>
 
 													<table cellspacing="0" cellpadding="0" border="0"
 														id="trSignChair">
-														<tbody>
+														<thead>
 															<tr>
-																<td><span class="cssClassLabel">Department
-																		Chair(s) or Director(s)</span></td>
-																<td><span class="cssClassLabel">Name(s)</span></td>
-																<td><span class="cssClassLabel">Date</span></td>
+																<th><span class="cssClassLabel">Department
+																		Chair(s) or Director(s)</span></th>
+																<th><span class="cssClassLabel">Name(s)</span></th>
+																<th><span class="cssClassLabel">Date</span></th>
 															</tr>
+														</thead>
+														<tbody>
 															<tr>
 																<td><span class="cssClassLabel"
 																	id="lblSignChairName" name="signChairName">Bind
 																		Dept Chair(s) or Director(s) Name here</span></td>
-																<td><input type="text" class="sfInputbox"
-																	name="signChairBox" placeholder="Chair's Signature"></td>
-																<td><input type="text" class="sfInputbox"
-																	name="signChairDate" placeholder="Signed Date"></td>
+																<td><input title="Chair's Signature" type="text"
+																	class="sfInputbox" name="signChairBox"
+																	placeholder="Chair's Signature" /></td>
+																<td><input title="Signed Date" type="text"
+																	class="sfInputbox" name="signChairDate"
+																	placeholder="Signed Date" /></td>
 															</tr>
 														</tbody>
 													</table>
 
 													<table cellspacing="0" cellpadding="0" border="0"
 														id="trSignDean">
-														<tbody>
+														<thead>
 															<tr>
-																<td><span class="cssClassLabel">Dean(s)</span></td>
-																<td><span class="cssClassLabel">Name(s)</span></td>
-																<td><span class="cssClassLabel">Date</span></td>
+																<th><span class="cssClassLabel">Dean(s)</span></th>
+																<th><span class="cssClassLabel">Name(s)</span></th>
+																<th><span class="cssClassLabel">Date</span></th>
 															</tr>
+														</thead>
+														<tbody>
 															<tr>
 																<td><span class="cssClassLabel"
 																	id="lblSignDeanName" name="signDeanName">Bind
 																		Dean(s) Name here</span></td>
-																<td><input type="text" class="sfInputbox"
-																	name="signDeanBox" placeholder="Dean's Signature"></td>
-																<td><input type="text" class="sfInputbox"
-																	name="signDeanDate" placeholder="Signed Date"></td>
+																<td><input title="Dean's Signature" type="text"
+																	class="sfInputbox" name="signDeanBox"
+																	placeholder="Dean's Signature" /></td>
+																<td><input title="Signed Date" type="text"
+																	class="sfInputbox" name="signDeanDate"
+																	placeholder="Signed Date" /></td>
 															</tr>
 														</tbody>
 													</table>
 
 													<table cellspacing="0" cellpadding="0" border="0"
 														id="trSignBusinessManager">
-														<tbody>
+														<thead>
 															<tr>
-																<td><span class="cssClassLabel">Business
-																		Manager (if applicable) has reviewed this proposal. </span></td>
-																<td colspan="2"><span class="cssClassLabel">Initials:</span>
-																	<span class="cssClassRequired">*</span></td>
+																<th><span class="cssClassLabel">Business
+																		Manager (if applicable) has reviewed this proposal.</span></th>
+																<th><span class="cssClassLabel">Initials:</span> <span
+																	class="cssClassRequired">*</span></th>
+																<th></th>
 															</tr>
+														</thead>
+														<tbody>
 															<tr>
 																<td><span class="cssClassLabel"
 																	id="lblSignBusinesManagerName"
 																	name="signBusinesManagerName">Bind Business
 																		Manager's Name here</span></td>
-																<td><input type="text" class="sfInputbox"
+																<td><input title="Business Manager's Signature"
+																	type="text" class="sfInputbox"
 																	id="txtSignBusinessManager" name="signBusinessManager"
-																	placeholder="Business Manager Signature"></td>
-																<td><input type="text" class="sfInputbox"
-																	id="txtBusinesManagerDate"
-																	name="signBusinesManagerDate" placeholder="Signed Date"></td>
+																	placeholder="Business Manager's Signature" /></td>
+																<td><input title="Signed Date" type="text"
+																	class="sfInputbox" id="txtBusinesManagerDate"
+																	name="signBusinesManagerDate" placeholder="Signed Date" /></td>
 															</tr>
 														</tbody>
 													</table>
@@ -1093,9 +1126,10 @@
 															<tr>
 																<td><span class="cssClassLabel">Flow-Through,
 																		List Agency</span> <span class="cssClassRequired">*</span></td>
-																<td><input type="text" class="sfInputbox"
-																	id="txtAgencyList" name="agencyList"
-																	placeholder="Flow-Through, List Agency"> <span
+																<td><input title="Flow-Through, List Agency"
+																	type="text" class="sfInputbox" id="txtAgencyList"
+																	name="agencyList"
+																	placeholder="Flow-Through, List Agency" /> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated names.</span></td>
 															</tr>
@@ -1105,53 +1139,60 @@
 																		Source:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><div
 																		class="cssClassCheckBox">
-																		<input type="checkbox" class="cssClassCheckBox"
-																			id="chkFederal" name="federal" value="Federal"><label
+																		<input title="Federal" type="checkbox"
+																			class="cssClassCheckBox" id="chkFederal"
+																			name="federal" value="Federal" /><label
 																			class="cssClassLabel" for="chkFederal">Federal</label><input
-																			type="checkbox" class="cssClassCheckBox"
-																			id="chkFederalFlowThrough" name="federalFlowThrough"
-																			value="Federal Flow-Through"><label
+																			title="Federal Flow-Through" type="checkbox"
+																			class="cssClassCheckBox" id="chkFederalFlowThrough"
+																			name="federalFlowThrough"
+																			value="Federal Flow-Through" /><label
 																			class="cssClassLabel" for="chkFederalFlowThrough">Federal
-																			Flow-Through</label><input type="checkbox"
-																			class="cssClassCheckBox" id="chkStateOfIdahoEntity"
-																			name="stateOfIdahoEntity"
-																			value="State of Idaho Entity"><label
+																			Flow-Through</label><input title="State of Idaho Entity"
+																			type="checkbox" class="cssClassCheckBox"
+																			id="chkStateOfIdahoEntity" name="stateOfIdahoEntity"
+																			value="State of Idaho Entity" /><label
 																			class="cssClassLabel" for="chkStateOfIdahoEntity">State
-																			of Idaho Entity</label> <input type="checkbox"
-																			class="cssClassCheckBox" id="chkPrivateForProfit"
-																			name="privateForProfit" value="Private For Profit"><label
+																			of Idaho Entity</label> <input title="Private For Profit"
+																			type="checkbox" class="cssClassCheckBox"
+																			id="chkPrivateForProfit" name="privateForProfit"
+																			value="Private For Profit" /><label
 																			class="cssClassLabel" for="chkPrivateForProfit">Private
-																			For Profit</label><input type="checkbox"
-																			class="cssClassCheckBox"
+																			For Profit</label><input title="Non-Profit Organization"
+																			type="checkbox" class="cssClassCheckBox"
 																			id="chkNonProfitOrganization"
 																			name="nonProfitOrganization"
-																			value="Non-Profit Organization"><label
+																			value="Non-Profit Organization" /><label
 																			class="cssClassLabel" for="chkNonProfitOrganization">Non-Profit
-																			Organization</label><input type="checkbox"
-																			class="cssClassCheckBox" id="chkNonIdahoStateEntity"
-																			name="nonIdahoStateEntity"
-																			value="Non-Idaho State Entity"><label
-																			class="cssClassLabel" for="chkNonIdahoStateEntity">Non-Idaho
-																			State Entity</label> <input type="checkbox"
-																			class="cssClassCheckBox" id="chkCollegeUniversity"
-																			name="collegeUniversity" value="College/University"><label
-																			class="cssClassLabel" for="chkCollegeUniversity">College/University</label><input
+																			Organization</label><input title="Non-Idaho State Entity"
 																			type="checkbox" class="cssClassCheckBox"
-																			id="chkLocalEntity" name="localEntity"
-																			value="Local Entity"><label
+																			id="chkNonIdahoStateEntity"
+																			name="nonIdahoStateEntity"
+																			value="Non-Idaho State Entity" /><label
+																			class="cssClassLabel" for="chkNonIdahoStateEntity">Non-Idaho
+																			State Entity</label> <input title="College/University"
+																			type="checkbox" class="cssClassCheckBox"
+																			id="chkCollegeUniversity" name="collegeUniversity"
+																			value="College/University" /><label
+																			class="cssClassLabel" for="chkCollegeUniversity">College/University</label><input
+																			title="Local Entity" type="checkbox"
+																			class="cssClassCheckBox" id="chkLocalEntity"
+																			name="localEntity" value="Local Entity" /><label
 																			class="cssClassLabel" for="chkLocalEntity">Local
-																			Entity</label><input type="checkbox" class="cssClassCheckBox"
+																			Entity</label><input title="Non-Idaho Local Entity"
+																			type="checkbox" class="cssClassCheckBox"
 																			id="chkNonIdahoLocalEntity"
 																			name="nonIdahoLocalEntity"
-																			value="Non-Idaho Local Entity"><label
+																			value="Non-Idaho Local Entity" /><label
 																			class="cssClassLabel" for="chkNonIdahoLocalEntity">Non-Idaho
-																			Local Entity</label> <input type="checkbox"
-																			class="cssClassCheckBox" id="chkTribalGovernment"
-																			name="tribalGovernment" value="Tribal Government"><label
+																			Local Entity</label> <input title="Tribal Government"
+																			type="checkbox" class="cssClassCheckBox"
+																			id="chkTribalGovernment" name="tribalGovernment"
+																			value="Tribal Government" /><label
 																			class="cssClassLabel" for="chkTribalGovernment">Tribal
-																			Government</label><input type="checkbox"
+																			Government</label><input title="Foreign" type="checkbox"
 																			class="cssClassCheckBox" id="chkForeign"
-																			name="foreign" value="Foreign"><label
+																			name="foreign" value="Foreign" /><label
 																			class="cssClassLabel" for="chkForeign">Foreign</label>
 																	</div></td>
 															</tr>
@@ -1159,23 +1200,25 @@
 															<tr>
 																<td><span class="cssClassLabel">CFDA No.:</span> <span
 																	class="cssClassRequired">*</span></td>
-																<td><input type="text" class="sfInputbox"
-																	id="txtCFDANo" name="CFDANo" placeholder="CFDA No."></td>
+																<td><input title="CFDA No." type="text"
+																	class="sfInputbox" id="txtCFDANo" name="CFDANo"
+																	placeholder="CFDA No." /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">Program No.:</span>
 																	<span class="cssClassRequired">*</span></td>
-																<td><input type="text" class="sfInputbox"
-																	id="txtProgramNo" name="programNo"
-																	placeholder="Program No."></td>
+																<td><input title="Program No." type="text"
+																	class="sfInputbox" id="txtProgramNo" name="programNo"
+																	placeholder="Program No." /></td>
 															</tr>
 
 															<tr>
 																<td><span class="cssClassLabel">Program/Solicitation
 																		Title:</span> <span class="cssClassRequired">*</span></td>
-																<td><input type="text" class="sfInputbox"
-																	id="txtProgramTitle" name="programTitle"
-																	placeholder="Program/Solicitation Title"></td>
+																<td><input title="Program/Solicitation Title"
+																	type="text" class="sfInputbox" id="txtProgramTitle"
+																	name="programTitle"
+																	placeholder="Program/Solicitation Title" /></td>
 															</tr>
 															<tr>
 																<td>-----------------------------------------------------------</td>
@@ -1187,33 +1230,37 @@
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><div
 																		class="cssClassCheckBox">
-																		<input type="checkbox" class="cssClassCheckBox"
-																			id="chkFullRecovery" name="fullRecovery"
-																			value="Full Recovery"><label
+																		<input title="Full Recovery" type="checkbox"
+																			class="cssClassCheckBox" id="chkFullRecovery"
+																			name="fullRecovery" value="Full Recovery" /><label
 																			class="cssClassLabel" for="chkFullRecovery">Full
-																			Recovery</label><input type="checkbox"
-																			class="cssClassCheckBox" id="chkNoRecoveryNormal"
-																			name="noRecoveryNormal"
-																			value="No Recovery-Normal Sponsor Policy"><label
+																			Recovery</label><input
+																			title="No Recovery-Normal Sponsor Policy"
+																			type="checkbox" class="cssClassCheckBox"
+																			id="chkNoRecoveryNormal" name="noRecoveryNormal"
+																			value="No Recovery-Normal Sponsor Policy" /><label
 																			class="cssClassLabel" for="chkNoRecoveryNormal">No
-																			Recovery-Normal Sponsor Policy</label><input type="checkbox"
-																			class="cssClassCheckBox"
+																			Recovery-Normal Sponsor Policy</label><input
+																			title="No Recovery-Institutional Waiver"
+																			type="checkbox" class="cssClassCheckBox"
 																			id="chkNoRecoveryInstitutional"
 																			name="noRecoveryInstitutional"
-																			value="No Recovery-Institutional Waiver"><label
+																			value="No Recovery-Institutional Waiver" /><label
 																			class="cssClassLabel"
 																			for="chkNoRecoveryInstitutional">No
-																			Recovery-Institutional Waiver</label> <input type="checkbox"
-																			class="cssClassCheckBox"
+																			Recovery-Institutional Waiver</label> <input
+																			title="Limited Recovery-Normal Sponsor Policy"
+																			type="checkbox" class="cssClassCheckBox"
 																			id="chkLimitedRecoveryNormal"
 																			name="limitedRecoveryNormal"
-																			value="Limited Recovery-Normal Sponsor Policy"><label
+																			value="Limited Recovery-Normal Sponsor Policy" /><label
 																			class="cssClassLabel" for="chkLimitedRecoveryNormal">Limited
-																			Recovery-Normal Sponsor Policy</label><input type="checkbox"
-																			class="cssClassCheckBox"
+																			Recovery-Normal Sponsor Policy</label><input
+																			title="Limited Recovery-Institutional Waiver"
+																			type="checkbox" class="cssClassCheckBox"
 																			id="chkLimitedRecoveryInstitutional"
 																			name="limitedRecoveryInstitutional"
-																			value="Limited Recovery-Institutional Waiver"><label
+																			value="Limited Recovery-Institutional Waiver" /><label
 																			class="cssClassLabel"
 																			for="chkLimitedRecoveryInstitutional">Limited
 																			Recovery-Institutional Waiver</label>
@@ -1225,20 +1272,21 @@
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><div
 																		class="cssClassCheckBox">
-																		<input type="checkbox" class="cssClassCheckBox"
-																			id="chkMTDC" name="MTDC" value="MTDC"><label
-																			class="cssClassLabel" for="chkMTDC">MTDC</label><input
+																		<input title="MTDC" type="checkbox"
+																			class="cssClassCheckBox" id="chkMTDC" name="MTDC"
+																			value="MTDC" /><label class="cssClassLabel"
+																			for="chkMTDC">MTDC</label><input title="TDC"
 																			type="checkbox" class="cssClassCheckBox" id="chkTDC"
-																			name="TDC" value="TDC"><label
-																			class="cssClassLabel" for="chkTDC">TDC</label><input
+																			name="TDC" value="TDC" /><label class="cssClassLabel"
+																			for="chkTDC">TDC</label><input title="TC"
 																			type="checkbox" class="cssClassCheckBox" id="chkTC"
-																			name="TC" value="TC"><label
-																			class="cssClassLabel" for="chkTC">TC</label> <input
+																			name="TC" value="TC" /><label class="cssClassLabel"
+																			for="chkTC">TC</label> <input title="Other"
 																			type="checkbox" class="cssClassCheckBox"
-																			id="chkOther" name="other" value="Other"><label
+																			id="chkOther" name="other" value="Other" /><label
 																			class="cssClassLabel" for="chkOther">Other</label><input
-																			type="checkbox" class="cssClassCheckBox" id="chkNA"
-																			name="nA" value="N/A"><label
+																			title="N/A" type="checkbox" class="cssClassCheckBox"
+																			id="chkNA" name="nA" value="N/A" /><label
 																			class="cssClassLabel" for="chkNA">N/A</label>
 																	</div></td>
 															</tr>
@@ -1252,7 +1300,7 @@
 																		included in the proposal?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Is PI salary included in the proposal?"
+																	title="Choose Is PI salary included in the proposal?"
 																	class="sfListmenu" id="ddlPISalaryIncluded"
 																	name="PISalaryIncluded">
 																		<option value="">Select Option</option>
@@ -1267,30 +1315,32 @@
 																<td><span class="cssClassLabel">PI Salary:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtPISalary"
-																	name="PISalary" placeholder="PI Salary"></td>
+																	title="PI Salary" type="text" class="sfInputbox"
+																	id="txtPISalary" name="PISalary"
+																	placeholder="PI Salary" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">PI Fringe:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtPIFringe"
-																	name="PIFringe" placeholder="PI Fringe"></td>
+																	title="PI Fringe" type="text" class="sfInputbox"
+																	id="txtPIFringe" name="PIFringe"
+																	placeholder="PI Fringe" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">Department
 																		ID:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtDepartmentID"
-																	name="departmentID" placeholder="Department ID"></td>
+																	title="Department ID" type="text" class="sfInputbox"
+																	id="txtDepartmentID" name="departmentID"
+																	placeholder="Department ID" /></td>
 															</tr>
 
 															<tr>
 																<td><span class="cssClassLabel">Institutional
 																		Cost Share Documented:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Is Institutional
-																					Cost Share Documented?"
+																	title="Choose Is Institutional Cost Share Documented?"
 																	class="sfListmenu" id="ddlInstitutionalCostDocumented"
 																	name="institutionalCostDocumented">
 																		<option value="">Select Option</option>
@@ -1303,8 +1353,7 @@
 																<td><span class="cssClassLabel">Third Party
 																		Cost Share Documented:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Is Third Party
-																					Cost Share Documented?"
+																	title="Choose Is Third Party Cost Share Documented?"
 																	class="sfListmenu" id="ddlThirdPartyCostDocumented"
 																	name="thirdPartyCostDocumented">
 																		<option value="">Select Option</option>
@@ -1324,7 +1373,7 @@
 																		subrecipients(subcontracts/subawards) anticipated?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Are subrecipients (subcontracts/subawards) anticipated?"
+																	title="Choose Are subrecipients (subcontracts/subawards) anticipated?"
 																	class="sfListmenu" id="ddlSubrecipients"
 																	name="subrecipients">
 																		<option value="">Select Option</option>
@@ -1336,9 +1385,10 @@
 																<td><span class="cssClassLabel">Names of
 																		subrecipients:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox"
-																	id="txtNamesSubrecipients" name="namesSubrecipients"
-																	placeholder="Names of subrecipients"></td>
+																	title="Names of subrecipients" type="text"
+																	class="sfInputbox" id="txtNamesSubrecipients"
+																	name="namesSubrecipients"
+																	placeholder="Names of subrecipients" /></td>
 															</tr>
 
 															<tr>
@@ -1351,7 +1401,7 @@
 																		Eligibility Waiver on File:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="PI Eligibility Waiver on File"
+																	title="Choose PI Eligibility Waiver on File"
 																	class="sfListmenu" id="ddlPIEligibilityWaiver"
 																	name="PIEligibilityWaiver">
 																		<option value="">Select Option</option>
@@ -1367,8 +1417,7 @@
 																<td><span class="cssClassLabel">Conflict of
 																		Interest Forms on File:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Conflict
-																					of Interest Forms on File"
+																	title="Choose Conflict of Interest Forms on File"
 																	class="sfListmenu" id="ddlCOIForms" name="COIForms">
 																		<option value="">Select Option</option>
 																		<option value="1">Yes</option>
@@ -1381,8 +1430,7 @@
 																		party list has been checked:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><select
-																	title="Excluded
-																					party list has been checked"
+																	title="Choose Excluded party list has been checked"
 																	class="sfListmenu" id="ddlCheckedExcludedPartyList"
 																	name="checkedExcludedPartyList">
 																		<option value="">Select Option</option>
@@ -1396,8 +1444,8 @@
 																<td><span class="cssClassLabel">Proposal
 																		Notes:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><textarea
-																		class="cssClassTextArea" cols="26" rows="2"
-																		title="Proposal Notes" name="proposalNotes"
+																		title="Proposal Notes" class="cssClassTextArea"
+																		cols="26" rows="2" name="proposalNotes"
 																		id="txtProposalNotes" placeholder="Proposal Notes"
 																		required></textarea></td>
 															</tr>
@@ -1406,14 +1454,14 @@
 																		Administrator:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><div
 																		class="cssClassCheckBox">
-																		<input type="checkbox" class="cssClassCheckBox"
-																			id="chkDF" name="DF" value="DF"><label
-																			class="cssClassLabel" for="chkDF">DF</label><input
-																			type="checkbox" class="cssClassCheckBox" id="chkLG"
-																			name="LG" value="LG"><label
+																		<input title="DF" type="checkbox"
+																			class="cssClassCheckBox" id="chkDF" name="DF"
+																			value="DF" /><label class="cssClassLabel" for="chkDF">DF</label><input
+																			title="LG" type="checkbox" class="cssClassCheckBox"
+																			id="chkLG" name="LG" value="LG" /><label
 																			class="cssClassLabel" for="chkLG">LG</label><input
-																			type="checkbox" class="cssClassCheckBox" id="chkLN"
-																			name="LN" value="LN"><label
+																			title="LN" type="checkbox" class="cssClassCheckBox"
+																			id="chkLN" name="LN" value="LN" /><label
 																			class="cssClassLabel" for="chkLN">LN</label>
 																	</div></td>
 															</tr>
@@ -1441,26 +1489,25 @@
 																		<tbody>
 																			<tr>
 																				<td><label class="cssClassLabel sfLocale">
-																						Action:</label> <input type="text" class="sfInputbox"
-																					id="txtSearchAction"
+																						Action:</label> <input title="Action" type="text"
+																					class="sfInputbox" id="txtSearchAction"
 																					style="width: 150px !important;"
-																					placeholder="Action"></td>
+																					placeholder="Action" /></td>
 																				<td><label class="cssClassLabel sfLocale">
-																						Audited By:</label> <input type="text" class="sfInputbox"
-																					id="txtSearchAuditedBy"
+																						Audited By:</label> <input title="Audited By" type="text"
+																					class="sfInputbox" id="txtSearchAuditedBy"
 																					style="width: 140px !important;"
-																					placeholder="Audited By"></td>
+																					placeholder="Audited By" /></td>
 																				<td><label class="cssClassLabel sfLocale">
-																						Activity On From:</label> <input type="text"
-																					class="sfTextBoxSmall" id="txtSearchActivityOnFrom"
-																					placeholder="From"></td>
+																						Activity On From:</label> <input title="Activity On From"
+																					type="text" class="sfTextBoxSmall"
+																					id="txtSearchActivityOnFrom" placeholder="From" /></td>
 																				<td><label class="cssClassLabel sfLocale">
-																						Activity On To:</label> <input type="text"
-																					class="sfTextBoxSmall" id="txtSearchActivityOnTo"
-																					placeholder="To"></td>
-
+																						Activity On To:</label> <input title="Activity On To"
+																					type="text" class="sfTextBoxSmall"
+																					id="txtSearchActivityOnTo" placeholder="To" /></td>
 																				<td><br>
-																					<button class="sfBtn"
+																					<button title="Search Audit Log" class="sfBtn"
 																						id="btnSearchProposalAuditLog" type="button">
 																						<span class="sfLocale icon-search">Search</span>
 																					</button></td>
@@ -1470,7 +1517,7 @@
 																</div>
 																<div class="loading">
 																	<img id="ajaxLoader" src="" class="sfLocale"
-																		alt="loading...." title="loading...." />
+																		alt="Loading..." title="Loading..." />
 																</div>
 																<div class="log"></div>
 																<table id="gdvProposalsAuditLog" cellspacing="0"
@@ -1506,17 +1553,20 @@
 
 											<div class="sfButtonwrapper">
 												<p>
-													<button type="button" id="btnBack" class="sfBtn">
+													<button title="Go Back" type="button" id="btnBack"
+														class="sfBtn">
 														<span class="sfLocale icon-arrow-slim-w">Back</span>
 													</button>
 												</p>
 												<p>
-													<button type="button" id="btnReset" class="sfBtn">
+													<button title="Reset" type="button" id="btnReset"
+														class="sfBtn">
 														<span class="sfLocale icon-refresh">Reset</span>
 													</button>
 												</p>
 												<p>
-													<button type="button" id="btnSaveProposal" class="sfBtn">
+													<button title="Save Proposal" type="button"
+														id="btnSaveProposal" class="sfBtn">
 														<span class="sfLocale icon-save">Save</span>
 													</button>
 												</p>
