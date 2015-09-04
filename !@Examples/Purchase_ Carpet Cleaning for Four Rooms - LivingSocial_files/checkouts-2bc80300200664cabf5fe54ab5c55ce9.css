@@ -1,0 +1,1749 @@
+/* ===================
+   MULTISTEP \ LAYOUT
+====================== */
+.deal-purchasing {
+  position: relative;
+  padding-left: 100px;
+  min-height: 122px;
+  margin-bottom: 20px; }
+
+.deal-purchasing img {
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.deal-purchasing h1 {
+  font-size: 24px; }
+
+.deal-purchasing h2 {
+  font-size: 16px;
+  line-height: 22px;
+  margin-bottom: 5px; }
+
+.deal-purchasing h2,
+.deal-purchasing p {
+  color: #666; }
+
+.deal-purchasing p {
+  font-size: 14px; }
+
+.deal-purchasing #countdown span {
+  font-weight: bold; }
+
+.checkout-content {
+  padding: 0 130px 60px 130px; }
+
+.checkout-content .unauth {
+  position: relative;
+  padding-right: 280px; }
+
+.checkout-content .unauth fieldset {
+  border-right: 1px solid #e1e1e1;
+  padding-right: 50px; }
+
+.checkout-content .unauth .facebook-connect {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 230px; }
+
+.checkout-content .unauth button {
+  float: left; }
+
+.checkout-content .unauth ul {
+  float: left; }
+
+/* so the input doesn't kick out the text all weird */
+.checkout-content .unauth form input#subscribe {
+  width: auto; }
+
+.checkout-content .form-actions {
+  clear: both;
+  overflow: hidden; }
+
+.checkout-content .form-actions ul.unstyled.terms {
+  width: 225px; }
+
+/* "i'm a customer" column */
+.checkout-content .unauth .customer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 230px; }
+
+.checkout-content .unauth .customer a {
+  font-weight: bold; }
+
+.checkout-content #returning_customer {
+  display: none; }
+
+.checkout-content #new_customer.show-form,
+.checkout-content #returning_customer.show-form {
+  display: block; }
+
+.checkouts h3 {
+  color: #f0812b;
+  padding: 6px 0 10px 0;
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+  text-transform: lowercase; }
+
+.checkouts .shipping-address-form span.error {
+  color: #eb3f3c; }
+
+.checkouts h4 {
+  color: #909090;
+  padding: 6px 0 10px 0;
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+  text-transform: lowercase;
+  font-size: 14px; }
+
+.checkout-content .unauth .facebook-connect ul {
+  padding: 0;
+  margin-top: 10px; }
+
+/* fix modal overflow so it's scrollable */
+.checkouts .modal {
+  position: absolute; }
+
+/* Hide the "log in" nav actions in the header when in the checkout flow and not
+ * logged in. User testing has shown that people tend to click in the nav to log
+ * in rather than logging in on-page as intended. Having the 'logged-in' and
+ * 'logged-out' class on the actions list makes it easy to still show the
+ * current logged in user, *when* they're logged in. This prevents confusion as
+ * to "whose account am I using when buying this deal?" */
+.checkouts #masthead ul.actions.logged-out {
+  display: none; }
+
+.checkouts #not-person-logout-link {
+  float: right; }
+
+/* "OR" divider between facebook & LS form */
+.checkout-content div.login-divider {
+  color: #909090;
+  clear: both;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 310px; }
+  .checkout-content div.login-divider hr {
+    border: 1px dashed #909090;
+    margin: 0px; }
+  .checkout-content div.login-divider p {
+    font: normal bold 16px/20px "arial rounded mt bold", helvetica, arial, sans-serif;
+    margin-top: -12px; }
+  .checkout-content div.login-divider p span {
+    background: white;
+    padding: 0px 5px; }
+
+.promo-tier {
+  color: #ef6d22; }
+
+/* FACEBOOK LOGIN =================  */
+.checkout-content .fb-login {
+  padding: 0 0 20px 0; }
+
+.checkout-content .fb-login p {
+  color: #262626;
+  padding: 5px 0px;
+  margin-top: 0; }
+
+.checkout-content .fb-login .btn {
+  font-size: 18px;
+  padding: 15px 10px;
+  border: 1px solid #1c2b46;
+  background: -webkit-gradient(linear, left top, left bottom, from(#6083c5), to(#375081));
+  background: -moz-linear-gradient(top, #6083c5, #375081);
+  background-color: #3F6CAA;
+  background: linear, top, #6083c5, #375081;
+  text-shadow: #385896 1px 0, rgba(19, 36, 68, 0.8) 0 1px, rgba(41, 61, 100, 0) 0 1px, rgba(59, 86, 139, 0.8) -1px -2px;
+  position: relative;
+  width: 288px; }
+
+.checkout-content .fb-login a.btn span {
+  height: 45px;
+  width: 45px;
+  background: transparent url("data:image/png;base64,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") no-repeat 10px center;
+  -webkit-background-size: 24px 25px;
+  -moz-background-size: 24px 25px;
+  background-size: 24px 25px;
+  text-indent: -9999px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+/* ===================
+   MULTISTEP \ OPTIONS
+====================== */
+table.order-summary {
+  width: 100%; }
+
+table.order-summary th {
+  padding-bottom: 10px; }
+
+table.order-summary th.first {
+  padding-left: 18px;
+  text-align: left; }
+
+table.order-summary th.price,
+table.order-summary th.quantity {
+  text-align: center; }
+
+table.order-summary th.total {
+  text-align: right;
+  padding-right: 18px; }
+
+table.order-summary td {
+  padding: 15px 10px 15px 0;
+  color: #59595b; }
+
+table.order-summary td.deal,
+table.order-summary tr.grand-total {
+  font-weight: bold;
+  font-size: 16px; }
+
+.checkouts form .quantity-field select,
+.checkouts form .quantity-field input {
+  width: 45px; }
+
+table.order-summary .total {
+  text-align: right;
+  white-space: nowrap;
+  min-width: 60px;
+  padding-right: 18px; }
+
+table.order-summary .total_value.zero {
+  color: #CED0CD; }
+
+table.order-summary tr.option {
+  border-top: 1px solid #e0e0e0; }
+
+table.order-summary tr.option td.title {
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 40px; }
+
+table.order-summary td.title .details {
+  font-weight: normal;
+  display: block;
+  padding-top: 0.5em; }
+
+table.order-summary td.title div.alert-info {
+  margin-top: 5px; }
+
+table.order-summary tr.option-gifts td {
+  line-height: 1.5em;
+  vertical-align: middle; }
+
+tr.option-gifts td.quantity-field {
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  position: relative;
+  text-align: right;
+  top: 2px; }
+
+tr.option-gifts td.quantity-field img {
+  margin-right: -3px; }
+
+tr.option-gifts td.quantity-field select {
+  margin-bottom: -1px; }
+
+tr.option-gifts img {
+  position: relative;
+  top: 5px;
+  right: 5px; }
+
+tr.option-gifts p {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+table.order-summary tr.empty td {
+  padding: 10px 0 0 0; }
+
+table.order-summary td.price {
+  font-size: 13px;
+  width: 70px;
+  text-align: center; }
+
+/* quantity-field has the select box, quantity has just the summary */
+table.order-summary td.quantity {
+  font-size: 13px;
+  width: 100px;
+  text-align: center; }
+
+table.order-summary td.quantity-field {
+  font-size: 13px;
+  width: 140px;
+  text-align: left; }
+
+table.order-summary td.quantity-field select {
+  margin-right: 10px; }
+
+table.order-summary tr.grand-total td {
+  padding: 15px 0 40px;
+  border-top: 1px solid #e0e0e0;
+  text-align: right; }
+
+table.order-summary tr.grand-total .card-info {
+  font-size: 12px;
+  font-weight: normal; }
+
+table.order-summary tr.grand-total label {
+  font-size: 12px; }
+
+table.order-summary tr.grand-total #grand_total_label {
+  font-weight: bold; }
+
+table.order-summary tr.grand-total #grand_total {
+  font-weight: bold; }
+
+table.order-summary tr.grand-total #checkout_form_buy {
+  margin-left: 10px; }
+
+table.order-summary tr.grand-total .meta {
+  display: block;
+  float: left;
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 10px;
+  text-align: left;
+  line-height: 1.5em;
+  clear: left; }
+
+table.order-summary tr.grand-total .meta.card-charged {
+  margin-top: 4px; }
+
+table.order-summary tr.grand-total .meta.promo-code {
+  clear: left; }
+
+table.order-summary tr.grand-total .meta > p {
+  font-size: 12px;
+  font-weight: normal; }
+
+table.order-summary tr.deal-bucks td {
+  background-color: #ddf2fa;
+  border-top: 1px solid #CCC;
+  padding-left: 18px; }
+
+table.order-summary tr.deal-bucks .total {
+  color: #ef6d22; }
+
+table.order-summary tr.promo-codes td {
+  background-color: #eee;
+  border-top: 1px solid #CCC;
+  padding-left: 18px; }
+
+table.order-summary tr.promo-codes .total {
+  color: #ef6d22; }
+
+table.order-summary tr.will_call_title td {
+  padding: 0; }
+
+table.order-summary tr.will_call {
+  border-top: 1px solid #e0e0e0; }
+  table.order-summary tr.will_call td {
+    padding: 15px 0 0 20px; }
+  table.order-summary tr.will_call p.help {
+    font-size: 10px; }
+  table.order-summary tr.will_call label.control-label {
+    float: left;
+    width: 65px;
+    padding-top: 5px;
+    text-align: left;
+    font-weight: bold; }
+  table.order-summary tr.will_call div.controls {
+    margin-left: 80px; }
+
+#promo-codes input {
+  margin-bottom: 0px; }
+
+/* Next 2 styles for the promo_codes_checkout_link AB test */
+#promo-codes input.promo-code-test {
+  width: 150px; }
+
+label.promo-code {
+  display: inline; }
+
+/* ===================
+   MULTISTEP \ PAYMENT
+====================== */
+.checkout-payment {
+  position: relative; }
+
+.payment-fields {
+  width: 415px;
+  border-right: 1px solid #e0e0e0; }
+
+.alternate_payment {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200px;
+  padding-left: 20px; }
+
+.checkout-content .tabbable .nav-tabs {
+  width: 200px;
+  margin-right: 0; }
+
+.checkout-content .tabbable .nav-tabs img {
+  vertical-align: middle; }
+
+.checkout-content .tabbable .tab-content {
+  margin-left: 200px; }
+
+.checkout-content .tabbable .tab-pane {
+  padding-left: 20px;
+  border-top: 1px solid #DDD; }
+
+.checkout-content .nav li.paypal img {
+  vertical-align: -30%; }
+
+.inline {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto; }
+
+.inline input {
+  margin-right: 5px; }
+
+.accepted-cards {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  height: 20px;
+  margin-left: 10px;
+  margin-top: 4px;
+  vertical-align: top; }
+
+.accepted-cards li {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  height: 20px;
+  width: 30px;
+  margin-left: 1px;
+  margin-right: 1px;
+  text-indent: -9999px;
+  background: transparent url("/deals/images/hungry/accepted-credit-cards.png?2") no-repeat top left; }
+
+.accepted-cards li.visa {
+  background-position: 0 -30px; }
+
+.accepted-cards li.master {
+  background-position: 0 -60px; }
+
+.accepted-cards li.discover {
+  background-position: 0 -90px; }
+
+.accepted-cards li.american_express {
+  background-position: 0 -120px; }
+
+.accepted-cards li.laser {
+  background-position: 0 -150px; }
+
+.accepted-cards li.maestro {
+  background-position: 0 -150px; }
+
+.credit_card_form_stub {
+  width: 564px; }
+
+.cc-first-name,
+.cc-last-name {
+  width: 185px; }
+
+.cc-number {
+  width: 235px; }
+
+.cc-exp-month {
+  width: 150px; }
+
+.cc-exp-year {
+  width: 65px; }
+
+.cc-address,
+.cc-address-2 {
+  width: 380px; }
+
+.cc-city {
+  width: 220px; }
+
+.cc-state {
+  width: 50px; }
+
+.cc-zip {
+  width: 85px; }
+
+.encrypted {
+  margin-left: 20px;
+  padding: 5px 0 5px 25px;
+  background: transparent url("/deals/images/hungry/accepted-credit-cards.png") no-repeat top left; }
+
+/* Checkout */
+.adventures_roommate td div.fieldWithErrors,
+.adventures_roommate [type="radio"] {
+  display: inline; }
+
+/* ADD A CARD MODAL */
+.add-credit-card {
+  width: 100%;
+  margin-bottom: 0;
+  border: none;
+  border-spacing: 0;
+  border-top: 1px solid #e0e0e0; }
+
+.add-credit-card tr.current {
+  background-color: #dff1f8; }
+
+.add-credit-card td {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0; }
+
+p.add-new-card {
+  margin-bottom: 10px; }
+
+p.add-new-card a {
+  display: block;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0; }
+
+tr.credit-card {
+  cursor: pointer; }
+
+td.payment_radio {
+  width: 10px; }
+
+td.credit-card-on-file {
+  padding-left: 40px;
+  background: transparent url("/deals/images/hungry/accepted-credit-cards.png?2") no-repeat 0 100px; }
+
+td.credit-card-on-file.visa {
+  background-position: 0 -20px; }
+
+td.credit-card-on-file.master {
+  background-position: 0 -50px; }
+
+td.credit-card-on-file.discover {
+  background-position: 0 -80px; }
+
+td.credit-card-on-file.american_express {
+  background-position: 0 -110px; }
+
+td.credit-card-on-file.laser {
+  background-position: 0 -140px; }
+
+td.credit-card-on-file.maestro {
+  background-position: 0 -140px; }
+
+td.credit-card-on-file.paypal {
+  background-position: 0 2000px;
+  padding-left: 0; }
+
+/* use direct image from paypal */
+td.credit-card-on-file.paypal img {
+  vertical-align: middle; }
+
+td.credit-card-on-file.v_dot_me {
+  background-position: 0 2000px;
+  padding-left: 0; }
+
+/* use direct image from V.me */
+td.credit-card-on-file.visa_checkout {
+  background-position: 0 2000px;
+  padding-left: 0; }
+
+/* use direct image from Visa */
+td.credit-card-on-file.v_dot_me img {
+  vertical-align: middle; }
+
+td.credit-card-on-file.paypass {
+  background-position: 0 2000px;
+  padding-left: 0; }
+
+td.credit-card-on-file.paypass img {
+  vertical-align: middle; }
+
+#checkout_payment_id_paypass {
+  margin-top: -45px; }
+
+#checkout_payment_id_visa_checkout {
+  margin-top: -15px; }
+
+.paypass_header {
+  text-transform: none !important; }
+
+.confirm_paypass_logo {
+  float: left;
+  width: 100px; }
+
+#payment_modal_loading p {
+  text-align: center;
+  margin-top: 60px; }
+
+/* ===================
+   MULTISTEP \ CONFIRM PURCHASE
+====================== */
+#confirm-purchase {
+  position: relative;
+  padding: 9px 0;
+  margin-bottom: 20px;
+  clear: both; }
+
+#confirm-purchase p.confirm-btn {
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+#confirm-purchase p.confirm-btn .btn {
+  margin-left: 20px; }
+
+.confirm p.receive-local-opt-in {
+  float: left;
+  padding-top: 7px;
+  margin-bottom: 7px;
+  text-align: left; }
+
+.confirm p.receive-local-opt-in input {
+  float: none;
+  display: inline;
+  margin-right: 5px; }
+
+#promo-codes {
+  margin-bottom: 7px;
+  float: right;
+  text-align: right; }
+  #promo-codes #promo_code_form {
+    margin: 7px 0 9px; }
+  #purchase_form #promo-codes {
+    margin-top: 10px; }
+
+.checkout-content.confirm table.order-summary tr.grand-total {
+  background-color: #eceed9; }
+
+.checkout-content.confirm table.order-summary tr.grand-total td {
+  padding: 18px;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: right;
+  vertical-align: middle; }
+
+.checkout-content.confirm table.order-summary tr.grand-total td.payment-info {
+  padding-right: 0px; }
+
+.checkout-content.confirm table.order-summary tr.grand-total.online-deal td {
+  border-bottom: 0px;
+  padding-bottom: 10px; }
+
+#masterpass_logo {
+  vertical-align: middle;
+  height: 28px;
+  width: 45px;
+  margin-left: 5px;
+  margin-right: 5px; }
+
+/* ===================
+   MULTISTEP \ CONFIRM PURCHASE FOR DATED ESCAPE
+====================== */
+table.order-summary tr.dated-escape td.title {
+  min-width: 360px; }
+
+table.order-summary th.dated-escape.price,
+table.order-summary tr.dated-escape td.price {
+  padding-right: 10px;
+  text-align: right; }
+
+table.order-summary th.dated-escape.last {
+  padding-right: 18px;
+  text-align: right; }
+
+table.order-summary tr.dated-escape td.quantity-field {
+  text-align: center; }
+
+table.order-summary tr.dated-escape td.total {
+  text-align: right; }
+
+table.order-summary tr.dated-escape.taxes td.title {
+  padding-left: 18px;
+  font-weight: bold;
+  font-style: normal; }
+
+.ie7 table.order-summary th.dated-escape.price,
+.ie7 table.order-summary th.dated-escape.quantity,
+.ie7 table.order-summary tr.dated-escape td.quantity-field,
+.ie7 table.order-summary tr.dated-escape td.price {
+  padding-right: 10px;
+  text-align: left; }
+
+.checkout-content.confirm .deal-purchasing.dated-escape {
+  padding-left: 0; }
+  .checkout-content.confirm .deal-purchasing.dated-escape img {
+    position: relative; }
+  .checkout-content.confirm .deal-purchasing.dated-escape h1 {
+    font: 36px "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif; }
+  .checkout-content.confirm .deal-purchasing.dated-escape h3 {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+    text-transform: none;
+    line-height: 14px; }
+.checkout-content.confirm .dated-escape-order-summary-header th {
+  padding-top: 20px; }
+.checkout-content.confirm div.traveler-info {
+  padding-left: 18px;
+  line-height: 18px;
+  padding-bottom: 14px; }
+  .checkout-content.confirm div.traveler-info .bold {
+    font-weight: bold; }
+  .checkout-content.confirm div.traveler-info #change-traveler-info {
+    font-size: 10px; }
+.checkout-content.confirm .dated-escape-summary {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px; }
+  .checkout-content.confirm .dated-escape-summary a {
+    color: #0899BC;
+    font-size: 10px; }
+  .checkout-content.confirm .dated-escape-summary .room-title {
+    font: 14px "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+    color: #666666; }
+  .checkout-content.confirm .dated-escape-summary .dated-top-content {
+    font: 12px Helvetica,Arial,Sans Serif;
+    line-height: 22px;
+    color: #262626;
+    padding: 10px; }
+    .checkout-content.confirm .dated-escape-summary .dated-top-content .room-image {
+      display: inline-block;
+      vertical-align: baseline;
+      zoom: 1;
+      *display: inline;
+      *vertical-align: auto;
+      margin-right: 10px; }
+      .checkout-content.confirm .dated-escape-summary .dated-top-content .room-image img {
+        width: 100px; }
+      .checkout-content.confirm .dated-escape-summary .dated-top-content .room-image.no-image {
+        display: none; }
+    .checkout-content.confirm .dated-escape-summary .dated-top-content .room-content {
+      display: inline-block;
+      vertical-align: baseline;
+      zoom: 1;
+      *display: inline;
+      *vertical-align: auto;
+      width: 490px;
+      vertical-align: top;
+      line-height: 22px; }
+      .checkout-content.confirm .dated-escape-summary .dated-top-content .room-content form {
+        margin: 0; }
+      .checkout-content.confirm .dated-escape-summary .dated-top-content .room-content div {
+        margin: 5px 0; }
+    .checkout-content.confirm .dated-escape-summary .dated-top-content .invalid-reservation-name {
+      color: red; }
+    .checkout-content.confirm .dated-escape-summary .dated-top-content form#update_roommate {
+      margin-bottom: 0; }
+  .checkout-content.confirm .dated-escape-summary .line-header {
+    color: #f0812b;
+    line-height: 20px; }
+  .checkout-content.confirm .dated-escape-summary em {
+    font-weight: bold;
+    font-style: normal; }
+  .checkout-content.confirm .dated-escape-summary div.subtotal {
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px dashed #CCC;
+    text-align: right; }
+    .checkout-content.confirm .dated-escape-summary div.subtotal.solid {
+      border-top: 1px solid #ccc; }
+    .checkout-content.confirm .dated-escape-summary div.subtotal span.label {
+      color: #f0812b;
+      font: 14px "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif; }
+    .checkout-content.confirm .dated-escape-summary div.subtotal sup {
+      font-size: 12px;
+      top: -4px; }
+    .checkout-content.confirm .dated-escape-summary div.subtotal span.price {
+      color: #262626;
+      padding-right: 20px;
+      font-weight: bold;
+      font: 18px "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif; }
+  .checkout-content.confirm .dated-escape-summary .tours-also-includes div {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    *vertical-align: auto;
+    vertical-align: top;
+    padding-top: 15px; }
+    .checkout-content.confirm .dated-escape-summary .tours-also-includes div.line-content {
+      width: 550px; }
+  .checkout-content.confirm .dated-escape-summary .flights-summary {
+    border-top: 1px solid #d1d1d1; }
+    .checkout-content.confirm .dated-escape-summary .flights-summary .airplane-image {
+      background: url("http://a5.lscdn.net/imgs/b1731e07-b52c-4345-887f-277cf8a9577b/500_q80.png");
+      height: 70px;
+      margin: 20px 20px 0 60px;
+      background-repeat: no-repeat; }
+    .checkout-content.confirm .dated-escape-summary .flights-summary .flights-container {
+      padding: 10px;
+      vertical-align: top;
+      margin: 10px 0; }
+    .checkout-content.confirm .dated-escape-summary .flights-summary .return-flights {
+      margin-left: 30px; }
+    .checkout-content.confirm .dated-escape-summary .flights-summary .header {
+      font: bold 11px helvetica, arial, sans serif;
+      color: #262626;
+      margin-bottom: 5px;
+      line-height: 18px; }
+    .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .departure-details, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .right-arrow, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .arrival-details {
+      display: inline-block;
+      vertical-align: baseline;
+      zoom: 1;
+      *display: inline;
+      *vertical-align: auto;
+      font: 11px helvetica, arial, sans serif;
+      vertical-align: top;
+      color: #666666; }
+      .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .departure-details div, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .departure-details span, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .right-arrow div, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .right-arrow span, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .arrival-details div, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .arrival-details span {
+        line-height: 14px; }
+      .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .departure-details .bold, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .right-arrow .bold, .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .arrival-details .bold {
+        color: #262626;
+        font-weight: bold;
+        width: auto; }
+    .checkout-content.confirm .dated-escape-summary .flights-summary .flight-details .right-arrow {
+      font-size: 20px;
+      margin: 0 15px;
+      font-family: capitals;
+      color: #909090;
+      line-height: 12px; }
+.checkout-content.confirm a.change_booking {
+  padding-left: 18px;
+  font-size: 10px; }
+.checkout-content.confirm .single-supplement-amount {
+  text-align: right;
+  padding: 10px 20px 20px 0;
+  font-weight: bold; }
+.checkout-content.confirm form#update_travelers input {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto; }
+.checkout-content.confirm form#update_travelers .passenger-information {
+  margin-top: 10px;
+  padding-left: 10px;
+  border-bottom: 2px solid #e6e6e6; }
+  .checkout-content.confirm form#update_travelers .passenger-information span {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    *vertical-align: auto;
+    vertical-align: middle; }
+  .checkout-content.confirm form#update_travelers .passenger-information input {
+    width: 150px;
+    margin-right: 10px; }
+  .checkout-content.confirm form#update_travelers .passenger-information select {
+    width: 100px;
+    margin-right: 10px; }
+.checkout-content.confirm form#update_travelers .choose-single-supplement {
+  margin-left: 10px; }
+  .checkout-content.confirm form#update_travelers .choose-single-supplement .has-roommate {
+    margin-bottom: 15px; }
+  .checkout-content.confirm form#update_travelers .choose-single-supplement .roommate-information {
+    display: none; }
+    .checkout-content.confirm form#update_travelers .choose-single-supplement .roommate-information h5 {
+      margin-bottom: 15px; }
+    .checkout-content.confirm form#update_travelers .choose-single-supplement .roommate-information label {
+      display: block; }
+  .checkout-content.confirm form#update_travelers .choose-single-supplement input[type='radio'] {
+    margin-right: 5px; }
+  .checkout-content.confirm form#update_travelers .choose-single-supplement label {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    *vertical-align: auto; }
+.checkout-content.confirm form#update_travelers .spacer {
+  border-bottom: 2px solid #e6e6e6; }
+.checkout-content.confirm form#update_travelers .btn {
+  margin: 20px 0;
+  float: right; }
+
+p.terms {
+  clear: both; }
+
+/* ===================
+   MULTISTEP \ CONFIRM PURCHASE FOR T&D VOUCHER
+====================== */
+.td_post_purch {
+  margin-top: 16px;
+  margin: 16px auto 32px;
+  width: 700px; }
+
+.td_post_purch h1 {
+  margin-bottom: 18px; }
+
+.td_post_purch h3 {
+  color: #f0812b;
+  margin: 20px 0 10px 0; }
+
+.td_post_purch h4 {
+  margin: 15px 0 5px 0; }
+
+.td_post_purch .td_voucher {
+  background: #eee;
+  margin: 24px auto;
+  width: 565px;
+  zoom: 1;
+  padding: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-bottom: 1px solid #ddd; }
+  .td_post_purch .td_voucher:before, .td_post_purch .td_voucher:after {
+    content: "";
+    display: table; }
+  .td_post_purch .td_voucher:after {
+    clear: both; }
+
+.td_post_purch .td_voucher .col_l {
+  float: left;
+  width: 70px;
+  padding-right: 10px; }
+
+.td_post_purch .td_voucher .col_c {
+  float: left;
+  width: 330px;
+  padding-right: 10px; }
+
+.td_post_purch .td_voucher .col_r {
+  float: right;
+  width: 145px; }
+
+.td_post_purch .td_voucher h2 {
+  font-size: 20px;
+  line-height: 23px;
+  margin: 2px 0 6px 0; }
+
+.td_post_purch .td_voucher p {
+  color: #777;
+  line-height: 22px; }
+
+.td_post_purch .td_voucher p strong {
+  display: block;
+  color: #555; }
+
+.td_post_purch .td_voucher .btn {
+  float: right; }
+
+/* ==========
+POST-PURCHASE / RESOLVE/DECLINE PAGE
+=========== */
+body.purchases-resolve_decline form h3 {
+  margin-bottom: 1em; }
+
+.decline-payments {
+  border-top: 1px solid #f5f5f5;
+  border-right: 1px solid #f5f5f5;
+  border-left: 1px solid #f5f5f5;
+  font-size: 18px; }
+
+.decline-payments li {
+  padding: 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #f5f5f5; }
+
+.decline-payments li:first-child {
+  background-color: #fffdd2; }
+
+/* page-specific override to make headers larger */
+body.purchases-resolve_decline .modal-header h3 {
+  font-size: 2em;
+  text-transform: lowercase;
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+  color: #F17A34; }
+
+/* ==========
+  GIFT EDUCATION MODAL
+=========== */
+#gift_flag {
+  background: url(https://a5.lscdn.net/imgs/e9a7d4f3-e6ed-49a7-b30f-9c84003cb433/.png) top right no-repeat;
+  float: right;
+  height: 49px; }
+
+#gift_flag p {
+  background: url(https://a5.lscdn.net/imgs/a804ffab-e6e3-4c32-9659-e4c9661e5dbb/.png) top left no-repeat;
+  color: #262626;
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  height: 49px;
+  line-height: 120%;
+  margin: 0px 24px 0px 0px;
+  padding: 11px 0 0 42px; }
+
+#gift_flag p a {
+  display: block;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 10px;
+  margin: 0px;
+  padding: 0px; }
+
+#gifting_how_it_works {
+  width: 660px; }
+  #gifting_how_it_works .modal-header {
+    border: 0;
+    min-height: 85px; }
+    #gifting_how_it_works .modal-header .close {
+      background: none;
+      color: #383838;
+      font-family: "ProximaNovaSoft", Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      opacity: 1;
+      right: 5px;
+      text-shadow: none;
+      text-transform: uppercase;
+      top: 3px; }
+    #gifting_how_it_works .modal-header p.icon {
+      background: #544aa1 url("//a5.lscdn.net/imgs/f02958fb-6b43-4512-b7d2-47ce37b2e846/.png") 32px 16px no-repeat;
+      background-size: 48px 65px;
+      border: 5px solid white;
+      border-radius: 80px;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+      height: 112px;
+      left: 30px;
+      margin: -30px 0 0 0;
+      position: absolute;
+      top: 0px;
+      width: 112px; }
+    #gifting_how_it_works .modal-header h1 {
+      color: #544aa1;
+      font-family: "ProximaNovaSoft", Helvetica, Arial, sans-serif;
+      font-size: 39px;
+      margin-left: 155px; }
+    #gifting_how_it_works .modal-header h2 {
+      border: 0;
+      color: #000;
+      font-family: "ProximaNovaSoft", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      margin-left: 155px; }
+  #gifting_how_it_works .modal-body {
+    background: #f3f3f3;
+    border-top: 1px solid #ddd;
+    padding-bottom: 20px;
+    overflow: hidden; }
+    #gifting_how_it_works .modal-body .title {
+      color: #000;
+      font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+      font-size: 18px;
+      text-align: center; }
+    #gifting_how_it_works .modal-body .content {
+      color: #000;
+      font-family: "ProximaNovaSoft", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      text-align: center; }
+    #gifting_how_it_works .modal-body .gift-delivery-option {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      float: left;
+      margin-top: 11px;
+      min-height: 150px;
+      padding-top: 270px;
+      width: 298px; }
+      #gifting_how_it_works .modal-body .gift-delivery-option .title {
+        color: #544aa1;
+        font-size: 20px;
+        padding: 20px 20px 3px;
+        text-align: left; }
+      #gifting_how_it_works .modal-body .gift-delivery-option .content {
+        font-size: 15px;
+        padding: 0 20px 20px;
+        text-align: left; }
+      #gifting_how_it_works .modal-body .gift-delivery-option#option_email {
+        background: white url("//a5.lscdn.net/imgs/5b65e177-de3c-458a-9132-214665a1f01e/.png") center 10px no-repeat;
+        margin-right: 20px; }
+      #gifting_how_it_works .modal-body .gift-delivery-option#option_print {
+        background: white url("//a5.lscdn.net/imgs/c8234b59-51cc-4671-bbf4-6aee9fbe2bc6/.png") center 10px no-repeat; }
+  #gifting_how_it_works .modal-footer {
+    background: none;
+    border: none;
+    padding: 0; }
+    #gifting_how_it_works .modal-footer p {
+      background: url("//a5.lscdn.net/imgs/3e54f4bf-49bd-44d9-b885-0929be0bc0f5/.png") left center no-repeat;
+      color: white;
+      font-family: "ProximaNovaSoft", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      left: 80px;
+      padding: 8px 0 8px 40px;
+      position: absolute;
+      top: 645px; }
+      #gifting_how_it_works .modal-footer p a {
+        color: white;
+        text-decoration: none; }
+
+#paypal-buy-button {
+  width: 170px;
+  float: right;
+  clear: both; }
+  #paypal-buy-button p {
+    margin: 5px 0 15px;
+    padding: 0;
+    font-size: 18px;
+    color: #888;
+    font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+    font-weight: normal;
+    line-height: 24px;
+    text-align: center;
+    position: relative; }
+    #paypal-buy-button p span {
+      background: #fff;
+      padding: 0 8px;
+      position: relative;
+      z-index: 10; }
+    #paypal-buy-button p:after {
+      content: " ";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: url("//a5.lscdn.net/imgs/7a2eca91-0ad8-46cc-9ed2-2f4a7d99b4c5/q100.png") 0 0 repeat; }
+
+#purchase.order-summary .shipping,
+.confirm .order-summary .shipping {
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+  float: right;
+  width: 380px;
+  margin-top: 3px; }
+  #purchase.order-summary .shipping em,
+  .confirm .order-summary .shipping em {
+    text-decoration: underline;
+    font-style: normal;
+    color: #859da9;
+    font-weight: bold; }
+  #purchase.order-summary .shipping h5,
+  .confirm .order-summary .shipping h5 {
+    color: #0898bb; }
+  #purchase.order-summary .shipping #truck,
+  .confirm .order-summary .shipping #truck {
+    margin-right: 0.6em;
+    vertical-align: -19%; }
+  #purchase.order-summary .shipping .tooltip-indicator,
+  .confirm .order-summary .shipping .tooltip-indicator {
+    vertical-align: -10%; }
+  #purchase.order-summary .shipping strong,
+  .confirm .order-summary .shipping strong {
+    color: #f0812b; }
+  #purchase.order-summary .shipping .slideout,
+  .confirm .order-summary .shipping .slideout {
+    border-radius: 4px;
+    text-align: left;
+    background-color: #e5f3f9;
+    padding: 7px 15px 15px 15px;
+    margin-top: 10px; }
+    #purchase.order-summary .shipping .slideout .close,
+    .confirm .order-summary .shipping .slideout .close {
+      text-align: right;
+      font-weight: bold;
+      color: #999; }
+
+.confirm .order-summary .tooltip-indicator {
+  display: none; }
+.confirm .order-summary .online-deal-shipping {
+  background-color: #eceed9; }
+  .confirm .order-summary .online-deal-shipping td {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 0px; }
+  .confirm .order-summary .online-deal-shipping .shipping {
+    font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+    text-align: right; }
+    .confirm .order-summary .online-deal-shipping .shipping strong, .confirm .order-summary .online-deal-shipping .shipping em {
+      color: #59595b; }
+    .confirm .order-summary .online-deal-shipping .shipping em {
+      text-decoration: none;
+      border-bottom: 1px dashed; }
+
+/* ===================
+   CALENDAR SELECTOR MODAL
+====================== */
+#facebox .body .content {
+  min-height: 0; }
+
+.date-picker-adventures {
+  width: 700px;
+  min-height: 424px;
+  text-align: left;
+  background: #222; }
+
+.date-picker-adventures .date-header {
+  height: 50px;
+  background: #f0812b;
+  margin-bottom: 10px;
+  text-align: center;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0; }
+
+.date-picker-adventures .cal {
+  float: left;
+  padding: 0;
+  width: 350px; }
+
+.date-picker-adventures .day {
+  float: left;
+  padding: 0 20px;
+  width: 310px; }
+
+.date-picker-adventures h2 {
+  color: #f0812b;
+  text-align: center;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.date-picker-adventures .ui-datepicker-title {
+  text-align: center;
+  font-size: 32px;
+  line-height: 34px; }
+
+table.ui-datepicker-calendar {
+  background: transparent url("/deals/images/hungry/adventures/calendar-tiles.png") 0 20px; }
+
+.datepicker-bg {
+  height: 320px; }
+
+.ui-datepicker-header,
+#date-header,
+.ui-datepicker-next,
+.ui-datepicker-prev,
+table.ui-datepicker-calendar,
+.datepicker-bg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+table.ui-datepicker-calendar thead tr {
+  height: 20px;
+  background: #262626; }
+
+table.ui-datepicker-calendar body {
+  height: 350px; }
+
+table.ui-datepicker-calendar tbody tr {
+  height: 50px; }
+
+table.ui-datepicker-calendar thead th {
+  vertical-align: bottom;
+  text-align: center; }
+
+table.ui-datepicker-calendar tbody td {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  text-align: center; }
+
+table.ui-datepicker-calendar tbody td {
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold; }
+
+table.ui-datepicker-calendar tbody {
+  width: 350px; }
+
+.ui-datepicker-header {
+  background: #222;
+  color: #fff;
+  padding: 0 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.date-picker-adventures .ui-datepicker-next,
+.date-picker-adventures .ui-datepicker-prev {
+  width: 26px;
+  height: 26px;
+  background: transparent url("/deals/images/hungry/adventures/next-previous-2.png") no-repeat top left;
+  margin-top: 4px; }
+
+.date-picker-adventures .ui-datepicker-prev {
+  background-position: 0 -26px; }
+
+.date-picker-adventures .ui-datepicker-next span,
+.date-picker-adventures .ui-datepicker-prev span {
+  display: none; }
+
+.date-picker-adventures .ui-datepicker-next {
+  float: right; }
+
+.date-picker-adventures .ui-datepicker-next,
+.date-picker-adventures .ui-datepicker-prev,
+table.ui-datepicker-calendar td.enabled {
+  cursor: pointer; }
+
+table.ui-datepicker-calendar td.enabled a {
+  color: #262626; }
+
+table.ui-datepicker-calendar td.enabled {
+  background: transparent url("/deals/images/hungry/adventures/current-enabled.png") no-repeat top left; }
+
+table.ui-datepicker-calendar td.ui-datepicker-current-day {
+  background-position: left bottom; }
+
+.date-picker-adventures .day li .price,
+.date-picker-adventures .day li .time {
+  color: #f0812b;
+  font-weight: bold; }
+
+.date-picker-adventures .day li .price {
+  font-size: 14px; }
+
+.date-picker-adventures .day li.with-options {
+  min-height: 35px; }
+
+.date-picker-adventures .day li .price,
+#date-picker-adventures .day li .spots-left {
+  font-family: georgia, serif;
+  font-style: italic;
+  text-transform: lowercase; }
+
+.date-picker-adventures .day li {
+  padding: 10px 70px 10px 10px;
+  border-bottom: 1px dashed #464646;
+  color: #909090;
+  position: relative; }
+
+.date-picker-adventures .day li .price,
+.date-picker-adventures .day li .btn {
+  position: absolute;
+  right: 0;
+  top: 10px; }
+
+.date-picker-adventures .day li .price {
+  top: 30px;
+  display: block;
+  width: 65px;
+  text-align: center; }
+
+.date-header h3 {
+  color: #fff;
+  font-size: 24px;
+  padding-top: 10px; }
+
+.date-picker-adventures h2,
+.date-header h3,
+.date-picker-adventures .ui-datepicker-title {
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif; }
+
+.date-picker-adventures .ui-datepicker-title {
+  width: 260px;
+  text-align: center;
+  margin: 0 auto 10px;
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+  color: #fff; }
+
+.date-picker-adventures .ui-datepicker-prev {
+  float: left; }
+
+.date-picker-adventures .ui-datepicker-next {
+  float: right; }
+
+.date-picker-adventures .ui-datepicker-prev.ui-state-disabled,
+.date-picker-adventures .ui-datepicker-next.ui-state-disabled {
+  display: none; }
+
+/* ===================
+   MULTISTEP \ LOGIN
+====================== */
+.checkouts .form-actions {
+  padding: 0;
+  background-color: transparent;
+  border: none; }
+
+.checkouts .form-actions .btn {
+  margin-right: 20px; }
+
+.checkouts .unauth form input,
+.checkouts .unauth form textarea,
+.checkouts .unauth form select,
+.checkouts .unauth form .uneditable-input {
+  width: 300px; }
+
+#registration {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  width: 399px;
+  vertical-align: top; }
+
+.checkout-content.login .unauth fieldset {
+  border-right: 1px solid #e1e1e1; }
+
+.checkout-content.login h3 {
+  padding: 10px 0;
+  color: #f0812b;
+  font-family: "ProximaNovaSoftBold", "arial rounded mt bold", helvetica, arial, sans-serif;
+  text-transform: lowercase; }
+
+.checkout-content.login input,
+.checkout-content.login textarea,
+.checkout-content.login select,
+.checkout-content.login .uneditable-input {
+  width: 300px; }
+
+.checkout-content.login .form-actions {
+  padding: 0;
+  background-color: transparent;
+  border: none; }
+
+.checkout-content.login .form-actions .btn {
+  float: left;
+  margin-right: 20px; }
+
+.checkout-content.login ul {
+  float: left; }
+
+.checkout-content.login .facebook-connect {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  width: 230px;
+  padding: 0 0 0 46px;
+  vertical-align: top; }
+
+.checkout-content.login .facebook-connect ul {
+  margin-top: 10px; }
+
+div.system-notice.error {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 10px 15px;
+  background: #fcd9d8;
+  border-radius: 4px;
+  color: #ed413b; }
+
+div.system-notice.error p {
+  margin: 0; }
+
+div.system-notice.error .close {
+  color: #1d81c1;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  text-shadow: none; }
+
+/*
+   =============================================================================
+   NOTES
+   * Items namespaced with #ls-wrap are because of overrides in experiments.css
+   ========================================================================== */
+@media only screen and (max-width: 980px) {
+  body.responsive {
+    background: -webkit-linear-gradient(top, #08c, #c9d5da) !important;
+    /*
+    =============================================================================
+    LS UI STUFF
+    ========================================================================== */
+    /*
+    =============================================================================
+    HEADER
+    ========================================================================== */
+    /*
+    =============================================================================
+    DEAL SHOW PAGE
+    ========================================================================== */
+    /*Deal Image*/
+    /* Hide banner because iframe content cannot be edited*/
+    /*Deal Price */
+    /* Deal Stats*/
+    /*Share Links*/
+    /*Slideshow*/
+    /*Alerts*/
+    /*
+    =============================================================================
+    DEAL TILES
+    ========================================================================== */
+    /*
+    =============================================================================
+    URGENT DEAL BANNER
+    ========================================================================== */
+    /*Deal image overlay*/
+    /* Pink side banner*/
+    /*Set padding to match new grid*/
+    /*The price section*/
+    /*Price section heading*/
+    /*Main price*/
+    /*Currency sign*/
+    /* Original Price*/
+    /*Purchase Button*/
+    /*
+    =============================================================================
+    RIGHT RAIL ITEMS
+    ========================================================================== */
+    /*
+    =============================================================================
+    CHECKOUTS
+    ========================================================================== */
+    /*
+    =============================================================================
+    FOOTER
+    ========================================================================== */
+    /* This is the new footer */
+    /* Cut off footer ads since they are in iframes*/ }
+    body.responsive.full-width .container {
+      width: 700px; }
+    body.responsive .span12,
+    body.responsive .container {
+      width: 682px; }
+    body.responsive #ls-wrap {
+      margin: -18px 0 0 0; }
+    body.responsive #ls-wrap .ls-content {
+      width: 402px;
+      padding: 18px 18px 18px 0; }
+    body.responsive #ls-wrap .ls-rail {
+      width: 242px;
+      padding: 18px 0 0 18px; }
+    body.responsive #main-hdr {
+      min-width: 700px; }
+    body.responsive #main-hdr nav {
+      width: 718px; }
+    body.responsive #main-hdr .verticals > li > a {
+      padding: 10px 10px 7px 10px; }
+    body.responsive #main-hdr.sticky-nav .verticals > li a {
+      padding: 1px 5px 7px 5px !important; }
+    body.responsive .lsautocomplete-searchBox-wrap {
+      width: auto; }
+    body.responsive #main-hdr .search > li fieldset input, body.responsive #main-hdr .search > li fieldset .lsautocomplete-searchSuggest {
+      width: 92px !important; }
+    body.responsive #main-hdr.sticky-nav .verticals {
+      margin-top: 9px; }
+    body.responsive #main-hdr.sticky-nav .main-nav {
+      float: none; }
+    body.responsive #main-hdr.sticky-nav .account > li.my-vouchers,
+    body.responsive #main-hdr.sticky-nav .account > li.my-account,
+    body.responsive #main-hdr.sticky-nav .account > li.log-in {
+      display: none; }
+    body.responsive #main-hdr.sticky-nav .search-form {
+      margin: 8px -12px 0 0;
+      float: right; }
+    body.responsive #main-hdr.sticky-nav .verticals > li:after,
+    body.responsive #main-hdr.sticky-nav .verticals > li:before {
+      top: 3px; }
+    body.responsive #main-hdr.sticky-nav .ls-logo {
+      display: none; }
+    body.responsive #main-hdr #gift-guide {
+      display: none; }
+    body.responsive #ls-wrap .ls-deal_image .handle,
+    body.responsive #ls-wrap .ls-deal_image .deal-image {
+      width: 402px;
+      height: 292px; }
+    body.responsive .dfp-promo-banner iframe {
+      display: none; }
+    body.responsive #ls-wrap #google-map {
+      width: 402px; }
+    body.responsive #ls-wrap #refund-badge {
+      width: 302px; }
+    body.responsive .cities-items .hd > h3 {
+      padding: 18px;
+      width: 684px; }
+    body.responsive #ls-wrap .ls-price_info {
+      width: 97px; }
+    body.responsive #ls-wrap li.ls-original_price {
+      font-size: 40px; }
+    body.responsive #ls-wrap li.ls-original_price sup {
+      top: -14px;
+      font-size: 27px; }
+    body.responsive #ls-wrap .ls-deal_stats li {
+      width: 69px; }
+    body.responsive #ls-wrap .ls-deal_stats li div {
+      font-size: 16px; }
+    body.responsive #ls-wrap .share-links li {
+      margin: 0;
+      display: block;
+      text-align: left;
+      margin-bottom: 20px; }
+    body.responsive #personal-link-container {
+      margin-bottom: 50px; }
+    body.responsive #ls-wrap .ls-personal_link input {
+      width: 220px;
+      margin-bottom: 15px; }
+    body.responsive #ls-wrap .ls-deal_image .images-window {
+      width: 366px; }
+    body.responsive #ls-wrap .ls-deal_image #images li img {
+      width: 64px; }
+    body.responsive #ls-wrap .ls-deal_image #images-cursor {
+      width: 64px;
+      height: 48px; }
+    body.responsive #ls-wrap .ls-deal_image .arrow a {
+      margin: 17px 0 0 0; }
+    body.responsive .alert > p,
+    body.responsive .alert-block > p,
+    body.responsive .alert-block > ul {
+      max-width: 450px; }
+    body.responsive #ls-wrap .ls-rail .related-deals ul li,
+    body.responsive #ls-wrap .ls-rail .most-popular-deals ul li {
+      padding: 12px 0px 12px 98px; }
+    body.responsive #ls-wrap .ls-rail .related-deals ul a span.price,
+    body.responsive #ls-wrap .ls-rail .most-popular-deals ul a span.price {
+      position: static; }
+    body.responsive #ls-wrap .pps .pps-actions .pps-url {
+      width: 113px; }
+    body.responsive #main-hdr .sub-nav li a {
+      padding: 3px 2px 0 2px; }
+    body.responsive #ls-me_plus_three_prompt {
+      padding: 0 !important; }
+    body.responsive .cities-items .hd > h3 a {
+      right: 0; }
+    body.responsive .cities-items ul.unstyled {
+      overflow: hidden;
+      height: 1%; }
+    body.responsive .ls-item.deal {
+      margin: 0 6px 18px 6px;
+      width: 335px; }
+    body.responsive .ls-item .hd {
+      height: 472px !important; }
+    body.responsive .ls-item .hd img {
+      width: 100%;
+      display: block; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals .related-deal .deal-image {
+      height: 246px; }
+      body.responsive #ls-wrap #ls-above-fold .related-deals .related-deal .deal-image .image-border {
+        width: 330px; }
+    body.responsive .nearby-deals {
+      margin: 0 -13px; }
+    body.responsive .nearby-deals li.ls-item.deal.nearby {
+      width: 252px; }
+    body.responsive .module.escapes.nearby ul.nearby-escapes {
+      padding: 20px 0 0 18px;
+      margin: 0 -18px; }
+    body.responsive .module.escapes.nearby ul.nearby-escapes li {
+      width: 215px;
+      margin-right: 15px; }
+    body.responsive .module.escapes ul li .info {
+      padding: 10px 8px; }
+    body.responsive .deals_online_ab .facetted-browse.tiles-view .deal-browse .deal-tile.four-up-small {
+      margin-left: 28px; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals {
+      margin: 0 0 0 -20px;
+      padding: 0 0 0 18px;
+      width: 702px; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals li {
+      width: 332px;
+      height: 420px;
+      margin-bottom: 18px; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals li:nth-child(3) {
+      margin-left: 0; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals li .deal-img {
+      width: 100%;
+      height: 252px; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals li .deal-img img {
+      width: 100%;
+      display: block; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals li .deal-img .deal-img-border {
+      width: 330px;
+      height: 240px; }
+    body.responsive #ls-wrap #ls-above-fold .related-deals li .deal-bottom-border {
+      width: 330px;
+      height: 251px; }
+    body.responsive #ls-wrap.urgent .ls-content #deal-urgency-content {
+      width: 440px;
+      top: -2px;
+      height: 326px; }
+    body.responsive #ls-wrap.urgent .ls-content #deal-urgency-content .icon {
+      margin: 65px 0 0 196px; }
+    body.responsive #ls-wrap.urgent .ls-content #deal-urgency-content .close {
+      left: 200px; }
+    body.responsive #ls-wrap.urgent #deal-details-container #deal-urgency-header {
+      border-width: 2px;
+      width: 275px; }
+    body.responsive #ls-wrap.urgent #deal-details-container {
+      margin: -20px -18px 0 -15px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-header-titles h1,
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-header-titles h2 {
+      padding-left: 18px;
+      padding-right: 18px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-price {
+      padding-right: 7px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-price p.heading {
+      font-size: 16px;
+      margin-left: 18px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-price p {
+      font-size: 32px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-price p sup {
+      top: -14px;
+      font-size: 18px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-price span {
+      font-size: 16px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header #deal-urgency-price a.btn {
+      margin-right: 0;
+      margin-left: 10px; }
+    body.responsive #ls-wrap.urgent #deal-urgency-header .discount {
+      line-height: 14px;
+      padding-bottom: 6px;
+      padding-right: 18px; }
+    body.responsive #ls-wrap .ls-buy_with_confidence {
+      padding: 120px 15px 0 15px;
+      background-position: center 9px; }
+    body.responsive .checkout-content {
+      padding: 0 60px 60px; }
+      body.responsive .checkout-content .terms {
+        margin-top: 60px; }
+    body.responsive .breadcrumbs {
+      padding: 55px 0 0 60px; }
+    body.responsive #gift_flag {
+      margin-left: 25px; }
+    body.responsive .reward_card {
+      background-size: 115px; }
+    body.responsive .checkout-content .unauth .facebook-connect,
+    body.responsive .checkout_test.unauth .customer {
+      right: -56px; }
+    body.responsive .global-footer {
+      min-width: 720px; }
+    body.responsive .footer-sitemap .col {
+      width: 154px; }
+    body.responsive .footer-callout-group-heading {
+      padding-bottom: 0; }
+    body.responsive .footer-callout {
+      width: 134px; }
+    body.responsive .footer-callout-wide {
+      padding-right: 20px;
+      width: 182px; }
+    body.responsive .copyright {
+      line-height: 18px;
+      width: 55%; }
+    body.responsive .footer-ads-wide .hd {
+      width: 682px;
+      overflow: hidden; }
+    body.responsive .wide-footer {
+      min-width: 0;
+      width: 100%; }
+    body.responsive .wide-footer ul.follow-us {
+      width: auto; }
+    body.responsive .wide-footer ul.border,
+    body.responsive .wide-footer ul {
+      width: 119px; }
+    body.responsive .footer-promos li.promo a {
+      height: auto; }
+    body.responsive .footer-promos li.promo a b {
+      background-image: none;
+      padding: 10px; } }
+

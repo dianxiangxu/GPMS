@@ -1,0 +1,112 @@
+mmcore.SetCookie('mmid','1346993110|AgAAAAqKN46gMQwAAA==',365,1);mmcore.SetCookie('pd','1143990676|AgAAAAoBQoo3jqAxDP5DUHABAMx7Ip5TkNJIDwAAAHRWOKdSkNJIAAAAAP//////////ABd3d3cuYW1lcmljYW5leHByZXNzLmNvbQIxDAEAAAAAAAAAAQAA////////////////AQBgNQAAADp/BbcxDAD/////ATEMMQz//wEAAAEAAAAAAVmHAABo1wAAAAAAAAFF',365);mmcore.SetCookie('srv','cg3.usw',365);(function(){if(typeof(mmcore.GenInfo)!='object')mmcore.GenInfo={};mmcore.EH=function(e){var s=e.message+'\r\n';if(!window.mm_error)window.mm_error=s;else window.mm_error+=s;};
+mmcore.GenInfo['T45OPENFConsolRegFlowAB']={'funnel':'bumperpage'};
+var tc={'mm_funnel':{'h':[],'c':[],'l':[]}}
+try{
+;
+(function () {
+    mmcore.AddDocLoadHandler(function waitForJQuery() {
+        var $ = window.jQuery;
+        if(!$) return setTimeout(waitForJQuery, 50);
+
+        var linkedinClicked = false, step;
+
+        var map = {
+            '1': 'Step 1',
+            '2': 'Step 2',
+            '3': 'Step 3',
+            'create_email_user': 'Step 2',
+            'set_registrant_basic_info': 'Step 3'
+        };
+
+        var requestToCG = function (actionName, val, attr) {            
+            mmcore._async = true;
+            mmcore.SetPageID('mmevents');
+            mmcore.SetAction(actionName, val || 1, attr || '');
+            mmcore.CGRequest();
+        };
+
+        var onClickHandler = function (t, an, at) {
+            var h = t.href, m = mmcore, timer,
+                fu = function () {
+                    clearTimeout(timer);
+                    if (/Firefox/.test(navigator.userAgent)) location.hash = 'mm';
+                    location.assign(h);
+                };
+
+            m._async = true;
+            m.SetPageID('mmevents');
+            m.SetAction(an, '1', at || '');
+            m.CGRequest(fu);
+            timer = setTimeout(fu, 2000);
+            return false;
+        };
+
+        //action T45EmailFunnel
+        mmcore.on('continue:click', function (path) {
+            requestToCG('T45EmailFunnel', 1, map[path]);
+        });
+        
+        $(document).ajaxComplete(function(event, xhr, settings) {
+            if (/admin-ajax\.php/.test(settings.url) && settings.data && !/error/.test(xhr.responseText)) {
+                var path = (settings.data.match(/action=([^&]+)/) || [,''])[1];
+
+                if (path) {
+                    mmcore.trigger('continue:click', path);
+                }
+            }
+        });
+
+        if (mmcore.GenInfo.T45OPENFConsolRegFlowAB.funnel === 'Default' && $('.step-item.current').html() === '1') {
+           requestToCG('T45EmailFunnel', 1, 'Step 1'); 
+        }
+
+        if (/provider=email/i.test(location.href)) {
+            var step = map[$('.step-item.current').html()];
+            if (step) {
+                requestToCG('T45EmailFunnel', 1, step); 
+            } else if (window.itag_regcomplete) {
+                requestToCG('T45EmailFunnel', 1, 'EmailRegComplete');
+            }            
+        }
+        
+        //T45EmailStart and T45EmailFunnel with 'Step 1'
+        $('.signup-with-email').click(function () {
+            mmcore.$Action('T45EmailFunnel', 1, 'Step 1');
+        	requestToCG('T45EmailStart');
+        });
+
+
+        //T45LinkedInStart
+        $('.signup-with-linkedin').click(function () {
+            if (!linkedinClicked) {
+                linkedinClicked = true;
+                return onClickHandler(this, 'T45LinkedInStart');
+            }        	
+        });
+
+        //T45LinkedInStep3
+        if (/provider=linkedin/i.test(location.href)) {
+            requestToCG('T45LinkedInStep3');
+        }        
+
+        //T45LinkedInComplete
+        $('.linkedin-step-2-button').click(function () {
+            if (!$(this).hasClass('disabled')) {
+                requestToCG('T45LinkedInComplete');
+            }
+        });
+    });
+})();
+}catch(err){mmcore.EH(err);}
+try{
+mmcore.omniture('T45OPENFConsolRegFlowAB');
+}catch(err){mmcore.EH(err);}
+mmcore._AddRenderer('mm_funnel',function(){var el=mmcore.GetMaxyboxNode('mm_funnel');var mm_inner_HTML='';try{
+
+    window.experienceB = true;
+
+
+}catch(err){mmcore.EH(err);}
+if(el && typeof el.innerHTML!='undefined')el.innerHTML=mm_inner_HTML;});mmcore.HideMaxyboxes('mm_funnel');mmcore._RenderOnLoad();if(typeof mmcore._callback=='object'&&typeof mmcore._callback[2]=='function'){try{mmcore._callback[2]();}catch(err){mmcore.EH(err);}
+finally{mmcore._callback[2]=null;}}
+})();

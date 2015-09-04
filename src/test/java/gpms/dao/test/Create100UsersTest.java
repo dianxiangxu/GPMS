@@ -80,7 +80,7 @@ public class Create100UsersTest {
 			newProfile.getOfficeNumbers().add("2084947492");
 			newProfile.getMobileNumbers().add("2087024522");
 			// newProfile.getWorkEmails().add("workman@worksite.org");
-			newProfile.getPersonalEmails().add("supercoolbro@yahoo.com");
+			newProfile.getPersonalEmails().add(userAccount + "@yahoo.com");
 
 			// Add two Position Detail objects to the user profile
 			setTheDeets(newProfile);
@@ -131,7 +131,7 @@ public class Create100UsersTest {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateDOB = formatter.parse(strDOB);
 
-			String newPassword = userAccount + "pwd";
+			String newPassword = userAccount + "PW";
 			newUserAccountDAO.setPassword(newProfile, newAccount, newPassword);
 
 			newUserProfileDAO.setDateOfBirth(newProfile, newProfile, dateDOB);
@@ -139,8 +139,8 @@ public class Create100UsersTest {
 
 			newUserProfileDAO.addOtherNumber(newProfile, newProfile,
 					"2089389302");
-			newUserProfileDAO.addWorkEmail(newProfile, newProfile,
-					"alternatecontact@officialplace.com");
+			newUserProfileDAO.addWorkEmail(newProfile, newProfile, userAccount
+					+ "@officialplace.com");
 
 			// Increment Count
 			creationCounter++;

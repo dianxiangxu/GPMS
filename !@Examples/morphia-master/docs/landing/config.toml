@@ -1,6 +1,0 @@
-baseurl = "/morphia/"
-languageCode = "en-us"
-title = "Morphia"
-canonifyurls = false
-
-githubRepo = "morphia"

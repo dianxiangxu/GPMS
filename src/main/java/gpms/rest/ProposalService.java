@@ -354,4 +354,65 @@ public class ProposalService {
 
 		return proposalAuditLogs;
 	}
+
+	@POST
+	@Path("/CheckUniqueProjectTitle")
+	public String checkUniqueProjectTitle(String message)
+			throws JsonProcessingException, IOException {
+		String proposalID = new String();
+		String newProjectTitle = new String();
+		String userName = new String();
+		String userProfileID = new String();
+		String cultureName = new String();
+
+		String response = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(message);
+
+		JsonNode proposalUniqueObj = root.get("proposalUniqueObj");
+		if (proposalUniqueObj != null && proposalUniqueObj.has("ProposalID")) {
+			proposalID = proposalUniqueObj.get("ProposalID").getTextValue();
+		}
+
+		if (proposalUniqueObj != null
+				&& proposalUniqueObj.has("NewProjectTitle")) {
+			newProjectTitle = proposalUniqueObj.get("NewProjectTitle")
+					.getTextValue();
+		}
+
+		JsonNode commonObj = root.get("gpmsCommonObj");
+		if (commonObj != null && commonObj.has("UserName")) {
+			userName = commonObj.get("UserName").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("UserProfileID")) {
+			userProfileID = commonObj.get("UserProfileID").getTextValue();
+		}
+
+		if (commonObj != null && commonObj.has("CultureName")) {
+			cultureName = commonObj.get("CultureName").getTextValue();
+		}
+
+		ObjectId id = new ObjectId();
+		Proposal proposal = new Proposal();
+		if (!proposalID.equals("0")) {
+			id = new ObjectId(proposalID);
+			proposal = proposalDAO.findNextProposalWithSameProjectTitle(id,
+					newProjectTitle);
+		} else {
+			proposal = proposalDAO
+					.findAnyProposalWithSameProjectTitle(newProjectTitle);
+		}
+
+		if (proposal != null) {
+			response = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString("false");
+		} else {
+			response = mapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString("true");
+		}
+		return response;
+
+	}
 }

@@ -1,0 +1,752 @@
+/* The Warehouse Design */
+
+
+
+/* Theme One: Button, Checkbox and Radio Sytle
+============================================== */
+
+/* ===== Orange Theme ===== */
+.orangeButton {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	border: solid 1px #da7c0c;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	background: #f78d1d;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFA800), to(#f97d06));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #ffa800,  #f97d06);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#ffa800', endColorstr='#f97d06')";/* IE */
+}
+.orangeButton:hover {
+	text-decoration: none;
+	background: #f47c20;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #f88e11,  #f06015);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#f88e11', endColorstr='#f06015')";/* IE */
+
+}
+.orangeButton:active {
+	color: #ffffff;
+	position: relative;
+	background: #f47c20;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f97d06), to(#ffa800));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #f97d06,  #ffa800);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#f97d06', endColorstr='#ffa800')";/* IE */
+}
+
+.orangeRounded {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	border: solid 1px #da7c0c;
+	-webkit-border-radius: 12px; 
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	background: #f78d1d;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffa800), to(#f97d06));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #ffa800,  #f97d06);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#ffa800', endColorstr='#f97d06')";/* IE */
+}
+.orangeRounded:hover {
+	text-decoration: none;
+	background: #f47c20;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #f88e11,  #f06015);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#f88e11', endColorstr='#f06015')";/* IE */
+
+}
+.orangeRounded:active {
+	color: #ffffff;
+	position: relative;
+	background: #f47c20;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f97d06), to(#ffa800));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #f97d06,  #ffa800);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#f97d06', endColorstr='#ffa800')";/* IE */
+}
+
+/* == Checkbox == */
+.orangeCheckbox input[type="checkbox"] {
+	display: none;
+}
+
+.orangeCheckbox input[type="checkbox"]+ label span {
+	display: inline-block;
+	cursor: pointer;
+	width: 19px;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	background: url(img/orange_sprites.png) left top no-repeat;
+
+}
+
+.orangeCheckbox input[type="checkbox"]:checked + label span {
+	background: url(img/orange_sprites.png) -19px top no-repeat;
+}
+
+/* == Radio Button == */
+.orangeRadio input[type="radio"] {
+    display:none;
+}
+
+.orangeRadio input[type="radio"] + label {
+    color: #272626;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+.orangeRadio input[type="radio"] + label span {
+    cursor: pointer;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(img/orange_sprites.png) -38px top no-repeat;
+   
+}
+
+.orangeRadio input[type="radio"]:checked + label span {
+    background:  url(img/orange_sprites.png) -57px top no-repeat;
+}
+
+/* ===== Blue Theme ===== */
+.blueButton {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #2d5ca3;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	background: #3061ae;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#5386c7), to(#2956a7));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #5386c7,  #2956a7);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5386c7', endColorstr='#2956a7')";/* IE */
+}
+.blueButton:hover {
+	text-decoration: none;
+	background: #7b1d16;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#5683ba), to(#214689));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #5683ba,  #214689);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5683ba', endColorstr='#214689')";/* IE */
+
+}
+.blueButton:active {
+	color: #ffffff;
+	position: relative;
+	background: #9f352b;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#4172ce), to(#649ddd));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #4172ce,  #649ddd);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#4172ce', endColorstr='#649ddd')";/* IE */
+}
+
+.blueRounded {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #2d5ca3;
+	-webkit-border-radius: 12px; 
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	background: #3061ae;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#5386c7), to(#2956a7));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #5386c7,  #2956a7);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5386c7', endColorstr='#2956a7')";/* IE */
+}
+.blueRounded:hover {
+	text-decoration: none;
+	background: #7b1d16;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#5683ba), to(#214689));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #5683ba,  #214689);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5683ba', endColorstr='#214689')";/* IE */
+
+}
+.blueRounded:active {
+	color: #ffffff;
+	position: relative;
+	background: #9f352b;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#4172ce), to(#649ddd));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #4172ce,  #649ddd);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#4172ce', endColorstr='#649ddd')";/* IE */
+}
+
+
+
+/* == Checkbox == */
+.blueCheckbox input[type="checkbox"] {
+	display: none;
+}
+
+.blueCheckbox input[type="checkbox"]+ label span {
+	display: inline-block;
+	cursor: pointer;
+	width: 19px;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	background: url(img/blue_sprites.png) left top no-repeat;
+
+}
+
+.blueCheckbox input[type="checkbox"]:checked + label span {
+	background: url(img/blue_sprites.png) -19px top no-repeat;
+}
+
+/* == Radio Button == */
+.blueRadio input[type="radio"] {
+    display:none;
+}
+
+.blueRadio input[type="radio"] + label {
+    color: #272626;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+.blueRadio input[type="radio"] + label span {
+    cursor: pointer;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(img/blue_sprites.png) -38px top no-repeat;
+   
+}
+
+.blueRadio input[type="radio"]:checked + label span {
+    background: url(img/blue_sprites.png)  -57px top no-repeat;
+}
+
+/* ===== Red Theme ===== */
+.redButton {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #7d1913;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	background: #7a1812;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#a8392e), to(#771610));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #a8392e,  #771610);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#a8392e', endColorstr='#771610')";/* IE */
+}
+.redButton:hover {
+	text-decoration: none;
+	background: #5683ba;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#953228), to(#62120e));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #953228,  #62120e);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#953228', endColorstr='#62120e')";/* IE */
+
+}
+.redButton:active {
+	color: #ffffff;
+	position: relative;
+	background: #649ddd;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#84211a), to(#ac483e));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #84211a,  #ac483e);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#84211a', endColorstr='#ac483e')";/* IE */
+}
+
+.redRounded {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #7a1812;
+	-webkit-border-radius: 12px; 
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	background: #7a1812;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#a8392e), to(#771610));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #a8392e,  #771610);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#a8392e', endColorstr='#771610')";/* IE */
+}
+.redRounded:hover {
+	text-decoration: none;
+	background: #5683ba;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#953228), to(#62120e));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #953228,  #62120e);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#953228', endColorstr='#62120e')";/* IE */
+}
+.redRounded:active {
+	color: #ffffff;
+	position: relative;
+	background: #649ddd;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#84211a), to(#ac483e));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #84211a,  #ac483e);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#84211a', endColorstr='#ac483e')";/* IE */
+}
+
+
+
+/* == Checkbox == */
+.redCheckbox input[type="checkbox"] {
+	display: none;
+}
+
+.redCheckbox input[type="checkbox"]+ label span {
+	display: inline-block;
+	cursor: pointer;
+	width: 19px;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	background: url(img/red_sprites.png) left top no-repeat;
+
+}
+
+.redCheckbox input[type="checkbox"]:checked + label span {
+	background: url(img/red_sprites.png) -19px top no-repeat;
+}
+
+/* == Radio Button == */
+.redRadio input[type="radio"] {
+    display:none;
+}
+
+.redRadio input[type="radio"] + label {
+    color: #272626;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+.redRadio input[type="radio"] + label span {
+    cursor: pointer;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(img/red_sprites.png) -38px top no-repeat;
+   
+}
+
+.redRadio input[type="radio"]:checked + label span {
+    background: url(img/red_sprites.png)  -57px top no-repeat;
+}
+
+/* ===== Green Theme ===== */
+.greenButton {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #61af3c;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	background: #78ce4e;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#9adc75), to(#5cbc35));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #9adc75,  #5cbc35);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#9adc75', endColorstr='#5cbc35')";/* IE */
+}
+.greenButton:hover {
+	text-decoration: none;
+	background: #61b23d;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#86c865), to(#4a9c2b));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #86c865,  #4a9c2b);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#86c865', endColorstr='#4a9c2b')";/* IE */
+
+}
+.greenButton:active {
+	color: #ffffff;
+	position: relative;
+	background: #84d75b;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#6bc943), to(#91dc6a));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #6bc943,  #91dc6a);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#6bc943', endColorstr='#91dc6a')";/* IE */
+}
+
+.greenRounded {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #61af3c;
+	-webkit-border-radius: 12px; 
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	background: #78ce4e;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#9adc75), to(#5cbc35));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #9adc75,  #5cbc35);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#9adc75', endColorstr='#5cbc35')";/* IE */
+}
+.greenRounded:hover {
+	text-decoration: none;
+	background: #61b23d;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#86c865), to(#4a9c2b));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #86c865,  #4a9c2b);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#86c865', endColorstr='#4a9c2b')";/* IE */
+
+}
+.greenRounded:active {
+	color: #ffffff;
+	position: relative;
+	background: #84d75b;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#6bc943), to(#91dc6a));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #6bc943,  #91dc6a);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#6bc943', endColorstr='#91dc6a')";/* IE */
+
+}
+
+/* == Checkbox == */
+.greenCheckbox input[type="checkbox"] {
+	display: none;
+}
+
+.greenCheckbox input[type="checkbox"]+ label span {
+	display: inline-block;
+	cursor: pointer;
+	width: 19px;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	background: url(img/green_sprites.png) left top no-repeat;
+
+}
+
+.greenCheckbox input[type="checkbox"]:checked + label span {
+	background: url(img/green_sprites.png) -19px top no-repeat;
+}
+
+/* == Radio Button == */
+.greenRadio input[type="radio"] {
+    display:none;
+}
+
+.greenRadio input[type="radio"] + label {
+    color: #272626;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+.greenRadio input[type="radio"] + label span {
+    cursor: pointer;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(img/green_sprites.png) -38px top no-repeat;
+   
+}
+
+.greenRadio input[type="radio"]:checked + label span {
+    background: url(img/green_sprites.png)  -57px top no-repeat;
+}
+
+/* ===== Dark Grey Theme ===== */
+.darkButton {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #343434;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	background: #4c4c4c;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b6b6b), to(#363536));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #6b6b6b,  #363536);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#6b6b6b', endColorstr='#363536')";/* IE */
+}
+.darkButton:hover {
+	text-decoration: none;
+	background: #3a3939;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#626161), to(#272626));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #626161,  #272626);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#626161', endColorstr='#272626')";/* IE */
+
+}
+.darkButton:active {
+	color: #ffffff;
+	position: relative;
+	background: #545454;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#3d3c3c), to(#6f6f6f));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #3d3c3c,  #6f6f6f);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr='#3d3c3c', endColorstr='#6f6f6f')";/* IE */
+}
+
+.darkRounded {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #343434;
+	-webkit-border-radius: 12px; 
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	background: #4c4c4c;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b6b6b), to(#363536));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #6b6b6b,  #363536);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b6b6b', endColorstr='#363536')";/* IE */
+
+}
+.darkRounded:hover {
+	text-decoration: none;
+	background: #3a3939;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#626161), to(#272626));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #626161,  #272626);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#626161', endColorstr='#272626')";/* IE */
+
+
+}
+.darkRounded:active {
+	color: #ffffff;
+	position: relative;
+	background: #545454;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#3d3c3c), to(#6f6f6f));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #3d3c3c,  #6f6f6f);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d3c3c', endColorstr='#6f6f6f')";/* IE */
+
+}
+
+
+
+/* == Checkbox == */
+.darkCheckbox input[type="checkbox"] {
+	display: none;
+}
+
+.darkCheckbox input[type="checkbox"]+ label span {
+	display: inline-block;
+	cursor: pointer;
+	width: 19px;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	background: url(img/darkgrey_sprites.png) left top no-repeat;
+
+}
+
+.darkCheckbox input[type="checkbox"]:checked + label span {
+	background: url(img/darkgrey_sprites.png) -19px top no-repeat;
+}
+
+/* == Radio Button == */
+.darkRadio input[type="radio"] {
+    display:none;
+}
+
+.darkRadio input[type="radio"] + label {
+    color: #272626;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+.darkRadio input[type="radio"] + label span {
+    cursor: pointer;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(img/darkgrey_sprites.png) -38px top no-repeat;
+   
+}
+
+.darkRadio input[type="radio"]:checked + label span {
+    background: url(img/darkgrey_sprites.png)  -57px top no-repeat;
+}
+
+/* ===== Light Grey Theme ===== */
+.lightButton {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #3f3f3f;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #b3b2b2;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	background: #dedede;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#cfcfcf));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #f2f2f2,  #cfcfcf);/* Firefox */
+	filter: -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#cfcfcf')";/* IE */
+}
+.lightButton:hover {
+	text-decoration: none;
+	background: #c9c9c9;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#b4b3b4));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #eaeaea,  #b4b3b4);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea', endColorstr='#b4b3b4')";/* IE */
+
+}
+.lightButton:active {
+	color: #3f3f3f;
+	position: relative;
+	background: #e6e6e6;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#d8d8d8), to(#f9f9f9));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #d8d8d8,  #f9f9f9);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#d8d8d8', endColorstr='#f9f9f9')";/* IE */
+}
+
+.lightRounded {
+	font: 14px/100% 'Source Sans Pro', sans-serif;
+	color: #3f3f3f;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	padding: .5em 2em .55em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Safari and Chrome */
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3); /* Firefox */
+	box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	border: solid 1px #b3b2b2;
+	-webkit-border-radius: 12px; 
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	background: #dedede;/* old browser default*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#cfcfcf));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #f2f2f2,  #cfcfcf);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#cfcfcf')";/* IE */
+
+
+}
+.lightRounded:hover {
+	text-decoration: none;
+	background: #c9c9c9;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#b4b3b4));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #eaeaea,  #b4b3b4);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea', endColorstr='#b4b3b4')";/* IE */
+
+}
+.lightRounded:active {
+	color: #3f3f3f;
+	position: relative;
+	background: #e6e6e6;/* old browser default */
+	background: -webkit-gradient(linear, left top, left bottom, from(#d8d8d8), to(#f9f9f9));/* Safari and Chrome */
+	background: -moz-linear-gradient(top,  #d8d8d8,  #f9f9f9);/* Firefox */
+	filter:  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#d8d8d8', endColorstr='#f9f9f9')";/* IE */
+
+}
+
+
+
+/* == Checkbox == */
+.lightCheckbox input[type="checkbox"] {
+	display: none;
+}
+
+.lightCheckbox input[type="checkbox"]+ label span {
+	display: inline-block;
+	cursor: pointer;
+	width: 19px;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	background: url(img/lightgrey_sprites.png) left top no-repeat;
+
+}
+
+.lightCheckbox input[type="checkbox"]:checked + label span {
+	background: url(img/lightgrey_sprites.png) -19px top no-repeat;
+}
+
+/* == Radio Button == */
+.lightRadio input[type="radio"] {
+    display:none;
+}
+
+.lightRadio input[type="radio"] + label {
+    color: #272626;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+.lightRadio input[type="radio"] + label span {
+    cursor: pointer;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(img/lightgrey_sprites.png) -38px top no-repeat;
+   
+}
+
+.lightRadio input[type="radio"]:checked + label span {
+    background: url(img/lightgrey_sprites.png)  -57px top no-repeat;
+}

@@ -315,7 +315,8 @@ $(function() {
 					coltype : 'label',
 					align : 'left',
 					type : 'date',
-					format : 'yyyy/MM/dd hh:mm:ss a'
+					format : 'yyyy/MM/dd hh:mm:ss a',
+					hide : true
 				}, {
 					display : 'Last Audited By',
 					name : 'last_audited_by',
@@ -993,16 +994,22 @@ $(function() {
 			if (checkForm($("#form1"))) {
 				var validateErrorMessage = '';
 
-				var newUserName = $('#txtUserName').val();
+				var newUserName = $.trim($('#txtUserName').val());
 				if (!newUserName) {
 					validateErrorMessage += 'Please enter username.<br/>';
 				} else if (!usersManage.IsUniqueUserName(_userId, newUserName)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsUsersManagement,
 									"Please enter unique username.") + " '"
-							+ usersManage.trim() + "' "
+							+ newUserName.trim() + "' "
 							+ getLocale(gpmsUsersManagement, "already exists.")
 							+ '<br/>';
+				}
+
+				if (validateErrorMessage != '') {
+					$('#txtUserName').removeClass("error");
+				} else {
+					$('#txtUserName').addClass("error");
 				}
 
 				var _saveOptions = '';
@@ -1807,7 +1814,7 @@ $(function() {
 			$('#txtUserName').blur(
 					function() {
 						var errors = '';
-						var userName = $(this).val();
+						var userName = $.trim($(this).val());
 						var user_id = $('#btnSaveUser').prop("name");
 						if (user_id == '') {
 							user_id = "0";
@@ -1827,22 +1834,16 @@ $(function() {
 						}
 
 						if (errors) {
+							$(this).addClass("error");
 							$(this).next('.cssClassRight').hide();
-							$(this).siblings('.cssClassError').show();
-							$(this).siblings(".cssClassError").parent('div')
-									.addClass("diverror");
-							$(this).siblings('.cssClassError').prevAll(
-									"input:first").addClass("error");
 							$(this).siblings('.cssClassError').html(errors);
+							$(this).siblings('.cssClassError').show();
 							return false;
 						} else {
-							$(this).parent("td").find("span.error").hide();
+							$(this).removeClass("error");
 							$(this).next('.cssClassRight').show();
 							$(this).siblings('.cssClassError').hide();
-							$(this).siblings(".cssClassError").parent('div')
-									.removeClass("diverror");
-							$(this).siblings('.cssClassError').prevAll(
-									"input:first").removeClass("error");
+							$(this).siblings('.cssClassError').html('');
 						}
 					});
 

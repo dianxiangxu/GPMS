@@ -152,13 +152,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 						userAuditLog.setActivityDate(userAccountAudit
 								.getActivityDate());
 						userAuditLog.setUserFullName(userAccountAudit
-								.getUserProfileId().getFirstName()
-								+ " "
-								+ userAccountAudit.getUserProfileId()
-										.getMiddleName()
-								+ " "
-								+ userAccountAudit.getUserProfileId()
-										.getLastName());
+								.getUserProfileId().getFullName());
 						userAuditLog.setAction(userAccountAudit.getAction());
 
 						allAuditLogs.add(userAuditLog);
@@ -170,15 +164,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 					AuditLogInfo userAuditLog = new AuditLogInfo();
 					userAuditLog.setActivityDate(userProfileAudit
 							.getActivityDate());
-					userAuditLog
-							.setUserFullName(userProfileAudit
-									.getUserProfileId().getFirstName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getMiddleName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getLastName());
+					userAuditLog.setUserFullName(userProfileAudit
+							.getUserProfileId().getFullName());
 					userAuditLog.setAction(userProfileAudit.getAction());
 
 					allAuditLogs.add(userAuditLog);
@@ -298,15 +285,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 						&& isActivityDateFromMatch && isActivityDateToMatch) {
 					userAuditLog.setUserName(userProfileAudit
 							.getUserProfileId().getUserAccount().getUserName());
-					userAuditLog
-							.setUserFullName(userProfileAudit
-									.getUserProfileId().getFirstName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getMiddleName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getLastName());
+					userAuditLog.setUserFullName(userProfileAudit
+							.getUserProfileId().getFullName());
 					userAuditLog.setAction(userProfileAudit.getAction());
 					userAuditLog.setActivityDate(userProfileAudit
 							.getActivityDate());
@@ -393,15 +373,8 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 						&& isActivityDateFromMatch && isActivityDateToMatch) {
 					userAuditLog.setUserName(userAccountAudit
 							.getUserProfileId().getUserAccount().getUserName());
-					userAuditLog
-							.setUserFullName(userAccountAudit
-									.getUserProfileId().getFirstName()
-									+ " "
-									+ userAccountAudit.getUserProfileId()
-											.getMiddleName()
-									+ " "
-									+ userAccountAudit.getUserProfileId()
-											.getLastName());
+					userAuditLog.setUserFullName(userAccountAudit
+							.getUserProfileId().getFullName());
 					userAuditLog.setAction(userAccountAudit.getAction());
 					userAuditLog.setActivityDate(userAccountAudit
 							.getActivityDate());
@@ -1087,5 +1060,4 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 		return userPositionTitles;
 	}
-
 }

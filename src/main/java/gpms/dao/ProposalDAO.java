@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -281,25 +282,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				proposal.setDeleted(true);
 			}
 
-			// PI, CO-PI and Senior UserProfiles
-
-			proposal.setPIUser(userProposal.getInvestigatorInfo().getPi()
-					.getUserRef().getId().toString());
-
-			ArrayList<InvestigatorRefAndPosition> allCoPI = userProposal
-					.getInvestigatorInfo().getCo_pi();
-			for (InvestigatorRefAndPosition coPI : allCoPI) {
-				proposal.getCOPIUsers().add(
-						coPI.getUserRef().getId().toString());
-			}
-
-			ArrayList<InvestigatorRefAndPosition> allSeniors = userProposal
-					.getInvestigatorInfo().getSeniorPersonnel();
-			for (InvestigatorRefAndPosition senior : allSeniors) {
-				proposal.getSeniorPersonnelUsers().add(
-						senior.getUserRef().getId().toString());
-			}
-
 			// ProjectInfo
 			proposal.setProjectTitle(userProposal.getProjectInfo()
 					.getProjectTitle());
@@ -348,11 +330,11 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.getGrantingAgency());
 			proposal.setDirectCosts(userProposal.getSponsorAndBudgetInfo()
 					.getDirectCosts());
-			proposal.setFACosts(userProposal.getSponsorAndBudgetInfo()
+			proposal.setFaCosts(userProposal.getSponsorAndBudgetInfo()
 					.getFACosts());
 			proposal.setTotalCosts(userProposal.getSponsorAndBudgetInfo()
 					.getTotalCosts());
-			proposal.setFARate(userProposal.getSponsorAndBudgetInfo()
+			proposal.setFaRate(userProposal.getSponsorAndBudgetInfo()
 					.getFARate());
 
 			ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
@@ -363,15 +345,8 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					AuditLogInfo userAuditLog = new AuditLogInfo();
 					userAuditLog.setActivityDate(userProfileAudit
 							.getActivityDate());
-					userAuditLog
-							.setUserFullName(userProfileAudit
-									.getUserProfileId().getFirstName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getMiddleName()
-									+ " "
-									+ userProfileAudit.getUserProfileId()
-											.getLastName());
+					userAuditLog.setUserFullName(userProfileAudit
+							.getUserProfileId().getFullName());
 					userAuditLog.setAction(userProfileAudit.getAction());
 
 					allAuditLogs.add(userAuditLog);
@@ -392,6 +367,24 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			proposal.setLastAudited(lastAudited);
 			proposal.setLastAuditedBy(lastAuditedBy);
 			proposal.setLastAuditAction(lastAuditAction);
+
+			// PI, CO-PI and Senior UserProfiles
+			proposal.setPiUser(userProposal.getInvestigatorInfo().getPi()
+					.getUserRef().getId().toString());
+
+			ArrayList<InvestigatorRefAndPosition> allCoPI = userProposal
+					.getInvestigatorInfo().getCo_pi();
+			for (InvestigatorRefAndPosition coPI : allCoPI) {
+				proposal.getCopiUsers().add(
+						coPI.getUserRef().getId().toString());
+			}
+
+			ArrayList<InvestigatorRefAndPosition> allSeniors = userProposal
+					.getInvestigatorInfo().getSeniorPersonnel();
+			for (InvestigatorRefAndPosition senior : allSeniors) {
+				proposal.getSeniorUsers().add(
+						senior.getUserRef().getId().toString());
+			}
 
 			proposals.add(proposal);
 		}
@@ -488,11 +481,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					proposalAuditLog.setUserName(poposalAudit
 							.getUserProfileId().getUserAccount().getUserName());
 					proposalAuditLog.setUserFullName(poposalAudit
-							.getUserProfileId().getFirstName()
-							+ " "
-							+ poposalAudit.getUserProfileId().getMiddleName()
-							+ " "
-							+ poposalAudit.getUserProfileId().getLastName());
+							.getUserProfileId().getFullName());
 					proposalAuditLog.setAction(poposalAudit.getAction());
 					proposalAuditLog.setActivityDate(poposalAudit
 							.getActivityDate());
@@ -516,5 +505,33 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		} else {
 			return allAuditLogs.subList(offset - 1, rowTotal);
 		}
+	}
+
+	public Proposal findNextProposalWithSameProjectTitle(ObjectId id,
+			String newProjectTitle) {
+		Datastore ds = getDatastore();
+
+		Query<Proposal> proposalQuery = ds.createQuery(Proposal.class);
+
+		Pattern pattern = Pattern.compile("^" + newProjectTitle + "$",
+				Pattern.CASE_INSENSITIVE);
+
+		proposalQuery.and(proposalQuery.criteria("_id").notEqual(id),
+				proposalQuery.criteria("project info.project title")
+						.containsIgnoreCase(pattern.pattern()));
+		return proposalQuery.get();
+	}
+
+	public Proposal findAnyProposalWithSameProjectTitle(String newProjectTitle) {
+		Datastore ds = getDatastore();
+
+		Query<Proposal> proposalQuery = ds.createQuery(Proposal.class);
+
+		Pattern pattern = Pattern.compile("^" + newProjectTitle + "$",
+				Pattern.CASE_INSENSITIVE);
+
+		proposalQuery.criteria("project info.project title")
+				.containsIgnoreCase(pattern.pattern());
+		return proposalQuery.get();
 	}
 }

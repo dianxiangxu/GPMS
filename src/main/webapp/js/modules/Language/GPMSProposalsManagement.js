@@ -45,4 +45,9 @@
 	"Failed to load user's position types list." : "Failed to load user's position types list.",
 	"Failed to load user's position titles list." : "Failed to load user's position titles list.",
 
+	"Please enter project title." : "Please enter project title.",
+	"Please enter unique project title." : "Please enter unique project title.",
+	"already exists." : "already exists.",
+	"Cannot check for unique project title" : "Cannot check for unique project title",
+
 };
