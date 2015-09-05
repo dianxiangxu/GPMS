@@ -143,8 +143,8 @@
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
 				<img id="imgProgress" src="images/ajax-loader.gif"
-					style="border-width: 0px;" alt="Loading..." title="Loading..." /> <br>
-				<span id="lblPrgress">Please wait...</span>
+					style="border-width: 0px;" alt="Loading..." title="Loading..." />
+				<br> <span id="lblPrgress">Please wait...</span>
 			</div>
 		</div>
 		<noscript>
@@ -228,24 +228,16 @@
 															border="0">
 															<tbody>
 																<tr>
-																	<td><label class="cssClassLabel sfLocale">Project
-																			Title:</label> <input title="Project Title" type="text"
+																	<td style="width: 100px;"><label
+																		class="cssClassLabel sfLocale">Project Title:</label>
+																		<input title="Project Title" type="text"
 																		class="sfTextBoxFix" id="txtSearchProjectTitle"
 																		placeholder="Project Title" /></td>
-																	<td><label class="cssClassLabel sfLocale">
-																			Proposed By:</label><input title="Proposed By"
-																		id="txtSearchProposedBy" class="sfTextBoxFix"
-																		type="text" placeholder="Proposed By" /></td>
-
-																	<td><label class="cssClassLabel sfLocale">
-																			Total Costs:</label> <br> <span class="label sfLocale">
-																			From :</span> <input title="Total Costs From" type="text"
-																		id="txtSearchTotalCostsFrom" class="sfTextBoxFix"
-																		placeholder="From" /> <span class="label sfLocale">
-																			To :</span> <input title="Total Costs To" type="text"
-																		id="txtSearchTotalCostsTo" class="sfTextBoxFix"
-																		placeholder="To" /></td>
-																	</td>
+																	<td style="width: 100px;"><label
+																		class="cssClassLabel sfLocale"> Proposed By:</label><input
+																		title="Proposed By" id="txtSearchProposedBy"
+																		class="sfTextBoxFix" type="text"
+																		placeholder="Proposed By" /></td>
 
 																	<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
 																	<!-- 																				Project Type:</label> <select title="Choose Project Type" id="ddlProjectType" -->
@@ -274,8 +266,18 @@
 																		placeholder="To" /></td>
 
 																	<td><label class="cssClassLabel sfLocale">
-																			Proposal Status:</label> <select
-																		title="Choose Proposal Status"
+																			Total Costs:</label> <br> <span class="label sfLocale">
+																			From :</span> <input title="Total Costs From" type="text"
+																		id="txtSearchTotalCostsFrom"
+																		name="searchTotalCostsFrom" class="sfTextBoxFix"
+																		placeholder="From" /> <span class="label sfLocale">
+																			To :</span> <input title="Total Costs To" type="text"
+																		id="txtSearchTotalCostsTo" name="searchTotalCostsTo"
+																		class="sfTextBoxFix" placeholder="To" /></td>
+																	</td>
+
+																	<td style="width: 100px;"><label
+																		class="cssClassLabel sfLocale">Proposal Status:</label> <select title="Choose Proposal Status"
 																		id="ddlSearchProposalStatus" class="sfListmenu"
 																		style="width: 80px;">
 																			<option value="0" class="sfLocale">--All--</option>
@@ -1277,17 +1279,18 @@
 																			value="MTDC" /><label class="cssClassLabel"
 																			for="chkMTDC">MTDC</label><input title="TDC"
 																			type="checkbox" class="cssClassCheckBox" id="chkTDC"
-																			name="TDC" value="TDC" /><label class="cssClassLabel"
-																			for="chkTDC">TDC</label><input title="TC"
-																			type="checkbox" class="cssClassCheckBox" id="chkTC"
-																			name="TC" value="TC" /><label class="cssClassLabel"
-																			for="chkTC">TC</label> <input title="Other"
-																			type="checkbox" class="cssClassCheckBox"
-																			id="chkOther" name="other" value="Other" /><label
-																			class="cssClassLabel" for="chkOther">Other</label><input
-																			title="N/A" type="checkbox" class="cssClassCheckBox"
-																			id="chkNA" name="nA" value="N/A" /><label
-																			class="cssClassLabel" for="chkNA">N/A</label>
+																			name="TDC" value="TDC" /><label
+																			class="cssClassLabel" for="chkTDC">TDC</label><input
+																			title="TC" type="checkbox" class="cssClassCheckBox"
+																			id="chkTC" name="TC" value="TC" /><label
+																			class="cssClassLabel" for="chkTC">TC</label> <input
+																			title="Other" type="checkbox"
+																			class="cssClassCheckBox" id="chkOther" name="other"
+																			value="Other" /><label class="cssClassLabel"
+																			for="chkOther">Other</label><input title="N/A"
+																			type="checkbox" class="cssClassCheckBox" id="chkNA"
+																			name="nA" value="N/A" /><label class="cssClassLabel"
+																			for="chkNA">N/A</label>
 																	</div></td>
 															</tr>
 															<tr>
@@ -1456,13 +1459,14 @@
 																		class="cssClassCheckBox">
 																		<input title="DF" type="checkbox"
 																			class="cssClassCheckBox" id="chkDF" name="DF"
-																			value="DF" /><label class="cssClassLabel" for="chkDF">DF</label><input
-																			title="LG" type="checkbox" class="cssClassCheckBox"
-																			id="chkLG" name="LG" value="LG" /><label
-																			class="cssClassLabel" for="chkLG">LG</label><input
-																			title="LN" type="checkbox" class="cssClassCheckBox"
-																			id="chkLN" name="LN" value="LN" /><label
-																			class="cssClassLabel" for="chkLN">LN</label>
+																			value="DF" /><label class="cssClassLabel"
+																			for="chkDF">DF</label><input title="LG"
+																			type="checkbox" class="cssClassCheckBox" id="chkLG"
+																			name="LG" value="LG" /><label class="cssClassLabel"
+																			for="chkLG">LG</label><input title="LN"
+																			type="checkbox" class="cssClassCheckBox" id="chkLN"
+																			name="LN" value="LN" /><label class="cssClassLabel"
+																			for="chkLN">LN</label>
 																	</div></td>
 															</tr>
 														</tbody>

@@ -9,10 +9,33 @@ $(function() {
 		return gpmsCommonInfo;
 	};
 
+	$.validator
+			.addMethod(
+					'greaterthan',
+					function(value, element, params) {
+						if ($(params).autoNumeric('get') != ''
+								&& $(element).autoNumeric('get') != '') {
+							return isNaN($(element).autoNumeric('get'))
+									&& isNaN($(params).autoNumeric('get'))
+									|| parseFloat($(element).autoNumeric('get')) > parseFloat($(
+											params).autoNumeric('get'));
+						}
+						return true;
+					}, 'Must be greater than Total Costs From');
+
+	$("#txtSearchTotalCostsFrom").keyup(function() {
+		$("#txtSearchTotalCostsTo").val('');
+		$("#txtSearchTotalCostsTo").removeClass('error');
+		$("#txtSearchTotalCostsTo-error").remove();
+	});
+
 	var validator = $("#form1")
 			.validate(
 					{
 						rules : {
+							searchTotalCostsTo : {
+								greaterthan : "#txtSearchTotalCostsFrom"
+							},
 							// projectTitle : {
 							// required : true
 							// },
@@ -185,7 +208,11 @@ $(function() {
 								required : true
 							}
 						},
+						errorElement : "span",
 						messages : {
+							searchTotalCostsTo : {
+								greaterthan : "Must be greater than Total Costs From"
+							},
 							// projectTitle : {
 							// required : "Please enter project title."
 							// },
@@ -410,10 +437,12 @@ $(function() {
 		SearchProposals : function() {
 			var projectTitle = $.trim($("#txtSearchProjectTitle").val());
 			var proposedBy = $.trim($("#txtSearchProposedBy").val());
-			var totalCostsFrom = $.trim($("#txtSearchTotalCostsFrom").val());
-			var totalCostsTo = $.trim($("#txtSearchTotalCostsTo").val());
 			var receivedOnFrom = $.trim($("#txtSearchReceivedOnFrom").val());
 			var receivedOnTo = $.trim($("#txtSearchReceivedOnTo").val());
+			var totalCostsFrom = $.trim($("#txtSearchTotalCostsFrom")
+					.autoNumeric('get'));
+			var totalCostsTo = $.trim($("#txtSearchTotalCostsTo").autoNumeric(
+					'get'));
 
 			var proposalStatus = $.trim($('#ddlSearchProposalStatus').val()) == "" ? null
 					: $.trim($('#ddlSearchProposalStatus').val()) == "0" ? null
@@ -438,12 +467,12 @@ $(function() {
 			}
 
 			proposalsManage.BindProposalGrid(projectTitle, proposedBy,
-					totalCostsFrom, totalCostsTo, receivedOnFrom, receivedOnTo,
+					receivedOnFrom, receivedOnTo, totalCostsFrom, totalCostsTo,
 					proposalStatus);
 		},
 
-		BindProposalGrid : function(projectTitle, proposedBy, totalCostsFrom,
-				totalCostsTo, receivedOnFrom, receivedOnTo, proposalStatus) {
+		BindProposalGrid : function(projectTitle, proposedBy, receivedOnFrom,
+				receivedOnTo, totalCostsFrom, totalCostsTo, proposalStatus) {
 			this.config.url = this.config.baseURL;
 			this.config.method = "GetProposalsList";
 			var offset_ = 1;
@@ -454,10 +483,10 @@ $(function() {
 			var proposalBindObj = {
 				ProjectTitle : projectTitle,
 				ProposedBy : proposedBy,
-				TotalCostsFrom : totalCostsFrom,
-				TotalCostsTo : totalCostsTo,
 				ReceivedOnFrom : receivedOnFrom,
 				ReceivedOnTo : receivedOnTo,
+				TotalCostsFrom : totalCostsFrom,
+				TotalCostsTo : totalCostsTo,
 				ProposalStatus : proposalStatus
 			};
 			this.config.data = {
@@ -491,24 +520,6 @@ $(function() {
 											hide : true
 										},
 										{
-											display : 'Date Received',
-											name : 'date_received',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											type : 'date',
-											format : 'yyyy/MM/dd hh:mm:ss a'
-										},
-										{
-											display : 'Proposal Status',
-											name : 'proposal_status',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left'
-										},
-										{
 											display : 'Project Title',
 											name : 'project_title',
 											cssclass : '',
@@ -533,6 +544,72 @@ $(function() {
 											align : 'left',
 											type : 'array',
 											hide : true
+										},
+										{
+											display : 'Project Location',
+											name : 'project_location',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											hide : true
+										},
+										{
+											display : 'Granting Agencies',
+											name : 'granting_agencies',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'array'
+										},
+										{
+											display : 'Direct Costs',
+											name : 'directCosts',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'currency',
+											hide : true
+										},
+										{
+											display : 'FA Costs',
+											name : 'FA_costs',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'currency',
+											hide : true
+										},
+										{
+											display : 'Total Costs',
+											name : 'total_costs',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'currency'
+										},
+										{
+											display : 'FA Rate',
+											name : 'FA_rate',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'percent'
+										},
+										{
+											display : 'Date Received',
+											name : 'date_received',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'date',
+											format : 'yyyy/MM/dd hh:mm:ss a'
 										},
 										{
 											display : 'Due Date',
@@ -567,58 +644,12 @@ $(function() {
 											hide : true
 										},
 										{
-											display : 'Project Location',
-											name : 'project_location',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											hide : true
-										},
-										{
-											display : 'Granting Agencies',
-											name : 'granting_agencies',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											type : 'array',
-											hide : true
-										},
-										{
-											display : 'Direct Costs($)',
-											name : 'directCosts',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											hide : true
-										},
-										{
-											display : 'FA Costs($)',
-											name : 'FA_costs',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											hide : true
-										},
-										{
-											display : 'Total Costs($)',
-											name : 'total_costs',
+											display : 'Status',
+											name : 'proposal_status',
 											cssclass : '',
 											controlclass : '',
 											coltype : 'label',
 											align : 'left'
-										},
-										{
-											display : 'FA Rate(%)',
-											name : 'FA_rate',
-											cssclass : '',
-											controlclass : '',
-											coltype : 'label',
-											align : 'left',
-											hide : true
 										},
 										{
 											display : getLocale(
@@ -2525,12 +2556,14 @@ $(function() {
 									rowIndex).val());
 						}
 					});
-			$("#btnSearchProposal").bind("click", function() {
-				proposalsManage.SearchProposals();
+			$("#btnSearchProposal").on("click", function() {
+				if ($("#form1").valid()) {
+					proposalsManage.SearchProposals();
+				}
 				return false;
 			});
 
-			$("#btnSearchProposalAuditLog").bind("click", function() {
+			$("#btnSearchProposalAuditLog").on("click", function() {
 				proposalsManage.SearchProposalAuditLogs();
 				return false;
 			});
@@ -2735,11 +2768,31 @@ $(function() {
 				placeholder : "yyyy-mm-dd"
 			});
 
+			$("#txtSearchTotalCostsFrom").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$',
+				pSign : 'p',
+				aPad : true,
+				vMin : "1.00"
+			});
+
+			$("#txtSearchTotalCostsTo").autoNumeric('init', {
+				aSep : ',',
+				dGroup : '3',
+				aDec : '.',
+				aSign : '$',
+				pSign : 'p',
+				aPad : true,
+				vMin : "1.00"
+			});
+
 			$("#txtDirectCosts").autoNumeric('init', {
 				aSep : ',',
 				dGroup : '3',
 				aDec : '.',
-				aSign : '$ ',
+				aSign : '$',
 				pSign : 'p',
 				aPad : true
 			});
@@ -2747,7 +2800,7 @@ $(function() {
 				aSep : ',',
 				dGroup : '3',
 				aDec : '.',
-				aSign : '$ ',
+				aSign : '$',
 				pSign : 'p',
 				aPad : true
 			});
@@ -2755,7 +2808,7 @@ $(function() {
 				aSep : ',',
 				dGroup : '3',
 				aDec : '.',
-				aSign : '$ ',
+				aSign : '$',
 				pSign : 'p',
 				aPad : true
 			});
@@ -2773,7 +2826,7 @@ $(function() {
 				aSep : ',',
 				dGroup : '3',
 				aDec : '.',
-				aSign : '$ ',
+				aSign : '$',
 				pSign : 'p',
 				aPad : true
 			});
@@ -2782,13 +2835,13 @@ $(function() {
 				aSep : ',',
 				dGroup : '3',
 				aDec : '.',
-				aSign : '$ ',
+				aSign : '$',
 				pSign : 'p',
 				aPad : true
 			});
 
 			$(
-					'#txtSearchProjectTitle,#txtSearchProposedBy,#txtSearchTotalCostsFrom,#txtSearchTotalCostsTo,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#ddlSearchProposalStatus')
+					'#txtSearchProjectTitle,#txtSearchProposedBy,#txtSearchReceivedOnFrom,#txtSearchReceivedOnTo,#txtSearchTotalCostsFrom,#txtSearchTotalCostsTo,#ddlSearchProposalStatus')
 					.keyup(function(event) {
 						if (event.keyCode == 13) {
 							$("#btnSearchProposal").click();

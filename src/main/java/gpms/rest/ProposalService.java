@@ -107,6 +107,14 @@ public class ProposalService {
 			proposedBy = proposalObj.get("ProposedBy").getTextValue();
 		}
 
+		if (proposalObj != null && proposalObj.has("ReceivedOnFrom")) {
+			receivedOnFrom = proposalObj.get("ReceivedOnFrom").getTextValue();
+		}
+
+		if (proposalObj != null && proposalObj.has("ReceivedOnTo")) {
+			receivedOnTo = proposalObj.get("ReceivedOnTo").getTextValue();
+		}
+
 		if (proposalObj != null && proposalObj.has("TotalCostsFrom")) {
 			if (proposalObj.get("TotalCostsFrom").getTextValue() != null) {
 				totalCostsFrom = Double.valueOf(proposalObj.get(
@@ -121,21 +129,13 @@ public class ProposalService {
 			}
 		}
 
-		if (proposalObj != null && proposalObj.has("ReceivedOnFrom")) {
-			receivedOnFrom = proposalObj.get("ReceivedOnFrom").getTextValue();
-		}
-
-		if (proposalObj != null && proposalObj.has("ReceivedOnTo")) {
-			receivedOnTo = proposalObj.get("ReceivedOnTo").getTextValue();
-		}
-
 		if (proposalObj != null && proposalObj.has("ProposalStatus")) {
 			proposalStatus = proposalObj.get("ProposalStatus").getTextValue();
 		}
 
 		proposals = proposalDAO.findAllForProposalGrid(offset, limit,
-				projectTitle, proposedBy, totalCostsFrom, totalCostsTo,
-				receivedOnFrom, receivedOnTo, proposalStatus);
+				projectTitle, proposedBy, receivedOnFrom, receivedOnTo,
+				totalCostsFrom, totalCostsTo, proposalStatus);
 
 		return proposals;
 	}
