@@ -1,0 +1,1073 @@
+/* Non reponisive style */
+
+.ie8 .header h4, .ie7 .header h4 {
+	background: url(/skins/prospect/images/logo.png) no-repeat 0 0;
+}
+
+.ie8 .header li.secure, .ie7 .header li.secure  {
+	background: url(/skins/respola/images/non-svg/icon-sprite.png) no-repeat 0 -53px;
+	padding-bottom: 6px;
+}
+
+.ie8 .header li.call, .ie7 .header li.call  {
+	background: url(/skins/respola/images/non-svg/icon-sprite.png) no-repeat 0 4px;
+	padding-bottom: 5px;
+}
+
+.ie8 .header li.call:hover, .ie7 .header li.call:hover  {
+	background: url(/skins/respola/images/non-svg/icon-sprite.png) no-repeat 0 -23px;
+}
+
+.ie8 .header li.chat, .ie7 .header li.chat  {
+	background: url(/skins/respola/images/non-svg/icon-sprite.png) no-repeat 0 -114px;
+}
+
+.ie8 .header li.chat:hover, .ie7 .header li.chat:hover  {
+	background: url(/skins/respola/images/non-svg/icon-sprite.png) no-repeat 0 -149px;
+}
+
+.ie8 .icon-question, .ie7 .icon-question  {
+	background: url(/skins/respola/images/non-svg/icon-sprite.png) no-repeat -1px -193px;
+	width: 20px;
+	vertical-align: text-middle;
+}
+
+.ie8 .header .container, .ie8 .footer .container, .ie8 .container.main {
+	width: 960px;
+}
+
+.ie8 #more-choices .icon-question  {
+	vertical-align: text-middle
+}
+
+.editMsgTxtWrap {
+	float:right;
+}
+
+.editMsgTxt {
+	line-height: 20px;
+	margin-right: 10px;
+}
+
+#editOpenMsgWrapper {
+	display:inline;
+}
+
+#trigger-1.trigger.active, #trigger-2.trigger.active, #trigger-3.trigger.active {
+	cursor: auto;
+	background-image: none;
+  	background-color: #FFFFFF;
+}
+
+.ie8 .form-container.step-four .optInvSec input[type="text"] {
+	width: 180px;
+}
+
+.ie8 .account-holder .radio-group {
+	display: inline;
+}
+
+.ie8 .quick-transfer-subsection input[type="text"] {
+	width: 315px;
+}
+
+.ie8 .check-image {
+	float:right;
+	margin-top:-255px;
+}
+
+/* step-one.ftl  */
+#retirementAccountsLink {
+	font-weight: normal;
+}
+
+.float-right {
+	float:right;
+}
+  
+.ie8 .styled .wrap label, .ie9 .styled .wrap label {
+	display: block;
+}
+
+ul.retirement {
+	list-style: none;
+}
+
+ul.retirement li{
+	margin:0 0 10px 5px;
+}
+
+ul.osr li {
+	padding: 0 0 12px 0;
+	font-size: 15px;
+	color: #666;
+}
+
+ul.osr-agreements {
+	list-style-type: none;
+	margin: 0;
+	padding: 15px 0 0 0;
+}
+
+ul.osr-agreements li {
+	margin: 0 0 15px 0;
+}
+
+ul.osr-agreements li a {
+	color: #039;
+	font-size: 12px;
+	font-weight: bold;
+	margin-top: 5px;
+	line-height: 10px;
+}
+
+.mas-tooltip-left {
+	background: url(/skins/respola/images/flyout-left-triangle.png) no-repeat scroll right top transparent;
+	width: 338px;
+	height: 344px;
+	font-size: 90%;
+}
+
+.mas-tooltip-left .see-fee-div, .mas-tooltip-right .see-fee-div {
+	padding: 15px 5px 0px 30px;
+}
+
+.mas-tooltip-left .popup-middle-tr, .mas-tooltip-right .popup-middle-tr {
+	height: 29px;
+	border-bottom: 1px solid #999999;
+}
+
+.mas-tooltip-left .popup-bottom-tr, .mas-tooltip-right .popup-bottom-tr {
+	height: 29px;
+}
+
+.mas-tooltip-left ol li, .mas-tooltip-right-img ol li {
+	font-size: 85%;
+	margin-left: 25px;
+	line-height: 16px;
+	padding: 4px 0px 0px;
+	width: 85%;
+}
+
+.mas-tooltip-right-img {
+	background: url(/skins/respola/images/flyout-right-triangle.png) no-repeat scroll right top transparent;
+	width: 338px;
+	height: 344px;
+	font-size: 90%;
+}
+
+.mas-tooltip-right-img .see-fee-div, .mas-tooltip-right .see-fee-div {
+	padding: 10px 5px 0px 30px;
+}
+
+.mas-tooltip-right-img .popup-middle-tr, .mas-tooltip-right .popup-middle-tr {
+	height: 29px;
+	border-bottom: 1px solid #999999;
+}
+
+.mas-tooltip-right-img .popup-bottom-tr, .mas-tooltip-right .popup-bottom-tr {
+	height: 29px;
+}
+
+.disclaimer {
+	float: left;
+	width: 65%;
+	clear: both;
+}
+
+.furutrePrnSubText {
+	display:inline
+}
+
+.furutrePrnFunction {
+	float: right;
+	width: 160px;
+}
+
+.furutrePrnFunction a img {
+	padding-left:3px
+}
+
+.step1-intro {
+	margin-bottom: 27px
+}
+
+.step1-intro h2 {
+	line-height: 25px;
+}
+
+.form-container.step-two h3.inv-profile p.help {
+	display:inline-block;
+}
+
+.form-container.step-two h3.inv-profile p.help a {
+	vertical-align:text-top;
+}
+
+.save-complete {
+	font-size: 14px; float: right;
+}
+
+.step-three .acct_details_div ul, .step-three .acct_details_div h5, .step-three .acct_details_div .acct_details {
+	margin-left:0px;
+}
+
+.step-three .greySection .one-line {
+	padding:10px;
+}
+
+.learnmorelink {
+	background: url('/skins/respola/images/icon-overlay.png') no-repeat scroll 0 3px transparent; 
+	padding-left: 20px;
+}
+
+.greySection { 	
+	background: none repeat scroll 0 0 #E9E9E9;
+	margin-bottom: 10px;
+	padding: 20px 15px;
+}
+ 
+.sectitle {
+	margin-right:10px;
+}
+ 
+.rightLvlDesc { 
+	width:80%;
+	padding:10px;
+	margin-left:180px;
+	border-left:1px solid #fff;
+}
+
+#benefListBox label.radio {
+	display: table;
+}
+
+#aboutNewCustomer .lock {
+	width:240px
+}
+
+.osr-accordion .trigger.active h1:hover {
+	color: #000;
+}
+
+a[disabled] {
+    background-color: #EEEEEE;
+    cursor: not-allowed;
+}
+
+.inline-note-right {
+	margin: 5px 0 0 5px;
+    position: absolute;
+}
+.acct_details{
+	margin-left: 25px;
+}
+
+.ajax_loading {
+	font-size:13px; 
+	font-family:Arial, Helvetica, sans-serif; 
+	color:#fff; 
+	font-weight:bold; 
+	padding:12px; 
+	margin:0;
+}
+
+.last-select-box {
+	margin-bottom:5px;
+}
+
+.form-container p.prefill-msg {
+	display: block;
+	margin: 5px 0 20px 0;
+	clear:both;
+}
+
+input[type=number] {
+	-moz-appearance:textfield;	
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+	-webkit-appearance: none; 
+	margin: 0; 
+}
+
+input[type=number] {
+	-moz-appearance:textfield;	
+}
+
+.styled .wrap input[type="number"],
+.styled .wrap input[type="tel"] {
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+@-moz-document url-prefix() { 
+  .step2-save,.step3-save {
+     margin-top:13px;
+  }
+}
+
+#aboutNewCustomer,#aboutExistingCustomer {
+		margin-left:0px;
+}
+
+.button.btn-step-one {
+	margin-left:0px;
+}
+
+.redText {
+	background-color: #FEFBCD;
+	color: #242424;
+	font-size: 13px;
+	font-weight: normal;
+	height: 32px;
+	padding: 10px;
+	line-height:40px;
+}	
+  
+.form-container p.side-note-prefill {
+	color: #666666;
+	display: inline-block;
+	font-size: 13px;
+	margin-left: 18px;
+}
+.clear-prefill {
+	clear:both;
+}
+
+#continue-button, #back-button, #save-appln, #step-three-continue-button, #fundingpagewidgetsubmit {
+	border: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+textarea.error {
+    background: none repeat scroll 0 0 #FFDCDB;
+    color: #999999;
+}
+
+.warning.osr-msg {	
+	background: none;
+	background-color: #ECF4FF; 
+	padding:6px 0 1px 70px;		
+}
+
+.osr-msg-info-icon {
+	background: url("../images/icon-message.png") no-repeat scroll 10px -52px #ECF4FF;
+	position: absolute;
+	height: 50px;
+	width: 60px;
+	margin-left: -70px;
+	margin-top:-10px;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#mobileDeviceSelectBoxItContainer{
+	width: 176px;
+}
+
+.fldata-margin{
+	margin-bottom:10px;
+}
+
+input.errorPhone {
+	background: none repeat scroll 0 0 #FFDCDB;
+}
+
+p.errorPhoneWarning {
+	color: red;
+}
+
+.step-four li.selectboxit-option {
+	background: none repeat scroll 0 0 transparent;
+}
+
+.reset-margin{
+	margin-bottom:15px;
+}
+
+.form-container.step-two input.veryShortInput[type="text"] {
+	width: 40px;
+}
+
+.form-container.step-four input.veryShortInput[type="text"] {
+	width: 40px;
+}
+
+.hideLabel {
+	opacity: 0; 
+	display: none;
+}
+
+.shortInput_select {
+	width: 180px;
+}
+
+.form-container.step-two select.fullsize {
+	width:250px;
+}
+
+.form-container.step-four select.fullsize {
+	width:290px;
+}
+
+.tooltip-inner {
+	max-width: 250px;
+}	
+  
+.greenText{
+	background-color: #E6FEDF;
+    color: #242424;
+    font-size: 13px;
+    font-weight: normal;
+    height: 32px;
+    padding: 10px;
+    line-height:40px;
+}
+
+.ie8 .optInvSec .expstocks { 
+	margin-left:8px; 
+}
+
+.ie8 .optInvSec .expbonds { 
+	margin-left:10px; 
+}
+
+.ie8 .step-four .optInvSec .flddata { 
+	margin-left:100px;
+}
+
+.futuresOptions #stockyears0, .futuresOptions #bondyears0, .futuresOptions #optionsyears0, .futuresOptions #futuresyears0 {
+	width:195px; 
+}
+
+.futuresOptions #stockyears1, .futuresOptions #bondyears1, .futuresOptions #optionsyears1, .futuresOptions #futuresyears1 {
+	width:195px; 
+}
+ 
+.save {
+    background-color: #81B323;;
+    font-size: 12px;
+    text-transform: uppercase;
+	background-image: -moz-linear-gradient(center bottom , #6D9F0D 0%, #6D9F0D 0.24%, #99C941 100%);
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+	padding: 7px;
+	display:none;
+	float:right;
+	margin-right:10px;
+ }
+
+.save span {
+	font-weight:bold;
+}
+
+.cancel span {
+	font-weight:bold;
+}
+
+.cancel {
+    background-color: #cccccc;
+	color: #292929;
+    font-size: 12px;
+    text-transform: uppercase;	
+    border-radius: 3px 3px 3px 3px;    
+	padding: 7px;	
+	display:none;
+	float:right;
+}
+ 
+.step-four .save:hover, .step-four .cancel:hover{
+	text-decoration: none;  
+}
+
+.ltgray {color: #666666;
+	font-size: 12px;
+}
+
+.popup-middle-mip-tr,.popup-bottom-mip-tr {
+ 	border-bottom: 1px solid #999999;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    height: 45px;
+}
+
+.popup-bottom-mip-tr{	
+	border-bottom: none;
+}
+
+.mip-ira-header{	
+	margin: 20px 0 10px 25px;
+}
+
+table.potential_tb {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #cccccc;
+	border-collapse: collapse;
+}
+
+table.potential_tb td {
+	border-width: 1px;
+	padding: 1px 9px;
+	border-style: solid;
+	border-color: #cccccc;
+}
+
+.form-container .bottom-margin {
+	padding-bottom: 10px;
+}
+
+#fProfile0SelectBoxItContainer, #fProfile1SelectBoxItContainer, #fProfile2SelectBoxItContainer, #fProfile3SelectBoxItContainer, #fProfile6SelectBoxItContainer {
+	width: 273px;
+}
+
+#rProfile0SelectBoxItContainer, #rProfile1SelectBoxItContainer, #rProfile2SelectBoxItContainer, #rProfile3SelectBoxItContainer, #rProfile7SelectBoxItContainer {
+	width: 273px;
+}
+
+.leftLvlList {padding: 10px 10px 0 10px;
+	float:left;
+}
+ 
+.optrdexp {
+	width:40%;
+	float:left;
+}
+
+.edocs {
+	width: 60%;
+}
+ 
+.edocsheader {
+	width:100%;
+	background-color:#ccc;
+	margin:0;
+	padding:12px 0;
+}
+ 
+.edocsheader span.fldinput {
+	padding-left:15px;
+}
+
+.edocs hr {
+	margin-top:-10px; 
+	margin-bottom:10px; 
+	margin-left:0; 
+	margin-right:0;
+	background-color:#fff;
+}	
+ 
+.edocs .greySection {
+	padding: 10px 0;
+}
+ 
+.edocs fieldset {
+	padding: 4px 0 0 15px;
+}
+ 
+.edocs .edocsbtmbox1 {
+	padding: 0 15px 0 16px;
+}
+ 
+.edocs .edocsbtmbox2 {
+	padding: 10px 15px 5px 16px;
+}
+ 
+.step-four .edocs .greySection { 
+	background-color:#fff; 
+}
+
+.step-four .edocs .edocsheader { 
+	background-color:#fff; 
+}
+
+#selectAccountDup { 
+	width: 250px; 
+}
+
+.sectitle {
+	margin-right:10px;
+}
+ 
+.clr {
+	clear:both;
+}
+
+.sectrdexp {
+	margin:7px;
+	vertical-align:middle;
+}
+
+.nolineindent {
+	display: inline;
+}
+
+.lineindent {		
+	display: none;
+}
+
+.lineindentsmall {
+	display: none;
+}
+
+.lineindentmid {
+	display: none;	
+}
+
+.nolineindentmid {
+	display: inline;
+}
+
+.form-container.step-two h3 p.help {
+	margin-left: 0px;
+	margin-top: 10px;
+	display: block;
+}
+
+.section.editable .check-group label,.check-group label {
+	padding-left: 36px;
+}
+
+.check-group span.icon {
+	margin-left: -36px;
+}
+
+.step-four .check-group label {
+	padding-left: 0px;
+}
+
+.radio-group label {
+	padding-left: 30px;
+}
+
+.radio-group span.icon {
+	margin-left: -30px;
+}
+
+div.wrap label {
+	padding-left:0px;
+}
+
+#portfolioTableColLeft {
+	text-align: center;
+	font-size: 15px;
+	float:left;
+	margin:0 25px 25px 25px;
+}
+
+.proposaltable {
+	width:500px;
+}
+
+#agreementSection .check-group label {
+	padding-left:36px;	
+}
+
+/*****/
+.form-container .intro .alignLeft a.change-account {
+	display: block;
+    float: none;
+    margin-top: 35px;
+    padding-left: 0;
+}
+
+.form-container .intro h3 {
+	padding-bottom: 15px;
+	margin-bottom: 5px;
+}
+
+.styled .sidebar-container .save-complete {
+	position: absolute;
+	margin-top: -30px
+}
+
+.form-container .intro {
+    margin-bottom: 0;
+}
+
+.form-container .secondintro {
+	margin-top: 15px;
+}
+
+.sidebar-container .sidebar {
+	margin-top: 35px;
+}
+
+.form-container .afl {
+	color: #666;
+	font-size: 13px;
+}
+
+.form-container.step-three .alert {
+	margin-left: 0;
+}
+
+.form-container.step-three .subsection.sectionfirst {
+	border-top: none;
+}
+
+.form-container.step-four .acct_details_div {
+	width: 800px;
+	background: none;
+	padding-left: 0;
+}
+
+.form-container.step-four .acct-details div {
+	float: left;
+}
+
+.form-container.step-four .acct_details_div div.acct-details-col1,.form-container.step-four .acct_details_div div.acct-details-col2 {
+	width: 350px;
+}
+
+.form-container.step-four .pr-info-cols, .form-container.step-four .sec-info-cols {
+	width: 100%;
+}
+
+.form-container.step-four .pr-info-col1,.form-container.step-four .pr-info-col2,.form-container.step-four .pr-info-col3, .form-container.step-four .sec-info-col1,.form-container.step-four .sec-info-col2,.form-container.step-four .sec-info-col3 {	
+	float: left;
+	width: 32%;
+	margin-right:10px;
+}
+/*****/
+
+/* LD--------Large desktop */
+@media (min-width: 1200px) {
+	.tradePerYear {width:152px;}
+	.avgTrade {width:171px;}
+	.form-container.step-four .optInvSec input[type="text"] {width: 180px;}	
+	.expyears {width: 195px; margin-right: 18px}
+	.expyears input[type="text"],.expyears input[type="number"] {width: 180px;}
+}
+
+/* RD--------Regular Desktop */
+@media (min-width: 980px) and (max-width: 1199px) {
+	.ie8 .header {
+		position:relative;
+	}
+	
+	.ie8 .header .container, .ie8 .footer .container, .ie8 .container.main {
+		width: auto;
+		padding-left: 25px;
+	}
+	
+	.ie8 .header h4, .ie7 .header h4 {
+		width: 200px;
+	}     
+	
+	.ie8 .footer{
+		padding-left: 25px;
+	}
+	
+	#stockyears, #bondyears, #optionsyears, #futuresyears {width:80px;}
+	.sectitle {width:70px;}	
+	.rightLvlDesc { width:auto;margin-left:145px;}
+	.tradePerYear {width:140px;}
+	.avgTrade {width:170px;}
+	.form-container.step-four .optInvSec input[type="text"] {width: 180px;}
+	.expyears {width: 195px; margin-right: 5px}
+	.edocsheader {width: 100%}
+	.step-three .edocs .edocspace {clear:both;}
+	
+	.form-container.step-four .pr-info-cols, .form-container.step-four .sec-info-cols {
+		width: 100%;
+	}
+	
+	.form-container.step-four .pr-info-col1,.form-container.step-four .pr-info-col2, .form-container.step-four .sec-info-col1,.form-container.step-four .sec-info-col2 {
+		float: left;
+		width: 32%;
+		margin-right:10px;		
+	}
+	
+	.form-container.step-four .pr-info-col3, .form-container.step-four .sec-info-col3 {
+		float: left;
+		width: 32%;		
+	}
+}
+
+/* PT--------Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+	#editOpenMsgWrapper {
+		display: block;	
+		padding: 10px;
+	}
+	
+	.lineindentsmall {
+		display: none;
+	}
+	
+	.lineindentmid {
+		display: none;	
+	}
+	
+	.nolineindentmid {
+		display: inline;
+	}
+	
+	.form-container.step-four .pr-info-cols, .form-container.step-four .sec-info-cols {
+		width: 100%;
+	}
+	
+	.form-container.step-four .pr-info-col1, .form-container.step-four .sec-info-col1 {
+		float: left;
+		width: 32%;
+		margin-right:10px;
+	}
+	
+	.form-container.step-four .pr-info-col2,.form-container.step-four .pr-info-col3, .form-container.step-four .sec-info-col2,.form-container.step-four .sec-info-col3 {	
+		float: left;
+		width: 32%;
+	}
+}
+
+/* LP--------Landscape phone to portrait tablet */
+@media (min-width: 600px) and (max-width: 767px) {
+	.form-container.step-four .pr-info-cols, .form-container.step-four .sec-info-cols {
+		width: 100%;
+	}
+	
+	.form-container.step-four .pr-info-col1, .form-container.step-four .sec-info-col1 {
+		float: left;
+		width: 48%;
+		margin-right:10px;
+	}
+	
+	.form-container.step-four .pr-info-col2,.form-container.step-four .pr-info-col3, .form-container.step-four .sec-info-col2,.form-container.step-four .sec-info-col3 {	
+		float: none;
+		width: 48%;
+	}
+}
+
+/* ST--------Small Tablet */
+@media (min-width: 481px) and (max-width: 599px) {
+	fieldset.account-holder {
+		width: 100%;
+	}
+  
+	.save-complete {
+		float:none;
+		display: block;
+		padding-top: 20px;
+	}
+   
+	#editOpenMsgWrapper {
+		display:block;	
+		padding:10px;
+	}
+	
+	#editOpenMsg {
+		white-space:pre;
+	}
+	
+	.lineindentsmall {
+		display: none;
+	}
+	
+	.lineindentmid {
+		display: inline;	
+	}
+	
+	.nolineindentmid {
+		display: none;
+	}
+	
+	.edocs {
+		width: 100%;
+	}
+	
+	.leftLvlList {
+		width:25%;
+		float:left;
+	}
+	
+	.rightLvlDesc { 
+		width:auto;
+		margin-left:145px;
+	} 
+	
+	.form-container.step-four .pr-info-cols, .form-container.step-four .sec-info-cols {
+		width: 100%;
+	}
+	
+	.form-container.step-four .pr-info-col1,.form-container.step-four .pr-info-col2,.form-container.step-four .pr-info-col3, .form-container.step-four .sec-info-col1,.form-container.step-four .sec-info-col2,.form-container.step-four .sec-info-col3 {	
+		float: none;		
+		width: 98%;
+	}
+	
+	.form-container .intro h3 {
+		padding-bottom: 40px;
+		margin-bottom: 5px;
+	}
+	
+	.styled .sidebar-container .save-complete {
+		position: absolute;
+		margin-top: -50px
+	}
+	
+	.step-seven #prevYearContrib {
+		float: none;
+		width: 100%;
+		margin-right:0; 
+	}
+	
+	.step-seven #currYearContrib {
+		float: none;
+		width: 100%;
+	}
+}
+
+/* P---------Landscape phones and down */
+@media (max-width: 480px) {
+    .disclaimer {
+        width: 95%;
+    }
+    
+    .osr-accordion  #trigger-3 {
+    	height: 110px;
+    }
+    
+    .editMsgTxt {
+		line-height: 45px;
+		margin-right: 10px;
+		white-space: pre;
+	}
+	
+    .editMsgTxtWrap {
+		float: left;
+		margin-top:5px;
+		margin-right:5px;
+	}
+	
+	#editOpenMsgWrapper {
+		display:block;	
+		padding:10px;
+		padding-left:0px;
+	}
+	
+	#editOpenMsg {
+		white-space:pre;
+	}
+	
+	.lineindentsmall {
+		display: inline;
+	}
+	
+	.lineindentmid {
+		display: none;	
+	}
+	
+	.nolineindentmid {
+		display: none;
+	}
+	
+    .step-four .edocspace {
+		width: 300px !important;
+    }
+    
+    /* step-five.ftl */
+    .quick-transfer {
+		padding:30px;
+    }
+    
+    .quick-transfer-subsection {
+		width: 230px !important;
+	} 
+
+	.save-complete {
+		float:none;
+		display: block;
+		padding-top: 20px;
+	}
+	
+   .quick-transfer-subsection .icon-question {
+		width: 15px;
+		margin-left: 0px;
+		left: 31px;
+		position: absolute;
+		left: 263px;
+		top: 8px;
+	}
+    /* step-five.ftl */
+    
+	.pull-right {
+		float: none;
+	}
+	
+	.nolineindent {
+		display: none;
+	}
+	
+	.lineindent {		
+		display:inline;
+	}
+	
+	#portfolioTableColLeft {
+		text-align: center;
+		font-size: 15px;
+		margin-right:25px;
+	}
+	
+	.proposaltable {
+		width:450px;
+	}
+	
+	.step-three #options { margin-left:0; }
+	.step-three .sweepmap .radio-group { background-color: none; }
+	.step-three .greySection .optrdexp { width:50% }
+	.styled .step-three .wrap-left {margin-left:0;}	
+	.step-three #paperless-options .corpreport {height:75px;}
+	.step-three #paperless-options .edocspace {width: 60%;display: inline-block;}
+	.step-three .edocs,.step-four .edocs {width:100%}
+	.step-four .populated-fields fieldset .greySection {margin-left:0px;padding-left:0px;}
+	.step-four #options {margin-left:0px;}
+	.step-four .greySection .one-line .inline-element {display:inline;}
+	.step-four .greySection .one-line {padding-left:0px;}
+	.step-four #options .greySection {margin-left:0px;padding-left:0px;}
+	.step-four .edocs .greySection fieldset {margin-left:0px;padding-left:0px;}	
+	.step-four .edocsheader {display:none;}
+	.step-four .edocsbtmbox1 {padding-left:0px;}
+	.step-four .edocsbtmbox2 {padding-left:0px;}
+	#step-seven-continue-button {margin: 10px 0 0 10px; }
+	.leftLvlList {width:45%;float:left;}
+	.rightLvlDesc { width:auto;margin-left:145px;}	
+	#selectAccountDup { width: 220px; }
+	
+	.form-container.step-four .pr-info-cols, .form-container.step-four .sec-info-cols {
+		width: 100%;
+	}
+	
+	.form-container.step-four .pr-info-col1,.form-container.step-four .pr-info-col2,.form-container.step-four .pr-info-col3, .form-container.step-four .sec-info-col1,.form-container.step-four .sec-info-col2,.form-container.step-four .sec-info-col3 {	
+		float: none;		
+		width: 98%;
+	}
+	
+	.form-container .intro h3 {
+		padding-bottom: 40px;
+		margin-bottom: 5px;
+	}
+	
+	.styled .sidebar-container .save-complete {
+		position: absolute;
+		margin-top: -50px
+	}	
+
+	.step-seven #prevYearContrib {
+		float: none;
+		width: 100%;
+		margin-right:0; 
+	}
+	
+	.step-seven #currYearContrib {
+		float: none;
+		width: 100%;
+	}	
+}

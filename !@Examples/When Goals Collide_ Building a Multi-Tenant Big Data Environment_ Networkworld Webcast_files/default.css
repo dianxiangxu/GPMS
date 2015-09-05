@@ -1,0 +1,770 @@
+#basic_reg_form {
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+/*	margin-left: 5px; */
+	width: 650px;
+}
+
+#basic_reg_form p.title {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#basic_reg_form .required {
+	color: #b20006;	
+}
+
+#basic_reg_form .description {
+	padding-bottom: 20px;	
+}
+
+#basic_reg_form .error_message {
+	color: #ff0000;	
+}
+
+#basic_reg_form #reg_fields .row {
+	clear: both;
+	margin: 0 0 10px 0;
+}
+
+#basic_reg_form #reg_fields .input_label,
+#basic_reg_form #reg_fields .select_label {
+	float: left;
+	margin-bottom: 10px;
+	padding-right: 15px;
+	text-align: right;
+	width: 130px;
+	font-weight: bold;	
+}
+
+/* jjoly NEW - for mobile testing */
+#basic_reg_form #reg_fields select.custom {
+	width: 315px;	
+}
+
+
+#basic_reg_form #reg_fields .checkbox {
+	float: left;
+	margin-right: 10px;
+	margin-left: 29px;
+}
+
+#basic_reg_form #reg_fields .multicheckbox {
+	clear: both;
+/*	float: left;*/
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+#basic_reg_form #reg_fields .input_multicheckbox {
+	clear: both;
+	margin: 0 0 3px 114px;
+	/*white-space:nowrap;*/
+}
+
+#basic_reg_form #reg_fields .checkbox_label,
+#basic_reg_form #reg_fields .multicheckbox_label {
+	float: left;
+	margin-bottom: 10px;
+	width: 450px;	
+}
+
+#basic_reg_form #reg_fields .multicheckbox_label {
+		font-weight: bold;	
+	}
+
+
+#basic_reg_form #reg_fields .submit_btn {
+	width: 137px; 
+	margin-top: 30px;
+}
+
+#basic_reg_form #reg_fields .input_submit {
+	width: 137px;
+	height: 36px;
+	float: left;	
+	margin-left: 140px;
+	margin-right: 15px;
+}
+
+#continue_button {
+	margin-left: 146px;
+}
+
+#continue_button img:hover {
+	cursor: pointer;
+}
+
+#thank_you_page {
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	margin-left: 5px;
+	/*width: 650px;*/
+	/*width: 98%;*/
+	width: 70%;
+	padding-left: 162px;
+}
+
+#thank_you_page li {
+	padding-bottom: 14px;	
+}
+
+#thank_you_page li a:link,
+#thank_you_page li a:visited,
+#thank_you_page p a:link,
+#thank_you_page p a:visited {
+	color: #41688f;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+#thank_you_page li a:hover,
+#thank_you_page li a:active,
+#thank_you_page p a:hover,
+#thank_you_page p a:active {
+	text-decoration: underline;	
+}
+
+#thank_you_page ul li {
+    background-image: url('http://www.computerworld.com/resources/images/layout/bullet_gray_9x9.gif');
+	background-position: 12px 2px;
+	background-repeat: no-repeat;
+	line-height: normal;
+	padding: 0 10px 10px 28px;
+	font-size: 13px;	
+}
+
+#thank_you_page p {
+	line-height: 20px;	
+}
+
+#thank_you_page p.ty-name {
+	color: #000;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#thank_you_page p.ty-view {
+}
+
+#thank_you_page p span.other {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#thank_you_page .rre-bluebox {
+	margin-top: 30px;
+	border-top: 10px solid #d3d3d3;
+}
+
+#thank_you_page .rre-bluebox span.other {
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 2.6em;
+}
+
+#thank_you_page ul {
+	list-style: none;	
+	margin: 0;
+	padding: 0 0 0 5px;
+}
+
+#thank_you_page #sr_access_now img {
+	border: 0 none;
+}
+
+
+#basic_reg_form .line_header {
+	margin-top: 20px;
+}
+
+#basic_reg_form .required_header {
+	margin-left: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#basic_reg_form .required_details {
+	color: #ff0000;	
+	float: left;
+	margin-right: 15px;
+}
+
+.medium_print{ 
+	font-size:11px; 
+	font-weight:normal; 
+	margin-top: 10px;	
+	padding-top: 1px;
+}
+
+.small_print{ 
+	font-size:11px; 
+	line-height: 15px;
+	font-weight:normal; 
+	margin-top: 10px;	
+	padding-top: 2px;
+}
+
+#basic_reg_form #instructions {
+	padding: 20px 0 20px 0;	
+	font-size: 14px;
+	line-height: 1.3em;
+}
+
+#basic_reg_form #instructions img {
+	padding-top: 10px;	
+}
+
+#basic_reg_form #other_resources {
+	border-top: 4px solid #ccc;
+	margin-top: 20px;
+}
+
+#basic_reg_form #other_resources h3 {
+	font-size: 16px;
+	margin: 8px 0 14px 0;
+}
+
+#basic_reg_form #other_resources ul {
+	padding-left: 0px;
+}
+
+#basic_reg_form #other_resources ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 10px 0;
+}
+
+a:link, 
+a:visited {
+	color: #1752A3;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: #54A4DE;
+	text-decoration: underline;
+}
+
+#basic_reg_form #other_resources ul li a:link,
+#basic_reg_form #other_resources ul li a:visited {
+	font-size: 14px;	
+}
+
+
+
+/* jjoly MAY 2012 */
+#basic_reg_form #reg_fields .input_label, 
+#basic_reg_form #reg_fields .select_label,
+#basic_reg_form #reg_fields .input_multicheckbox,
+#basic_reg_form .required_details {
+	font-size: 15px;
+	position: relative;
+	top: 9px;
+	padding-bottom: 10px;
+}
+
+#basic_reg_form #reg_fields .checkbox_label, 
+#basic_reg_form #reg_fields .multicheckbox_label  {
+	font-size: 15px;
+	line-height: 18px;
+}
+
+#basic_reg_form #reg_fields .checkbox_label {
+	font-size: 13px;	
+}
+
+#basic_reg_form #reg_fields .row {
+	margin: 0 0 14px 0;
+}
+
+#basic_reg_form #reg_fields .row.custom_row .checkbox_label {
+	width: 350px;	
+}
+
+#basic_reg_form #reg_fields .row.custom_row {
+	width: 450px;	
+}
+
+input, 
+input[type="password"], 
+input[type="search"], 
+isindex {
+	font-size: 15px;
+	height: 30px;
+	padding-left: 6px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+input[type="checkbox"] {
+	height: 13px;
+	margin-right: 5px;
+	margin-left: 35px;
+}
+
+select {
+	margin-top: 7px;
+	margin-bottom: 7px;
+	width: 288px;	
+	font-size: 15px;
+}
+
+.privacyPolicy {
+	clear: both;
+	margin-left: 145px;
+	padding-top: 10px;	
+	width: 300px;
+}
+
+.canadaPolicy {
+	clear: both;
+	margin-left: 145px;
+	padding-top: 10px;	
+	width: 300px;
+}
+
+
+input[type="text"], input[type="password"], textarea { 
+	width: 280px;
+	background: #ffffff; /* Old browsers */
+
+background: -moz-linear-gradient(top,  #dcdcdc 0%, #d8d8d8 3%, #ffffff 11%, #ffffff 100%); /* FF3.6+ */
+
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dcdcdc), color-stop(3%,#d8d8d8), color-stop(11%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+
+background: -webkit-linear-gradient(top,  #dcdcdc 0%,#d8d8d8 3%,#ffffff 11%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+
+background: -o-linear-gradient(top,  #dcdcdc 0%,#d8d8d8 3%,#ffffff 11%,#ffffff 100%); /* Opera 11.10+ */
+
+background: -ms-linear-gradient(top,  #dcdcdc 0%,#d8d8d8 3%,#ffffff 11%,#ffffff 100%); /* IE10+ */
+
+background: linear-gradient(top,  #dcdcdc 0%,#d8d8d8 3%,#ffffff 11%,#ffffff 100%); /* W3C */
+
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.05); -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.05); -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.05); -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border-top: 1px solid #666; border-right: 1px solid #9e9e9e; border-bottom: 1px solid #B4B4B4; border-left: 1px solid #B4B4B4;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus { 
+	outline: none;
+	background: #f6eacb; /* Old browsers */
+background: -moz-linear-gradient(top, #dbdbd5 0%, #d6d6c8 3%, #fdf9ed 14%, #f6eacb 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbd5), color-stop(3%,#d6d6c8), color-stop(14%,#fdf9ed), color-stop(100%,#f6eacb)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #dbdbd5 0%,#d6d6c8 3%,#fdf9ed 14%,#f6eacb 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #dbdbd5 0%,#d6d6c8 3%,#fdf9ed 14%,#f6eacb 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #dbdbd5 0%,#d6d6c8 3%,#fdf9ed 14%,#f6eacb 100%); /* IE10+ */
+background: linear-gradient(top, #dbdbd5 0%,#d6d6c8 3%,#fdf9ed 14%,#f6eacb 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FDF9ED', endColorstr='#f6eacb',GradientType=0 ); /* IE6-9 */
+}
+
+.error_icon {
+	position: absolute; 
+	left: 442px; 
+	padding-top: 10px;	
+}
+
+#divError {
+	position: absolute; 
+	left: 444px; 
+	top: 28px;
+	float: left;
+	color: #000000;	
+	padding-left: 20px;
+}
+#divErrorZip {
+	position: relative; 
+	left: 444px; 
+	float: left;
+	color: #000000;	
+}
+
+.divErrorBox, .divErrorBoxEmail, .divErrorBoxZip {
+	/*border: 1px solid #d8cfb5;*/
+/*	width: 211px; */
+	background-color: #F6EBCD;
+	padding: 14px;
+	font-size: 14px;
+	line-height: 18px;
+	-webkit-border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	border-radius: 4px; border-top: 1px solid #d8cfb5; 
+	border-right: 1px solid #d8cfb5; 
+	border-bottom: 1px solid #d8cfb5; 
+	border-left: 1px solid #d8cfb5;
+	margin-left:15px;
+	bottom: 10px;
+	position: relative;
+	z-index: 1;
+}
+.divErrorArrow {
+	background: transparent url(/resources/images/sr_bubble_arrow.png) no-repeat 0 0;
+	width: 17px;
+	height: 29px;
+	float: left;
+	position: relative;
+	z-index: 5;
+}
+
+.redBorder {
+	/*border: 3px solid #cc0000;	*/
+}
+
+#basic_reg_form #reg_fields .input_multiradio {
+	font-size:14px;
+	padding-top: 6px;
+	margin-left: 142px;
+}
+
+input[type="radio"] {
+	height: 15px;
+	margin-right: 8px;	
+}
+
+.radio_label {
+	font-weight: bold;
+	width: 430px;
+}
+
+
+/* max device width - For iPad */
+@media screen and (max-device-width: 800px) {
+	#basic_reg_form {
+		width: 100%;
+		margin-left: 5px;
+	}
+	
+	#basic_reg_form #reg_fields .checkbox_label,
+	#basic_reg_form #reg_fields .multicheckbox_label,
+	#basic_reg_form #reg_fields .submit_btn {
+		width: 85%;	
+	}
+	
+	#basic_reg_form #reg_fields select.custom {
+		width: 85%;	
+	}
+	
+	#basic_reg_form #reg_fields .input_multicheckbox {
+		margin: 0 0 10px 114px;
+	}
+	
+	#basic_reg_form #reg_fields select.custom {
+		width: 85% !important;	
+	}
+	
+	.medium_print {
+    	font-size: 12px !important;
+	}
+	
+	.divErrorBox, .divErrorBoxEmail {
+	    width: 150px;	
+	}
+	
+	input[type="text"], input[type="password"], textarea { 
+		width: 270px;
+	}
+	
+	#thank_you_page {
+		padding-left: 88px;
+		width: 60%;
+	}
+	
+/*
+	input, 
+	input[type="password"], 
+	input[type="search"], 
+	isindex {
+		font-size: 15px;
+		height: 28px;
+		padding-left: 6px;
+		width: 85%;
+	}
+	
+	
+	.input_multicheckbox input[type="checkbox"] {
+		width: 10% !important;
+	}
+	
+	select {
+		width: 85% !important;
+		font-size: 15px !important;
+	}
+	*/
+}
+
+/* mobile devices */
+@media handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+	html, body.x-apple {
+		-webkit-text-size-adjust: none;
+	}
+	
+	#basic_reg_form {
+		width: 100%;
+		margin-left: 5px;
+	}
+	
+	#basic_reg_form #reg_fields .input_label,
+	#basic_reg_form #reg_fields .select_label {
+		float: none !important;
+		text-align: left !important;
+		margin-bottom: 5px !important;
+		font-size: 15px !important;
+	}
+	
+	#basic_reg_form #reg_fields .input_label {
+	/*	margin-bottom: 12px !important;	*/
+	}
+	
+	#basic_reg_form #reg_fields .checkbox_label,
+	#basic_reg_form #reg_fields .multicheckbox_label {
+		width: 85% !important;	
+		float: left;
+		font-size: 15px !important;
+		line-height: 18px !important;
+	}
+	
+	#basic_reg_form #reg_fields .checkbox_label {
+		float: none;	
+	}
+	
+	#basic_reg_form #reg_fields .checkbox {
+		margin-left: 10px;	
+	}
+
+	#basic_reg_form #reg_fields .input_multicheckbox,
+	#basic_reg_form .required_details {
+		font-size: 15px !important;
+	}
+	
+	#basic_reg_form #reg_fields .input_multicheckbox {
+		margin: 0 0 10px 10px;
+	}
+	
+	#basic_reg_form #reg_fields .submit_btn {
+		width: 100px !important;	
+	}
+	
+	#basic_reg_form #reg_fields .input_submit {
+		width: 137px;
+		height: 36px;
+		clear: left;	
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	
+/*	#reg_fields {
+		margin-top: 35px;	
+	}
+	*/
+	
+	#continue_button {
+		margin-left: 6px;
+		margin-top: 34px !important;
+	}
+	
+	.message_area_short {
+		margin-top: 50px;	
+	}
+	
+	.message_area {
+		margin-top: 100px;	
+	}
+	
+	.message_area_2 {
+		margin-top: 75px;	
+	}
+	
+	.medium_print {
+    	font-size: 12px !important;
+	}
+	
+	.small_print {
+		font-size: 11px !important;
+		line-height: 15px;
+		font-weight: normal;
+		margin-top: 10px;
+		padding-top: 2px;
+		width: 220px;
+		margin-left: 10px;
+	}
+	
+	.fb_edge_widget_with_comment {
+		bottom: 3px !important;
+	}
+	
+	.pluginButtonFav {
+		background-position: 13px -141px !important;	
+	}
+	
+	.sharing-tools {
+		display: none;
+	}
+	
+	#view_more  {
+		display: none;
+	}
+	
+	#complete_form {
+		display: block;	
+	}
+	
+	#complete_form p {
+		color: #333333;
+		font-family: Arial,Helvetica,sans-serif;
+		font-size: 13px;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#complete_form p a:link,
+	#complete_form p a:visited {
+		color: #1752A3;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	.video-style {
+		width: 200px; 
+		height: 113px;
+		margin:0 auto;
+		padding-top: 10px;
+		padding-bottom: 20px;
+	}
+	
+	#basic_reg_form #reg_fields select.custom {
+		width: 85% !important;	
+	}
+	
+	.medium_print {
+    	font-size: 12px !important;
+	}
+	
+
+	input, 
+	input[type="password"], 
+	input[type="search"], 
+	isindex {
+		font-size: 15px;
+		height: 28px;
+		padding-left: 6px;
+		/*width: 85%;*/
+	}
+	
+	input[type="text"], textarea { 
+		width: 80% !important;
+	}
+	
+	.input_multicheckbox input[type="checkbox"] {
+		width: 7% !important;
+	}
+	
+	#basic_reg_form #reg_fields .input_multicheckbox input {
+		margin-right: 0px;	
+	}
+	
+	input[type="checkbox"] {
+		margin-left: 0px;
+	}
+	
+	select {
+		width: 85% !important;
+		font-size: 15px !important;
+	}
+	
+	#divError {
+		left: 0px;
+		top: 20px;	
+		width: 90%;
+	}
+	
+	.divErrorBox {
+		left: 0px;
+		padding: 10px 14px 10px 14px;
+		width: 90%;
+		margin-left: 5px;
+	}
+	
+	.divErrorBoxEmail {
+		left: 0px;
+		padding: 10px 14px 10px 14px;
+		width: 90%;
+		margin-left: 5px;
+	}
+	
+	.divErrorBoxZip {
+		left: 0px;
+		padding: 10px 14px 10px 14px;
+		width: 100px;
+		margin-left: 5px;
+	}
+	
+	/* this is to move the error message down for email error message only */
+	.errorTop {
+		top: 63px !important;	
+	}
+	
+	/* this is to position the zip error message only */
+	.error_zip_pos {
+		float: right;	
+	}
+	
+	.divErrorArrow {
+		display: none;	
+	}
+	
+	.divErrorArrowDown {
+		background: transparent url(/resources/images/sr_bubble_arrow_down.png) no-repeat 0 0;
+		width: 29px;
+		height: 17px;
+		/*float: left; */
+		position: relative;
+		z-index: 5;
+		left: 48%;
+		bottom: 11px;
+	}
+	.error_icon {
+		position: absolute;
+		left: 88%;
+		padding-top: 38px;
+	}
+	
+	.privacyPolicy {
+		clear: both;
+		margin-left: 0px;
+		padding-top: 10px;	
+	}
+	
+	.canadaPolicy {
+		clear: both;
+		margin-left: 0px;
+		padding-top: 10px;	
+	}
+	
+	.radio_label {
+		font-weight: bold;
+		width: 100%;
+	}
+	
+	#basic_reg_form #reg_fields .input_multiradio {
+		font-size: 14px;
+		padding-top: 6px;
+		margin-left: 6px;
+	}
+	
+	#basic_reg_form #reg_fields .input_label, 
+	#basic_reg_form #reg_fields .select_label {
+		width: 98%;
+	}
+	
+	#thank_you_page {
+		padding-left: 0px;
+		width: 98%;
+	}
+	
+}

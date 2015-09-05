@@ -1,0 +1,1287 @@
+/* updated 8-19-14 to include styles for CTW scale wrapper */
+
+body{
+	margin:0px;	
+}
+#wrapper{
+	width:970px;
+	margin:auto;
+	display:block;
+}
+
+#wrapper_iframe{
+	margin:auto;
+	display:block;
+}
+
+#container{
+	padding-top:10px;
+	border:1px solid #e7e7e7;
+	margin-bottom:50px;
+}
+
+#top #top_logo a{
+	text-decoration:none;	
+}
+
+#view_more a:link,
+#view_more a:hover,
+#view_more a:visited{
+	font-family:Arial, Helvetica, sans-serif;
+	color:#206ba4;	
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+#view_more{
+	float:right;	
+}
+
+.thumb_img{
+	float:left;
+	margin-right:15px;
+	margin-bottom:15px;
+}
+
+.clear{
+	clear:both;	
+}
+
+#footer_details{
+	border-top:1px solid #e7e7e7;
+	padding-top:5px;
+	padding-bottom:20px;
+	margin-top:50px;
+	margin-left:20px;
+	margin-right:20px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#666666;
+}
+
+/* jjoly Updated June 1 for Stepped Reg Form */
+#inner_container{
+	width:850px; /*was 772*/
+	/*margin:auto;*/
+	margin-left: 20px;
+}
+
+#inner_container_iframe{
+	margin:auto;
+}
+
+/* mobile testing */
+.stButton {
+	margin-top: 8px !important;	
+}
+
+.st_twitter_button .stButton {
+	margin-bottom: 8px !important;	
+}
+
+.fb_iframe_widget span {
+	padding-left: 2px !important;	
+}
+
+#complete_form {
+	display: none;	
+}
+/* end testing */
+
+#reg_container{
+/*	height:544px; 
+	background-color:#999;
+*/
+	margin-top:20px;
+}
+
+/*JAVAWORLD STYLES*/
+
+body#jvw{
+	background-image:url("/images/javaworld-header-bg.png");
+	background-repeat:repeat-x;
+	background-color:#eee;
+	font-size: 1em;
+	font-family: Helvetica,Arial,sans-serif,sans-serif;
+	line-height: 1.4;
+}
+#jvw #top{
+  background: #0f4461;
+	height:81px;
+}
+
+#jvw #top_content #item {
+  margin-top: 10px;
+}
+
+#jvw #container {
+  border-top: none;
+  border-color: #dcdcdc;
+  background: #fff;
+	background-image:url("/images/javaworld-header-bg.png");
+	background-position: 0 -81px;
+	background-repeat:repeat-x;
+	padding-top: 20px;
+}
+
+#jvw #top_inner_container {
+  border-right: 1px solid #fff;
+  border-left: 1px solid #fff;
+  margin-bottom: 1px;
+}
+
+#jvw #top_inner_container.linearBackground {
+  border-bottom: 1px solid #c9c9c9;
+}
+
+#jvw #top #top_logo a{
+	background:transparent url("/images/javaworld-logo.png") no-repeat scroll left bottom;
+	display:block;
+	height:61px;
+	position:absolute;
+	top:4px;
+	width:310px;	
+}
+
+
+#jvw h1{
+  font-size: 1.6rem;
+  line-height: 2rem;
+  margin: 0.25rem 0px 0.5rem;
+}
+
+#jvw p{
+	color:#333333;
+	font-size: 0.9rem
+}
+
+#jvw .thumb_img {
+  padding-top: 9px;
+}
+
+
+/*GRB STYLES*/
+
+body#grb{
+	background: #ffffff url("http://computerworld.com.edgesuite.net/grb/grb-ccd-header-bg-img.jpg") repeat-x scroll 0 -26px;
+	margin-bottom:0;
+	margin-top:0;
+}
+#grb #top{
+	height:97px;	
+}
+
+#grb #top #top_logo a{
+	background:url(http://idge.staticworld.net/grb/greenbot-logo-final.png) no-repeat scroll left bottom;
+	display:block;
+	height:63px;
+	position:absolute;
+	top:5px;
+	width:275px;	
+}
+
+#grb #container{
+	background-color:#fff;	
+}
+
+
+#grb h1{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	font-weight:bold;
+	color:#000;
+}
+
+#grb p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	line-height:16px;
+	color:#333333;
+}
+
+/*END GRB STYLES*/
+
+
+
+
+/*INFOWORLD STYLES*/
+
+body#ifw{
+	background-color:#7e072e;
+	height:83px;
+}
+#ifw #top{
+	height:90px;
+	background-color:#7e072e;
+}
+
+#ifw #container{
+	border:none;	
+	background-color:#fff;
+}
+
+#ifw #top #top_logo a{
+	background:transparent url(http://idge.staticworld.net/ifw/IFW_logo_desktop.png) no-repeat scroll left bottom;
+	display:block;
+	height:70px;
+}
+
+
+#ifw h1{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:24px;
+	font-weight:bold;
+}
+
+#ifw p{
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:13px;
+	line-height:16px;
+	color:#333333;
+}
+
+/*COMPUTERWORLD STYLES*/
+
+body#ctw{
+	background: url("http://idge.staticworld.net/ctw/cw-ccd-header-black.jpg") repeat-x 0 0 #efefef;
+}
+#ctw #top{
+	height:64px;	
+}
+
+#ctw #top #top_logo a{
+	background:url('http://idge.staticworld.net/ctw/cw-logo-ccd-wrapper-310x48.png') no-repeat scroll left bottom;
+	display:block;
+	height:54px;
+	position:absolute;
+	top:10px;
+	width:310px;	
+}
+
+#ctw #container{
+	background-color:#fff;
+	border-top: 0 none;	
+	padding-top: 20px;
+}
+
+
+#ctw h1{
+	font-family:Helvetica, Georgia, "Times New Roman", Times, serif;
+	font-size:26px;
+	font-weight:700;
+}
+
+#ctw p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:18px;
+	color:#333333;
+}
+
+
+/*CIO STYLES*/
+
+body#cio{
+	background: #EDEDED url("http://idge.staticworld.net/cio/topheader_red_bg_1x77.gif") repeat-x scroll 0 0;
+	margin-bottom:0;
+	margin-top:0;
+}
+#cio #top{
+	height:77px;	
+}
+
+#cio #top #top_logo a{
+	background:url("http://idge.staticworld.net/cio/hdr_logo_cio_150x72.gif") no-repeat scroll left bottom;
+	display:block;
+	height:72px;
+	position:absolute;
+	top:5px;
+	width:150px;	
+}
+
+#cio #container{
+	background-color:#fff;	
+}
+
+
+#cio h1{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	font-weight:bold;
+	color:#000;
+}
+
+#cio p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	line-height:16px;
+	color:#333333;
+}
+
+
+
+/*NWW STYLES*/
+
+body#nww{
+	background:#00629B url(http://www.networkworld.com/includes/styles/r08/img/sitewideblue.png) repeat-y scroll center center;
+}
+#nww #top{
+	height:74px;
+	background-color:#fff;
+	border-bottom:5px solid #007fc6;
+}
+
+#nww #top #top_logo a{
+	background:transparent url(http://idge.staticworld.net/nww/nww-logo-final.png) no-repeat scroll 0 0;
+	display:block;
+	height:46px;
+	position:absolute;
+	top:15px;
+	margin-left:20px;
+	width:281px;
+}
+
+#nww #container{
+	background-color:#fff;	
+	border-top:0px;
+	margin-bottom:0px;
+}
+
+
+#nww h1{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	font-weight:bold;
+	color:#000;
+}
+
+#nww p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	line-height:16px;
+	color:#333333;
+}
+
+
+/*ITW STYLES*/
+
+body#itw{
+	background-color:#fff;
+    background-color: #fff;
+    background-image: url(http://idge.staticworld.net/itw/itw-rs-orange-line.jpg);
+    background-position: 0 15px;
+    background-repeat: repeat-x;
+}
+
+#itw #top{
+	background-image:url(http://idge.staticworld.net/itw/itw-rs-orange-line.jpg);
+	background-repeat:repeat-x;
+	height:90px;
+	background-color:#fff;
+	margin-top: 15px;
+}
+#itw #top #top_logo{
+}
+
+#itw #top #top_logo a{
+	background-image:url(http://idge.staticworld.net/itw/itw-resource-logo.jpg);
+	background-repeat:no-repeat;
+	display:block;
+	height:76px;
+	width:274px;	
+}
+
+#itw #container{
+	background-color:#fff;	
+	border:0px;
+	margin-bottom:0px;
+}
+
+#itw #wrapper{
+	margin-bottom:50px;
+}
+
+#itw h1{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	font-weight:bold;
+	color:#000;
+}
+
+#itw p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	line-height:16px;
+	color:#333333;
+}
+
+/*CSO STYLES*/
+
+body#cso{
+	background: black url(http://idge.staticworld.net/cso/cso-home-bg.png) 0 0 repeat;
+	background-size: 12px 12px;
+}
+
+#cso #top{
+	height:75px;
+	background-color:#1e2226;
+	padding-top:10px;
+}
+
+#cso #top #top_logo a{
+		background:transparent url(http://idge.staticworld.net/cso/cso-logo.png) no-repeat scroll 0 0;
+	display:block;
+	height:61px;
+	width:132px;
+	margin-left:20px;
+}
+
+#cso #wrapper{
+	border:1px solid #000;
+	margin-bottom:50px;
+}
+
+#cso #container{
+	background-color:#fff;	
+	border:0px;
+	margin-bottom:0px;
+}
+
+
+#cso h1{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:24px;
+	font-weight:bold;
+	color:#000;
+}
+
+#cso p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	line-height:16px;
+	color:#333333;
+}
+
+
+
+/*CFOworld STYLES*/
+
+body#cfo{
+	background-color:#626687;
+	background-image:url("http://computerworld.com.edgesuite.net/cfo/main_bg_grad.gif");
+	background-repeat:repeat-x;
+}
+#cfo #top{
+	background-color:#fff;
+	height:120px;	
+}
+
+#cfo #top #top_logo a{
+	background:url("http://computerworld.com.edgesuite.net/cfo/cfoworld_logo1.gif") no-repeat scroll left bottom;
+	display:block;
+	height:110px;
+	position:absolute;
+	top:10px;
+	width:292px;	
+}
+
+#cfo #container{
+	background-color:#fff;	
+}
+
+
+#cfo h1{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:30px;
+	font-weight:normal;
+}
+
+#cfo p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:18px;
+	color:#525252;
+}
+
+/* CITE STYLES */
+body#cit {
+	background: #f8f8f8 url('http://computerworld.com.edgesuite.net/cite/cite_reg_hdr_bg.png') repeat-x scroll 0 0;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+#cit a:link,
+#cit a:hover,
+#cit a:visited {
+	color: #338cc5;	
+}
+
+#cit #top {
+	height: 61px;	
+}
+
+#cit #top #top_logo a {
+	background: url('http://computerworld.com.edgesuite.net/cite/cite_reg_logo.png') no-repeat scroll left bottom;
+	display: block;
+	height: 69px;
+	position: absolute;
+	top: 0;
+	width: 224px;
+}
+
+#cit #container {
+	background-color:#fff;	
+}
+
+#cit #view_more a:link,
+#cit #view_more a:hover,
+#cit #view_more a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #338cc5;	
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#cit h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: #000;
+}
+
+#cit p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 17px;
+	color: #333333;
+}
+
+
+/*itwhitepapers*/
+			body#itp {
+				padding:0;
+				margin:0;
+				background:transparent url("http://computerworld.com.edgesuite.net/itwhitepapers/images/ITWhitepaper_home_BG_repeat.gif") repeat-x left top;
+				font-family: Arial,Helvetica,sans-serif;
+   		  font-size: 12px;
+				line-height: 18px;
+			}
+			#itp #wrapper {
+				width:960px;
+				text-align:center;
+				margin:0px auto;
+			}
+			#itp #container {
+				padding-top:212px;
+				border:none;
+				text-align: left;
+			}
+			#itp #top_logo {
+				display:block;
+				float:left;
+				background:transparent url("http://computerworld.com.edgesuite.net/itwhitepapers/images/ITWhitepaper_home_logo.png") no-repeat left top;
+				width:412px;
+				height:190px;
+			}
+			#itp #top_logo a {
+				display:block;
+				width:420px;
+                height:180px;
+			}
+			#itp #footer_details {
+				padding-bottom:20px;
+				overflow:hidden; /*expand to contain floats*/
+			}
+			#itp iframe {
+				clear:both;
+				margin:42px auto 0 auto;
+				width:771px;
+				display:block;
+				border:none;
+			}
+      #itp h1 {
+        background-image: url("http://www.itwhitepapers.com/images/header_arrow.gif");
+				background-position: left 4px;
+				background-repeat: no-repeat;
+				color: #002200;
+				font-size: 21px;
+				font-weight: bold;
+				line-height: normal;
+				margin-bottom: 8px;
+				margin-left: -10px;
+				padding-left: 21px;
+				font-family: Arial,Helvetica,sans-serif;
+      }
+/*end itwhitepapers*/
+
+/*itnews*/
+
+body#itn {
+	background-color:#e7ebd9;
+background-image:url(http://www.itnews.com/images/itwp_bg.gif);
+background-position:left top;
+background-repeat:repeat-x;
+margin:0;
+padding:0;
+}
+
+#itn #wrapper {
+	border-left:1px solid #acacac;
+	border-right:1px solid #acacac;
+	box-shadow:0 5px 20px #acacac;
+	-moz-box-shadow:0 5px 20px #acacac;
+-webkit-box-shadow:0 5px 20px #acacac;
+}
+
+#itn #top,
+#itn #container {
+	background-color:#fff;
+}
+
+#itn #top #top_logo {
+	padding:15px 0 0 15px;
+}
+
+#itn #top #top_logo a {
+	background-image:url(http://computerworld.com.edgesuite.net/itnews/logos/itnews-logo194x78.png);
+	background-repeat:no-repeat;
+	display:block;
+	height:78px;
+	width:194px;
+}
+
+#itn #container {
+border: none;
+}
+
+#itn #inner_container {
+	margin-left:93px;
+}
+
+#itn #top_inner_container {
+	background:#fff;
+	border-bottom:none;
+}
+
+#itn h1 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	font-weight:bold;
+}
+
+#itn p {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:18px;
+	font-weight:normal;
+	
+}
+
+/*end itnews*/
+
+/* MACWORLD CSMB WRAPPER  */
+
+body#mcw {
+     background: #2699CD;
+     margin-bottom: 0px;
+     margin-top: 0px;
+}
+
+#mcw #top {
+     height: 77px;
+}
+
+#mcw #top #top_logo a {
+     background: url("http://csmb.staticworld.net/images/furniture/techhive/logo-banner-macworld-sm.png") no-repeat scroll left bottom transparent;
+     display: block;
+     height: 52px;
+     position: absolute;
+     top: 5px;
+	 margin-left: 10px;
+     width: 192px;
+}
+
+#mcw #container {
+     background-color: #FFFFFF;
+	 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+#mcw h1 {
+     color: #000000;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 24px;
+     font-weight: bold;
+}
+
+#mcw p {
+     color: #333333;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 13px;
+     line-height: 16px;
+}
+
+
+
+/* TECHHIVE CSMB WRAPPER  */
+
+body#thv {
+     background: url("http://csmb.staticworld.net/images/furniture/techhive/techhive-header-base-background.png") repeat scroll 0px 0px #fff;
+     margin-bottom: 0px;
+     margin-top: 0px;
+}
+
+#thv #top {
+     height: 77px;
+}
+
+#thv #top #top_logo a {
+     background: url("http://csmb.staticworld.net/images/furniture/techhive/logo-banner-techhive-sm.png") no-repeat scroll left bottom transparent;
+     display: block;
+     height: 52px;
+     position: absolute;
+     top: 5px;
+     width: 186px;
+	 margin-left: 10px;
+}
+
+#thv #container {
+     background-color: #FFFFFF;
+	 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 1); 
+}
+
+#thv h1 {
+     color: #000000;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 24px;
+     font-weight: bold;
+}
+
+#thv p {
+     color: #333333;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 13px;
+     line-height: 16px;
+}
+
+
+
+
+/* PCWORLD CSMB WRAPPER  */
+
+body#pcw {
+     background-color: #8F0D10;
+     margin: 0px;
+     padding: 0px;
+}
+
+#pcw #wrapper {
+
+}
+
+#pcw #container {
+     background: #FFFFFF;
+	 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.5);	 
+}
+
+#pcw #top #top_logo {
+     padding: 15px 0px 0px 15px;
+}
+
+#pcw #top_logo a {
+     background-image: url("http://csmb.staticworld.net/images/furniture/techhive/logo-banner-pcworld-sm.png");
+     background-repeat: no-repeat;
+     display: block;
+     height: 58px;
+     width: 200px;
+}
+
+#pcw #container {
+     border: medium none
+	 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+#pcw #inner_container {
+     margin-left: 93px;
+}
+
+#pcw #top_inner_container {
+     background: none repeat scroll 0% 0% #FFFFFF;
+     border-bottom: medium none;
+}
+
+#pcw h1 {
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 24px;
+     font-weight: bold;
+}
+
+#pcw p {
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 14px;
+     font-weight: normal;
+     line-height: 18px;
+}
+
+
+
+
+/*  ITWHITEPAPERS CSMB WRAPPER  */
+
+body#itp {
+     background: url("http://computerworld.com.edgesuite.net/itwhitepapers/images/ITWhitepaper_home_BG_repeat.gif") repeat-x scroll left top transparent;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 12px;
+     line-height: 18px;
+     margin: 0px;
+     padding: 0px;
+}
+
+#itp #wrapper {
+     margin: 0px auto;
+     text-align: center;
+     width: 960px;
+}
+
+#itp #container {
+     border: medium none;
+     padding-top: 212px;
+     text-align: left;
+}
+
+#itp #top_logo {
+     background: url("http://computerworld.com.edgesuite.net/itwhitepapers/images/ITWhitepaper_home_logo.png") no-repeat scroll left top transparent;
+     display: block;
+     float: left;
+     height: 190px;
+     width: 412px;
+}
+
+#itp #top_logo a {
+     display: block;
+     height: 180px;
+     width: 420px;
+}
+
+#itp #footer_details {
+     overflow: hidden;
+     padding-bottom: 20px;
+}
+
+#itp iframe {
+     border: medium none;
+     clear: both;
+     display: block;
+     margin: 42px auto 0px;
+     width: 771px;
+}
+
+#itp h1 {
+     background-image: url("http://www.itwhitepapers.com/images/header_arrow.gif");
+     background-position: left 4px;
+     background-repeat: no-repeat;
+     color: #002200;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 21px;
+     font-weight: bold;
+     line-height: normal;
+     margin-bottom: 8px;
+     margin-left: -10px;
+     padding-left: 21px;
+}
+
+
+
+/*  GREENBOT CSMB WRAPPER  */
+
+body#grb {
+     background: url("http://computerworld.com.edgesuite.net/grb/grb-ccd-header-bg-img.jpg") repeat-x scroll 0px -26px #FFFFFF;
+     margin-bottom: 0px;
+     margin-top: 0px;
+}
+
+#grb #top {
+     height: 97px;
+}
+
+#grb #top #top_logo a {
+     background: url("http://idge.staticworld.net/grb/greenbot-logo-final.png") no-repeat scroll left bottom transparent;
+     display: block;
+     height: 63px;
+     position: absolute;
+     top: 5px;
+     width: 275px;
+}
+
+#grb #container {
+     background-color: #FFFFFF;
+}
+
+#grb h1 {
+     color: #000000;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 24px;
+     font-weight: bold;
+}
+
+#grb p {
+     color: #333333;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 13px;
+     line-height: 16px;
+}
+
+
+/*  IDGTECHNETWORK CSMB WRAPPER  */
+
+body#tnw {
+     background-color: #F06522;
+}
+
+#tnw #wrapper {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);	
+}
+
+
+#tnw #top {
+     background-color: #FFFFFF;
+     height: 120px;
+}
+
+#tnw #top #top_logo a {
+     background: url("http://idgtechnetwork.com/wp-content/uploads/2012/12/IDG1-300x50.png") no-repeat scroll left bottom transparent;
+     display: block;
+     height: 80px;
+     position: absolute;
+     margin-left: 10px;
+     width: 300px;
+}
+
+#tnw #container {
+     background-color: #FFFFFF;
+}
+
+#tnw h1 {
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 30px;
+     font-weight: normal;
+}
+
+#tnw p {
+     color: #525252;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 14px;
+     line-height: 18px;
+}
+
+
+
+/*  ALLWHITEPAPERS CSMB WRAPPER  */
+
+body#awp {
+     background-color: #57BAD5;
+}
+
+#awp #wrapper {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);	
+}
+
+
+#awp #top {
+     background-color: #FFFFFF;
+     height: 120px;
+}
+
+#awp #top #top_logo a {
+     background: url("http://csmb.staticworld.net/images/furniture/allwhitepapers/allwhitepapers-logo.jpg") no-repeat scroll left bottom transparent;
+     display: block;
+     height: 110px;
+     position: absolute;
+     margin-left: 10px;
+     width: 300px;
+}
+
+#awp #container {
+     background-color: #FFFFFF;
+}
+
+#awp h1 {
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 30px;
+     font-weight: normal;
+}
+
+#awp p {
+     color: #525252;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 14px;
+     line-height: 18px;
+}
+
+
+
+/*  GETWHITEPAPERS CSMB WRAPPER  */
+
+body#gwp {
+     background-color: #F37721;
+}
+
+#gwp #wrapper {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);	
+}
+
+
+#gwp #top {
+     background-color: #FFFFFF;
+     height: 120px;
+}
+
+#gwp #top #top_logo a {
+     background: url("http://csmb.staticworld.net/images/furniture/allwhitepapers/getwhitepapers-logo-240.jpg") no-repeat scroll left bottom transparent;
+     display: block;
+     height: 110px;
+     position: absolute;
+     margin-left: 10px;
+     width: 300px;
+}
+
+#gwp #container {
+     background-color: #FFFFFF;
+}
+
+#gwp h1 {
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 30px;
+     font-weight: normal;
+}
+
+#gwp p {
+     color: #525252;
+     font-family: Arial,Helvetica,sans-serif;
+     font-size: 14px;
+     line-height: 18px;
+}
+
+
+/* NEW SELECTORS */
+.linearBkgrnd {
+  /* fallback */
+  background-color: #ffffff;
+  
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 60%, rgba(239,239,239,1) 100%, rgba(255,255,255,1) 0%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(255,255,255,1)), color-stop(100%,rgba(239,239,239,1)), color-stop(0%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 60%,rgba(239,239,239,1) 100%); /* IE10+ */
+background: linear-gradient(top, rgba(255,255,255,1) 60%,rgba(239,239,239,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=0 ); /* IE6-9 */ 
+	
+	
+	border-bottom: 1px solid #d3d3d3;
+}
+
+#top_inner_container {
+	
+}
+
+#top_content {
+	width: 772px;
+	margin: auto;
+	padding-bottom: 30px;	
+}
+
+.social_sharing {
+	float: left;
+	position: relative;
+	top: 32px; 
+	width: 30px;
+	margin-left: 20px;
+}
+
+.sharing-tools {
+	padding-left: 0; 
+	padding-left: 10px;
+	border-left: 4px solid #d4d4d4;	
+}
+
+.stButton {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* IFRAME */
+iframe.idg_reg_form {
+	width: 650px;
+	height: 2000px;
+	position:relative;
+	left:0px;
+	top:0px;
+}
+
+#item {
+	padding-top: 0px;
+    float: left; 
+	width: 710px;	
+}
+
+/* May 29, 2012 jjoly - NEW sharing styles */
+#social_sharing_items {
+ margin: 0px 10px 0px 10px;
+ padding: 0px 12px 45px 12px;
+ border-left: 4px solid #D4D4D4;
+ height: 75px;
+}
+
+#social_sharing_items .share {
+ width: 16px;
+ height: 16px;
+ display: block;
+ text-indent: -9999px;
+ background-position: 0 0;
+ background-repeat: no-repeat;
+ margin-bottom: 10px;
+}
+#social_sharing_items #twitter_button {
+background-image: url('http://computerworld.com.edgesuite.net/step_reg/twitter_16.png');
+}
+
+#social_sharing_items #gplus_button {
+background-image: url('http://computerworld.com.edgesuite.net/step_reg/googleplus_16.png');
+}
+
+#social_sharing_items #linkedin_button {
+background-image: url('http://computerworld.com.edgesuite.net/step_reg/linkedin_16.png');
+}
+
+#social_sharing_items #facebook_button {
+background-image: url('http://computerworld.com.edgesuite.net/step_reg/facebook_16.png');
+}
+
+#social_sharing_items #email_button {
+background-image: url('http://computerworld.com.edgesuite.net/step_reg/email_16.png');
+}
+/* END new sharing styles */ 
+
+
+/* MEDIA QUERIES ----------------------------------- */
+/* ipad tablet */
+
+@media screen and (max-device-width: 800px) {
+	.medium_print {
+    	font-size: 12px !important;
+	}
+	
+	#wrapper {
+		width: 95%;	
+	}
+	
+	#inner_container {
+    width: 95%; 
+    margin: auto; 
+	}
+	
+	#top_content {
+	    width: 95%;	
+	}
+	
+	#item {
+	    width: 90%;	
+	}
+
+	iframe.idg_reg_form {
+		width: 97% !important;
+		height: 2500px !important;
+	}
+}
+
+
+/* mobile devices */
+@media handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+	html, body.x-apple {
+		-webkit-text-size-adjust: none;
+	}
+
+	#wrapper {
+		width: 95%;	
+	}
+	
+	#inner_container {
+		width: 95%;	
+	}
+	
+	#item {
+	    width: 100%;
+		float: none;	
+	}
+
+	iframe.idg_reg_form {
+		width: 97% !important;
+		height: 2500px !important;
+	}
+	
+	.fb_edge_widget_with_comment {
+		bottom: 3px !important;
+	}
+	
+	.pluginButtonFav {
+		background-position: 13px -141px !important;	
+	}
+	
+	.sharing-tools {
+		display: none;
+	}
+	
+	#reg_container {
+		margin-top: 0px;
+		border-top: none;
+	}
+	
+	#ctw h1,
+	#cio h1,
+	#ifw h1,
+	#nww h1,
+	#cso h1,
+	#itw h1,
+	#cfo h1 {
+		font-size: 22px !important;	
+		margin-top: 10px !important;
+	}
+	
+	#view_more  {
+		display: none;
+	}
+	
+	#complete_form {
+		display: block;	
+	}
+	
+	#complete_form p {
+		color: #333333;
+		font-family: Arial,Helvetica,sans-serif;
+		font-size: 13px;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#complete_form p a:link,
+	#complete_form p a:visited {
+		color: #1752A3;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	#top_content {
+	    width: 95%;	
+		padding-bottom: 15px;
+	}
+	
+	.linearBkgrnd {
+		border-bottom: none;	
+	}
+	
+	.social_sharing {
+		display: none;	
+	}
+}
+/* END mobile styles */
