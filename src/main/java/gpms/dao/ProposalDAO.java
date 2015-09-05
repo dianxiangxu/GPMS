@@ -13,6 +13,7 @@ import gpms.model.ProjectLocation;
 import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.ProposalInfo;
+import gpms.model.QuickPersonnelQuery;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
 import gpms.model.TypeOfRequest;
@@ -394,6 +395,11 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		return proposals;
 	}
 
+	/**
+	 * 
+	 * TODO is this method working as intended?
+	 * Appears to just query by ID
+	 */
 	public Proposal findProposalDetailsByProposalID(ObjectId id) {
 		Datastore ds = getDatastore();
 		return ds.createQuery(Proposal.class).field("_id").equal(id).get();
@@ -537,4 +543,27 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				.containsIgnoreCase(pattern.pattern());
 		return proposalQuery.get();
 	}
+	
+	//Creating a method here to find related personnel relative to the PI, CoPI, and Senior Personnel
+	//"Find Business Manager for..." etc
+	//Will attempt a generic build so that one can search for Deans, etc.
+	
+	public ArrayList<QuickPersonnelQuery> PersonnelQuery(ObjectId id, String searchQuery)
+	{
+		Proposal queryProposal;
+		try 
+		{
+			queryProposal = findProposalByProposalID(id);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//queryProposal.getInvestigatorInfo();
+		
+		
+		ArrayList<QuickPersonnelQuery> queryList = new ArrayList();
+		return null;
+	}
+	
 }
