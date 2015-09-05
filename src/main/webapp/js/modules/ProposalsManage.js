@@ -644,7 +644,7 @@ $(function() {
 											hide : true
 										},
 										{
-											display : 'Proposal Status',
+											display : 'Status',
 											name : 'proposal_status',
 											cssclass : '',
 											controlclass : '',

@@ -277,8 +277,7 @@
 																	</td>
 
 																	<td style="width: 100px;"><label
-																		class="cssClassLabel sfLocale"> Proposal
-																			Status:</label> <select title="Choose Proposal Status"
+																		class="cssClassLabel sfLocale">Proposal Status:</label> <select title="Choose Proposal Status"
 																		id="ddlSearchProposalStatus" class="sfListmenu"
 																		style="width: 80px;">
 																			<option value="0" class="sfLocale">--All--</option>
