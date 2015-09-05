@@ -654,14 +654,11 @@
 																						<td><label class="cssClassLabel sfLocale">
 																								Action:</label> <input title="Action" type="text"
 																							class="sfInputbox" id="txtSearchAction"
-																							style="width: 150px !important;"
 																							placeholder="Action" /></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Audited By:</label> <input title="Audited By"
 																							type="text" class="sfInputbox"
-																							id="txtSearchAuditedBy"
-																							style="width: 150px !important;"
-																							placeholder="Audited By" /></td>
+																							id="txtSearchAuditedBy" placeholder="Audited By" /></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input
 																							title="Activity On From" type="text"

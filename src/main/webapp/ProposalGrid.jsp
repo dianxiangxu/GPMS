@@ -258,15 +258,14 @@
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Received On From"
-																				id="txtSearchReceivedOnFrom"
-																				class="sfTextBoxFix hasDatepicker"
+																				id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
 																				placeholder="From">
 																		</div>
 																		<div class="cssClassFromTo">
 																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Received On To"
-																				id="txtSearchReceivedOnTo"
-																				class="sfTextBoxFix hasDatepicker" placeholder="To">
+																				id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
+																				placeholder="To">
 																		</div></td>
 
 																	<td style="width: 200px;"><label
@@ -1504,12 +1503,10 @@
 																				<td><label class="cssClassLabel sfLocale">
 																						Action:</label> <input title="Action" type="text"
 																					class="sfInputbox" id="txtSearchAction"
-																					style="width: 150px !important;"
 																					placeholder="Action" /></td>
 																				<td><label class="cssClassLabel sfLocale">
 																						Audited By:</label> <input title="Audited By" type="text"
 																					class="sfInputbox" id="txtSearchAuditedBy"
-																					style="width: 140px !important;"
 																					placeholder="Audited By" /></td>
 																				<td><label class="cssClassLabel sfLocale">
 																						Activity On From:</label> <input title="Activity On From"
