@@ -236,7 +236,7 @@
 																	<td style="width: 100px;"><label
 																		class="cssClassLabel sfLocale"> Proposed By:</label><input
 																		title="Proposed By" id="txtSearchProposedBy"
-																		class="sfTextBoxFix" type="text"
+																		class="sfTextBoxSmall" type="text"
 																		placeholder="Proposed By" /></td>
 
 																	<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
@@ -277,7 +277,8 @@
 																	</td>
 
 																	<td style="width: 100px;"><label
-																		class="cssClassLabel sfLocale">Proposal Status:</label> <select title="Choose Proposal Status"
+																		class="cssClassLabel sfLocale">Proposal
+																			Status:</label> <select title="Choose Proposal Status"
 																		id="ddlSearchProposalStatus" class="sfListmenu"
 																		style="width: 80px;">
 																			<option value="0" class="sfLocale">--All--</option>
