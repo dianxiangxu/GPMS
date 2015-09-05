@@ -215,8 +215,8 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	}
 
 	public List<ProposalInfo> findAllForProposalGrid(int offset, int limit,
-			String projectTitle, String proposedBy, Double totalCostsFrom,
-			Double totalCostsTo, String receivedOnFrom, String receivedOnTo,
+			String projectTitle, String proposedBy, String receivedOnFrom,
+			String receivedOnTo, Double totalCostsFrom, Double totalCostsTo,
 			String proposalStatus) throws UnknownHostException, ParseException {
 		Datastore ds = getDatastore();
 		ArrayList<ProposalInfo> proposals = new ArrayList<ProposalInfo>();
@@ -238,6 +238,16 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					profileQuery.asKeyList());
 		}
 
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		if (receivedOnFrom != null) {
+			Date receivedOnF = formatter.parse(receivedOnFrom);
+			proposalQuery.field("date received").greaterThanOrEq(receivedOnF);
+		}
+		if (receivedOnTo != null) {
+			Date receivedOnT = formatter.parse(receivedOnTo);
+			proposalQuery.field("date received").lessThanOrEq(receivedOnT);
+		}
+
 		if (totalCostsFrom != null && totalCostsFrom != 0.0) {
 			// proposalQuery.filter("sponsor and budget info.total costs >",
 			// totalCostsFrom);
@@ -251,15 +261,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.lessThanOrEq(totalCostsTo);
 		}
 
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		if (receivedOnFrom != null) {
-			Date receivedOnF = formatter.parse(receivedOnFrom);
-			proposalQuery.field("date received").greaterThanOrEq(receivedOnF);
-		}
-		if (receivedOnTo != null) {
-			Date receivedOnT = formatter.parse(receivedOnTo);
-			proposalQuery.field("date received").lessThanOrEq(receivedOnT);
-		}
 		if (proposalStatus != null) {
 			proposalQuery.field("proposal status").equal(proposalStatus);
 		}
@@ -275,12 +276,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			proposal.setRowTotal(rowTotal);
 			proposal.setId(userProposal.getId().toString());
 			proposal.setProposalNo(userProposal.getProposalNo());
-			proposal.setDateReceived(userProposal.getDateReceived());
-			proposal.setProposalStatus(userProposal.getProposalStatus());
-
-			if (userProposal.getProposalStatus() == Status.DELETED) {
-				proposal.setDeleted(true);
-			}
 
 			// ProjectInfo
 			proposal.setProjectTitle(userProposal.getProjectInfo()
@@ -311,12 +306,6 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				proposal.getTypeOfRequest().add("Supplement");
 			}
 
-			proposal.setDueDate(userProposal.getProjectInfo().getDueDate());
-			proposal.setProjectPeriodFrom(userProposal.getProjectInfo()
-					.getProjectPeriod().getFrom());
-			proposal.setProjectPeriodTo(userProposal.getProjectInfo()
-					.getProjectPeriod().getTo());
-
 			ProjectLocation pl = userProposal.getProjectInfo()
 					.getProjectLocation();
 			if (pl.isOffCampus()) {
@@ -336,6 +325,20 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.getTotalCosts());
 			proposal.setFaRate(userProposal.getSponsorAndBudgetInfo()
 					.getFARate());
+
+			proposal.setDateReceived(userProposal.getDateReceived());
+
+			proposal.setDueDate(userProposal.getProjectInfo().getDueDate());
+			proposal.setProjectPeriodFrom(userProposal.getProjectInfo()
+					.getProjectPeriod().getFrom());
+			proposal.setProjectPeriodTo(userProposal.getProjectInfo()
+					.getProjectPeriod().getTo());
+
+			proposal.setProposalStatus(userProposal.getProposalStatus());
+
+			if (userProposal.getProposalStatus() == Status.DELETED) {
+				proposal.setDeleted(true);
+			}
 
 			ArrayList<AuditLogInfo> allAuditLogs = new ArrayList<AuditLogInfo>();
 
