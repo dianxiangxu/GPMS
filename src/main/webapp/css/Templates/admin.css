@@ -4041,6 +4041,8 @@ div .sfGridwrapper table td a:hover.icon-edit, .sfGridwrapper table td a:hover.i
 	text-decoration: none;
 }
 
+.cssClassFromTo{padding:5px 0px 0px 14px;}
+
 #divModulesLists .icon-edit:hover, #divModulesLists .icon-delete:hover {
 	text-decoration: none;
 	color: #1a1a1a;

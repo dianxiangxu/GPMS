@@ -136,8 +136,8 @@
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
 				<img id="imgProgress" src="images/ajax-loader.gif"
-					style="border-width: 0px;" alt="Loading..." title="Loading..." /> <br>
-				<span id="lblPrgress">Please wait...</span>
+					style="border-width: 0px;" alt="Loading..." title="Loading..." />
+				<br> <span id="lblPrgress">Please wait...</span>
 			</div>
 		</div>
 		<noscript>
@@ -223,55 +223,56 @@
 																<tr>
 																	<td><label class="cssClassLabel sfLocale">User
 																			Name:</label> <input title="User Name" type="text"
-																		class="sfTextBoxSmall" id="txtSearchUserName"
+																		class="sfTextBoxFix" id="txtSearchUserName"
 																		placeholder="User Name" /></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			College:</label> <select title="Choose College"
 																		id="ddlSearchCollege" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 90px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Department:</label> <select title="Choose Department"
 																		id="ddlSearchDepartment" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 143px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Position Type:</label> <select title="Choose Position Type"
 																		id="ddlSearchPositionType" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 150px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Position Title:</label> <select title="Choose Position Title"
 																		id="ddlSearchPositionTitle" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 150px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<!-- <td width="315"><label
-																			class="cssClassLabel sfLocale"> Added On:</label><br />
-																			<span class="label sfLocale"> From :</span> <input title="Added On From" 
+																			class="cssClassLabel sfLocale">Added On:</label><br />
+																			<span class="label sfLocale">From:</span> <input title="Added On From" 
 																			type="text" id="txtSearchAddedOnFrom"
 																			class="sfTextBoxSmall"
 																			style="width: 80px !important;"/> <span
-																			class="label sfLocale"> To :</span> <input title="Added On To" 
+																			class="label sfLocale">To:</span> <input title="Added On To" 
 																			type="text" id="txtSearchAddedOnTo" class="sfTextBoxSmall"
 																			style="width: 80px !important;"/></td> -->
+
 																	<td><label class="cssClassLabel sfLocale">
 																			Active:</label> <select title="Is Active?"
 																		id="ddlSearchIsActive" class="sfListmenu"
-																		style="width: 85px;">
+																		style="width: 50px;">
 																			<option value="" class="sfLocale">--All--</option>
 																			<option value="True" class="sfLocale">True</option>
 																			<option value="False" class="sfLocale">False</option>
 																	</select></td>
-																	<td><br>
+																	<td><label class="cssClassLabel">&nbsp;</label>
 																		<button title="Search User" class="sfBtn"
 																			id="btnSearchUser" type="button">
 																			<span class="sfLocale icon-search">Search</span>

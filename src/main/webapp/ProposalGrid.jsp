@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e8c7bf96f52c00e8c429ab";
+	var userProfileId = "55e89430af6e0427c0c2cf63";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -253,33 +253,33 @@
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
-																	<td><label class="cssClassLabel sfLocale">Received
-																			On:</label>
+																	<td style="width: 200px;"><label
+																		class="cssClassLabel sfLocale">Received On:</label>
 																		<div>
-																			<span class="label sfLocale">From :</span> <input
+																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Received On From"
 																				id="txtSearchReceivedOnFrom"
 																				class="sfTextBoxFix hasDatepicker"
 																				placeholder="From">
 																		</div>
-																		<div>
-																			<span class="label sfLocale">To :</span> <input
+																		<div class="cssClassFromTo">
+																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Received On To"
 																				id="txtSearchReceivedOnTo"
 																				class="sfTextBoxFix hasDatepicker" placeholder="To">
 																		</div></td>
 
-																	<td><label class="cssClassLabel sfLocale">Total
-																			Costs:</label>
+																	<td style="width: 200px;"><label
+																		class="cssClassLabel sfLocale">Total Costs:</label>
 																		<div>
-																			<span class="label sfLocale">From :</span> <input
+																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Total Costs From"
 																				id="txtSearchTotalCostsFrom"
 																				name="searchTotalCostsFrom" class="sfTextBoxFix"
 																				placeholder="From">
 																		</div>
-																		<div>
-																			<span class="label sfLocale">To :</span> <input
+																		<div class="cssClassFromTo">
+																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Total Costs To"
 																				id="txtSearchTotalCostsTo" name="searchTotalCostsTo"
 																				class="sfTextBoxFix" placeholder="To">
@@ -291,7 +291,7 @@
 																		style="width: 80px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
-																	<td><br>
+																	<td><label class="cssClassLabel">&nbsp;</label>
 																		<button title="Search Proposal" class="sfBtn"
 																			id="btnSearchProposal" type="button">
 																			<span class="sfLocale icon-search">Search</span>
