@@ -211,7 +211,7 @@ $(function() {
 						errorElement : "span",
 						messages : {
 							searchTotalCostsTo : {
-								greaterthan : "Must be greater than Total Costs From"
+								greaterthan : "Must be greater than From"
 							},
 							// projectTitle : {
 							// required : "Please enter project title."
@@ -783,7 +783,9 @@ $(function() {
 				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
 								'Edit Proposal Details for: ')
-								+ argus[4]);
+								+ argus[2]);
+
+				$("#lblProposalDateReceived").text(argus[11]);
 
 				if (argus[16] != null && argus[16] != "") {
 					$('#tblLastAuditedInfo').show();
@@ -793,7 +795,7 @@ $(function() {
 				} else {
 					$('#tblLastAuditedInfo').hide();
 				}
-				// $('#txtProjectTitle').val(argus[4]);
+				// $('#txtProjectTitle').val(argus[2]);
 				// $('#txtProjectTitle').prop('disabled', 'disabled');
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
@@ -827,7 +829,6 @@ $(function() {
 
 			// Project Information
 			$("#lblProposalNo").text(response.proposalNo);
-			$("#lblProposalDateReceived").text(response.dateReceived);
 			$("#ddlProposalStatus").val(response.proposalStatus);
 
 			$("#txtProjectTitle").val(response.projectInfo.projectTitle).prop(

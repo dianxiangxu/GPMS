@@ -233,7 +233,7 @@
 																		class="sfTextBoxFix" id="txtSearchProjectTitle"
 																		placeholder="Project Title" /></td>
 																	<td><label class="cssClassLabel sfLocale">
-																			Proposed By:</label><input title="Proposed By"
+																			Proposed By:</label> <input title="Proposed By"
 																		id="txtSearchProposedBy" class="sfTextBoxFix"
 																		type="text" placeholder="Proposed By" /></td>
 
@@ -253,8 +253,8 @@
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
-																	<td style="width: 200px;"><label
-																		class="cssClassLabel sfLocale">Received On:</label>
+																	<td><label class="cssClassLabel sfLocale">Received
+																			On:</label>
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Received On From"
@@ -268,8 +268,8 @@
 																				placeholder="To">
 																		</div></td>
 
-																	<td style="width: 200px;"><label
-																		class="cssClassLabel sfLocale">Total Costs:</label>
+																	<td><label class="cssClassLabel sfLocale">Total
+																			Costs:</label>
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Total Costs From"
@@ -318,11 +318,32 @@
 												<h1>
 													<span id="lblFormHeading">New Proposal Details</span>
 												</h1>
-												<div>
-													<span class="cssClassRequired">*</span> <span
-														class="cssClassLabelTitle">indicates required
-														fields</span>
+												<div class="cssClassLeft">
+													<img src="images/bsu_logo.png" alt="Boise State University"
+														title="Boise State University">
 												</div>
+												<div class="cssClassMiddle" style="text-align:center; width:40%;">
+													<div class="cssClassLabelHeader">Office of Sponsored
+														Programs</div>
+													<div class="cssClassLabelHeader">Proposal Data Sheet</div>
+													<span class="cssClassLabel">Proposals must be
+														submitted to OSP <u>3 working days prior</u> to the
+														proposal submission deadline.
+													</span>
+												</div>
+												<div class="cssClassRight">
+													<div class="cssClassLabelHeader">Office of Sponsored
+														Programs</div>
+													<div class="cssClassLabelHeader">Proposal Data Sheet</div>
+													<span class="cssClassLabel">Proposals must be
+														submitted to OSP <u>3 working days prior</u> to the
+														proposal submission deadline.
+													</span>
+												</div>
+											</div>
+											<div>
+												<span class="cssClassRequired">*</span> <span
+													class="cssClassLabelTitle">indicates required fields</span>
 											</div>
 											<div id="accordion">
 												<h3>

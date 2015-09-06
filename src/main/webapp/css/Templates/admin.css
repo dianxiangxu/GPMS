@@ -1601,6 +1601,13 @@ th.header {
 	font-weight: bold;
 }
 
+.cssClassLabelHeader{
+    color: #163652;
+    font-size: 28px;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
 .sfGridwrapper .sfButtonWrapper {
 	padding: 0 20px 20px 20px;
 }
@@ -1653,6 +1660,7 @@ select.sfListmenusmall {
 
 .sfTextBoxFix {
 	width: 141px !important;
+	display: inline !important;
 }
 
 .sfListmenubig option {
@@ -1892,11 +1900,15 @@ label.error {
 }
 
 #txtWorkEmail-error {
-	display: table-caption;!important
+	display: table-caption;
 }
 
 #txtPersonalEmail-error {
-	display: table-caption;!important
+	display: table-caption;
+}
+
+#txtSearchTotalCostsTo-error{
+	padding: 0 0 0 23px;
 }
 
 .sfRadiobutton {
@@ -4041,7 +4053,7 @@ div .sfGridwrapper table td a:hover.icon-edit, .sfGridwrapper table td a:hover.i
 	text-decoration: none;
 }
 
-.cssClassFromTo{padding:5px 0px 0px 14px;}
+.cssClassFromTo{padding:5px 0 0 15px;}
 
 #divModulesLists .icon-edit:hover, #divModulesLists .icon-delete:hover {
 	text-decoration: none;
@@ -5065,6 +5077,12 @@ p.sfDisplayName span.sfFormlabel.sfDefaultName {
 
 .cssClassHeader {
 	position: relative;
+	overflow: hidden;
+}
+
+.cssClassLeft, .cssClassMiddle, .cssClassRight{	
+    float:left;
+	padding: 0 0 0 100px;	
 }
 
 .cssClassRssDiv {
