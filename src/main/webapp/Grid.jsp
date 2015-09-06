@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e89430af6e0427c0c2cf63";
+	var userProfileId = "55e8c7bf96f52c00e8c429af";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -327,8 +327,8 @@
 															<table cellspacing="0" cellpadding="0" border="0">
 																<tbody>
 																	<tr class="rule dashed">
-																		<td><span class="cssClassLabelTitle" id="lblName">Name</span></td>
-																		<td class="cssClassTableRightCol"></td>
+																		<td colspan="4"><span class="cssClassLabelTitle"
+																			id="lblName">User Information</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblUserName">First
@@ -347,12 +347,10 @@
 																	<tr>
 																		<td><span id="lblLastName" class="cssClassLabel">Last
 																				Name:</span> <span class="cssClassRequired">*</span></td>
-																		<td class="cssClassTableRightCol"><input
+																		<td class="cssClassTableRightCol" colspan="3"><input
 																			title="Last Name" type="text" id="txtLastName"
 																			class="sfInputbox" name="lastName"
 																			placeholder="Last Name" /></td>
-																		<td></td>
-																		<td></td>
 																	</tr>
 																	<tr>
 																		<td><span id="lblDOB" class="cssClassLabel">Date
@@ -371,9 +369,8 @@
 																		</select></td>
 																	</tr>
 																	<tr class="rule dashed">
-																		<td><span id="lblAddress"
+																		<td colspan="4"><span id="lblAddress"
 																			class="cssClassLabelTitle">Current Address</span></td>
-																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 
 																	<tr>
@@ -470,9 +467,8 @@
 																		</select></td>
 																	</tr>
 																	<tr class="rule dashed">
-																		<td><span class="cssClassLabelTitle"
+																		<td colspan="4"><span class="cssClassLabelTitle"
 																			id="lblPhone">Phone</span></td>
-																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
@@ -504,10 +500,8 @@
 																			placeholder="Other Number" /></td>
 																	</tr>
 																	<tr class="rule dashed">
-
-																		<td><span class="cssClassLabelTitle"
+																		<td colspan="4"><span class="cssClassLabelTitle"
 																			id="lblEmail">E-mail Address</span></td>
-																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblWorkEmail">Work
@@ -545,7 +539,7 @@
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblActive">Active:</span></td>
-																		<td class="cssClassTableRightCol"><input
+																		<td class="cssClassTableRightCol" colspan="3"><input
 																			title="Active" type="checkbox" value=""
 																			name="chkActive" class="cssClassCheckBox"></td>
 																	</tr>
@@ -589,8 +583,8 @@
 																						<td><select title="Choose Position Title"
 																							class="sfListmenu" name="ddlPositionTitle">
 																						</select></td>
-																						<td><input title="Add More" type="Button"
-																							value="Add More" name="AddMore"
+																						<td><input type="Button" value="Add More"
+																							name="AddMore"
 																							class="AddOption cssClassButtonSubmit sfLocale" />
 																						</td>
 																					</tr>

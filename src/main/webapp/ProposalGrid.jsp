@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e89430af6e0427c0c2cf63";
+	var userProfileId = "55e8c7bf96f52c00e8c429af";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -322,20 +322,12 @@
 													<img src="images/bsu_logo.png" alt="Boise State University"
 														title="Boise State University">
 												</div>
-												<div class="cssClassMiddle" style="text-align:center; width:40%;">
+												<div class="cssClassMiddle"
+													style="text-align: center; width: 60%;">
 													<div class="cssClassLabelHeader">Office of Sponsored
 														Programs</div>
 													<div class="cssClassLabelHeader">Proposal Data Sheet</div>
-													<span class="cssClassLabel">Proposals must be
-														submitted to OSP <u>3 working days prior</u> to the
-														proposal submission deadline.
-													</span>
-												</div>
-												<div class="cssClassRight">
-													<div class="cssClassLabelHeader">Office of Sponsored
-														Programs</div>
-													<div class="cssClassLabelHeader">Proposal Data Sheet</div>
-													<span class="cssClassLabel">Proposals must be
+													<span class="cssClassLabelTitle">Proposals must be
 														submitted to OSP <u>3 working days prior</u> to the
 														proposal submission deadline.
 													</span>
@@ -392,18 +384,18 @@
 																</select></td>
 																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
-																	style="width: 110px;">
+																	style="width: 120px;">
 																</select></td>
 																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
-																	style="width: 145px;">
+																	style="width: 150px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
 																	class="sfTextBoxSmall" name="txtPhoneNo"
 																	placeholder="Phone #" disabled="disabled"
 																	style="width: 81px !important" /></td>
-																<td><input title="Add More" type="Button"
-																	value="Add More" name="AddMore"
+																<td><input type="Button" value="Add More"
+																	name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>
 															</tr>
 														</tbody>

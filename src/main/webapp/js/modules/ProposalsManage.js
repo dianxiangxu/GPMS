@@ -1322,10 +1322,12 @@ $(function() {
 
 			rowIndex += 1;
 			var btnOption = "[+] Add";
+			var btnTitle = "Add More"
 			var btnName = "AddMore";
 			if (rowIndex > 1) {
-				btnOption = "Delete";
-				var btnName = "DeleteOption";
+				btnOption = "Delete ";
+				btnTitle = "Delete";
+				btnName = "DeleteOption";
 			}
 
 			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("select").each(
@@ -1399,6 +1401,7 @@ $(function() {
 						if ($(this).hasClass("AddOption")) {
 							$(this).prop("name", btnName);
 							$(this).prop("value", btnOption);
+							$(this).prop("title", btnTitle);
 						}
 					});
 		},
@@ -2511,7 +2514,8 @@ $(function() {
 											$(this)
 													.prop("name",
 															"DeleteOption");
-											$(this).prop("value", "Delete");
+											$(this).prop("value", "Delete ");
+											$(this).prop("title", "Delete");
 										}
 										$(this).parent('td').find('span')
 												.removeClass('error');

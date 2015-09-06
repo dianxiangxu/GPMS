@@ -563,10 +563,12 @@ $(function() {
 								// alert(index + " :: " +
 								// value['positionTitle']);
 								var btnOption = "[+] Add";
+								var btnTitle = "Add More"
 								var btnName = "AddMore";
 								if (i > 0) {
-									btnOption = "Delete";
-									var btnName = "DeleteOption";
+									btnOption = "Delete ";
+									btnTitle = "Delete";
+									btnName = "DeleteOption";
 								}
 								var cloneRow = $('#dataTable tbody>tr:first')
 										.clone(true);
@@ -694,6 +696,8 @@ $(function() {
 																btnName);
 														$(this).prop("value",
 																btnOption);
+														$(this).prop("title",
+																btnTitle);
 													}
 												});
 							});
@@ -1985,6 +1989,8 @@ $(function() {
 													$(this).prop("name",
 															"DeleteOption");
 													$(this).prop("value",
+															"Delete ");
+													$(this).prop("title",
 															"Delete");
 												}
 												$(this).parent('td').find(

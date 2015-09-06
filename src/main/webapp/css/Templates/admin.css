@@ -206,12 +206,12 @@ td.sfMiddle label {
 /*---Heading---*/
 h1 {
 	color: #163652;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-size: 28px;
 	font-weight: normal;
 	border-bottom: 1px solid #c2c2c2;
 	padding-bottom: 10px;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .BoxAlert h1 {
@@ -1908,7 +1908,8 @@ label.error {
 }
 
 #txtSearchTotalCostsTo-error{
-	padding: 0 0 0 23px;
+	/*padding: 0 0 0 23px;*/
+	padding: 0px;
 }
 
 .sfRadiobutton {
@@ -4053,7 +4054,9 @@ div .sfGridwrapper table td a:hover.icon-edit, .sfGridwrapper table td a:hover.i
 	text-decoration: none;
 }
 
-.cssClassFromTo{padding:5px 0 0 15px;}
+.cssClassFromTo{
+	/*padding:5px 0 0 15px; */
+}
 
 #divModulesLists .icon-edit:hover, #divModulesLists .icon-delete:hover {
 	text-decoration: none;
@@ -5078,11 +5081,11 @@ p.sfDisplayName span.sfFormlabel.sfDefaultName {
 .cssClassHeader {
 	position: relative;
 	overflow: hidden;
+	margin-bottom: 10px;
 }
 
-.cssClassLeft, .cssClassMiddle, .cssClassRight{	
+.cssClassLeft, .cssClassMiddle{	
     float:left;
-	padding: 0 0 0 100px;	
 }
 
 .cssClassRssDiv {
