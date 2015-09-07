@@ -1,4 +1,0 @@
-mmcore.SetCookie('mmid','1477487175|AwAAAAqKN46gMQwAAA==',365,1);mmcore.SetCookie('pd','685441000|BAAAAAoBQoo3jqAxDP5DUHABAHZW+51TkNJIDwAAAHRWOKdSkNJIAAAAAP//////////ABd3d3cuYW1lcmljYW5leHByZXNzLmNvbQIxDAEAAAAAAAAAAAAAqogAAKuIAAC/fwAAAQBgNQAAANpHPSgxDAD/////ATEMMQz//wEAAAEAAAAAAVmHAABo1wAAAqqIAAABAAAAq4gAAAEAAAAAAAABRQ==',365);mmcore.SetCookie('srv','cg4.usw',365);(function(){if(typeof(mmcore.GenInfo)!='object')mmcore.GenInfo={};mmcore.EH=function(e){var s=e.message+'\r\n';if(!window.mm_error)window.mm_error=s;else window.mm_error+=s;};
-if(typeof mmcore._callback=='object'&&typeof mmcore._callback[4]=='function'){try{mmcore._callback[4]();}catch(err){mmcore.EH(err);}
-finally{mmcore._callback[4]=null;}}
-})();

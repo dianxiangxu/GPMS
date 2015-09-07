@@ -1,1 +1,0 @@
-document.getElementById('rating_info_8150989_post_272').style.display='block';
