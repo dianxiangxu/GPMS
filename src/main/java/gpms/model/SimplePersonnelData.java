@@ -17,25 +17,26 @@ public class SimplePersonnelData
 {
 	ObjectId personnelID=null;
 	String personnelName="";
-	
+
 	/**
 	 * Constructor
 	 */
 	public SimplePersonnelData()
 	{
-		
+
 	}
-	
+
 	/**
 	 * Parameterized constructor
 	 * @param id id of the person
 	 * @param name of the person
 	 */
-	public SimplePersonnelData(ObjectId id, String name)
+	public SimplePersonnelData(UserProfile profile)
 	{
-		
+		personnelName = profile.getFirstName()+ " " + profile.getLastName();
+		personnelID = profile.getId();
 	}
-	
+
 	/**
 	 * 
 	 * @param id sets the id of this object
@@ -44,7 +45,7 @@ public class SimplePersonnelData
 	{
 		personnelID = id;
 	}
-	
+
 	/**
 	 * 
 	 * @return the ID
@@ -53,7 +54,7 @@ public class SimplePersonnelData
 	{
 		return personnelID;
 	}
-	
+
 	/**
 	 * 
 	 * @param name sets the name of this object by concatenating first and last name
@@ -62,7 +63,7 @@ public class SimplePersonnelData
 	{
 		personnelName = firstName+" "+lastName;
 	}
-	
+
 	/**
 	 * 
 	 * @return the name of this object
@@ -71,14 +72,14 @@ public class SimplePersonnelData
 	{
 		return personnelName;
 	}
-	
+
 	/**
 	 * @return A string of id, Name
 	 */
 	public String toString()
 	{
 		String personnelString = personnelID.toString()+ " " +personnelName;
-		
+
 		return personnelString;
 	}
 

@@ -74,7 +74,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	}
 
 	public List<Proposal> findAll() throws UnknownHostException {
+		
 		Datastore ds = getDatastore();
+		
 		return ds.createQuery(Proposal.class).asList();
 	}
 
@@ -548,8 +550,10 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	//"Find Business Manager for..." etc
 	//Will attempt a generic build so that one can search for Deans, etc.
 	
-	public ArrayList<SimplePersonnelData> PersonnelQuery(ObjectId id, String searchQuery)
+	public List<SimplePersonnelData> PersonnelQuery(ObjectId id, String searchQuery)
 	{
+		ArrayList<SimplePersonnelData> spdList = new ArrayList<SimplePersonnelData>();
+		SimplePersonnelData newEntry;
 		Proposal queryProposal=null;
 		try 
 		{
@@ -561,22 +565,34 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		
 		InvestigatorRefAndPosition pi = queryProposal.getInvestigatorInfo().getPi();
 		String collegeSearch = pi.getCollege();
+		System.out.println("The college is: " + collegeSearch);
+		System.out.println("The college is: " + collegeSearch);
+		System.out.println("The college is: " + collegeSearch);
+		System.out.println("The college is: " + collegeSearch);
+		System.out.println("The college is: " + collegeSearch);
+		System.out.println("The college is: " + collegeSearch);
+		System.out.println("The college is: " + collegeSearch);
 		
 		MongoClient mongoClient;
 		mongoClient = MongoDBConnector.getMongo();
 		
-		UserProfileDAO searchDAO = new UserProfileDAO(mongoClient, morphia, DBNAME);
 		Datastore ds = getDatastore();
-		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		
 		//Working out how to get through linked collections
-		UserProfile q = profileQuery.field("details.college").equal(collegeSearch).get();
+		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("details.college").equal(collegeSearch);
+//		UserProfile q = profileQuery.field("details.college").equal(collegeSearch).get();
 //		ds.createQuery(Proposal.class)
 //		.field("investigator info.senior personnel.user profile")
 //		.equal(userProfile).asList().size();
+		List<UserProfile> queryProfileList = q.asList();
+		for(int a = 0; a < queryProfileList.size(); a++)
+		{
+			newEntry = new SimplePersonnelData(queryProfileList.get(a));
+			spdList.add(newEntry);		
+		}
 		
 		ArrayList<SimplePersonnelData> queryList = new ArrayList();
-		return null;
+		return spdList;
 	}
 	
 }
