@@ -2,6 +2,7 @@ package gpms.model;
 
 import gpms.dao.ProposalDAO;
 
+import java.security.Signature;
 import java.util.Date;
 
 import javax.persistence.EnumType;
@@ -77,11 +78,11 @@ public class Proposal extends BaseEntity {
 
 	@Expose
 	@Embedded("signature info")
-	private Signature signatureInfo = new Signature();
+	private SignatureInfo signatureInfo = new SignatureInfo();
 
 	@Expose
 	@Embedded("delegation info")
-	private Delegation delegationInfo = new Delegation();
+	private DelegationInfo delegationInfo = new DelegationInfo();
 
 	public Proposal() {
 	}
@@ -242,19 +243,19 @@ public class Proposal extends BaseEntity {
 		this.oSPSectionInfo = oSPSectionInfo;
 	}
 
-	public Signature getSignatureInfo() {
+	public SignatureInfo getSignatureInfo() {
 		return signatureInfo;
 	}
 
-	public void setSignatureInfo(Signature signatureInfo) {
+	public void setSignatureInfo(SignatureInfo signatureInfo) {
 		this.signatureInfo = signatureInfo;
 	}
 
-	public Delegation getDelegationInfo() {
+	public DelegationInfo getDelegationInfo() {
 		return delegationInfo;
 	}
 
-	public void setDelegationInfo(Delegation delegationInfo) {
+	public void setDelegationInfo(DelegationInfo delegationInfo) {
 		this.delegationInfo = delegationInfo;
 	}
 

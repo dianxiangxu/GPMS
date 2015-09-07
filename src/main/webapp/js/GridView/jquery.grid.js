@@ -970,12 +970,34 @@ var fromServer = 0;
 						// var idx = $(this).prop('axis').substr(3);
 						td.align = tdalign[cell];
 						td.style.textAlign = td.align;
-						if (tdtype[cell] != '') {
+
+						// Updated to support currency and percent type
+						if (tdtype[cell] != '' && tdtype[cell] != "currency"
+								&& tdtype[cell] != "percent") {
 							row[ncols] = g.formatContent(row[ncols],
 									tdtype[cell], tdformat[cell]);
 						}
-
 						$(td).html(row[Encoder.htmlDecode(ncols)]);
+						if (tdtype[cell] == "currency") {
+							$(td).autoNumeric('init', {
+								aSep : ',',
+								dGroup : '3',
+								aDec : '.',
+								aSign : '$',
+								pSign : 'p',
+								aPad : true
+							});
+						} else if (tdtype[cell] == "percent") {
+							$(td).autoNumeric('init', {
+								aDec : '.',
+								aSign : '%',
+								pSign : 's',
+								aPad : true,
+								vMin : "0.00",
+								vMax : "99.99"
+							});
+						}
+
 						$(tr).append(td);
 
 						// Update On 12 Dec 2010
@@ -1027,7 +1049,7 @@ var fromServer = 0;
 					break;
 
 				case "array":
-					returnvalue = content.join(",");
+					returnvalue = content.join(", ");
 					break;
 				}
 				return returnvalue;

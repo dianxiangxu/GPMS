@@ -43,7 +43,6 @@ import com.mongodb.MongoException;
 public class ProposalDAO extends BasicDAO<Proposal, String> {
 	private static final String DBNAME = "GPMS";
 	public static final String COLLECTION_NAME = "proposal";
-	private Mongo inMongo = new Mongo();
 	private static Morphia morphia;
 	private static Datastore ds;
 	private AuditLog audit = new AuditLog();

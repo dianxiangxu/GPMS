@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e89430af6e0427c0c2cf63";
+	var userProfileId = "55e8c7bf96f52c00e8c429af";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -136,8 +136,8 @@
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
 				<img id="imgProgress" src="images/ajax-loader.gif"
-					style="border-width: 0px;" alt="Loading..." title="Loading..." /> <br>
-				<span id="lblPrgress">Please wait...</span>
+					style="border-width: 0px;" alt="Loading..." title="Loading..." />
+				<br> <span id="lblPrgress">Please wait...</span>
 			</div>
 		</div>
 		<noscript>
@@ -223,55 +223,56 @@
 																<tr>
 																	<td><label class="cssClassLabel sfLocale">User
 																			Name:</label> <input title="User Name" type="text"
-																		class="sfTextBoxSmall" id="txtSearchUserName"
+																		class="sfTextBoxFix" id="txtSearchUserName"
 																		placeholder="User Name" /></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			College:</label> <select title="Choose College"
 																		id="ddlSearchCollege" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 90px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Department:</label> <select title="Choose Department"
 																		id="ddlSearchDepartment" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 143px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Position Type:</label> <select title="Choose Position Type"
 																		id="ddlSearchPositionType" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 150px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<td><label class="cssClassLabel sfLocale">
 																			Position Title:</label> <select title="Choose Position Title"
 																		id="ddlSearchPositionTitle" class="sfListmenu"
-																		style="width: 100px;">
+																		style="width: 150px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
 
 																	<!-- <td width="315"><label
-																			class="cssClassLabel sfLocale"> Added On:</label><br />
-																			<span class="label sfLocale"> From :</span> <input title="Added On From" 
+																			class="cssClassLabel sfLocale">Added On:</label><br />
+																			<span class="label sfLocale">From:</span> <input title="Added On From" 
 																			type="text" id="txtSearchAddedOnFrom"
 																			class="sfTextBoxSmall"
 																			style="width: 80px !important;"/> <span
-																			class="label sfLocale"> To :</span> <input title="Added On To" 
+																			class="label sfLocale">To:</span> <input title="Added On To" 
 																			type="text" id="txtSearchAddedOnTo" class="sfTextBoxSmall"
 																			style="width: 80px !important;"/></td> -->
+
 																	<td><label class="cssClassLabel sfLocale">
 																			Active:</label> <select title="Is Active?"
 																		id="ddlSearchIsActive" class="sfListmenu"
-																		style="width: 85px;">
+																		style="width: 50px;">
 																			<option value="" class="sfLocale">--All--</option>
 																			<option value="True" class="sfLocale">True</option>
 																			<option value="False" class="sfLocale">False</option>
 																	</select></td>
-																	<td><br>
+																	<td><label class="cssClassLabel">&nbsp;</label>
 																		<button title="Search User" class="sfBtn"
 																			id="btnSearchUser" type="button">
 																			<span class="sfLocale icon-search">Search</span>
@@ -326,8 +327,8 @@
 															<table cellspacing="0" cellpadding="0" border="0">
 																<tbody>
 																	<tr class="rule dashed">
-																		<td><span class="cssClassLabelTitle" id="lblName">Name</span></td>
-																		<td class="cssClassTableRightCol"></td>
+																		<td colspan="4"><span class="cssClassLabelTitle"
+																			id="lblName">User Information</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblUserName">First
@@ -346,12 +347,10 @@
 																	<tr>
 																		<td><span id="lblLastName" class="cssClassLabel">Last
 																				Name:</span> <span class="cssClassRequired">*</span></td>
-																		<td class="cssClassTableRightCol"><input
+																		<td class="cssClassTableRightCol" colspan="3"><input
 																			title="Last Name" type="text" id="txtLastName"
 																			class="sfInputbox" name="lastName"
 																			placeholder="Last Name" /></td>
-																		<td></td>
-																		<td></td>
 																	</tr>
 																	<tr>
 																		<td><span id="lblDOB" class="cssClassLabel">Date
@@ -370,9 +369,8 @@
 																		</select></td>
 																	</tr>
 																	<tr class="rule dashed">
-																		<td><span id="lblAddress"
+																		<td colspan="4"><span id="lblAddress"
 																			class="cssClassLabelTitle">Current Address</span></td>
-																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 
 																	<tr>
@@ -469,9 +467,8 @@
 																		</select></td>
 																	</tr>
 																	<tr class="rule dashed">
-																		<td><span class="cssClassLabelTitle"
+																		<td colspan="4"><span class="cssClassLabelTitle"
 																			id="lblPhone">Phone</span></td>
-																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel"
@@ -503,10 +500,8 @@
 																			placeholder="Other Number" /></td>
 																	</tr>
 																	<tr class="rule dashed">
-
-																		<td><span class="cssClassLabelTitle"
+																		<td colspan="4"><span class="cssClassLabelTitle"
 																			id="lblEmail">E-mail Address</span></td>
-																		<td class="cssClassTableRightCol"></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblWorkEmail">Work
@@ -544,7 +539,7 @@
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblActive">Active:</span></td>
-																		<td class="cssClassTableRightCol"><input
+																		<td class="cssClassTableRightCol" colspan="3"><input
 																			title="Active" type="checkbox" value=""
 																			name="chkActive" class="cssClassCheckBox"></td>
 																	</tr>
@@ -588,8 +583,8 @@
 																						<td><select title="Choose Position Title"
 																							class="sfListmenu" name="ddlPositionTitle">
 																						</select></td>
-																						<td><input title="Add More" type="Button"
-																							value="Add More" name="AddMore"
+																						<td><input type="Button" value="Add More"
+																							name="AddMore"
 																							class="AddOption cssClassButtonSubmit sfLocale" />
 																						</td>
 																					</tr>
@@ -653,14 +648,11 @@
 																						<td><label class="cssClassLabel sfLocale">
 																								Action:</label> <input title="Action" type="text"
 																							class="sfInputbox" id="txtSearchAction"
-																							style="width: 150px !important;"
 																							placeholder="Action" /></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Audited By:</label> <input title="Audited By"
 																							type="text" class="sfInputbox"
-																							id="txtSearchAuditedBy"
-																							style="width: 150px !important;"
-																							placeholder="Audited By" /></td>
+																							id="txtSearchAuditedBy" placeholder="Audited By" /></td>
 																						<td><label class="cssClassLabel sfLocale">
 																								Activity On From:</label> <input
 																							title="Activity On From" type="text"

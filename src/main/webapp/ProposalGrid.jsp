@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55e89430af6e0427c0c2cf63";
+	var userProfileId = "55e8c7bf96f52c00e8c429af";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -143,8 +143,8 @@
 			<div class="sfLoadingbg">&nbsp;</div>
 			<div class="sfLoadingdiv">
 				<img id="imgProgress" src="images/ajax-loader.gif"
-					style="border-width: 0px;" alt="Loading..." title="Loading..." /> <br>
-				<span id="lblPrgress">Please wait...</span>
+					style="border-width: 0px;" alt="Loading..." title="Loading..." />
+				<br> <span id="lblPrgress">Please wait...</span>
 			</div>
 		</div>
 		<noscript>
@@ -233,19 +233,9 @@
 																		class="sfTextBoxFix" id="txtSearchProjectTitle"
 																		placeholder="Project Title" /></td>
 																	<td><label class="cssClassLabel sfLocale">
-																			Proposed By:</label><input title="Proposed By"
+																			Proposed By:</label> <input title="Proposed By"
 																		id="txtSearchProposedBy" class="sfTextBoxFix"
 																		type="text" placeholder="Proposed By" /></td>
-
-																	<td><label class="cssClassLabel sfLocale">
-																			Total Costs:</label> <br> <span class="label sfLocale">
-																			From :</span> <input title="Total Costs From" type="text"
-																		id="txtSearchTotalCostsFrom" class="sfTextBoxFix"
-																		placeholder="From" /> <span class="label sfLocale">
-																			To :</span> <input title="Total Costs To" type="text"
-																		id="txtSearchTotalCostsTo" class="sfTextBoxFix"
-																		placeholder="To" /></td>
-																	</td>
 
 																	<!-- 																		<td><label class="cssClassLabel sfLocale"> -->
 																	<!-- 																				Project Type:</label> <select title="Choose Project Type" id="ddlProjectType" -->
@@ -263,24 +253,44 @@
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
+																	<td><label class="cssClassLabel sfLocale">Received
+																			On:</label>
+																		<div>
+																			<span class="cssClassLabel sfLocale">From:</span> <input
+																				type="text" title="Received On From"
+																				id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
+																				placeholder="From">
+																		</div>
+																		<div class="cssClassFromTo">
+																			<span class="cssClassLabel sfLocale">To:</span> <input
+																				type="text" title="Received On To"
+																				id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
+																				placeholder="To">
+																		</div></td>
 
-																	<td><label class="cssClassLabel sfLocale">
-																			Received On:</label><br> <span class="label sfLocale">
-																			From :</span> <input title="Received On From" type="text"
-																		id="txtSearchReceivedOnFrom" class="sfTextBoxFix"
-																		placeholder="From" /> <span class="label sfLocale">
-																			To :</span> <input title="Received On To" type="text"
-																		id="txtSearchReceivedOnTo" class="sfTextBoxFix"
-																		placeholder="To" /></td>
+																	<td><label class="cssClassLabel sfLocale">Total
+																			Costs:</label>
+																		<div>
+																			<span class="cssClassLabel sfLocale">From:</span> <input
+																				type="text" title="Total Costs From"
+																				id="txtSearchTotalCostsFrom"
+																				name="searchTotalCostsFrom" class="sfTextBoxFix"
+																				placeholder="From">
+																		</div>
+																		<div class="cssClassFromTo">
+																			<span class="cssClassLabel sfLocale">To:</span> <input
+																				type="text" title="Total Costs To"
+																				id="txtSearchTotalCostsTo" name="searchTotalCostsTo"
+																				class="sfTextBoxFix" placeholder="To">
+																		</div></td>
 
-																	<td><label class="cssClassLabel sfLocale">
-																			Proposal Status:</label> <select
-																		title="Choose Proposal Status"
+																	<td><label class="cssClassLabel sfLocale">Proposal
+																			Status:</label> <select title="Choose Proposal Status"
 																		id="ddlSearchProposalStatus" class="sfListmenu"
 																		style="width: 80px;">
 																			<option value="0" class="sfLocale">--All--</option>
 																	</select></td>
-																	<td><br>
+																	<td><label class="cssClassLabel">&nbsp;</label>
 																		<button title="Search Proposal" class="sfBtn"
 																			id="btnSearchProposal" type="button">
 																			<span class="sfLocale icon-search">Search</span>
@@ -308,11 +318,24 @@
 												<h1>
 													<span id="lblFormHeading">New Proposal Details</span>
 												</h1>
-												<div>
-													<span class="cssClassRequired">*</span> <span
-														class="cssClassLabelTitle">indicates required
-														fields</span>
+												<div class="cssClassLeft">
+													<img src="images/bsu_logo.png" alt="Boise State University"
+														title="Boise State University">
 												</div>
+												<div class="cssClassMiddle"
+													style="text-align: center; width: 60%;">
+													<div class="cssClassLabelHeader">Office of Sponsored
+														Programs</div>
+													<div class="cssClassLabelHeader">Proposal Data Sheet</div>
+													<span class="cssClassLabelTitle">Proposals must be
+														submitted to OSP <u>3 working days prior</u> to the
+														proposal submission deadline.
+													</span>
+												</div>
+											</div>
+											<div>
+												<span class="cssClassRequired">*</span> <span
+													class="cssClassLabelTitle">indicates required fields</span>
 											</div>
 											<div id="accordion">
 												<h3>
@@ -361,18 +384,18 @@
 																</select></td>
 																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
-																	style="width: 110px;">
+																	style="width: 120px;">
 																</select></td>
 																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
-																	style="width: 145px;">
+																	style="width: 150px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
 																	class="sfTextBoxSmall" name="txtPhoneNo"
 																	placeholder="Phone #" disabled="disabled"
 																	style="width: 81px !important" /></td>
-																<td><input title="Add More" type="Button"
-																	value="Add More" name="AddMore"
+																<td><input type="Button" value="Add More"
+																	name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>
 															</tr>
 														</tbody>
@@ -1277,17 +1300,18 @@
 																			value="MTDC" /><label class="cssClassLabel"
 																			for="chkMTDC">MTDC</label><input title="TDC"
 																			type="checkbox" class="cssClassCheckBox" id="chkTDC"
-																			name="TDC" value="TDC" /><label class="cssClassLabel"
-																			for="chkTDC">TDC</label><input title="TC"
-																			type="checkbox" class="cssClassCheckBox" id="chkTC"
-																			name="TC" value="TC" /><label class="cssClassLabel"
-																			for="chkTC">TC</label> <input title="Other"
-																			type="checkbox" class="cssClassCheckBox"
-																			id="chkOther" name="other" value="Other" /><label
-																			class="cssClassLabel" for="chkOther">Other</label><input
-																			title="N/A" type="checkbox" class="cssClassCheckBox"
-																			id="chkNA" name="nA" value="N/A" /><label
-																			class="cssClassLabel" for="chkNA">N/A</label>
+																			name="TDC" value="TDC" /><label
+																			class="cssClassLabel" for="chkTDC">TDC</label><input
+																			title="TC" type="checkbox" class="cssClassCheckBox"
+																			id="chkTC" name="TC" value="TC" /><label
+																			class="cssClassLabel" for="chkTC">TC</label> <input
+																			title="Other" type="checkbox"
+																			class="cssClassCheckBox" id="chkOther" name="other"
+																			value="Other" /><label class="cssClassLabel"
+																			for="chkOther">Other</label><input title="N/A"
+																			type="checkbox" class="cssClassCheckBox" id="chkNA"
+																			name="nA" value="N/A" /><label class="cssClassLabel"
+																			for="chkNA">N/A</label>
 																	</div></td>
 															</tr>
 															<tr>
@@ -1456,13 +1480,14 @@
 																		class="cssClassCheckBox">
 																		<input title="DF" type="checkbox"
 																			class="cssClassCheckBox" id="chkDF" name="DF"
-																			value="DF" /><label class="cssClassLabel" for="chkDF">DF</label><input
-																			title="LG" type="checkbox" class="cssClassCheckBox"
-																			id="chkLG" name="LG" value="LG" /><label
-																			class="cssClassLabel" for="chkLG">LG</label><input
-																			title="LN" type="checkbox" class="cssClassCheckBox"
-																			id="chkLN" name="LN" value="LN" /><label
-																			class="cssClassLabel" for="chkLN">LN</label>
+																			value="DF" /><label class="cssClassLabel"
+																			for="chkDF">DF</label><input title="LG"
+																			type="checkbox" class="cssClassCheckBox" id="chkLG"
+																			name="LG" value="LG" /><label class="cssClassLabel"
+																			for="chkLG">LG</label><input title="LN"
+																			type="checkbox" class="cssClassCheckBox" id="chkLN"
+																			name="LN" value="LN" /><label class="cssClassLabel"
+																			for="chkLN">LN</label>
 																	</div></td>
 															</tr>
 														</tbody>
@@ -1491,12 +1516,10 @@
 																				<td><label class="cssClassLabel sfLocale">
 																						Action:</label> <input title="Action" type="text"
 																					class="sfInputbox" id="txtSearchAction"
-																					style="width: 150px !important;"
 																					placeholder="Action" /></td>
 																				<td><label class="cssClassLabel sfLocale">
 																						Audited By:</label> <input title="Audited By" type="text"
 																					class="sfInputbox" id="txtSearchAuditedBy"
-																					style="width: 140px !important;"
 																					placeholder="Audited By" /></td>
 																				<td><label class="cssClassLabel sfLocale">
 																						Activity On From:</label> <input title="Activity On From"

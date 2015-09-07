@@ -10,16 +10,11 @@ public class ProposalInfo {
 
 	// Proposal
 	private String proposalNo = new String();
-	private Date dateReceived = new Date();
-	private Status proposalStatus = Status.NEW;
 
 	// ProjectInfo
 	private String projectTitle = new String();
 	private String projectType = new String();
 	private List<String> typeOfRequest = new ArrayList<String>();
-	private Date dueDate = new Date();
-	private Date projectPeriodFrom = new Date();
-	private Date projectPeriodTo = new Date();
 	private String projectLocation = new String();
 
 	// SponsorAndBudgetInfo
@@ -28,6 +23,17 @@ public class ProposalInfo {
 	private double faCosts;
 	private double totalCosts;
 	private double faRate;
+
+	// Proposal
+	private Date dateReceived = new Date();
+
+	// ProjectInfo
+	private Date dueDate = new Date();
+	private Date projectPeriodFrom = new Date();
+	private Date projectPeriodTo = new Date();	
+
+	// Proposal
+	private Status proposalStatus = Status.NEW;
 
 	private Date lastAudited = new Date();
 	private String lastAuditedBy = new String();
