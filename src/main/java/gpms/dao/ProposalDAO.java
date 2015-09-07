@@ -48,7 +48,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	private AuditLog audit = new AuditLog();
 
 	private static Morphia getMorphia() throws UnknownHostException,
-			MongoException {
+	MongoException {
 		if (morphia == null) {
 			morphia = new Morphia().map(Proposal.class);
 		}
@@ -74,9 +74,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	}
 
 	public List<Proposal> findAll() throws UnknownHostException {
-		
+
 		Datastore ds = getDatastore();
-		
+
 		return ds.createQuery(Proposal.class).asList();
 	}
 
@@ -230,7 +230,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 
 		if (projectTitle != null) {
 			proposalQuery.field("project info.project title")
-					.containsIgnoreCase(projectTitle);
+			.containsIgnoreCase(projectTitle);
 		}
 
 		// investigator info.PI.user profile
@@ -255,13 +255,13 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			// proposalQuery.filter("sponsor and budget info.total costs >",
 			// totalCostsFrom);
 			proposalQuery.field("sponsor and budget info.total costs")
-					.greaterThanOrEq(totalCostsFrom);
+			.greaterThanOrEq(totalCostsFrom);
 		}
 		if (totalCostsTo != null && totalCostsTo != 0.0) {
 			// proposalQuery.filter("sponsor and budget info.total costs <=",
 			// totalCostsTo);
 			proposalQuery.field("sponsor and budget info.total costs")
-					.lessThanOrEq(totalCostsTo);
+			.lessThanOrEq(totalCostsTo);
 		}
 
 		if (proposalStatus != null) {
@@ -529,7 +529,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 
 		proposalQuery.and(proposalQuery.criteria("_id").notEqual(id),
 				proposalQuery.criteria("project info.project title")
-						.containsIgnoreCase(pattern.pattern()));
+				.containsIgnoreCase(pattern.pattern()));
 		return proposalQuery.get();
 	}
 
@@ -542,14 +542,14 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				Pattern.CASE_INSENSITIVE);
 
 		proposalQuery.criteria("project info.project title")
-				.containsIgnoreCase(pattern.pattern());
+		.containsIgnoreCase(pattern.pattern());
 		return proposalQuery.get();
 	}
-	
+
 	//Creating a method here to find related personnel relative to the PI, CoPI, and Senior Personnel
 	//"Find Business Manager for..." etc
 	//Will attempt a generic build so that one can search for Deans, etc.
-	
+
 	public List<SimplePersonnelData> PersonnelQuery(ObjectId id, String searchQuery)
 	{
 		ArrayList<SimplePersonnelData> spdList = new ArrayList<SimplePersonnelData>();
@@ -562,37 +562,82 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		InvestigatorRefAndPosition pi = queryProposal.getInvestigatorInfo().getPi();
-		String collegeSearch = pi.getCollege();
-		System.out.println("The college is: " + collegeSearch);
-		System.out.println("The college is: " + collegeSearch);
-		System.out.println("The college is: " + collegeSearch);
-		System.out.println("The college is: " + collegeSearch);
-		System.out.println("The college is: " + collegeSearch);
-		System.out.println("The college is: " + collegeSearch);
-		System.out.println("The college is: " + collegeSearch);
-		
-		MongoClient mongoClient;
-		mongoClient = MongoDBConnector.getMongo();
-		
-		Datastore ds = getDatastore();
-		
-		//Working out how to get through linked collections
-		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("details.college").equal(collegeSearch);
-//		UserProfile q = profileQuery.field("details.college").equal(collegeSearch).get();
-//		ds.createQuery(Proposal.class)
-//		.field("investigator info.senior personnel.user profile")
-//		.equal(userProfile).asList().size();
-		List<UserProfile> queryProfileList = q.asList();
-		for(int a = 0; a < queryProfileList.size(); a++)
+		ArrayList<String> collegeSearch = new ArrayList<String>();
+		collegeSearch.add(pi.getCollege());
+
+		ArrayList <InvestigatorRefAndPosition> copi = queryProposal.getInvestigatorInfo().getCo_pi();
+		ArrayList<String> copicollegeSearch = new ArrayList<String>();
+
+		for(int b = 0; b < copi.size(); b++)
 		{
-			newEntry = new SimplePersonnelData(queryProfileList.get(a));
-			spdList.add(newEntry);		
+			if(!collegeSearch.contains(copi.get(b).getCollege()))
+			{
+				collegeSearch.add(copi.get(b).getCollege());
+			}
 		}
-		
-		ArrayList<SimplePersonnelData> queryList = new ArrayList();
+
+
+		ArrayList<InvestigatorRefAndPosition> seniorPersonnel = queryProposal.getInvestigatorInfo().getSeniorPersonnel();
+
+		for(int c = 0; c < seniorPersonnel.size(); c++)
+		{
+			if(!collegeSearch.contains(seniorPersonnel.get(c).getCollege()))
+			{
+				collegeSearch.add(seniorPersonnel.get(c).getCollege());
+			}
+		}
+
+
+		//		System.out.println("The college is: " + collegeSearch);
+
+		Datastore ds = getDatastore();
+
+		//Working out how to get through linked collections
+		//		Query<UserProfile> q = ds.createQuery(UserProfile.class).field("details.college").equal(collegeSearch);
+		//		Query<UserProfile> q = ds.createQuery(UserProfile.class);
+		//		q.and(
+		//				q.criteria("details.college").equal(collegeSearch),
+		//				q.criteria("details.position title").equal(searchQuery)
+		//				);
+		//		UserProfile q = profileQuery.field("details.college").equal(collegeSearch).get();
+		//		ds.createQuery(Proposal.class)
+		//		.field("investigator info.senior personnel.user profile")
+		//		.equal(userProfile).asList().size();
+		//		List<UserProfile> queryProfileList = q.asList();
+		//		for(int a = 0; a < queryProfileList.size(); a++)
+		//		{
+		//			newEntry = new SimplePersonnelData(queryProfileList.get(a));
+		//			spdList.add(newEntry);		
+		//		}
+
+		String checkName ="";
+		ArrayList<String> checkList = new ArrayList<String>();
+
+		for(int d = 0; d < collegeSearch.size(); d++)
+		{
+			String CollegeQuery = collegeSearch.get(d);
+			Query<UserProfile> r = ds.createQuery(UserProfile.class);
+			r.and(
+					r.criteria("details.college").equal(CollegeQuery),
+					r.criteria("details.position title").equal(searchQuery)
+					);
+			List<UserProfile> queryProfileList = r.asList();
+			for(int a = 0; a < queryProfileList.size(); a++)
+			{
+				checkName = queryProfileList.get(a).getFirstName()+ " " + queryProfileList.get(a).getLastName();
+				if(!checkList.contains(checkName))
+				{
+					newEntry = new SimplePersonnelData(queryProfileList.get(a));
+					spdList.add(newEntry);
+					checkList.add(checkName);
+				}
+			}
+		}
+
+
 		return spdList;
 	}
-	
+
 }

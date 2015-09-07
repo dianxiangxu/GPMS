@@ -52,6 +52,7 @@ public class FindByPositionTitleTEST
 		ObjectId id = propList.get(0).getId();
 		System.out.println("ID is: " + id.toString());
 		
+		//
 		String searchQuery = "Dean";
 		System.out.println("MADE DEAN");
 
@@ -60,20 +61,6 @@ public class FindByPositionTitleTEST
 		System.out.println("Made the Simple List");
 		System.out.println(newList.toString());
 		
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
-//		System.out.println("FUCK");
 	}
 
 }
