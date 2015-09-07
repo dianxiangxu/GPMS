@@ -1,9 +1,0 @@
-function piResponse() {
-piSetCookie('visitor_id84002', '3411166', 3650);
-
-}
-piResponse();
-
-
-
-

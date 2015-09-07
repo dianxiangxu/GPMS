@@ -1,4 +1,0 @@
-Krux.ns.etrade.kxjsonp_optOutCheck({
-  status: 200,
-  body: { "_kuid_": "J8YzeZY8" }
-});

@@ -1,3 +1,0 @@
-"({ 'Status': '1','Message': 'Upload/temp/puglu_482512.png' })"
-
-final Logger log = LoggerFactory.getLogger(MultipartUploadParser.class);

@@ -1,8 +1,0 @@
-var body = document.body;
-var div  = document.createElement('div');
-div.style.display = 'none';
-body.insertBefore(div, body.firstChild);
-var iframe0 = document.createElement('iframe');
-iframe0.frameborder = 0;
-iframe0.src = "//e04.optimix.asia/show_script?eid=8847&opxpid=2015090515431229304810118410146365&opxreferrer=https%3A%2F%2Fapp.grammarly.com%2F%3Fpayment%3Dfree%26planName%3Dnone%26funneltype%3Dfree%26from%3Dplan%26install%3Dfalse&opxsiteurl=https%3A%2F%2Fwww.grammarly.com%2F";
-div.appendChild(iframe0);
