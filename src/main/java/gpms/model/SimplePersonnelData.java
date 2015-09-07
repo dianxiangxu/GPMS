@@ -13,7 +13,7 @@ import org.bson.types.ObjectId;
 
 
 
-public class QuickPersonnelQuery 
+public class SimplePersonnelData 
 {
 	ObjectId personnelID=null;
 	String personnelName="";
@@ -21,7 +21,7 @@ public class QuickPersonnelQuery
 	/**
 	 * Constructor
 	 */
-	public QuickPersonnelQuery()
+	public SimplePersonnelData()
 	{
 		
 	}
@@ -31,7 +31,7 @@ public class QuickPersonnelQuery
 	 * @param id id of the person
 	 * @param name of the person
 	 */
-	public QuickPersonnelQuery(ObjectId id, String name)
+	public SimplePersonnelData(ObjectId id, String name)
 	{
 		
 	}

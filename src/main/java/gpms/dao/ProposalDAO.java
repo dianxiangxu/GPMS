@@ -13,7 +13,7 @@ import gpms.model.ProjectLocation;
 import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.ProposalInfo;
-import gpms.model.QuickPersonnelQuery;
+import gpms.model.SimplePersonnelData;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
 import gpms.model.TypeOfRequest;
@@ -36,13 +36,14 @@ import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class ProposalDAO extends BasicDAO<Proposal, String> {
 	private static final String DBNAME = "GPMS";
 	public static final String COLLECTION_NAME = "proposal";
-
+	private Mongo inMongo = new Mongo();
 	private static Morphia morphia;
 	private static Datastore ds;
 	private AuditLog audit = new AuditLog();
@@ -545,9 +546,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	//"Find Business Manager for..." etc
 	//Will attempt a generic build so that one can search for Deans, etc.
 	
-	public ArrayList<QuickPersonnelQuery> PersonnelQuery(ObjectId id, String searchQuery)
+	public ArrayList<SimplePersonnelData> PersonnelQuery(ObjectId id, String searchQuery)
 	{
-		Proposal queryProposal;
+		Proposal queryProposal=null;
 		try 
 		{
 			queryProposal = findProposalByProposalID(id);
@@ -556,10 +557,23 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			e.printStackTrace();
 		}
 		
-		//queryProposal.getInvestigatorInfo();
+		InvestigatorRefAndPosition pi = queryProposal.getInvestigatorInfo().getPi();
+		String collegeSearch = pi.getCollege();
 		
+		MongoClient mongoClient;
+		mongoClient = MongoDBConnector.getMongo();
 		
-		ArrayList<QuickPersonnelQuery> queryList = new ArrayList();
+		UserProfileDAO searchDAO = new UserProfileDAO(mongoClient, morphia, DBNAME);
+		Datastore ds = getDatastore();
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		
+		//Working out how to get through linked collections
+		UserProfile q = profileQuery.field("details.college").equal(collegeSearch).get();
+//		ds.createQuery(Proposal.class)
+//		.field("investigator info.senior personnel.user profile")
+//		.equal(userProfile).asList().size();
+		
+		ArrayList<SimplePersonnelData> queryList = new ArrayList();
 		return null;
 	}
 	
