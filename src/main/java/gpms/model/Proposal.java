@@ -82,7 +82,7 @@ public class Proposal extends BaseEntity {
 
 	@Expose
 	@Embedded("delegation info")
-	private DelegationInfo delegationInfo = new DelegationInfo();
+	private Delegation delegationInfo = new Delegation();
 
 	public Proposal() {
 	}
@@ -251,11 +251,11 @@ public class Proposal extends BaseEntity {
 		this.signatureInfo = signatureInfo;
 	}
 
-	public DelegationInfo getDelegationInfo() {
+	public Delegation getDelegationInfo() {
 		return delegationInfo;
 	}
 
-	public void setDelegationInfo(DelegationInfo delegationInfo) {
+	public void setDelegationInfo(Delegation delegationInfo) {
 		this.delegationInfo = delegationInfo;
 	}
 

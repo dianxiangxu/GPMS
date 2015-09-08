@@ -9,10 +9,10 @@ import org.mongodb.morphia.annotations.Property;
 
 public class InvestigatorUsersAndPositions {
 	@Property("id")
-	protected String id;
+	private String id;
 
 	@Property("full name")
-	protected String fullName;
+	private String fullName;
 
 	@Property("mobile number")
 	private String mobileNumber = new String();
