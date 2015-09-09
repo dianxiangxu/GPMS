@@ -8,12 +8,13 @@ import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
 import gpms.model.Proposal;
 import gpms.model.ProposalInfo;
+import gpms.model.SignatureInfo;
 import gpms.model.Status;
 import gpms.model.UserAccount;
-import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -413,6 +414,27 @@ public class ProposalService {
 					.writeValueAsString("true");
 		}
 		return response;
-
 	}
+
+	@POST
+	@Path("/GetAllSignatureForAProposal")
+	public List<SignatureInfo> getAllSignatureForAProposal(String message)
+			throws UnknownHostException, JsonProcessingException, IOException {
+		String proposalId = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("proposalId")) {
+			proposalId = root.get("proposalId").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(proposalId);
+
+		List<SignatureInfo> signatures = proposalDAO
+				.findAllSignatureForAProposal(id);
+
+		return signatures;
+	}
+
 }
