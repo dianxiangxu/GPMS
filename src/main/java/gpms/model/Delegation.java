@@ -11,7 +11,7 @@ import org.mongodb.morphia.annotations.Reference;
 import com.google.gson.annotations.Expose;
 
 @Entity(value = DelegationDAO.COLLECTION_NAME, noClassnameStored = true)
-public class Delegation {
+public class Delegation extends BaseEntity {
 	@Expose
 	@Reference(value = "user profile id"/* , lazy = true */)
 	private UserProfile userProfile = new UserProfile();
