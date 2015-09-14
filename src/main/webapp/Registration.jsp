@@ -175,6 +175,7 @@
 																<td class="cssClassTableRightCol"><input
 																	type="text" class="sfInputbox" id="txtFirstName"
 																	name="firstName" placeholder="First Name"></td>
+
 																<td><span class="cssClassLabel" id="middle_name"
 																	name="middlename">Middle Name:</span></td>
 																<td class="cssClassTableRightCol"><input
@@ -182,8 +183,9 @@
 																	name="middleName" placeholder="Middle Name"></td>
 															</tr>
 															<tr>
-																<td><span class="cssClassLabel" id="last_name" name="lastname">Last
-																		Name:</span> <span class="cssClassRequired">*</span></td>
+																<td><span class="cssClassLabel" id="last_name"
+																	name="lastname">Last Name:</span> <span
+																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	type="text" id="txtLastName" class="sfInputbox"
 																	name="lastName" placeholder="Last Name"></td>
@@ -326,10 +328,6 @@
 																<td class="cssClassTableRightCol"><input
 																	type="text" class="sfInputbox" id="txtHomeNumber"
 																	name="homeNumber" placeholder="Home Number"></td>
-																<td><span class="cssClassLabel" id="lblOtherNumber">Other:</span></td>
-																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtOtherNumber"
-																	name="otherNumber" placeholder="Other Number"></td>
 															</tr>
 															<tr class="rule dashed">
 
