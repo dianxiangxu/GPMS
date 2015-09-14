@@ -80,10 +80,6 @@ public class Proposal extends BaseEntity {
 	@Embedded("signature info")
 	private SignatureInfo signatureInfo = new SignatureInfo();
 
-	@Expose
-	@Embedded("delegation info")
-	private Delegation delegationInfo = new Delegation();
-
 	public Proposal() {
 	}
 
@@ -251,14 +247,6 @@ public class Proposal extends BaseEntity {
 		this.signatureInfo = signatureInfo;
 	}
 
-	public Delegation getDelegationInfo() {
-		return delegationInfo;
-	}
-
-	public void setDelegationInfo(Delegation delegationInfo) {
-		this.delegationInfo = delegationInfo;
-	}
-
 	@Override
 	public String toString() {
 		return new StringBuffer(" Proposal Number : ")
@@ -290,8 +278,6 @@ public class Proposal extends BaseEntity {
 				+ ((costShareInfo == null) ? 0 : costShareInfo.hashCode());
 		result = prime * result
 				+ ((dateReceived == null) ? 0 : dateReceived.hashCode());
-		result = prime * result
-				+ ((delegationInfo == null) ? 0 : delegationInfo.hashCode());
 		result = prime
 				* result
 				+ ((investigatorInfo == null) ? 0 : investigatorInfo.hashCode());
@@ -359,11 +345,6 @@ public class Proposal extends BaseEntity {
 			if (other.dateReceived != null)
 				return false;
 		} else if (!dateReceived.equals(other.dateReceived))
-			return false;
-		if (delegationInfo == null) {
-			if (other.delegationInfo != null)
-				return false;
-		} else if (!delegationInfo.equals(other.delegationInfo))
 			return false;
 		if (investigatorInfo == null) {
 			if (other.investigatorInfo != null)

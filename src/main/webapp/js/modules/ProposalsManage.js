@@ -803,14 +803,15 @@ $(function() {
 
 				$("#btnReset").hide();
 
-				proposalsManage.config.url = proposalsManage.config.baseURL
-						+ "GetProposalDetailsByProposalId";
-				proposalsManage.config.data = JSON2.stringify({
-					proposalId : argus[0]
-				});
-				proposalsManage.config.ajaxCallMode = 4;
-				proposalsManage.ajaxCall(proposalsManage.config);
+				// Get all proposal details
+				proposalsManage.BindProposalDetailsByProposalId(argus[0]);
 
+				// Certification/ Signatures Info
+				proposalsManage.BindAllSignatureForAProposal(argus[0]);
+
+				// Delegation Info
+
+				// Get Audit Logs
 				proposalsManage.BindProposalAuditLogGrid(argus[0], null, null,
 						null, null);
 				$('#ui-id-21').show();
@@ -821,6 +822,27 @@ $(function() {
 			default:
 				break;
 			}
+		},
+
+		BindAllSignatureForAProposal : function(proposalId) {
+			alert(proposalId);
+			proposalsManage.config.url = proposalsManage.config.baseURL
+					+ "GetAllSignatureForAProposal";
+			proposalsManage.config.data = JSON2.stringify({
+				proposalId : proposalId
+			});
+			proposalsManage.config.ajaxCallMode = 12;
+			proposalsManage.ajaxCall(proposalsManage.config);
+		},
+
+		BindProposalDetailsByProposalId : function(proposalId) {
+			proposalsManage.config.url = proposalsManage.config.baseURL
+					+ "GetProposalDetailsByProposalId";
+			proposalsManage.config.data = JSON2.stringify({
+				proposalId : proposalId
+			});
+			proposalsManage.config.ajaxCallMode = 4;
+			proposalsManage.ajaxCall(proposalsManage.config);
 		},
 
 		FillForm : function(response) {
@@ -1293,12 +1315,7 @@ $(function() {
 					response.oSPSectionInfo.researchAdministrator.LG);
 			$("#chkLN").prop("checked",
 					response.oSPSectionInfo.researchAdministrator.LN);
-
-			// Certification/ Signatures Info
-			// Delegation Info
-
 		},
-
 		BindInvestigatorInfo : function(investigatorInfo) {
 			rowIndex = 0;
 			proposalsManage
@@ -2039,7 +2056,7 @@ $(function() {
 			break;
 
 		case 12:
-
+			console.log(msg);
 			break;
 
 		case 13:

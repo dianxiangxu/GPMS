@@ -10,8 +10,8 @@ import com.google.gson.annotations.Expose;
 @Embedded
 public class SignatureInfo {
 	@Expose
-	@Property("id")
-	private String id = new String();
+	@Property("user profile id")
+	private String userProfileId = new String();
 
 	@Expose
 	@Property("full name")
@@ -36,12 +36,12 @@ public class SignatureInfo {
 	public SignatureInfo() {
 	}
 
-	public String getId() {
-		return id;
+	public String getUserProfileId() {
+		return userProfileId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserProfileId(String userProfileId) {
+		this.userProfileId = userProfileId;
 	}
 
 	public String getFullName() {
@@ -92,12 +92,13 @@ public class SignatureInfo {
 				+ ((delegatedAs == null) ? 0 : delegatedAs.hashCode());
 		result = prime * result
 				+ ((fullName == null) ? 0 : fullName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (isDelegated ? 1231 : 1237);
 		result = prime * result
 				+ ((positionTitle == null) ? 0 : positionTitle.hashCode());
 		result = prime * result
 				+ ((signedDate == null) ? 0 : signedDate.hashCode());
+		result = prime * result
+				+ ((userProfileId == null) ? 0 : userProfileId.hashCode());
 		return result;
 	}
 
@@ -120,11 +121,6 @@ public class SignatureInfo {
 				return false;
 		} else if (!fullName.equals(other.fullName))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (isDelegated != other.isDelegated)
 			return false;
 		if (positionTitle == null) {
@@ -137,14 +133,19 @@ public class SignatureInfo {
 				return false;
 		} else if (!signedDate.equals(other.signedDate))
 			return false;
+		if (userProfileId == null) {
+			if (other.userProfileId != null)
+				return false;
+		} else if (!userProfileId.equals(other.userProfileId))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "SignatureInfo [id=" + id + ", fullName=" + fullName
-				+ ", positionTitle=" + positionTitle + ", signedDate="
-				+ signedDate + ", isDelegated=" + isDelegated
+		return "SignatureInfo [userProfileId=" + userProfileId + ", fullName="
+				+ fullName + ", positionTitle=" + positionTitle
+				+ ", signedDate=" + signedDate + ", isDelegated=" + isDelegated
 				+ ", delegatedAs=" + delegatedAs + "]";
 	}
 

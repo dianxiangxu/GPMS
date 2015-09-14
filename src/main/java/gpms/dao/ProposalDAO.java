@@ -14,14 +14,13 @@ import gpms.model.ProjectLocation;
 import gpms.model.ProjectType;
 import gpms.model.Proposal;
 import gpms.model.ProposalInfo;
-import gpms.model.QuickPersonnelQuery;
 import gpms.model.SignatureInfo;
+import gpms.model.SimplePersonnelData;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.Status;
 import gpms.model.TypeOfRequest;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
-import gpms.rest.InvestigatorUsersAndPositions;
 
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -49,6 +48,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	private static Morphia morphia;
 	private static Datastore ds;
 	private AuditLog audit = new AuditLog();
+	DelegationDAO delegationDAO = null;
 
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
@@ -547,9 +547,11 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 	// "Find Business Manager for..." etc
 	// Will attempt a generic build so that one can search for Deans, etc.
 
-	public ArrayList<QuickPersonnelQuery> PersonnelQuery(ObjectId id,
+	public List<SimplePersonnelData> PersonnelQuery(ObjectId id,
 			String searchQuery) {
-		Proposal queryProposal;
+		ArrayList<SimplePersonnelData> spdList = new ArrayList<SimplePersonnelData>();
+		SimplePersonnelData newEntry;
+		Proposal queryProposal = null;
 		try {
 			queryProposal = findProposalByProposalID(id);
 		} catch (UnknownHostException e) {
@@ -557,10 +559,75 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			e.printStackTrace();
 		}
 
-		// queryProposal.getInvestigatorInfo();
+		InvestigatorRefAndPosition pi = queryProposal.getInvestigatorInfo()
+				.getPi();
+		ArrayList<String> collegeSearch = new ArrayList<String>();
+		collegeSearch.add(pi.getCollege());
 
-		ArrayList<QuickPersonnelQuery> queryList = new ArrayList();
-		return null;
+		ArrayList<InvestigatorRefAndPosition> copi = queryProposal
+				.getInvestigatorInfo().getCo_pi();
+		ArrayList<String> copicollegeSearch = new ArrayList<String>();
+
+		for (int b = 0; b < copi.size(); b++) {
+			if (!collegeSearch.contains(copi.get(b).getCollege())) {
+				collegeSearch.add(copi.get(b).getCollege());
+			}
+		}
+
+		ArrayList<InvestigatorRefAndPosition> seniorPersonnel = queryProposal
+				.getInvestigatorInfo().getSeniorPersonnel();
+
+		for (int c = 0; c < seniorPersonnel.size(); c++) {
+			if (!collegeSearch.contains(seniorPersonnel.get(c).getCollege())) {
+				collegeSearch.add(seniorPersonnel.get(c).getCollege());
+			}
+		}
+
+		// System.out.println("The college is: " + collegeSearch);
+
+		Datastore ds = getDatastore();
+
+		// Working out how to get through linked collections
+		// Query<UserProfile> q =
+		// ds.createQuery(UserProfile.class).field("details.college").equal(collegeSearch);
+		// Query<UserProfile> q = ds.createQuery(UserProfile.class);
+		// q.and(
+		// q.criteria("details.college").equal(collegeSearch),
+		// q.criteria("details.position title").equal(searchQuery)
+		// );
+		// UserProfile q =
+		// profileQuery.field("details.college").equal(collegeSearch).get();
+		// ds.createQuery(Proposal.class)
+		// .field("investigator info.senior personnel.user profile")
+		// .equal(userProfile).asList().size();
+		// List<UserProfile> queryProfileList = q.asList();
+		// for(int a = 0; a < queryProfileList.size(); a++)
+		// {
+		// newEntry = new SimplePersonnelData(queryProfileList.get(a));
+		// spdList.add(newEntry);
+		// }
+
+		String checkName = "";
+		ArrayList<String> checkList = new ArrayList<String>();
+
+		for (int d = 0; d < collegeSearch.size(); d++) {
+			String CollegeQuery = collegeSearch.get(d);
+			Query<UserProfile> r = ds.createQuery(UserProfile.class);
+			r.and(r.criteria("details.college").equal(CollegeQuery), r
+					.criteria("details.position title").equal(searchQuery));
+			List<UserProfile> queryProfileList = r.asList();
+			for (int a = 0; a < queryProfileList.size(); a++) {
+				checkName = queryProfileList.get(a).getFirstName() + " "
+						+ queryProfileList.get(a).getLastName();
+				if (!checkList.contains(checkName)) {
+					newEntry = new SimplePersonnelData(queryProfileList.get(a));
+					spdList.add(newEntry);
+					checkList.add(checkName);
+				}
+			}
+		}
+
+		return spdList;
 	}
 
 	public List<SignatureInfo> findAllSignatureForAProposal(ObjectId id) {
@@ -573,23 +640,20 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		// 1. Get all investigator info and create an arraylist of COlleges and
 		// Departments
 		Query<Proposal> q1 = ds.createQuery(Proposal.class).field("_id")
-				.equal(id).retrievedFields(true, "investigator info");
-		List<Proposal> users = q1.asList();
+				.equal(id).retrievedFields(true, "_id", "investigator info");
+		List<Proposal> proposals = q1.asList();
 
-		for (Proposal proposal : users) {
+		for (Proposal proposal : proposals) {
 			SignatureInfo piSign = new SignatureInfo();
 			// Adding PI
-			piSign.setId(proposal.getInvestigatorInfo().getPi().getUserRef()
-					.getId().toString());
+			piSign.setUserProfileId(proposal.getInvestigatorInfo().getPi()
+					.getUserRef().getId().toString());
 			piSign.setFullName(proposal.getInvestigatorInfo().getPi()
 					.getUserRef().getFullName());
 
 			piSign.setPositionTitle("PI");
 			piSign.setDelegated(false);
 			signatures.add(piSign);
-
-			// TODO : get all delegated User Info for this PI user and bind it
-			// into signature Object
 
 			if (!colleges.contains(proposal.getInvestigatorInfo().getPi()
 					.getCollege())) {
@@ -606,7 +670,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.getInvestigatorInfo().getCo_pi()) {
 				// Adding Co-PIs
 				SignatureInfo coPISign = new SignatureInfo();
-				coPISign.setId(coPIs.getUserRef().getId().toString());
+				coPISign.setUserProfileId(coPIs.getUserRef().getId().toString());
 				coPISign.setFullName(coPIs.getUserRef().getFullName());
 
 				coPISign.setPositionTitle("Co-PI");
@@ -625,7 +689,8 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					.getInvestigatorInfo().getSeniorPersonnel()) {
 				// Adding Seniors
 				SignatureInfo seniorSign = new SignatureInfo();
-				seniorSign.setId(seniors.getUserRef().getId().toString());
+				seniorSign.setUserProfileId(seniors.getUserRef().getId()
+						.toString());
 				seniorSign.setFullName(seniors.getUserRef().getFullName());
 
 				seniorSign.setPositionTitle("Senior");
@@ -676,7 +741,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"University Research Director")) {
 					SignatureInfo signDirector = new SignatureInfo();
-					signDirector.setId(user.getId().toString());
+					signDirector.setUserProfileId(user.getId().toString());
 					signDirector.setFullName(user.getFullName());
 					signDirector
 							.setPositionTitle(posDetails.getPositionTitle());
@@ -685,7 +750,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"Dean")) {
 					SignatureInfo signDean = new SignatureInfo();
-					signDean.setId(user.getId().toString());
+					signDean.setUserProfileId(user.getId().toString());
 					signDean.setFullName(user.getFullName());
 					signDean.setPositionTitle(posDetails.getPositionTitle());
 					signDean.setDelegated(false);
@@ -693,7 +758,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"Business Manager")) {
 					SignatureInfo signBusinessMgr = new SignatureInfo();
-					signBusinessMgr.setId(user.getId().toString());
+					signBusinessMgr.setUserProfileId(user.getId().toString());
 					signBusinessMgr.setFullName(user.getFullName());
 					signBusinessMgr.setPositionTitle(posDetails
 							.getPositionTitle());
@@ -702,7 +767,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"Department Chair")) {
 					SignatureInfo signDeptChair = new SignatureInfo();
-					signDeptChair.setId(user.getId().toString());
+					signDeptChair.setUserProfileId(user.getId().toString());
 					signDeptChair.setFullName(user.getFullName());
 					signDeptChair.setPositionTitle(posDetails
 							.getPositionTitle());
