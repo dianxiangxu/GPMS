@@ -95,17 +95,17 @@ public class RegistrationService
 				newUserProfile.setFirstName(firstname);
 				if(middleName!=null)
 				{
-				newUserProfile.setMiddleName(middleName);	
+					newUserProfile.setMiddleName(middleName);	
 				}
 				newUserProfile.setLastName(lastname);
-				
+
 				//Date of Birth block
 				//Will either have to parse a string to figure out the date
 				//Or get the form changed up a bit
 				//Parsing is obviously not the preferred option
 				//Date dobDate = new Calendar.set(year, month, date);
 
-				
+
 				//Address Construction Block
 				Address newAddress = new Address();
 				newAddress.setCity(city);
@@ -116,21 +116,23 @@ public class RegistrationService
 				{
 					newAddress.setApt(apt_misc);
 				}
-				
+
 				//Emails and Phone Numbers
 				newUserProfile.getWorkEmails().add(workEmail);
 				newUserProfile.getPersonalEmails().add(personalEmail);
 				newUserProfile.getHomeNumbers().add(homeNumber);
 				newUserProfile.getOfficeNumbers().add(officeNumber);
 				newUserProfile.getMobileNumbers().add(mobileNumber);
-				
-				
+
+
 				//Account Setup
 				newUserAccount.setUserName(userName);
 				newUserAccount.setPassword(password);
 
-				
-				
+
+
+
+
 				//This point should scan for a user in the database
 				//If the user account name exists, we should not allow the creation of an account object.
 				UserAccountDAO newAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
@@ -140,7 +142,7 @@ public class RegistrationService
 
 				boolean Authorized = true;
 
-				if (findAccount==null)
+				if (findAccount!=null)
 				{
 					Authorized = false;
 					java.net.URI location = new java.net.URI(
@@ -163,7 +165,11 @@ public class RegistrationService
 				//int qId = 0;
 
 				newUserProfile.setUserAccount(newUserAccount);
+				userAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+				userProfileDAO = new UserProfileDAO(mongoClient, morphia, personalEmail);
 
+				userAccountDAO.save(newUserAccount);
+				userProfileDAO.save(newUserProfile);
 
 				Date now = new Date();
 				SimpleDateFormat formatNow = new SimpleDateFormat(
@@ -173,27 +179,27 @@ public class RegistrationService
 				// Get current time
 				long start = System.currentTimeMillis();
 
-//				TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
-//				if (queue != null) {
-//					queue.add(newUserProfile);
-//					qId = dm.InsertQueue("Register", startTime);
-//				}
-//				while (!request.isCompleted()) {
-//					Thread.currentThread();
-//					Thread.sleep(5);
-//				}
+				//				TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
+				//				if (queue != null) {
+				//					queue.add(newUserProfile);
+				//					qId = dm.InsertQueue("Register", startTime);
+				//				}
+				//				while (!request.isCompleted()) {
+				//					Thread.currentThread();
+				//					Thread.sleep(5);
+				//				}
 				// Get elapsed time in milliseconds
 				long elapsedTimeMillis = System.currentTimeMillis() - start;
 
-//				dm.UpdateQueue(qId, elapsedTimeMillis);
-				
+				//				dm.UpdateQueue(qId, elapsedTimeMillis);
+
 				/**
 				 * TODO create this Object to keep track of a logged in user
 				 */
-				ActiveUser user = req.getResponse();
+				ActiveUser user = new ActiveUser(newUserProfile);
 
 				if (user != null) {
-					setMySessionID(req, user.get_uid());
+					setMySessionID(req, user.getID());
 					java.net.URI location = new java.net.URI("../home.jsp");
 					return Response.seeOther(location).build();
 				} else {
@@ -203,14 +209,12 @@ public class RegistrationService
 				}
 			}
 
-		} catch (Exception e) {
-			return Response.status(403).type("text/plain").entity(e.getMessage()).build();
-		}
+		
 		return null;
 	}
 
 
-	private void setMySessionID(@Context HttpServletRequest req, int uid) {
+	private void setMySessionID(@Context HttpServletRequest req, String UserID) {
 		try {
 			if (req == null) {
 				System.out.println("Null request in context");
@@ -218,13 +222,13 @@ public class RegistrationService
 			HttpSession session = req.getSession();
 			if (session.getAttribute("userid") == null) {
 				// id = System.currentTimeMillis();
-				session.setAttribute("userid", uid);
+				session.setAttribute("userid", UserID);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public int getMySessionId(@Context HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		if (session.getAttribute("userid") != null) {
@@ -244,40 +248,40 @@ public class RegistrationService
 		return "0";
 	}
 
-
-	@GET
-	@Path("/GetUserID")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getMyUserId(@Context HttpServletRequest req) throws Exception {
-		HttpSession session = req.getSession();
-		if (session.getAttribute("userid") != null) {
-			ActiveUser request = new ActiveUser();
-			int qId = 0;
-			Date now = new Date();
-			SimpleDateFormat formatNow = new SimpleDateFormat(
-					"yyyy-MM-dd HH:mm:ss");
-
-			String startTime = formatNow.format(now);
-			// Get current time
-			long start = System.currentTimeMillis();
-
-			TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
-			if (queue != null) {
-				queue.add(request);
-				qId = dm.InsertQueue("GetUserID", startTime);
-			}
-			while (!request.isCompleted()) {
-				Thread.currentThread();
-				Thread.sleep(5);
-			}
-			// Get elapsed time in milliseconds
-			long elapsedTimeMillis = System.currentTimeMillis() - start;
-
-			dm.UpdateQueue(qId, elapsedTimeMillis);
-
-			return session.getAttribute("userid").toString();
-		}
-		return "0";
-	}
+	//
+	//	@GET
+	//	@Path("/GetUserID")
+	//	@Produces(MediaType.TEXT_PLAIN)
+	//	public String getMyUserId(@Context HttpServletRequest req) throws Exception {
+	//		HttpSession session = req.getSession();
+	//		if (session.getAttribute("userid") != null) {
+	//			ActiveUser request = new ActiveUser();
+	//			int qId = 0;
+	//			Date now = new Date();
+	//			SimpleDateFormat formatNow = new SimpleDateFormat(
+	//					"yyyy-MM-dd HH:mm:ss");
+	//
+	//			String startTime = formatNow.format(now);
+	//			// Get current time
+	//			long start = System.currentTimeMillis();
+	//
+	//			TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
+	//			if (queue != null) {
+	//				queue.add(request);
+	//				qId = dm.InsertQueue("GetUserID", startTime);
+	//			}
+	//			while (!request.isCompleted()) {
+	//				Thread.currentThread();
+	//				Thread.sleep(5);
+	//			}
+	//			// Get elapsed time in milliseconds
+	//			long elapsedTimeMillis = System.currentTimeMillis() - start;
+	//
+	//			dm.UpdateQueue(qId, elapsedTimeMillis);
+	//
+	//			return session.getAttribute("userid").toString();
+	//		}
+	//		return "0";
+	//	}
 }
 }
