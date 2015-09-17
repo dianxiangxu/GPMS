@@ -21,6 +21,7 @@
 <meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible">
 <meta content="RevealTrans(Duration=0,Transition=1)"
 	http-equiv="PAGE-ENTER">
+<script type="text/javascript" src="js/RegistrationValidation.js"></script>
 <link type="icon shortcut" media="icon" href="favicon.ico">
 <!--[if IE 9]>
         <link rel="stylesheet" href="css/ie9.css" type="text/css" media="screen"/><![endif]-->
@@ -122,8 +123,9 @@
 	href="css/Templates/topstickybar.css" />
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 </head>
-<body>
-	<form id="registrationForm" action="RESTQ/user/Register" method="POST">
+<body bgcolor="white">
+	<form id="registrationForm" action="RESTQ/Registration/NewUser"
+		method="POST">
 		<noscript>
 			<span>This page requires java-script to be enabled. Please
 				adjust your browser-settings.</span>
@@ -167,20 +169,23 @@
 																<td class="cssClassTableRightCol"></td>
 															</tr>
 															<tr>
-																<td><span class="cssClassLabel" id="lblUserName">First
-																		Name:</span> <span class="cssClassRequired">*</span></td>
+																<td><span class="cssClassLabel" id="first_name"
+																	name="firstname">First Name:</span> <span
+																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	type="text" class="sfInputbox" id="txtFirstName"
 																	name="firstName" placeholder="First Name"></td>
-																<td><span class="cssClassLabel" id="lblMiddleName">Middle
-																		Name:</span></td>
+
+																<td><span class="cssClassLabel" id="middle_name"
+																	name="middlename">Middle Name:</span></td>
 																<td class="cssClassTableRightCol"><input
 																	type="text" class="sfInputbox" id="txtMiddleName"
 																	name="middleName" placeholder="Middle Name"></td>
 															</tr>
 															<tr>
-																<td><span id="lblLastName" class="cssClassLabel">Last
-																		Name:</span> <span class="cssClassRequired">*</span></td>
+																<td><span class="cssClassLabel" id="last_name"
+																	name="lastname">Last Name:</span> <span
+																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	type="text" id="txtLastName" class="sfInputbox"
 																	name="lastName" placeholder="Last Name"></td>
@@ -323,10 +328,6 @@
 																<td class="cssClassTableRightCol"><input
 																	type="text" class="sfInputbox" id="txtHomeNumber"
 																	name="homeNumber" placeholder="Home Number"></td>
-																<td><span class="cssClassLabel" id="lblOtherNumber">Other:</span></td>
-																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtOtherNumber"
-																	name="otherNumber" placeholder="Other Number"></td>
 															</tr>
 															<tr class="rule dashed">
 
@@ -381,18 +382,37 @@
 								</div>
 								<div class="sfButtonwrapper">
 									<p>
-										<button type="button" id="btnBack" class="sfBtn">
+										<button title="Go Back" type="button" id="btnBack"
+											class="sfBtn">
 											<span class="sfLocale icon-arrow-slim-w">Back</span>
+										</button>
+									</p>
+									<p>
+										<button title="Reset" type="button" id="btnReset"
+											class="sfBtn">
+											<span class="sfLocale icon-refresh">Reset</span>
+										</button>
+									</p>
+									<p>
+										<button title="Delete" type="button" class="delbutton sfBtn">
+											<span class="sfLocale icon-delete">Delete</span>
+										</button>
+									</p>
+									<p>
+										<button title="Save User" type="button" id="btnSaveUser"
+											class="sfBtn">
+											<span class="sfLocale icon-save">Save</span>
 										</button>
 									</p>
 								</div>
 							</div>
-							<!-- End form -->
 						</div>
+						<!-- End form -->
 					</div>
 				</div>
-				<!-- END sfMaincontent -->
 			</div>
+			<!-- END sfMaincontent -->
+		</div>
 		</div>
 		<!-- END Body Content sfContentwrapper -->
 	</form>
