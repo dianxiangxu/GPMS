@@ -38,7 +38,7 @@ public class Create100Proposals {
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
 	String dbName = "GPMS";
-	final int MAXIMUM_PROPOSALS = 10; // Adjust this to make more or less
+	final int MAXIMUM_PROPOSALS = 100; // Adjust this to make more or less
 										// profiles with the generator.
 
 	@Before
@@ -112,12 +112,16 @@ public class Create100Proposals {
 			InvestigatorInfo newInfo = new InvestigatorInfo();
 
 			InvestigatorRefAndPosition newInvPos = new InvestigatorRefAndPosition();
+			Random randomizer = new Random();
+			int posChoice = randomizer.nextInt(propProfile.getDetails().size());
 
-			newInvPos.setCollege(propProfile.getDetails(0).getCollege());
-			newInvPos.setDepartment(propProfile.getDetails(0).getDepartment());
-			newInvPos.setPositionType(propProfile.getDetails(0)
+			newInvPos
+					.setCollege(propProfile.getDetails(posChoice).getCollege());
+			newInvPos.setDepartment(propProfile.getDetails(posChoice)
+					.getDepartment());
+			newInvPos.setPositionType(propProfile.getDetails(posChoice)
 					.getPositionType());
-			newInvPos.setPositionTitle(propProfile.getDetails(0)
+			newInvPos.setPositionTitle(propProfile.getDetails(posChoice)
 					.getPositionTitle());
 			newInvPos.setUserProfileId(propProfile.getId().toString());
 			newInvPos.setUserRef(propProfile);
