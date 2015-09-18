@@ -10,195 +10,6 @@ $(function() {
 		return gpmsCommonInfo;
 	};
 
-	var icons = {
-		header : "ui-icon-circle-arrow-e",
-		activeHeader : "ui-icon-circle-arrow-s"
-	};
-
-	var $accordion = $("#accordion")
-			.accordion(
-					{
-						heightStyle : "content",
-						icons : icons,
-						collapsible : true,
-						animate : 200,
-						beforeActivate : function(event, ui) {
-							// Active tab
-							if ($(event.originalEvent.target).is('span')
-									&& $(event.originalEvent.target).parent(
-											'h3').is(
-											'.ui-accordion-header-active')) {
-								// DO Close
-
-								$(event.originalEvent.target)
-										.parent('h3')
-										.removeClass(
-												'ui-accordion-header-active ui-state-active ui-corner-top')
-										.addClass('ui-corner-all').attr({
-											'aria-selected' : 'false',
-											'aria-expanded' : 'false',
-											'tabindex' : '-1'
-										});
-								$(event.originalEvent.target).parent("h3")
-										.find("span:eq(0)").removeClass(
-												icons.activeHeader).addClass(
-												icons.header);
-								$(event.originalEvent.target).parent('h3')
-										.next('div').removeClass(
-												'ui-accordion-content-active')
-										.attr({
-											'aria-hidden' : 'true'
-										}).hide('blind');
-								$('.close').attr("disabled", "disabled");
-								$('.open').removeAttr("disabled");
-								return false;
-
-							} else if ($(event.originalEvent.target).is('h3')
-									&& $(event.originalEvent.target).is(
-											'.ui-accordion-header-active')) {
-								// DO close
-								$(event.originalEvent.target)
-										.removeClass(
-												'ui-accordion-header-active ui-state-active ui-corner-top')
-										.addClass('ui-corner-all').attr({
-											'aria-selected' : 'false',
-											'aria-expanded' : 'false',
-											'tabindex' : '-1'
-										});
-								$(event.originalEvent.target)
-										.find("span:eq(0)").removeClass(
-												icons.activeHeader).addClass(
-												icons.header);
-								$(event.originalEvent.target).next('div')
-										.removeClass(
-												'ui-accordion-content-active')
-										.attr({
-											'aria-hidden' : 'true'
-										}).hide('blind');
-
-								$('.close').attr("disabled", "disabled");
-								$('.open').removeAttr("disabled");
-								return false;
-							} else {
-								if ($(event.originalEvent.target).is('span')) {
-									$(event.originalEvent.target)
-											.parent('h3')
-											.removeClass('ui-corner-all')
-											.addClass(
-													'ui-accordion-header-active ui-state-active ui-corner-top')
-											.attr({
-												'aria-selected' : 'true',
-												'aria-expanded' : 'true',
-												'tabindex' : '0'
-											});
-									$(event.originalEvent.target).parent("h3")
-											.find("span:eq(0)").removeClass(
-													icons.header).addClass(
-													icons.activeHeader);
-									$(event.originalEvent.target)
-											.parent('h3')
-											.next('div')
-											.addClass(
-													'ui-accordion-content-active')
-											.attr({
-												'aria-hidden' : 'false'
-											}).show('blind');
-
-								} else {
-									$(event.originalEvent.target)
-											.removeClass('ui-corner-all')
-											.addClass(
-													'ui-accordion-header-active ui-state-active ui-corner-top')
-											.attr({
-												'aria-selected' : 'true',
-												'aria-expanded' : 'true',
-												'tabindex' : '0'
-											});
-									$(event.originalEvent.target).find(
-											"span:eq(0)").removeClass(
-											icons.header).addClass(
-											icons.activeHeader);
-									$(event.originalEvent.target)
-											.next('div')
-											.addClass(
-													'ui-accordion-content-active')
-											.attr({
-												'aria-hidden' : 'false'
-											}).show('blind');
-								}
-								$('.open').attr("disabled", "disabled");
-								$('.close').removeAttr("disabled");
-								return false;
-							}
-
-							// var fromIcon =
-							// $(event.originalEvent.target).is(
-							// '.ui-accordion-header > .ui-icon');
-							// return fromIcon;
-							// alert(expandLink.data('isAllOpen'));
-							// if (expandLink.data('isAllOpen')) {
-							// expandLink.text('Expand
-							// all').data('isAllOpen', false);
-							// }
-							// return false;
-							// $(event.originalEvent.target).removeClass();
-							// The accordion believes a panel is being
-							// opened
-						}
-					});
-
-	var icons = $("#accordion").accordion("option", "icons");
-
-	$('.open')
-			.on(
-					"click",
-					function() {
-						$('.ui-accordion-header')
-								.removeClass('ui-corner-all')
-								.addClass(
-										'ui-accordion-header-active ui-state-active ui-corner-top')
-								.attr({
-									'aria-selected' : 'true',
-									'aria-expanded' : 'true',
-									'tabindex' : '0'
-								});
-						$('.ui-accordion-header-icon')
-								.removeClass(icons.header).addClass(
-										icons.activeHeader);
-						$('.ui-accordion-content').addClass(
-								'ui-accordion-content-active').attr({
-							'aria-hidden' : 'false'
-						}).show();
-						$(this).attr("disabled", "disabled");
-						$('.close').removeAttr("disabled");
-					});
-	$('.close')
-			.on(
-					"click",
-					function() {
-						$('.ui-accordion-header')
-								.removeClass(
-										'ui-accordion-header-active ui-state-active ui-corner-top')
-								.addClass('ui-corner-all').attr({
-									'aria-selected' : 'false',
-									'aria-expanded' : 'false',
-									'tabindex' : '-1'
-								});
-						$('.ui-accordion-header-icon').removeClass(
-								icons.activeHeader).addClass(icons.header);
-						$('.ui-accordion-content').removeClass(
-								'ui-accordion-content-active').attr({
-							'aria-hidden' : 'true'
-						}).hide();
-						$(this).attr("disabled", "disabled");
-						$('.open').removeAttr("disabled");
-					});
-
-	// $('.ui-accordion-header').on("click", function() {
-	// $('.open').removeAttr("disabled");
-	// $('.close').removeAttr("disabled");
-	// });
-
 	$.validator
 			.addMethod(
 					'greaterthan',
@@ -617,6 +428,40 @@ $(function() {
 						success : proposalsManage.ajaxSuccess,
 						error : proposalsManage.ajaxFailure
 					});
+		},
+
+		ExpandAccordion : function() {
+			var icons = $("#accordion").accordion("option", "icons");
+			$('.ui-accordion-header').removeClass('ui-corner-all').addClass(
+					'ui-accordion-header-active ui-state-active ui-corner-top')
+					.attr({
+						'aria-selected' : 'true',
+						'aria-expanded' : 'true',
+						'tabindex' : '0'
+					});
+			$('.ui-accordion-header-icon').removeClass(icons.header).addClass(
+					icons.activeHeader);
+			$('.ui-accordion-content').addClass('ui-accordion-content-active')
+					.attr({
+						'aria-hidden' : 'false'
+					}).show('blind');
+		},
+
+		CollapseAccordion : function() {
+			var icons = $("#accordion").accordion("option", "icons");
+			$('.ui-accordion-header').removeClass(
+					'ui-accordion-header-active ui-state-active ui-corner-top')
+					.addClass('ui-corner-all').attr({
+						'aria-selected' : 'false',
+						'aria-expanded' : 'false',
+						'tabindex' : '-1'
+					});
+			$('.ui-accordion-header-icon').removeClass(icons.activeHeader)
+					.addClass(icons.header);
+			$('.ui-accordion-content').removeClass(
+					'ui-accordion-content-active').attr({
+				'aria-hidden' : 'true'
+			}).hide('blind');
 		},
 
 		LoadStaticImage : function() {
@@ -1877,6 +1722,155 @@ $(function() {
 		},
 
 		SetFirstAccordionActive : function() {
+			var icons = {
+				header : "ui-icon-circle-arrow-e",
+				activeHeader : "ui-icon-circle-arrow-s"
+			};
+
+			var $accordion = $("#accordion")
+					.accordion(
+							{
+								heightStyle : "content",
+								icons : icons,
+								collapsible : true,
+								beforeActivate : function(event, ui) {
+									if ($(event.originalEvent.target)
+											.is('span')
+											&& $(event.originalEvent.target)
+													.parent('h3')
+													.is(
+															'.ui-accordion-header-active')) {
+										$(event.originalEvent.target)
+												.parent('h3')
+												.removeClass(
+														'ui-accordion-header-active ui-state-active ui-corner-top')
+												.addClass('ui-corner-all')
+												.attr({
+													'aria-selected' : 'false',
+													'aria-expanded' : 'false',
+													'tabindex' : '-1'
+												});
+										$(event.originalEvent.target)
+												.parent("h3")
+												.find("span:eq(0)")
+												.removeClass(icons.activeHeader)
+												.addClass(icons.header);
+										$(event.originalEvent.target).parent(
+												'h3').next('div').removeClass(
+												'ui-accordion-content-active')
+												.attr({
+													'aria-hidden' : 'true'
+												}).hide('blind');
+										return false;
+
+									} else if ($(event.originalEvent.target)
+											.is('h3')
+											&& $(event.originalEvent.target)
+													.is(
+															'.ui-accordion-header-active')) {
+										$(event.originalEvent.target)
+												.removeClass(
+														'ui-accordion-header-active ui-state-active ui-corner-top')
+												.addClass('ui-corner-all')
+												.attr({
+													'aria-selected' : 'false',
+													'aria-expanded' : 'false',
+													'tabindex' : '-1'
+												});
+										$(event.originalEvent.target).find(
+												"span:eq(0)").removeClass(
+												icons.activeHeader).addClass(
+												icons.header);
+										$(event.originalEvent.target).next(
+												'div').removeClass(
+												'ui-accordion-content-active')
+												.attr({
+													'aria-hidden' : 'true'
+												}).hide('blind');
+										return false;
+									} else {
+										// proposalsManage.CollapseAccordion();
+										if ($(event.originalEvent.target).is(
+												'span')) {
+											$(event.originalEvent.target)
+													.parent('h3')
+													.removeClass(
+															'ui-corner-all')
+													.addClass(
+															'ui-accordion-header-active ui-state-active ui-corner-top')
+													.attr(
+															{
+																'aria-selected' : 'true',
+																'aria-expanded' : 'true',
+																'tabindex' : '0'
+															});
+											$(event.originalEvent.target)
+													.parent("h3").find(
+															"span:eq(0)")
+													.removeClass(icons.header)
+													.addClass(
+															icons.activeHeader);
+											$(event.originalEvent.target)
+													.parent('h3')
+													.next('div')
+													.addClass(
+															'ui-accordion-content-active')
+													.attr({
+														'aria-hidden' : 'false'
+													}).show('blind');
+
+										} else {
+											$(event.originalEvent.target)
+													.removeClass(
+															'ui-corner-all')
+													.addClass(
+															'ui-accordion-header-active ui-state-active ui-corner-top')
+													.attr(
+															{
+																'aria-selected' : 'true',
+																'aria-expanded' : 'true',
+																'tabindex' : '0'
+															});
+											$(event.originalEvent.target).find(
+													"span:eq(0)").removeClass(
+													icons.header).addClass(
+													icons.activeHeader);
+											$(event.originalEvent.target)
+													.next('div')
+													.addClass(
+															'ui-accordion-content-active')
+													.attr({
+														'aria-hidden' : 'false'
+													}).show('blind');
+										}
+										return false;
+									}
+
+									// var fromIcon =
+									// $(event.originalEvent.target).is(
+									// '.ui-accordion-header > .ui-icon');
+									// return fromIcon;
+									// alert(expandLink.data('isAllOpen'));
+									// if (expandLink.data('isAllOpen')) {
+									// expandLink.text('Expand
+									// all').data('isAllOpen', false);
+									// }
+									// return false;
+									// $(event.originalEvent.target).removeClass();
+									// The accordion believes a panel is being
+									// opened
+								}
+							});
+
+			$('.open').on("click", function() {
+				proposalsManage.ExpandAccordion();
+			});
+
+			$('.close').on("click", function() {
+				proposalsManage.CollapseAccordion();
+			});
+
+			proposalsManage.CollapseAccordion();
 			$accordion.accordion("option", "active", 0);
 		},
 
