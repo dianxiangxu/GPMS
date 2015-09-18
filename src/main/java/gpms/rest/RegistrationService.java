@@ -32,11 +32,13 @@ import com.mongodb.MongoClient;
 
 
 
-
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 @Path("/Registration")
 public class RegistrationService 
 {
-
+	private DataModel dm = null;
+	private final static String queueName = "processing-queue";
 	private MongoClient mongoClient = null;
 	private Morphia morphia = null;
 	private String dbName = "GPMS";
@@ -48,168 +50,163 @@ public class RegistrationService
 	private ProposalDAO proposalDAO = null;
 	private boolean Authorized;
 
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public class UsersService {
-		DataModel dm = null;
-		private final static String queueName = "processing-queue";
 
-		public UsersService() {
-			dm = new DataModel();
+	public  RegistrationService() {
+		dm = new DataModel();
+	}
+
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sayPlainTextHello() {
+		return "Hello Users";
+	}
+
+	// Register Users
+	@POST
+	@Path("/NewUser")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response userRegister(@FormParam("firstname") String firstname,
+			@FormParam("middlename") String middleName,
+			@FormParam("lastname") String lastname,
+			@FormParam("username") String userName,
+			@FormParam("password") String password,
+			@FormParam("dob") String dob, 
+			@FormParam("gender") String gender,
+			@FormParam("street") String street,
+			@FormParam("apt") String apt_misc,
+			@FormParam("city") String city,
+			@FormParam("state") String state,
+			@FormParam("zip") String zipCode,
+			@FormParam("country") String country,
+			@FormParam("mobileNumber") String mobileNumber,
+			@FormParam("officeNumber") String officeNumber,
+			@FormParam("homeNumber") String homeNumber,
+			@FormParam("workEmail") String workEmail,
+			@FormParam("personalEmail") String personalEmail,
+			@Context HttpServletRequest req) throws Exception {
+
+		try 
+		{
+			newUserProfile = new UserProfile();
+			newUserAccount = new UserAccount();
+			newUserProfile.setFirstName(firstname);
+			if(middleName!=null)
+			{
+				newUserProfile.setMiddleName(middleName);	
+			}
+			newUserProfile.setLastName(lastname);
+
+			//Date of Birth block
+			//Will either have to parse a string to figure out the date
+			//Or get the form changed up a bit
+			//Parsing is obviously not the preferred option
+			//Date dobDate = new Calendar.set(year, month, date);
+
+
+			//Address Construction Block
+			Address newAddress = new Address();
+			newAddress.setCity(city);
+			newAddress.setState(state);
+			newAddress.setZipcode(zipCode);
+			newAddress.setCountry(country);
+			if(apt_misc!=null)
+			{
+				newAddress.setApt(apt_misc);
+			}
+
+			//Emails and Phone Numbers
+			newUserProfile.getWorkEmails().add(workEmail);
+			newUserProfile.getPersonalEmails().add(personalEmail);
+			newUserProfile.getHomeNumbers().add(homeNumber);
+			newUserProfile.getOfficeNumbers().add(officeNumber);
+			newUserProfile.getMobileNumbers().add(mobileNumber);
+
+
+			//Account Setup
+			newUserAccount.setUserName(userName);
+			newUserAccount.setPassword(password);
+
+
+
+
+
+			//This point should scan for a user in the database
+			//If the user account name exists, we should not allow the creation of an account object.
+			UserAccountDAO newAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+
+			UserAccount findAccount = null;
+			findAccount = newAccountDAO.findByUserName(userName);
+
+			boolean Authorized = true;
+
+			if (findAccount!=null)
+			{
+				Authorized = false;
+				java.net.URI location = new java.net.URI(
+						"../index.jsp?error=nouser");
+				return Response.seeOther(location).build();
+			}
+		}
+		catch(Exception e)
+		{
+
 		}
 
-		@GET
-		@Produces(MediaType.TEXT_PLAIN)
-		public String sayPlainTextHello() {
-			return "Hello Users";
+		if (Authorized) 
+		{
+
+			//I believe this is where it should create a user.
+			//UserRegister request = new UserRegister(userInfo);
+
+			//Not sure what this variable is yet.
+			//int qId = 0;
+
+			newUserProfile.setUserAccount(newUserAccount);
+			userAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+			userProfileDAO = new UserProfileDAO(mongoClient, morphia, personalEmail);
+
+			userAccountDAO.save(newUserAccount);
+			userProfileDAO.save(newUserProfile);
+
+			Date now = new Date();
+			SimpleDateFormat formatNow = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+
+			String startTime = formatNow.format(now);
+			// Get current time
+			long start = System.currentTimeMillis();
+
+			//				TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
+			//				if (queue != null) {
+			//					queue.add(newUserProfile);
+			//					qId = dm.InsertQueue("Register", startTime);
+			//				}
+			//				while (!request.isCompleted()) {
+			//					Thread.currentThread();
+			//					Thread.sleep(5);
+			//				}
+			// Get elapsed time in milliseconds
+			long elapsedTimeMillis = System.currentTimeMillis() - start;
+
+			//				dm.UpdateQueue(qId, elapsedTimeMillis);
+
+			/**
+			 * TODO create this Object to keep track of a logged in user
+			 */
+			ActiveUser user = new ActiveUser(newUserProfile);
+
+			if (user != null) {
+				setMySessionID(req, user.getID());
+				java.net.URI location = new java.net.URI("../home.jsp");
+				return Response.seeOther(location).build();
+			} else {
+				java.net.URI location = new java.net.URI(
+						"../index.jsp?error=nouser");
+				return Response.seeOther(location).build();
+			}
 		}
 
-		// Register Users
-		@POST
-		@Path("/NewUser")
-		@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-		public Response userRegister(@FormParam("firstname") String firstname,
-				@FormParam("middlename") String middleName,
-				@FormParam("lastname") String lastname,
-				@FormParam("username") String userName,
-				@FormParam("password") String password,
-				@FormParam("dob") String dob, 
-				@FormParam("gender") String gender,
-				@FormParam("street") String street,
-				@FormParam("apt") String apt_misc,
-				@FormParam("city") String city,
-				@FormParam("state") String state,
-				@FormParam("zip") String zipCode,
-				@FormParam("country") String country,
-				@FormParam("mobileNumber") String mobileNumber,
-				@FormParam("officeNumber") String officeNumber,
-				@FormParam("homeNumber") String homeNumber,
-				@FormParam("workEmail") String workEmail,
-				@FormParam("personalEmail") String personalEmail,
-				@Context HttpServletRequest req) throws Exception {
 
-			try 
-			{
-				newUserProfile = new UserProfile();
-				newUserAccount = new UserAccount();
-				newUserProfile.setFirstName(firstname);
-				if(middleName!=null)
-				{
-					newUserProfile.setMiddleName(middleName);	
-				}
-				newUserProfile.setLastName(lastname);
-
-				//Date of Birth block
-				//Will either have to parse a string to figure out the date
-				//Or get the form changed up a bit
-				//Parsing is obviously not the preferred option
-				//Date dobDate = new Calendar.set(year, month, date);
-
-
-				//Address Construction Block
-				Address newAddress = new Address();
-				newAddress.setCity(city);
-				newAddress.setState(state);
-				newAddress.setZipcode(zipCode);
-				newAddress.setCountry(country);
-				if(apt_misc!=null)
-				{
-					newAddress.setApt(apt_misc);
-				}
-
-				//Emails and Phone Numbers
-				newUserProfile.getWorkEmails().add(workEmail);
-				newUserProfile.getPersonalEmails().add(personalEmail);
-				newUserProfile.getHomeNumbers().add(homeNumber);
-				newUserProfile.getOfficeNumbers().add(officeNumber);
-				newUserProfile.getMobileNumbers().add(mobileNumber);
-
-
-				//Account Setup
-				newUserAccount.setUserName(userName);
-				newUserAccount.setPassword(password);
-
-
-
-
-
-				//This point should scan for a user in the database
-				//If the user account name exists, we should not allow the creation of an account object.
-				UserAccountDAO newAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
-
-				UserAccount findAccount = null;
-				findAccount = newAccountDAO.findByUserName(userName);
-
-				boolean Authorized = true;
-
-				if (findAccount!=null)
-				{
-					Authorized = false;
-					java.net.URI location = new java.net.URI(
-							"../index.jsp?error=nouser");
-					return Response.seeOther(location).build();
-				}
-			}
-			catch(Exception e)
-			{
-
-			}
-
-			if (Authorized) 
-			{
-
-				//I believe this is where it should create a user.
-				//UserRegister request = new UserRegister(userInfo);
-
-				//Not sure what this variable is yet.
-				//int qId = 0;
-
-				newUserProfile.setUserAccount(newUserAccount);
-				userAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
-				userProfileDAO = new UserProfileDAO(mongoClient, morphia, personalEmail);
-
-				userAccountDAO.save(newUserAccount);
-				userProfileDAO.save(newUserProfile);
-
-				Date now = new Date();
-				SimpleDateFormat formatNow = new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss");
-
-				String startTime = formatNow.format(now);
-				// Get current time
-				long start = System.currentTimeMillis();
-
-				//				TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
-				//				if (queue != null) {
-				//					queue.add(newUserProfile);
-				//					qId = dm.InsertQueue("Register", startTime);
-				//				}
-				//				while (!request.isCompleted()) {
-				//					Thread.currentThread();
-				//					Thread.sleep(5);
-				//				}
-				// Get elapsed time in milliseconds
-				long elapsedTimeMillis = System.currentTimeMillis() - start;
-
-				//				dm.UpdateQueue(qId, elapsedTimeMillis);
-
-				/**
-				 * TODO create this Object to keep track of a logged in user
-				 */
-				ActiveUser user = new ActiveUser(newUserProfile);
-
-				if (user != null) {
-					setMySessionID(req, user.getID());
-					java.net.URI location = new java.net.URI("../home.jsp");
-					return Response.seeOther(location).build();
-				} else {
-					java.net.URI location = new java.net.URI(
-							"../index.jsp?error=nouser");
-					return Response.seeOther(location).build();
-				}
-			}
-
-		
 		return null;
 	}
 

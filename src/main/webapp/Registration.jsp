@@ -124,7 +124,7 @@
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 </head>
 <body bgcolor="white">
-	<form id="registrationForm" action="RESTQ/Registration/NewUser"
+	<form id="registrationForm" action="REST/Registration/NewUser"
 		method="POST">
 		<noscript>
 			<span>This page requires java-script to be enabled. Please
@@ -394,15 +394,8 @@
 										</button>
 									</p>
 									<p>
-										<button title="Delete" type="button" class="delbutton sfBtn">
-											<span class="sfLocale icon-delete">Delete</span>
-										</button>
-									</p>
-									<p>
-										<button title="Save User" type="button" id="btnSaveUser"
+										<input type="submit" value="Save User"  id="btnSaveUser"
 											class="sfBtn">
-											<span class="sfLocale icon-save">Save</span>
-										</button>
 									</p>
 								</div>
 							</div>
