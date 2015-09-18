@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55f10d8696f52c3794895944";
+	var userProfileId = "55f7546baf6e041174a9de81";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -253,23 +253,23 @@
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
-																	<td><label class="cssClassLabel sfLocale">Received
-																			On:</label>
+																	<td style="width: 120px; float: left;"><label
+																		class="cssClassLabel sfLocale">Received On:</label>
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Received On From"
 																				id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
 																				placeholder="From">
 																		</div>
-																		<div class="cssClassFromTo">
+																		<div>
 																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Received On To"
 																				id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
 																				placeholder="To">
 																		</div></td>
 
-																	<td><label class="cssClassLabel sfLocale">Total
-																			Costs:</label>
+																	<td style="width: 180px;"><label
+																		class="cssClassLabel sfLocale">Total Costs:</label>
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Total Costs From"
@@ -277,7 +277,7 @@
 																				name="searchTotalCostsFrom" class="sfTextBoxFix"
 																				placeholder="From">
 																		</div>
-																		<div class="cssClassFromTo">
+																		<div>
 																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Total Costs To"
 																				id="txtSearchTotalCostsTo" name="searchTotalCostsTo"
@@ -336,6 +336,10 @@
 											<div>
 												<span class="cssClassRequired">*</span> <span
 													class="cssClassLabelTitle">indicates required fields</span>
+												<div class="accordion-expand-holder">
+													<button type="button" class="open">Expand all</button>
+													<button type="button" class="close">Collapse all</button>
+												</div>
 											</div>
 											<div id="accordion">
 												<h3>
@@ -982,7 +986,7 @@
 												</div>
 
 												<h3>
-													<span id="lblSection11">Certification/Signatures</span>
+													<span id="lblSection11">Certification/ Signatures</span>
 												</h3>
 												<div class="sfFormwrapper">
 													<table cellspacing="0" cellpadding="0" border="0">
@@ -1038,23 +1042,12 @@
 														id="trSignPICOPI">
 														<thead>
 															<tr>
-																<th><span class="cssClassLabel">Principal/Co-Investigator(s)</span></th>
-																<th><span class="cssClassLabel">Name(s)</span></th>
-																<th><span class="cssClassLabel">Date</span></th>
+																<th><span class="cssClassLabelTitle">Principal/Co-Investigator(s)</span></th>
+																<th><span class="cssClassLabelTitle">Name(s)</span></th>
+																<th><span class="cssClassLabelTitle">Date</span></th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<td><span class="cssClassLabel" id="lblSignPIName"
-																	name="signPIName">Bind
-																		Principal/Co-Investigator(s) Name here</span></td>
-																<td><input title="PI's Signature" type="text"
-																	class="sfInputbox" name="signPIBox"
-																	placeholder="PI's Signature" /></td>
-																<td><input title="Signed Date" type="text"
-																	class="sfInputbox" name="signPIDate"
-																	placeholder="Signed Date" /></td>
-															</tr>
 														</tbody>
 													</table>
 
@@ -1062,24 +1055,13 @@
 														id="trSignChair">
 														<thead>
 															<tr>
-																<th><span class="cssClassLabel">Department
+																<th><span class="cssClassLabelTitle">Department
 																		Chair(s) or Director(s)</span></th>
-																<th><span class="cssClassLabel">Name(s)</span></th>
-																<th><span class="cssClassLabel">Date</span></th>
+																<th><span class="cssClassLabelTitle">Name(s)</span></th>
+																<th><span class="cssClassLabelTitle">Date</span></th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<td><span class="cssClassLabel"
-																	id="lblSignChairName" name="signChairName">Bind
-																		Dept Chair(s) or Director(s) Name here</span></td>
-																<td><input title="Chair's Signature" type="text"
-																	class="sfInputbox" name="signChairBox"
-																	placeholder="Chair's Signature" /></td>
-																<td><input title="Signed Date" type="text"
-																	class="sfInputbox" name="signChairDate"
-																	placeholder="Signed Date" /></td>
-															</tr>
 														</tbody>
 													</table>
 
@@ -1087,23 +1069,12 @@
 														id="trSignDean">
 														<thead>
 															<tr>
-																<th><span class="cssClassLabel">Dean(s)</span></th>
-																<th><span class="cssClassLabel">Name(s)</span></th>
-																<th><span class="cssClassLabel">Date</span></th>
+																<th><span class="cssClassLabelTitle">Dean(s)</span></th>
+																<th><span class="cssClassLabelTitle">Name(s)</span></th>
+																<th><span class="cssClassLabelTitle">Date</span></th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<td><span class="cssClassLabel"
-																	id="lblSignDeanName" name="signDeanName">Bind
-																		Dean(s) Name here</span></td>
-																<td><input title="Dean's Signature" type="text"
-																	class="sfInputbox" name="signDeanBox"
-																	placeholder="Dean's Signature" /></td>
-																<td><input title="Signed Date" type="text"
-																	class="sfInputbox" name="signDeanDate"
-																	placeholder="Signed Date" /></td>
-															</tr>
 														</tbody>
 													</table>
 
@@ -1111,27 +1082,14 @@
 														id="trSignBusinessManager">
 														<thead>
 															<tr>
-																<th><span class="cssClassLabel">Business
+																<th><span class="cssClassLabelTitle">Business
 																		Manager (if applicable) has reviewed this proposal.</span></th>
-																<th><span class="cssClassLabel">Initials:</span> <span
-																	class="cssClassRequired">*</span></th>
+																<th><span class="cssClassLabelTitle">Initials:</span>
+																	<span class="cssClassRequired">*</span></th>
 																<th></th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<td><span class="cssClassLabel"
-																	id="lblSignBusinesManagerName"
-																	name="signBusinesManagerName">Bind Business
-																		Manager's Name here</span></td>
-																<td><input title="Business Manager's Signature"
-																	type="text" class="sfInputbox"
-																	id="txtSignBusinessManager" name="signBusinessManager"
-																	placeholder="Business Manager's Signature" /></td>
-																<td><input title="Signed Date" type="text"
-																	class="sfInputbox" id="txtBusinesManagerDate"
-																	name="signBusinesManagerDate" placeholder="Signed Date" /></td>
-															</tr>
 														</tbody>
 													</table>
 												</div>
@@ -1529,7 +1487,7 @@
 																						Activity On To:</label> <input title="Activity On To"
 																					type="text" class="sfTextBoxSmall"
 																					id="txtSearchActivityOnTo" placeholder="To" /></td>
-																				<td><br>
+																				<td><label class="cssClassLabel"> </label>
 																					<button title="Search Audit Log" class="sfBtn"
 																						id="btnSearchProposalAuditLog" type="button">
 																						<span class="sfLocale icon-search">Search</span>

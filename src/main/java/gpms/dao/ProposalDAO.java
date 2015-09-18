@@ -36,6 +36,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.CriteriaContainer;
 import org.mongodb.morphia.query.Query;
 
 import com.mongodb.MongoClient;
@@ -720,18 +721,19 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		positions.add("Dean");
 		positions.add("Business Manager");
 
+		final CriteriaContainer container = profileQuery.or();
 		if (colleges != null) {
-			profileQuery.and(profileQuery.criteria("details.position title")
-					.in(positions), profileQuery.criteria("details.college")
-					.in(colleges));
-		}
-
-		if (departments != null) {
-			profileQuery
-					.and(profileQuery.criteria("details.position title").equal(
-							"Department Chair"),
-							profileQuery.criteria("details.department").in(
-									departments));
+			container.add(container.and(
+					profileQuery.criteria("details.position title").in(
+							positions), profileQuery
+							.criteria("details.college").in(colleges)));
+			if (departments != null) {
+				container.add(container.and(
+						profileQuery.criteria("details.position title").equal(
+								"Department Chair"),
+						profileQuery.criteria("details.department").in(
+								departments)));
+			}
 		}
 
 		List<UserProfile> userProfile = profileQuery.asList();
@@ -743,8 +745,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					SignatureInfo signDirector = new SignatureInfo();
 					signDirector.setUserProfileId(user.getId().toString());
 					signDirector.setFullName(user.getFullName());
-					signDirector
-							.setPositionTitle(posDetails.getPositionTitle());
+					signDirector.setPositionTitle("Research Director");
 					signDirector.setDelegated(false);
 					signatures.add(signDirector);
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(

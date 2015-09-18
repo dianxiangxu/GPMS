@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55f10d8696f52c3794895944";
+	var userProfileId = "55f7546baf6e041174a9de81";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -663,7 +663,7 @@
 																							type="text" class="sfTextBoxSmall"
 																							id="txtSearchActivityOnTo" placeholder="To" /></td>
 
-																						<td><br>
+																						<td><label class="cssClassLabel"> </label>
 																							<button title="Search Audit Log" class="sfBtn"
 																								id="btnSearchUserAuditLog" type="button">
 																								<span class="sfLocale icon-search">Search</span>

@@ -1022,12 +1022,10 @@ $(function() {
 						.each(
 								function(i) {
 									var optionsText = $(this).val();
-									// ddlCollege ddlDepartment ddlPositionType
-									// ddlPositionTitle
 									if (!optionsText
 											&& $(this).prop("name") != "ddlPositionTitle") {
 										validateErrorMessage = getLocale(
-												AspxAttributesManagement,
+												gpmsUsersManagement,
 												"Please select all position details for this user.")
 												+ "<br/>";
 										attributesManage.SetFirstTabActive();

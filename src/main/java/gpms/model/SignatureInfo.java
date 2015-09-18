@@ -23,7 +23,7 @@ public class SignatureInfo {
 
 	@Expose
 	@Property("signed date")
-	private Date signedDate = new Date();
+	private Date signedDate = null;
 
 	@Expose
 	@Property("is delegated")

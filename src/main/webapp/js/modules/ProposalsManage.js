@@ -1,4 +1,5 @@
 ﻿var proposalsManage = '';
+
 $(function() {
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
@@ -8,6 +9,195 @@ $(function() {
 		};
 		return gpmsCommonInfo;
 	};
+
+	var icons = {
+		header : "ui-icon-circle-arrow-e",
+		activeHeader : "ui-icon-circle-arrow-s"
+	};
+
+	var $accordion = $("#accordion")
+			.accordion(
+					{
+						heightStyle : "content",
+						icons : icons,
+						collapsible : true,
+						animate : 200,
+						beforeActivate : function(event, ui) {
+							// Active tab
+							if ($(event.originalEvent.target).is('span')
+									&& $(event.originalEvent.target).parent(
+											'h3').is(
+											'.ui-accordion-header-active')) {
+								// DO Close
+
+								$(event.originalEvent.target)
+										.parent('h3')
+										.removeClass(
+												'ui-accordion-header-active ui-state-active ui-corner-top')
+										.addClass('ui-corner-all').attr({
+											'aria-selected' : 'false',
+											'aria-expanded' : 'false',
+											'tabindex' : '-1'
+										});
+								$(event.originalEvent.target).parent("h3")
+										.find("span:eq(0)").removeClass(
+												icons.activeHeader).addClass(
+												icons.header);
+								$(event.originalEvent.target).parent('h3')
+										.next('div').removeClass(
+												'ui-accordion-content-active')
+										.attr({
+											'aria-hidden' : 'true'
+										}).hide('blind');
+								$('.close').attr("disabled", "disabled");
+								$('.open').removeAttr("disabled");
+								return false;
+
+							} else if ($(event.originalEvent.target).is('h3')
+									&& $(event.originalEvent.target).is(
+											'.ui-accordion-header-active')) {
+								// DO close
+								$(event.originalEvent.target)
+										.removeClass(
+												'ui-accordion-header-active ui-state-active ui-corner-top')
+										.addClass('ui-corner-all').attr({
+											'aria-selected' : 'false',
+											'aria-expanded' : 'false',
+											'tabindex' : '-1'
+										});
+								$(event.originalEvent.target)
+										.find("span:eq(0)").removeClass(
+												icons.activeHeader).addClass(
+												icons.header);
+								$(event.originalEvent.target).next('div')
+										.removeClass(
+												'ui-accordion-content-active')
+										.attr({
+											'aria-hidden' : 'true'
+										}).hide('blind');
+
+								$('.close').attr("disabled", "disabled");
+								$('.open').removeAttr("disabled");
+								return false;
+							} else {
+								if ($(event.originalEvent.target).is('span')) {
+									$(event.originalEvent.target)
+											.parent('h3')
+											.removeClass('ui-corner-all')
+											.addClass(
+													'ui-accordion-header-active ui-state-active ui-corner-top')
+											.attr({
+												'aria-selected' : 'true',
+												'aria-expanded' : 'true',
+												'tabindex' : '0'
+											});
+									$(event.originalEvent.target).parent("h3")
+											.find("span:eq(0)").removeClass(
+													icons.header).addClass(
+													icons.activeHeader);
+									$(event.originalEvent.target)
+											.parent('h3')
+											.next('div')
+											.addClass(
+													'ui-accordion-content-active')
+											.attr({
+												'aria-hidden' : 'false'
+											}).show('blind');
+
+								} else {
+									$(event.originalEvent.target)
+											.removeClass('ui-corner-all')
+											.addClass(
+													'ui-accordion-header-active ui-state-active ui-corner-top')
+											.attr({
+												'aria-selected' : 'true',
+												'aria-expanded' : 'true',
+												'tabindex' : '0'
+											});
+									$(event.originalEvent.target).find(
+											"span:eq(0)").removeClass(
+											icons.header).addClass(
+											icons.activeHeader);
+									$(event.originalEvent.target)
+											.next('div')
+											.addClass(
+													'ui-accordion-content-active')
+											.attr({
+												'aria-hidden' : 'false'
+											}).show('blind');
+								}
+								$('.open').attr("disabled", "disabled");
+								$('.close').removeAttr("disabled");
+								return false;
+							}
+
+							// var fromIcon =
+							// $(event.originalEvent.target).is(
+							// '.ui-accordion-header > .ui-icon');
+							// return fromIcon;
+							// alert(expandLink.data('isAllOpen'));
+							// if (expandLink.data('isAllOpen')) {
+							// expandLink.text('Expand
+							// all').data('isAllOpen', false);
+							// }
+							// return false;
+							// $(event.originalEvent.target).removeClass();
+							// The accordion believes a panel is being
+							// opened
+						}
+					});
+
+	var icons = $("#accordion").accordion("option", "icons");
+
+	$('.open')
+			.on(
+					"click",
+					function() {
+						$('.ui-accordion-header')
+								.removeClass('ui-corner-all')
+								.addClass(
+										'ui-accordion-header-active ui-state-active ui-corner-top')
+								.attr({
+									'aria-selected' : 'true',
+									'aria-expanded' : 'true',
+									'tabindex' : '0'
+								});
+						$('.ui-accordion-header-icon')
+								.removeClass(icons.header).addClass(
+										icons.activeHeader);
+						$('.ui-accordion-content').addClass(
+								'ui-accordion-content-active').attr({
+							'aria-hidden' : 'false'
+						}).show();
+						$(this).attr("disabled", "disabled");
+						$('.close').removeAttr("disabled");
+					});
+	$('.close')
+			.on(
+					"click",
+					function() {
+						$('.ui-accordion-header')
+								.removeClass(
+										'ui-accordion-header-active ui-state-active ui-corner-top')
+								.addClass('ui-corner-all').attr({
+									'aria-selected' : 'false',
+									'aria-expanded' : 'false',
+									'tabindex' : '-1'
+								});
+						$('.ui-accordion-header-icon').removeClass(
+								icons.activeHeader).addClass(icons.header);
+						$('.ui-accordion-content').removeClass(
+								'ui-accordion-content-active').attr({
+							'aria-hidden' : 'true'
+						}).hide();
+						$(this).attr("disabled", "disabled");
+						$('.open').removeAttr("disabled");
+					});
+
+	// $('.ui-accordion-header').on("click", function() {
+	// $('.open').removeAttr("disabled");
+	// $('.close').removeAttr("disabled");
+	// });
 
 	$.validator
 			.addMethod(
@@ -824,17 +1014,6 @@ $(function() {
 			}
 		},
 
-		BindAllSignatureForAProposal : function(proposalId) {
-			alert(proposalId);
-			proposalsManage.config.url = proposalsManage.config.baseURL
-					+ "GetAllSignatureForAProposal";
-			proposalsManage.config.data = JSON2.stringify({
-				proposalId : proposalId
-			});
-			proposalsManage.config.ajaxCallMode = 12;
-			proposalsManage.ajaxCall(proposalsManage.config);
-		},
-
 		BindProposalDetailsByProposalId : function(proposalId) {
 			proposalsManage.config.url = proposalsManage.config.baseURL
 					+ "GetProposalDetailsByProposalId";
@@ -1316,6 +1495,7 @@ $(function() {
 			$("#chkLN").prop("checked",
 					response.oSPSectionInfo.researchAdministrator.LN);
 		},
+
 		BindInvestigatorInfo : function(investigatorInfo) {
 			rowIndex = 0;
 			proposalsManage
@@ -1650,6 +1830,12 @@ $(function() {
 					'select[name="ddlCollege"]').eq(0).val(), $(
 					'select[name="ddlDepartment"]').eq(0).val(), $(
 					'select[name="ddlPositionType"]').eq(0).val());
+
+			// For Signature Section
+			$("#trSignPICOPI tbody").empty();
+			$("#trSignChair tbody").empty();
+			$("#trSignDean tbody").empty();
+			$("#trSignBusinessManager tbody").empty();
 			return false;
 		},
 
@@ -1691,15 +1877,6 @@ $(function() {
 		},
 
 		SetFirstAccordionActive : function() {
-			var icons = {
-				header : "ui-icon-circle-arrow-e",
-				activeHeader : "ui-icon-circle-arrow-s"
-			};
-			var $accordion = $("#accordion").accordion({
-				heightStyle : "content",
-				icons : icons,
-				collapsible : true
-			});
 			$accordion.accordion("option", "active", 0);
 		},
 
@@ -1717,6 +1894,16 @@ $(function() {
 			this.config.ajaxCallMode = 11;
 			this.ajaxCall(this.config);
 			return isUniqueProjectTitle;
+		},
+
+		BindAllSignatureForAProposal : function(proposalId) {
+			proposalsManage.config.url = proposalsManage.config.baseURL
+					+ "GetAllSignatureForAProposal";
+			proposalsManage.config.data = JSON2.stringify({
+				proposalId : proposalId
+			});
+			proposalsManage.config.ajaxCallMode = 12;
+			proposalsManage.ajaxCall(proposalsManage.config);
 		},
 
 		SaveProposal : function(_proposalId, _flag) {
@@ -1754,7 +1941,7 @@ $(function() {
 									if (!optionsText
 											&& $(this).prop("name") != "ddlPositionTitle") {
 										validateErrorMessage = getLocale(
-												AspxAttributesManagement,
+												gpmsProposalsManagement,
 												"Please select all position details for this user.")
 												+ "<br/>";
 										attributesManage
@@ -1771,8 +1958,17 @@ $(function() {
 				_saveOptions = _saveOptions.substring(0,
 						_saveOptions.length - 3);
 
+				// 0!#!55f7546caf6e041174a9ded7!#!Engineering!#!Electrical
+				// Engineering!#!Tenured/tenure-track faculty!#!Distinguished
+				// Professor
+				// #!#
+				// 2!#!55f7546caf6e041174a9df13!#!Science!#!Chemistry!#!Research
+				// staff!#!Senior Research Scientist
+
+				alert(_saveOptions);
+
 				if (!validateErrorMessage) {
-					var userInfo = {
+					var proposalInfo = {
 						ProposalID : _proposalId,
 						FirstName : $.trim($('#txtFirstName').val()),
 						MiddleName : $.trim($('#txtMiddleName').val()),
@@ -1803,20 +1999,20 @@ $(function() {
 						SaveOptions : _saveOptions
 					};
 
-					proposalsManage.AddUserInfo(userInfo);
+					proposalsManage.AddProposalInfo(proposalInfo);
 
 					return false;
 				}
 			}
 		},
 
-		AddUserInfo : function(info) {
-			this.config.url = this.config.baseURL + "SaveUpdateUser";
+		AddProposalInfo : function(info) {
+			this.config.url = this.config.baseURL + "SaveUpdateProposal";
 			this.config.data = JSON2.stringify({
-				userInfo : info,
+				proposalInfo : info,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 16;
+			this.config.ajaxCallMode = 13;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -2056,7 +2252,41 @@ $(function() {
 			break;
 
 		case 12:
-			console.log(msg);
+			$
+					.each(
+							msg,
+							function(index, item) {
+								var cloneRow = '<tr id='
+										+ item.userProfileId
+										+ '><td><span class="cssClassLabel">'
+										+ item.fullName
+										+ '</span></td><td><input title="'
+										+ item.positionTitle
+										+ '\'s Signature" class="sfInputbox" placeholder="'
+										+ item.positionTitle
+										+ '\'s Signature" type="text"></td><td><input title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text"></td></tr>';
+								switch (item.positionTitle) {
+								case "PI":
+								case "Co-PI":
+								case "Senior":
+									$(cloneRow).appendTo("#trSignPICOPI tbody");
+									break;
+								case "Department Chair":
+								case "Research Director":
+									$(cloneRow).appendTo("#trSignChair tbody");
+									break;
+								case "Dean":
+									$(cloneRow).appendTo("#trSignDean tbody");
+									break;
+								case "Business Manager":
+									$(cloneRow).appendTo(
+											"#trSignBusinessManager tbody");
+									break;
+								default:
+									break;
+								}
+							});
+
 			break;
 
 		case 13:
@@ -2190,22 +2420,17 @@ $(function() {
 				break;
 
 			case 12:
-
+				csscody
+						.error("<h2>"
+								+ getLocale(gpmsProposalsManagement,
+										'Error Message')
+								+ "</h2><p>"
+								+ getLocale(gpmsProposalsManagement,
+										'Cannot get certification/ signatures information')
+								+ "</p>");
 				break;
 
 			case 13:
-
-				break;
-
-			case 14:
-
-				break;
-
-			case 15:
-
-				break;
-
-			case 16:
 				csscody.error("<h2>"
 						+ getLocale(gpmsProposalsManagement, 'Error Message')
 						+ "</h2><p>"
@@ -2539,7 +2764,8 @@ $(function() {
 										$(this).removeClass('error');
 									});
 							$(cloneRow).find("select").each(function(j) {
-								// Remove PI option after first row
+								// Remove PI option
+								// after first row
 								if (j == 0) {
 									$(this).find('option:first').remove();
 								}

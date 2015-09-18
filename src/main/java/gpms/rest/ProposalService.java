@@ -437,23 +437,23 @@ public class ProposalService {
 		List<SignatureInfo> signatures = proposalDAO
 				.findAllSignatureForAProposal(id);
 
-		for (SignatureInfo signatureInfo : signatures) {
-			// TODO : get all delegated User Info for this PI user and bind it
-			// into signature Object
-
-			// Check if the proposal Id is exact to this proposal id
-
-			// TODO : find all the delegated User for this Proposal Id
-			ObjectId userId = new ObjectId(signatureInfo.getUserProfileId());
-			List<SignatureInfo> delegatedUsers = delegationDAO
-					.findDelegatedUsersForAUser(userId,
-							signatureInfo.getPositionTitle(), proposalId);
-
-			for (SignatureInfo delegatedUser : delegatedUsers) {
-				signatures.add(delegatedUser);
-			}
-
-		}
+		// for (SignatureInfo signatureInfo : signatures) {
+		// // TODO : get all delegated User Info for this PI user and bind it
+		// // into signature Object
+		//
+		// // Check if the proposal Id is exact to this proposal id
+		//
+		// // TODO : find all the delegated User for this Proposal Id
+		// ObjectId userId = new ObjectId(signatureInfo.getUserProfileId());
+		// List<SignatureInfo> delegatedUsers = delegationDAO
+		// .findDelegatedUsersForAUser(userId,
+		// signatureInfo.getPositionTitle(), proposalId);
+		//
+		// for (SignatureInfo delegatedUser : delegatedUsers) {
+		// signatures.add(delegatedUser);
+		// }
+		//
+		// }
 
 		return signatures;
 	}

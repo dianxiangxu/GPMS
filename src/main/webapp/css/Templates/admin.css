@@ -3978,13 +3978,13 @@ div.sfFooterwrapper.sfFooterCollapse, div.sideBarRight .sfFooterwrapper.sfFooter
 	-moz-border-radius: 3px 3px 0px 0px;
 }
 
-.sfTableOption table tr td {
-	padding: 0px 10px;
+.sfTableOption table tr td {	
 	color: #fff;
 }
 /*.sfTableOption .sfBtn.icon-search {background:#fff; border-bottom:none; font-size:15px; padding:8px;  margin-left: -4px; border:1px solid #CCCCCC; border-left:none;}*/
 .sfTableOption .sfLeftdiv {
 	margin-bottom: 0px;
+	padding-top: 0px;
 }
 
 .sfTableOption .sfRightdiv label {
@@ -4052,10 +4052,6 @@ div .sfGridwrapper table td a:hover.icon-edit, .sfGridwrapper table td a:hover.i
 	.sfGridwrapper table td a:hover.icon-preview {
 	color: #1a1a1a;
 	text-decoration: none;
-}
-
-.cssClassFromTo{
-	/*padding:5px 0 0 15px; */
 }
 
 #divModulesLists .icon-edit:hover, #divModulesLists .icon-delete:hover {
