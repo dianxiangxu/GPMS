@@ -336,9 +336,11 @@
 											<div>
 												<span class="cssClassRequired">*</span> <span
 													class="cssClassLabelTitle">indicates required fields</span>
-												<div class="accordion-expand-holder">
-													<button type="button" class="open">Expand all</button>
-													<button type="button" class="close">Collapse all</button>
+												<div id="accordion-expand-holder">
+													<button type="button" class="open sfBtn">Expand
+														all</button>
+													<button type="button" class="close sfBtn">Collapse
+														all</button>
 												</div>
 											</div>
 											<div id="accordion">

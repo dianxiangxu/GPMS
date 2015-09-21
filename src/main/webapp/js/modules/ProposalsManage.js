@@ -634,7 +634,8 @@ $(function() {
 											controlclass : '',
 											coltype : 'label',
 											align : 'left',
-											type : 'percent'
+											type : 'percent',
+											hide : true
 										},
 										{
 											display : 'Date Received',
@@ -811,6 +812,7 @@ $(function() {
 			switch (tblID) {
 			case "gdvProposals":
 				proposalsManage.ClearForm();
+				$('#accordion-expand-holder').show();
 
 				$("#trProposalInfo").show();
 				$("#trProposalStatus").show();
@@ -849,10 +851,8 @@ $(function() {
 				// Get Audit Logs
 				proposalsManage.BindProposalAuditLogGrid(argus[0], null, null,
 						null, null);
-				$('#ui-id-21').show();
 				$('#ui-id-23').show();
 				$('#ui-id-25').show();
-
 				break;
 			default:
 				break;
@@ -1623,6 +1623,9 @@ $(function() {
 			validator.resetForm();
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
+
+			$('#accordion-expand-holder').hide();
+
 			var container = $("#accordion div:gt(0)");
 			var inputs = container.find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
@@ -2649,7 +2652,6 @@ $(function() {
 
 			$('#btnAddNew').bind("click", function() {
 				proposalsManage.ClearForm();
-				$('#ui-id-21').hide();
 				$('#ui-id-23').hide();
 				$('#ui-id-25').hide();
 				$("#trProposalInfo").hide();
