@@ -253,18 +253,18 @@
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
-																	<td style="width: 120px; float: left;"><label
+																	<td style="width: 180px; float: left;"><label
 																		class="cssClassLabel sfLocale">Received On:</label>
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Received On From"
-																				id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
+																				id="txtSearchReceivedOnFrom" class="sfTextBoxFix"
 																				placeholder="From">
 																		</div>
 																		<div>
 																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Received On To"
-																				id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
+																				id="txtSearchReceivedOnTo" class="sfTextBoxFix"
 																				placeholder="To">
 																		</div></td>
 
