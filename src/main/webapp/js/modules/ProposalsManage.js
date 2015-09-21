@@ -1687,6 +1687,36 @@ $(function() {
 			return false;
 		},
 
+		BindPICoPISignatures : function() {
+			$("#dataTable tbody>tr:gt(0)").remove();
+			$("#dataTable tbody>tr:first").find("select").find('option').each(
+					function(i) {
+						$(this).removeAttr("selected");
+					});
+
+			// For form Dropdown Binding
+			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
+					.prop('disabled', 'disabled');
+			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID())
+					.prop('selected', 'selected').prop('disabled', 'disabled');
+
+			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
+					.val());
+			proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
+					0).val());
+			proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
+					.eq(0).val(), $('select[name="ddlCollege"]').eq(0).val());
+			proposalsManage.BindPositionTypeDropDown(
+					$('select[name="ddlName"]').eq(0).val(), $(
+							'select[name="ddlCollege"]').eq(0).val(), $(
+							'select[name="ddlDepartment"]').eq(0).val());
+			proposalsManage.BindPositionTitleDropDown($(
+					'select[name="ddlName"]').eq(0).val(), $(
+					'select[name="ddlCollege"]').eq(0).val(), $(
+					'select[name="ddlDepartment"]').eq(0).val(), $(
+					'select[name="ddlPositionType"]').eq(0).val());
+		},
+
 		onInit : function() {
 			proposalsManage.SetFirstAccordionActive();
 			$('#btnReset').hide();
@@ -2652,6 +2682,12 @@ $(function() {
 
 			$('#btnAddNew').bind("click", function() {
 				proposalsManage.ClearForm();
+				proposalsManage.BindPICoPISignatures();
+
+				$("#trSignChair").hide();
+				$("#trSignDean").hide();
+				$("#trSignBusinessManager").hide();
+
 				$('#ui-id-23').hide();
 				$('#ui-id-25').hide();
 				$("#trProposalInfo").hide();
@@ -2668,6 +2704,7 @@ $(function() {
 
 			$('#btnReset').bind("click", function() {
 				proposalsManage.ClearForm();
+				proposalsManage.BindPICoPISignatures();
 			});
 
 			$('#btnSaveProposal').click(function() {

@@ -378,15 +378,15 @@
 																		<option value="2">Senior Personnel</option>
 																</select></td>
 																<td><select title="Choose Full Name"
-																	class="sfListmenu" name="ddlName" style="width: 150px;">
+																	class="sfListmenu" name="ddlName" style="width: 125px;">
 																</select></td>
 																<td><select title="Choose College Name"
 																	class="sfListmenu" name="ddlCollege"
-																	style="width: 110px;">
+																	style="width: 85px;">
 																</select></td>
 																<td><select title="Choose Department Name"
 																	class="sfListmenu" name="ddlDepartment"
-																	style="width: 125px;">
+																	style="width: 122px;">
 																</select></td>
 																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
@@ -394,7 +394,7 @@
 																</select></td>
 																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
-																	style="width: 150px;">
+																	style="width: 145px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
 																	class="sfTextBoxSmall" name="txtPhoneNo"
