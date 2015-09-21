@@ -2288,15 +2288,32 @@ $(function() {
 					.each(
 							msg,
 							function(index, item) {
-								var cloneRow = '<tr id='
-										+ item.userProfileId
-										+ '><td><span class="cssClassLabel">'
+								var signedDate = '';
+								var readOnly = '';
+
+								if (item.signedDate != null) {
+									signedDate = item.signedDate;
+								}
+
+								if (GPMS.utils.GetUserProfileID() != item.userProfileId) {
+									readOnly = 'readonly="true"';
+								}
+
+								var cloneRow = '<tr><td><span class="cssClassLabel">'
 										+ item.fullName
 										+ '</span></td><td><input title="'
 										+ item.positionTitle
 										+ '\'s Signature" class="sfInputbox" placeholder="'
 										+ item.positionTitle
-										+ '\'s Signature" type="text"></td><td><input title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text"></td></tr>';
+										+ '\'s Signature" type="text" value="'
+										+ item.signature
+										+ '"'
+										+ ' name="'
+										+ item.userProfileId
+										+ '" '
+										+ readOnly
+										+ '></td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" value='
+										+ signedDate + '></td></tr>';
 								switch (item.positionTitle) {
 								case "PI":
 								case "Co-PI":
@@ -2688,6 +2705,8 @@ $(function() {
 			$('#btnAddNew').bind("click", function() {
 				proposalsManage.ClearForm();
 				proposalsManage.BindPICoPISignatures();
+
+				$("input[name='signaturedate']").hide();
 
 				$("#trSignChair").hide();
 				$("#trSignDean").hide();
