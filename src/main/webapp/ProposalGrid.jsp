@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "55f7546baf6e041174a9de81";
+	var userProfileId = "5600525baf6e041d406733a6";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -253,18 +253,18 @@
 																	<!-- 																				<option value="0" class="sfLocale">--All--</option> -->
 																	<!-- 																		</select></td> -->
 
-																	<td style="width: 120px; float: left;"><label
+																	<td style="width: 180px; float: left;"><label
 																		class="cssClassLabel sfLocale">Received On:</label>
 																		<div>
 																			<span class="cssClassLabel sfLocale">From:</span> <input
 																				type="text" title="Received On From"
-																				id="txtSearchReceivedOnFrom" class="sfTextBoxSmall"
+																				id="txtSearchReceivedOnFrom" class="sfTextBoxFix"
 																				placeholder="From">
 																		</div>
 																		<div>
 																			<span class="cssClassLabel sfLocale">To:</span> <input
 																				type="text" title="Received On To"
-																				id="txtSearchReceivedOnTo" class="sfTextBoxSmall"
+																				id="txtSearchReceivedOnTo" class="sfTextBoxFix"
 																				placeholder="To">
 																		</div></td>
 
@@ -336,9 +336,11 @@
 											<div>
 												<span class="cssClassRequired">*</span> <span
 													class="cssClassLabelTitle">indicates required fields</span>
-												<div class="accordion-expand-holder">
-													<button type="button" class="open">Expand all</button>
-													<button type="button" class="close">Collapse all</button>
+												<div id="accordion-expand-holder">
+													<button type="button" class="open sfBtn">Expand
+														all</button>
+													<button type="button" class="close sfBtn">Collapse
+														all</button>
 												</div>
 											</div>
 											<div id="accordion">
@@ -376,15 +378,15 @@
 																		<option value="2">Senior Personnel</option>
 																</select></td>
 																<td><select title="Choose Full Name"
-																	class="sfListmenu" name="ddlName" style="width: 150px;">
+																	class="sfListmenu" name="ddlName" style="width: 125px;">
 																</select></td>
 																<td><select title="Choose College Name"
 																	class="sfListmenu" name="ddlCollege"
-																	style="width: 110px;">
+																	style="width: 85px;">
 																</select></td>
 																<td><select title="Choose Department Name"
 																	class="sfListmenu" name="ddlDepartment"
-																	style="width: 125px;">
+																	style="width: 122px;">
 																</select></td>
 																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
@@ -392,7 +394,7 @@
 																</select></td>
 																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
-																	style="width: 150px;">
+																	style="width: 145px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
 																	class="sfTextBoxSmall" name="txtPhoneNo"

@@ -18,6 +18,10 @@ public class SignatureInfo {
 	private String fullName = new String();
 
 	@Expose
+	@Property("signature")
+	private String signature = new String();
+
+	@Expose
 	@Property("position title")
 	private String positionTitle = new String();
 
@@ -50,6 +54,14 @@ public class SignatureInfo {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 	public String getPositionTitle() {
@@ -96,6 +108,8 @@ public class SignatureInfo {
 		result = prime * result
 				+ ((positionTitle == null) ? 0 : positionTitle.hashCode());
 		result = prime * result
+				+ ((signature == null) ? 0 : signature.hashCode());
+		result = prime * result
 				+ ((signedDate == null) ? 0 : signedDate.hashCode());
 		result = prime * result
 				+ ((userProfileId == null) ? 0 : userProfileId.hashCode());
@@ -128,6 +142,11 @@ public class SignatureInfo {
 				return false;
 		} else if (!positionTitle.equals(other.positionTitle))
 			return false;
+		if (signature == null) {
+			if (other.signature != null)
+				return false;
+		} else if (!signature.equals(other.signature))
+			return false;
 		if (signedDate == null) {
 			if (other.signedDate != null)
 				return false;
@@ -144,9 +163,10 @@ public class SignatureInfo {
 	@Override
 	public String toString() {
 		return "SignatureInfo [userProfileId=" + userProfileId + ", fullName="
-				+ fullName + ", positionTitle=" + positionTitle
-				+ ", signedDate=" + signedDate + ", isDelegated=" + isDelegated
-				+ ", delegatedAs=" + delegatedAs + "]";
+				+ fullName + ", signature=" + signature + ", positionTitle="
+				+ positionTitle + ", signedDate=" + signedDate
+				+ ", isDelegated=" + isDelegated + ", delegatedAs="
+				+ delegatedAs + "]";
 	}
 
 }
