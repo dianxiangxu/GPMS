@@ -1,6 +1,7 @@
 package gpms.rest;
 
 import gpms.DAL.DataModel;
+import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
@@ -37,27 +38,27 @@ import com.mongodb.MongoClient;
 @Path("/Registration")
 public class RegistrationService 
 {
-	private DataModel dm = null;
+	private DataModel dm = new DataModel();
 	private final static String queueName = "processing-queue";
-	private MongoClient mongoClient = null;
-	private Morphia morphia = null;
+	private MongoClient mongoClient= MongoDBConnector.getMongo();
+	private Morphia morphia = new Morphia();
 	private String dbName = "GPMS";
-	private UserAccountDAO userAccountDAO = null;
+	private UserAccountDAO userAccountDAO;
 	private UserAccount newUserAccount;
-	private UserProfileDAO userProfileDAO = null;
+	private UserProfileDAO userProfileDAO;
 	private UserProfile newUserProfile;
-
-	private ProposalDAO proposalDAO = null;
-	private boolean Authorized;
+	private boolean Authorized = true;
 
 
-	public  RegistrationService() {
+	public  RegistrationService() 
+	{	
 		dm = new DataModel();
 	}
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String sayPlainTextHello() {
+	public String sayPlainTextHello() 
+	{
 		return "Hello Users";
 	}
 
@@ -85,8 +86,12 @@ public class RegistrationService
 			@FormParam("personalEmail") String personalEmail,
 			@Context HttpServletRequest req) throws Exception {
 
+
+		
 		try 
 		{
+			userAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+			userProfileDAO = new UserProfileDAO(mongoClient, morphia, dbName);
 			newUserProfile = new UserProfile();
 			newUserAccount = new UserAccount();
 			newUserProfile.setFirstName(firstname);
@@ -109,11 +114,14 @@ public class RegistrationService
 			newAddress.setState(state);
 			newAddress.setZipcode(zipCode);
 			newAddress.setCountry(country);
+			newAddress.setStreet(street);
 			if(apt_misc!=null)
 			{
 				newAddress.setApt(apt_misc);
 			}
 
+			newUserProfile.getAddresses().add(newAddress);
+			
 			//Emails and Phone Numbers
 			newUserProfile.getWorkEmails().add(workEmail);
 			newUserProfile.getPersonalEmails().add(personalEmail);
@@ -132,12 +140,12 @@ public class RegistrationService
 
 			//This point should scan for a user in the database
 			//If the user account name exists, we should not allow the creation of an account object.
-			UserAccountDAO newAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
+			
 
 			UserAccount findAccount = null;
-			findAccount = newAccountDAO.findByUserName(userName);
+			findAccount = userAccountDAO.findByUserName(userName);
 
-			boolean Authorized = true;
+			
 
 			if (findAccount!=null)
 			{
@@ -161,34 +169,10 @@ public class RegistrationService
 			//Not sure what this variable is yet.
 			//int qId = 0;
 
-			newUserProfile.setUserAccount(newUserAccount);
-			userAccountDAO = new UserAccountDAO(mongoClient, morphia, dbName);
-			userProfileDAO = new UserProfileDAO(mongoClient, morphia, personalEmail);
-
+			newUserProfile.setUserId(newUserAccount);
 			userAccountDAO.save(newUserAccount);
+			
 			userProfileDAO.save(newUserProfile);
-
-			Date now = new Date();
-			SimpleDateFormat formatNow = new SimpleDateFormat(
-					"yyyy-MM-dd HH:mm:ss");
-
-			String startTime = formatNow.format(now);
-			// Get current time
-			long start = System.currentTimeMillis();
-
-			//				TaskQueue queue = ProcessingFactory.getTaskQueue(queueName);
-			//				if (queue != null) {
-			//					queue.add(newUserProfile);
-			//					qId = dm.InsertQueue("Register", startTime);
-			//				}
-			//				while (!request.isCompleted()) {
-			//					Thread.currentThread();
-			//					Thread.sleep(5);
-			//				}
-			// Get elapsed time in milliseconds
-			long elapsedTimeMillis = System.currentTimeMillis() - start;
-
-			//				dm.UpdateQueue(qId, elapsedTimeMillis);
 
 			/**
 			 * TODO create this Object to keep track of a logged in user
@@ -281,4 +265,4 @@ public class RegistrationService
 	//		return "0";
 	//	}
 }
-}
+

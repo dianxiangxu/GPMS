@@ -169,26 +169,33 @@
 																<td class="cssClassTableRightCol"></td>
 															</tr>
 															<tr>
-																<td><span class="cssClassLabel" id="first_name"
-																	name="firstname">First Name:</span> <span
-																	class="cssClassRequired">*</span></td>
+																<td><span class="cssClassLabel">Account User
+																		Name:</span><span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtFirstName"
-																	name="firstName" placeholder="First Name"></td>
+																	type="text" class="sfInputBox" id="userName"
+																	name="username"
+																	placeholder="Enter Desired Account Name"></td>
+															<tr></tr>
+															<td><span class="cssClassLabel">First Name</span> <span
+																class="cssClassRequired">*</span></td>
+															<td class="cssClassTableRightCol"><input type="text"
+																class="sfInputbox" id="firstname" name="firstname"
+																placeholder="First Name"></td>
 
-																<td><span class="cssClassLabel" id="middle_name"
-																	name="middlename">Middle Name:</span></td>
-																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtMiddleName"
-																	name="middleName" placeholder="Middle Name"></td>
-															</tr>
+															<td><span class="cssClassLabel" id="middle_name"
+																name="middlename">Middle Name:</span></td>
+															<td class="cssClassTableRightCol"><input type="text"
+																class="sfInputbox" id="middlename" name="middlename"
+																placeholder="Middle Name"></td>
+
+
 															<tr>
 																<td><span class="cssClassLabel" id="last_name"
 																	name="lastname">Last Name:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" id="txtLastName" class="sfInputbox"
-																	name="lastName" placeholder="Last Name"></td>
+																	type="text" class="sfInputbox" id="lastname"
+																	name="lastname" placeholder="Last Name"></td>
 																<td></td>
 																<td></td>
 															</tr>
@@ -394,7 +401,7 @@
 										</button>
 									</p>
 									<p>
-										<input type="submit" value="Save User"  id="btnSaveUser"
+										<input type="submit" value="Save User" id="btnSaveUser"
 											class="sfBtn">
 									</p>
 								</div>
