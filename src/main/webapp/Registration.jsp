@@ -124,7 +124,7 @@
 <link type="text/css" rel="stylesheet" href="css/Templates/admin.css" />
 </head>
 <body bgcolor="white">
-	<form id="registrationForm" action="RESTQ/Registration/NewUser"
+	<form id="registrationForm" action="REST/Registration/NewUser"
 		method="POST">
 		<noscript>
 			<span>This page requires java-script to be enabled. Please
@@ -169,26 +169,33 @@
 																<td class="cssClassTableRightCol"></td>
 															</tr>
 															<tr>
-																<td><span class="cssClassLabel" id="first_name"
-																	name="firstname">First Name:</span> <span
-																	class="cssClassRequired">*</span></td>
+																<td><span class="cssClassLabel">Account User
+																		Name:</span><span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtFirstName"
-																	name="firstName" placeholder="First Name"></td>
+																	type="text" class="sfInputBox" id="userName"
+																	name="username"
+																	placeholder="Enter Desired Account Name"></td>
+															<tr></tr>
+															<td><span class="cssClassLabel">First Name</span> <span
+																class="cssClassRequired">*</span></td>
+															<td class="cssClassTableRightCol"><input type="text"
+																class="sfInputbox" id="firstname" name="firstname"
+																placeholder="First Name"></td>
 
-																<td><span class="cssClassLabel" id="middle_name"
-																	name="middlename">Middle Name:</span></td>
-																<td class="cssClassTableRightCol"><input
-																	type="text" class="sfInputbox" id="txtMiddleName"
-																	name="middleName" placeholder="Middle Name"></td>
-															</tr>
+															<td><span class="cssClassLabel" id="middle_name"
+																name="middlename">Middle Name:</span></td>
+															<td class="cssClassTableRightCol"><input type="text"
+																class="sfInputbox" id="middlename" name="middlename"
+																placeholder="Middle Name"></td>
+
+
 															<tr>
 																<td><span class="cssClassLabel" id="last_name"
 																	name="lastname">Last Name:</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	type="text" id="txtLastName" class="sfInputbox"
-																	name="lastName" placeholder="Last Name"></td>
+																	type="text" class="sfInputbox" id="lastname"
+																	name="lastname" placeholder="Last Name"></td>
 																<td></td>
 																<td></td>
 															</tr>
@@ -394,15 +401,8 @@
 										</button>
 									</p>
 									<p>
-										<button title="Delete" type="button" class="delbutton sfBtn">
-											<span class="sfLocale icon-delete">Delete</span>
-										</button>
-									</p>
-									<p>
-										<button title="Save User" type="button" id="btnSaveUser"
+										<input type="submit" value="Save User" id="btnSaveUser"
 											class="sfBtn">
-											<span class="sfLocale icon-save">Save</span>
-										</button>
 									</p>
 								</div>
 							</div>
