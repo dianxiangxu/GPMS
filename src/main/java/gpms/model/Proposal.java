@@ -3,7 +3,9 @@ package gpms.model;
 import gpms.dao.ProposalDAO;
 
 import java.security.Signature;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -78,7 +80,7 @@ public class Proposal extends BaseEntity {
 
 	@Expose
 	@Embedded("signature info")
-	private SignatureInfo signatureInfo = new SignatureInfo();
+	private List<SignatureInfo> signatureInfo = new ArrayList<SignatureInfo>();
 
 	public Proposal() {
 	}
@@ -239,20 +241,12 @@ public class Proposal extends BaseEntity {
 		this.oSPSectionInfo = oSPSectionInfo;
 	}
 
-	public SignatureInfo getSignatureInfo() {
+	public List<SignatureInfo> getSignatureInfo() {
 		return signatureInfo;
 	}
 
-	public void setSignatureInfo(SignatureInfo signatureInfo) {
+	public void setSignatureInfo(List<SignatureInfo> signatureInfo) {
 		this.signatureInfo = signatureInfo;
-	}
-
-	@Override
-	public String toString() {
-		return new StringBuffer(" Proposal Number : ")
-				.append(this.getProposalNo()).append(" Date Received : ")
-				.append(this.getDateReceived()).append(" Proposal Status : ")
-				.append(this.getProposalStatus()).toString();
 	}
 
 	@Override
@@ -384,6 +378,22 @@ public class Proposal extends BaseEntity {
 		} else if (!universityCommitments.equals(other.universityCommitments))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Proposal [proposalNo=" + proposalNo + ", dateReceived="
+				+ dateReceived + ", proposalStatus=" + proposalStatus
+				+ ", investigatorInfo=" + investigatorInfo + ", projectInfo="
+				+ projectInfo + ", sponsorAndBudgetInfo="
+				+ sponsorAndBudgetInfo + ", costShareInfo=" + costShareInfo
+				+ ", universityCommitments=" + universityCommitments
+				+ ", conflicOfInterest=" + conflicOfInterest
+				+ ", complianceInfo=" + complianceInfo + ", additionalInfo="
+				+ additionalInfo + ", collaborationInfo=" + collaborationInfo
+				+ ", confidentialInfo=" + confidentialInfo
+				+ ", oSPSectionInfo=" + oSPSectionInfo + ", signatureInfo="
+				+ signatureInfo + "]";
 	}
 
 }
