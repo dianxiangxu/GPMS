@@ -11,6 +11,7 @@ import gpms.model.ProjectLocation;
 import gpms.model.ProjectPeriod;
 import gpms.model.ProjectType;
 import gpms.model.Proposal;
+import gpms.model.SignatureInfo;
 import gpms.model.SponsorAndBudgetInfo;
 import gpms.model.TypeOfRequest;
 import gpms.model.UserAccount;
@@ -109,6 +110,9 @@ public class Create100Proposals {
 			// --------------------------------------------------------
 			// newProposalDAO.save(newProposal);
 
+			SignatureInfo newSignInfo = new SignatureInfo();
+			newProposal.getSignatureInfo().add(newSignInfo);
+
 			InvestigatorInfo newInfo = new InvestigatorInfo();
 
 			InvestigatorRefAndPosition newInvPos = new InvestigatorRefAndPosition();
@@ -139,7 +143,7 @@ public class Create100Proposals {
 				newInfo.addSeniorPersonnel(makeSenior(masterList, newInfo));
 			}
 
-			// REUIERED FOR AUDIT LOG
+			// REQUIRED FOR AUDIT LOG
 			newProposalDAO.setEditInvestigatorInfo(newProposal, newInfo,
 					propProfile);
 

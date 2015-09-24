@@ -36,17 +36,6 @@ public class InvestigatorRefAndPosition {
 
 	}
 
-	public InvestigatorRefAndPosition(UserProfile userRef,
-			String userProfileId, String college, String department,
-			String positionType, String positionTitle) {
-		this.userRef = userRef;
-		this.userProfileId = userProfileId;
-		this.college = college;
-		this.department = department;
-		this.positionType = positionType;
-		this.positionTitle = positionTitle;
-	}
-
 	public UserProfile getUserRef() {
 		return userRef;
 	}

@@ -2,6 +2,9 @@ package gpms.rest.test;
 
 import gpms.model.UserProfile;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -13,9 +16,16 @@ public class JerseyClient {
 
 	public static void main(String[] args) {
 		try {
-			String dob = "Nov 4, 1984 8:14 PM";
-			UserProfile user = new UserProfile("Adriana", "Herald", "Barrer",
-					dob, "Male");
+			String dateOfBirth = "Nov 4, 1984 8:14 PM";
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
+			Date dob = df.parse(dateOfBirth);
+
+			UserProfile user = new UserProfile();
+			user.setFirstName("Adriana");
+			user.setMiddleName("Herald");
+			user.setLastName("Barrer");
+			user.setDateOfBirth(dob);
+			user.setGender("Male");
 
 			ClientConfig clientConfig = new DefaultClientConfig();
 

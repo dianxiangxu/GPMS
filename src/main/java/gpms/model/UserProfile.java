@@ -7,8 +7,6 @@ package gpms.model;
 
 import gpms.dao.UserProfileDAO;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
-import org.mongodb.morphia.annotations.PrePersist;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.utils.IndexDirection;
@@ -234,70 +231,6 @@ public class UserProfile extends BaseEntity {
 		userAccount = newUserAccount;
 	}
 
-	/**
-	 * Overloaded constructor
-	 * 
-	 * @param firstName
-	 *            First Name of the User
-	 * @param middleName
-	 *            Middle Name of the User
-	 * @param lastName
-	 *            Last Name of the User
-	 * @param details
-	 *            List of Job Type / Position
-	 * @param phoneNumbers
-	 *            Phone Numbers of the User
-	 * @param emails
-	 *            Emails of the user
-	 */
-	public UserProfile(String firstName, String middleName, String lastName,
-			Date dateOfBirth, String gender,
-			ArrayList<PositionDetails> details,
-			ArrayList<String> setOfficeNumbers,
-			ArrayList<String> setHomeNumbers,
-			ArrayList<String> setMobileNumbers,
-			ArrayList<String> setOtherNumbers, ArrayList<String> emails,
-			UserAccount userAccount) {
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-		this.gender = gender;
-		this.details = details;
-		officeNumbers = setOfficeNumbers;
-		homeNumbers = setHomeNumbers;
-		mobileNumbers = setMobileNumbers;
-		otherNumbers = setOtherNumbers;
-
-		this.userAccount = userAccount;
-	}
-
-	/**
-	 * Constructor for creating user profile with name only
-	 * 
-	 * @param firstName
-	 *            First name of the user
-	 * @param middleName
-	 *            Middle name of the user
-	 * @param lastName
-	 *            Last name of the user
-	 * @throws ParseException
-	 */
-	public UserProfile(String firstName, String middleName, String lastName,
-			String dateOfBirth, String gender) throws ParseException {
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
-		Date dob = df.parse(dateOfBirth);
-
-		this.dateOfBirth = dob;
-		this.gender = gender;
-	}
-
-
-	
 	/**
 	 * toString returns full user name
 	 * 

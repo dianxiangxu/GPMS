@@ -1663,8 +1663,6 @@ $(function() {
 			// For form Dropdown Binding
 			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
 					.prop('disabled', 'disabled');
-			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID())
-					.prop('selected', 'selected').prop('disabled', 'disabled');
 
 			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
 					.val());
@@ -2294,7 +2292,6 @@ $(function() {
 								if (item.signedDate != null) {
 									signedDate = item.signedDate;
 								}
-
 								if (GPMS.utils.GetUserProfileID() != item.userProfileId) {
 									readOnly = 'readonly="true"';
 								}
@@ -2702,23 +2699,29 @@ $(function() {
 								}
 							});
 
-			$('#btnAddNew').bind("click", function() {
-				proposalsManage.ClearForm();
-				proposalsManage.BindPICoPISignatures();
+			$('#btnAddNew').bind(
+					"click",
+					function() {
+						proposalsManage.ClearForm();
+						$('select[name=ddlName]').eq(0).val(
+								GPMS.utils.GetUserProfileID()).prop('selected',
+								'selected').prop('disabled', 'disabled');
 
-				$("input[name='signaturedate']").hide();
+						proposalsManage.BindPICoPISignatures();
 
-				$("#trSignChair").hide();
-				$("#trSignDean").hide();
-				$("#trSignBusinessManager").hide();
+						$("input[name='signaturedate']").hide();
 
-				$('#ui-id-23').hide();
-				$('#ui-id-25').hide();
-				$("#trProposalInfo").hide();
-				$("#trProposalStatus").hide();
-				$('#divProposalGrid').hide();
-				$('#divProposalForm').show();
-			});
+						$("#trSignChair").hide();
+						$("#trSignDean").hide();
+						$("#trSignBusinessManager").hide();
+
+						$('#ui-id-23').hide();
+						$('#ui-id-25').hide();
+						$("#trProposalInfo").hide();
+						$("#trProposalStatus").hide();
+						$('#divProposalGrid').hide();
+						$('#divProposalForm').show();
+					});
 
 			$('#btnBack').bind("click", function() {
 				$('#divProposalForm').hide();

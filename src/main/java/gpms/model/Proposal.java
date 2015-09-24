@@ -85,37 +85,6 @@ public class Proposal extends BaseEntity {
 	public Proposal() {
 	}
 
-	public Proposal(String proposalNo, Date dateReceived,
-			Status proposalStatus, InvestigatorInfo investigatorInfo,
-			ProjectInfo projectInfo, SponsorAndBudgetInfo sponsorAndBudgetInfo,
-			CostShareInfo costShareInfo) {
-		this.proposalNo = proposalNo;
-		this.dateReceived = dateReceived;
-		this.proposalStatus = proposalStatus;
-
-		// TODO:: need to do in loop of the list object
-		this.investigatorInfo = investigatorInfo;
-		this.projectInfo = projectInfo;
-		this.sponsorAndBudgetInfo = sponsorAndBudgetInfo;
-		this.costShareInfo = new CostShareInfo();
-		this.universityCommitments = new UniversityCommitments();
-		this.conflicOfInterest = new ConflictOfInterest();
-		this.complianceInfo = new ComplianceInfo();
-	}
-
-	public Proposal(String proposalNo, Date dateReceived, Status proposalStatus) {
-		this.proposalNo = proposalNo;
-		this.dateReceived = dateReceived;
-		this.proposalStatus = proposalStatus;
-		investigatorInfo = new InvestigatorInfo();
-		projectInfo = new ProjectInfo();
-		sponsorAndBudgetInfo = new SponsorAndBudgetInfo();
-		costShareInfo = new CostShareInfo();
-		universityCommitments = new UniversityCommitments();
-		conflicOfInterest = new ConflictOfInterest();
-		complianceInfo = new ComplianceInfo();
-	}
-
 	public String getProposalNo() {
 		return proposalNo;
 	}
@@ -245,7 +214,7 @@ public class Proposal extends BaseEntity {
 		return signatureInfo;
 	}
 
-	public void setSignatureInfo(List<SignatureInfo> signatureInfo) {
+	public void setSignatureInfo(ArrayList<SignatureInfo> signatureInfo) {
 		this.signatureInfo = signatureInfo;
 	}
 

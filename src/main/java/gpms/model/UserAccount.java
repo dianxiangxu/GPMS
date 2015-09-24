@@ -46,18 +46,6 @@ public class UserAccount extends BaseEntity {
 	public UserAccount() {
 	}
 
-	public UserAccount(String userName, String password) {
-		this.userName = userName;
-		this.password = password;
-		// TODO:: encrypt the password
-		// this.set_uid(id);
-	}
-
-	public UserAccount(String userName) {
-		this.userName = userName;
-		this.password = "123456789"; // TODO:: user random password generator
-	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -151,7 +139,7 @@ public class UserAccount extends BaseEntity {
 
 	@Override
 	public UserAccount clone() throws CloneNotSupportedException {
-		UserAccount copy = new UserAccount(this.userName, this.password);
+		UserAccount copy = new UserAccount();
 		copy.setId(this.getId());
 		copy.setVersion(this.getVersion());
 		copy.setDeleted(this.isDeleted());
