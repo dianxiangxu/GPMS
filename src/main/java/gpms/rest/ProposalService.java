@@ -421,11 +421,11 @@ public class ProposalService {
 
 	@POST
 	@Path("/GetAllSignatureForAProposal")
-	public String getAllSignatureForAProposal(String message)
+	public List<SignatureInfo> getAllSignatureForAProposal(String message)
 			throws UnknownHostException, JsonProcessingException, IOException,
 			ParseException {
 		String proposalId = new String();
-		String response = new String();
+		// String response = new String();
 
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -439,10 +439,10 @@ public class ProposalService {
 		List<SignatureInfo> signatures = proposalDAO
 				.findAllSignatureForAProposal(id);
 
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")
-				.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
-				.create();
-		response = gson.toJson(signatures, SignatureInfo.class);
+		// Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")
+		// .excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
+		// .create();
+		// response = gson.toJson(signatures, SignatureInfo.class);
 
 		// for (SignatureInfo signatureInfo : signatures) {
 		// // TODO : get all delegated User Info for this PI user and bind it
@@ -462,7 +462,7 @@ public class ProposalService {
 		//
 		// }
 
-		return response;
+		return signatures;
 	}
 
 }

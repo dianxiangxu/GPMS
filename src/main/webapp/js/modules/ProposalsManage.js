@@ -2292,8 +2292,11 @@ $(function() {
 								if (item.signedDate != null) {
 									signedDate = item.signedDate;
 								}
+
 								if (GPMS.utils.GetUserProfileID() != item.userProfileId) {
 									readOnly = 'readonly="true"';
+								} else {
+									readOnly = 'required="true"';
 								}
 
 								var cloneRow = '<tr><td><span class="cssClassLabel">'
@@ -2309,8 +2312,11 @@ $(function() {
 										+ item.userProfileId
 										+ '" '
 										+ readOnly
-										+ '></td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" value='
-										+ signedDate + '></td></tr>';
+										+ '>'
+										+ '</td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" value="'
+										+ $.format.date(signedDate,
+												'yyyy/MM/dd hh:mm:ss a')
+										+ '"></td></tr>';
 								switch (item.positionTitle) {
 								case "PI":
 								case "Co-PI":

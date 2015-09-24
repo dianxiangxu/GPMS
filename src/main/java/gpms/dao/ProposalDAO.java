@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
@@ -657,6 +658,16 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			if (PI.getUserRef().getId().toString()
 					.equals(signature.getUserProfileId())
 					&& signature.getPositionTitle().equals("PI")) {
+
+				// "yyyy-MM-dd'T'HH:mm:ss zzzz"
+				DateFormat sdf = new SimpleDateFormat(
+						"EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+				DateFormat format = new SimpleDateFormat(
+						"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+				// Date activityDateFrom =
+				// format.parse(signature.getSignedDate()
+				// .toString());
+
 				piSign.setUserProfileId(signature.getUserProfileId());
 				piSign.setFullName(signature.getFullName());
 				piSign.setSignature(signature.getSignature());
