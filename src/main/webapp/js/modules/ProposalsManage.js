@@ -1663,8 +1663,6 @@ $(function() {
 			// For form Dropdown Binding
 			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
 					.prop('disabled', 'disabled');
-			$('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID())
-					.prop('selected', 'selected').prop('disabled', 'disabled');
 
 			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
 					.val());
@@ -2297,6 +2295,8 @@ $(function() {
 
 								if (GPMS.utils.GetUserProfileID() != item.userProfileId) {
 									readOnly = 'readonly="true"';
+								} else {
+									readOnly = 'required="true"';
 								}
 
 								var cloneRow = '<tr><td><span class="cssClassLabel">'
@@ -2312,8 +2312,11 @@ $(function() {
 										+ item.userProfileId
 										+ '" '
 										+ readOnly
-										+ '></td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" value='
-										+ signedDate + '></td></tr>';
+										+ '>'
+										+ '</td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" value="'
+										+ $.format.date(signedDate,
+												'yyyy/MM/dd hh:mm:ss a')
+										+ '"></td></tr>';
 								switch (item.positionTitle) {
 								case "PI":
 								case "Co-PI":
@@ -2702,23 +2705,29 @@ $(function() {
 								}
 							});
 
-			$('#btnAddNew').bind("click", function() {
-				proposalsManage.ClearForm();
-				proposalsManage.BindPICoPISignatures();
+			$('#btnAddNew').bind(
+					"click",
+					function() {
+						proposalsManage.ClearForm();
+						$('select[name=ddlName]').eq(0).val(
+								GPMS.utils.GetUserProfileID()).prop('selected',
+								'selected').prop('disabled', 'disabled');
 
-				$("input[name='signaturedate']").hide();
+						proposalsManage.BindPICoPISignatures();
 
-				$("#trSignChair").hide();
-				$("#trSignDean").hide();
-				$("#trSignBusinessManager").hide();
+						$("input[name='signaturedate']").hide();
 
-				$('#ui-id-23').hide();
-				$('#ui-id-25').hide();
-				$("#trProposalInfo").hide();
-				$("#trProposalStatus").hide();
-				$('#divProposalGrid').hide();
-				$('#divProposalForm').show();
-			});
+						$("#trSignChair").hide();
+						$("#trSignDean").hide();
+						$("#trSignBusinessManager").hide();
+
+						$('#ui-id-23').hide();
+						$('#ui-id-25').hide();
+						$("#trProposalInfo").hide();
+						$("#trProposalStatus").hide();
+						$('#divProposalGrid').hide();
+						$('#divProposalForm').show();
+					});
 
 			$('#btnBack').bind("click", function() {
 				$('#divProposalForm').hide();

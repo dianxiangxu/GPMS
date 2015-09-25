@@ -57,7 +57,8 @@ public class UserEntryExample {
 		UserAccountDAO newUserAccountDAO = new UserAccountDAO(mongo, morphia,
 				"GPMS");
 
-		UserAccount newUserAccount = new UserAccount(userName);
+		UserAccount newUserAccount = new UserAccount();
+		newUserAccount.setUserName(userName);
 
 		newUserProfileDAO.save(newUser);
 		newUserAccountDAO.save(newUserAccount);

@@ -68,7 +68,8 @@ public class UserProfileDAOTest {
 		// Test that a user can be added and the first name can be retrieved.
 		// Test that list size increments +1
 		System.out.println("BEGINNING TESTSEARCHBYFIRSTNAME:");
-		UserAccount ua = new UserAccount("tVolz");
+		UserAccount ua = new UserAccount();
+		ua.setUserName("tVolz");
 		UserProfile newUser = new UserProfile();
 		newUser.setFirstName(firstName);
 		newUser.setMiddleName(middleName);

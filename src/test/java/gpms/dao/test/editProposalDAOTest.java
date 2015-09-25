@@ -91,8 +91,8 @@ public class editProposalDAOTest {
 		upList = upDAO.findAll();
 
 		InvestigatorInfo invInf = prop.getInvestigatorInfo().clone();
-		ArrayList<InvestigatorRefAndPosition> coPiList = invInf.getCo_pi();
-		ArrayList<InvestigatorRefAndPosition> seniorPersonnelList = invInf
+		List<InvestigatorRefAndPosition> coPiList = invInf.getCo_pi();
+		List<InvestigatorRefAndPosition> seniorPersonnelList = invInf
 				.getSeniorPersonnel();
 
 		int coPiCount = coPiList.size();

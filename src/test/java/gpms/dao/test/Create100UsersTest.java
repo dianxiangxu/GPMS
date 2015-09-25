@@ -83,8 +83,8 @@ public class Create100UsersTest {
 			newProfile.getPersonalEmails().add(userAccount + "@yahoo.com");
 
 			// Add two Position Detail objects to the user profile
-			setTheDeets(newProfile);
-			setTheDeets(newProfile);
+			setPositionDetails(newProfile);
+			setPositionDetails(newProfile);
 
 			Address newAddress = new Address();
 
@@ -154,7 +154,7 @@ public class Create100UsersTest {
 	 * 
 	 * @param theProfile
 	 */
-	public void setTheDeets(UserProfile theProfile) {
+	public void setPositionDetails(UserProfile theProfile) {
 		DepartmentsPositionsCollection newThing = new DepartmentsPositionsCollection();
 		List<String> firstList = newThing.getCollegeKeys();
 		PositionDetails newDetails = new PositionDetails();

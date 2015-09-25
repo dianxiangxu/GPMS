@@ -20,6 +20,7 @@ import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class TestClass {
 	}
 
 	@Test
-	public void setInitialInfo() {
+	public void setInitialInfo() throws ParseException {
 		System.out.println("Now creating new proposal...");
 		String proposalId = "55e8c7c096f52c00e8c429ba";
 		ObjectId id = new ObjectId(proposalId);

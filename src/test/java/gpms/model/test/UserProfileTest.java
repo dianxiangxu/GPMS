@@ -1,9 +1,13 @@
 package gpms.model.test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import gpms.model.UserProfile;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,18 +15,32 @@ public class UserProfileTest {
 	String fName = "Tom";
 	String mName = "Tito";
 	String lName = "Perelman";
-	String dob = "Nov 4, 1984 8:14 PM";
+
+	String dateOfBirth = "Nov 4, 1984 8:14 PM";
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
+
 	UserProfile up = new UserProfile();
 
 	@Before
 	public void initiate() throws ParseException {
-		up = new UserProfile(fName, mName, lName, dob, "Male");
+		Date dob = df.parse(dateOfBirth);
+		up.setFirstName(fName);
+		up.setMiddleName(mName);
+		up.setLastName(lName);
+		up.setDateOfBirth(dob);
+		up.setGender("Male");
 	}
 
 	@Test
 	public void testEqulity() throws ParseException {
-		UserProfile upt = new UserProfile(fName, mName, lName, dob, "Male");
-		assertTrue(up.equals(upt));
+		Date dob = df.parse(dateOfBirth);
+		UserProfile upt = new UserProfile();
+		upt.setFirstName(fName);
+		upt.setMiddleName(mName);
+		upt.setLastName(lName);
+		upt.setDateOfBirth(dob);
+		upt.setGender("Female");
+		assertFalse(up.equals(upt));
 	}
 
 	@Test

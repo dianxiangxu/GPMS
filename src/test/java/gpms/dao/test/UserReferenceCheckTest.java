@@ -57,7 +57,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setMiddleName("Bernthal");
 		newUserProfile.setLastName("Walsh");
 
-		newUserAccount = new UserAccount("sWalsh");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("sWalsh");
 
 		pd.setCollege("Engeneering");
 		pd.setDepartment("Computer Engeneering");
@@ -77,7 +78,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setMiddleName("Caleb");
 		newUserProfile.setLastName("Ortiz");
 
-		newUserAccount = new UserAccount("hOrtiz");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("hOrtiz");
 
 		pd.setCollege("Engeneering");
 		pd.setDepartment("Computer Science");
@@ -96,7 +98,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setFirstName("Thomas");
 		newUserProfile.setLastName("Volz");
 
-		newUserAccount = new UserAccount("tVolz");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("tVolz");
 
 		pd.setCollege("Engeneering");
 		pd.setDepartment("Computer Science");
@@ -115,7 +118,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setFirstName("Milson");
 		newUserProfile.setLastName("Munakami");
 
-		newUserAccount = new UserAccount("milsonmun");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("milsonmun");
 
 		pd.setCollege("Engineering");
 		pd.setDepartment("Computer Engeneering");
@@ -134,7 +138,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setFirstName("Diangxian");
 		newUserProfile.setLastName("Xu");
 
-		newUserAccount = new UserAccount("dXu");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("dXu");
 
 		pd.setCollege("Engeneering");
 		pd.setDepartment("Computer Science");
@@ -154,7 +159,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setFirstName("H");
 		newUserProfile.setLastName("Bush");
 
-		newUserAccount = new UserAccount("wBush");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("wBush");
 
 		pd.setCollege("Science");
 		pd.setDepartment("Biology");
@@ -173,7 +179,8 @@ public class UserReferenceCheckTest {
 		newUserProfile.setFirstName("Turner");
 		newUserProfile.setLastName("Borges");
 
-		newUserAccount = new UserAccount("tBorges");
+		newUserAccount = new UserAccount();
+		newUserAccount.setUserName("tBorges");
 
 		pd.setCollege("Engeneering");
 		pd.setDepartment("Electrical Engineering");

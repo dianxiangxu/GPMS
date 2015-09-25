@@ -3,8 +3,7 @@
 package gpms.model;
 
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 //import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -24,10 +23,10 @@ public class InvestigatorInfo {
 	private InvestigatorRefAndPosition pi = new InvestigatorRefAndPosition();
 	@Expose
 	@Embedded("CO-PI")
-	private ArrayList<InvestigatorRefAndPosition> co_pi = new ArrayList<InvestigatorRefAndPosition>();
+	private List<InvestigatorRefAndPosition> co_pi = new ArrayList<InvestigatorRefAndPosition>();
 	@Expose
 	@Embedded("senior personnel")
-	private ArrayList<InvestigatorRefAndPosition> seniorPersonnel = new ArrayList<InvestigatorRefAndPosition>();
+	private List<InvestigatorRefAndPosition> seniorPersonnel = new ArrayList<InvestigatorRefAndPosition>();
 
 	public InvestigatorInfo() {
 	}
@@ -40,7 +39,7 @@ public class InvestigatorInfo {
 		this.pi = pi;
 	}
 
-	public ArrayList<InvestigatorRefAndPosition> getCo_pi() {
+	public List<InvestigatorRefAndPosition> getCo_pi() {
 		return co_pi;
 	}
 
@@ -58,7 +57,7 @@ public class InvestigatorInfo {
 		}
 	}
 
-	public ArrayList<InvestigatorRefAndPosition> getSeniorPersonnel() {
+	public List<InvestigatorRefAndPosition> getSeniorPersonnel() {
 		return seniorPersonnel;
 	}
 
@@ -113,13 +112,10 @@ public class InvestigatorInfo {
 	public boolean equals(InvestigatorInfo invInf) {
 
 		boolean coPiEqual = false;
-		if(this.co_pi.size() == invInf.co_pi.size())
-		{
+		if (this.co_pi.size() == invInf.co_pi.size()) {
 			coPiEqual = true;
-			for(int i = 0; i < this.co_pi.size(); i++)
-			{
-				if(!this.co_pi.get(i).equals(invInf.co_pi.get(i)))
-				{
+			for (int i = 0; i < this.co_pi.size(); i++) {
+				if (!this.co_pi.get(i).equals(invInf.co_pi.get(i))) {
 					coPiEqual = false;
 					break;
 				}
@@ -127,24 +123,23 @@ public class InvestigatorInfo {
 		}
 
 		boolean seniorPersonnelEqual = false;
-		if(this.seniorPersonnel.size() == invInf.seniorPersonnel.size())
-		{
+		if (this.seniorPersonnel.size() == invInf.seniorPersonnel.size()) {
 			seniorPersonnelEqual = true;
-			for(int i = 0; i < this.seniorPersonnel.size(); i++)
-			{
-				if(!this.seniorPersonnel.get(i).equals(invInf.seniorPersonnel.get(i)))
-				{
+			for (int i = 0; i < this.seniorPersonnel.size(); i++) {
+				if (!this.seniorPersonnel.get(i).equals(
+						invInf.seniorPersonnel.get(i))) {
 					seniorPersonnelEqual = false;
 					break;
 				}
 			}
 		}
 
-		return this.pi.equals(invInf.getPi()) && coPiEqual && seniorPersonnelEqual;
+		return this.pi.equals(invInf.getPi()) && coPiEqual
+				&& seniorPersonnelEqual;
 	}
 
 	@Override
-	public InvestigatorInfo clone() throws CloneNotSupportedException{
+	public InvestigatorInfo clone() throws CloneNotSupportedException {
 		InvestigatorInfo copy = new InvestigatorInfo();
 		copy.setPi(this.pi.clone());
 
