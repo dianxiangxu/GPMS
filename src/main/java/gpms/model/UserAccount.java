@@ -7,7 +7,7 @@ package gpms.model;
 import gpms.dao.UserAccountDAO;
 
 import java.util.Date;
-
+import java.security.SecureRandom;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
@@ -48,9 +48,14 @@ public class UserAccount extends BaseEntity {
 
 	public UserAccount(String userName, String password) {
 		this.userName = userName;
-		this.password = password;
+		//In this use we are going to attempt a salt / hash combination for securing the password.
 		// TODO:: encrypt the password
-		// this.set_uid(id);
+		this.password = password;
+		//To store the password, we generate a long random salt using the CSPRNG
+		//Then, prepend the salt to the password and hash it with a crypto function
+		//Then save the salt and hash in the db (this object).0
+		//https://crackstation.net/hashing-security.htm Using this guide.
+		
 	}
 
 	public UserAccount(String userName) {
