@@ -690,8 +690,8 @@ $(function() {
 								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
 										.find("input").each(
 												function(k) {
-													if ($(this).hasClass(
-															"AddOption")) {
+													if ($(this)
+															.is(".AddOption")) {
 														$(this).prop("name",
 																btnName);
 														$(this).prop("value",
@@ -1971,7 +1971,7 @@ $(function() {
 									var t = $(this).closest('tr');
 
 									t.find("td").wrapInner(
-											"<div style='DISPLAY: block'/>")
+											"<div style='display: block'/>")
 											.parent().find("td div").slideUp(
 													300, function() {
 														t.remove();

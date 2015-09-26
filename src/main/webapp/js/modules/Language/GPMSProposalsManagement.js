@@ -49,6 +49,7 @@
 	"Please enter unique project title." : "Please enter unique project title.",
 	"already exists." : "already exists.",
 	"Cannot check for unique project title" : "Cannot check for unique project title",
-	"Cannot get certification/ signatures information" : "Cannot get certification/ signatures information"
+	"Cannot get certification/ signatures information" : "Cannot get certification/ signatures information",
+	"Please select all position details for this user." : "Please select all position details for this user."
 
 };
