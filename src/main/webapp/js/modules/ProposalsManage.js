@@ -451,7 +451,7 @@ $(function() {
 					.addClass(icons.activeHeader);
 			$('#ui-id-2').addClass('ui-accordion-content-active').attr({
 				'aria-hidden' : 'false'
-			}).toggle('blind', 1000);
+			}).show('blind');
 		},
 
 		ExpandAccordion : function() {
@@ -468,7 +468,7 @@ $(function() {
 			$('.ui-accordion-content').addClass('ui-accordion-content-active')
 					.attr({
 						'aria-hidden' : 'false'
-					}).toggle('blind', 1000);
+					}).show('blind');
 		},
 
 		CollapseAccordion : function() {
@@ -485,7 +485,7 @@ $(function() {
 			$('.ui-accordion-content').removeClass(
 					'ui-accordion-content-active').attr({
 				'aria-hidden' : 'true'
-			}).toggle('blind', 1000);
+			}).hide('blind');
 		},
 
 		LoadStaticImage : function() {
@@ -1794,148 +1794,134 @@ $(function() {
 								heightStyle : "content",
 								icons : icons,
 								collapsible : true,
-								active : 0,
 								beforeActivate : function(event, ui) {
-									if (event.originalEvent != undefined) {
+									// if (event.originalEvent != undefined) {
+									if ($(event.originalEvent.target)
+											.is('span')
+											&& $(event.originalEvent.target)
+													.parent('h3')
+													.is(
+															'.ui-accordion-header-active')) {
+										$(event.originalEvent.target)
+												.parent('h3')
+												.removeClass(
+														'ui-accordion-header-active ui-state-active ui-corner-top')
+												.addClass('ui-corner-all')
+												.attr({
+													'aria-selected' : 'false',
+													'aria-expanded' : 'false',
+													'tabindex' : '-1'
+												});
+										$(event.originalEvent.target)
+												.parent("h3")
+												.find("span:eq(0)")
+												.removeClass(icons.activeHeader)
+												.addClass(icons.header);
+										$(event.originalEvent.target).parent(
+												'h3').next('div').removeClass(
+												'ui-accordion-content-active')
+												.attr({
+													'aria-hidden' : 'true'
+												}).hide('blind');
+										return false;
+									} else if ($(event.originalEvent.target)
+											.is('h3')
+											&& $(event.originalEvent.target)
+													.is(
+															'.ui-accordion-header-active')) {
+										$(event.originalEvent.target)
+												.removeClass(
+														'ui-accordion-header-active ui-state-active ui-corner-top')
+												.addClass('ui-corner-all')
+												.attr({
+													'aria-selected' : 'false',
+													'aria-expanded' : 'false',
+													'tabindex' : '-1'
+												});
+										$(event.originalEvent.target).find(
+												"span:eq(0)").removeClass(
+												icons.activeHeader).addClass(
+												icons.header);
+										$(event.originalEvent.target).next(
+												'div').removeClass(
+												'ui-accordion-content-active')
+												.attr({
+													'aria-hidden' : 'true'
+												}).hide('blind');
+										return false;
+									} else {
+										proposalsManage.CollapseAccordion();
 										if ($(event.originalEvent.target).is(
-												'span')
-												&& $(event.originalEvent.target)
-														.parent('h3')
-														.is(
-																'.ui-accordion-header-active')) {
+												'span')) {
 											$(event.originalEvent.target)
 													.parent('h3')
 													.removeClass(
+															'ui-corner-all')
+													.addClass(
 															'ui-accordion-header-active ui-state-active ui-corner-top')
-													.addClass('ui-corner-all')
 													.attr(
 															{
-																'aria-selected' : 'false',
-																'aria-expanded' : 'false',
-																'tabindex' : '-1'
+																'aria-selected' : 'true',
+																'aria-expanded' : 'true',
+																'tabindex' : '0'
 															});
 											$(event.originalEvent.target)
 													.parent("h3").find(
 															"span:eq(0)")
-													.removeClass(
-															icons.activeHeader)
-													.addClass(icons.header);
+													.removeClass(icons.header)
+													.addClass(
+															icons.activeHeader);
 											$(event.originalEvent.target)
 													.parent('h3')
 													.next('div')
-													.removeClass(
+													.addClass(
 															'ui-accordion-content-active')
 													.attr({
-														'aria-hidden' : 'true'
-													}).toggle('blind', 1000);
-											return false;
-										} else if ($(event.originalEvent.target)
-												.is('h3')
-												&& $(event.originalEvent.target)
-														.is(
-																'.ui-accordion-header-active')) {
+														'aria-hidden' : 'false'
+													}).show('blind');
+										} else {
 											$(event.originalEvent.target)
 													.removeClass(
+															'ui-corner-all')
+													.addClass(
 															'ui-accordion-header-active ui-state-active ui-corner-top')
-													.addClass('ui-corner-all')
 													.attr(
 															{
-																'aria-selected' : 'false',
-																'aria-expanded' : 'false',
-																'tabindex' : '-1'
+																'aria-selected' : 'true',
+																'aria-expanded' : 'true',
+																'tabindex' : '0'
 															});
 											$(event.originalEvent.target).find(
 													"span:eq(0)").removeClass(
-													icons.activeHeader)
-													.addClass(icons.header);
+													icons.header).addClass(
+													icons.activeHeader);
 											$(event.originalEvent.target)
 													.next('div')
-													.removeClass(
+													.addClass(
 															'ui-accordion-content-active')
 													.attr({
-														'aria-hidden' : 'true'
-													}).toggle('blind', 1000);
-											return false;
-										} else {
-											proposalsManage.CollapseAccordion();
-											if ($(event.originalEvent.target)
-													.is('span')) {
-												$(event.originalEvent.target)
-														.parent('h3')
-														.removeClass(
-																'ui-corner-all')
-														.addClass(
-																'ui-accordion-header-active ui-state-active ui-corner-top')
-														.attr(
-																{
-																	'aria-selected' : 'true',
-																	'aria-expanded' : 'true',
-																	'tabindex' : '0'
-																});
-												$(event.originalEvent.target)
-														.parent("h3")
-														.find("span:eq(0)")
-														.removeClass(
-																icons.header)
-														.addClass(
-																icons.activeHeader);
-												$(event.originalEvent.target)
-														.parent('h3')
-														.next('div')
-														.addClass(
-																'ui-accordion-content-active')
-														.attr(
-																{
-																	'aria-hidden' : 'false'
-																})
-														.toggle('blind', 1000);
-											} else {
-												$(event.originalEvent.target)
-														.removeClass(
-																'ui-corner-all')
-														.addClass(
-																'ui-accordion-header-active ui-state-active ui-corner-top')
-														.attr(
-																{
-																	'aria-selected' : 'true',
-																	'aria-expanded' : 'true',
-																	'tabindex' : '0'
-																});
-												$(event.originalEvent.target)
-														.find("span:eq(0)")
-														.removeClass(
-																icons.header)
-														.addClass(
-																icons.activeHeader);
-												$(event.originalEvent.target)
-														.next('div')
-														.addClass(
-																'ui-accordion-content-active')
-														.attr(
-																{
-																	'aria-hidden' : 'false'
-																})
-														.toggle('blind', 1000);
-											}
-											return false;
+														'aria-hidden' : 'false'
+													}).show('blind');
 										}
-										// return false;
-										// var fromIcon =
-										// $(event.originalEvent.target).is(
-										// '.ui-accordion-header > .ui-icon');
-										// return fromIcon;
-										// alert(expandLink.data('isAllOpen'));
-										// if (expandLink.data('isAllOpen')) {
-										// expandLink.text('Expand
-										// all').data('isAllOpen', false);
-										// }
-										// return false;
-										// $(event.originalEvent.target).removeClass();
-										// The accordion believes a panel is
-										// being
-										// opened
+										return false;
 									}
+									// return false;
+									// var fromIcon =
+									// $(event.originalEvent.target).is(
+									// '.ui-accordion-header > .ui-icon');
+									// return fromIcon;
+									// alert(expandLink.data('isAllOpen'));
+									// if (expandLink.data('isAllOpen')) {
+									// expandLink.text('Expand
+									// all').data('isAllOpen', false);
+									// }
+									// return false;
+									// $(event.originalEvent.target).removeClass();
+									// The accordion believes a panel is
+									// being
+									// opened
 								}
+							// }
 							});
 
 			// $accordion.accordion("option", "active", 0);
