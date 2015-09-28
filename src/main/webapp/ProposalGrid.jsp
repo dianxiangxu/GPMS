@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560345dd83f5e40ae40d4572";
+	var userProfileId = "56032c1d54ffd822f4481079";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -397,9 +397,9 @@
 																	style="width: 145px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
-																	class="sfTextBoxSmall" name="txtPhoneNo"
-																	placeholder="Phone #" disabled="disabled"
-																	style="width: 81px !important" /></td>
+																	readonly="readonly" class="sfTextBoxSmall"
+																	name="txtPhoneNo" placeholder="Phone #"
+																	style="width: 88px !important" /></td>
 																<td><input type="Button" value="Add More"
 																	name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>

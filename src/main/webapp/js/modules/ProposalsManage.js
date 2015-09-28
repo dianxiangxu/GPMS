@@ -30,6 +30,14 @@ $(function() {
 		$("#txtSearchTotalCostsTo-error").remove();
 	});
 
+	$('.open').on("click", function() {
+		proposalsManage.ExpandAccordion();
+	});
+
+	$('.close').on("click", function() {
+		proposalsManage.CollapseAccordion();
+	});
+
 	var validator = $("#form1")
 			.validate(
 					{
@@ -428,6 +436,22 @@ $(function() {
 						success : proposalsManage.ajaxSuccess,
 						error : proposalsManage.ajaxFailure
 					});
+		},
+
+		SelectFirstAccordion : function() {
+			var icons = $("#accordion").accordion("option", "icons");
+			$('#ui-id-1').removeClass('ui-corner-all').addClass(
+					'ui-accordion-header-active ui-state-active ui-corner-top')
+					.attr({
+						'aria-selected' : 'true',
+						'aria-expanded' : 'true',
+						'tabindex' : '0'
+					});
+			$('#ui-id-1 > .ui-accordion-header-icon').removeClass(icons.header)
+					.addClass(icons.activeHeader);
+			$('#ui-id-2').addClass('ui-accordion-content-active').attr({
+				'aria-hidden' : 'false'
+			}).show('blind');
 		},
 
 		ExpandAccordion : function() {
@@ -1358,7 +1382,6 @@ $(function() {
 			});
 
 			$('#dataTable>tbody tr:first').remove();
-
 		},
 
 		BindUserToPositionDetails : function(userDetails, userType) {
@@ -1400,11 +1423,6 @@ $(function() {
 								$(this).removeAttr('disabled');
 							}
 
-							$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
-							$('input[name="txtPhoneNo"]').eq(rowIndex).val(
-									userDetails.userRef.mobileNumbers[0]).mask(
-									"(999) 999-9999");
-
 							proposalsManage.BindCollegeDropDown($(
 									'select[name="ddlName"]').eq(rowIndex)
 									.val());
@@ -1439,11 +1457,17 @@ $(function() {
 							$(this).val(userDetails.positionTitle).prop(
 									'selected', 'selected');
 						}
+
+						$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+						$('input[name="txtPhoneNo"]').eq(rowIndex).val(
+								userDetails.userRef.mobileNumbers[0]).mask(
+								"(999) 999-9999");
+						;
 					});
 
 			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("input").each(
 					function(l) {
-						if ($(this).hasClass("AddOption")) {
+						if ($(this).is(".AddOption")) {
 							$(this).prop("name", btnName);
 							$(this).prop("value", btnOption);
 							$(this).prop("title", btnTitle);
@@ -1666,6 +1690,7 @@ $(function() {
 
 			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
 					.val());
+
 			proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
 					0).val());
 			proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
@@ -1770,6 +1795,7 @@ $(function() {
 								icons : icons,
 								collapsible : true,
 								beforeActivate : function(event, ui) {
+									// if (event.originalEvent != undefined) {
 									if ($(event.originalEvent.target)
 											.is('span')
 											&& $(event.originalEvent.target)
@@ -1798,7 +1824,6 @@ $(function() {
 													'aria-hidden' : 'true'
 												}).hide('blind');
 										return false;
-
 									} else if ($(event.originalEvent.target)
 											.is('h3')
 											&& $(event.originalEvent.target)
@@ -1825,7 +1850,7 @@ $(function() {
 												}).hide('blind');
 										return false;
 									} else {
-										// proposalsManage.CollapseAccordion();
+										proposalsManage.CollapseAccordion();
 										if ($(event.originalEvent.target).is(
 												'span')) {
 											$(event.originalEvent.target)
@@ -1854,7 +1879,6 @@ $(function() {
 													.attr({
 														'aria-hidden' : 'false'
 													}).show('blind');
-
 										} else {
 											$(event.originalEvent.target)
 													.removeClass(
@@ -1881,7 +1905,7 @@ $(function() {
 										}
 										return false;
 									}
-
+									// return false;
 									// var fromIcon =
 									// $(event.originalEvent.target).is(
 									// '.ui-accordion-header > .ui-icon');
@@ -1893,21 +1917,17 @@ $(function() {
 									// }
 									// return false;
 									// $(event.originalEvent.target).removeClass();
-									// The accordion believes a panel is being
+									// The accordion believes a panel is
+									// being
 									// opened
 								}
+							// }
 							});
 
-			$('.open').on("click", function() {
-				proposalsManage.ExpandAccordion();
-			});
-
-			$('.close').on("click", function() {
-				proposalsManage.CollapseAccordion();
-			});
-
+			// $accordion.accordion("option", "active", 0);
 			proposalsManage.CollapseAccordion();
-			$accordion.accordion("option", "active", 0);
+			proposalsManage.SelectFirstAccordion();
+			return false;
 		},
 
 		isUniqueProjectTitle : function(proposalId, newProjectTitle) {
@@ -1963,26 +1983,47 @@ $(function() {
 				}
 
 				var _saveOptions = '';
-				$("#dataTable")
-						.find("tr select")
+				$('#dataTable > tbody  > tr')
 						.each(
 								function(i) {
-									var optionsText = $(this).val();
-									if (!optionsText
-											&& $(this).prop("name") != "ddlPositionTitle") {
-										validateErrorMessage = getLocale(
-												gpmsProposalsManagement,
-												"Please select all position details for this user.")
-												+ "<br/>";
-										attributesManage
-												.SetFirstAccordionActive();
-										$(this).focus();
-									} else if (optionsText
-											&& $(this).prop("name") != "ddlPositionTitle") {
-										_saveOptions += optionsText + "!#!";
-									} else {
-										_saveOptions += optionsText + "#!#";
-									}
+									$(this)
+											.find("select")
+											.each(
+													function(j) {
+														var optionsText = $(
+																this).val();
+														if (!optionsText
+																&& $(this)
+																		.prop(
+																				"name") != "ddlPositionTitle") {
+															validateErrorMessage = getLocale(
+																	gpmsProposalsManagement,
+																	"Please select all position details for this user.")
+																	+ "<br/>";
+															proposalsManage
+																	.SetFirstAccordionActive();
+															$(this).focus();
+														} else if (optionsText
+																&& $(this)
+																		.prop(
+																				"name") != "ddlPositionTitle") {
+															_saveOptions += optionsText
+																	+ "!#!";
+														} else {
+															_saveOptions += optionsText
+																	+ "!#!";
+														}
+													});
+
+									alert("From Save: "
+											+ $(this)
+											+ " Mask: "
+											+ +$(this).find(
+													'input[name="txtPhoneNo"]')
+													.mask());
+									_saveOptions += $(this).find(
+											'input[name="txtPhoneNo"]').mask()
+											+ "#!#";
 								});
 
 				_saveOptions = _saveOptions.substring(0,
@@ -2085,6 +2126,7 @@ $(function() {
 			});
 			this.config.ajaxCallMode = 6;
 			this.ajaxCall(this.config);
+			$('input[name="txtPhoneNo"]').mask("(999) 999-9999");
 			return false;
 		},
 
@@ -2295,8 +2337,11 @@ $(function() {
 
 								if (GPMS.utils.GetUserProfileID() != item.userProfileId) {
 									readOnly = 'readonly="true"';
-								} else {
-									readOnly = 'required="true"';
+								} else if (GPMS.utils.GetUserProfileID() == item.userProfileId) {
+									if (item.signature != ""
+											&& item.signedDate != null) {
+										readOnly = 'readonly="true"';
+									}
 								}
 
 								var cloneRow = '<tr><td><span class="cssClassLabel">'
@@ -2305,7 +2350,7 @@ $(function() {
 										+ item.positionTitle
 										+ '\'s Signature" class="sfInputbox" placeholder="'
 										+ item.positionTitle
-										+ '\'s Signature" type="text" value="'
+										+ '\'s Signature" type="text" required="true" value="'
 										+ item.signature
 										+ '"'
 										+ ' name="'
@@ -2812,7 +2857,7 @@ $(function() {
 							var t = $(this).closest('tr');
 
 							t.find("td").wrapInner(
-									"<div style='DISPLAY: block'/>").parent()
+									"<div style='display: block'/>").parent()
 									.find("td div").slideUp(300, function() {
 										t.remove();
 									});
@@ -2821,7 +2866,7 @@ $(function() {
 							var cloneRow = $(this).closest('tr').clone(true);
 							$(cloneRow).find("input").each(
 									function(i) {
-										if ($(this).hasClass("AddOption")) {
+										if ($(this).is(".AddOption")) {
 											$(this)
 													.prop("name",
 															"DeleteOption");
