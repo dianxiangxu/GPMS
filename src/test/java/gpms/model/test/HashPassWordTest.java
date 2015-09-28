@@ -53,6 +53,7 @@ public class HashPassWordTest
 		secondPassword = keyb.nextLine();
 		
 		PasswordHash checkHash = new PasswordHash();
+		System.out.println("Hashed Pass: " + newUser.getPassword());
 		
 		System.out.println("Passwords match: " + PasswordHash.validatePassword(secondPassword, newUser.getPassword()));
 		
