@@ -33,7 +33,13 @@ public class BasePIEligibilityOptions {
 	}
 
 	public void setYes(boolean yes) {
-		this.yes = yes;
+		if (!this.yes && yes) {
+			this.yes = yes;
+			no = false;
+			notApplicable = false;
+			thisProposalOnly = false;
+			blanket = false;
+		}
 	}
 
 	public boolean isNo() {
@@ -41,7 +47,13 @@ public class BasePIEligibilityOptions {
 	}
 
 	public void setNo(boolean no) {
-		this.no = no;
+		if (!this.no && no) {
+			yes = false;
+			this.no = no;
+			notApplicable = false;
+			thisProposalOnly = false;
+			blanket = false;
+		}
 	}
 
 	public boolean isNotApplicable() {
@@ -49,7 +61,13 @@ public class BasePIEligibilityOptions {
 	}
 
 	public void setNotApplicable(boolean notApplicable) {
-		this.notApplicable = notApplicable;
+		if (!this.notApplicable && notApplicable) {
+			yes = false;
+			no = false;
+			this.notApplicable = notApplicable;
+			thisProposalOnly = false;
+			blanket = false;
+		}
 	}
 
 	public boolean isThisProposalOnly() {
@@ -57,7 +75,13 @@ public class BasePIEligibilityOptions {
 	}
 
 	public void setThisProposalOnly(boolean thisProposalOnly) {
-		this.thisProposalOnly = thisProposalOnly;
+		if (!this.thisProposalOnly && thisProposalOnly) {
+			yes = false;
+			no = false;
+			notApplicable = false;
+			this.thisProposalOnly = thisProposalOnly;
+			blanket = false;
+		}
 	}
 
 	public boolean isBlanket() {
@@ -65,7 +89,13 @@ public class BasePIEligibilityOptions {
 	}
 
 	public void setBlanket(boolean blanket) {
-		this.blanket = blanket;
+		if (!this.blanket && blanket) {
+			yes = false;
+			no = false;
+			notApplicable = false;
+			thisProposalOnly = false;
+			this.blanket = blanket;
+		}
 	}
 
 	@Override
@@ -108,5 +138,5 @@ public class BasePIEligibilityOptions {
 			return false;
 		return true;
 	}
-	
+
 }

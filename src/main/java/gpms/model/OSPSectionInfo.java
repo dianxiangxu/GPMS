@@ -33,7 +33,7 @@ public class OSPSectionInfo {
 
 	@Expose
 	@Embedded("base")
-	private Base base = new Base();
+	private BaseInfo baseInfo = new BaseInfo();
 
 	@Expose
 	@Property("is PI salary included")
@@ -65,7 +65,7 @@ public class OSPSectionInfo {
 
 	@Expose
 	@Property("anticipated subrecipients names")
-	private boolean anticipatedSubRecipientsNames;
+	private String anticipatedSubRecipientsNames;
 
 	@Expose
 	@Embedded("PI eligibility waiver on file")
@@ -138,12 +138,12 @@ public class OSPSectionInfo {
 		this.recovery = recovery;
 	}
 
-	public Base getBase() {
-		return base;
+	public BaseInfo getBaseInfo() {
+		return baseInfo;
 	}
 
-	public void setBase(Base base) {
-		this.base = base;
+	public void setBaseInfo(BaseInfo baseInfo) {
+		this.baseInfo = baseInfo;
 	}
 
 	public boolean isPISalaryIncluded() {
@@ -203,12 +203,12 @@ public class OSPSectionInfo {
 		this.isAnticipatedSubRecipients = isAnticipatedSubRecipients;
 	}
 
-	public boolean isAnticipatedSubRecipientsNames() {
+	public String getAnticipatedSubRecipientsNames() {
 		return anticipatedSubRecipientsNames;
 	}
 
 	public void setAnticipatedSubRecipientsNames(
-			boolean anticipatedSubRecipientsNames) {
+			String anticipatedSubRecipientsNames) {
 		this.anticipatedSubRecipientsNames = anticipatedSubRecipientsNames;
 	}
 
@@ -259,7 +259,7 @@ public class OSPSectionInfo {
 		return "OSPSectionInfo [listAgency=" + listAgency + ", fundingSource="
 				+ fundingSource + ", CFDANo=" + CFDANo + ", programNo="
 				+ programNo + ", programTitle=" + programTitle + ", recovery="
-				+ recovery + ", base=" + base + ", isPISalaryIncluded="
+				+ recovery + ", baseInfo=" + baseInfo + ", isPISalaryIncluded="
 				+ isPISalaryIncluded + ", PISalary=" + PISalary + ", PIFringe="
 				+ PIFringe + ", departmentId=" + departmentId
 				+ ", institutionalCostDocumented="
@@ -288,8 +288,12 @@ public class OSPSectionInfo {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(PISalary);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + (anticipatedSubRecipientsNames ? 1231 : 1237);
-		result = prime * result + ((base == null) ? 0 : base.hashCode());
+		result = prime
+				* result
+				+ ((anticipatedSubRecipientsNames == null) ? 0
+						: anticipatedSubRecipientsNames.hashCode());
+		result = prime * result
+				+ ((baseInfo == null) ? 0 : baseInfo.hashCode());
 		result = prime
 				* result
 				+ ((conflictOfInterestForms == null) ? 0
@@ -354,12 +358,16 @@ public class OSPSectionInfo {
 		if (Double.doubleToLongBits(PISalary) != Double
 				.doubleToLongBits(other.PISalary))
 			return false;
-		if (anticipatedSubRecipientsNames != other.anticipatedSubRecipientsNames)
-			return false;
-		if (base == null) {
-			if (other.base != null)
+		if (anticipatedSubRecipientsNames == null) {
+			if (other.anticipatedSubRecipientsNames != null)
 				return false;
-		} else if (!base.equals(other.base))
+		} else if (!anticipatedSubRecipientsNames
+				.equals(other.anticipatedSubRecipientsNames))
+			return false;
+		if (baseInfo == null) {
+			if (other.baseInfo != null)
+				return false;
+		} else if (!baseInfo.equals(other.baseInfo))
 			return false;
 		if (conflictOfInterestForms == null) {
 			if (other.conflictOfInterestForms != null)

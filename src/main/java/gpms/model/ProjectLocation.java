@@ -23,7 +23,10 @@ public class ProjectLocation {
 	}
 
 	public void setOffCampus(boolean offCampus) {
-		this.offCampus = offCampus;
+		if (!this.offCampus && offCampus) {
+			this.offCampus = offCampus;
+			onCampus = false;
+		}
 	}
 
 	public boolean isOnCampus() {
@@ -31,7 +34,10 @@ public class ProjectLocation {
 	}
 
 	public void setOnCampus(boolean onCampus) {
-		this.onCampus = onCampus;
+		if (!this.onCampus && onCampus) {
+			offCampus = false;
+			this.onCampus = onCampus;
+		}
 	}
 
 	@Override

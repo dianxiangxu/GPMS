@@ -17,7 +17,7 @@ public class FundingSource {
 
 	@Expose
 	@Property("Sate of Idaho entity")
-	private boolean sateOfIdahoEntity;
+	private boolean stateOfIdahoEntity;
 
 	@Expose
 	@Property("private for profit")
@@ -70,12 +70,12 @@ public class FundingSource {
 		this.federalFlowThrough = federalFlowThrough;
 	}
 
-	public boolean isSateOfIdahoEntity() {
-		return sateOfIdahoEntity;
+	public boolean isStateOfIdahoEntity() {
+		return stateOfIdahoEntity;
 	}
 
-	public void setSateOfIdahoEntity(boolean sateOfIdahoEntity) {
-		this.sateOfIdahoEntity = sateOfIdahoEntity;
+	public void setStateOfIdahoEntity(boolean stateOfIdahoEntity) {
+		this.stateOfIdahoEntity = stateOfIdahoEntity;
 	}
 
 	public boolean isPrivateForProfit() {
@@ -145,8 +145,8 @@ public class FundingSource {
 	@Override
 	public String toString() {
 		return "FundingSource [federal=" + federal + ", federalFlowThrough="
-				+ federalFlowThrough + ", sateOfIdahoEntity="
-				+ sateOfIdahoEntity + ", privateForProfit=" + privateForProfit
+				+ federalFlowThrough + ", stateOfIdahoEntity="
+				+ stateOfIdahoEntity + ", privateForProfit=" + privateForProfit
 				+ ", nonProfitOrganization=" + nonProfitOrganization
 				+ ", nonIdahoStateEntity=" + nonIdahoStateEntity
 				+ ", collegeOrUniversity=" + collegeOrUniversity
@@ -168,7 +168,7 @@ public class FundingSource {
 		result = prime * result + (nonIdahoStateEntity ? 1231 : 1237);
 		result = prime * result + (nonProfitOrganization ? 1231 : 1237);
 		result = prime * result + (privateForProfit ? 1231 : 1237);
-		result = prime * result + (sateOfIdahoEntity ? 1231 : 1237);
+		result = prime * result + (stateOfIdahoEntity ? 1231 : 1237);
 		result = prime * result + (tirbalGovernment ? 1231 : 1237);
 		return result;
 	}
@@ -200,7 +200,7 @@ public class FundingSource {
 			return false;
 		if (privateForProfit != other.privateForProfit)
 			return false;
-		if (sateOfIdahoEntity != other.sateOfIdahoEntity)
+		if (stateOfIdahoEntity != other.stateOfIdahoEntity)
 			return false;
 		if (tirbalGovernment != other.tirbalGovernment)
 			return false;

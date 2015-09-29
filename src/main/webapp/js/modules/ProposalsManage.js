@@ -848,6 +848,8 @@ $(function() {
 
 				$("#lblProposalDateReceived").text(argus[11]);
 
+				$("#txtNameOfGrantingAgency").val(argus[6]);
+
 				if (argus[16] != null && argus[16] != "") {
 					$('#tblLastAuditedInfo').show();
 					$('#lblLastUpdatedOn').html(argus[16]);
@@ -953,12 +955,12 @@ $(function() {
 			// var array_element = array[int];
 			//				
 			// }
-			$("#txtNameOfGrantingAgency").val(
-					response.sponsorAndBudgetInfo.grantingAgency);
+			// $("#txtNameOfGrantingAgency").val(
+			// response.sponsorAndBudgetInfo.grantingAgency);
 			$("#txtDirectCosts").autoNumeric('set',
 					response.sponsorAndBudgetInfo.directCosts);
 			$("#txtFACosts").autoNumeric('set',
-					response.sponsorAndBudgetInfo.directCosts);
+					response.sponsorAndBudgetInfo.FACosts);
 			$("#txtTotalCosts").autoNumeric('set',
 					response.sponsorAndBudgetInfo.totalCosts);
 			$("#txtFARate").autoNumeric('set',
@@ -987,7 +989,7 @@ $(function() {
 			// University Commitments
 			if (response.universityCommitments.newRenovatedFacilitiesRequired) {
 				$("#ddlNewSpaceRequired").val(1);
-			} else if (!response.costShareInfo.newRenovatedFacilitiesRequired) {
+			} else if (!response.universityCommitments.newRenovatedFacilitiesRequired) {
 				$("#ddlNewSpaceRequired").val(2);
 			} else {
 				$("#ddlNewSpaceRequired").prop("selectedIndex", 0);
@@ -995,7 +997,7 @@ $(function() {
 
 			if (response.universityCommitments.rentalSpaceRequired) {
 				$("#ddlRentalSpaceRequired").val(1);
-			} else if (!response.costShareInfo.rentalSpaceRequired) {
+			} else if (!response.universityCommitments.rentalSpaceRequired) {
 				$("#ddlRentalSpaceRequired").val(2);
 			} else {
 				$("#ddlRentalSpaceRequired").prop("selectedIndex", 0);
@@ -1182,7 +1184,7 @@ $(function() {
 				$("#txtCollaborators").val('');
 			}
 
-			// Collaboration Information
+			// Proprietary/ Confidential Information
 			if (response.confidentialInfo.containConfidentialInformation) {
 				$("#ddlProprietaryInformation").val(1);
 				$("#txtPagesWithProprietaryInfo").val(
@@ -1221,7 +1223,7 @@ $(function() {
 			$("#chkFederalFlowThrough").prop("checked",
 					response.oSPSectionInfo.fundingSource.federalFlowThrough);
 			$("#chkStateOfIdahoEntity").prop("checked",
-					response.oSPSectionInfo.fundingSource.sateOfIdahoEntity);
+					response.oSPSectionInfo.fundingSource.stateOfIdahoEntity);
 			$("#chkPrivateForProfit").prop("checked",
 					response.oSPSectionInfo.fundingSource.privateForProfit);
 			$("#chkNonProfitOrganization")
@@ -1982,7 +1984,7 @@ $(function() {
 					$('#txtProjectTitle').addClass("error");
 				}
 
-				var _saveOptions = '';
+				var investigatorInfo = '';
 				$('#dataTable > tbody  > tr')
 						.each(
 								function(i) {
@@ -2001,77 +2003,246 @@ $(function() {
 																	"Please select all position details for this user.")
 																	+ "<br/>";
 															proposalsManage
-																	.SetFirstAccordionActive();
+																	.CollapseAccordion();
+															proposalsManage
+																	.SelectFirstAccordion();
 															$(this).focus();
 														} else if (optionsText
 																&& $(this)
 																		.prop(
 																				"name") != "ddlPositionTitle") {
-															_saveOptions += optionsText
+															investigatorInfo += optionsText
 																	+ "!#!";
 														} else {
-															_saveOptions += optionsText
+															investigatorInfo += optionsText
 																	+ "!#!";
 														}
 													});
 
-									alert("From Save: "
-											+ $(this)
-											+ " Mask: "
-											+ +$(this).find(
-													'input[name="txtPhoneNo"]')
-													.mask());
-									_saveOptions += $(this).find(
+									investigatorInfo += $(this).find(
 											'input[name="txtPhoneNo"]').mask()
 											+ "#!#";
 								});
 
-				_saveOptions = _saveOptions.substring(0,
-						_saveOptions.length - 3);
-
-				// 0!#!55f7546caf6e041174a9ded7!#!Engineering!#!Electrical
-				// Engineering!#!Tenured/tenure-track faculty!#!Distinguished
-				// Professor
-				// #!#
-				// 2!#!55f7546caf6e041174a9df13!#!Science!#!Chemistry!#!Research
-				// staff!#!Senior Research Scientist
-
-				alert(_saveOptions);
+				investigatorInfo = investigatorInfo.substring(0,
+						investigatorInfo.length - 3);
 
 				if (!validateErrorMessage) {
-					var proposalInfo = {
-						ProposalID : _proposalId,
-						FirstName : $.trim($('#txtFirstName').val()),
-						MiddleName : $.trim($('#txtMiddleName').val()),
-						LastName : $.trim($('#txtLastName').val()),
-						DOB : $('#txtDOB').val(),
-						Gender : $('#ddlGender :selected').val(),
-						Street : $.trim($('#txtStreet').val()),
-						Apt : $.trim($('#txtApt').val()),
-						City : $.trim($('#txtCity').val()),
-						State : $('#ddlState :selected').text(),
-						Zip : $.trim($('#txtZip').val()),
-						Country : $('#ddlCountry :selected').text(),
-						OfficeNumber : $('#txtOfficeNumber').val(),
-						MobileNumber : $('#txtMobileNumber').val(),
-						HomeNumber : $('#txtHomeNumber').val(),
-						OtherNumber : $('#txtOtherNumber').val(),
-						WorkEmail : $('#txtWorkEmail').val(),
-						PersonalEmail : $('#txtPersonalEmail').val(),
-						IsActive : $('input[name=chkActive]').prop('checked'),
-						UserName : $.trim($('#txtProjectTitle').val()),
-						Password : $.trim($('#txtPassword').val()),
-
-						// $('#txtDirectCosts').autoNumeric('get');
-						// $('#txtFACosts').autoNumeric('get');
-						// $('#txtTotalCosts').autoNumeric('get');
-						// $('#txtFARate').autoNumeric('get');
-						Flag : _flag, // false for Update true for New Add
-						SaveOptions : _saveOptions
+					var projectInfo = {
+						ProjectTitle : $.trim($("#txtProjectTitle").val()),
+						ProjectType : $("#ddlProjectType").val(),
+						TypeOfRequest : $("#ddlTypeOfRequest").val(),
+						ProjectLocation : $("#ddlLocationOfProject").val(),
+						DueDate : $("#txtDueDate").val(),
+						ProjectPeriodFrom : $("#txtProjectPeriodFrom").val(),
+						ProjectPeriodTo : $("#txtProjectPeriodTo").val()
 					};
 
-					proposalsManage.AddProposalInfo(proposalInfo);
+					if (!_flag) {
+						projectInfo.ProposalStatus = $("#ddlProposalStatus")
+								.val();
+					}
 
+					var sponsorAndBudgetInfo = {
+						GrantingAgency : $.trim($("#txtNameOfGrantingAgency")
+								.val()),
+						DirectCosts : $('#txtDirectCosts').autoNumeric('get'),
+						FACosts : $("#txtFACosts").autoNumeric('get'),
+						TotalCosts : $("#txtTotalCosts").autoNumeric('get'),
+						FARate : $("#txtFARate").autoNumeric('get')
+					};
+
+					var costShareInfo = {
+						InstitutionalCommitted : $(
+								"#ddlInstitutionalCommitmentCost").val(),
+						ThirdPartyCommitted : $("#ddlThirdPartyCommitmentCost")
+								.val()
+					};
+
+					var univCommitments = {
+						NewRenovatedFacilitiesRequired : $(
+								"#ddlNewSpaceRequired").val(),
+						RentalSpaceRequired : $("#ddlRentalSpaceRequired")
+								.val(),
+						InstitutionalCommitmentRequired : $(
+								"#ddlInstitutionalCommitmentsRequired").val()
+					};
+
+					var conflicOfInterestInfo = {
+						FinancialCOI : $("#ddlFinancialCOI").val(),
+						ConflictDisclosed : $("#ddlDisclosedFinancialCOI")
+								.val(),
+						DisclosureFormChange : $("#ddlMaterialChanged").val()
+					};
+
+					var complianceInfo = {
+						InvolveUseOfHumanSubjects : $("#ddlUseHumanSubjects")
+								.val(),
+						InvolveUseOfVertebrateAnimals : $(
+								"#ddlUseVertebrateAnimals").val(),
+						InvolveBiosafetyConcerns : $("#ddlInvovleBioSafety")
+								.val(),
+						InvolveEnvironmentalHealthAndSafetyConcerns : $(
+								"#ddlEnvironmentalConcerns").val()
+					};
+
+					if ($("#ddlUseHumanSubjects").val() == "1") {
+						complianceInfo.IRBPending = $("#ddlIRBOptions").val();
+					}
+
+					if ($("#ddlIRBOptions").val() == "1") {
+						complianceInfo.IRB = $("#txtIRB").val();
+					}
+
+					if ($("#ddlUseVertebrateAnimals").val() == "1") {
+						complianceInfo.IACUCPending = $("#ddlIACUCOptions")
+								.val();
+					}
+
+					if ($("#ddlIACUCOptions").val() == "1") {
+						complianceInfo.IACUC = $("#txtIACUC").val();
+					}
+
+					if ($("#ddlInvovleBioSafety").val() == "1") {
+						complianceInfo.IBCPending = $("#ddlIBCOptions").val();
+					}
+
+					if ($("#ddlIBCOptions").val() == "1") {
+						complianceInfo.IBC = $("#txtIBC").val();
+					}
+
+					var additionalInfo = {
+						AnticipatesForeignNationalsPayment : $(
+								"#ddlAnticipateForeignNationals").val(),
+						AnticipatesCourseReleaseTime : $(
+								"#ddlAnticipateReleaseTime").val(),
+						RelatedToCenterForAdvancedEnergyStudies : $(
+								"#ddlRelatedToEnergyStudies").val()
+					};
+
+					var collaborationInfo = {
+						InvolveNonFundedCollab : $(
+								"#ddlInvolveNonFundedCollabs").val()
+					};
+
+					if ($("#ddlInvolveNonFundedCollabs").val() == "1") {
+						collaborationInfo.Collaborators = $("#txtCollaborators")
+								.val();
+					}
+
+					var confidentialInfo = {
+						ContainConfidentialInformation : $(
+								"#ddlProprietaryInformation").val(),
+						InvolveIntellectualProperty : $(
+								"#ddlOwnIntellectualProperty").val()
+					};
+
+					if ($("#ddlProprietaryInformation").val() == "1") {
+						confidentialInfo.OnPages = $.trim($(
+								"#txtPagesWithProprietaryInfo").val());
+						confidentialInfo.Patentable = $("#chkPatentable").prop(
+								"checked");
+						confidentialInfo.Copyrightable = $("#chkCopyrightable")
+								.prop("checked");
+					}
+
+					var OSPSection = {
+						ListAgency : $.trim($("#txtAgencyList").val()),
+
+						Federal : $("#chkFederal").prop("checked"),
+						FederalFlowThrough : $("#chkFederalFlowThrough").prop(
+								"checked"),
+						StateOfIdahoEntity : $("#chkStateOfIdahoEntity").prop(
+								"checked"),
+						PrivateForProfit : $("#chkPrivateForProfit").prop(
+								"checked"),
+						NonProfitOrganization : $("#chkNonProfitOrganization")
+								.prop("checked"),
+						NonIdahoStateEntity : $("#chkNonIdahoStateEntity")
+								.prop("checked"),
+						CollegeOrUniversity : $("#chkCollegeUniversity").prop(
+								"checked"),
+						LocalEntity : $("#chkLocalEntity").prop("checked"),
+						NonIdahoLocalEntity : $("#chkNonIdahoLocalEntity")
+								.prop("checked"),
+						TirbalGovernment : $("#chkTribalGovernment").prop(
+								"checked"),
+						Foreign : $("#chkForeign").prop("checked"),
+
+						CFDANo : $.trim($("#txtCFDANo").val()),
+						ProgramNo : $.trim($("#txtProgramNo").val()),
+						ProgramTitle : $.trim($("#txtProgramTitle").val()),
+
+						// --------------------------
+						FullRecovery : $("#chkFullRecovery").prop("checked"),
+						NoRecoveryNormalSponsorPolicy : $(
+								"#chkNoRecoveryNormal").prop("checked"),
+						NoRecoveryInstitutionalWaiver : $(
+								"#chkNoRecoveryInstitutional").prop("checked"),
+						LimitedRecoveryNormalSponsorPolicy : $(
+								"#chkLimitedRecoveryNormal").prop("checked"),
+						LimitedRecoveryInstitutionalWaiver : $(
+								"#chkLimitedRecoveryInstitutional").prop(
+								"checked"),
+
+						MTDC : $("#chkMTDC").prop("checked"),
+						TDC : $("#chkTDC").prop("checked"),
+						TC : $("#chkTC").prop("checked"),
+						Other : $("#chkOther").prop("checked"),
+						NotApplicable : $("#chkNA").prop("checked"),
+
+						// --------------------------
+						IsPISalaryIncluded : $("#ddlPISalaryIncluded").val(),
+						PISalary : $("#txtPISalary").autoNumeric('get'),
+						PIFringe : $("#txtPIFringe").autoNumeric('get'),
+						DepartmentId : $.trim($("#txtDepartmentID").val()),
+						InstitutionalCostDocumented : $(
+								"#ddlInstitutionalCostDocumented").val(),
+						ThirdPartyCostDocumented : $(
+								"#ddlThirdPartyCostDocumented").val(),
+
+						// --------------------------
+						IsAnticipatedSubRecipients : $("#ddlSubrecipients")
+								.val(),
+
+						// --------------------------
+						PIEligibilityWaiver : $("#ddlPIEligibilityWaiver")
+								.val(),
+						ConflictOfInterestForms : $("#ddlCOIForms").val(),
+						ExcludedPartyListChecked : $(
+								"#ddlCheckedExcludedPartyList").val(),
+						proposalNotes : $.trim($("#txtProposalNotes").val()),
+
+						DF : $("#chkDF").prop("checked"),
+						LG : $("#chkLG").prop("checked"),
+						LN : $("#chkLN").prop("checked")
+					};
+
+					if ($("#ddlSubrecipients").val() == "1") {
+						OSPSection.AnticipatedSubRecipientsNames = $.trim($(
+								"#txtNamesSubrecipients").val());
+					}
+
+					var proposalInfo = {
+						ProposalID : _proposalId,
+						InvestigatorInfo : investigatorInfo,
+						ProjectInfo : projectInfo,
+						SponsorAndBudgetInfo : sponsorAndBudgetInfo,
+						CostShareInfo : costShareInfo,
+						UnivCommitments : univCommitments,
+						ConflicOfInterestInfo : conflicOfInterestInfo,
+						ComplianceInfo : complianceInfo,
+						AdditionalInfo : additionalInfo,
+						CollaborationInfo : collaborationInfo,
+						ConfidentialInfo : confidentialInfo,
+
+						OSPSection : OSPSection,
+						Flag : _flag
+					// false for Update true for New Add
+					};
+
+					// alert(proposalInfo);
+					proposalsManage.AddProposalInfo(proposalInfo);
 					return false;
 				}
 			}
