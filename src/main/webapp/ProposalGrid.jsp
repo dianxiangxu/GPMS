@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "56032c1d54ffd822f4481079";
+	var userProfileId = "5609e55654ffd80d60b43144";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -497,7 +497,8 @@
 																<td><span class="cssClassLabel">Proposal
 																		Date Received:</span></td>
 																<td class="cssClassTableRightCol"><span
-																	id="lblProposalDateReceived" class="cssClassLabel"></span></td>
+																	id="lblProposalDateReceived" class="cssClassLabel"></span>
+																	<span id="lblHiddenDateReceived" style="display: none;"></span></td>
 															</tr>
 
 															<tr id="trProposalStatus">

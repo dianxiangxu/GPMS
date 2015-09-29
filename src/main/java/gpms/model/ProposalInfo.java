@@ -9,7 +9,7 @@ public class ProposalInfo {
 	private String id = new String();
 
 	// Proposal
-	private String proposalNo = new String();
+	private int proposalNo = 0;
 
 	// ProjectInfo
 	private String projectTitle = new String();
@@ -30,7 +30,7 @@ public class ProposalInfo {
 	// ProjectInfo
 	private Date dueDate = new Date();
 	private Date projectPeriodFrom = new Date();
-	private Date projectPeriodTo = new Date();	
+	private Date projectPeriodTo = new Date();
 
 	// Proposal
 	private Status proposalStatus = Status.NEW;
@@ -66,11 +66,11 @@ public class ProposalInfo {
 		this.id = id;
 	}
 
-	public String getProposalNo() {
+	public int getProposalNo() {
 		return proposalNo;
 	}
 
-	public void setProposalNo(String proposalNo) {
+	public void setProposalNo(int proposalNo) {
 		this.proposalNo = proposalNo;
 	}
 

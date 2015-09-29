@@ -524,32 +524,12 @@ public class ProposalService {
 		}
 
 		JsonNode proposalInfo = root.get("proposalInfo");
-		// Flag
-
 		if (proposalInfo != null && proposalInfo.has("ProposalID")) {
 			proposalID = proposalInfo.get("ProposalID").getTextValue();
 			if (proposalID != "0") {
 				ObjectId id = new ObjectId(proposalID);
 				existingProposal = proposalDAO.findProposalByProposalID(id);
 			}
-		}
-
-		if (proposalInfo != null && proposalInfo.has("ProposalNo")
-				&& !proposalInfo.has("Flag")) {
-			newProposal.setProposalNo(proposalInfo.get("ProposalNo")
-					.getTextValue());
-		} else {
-			// TODO : Get the last Proposal No for increment
-			newProposal.setProposalNo("1");
-		}
-
-		if (proposalInfo != null && proposalInfo.has("ReceivedDate")
-				&& !proposalInfo.has("Flag")) {
-			Date receivedDate = formatter.parse(proposalInfo
-					.get("ReceivedDate").getTextValue());
-			newProposal.setDateReceived(receivedDate);
-		} else {
-			newProposal.setDateReceived(formatter.parse(new Date().toString()));
 		}
 
 		ProjectInfo newProjectInfo = new ProjectInfo();
@@ -645,14 +625,6 @@ public class ProposalService {
 			}
 
 			newProjectInfo.setProjectPeriod(projectPeriod);
-
-			if (projectInfo != null && projectInfo.has("ProposalStatus")
-					&& proposalInfo != null && !proposalInfo.has("Flag")) {
-				newProposal.setProposalStatus(Status.valueOf(projectInfo.get(
-						"ProposalStatus").getTextValue()));
-			} else {
-				newProposal.setProposalStatus(Status.NEW);
-			}
 		}
 
 		newProposal.setProjectInfo(newProjectInfo);
@@ -1467,6 +1439,31 @@ public class ProposalService {
 					.setResearchAdministrator(newResearchAdministrator);
 		}
 		newProposal.setoSPSectionInfo(newOSPSectionInfo);
+
+		if (proposalInfo != null && proposalInfo.has("ProposalNo")
+				&& !proposalInfo.has("Flag")) {
+			newProposal.setProposalNo(proposalInfo.get("ProposalNo")
+					.getIntValue());
+		} else {
+			newProposal.setProposalNo(proposalDAO.findLatestProposalNo() + 1);
+		}
+
+		if (proposalInfo != null && proposalInfo.has("ReceivedDate")
+				&& !proposalInfo.has("Flag")) {
+			Date receivedDate = formatter.parse(proposalInfo
+					.get("ReceivedDate").getTextValue());
+			newProposal.setDateReceived(receivedDate);
+		} else {
+			newProposal.setDateReceived(new Date());
+		}
+
+		if (proposalInfo != null && proposalInfo.has("ProposalStatus")
+				&& !proposalInfo.has("Flag")) {
+			newProposal.setProposalStatus(Status.valueOf(proposalInfo.get(
+					"ProposalStatus").getTextValue()));
+		} else {
+			newProposal.setProposalStatus(Status.NEW);
+		}
 
 		// Need to Compare Equals before saving existingUserProfile and
 		// newProfile

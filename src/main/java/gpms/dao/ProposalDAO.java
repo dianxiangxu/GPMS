@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
@@ -113,11 +112,11 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		}
 	}
 
-	public void setEditProposalNumber(Proposal proposal, String number,
+	public void setEditProposalNumber(Proposal proposal, int i,
 			UserProfile authorProfile) {
-		if (!proposal.getProposalNo().equals(number)) {
+		if (proposal.getProposalNo() != i) {
 			Datastore ds = getDatastore();
-			proposal.setProposalNo(number);
+			proposal.setProposalNo(i);
 			AuditLog entry = new AuditLog(authorProfile,
 					"Edited Proposal Number", new Date());
 			proposal.addEntryToAuditLog(entry);
@@ -931,5 +930,12 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			}
 		}
 		return signatures;
+	}
+
+	public int findLatestProposalNo() {
+		Datastore ds = getDatastore();
+		List<Proposal> q1 = ds.createQuery(Proposal.class)
+				.retrievedFields(true, "proposal no").asList();
+		return q1.get(q1.size() - 1).getProposalNo();
 	}
 }

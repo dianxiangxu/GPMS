@@ -904,6 +904,7 @@ $(function() {
 
 			// Project Information
 			$("#lblProposalNo").text(response.proposalNo);
+			$("#lblHiddenDateReceived").text(response.dateReceived);
 			$("#ddlProposalStatus").val(response.proposalStatus);
 
 			$("#txtProjectTitle").val(response.projectInfo.projectTitle).prop(
@@ -1266,12 +1267,14 @@ $(function() {
 							"checked",
 							response.oSPSectionInfo.recovery.limitedRecoveryInstitutionalWaiver);
 
-			$("#chkMTDC").prop("checked", response.oSPSectionInfo.base.MTDC);
-			$("#chkTDC").prop("checked", response.oSPSectionInfo.base.TDC);
-			$("#chkTC").prop("checked", response.oSPSectionInfo.base.TC);
-			$("#chkOther").prop("checked", response.oSPSectionInfo.base.other);
+			$("#chkMTDC")
+					.prop("checked", response.oSPSectionInfo.baseInfo.MTDC);
+			$("#chkTDC").prop("checked", response.oSPSectionInfo.baseInfo.TDC);
+			$("#chkTC").prop("checked", response.oSPSectionInfo.baseInfo.TC);
+			$("#chkOther").prop("checked",
+					response.oSPSectionInfo.baseInfo.other);
 			$("#chkNA").prop("checked",
-					response.oSPSectionInfo.base.notApplicable);
+					response.oSPSectionInfo.baseInfo.notApplicable);
 
 			if (response.oSPSectionInfo.isPISalaryIncluded) {
 				$("#ddlPISalaryIncluded").val(1);
@@ -2038,11 +2041,6 @@ $(function() {
 						ProjectPeriodTo : $("#txtProjectPeriodTo").val()
 					};
 
-					if (!_flag) {
-						projectInfo.ProposalStatus = $("#ddlProposalStatus")
-								.val();
-					}
-
 					var sponsorAndBudgetInfo = {
 						GrantingAgency : $.trim($("#txtNameOfGrantingAgency")
 								.val()),
@@ -2240,6 +2238,14 @@ $(function() {
 						Flag : _flag
 					// false for Update true for New Add
 					};
+
+					if (!_flag) {
+						proposalInfo.ProposalNo = $("#lblProposalNo").text();
+						proposalInfo.ReceivedDate = $("#lblHiddenDateReceived")
+								.text();
+						proposalInfo.ProposalStatus = $("#ddlProposalStatus")
+								.val();
+					}
 
 					// alert(proposalInfo);
 					proposalsManage.AddProposalInfo(proposalInfo);

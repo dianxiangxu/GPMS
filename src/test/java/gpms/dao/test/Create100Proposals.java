@@ -169,11 +169,10 @@ public class Create100Proposals {
 			newProposalDAO.setEditSponsorAndBudgetInfo(newProposal, newSandBud,
 					propProfile);
 
-			String proNumb = "" + propNumb;
 			// newProposal.setProposalNo(proNumb);
 
 			// REQUIRED FOR AUDIT LOG
-			newProposalDAO.setEditProposalNumber(newProposal, proNumb,
+			newProposalDAO.setEditProposalNumber(newProposal, propNumb,
 					propProfile);
 
 			ProjectInfo newProjInf = new ProjectInfo();
