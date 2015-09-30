@@ -540,13 +540,14 @@
 																<td class="cssClassTableRightCol"><input
 																	title="Direct Costs" type="text" class="sfInputbox"
 																	id="txtDirectCosts" name="directCosts"
-																	placeholder="Direct Costs" /></td>
+																	placeholder="Direct Costs" style="text-align: right;" /></td>
 
 																<td><span class="cssClassLabel" id="lblFACosts">F&A
 																		Costs:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	title="F&A Costs" type="text" class="sfInputbox"
-																	id="txtFACosts" name="FACosts" placeholder="F&A Costs" /></td>
+																	id="txtFACosts" name="FACosts" placeholder="F&A Costs"
+																	style="text-align: right;" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel" id="lblTotalCosts">Total
@@ -554,12 +555,13 @@
 																<td class="cssClassTableRightCol"><input
 																	title="Total Costs" type="text" class="sfInputbox"
 																	id="txtTotalCosts" name="totalCosts"
-																	placeholder="Total Costs" /></td>
+																	placeholder="Total Costs" style="text-align: right;" /></td>
 																<td><span class="cssClassLabel" id="lblFARate">F&A
 																		Rate:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	title="F&A Rate" type="text" class="sfInputbox"
-																	id="txtFARate" name="FARate" placeholder="F&A Rate" /></td>
+																	id="txtFARate" name="FARate" placeholder="F&A Rate"
+																	style="text-align: right;" /></td>
 															</tr>
 														</tbody>
 													</table>
@@ -1302,7 +1304,7 @@
 																<td class="cssClassTableRightCol"><input
 																	title="PI Salary" type="text" class="sfInputbox"
 																	id="txtPISalary" name="PISalary"
-																	placeholder="PI Salary" /></td>
+																	placeholder="PI Salary" style="text-align: right;" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">PI Fringe:</span> <span
@@ -1310,7 +1312,7 @@
 																<td class="cssClassTableRightCol"><input
 																	title="PI Fringe" type="text" class="sfInputbox"
 																	id="txtPIFringe" name="PIFringe"
-																	placeholder="PI Fringe" /></td>
+																	placeholder="PI Fringe" style="text-align: right;" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">Department

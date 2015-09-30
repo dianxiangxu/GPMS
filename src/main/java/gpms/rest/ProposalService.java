@@ -390,7 +390,7 @@ public class ProposalService {
 	@Path("/CheckUniqueProjectTitle")
 	public String checkUniqueProjectTitle(String message)
 			throws JsonProcessingException, IOException {
-		String proposalID = new String();
+		Integer proposalID = 0;
 		String newProjectTitle = new String();
 		String userName = new String();
 		String userProfileID = new String();
@@ -403,7 +403,7 @@ public class ProposalService {
 
 		JsonNode proposalUniqueObj = root.get("proposalUniqueObj");
 		if (proposalUniqueObj != null && proposalUniqueObj.has("ProposalID")) {
-			proposalID = proposalUniqueObj.get("ProposalID").getTextValue();
+			proposalID = proposalUniqueObj.get("ProposalID").getIntValue();
 		}
 
 		if (proposalUniqueObj != null
@@ -425,10 +425,9 @@ public class ProposalService {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
 
-		ObjectId id = new ObjectId();
 		Proposal proposal = new Proposal();
-		if (!proposalID.equals("0")) {
-			id = new ObjectId(proposalID);
+		if (proposalID != 0) {
+			ObjectId id = new ObjectId(proposalID.toString());
 			proposal = proposalDAO.findNextProposalWithSameProjectTitle(id,
 					newProjectTitle);
 		} else {
@@ -500,7 +499,7 @@ public class ProposalService {
 		String userProfileID = new String();
 		String cultureName = new String();
 
-		String proposalID = new String();
+		Integer proposalID = 0;
 
 		Proposal newProposal = new Proposal();
 		Proposal existingProposal = new Proposal();
@@ -525,9 +524,9 @@ public class ProposalService {
 
 		JsonNode proposalInfo = root.get("proposalInfo");
 		if (proposalInfo != null && proposalInfo.has("ProposalID")) {
-			proposalID = proposalInfo.get("ProposalID").getTextValue();
-			if (proposalID != "0") {
-				ObjectId id = new ObjectId(proposalID);
+			proposalID = proposalInfo.get("ProposalID").getIntValue();
+			if (proposalID != 0) {
+				ObjectId id = new ObjectId(proposalID.toString());
 				existingProposal = proposalDAO.findProposalByProposalID(id);
 			}
 		}
@@ -535,7 +534,7 @@ public class ProposalService {
 		ProjectInfo newProjectInfo = new ProjectInfo();
 
 		if (proposalInfo != null && proposalInfo.has("ProjectInfo")) {
-			JsonNode projectInfo = root.get("ProjectInfo");
+			JsonNode projectInfo = proposalInfo.get("ProjectInfo");
 			if (projectInfo != null && projectInfo.has("ProjectTitle")) {
 				newProjectInfo.setProjectTitle(projectInfo.get("ProjectTitle")
 						.getTextValue());
@@ -621,17 +620,19 @@ public class ProposalService {
 			if (projectInfo != null && projectInfo.has("ProjectPeriodTo")) {
 				Date periodTo = formatter.parse(projectInfo.get(
 						"ProjectPeriodTo").getTextValue());
-				projectPeriod.setFrom(periodTo);
+				projectPeriod.setTo(periodTo);
 			}
 
 			newProjectInfo.setProjectPeriod(projectPeriod);
 		}
 
+		// ProjectInfo
 		newProposal.setProjectInfo(newProjectInfo);
 
 		SponsorAndBudgetInfo newSponsorAndBudgetInfo = new SponsorAndBudgetInfo();
 		if (proposalInfo != null && proposalInfo.has("SponsorAndBudgetInfo")) {
-			JsonNode sponsorAndBudgetInfo = root.get("SponsorAndBudgetInfo");
+			JsonNode sponsorAndBudgetInfo = proposalInfo
+					.get("SponsorAndBudgetInfo");
 			if (sponsorAndBudgetInfo != null
 					&& sponsorAndBudgetInfo.has("GrantingAgency")) {
 				for (String grantingAgency : sponsorAndBudgetInfo
@@ -643,34 +644,39 @@ public class ProposalService {
 
 			if (sponsorAndBudgetInfo != null
 					&& sponsorAndBudgetInfo.has("DirectCosts")) {
-				newSponsorAndBudgetInfo.setDirectCosts(sponsorAndBudgetInfo
-						.get("DirectCosts").getDoubleValue());
+				newSponsorAndBudgetInfo.setDirectCosts(Double
+						.parseDouble(sponsorAndBudgetInfo.get("DirectCosts")
+								.getTextValue()));
 			}
 
 			if (sponsorAndBudgetInfo != null
 					&& sponsorAndBudgetInfo.has("FACosts")) {
-				newSponsorAndBudgetInfo.setDirectCosts(sponsorAndBudgetInfo
-						.get("FACosts").getDoubleValue());
+				newSponsorAndBudgetInfo.setFACosts(Double
+						.parseDouble(sponsorAndBudgetInfo.get("FACosts")
+								.getTextValue()));
 			}
 
 			if (sponsorAndBudgetInfo != null
 					&& sponsorAndBudgetInfo.has("TotalCosts")) {
-				newSponsorAndBudgetInfo.setTotalCosts(sponsorAndBudgetInfo.get(
-						"TotalCosts").getDoubleValue());
+				newSponsorAndBudgetInfo.setTotalCosts(Double
+						.parseDouble(sponsorAndBudgetInfo.get("TotalCosts")
+								.getTextValue()));
 			}
 
 			if (sponsorAndBudgetInfo != null
 					&& sponsorAndBudgetInfo.has("FARate")) {
-				newSponsorAndBudgetInfo.setDirectCosts(sponsorAndBudgetInfo
-						.get("FARate").getDoubleValue());
+				newSponsorAndBudgetInfo.setFARate(Double
+						.parseDouble(sponsorAndBudgetInfo.get("FARate")
+								.getTextValue()));
 			}
 		}
 
+		// SponsorAndBudgetInfo
 		newProposal.setSponsorAndBudgetInfo(newSponsorAndBudgetInfo);
 
 		CostShareInfo newCostShareInfo = new CostShareInfo();
 		if (proposalInfo != null && proposalInfo.has("CostShareInfo")) {
-			JsonNode costShareInfo = root.get("CostShareInfo");
+			JsonNode costShareInfo = proposalInfo.get("CostShareInfo");
 			if (costShareInfo != null
 					&& costShareInfo.has("InstitutionalCommitted")) {
 				switch (costShareInfo.get("InstitutionalCommitted")
@@ -700,11 +706,12 @@ public class ProposalService {
 				}
 			}
 		}
+		// CostShareInfo
 		newProposal.setCostShareInfo(newCostShareInfo);
 
 		UniversityCommitments newUnivCommitments = new UniversityCommitments();
 		if (proposalInfo != null && proposalInfo.has("UnivCommitments")) {
-			JsonNode univCommitments = root.get("UnivCommitments");
+			JsonNode univCommitments = proposalInfo.get("UnivCommitments");
 			if (univCommitments != null
 					&& univCommitments.has("NewRenovatedFacilitiesRequired")) {
 				switch (univCommitments.get("NewRenovatedFacilitiesRequired")
@@ -751,11 +758,13 @@ public class ProposalService {
 				}
 			}
 		}
+		// UnivCommitments
 		newProposal.setUniversityCommitments(newUnivCommitments);
 
 		ConflictOfInterest newConflictOfInterest = new ConflictOfInterest();
 		if (proposalInfo != null && proposalInfo.has("ConflicOfInterestInfo")) {
-			JsonNode conflicOfInterestInfo = root.get("ConflicOfInterestInfo");
+			JsonNode conflicOfInterestInfo = proposalInfo
+					.get("ConflicOfInterestInfo");
 			if (conflicOfInterestInfo != null
 					&& conflicOfInterestInfo.has("FinancialCOI")) {
 				switch (conflicOfInterestInfo.get("FinancialCOI")
@@ -801,11 +810,12 @@ public class ProposalService {
 				}
 			}
 		}
+		// ConflicOfInterestInfo
 		newProposal.setConflicOfInterest(newConflictOfInterest);
 
 		ComplianceInfo newComplianceInfo = new ComplianceInfo();
 		if (proposalInfo != null && proposalInfo.has("ComplianceInfo")) {
-			JsonNode complianceInfo = root.get("ComplianceInfo");
+			JsonNode complianceInfo = proposalInfo.get("ComplianceInfo");
 			if (complianceInfo != null
 					&& complianceInfo.has("InvolveUseOfHumanSubjects")) {
 				switch (complianceInfo.get("InvolveUseOfHumanSubjects")
@@ -925,11 +935,12 @@ public class ProposalService {
 				}
 			}
 		}
+		// ComplianceInfo
 		newProposal.setComplianceInfo(newComplianceInfo);
 
 		AdditionalInfo newAdditionalInfo = new AdditionalInfo();
 		if (proposalInfo != null && proposalInfo.has("AdditionalInfo")) {
-			JsonNode additionalInfo = root.get("AdditionalInfo");
+			JsonNode additionalInfo = proposalInfo.get("AdditionalInfo");
 			if (additionalInfo != null
 					&& additionalInfo.has("AnticipatesForeignNationalsPayment")) {
 				switch (additionalInfo
@@ -982,16 +993,16 @@ public class ProposalService {
 				}
 			}
 		}
+		// AdditionalInfo
 		newProposal.setAdditionalInfo(newAdditionalInfo);
 
 		CollaborationInfo newCollaborationInfo = new CollaborationInfo();
 		if (proposalInfo != null && proposalInfo.has("CollaborationInfo")) {
-			JsonNode collaborationInfo = root.get("CollaborationInfo");
+			JsonNode collaborationInfo = proposalInfo.get("CollaborationInfo");
 			if (collaborationInfo != null
-					&& collaborationInfo
-							.has("AnticipatesForeignNationalsPayment")) {
-				switch (collaborationInfo.get(
-						"AnticipatesForeignNationalsPayment").getTextValue()) {
+					&& collaborationInfo.has("InvolveNonFundedCollab")) {
+				switch (collaborationInfo.get("InvolveNonFundedCollab")
+						.getTextValue()) {
 				case "1":
 					newCollaborationInfo.setInvolveNonFundedCollab(true);
 					if (collaborationInfo != null
@@ -1009,11 +1020,12 @@ public class ProposalService {
 				}
 			}
 		}
+		// CollaborationInfo
 		newProposal.setCollaborationInfo(newCollaborationInfo);
 
 		ConfidentialInfo newConfidentialInfo = new ConfidentialInfo();
 		if (proposalInfo != null && proposalInfo.has("ConfidentialInfo")) {
-			JsonNode confidentialInfo = root.get("ConfidentialInfo");
+			JsonNode confidentialInfo = proposalInfo.get("ConfidentialInfo");
 			if (confidentialInfo != null
 					&& confidentialInfo.has("ContainConfidentialInformation")) {
 				switch (confidentialInfo.get("ContainConfidentialInformation")
@@ -1060,6 +1072,7 @@ public class ProposalService {
 				}
 			}
 		}
+		// ConfidentialInfo
 		newProposal.setConfidentialInfo(newConfidentialInfo);
 
 		if (proposalInfo != null && proposalInfo.has("InvestigatorInfo")) {
@@ -1071,8 +1084,9 @@ public class ProposalService {
 			for (String col : rows) {
 				String[] cols = col.split("!#!");
 				InvestigatorRefAndPosition investigatorRefAndPosition = new InvestigatorRefAndPosition();
-
-				UserProfile userRef = userProfileDAO.get(cols[1]);
+				ObjectId id = new ObjectId(cols[1]);
+				UserProfile userRef = userProfileDAO
+						.findUserDetailsByProfileID(id);
 				investigatorRefAndPosition.setUserRef(userRef);
 
 				investigatorRefAndPosition.setUserProfileId(cols[1]);
@@ -1096,12 +1110,13 @@ public class ProposalService {
 					break;
 				}
 			}
+			// InvestigatorInfo
 			newProposal.setInvestigatorInfo(newInvestigatorInfo);
 		}
 
 		OSPSectionInfo newOSPSectionInfo = new OSPSectionInfo();
 		if (proposalInfo != null && proposalInfo.has("OSPSectionInfo")) {
-			JsonNode oSPSectionInfo = root.get("OSPSectionInfo");
+			JsonNode oSPSectionInfo = proposalInfo.get("OSPSectionInfo");
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("ListAgency")) {
 				newOSPSectionInfo.setListAgency(oSPSectionInfo
@@ -1268,13 +1283,13 @@ public class ProposalService {
 			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("PISalary")) {
-				newOSPSectionInfo.setPISalary(oSPSectionInfo.get("PISalary")
-						.getDoubleValue());
+				newOSPSectionInfo.setPISalary(Double.parseDouble(oSPSectionInfo
+						.get("PISalary").getTextValue()));
 			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("PIFringe")) {
-				newOSPSectionInfo.setPIFringe(oSPSectionInfo.get("PIFringe")
-						.getDoubleValue());
+				newOSPSectionInfo.setPIFringe(Double.parseDouble(oSPSectionInfo
+						.get("PIFringe").getTextValue()));
 			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("DepartmentId")) {
@@ -1438,6 +1453,7 @@ public class ProposalService {
 			newOSPSectionInfo
 					.setResearchAdministrator(newResearchAdministrator);
 		}
+		// OSPSection
 		newProposal.setoSPSectionInfo(newOSPSectionInfo);
 
 		if (proposalInfo != null && proposalInfo.has("ProposalNo")

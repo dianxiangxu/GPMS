@@ -1684,31 +1684,14 @@ $(function() {
 
 			rowIndex = 0;
 			$("#dataTable tbody>tr:gt(0)").remove();
-			$("#dataTable tbody>tr:first").find("select").find('option').each(
-					function(i) {
-						$(this).removeAttr("selected");
-					});
 
-			// For form Dropdown Binding
 			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
 					.prop('disabled', 'disabled');
-
-			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
-					.val());
-
-			proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
-					0).val());
-			proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
-					.eq(0).val(), $('select[name="ddlCollege"]').eq(0).val());
-			proposalsManage.BindPositionTypeDropDown(
-					$('select[name="ddlName"]').eq(0).val(), $(
-							'select[name="ddlCollege"]').eq(0).val(), $(
-							'select[name="ddlDepartment"]').eq(0).val());
-			proposalsManage.BindPositionTitleDropDown($(
-					'select[name="ddlName"]').eq(0).val(), $(
-					'select[name="ddlCollege"]').eq(0).val(), $(
-					'select[name="ddlDepartment"]').eq(0).val(), $(
-					'select[name="ddlPositionType"]').eq(0).val());
+			// $("#dataTable
+			// tbody>tr:first").find("select").find('option').each(
+			// function(i) {
+			// $(this).removeAttr("selected");
+			// });
 
 			// For Signature Section
 			$("#trSignPICOPI tbody").empty();
@@ -1718,36 +1701,38 @@ $(function() {
 			return false;
 		},
 
+		BindDefaultUserPosition : function(rowIndexVal) {
+			// For form Dropdown Binding
+			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(
+					rowIndexVal).val());
+
+			proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
+					rowIndexVal).val());
+			proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
+					.eq(rowIndexVal).val(), $('select[name="ddlCollege"]').eq(
+					rowIndexVal).val());
+			proposalsManage.BindPositionTypeDropDown(
+					$('select[name="ddlName"]').eq(rowIndexVal).val(), $(
+							'select[name="ddlCollege"]').eq(rowIndexVal).val(),
+					$('select[name="ddlDepartment"]').eq(rowIndexVal).val());
+			proposalsManage.BindPositionTitleDropDown($(
+					'select[name="ddlName"]').eq(rowIndexVal).val(), $(
+					'select[name="ddlCollege"]').eq(rowIndexVal).val(), $(
+					'select[name="ddlDepartment"]').eq(rowIndexVal).val(), $(
+					'select[name="ddlPositionType"]').eq(rowIndexVal).val());
+			return false;
+		},
+
 		BindPICoPISignatures : function() {
-			// $("#dataTable tbody>tr:gt(0)").remove();
-			// $("#dataTable
-			// tbody>tr:first").find("select").find('option').each(
-			// function(i) {
-			// $(this).removeAttr("selected");
-			// });
-			//
-			// // For form Dropdown Binding
-			// $('select[name=ddlRole]').eq(0).val(0).prop('selected',
-			// 'selected')
-			// .prop('disabled', 'disabled');
-			// $('select[name=ddlName]').eq(0).val(GPMS.utils.GetUserProfileID())
-			// .prop('selected', 'selected').prop('disabled', 'disabled');
-			//
-			// proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(0)
-			// .val());
-			// proposalsManage.BindCollegeDropDown($('select[name="ddlName"]').eq(
-			// 0).val());
-			// proposalsManage.BindDepartmentDropDown($('select[name="ddlName"]')
-			// .eq(0).val(), $('select[name="ddlCollege"]').eq(0).val());
-			// proposalsManage.BindPositionTypeDropDown(
-			// $('select[name="ddlName"]').eq(0).val(), $(
-			// 'select[name="ddlCollege"]').eq(0).val(), $(
-			// 'select[name="ddlDepartment"]').eq(0).val());
-			// proposalsManage.BindPositionTitleDropDown($(
-			// 'select[name="ddlName"]').eq(0).val(), $(
-			// 'select[name="ddlCollege"]').eq(0).val(), $(
-			// 'select[name="ddlDepartment"]').eq(0).val(), $(
-			// 'select[name="ddlPositionType"]').eq(0).val());
+			var fullName = $('select[name="ddlName"]').eq(0).find(
+					"option:selected").text();
+			var cloneRow = '<tr><td><span class="cssClassLabel">'
+					+ fullName
+					+ '</span></td><td><input title="PI\'s Signature" class="sfInputbox" placeholder="PI\'s Signature" type="text" required="true" name="'
+					+ $('select[name="ddlName"]').eq(0).val()
+					+ '">'
+					+ '</td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" onfocus="proposalsManage.BindCurrentDateTime(this);"></td></tr>';
+			$(cloneRow).appendTo("#trSignPICOPI tbody");
 		},
 
 		onInit : function() {
@@ -1935,7 +1920,7 @@ $(function() {
 			return false;
 		},
 
-		isUniqueProjectTitle : function(proposalId, newProjectTitle) {
+		CheckUniqueProjectTitle : function(proposalId, newProjectTitle) {
 			var proposalUniqueObj = {
 				ProposalID : proposalId,
 				NewProjectTitle : newProjectTitle
@@ -1961,6 +1946,11 @@ $(function() {
 			proposalsManage.ajaxCall(proposalsManage.config);
 		},
 
+		BindCurrentDateTime : function(obj) {
+			$(obj).val($.format.date(new Date(), 'yyyy/MM/dd hh:mm:ss a'));
+			return false;
+		},
+
 		SaveProposal : function(_proposalId, _flag) {
 			$('#iferror').hide();
 			if (checkForm($("#form1"))) {
@@ -1969,8 +1959,8 @@ $(function() {
 				var newProjectTitle = $.trim($('#txtProjectTitle').val());
 				if (!newProjectTitle) {
 					validateErrorMessage += 'Please enter Project Title.';
-				} else if (!proposalsManage.isUniqueProjectTitle(_proposalId,
-						newProjectTitle)) {
+				} else if (!proposalsManage.CheckUniqueProjectTitle(
+						_proposalId, newProjectTitle)) {
 					validateErrorMessage += "'"
 							+ getLocale(gpmsProposalsManagement,
 									"Please enter unique Project Title.")
@@ -2144,83 +2134,6 @@ $(function() {
 								.prop("checked");
 					}
 
-					var OSPSection = {
-						ListAgency : $.trim($("#txtAgencyList").val()),
-
-						Federal : $("#chkFederal").prop("checked"),
-						FederalFlowThrough : $("#chkFederalFlowThrough").prop(
-								"checked"),
-						StateOfIdahoEntity : $("#chkStateOfIdahoEntity").prop(
-								"checked"),
-						PrivateForProfit : $("#chkPrivateForProfit").prop(
-								"checked"),
-						NonProfitOrganization : $("#chkNonProfitOrganization")
-								.prop("checked"),
-						NonIdahoStateEntity : $("#chkNonIdahoStateEntity")
-								.prop("checked"),
-						CollegeOrUniversity : $("#chkCollegeUniversity").prop(
-								"checked"),
-						LocalEntity : $("#chkLocalEntity").prop("checked"),
-						NonIdahoLocalEntity : $("#chkNonIdahoLocalEntity")
-								.prop("checked"),
-						TirbalGovernment : $("#chkTribalGovernment").prop(
-								"checked"),
-						Foreign : $("#chkForeign").prop("checked"),
-
-						CFDANo : $.trim($("#txtCFDANo").val()),
-						ProgramNo : $.trim($("#txtProgramNo").val()),
-						ProgramTitle : $.trim($("#txtProgramTitle").val()),
-
-						// --------------------------
-						FullRecovery : $("#chkFullRecovery").prop("checked"),
-						NoRecoveryNormalSponsorPolicy : $(
-								"#chkNoRecoveryNormal").prop("checked"),
-						NoRecoveryInstitutionalWaiver : $(
-								"#chkNoRecoveryInstitutional").prop("checked"),
-						LimitedRecoveryNormalSponsorPolicy : $(
-								"#chkLimitedRecoveryNormal").prop("checked"),
-						LimitedRecoveryInstitutionalWaiver : $(
-								"#chkLimitedRecoveryInstitutional").prop(
-								"checked"),
-
-						MTDC : $("#chkMTDC").prop("checked"),
-						TDC : $("#chkTDC").prop("checked"),
-						TC : $("#chkTC").prop("checked"),
-						Other : $("#chkOther").prop("checked"),
-						NotApplicable : $("#chkNA").prop("checked"),
-
-						// --------------------------
-						IsPISalaryIncluded : $("#ddlPISalaryIncluded").val(),
-						PISalary : $("#txtPISalary").autoNumeric('get'),
-						PIFringe : $("#txtPIFringe").autoNumeric('get'),
-						DepartmentId : $.trim($("#txtDepartmentID").val()),
-						InstitutionalCostDocumented : $(
-								"#ddlInstitutionalCostDocumented").val(),
-						ThirdPartyCostDocumented : $(
-								"#ddlThirdPartyCostDocumented").val(),
-
-						// --------------------------
-						IsAnticipatedSubRecipients : $("#ddlSubrecipients")
-								.val(),
-
-						// --------------------------
-						PIEligibilityWaiver : $("#ddlPIEligibilityWaiver")
-								.val(),
-						ConflictOfInterestForms : $("#ddlCOIForms").val(),
-						ExcludedPartyListChecked : $(
-								"#ddlCheckedExcludedPartyList").val(),
-						proposalNotes : $.trim($("#txtProposalNotes").val()),
-
-						DF : $("#chkDF").prop("checked"),
-						LG : $("#chkLG").prop("checked"),
-						LN : $("#chkLN").prop("checked")
-					};
-
-					if ($("#ddlSubrecipients").val() == "1") {
-						OSPSection.AnticipatedSubRecipientsNames = $.trim($(
-								"#txtNamesSubrecipients").val());
-					}
-
 					var proposalInfo = {
 						ProposalID : _proposalId,
 						InvestigatorInfo : investigatorInfo,
@@ -2234,7 +2147,6 @@ $(function() {
 						CollaborationInfo : collaborationInfo,
 						ConfidentialInfo : confidentialInfo,
 
-						OSPSection : OSPSection,
 						Flag : _flag
 					// false for Update true for New Add
 					};
@@ -2245,6 +2157,91 @@ $(function() {
 								.text();
 						proposalInfo.ProposalStatus = $("#ddlProposalStatus")
 								.val();
+
+						var OSPSection = {
+							ListAgency : $.trim($("#txtAgencyList").val()),
+
+							Federal : $("#chkFederal").prop("checked"),
+							FederalFlowThrough : $("#chkFederalFlowThrough")
+									.prop("checked"),
+							StateOfIdahoEntity : $("#chkStateOfIdahoEntity")
+									.prop("checked"),
+							PrivateForProfit : $("#chkPrivateForProfit").prop(
+									"checked"),
+							NonProfitOrganization : $(
+									"#chkNonProfitOrganization")
+									.prop("checked"),
+							NonIdahoStateEntity : $("#chkNonIdahoStateEntity")
+									.prop("checked"),
+							CollegeOrUniversity : $("#chkCollegeUniversity")
+									.prop("checked"),
+							LocalEntity : $("#chkLocalEntity").prop("checked"),
+							NonIdahoLocalEntity : $("#chkNonIdahoLocalEntity")
+									.prop("checked"),
+							TirbalGovernment : $("#chkTribalGovernment").prop(
+									"checked"),
+							Foreign : $("#chkForeign").prop("checked"),
+
+							CFDANo : $.trim($("#txtCFDANo").val()),
+							ProgramNo : $.trim($("#txtProgramNo").val()),
+							ProgramTitle : $.trim($("#txtProgramTitle").val()),
+
+							// --------------------------
+							FullRecovery : $("#chkFullRecovery")
+									.prop("checked"),
+							NoRecoveryNormalSponsorPolicy : $(
+									"#chkNoRecoveryNormal").prop("checked"),
+							NoRecoveryInstitutionalWaiver : $(
+									"#chkNoRecoveryInstitutional").prop(
+									"checked"),
+							LimitedRecoveryNormalSponsorPolicy : $(
+									"#chkLimitedRecoveryNormal")
+									.prop("checked"),
+							LimitedRecoveryInstitutionalWaiver : $(
+									"#chkLimitedRecoveryInstitutional").prop(
+									"checked"),
+
+							MTDC : $("#chkMTDC").prop("checked"),
+							TDC : $("#chkTDC").prop("checked"),
+							TC : $("#chkTC").prop("checked"),
+							Other : $("#chkOther").prop("checked"),
+							NotApplicable : $("#chkNA").prop("checked"),
+
+							// --------------------------
+							IsPISalaryIncluded : $("#ddlPISalaryIncluded")
+									.val(),
+							PISalary : $("#txtPISalary").autoNumeric('get'),
+							PIFringe : $("#txtPIFringe").autoNumeric('get'),
+							DepartmentId : $.trim($("#txtDepartmentID").val()),
+							InstitutionalCostDocumented : $(
+									"#ddlInstitutionalCostDocumented").val(),
+							ThirdPartyCostDocumented : $(
+									"#ddlThirdPartyCostDocumented").val(),
+
+							// --------------------------
+							IsAnticipatedSubRecipients : $("#ddlSubrecipients")
+									.val(),
+
+							// --------------------------
+							PIEligibilityWaiver : $("#ddlPIEligibilityWaiver")
+									.val(),
+							ConflictOfInterestForms : $("#ddlCOIForms").val(),
+							ExcludedPartyListChecked : $(
+									"#ddlCheckedExcludedPartyList").val(),
+							proposalNotes : $
+									.trim($("#txtProposalNotes").val()),
+
+							DF : $("#chkDF").prop("checked"),
+							LG : $("#chkLG").prop("checked"),
+							LN : $("#chkLN").prop("checked")
+						};
+
+						if ($("#ddlSubrecipients").val() == "1") {
+							OSPSection.AnticipatedSubRecipientsNames = $
+									.trim($("#txtNamesSubrecipients").val());
+						}
+
+						proposalInfo.OSPSectionInfo = OSPSection;
 					}
 
 					// alert(proposalInfo);
@@ -2507,6 +2504,7 @@ $(function() {
 							function(index, item) {
 								var signedDate = '';
 								var readOnly = '';
+								var focusMethod = '';
 
 								if (item.signedDate != null) {
 									signedDate = item.signedDate;
@@ -2518,6 +2516,8 @@ $(function() {
 									if (item.signature != ""
 											&& item.signedDate != null) {
 										readOnly = 'readonly="true"';
+									} else if (item.signedDate == null) {
+										focusMethod = 'onfocus="proposalsManage.BindCurrentDateTime(this);"';
 									}
 								}
 
@@ -2535,7 +2535,9 @@ $(function() {
 										+ '" '
 										+ readOnly
 										+ '>'
-										+ '</td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" value="'
+										+ '</td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" '
+										+ focusMethod
+										+ ' value="'
 										+ $.format.date(signedDate,
 												'yyyy/MM/dd hh:mm:ss a')
 										+ '"></td></tr>';
@@ -2564,37 +2566,25 @@ $(function() {
 			break;
 
 		case 13:
-
-			break;
-
-		case 14:
-
-			break;
-
-		case 15:
-
-			break;
-
-		case 16: // Save Update
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
 			$('#divProposalGrid').show();
 			if (editFlag > 0) {
-				csscody
-						.info("<h2>"
-								+ getLocale(gpmsProposalsManagement,
-										'Successful Message')
-								+ "</h2><p>"
-								+ getLocale(gpmsProposalsManagement,
-										'User has been updated successfully.')
-								+ "</p>");
+				csscody.info("<h2>"
+						+ getLocale(gpmsProposalsManagement,
+								'Successful Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'Proposal has been updated successfully.')
+						+ "</p>");
 			} else {
 				csscody.info("<h2>"
 						+ getLocale(gpmsProposalsManagement,
 								'Successful Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsProposalsManagement,
-								'User has been saved successfully.') + "</p>");
+								'Proposal has been saved successfully.')
+						+ "</p>");
 			}
 			proposalsManage.ClearForm();
 			$('#divProposalForm').hide();
@@ -2709,7 +2699,7 @@ $(function() {
 						+ getLocale(gpmsProposalsManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsProposalsManagement,
-								'Failed to save user!') + "</p>");
+								'Failed to save proposal!') + "</p>");
 				break;
 			}
 		},
@@ -2774,40 +2764,14 @@ $(function() {
 			proposalsManage.BindUserDropDown();
 
 			// Form Position details Drop downs
-			$('select[name="ddlName"]').on(
-					"change",
-					function() {
-						rowIndex = $(this).closest('tr').prevAll("tr").length;
-						if ($(this).val() != "0") {
-							proposalsManage.BindUserMobileNo($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
-							proposalsManage.BindCollegeDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
-
-							proposalsManage.BindDepartmentDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val());
-							proposalsManage.BindPositionTypeDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val(), $(
-									'select[name="ddlDepartment"]')
-									.eq(rowIndex).val());
-							proposalsManage.BindPositionTitleDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val(), $(
-									'select[name="ddlDepartment"]')
-									.eq(rowIndex).val(), $(
-									'select[name="ddlPositionType"]').eq(
-									rowIndex).val());
-						} else {
-							$(this).find('option:gt(0)').remove();
-						}
-					});
+			$('select[name="ddlName"]').on("change", function() {
+				rowIndex = $(this).closest('tr').prevAll("tr").length;
+				if ($(this).val() != "0") {
+					proposalsManage.BindDefaultUserPosition(rowIndex);
+				} else {
+					$(this).find('option:gt(0)').remove();
+				}
+			});
 
 			$('select[name="ddlCollege"]').on(
 					"change",
@@ -2927,17 +2891,16 @@ $(function() {
 								}
 							});
 
-			$('#btnAddNew').bind(
+			$('#btnAddNew').on(
 					"click",
 					function() {
-						proposalsManage.ClearForm();
 						$('select[name=ddlName]').eq(0).val(
 								GPMS.utils.GetUserProfileID()).prop('selected',
 								'selected').prop('disabled', 'disabled');
 
+						proposalsManage.ClearForm();
+						proposalsManage.BindDefaultUserPosition(0);
 						proposalsManage.BindPICoPISignatures();
-
-						$("input[name='signaturedate']").hide();
 
 						$("#trSignChair").hide();
 						$("#trSignDean").hide();
@@ -2951,7 +2914,7 @@ $(function() {
 						$('#divProposalForm').show();
 					});
 
-			$('#btnBack').bind("click", function() {
+			$('#btnBack').on("click", function() {
 				$('#divProposalForm').hide();
 				$('#divProposalGrid').show();
 				proposalsManage.ClearForm();
@@ -2959,6 +2922,7 @@ $(function() {
 
 			$('#btnReset').bind("click", function() {
 				proposalsManage.ClearForm();
+				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();
 				$("#trSignChair").hide();
 				$("#trSignDean").hide();
@@ -2972,7 +2936,7 @@ $(function() {
 					proposalsManage.SaveProposal(proposal_id, false);
 				} else {
 					editFlag = 0;
-					proposalsManage.SaveProposal("0", true);
+					proposalsManage.SaveProposal(0, true);
 				}
 			});
 
@@ -2991,7 +2955,7 @@ $(function() {
 						if (!projectTitle) {
 							errors += getLocale(gpmsProposalsManagement,
 									"Please enter project title.");
-						} else if (!proposalsManage.isUniqueProjectTitle(
+						} else if (!proposalsManage.CheckUniqueProjectTitle(
 								proposal_id, projectTitle)) {
 							errors += getLocale(gpmsProposalsManagement,
 									"Please enter unique project title.")
@@ -3068,31 +3032,7 @@ $(function() {
 									1200);
 
 							rowIndex = $('#dataTable > tbody tr').size() - 1;
-
-							proposalsManage.BindUserMobileNo($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
-							proposalsManage.BindCollegeDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
-							proposalsManage.BindDepartmentDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val());
-							proposalsManage.BindPositionTypeDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val(), $(
-									'select[name="ddlDepartment"]')
-									.eq(rowIndex).val());
-							proposalsManage.BindPositionTitleDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val(), $(
-									'select[name="ddlDepartment"]')
-									.eq(rowIndex).val(), $(
-									'select[name="ddlPositionType"]').eq(
-									rowIndex).val());
+							proposalsManage.BindDefaultUserPosition(rowIndex);
 						}
 					});
 			$("#btnSearchProposal").on("click", function() {
@@ -3354,7 +3294,7 @@ $(function() {
 
 			$("#txtFARate").autoNumeric('init', {
 				aDec : '.',
-				aSign : '% ',
+				aSign : ' %',
 				pSign : 's',
 				aPad : true,
 				vMin : "0.00",

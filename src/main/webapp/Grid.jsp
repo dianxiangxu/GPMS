@@ -541,7 +541,8 @@
 																		<td><span class="cssClassLabel" id="lblActive">Active:</span></td>
 																		<td class="cssClassTableRightCol" colspan="3"><input
 																			title="Active" type="checkbox" value=""
-																			name="chkActive" class="cssClassCheckBox"></td>
+																			name="chkActive" class="cssClassCheckBox"
+																			checked="checked"></td>
 																	</tr>
 																</tbody>
 															</table>

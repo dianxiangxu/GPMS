@@ -936,6 +936,10 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		Datastore ds = getDatastore();
 		List<Proposal> q1 = ds.createQuery(Proposal.class)
 				.retrievedFields(true, "proposal no").asList();
-		return q1.get(q1.size() - 1).getProposalNo();
+		if (q1.size() == 0) {
+			return 0;
+		} else {
+			return q1.get(q1.size() - 1).getProposalNo();
+		}
 	}
 }

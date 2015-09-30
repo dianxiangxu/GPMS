@@ -959,16 +959,10 @@ $(function() {
 
 			rowIndex = 0;
 			$("#dataTable tbody>tr:gt(0)").remove();
-			$("#dataTable tbody>tr:first").find("select").find('option').each(
-					function(i) {
-						$(this).removeAttr("selected");
-					});
 
-			usersManage.BindDepartmentDropDown($('select[name="ddlCollege"]')
-					.eq(0).val(), false);
-
-			// var checked = $('input[name=chkActive]').is(":checked");
-			$('input[name=chkActive]').prop('checked', 'checked');
+			if (!$('input[name=chkActive]').is(":checked")) {
+				$('input[name=chkActive]').prop('checked', 'checked');
+			}
 
 			return false;
 		},
@@ -1785,12 +1779,18 @@ $(function() {
 								}
 							});
 
-			$('#btnAddNew').bind("click", function() {
-				usersManage.ClearForm();
-				$('#auditLogTab').hide();
-				$('#divUserGrid').hide();
-				$('#divUserForm').show();
-			});
+			$('#btnAddNew').bind(
+					"click",
+					function() {
+						usersManage.ClearForm();
+						usersManage
+								.BindDepartmentDropDown($(
+										'select[name="ddlCollege"]').eq(0)
+										.val(), false);
+						$('#auditLogTab').hide();
+						$('#divUserGrid').hide();
+						$('#divUserForm').show();
+					});
 
 			$('#btnBack').bind("click", function() {
 				$('#divUserForm').hide();
@@ -1798,9 +1798,15 @@ $(function() {
 				usersManage.ClearForm();
 			});
 
-			$('#btnReset').bind("click", function() {
-				usersManage.ClearForm();
-			});
+			$('#btnReset').bind(
+					"click",
+					function() {
+						usersManage.ClearForm();
+						usersManage
+								.BindDepartmentDropDown($(
+										'select[name="ddlCollege"]').eq(0)
+										.val(), false);
+					});
 
 			$('#btnSaveUser').click(function() {
 				var user_id = $(this).prop("name");
