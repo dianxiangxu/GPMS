@@ -6,7 +6,7 @@ import org.mongodb.morphia.annotations.Property;
 import com.google.gson.annotations.Expose;
 
 @Embedded
-public class Base {
+public class BaseInfo {
 	@Expose
 	@Property("MTDC")
 	private boolean MTDC;
@@ -27,7 +27,7 @@ public class Base {
 	@Property("not applicable")
 	private boolean notApplicable;
 
-	public Base() {
+	public BaseInfo() {
 	}
 
 	public boolean isMTDC() {
@@ -96,7 +96,7 @@ public class Base {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Base other = (Base) obj;
+		BaseInfo other = (BaseInfo) obj;
 		if (MTDC != other.MTDC)
 			return false;
 		if (TC != other.TC)

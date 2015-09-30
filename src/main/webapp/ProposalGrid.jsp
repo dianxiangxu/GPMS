@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "56032c1d54ffd822f4481079";
+	var userProfileId = "560345db83f5e40ae40d453a";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -378,28 +378,28 @@
 																		<option value="2">Senior Personnel</option>
 																</select></td>
 																<td><select title="Choose Full Name"
-																	class="sfListmenu" name="ddlName" style="width: 125px;">
+																	class="sfListmenu" name="ddlName" style="width: 140px;">
 																</select></td>
 																<td><select title="Choose College Name"
 																	class="sfListmenu" name="ddlCollege"
-																	style="width: 85px;">
+																	style="width: 90px;">
 																</select></td>
 																<td><select title="Choose Department Name"
 																	class="sfListmenu" name="ddlDepartment"
-																	style="width: 122px;">
+																	style="width: 126px;">
 																</select></td>
 																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
-																	style="width: 120px;">
+																	style="width: 122px;">
 																</select></td>
 																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
-																	style="width: 145px;">
+																	style="width: 169px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
 																	readonly="readonly" class="sfTextBoxSmall"
 																	name="txtPhoneNo" placeholder="Phone #"
-																	style="width: 88px !important" /></td>
+																	style="width: 90px !important" /></td>
 																<td><input type="Button" value="Add More"
 																	name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -497,7 +497,8 @@
 																<td><span class="cssClassLabel">Proposal
 																		Date Received:</span></td>
 																<td class="cssClassTableRightCol"><span
-																	id="lblProposalDateReceived" class="cssClassLabel"></span></td>
+																	id="lblProposalDateReceived" class="cssClassLabel"></span>
+																	<span id="lblHiddenDateReceived" style="display: none;"></span></td>
 															</tr>
 
 															<tr id="trProposalStatus">
@@ -539,13 +540,14 @@
 																<td class="cssClassTableRightCol"><input
 																	title="Direct Costs" type="text" class="sfInputbox"
 																	id="txtDirectCosts" name="directCosts"
-																	placeholder="Direct Costs" /></td>
+																	placeholder="Direct Costs" style="text-align: right;" /></td>
 
 																<td><span class="cssClassLabel" id="lblFACosts">F&A
 																		Costs:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	title="F&A Costs" type="text" class="sfInputbox"
-																	id="txtFACosts" name="FACosts" placeholder="F&A Costs" /></td>
+																	id="txtFACosts" name="FACosts" placeholder="F&A Costs"
+																	style="text-align: right;" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel" id="lblTotalCosts">Total
@@ -553,12 +555,13 @@
 																<td class="cssClassTableRightCol"><input
 																	title="Total Costs" type="text" class="sfInputbox"
 																	id="txtTotalCosts" name="totalCosts"
-																	placeholder="Total Costs" /></td>
+																	placeholder="Total Costs" style="text-align: right;" /></td>
 																<td><span class="cssClassLabel" id="lblFARate">F&A
 																		Rate:</span> <span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
 																	title="F&A Rate" type="text" class="sfInputbox"
-																	id="txtFARate" name="FARate" placeholder="F&A Rate" /></td>
+																	id="txtFARate" name="FARate" placeholder="F&A Rate"
+																	style="text-align: right;" /></td>
 															</tr>
 														</tbody>
 													</table>
@@ -940,11 +943,11 @@
 																</select></td>
 																<td id="tdPagesWithProprietaryInfo"><input
 																	title="Pages With Proprietary/Confidential Information"
-																	type="text" class="sfInputbox" style="width: 285px;"
+																	type="text" class="sfInputbox" style="width: 210px;"
 																	id="txtPagesWithProprietaryInfo"
 																	name="pagesWithProprietaryInfo"
-																	placeholder="Pages With Proprietary/Confidential Information" />
-																	<span class="cssClassRequired">*</span> <span
+																	placeholder="Pages Containing the Information" /> <span
+																	class="cssClassRequired">*</span> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated page numbers.</span></td>
 																</td>
@@ -1301,7 +1304,7 @@
 																<td class="cssClassTableRightCol"><input
 																	title="PI Salary" type="text" class="sfInputbox"
 																	id="txtPISalary" name="PISalary"
-																	placeholder="PI Salary" /></td>
+																	placeholder="PI Salary" style="text-align: right;" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">PI Fringe:</span> <span
@@ -1309,7 +1312,7 @@
 																<td class="cssClassTableRightCol"><input
 																	title="PI Fringe" type="text" class="sfInputbox"
 																	id="txtPIFringe" name="PIFringe"
-																	placeholder="PI Fringe" /></td>
+																	placeholder="PI Fringe" style="text-align: right;" /></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel">Department

@@ -12,19 +12,19 @@ public class ProjectType {
 	@Expose
 	@Property("research-basic")
 	private boolean isResearchBasic;
-	
+
 	@Expose
 	@Property("research-applied")
 	private boolean isResearchApplied;
-	
+
 	@Expose
 	@Property("research-development")
 	private boolean isResearchDevelopment;
-	
+
 	@Expose
 	@Property("instruction")
 	private boolean isInstruction;
-	
+
 	@Expose
 	@Property("other sponsored activity")
 	private boolean isOtherSponsoredActivity;
@@ -107,7 +107,7 @@ public class ProjectType {
 	public String toString() {
 		String outPut = "";
 		outPut += "Research-Basic           : " + isResearchBasic + "\n";
-		outPut += "Reseach-Applied          : " + isResearchApplied + "\n";
+		outPut += "Research-Applied          : " + isResearchApplied + "\n";
 		outPut += "Research-Development     : " + isResearchDevelopment + "\n";
 		outPut += "Instruction              : " + isInstruction + "\n";
 		outPut += "Other Sponsored Activity : " + isOtherSponsoredActivity;
@@ -147,9 +147,9 @@ public class ProjectType {
 			return false;
 		return true;
 	}
-	
+
 	@Override
-	public ProjectType clone() throws CloneNotSupportedException{
+	public ProjectType clone() throws CloneNotSupportedException {
 		ProjectType copy = new ProjectType();
 
 		copy.setIsResearchBasic(this.isResearchBasic);

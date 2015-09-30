@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560345dd83f5e40ae40d4572";
+	var userProfileId = "5609e55654ffd80d60b43144";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -541,7 +541,8 @@
 																		<td><span class="cssClassLabel" id="lblActive">Active:</span></td>
 																		<td class="cssClassTableRightCol" colspan="3"><input
 																			title="Active" type="checkbox" value=""
-																			name="chkActive" class="cssClassCheckBox"></td>
+																			name="chkActive" class="cssClassCheckBox"
+																			checked="checked"></td>
 																	</tr>
 																</tbody>
 															</table>

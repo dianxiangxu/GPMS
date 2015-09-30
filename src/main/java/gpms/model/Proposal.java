@@ -2,7 +2,6 @@ package gpms.model;
 
 import gpms.dao.ProposalDAO;
 
-import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +22,7 @@ public class Proposal extends BaseEntity {
 	@Expose
 	@Property("proposal no")
 	@Indexed(value = IndexDirection.ASC, name = "proposalNoIndex", unique = true)
-	private String proposalNo = new String();
+	private int proposalNo = 0;
 
 	@Expose
 	@Property("date received")
@@ -85,11 +84,11 @@ public class Proposal extends BaseEntity {
 	public Proposal() {
 	}
 
-	public String getProposalNo() {
+	public int getProposalNo() {
 		return proposalNo;
 	}
 
-	public void setProposalNo(String proposalNo) {
+	public void setProposalNo(int proposalNo) {
 		this.proposalNo = proposalNo;
 	}
 
@@ -219,6 +218,22 @@ public class Proposal extends BaseEntity {
 	}
 
 	@Override
+	public String toString() {
+		return "Proposal [proposalNo=" + proposalNo + ", dateReceived="
+				+ dateReceived + ", proposalStatus=" + proposalStatus
+				+ ", investigatorInfo=" + investigatorInfo + ", projectInfo="
+				+ projectInfo + ", sponsorAndBudgetInfo="
+				+ sponsorAndBudgetInfo + ", costShareInfo=" + costShareInfo
+				+ ", universityCommitments=" + universityCommitments
+				+ ", conflicOfInterest=" + conflicOfInterest
+				+ ", complianceInfo=" + complianceInfo + ", additionalInfo="
+				+ additionalInfo + ", collaborationInfo=" + collaborationInfo
+				+ ", confidentialInfo=" + confidentialInfo
+				+ ", oSPSectionInfo=" + oSPSectionInfo + ", signatureInfo="
+				+ signatureInfo + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -248,8 +263,7 @@ public class Proposal extends BaseEntity {
 				+ ((oSPSectionInfo == null) ? 0 : oSPSectionInfo.hashCode());
 		result = prime * result
 				+ ((projectInfo == null) ? 0 : projectInfo.hashCode());
-		result = prime * result
-				+ ((proposalNo == null) ? 0 : proposalNo.hashCode());
+		result = prime * result + proposalNo;
 		result = prime * result
 				+ ((proposalStatus == null) ? 0 : proposalStatus.hashCode());
 		result = prime * result
@@ -324,10 +338,7 @@ public class Proposal extends BaseEntity {
 				return false;
 		} else if (!projectInfo.equals(other.projectInfo))
 			return false;
-		if (proposalNo == null) {
-			if (other.proposalNo != null)
-				return false;
-		} else if (!proposalNo.equals(other.proposalNo))
+		if (proposalNo != other.proposalNo)
 			return false;
 		if (proposalStatus != other.proposalStatus)
 			return false;
@@ -347,22 +358,6 @@ public class Proposal extends BaseEntity {
 		} else if (!universityCommitments.equals(other.universityCommitments))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Proposal [proposalNo=" + proposalNo + ", dateReceived="
-				+ dateReceived + ", proposalStatus=" + proposalStatus
-				+ ", investigatorInfo=" + investigatorInfo + ", projectInfo="
-				+ projectInfo + ", sponsorAndBudgetInfo="
-				+ sponsorAndBudgetInfo + ", costShareInfo=" + costShareInfo
-				+ ", universityCommitments=" + universityCommitments
-				+ ", conflicOfInterest=" + conflicOfInterest
-				+ ", complianceInfo=" + complianceInfo + ", additionalInfo="
-				+ additionalInfo + ", collaborationInfo=" + collaborationInfo
-				+ ", confidentialInfo=" + confidentialInfo
-				+ ", oSPSectionInfo=" + oSPSectionInfo + ", signatureInfo="
-				+ signatureInfo + "]";
 	}
 
 }

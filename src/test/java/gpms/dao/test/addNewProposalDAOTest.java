@@ -104,8 +104,8 @@ public class addNewProposalDAOTest {
 		assertTrue(prop.getInvestigatorInfo().equals(invInf));
 
 		System.out.println("Now adding Proposal Number...");
-		pdao.setEditProposalNumber(prop, "4", piProfile);
-		assertTrue(prop.getProposalNo().equals("4"));
+		pdao.setEditProposalNumber(prop, 4, piProfile);
+		assertTrue(prop.getProposalNo() == 4);
 
 		Date date = new Date();
 

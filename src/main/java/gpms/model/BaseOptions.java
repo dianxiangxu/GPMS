@@ -27,7 +27,11 @@ public class BaseOptions {
 	}
 
 	public void setYes(boolean yes) {
-		this.yes = yes;
+		if (!this.yes && yes) {
+			this.yes = yes;
+			no = false;
+			notApplicable = false;
+		}
 	}
 
 	public boolean isNo() {
@@ -35,7 +39,11 @@ public class BaseOptions {
 	}
 
 	public void setNo(boolean no) {
-		this.no = no;
+		if (!this.no && no) {
+			yes = false;
+			this.no = no;
+			notApplicable = false;
+		}
 	}
 
 	public boolean isNotApplicable() {
@@ -43,7 +51,11 @@ public class BaseOptions {
 	}
 
 	public void setNotApplicable(boolean notApplicable) {
-		this.notApplicable = notApplicable;
+		if (!this.notApplicable && notApplicable) {
+			yes = false;
+			no = false;
+			this.notApplicable = notApplicable;
+		}
 	}
 
 	@Override
@@ -78,6 +90,6 @@ public class BaseOptions {
 		if (yes != other.yes)
 			return false;
 		return true;
-	}	
+	}
 
 }

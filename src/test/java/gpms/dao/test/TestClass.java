@@ -53,9 +53,9 @@ public class TestClass {
 	@Test
 	public void setInitialInfo() throws ParseException {
 		System.out.println("Now creating new proposal...");
-		String proposalId = "55e8c7c096f52c00e8c429ba";
+		String proposalId = "5609e55954ffd80d60b4321e";
 		ObjectId id = new ObjectId(proposalId);
 
-		newProposalDAO.findAllSignatureForAProposal(id);
+		System.out.println(newProposalDAO.findLatestProposalNo());
 	}
 }

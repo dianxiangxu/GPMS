@@ -12,15 +12,15 @@ public class TypeOfRequest {
 	@Expose
 	@Property("pre-proposal")
 	private boolean isPreProposal;
-	
+
 	@Expose
 	@Property("new proposal")
 	private boolean isNewProposal;
-	
+
 	@Expose
 	@Property("continuation")
 	private boolean isContinuation;
-	
+
 	@Expose
 	@Property("supplement")
 	private boolean isSupplement;
@@ -33,7 +33,12 @@ public class TypeOfRequest {
 	}
 
 	public void setPreProposal(boolean isPreProposal) {
-		this.isPreProposal = isPreProposal;
+		if (!this.isPreProposal && isPreProposal) {
+			this.isPreProposal = isPreProposal;
+			isNewProposal = false;
+			isContinuation = false;
+			isSupplement = false;
+		}
 	}
 
 	public boolean isNewProposal() {
@@ -41,7 +46,12 @@ public class TypeOfRequest {
 	}
 
 	public void setNewProposal(boolean isNewProposal) {
-		this.isNewProposal = isNewProposal;
+		if (!this.isNewProposal && isNewProposal) {
+			isPreProposal = false;
+			this.isNewProposal = isNewProposal;
+			isContinuation = false;
+			isSupplement = false;
+		}
 	}
 
 	public boolean isContinuation() {
@@ -49,7 +59,12 @@ public class TypeOfRequest {
 	}
 
 	public void setContinuation(boolean isContinuation) {
-		this.isContinuation = isContinuation;
+		if (!this.isContinuation && isContinuation) {
+			isPreProposal = false;
+			isNewProposal = false;
+			this.isContinuation = isContinuation;
+			isSupplement = false;
+		}
 	}
 
 	public boolean isSupplement() {
@@ -57,7 +72,12 @@ public class TypeOfRequest {
 	}
 
 	public void setSupplement(boolean isSupplement) {
-		this.isSupplement = isSupplement;
+		if (!this.isSupplement && isSupplement) {
+			isPreProposal = false;
+			isNewProposal = false;
+			isContinuation = false;
+			this.isSupplement = isSupplement;
+		}
 	}
 
 	@Override

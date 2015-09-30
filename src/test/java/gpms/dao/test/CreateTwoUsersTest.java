@@ -171,7 +171,7 @@ public class CreateTwoUsersTest {
 
 		// firstInv.setPi(newUserProfile);
 
-		proposal1.setProposalNo("10001");
+		proposal1.setProposalNo(10001);
 		proposal1.setInvestigatorInfo(firstInv);
 
 		ProposalDAO newProposalDAO = new ProposalDAO(mongoClient, morphia,
@@ -293,7 +293,7 @@ public class CreateTwoUsersTest {
 		// secondInv.setPi(newUserProfile2);
 		// secondInv.addCo_pi(newUserProfile);
 
-		proposal2.setProposalNo("10002");
+		proposal2.setProposalNo(10002);
 		proposal2.setInvestigatorInfo(secondInv);
 
 		ProposalDAO nextProposalDAO = new ProposalDAO(mongoClient, morphia,

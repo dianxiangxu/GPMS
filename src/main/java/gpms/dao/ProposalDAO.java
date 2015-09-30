@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
@@ -113,11 +112,11 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 		}
 	}
 
-	public void setEditProposalNumber(Proposal proposal, String number,
+	public void setEditProposalNumber(Proposal proposal, int i,
 			UserProfile authorProfile) {
-		if (!proposal.getProposalNo().equals(number)) {
+		if (proposal.getProposalNo() != i) {
 			Datastore ds = getDatastore();
-			proposal.setProposalNo(number);
+			proposal.setProposalNo(i);
 			AuditLog entry = new AuditLog(authorProfile,
 					"Edited Proposal Number", new Date());
 			proposal.addEntryToAuditLog(entry);
@@ -664,7 +663,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				piSign.setSignedDate(signature.getSignedDate());
 				piSign.setPositionTitle(signature.getPositionTitle());
 				piSign.setDelegated(signature.isDelegated());
-				signatures.add(piSign);
+				if (!signatures.contains(piSign)) {
+					signatures.add(piSign);
+				}
 				piAlreadySigned = true;
 			}
 		}
@@ -675,7 +676,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			piSign.setSignature("");
 			piSign.setPositionTitle("PI");
 			piSign.setDelegated(false);
-			signatures.add(piSign);
+			if (!signatures.contains(piSign)) {
+				signatures.add(piSign);
+			}
 		}
 
 		if (!colleges.contains(PI.getCollege())) {
@@ -701,7 +704,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					coPISign.setSignedDate(signature.getSignedDate());
 					coPISign.setPositionTitle(signature.getPositionTitle());
 					coPISign.setDelegated(signature.isDelegated());
-					signatures.add(coPISign);
+					if (!signatures.contains(coPISign)) {
+						signatures.add(coPISign);
+					}
 					coPIAlreadySigned = true;
 				}
 			}
@@ -713,7 +718,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				coPISign.setSignature("");
 				coPISign.setPositionTitle("Co-PI");
 				coPISign.setDelegated(false);
-				signatures.add(coPISign);
+				if (!signatures.contains(coPISign)) {
+					signatures.add(coPISign);
+				}
 			}
 
 			if (!colleges.contains(coPIs.getCollege())) {
@@ -740,7 +747,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					seniorSign.setSignedDate(signature.getSignedDate());
 					seniorSign.setPositionTitle(signature.getPositionTitle());
 					seniorSign.setDelegated(signature.isDelegated());
-					signatures.add(seniorSign);
+					if (!signatures.contains(seniorSign)) {
+						signatures.add(seniorSign);
+					}
 					seniorAlreadySigned = true;
 				}
 			}
@@ -752,7 +761,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				seniorSign.setSignature("");
 				seniorSign.setPositionTitle("Senior");
 				seniorSign.setDelegated(false);
-				signatures.add(seniorSign);
+				if (!signatures.contains(seniorSign)) {
+					signatures.add(seniorSign);
+				}
 			}
 
 			if (!colleges.contains(seniors.getCollege())) {
@@ -815,7 +826,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 									.getSignedDate());
 							signDirector.setPositionTitle("Research Director");
 							signDirector.setDelegated(signature.isDelegated());
-							signatures.add(signDirector);
+							if (!signatures.contains(signDirector)) {
+								signatures.add(signDirector);
+							}
 							directorAlreadySigned = true;
 						}
 					}
@@ -826,7 +839,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 						signDirector.setSignature("");
 						signDirector.setPositionTitle("Research Director");
 						signDirector.setDelegated(false);
-						signatures.add(signDirector);
+						if (!signatures.contains(signDirector)) {
+							signatures.add(signDirector);
+						}
 					}
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"Dean")) {
@@ -845,7 +860,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 							signDean.setPositionTitle(signature
 									.getPositionTitle());
 							signDean.setDelegated(signature.isDelegated());
-							signatures.add(signDean);
+							if (!signatures.contains(signDean)) {
+								signatures.add(signDean);
+							}
 							deanAlreadySigned = true;
 						}
 					}
@@ -856,7 +873,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 						signDean.setSignature("");
 						signDean.setPositionTitle("Dean");
 						signDean.setDelegated(false);
-						signatures.add(signDean);
+						if (!signatures.contains(signDean)) {
+							signatures.add(signDean);
+						}
 					}
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"Business Manager")) {
@@ -880,7 +899,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 									.getPositionTitle());
 							signBusinessMgr.setDelegated(signature
 									.isDelegated());
-							signatures.add(signBusinessMgr);
+							if (!signatures.contains(signBusinessMgr)) {
+								signatures.add(signBusinessMgr);
+							}
 							businessManagerAlreadySigned = true;
 						}
 					}
@@ -892,7 +913,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 						signBusinessMgr.setSignature("");
 						signBusinessMgr.setPositionTitle("Business Manager");
 						signBusinessMgr.setDelegated(false);
-						signatures.add(signBusinessMgr);
+						if (!signatures.contains(signBusinessMgr)) {
+							signatures.add(signBusinessMgr);
+						}
 					}
 				} else if (posDetails.getPositionTitle().equalsIgnoreCase(
 						"Department Chair")) {
@@ -914,7 +937,9 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 							signDeptChair.setPositionTitle(signature
 									.getPositionTitle());
 							signDeptChair.setDelegated(signature.isDelegated());
-							signatures.add(signDeptChair);
+							if (!signatures.contains(signDeptChair)) {
+								signatures.add(signDeptChair);
+							}
 							departmentChairAlreadySigned = true;
 						}
 					}
@@ -925,11 +950,24 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 						signDeptChair.setSignature("");
 						signDeptChair.setPositionTitle("Department Chair");
 						signDeptChair.setDelegated(false);
-						signatures.add(signDeptChair);
+						if (!signatures.contains(signDeptChair)) {
+							signatures.add(signDeptChair);
+						}
 					}
 				}
 			}
 		}
 		return signatures;
+	}
+
+	public int findLatestProposalNo() {
+		Datastore ds = getDatastore();
+		List<Proposal> q1 = ds.createQuery(Proposal.class)
+				.retrievedFields(true, "proposal no").asList();
+		if (q1.size() == 0) {
+			return 0;
+		} else {
+			return q1.get(q1.size() - 1).getProposalNo();
+		}
 	}
 }

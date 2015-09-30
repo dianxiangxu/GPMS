@@ -192,7 +192,7 @@ public class JUnitCreateTwoUsersTest {
 		// We need to create a proposal and we need to create an investigator
 		// for this proposal.
 		Proposal proposal1 = new Proposal();
-		proposal1.setProposalNo("10001");
+		proposal1.setProposalNo(10001);
 
 		InvestigatorInfo firstInv = new InvestigatorInfo();
 
@@ -329,7 +329,7 @@ public class JUnitCreateTwoUsersTest {
 		// secondInv.setPi(newUserProfile2);
 		// secondInv.addCo_pi(newUserProfile);
 
-		proposal2.setProposalNo("10002");
+		proposal2.setProposalNo(10002);
 		proposal2.setInvestigatorInfo(secondInv);
 
 		ProposalDAO nextProposalDAO = new ProposalDAO(mongoClient, morphia,
