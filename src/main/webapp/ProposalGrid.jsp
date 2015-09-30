@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "5609e55654ffd80d60b43144";
+	var userProfileId = "560345db83f5e40ae40d453a";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -378,28 +378,28 @@
 																		<option value="2">Senior Personnel</option>
 																</select></td>
 																<td><select title="Choose Full Name"
-																	class="sfListmenu" name="ddlName" style="width: 125px;">
+																	class="sfListmenu" name="ddlName" style="width: 128px;">
 																</select></td>
 																<td><select title="Choose College Name"
 																	class="sfListmenu" name="ddlCollege"
-																	style="width: 85px;">
+																	style="width: 90px;">
 																</select></td>
 																<td><select title="Choose Department Name"
 																	class="sfListmenu" name="ddlDepartment"
-																	style="width: 122px;">
+																	style="width: 126px;">
 																</select></td>
 																<td><select title="Choose Position Type"
 																	class="sfListmenu" name="ddlPositionType"
-																	style="width: 120px;">
+																	style="width: 122px;">
 																</select></td>
 																<td><select title="Choose Position Title"
 																	class="sfListmenu" name="ddlPositionTitle"
-																	style="width: 145px;">
+																	style="width: 169px;">
 																</select></td>
 																<td><input title="Phone #" type="text"
 																	readonly="readonly" class="sfTextBoxSmall"
 																	name="txtPhoneNo" placeholder="Phone #"
-																	style="width: 88px !important" /></td>
+																	style="width: 90px !important" /></td>
 																<td><input type="Button" value="Add More"
 																	name="AddMore"
 																	class="AddOption cssClassButtonSubmit sfLocale" /></td>
@@ -943,11 +943,11 @@
 																</select></td>
 																<td id="tdPagesWithProprietaryInfo"><input
 																	title="Pages With Proprietary/Confidential Information"
-																	type="text" class="sfInputbox" style="width: 285px;"
+																	type="text" class="sfInputbox" style="width: 210px;"
 																	id="txtPagesWithProprietaryInfo"
 																	name="pagesWithProprietaryInfo"
-																	placeholder="Pages With Proprietary/Confidential Information" />
-																	<span class="cssClassRequired">*</span> <span
+																	placeholder="Pages Containing the Information" /> <span
+																	class="cssClassRequired">*</span> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated page numbers.</span></td>
 																</td>
