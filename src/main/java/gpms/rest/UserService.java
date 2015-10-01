@@ -866,6 +866,7 @@ public class UserService {
 		UserAccount newAccount = new UserAccount();
 		UserProfile newProfile = new UserProfile();
 
+		UserAccount existingUserAccount = new UserAccount();
 		UserProfile existingUserProfile = new UserProfile();
 
 		String response = new String();
@@ -888,34 +889,85 @@ public class UserService {
 
 		JsonNode userInfo = root.get("userInfo");
 
-		if (userInfo != null && userInfo.has("UserName")) {
-			newAccount.setUserName(userInfo.get("UserName").getTextValue());
-		}
-
-		if (userInfo != null && userInfo.has("Password")) {
-			newAccount.setPassword(userInfo.get("Password").getTextValue());
-		}
-
-		newAccount.setAddedOn(new Date());
-
-		if (userInfo != null && userInfo.has("IsActive")) {
-			newAccount.setActive(Boolean.parseBoolean(userInfo.get("IsActive")
-					.getTextValue()));
-			newAccount.setDeleted(!Boolean.parseBoolean(userInfo
-					.get("IsActive").getTextValue()));
-			newProfile.setDeleted(!Boolean.parseBoolean(userInfo
-					.get("IsActive").getTextValue()));
-		}
-
-		newProfile.setUserId(newAccount);
-
 		if (userInfo != null && userInfo.has("UserID")) {
 			userID = userInfo.get("UserID").getTextValue();
 			if (!userID.equals("0")) {
 				ObjectId id = new ObjectId(userID);
 				existingUserProfile = userProfileDAO
 						.findUserDetailsByProfileID(id);
+			} else {
+				newAccount.setAddedOn(new Date());
 			}
+		}
+
+		if (userInfo != null && userInfo.has("UserName")) {
+			String loginUserName = userInfo.get("UserName").getTextValue();
+			if (!userID.equals("0")) {
+				existingUserAccount = userAccountDAO
+						.findByUserName(loginUserName);
+			} else {
+				newAccount.setUserName(userInfo.get("UserName").getTextValue());
+			}
+		}
+
+		if (userInfo != null && userInfo.has("Password")) {
+			if (!userID.equals("0")) {
+				if (!existingUserAccount.getPassword().equals(
+						userInfo.get("Password").getTextValue())) {
+					existingUserAccount.setPassword(userInfo.get("Password")
+							.getTextValue());
+				}
+			} else {
+				newAccount.setPassword(userInfo.get("Password").getTextValue());
+			}
+		}
+
+		if (userInfo != null && userInfo.has("IsActive")) {
+			if (!userID.equals("0")) {
+				if (existingUserAccount.isActive() != userInfo.get("IsActive")
+						.getBooleanValue()) {
+					existingUserAccount.setActive(userInfo.get("IsActive")
+							.getBooleanValue());
+				}
+			} else {
+				newAccount
+						.setActive(userInfo.get("IsActive").getBooleanValue());
+			}
+			if (!userID.equals("0")) {
+				if (existingUserAccount.isDeleted() != userInfo.get("IsActive")
+						.getBooleanValue()) {
+					existingUserAccount.setDeleted(!userInfo.get("IsActive")
+							.getBooleanValue());
+				}
+			} else {
+				newAccount.setDeleted(!userInfo.get("IsActive")
+						.getBooleanValue());
+			}
+
+			// TODO: Check the old ways to do this
+			// if (userInfo != null && userInfo.has("IsActive")) {
+			// newAccount.setActive(Boolean.parseBoolean(userInfo.get(
+			// "IsActive").getTextValue()));
+			// newAccount.setDeleted(!Boolean.parseBoolean(userInfo.get(
+			// "IsActive").getTextValue()));
+			// newProfile.setDeleted(!Boolean.parseBoolean(userInfo.get(
+			// "IsActive").getTextValue()));
+			// }
+
+			if (!userID.equals("0")) {
+				if (existingUserProfile.isDeleted() != userInfo.get("IsActive")
+						.getBooleanValue()) {
+					existingUserProfile.setDeleted(!userInfo.get("IsActive")
+							.getBooleanValue());
+				}
+			} else {
+				newProfile.setDeleted(!userInfo.get("IsActive")
+						.getBooleanValue());
+			}
+		}
+
+		if (userID.equals("0")) {
+			newProfile.setUserId(newAccount);
 		}
 
 		if (userInfo != null && userInfo.has("FirstName")) {
@@ -1170,7 +1222,11 @@ public class UserService {
 		// newProfile
 
 		// Save the User Account
-		userAccountDAO.save(newAccount);
+		if (!userID.equals("0")) {
+			userAccountDAO.save(existingUserAccount);
+		} else {
+			userAccountDAO.save(newAccount);
+		}
 
 		// Save the User Profile
 		if (!userID.equals("0")) {
