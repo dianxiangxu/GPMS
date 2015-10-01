@@ -390,7 +390,7 @@ public class ProposalService {
 	@Path("/CheckUniqueProjectTitle")
 	public String checkUniqueProjectTitle(String message)
 			throws JsonProcessingException, IOException {
-		Integer proposalID = 0;
+		String proposalID = new String();
 		String newProjectTitle = new String();
 		String userName = new String();
 		String userProfileID = new String();
@@ -403,7 +403,7 @@ public class ProposalService {
 
 		JsonNode proposalUniqueObj = root.get("proposalUniqueObj");
 		if (proposalUniqueObj != null && proposalUniqueObj.has("ProposalID")) {
-			proposalID = proposalUniqueObj.get("ProposalID").getIntValue();
+			proposalID = proposalUniqueObj.get("ProposalID").getTextValue();
 		}
 
 		if (proposalUniqueObj != null
@@ -426,8 +426,8 @@ public class ProposalService {
 		}
 
 		Proposal proposal = new Proposal();
-		if (proposalID != 0) {
-			ObjectId id = new ObjectId(proposalID.toString());
+		if (!proposalID.equals("0")) {
+			ObjectId id = new ObjectId(proposalID);
 			proposal = proposalDAO.findNextProposalWithSameProjectTitle(id,
 					newProjectTitle);
 		} else {
@@ -499,7 +499,7 @@ public class ProposalService {
 		String userProfileID = new String();
 		String cultureName = new String();
 
-		Integer proposalID = 0;
+		String proposalID = new String();
 
 		Proposal newProposal = new Proposal();
 		Proposal existingProposal = new Proposal();
@@ -524,9 +524,9 @@ public class ProposalService {
 
 		JsonNode proposalInfo = root.get("proposalInfo");
 		if (proposalInfo != null && proposalInfo.has("ProposalID")) {
-			proposalID = proposalInfo.get("ProposalID").getIntValue();
-			if (proposalID != 0) {
-				ObjectId id = new ObjectId(proposalID.toString());
+			proposalID = proposalInfo.get("ProposalID").getTextValue();
+			if (!proposalID.equals("0")) {
+				ObjectId id = new ObjectId(proposalID);
 				existingProposal = proposalDAO.findProposalByProposalID(id);
 			}
 		}
@@ -536,8 +536,10 @@ public class ProposalService {
 		if (proposalInfo != null && proposalInfo.has("ProjectInfo")) {
 			JsonNode projectInfo = proposalInfo.get("ProjectInfo");
 			if (projectInfo != null && projectInfo.has("ProjectTitle")) {
-				newProjectInfo.setProjectTitle(projectInfo.get("ProjectTitle")
-						.getTextValue());
+				if (proposalID.equals("0")) {
+					newProjectInfo.setProjectTitle(projectInfo.get(
+							"ProjectTitle").getTextValue());
+				}
 			}
 
 			if (projectInfo != null && projectInfo.has("ProjectType")) {
@@ -562,7 +564,15 @@ public class ProposalService {
 					break;
 				}
 
-				newProjectInfo.setProjectType(projectType);
+				if (!proposalID.equals("0")) {
+					if (!existingProposal.getProjectInfo().getProjectType()
+							.equals(projectType)) {
+						existingProposal.getProjectInfo().setProjectType(
+								projectType);
+					}
+				} else {
+					newProjectInfo.setProjectType(projectType);
+				}
 			}
 
 			if (projectInfo != null && projectInfo.has("TypeOfRequest")) {
@@ -583,8 +593,15 @@ public class ProposalService {
 				default:
 					break;
 				}
-
-				newProjectInfo.setTypeOfRequest(typeOfRequest);
+				if (!proposalID.equals("0")) {
+					if (!existingProposal.getProjectInfo().getTypeOfRequest()
+							.equals(typeOfRequest)) {
+						existingProposal.getProjectInfo().setTypeOfRequest(
+								typeOfRequest);
+					}
+				} else {
+					newProjectInfo.setTypeOfRequest(typeOfRequest);
+				}
 			}
 
 			if (projectInfo != null && projectInfo.has("ProjectLocation")) {
@@ -599,14 +616,28 @@ public class ProposalService {
 				default:
 					break;
 				}
-
-				newProjectInfo.setProjectLocation(projectLocation);
+				if (!proposalID.equals("0")) {
+					if (!existingProposal.getProjectInfo().getProjectLocation()
+							.equals(projectLocation)) {
+						existingProposal.getProjectInfo().setProjectLocation(
+								projectLocation);
+					}
+				} else {
+					newProjectInfo.setProjectLocation(projectLocation);
+				}
 			}
 
 			if (projectInfo != null && projectInfo.has("DueDate")) {
 				Date dueDate = formatter.parse(projectInfo.get("DueDate")
 						.getTextValue());
-				newProjectInfo.setDueDate(dueDate);
+				if (!proposalID.equals("0")) {
+					if (!existingProposal.getProjectInfo().getDueDate()
+							.equals(dueDate)) {
+						existingProposal.getProjectInfo().setDueDate(dueDate);
+					}
+				} else {
+					newProjectInfo.setDueDate(dueDate);
+				}
 			}
 
 			ProjectPeriod projectPeriod = new ProjectPeriod();
@@ -622,12 +653,21 @@ public class ProposalService {
 						"ProjectPeriodTo").getTextValue());
 				projectPeriod.setTo(periodTo);
 			}
-
-			newProjectInfo.setProjectPeriod(projectPeriod);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getProjectInfo().getProjectPeriod()
+						.equals(projectPeriod)) {
+					existingProposal.getProjectInfo().setProjectPeriod(
+							projectPeriod);
+				}
+			} else {
+				newProjectInfo.setProjectPeriod(projectPeriod);
+			}
 		}
 
 		// ProjectInfo
-		newProposal.setProjectInfo(newProjectInfo);
+		if (proposalID.equals("0")) {
+			newProposal.setProjectInfo(newProjectInfo);
+		}
 
 		SponsorAndBudgetInfo newSponsorAndBudgetInfo = new SponsorAndBudgetInfo();
 		if (proposalInfo != null && proposalInfo.has("SponsorAndBudgetInfo")) {
@@ -672,7 +712,15 @@ public class ProposalService {
 		}
 
 		// SponsorAndBudgetInfo
-		newProposal.setSponsorAndBudgetInfo(newSponsorAndBudgetInfo);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getSponsorAndBudgetInfo().equals(
+					newSponsorAndBudgetInfo)) {
+				existingProposal
+						.setSponsorAndBudgetInfo(newSponsorAndBudgetInfo);
+			}
+		} else {
+			newProposal.setSponsorAndBudgetInfo(newSponsorAndBudgetInfo);
+		}
 
 		CostShareInfo newCostShareInfo = new CostShareInfo();
 		if (proposalInfo != null && proposalInfo.has("CostShareInfo")) {
@@ -707,7 +755,13 @@ public class ProposalService {
 			}
 		}
 		// CostShareInfo
-		newProposal.setCostShareInfo(newCostShareInfo);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getCostShareInfo().equals(newCostShareInfo)) {
+				existingProposal.setCostShareInfo(newCostShareInfo);
+			}
+		} else {
+			newProposal.setCostShareInfo(newCostShareInfo);
+		}
 
 		UniversityCommitments newUnivCommitments = new UniversityCommitments();
 		if (proposalInfo != null && proposalInfo.has("UnivCommitments")) {
@@ -759,7 +813,14 @@ public class ProposalService {
 			}
 		}
 		// UnivCommitments
-		newProposal.setUniversityCommitments(newUnivCommitments);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getUniversityCommitments().equals(
+					newUnivCommitments)) {
+				existingProposal.setUniversityCommitments(newUnivCommitments);
+			}
+		} else {
+			newProposal.setUniversityCommitments(newUnivCommitments);
+		}
 
 		ConflictOfInterest newConflictOfInterest = new ConflictOfInterest();
 		if (proposalInfo != null && proposalInfo.has("ConflicOfInterestInfo")) {
@@ -811,7 +872,14 @@ public class ProposalService {
 			}
 		}
 		// ConflicOfInterestInfo
-		newProposal.setConflicOfInterest(newConflictOfInterest);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getConflicOfInterest().equals(
+					newConflictOfInterest)) {
+				existingProposal.setConflicOfInterest(newConflictOfInterest);
+			}
+		} else {
+			newProposal.setConflicOfInterest(newConflictOfInterest);
+		}
 
 		ComplianceInfo newComplianceInfo = new ComplianceInfo();
 		if (proposalInfo != null && proposalInfo.has("ComplianceInfo")) {
@@ -936,7 +1004,13 @@ public class ProposalService {
 			}
 		}
 		// ComplianceInfo
-		newProposal.setComplianceInfo(newComplianceInfo);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getComplianceInfo().equals(newComplianceInfo)) {
+				existingProposal.setComplianceInfo(newComplianceInfo);
+			}
+		} else {
+			newProposal.setComplianceInfo(newComplianceInfo);
+		}
 
 		AdditionalInfo newAdditionalInfo = new AdditionalInfo();
 		if (proposalInfo != null && proposalInfo.has("AdditionalInfo")) {
@@ -994,7 +1068,13 @@ public class ProposalService {
 			}
 		}
 		// AdditionalInfo
-		newProposal.setAdditionalInfo(newAdditionalInfo);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getAdditionalInfo().equals(newAdditionalInfo)) {
+				existingProposal.setAdditionalInfo(newAdditionalInfo);
+			}
+		} else {
+			newProposal.setAdditionalInfo(newAdditionalInfo);
+		}
 
 		CollaborationInfo newCollaborationInfo = new CollaborationInfo();
 		if (proposalInfo != null && proposalInfo.has("CollaborationInfo")) {
@@ -1021,7 +1101,14 @@ public class ProposalService {
 			}
 		}
 		// CollaborationInfo
-		newProposal.setCollaborationInfo(newCollaborationInfo);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getCollaborationInfo().equals(
+					newCollaborationInfo)) {
+				existingProposal.setCollaborationInfo(newCollaborationInfo);
+			}
+		} else {
+			newProposal.setCollaborationInfo(newCollaborationInfo);
+		}
 
 		ConfidentialInfo newConfidentialInfo = new ConfidentialInfo();
 		if (proposalInfo != null && proposalInfo.has("ConfidentialInfo")) {
@@ -1073,9 +1160,22 @@ public class ProposalService {
 			}
 		}
 		// ConfidentialInfo
-		newProposal.setConfidentialInfo(newConfidentialInfo);
+		if (!proposalID.equals("0")) {
+			if (!existingProposal.getConfidentialInfo().equals(
+					newConfidentialInfo)) {
+				existingProposal.setConfidentialInfo(newConfidentialInfo);
+			}
+		} else {
+			newProposal.setConfidentialInfo(newConfidentialInfo);
+		}
 
 		if (proposalInfo != null && proposalInfo.has("InvestigatorInfo")) {
+			if (!proposalID.equals("0")) {
+				existingProposal.getInvestigatorInfo().getCo_pi().clear();
+				existingProposal.getInvestigatorInfo().getSeniorPersonnel()
+						.clear();
+			}
+
 			String[] rows = proposalInfo.get("InvestigatorInfo").getTextValue()
 					.split("#!#");
 
@@ -1096,22 +1196,82 @@ public class ProposalService {
 				investigatorRefAndPosition.setPositionTitle(cols[5]);
 				switch (cols[0]) {
 				case "0":
-					newInvestigatorInfo.setPi(investigatorRefAndPosition);
+					if (!proposalID.equals("0")) {
+						if (!existingProposal.getInvestigatorInfo().getPi()
+								.equals(investigatorRefAndPosition)) {
+							existingProposal.getInvestigatorInfo().setPi(
+									investigatorRefAndPosition);
+						}
+					} else {
+						newInvestigatorInfo.setPi(investigatorRefAndPosition);
+					}
 					break;
 				case "1":
-					newInvestigatorInfo.getCo_pi().add(
-							investigatorRefAndPosition);
+					if (!proposalID.equals("0")) {
+						existingProposal.getInvestigatorInfo().getCo_pi()
+								.add(investigatorRefAndPosition);
+					} else {
+						newInvestigatorInfo.getCo_pi().add(
+								investigatorRefAndPosition);
+					}
 					break;
 				case "2":
-					newInvestigatorInfo.getSeniorPersonnel().add(
-							investigatorRefAndPosition);
+					if (!proposalID.equals("0")) {
+						existingProposal.getInvestigatorInfo()
+								.getSeniorPersonnel()
+								.add(investigatorRefAndPosition);
+					} else {
+						newInvestigatorInfo.getSeniorPersonnel().add(
+								investigatorRefAndPosition);
+					}
 					break;
 				default:
 					break;
 				}
 			}
 			// InvestigatorInfo
-			newProposal.setInvestigatorInfo(newInvestigatorInfo);
+			if (proposalID.equals("0")) {
+				newProposal.setInvestigatorInfo(newInvestigatorInfo);
+			}
+		}
+
+		if (proposalInfo != null && proposalInfo.has("SignatureInfo")) {
+			String[] rows = proposalInfo.get("SignatureInfo").getTextValue()
+					.split("#!#");
+
+			List<SignatureInfo> newSignatureInfo = new ArrayList<SignatureInfo>();
+			// UserProfileID!#!Signature!#!SignedDate!#!FullName!#!PositionTitle!#!Delegated#!#
+			DateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a");
+
+			for (String col : rows) {
+				String[] cols = col.split("!#!");
+				SignatureInfo signatureInfo = new SignatureInfo();
+				signatureInfo.setUserProfileId(cols[0]);
+				signatureInfo.setSignature(cols[1]);
+				signatureInfo.setSignedDate(format.parse(cols[2]));
+				signatureInfo.setFullName(cols[3]);
+				signatureInfo.setPositionTitle(cols[4]);
+				signatureInfo.setDelegated(Boolean.parseBoolean(cols[5]));
+
+				boolean alreadyExist = false;
+				for (SignatureInfo sign : existingProposal.getSignatureInfo()) {
+					if (sign.equals(signatureInfo)) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					newSignatureInfo.add(signatureInfo);
+				}
+			}
+			// SignatureInfo
+			if (!proposalID.equals("0")) {
+				for (SignatureInfo signatureInfo : newSignatureInfo) {
+					existingProposal.getSignatureInfo().add(signatureInfo);
+				}
+			} else {
+				newProposal.setSignatureInfo(newSignatureInfo);
+			}
 		}
 
 		OSPSectionInfo newOSPSectionInfo = new OSPSectionInfo();
@@ -1119,8 +1279,21 @@ public class ProposalService {
 			JsonNode oSPSectionInfo = proposalInfo.get("OSPSectionInfo");
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("ListAgency")) {
-				newOSPSectionInfo.setListAgency(oSPSectionInfo
-						.get("ListAgency").getTextValue());
+				if (!proposalID.equals("0")) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getListAgency()
+							.equals(oSPSectionInfo.get("ListAgency")
+									.getTextValue())) {
+						existingProposal.getoSPSectionInfo()
+								.setListAgency(
+										oSPSectionInfo.get("ListAgency")
+												.getTextValue());
+					}
+				} else {
+					newOSPSectionInfo.setListAgency(oSPSectionInfo.get(
+							"ListAgency").getTextValue());
+				}
 			}
 
 			FundingSource newFundingSource = new FundingSource();
@@ -1187,114 +1360,218 @@ public class ProposalService {
 						.getBooleanValue());
 			}
 
-			newOSPSectionInfo.setFundingSource(newFundingSource);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo().getFundingSource()
+						.equals(newFundingSource)) {
+					existingProposal.getoSPSectionInfo().setFundingSource(
+							newFundingSource);
+				}
+			} else {
+				newOSPSectionInfo.setFundingSource(newFundingSource);
+			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("CFDANo")) {
-				newOSPSectionInfo.setCFDANo(oSPSectionInfo.get("CFDANo")
-						.getTextValue());
-			}
-
-			if (oSPSectionInfo != null && oSPSectionInfo.has("ProgramNo")) {
-				newOSPSectionInfo.setProgramNo(oSPSectionInfo.get("ProgramNo")
-						.getTextValue());
-			}
-
-			if (oSPSectionInfo != null && oSPSectionInfo.has("ProgramTitle")) {
-				newOSPSectionInfo.setProgramTitle(oSPSectionInfo.get(
-						"ProgramTitle").getTextValue());
-			}
-
-			Recovery newRecovery = new Recovery();
-			if (oSPSectionInfo != null && oSPSectionInfo.has("FullRecovery")) {
-				newRecovery.setFullRecovery(oSPSectionInfo.get("FullRecovery")
-						.getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null
-					&& oSPSectionInfo.has("NoRecoveryNormalSponsorPolicy")) {
-				newRecovery
-						.setNoRecoveryNormalSponsorPolicy(oSPSectionInfo.get(
-								"NoRecoveryNormalSponsorPolicy")
-								.getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null
-					&& oSPSectionInfo.has("NoRecoveryInstitutionalWaiver")) {
-				newRecovery
-						.setNoRecoveryInstitutionalWaiver(oSPSectionInfo.get(
-								"NoRecoveryInstitutionalWaiver")
-								.getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null
-					&& oSPSectionInfo.has("LimitedRecoveryNormalSponsorPolicy")) {
-				newRecovery
-						.setLimitedRecoveryNormalSponsorPolicy(oSPSectionInfo
-								.get("LimitedRecoveryNormalSponsorPolicy")
-								.getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null
-					&& oSPSectionInfo.has("LimitedRecoveryInstitutionalWaiver")) {
-				newRecovery
-						.setLimitedRecoveryInstitutionalWaiver(oSPSectionInfo
-								.get("LimitedRecoveryInstitutionalWaiver")
-								.getBooleanValue());
-			}
-			newOSPSectionInfo.setRecovery(newRecovery);
-
-			BaseInfo newBaseInfo = new BaseInfo();
-			if (oSPSectionInfo != null && oSPSectionInfo.has("MTDC")) {
-				newBaseInfo.setMTDC(oSPSectionInfo.get("MTDC")
-						.getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null && oSPSectionInfo.has("TDC")) {
-				newBaseInfo.setTDC(oSPSectionInfo.get("TDC").getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null && oSPSectionInfo.has("TC")) {
-				newBaseInfo.setTC(oSPSectionInfo.get("TC").getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null && oSPSectionInfo.has("Other")) {
-				newBaseInfo.setOther(oSPSectionInfo.get("Other")
-						.getBooleanValue());
-			}
-
-			if (oSPSectionInfo != null && oSPSectionInfo.has("NotApplicable")) {
-				newBaseInfo.setNotApplicable(oSPSectionInfo
-						.get("NotApplicable").getBooleanValue());
-			}
-			newOSPSectionInfo.setBaseInfo(newBaseInfo);
-
-			if (oSPSectionInfo != null
-					&& oSPSectionInfo.has("IsPISalaryIncluded")) {
-				switch (oSPSectionInfo.get("IsPISalaryIncluded").getTextValue()) {
-				case "1":
-					newOSPSectionInfo.setPISalaryIncluded(true);
-					break;
-				case "2":
-					newOSPSectionInfo.setPISalaryIncluded(false);
-					break;
-				default:
-					break;
+				if (!proposalID.equals("0")) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getCFDANo()
+							.equals(oSPSectionInfo.get("CFDANo").getTextValue())) {
+						existingProposal.getoSPSectionInfo().setCFDANo(
+								oSPSectionInfo.get("CFDANo").getTextValue());
+					}
+				} else {
+					newOSPSectionInfo.setCFDANo(oSPSectionInfo.get("CFDANo")
+							.getTextValue());
 				}
 			}
 
-			if (oSPSectionInfo != null && oSPSectionInfo.has("PISalary")) {
-				newOSPSectionInfo.setPISalary(Double.parseDouble(oSPSectionInfo
-						.get("PISalary").getTextValue()));
+			if (oSPSectionInfo != null && oSPSectionInfo.has("ProgramNo")) {
+				if (!proposalID.equals("0")) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getProgramNo()
+							.equals(oSPSectionInfo.get("ProgramNo")
+									.getTextValue())) {
+						existingProposal.getoSPSectionInfo().setProgramNo(
+								oSPSectionInfo.get("ProgramNo").getTextValue());
+					}
+				} else {
+					newOSPSectionInfo.setProgramNo(oSPSectionInfo.get(
+							"ProgramNo").getTextValue());
+				}
 			}
 
-			if (oSPSectionInfo != null && oSPSectionInfo.has("PIFringe")) {
-				newOSPSectionInfo.setPIFringe(Double.parseDouble(oSPSectionInfo
-						.get("PIFringe").getTextValue()));
+			if (oSPSectionInfo != null && oSPSectionInfo.has("ProgramTitle")) {
+				if (!proposalID.equals("0")) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getProgramTitle()
+							.equals(oSPSectionInfo.get("ProgramTitle")
+									.getTextValue())) {
+						existingProposal.getoSPSectionInfo().setProgramTitle(
+								oSPSectionInfo.get("ProgramTitle")
+										.getTextValue());
+					}
+				} else {
+					newOSPSectionInfo.setProgramTitle(oSPSectionInfo.get(
+							"ProgramTitle").getTextValue());
+				}
+
+				Recovery newRecovery = new Recovery();
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo.has("FullRecovery")) {
+					newRecovery.setFullRecovery(oSPSectionInfo.get(
+							"FullRecovery").getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo.has("NoRecoveryNormalSponsorPolicy")) {
+					newRecovery.setNoRecoveryNormalSponsorPolicy(oSPSectionInfo
+							.get("NoRecoveryNormalSponsorPolicy")
+							.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo.has("NoRecoveryInstitutionalWaiver")) {
+					newRecovery.setNoRecoveryInstitutionalWaiver(oSPSectionInfo
+							.get("NoRecoveryInstitutionalWaiver")
+							.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo
+								.has("LimitedRecoveryNormalSponsorPolicy")) {
+					newRecovery
+							.setLimitedRecoveryNormalSponsorPolicy(oSPSectionInfo
+									.get("LimitedRecoveryNormalSponsorPolicy")
+									.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo
+								.has("LimitedRecoveryInstitutionalWaiver")) {
+					newRecovery
+							.setLimitedRecoveryInstitutionalWaiver(oSPSectionInfo
+									.get("LimitedRecoveryInstitutionalWaiver")
+									.getBooleanValue());
+				}
+				if (!proposalID.equals("0")) {
+					if (!existingProposal.getoSPSectionInfo().getRecovery()
+							.equals(newRecovery)) {
+						existingProposal.getoSPSectionInfo().setRecovery(
+								newRecovery);
+					}
+				} else {
+					newOSPSectionInfo.setRecovery(newRecovery);
+				}
+
+				BaseInfo newBaseInfo = new BaseInfo();
+				if (oSPSectionInfo != null && oSPSectionInfo.has("MTDC")) {
+					newBaseInfo.setMTDC(oSPSectionInfo.get("MTDC")
+							.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null && oSPSectionInfo.has("TDC")) {
+					newBaseInfo.setTDC(oSPSectionInfo.get("TDC")
+							.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null && oSPSectionInfo.has("TC")) {
+					newBaseInfo.setTC(oSPSectionInfo.get("TC")
+							.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null && oSPSectionInfo.has("Other")) {
+					newBaseInfo.setOther(oSPSectionInfo.get("Other")
+							.getBooleanValue());
+				}
+
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo.has("NotApplicable")) {
+					newBaseInfo.setNotApplicable(oSPSectionInfo.get(
+							"NotApplicable").getBooleanValue());
+				}
+				if (!proposalID.equals("0")) {
+					if (!existingProposal.getoSPSectionInfo().getBaseInfo()
+							.equals(newBaseInfo)) {
+						existingProposal.getoSPSectionInfo().setBaseInfo(
+								newBaseInfo);
+					}
+				} else {
+					newOSPSectionInfo.setBaseInfo(newBaseInfo);
+				}
+
+				if (oSPSectionInfo != null
+						&& oSPSectionInfo.has("IsPISalaryIncluded")) {
+					switch (oSPSectionInfo.get("IsPISalaryIncluded")
+							.getTextValue()) {
+					case "1":
+						newOSPSectionInfo.setPISalaryIncluded(true);
+						break;
+					case "2":
+						newOSPSectionInfo.setPISalaryIncluded(false);
+						break;
+					default:
+						break;
+					}
+				}
+
+				if (!proposalID.equals("0")) {
+					if (existingProposal.getoSPSectionInfo()
+							.isPISalaryIncluded() != newOSPSectionInfo
+							.isPISalaryIncluded()) {
+						existingProposal.getoSPSectionInfo()
+								.setPISalaryIncluded(
+										newOSPSectionInfo.isPISalaryIncluded());
+					}
+				}
+
+				if (oSPSectionInfo != null && oSPSectionInfo.has("PISalary")) {
+					if (!proposalID.equals("0")) {
+						if (existingProposal.getoSPSectionInfo().getPISalary() != Double
+								.parseDouble(oSPSectionInfo.get("PISalary")
+										.getTextValue())) {
+							existingProposal.getoSPSectionInfo().setPISalary(
+									Double.parseDouble(oSPSectionInfo.get(
+											"PISalary").getTextValue()));
+						}
+					} else {
+						newOSPSectionInfo.setPISalary(Double
+								.parseDouble(oSPSectionInfo.get("PISalary")
+										.getTextValue()));
+					}
+				}
+
+				if (oSPSectionInfo != null && oSPSectionInfo.has("PIFringe")) {
+					if (existingProposal.getoSPSectionInfo().getPIFringe() != Double
+							.parseDouble(oSPSectionInfo.get("PIFringe")
+									.getTextValue())) {
+						existingProposal.getoSPSectionInfo().setPIFringe(
+								Double.parseDouble(oSPSectionInfo.get(
+										"PIFringe").getTextValue()));
+					}
+				} else {
+					newOSPSectionInfo.setPIFringe(Double
+							.parseDouble(oSPSectionInfo.get("PIFringe")
+									.getTextValue()));
+				}
 			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("DepartmentId")) {
-				newOSPSectionInfo.setDepartmentId(oSPSectionInfo.get(
-						"DepartmentId").getTextValue());
+				if (oSPSectionInfo != null && oSPSectionInfo.has("PIFringe")) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getDepartmentId()
+							.equals(oSPSectionInfo.get("DepartmentId")
+									.getTextValue())) {
+						existingProposal.getoSPSectionInfo().setDepartmentId(
+								oSPSectionInfo.get("DepartmentId")
+										.getTextValue());
+					}
+				} else {
+					newOSPSectionInfo.setDepartmentId(oSPSectionInfo.get(
+							"DepartmentId").getTextValue());
+				}
 			}
 
 			BaseOptions newBaseOptions = new BaseOptions();
@@ -1316,7 +1593,17 @@ public class ProposalService {
 					break;
 				}
 			}
-			newOSPSectionInfo.setInstitutionalCostDocumented(newBaseOptions);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo()
+						.getInstitutionalCostDocumented()
+						.equals(newBaseOptions)) {
+					existingProposal.getoSPSectionInfo()
+							.setInstitutionalCostDocumented(newBaseOptions);
+				}
+			} else {
+				newOSPSectionInfo
+						.setInstitutionalCostDocumented(newBaseOptions);
+			}
 
 			newBaseOptions = new BaseOptions();
 			if (oSPSectionInfo != null
@@ -1336,7 +1623,15 @@ public class ProposalService {
 					break;
 				}
 			}
-			newOSPSectionInfo.setThirdPartyCostDocumented(newBaseOptions);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo()
+						.getThirdPartyCostDocumented().equals(newBaseOptions)) {
+					existingProposal.getoSPSectionInfo()
+							.setThirdPartyCostDocumented(newBaseOptions);
+				}
+			} else {
+				newOSPSectionInfo.setThirdPartyCostDocumented(newBaseOptions);
+			}
 
 			if (oSPSectionInfo != null
 					&& oSPSectionInfo.has("IsAnticipatedSubRecipients")) {
@@ -1358,6 +1653,17 @@ public class ProposalService {
 					break;
 				default:
 					break;
+				}
+			}
+
+			if (!proposalID.equals("0")) {
+				if (existingProposal.getoSPSectionInfo()
+						.isAnticipatedSubRecipients() != newOSPSectionInfo
+						.isAnticipatedSubRecipients()) {
+					existingProposal.getoSPSectionInfo()
+							.setAnticipatedSubRecipients(
+									newOSPSectionInfo
+											.isAnticipatedSubRecipients());
 				}
 			}
 
@@ -1385,8 +1691,18 @@ public class ProposalService {
 					break;
 				}
 			}
-			newOSPSectionInfo
-					.setPIEligibilityWaiver(newBasePIEligibilityOptions);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo()
+						.getPIEligibilityWaiver()
+						.equals(newBasePIEligibilityOptions)) {
+					existingProposal
+							.getoSPSectionInfo()
+							.setPIEligibilityWaiver(newBasePIEligibilityOptions);
+				}
+			} else {
+				newOSPSectionInfo
+						.setPIEligibilityWaiver(newBasePIEligibilityOptions);
+			}
 
 			newBaseOptions = new BaseOptions();
 			if (oSPSectionInfo != null
@@ -1406,7 +1722,15 @@ public class ProposalService {
 					break;
 				}
 			}
-			newOSPSectionInfo.setConflictOfInterestForms(newBaseOptions);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo()
+						.getConflictOfInterestForms().equals(newBaseOptions)) {
+					existingProposal.getoSPSectionInfo()
+							.setConflictOfInterestForms(newBaseOptions);
+				}
+			} else {
+				newOSPSectionInfo.setConflictOfInterestForms(newBaseOptions);
+			}
 
 			newBaseOptions = new BaseOptions();
 			if (oSPSectionInfo != null
@@ -1426,11 +1750,31 @@ public class ProposalService {
 					break;
 				}
 			}
-			newOSPSectionInfo.setExcludedPartyListChecked(newBaseOptions);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo()
+						.getExcludedPartyListChecked().equals(newBaseOptions)) {
+					existingProposal.getoSPSectionInfo()
+							.setExcludedPartyListChecked(newBaseOptions);
+				}
+			} else {
+				newOSPSectionInfo.setExcludedPartyListChecked(newBaseOptions);
+			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("proposalNotes")) {
-				newOSPSectionInfo.setProposalNotes(oSPSectionInfo.get(
-						"proposalNotes").getTextValue());
+				if (!proposalID.equals("0")) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getProposalNotes()
+							.equals(oSPSectionInfo.get("proposalNotes")
+									.getTextValue())) {
+						existingProposal.getoSPSectionInfo().setProposalNotes(
+								oSPSectionInfo.get("proposalNotes")
+										.getTextValue());
+					}
+				} else {
+					newOSPSectionInfo.setProposalNotes(oSPSectionInfo.get(
+							"proposalNotes").getTextValue());
+				}
 			}
 
 			ResearchAdministrator newResearchAdministrator = new ResearchAdministrator();
@@ -1449,34 +1793,44 @@ public class ProposalService {
 				newResearchAdministrator.setLN(oSPSectionInfo.get("LN")
 						.getBooleanValue());
 			}
-
-			newOSPSectionInfo
-					.setResearchAdministrator(newResearchAdministrator);
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getoSPSectionInfo()
+						.getResearchAdministrator()
+						.equals(newResearchAdministrator)) {
+					existingProposal.getoSPSectionInfo()
+							.setResearchAdministrator(newResearchAdministrator);
+				}
+			} else {
+				newOSPSectionInfo
+						.setResearchAdministrator(newResearchAdministrator);
+			}
 		}
 		// OSPSection
-		newProposal.setoSPSectionInfo(newOSPSectionInfo);
+		if (proposalInfo != null && proposalInfo.has("OSPSectionInfo")
+				&& proposalID.equals("0")) {
+			newProposal.setoSPSectionInfo(newOSPSectionInfo);
+		}
 
-		if (proposalInfo != null && proposalInfo.has("ProposalNo")
-				&& !proposalInfo.has("Flag")) {
-			newProposal.setProposalNo(proposalInfo.get("ProposalNo")
-					.getIntValue());
-		} else {
+		if (proposalInfo != null && !proposalInfo.has("ProposalNo")
+				&& proposalID.equals("0")) {
 			newProposal.setProposalNo(proposalDAO.findLatestProposalNo() + 1);
 		}
 
-		if (proposalInfo != null && proposalInfo.has("ReceivedDate")
-				&& !proposalInfo.has("Flag")) {
-			Date receivedDate = formatter.parse(proposalInfo
-					.get("ReceivedDate").getTextValue());
-			newProposal.setDateReceived(receivedDate);
-		} else {
+		if (proposalInfo != null && !proposalInfo.has("ReceivedDate")
+				&& proposalID.equals("0")) {
 			newProposal.setDateReceived(new Date());
 		}
 
-		if (proposalInfo != null && proposalInfo.has("ProposalStatus")
-				&& !proposalInfo.has("Flag")) {
-			newProposal.setProposalStatus(Status.valueOf(proposalInfo.get(
-					"ProposalStatus").getTextValue()));
+		if (proposalInfo != null && proposalInfo.has("ProposalStatus")) {
+			if (!proposalID.equals("0")) {
+				if (!existingProposal.getProposalStatus().equals(
+						Status.valueOf(proposalInfo.get("ProposalStatus")
+								.getTextValue()))) {
+					existingProposal.setProposalStatus(Status
+							.valueOf(proposalInfo.get("ProposalStatus")
+									.getTextValue()));
+				}
+			}
 		} else {
 			newProposal.setProposalStatus(Status.NEW);
 		}
@@ -1485,7 +1839,11 @@ public class ProposalService {
 		// newProfile
 
 		// Save the Proposal
-		proposalDAO.save(newProposal);
+		if (!proposalID.equals("0")) {
+			proposalDAO.save(existingProposal);
+		} else {
+			proposalDAO.save(newProposal);
+		}
 
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");

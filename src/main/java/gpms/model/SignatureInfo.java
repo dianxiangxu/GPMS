@@ -33,10 +33,6 @@ public class SignatureInfo {
 	@Property("is delegated")
 	private boolean isDelegated = false;
 
-	@Expose
-	@Property("delegated as")
-	private String delegatedAs = new String();
-
 	public SignatureInfo() {
 	}
 
@@ -88,20 +84,18 @@ public class SignatureInfo {
 		this.isDelegated = isDelegated;
 	}
 
-	public String getDelegatedAs() {
-		return delegatedAs;
-	}
-
-	public void setDelegatedAs(String delegatedAs) {
-		this.delegatedAs = delegatedAs;
+	@Override
+	public String toString() {
+		return "SignatureInfo [userProfileId=" + userProfileId + ", fullName="
+				+ fullName + ", signature=" + signature + ", positionTitle="
+				+ positionTitle + ", signedDate=" + signedDate
+				+ ", isDelegated=" + isDelegated + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((delegatedAs == null) ? 0 : delegatedAs.hashCode());
 		result = prime * result
 				+ ((fullName == null) ? 0 : fullName.hashCode());
 		result = prime * result + (isDelegated ? 1231 : 1237);
@@ -125,11 +119,6 @@ public class SignatureInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		SignatureInfo other = (SignatureInfo) obj;
-		if (delegatedAs == null) {
-			if (other.delegatedAs != null)
-				return false;
-		} else if (!delegatedAs.equals(other.delegatedAs))
-			return false;
 		if (fullName == null) {
 			if (other.fullName != null)
 				return false;
@@ -158,15 +147,6 @@ public class SignatureInfo {
 		} else if (!userProfileId.equals(other.userProfileId))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "SignatureInfo [userProfileId=" + userProfileId + ", fullName="
-				+ fullName + ", signature=" + signature + ", positionTitle="
-				+ positionTitle + ", signedDate=" + signedDate
-				+ ", isDelegated=" + isDelegated + ", delegatedAs="
-				+ delegatedAs + "]";
 	}
 
 }

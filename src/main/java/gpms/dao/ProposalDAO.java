@@ -663,7 +663,15 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				piSign.setSignedDate(signature.getSignedDate());
 				piSign.setPositionTitle(signature.getPositionTitle());
 				piSign.setDelegated(signature.isDelegated());
-				if (!signatures.contains(piSign)) {
+				boolean piAlreadyExist = false;
+				for (SignatureInfo sign : signatures) {
+					if (sign.getUserProfileId().equalsIgnoreCase(
+							piSign.getUserProfileId())) {
+						piAlreadyExist = true;
+						break;
+					}
+				}
+				if (!piAlreadyExist) {
 					signatures.add(piSign);
 				}
 				piAlreadySigned = true;
@@ -676,7 +684,15 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 			piSign.setSignature("");
 			piSign.setPositionTitle("PI");
 			piSign.setDelegated(false);
-			if (!signatures.contains(piSign)) {
+			boolean piAlreadyExist = false;
+			for (SignatureInfo sign : signatures) {
+				if (sign.getUserProfileId().equalsIgnoreCase(
+						piSign.getUserProfileId())) {
+					piAlreadyExist = true;
+					break;
+				}
+			}
+			if (!piAlreadyExist) {
 				signatures.add(piSign);
 			}
 		}
@@ -704,7 +720,15 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					coPISign.setSignedDate(signature.getSignedDate());
 					coPISign.setPositionTitle(signature.getPositionTitle());
 					coPISign.setDelegated(signature.isDelegated());
-					if (!signatures.contains(coPISign)) {
+					boolean coPIAlreadyExist = false;
+					for (SignatureInfo sign : signatures) {
+						if (sign.getUserProfileId().equalsIgnoreCase(
+								coPISign.getUserProfileId())) {
+							coPIAlreadyExist = true;
+							break;
+						}
+					}
+					if (!coPIAlreadyExist) {
 						signatures.add(coPISign);
 					}
 					coPIAlreadySigned = true;
@@ -718,7 +742,15 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				coPISign.setSignature("");
 				coPISign.setPositionTitle("Co-PI");
 				coPISign.setDelegated(false);
-				if (!signatures.contains(coPISign)) {
+				boolean coPIAlreadyExist = false;
+				for (SignatureInfo sign : signatures) {
+					if (sign.getUserProfileId().equalsIgnoreCase(
+							coPISign.getUserProfileId())) {
+						coPIAlreadyExist = true;
+						break;
+					}
+				}
+				if (!coPIAlreadyExist) {
 					signatures.add(coPISign);
 				}
 			}
@@ -750,6 +782,17 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 					if (!signatures.contains(seniorSign)) {
 						signatures.add(seniorSign);
 					}
+					boolean seniorAlreadyExist = false;
+					for (SignatureInfo sign : signatures) {
+						if (sign.getUserProfileId().equalsIgnoreCase(
+								seniorSign.getUserProfileId())) {
+							seniorAlreadyExist = true;
+							break;
+						}
+					}
+					if (!seniorAlreadyExist) {
+						signatures.add(seniorSign);
+					}
 					seniorAlreadySigned = true;
 				}
 			}
@@ -761,7 +804,15 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 				seniorSign.setSignature("");
 				seniorSign.setPositionTitle("Senior");
 				seniorSign.setDelegated(false);
-				if (!signatures.contains(seniorSign)) {
+				boolean seniorAlreadyExist = false;
+				for (SignatureInfo sign : signatures) {
+					if (sign.getUserProfileId().equalsIgnoreCase(
+							seniorSign.getUserProfileId())) {
+						seniorAlreadyExist = true;
+						break;
+					}
+				}
+				if (!seniorAlreadyExist) {
 					signatures.add(seniorSign);
 				}
 			}

@@ -11,6 +11,7 @@ import gpms.model.GPMSCommonInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.JSONTansformer;
 import gpms.model.PositionDetails;
+import gpms.model.SignatureInfo;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
@@ -56,6 +57,8 @@ public class UserService {
 	UserAccountDAO userAccountDAO = null;
 	UserProfileDAO userProfileDAO = null;
 	ProposalDAO proposalDAO = null;
+
+	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	public UserService() {
 		mongoClient = MongoDBConnector.getMongo();
@@ -908,34 +911,72 @@ public class UserService {
 
 		if (userInfo != null && userInfo.has("UserID")) {
 			userID = userInfo.get("UserID").getTextValue();
-			if (userID != "0") {
+			if (!userID.equals("0")) {
 				ObjectId id = new ObjectId(userID);
 				existingUserProfile = userProfileDAO
 						.findUserDetailsByProfileID(id);
-				// newProfile.setId(id);
 			}
 		}
 
 		if (userInfo != null && userInfo.has("FirstName")) {
-			newProfile.setFirstName(userInfo.get("FirstName").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getFirstName().equals(
+						userInfo.get("FirstName").getTextValue())) {
+					existingUserProfile.setFirstName(userInfo.get("FirstName")
+							.getTextValue());
+				}
+			} else {
+				newProfile.setFirstName(userInfo.get("FirstName")
+						.getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("MiddleName")) {
-			newProfile.setMiddleName(userInfo.get("MiddleName").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getMiddleName().equals(
+						userInfo.get("MiddleName").getTextValue())) {
+					existingUserProfile.setMiddleName(userInfo
+							.get("MiddleName").getTextValue());
+				}
+			} else {
+				newProfile.setMiddleName(userInfo.get("MiddleName")
+						.getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("LastName")) {
-			newProfile.setLastName(userInfo.get("LastName").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getLastName().equals(
+						userInfo.get("LastName").getTextValue())) {
+					existingUserProfile.setLastName(userInfo.get("LastName")
+							.getTextValue());
+				}
+			} else {
+				newProfile.setLastName(userInfo.get("LastName").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("DOB")) {
-			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date dob = formatter.parse(userInfo.get("DOB").getTextValue());
-			newProfile.setDateOfBirth(dob);
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getDateOfBirth().equals(dob)) {
+					existingUserProfile.setDateOfBirth(dob);
+				}
+			} else {
+				newProfile.setDateOfBirth(dob);
+			}
 		}
 
 		if (userInfo != null && userInfo.has("Gender")) {
-			newProfile.setGender(userInfo.get("Gender").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getGender().equals(
+						userInfo.get("Gender").getTextValue())) {
+					existingUserProfile.setGender(userInfo.get("Gender")
+							.getTextValue());
+				}
+			} else {
+				newProfile.setGender(userInfo.get("Gender").getTextValue());
+			}
 		}
 
 		Address newAddress = new Address();
@@ -959,39 +1000,154 @@ public class UserService {
 			newAddress.setCountry(userInfo.get("Country").getTextValue());
 		}
 
-		newProfile.getAddresses().add(newAddress);
+		if (!userID.equals("0")) {
+			boolean alreadyExist = false;
+			for (Address address : existingUserProfile.getAddresses()) {
+				if (address.equals(newAddress)) {
+					alreadyExist = true;
+					break;
+				}
+			}
+			if (!alreadyExist) {
+				existingUserProfile.getAddresses().clear();
+				existingUserProfile.getAddresses().add(newAddress);
+			}
+		} else {
+			newProfile.getAddresses().add(newAddress);
+		}
 
 		if (userInfo != null && userInfo.has("OfficeNumber")) {
-			newProfile.getOfficeNumbers().add(
-					userInfo.get("OfficeNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String officeNo : existingUserProfile.getOfficeNumbers()) {
+					if (officeNo.equals(userInfo.get("OfficeNumber")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getOfficeNumbers().clear();
+					existingUserProfile.getOfficeNumbers().add(
+							userInfo.get("OfficeNumber").getTextValue());
+				}
+			} else {
+				newProfile.getOfficeNumbers().add(
+						userInfo.get("OfficeNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("MobileNumber")) {
-			newProfile.getMobileNumbers().add(
-					userInfo.get("MobileNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String mobileNo : existingUserProfile.getMobileNumbers()) {
+					if (mobileNo.equals(userInfo.get("MobileNumber")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getMobileNumbers().clear();
+					existingUserProfile.getMobileNumbers().add(
+							userInfo.get("MobileNumber").getTextValue());
+				}
+			} else {
+				newProfile.getMobileNumbers().add(
+						userInfo.get("MobileNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("HomeNumber")) {
-			newProfile.getHomeNumbers().add(
-					userInfo.get("HomeNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String homeNo : existingUserProfile.getHomeNumbers()) {
+					if (homeNo
+							.equals(userInfo.get("HomeNumber").getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getHomeNumbers().clear();
+					existingUserProfile.getHomeNumbers().add(
+							userInfo.get("HomeNumber").getTextValue());
+				}
+			} else {
+				newProfile.getHomeNumbers().add(
+						userInfo.get("HomeNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("OtherNumber")) {
-			newProfile.getOtherNumbers().add(
-					userInfo.get("OtherNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String otherNo : existingUserProfile.getOtherNumbers()) {
+					if (otherNo.equals(userInfo.get("OtherNumber")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getOtherNumbers().clear();
+					existingUserProfile.getOtherNumbers().add(
+							userInfo.get("OtherNumber").getTextValue());
+				}
+			} else {
+				newProfile.getOtherNumbers().add(
+						userInfo.get("OtherNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("WorkEmail")) {
-			newProfile.getWorkEmails().add(
-					userInfo.get("WorkEmail").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String workEmail : existingUserProfile.getWorkEmails()) {
+					if (workEmail.equals(userInfo.get("WorkEmail")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getWorkEmails().clear();
+					existingUserProfile.getWorkEmails().add(
+							userInfo.get("WorkEmail").getTextValue());
+				}
+			} else {
+				newProfile.getWorkEmails().add(
+						userInfo.get("WorkEmail").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("PersonalEmail")) {
-			newProfile.getPersonalEmails().add(
-					userInfo.get("PersonalEmail").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String personalEmail : existingUserProfile
+						.getPersonalEmails()) {
+					if (personalEmail.equals(userInfo.get("PersonalEmail")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getPersonalEmails().clear();
+					existingUserProfile.getPersonalEmails().add(
+							userInfo.get("PersonalEmail").getTextValue());
+				}
+			} else {
+				newProfile.getPersonalEmails().add(
+						userInfo.get("PersonalEmail").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("SaveOptions")) {
+			if (!userID.equals("0")) {
+				existingUserProfile.getDetails().clear();
+			}
+
 			String[] rows = userInfo.get("SaveOptions").getTextValue()
 					.split("#!#");
 
@@ -1002,16 +1158,26 @@ public class UserService {
 				newDetails.setDepartment(cols[1]);
 				newDetails.setPositionType(cols[2]);
 				newDetails.setPositionTitle(cols[3]);
-				newProfile.getDetails().add(newDetails);
+				if (!userID.equals("0")) {
+					existingUserProfile.getDetails().add(newDetails);
+				} else {
+					newProfile.getDetails().add(newDetails);
+				}
 			}
 		}
 
 		// Need to Compare Equals before saving existingUserProfile and
 		// newProfile
 
-		// Save the informations
+		// Save the User Account
 		userAccountDAO.save(newAccount);
-		userProfileDAO.save(newProfile);
+
+		// Save the User Profile
+		if (!userID.equals("0")) {
+			userProfileDAO.save(existingUserProfile);
+		} else {
+			userProfileDAO.save(newProfile);
+		}
 
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");

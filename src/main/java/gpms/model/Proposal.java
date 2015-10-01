@@ -213,7 +213,7 @@ public class Proposal extends BaseEntity {
 		return signatureInfo;
 	}
 
-	public void setSignatureInfo(ArrayList<SignatureInfo> signatureInfo) {
+	public void setSignatureInfo(List<SignatureInfo> signatureInfo) {
 		this.signatureInfo = signatureInfo;
 	}
 
