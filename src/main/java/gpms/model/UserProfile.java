@@ -418,4 +418,8 @@ public class UserProfile extends BaseEntity {
 			return this.firstName + " " + this.lastName;
 
 	}
+
+	public void addEntryToAuditLog(AuditLog audit) {
+		this.getAuditLog().add(audit);
+	}
 }

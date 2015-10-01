@@ -49,24 +49,28 @@ public class UserAccount extends BaseEntity {
 	public UserAccount() {
 	}
 
-	public UserAccount(String userName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public UserAccount(String userName, String password)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		this.userName = userName;
-		//In this use we are going to attempt a salt / hash combination for securing the password.
+		// In this use we are going to attempt a salt / hash combination for
+		// securing the password.
 		// TODO:: encrypt the password
-		
-		//To store the password, we generate a long random salt using the CSPRNG
-		//Then, prepend the salt to the password and hash it with a crypto function
-		//Then save the salt and hash in the db (this object).0
-		//https://crackstation.net/hashing-security.htm Using this guide.
-		
+
+		// To store the password, we generate a long random salt using the
+		// CSPRNG
+		// Then, prepend the salt to the password and hash it with a crypto
+		// function
+		// Then save the salt and hash in the db (this object).0
+		// https://crackstation.net/hashing-security.htm Using this guide.
+
 		PasswordHash newHash = new PasswordHash();
 		hashword = newHash.createHash(password);
-		
+
 	}
 
 	public UserAccount(String userName) {
 		this.userName = userName;
-		
+
 	}
 
 	public String getUserName() {
@@ -77,8 +81,6 @@ public class UserAccount extends BaseEntity {
 		this.userName = userName;
 	}
 
-	
-	
 	/**
 	 * 
 	 * @return Returns the hashed and salted password.
@@ -90,10 +92,11 @@ public class UserAccount extends BaseEntity {
 	// TODO::Correct this method
 	/**
 	 * This will now set a hashed password
+	 * 
 	 * @param password
 	 */
 	public void setPassword(String password) {
-//		this.password = password;
+		// this.password = password;
 	}
 
 	public boolean isDeleted() {
@@ -133,8 +136,8 @@ public class UserAccount extends BaseEntity {
 		result = prime * result + ((addedOn == null) ? 0 : addedOn.hashCode());
 		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + (isDeleted ? 1231 : 1237);
-//		result = prime * result
-//				+ ((password == null) ? 0 : password.hashCode());
+		// result = prime * result
+		// + ((password == null) ? 0 : password.hashCode());
 		result = prime * result
 				+ ((userName == null) ? 0 : userName.hashCode());
 		return result;
@@ -158,11 +161,11 @@ public class UserAccount extends BaseEntity {
 			return false;
 		if (isDeleted != other.isDeleted)
 			return false;
-//		if (password == null) {
-//			if (other.password != null)
-//				return false;
-//		} else if (!password.equals(other.password))
-//			return false;
+		// if (password == null) {
+		// if (other.password != null)
+		// return false;
+		// } else if (!password.equals(other.password))
+		// return false;
 		if (userName == null) {
 			if (other.userName != null)
 				return false;
@@ -171,7 +174,8 @@ public class UserAccount extends BaseEntity {
 		return true;
 	}
 
-	// TODO::Password from constructor removed, verify correct function of method
+	// TODO::Password from constructor removed, verify correct function of
+	// method
 	@Override
 	public UserAccount clone() throws CloneNotSupportedException {
 		UserAccount copy = new UserAccount(this.userName);
@@ -182,5 +186,9 @@ public class UserAccount extends BaseEntity {
 			copy.addEntryToAuditLog(entry);
 		}
 		return copy;
+	}
+
+	public void addEntryToAuditLog(AuditLog audit) {
+		this.getAuditLog().add(audit);
 	}
 }

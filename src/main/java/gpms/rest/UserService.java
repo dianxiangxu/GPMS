@@ -730,8 +730,7 @@ public class UserService {
 		userProfileDAO.activateUserProfileByUserID(userProfile, authorProfile,
 				gpmsCommonObj, isActive);
 
-		UserAccount userAccount = userAccountDAO.findByID(userProfile
-				.getUserAccount().getId());
+		UserAccount userAccount = userProfile.getUserAccount();
 		userAccountDAO.activateUserAccountByUserID(userAccount, authorProfile,
 				gpmsCommonObj, isActive);
 		// return Response.ok("Success", MediaType.APPLICATION_JSON).build();
@@ -934,8 +933,8 @@ public class UserService {
 						.setActive(userInfo.get("IsActive").getBooleanValue());
 			}
 			if (!userID.equals("0")) {
-				if (existingUserAccount.isDeleted() != userInfo.get("IsActive")
-						.getBooleanValue()) {
+				if (existingUserAccount.isDeleted() != !userInfo
+						.get("IsActive").getBooleanValue()) {
 					existingUserAccount.setDeleted(!userInfo.get("IsActive")
 							.getBooleanValue());
 				}
@@ -955,8 +954,8 @@ public class UserService {
 			// }
 
 			if (!userID.equals("0")) {
-				if (existingUserProfile.isDeleted() != userInfo.get("IsActive")
-						.getBooleanValue()) {
+				if (existingUserProfile.isDeleted() != !userInfo
+						.get("IsActive").getBooleanValue()) {
 					existingUserProfile.setDeleted(!userInfo.get("IsActive")
 							.getBooleanValue());
 				}

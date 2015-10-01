@@ -360,4 +360,8 @@ public class Proposal extends BaseEntity {
 		return true;
 	}
 
+	public void addEntryToAuditLog(AuditLog audit) {
+		this.getAuditLog().add(audit);
+	}
+
 }
