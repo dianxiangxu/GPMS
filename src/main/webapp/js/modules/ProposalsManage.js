@@ -1668,6 +1668,7 @@ $(function() {
 				$(this).val($(this).find('option').first().val());
 			});
 
+			proposalsManage.SetFirstAccordionActive();
 			proposalsManage.onInit();
 			$('#lblFormHeading').html(
 					getLocale(gpmsProposalsManagement, "New Proposal Details"));
@@ -1695,6 +1696,9 @@ $(function() {
 			// });
 
 			// For Signature Section
+			$("#trSignChair").hide();
+			$("#trSignDean").hide();
+			$("#trSignBusinessManager").hide();
 			signatureInfo = '';
 			$("#trSignPICOPI tbody").empty();
 			$("#trSignChair tbody").empty();
@@ -1738,7 +1742,6 @@ $(function() {
 		},
 
 		onInit : function() {
-			proposalsManage.SetFirstAccordionActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
@@ -1915,10 +1918,6 @@ $(function() {
 								}
 							// }
 							});
-
-			// $accordion.accordion("option", "active", 0);
-			proposalsManage.CollapseAccordion();
-			proposalsManage.SelectFirstAccordion();
 			return false;
 		},
 
@@ -2358,65 +2357,76 @@ $(function() {
 		},
 
 		BindUserMobileNo : function(userId) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetMobileNoForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId
-			});
-			this.config.ajaxCallMode = 6;
-			this.ajaxCall(this.config);
-			$('input[name="txtPhoneNo"]').mask("(999) 999-9999");
+			if (userId != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetMobileNoForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId
+				});
+				this.config.ajaxCallMode = 6;
+				this.ajaxCall(this.config);
+				$('input[name="txtPhoneNo"]').mask("(999) 999-9999");
+			}
 			return false;
 		},
 
 		BindCollegeDropDown : function(userId) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetCollegesForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId
-			});
-			this.config.ajaxCallMode = 7;
-			this.ajaxCall(this.config);
+			if (userId != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetCollegesForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId
+				});
+				this.config.ajaxCallMode = 7;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
 		BindDepartmentDropDown : function(userId, collegeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetDepartmentsForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId,
-				college : collegeName
-			});
-			this.config.ajaxCallMode = 8;
-			this.ajaxCall(this.config);
+			if (userId != null && collegeName != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetDepartmentsForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId,
+					college : collegeName
+				});
+				this.config.ajaxCallMode = 8;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
 		BindPositionTypeDropDown : function(userId, collegeName, departmentName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTypeForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId,
-				college : collegeName,
-				department : departmentName
-			});
-			this.config.ajaxCallMode = 9;
-			this.ajaxCall(this.config);
+			if (userId != null && collegeName != null && departmentName != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetPositionTypeForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId,
+					college : collegeName,
+					department : departmentName
+				});
+				this.config.ajaxCallMode = 9;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
 		BindPositionTitleDropDown : function(userId, collegeName,
 				departmentName, positionTypeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTitleForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId,
-				college : collegeName,
-				department : departmentName,
-				positionType : positionTypeName
-			});
-			this.config.ajaxCallMode = 10;
-			this.ajaxCall(this.config);
+			if (userId != null && collegeName != null && departmentName != null
+					&& positionTypeName != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetPositionTitleForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId,
+					college : collegeName,
+					department : departmentName,
+					positionType : positionTypeName
+				});
+				this.config.ajaxCallMode = 10;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
@@ -2666,8 +2676,10 @@ $(function() {
 								'Proposal has been saved successfully.')
 						+ "</p>");
 			}
-			proposalsManage.ClearForm();
 			$('#divProposalForm').hide();
+			proposalsManage.ClearForm();
+			proposalsManage.CollapseAccordion();
+			proposalsManage.SelectFirstAccordion();
 			break;
 		}
 	},
@@ -2995,18 +3007,19 @@ $(function() {
 					});
 
 			$('#btnBack').on("click", function() {
-				$('#divProposalForm').hide();
 				$('#divProposalGrid').show();
+				$('#divProposalForm').hide();
 				proposalsManage.ClearForm();
+				proposalsManage.CollapseAccordion();
+				proposalsManage.SelectFirstAccordion();
 			});
 
 			$('#btnReset').bind("click", function() {
 				proposalsManage.ClearForm();
 				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();
-				$("#trSignChair").hide();
-				$("#trSignDean").hide();
-				$("#trSignBusinessManager").hide();
+				proposalsManage.CollapseAccordion();
+				proposalsManage.SelectFirstAccordion();
 			});
 
 			$('#btnSaveProposal').click(function() {
