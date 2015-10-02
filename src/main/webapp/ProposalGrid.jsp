@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560dbe86af6e042200cea793";
+	var userProfileId = "560ed83caf6e040da04e60e4";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -991,7 +991,7 @@
 												</div>
 
 												<h3>
-													<span id="lblSection11">Certification/ Signatures</span>
+													<span id="lblSection11">Certification/Signatures</span>
 												</h3>
 												<div class="sfFormwrapper">
 													<table cellspacing="0" cellpadding="0" border="0">

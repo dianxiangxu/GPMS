@@ -2060,21 +2060,11 @@ $(function() {
 
 				signatureInfo = '';
 
-				$('#trSignPICOPI > tbody  > tr').each(function() {
-					proposalsManage.GetUserSignature($(this));
-				});
-
-				$('#trSignChair > tbody  > tr').each(function() {
-					proposalsManage.GetUserSignature($(this));
-				});
-
-				$('#trSignDean > tbody  > tr').each(function() {
-					proposalsManage.GetUserSignature($(this));
-				});
-
-				$('#trSignBusinessManager > tbody  > tr').each(function() {
-					proposalsManage.GetUserSignature($(this));
-				});
+				$(
+						'#trSignPICOPI > tbody  > tr, #trSignChair > tbody  > tr, #trSignDean > tbody  > tr, #trSignBusinessManager > tbody  > tr')
+						.each(function() {
+							proposalsManage.GetUserSignature($(this));
+						});
 
 				signatureInfo = signatureInfo.substring(0,
 						signatureInfo.length - 3);
