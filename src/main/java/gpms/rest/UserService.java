@@ -90,7 +90,7 @@ public class UserService {
 	@Path("/{firstname}")
 	public String findUserDeatilsByFirstName(
 			@PathParam("firstname") String query)
-			throws JsonGenerationException, JsonMappingException, IOException {
+					throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
 		String response = new String();
 
@@ -483,7 +483,7 @@ public class UserService {
 	@POST
 	@Path("/GetCollegeList")
 	public List<String> produceCollegeList() throws JsonProcessingException,
-			IOException {
+	IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 		return dpc.getCollegeKeys();
 	}
@@ -853,6 +853,8 @@ public class UserService {
 	@Path("/SaveUpdateUser")
 	public String saveUpdateUser(String message)
 			throws JsonProcessingException, IOException, ParseException {
+		// **TODO: Evaluate this, possible source of duplication errors.
+		// This may be the issue behind the duplication
 
 		String userName = new String();
 		String userProfileID = new String();
@@ -861,7 +863,7 @@ public class UserService {
 		String userID = new String();
 
 		UserAccount newAccount = new UserAccount();
-		UserProfile newProfile = new UserProfile();
+		UserProfile newProfile;
 
 		UserProfile existingUserProfile = new UserProfile();
 
@@ -910,14 +912,35 @@ public class UserService {
 			userID = userInfo.get("UserID").getTextValue();
 			if (userID != "0") {
 				ObjectId id = new ObjectId(userID);
-				existingUserProfile = userProfileDAO
-						.findUserDetailsByProfileID(id);
-				// newProfile.setId(id);
+				newProfile = userProfileDAO.findUserDetailsByProfileID(id);
+				//If this is working right something should return here:
+				//I need to spam the console so I notice it...
+				//System.out.println(existingUserProfile.getFirstName());
+				//With the check it looks like it found the right profile.
+				//There is an error that exists somewhere below
+
 			}
 		}
 
-		if (userInfo != null && userInfo.has("FirstName")) {
-			newProfile.setFirstName(userInfo.get("FirstName").getTextValue());
+		//**TODO: Check that there are no copying id collisions here that may cause duplication
+		
+		//Going to try and use the same "newProfile" object for all of this
+		//In the above method,newProfile = userProfileDAO.findUserDetailsByProfileID(id);
+		//If there is nothing that matches the return should be null
+		//meaning we should just need a declaration of newProfile!=null to determine if it is a new or 
+		//already existing profile
+		if (userInfo != null && userInfo.has("FirstName"))
+		{
+			if (userID != "0") {
+
+				if (!existingUserProfile.getFirstName().equals(userInfo.get("FirstName").getTextValue())) 
+				{
+					existingUserProfile.setFirstName(userInfo.get("FirstName").getTextValue());
+				}
+			} else 
+			{
+				newProfile.setFirstName(userInfo.get("FirstName").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("MiddleName")) {

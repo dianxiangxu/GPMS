@@ -73,12 +73,12 @@ public class UserProfile extends BaseEntity {
 
 	@Expose
 	@Property("work email")
-	@Indexed(name = "workEmailsIndex", unique = true)
+	@Indexed(name = "workEmailsIndex") //, unique = true  //removed this, testing dupe
 	private List<String> workEmails = new ArrayList<String>();
 
 	@Expose
 	@Property("personal email")
-	@Indexed(name = "personalEmailsIndex", unique = true)
+	@Indexed(name = "personalEmailsIndex") //, unique = true  //removed this, testing dupe
 	private List<String> personalEmails = new ArrayList<String>();
 
 	@Expose

@@ -60,8 +60,9 @@ public class EditXUsers
 		UserProfile authorUser = userList.get(1);
 		
 		//If this is working as intended, it should take care of everything.
-		profileDAO.setFirstName(authorUser, editUser, "Andross");
-		
+//		profileDAO.setFirstName(authorUser, editUser, "Andross");
+		editUser.setFirstName("Bruce");
+		profileDAO.save(editUser);
 		
 		
 		//Make another list object from the db, both should be the same size if no
