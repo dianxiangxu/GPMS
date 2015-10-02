@@ -40,7 +40,7 @@ public abstract class BaseEntity {
 		this.version = version;
 	}
 
-	public List<AuditLog> getAuditLog() {
+	public ArrayList<AuditLog> getAuditLog() {
 		return auditLog;
 	}
 
@@ -48,7 +48,4 @@ public abstract class BaseEntity {
 		this.auditLog = auditLog;
 	}
 
-	public void addEntryToAuditLog(AuditLog entry) {
-		auditLog.add(entry);
-	}
 }

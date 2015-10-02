@@ -397,6 +397,7 @@ $(function() {
 	var rowIndex = 0;
 	var editFlag = 0;
 	var isUniqueProjectTitle = false;
+	var signatureInfo = '';
 
 	proposalsManage = {
 		config : {
@@ -1667,6 +1668,7 @@ $(function() {
 				$(this).val($(this).find('option').first().val());
 			});
 
+			proposalsManage.SetFirstAccordionActive();
 			proposalsManage.onInit();
 			$('#lblFormHeading').html(
 					getLocale(gpmsProposalsManagement, "New Proposal Details"));
@@ -1694,6 +1696,10 @@ $(function() {
 			// });
 
 			// For Signature Section
+			$("#trSignChair").hide();
+			$("#trSignDean").hide();
+			$("#trSignBusinessManager").hide();
+			signatureInfo = '';
 			$("#trSignPICOPI tbody").empty();
 			$("#trSignChair tbody").empty();
 			$("#trSignDean tbody").empty();
@@ -1726,7 +1732,7 @@ $(function() {
 		BindPICoPISignatures : function() {
 			var fullName = $('select[name="ddlName"]').eq(0).find(
 					"option:selected").text();
-			var cloneRow = '<tr><td><span class="cssClassLabel">'
+			var cloneRow = '<tr allowchange="true" allowsign="true"><td><span class="cssClassLabel" name ="fullname" role="PI" delegated="false">'
 					+ fullName
 					+ '</span></td><td><input title="PI\'s Signature" class="sfInputbox" placeholder="PI\'s Signature" type="text" required="true" name="'
 					+ $('select[name="ddlName"]').eq(0).val()
@@ -1736,7 +1742,6 @@ $(function() {
 		},
 
 		onInit : function() {
-			proposalsManage.SetFirstAccordionActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
 			$('.cssClassError').hide();
@@ -1913,10 +1918,6 @@ $(function() {
 								}
 							// }
 							});
-
-			// $accordion.accordion("option", "active", 0);
-			proposalsManage.CollapseAccordion();
-			proposalsManage.SelectFirstAccordion();
 			return false;
 		},
 
@@ -1951,6 +1952,43 @@ $(function() {
 			return false;
 		},
 
+		GetUserSignature : function(obj) {
+			var allowedChangeAttr = obj.attr('allowchange');
+			var allowedSignAttr = obj.attr('allowsign');
+
+			if (typeof allowedChangeAttr !== typeof undefined
+					&& allowedChangeAttr !== false
+					&& allowedChangeAttr == "true"
+					&& typeof allowedSignAttr !== typeof undefined
+					&& allowedSignAttr !== false && allowedSignAttr == "true") {
+				obj
+						.find("input")
+						.each(
+								function() {
+									var optionsText = $(this).val();
+									if (optionsText
+											&& $(this).prop("name") != "signaturedate") {
+
+										signatureInfo += $(this).prop("name")
+												+ "!#!"; // UserProfileID
+
+										signatureInfo += optionsText + "!#!"; // Signature
+									} else {
+										signatureInfo += optionsText + "!#!"; // SignedDate
+									}
+								});
+
+				signatureInfo += obj.find('span.cssClassLabel').text() + "!#!"; // FullName
+				signatureInfo += obj.find('span.cssClassLabel').attr("role")
+						+ "!#!";
+				// PositionTitle
+				signatureInfo += obj.find('span.cssClassLabel').attr(
+						"delegated")
+						+ "#!#";
+				// Delegated
+			}
+		},
+
 		SaveProposal : function(_proposalId, _flag) {
 			$('#iferror').hide();
 			if (checkForm($("#form1"))) {
@@ -1980,11 +2018,11 @@ $(function() {
 				var investigatorInfo = '';
 				$('#dataTable > tbody  > tr')
 						.each(
-								function(i) {
+								function() {
 									$(this)
 											.find("select")
 											.each(
-													function(j) {
+													function() {
 														var optionsText = $(
 																this).val();
 														if (!optionsText
@@ -2019,6 +2057,27 @@ $(function() {
 
 				investigatorInfo = investigatorInfo.substring(0,
 						investigatorInfo.length - 3);
+
+				signatureInfo = '';
+
+				$('#trSignPICOPI > tbody  > tr').each(function() {
+					proposalsManage.GetUserSignature($(this));
+				});
+
+				$('#trSignChair > tbody  > tr').each(function() {
+					proposalsManage.GetUserSignature($(this));
+				});
+
+				$('#trSignDean > tbody  > tr').each(function() {
+					proposalsManage.GetUserSignature($(this));
+				});
+
+				$('#trSignBusinessManager > tbody  > tr').each(function() {
+					proposalsManage.GetUserSignature($(this));
+				});
+
+				signatureInfo = signatureInfo.substring(0,
+						signatureInfo.length - 3);
 
 				if (!validateErrorMessage) {
 					var projectInfo = {
@@ -2151,10 +2210,15 @@ $(function() {
 					// false for Update true for New Add
 					};
 
+					if (signatureInfo != "") {
+						proposalInfo.SignatureInfo = signatureInfo;
+					}
+
 					if (!_flag) {
-						proposalInfo.ProposalNo = $("#lblProposalNo").text();
-						proposalInfo.ReceivedDate = $("#lblHiddenDateReceived")
-								.text();
+						// proposalInfo.ProposalNo = $("#lblProposalNo").text();
+						// proposalInfo.ReceivedDate =
+						// $("#lblHiddenDateReceived")
+						// .text();
 						proposalInfo.ProposalStatus = $("#ddlProposalStatus")
 								.val();
 
@@ -2293,65 +2357,76 @@ $(function() {
 		},
 
 		BindUserMobileNo : function(userId) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetMobileNoForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId
-			});
-			this.config.ajaxCallMode = 6;
-			this.ajaxCall(this.config);
-			$('input[name="txtPhoneNo"]').mask("(999) 999-9999");
+			if (userId != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetMobileNoForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId
+				});
+				this.config.ajaxCallMode = 6;
+				this.ajaxCall(this.config);
+				$('input[name="txtPhoneNo"]').mask("(999) 999-9999");
+			}
 			return false;
 		},
 
 		BindCollegeDropDown : function(userId) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetCollegesForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId
-			});
-			this.config.ajaxCallMode = 7;
-			this.ajaxCall(this.config);
+			if (userId != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetCollegesForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId
+				});
+				this.config.ajaxCallMode = 7;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
 		BindDepartmentDropDown : function(userId, collegeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetDepartmentsForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId,
-				college : collegeName
-			});
-			this.config.ajaxCallMode = 8;
-			this.ajaxCall(this.config);
+			if (userId != null && collegeName != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetDepartmentsForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId,
+					college : collegeName
+				});
+				this.config.ajaxCallMode = 8;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
 		BindPositionTypeDropDown : function(userId, collegeName, departmentName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTypeForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId,
-				college : collegeName,
-				department : departmentName
-			});
-			this.config.ajaxCallMode = 9;
-			this.ajaxCall(this.config);
+			if (userId != null && collegeName != null && departmentName != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetPositionTypeForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId,
+					college : collegeName,
+					department : departmentName
+				});
+				this.config.ajaxCallMode = 9;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
 		BindPositionTitleDropDown : function(userId, collegeName,
 				departmentName, positionTypeName) {
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetPositionTitleForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId,
-				college : collegeName,
-				department : departmentName,
-				positionType : positionTypeName
-			});
-			this.config.ajaxCallMode = 10;
-			this.ajaxCall(this.config);
+			if (userId != null && collegeName != null && departmentName != null
+					&& positionTypeName != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetPositionTitleForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId,
+					college : collegeName,
+					department : departmentName,
+					positionType : positionTypeName
+				});
+				this.config.ajaxCallMode = 10;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
@@ -2505,6 +2580,8 @@ $(function() {
 								var signedDate = '';
 								var readOnly = '';
 								var focusMethod = '';
+								var allowedChange = false;
+								var allowedSign = false;
 
 								if (item.signedDate != null) {
 									signedDate = item.signedDate;
@@ -2518,10 +2595,22 @@ $(function() {
 										readOnly = 'readonly="true"';
 									} else if (item.signedDate == null) {
 										focusMethod = 'onfocus="proposalsManage.BindCurrentDateTime(this);"';
+										allowedSign = true;
 									}
 								}
 
-								var cloneRow = '<tr><td><span class="cssClassLabel">'
+								if (readOnly == '') {
+									allowedChange = true;
+								}
+								var cloneRow = '<tr allowchange="'
+										+ allowedChange
+										+ '" allowsign="'
+										+ allowedSign
+										+ '"><td><span class="cssClassLabel" name="fullname" role="'
+										+ item.positionTitle
+										+ '" delegated="'
+										+ item.delegated
+										+ '">'
 										+ item.fullName
 										+ '</span></td><td><input title="'
 										+ item.positionTitle
@@ -2541,6 +2630,7 @@ $(function() {
 										+ $.format.date(signedDate,
 												'yyyy/MM/dd hh:mm:ss a')
 										+ '"></td></tr>';
+
 								switch (item.positionTitle) {
 								case "PI":
 								case "Co-PI":
@@ -2586,8 +2676,10 @@ $(function() {
 								'Proposal has been saved successfully.')
 						+ "</p>");
 			}
-			proposalsManage.ClearForm();
 			$('#divProposalForm').hide();
+			proposalsManage.ClearForm();
+			proposalsManage.CollapseAccordion();
+			proposalsManage.SelectFirstAccordion();
 			break;
 		}
 	},
@@ -2915,18 +3007,19 @@ $(function() {
 					});
 
 			$('#btnBack').on("click", function() {
-				$('#divProposalForm').hide();
 				$('#divProposalGrid').show();
+				$('#divProposalForm').hide();
 				proposalsManage.ClearForm();
+				proposalsManage.CollapseAccordion();
+				proposalsManage.SelectFirstAccordion();
 			});
 
 			$('#btnReset').bind("click", function() {
 				proposalsManage.ClearForm();
 				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();
-				$("#trSignChair").hide();
-				$("#trSignDean").hide();
-				$("#trSignBusinessManager").hide();
+				proposalsManage.CollapseAccordion();
+				proposalsManage.SelectFirstAccordion();
 			});
 
 			$('#btnSaveProposal').click(function() {
@@ -2936,7 +3029,7 @@ $(function() {
 					proposalsManage.SaveProposal(proposal_id, false);
 				} else {
 					editFlag = 0;
-					proposalsManage.SaveProposal(0, true);
+					proposalsManage.SaveProposal("0", true);
 				}
 			});
 

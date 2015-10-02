@@ -11,6 +11,7 @@ import gpms.model.GPMSCommonInfo;
 import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.JSONTansformer;
 import gpms.model.PositionDetails;
+import gpms.model.SignatureInfo;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
@@ -57,6 +58,8 @@ public class UserService {
 	UserProfileDAO userProfileDAO = null;
 	ProposalDAO proposalDAO = null;
 
+	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
 	public UserService() {
 		mongoClient = MongoDBConnector.getMongo();
 		morphia = new Morphia();
@@ -90,7 +93,7 @@ public class UserService {
 	@Path("/{firstname}")
 	public String findUserDeatilsByFirstName(
 			@PathParam("firstname") String query)
-					throws JsonGenerationException, JsonMappingException, IOException {
+			throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayList<UserProfile> users = new ArrayList<UserProfile>();
 		String response = new String();
 
@@ -483,7 +486,7 @@ public class UserService {
 	@POST
 	@Path("/GetCollegeList")
 	public List<String> produceCollegeList() throws JsonProcessingException,
-	IOException {
+			IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 		return dpc.getCollegeKeys();
 	}
@@ -727,8 +730,7 @@ public class UserService {
 		userProfileDAO.activateUserProfileByUserID(userProfile, authorProfile,
 				gpmsCommonObj, isActive);
 
-		UserAccount userAccount = userAccountDAO.findByID(userProfile
-				.getUserAccount().getId());
+		UserAccount userAccount = userProfile.getUserAccount();
 		userAccountDAO.activateUserAccountByUserID(userAccount, authorProfile,
 				gpmsCommonObj, isActive);
 		// return Response.ok("Success", MediaType.APPLICATION_JSON).build();
@@ -853,8 +855,6 @@ public class UserService {
 	@Path("/SaveUpdateUser")
 	public String saveUpdateUser(String message)
 			throws JsonProcessingException, IOException, ParseException {
-		// **TODO: Evaluate this, possible source of duplication errors.
-		// This may be the issue behind the duplication
 
 		String userName = new String();
 		String userProfileID = new String();
@@ -863,8 +863,9 @@ public class UserService {
 		String userID = new String();
 
 		UserAccount newAccount = new UserAccount();
-		UserProfile newProfile;
+		UserProfile newProfile = new UserProfile();
 
+		UserAccount existingUserAccount = new UserAccount();
 		UserProfile existingUserProfile = new UserProfile();
 
 		String response = new String();
@@ -887,78 +888,146 @@ public class UserService {
 
 		JsonNode userInfo = root.get("userInfo");
 
-		if (userInfo != null && userInfo.has("UserName")) {
-			newAccount.setUserName(userInfo.get("UserName").getTextValue());
-		}
-
-		if (userInfo != null && userInfo.has("Password")) {
-			newAccount.setPassword(userInfo.get("Password").getTextValue());
-		}
-
-		newAccount.setAddedOn(new Date());
-
-		if (userInfo != null && userInfo.has("IsActive")) {
-			newAccount.setActive(Boolean.parseBoolean(userInfo.get("IsActive")
-					.getTextValue()));
-			newAccount.setDeleted(!Boolean.parseBoolean(userInfo
-					.get("IsActive").getTextValue()));
-			newProfile.setDeleted(!Boolean.parseBoolean(userInfo
-					.get("IsActive").getTextValue()));
-		}
-
-		newProfile.setUserId(newAccount);
-
 		if (userInfo != null && userInfo.has("UserID")) {
 			userID = userInfo.get("UserID").getTextValue();
-			if (userID != "0") {
+			if (!userID.equals("0")) {
 				ObjectId id = new ObjectId(userID);
-				newProfile = userProfileDAO.findUserDetailsByProfileID(id);
-				//If this is working right something should return here:
-				//I need to spam the console so I notice it...
-				//System.out.println(existingUserProfile.getFirstName());
-				//With the check it looks like it found the right profile.
-				//There is an error that exists somewhere below
-
+				existingUserProfile = userProfileDAO
+						.findUserDetailsByProfileID(id);
+			} else {
+				newAccount.setAddedOn(new Date());
 			}
 		}
 
-		//**TODO: Check that there are no copying id collisions here that may cause duplication
-		
-		//Going to try and use the same "newProfile" object for all of this
-		//In the above method,newProfile = userProfileDAO.findUserDetailsByProfileID(id);
-		//If there is nothing that matches the return should be null
-		//meaning we should just need a declaration of newProfile!=null to determine if it is a new or 
-		//already existing profile
-		if (userInfo != null && userInfo.has("FirstName"))
-		{
-			if (userID != "0") {
+		if (userInfo != null && userInfo.has("UserName")) {
+			String loginUserName = userInfo.get("UserName").getTextValue();
+			if (!userID.equals("0")) {
+				existingUserAccount = userAccountDAO
+						.findByUserName(loginUserName);
+			} else {
+				newAccount.setUserName(userInfo.get("UserName").getTextValue());
+			}
+		}
 
-				if (!existingUserProfile.getFirstName().equals(userInfo.get("FirstName").getTextValue())) 
-				{
-					existingUserProfile.setFirstName(userInfo.get("FirstName").getTextValue());
+		if (userInfo != null && userInfo.has("Password")) {
+			if (!userID.equals("0")) {
+				if (!existingUserAccount.getPassword().equals(
+						userInfo.get("Password").getTextValue())) {
+					existingUserAccount.setPassword(userInfo.get("Password")
+							.getTextValue());
 				}
-			} else 
-			{
-				newProfile.setFirstName(userInfo.get("FirstName").getTextValue());
+			} else {
+				newAccount.setPassword(userInfo.get("Password").getTextValue());
+			}
+		}
+
+		if (userInfo != null && userInfo.has("IsActive")) {
+			if (!userID.equals("0")) {
+				if (existingUserAccount.isActive() != userInfo.get("IsActive")
+						.getBooleanValue()) {
+					existingUserAccount.setActive(userInfo.get("IsActive")
+							.getBooleanValue());
+				}
+			} else {
+				newAccount
+						.setActive(userInfo.get("IsActive").getBooleanValue());
+			}
+			if (!userID.equals("0")) {
+				if (existingUserAccount.isDeleted() != !userInfo
+						.get("IsActive").getBooleanValue()) {
+					existingUserAccount.setDeleted(!userInfo.get("IsActive")
+							.getBooleanValue());
+				}
+			} else {
+				newAccount.setDeleted(!userInfo.get("IsActive")
+						.getBooleanValue());
+			}
+
+			// TODO: Check the old ways to do this
+			// if (userInfo != null && userInfo.has("IsActive")) {
+			// newAccount.setActive(Boolean.parseBoolean(userInfo.get(
+			// "IsActive").getTextValue()));
+			// newAccount.setDeleted(!Boolean.parseBoolean(userInfo.get(
+			// "IsActive").getTextValue()));
+			// newProfile.setDeleted(!Boolean.parseBoolean(userInfo.get(
+			// "IsActive").getTextValue()));
+			// }
+
+			if (!userID.equals("0")) {
+				if (existingUserProfile.isDeleted() != !userInfo
+						.get("IsActive").getBooleanValue()) {
+					existingUserProfile.setDeleted(!userInfo.get("IsActive")
+							.getBooleanValue());
+				}
+			} else {
+				newProfile.setDeleted(!userInfo.get("IsActive")
+						.getBooleanValue());
+			}
+		}
+
+		if (userID.equals("0")) {
+			newProfile.setUserId(newAccount);
+		}
+
+		if (userInfo != null && userInfo.has("FirstName")) {
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getFirstName().equals(
+						userInfo.get("FirstName").getTextValue())) {
+					existingUserProfile.setFirstName(userInfo.get("FirstName")
+							.getTextValue());
+				}
+			} else {
+				newProfile.setFirstName(userInfo.get("FirstName")
+						.getTextValue());
 			}
 		}
 
 		if (userInfo != null && userInfo.has("MiddleName")) {
-			newProfile.setMiddleName(userInfo.get("MiddleName").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getMiddleName().equals(
+						userInfo.get("MiddleName").getTextValue())) {
+					existingUserProfile.setMiddleName(userInfo
+							.get("MiddleName").getTextValue());
+				}
+			} else {
+				newProfile.setMiddleName(userInfo.get("MiddleName")
+						.getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("LastName")) {
-			newProfile.setLastName(userInfo.get("LastName").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getLastName().equals(
+						userInfo.get("LastName").getTextValue())) {
+					existingUserProfile.setLastName(userInfo.get("LastName")
+							.getTextValue());
+				}
+			} else {
+				newProfile.setLastName(userInfo.get("LastName").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("DOB")) {
-			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date dob = formatter.parse(userInfo.get("DOB").getTextValue());
-			newProfile.setDateOfBirth(dob);
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getDateOfBirth().equals(dob)) {
+					existingUserProfile.setDateOfBirth(dob);
+				}
+			} else {
+				newProfile.setDateOfBirth(dob);
+			}
 		}
 
 		if (userInfo != null && userInfo.has("Gender")) {
-			newProfile.setGender(userInfo.get("Gender").getTextValue());
+			if (!userID.equals("0")) {
+				if (!existingUserProfile.getGender().equals(
+						userInfo.get("Gender").getTextValue())) {
+					existingUserProfile.setGender(userInfo.get("Gender")
+							.getTextValue());
+				}
+			} else {
+				newProfile.setGender(userInfo.get("Gender").getTextValue());
+			}
 		}
 
 		Address newAddress = new Address();
@@ -982,39 +1051,154 @@ public class UserService {
 			newAddress.setCountry(userInfo.get("Country").getTextValue());
 		}
 
-		newProfile.getAddresses().add(newAddress);
+		if (!userID.equals("0")) {
+			boolean alreadyExist = false;
+			for (Address address : existingUserProfile.getAddresses()) {
+				if (address.equals(newAddress)) {
+					alreadyExist = true;
+					break;
+				}
+			}
+			if (!alreadyExist) {
+				existingUserProfile.getAddresses().clear();
+				existingUserProfile.getAddresses().add(newAddress);
+			}
+		} else {
+			newProfile.getAddresses().add(newAddress);
+		}
 
 		if (userInfo != null && userInfo.has("OfficeNumber")) {
-			newProfile.getOfficeNumbers().add(
-					userInfo.get("OfficeNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String officeNo : existingUserProfile.getOfficeNumbers()) {
+					if (officeNo.equals(userInfo.get("OfficeNumber")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getOfficeNumbers().clear();
+					existingUserProfile.getOfficeNumbers().add(
+							userInfo.get("OfficeNumber").getTextValue());
+				}
+			} else {
+				newProfile.getOfficeNumbers().add(
+						userInfo.get("OfficeNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("MobileNumber")) {
-			newProfile.getMobileNumbers().add(
-					userInfo.get("MobileNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String mobileNo : existingUserProfile.getMobileNumbers()) {
+					if (mobileNo.equals(userInfo.get("MobileNumber")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getMobileNumbers().clear();
+					existingUserProfile.getMobileNumbers().add(
+							userInfo.get("MobileNumber").getTextValue());
+				}
+			} else {
+				newProfile.getMobileNumbers().add(
+						userInfo.get("MobileNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("HomeNumber")) {
-			newProfile.getHomeNumbers().add(
-					userInfo.get("HomeNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String homeNo : existingUserProfile.getHomeNumbers()) {
+					if (homeNo
+							.equals(userInfo.get("HomeNumber").getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getHomeNumbers().clear();
+					existingUserProfile.getHomeNumbers().add(
+							userInfo.get("HomeNumber").getTextValue());
+				}
+			} else {
+				newProfile.getHomeNumbers().add(
+						userInfo.get("HomeNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("OtherNumber")) {
-			newProfile.getOtherNumbers().add(
-					userInfo.get("OtherNumber").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String otherNo : existingUserProfile.getOtherNumbers()) {
+					if (otherNo.equals(userInfo.get("OtherNumber")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getOtherNumbers().clear();
+					existingUserProfile.getOtherNumbers().add(
+							userInfo.get("OtherNumber").getTextValue());
+				}
+			} else {
+				newProfile.getOtherNumbers().add(
+						userInfo.get("OtherNumber").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("WorkEmail")) {
-			newProfile.getWorkEmails().add(
-					userInfo.get("WorkEmail").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String workEmail : existingUserProfile.getWorkEmails()) {
+					if (workEmail.equals(userInfo.get("WorkEmail")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getWorkEmails().clear();
+					existingUserProfile.getWorkEmails().add(
+							userInfo.get("WorkEmail").getTextValue());
+				}
+			} else {
+				newProfile.getWorkEmails().add(
+						userInfo.get("WorkEmail").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("PersonalEmail")) {
-			newProfile.getPersonalEmails().add(
-					userInfo.get("PersonalEmail").getTextValue());
+			if (!userID.equals("0")) {
+				boolean alreadyExist = false;
+				for (String personalEmail : existingUserProfile
+						.getPersonalEmails()) {
+					if (personalEmail.equals(userInfo.get("PersonalEmail")
+							.getTextValue())) {
+						alreadyExist = true;
+						break;
+					}
+				}
+				if (!alreadyExist) {
+					existingUserProfile.getPersonalEmails().clear();
+					existingUserProfile.getPersonalEmails().add(
+							userInfo.get("PersonalEmail").getTextValue());
+				}
+			} else {
+				newProfile.getPersonalEmails().add(
+						userInfo.get("PersonalEmail").getTextValue());
+			}
 		}
 
 		if (userInfo != null && userInfo.has("SaveOptions")) {
+			if (!userID.equals("0")) {
+				existingUserProfile.getDetails().clear();
+			}
+
 			String[] rows = userInfo.get("SaveOptions").getTextValue()
 					.split("#!#");
 
@@ -1025,16 +1209,30 @@ public class UserService {
 				newDetails.setDepartment(cols[1]);
 				newDetails.setPositionType(cols[2]);
 				newDetails.setPositionTitle(cols[3]);
-				newProfile.getDetails().add(newDetails);
+				if (!userID.equals("0")) {
+					existingUserProfile.getDetails().add(newDetails);
+				} else {
+					newProfile.getDetails().add(newDetails);
+				}
 			}
 		}
 
 		// Need to Compare Equals before saving existingUserProfile and
 		// newProfile
 
-		// Save the informations
-		userAccountDAO.save(newAccount);
-		userProfileDAO.save(newProfile);
+		// Save the User Account
+		if (!userID.equals("0")) {
+			userAccountDAO.save(existingUserAccount);
+		} else {
+			userAccountDAO.save(newAccount);
+		}
+
+		// Save the User Profile
+		if (!userID.equals("0")) {
+			userProfileDAO.save(existingUserProfile);
+		} else {
+			userProfileDAO.save(newProfile);
+		}
 
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");

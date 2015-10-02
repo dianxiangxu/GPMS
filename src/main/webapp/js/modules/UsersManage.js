@@ -1057,11 +1057,14 @@ $(function() {
 						PersonalEmail : $('#txtPersonalEmail').val(),
 						IsActive : $('input[name=chkActive]').prop('checked'),
 						UserName : $.trim($('#txtUserName').val()),
-						Password : $.trim($('#txtPassword').val()),
 						Flag : _flag, // false for Update true for New Add
 						SaveOptions : _saveOptions
 					};
 
+					var password = $.trim($('#txtPassword').val());
+					if (!_flag && password != "") {
+						userInfo.Password = password;
+					}
 					usersManage.AddUserInfo(userInfo);
 
 					return false;
@@ -2050,7 +2053,8 @@ $(function() {
 			$("#txtDOB").datepicker({
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
-				changeYear : true
+				changeYear : true,
+				yearRange : "-100:+0"
 			}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});

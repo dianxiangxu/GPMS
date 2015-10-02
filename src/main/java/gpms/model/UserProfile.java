@@ -93,7 +93,6 @@ public class UserProfile extends BaseEntity {
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
 	public UserProfile() {
-
 	}
 
 	public String getFirstName() {
@@ -417,5 +416,9 @@ public class UserProfile extends BaseEntity {
 		else
 			return this.firstName + " " + this.lastName;
 
+	}
+
+	public void addEntryToAuditLog(AuditLog audit) {
+		this.getAuditLog().add(audit);
 	}
 }

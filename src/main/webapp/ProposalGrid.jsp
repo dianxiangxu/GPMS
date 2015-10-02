@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560345db83f5e40ae40d453a";
+	var userProfileId = "560dbe86af6e042200cea793";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -1048,7 +1048,7 @@
 														<thead>
 															<tr>
 																<th><span class="cssClassLabelTitle">Principal/Co-Investigator(s)</span></th>
-																<th><span class="cssClassLabelTitle">Name(s)</span></th>
+																<th><span class="cssClassLabelTitle">Signature(s)</span></th>
 																<th><span class="cssClassLabelTitle">Date</span></th>
 															</tr>
 														</thead>
@@ -1062,7 +1062,7 @@
 															<tr>
 																<th><span class="cssClassLabelTitle">Department
 																		Chair(s) or Director(s)</span></th>
-																<th><span class="cssClassLabelTitle">Name(s)</span></th>
+																<th><span class="cssClassLabelTitle">Signature(s)</span></th>
 																<th><span class="cssClassLabelTitle">Date</span></th>
 															</tr>
 														</thead>

@@ -29,10 +29,10 @@ public class AuditLog implements Comparable<AuditLog> {
 	public AuditLog() {
 	}
 
-	public AuditLog(UserProfile userProfileId, String action, Date activityDate) {
+	public AuditLog(UserProfile authorProfile, String action, Date activityDate) {
+		this.userProfileId = authorProfile;
 		this.action = action;
 		this.activityDate = activityDate;
-		this.userProfileId = userProfileId;
 	}
 
 	public UserProfile getUserProfileId() {
@@ -57,11 +57,6 @@ public class AuditLog implements Comparable<AuditLog> {
 
 	public void setActivityDate(Date activityDate) {
 		this.activityDate = activityDate;
-	}
-
-	@Override
-	public AuditLog clone() {
-		return new AuditLog(this.userProfileId, this.action, this.activityDate);
 	}
 
 	public int compareTo(AuditLog o) {

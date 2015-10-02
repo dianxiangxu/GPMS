@@ -97,6 +97,15 @@ public class SignatureInfo {
 	}
 
 	@Override
+	public String toString() {
+		return "SignatureInfo [userProfileId=" + userProfileId + ", fullName="
+				+ fullName + ", signature=" + signature + ", positionTitle="
+				+ positionTitle + ", signedDate=" + signedDate
+				+ ", isDelegated=" + isDelegated + ", delegatedAs="
+				+ delegatedAs + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -158,15 +167,6 @@ public class SignatureInfo {
 		} else if (!userProfileId.equals(other.userProfileId))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "SignatureInfo [userProfileId=" + userProfileId + ", fullName="
-				+ fullName + ", signature=" + signature + ", positionTitle="
-				+ positionTitle + ", signedDate=" + signedDate
-				+ ", isDelegated=" + isDelegated + ", delegatedAs="
-				+ delegatedAs + "]";
 	}
 
 }
