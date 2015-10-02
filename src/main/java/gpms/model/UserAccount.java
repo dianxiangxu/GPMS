@@ -6,10 +6,9 @@ package gpms.model;
 
 import gpms.dao.UserAccountDAO;
 
-import java.util.Date;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
@@ -17,9 +16,6 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.utils.IndexDirection;
 
 import com.google.gson.annotations.Expose;
-
-//{"id":null,"version":null,"auditLog":[],
-//"userName":"","password":"","isDeleted":false}
 
 @Entity(value = UserAccountDAO.COLLECTION_NAME, noClassnameStored = true)
 // @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,
@@ -32,7 +28,7 @@ public class UserAccount extends BaseEntity {
 
 	@Expose
 	@Property("password")
-	private String hashword = new String();
+	private String password = new String();
 
 	@Expose
 	@Property("is deleted")
@@ -47,24 +43,6 @@ public class UserAccount extends BaseEntity {
 	private Date addedOn = new Date();
 
 	public UserAccount() {
-	}
-
-	public UserAccount(String userName, String password)
-			throws NoSuchAlgorithmException, InvalidKeySpecException {
-		this.userName = userName;
-		// In this use we are going to attempt a salt / hash combination for
-		// securing the password.
-		// TODO:: encrypt the password
-
-		// To store the password, we generate a long random salt using the
-		// CSPRNG
-		// Then, prepend the salt to the password and hash it with a crypto
-		// function
-		// Then save the salt and hash in the db (this object).0
-		// https://crackstation.net/hashing-security.htm Using this guide.
-
-		PasswordHash newHash = new PasswordHash();
-		hashword = newHash.createHash(password);
 
 	}
 
@@ -86,17 +64,18 @@ public class UserAccount extends BaseEntity {
 	 * @return Returns the hashed and salted password.
 	 */
 	public String getPassword() {
-		return hashword;
+		return password;
 	}
 
-	// TODO::Correct this method
-	/**
-	 * This will now set a hashed password
-	 * 
-	 * @param password
-	 */
 	public void setPassword(String password) {
-		// this.password = password;
+		PasswordHash newHash = new PasswordHash();
+		try {
+			this.password = newHash.createHash(password);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean isDeleted() {
@@ -125,8 +104,9 @@ public class UserAccount extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return new StringBuffer(" User Name : ").append(this.getUserName())
-				.append(" Password : ").append(this.getPassword()).toString();
+		return "UserAccount [userName=" + userName + ", password=" + password
+				+ ", isDeleted=" + isDeleted + ", isActive=" + isActive
+				+ ", addedOn=" + addedOn + "]";
 	}
 
 	@Override
@@ -136,8 +116,8 @@ public class UserAccount extends BaseEntity {
 		result = prime * result + ((addedOn == null) ? 0 : addedOn.hashCode());
 		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + (isDeleted ? 1231 : 1237);
-		// result = prime * result
-		// + ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
 				+ ((userName == null) ? 0 : userName.hashCode());
 		return result;
@@ -161,11 +141,11 @@ public class UserAccount extends BaseEntity {
 			return false;
 		if (isDeleted != other.isDeleted)
 			return false;
-		// if (password == null) {
-		// if (other.password != null)
-		// return false;
-		// } else if (!password.equals(other.password))
-		// return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (userName == null) {
 			if (other.userName != null)
 				return false;
