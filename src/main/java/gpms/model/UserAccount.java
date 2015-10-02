@@ -43,7 +43,6 @@ public class UserAccount extends BaseEntity {
 	private Date addedOn = new Date();
 
 	public UserAccount() {
-
 	}
 
 	public UserAccount(String userName) {

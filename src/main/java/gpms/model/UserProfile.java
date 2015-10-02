@@ -93,7 +93,6 @@ public class UserProfile extends BaseEntity {
 	 * Non-Parameterized constructor, needed for @id assignment
 	 */
 	public UserProfile() {
-
 	}
 
 	public String getFirstName() {
