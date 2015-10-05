@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560ed83daf6e040da04e60f2";
+	var userProfileId = "5612c0b30b663222701da95e";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -61,6 +61,12 @@
 
 	var logInURL = "login";
 	var pageExtension = ".jsp";
+
+	$(function() {
+		$(".sfLocale").localize({
+			moduleKey : gpmsUsersManagement
+		});
+	});
 	//]]>
 </script>
 
@@ -161,17 +167,6 @@
 							<div style="display: block" class="sfCpanel sfInnerwrapper"
 								id="divBottompanel">
 								<div class="sfModulecontent clearfix">
-
-									<script type="text/javascript">
-										//<![CDATA[
-										$(function() {
-											$(".sfLocale").localize({
-												moduleKey : gpmsUsersManagement
-											});
-										});
-										//]]>
-									</script>
-
 									<!-- Grid -->
 									<div id="divUserGrid">
 										<div class="cssClassCommonBox Curve">
