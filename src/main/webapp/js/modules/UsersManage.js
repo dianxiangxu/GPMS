@@ -199,7 +199,7 @@ $(function() {
 
 		LoadStaticImage : function() {
 			$('.cssClassSuccessImg').prop('src',
-					'' + GPMS.utils.GetGPMSRootPath() + '/images/right.jpg');
+					'' + GPMS.utils.GetGPMSRootPath() + 'images/right.jpg');
 		},
 
 		SearchUsers : function() {

@@ -8,15 +8,15 @@ import gpms.dao.UserProfileDAO;
 import gpms.model.Address;
 import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
-import gpms.model.InvestigatorRefAndPosition;
 import gpms.model.JSONTansformer;
+import gpms.model.PasswordHash;
 import gpms.model.PositionDetails;
-import gpms.model.SignatureInfo;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -27,13 +27,18 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.JsonGenerationException;
@@ -48,8 +53,10 @@ import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
 
 @Path("/users")
-@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+		MediaType.APPLICATION_FORM_URLENCODED })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+		MediaType.TEXT_PLAIN })
 public class UserService {
 	MongoClient mongoClient = null;
 	Morphia morphia = null;
@@ -905,7 +912,7 @@ public class UserService {
 				existingUserAccount = userAccountDAO
 						.findByUserName(loginUserName);
 			} else {
-				newAccount.setUserName(userInfo.get("UserName").getTextValue());
+				newAccount.setUserName(loginUserName);
 			}
 		}
 
@@ -1233,10 +1240,323 @@ public class UserService {
 		} else {
 			userProfileDAO.save(newProfile);
 		}
-
+		UserProfile user = userProfileDAO.findByUserAccount(newAccount);
+		System.out.println(user);
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");
 		return response;
 
 	}
+
+	@POST
+	@Path("/signup")
+	public Response signUpUser(String message, @Context HttpServletRequest req)
+			throws Exception {
+		try {
+			UserAccount newAccount = new UserAccount();
+			UserProfile newProfile = new UserProfile();
+
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode root = mapper.readTree(message);
+
+			JsonNode userInfo = root.get("userInfo");
+
+			boolean isAuth = true;
+
+			if (userInfo != null && userInfo.has("UserName")) {
+				String loginUserName = userInfo.get("UserName").getTextValue();
+
+				UserProfile userProfile = userProfileDAO
+						.findAnyUserWithSameUserName(loginUserName);
+				if (userProfile != null) {
+					// false
+					isAuth = false;
+					java.net.URI location = new java.net.URI(
+							"../SignUp.jsp?error=userexists");
+					return Response.seeOther(location).build();
+				} else {
+					// true
+					newAccount.setUserName(loginUserName);
+				}
+			} else {
+				isAuth = false;
+			}
+
+			if (isAuth) {
+				newAccount.setAddedOn(new Date());
+				newAccount.setActive(false);
+				newAccount.setDeleted(false);
+				newProfile.setDeleted(false);
+				newProfile.setUserId(newAccount);
+
+				if (userInfo != null && userInfo.has("Password")) {
+					newAccount.setPassword(userInfo.get("Password")
+							.getTextValue());
+
+				}
+
+				if (userInfo != null && userInfo.has("FirstName")) {
+					newProfile.setFirstName(userInfo.get("FirstName")
+							.getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("MiddleName")) {
+					newProfile.setMiddleName(userInfo.get("MiddleName")
+							.getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("LastName")) {
+					newProfile.setLastName(userInfo.get("LastName")
+							.getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("DOB")) {
+					Date dob = formatter.parse(userInfo.get("DOB")
+							.getTextValue());
+					newProfile.setDateOfBirth(dob);
+				}
+
+				if (userInfo != null && userInfo.has("Gender")) {
+					newProfile.setGender(userInfo.get("Gender").getTextValue());
+				}
+
+				Address newAddress = new Address();
+
+				if (userInfo != null && userInfo.has("Street")) {
+					newAddress.setStreet(userInfo.get("Street").getTextValue());
+				}
+				if (userInfo != null && userInfo.has("Apt")) {
+					newAddress.setApt(userInfo.get("Apt").getTextValue());
+				}
+				if (userInfo != null && userInfo.has("City")) {
+					newAddress.setCity(userInfo.get("City").getTextValue());
+				}
+				if (userInfo != null && userInfo.has("State")) {
+					newAddress.setState(userInfo.get("State").getTextValue());
+				}
+				if (userInfo != null && userInfo.has("Zip")) {
+					newAddress.setZipcode(userInfo.get("Zip").getTextValue());
+				}
+				if (userInfo != null && userInfo.has("Country")) {
+					newAddress.setCountry(userInfo.get("Country")
+							.getTextValue());
+				}
+
+				newProfile.getAddresses().add(newAddress);
+
+				if (userInfo != null && userInfo.has("OfficeNumber")) {
+					newProfile.getOfficeNumbers().add(
+							userInfo.get("OfficeNumber").getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("MobileNumber")) {
+					newProfile.getMobileNumbers().add(
+							userInfo.get("MobileNumber").getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("HomeNumber")) {
+					newProfile.getHomeNumbers().add(
+							userInfo.get("HomeNumber").getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("OtherNumber")) {
+					newProfile.getOtherNumbers().add(
+							userInfo.get("OtherNumber").getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("WorkEmail")) {
+					newProfile.getWorkEmails().add(
+							userInfo.get("WorkEmail").getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("PersonalEmail")) {
+					newProfile.getPersonalEmails().add(
+							userInfo.get("PersonalEmail").getTextValue());
+				}
+
+				if (userInfo != null && userInfo.has("SaveOptions")) {
+					String[] rows = userInfo.get("SaveOptions").getTextValue()
+							.split("#!#");
+
+					for (String col : rows) {
+						String[] cols = col.split("!#!");
+						PositionDetails newDetails = new PositionDetails();
+						newDetails.setCollege(cols[0]);
+						newDetails.setDepartment(cols[1]);
+						newDetails.setPositionType(cols[2]);
+						newDetails.setPositionTitle(cols[3]);
+
+						newProfile.getDetails().add(newDetails);
+					}
+				}
+
+				// Save the User Account
+				userAccountDAO.save(newAccount);
+
+				// Save the User Profile
+				userProfileDAO.save(newProfile);
+
+				// UserAccount user = userAccountDAO.findByUserName(newAccount
+				// .getUserName());
+				UserProfile user = userProfileDAO.findByUserAccount(newAccount);
+
+				if (user != null) {
+					setMySessionID(req, user.getId().toString());
+					java.net.URI location = new java.net.URI("../Home.jsp");
+					return Response.seeOther(location).build();
+				} else {
+					java.net.URI location = new java.net.URI(
+							"../SignUp.jsp?error=nouser");
+					return Response.seeOther(location).build();
+				}
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		// return
+		// Response.status(403).type("text/plain").entity(message).build();
+		return null;
+	}
+
+	@POST
+	@Path("/confirmation")
+	public Response resendConfirmation(@FormParam("email") String email,
+			@Context HttpServletRequest req) {
+		try {
+			// Check if already isActive show
+			// "was already confirmed, please try signing in"
+			// else
+			// SEND Email to the email id to Confirm the user Creation and set
+			// IsActive True after link click form email
+			// https://gpms.com/confirmation?confirmation_token=YwbmcsY_ypY_EG-SmzdL
+			// Validate the Confirmation token exist
+			// not found
+
+		} catch (Exception e) {
+			System.out.println("error");
+		}
+		return null;
+	}
+
+	@POST
+	@Path("/login")
+	public Response login(@FormParam("user[email]") String email,
+			@FormParam("user[password]") String password,
+			@Context HttpServletRequest req) {
+		try {
+			List<UserProfile> userList = userProfileDAO.findAll();
+			boolean isFound = false;
+			if (userList.size() != 0) {
+				for (UserProfile user : userList) {
+					if (user.getUserAccount().getUserName().equals(email)
+							|| user.getWorkEmails().contains(email)) {
+						if (PasswordHash.validatePassword(password, user
+								.getUserAccount().getPassword())) {
+							isFound = true;
+							setMySessionID(req, user.getId().toString());
+							java.net.URI location = new java.net.URI(
+									"../Home.jsp");
+							return Response.seeOther(location).build();
+						} else {
+							isFound = false;
+						}
+					}
+				}
+			} else {
+				isFound = false;
+			}
+			if (!isFound) {
+				java.net.URI location = new java.net.URI(
+						"../Login.jsp?msg=error");
+				return Response.seeOther(location).build();
+			}
+		} catch (Exception e) {
+			System.out.println("error");
+		}
+		// return
+		// Response.status(403).type("text/plain").entity(message).build();
+		return null;
+	}
+
+	private void setMySessionID(@Context HttpServletRequest req,
+			String sessionValue) {
+		try {
+			if (req == null) {
+				System.out.println("Null request in context");
+			}
+			HttpSession session = req.getSession();
+			if (session.getAttribute("userid") == null) {
+				// id = System.currentTimeMillis();
+				session.setAttribute("userid", sessionValue);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@POST
+	@Path("/logout")
+	public Response logout(@Context HttpServletRequest req) {
+		if (req == null) {
+			System.out.println("Null request in context");
+		}
+		HttpSession session = req.getSession();
+		if (session.getAttribute("userid") != null) {
+			// session.setAttribute("userid", null);
+			session.removeAttribute("userid");
+			session.invalidate();
+			java.net.URI location = null;
+			try {
+				location = new java.net.URI("../Login.jsp");
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			return Response.seeOther(location).build();
+		}
+		return null;
+	}
+
+	public int getMySessionId(@Context HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		if (session.getAttribute("userid") != null) {
+			return (int) session.getAttribute("userid");
+		}
+		return 0;
+	}
+
+	@POST
+	@Path("/forgotpassword")
+	public Response forgotPassword(@FormParam("user[email]") String email,
+			@Context HttpServletRequest req) {
+		// Check Entered Email
+		// Send Email to the User for Reseting Code
+		// https: //
+		// gpms.com/REST/users/changepassword?reset_password_token=vnrDLXnzx327b4Qv6bRa
+
+		return null;
+	}
+
+	@POST
+	@Path("/changepassword")
+	public Response changePassword(@FormParam("user[email]") String email,
+			@Context HttpServletRequest req) {
+
+		// Check Found Email
+		// If Found with correct reset_password_token Change his/ her Password
+		// and go to Home.jsp
+		// Send email password successfully changed
+
+		return null;
+	}
+
+	@GET
+	@Path("/GetUserID")
+	public String getMyUserId(@Context HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		if (session.getAttribute("userid") != null) {
+			return session.getAttribute("userid").toString();
+		}
+		return "0";
+	}
+
 }

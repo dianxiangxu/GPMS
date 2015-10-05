@@ -44,7 +44,7 @@
 </script>
 
 <script type="text/javascript">
-	//_$tag____
+	//<![CDATA[
 	var gpmsAppPath = "";
 	var gpmsUserName = "superuser";
 	var gpmsCurrentCulture = "en-US";
@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560ed83caf6e040da04e60e4";
+	var userProfileId = "5612c0b30b663222701da95e";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -61,7 +61,13 @@
 
 	var logInURL = "login";
 	var pageExtension = ".jsp";
-	//_$t
+
+	$(function() {
+		$(".sfLocale").localize({
+			moduleKey : gpmsProposalsManagement
+		});
+	});
+	//]]>
 </script>
 
 <script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
@@ -166,18 +172,6 @@
 							<div style="display: block" class="sfCpanel sfInnerwrapper"
 								id="divBottompanel">
 								<div class="sfModulecontent clearfix">
-
-									<script type="text/javascript">
-										//<![CDATA[
-										$(function() {
-											$(".sfLocale")
-													.localize(
-															{
-																moduleKey : gpmsProposalsManagement
-															});
-										});
-										//]]>
-									</script>
 									<!-- Grid -->
 									<div id="divProposalGrid">
 										<div class="cssClassCommonBox Curve">
