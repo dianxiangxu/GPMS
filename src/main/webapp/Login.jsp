@@ -130,8 +130,9 @@
 		<div
 			class="row__col row__col--xl-6 row__col--l-7 row__col--m-8 row__col--xl-centered row__col--l-centered row__col--m-centered">
 			<div class="account__box box">
-				<form accept-charset="UTF-8" action="REST/users/login"
-					class="form account__form" id="login-form" method="post">
+				<form enctype="multipart/form-data" accept-charset="UTF-8"
+					action="REST/users/login" class="form account__form"
+					id="login-form" method="post">
 					<div style="margin: 0; padding: 0; display: inline">
 						<input name="utf8" type="hidden" value="✓"><input
 							name="authenticity_token" type="hidden"

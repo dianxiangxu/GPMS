@@ -44,18 +44,8 @@ $(function() {
 							country : {
 								required : true
 							},
-							officeNumber : {
-								phoneUS : true
-							},
 							mobileNumber : {
-								required : true,
-								phoneUS : true
-							},
-							homeNumber : {
-								phoneUS : true
-							},
-							otherNumber : {
-								phoneUS : true
+								required : true
 							},
 							workEmail : {
 								required : true,
@@ -64,10 +54,10 @@ $(function() {
 							personalEmail : {
 								email : true
 							},
-							// username : {
-							// required : true,
-							// minlength : 3
-							// },
+							username : {
+								required : true,
+								minlength : 3
+							},
 							password : {
 								required : true,
 								minlength : 6,
@@ -113,18 +103,8 @@ $(function() {
 							country : {
 								required : "Please select your country"
 							},
-							officeNumber : {
-								phoneUS : "Please enter your valid office phone number"
-							},
 							mobileNumber : {
-								required : "Please enter your mobile phone number",
-								phoneUS : "Please enter your valid mobile phone number",
-							},
-							homeNumber : {
-								phoneUS : "Please enter your valid home phone number",
-							},
-							otherNumber : {
-								phoneUS : "Please enter your valid additional phone number",
+								required : "Please enter your mobile phone number"
 							},
 							workEmail : {
 								required : "Please enter your work email",
@@ -133,11 +113,10 @@ $(function() {
 							personalEmail : {
 								email : "Please enter valid email id"
 							},
-							// username : {
-							// required : "Please enter a username",
-							// minlength : "Your username must be at least 3
-							// characters long"
-							// },
+							username : {
+								required : "Please enter a username",
+								minlength : "Your username must be at least 3 characters long"
+							},
 							password : {
 								required : "Please provide a password",
 								minlength : "Your password must be between 6 and 15 characters",
@@ -989,7 +968,9 @@ $(function() {
 
 		SaveUser : function(_userId, _flag) {
 			$('#iferror').hide();
-			if (checkForm($("#form1"))) {
+			// var $form = $("#form1");
+			// $form.valid();
+			if (validator.form()) {
 				var validateErrorMessage = '';
 
 				var newUserName = $.trim($('#txtUserName').val());
@@ -1062,7 +1043,7 @@ $(function() {
 					};
 
 					var password = $.trim($('#txtPassword').val());
-					if (!_flag && password != "") {
+					if (password != "") {
 						userInfo.Password = password;
 					}
 					usersManage.AddUserInfo(userInfo);
@@ -1820,6 +1801,12 @@ $(function() {
 					editFlag = 0;
 					usersManage.SaveUser("0", true);
 				}
+			});
+
+			$('#txtUserName').focus(function() {
+				// $(this).removeClass("error");
+				$(this).next('.cssClassRight').hide();
+				// $(this).siblings('.cssClassError').hide();
 			});
 
 			$('#txtUserName').blur(

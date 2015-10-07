@@ -1250,24 +1250,32 @@ public class UserService {
 
 	@POST
 	@Path("/signup")
-	public Response signUpUser(String message, @Context HttpServletRequest req)
-			throws Exception {
+	public Response signUpUser(@FormParam("username") String username,
+			@FormParam("password") String password,
+			@FormParam("workEmail") String workEmail,
+			@FormParam("firstName") String firstName,
+			@FormParam("middleName") String middleName,
+			@FormParam("lastName") String lastName,
+			@FormParam("dob") String dateOfBirth,
+			@FormParam("gender") String gender,
+			@FormParam("street") String street, @FormParam("apt") String apt,
+			@FormParam("city") String city, @FormParam("state") String state,
+			@FormParam("zip") String zip, @FormParam("country") String country,
+			@FormParam("mobileNumber") String mobileNumber,
+			@Context HttpServletRequest req) throws Exception {
 		try {
 			UserAccount newAccount = new UserAccount();
 			UserProfile newProfile = new UserProfile();
 
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode root = mapper.readTree(message);
-
-			JsonNode userInfo = root.get("userInfo");
+			if (workEmail != "") {
+				newProfile.getWorkEmails().add(workEmail);
+			}
 
 			boolean isAuth = true;
 
-			if (userInfo != null && userInfo.has("UserName")) {
-				String loginUserName = userInfo.get("UserName").getTextValue();
-
+			if (username != "") {
 				UserProfile userProfile = userProfileDAO
-						.findAnyUserWithSameUserName(loginUserName);
+						.findAnyUserWithSameUserName(username);
 				if (userProfile != null) {
 					// false
 					isAuth = false;
@@ -1276,7 +1284,7 @@ public class UserService {
 					return Response.seeOther(location).build();
 				} else {
 					// true
-					newAccount.setUserName(loginUserName);
+					newAccount.setUserName(username);
 				}
 			} else {
 				isAuth = false;
@@ -1289,105 +1297,57 @@ public class UserService {
 				newProfile.setDeleted(false);
 				newProfile.setUserId(newAccount);
 
-				if (userInfo != null && userInfo.has("Password")) {
-					newAccount.setPassword(userInfo.get("Password")
-							.getTextValue());
+				if (password != "") {
+					newAccount.setPassword(password);
 
 				}
 
-				if (userInfo != null && userInfo.has("FirstName")) {
-					newProfile.setFirstName(userInfo.get("FirstName")
-							.getTextValue());
+				if (firstName != "") {
+					newProfile.setFirstName(firstName);
 				}
 
-				if (userInfo != null && userInfo.has("MiddleName")) {
-					newProfile.setMiddleName(userInfo.get("MiddleName")
-							.getTextValue());
+				if (middleName != "") {
+					newProfile.setMiddleName(middleName);
 				}
 
-				if (userInfo != null && userInfo.has("LastName")) {
-					newProfile.setLastName(userInfo.get("LastName")
-							.getTextValue());
+				if (lastName != "") {
+					newProfile.setLastName(lastName);
 				}
 
-				if (userInfo != null && userInfo.has("DOB")) {
-					Date dob = formatter.parse(userInfo.get("DOB")
-							.getTextValue());
+				if (dateOfBirth != "") {
+					Date dob = formatter.parse(dateOfBirth);
 					newProfile.setDateOfBirth(dob);
 				}
 
-				if (userInfo != null && userInfo.has("Gender")) {
-					newProfile.setGender(userInfo.get("Gender").getTextValue());
+				if (gender != "") {
+					newProfile.setGender(gender);
 				}
 
 				Address newAddress = new Address();
 
-				if (userInfo != null && userInfo.has("Street")) {
-					newAddress.setStreet(userInfo.get("Street").getTextValue());
+				if (street != "") {
+					newAddress.setStreet(street);
 				}
-				if (userInfo != null && userInfo.has("Apt")) {
-					newAddress.setApt(userInfo.get("Apt").getTextValue());
+				if (apt != "") {
+					newAddress.setApt(apt);
 				}
-				if (userInfo != null && userInfo.has("City")) {
-					newAddress.setCity(userInfo.get("City").getTextValue());
+				if (city != "") {
+					newAddress.setCity(city);
 				}
-				if (userInfo != null && userInfo.has("State")) {
-					newAddress.setState(userInfo.get("State").getTextValue());
+				if (state != "") {
+					newAddress.setState(state);
 				}
-				if (userInfo != null && userInfo.has("Zip")) {
-					newAddress.setZipcode(userInfo.get("Zip").getTextValue());
+				if (zip != "") {
+					newAddress.setZipcode(zip);
 				}
-				if (userInfo != null && userInfo.has("Country")) {
-					newAddress.setCountry(userInfo.get("Country")
-							.getTextValue());
+				if (country != "") {
+					newAddress.setCountry(country);
 				}
 
 				newProfile.getAddresses().add(newAddress);
 
-				if (userInfo != null && userInfo.has("OfficeNumber")) {
-					newProfile.getOfficeNumbers().add(
-							userInfo.get("OfficeNumber").getTextValue());
-				}
-
-				if (userInfo != null && userInfo.has("MobileNumber")) {
-					newProfile.getMobileNumbers().add(
-							userInfo.get("MobileNumber").getTextValue());
-				}
-
-				if (userInfo != null && userInfo.has("HomeNumber")) {
-					newProfile.getHomeNumbers().add(
-							userInfo.get("HomeNumber").getTextValue());
-				}
-
-				if (userInfo != null && userInfo.has("OtherNumber")) {
-					newProfile.getOtherNumbers().add(
-							userInfo.get("OtherNumber").getTextValue());
-				}
-
-				if (userInfo != null && userInfo.has("WorkEmail")) {
-					newProfile.getWorkEmails().add(
-							userInfo.get("WorkEmail").getTextValue());
-				}
-
-				if (userInfo != null && userInfo.has("PersonalEmail")) {
-					newProfile.getPersonalEmails().add(
-							userInfo.get("PersonalEmail").getTextValue());
-				}
-
-				if (userInfo != null && userInfo.has("SaveOptions")) {
-					String[] rows = userInfo.get("SaveOptions").getTextValue()
-							.split("#!#");
-
-					for (String col : rows) {
-						String[] cols = col.split("!#!");
-						PositionDetails newDetails = new PositionDetails();
-						newDetails.setCollege(cols[0]);
-						newDetails.setDepartment(cols[1]);
-						newDetails.setPositionType(cols[2]);
-						newDetails.setPositionTitle(cols[3]);
-
-						newProfile.getDetails().add(newDetails);
-					}
+				if (mobileNumber != "") {
+					newProfile.getMobileNumbers().add(mobileNumber);
 				}
 
 				// Save the User Account

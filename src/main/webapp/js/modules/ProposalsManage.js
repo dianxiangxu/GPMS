@@ -1991,7 +1991,7 @@ $(function() {
 
 		SaveProposal : function(_proposalId, _flag) {
 			$('#iferror').hide();
-			if (checkForm($("#form1"))) {
+			if ($("#form1").valid()) {
 				var validateErrorMessage = '';
 
 				var newProjectTitle = $.trim($('#txtProjectTitle').val());
@@ -3023,8 +3023,10 @@ $(function() {
 				}
 			});
 
-			$("#saveForm").bind("click", function() {
-				proposalsManage.SubmitForm('form_8');
+			$('#txtProjectTitle').focus(function() {
+				// $(this).removeClass("error");
+				$(this).next('.cssClassRight').hide();
+				// $(this).siblings('.cssClassError').hide();
 			});
 
 			$('#txtProjectTitle').blur(

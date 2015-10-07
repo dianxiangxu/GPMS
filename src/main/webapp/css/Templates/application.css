@@ -258,6 +258,16 @@ input[type="checkbox"] {
     line-height: 1.5;
     padding: 10px;
 }
+
+input.error {
+    border: 1px dashed #f00 !important;
+}
+
+.error {
+    color: red;
+    display: block;
+}
+
 label.error {
     background-color: #f5716b;
     border-radius: 2px;
