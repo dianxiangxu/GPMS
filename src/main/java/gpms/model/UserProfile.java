@@ -78,7 +78,6 @@ public class UserProfile extends BaseEntity {
 
 	@Expose
 	@Property("personal email")
-	@Indexed(name = "personalEmailsIndex", unique = true)
 	private List<String> personalEmails = new ArrayList<String>();
 
 	@Expose

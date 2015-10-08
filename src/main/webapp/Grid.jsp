@@ -511,8 +511,7 @@
 																					class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" alt="Right" title="Right" />
-																				</span> <span class="cssClassError sfLocale">Work
-																					email must be unique with no spaces</span>
+																				</span>
 																			</div>
 																		</td>
 																		<td><span class="cssClassLabel"
@@ -527,8 +526,7 @@
 																					class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" alt="Right" title="Right" />
-																				</span> <span class="cssClassError sfLocale">Personal
-																					email must be unique with no spaces</span>
+																				</span>
 																			</div>
 																		</td>
 																	</tr>
@@ -606,8 +604,7 @@
 																			class="cssClassRight"> <img src=""
 																				class="cssClassSuccessImg sfLocale" height="13"
 																				width="18" alt="Right" title="Right" />
-																		</span> <span class="cssClassError sfLocale">Username
-																				must be unique with no spaces</span></td>
+																		</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblPassword">Password:</span>

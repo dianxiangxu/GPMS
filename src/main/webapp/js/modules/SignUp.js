@@ -126,8 +126,7 @@ $(function() {
 							mobileNumber : {
 								required : "Please enter your mobile phone number"
 							}
-						},
-						ignore : ":hidden"
+						}
 					});
 
 	var userNameIsUnique = false;
@@ -192,11 +191,44 @@ $(function() {
 				var $username = $('#txtUserName');
 				var userName = $.trim($username.val());
 				var user_id = "0";
-				signUp.checkUniqueUserName(user_id, userName, $username);
-				// TODO : save User here
-				alert("F");
-				return false;
+				var validateErrorMessage = signUp.checkUniqueUserName(user_id,
+						userName, $username);
+				alert(validateErrorMessage);
+				if (!validateErrorMessage) {
+					var userInfo = {
+						UserID : user_id,
+						UserName : $.trim($('#txtUserName').val()),
+						Password : $.trim($('#txtPassword').val()),
+						WorkEmail : $('#txtWorkEmail').val(),
+						FirstName : $.trim($('#txtFirstName').val()),
+						MiddleName : $.trim($('#txtMiddleName').val()),
+						LastName : $.trim($('#txtLastName').val()),
+						DOB : $('#txtDOB').val(),
+						Gender : $('#ddlGender :selected').val(),
+						Street : $.trim($('#txtStreet').val()),
+						Apt : $.trim($('#txtApt').val()),
+						City : $.trim($('#txtCity').val()),
+						State : $('#ddlState :selected').text(),
+						Zip : $.trim($('#txtZip').val()),
+						Country : $('#ddlCountry :selected').text(),
+						MobileNumber : $('#txtMobileNumber').mask()
+					};
+					signUp.AddUserInfo(userInfo);
+
+					return false;
+				}
 			}
+		},
+
+		AddUserInfo : function(info) {
+			this.config.url = this.config.baseURL + "SaveUpdateUser";
+			this.config.data = JSON2.stringify({
+				userInfo : info,
+				gpmsCommonObj : gpmsCommonObj()
+			});
+			this.config.ajaxCallMode = 2;
+			this.ajaxCall(this.config);
+			return false;
 		},
 
 		checkUniqueUserName : function(user_id, userName, textBoxUserName) {
@@ -208,7 +240,7 @@ $(function() {
 							+ " '"
 							+ userName.trim()
 							+ "' "
-							+ getLocale(gpmsSignUp, "already exists.");
+							+ getLocale(gpmsSignUp, "has already been taken.");
 					textBoxUserName.addClass("error");
 					textBoxUserName.siblings('.right').hide();
 					if (textBoxUserName.siblings('.error').exists()) {
@@ -222,15 +254,14 @@ $(function() {
 
 					textBoxUserName.siblings('.error').show();
 					// textBoxUserName.focus();
-					return false;
 				} else {
 					textBoxUserName.removeClass("error");
 					textBoxUserName.siblings('.right').show();
 					textBoxUserName.siblings('.error').hide();
 					textBoxUserName.siblings('.error').html('');
-					return false;
 				}
 			}
+			return errors;
 		},
 
 		ajaxSuccess : function(msg) {
@@ -239,6 +270,13 @@ $(function() {
 				break;
 			case 1:
 				userNameIsUnique = stringToBoolean(msg);
+				break;
+			case 2:
+				csscody.info("<h2>"
+						+ getLocale(gpmsSignUp, 'Successful Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsSignUp,
+								'User has been saved successfully.') + "</p>");
 				break;
 			}
 		},
@@ -254,6 +292,12 @@ $(function() {
 						+ getLocale(gpmsSignUp,
 								'Cannot check for unique Username') + "</p>");
 				break;
+			case 2:
+				csscody.info("<h2>" + getLocale(gpmsSignUp, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsSignUp, 'Failed to save user!')
+						+ "</p>");
+				break;
 			}
 		},
 
@@ -267,7 +311,8 @@ $(function() {
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
 				changeYear : true,
-				yearRange : "-100:+0"
+				yearRange : "-100:+0",
+				maxDate : 0
 			}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});

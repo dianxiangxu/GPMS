@@ -76,7 +76,7 @@
 
 	"Please enter a username." : "Please enter a username.",
 	"Please enter unique username." : "Please enter unique username.",
-	"already exists." : "already exists.",
+	"has already been taken." : "has already been taken.",
 	"Please enter work email id." : "Please enter work email id.",
 	"Please enter unique work email id." : "Please enter unique work email id.",
 	"Please enter unique personal email id." : "Please enter unique personal email id.",

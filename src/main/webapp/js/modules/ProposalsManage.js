@@ -1,6 +1,14 @@
 ﻿var proposalsManage = '';
 
 $(function() {
+	jQuery.fn.exists = function() {
+		return this.length > 0;
+	}
+
+	$.validator.setDefaults({
+		ignore : ""
+	});
+
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
 			UserName : GPMS.utils.GetUserName(),
@@ -45,9 +53,10 @@ $(function() {
 							searchTotalCostsTo : {
 								greaterthan : "#txtSearchTotalCostsFrom"
 							},
-							// projectTitle : {
-							// required : true
-							// },
+							projectTitle : {
+								required : true,
+								minlength : 10
+							},
 							projectType : {
 								required : true
 							},
@@ -222,9 +231,10 @@ $(function() {
 							searchTotalCostsTo : {
 								greaterthan : "Must be greater than From"
 							},
-							// projectTitle : {
-							// required : "Please enter project title."
-							// },
+							projectTitle : {
+								required : "Please enter project title.",
+								minlength : "Your project title must be at least 10 characters long"
+							},
 							projectType : {
 								required : "Please select your project type"
 							},
@@ -390,13 +400,12 @@ $(function() {
 							proposalNotes : {
 								required : "Please enter proposal notes"
 							}
-						},
-						ignore : ":hidden"
+						}
 					});
 
 	var rowIndex = 0;
 	var editFlag = 0;
-	var isUniqueProjectTitle = false;
+	var projectTitleIsUnique = false;
 	var signatureInfo = '';
 
 	proposalsManage = {
@@ -1734,10 +1743,10 @@ $(function() {
 					"option:selected").text();
 			var cloneRow = '<tr allowchange="true" allowsign="true"><td><span class="cssClassLabel" name ="fullname" role="PI" delegated="false">'
 					+ fullName
-					+ '</span></td><td><input title="PI\'s Signature" class="sfInputbox" placeholder="PI\'s Signature" type="text" required="true" name="'
+					+ '</span></td><td><input id="pi_signature" title="PI\'s Signature" class="sfInputbox" placeholder="PI\'s Signature" type="text" required="true" name="'
 					+ $('select[name="ddlName"]').eq(0).val()
 					+ '">'
-					+ '</td><td><input name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" readonly="true" onfocus="proposalsManage.BindCurrentDateTime(this);"></td></tr>';
+					+ '</td><td><input id="pi_signaturedate" name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" required="true" readonly="true" onfocus="proposalsManage.BindCurrentDateTime(this);"></td></tr>';
 			$(cloneRow).appendTo("#trSignPICOPI tbody");
 		},
 
@@ -1921,22 +1930,6 @@ $(function() {
 			return false;
 		},
 
-		CheckUniqueProjectTitle : function(proposalId, newProjectTitle) {
-			var proposalUniqueObj = {
-				ProposalID : proposalId,
-				NewProjectTitle : newProjectTitle
-			};
-			var gpmsCommonInfo = gpmsCommonObj();
-			this.config.url = this.config.baseURL + "CheckUniqueProjectTitle";
-			this.config.data = JSON2.stringify({
-				proposalUniqueObj : proposalUniqueObj,
-				gpmsCommonObj : gpmsCommonInfo
-			});
-			this.config.ajaxCallMode = 11;
-			this.ajaxCall(this.config);
-			return isUniqueProjectTitle;
-		},
-
 		BindAllSignatureForAProposal : function(proposalId) {
 			proposalsManage.config.url = proposalsManage.config.baseURL
 					+ "GetAllSignatureForAProposal";
@@ -1989,87 +1982,124 @@ $(function() {
 			}
 		},
 
-		SaveProposal : function(_proposalId, _flag) {
-			$('#iferror').hide();
-			if ($("#form1").valid()) {
-				var validateErrorMessage = '';
-
-				var newProjectTitle = $.trim($('#txtProjectTitle').val());
-				if (!newProjectTitle) {
-					validateErrorMessage += 'Please enter Project Title.';
-				} else if (!proposalsManage.CheckUniqueProjectTitle(
-						_proposalId, newProjectTitle)) {
-					validateErrorMessage += "'"
+		checkUniqueProjectTitle : function(proposal_id, projectTitle,
+				textBoxProjectTitle) {
+			var errors = '';
+			if (projectTitle.length >= 3) {
+				if (!proposalsManage.isUniqueProjectTitle(proposal_id,
+						projectTitle)) {
+					errors += "'"
 							+ getLocale(gpmsProposalsManagement,
 									"Please enter unique Project Title.")
 							+ " '"
-							+ newProjectTitle.trim()
+							+ projectTitle.trim()
 							+ "' "
 							+ getLocale(gpmsProposalsManagement,
-									"already exists.") + '<br/>';
-				}
+									"has already been taken.");
+					textBoxProjectTitle.addClass("error");
+					textBoxProjectTitle.siblings('.cssClassRight').hide();
+					if (textBoxProjectTitle.siblings('.error').exists()) {
+						textBoxProjectTitle.siblings('.error').html(errors);
+					} else {
+						$(
+								'<span id="txtProjectTitle-error" class="error" for="txtProjectTitle">'
+										+ errors + '</span>').insertAfter(
+								textBoxProjectTitle);
+					}
 
-				if (validateErrorMessage != '') {
-					$('#txtProjectTitle').removeClass("error");
+					textBoxProjectTitle.siblings('.error').show();
+					textBoxProjectTitle.focus();
 				} else {
-					$('#txtProjectTitle').addClass("error");
+					textBoxProjectTitle.removeClass("error");
+					textBoxProjectTitle.siblings('.cssClassRight').show();
+					textBoxProjectTitle.siblings('.error').hide();
+					textBoxProjectTitle.siblings('.error').html('');
 				}
+			}
+			return errors;
+		},
 
-				var investigatorInfo = '';
-				$('#dataTable > tbody  > tr')
-						.each(
-								function() {
-									$(this)
-											.find("select")
-											.each(
-													function() {
-														var optionsText = $(
-																this).val();
-														if (!optionsText
-																&& $(this)
-																		.prop(
-																				"name") != "ddlPositionTitle") {
-															validateErrorMessage = getLocale(
-																	gpmsProposalsManagement,
-																	"Please select all position details for this user.")
-																	+ "<br/>";
-															proposalsManage
-																	.CollapseAccordion();
-															proposalsManage
-																	.SelectFirstAccordion();
-															$(this).focus();
-														} else if (optionsText
-																&& $(this)
-																		.prop(
-																				"name") != "ddlPositionTitle") {
-															investigatorInfo += optionsText
-																	+ "!#!";
-														} else {
-															investigatorInfo += optionsText
-																	+ "!#!";
-														}
-													});
+		isUniqueProjectTitle : function(proposalId, newProjectTitle) {
+			var proposalUniqueObj = {
+				ProposalID : proposalId,
+				NewProjectTitle : newProjectTitle
+			};
+			var gpmsCommonInfo = gpmsCommonObj();
+			this.config.url = this.config.baseURL + "CheckUniqueProjectTitle";
+			this.config.data = JSON2.stringify({
+				proposalUniqueObj : proposalUniqueObj,
+				gpmsCommonObj : gpmsCommonInfo
+			});
+			this.config.ajaxCallMode = 11;
+			this.ajaxCall(this.config);
+			return projectTitleIsUnique;
+		},
 
-									investigatorInfo += $(this).find(
-											'input[name="txtPhoneNo"]').mask()
-											+ "#!#";
-								});
-
-				investigatorInfo = investigatorInfo.substring(0,
-						investigatorInfo.length - 3);
-
-				signatureInfo = '';
-
-				$(
-						'#trSignPICOPI > tbody  > tr, #trSignChair > tbody  > tr, #trSignDean > tbody  > tr, #trSignBusinessManager > tbody  > tr')
-						.each(function() {
-							proposalsManage.GetUserSignature($(this));
-						});
-
-				signatureInfo = signatureInfo.substring(0,
-						signatureInfo.length - 3);
+		SaveProposal : function(_proposalId, _flag) {
+			$('#iferror').hide();
+			if (validator.form()) {
+				var $projectTitle = $('#txtProjectTitle');
+				var projectTitle = $.trim($projectTitle.val());
+				var validateErrorMessage = proposalsManage
+						.checkUniqueProjectTitle(_proposalId, projectTitle,
+								$projectTitle);
 
 				if (!validateErrorMessage) {
+					var investigatorInfo = '';
+					$('#dataTable > tbody  > tr')
+							.each(
+									function() {
+										$(this)
+												.find("select")
+												.each(
+														function() {
+															var optionsText = $(
+																	this).val();
+															if (!optionsText
+																	&& $(this)
+																			.prop(
+																					"name") != "ddlPositionTitle") {
+																validateErrorMessage = getLocale(
+																		gpmsProposalsManagement,
+																		"Please select all position details for this user.")
+																		+ "<br/>";
+																proposalsManage
+																		.CollapseAccordion();
+																proposalsManage
+																		.SelectFirstAccordion();
+																$(this).focus();
+															} else if (optionsText
+																	&& $(this)
+																			.prop(
+																					"name") != "ddlPositionTitle") {
+																investigatorInfo += optionsText
+																		+ "!#!";
+															} else {
+																investigatorInfo += optionsText
+																		+ "!#!";
+															}
+														});
+
+										investigatorInfo += $(this).find(
+												'input[name="txtPhoneNo"]')
+												.mask()
+												+ "#!#";
+									});
+
+					investigatorInfo = investigatorInfo.substring(0,
+							investigatorInfo.length - 3);
+
+					signatureInfo = '';
+
+					$(
+							'#trSignPICOPI > tbody  > tr, #trSignChair > tbody  > tr, #trSignDean > tbody  > tr, #trSignBusinessManager > tbody  > tr')
+							.each(function() {
+								proposalsManage.GetUserSignature($(this));
+							});
+
+					signatureInfo = signatureInfo.substring(0,
+							signatureInfo.length - 3);
+
 					var projectInfo = {
 						ProjectTitle : $.trim($("#txtProjectTitle").val()),
 						ProjectType : $("#ddlProjectType").val(),
@@ -2559,7 +2589,7 @@ $(function() {
 			break;
 
 		case 11:// Unique Project Title Check
-			isUniqueProjectTitle = stringToBoolean(msg);
+			projectTitleIsUnique = stringToBoolean(msg);
 			break;
 
 		case 12:
@@ -2584,7 +2614,8 @@ $(function() {
 											&& item.signedDate != null) {
 										readOnly = 'readonly="true"';
 									} else if (item.signedDate == null) {
-										focusMethod = 'onfocus="proposalsManage.BindCurrentDateTime(this);"';
+										focusMethod = 'onfocus="proposalsManage.BindCurrentDateTime(this);" required="true"';
+										readOnly = 'required="true"';
 										allowedSign = true;
 									}
 								}
@@ -2606,7 +2637,7 @@ $(function() {
 										+ item.positionTitle
 										+ '\'s Signature" class="sfInputbox" placeholder="'
 										+ item.positionTitle
-										+ '\'s Signature" type="text" required="true" value="'
+										+ '\'s Signature" type="text" value="'
 										+ item.signature
 										+ '"'
 										+ ' name="'
@@ -2793,6 +2824,7 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
+						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtSearchReceivedOnTo").datepicker("option",
 									"minDate", selectedDate);
@@ -2800,11 +2832,17 @@ $(function() {
 					}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
-			$("#txtSearchReceivedOnTo").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			}).mask("9999-99-99", {
+			$("#txtSearchReceivedOnTo").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						maxDate : 0,
+						onSelect : function(selectedDate) {
+							$("#txtSearchReceivedOnFrom").datepicker("option",
+									"maxDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
@@ -2826,6 +2864,7 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
+						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtProjectPeriodTo").datepicker("option",
 									"minDate", selectedDate);
@@ -2833,11 +2872,17 @@ $(function() {
 					}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
-			$("#txtProjectPeriodTo").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			}).mask("9999-99-99", {
+			$("#txtProjectPeriodTo").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						maxDate : 0,
+						onSelect : function(selectedDate) {
+							$("#txtProjectPeriodFrom").datepicker("option",
+									"maxDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
 
@@ -2939,7 +2984,7 @@ $(function() {
 								proposal_ids = SageData.Get("gdvProposals").Arr
 										.join(',');
 
-								if (proposal_ids.length > 0) {
+								if (proposal_ids.length > 10) {
 									var properties = {
 										onComplete : function(e) {
 											proposalsManage
@@ -3024,57 +3069,20 @@ $(function() {
 			});
 
 			$('#txtProjectTitle').focus(function() {
-				// $(this).removeClass("error");
-				$(this).next('.cssClassRight').hide();
-				// $(this).siblings('.cssClassError').hide();
+				$(this).siblings('.cssClassRight').hide();
 			});
 
 			$('#txtProjectTitle').blur(
 					function() {
-						var errors = '';
 						var projectTitle = $.trim($(this).val());
 						var proposal_id = $('#btnSaveProposal').prop("name");
 						if (proposal_id == '') {
 							proposal_id = "0";
 						}
-						if (!projectTitle) {
-							errors += getLocale(gpmsProposalsManagement,
-									"Please enter project title.");
-						} else if (!proposalsManage.CheckUniqueProjectTitle(
-								proposal_id, projectTitle)) {
-							errors += getLocale(gpmsProposalsManagement,
-									"Please enter unique project title.")
-									+ " '"
-									+ projectTitle.trim()
-									+ "' "
-									+ getLocale(gpmsProposalsManagement,
-											"already exists.");
-						}
-
-						if (errors) {
-							$(this).addClass("error");
-							$(this).next('.cssClassRight').hide();
-							$(this).siblings('.cssClassError').html(errors);
-							$(this).siblings('.cssClassError').show();
-							return false;
-						} else {
-							$(this).removeClass("error");
-							$(this).next('.cssClassRight').show();
-							$(this).siblings('.cssClassError').hide();
-							$(this).siblings('.cssClassError').html('');
-						}
+						proposalsManage.checkUniqueProjectTitle(proposal_id,
+								projectTitle, $(this));
+						return false;
 					});
-
-			// $("td.required input, td select").focusout(function() {
-			// $tdParent = $(this).parent();
-			// if ($tdParent.find('.cssClassRequired')) {
-			// if ($(this).val() != '' && $(this).val() != '0') {
-			// $tdParent.find('.cssClassRequired').hide();
-			// } else {
-			// $tdParent.find('.cssClassRequired').show();
-			// }
-			// }
-			// });
 
 			$("input[type=button].AddOption").on(
 					"click",

@@ -419,8 +419,7 @@
 																	class="cssClassRight"> <img src=""
 																		class="cssClassSuccessImg sfLocale" height="13"
 																		width="18" alt="Right" title="Right" />
-																</span> <span class="cssClassError sfLocale">Project
-																		title must be unique with no spaces</span></td>
+																</span></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel" id="lblProjectType">Project
