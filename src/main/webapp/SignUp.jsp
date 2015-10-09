@@ -107,6 +107,8 @@
 
 <link type="text/css" rel="stylesheet"
 	href="css/Templates/jquery-ui.css" />
+<link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
+<link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
 
 <link media="screen" rel="stylesheet"
 	href="css/Templates/application.css" type="text/css" />
@@ -152,7 +154,7 @@
 						</label> <input class="form__input input" data-form-input=""
 							id="txtUserName" placeholder="User Name" name="username"
 							title="User name"><span style="display: none;"
-							class="right"> <img
+							class="cssClassRight"> <img
 							src="http://localhost:8181/GPMS//images/right.jpg"
 							class="cssClassSuccessImg sfLocale" alt="Right" title="Right"
 							height="13" width="18">
@@ -184,7 +186,10 @@
 								No spam, only relevant updates</div>
 						</label> <input class="form__input input" data-form-input=""
 							id="txtWorkEmail" placeholder="Work Email" name="workEmail"
-							title="Work Email">
+							title="Work Email"><span class="cssClassRight"> <img
+							src="" class="cssClassSuccessImg sfLocale" height="13" width="18"
+							alt="Right" title="Right" />
+						</span>
 					</div>
 					<div class="form__item">
 						<label class="form__label label" for="txtFirstName"> First

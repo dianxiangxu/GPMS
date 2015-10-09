@@ -410,7 +410,6 @@ $(function() {
 			switch (tblID) {
 			case "gdvUsers":
 				usersManage.ClearForm();
-
 				$('#txtPassword').rules("remove");
 				$('#txtConfirmPassword').rules("remove");
 
@@ -935,11 +934,11 @@ $(function() {
 		ClearForm : function() {
 			validator.resetForm();
 			// $('#form1').removeData('validator');
-			$('.class-text').removeClass('error').next('span').removeClass(
-					'error');
+			// $('.class-text').removeClass('error').next('span').removeClass(
+			// 'error');
 			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
-				rmErrorClass(item);
+				// rmErrorClass(item);
 				$(this).prop('checked', false);
 				$(this).val($(this).find('option').first().val());
 			});
@@ -951,12 +950,12 @@ $(function() {
 			$("#btnSaveUser").removeAttr("name");
 			$(".delbutton").hide();
 			$("#btnReset").show();
-			$(".required:enabled").each(function() {
-				if ($(this).parent("td").find("span.error").length == 1) {
-					$(this).removeClass("error").addClass("required");
-					$(this).parent("td").find("span.error").remove();
-				}
-			});
+			// $(".required:enabled").each(function() {
+			// if ($(this).parent("td").find("span.error").length == 1) {
+			// $(this).removeClass("error").addClass("required");
+			// $(this).parent("td").find("span.error").remove();
+			// }
+			// });
 			$('#txtUserName').removeAttr('disabled');
 
 			$(".AddOption").val("[+] Add");
@@ -975,7 +974,7 @@ $(function() {
 			usersManage.SetFirstTabActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
-			$('.error').hide();
+			$('.warning').hide();
 
 			$("#gdvUsersAuditLog").empty();
 			$("#gdvUsersAuditLog_Pagination").remove();
@@ -1078,7 +1077,7 @@ $(function() {
 
 		checkUniqueUserName : function(user_id, userName, textBoxUserName) {
 			var errors = '';
-			if (!textBoxUserName.hasClass('warning')) {
+			if (!textBoxUserName.hasClass('warning') && userName.length > 0) {
 				if (!usersManage.isUniqueUserName(user_id, userName)) {
 					errors += getLocale(gpmsUsersManagement,
 							"Please enter unique username.")
@@ -1089,11 +1088,11 @@ $(function() {
 									"has already been taken.");
 					textBoxUserName.addClass("error");
 					textBoxUserName.siblings('.cssClassRight').hide();
-					if (textBoxUserName.siblings('.warning').exists()) {
-						textBoxUserName.siblings('.warning').html(errors);
+					if (textBoxUserName.siblings('span.warning').exists()) {
+						textBoxUserName.siblings('span.warning').html(errors);
 					} else {
 						$(
-								'<span id="txtUserName-error" class="error" for="txtUserName">'
+								'<span id="txtUserName-error" class="warning" for="txtUserName">'
 										+ errors + '</span>').insertAfter(
 								textBoxUserName);
 					}
@@ -1129,10 +1128,10 @@ $(function() {
 		checkUniqueEmailAddress : function(user_id, email, textBoxEmail) {
 			var errors = '';
 			var txtEmail = $("#" + textBoxEmail);
-			if (!txtEmail.hasClass('warning')) {
+			if (!txtEmail.hasClass('warning') && email.length > 0) {
 				if (!usersManage.isUniqueEmail(user_id, email)) {
 					errors += getLocale(gpmsUsersManagement,
-							"Please enter unique personal email id.")
+							"Please enter unique email id.")
 							+ " '"
 							+ email.trim()
 							+ "' "
@@ -1140,12 +1139,12 @@ $(function() {
 									"has already been taken.");
 					txtEmail.addClass("error");
 					txtEmail.siblings('.cssClassRight').hide();
-					if (txtEmail.siblings('.warning').exists()) {
-						txtEmail.siblings('.warning').html(errors);
+					if (txtEmail.siblings('span.warning').exists()) {
+						txtEmail.siblings('span.warning').html(errors);
 					} else {
 						$(
 								'<span id="' + textBoxEmail
-										+ '-error" class="error" for="'
+										+ '-error" class="warning" for="'
 										+ textBoxEmail + '">' + errors
 										+ '</span>').insertAfter(txtEmail);
 					}
@@ -1901,6 +1900,7 @@ $(function() {
 					function() {
 						usersManage.ClearForm();
 						usersManage.addPwdValidateRules();
+
 						usersManage
 								.BindDepartmentDropDown($(
 										'select[name="ddlCollege"]').eq(0)

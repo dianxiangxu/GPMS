@@ -74,12 +74,9 @@
 	"Sorry! this user is already actived." : "Sorry! this user is already actived.",
 	"Sorry! this user is already deactived." : "Sorry! this user is already deactived.",
 
-	"Please enter a username." : "Please enter a username.",
 	"Please enter unique username." : "Please enter unique username.",
+	"Please enter unique email id." : "Please enter unique email id.",
 	"has already been taken." : "has already been taken.",
-	"Please enter work email id." : "Please enter work email id.",
-	"Please enter unique work email id." : "Please enter unique work email id.",
-	"Please enter unique personal email id." : "Please enter unique personal email id.",
 
 	// USED
 	"Successful Message" : "Successful Message",

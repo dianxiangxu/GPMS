@@ -77,6 +77,9 @@
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
 
 <script type="text/javascript"
+	src="js/FormValidation/jquery.validate.js"></script>
+
+<script type="text/javascript"
 	src="js/modules/Language/CoreJsLanguage.js"></script>
 
 <script type="text/javascript" src="js/core/json2.js"></script>
@@ -97,8 +100,6 @@
 
 <link media="screen" rel="stylesheet"
 	href="css/Templates/application.css" type="text/css" />
-<link href="css/Templates/style.css" media="screen" rel="stylesheet"
-	type="text/css" />
 
 </head>
 
@@ -130,9 +131,8 @@
 		<div
 			class="row__col row__col--xl-6 row__col--l-7 row__col--m-8 row__col--xl-centered row__col--l-centered row__col--m-centered">
 			<div class="account__box box">
-				<form enctype="multipart/form-data" accept-charset="UTF-8"
-					action="REST/users/login" class="form account__form"
-					id="login-form" method="post">
+				<form accept-charset="UTF-8" action="REST/users/login"
+					class="form account__form" id="form1" method="post">
 					<div style="margin: 0; padding: 0; display: inline">
 						<input name="utf8" type="hidden" value="✓"><input
 							name="authenticity_token" type="hidden"
@@ -150,13 +150,13 @@
 					</div>
 					<div class="form__item">
 						<label class="label form__label" for="user_email">Email/
-							Username</label> <input class="required form__input input"
-							id="user_email" name="user[email]" size="30" type="text">
+							Username</label> <input class="form__input input" id="user_email"
+							name="username" size="30" type="text">
 					</div>
 					<div class="form__item">
 						<label class="label form__label" for="user_password">Password</label>
-						<input class="required form__input input" id="user_password"
-							name="user[password]" size="30" type="password">
+						<input class="form__input input" id="user_password"
+							name="password" size="30" type="password">
 					</div>
 					<div class="form__item">
 						<input id="remember_me" name="remember_me" type="checkbox"

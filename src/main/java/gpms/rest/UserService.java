@@ -1405,8 +1405,8 @@ public class UserService {
 
 	@POST
 	@Path("/login")
-	public Response login(@FormParam("user[email]") String email,
-			@FormParam("user[password]") String password,
+	public Response login(@FormParam("username") String email,
+			@FormParam("password") String password,
 			@Context HttpServletRequest req) {
 		try {
 			List<UserProfile> userList = userProfileDAO.findAll();

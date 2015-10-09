@@ -5,9 +5,9 @@ $(function() {
 		return this.length > 0;
 	}
 
-	$.validator.setDefaults({
-		ignore : ""
-	});
+	// $.validator.setDefaults({
+	// ignore : ""
+	// });
 
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
