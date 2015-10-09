@@ -4,8 +4,10 @@ $(function() {
 		return this.length > 0;
 	}
 
+	// $.validator.unobtrusive.parse(#form1);
+
 	$.validator.setDefaults({
-		ignore : ""
+		ignore : []
 	});
 
 	var gpmsCommonObj = function() {
@@ -79,6 +81,7 @@ $(function() {
 							}
 						},
 						errorElement : "span",
+						errorClass : "warning",
 						messages : {
 							firstName : {
 								required : "Please enter your firstname",
@@ -979,7 +982,7 @@ $(function() {
 		},
 
 		saveUser : function(_userId, _flag) {
-			$('#iferror').hide();
+			// $('#iferror').hide();
 			// var $form = $("#form1");
 			// $form.valid();
 			if (validator.form()) {
@@ -1048,6 +1051,14 @@ $(function() {
 
 					return false;
 				}
+			} else {
+				FocusTabWithErrors("#container-7");
+
+				// var index = $("div.ui-tabs-panel").index(
+				// $("#"
+				// + $(".warning").closest(".ui-tabs-panel")
+				// .get(0).id));
+				// $("#container-7").tabs("option", "active", index);
 			}
 		},
 

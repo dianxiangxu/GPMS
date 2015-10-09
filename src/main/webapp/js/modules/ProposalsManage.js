@@ -55,7 +55,7 @@ $(function() {
 							},
 							projectTitle : {
 								required : true,
-								minlength : 10
+								minlength : 5
 							},
 							projectType : {
 								required : true
@@ -233,7 +233,7 @@ $(function() {
 							},
 							projectTitle : {
 								required : "Please enter project title.",
-								minlength : "Your project title must be at least 10 characters long"
+								minlength : "Your project title must be at least 5 characters long"
 							},
 							projectType : {
 								required : "Please select your project type"
@@ -1985,7 +1985,7 @@ $(function() {
 		checkUniqueProjectTitle : function(proposal_id, projectTitle,
 				textBoxProjectTitle) {
 			var errors = '';
-			if (projectTitle.length >= 3) {
+			if (projectTitle.length >= 5) {
 				if (!proposalsManage.isUniqueProjectTitle(proposal_id,
 						projectTitle)) {
 					errors += "'"

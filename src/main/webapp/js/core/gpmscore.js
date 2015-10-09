@@ -495,3 +495,21 @@ stringToBoolean = function(b) {
 		return Boolean(b);
 	}
 }
+
+function FocusTabWithErrors(tabPanelName) {
+	$(tabPanelName).find('div.ui-tabs-panel').each(
+			function() {
+				$("#container-7").children('div.ui-tabs-panel').each(
+						function(index) {
+							if ($(this).find("span.warning").text() != "") {
+								console.log(index + ":::"
+										+ $(this).find("span.warning").text());
+								$("#container-7").tabs("option", "active",
+										index);
+								return false;
+								// e.preventDefault();
+							}
+						});
+				return false;
+			});
+}
