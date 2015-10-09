@@ -894,6 +894,22 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		profileQuery.and(
 				profileQuery.criteria("_id").notEqual(id),
+				profileQuery.or(
+						profileQuery.criteria("work email").hasThisOne(
+								newEmail.toString()),
+						profileQuery.criteria("personal email").hasThisOne(
+								newEmail.toString())));
+		return profileQuery.get();
+	}
+
+	public UserProfile findAnyUserWithSameEmail(String newEmail) {
+		Datastore ds = getDatastore();
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+
+		// Pattern pattern = Pattern.compile("^" + newEmail + "$",
+		// Pattern.CASE_INSENSITIVE);
+		profileQuery.or(
 				profileQuery.criteria("work email").hasThisOne(
 						newEmail.toString()),
 				profileQuery.criteria("personal email").hasThisOne(
@@ -1060,4 +1076,5 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 		return userPositionTitles;
 	}
+
 }

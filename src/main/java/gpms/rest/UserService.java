@@ -843,10 +843,15 @@ public class UserService {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
 
-		ObjectId id = new ObjectId(userID);
-
-		UserProfile userProfile = userProfileDAO.findNextUserWithSameEmail(id,
-				newEmail);
+		ObjectId id = new ObjectId();
+		UserProfile userProfile = new UserProfile();
+		if (!userID.equals("0")) {
+			id = new ObjectId(userID);
+			userProfile = userProfileDAO
+					.findNextUserWithSameEmail(id, newEmail);
+		} else {
+			userProfile = userProfileDAO.findAnyUserWithSameEmail(newEmail);
+		}
 
 		if (userProfile != null) {
 			response = mapper.writerWithDefaultPrettyPrinter()

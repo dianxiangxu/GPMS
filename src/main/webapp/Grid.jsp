@@ -504,10 +504,9 @@
 																		<td class="cssClassTableRightCol">
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
-																				<input title="Work Email" type="email"
-																					id="txtWorkEmail" class="sfInputbox"
-																					style="width: 160px;" name="workEmail"
-																					placeholder="Work Email" /> <span
+																				<input type="email" id="txtWorkEmail"
+																					class="sfInputbox" style="width: 160px;"
+																					name="workEmail" placeholder="Work Email" /> <span
 																					class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" alt="Right" title="Right" />
@@ -519,10 +518,9 @@
 																		<td class="cssClassTableRightCol">
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
-																				<input title="Personal Email" type="email"
-																					class="sfInputbox" style="width: 160px;"
-																					id="txtPersonalEmail" name="personalEmail"
-																					placeholder="Personal Email" /><span
+																				<input type="email" class="sfInputbox"
+																					style="width: 160px;" id="txtPersonalEmail"
+																					name="personalEmail" placeholder="Personal Email" /><span
 																					class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" alt="Right" title="Right" />

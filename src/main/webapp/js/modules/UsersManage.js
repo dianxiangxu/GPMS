@@ -5,10 +5,13 @@ $(function() {
 	}
 
 	// $.validator.unobtrusive.parse(#form1);
-
 	$.validator.setDefaults({
 		ignore : []
 	});
+
+	$.validator.addMethod('notequalto', function(value, element, param) {
+		return value != $(param).val();
+	}, 'Both emails looks same!');
 
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
@@ -59,10 +62,12 @@ $(function() {
 							},
 							workEmail : {
 								required : true,
-								email : true
+								email : true,
+								notequalto : '#txtPersonalEmail'
 							},
 							personalEmail : {
-								email : true
+								email : true,
+								notequalto : '#txtWorkEmail'
 							},
 							username : {
 								required : true,
@@ -136,8 +141,8 @@ $(function() {
 							confirm_password : {
 								required : "Please confirm your password",
 								minlength : "Your password must be between 6 and 15 characters",
-								equalTo : "Please enter the same password as above",
-								maxlength : "Your password must be between 6 and 15 characters"
+								maxlength : "Your password must be between 6 and 15 characters",
+								equalTo : "Please enter the same password as above"
 							}
 						}
 					});
@@ -145,7 +150,7 @@ $(function() {
 	var rowIndex = 0;
 	var editFlag = 0;
 	var userNameIsUnique = false;
-	var isUniqueEmail = false;
+	var emailIsUnique = false;
 
 	usersManage = {
 		config : {
@@ -405,6 +410,10 @@ $(function() {
 			switch (tblID) {
 			case "gdvUsers":
 				usersManage.ClearForm();
+
+				$('#txtPassword').rules("remove");
+				$('#txtConfirmPassword').rules("remove");
+
 				$('#lblFormHeading').html(
 						getLocale(gpmsUsersManagement,
 								'Edit User Details for: ')
@@ -925,6 +934,7 @@ $(function() {
 
 		ClearForm : function() {
 			validator.resetForm();
+			// $('#form1').removeData('validator');
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
 			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
@@ -991,6 +1001,16 @@ $(function() {
 				var validateErrorMessage = usersManage.checkUniqueUserName(
 						_userId, userName, $username);
 
+				var $workEmail = $("#txtWorkEmail");
+				var workEmail = $.trim($workEmail.val());
+				validateErrorMessage += usersManage.checkUniqueEmailAddress(
+						_userId, workEmail, "txtWorkEmail");
+
+				var $personalEmail = $("#txtPersonalEmail");
+				var personalEmail = $.trim($personalEmail.val());
+				validateErrorMessage += usersManage.checkUniqueEmailAddress(
+						_userId, personalEmail, "txtPersonalEmail");
+
 				if (!validateErrorMessage) {
 					var _saveOptions = '';
 					$("#dataTable")
@@ -1052,19 +1072,13 @@ $(function() {
 					return false;
 				}
 			} else {
-				FocusTabWithErrors("#container-7");
-
-				// var index = $("div.ui-tabs-panel").index(
-				// $("#"
-				// + $(".warning").closest(".ui-tabs-panel")
-				// .get(0).id));
-				// $("#container-7").tabs("option", "active", index);
+				usersManage.focusTabWithErrors("#container-7");
 			}
 		},
 
 		checkUniqueUserName : function(user_id, userName, textBoxUserName) {
 			var errors = '';
-			if (userName.length >= 3) {
+			if (!textBoxUserName.hasClass('warning')) {
 				if (!usersManage.isUniqueUserName(user_id, userName)) {
 					errors += getLocale(gpmsUsersManagement,
 							"Please enter unique username.")
@@ -1075,8 +1089,8 @@ $(function() {
 									"has already been taken.");
 					textBoxUserName.addClass("error");
 					textBoxUserName.siblings('.cssClassRight').hide();
-					if (textBoxUserName.siblings('.error').exists()) {
-						textBoxUserName.siblings('.error').html(errors);
+					if (textBoxUserName.siblings('.warning').exists()) {
+						textBoxUserName.siblings('.warning').html(errors);
 					} else {
 						$(
 								'<span id="txtUserName-error" class="error" for="txtUserName">'
@@ -1084,13 +1098,13 @@ $(function() {
 								textBoxUserName);
 					}
 
-					textBoxUserName.siblings('.error').show();
+					textBoxUserName.siblings('.warning').show();
 					textBoxUserName.focus();
 				} else {
 					textBoxUserName.removeClass("error");
 					textBoxUserName.siblings('.cssClassRight').show();
-					textBoxUserName.siblings('.error').hide();
-					textBoxUserName.siblings('.error').html('');
+					textBoxUserName.siblings('.warning').hide();
+					textBoxUserName.siblings('.warning').html('');
 				}
 			}
 			return errors;
@@ -1112,7 +1126,43 @@ $(function() {
 			return userNameIsUnique;
 		},
 
-		IsUniqueEmail : function(userId, newEmail) {
+		checkUniqueEmailAddress : function(user_id, email, textBoxEmail) {
+			var errors = '';
+			var txtEmail = $("#" + textBoxEmail);
+			if (!txtEmail.hasClass('warning')) {
+				if (!usersManage.isUniqueEmail(user_id, email)) {
+					errors += getLocale(gpmsUsersManagement,
+							"Please enter unique personal email id.")
+							+ " '"
+							+ email.trim()
+							+ "' "
+							+ getLocale(gpmsUsersManagement,
+									"has already been taken.");
+					txtEmail.addClass("error");
+					txtEmail.siblings('.cssClassRight').hide();
+					if (txtEmail.siblings('.warning').exists()) {
+						txtEmail.siblings('.warning').html(errors);
+					} else {
+						$(
+								'<span id="' + textBoxEmail
+										+ '-error" class="error" for="'
+										+ textBoxEmail + '">' + errors
+										+ '</span>').insertAfter(txtEmail);
+					}
+
+					txtEmail.siblings('.warning').show();
+					txtEmail.focus();
+				} else {
+					txtEmail.removeClass("error");
+					txtEmail.siblings('.cssClassRight').show();
+					txtEmail.siblings('.warning').hide();
+					txtEmail.siblings('.warning').html('');
+				}
+			}
+			return errors;
+		},
+
+		isUniqueEmail : function(userId, newEmail) {
 			var userUniqueObj = {
 				UserID : userId,
 				NewEmail : newEmail
@@ -1125,7 +1175,48 @@ $(function() {
 			});
 			this.config.ajaxCallMode = 17;
 			this.ajaxCall(this.config);
-			return isUniqueEmail;
+			return emailIsUnique;
+		},
+
+		addPwdValidateRules : function() {
+			$("#txtPassword")
+					.rules(
+							"add",
+							{
+								required : true,
+								minlength : 6,
+								maxlength : 15,
+								messages : {
+									required : "Please provide a password",
+									minlength : "Your password must be between 6 and 15 characters",
+									maxlength : "Your password must be between 6 and 15 characters"
+								}
+							});
+			$("#txtConfirmPassword")
+					.rules(
+							"add",
+							{
+								required : true,
+								minlength : 6,
+								maxlength : 15,
+								equalTo : "#txtPassword",
+								messages : {
+									required : "Please confirm your password",
+									minlength : "Your password must be between 6 and 15 characters",
+									maxlength : "Your password must be between 6 and 15 characters",
+									equalTo : "Please enter the same password as above"
+								}
+							});
+		},
+
+		focusTabWithErrors : function(tabPanelName) {
+			$(tabPanelName).children('div.ui-tabs-panel:not("#fragment-4")')
+					.each(function(index) {
+						if ($(this).find("span.warning").text() != "") {
+							$(tabPanelName).tabs("option", "active", index);
+							return false;
+						}
+					});
 		},
 
 		AddUserInfo : function(info) {
@@ -1469,7 +1560,7 @@ $(function() {
 				break;
 
 			case 17:
-				isUniqueEmail = stringToBoolean(msg);
+				emailIsUnique = stringToBoolean(msg);
 				break;
 
 			case 18:
@@ -1809,6 +1900,7 @@ $(function() {
 					"click",
 					function() {
 						usersManage.ClearForm();
+						usersManage.addPwdValidateRules();
 						usersManage
 								.BindDepartmentDropDown($(
 										'select[name="ddlCollege"]').eq(0)
@@ -1845,6 +1937,11 @@ $(function() {
 				}
 			});
 
+			$('#txtPassword').dblclick(function() {
+				$(this).val('');
+				usersManage.addPwdValidateRules();
+			});
+
 			$('#txtUserName').focus(function() {
 				$(this).siblings('.cssClassRight').hide();
 			});
@@ -1859,119 +1956,25 @@ $(function() {
 				return false;
 			});
 
-			// $('#txtWorkEmail').blur(
-			// function() {
-			// var errors = '';
-			// var email = $(this).val();
-			// var user_id = $('#btnSaveUser').prop("name");
-			// if (user_id == '') {
-			// user_id = 0;
-			// }
-			//
-			// if ($.trim(email) == "") {
-			// errors += getLocale(gpmsUsersManagement,
-			// "Please enter work email id.");
-			// } else if (!usersManage.IsUniqueEmail(user_id, email)) {
-			// errors += getLocale(gpmsUsersManagement,
-			// "Please enter unique work email id.")
-			// + " '"
-			// + email.trim()
-			// + "' "
-			// + getLocale(gpmsUsersManagement,
-			// "has already been taken.") + '<br/>';
-			// }
-			//
-			// if (errors) {
-			// $(this).next('.cssClassRight').hide();
-			// $(this).siblings('.error').show();
-			// $(this).siblings(".error").parent('div')
-			// .addClass("diverror");
-			// $(this).siblings('.error').prevAll(
-			// "input:first").addClass("error");
-			// $(this).siblings('.error').html(errors);
-			// return false;
-			// } else {
-			// $(this).parent("td").find("span.error").hide();
-			// $(this).next('.cssClassRight').show();
-			// $(this).siblings('.error').hide();
-			// $(this).siblings(".error").parent('div')
-			// .removeClass("diverror");
-			// $(this).siblings('.error').prevAll(
-			// "input:first").removeClass("error");
-			// }
-			// });
-			//
-			// $('#txtPersonalEmail')
-			// .blur(
-			// function() {
-			// var email = $(this).val();
-			// if ($.trim(email) != "") {
-			// var errors = '';
-			// var user_id = $('#btnSaveUser')
-			// .prop("name");
-			// if (user_id == '') {
-			// user_id = 0;
-			// }
-			//
-			// if (!usersManage.IsUniqueEmail(user_id,
-			// email)) {
-			// errors += getLocale(
-			// gpmsUsersManagement,
-			// "Please enter unique personal email id.")
-			// + " '"
-			// + email.trim()
-			// + "' "
-			// + getLocale(
-			// gpmsUsersManagement,
-			// "has already been taken.")
-			// + '<br/>';
-			// }
-			//
-			// if (errors) {
-			// $(this).next('.cssClassRight').hide();
-			// $(this).siblings('.error')
-			// .show();
-			// $(this).siblings(".error")
-			// .parent('div').addClass(
-			// "diverror");
-			// $(this).siblings('.error')
-			// .prevAll("input:first")
-			// .addClass("error");
-			// $(this).siblings('.error')
-			// .html(errors);
-			// return false;
-			// } else {
-			// $(this).parent("td").find("span.error")
-			// .hide();
-			// $(this).next('.cssClassRight').show();
-			// $(this).siblings('.error')
-			// .hide();
-			// $(this).siblings(".error")
-			// .parent('div').removeClass(
-			// "diverror");
-			// $(this).siblings('.error')
-			// .prevAll("input:first")
-			// .removeClass("error");
-			// }
-			// }
-			// });
+			$('#txtWorkEmail, #txtPersonalEmail').focus(function() {
+				$(this).siblings('.cssClassRight').hide();
+			});
+
+			$('#txtWorkEmail, #txtPersonalEmail').blur(function() {
+				var email = $.trim($(this).val());
+				var user_id = $('#btnSaveUser').prop("name");
+				if (user_id == '') {
+					user_id = "0";
+				}
+				usersManage.checkUniqueEmailAddress(user_id, email, this.id);
+				return false;
+			});
 
 			$(".delbutton").click(function() {
 				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
 				var user_id = $(this).prop("id");
 				usersManage.DeleteUserById(user_id);
 			});
-
-			// $("td.required input, td select").focusout(function() {
-			// $tdParent = $(this).parent();
-			// if ($tdParent.find('.cssClassRequired')) {
-			// if ($(this).val() != '' && $(this).val() != '0') {
-			// $tdParent.find('.cssClassRequired').hide();
-			// } else {
-			// $tdParent.find('.cssClassRequired').show();
-			// }
-			// }
-			// });
 
 			$("input[type=button].AddOption")
 					.on(
