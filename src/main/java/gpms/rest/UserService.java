@@ -1416,7 +1416,10 @@ public class UserService {
 					if (user.getUserAccount().getUserName().equals(email)
 							|| user.getWorkEmails().contains(email)) {
 						if (PasswordHash.validatePassword(password, user
-								.getUserAccount().getPassword())) {
+								.getUserAccount().getPassword())
+								&& !user.isDeleted()
+								&& user.getUserAccount().isActive()
+								&& !user.getUserAccount().isDeleted()) {
 							isFound = true;
 							setMySessionID(req, user.getId().toString());
 							java.net.URI location = new java.net.URI(

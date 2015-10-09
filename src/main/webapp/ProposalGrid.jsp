@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "56143b21af6e0425809b737a";
+	var userProfileId = "5617fc9caf6e0424c48fc13f";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -737,10 +737,10 @@
 																		<option value="2">Pending</option>
 																</select></td>
 
-																<td class="cssClassTableRightCol" id="tdIRBtxt"><input
-																	title="IRB #" type="text" class="sfTextBoxSmall"
-																	id="txtIRB" name="IRB" placeholder="IRB #" /> <span
-																	class="cssClassRequired">*</span></td>
+																<td class="cssClassTableRightCol" id="tdIRBtxt"><span
+																	class="cssClassRequired">*</span> <input title="IRB #"
+																	type="text" class="sfTextBoxSmall" id="txtIRB"
+																	name="IRB" placeholder="IRB #" /></td>
 															</tr>
 
 															<tr>
@@ -770,10 +770,10 @@
 																		<option value="2">Pending</option>
 																</select></td>
 
-																<td class="cssClassTableRightCol" id="tdIACUCtxt"><input
+																<td class="cssClassTableRightCol" id="tdIACUCtxt"><span
+																	class="cssClassRequired">*</span> <input
 																	title="IACUC #" type="text" class="sfTextBoxSmall"
-																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /> <span
-																	class="cssClassRequired">*</span></td>
+																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /></td>
 															</tr>
 
 															<tr>
@@ -803,10 +803,10 @@
 																		<option value="2">Pending</option>
 																</select></td>
 
-																<td class="cssClassTableRightCol" id="tdIBCtxt"><input
-																	title="IBC #" type="text" class="sfTextBoxSmall"
-																	id="txtIBC" name="IBC" placeholder="IBC #" /> <span
-																	class="cssClassRequired">*</span></td>
+																<td class="cssClassTableRightCol" id="tdIBCtxt"><span
+																	class="cssClassRequired">*</span> <input title="IBC #"
+																	type="text" class="sfTextBoxSmall" id="txtIBC"
+																	name="IBC" placeholder="IBC #" /></td>
 															</tr>
 
 															<tr>

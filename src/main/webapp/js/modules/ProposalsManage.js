@@ -1985,7 +1985,8 @@ $(function() {
 		checkUniqueProjectTitle : function(proposal_id, projectTitle,
 				textBoxProjectTitle) {
 			var errors = '';
-			if (projectTitle.length >= 5) {
+			if (!textBoxProjectTitle.hasClass('error')
+					&& projectTitle.length > 0) {
 				if (!proposalsManage.isUniqueProjectTitle(proposal_id,
 						projectTitle)) {
 					errors += "'"
