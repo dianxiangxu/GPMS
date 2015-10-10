@@ -53,13 +53,6 @@ public class AuditLogInfo implements Comparable<AuditLogInfo> {
 	}
 
 	@Override
-	public String toString() {
-		return "AuditLogInfo [rowTotal=" + rowTotal + ", userName=" + userName
-				+ ", userFullName=" + userFullName + ", action=" + action
-				+ ", activityDate=" + activityDate + "]";
-	}
-
-	@Override
 	public int compareTo(AuditLogInfo o) {
 		if (getActivityDate() == null || o.getActivityDate() == null)
 			return 0;

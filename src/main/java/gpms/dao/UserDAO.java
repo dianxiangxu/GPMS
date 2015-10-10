@@ -1,6 +1,5 @@
 package gpms.dao;
 
-
 import java.net.UnknownHostException;
 import java.util.List;
 
@@ -13,13 +12,12 @@ import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoException;
 
 public class UserDAO {
-	private static final String DBNAME = "GPMS";
+	private static final String DBNAME = "db_gpms";
 	public static final String COLLECTION_NAME = "user";
 
-	private static Morphia morphia;	
+	private static Morphia morphia;
 	private static Datastore ds;
-	
-	
+
 	private static Morphia getMorphia() throws UnknownHostException,
 			MongoException {
 		if (morphia == null) {
@@ -27,11 +25,12 @@ public class UserDAO {
 		}
 		return morphia;
 	}
-	
+
 	private static Datastore getDatastore() throws UnknownHostException,
 			MongoException {
 		if (ds == null) {
-			ds = getMorphia().createDatastore(MongoDBConnector.getMongo(), DBNAME);
+			ds = getMorphia().createDatastore(MongoDBConnector.getMongo(),
+					DBNAME);
 		}
 		return ds;
 	}
@@ -40,7 +39,8 @@ public class UserDAO {
 			throws UnknownHostException {
 		Morphia morphia = getMorphia();
 		morphia.map(UserAccount.class);
-		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(), DBNAME);
+		Datastore ds = morphia.createDatastore(MongoDBConnector.getMongo(),
+				DBNAME);
 		ds.save(userAccount);
 	}
 
@@ -49,21 +49,21 @@ public class UserDAO {
 		ds = getDatastore();
 		return ds.createQuery(UserAccount.class).asList();
 	}
-	
-	public void setUserName(UserAccount account, String newName) throws UnknownHostException, MongoException
-	{
+
+	public void setUserName(UserAccount account, String newName)
+			throws UnknownHostException, MongoException {
 		ds = getDatastore();
-		account.setUserName(newName);	
+		account.setUserName(newName);
 		ds.save(account);
 	}
-	
-	public void setPassword(UserAccount account, String password) throws UnknownHostException, MongoException
-	{
+
+	public void setPassword(UserAccount account, String password)
+			throws UnknownHostException, MongoException {
 		ds = getDatastore();
 		account.setPassword(password);
 		ds.save(account);
 	}
-	
+
 	// public List<AttributesBasicInfo> GetAttributesList(int offset, int limit,
 	// AttributeBindInfo attrbuteBindObj, AspxCommonInfo aspxCommonObj)
 	// {
@@ -79,8 +79,5 @@ public class UserDAO {
 	// throw e;
 	// }
 	// }
-	
-	
-	
-	
+
 }

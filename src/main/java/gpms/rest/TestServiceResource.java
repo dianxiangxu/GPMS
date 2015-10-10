@@ -23,7 +23,7 @@ public class TestServiceResource {
 	MongoClient mongoClient = MongoDBConnector.getMongo();
 	Morphia morphia = new Morphia();
 
-	String dbName = "GPMS";
+	String dbName = "db_gpms";
 	UserAccountDAO userAccountDAO = new UserAccountDAO(mongoClient, morphia,
 			dbName);
 	UserProfileDAO userProfileDAO = new UserProfileDAO(mongoClient, morphia,

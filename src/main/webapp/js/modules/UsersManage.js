@@ -1067,8 +1067,6 @@ $(function() {
 						userInfo.Password = password;
 					}
 					usersManage.AddUserInfo(userInfo);
-
-					return false;
 				}
 			} else {
 				usersManage.focusTabWithErrors("#container-7");
@@ -1737,13 +1735,13 @@ $(function() {
 
 			case 18:
 				if (editFlag > 0) {
-					csscody.info("<h2>"
+					csscody.error("<h2>"
 							+ getLocale(gpmsUsersManagement, 'Error Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsUsersManagement,
 									'Failed to update user!') + "</p>");
 				} else {
-					csscody.info("<h2>"
+					csscody.error("<h2>"
 							+ getLocale(gpmsUsersManagement, 'Error Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsUsersManagement,
@@ -1926,7 +1924,8 @@ $(function() {
 										.val(), false);
 					});
 
-			$('#btnSaveUser').click(function() {
+			$('#btnSaveUser').click(function(e) {
+				$(this).disableWith('Saving...');
 				var user_id = $(this).prop("name");
 				if (user_id != '') {
 					editFlag = user_id;
@@ -1935,6 +1934,9 @@ $(function() {
 					editFlag = 0;
 					usersManage.saveUser("0", true);
 				}
+				$(this).enable();
+				e.preventDefault();
+				return false;
 			});
 
 			$('#txtPassword').dblclick(function() {
@@ -1942,11 +1944,11 @@ $(function() {
 				usersManage.addPwdValidateRules();
 			});
 
-			$('#txtUserName').focus(function() {
+			$('#txtUserName').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
 			});
 
-			$('#txtUserName').blur(function() {
+			$('#txtUserName').on("blur", function() {
 				var userName = $.trim($(this).val());
 				var user_id = $('#btnSaveUser').prop("name");
 				if (user_id == '') {
@@ -1956,11 +1958,11 @@ $(function() {
 				return false;
 			});
 
-			$('#txtWorkEmail, #txtPersonalEmail').focus(function() {
+			$('#txtWorkEmail, #txtPersonalEmail').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
 			});
 
-			$('#txtWorkEmail, #txtPersonalEmail').blur(function() {
+			$('#txtWorkEmail, #txtPersonalEmail').on("blur", function() {
 				var email = $.trim($(this).val());
 				var user_id = $('#btnSaveUser').prop("name");
 				if (user_id == '') {

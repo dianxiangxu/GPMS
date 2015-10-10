@@ -1,5 +1,11 @@
 var logIn = '';
 $(function() {
+
+	var userSession = "<%=session.getAttribute('userid')%>";
+	if (userSession != null) {
+		window.location = 'Home.jsp';
+	}
+
 	var validator = $('#form1')
 			.validate(
 					{

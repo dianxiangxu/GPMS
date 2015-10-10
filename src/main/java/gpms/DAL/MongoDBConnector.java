@@ -19,6 +19,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 
 /*
@@ -31,7 +32,7 @@ public class MongoDBConnector {
 	private static MongoDBConnector instance = new MongoDBConnector();
 
 	private Datastore ds = null;
-	public static final String DB_NAME = "GPMS";
+	public static final String DB_NAME = "db_gpms";
 
 	private static final String host = "localhost";
 	private static final int port = 27017;
@@ -72,9 +73,15 @@ public class MongoDBConnector {
 				// MongoURI("mongodb://localhost/mjormIsFun"));
 				// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
 				// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+
 				mongo = new MongoClient(host, port);
 				logger.debug("New Mongo created with [" + host + "] and ["
 						+ port + "]");
+
+				// MongoClientURI uri = new MongoClientURI(
+				// "mongodb://milstein:milstein@ds042888.mongolab.com:42888/db_gpms");
+				// mongo = new MongoClient(uri);
+
 			} catch (MongoException e) {
 				logger.error(e.getMessage());
 			}

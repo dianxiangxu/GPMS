@@ -42,7 +42,7 @@ public class RegistrationService
 	private final static String queueName = "processing-queue";
 	private MongoClient mongoClient= MongoDBConnector.getMongo();
 	private Morphia morphia = new Morphia();
-	private String dbName = "GPMS";
+	private String dbName = "db_gpms";
 	private UserAccountDAO userAccountDAO;
 	private UserAccount newUserAccount;
 	private UserProfileDAO userProfileDAO;

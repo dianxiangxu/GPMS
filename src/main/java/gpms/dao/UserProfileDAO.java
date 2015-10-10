@@ -38,7 +38,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserProfileDAO extends BasicDAO<UserProfile, String> {
-	private static final String DBNAME = "GPMS";
+	private static final String DBNAME = "db_gpms";
 	public static final String COLLECTION_NAME = "userprofile";
 
 	private static Morphia morphia;
@@ -193,6 +193,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setActive(userProfile.getUserAccount().isActive());
 			users.add(user);
 		}
+		Collections.sort(users);
 		return users;
 	}
 

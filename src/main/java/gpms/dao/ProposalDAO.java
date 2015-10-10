@@ -43,7 +43,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class ProposalDAO extends BasicDAO<Proposal, String> {
-	private static final String DBNAME = "GPMS";
+	private static final String DBNAME = "db_gpms";
 	public static final String COLLECTION_NAME = "proposal";
 
 	private static Morphia morphia;
@@ -396,6 +396,7 @@ public class ProposalDAO extends BasicDAO<Proposal, String> {
 
 			proposals.add(proposal);
 		}
+		Collections.sort(proposals);
 		return proposals;
 	}
 

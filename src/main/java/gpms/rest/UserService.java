@@ -60,7 +60,7 @@ import com.mongodb.MongoClient;
 public class UserService {
 	MongoClient mongoClient = null;
 	Morphia morphia = null;
-	String dbName = "GPMS";
+	String dbName = "db_gpms";
 	UserAccountDAO userAccountDAO = null;
 	UserProfileDAO userProfileDAO = null;
 	ProposalDAO proposalDAO = null;

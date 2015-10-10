@@ -2,7 +2,7 @@ package gpms.model;
 
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo implements Comparable<UserInfo> {
 	private int rowTotal;
 	private String id = new String();
 	private String userName = new String();
@@ -123,5 +123,12 @@ public class UserInfo {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	@Override
+	public int compareTo(UserInfo o) {
+		if (getLastAudited() == null || o.getLastAudited() == null)
+			return 0;
+		return o.getLastAudited().compareTo(getLastAudited()); // Descending
 	}
 }

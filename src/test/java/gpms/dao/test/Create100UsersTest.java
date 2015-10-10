@@ -26,11 +26,11 @@ public class Create100UsersTest {
 
 	MongoClient mongoClient;
 	Morphia morphia;
-	String dbName = "GPMS";
+	String dbName = "db_gpms";
 	UserAccountDAO newUserAccountDAO;
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
-	final int MAXIMUM_PROFILES = 10; // Adjust this to make more or less
+	final int MAXIMUM_PROFILES = 1; // Adjust this to make more or less
 										// profiles
 										// with the generator.
 

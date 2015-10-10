@@ -55,7 +55,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560ed83daf6e040da04e60f2";
+	var userProfileId = "56175791a1602426088a3b84";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -75,6 +75,8 @@
 <script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
+
+<script type="text/javascript" src="js/core/jquery.disable_with.js"></script>
 
 <script type="text/javascript"
 	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>

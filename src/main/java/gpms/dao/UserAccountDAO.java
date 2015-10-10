@@ -18,7 +18,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserAccountDAO extends BasicDAO<UserAccount, String> {
-	private static final String DBNAME = "GPMS";
+	private static final String DBNAME = "db_gpms";
 	public static final String COLLECTION_NAME = "useraccount";
 	private AuditLog audit;
 	private static Morphia morphia;

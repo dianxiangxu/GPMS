@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProposalInfo {
+public class ProposalInfo implements Comparable<ProposalInfo> {
 	private int rowTotal;
 	private String id = new String();
 
@@ -240,6 +240,13 @@ public class ProposalInfo {
 
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	@Override
+	public int compareTo(ProposalInfo o) {
+		if (getLastAudited() == null || o.getLastAudited() == null)
+			return 0;
+		return o.getLastAudited().compareTo(getLastAudited()); // Descending
 	}
 
 }

@@ -309,7 +309,6 @@ $(function() {
 						MobileNumber : $('#txtMobileNumber').mask()
 					};
 					signUp.AddUserInfo(userInfo);
-					return false;
 				}
 			}
 		},
@@ -350,12 +349,21 @@ $(function() {
 				emailIsUnique = stringToBoolean(msg);
 				break;
 			case 3:
-				csscody.info("<h2>"
-						+ getLocale(gpmsSignUp, 'Successful Message')
-						+ "</h2><p>"
-						+ getLocale(gpmsSignUp,
-								'User has been saved successfully.') + "</p>");
-				break;
+				csscody
+						.info("<h2>"
+								+ getLocale(gpmsSignUp,
+										'Great! You are signed up.')
+								+ "</h2><p>"
+								+ "<b>"
+								+ $("#txtWorkEmail").val()
+								+ "</b>"
+								+ "</br>"
+								+ getLocale(
+										gpmsSignUp,
+										'Now, go check your email.<br/>The email contains a confirmation link for account activation.')
+								+ "</p>");
+
+				signUp.ClearForm();
 			}
 		},
 
@@ -380,24 +388,14 @@ $(function() {
 								+ "</p>");
 				break;
 			case 3:
-				csscody
-						.info("<h2>"
-								+ getLocale(gpmsSignUp,
-										'Great! You are signed up.')
-								+ "</h2><p>"
-								+ "<b>"
-								+ $("#txtWorkEmail").val()
-								+ "</b>"
-								+ "</br>"
-								+ getLocale(
-										gpmsSignUp,
-										'Now, go check your email.<br/>The email contains a confirmation link for account activation.')
-								+ "</p>");
-
-				signUp.ClearForm();
+				csscody.error("<h2>" + getLocale(gpmsSignUp, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsSignUp, 'Failed to save user!')
+						+ "</p>");
 				break;
-			}
-		},
+			break;
+		}
+	},
 
 		init : function(config) {
 			signUp.LoadStaticImage();
@@ -416,12 +414,16 @@ $(function() {
 				placeholder : "yyyy-mm-dd"
 			});
 
-			$("#btnSignUp").on("click", function() {
+			$("#btnSignUp").on("click", function(e) {
+				$(this).disableWith('Registering...');
 				signUp.signUpUser();
+				$(this).enable();
+				e.preventDefault();
+				return false;
 			});
 
 			$('#txtUserName').on("focus", function() {
-				$(this).siblings('.right').hide();
+				$(this).siblings('.cssClassRight').hide();
 			}), $('#txtUserName').on("blur", function() {
 				var userName = $.trim($(this).val());
 				var user_id = "0";
@@ -429,11 +431,11 @@ $(function() {
 				return false;
 			});
 
-			$('#txtWorkEmail').focus(function() {
+			$('#txtWorkEmail').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
 			});
 
-			$('#txtWorkEmail').blur(function() {
+			$('#txtWorkEmail').on("blur", function() {
 				var email = $.trim($(this).val());
 				var user_id = "0";
 				signUp.checkUniqueEmailAddress(user_id, email, this.id);

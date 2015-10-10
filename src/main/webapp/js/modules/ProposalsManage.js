@@ -2331,7 +2331,6 @@ $(function() {
 
 					// alert(proposalInfo);
 					proposalsManage.AddProposalInfo(proposalInfo);
-					return false;
 				}
 			}
 		},
@@ -3058,7 +3057,8 @@ $(function() {
 				proposalsManage.SelectFirstAccordion();
 			});
 
-			$('#btnSaveProposal').click(function() {
+			$('#btnSaveProposal').click(function(e) {
+				$(this).disableWith('Saving...');
 				var proposal_id = $(this).prop("name");
 				if (proposal_id != '') {
 					editFlag = proposal_id;
@@ -3067,13 +3067,17 @@ $(function() {
 					editFlag = 0;
 					proposalsManage.SaveProposal("0", true);
 				}
+				$(this).enable();
+				e.preventDefault();
+				return false;
 			});
 
-			$('#txtProjectTitle').focus(function() {
+			$('#txtProjectTitle').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
 			});
 
-			$('#txtProjectTitle').blur(
+			$('#txtProjectTitle').on(
+					"blur",
 					function() {
 						var projectTitle = $.trim($(this).val());
 						var proposal_id = $('#btnSaveProposal').prop("name");

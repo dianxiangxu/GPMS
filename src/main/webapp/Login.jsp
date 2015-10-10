@@ -57,7 +57,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560ed83daf6e040da04e60f2";
+	var userProfileId = '<%=session.getAttribute("userid")%>';
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -71,6 +71,7 @@
 			moduleKey : gpmsLogIn
 		});
 	});
+
 	//]]>
 </script>
 
@@ -102,7 +103,6 @@
 	href="css/Templates/application.css" type="text/css" />
 
 </head>
-
 <body class="account">
 	<div style="display: none;" id="UpdateProgress1">
 		<div class="sfLoadingbg">&nbsp;</div>
