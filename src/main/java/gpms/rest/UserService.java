@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -484,7 +485,7 @@ public class UserService {
 
 	@POST
 	@Path("/GetPositionDetailsHash")
-	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> producePositionDetailsHash()
+	public HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>> producePositionDetailsHash()
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 		return dpc.getAvailableDepartmentsAndPositions();
@@ -492,7 +493,7 @@ public class UserService {
 
 	@POST
 	@Path("/GetCollegeList")
-	public List<String> produceCollegeList() throws JsonProcessingException,
+	public Set<String> produceCollegeList() throws JsonProcessingException,
 			IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 		return dpc.getCollegeKeys();
@@ -500,7 +501,7 @@ public class UserService {
 
 	@POST
 	@Path("/GetDepartmentList")
-	public List<String> produceDepartmentList(String message)
+	public Set<String> produceDepartmentList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 
@@ -516,7 +517,7 @@ public class UserService {
 
 	@POST
 	@Path("/GetPositionTypeList")
-	public List<String> producePositionTypeList(String message)
+	public Set<String> producePositionTypeList(String message)
 			throws JsonProcessingException, IOException {
 		DepartmentsPositionsCollection dpc = new DepartmentsPositionsCollection();
 

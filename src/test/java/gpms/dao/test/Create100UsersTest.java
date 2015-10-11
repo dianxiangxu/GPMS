@@ -15,7 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mongodb.morphia.Morphia;
@@ -30,9 +32,9 @@ public class Create100UsersTest {
 	UserAccountDAO newUserAccountDAO;
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
-	final int MAXIMUM_PROFILES = 1; // Adjust this to make more or less
-										// profiles
-										// with the generator.
+	final int MAXIMUM_PROFILES = 10; // Adjust this to make more or less
+									// profiles
+									// with the generator.
 
 	@Before
 	public void initiate() {
@@ -156,26 +158,31 @@ public class Create100UsersTest {
 	 */
 	public void setPositionDetails(UserProfile theProfile) {
 		DepartmentsPositionsCollection newThing = new DepartmentsPositionsCollection();
-		List<String> firstList = newThing.getCollegeKeys();
+		Set<String> firstList = newThing.getCollegeKeys();
 		PositionDetails newDetails = new PositionDetails();
 		Random rand = new Random();
 
 		int choice1 = rand.nextInt(firstList.size());
-		newDetails.setCollege(firstList.get(choice1));
+		newDetails.setCollege(CollectionUtils.get(firstList, choice1)
+				.toString());
 
-		List<String> secondList = newThing.getDepartmentKeys(firstList
-				.get(choice1));
+		Set<String> secondList = newThing.getDepartmentKeys(CollectionUtils
+				.get(firstList, choice1).toString());
 		int choice2 = rand.nextInt(secondList.size());
-		newDetails.setDepartment(secondList.get(choice2));
+		newDetails.setDepartment(CollectionUtils.get(secondList, choice2)
+				.toString());
 
-		List<String> thirdList = newThing.getPositionType(
-				firstList.get(choice1), secondList.get(choice2));
+		Set<String> thirdList = newThing.getPositionType(
+				CollectionUtils.get(firstList, choice1).toString(),
+				CollectionUtils.get(secondList, choice2).toString());
 		int choice3 = rand.nextInt(thirdList.size());
-		newDetails.setPositionType(thirdList.get(choice3));
+		newDetails.setPositionType(CollectionUtils.get(thirdList, choice3)
+				.toString());
 
-		List<String> fourthList = newThing.getPositionTitle(
-				firstList.get(choice1), secondList.get(choice2),
-				thirdList.get(choice3));
+		List<String> fourthList = newThing.getPositionTitle(CollectionUtils
+				.get(firstList, choice1).toString(),
+				CollectionUtils.get(secondList, choice2).toString(),
+				CollectionUtils.get(thirdList, choice3).toString());
 		int choice4 = rand.nextInt(fourthList.size());
 		newDetails.setPositionTitle(fourthList.get(choice4));
 
