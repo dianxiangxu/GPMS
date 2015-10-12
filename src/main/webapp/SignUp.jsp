@@ -55,7 +55,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560ed83daf6e040da04e60f2";
+	var userProfileId = "56175791a1602426088a3b84";
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -72,7 +72,11 @@
 	//]]>
 </script>
 
+<script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
+
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
+
+<script type="text/javascript" src="js/core/jquery.disable_with.js"></script>
 
 <script type="text/javascript"
 	src="js/FormValidation/jquery.form-validation-and-hints.js"></script>
@@ -102,6 +106,11 @@
 
 <script type="text/javascript" src="js/modules/SignUp.js"></script>
 <script type="text/javascript" src="js/modules/Language/GPMSSignUp.js"></script>
+
+<link type="text/css" rel="stylesheet"
+	href="css/Templates/jquery-ui.css" />
+<link type="text/css" rel="stylesheet" href="css/GridView/tablesort.css" />
+<link type="text/css" rel="stylesheet" href="css/MessageBox/style.css" />
 
 <link media="screen" rel="stylesheet"
 	href="css/Templates/application.css" type="text/css" />
@@ -139,330 +148,216 @@
 				<form enctype="multipart/form-data" accept-charset="UTF-8"
 					action="SignUp.jsp" class="account__form form" data-form="signup"
 					method="post" name="form1" id="form1">
-					<input class="form__input input is-hidden" data-form-plan=""
-						name="user[subscription_plan_code]" value="starter">
 					<div class="form__item">
-						<label class="form__label label" for="firstname"> First
-							name
+						<label class="form__label label" for="txtUserName"> User
+							name <span class="cssClassRequired">*</span>
 							<div class="label__description" data-form-label-description="">
-								So that we know how to say hello</div>
+								It must be unique</div>
 						</label> <input class="form__input input" data-form-input=""
-							id="firstname" name="user[first_name]" required=""
-							aria-required="true">
+							id="txtUserName" placeholder="User Name" name="username"
+							title="User name"><span style="display: none;"
+							class="cssClassRight"> <img
+							src="http://localhost:8181/GPMS//images/right.jpg"
+							class="cssClassSuccessImg sfLocale" alt="Right" title="Right"
+							height="13" width="18">
+						</span>
 					</div>
 					<div class="form__item">
-						<label class="form__label label" for="lastname"> Last name
+						<label class="form__label label" for="txtPassword">
+							Password <span class="cssClassRequired">*</span>
 							<div class="label__description" data-form-label-description="">
-								So that we know how to say hello</div>
-						</label> <input class="form__input input" data-form-input="" id="lastname"
-							name="user[last_name]" required="" aria-required="true">
-					</div>
-					<div class="form__item">
-						<label class="form__label label" for="organization">
-							Company
-							<div class="label__description" data-form-label-description="">
-								Every account belongs to a company</div>
+								At least 6 and at most 15 characters, please</div>
 						</label> <input class="form__input input" data-form-input=""
-							id="organization" name="user[organization_name]" required=""
-							aria-required="true">
+							id="txtPassword" placeholder="Password" name="password"
+							title="Password" type="password">
+					</div>
+
+					<div class="form__item">
+						<label class="form__label label" for="txtConfirmPassword">
+							Confirm Password <span class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								At least 6 and at most 15 characters, please</div>
+						</label> <input class="form__input input" data-form-input=""
+							id="txtConfirmPassword" placeholder="Password (Again)"
+							name="confirm_password" title="Confirm Password" type="password">
 					</div>
 					<div class="form__item">
-						<label class="form__label label" for="email"> Email
+						<label class="form__label label" for="txtWorkEmail"> Work
+							Email <span class="cssClassRequired">*</span>
 							<div class="label__description" data-form-label-description="">
 								No spam, only relevant updates</div>
-						</label> <input class="form__input input" data-form-input="" id="email"
-							name="user[email]" required="" type="email" aria-required="true">
+						</label> <input class="form__input input" data-form-input=""
+							id="txtWorkEmail" placeholder="Work Email" name="workEmail"
+							title="Work Email"><span class="cssClassRight"> <img
+							src="" class="cssClassSuccessImg sfLocale" height="13" width="18"
+							alt="Right" title="Right" />
+						</span>
 					</div>
 					<div class="form__item">
-						<label class="form__label label" for="password"> Password
+						<label class="form__label label" for="txtFirstName"> First
+							Name <span class="cssClassRequired">*</span>
 							<div class="label__description" data-form-label-description="">
-								At least 6 characters, please</div>
-						</label> <input class="form__input input" data-form-input="" id="password"
-							minlength="6" name="user[password]" required="" type="password"
-							aria-required="true">
+								So that we know how to say hello</div>
+						</label> <input class="form__input input" data-form-input=""
+							id="txtFirstName" placeholder="First Name" name="firstName"
+							title="First name">
+					</div>
+					<div class="form__item">
+						<label class="form__label label" for="txtMiddleName">
+							Middle Name
+							<div class="label__description" data-form-label-description="">
+								So that we know how to say hello</div>
+						</label> <input class="form__input input" data-form-input=""
+							id="txtMiddleName" placeholder="Middle Name" name="middleName"
+							title="middle name">
+					</div>
+					<div class="form__item">
+						<label class="form__label label" for="txtLastName"> Last
+							Name <span class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								So that we know how to say hello</div>
+						</label> <input class="form__input input" data-form-input=""
+							id="txtLastName" placeholder="Last Name" name="lastName"
+							title="Last name">
+					</div>
+					<div class="form__item">
+						<label class="form__label label" for="txtDOB"> Date of
+							Birth <span class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								So that we know when to say happy birthday</div>
+						</label> <input class="form__input input" data-form-input="" id="txtDOB"
+							placeholder="Date of Birth" name="dob" title="Date of Birth">
+					</div>
+					<div class="form__item">
+						<label class="form__label label"> Gender <span
+							class="cssClassRequired">*</span>
+						</label> <select class="form__input select" id="ddlGender" name="gender"
+							title="Choose Gender">
+							<option value="">Choose Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
 					</div>
 
-					<div class="sfFormwrapper">
-						<table cellspacing="0" cellpadding="0" border="0">
-							<tbody>
-								<tr class="rule dashed">
-									<td colspan="4"><span id="lblLogin"
-										class="cssClassLabelTitle">User Login Information</span></td>
-								</tr>
-								<tr>
-									<td><span class="cssClassLabel" id="lblUserName">User
-											Name:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input title="User Name"
-										class="sfInputbox" id="txtUserName" name="username"
-										placeholder="User Name" type="text"> <span
-										style="display: none;" class="cssClassRight"> <img
-											src="http://localhost:8181/GPMS//images/right.jpg"
-											class="cssClassSuccessImg sfLocale" alt="Right" title="Right"
-											height="13" width="18">
-									</span> <span style="display: none;" class="cssClassError sfLocale">Username
-											must be unique with no spaces</span></td>
-								</tr>
-								<tr>
-									<td><span class="cssClassLabel" id="lblPassword">Password:</span>
-										<span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input title="Password"
-										class="sfInputbox" id="txtPassword" name="password"
-										placeholder="Password" type="password"></td>
-								</tr>
-								<tr>
-									<td><span class="cssClassLabel" id="lblConfirmPassword">Confirm
-											Password:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input
-										title="Confirm Password" class="sfInputbox"
-										id="txtConfirmPassword" name="confirm_password"
-										placeholder="Password (Again)" type="password"></td>
-								</tr>
-
-								<tr class="rule dashed">
-									<td colspan="4"><span id="lblName"
-										class="cssClassLabelTitle">User Information</span></td>
-								</tr>
-								<tr>
-									<td><span id="lblUserName" class="cssClassLabel">First
-											Name:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="First Name" name="firstName" id="txtFirstName"
-										class="sfInputbox" title="First Name"></td>
-									<td><span id="lblMiddleName" class="cssClassLabel">Middle
-											Name:</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Middle Name" name="middleName" id="txtMiddleName"
-										class="sfInputbox" title="Middle Name"></td>
-								</tr>
-								<tr>
-									<td><span class="cssClassLabel" id="lblLastName">Last
-											Name:</span> <span class="cssClassRequired">*</span></td>
-									<td colspan="3" class="cssClassTableRightCol"><input
-										type="text" placeholder="Last Name" name="lastName"
-										class="sfInputbox" id="txtLastName" title="Last Name"></td>
-								</tr>
-								<tr>
-									<td><span class="cssClassLabel" id="lblDOB">Date of
-											Birth:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Date of Birth" name="dob"
-										class="sfInputbox hasDatepicker" id="txtDOB"
-										title="Date of Birth"></td>
-									<td><span class="cssClassLabel" id="lblGender">Gender:</span>
-										<span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><select name="gender"
-										id="ddlGender" title="Choose Gender">
-											<option value="">Choose Gender</option>
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
-									</select></td>
-								</tr>
-								<tr class="rule dashed">
-									<td colspan="4"><span class="cssClassLabelTitle"
-										id="lblAddress">Current Address</span></td>
-								</tr>
-
-								<tr>
-									<td><span id="lblStreet" class="cssClassLabel">Street:</span>
-										<span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Street" name="street" id="txtStreet"
-										class="sfInputbox" title="Street"></td>
-									<td><span id="lblApt" class="cssClassLabel">Apt.,
-											Suit, Floor, etc:</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Apt., Suite, Floor, etc. (optional)" name="apt"
-										id="txtApt" class="sfInputbox"
-										title="Apt., Suit, Floor, etc. (optional)"></td>
-								</tr>
-								<tr>
-									<td><span id="lblCity" class="cssClassLabel">City:</span>
-										<span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="City" name="city" id="txtCity" class="sfInputbox"
-										title="City"></td>
-									<td><span id="lblState" class="cssClassLabel">State:</span>
-										<span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><select name="state"
-										id="ddlState" title="Choose State"><option value="">Choose
-												State</option>
-											<option value="1">Alabama</option>
-											<option value="2">Alaska</option>
-											<option value="4">Arizona</option>
-											<option value="5">Arkansas</option>
-											<option value="6">California</option>
-											<option value="7">Colorado</option>
-											<option value="8">Connecticut</option>
-											<option value="10">Delaware</option>
-											<option value="57">District of Columbia</option>
-											<option value="11">Florida</option>
-											<option value="12">Georgia</option>
-											<option value="14">Hawaii</option>
-											<option value="15">Idaho</option>
-											<option value="16">Illinois</option>
-											<option value="17">Indiana</option>
-											<option value="18">Iowa</option>
-											<option value="19">Kansas</option>
-											<option value="20">Kentucky</option>
-											<option value="21">Louisiana</option>
-											<option value="22">Maine</option>
-											<option value="23">Maryland</option>
-											<option value="24">Massachusetts</option>
-											<option value="25">Michigan</option>
-											<option value="26">Minnesota</option>
-											<option value="27">Mississippi</option>
-											<option value="28">Missouri</option>
-											<option value="29">Montana</option>
-											<option value="30">Nebraska</option>
-											<option value="31">Nevada</option>
-											<option value="32">New Hampshire</option>
-											<option value="33">New Jersey</option>
-											<option value="34">New Mexico</option>
-											<option value="35">New York</option>
-											<option value="36">North Carolina</option>
-											<option value="37">North Dakota</option>
-											<option value="39">Ohio</option>
-											<option value="40">Oklahoma</option>
-											<option value="41">Oregon</option>
-											<option value="42">Pennsylvania</option>
-											<option value="58">Puerto Rico</option>
-											<option value="44">Rhode Island</option>
-											<option value="45">South Carolina</option>
-											<option value="46">South Dakota</option>
-											<option value="47">Tennessee</option>
-											<option value="48">Texas</option>
-											<option value="59">U.S. Virgin Islands</option>
-											<option value="49">Utah</option>
-											<option value="50">Vermont</option>
-											<option value="51">Virginia</option>
-											<option value="53">Washington</option>
-											<option value="54">West Virginia</option>
-											<option value="55">Wisconsin</option>
-											<option value="56">Wyoming</option>
-									</select></td>
-								</tr>
-								<tr>
-									<td><span id="lblZip" class="cssClassLabel">Zip
-											Code:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Zip" name="zip" id="txtZip" class="sfInputbox"
-										title="Zip"></td>
-									<td><span id="lblCountry" class="cssClassLabel">Country:</span>
-										<span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><select name="country"
-										id="ddlCountry" title="Choose Country"><option
-												value="">Choose Country</option>
-											<option value="1">United States</option>
-									</select></td>
-								</tr>
-								<tr class="rule dashed">
-									<td colspan="4"><span id="lblPhone"
-										class="cssClassLabelTitle">Phone</span></td>
-								</tr>
-								<tr>
-									<td><span id="lblOfficeNumber" class="cssClassLabel">Office
-											Number:</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Office Number" name="officeNumber"
-										id="txtOfficeNumber" class="sfInputbox" title="Office Number"></td>
-									<td><span id="lblMobileNumber" class="cssClassLabel">Mobile
-											Number:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Mobile Number" name="mobileNumber"
-										id="txtMobileNumber" class="sfInputbox" title="Mobile Number"></td>
-								</tr>
-								<tr>
-									<td><span id="lblHomeNumber" class="cssClassLabel">Home
-											Number:</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Home Number" name="homeNumber" id="txtHomeNumber"
-										class="sfInputbox" title="Home Number"></td>
-									<td><span id="lblOtherNumber" class="cssClassLabel">Other:</span></td>
-									<td class="cssClassTableRightCol"><input type="text"
-										placeholder="Other Number" name="otherNumber"
-										id="txtOtherNumber" class="sfInputbox" title="Other"></td>
-								</tr>
-								<tr class="rule dashed">
-									<td colspan="4"><span id="lblEmail"
-										class="cssClassLabelTitle">E-mail Address</span></td>
-								</tr>
-								<tr>
-									<td><span id="lblWorkEmail" class="cssClassLabel">Work
-											Email:</span> <span class="cssClassRequired">*</span></td>
-									<td class="cssClassTableRightCol">
-										<div class="input-group">
-											<div class="input-group-addon">@</div>
-											<input type="email" placeholder="Work Email" name="workEmail"
-												style="width: 160px;" class="sfInputbox" id="txtWorkEmail"
-												title="Work Email"> <span class="cssClassRight"
-												style="display: none;"> <img width="18" height="13"
-												title="Right" alt="Right"
-												class="cssClassSuccessImg sfLocale"
-												src="http://localhost:8181/GPMS//images/right.jpg">
-											</span> <span class="cssClassError sfLocale" style="display: none;">Work
-												email must be unique with no spaces</span>
-										</div>
-									</td>
-									<td><span id="lblPersonalEmail" class="cssClassLabel">Personal
-											Email:</span></td>
-									<td class="cssClassTableRightCol">
-										<div class="input-group">
-											<div class="input-group-addon">@</div>
-											<input type="email" placeholder="Personal Email"
-												name="personalEmail" id="txtPersonalEmail"
-												style="width: 160px;" class="sfInputbox"
-												title="Personal Email"><span class="cssClassRight"
-												style="display: none;"> <img width="18" height="13"
-												title="Right" alt="Right"
-												class="cssClassSuccessImg sfLocale"
-												src="http://localhost:8181/GPMS/images/right.jpg">
-											</span> <span class="cssClassError sfLocale" style="display: none;">Personal
-												email must be unique with no spaces</span>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<table width="100%" cellspacing="0" cellpadding="0" border="0"
-							id="dataTable">
-							<thead>
-								<tr>
-									<th><span class="cssClassLabel">College:</span> <span
-										class="cssClassRequired">*</span></th>
-									<th><span class="cssClassLabel">Department:</span> <span
-										class="cssClassRequired">*</span></th>
-									<th><span class="cssClassLabel">Position Type:</span> <span
-										class="cssClassRequired">*</span></th>
-									<th><span class="cssClassLabel">Position Title:</span> <span
-										class="cssClassRequired">*</span></th>
-
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><select name="ddlCollege" class="sfListmenu"
-										title="Choose College Name">
-									</select></td>
-									<td><select name="ddlDepartment" class="sfListmenu"
-										title="Choose Department Name">
-									</select></td>
-									<td><select name="ddlPositionType" class="sfListmenu"
-										title="Choose Position Type">
-									</select></td>
-									<td><select name="ddlPositionTitle" class="sfListmenu"
-										title="Choose Position Title">
-									</select></td>
-									<td><input type="Button"
-										class="AddOption cssClassButtonSubmit sfLocale" name="AddMore"
-										value="[+] Add"></td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="form__item">
+						<label class="form__label label" for="txtStreet"> Street <span
+							class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								So that is where you located</div>
+						</label> <input class="form__input input" data-form-input=""
+							id="txtStreet" placeholder="Street" name="street" title="Street">
 					</div>
-					<input class="btn btn--large btn--expanded btn--blue"
-						data-form-submit="" type="submit" value="Sign up">
+					<div class="form__item">
+						<label class="form__label label" for="txtApt"> Apt., Suit,
+							Floor, etc
+							<div class="label__description" data-form-label-description="">
+								So that is where you stay</div>
+						</label> <input class="form__input input" data-form-input="" id="txtApt"
+							placeholder="Apt., Suite, Floor, etc. (optional)" name="apt"
+							title="Apt., Suite, Floor, etc. (optional)">
+					</div>
+					<div class="form__item">
+						<label class="form__label label" for="txtCity"> City <span
+							class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								Every user belongs to a city</div>
+						</label> <input class="form__input input" data-form-input="" id="txtCity"
+							placeholder="City" name="city" title="City">
+					</div>
+					<div class="form__item">
+						<label class="form__label label"> State <span
+							class="cssClassRequired">*</span>
+						</label> <select id="ddlState" class="form__input select" name="state"
+							title="Choose State"><option value="">Choose
+								State</option>
+							<option value="1">Alabama</option>
+							<option value="2">Alaska</option>
+							<option value="4">Arizona</option>
+							<option value="5">Arkansas</option>
+							<option value="6">California</option>
+							<option value="7">Colorado</option>
+							<option value="8">Connecticut</option>
+							<option value="10">Delaware</option>
+							<option value="57">District of Columbia</option>
+							<option value="11">Florida</option>
+							<option value="12">Georgia</option>
+							<option value="14">Hawaii</option>
+							<option value="15">Idaho</option>
+							<option value="16">Illinois</option>
+							<option value="17">Indiana</option>
+							<option value="18">Iowa</option>
+							<option value="19">Kansas</option>
+							<option value="20">Kentucky</option>
+							<option value="21">Louisiana</option>
+							<option value="22">Maine</option>
+							<option value="23">Maryland</option>
+							<option value="24">Massachusetts</option>
+							<option value="25">Michigan</option>
+							<option value="26">Minnesota</option>
+							<option value="27">Mississippi</option>
+							<option value="28">Missouri</option>
+							<option value="29">Montana</option>
+							<option value="30">Nebraska</option>
+							<option value="31">Nevada</option>
+							<option value="32">New Hampshire</option>
+							<option value="33">New Jersey</option>
+							<option value="34">New Mexico</option>
+							<option value="35">New York</option>
+							<option value="36">North Carolina</option>
+							<option value="37">North Dakota</option>
+							<option value="39">Ohio</option>
+							<option value="40">Oklahoma</option>
+							<option value="41">Oregon</option>
+							<option value="42">Pennsylvania</option>
+							<option value="58">Puerto Rico</option>
+							<option value="44">Rhode Island</option>
+							<option value="45">South Carolina</option>
+							<option value="46">South Dakota</option>
+							<option value="47">Tennessee</option>
+							<option value="48">Texas</option>
+							<option value="59">U.S. Virgin Islands</option>
+							<option value="49">Utah</option>
+							<option value="50">Vermont</option>
+							<option value="51">Virginia</option>
+							<option value="53">Washington</option>
+							<option value="54">West Virginia</option>
+							<option value="55">Wisconsin</option>
+							<option value="56">Wyoming</option>
+						</select>
+					</div>
+					<div class="form__item">
+						<label class="form__label label" for="txtZip"> Zip Code <span
+							class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								Every state has a zip code</div>
+						</label> <input class="form__input input" data-form-input="" id="txtZip"
+							placeholder="Zip Code" name="zip" title="Zip Code">
+					</div>
+					<div class="form__item">
+						<label class="form__label label"> Country <span
+							class="cssClassRequired">*</span>
+						</label> <select id="ddlCountry" class="form__input select" name="country"
+							title="Choose Country"><option value="">Choose
+								Country</option>
+							<option value="1">United States</option>
+						</select>
+					</div>
+					<div class="form__item">
+						<label class="form__label label" for="txtMobileNumber">
+							Mobile Number <span class="cssClassRequired">*</span>
+							<div class="label__description" data-form-label-description="">
+								So that is where we can call you</div>
+						</label> <input class="form__input input" data-form-input=""
+							id="txtMobileNumber" placeholder="Mobile Number"
+							name="mobileNumber" title="Mobile Number">
+					</div>
+
+					<!-- 					<input class="btn btn--large btn--expanded btn--blue" -->
+					<!-- 						data-form-submit="" type="submit" value="Sign up"> -->
+					<button type="button" id="btnSignUp"
+						class="btn btn--large btn--expanded btn--blue">
+						<span>Sign up</span>
+					</button>
 				</form>
 				<!-- 				<div class="account__buttons"> -->
 				<!-- 					<div class="account__divider uppercase"> -->

@@ -38,7 +38,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 public class UserProfileDAO extends BasicDAO<UserProfile, String> {
-	private static final String DBNAME = "GPMS";
+	private static final String DBNAME = "db_gpms";
 	public static final String COLLECTION_NAME = "userprofile";
 
 	private static Morphia morphia;
@@ -193,6 +193,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			user.setActive(userProfile.getUserAccount().isActive());
 			users.add(user);
 		}
+		Collections.sort(users);
 		return users;
 	}
 
@@ -894,6 +895,22 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		profileQuery.and(
 				profileQuery.criteria("_id").notEqual(id),
+				profileQuery.or(
+						profileQuery.criteria("work email").hasThisOne(
+								newEmail.toString()),
+						profileQuery.criteria("personal email").hasThisOne(
+								newEmail.toString())));
+		return profileQuery.get();
+	}
+
+	public UserProfile findAnyUserWithSameEmail(String newEmail) {
+		Datastore ds = getDatastore();
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+
+		// Pattern pattern = Pattern.compile("^" + newEmail + "$",
+		// Pattern.CASE_INSENSITIVE);
+		profileQuery.or(
 				profileQuery.criteria("work email").hasThisOne(
 						newEmail.toString()),
 				profileQuery.criteria("personal email").hasThisOne(
@@ -1060,4 +1077,5 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		}
 		return userPositionTitles;
 	}
+
 }

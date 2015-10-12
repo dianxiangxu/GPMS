@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "5612c0b30b663222701da95e";
+	var userProfileId = '<%=session.getAttribute("userid")%>';
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -73,6 +73,8 @@
 <script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
+
+<script type="text/javascript" src="js/core/jquery.disable_with.js"></script>
 
 <!-- For Side Bar Navigation -->
 <script type="text/javascript" src="js/core/dashboard.js"></script>
@@ -419,8 +421,7 @@
 																	class="cssClassRight"> <img src=""
 																		class="cssClassSuccessImg sfLocale" height="13"
 																		width="18" alt="Right" title="Right" />
-																</span> <span class="cssClassError sfLocale">Project
-																		title must be unique with no spaces</span></td>
+																</span></td>
 															</tr>
 															<tr>
 																<td><span class="cssClassLabel" id="lblProjectType">Project
@@ -738,10 +739,10 @@
 																		<option value="2">Pending</option>
 																</select></td>
 
-																<td class="cssClassTableRightCol" id="tdIRBtxt"><input
-																	title="IRB #" type="text" class="sfTextBoxSmall"
-																	id="txtIRB" name="IRB" placeholder="IRB #" /> <span
-																	class="cssClassRequired">*</span></td>
+																<td class="cssClassTableRightCol" id="tdIRBtxt"><span
+																	class="cssClassRequired">*</span> <input title="IRB #"
+																	type="text" class="sfTextBoxSmall" id="txtIRB"
+																	name="IRB" placeholder="IRB #" /></td>
 															</tr>
 
 															<tr>
@@ -771,10 +772,10 @@
 																		<option value="2">Pending</option>
 																</select></td>
 
-																<td class="cssClassTableRightCol" id="tdIACUCtxt"><input
+																<td class="cssClassTableRightCol" id="tdIACUCtxt"><span
+																	class="cssClassRequired">*</span> <input
 																	title="IACUC #" type="text" class="sfTextBoxSmall"
-																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /> <span
-																	class="cssClassRequired">*</span></td>
+																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /></td>
 															</tr>
 
 															<tr>
@@ -804,10 +805,10 @@
 																		<option value="2">Pending</option>
 																</select></td>
 
-																<td class="cssClassTableRightCol" id="tdIBCtxt"><input
-																	title="IBC #" type="text" class="sfTextBoxSmall"
-																	id="txtIBC" name="IBC" placeholder="IBC #" /> <span
-																	class="cssClassRequired">*</span></td>
+																<td class="cssClassTableRightCol" id="tdIBCtxt"><span
+																	class="cssClassRequired">*</span> <input title="IBC #"
+																	type="text" class="sfTextBoxSmall" id="txtIBC"
+																	name="IBC" placeholder="IBC #" /></td>
 															</tr>
 
 															<tr>
@@ -935,13 +936,13 @@
 																		<option value="1">Yes, on pages</option>
 																		<option value="2">No</option>
 																</select></td>
-																<td id="tdPagesWithProprietaryInfo"><input
+																<td id="tdPagesWithProprietaryInfo"><span
+																	class="cssClassRequired">*</span> <input
 																	title="Pages With Proprietary/Confidential Information"
 																	type="text" class="sfInputbox" style="width: 210px;"
 																	id="txtPagesWithProprietaryInfo"
 																	name="pagesWithProprietaryInfo"
 																	placeholder="Pages Containing the Information" /> <span
-																	class="cssClassRequired">*</span> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated page numbers.</span></td>
 																</td>

@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "5612c0b30b663222701da95e";
+	var userProfileId = '<%=session.getAttribute("userid")%>';
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -73,6 +73,8 @@
 <script type="text/javascript" src="js/jQuery/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
+
+<script type="text/javascript" src="js/core/jquery.disable_with.js"></script>
 
 <!-- For Side Bar Navigation -->
 <script type="text/javascript" src="js/core/dashboard.js"></script>
@@ -504,15 +506,13 @@
 																		<td class="cssClassTableRightCol">
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
-																				<input title="Work Email" type="email"
-																					id="txtWorkEmail" class="sfInputbox"
-																					style="width: 160px;" name="workEmail"
-																					placeholder="Work Email" /> <span
+																				<input type="email" id="txtWorkEmail"
+																					class="sfInputbox" style="width: 160px;"
+																					name="workEmail" placeholder="Work Email" /> <span
 																					class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" alt="Right" title="Right" />
-																				</span> <span class="cssClassError sfLocale">Work
-																					email must be unique with no spaces</span>
+																				</span>
 																			</div>
 																		</td>
 																		<td><span class="cssClassLabel"
@@ -520,15 +520,13 @@
 																		<td class="cssClassTableRightCol">
 																			<div class="input-group">
 																				<div class="input-group-addon">@</div>
-																				<input title="Personal Email" type="email"
-																					class="sfInputbox" style="width: 160px;"
-																					id="txtPersonalEmail" name="personalEmail"
-																					placeholder="Personal Email" /><span
+																				<input type="email" class="sfInputbox"
+																					style="width: 160px;" id="txtPersonalEmail"
+																					name="personalEmail" placeholder="Personal Email" /><span
 																					class="cssClassRight"> <img src=""
 																					class="cssClassSuccessImg sfLocale" height="13"
 																					width="18" alt="Right" title="Right" />
-																				</span> <span class="cssClassError sfLocale">Personal
-																					email must be unique with no spaces</span>
+																				</span>
 																			</div>
 																		</td>
 																	</tr>
@@ -606,8 +604,7 @@
 																			class="cssClassRight"> <img src=""
 																				class="cssClassSuccessImg sfLocale" height="13"
 																				width="18" alt="Right" title="Right" />
-																		</span> <span class="cssClassError sfLocale">Username
-																				must be unique with no spaces</span></td>
+																		</span></td>
 																	</tr>
 																	<tr>
 																		<td><span class="cssClassLabel" id="lblPassword">Password:</span>

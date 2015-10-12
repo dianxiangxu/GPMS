@@ -57,7 +57,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "560ed83daf6e040da04e60f2";
+	var userProfileId = '<%=session.getAttribute("userid")%>';
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -71,10 +71,14 @@
 			moduleKey : gpmsLogIn
 		});
 	});
+
 	//]]>
 </script>
 
 <script type="text/javascript" src="js/core/gpmscore.js"></script>
+
+<script type="text/javascript"
+	src="js/FormValidation/jquery.validate.js"></script>
 
 <script type="text/javascript"
 	src="js/modules/Language/CoreJsLanguage.js"></script>
@@ -97,11 +101,8 @@
 
 <link media="screen" rel="stylesheet"
 	href="css/Templates/application.css" type="text/css" />
-<link href="css/Templates/style.css" media="screen" rel="stylesheet"
-	type="text/css" />
 
 </head>
-
 <body class="account">
 	<div style="display: none;" id="UpdateProgress1">
 		<div class="sfLoadingbg">&nbsp;</div>
@@ -131,7 +132,7 @@
 			class="row__col row__col--xl-6 row__col--l-7 row__col--m-8 row__col--xl-centered row__col--l-centered row__col--m-centered">
 			<div class="account__box box">
 				<form accept-charset="UTF-8" action="REST/users/login"
-					class="form account__form" id="login-form" method="post">
+					class="form account__form" id="form1" method="post">
 					<div style="margin: 0; padding: 0; display: inline">
 						<input name="utf8" type="hidden" value="✓"><input
 							name="authenticity_token" type="hidden"
@@ -149,13 +150,13 @@
 					</div>
 					<div class="form__item">
 						<label class="label form__label" for="user_email">Email/
-							Username</label> <input class="required form__input input"
-							id="user_email" name="user[email]" size="30" type="text">
+							Username</label> <input class="form__input input" id="user_email"
+							name="username" size="30" type="text">
 					</div>
 					<div class="form__item">
 						<label class="label form__label" for="user_password">Password</label>
-						<input class="required form__input input" id="user_password"
-							name="user[password]" size="30" type="password">
+						<input class="form__input input" id="user_password"
+							name="password" size="30" type="password">
 					</div>
 					<div class="form__item">
 						<input id="remember_me" name="remember_me" type="checkbox"

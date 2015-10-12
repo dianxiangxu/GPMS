@@ -1,5 +1,18 @@
 ﻿var usersManage = '';
 $(function() {
+	jQuery.fn.exists = function() {
+		return this.length > 0;
+	}
+
+	// $.validator.unobtrusive.parse(#form1);
+	$.validator.setDefaults({
+		ignore : []
+	});
+
+	$.validator.addMethod('notequalto', function(value, element, param) {
+		return value != $(param).val();
+	}, 'Both emails looks same!');
+
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
 			UserName : GPMS.utils.GetUserName(),
@@ -44,30 +57,22 @@ $(function() {
 							country : {
 								required : true
 							},
-							officeNumber : {
-								phoneUS : true
-							},
 							mobileNumber : {
-								required : true,
-								phoneUS : true
-							},
-							homeNumber : {
-								phoneUS : true
-							},
-							otherNumber : {
-								phoneUS : true
+								required : true
 							},
 							workEmail : {
 								required : true,
-								email : true
+								email : true,
+								notequalto : '#txtPersonalEmail'
 							},
 							personalEmail : {
-								email : true
+								email : true,
+								notequalto : '#txtWorkEmail'
 							},
-							// username : {
-							// required : true,
-							// minlength : 3
-							// },
+							username : {
+								required : true,
+								minlength : 3
+							},
 							password : {
 								required : true,
 								minlength : 6,
@@ -81,12 +86,13 @@ $(function() {
 							}
 						},
 						errorElement : "span",
+						errorClass : "warning",
 						messages : {
 							firstName : {
 								required : "Please enter your firstname",
 								maxlength : "Your firstname must be at most 40 characters long"
 							},
-							LastName : {
+							lastName : {
 								required : "Please enter your lastname",
 								maxlength : "Your lastname must be at most 40 characters long"
 							},
@@ -113,18 +119,8 @@ $(function() {
 							country : {
 								required : "Please select your country"
 							},
-							officeNumber : {
-								phoneUS : "Please enter your valid office phone number"
-							},
 							mobileNumber : {
-								required : "Please enter your mobile phone number",
-								phoneUS : "Please enter your valid mobile phone number",
-							},
-							homeNumber : {
-								phoneUS : "Please enter your valid home phone number",
-							},
-							otherNumber : {
-								phoneUS : "Please enter your valid additional phone number",
+								required : "Please enter your mobile phone number"
 							},
 							workEmail : {
 								required : "Please enter your work email",
@@ -133,11 +129,10 @@ $(function() {
 							personalEmail : {
 								email : "Please enter valid email id"
 							},
-							// username : {
-							// required : "Please enter a username",
-							// minlength : "Your username must be at least 3
-							// characters long"
-							// },
+							username : {
+								required : "Please enter a username",
+								minlength : "Your username must be at least 3 characters long"
+							},
 							password : {
 								required : "Please provide a password",
 								minlength : "Your password must be between 6 and 15 characters",
@@ -146,17 +141,16 @@ $(function() {
 							confirm_password : {
 								required : "Please confirm your password",
 								minlength : "Your password must be between 6 and 15 characters",
-								equalTo : "Please enter the same password as above",
-								maxlength : "Your password must be between 6 and 15 characters"
+								maxlength : "Your password must be between 6 and 15 characters",
+								equalTo : "Please enter the same password as above"
 							}
-						},
-						ignore : ":hidden"
+						}
 					});
 
 	var rowIndex = 0;
 	var editFlag = 0;
-	var isUniqueUserName = false;
-	var isUniqueEmail = false;
+	var userNameIsUnique = false;
+	var emailIsUnique = false;
 
 	usersManage = {
 		config : {
@@ -416,6 +410,9 @@ $(function() {
 			switch (tblID) {
 			case "gdvUsers":
 				usersManage.ClearForm();
+				$('#txtPassword').rules("remove");
+				$('#txtConfirmPassword').rules("remove");
+
 				$('#lblFormHeading').html(
 						getLocale(gpmsUsersManagement,
 								'Edit User Details for: ')
@@ -555,153 +552,158 @@ $(function() {
 		},
 
 		BindUserPostionDetails : function(postitionDetails) {
-			// $("#dataTable tr:gt(1)").remove();
-			$
-					.each(
-							postitionDetails,
-							function(i, value) {
-								// alert(index + " :: " +
-								// value['positionTitle']);
-								var btnOption = "[+] Add";
-								var btnTitle = "Add More"
-								var btnName = "AddMore";
-								if (i > 0) {
-									btnOption = "Delete ";
-									btnTitle = "Delete";
-									btnName = "DeleteOption";
-								}
-								var cloneRow = $('#dataTable tbody>tr:first')
-										.clone(true);
-								$(cloneRow).appendTo("#dataTable");
+			if (postitionDetails.length != 0) {
+				$
+						.each(
+								postitionDetails,
+								function(i, value) {
+									// alert(index + " :: " +
+									// value['positionTitle']);
+									var btnOption = "[+] Add";
+									var btnTitle = "Add More"
+									var btnName = "AddMore";
+									if (i > 0) {
+										btnOption = "Delete ";
+										btnTitle = "Delete";
+										btnName = "DeleteOption";
+									}
+									var cloneRow = $(
+											'#dataTable tbody>tr:first').clone(
+											true);
+									$(cloneRow).appendTo("#dataTable");
 
-								rowIndex = i + 1;
-								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
-										.find("select")
-										.each(
-												function(j) {
-													if (this.name == "ddlCollege") {
-														// $(this).val(value['college']);
+									rowIndex = i + 1;
+									$(
+											'#dataTable tbody>tr:eq('
+													+ rowIndex + ')')
+											.find("select")
+											.each(
+													function(j) {
+														if (this.name == "ddlCollege") {
+															// $(this).val(value['college']);
 
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['college']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
-																				usersManage
-																						.BindDepartmentOnly($(
-																								'select[name="ddlCollege"] option:selected')
-																								.eq(
-																										rowIndex)
-																								.val());
-																				return false;
-																			}
-																		});
-													} else if (this.name == "ddlDepartment") {
-														// $(this).val(value['department']);
+															$(this)
+																	.find(
+																			'option')
+																	.each(
+																			function() {
+																				var $this = $(this);
+																				if ($this
+																						.text() == value['college']) {
+																					$this
+																							.prop(
+																									'selected',
+																									'selected');
+																					usersManage
+																							.BindDepartmentOnly($(
+																									'select[name="ddlCollege"] option:selected')
+																									.eq(
+																											rowIndex)
+																									.val());
+																					return false;
+																				}
+																			});
+														} else if (this.name == "ddlDepartment") {
+															// $(this).val(value['department']);
 
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['department']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
+															$(this)
+																	.find(
+																			'option')
+																	.each(
+																			function() {
+																				var $this = $(this);
+																				if ($this
+																						.text() == value['department']) {
+																					$this
+																							.prop(
+																									'selected',
+																									'selected');
 
-																				usersManage
-																						.BindPositionTypeOnly(
-																								$(
-																										'select[name="ddlCollege"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val(),
-																								$(
-																										'select[name="ddlDepartment"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val());
-																				return false;
-																			}
-																		});
-													} else if (this.name == "ddlPositionType") {
-														// $(this).val(value['positionType']);
+																					usersManage
+																							.BindPositionTypeOnly(
+																									$(
+																											'select[name="ddlCollege"] option:selected')
+																											.eq(
+																													rowIndex)
+																											.val(),
+																									$(
+																											'select[name="ddlDepartment"] option:selected')
+																											.eq(
+																													rowIndex)
+																											.val());
+																					return false;
+																				}
+																			});
+														} else if (this.name == "ddlPositionType") {
+															// $(this).val(value['positionType']);
 
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['positionType']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
+															$(this)
+																	.find(
+																			'option')
+																	.each(
+																			function() {
+																				var $this = $(this);
+																				if ($this
+																						.text() == value['positionType']) {
+																					$this
+																							.prop(
+																									'selected',
+																									'selected');
 
-																				usersManage
-																						.BindPositionTitleOnly(
-																								$(
-																										'select[name="ddlCollege"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val(),
-																								$(
-																										'select[name="ddlDepartment"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val(),
-																								$(
-																										'select[name="ddlPositionType"] option:selected')
-																										.eq(
-																												rowIndex)
-																										.val());
-																				return false;
-																			}
-																		});
-													} else if (this.name == "ddlPositionTitle") {
-														// $(this).val(value['positionTitle']);
+																					usersManage
+																							.BindPositionTitleOnly(
+																									$(
+																											'select[name="ddlCollege"] option:selected')
+																											.eq(
+																													rowIndex)
+																											.val(),
+																									$(
+																											'select[name="ddlDepartment"] option:selected')
+																											.eq(
+																													rowIndex)
+																											.val(),
+																									$(
+																											'select[name="ddlPositionType"] option:selected')
+																											.eq(
+																													rowIndex)
+																											.val());
+																					return false;
+																				}
+																			});
+														} else if (this.name == "ddlPositionTitle") {
+															// $(this).val(value['positionTitle']);
 
-														$(this)
-																.find('option')
-																.each(
-																		function() {
-																			var $this = $(this);
-																			if ($this
-																					.text() == value['positionTitle']) {
-																				$this
-																						.prop(
-																								'selected',
-																								'selected');
-																				return false;
-																			}
-																		});
-													}
-												});
+															$(this)
+																	.find(
+																			'option')
+																	.each(
+																			function() {
+																				var $this = $(this);
+																				if ($this
+																						.text() == value['positionTitle']) {
+																					$this
+																							.prop(
+																									'selected',
+																									'selected');
+																					return false;
+																				}
+																			});
+														}
+													});
 
-								$('#dataTable tbody>tr:eq(' + rowIndex + ')')
-										.find("input").each(
-												function(k) {
-													if ($(this)
-															.is(".AddOption")) {
-														$(this).prop("name",
-																btnName);
-														$(this).prop("value",
-																btnOption);
-														$(this).prop("title",
-																btnTitle);
-													}
-												});
-							});
-			$('#dataTable>tbody tr:first').remove();
+									$(
+											'#dataTable tbody>tr:eq('
+													+ rowIndex + ')').find(
+											"input").each(function(k) {
+										if ($(this).is(".AddOption")) {
+											$(this).prop("name", btnName);
+											$(this).prop("value", btnOption);
+											$(this).prop("title", btnTitle);
+										}
+									});
+								});
+				$('#dataTable>tbody tr:first').remove();
+			}
 		},
 
 		SearchUserAuditLogs : function() {
@@ -931,11 +933,12 @@ $(function() {
 
 		ClearForm : function() {
 			validator.resetForm();
-			$('.class-text').removeClass('error').next('span').removeClass(
-					'error');
+			// $('#form1').removeData('validator');
+			// $('.class-text').removeClass('error').next('span').removeClass(
+			// 'error');
 			var inputs = $("#container-7").find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
-				rmErrorClass(item);
+				// rmErrorClass(item);
 				$(this).prop('checked', false);
 				$(this).val($(this).find('option').first().val());
 			});
@@ -947,12 +950,12 @@ $(function() {
 			$("#btnSaveUser").removeAttr("name");
 			$(".delbutton").hide();
 			$("#btnReset").show();
-			$(".required:enabled").each(function() {
-				if ($(this).parent("td").find("span.error").length == 1) {
-					$(this).removeClass("error").addClass("required");
-					$(this).parent("td").find("span.error").remove();
-				}
-			});
+			// $(".required:enabled").each(function() {
+			// if ($(this).parent("td").find("span.error").length == 1) {
+			// $(this).removeClass("error").addClass("required");
+			// $(this).parent("td").find("span.error").remove();
+			// }
+			// });
 			$('#txtUserName').removeAttr('disabled');
 
 			$(".AddOption").val("[+] Add");
@@ -971,7 +974,7 @@ $(function() {
 			usersManage.SetFirstTabActive();
 			$('#btnReset').hide();
 			$('.cssClassRight').hide();
-			$('.cssClassError').hide();
+			$('.warning').hide();
 
 			$("#gdvUsersAuditLog").empty();
 			$("#gdvUsersAuditLog_Pagination").remove();
@@ -987,55 +990,53 @@ $(function() {
 			$tabs.tabs('option', 'active', 0);
 		},
 
-		SaveUser : function(_userId, _flag) {
-			$('#iferror').hide();
-			if (checkForm($("#form1"))) {
-				var validateErrorMessage = '';
+		saveUser : function(_userId, _flag) {
+			// $('#iferror').hide();
+			// var $form = $("#form1");
+			// $form.valid();
+			if (validator.form()) {
+				var $username = $('#txtUserName');
+				var userName = $.trim($username.val());
+				var validateErrorMessage = usersManage.checkUniqueUserName(
+						_userId, userName, $username);
 
-				var newUserName = $.trim($('#txtUserName').val());
-				if (!newUserName) {
-					validateErrorMessage += 'Please enter username.<br/>';
-				} else if (!usersManage.IsUniqueUserName(_userId, newUserName)) {
-					validateErrorMessage += "'"
-							+ getLocale(gpmsUsersManagement,
-									"Please enter unique username.") + " '"
-							+ newUserName.trim() + "' "
-							+ getLocale(gpmsUsersManagement, "already exists.")
-							+ '<br/>';
-				}
+				var $workEmail = $("#txtWorkEmail");
+				var workEmail = $.trim($workEmail.val());
+				validateErrorMessage += usersManage.checkUniqueEmailAddress(
+						_userId, workEmail, "txtWorkEmail");
 
-				if (validateErrorMessage != '') {
-					$('#txtUserName').removeClass("error");
-				} else {
-					$('#txtUserName').addClass("error");
-				}
-
-				var _saveOptions = '';
-				$("#dataTable")
-						.find("tr select")
-						.each(
-								function(i) {
-									var optionsText = $(this).val();
-									if (!optionsText
-											&& $(this).prop("name") != "ddlPositionTitle") {
-										validateErrorMessage = getLocale(
-												gpmsUsersManagement,
-												"Please select all position details for this user.")
-												+ "<br/>";
-										attributesManage.SetFirstTabActive();
-										$(this).focus();
-									} else if (optionsText
-											&& $(this).prop("name") != "ddlPositionTitle") {
-										_saveOptions += optionsText + "!#!";
-									} else {
-										_saveOptions += optionsText + "#!#";
-									}
-								});
-
-				_saveOptions = _saveOptions.substring(0,
-						_saveOptions.length - 3);
+				var $personalEmail = $("#txtPersonalEmail");
+				var personalEmail = $.trim($personalEmail.val());
+				validateErrorMessage += usersManage.checkUniqueEmailAddress(
+						_userId, personalEmail, "txtPersonalEmail");
 
 				if (!validateErrorMessage) {
+					var _saveOptions = '';
+					$("#dataTable")
+							.find("tr select")
+							.each(
+									function(i) {
+										var optionsText = $(this).val();
+										if (!optionsText
+												&& $(this).prop("name") != "ddlPositionTitle") {
+											validateErrorMessage = getLocale(
+													gpmsUsersManagement,
+													"Please select all position details for this user.")
+													+ "<br/>";
+											attributesManage
+													.SetFirstTabActive();
+											$(this).focus();
+										} else if (optionsText
+												&& $(this).prop("name") != "ddlPositionTitle") {
+											_saveOptions += optionsText + "!#!";
+										} else {
+											_saveOptions += optionsText + "#!#";
+										}
+									});
+
+					_saveOptions = _saveOptions.substring(0,
+							_saveOptions.length - 3);
+
 					var userInfo = {
 						UserID : _userId,
 						FirstName : $.trim($('#txtFirstName').val()),
@@ -1062,17 +1063,51 @@ $(function() {
 					};
 
 					var password = $.trim($('#txtPassword').val());
-					if (!_flag && password != "") {
+					if (password != "") {
 						userInfo.Password = password;
 					}
 					usersManage.AddUserInfo(userInfo);
-
-					return false;
 				}
+			} else {
+				usersManage.focusTabWithErrors("#container-7");
 			}
 		},
 
-		IsUniqueUserName : function(userId, newUserName) {
+		checkUniqueUserName : function(user_id, userName, textBoxUserName) {
+			var errors = '';
+			if (!textBoxUserName.hasClass('warning') && userName.length > 0) {
+				if (!usersManage.isUniqueUserName(user_id, userName)) {
+					errors += getLocale(gpmsUsersManagement,
+							"Please enter unique username.")
+							+ " '"
+							+ userName.trim()
+							+ "' "
+							+ getLocale(gpmsUsersManagement,
+									"has already been taken.");
+					textBoxUserName.addClass("error");
+					textBoxUserName.siblings('.cssClassRight').hide();
+					if (textBoxUserName.siblings('span.warning').exists()) {
+						textBoxUserName.siblings('span.warning').html(errors);
+					} else {
+						$(
+								'<span id="txtUserName-error" class="warning" for="txtUserName">'
+										+ errors + '</span>').insertAfter(
+								textBoxUserName);
+					}
+
+					textBoxUserName.siblings('.warning').show();
+					textBoxUserName.focus();
+				} else {
+					textBoxUserName.removeClass("error");
+					textBoxUserName.siblings('.cssClassRight').show();
+					textBoxUserName.siblings('.warning').hide();
+					textBoxUserName.siblings('.warning').html('');
+				}
+			}
+			return errors;
+		},
+
+		isUniqueUserName : function(userId, newUserName) {
 			var userUniqueObj = {
 				UserID : userId,
 				NewUserName : newUserName
@@ -1085,11 +1120,46 @@ $(function() {
 			});
 			this.config.ajaxCallMode = 16;
 			this.ajaxCall(this.config);
-			return isUniqueUserName;
+			return userNameIsUnique;
 		},
 
-		// TODO:
-		IsUniqueEmail : function(userId, newEmail) {
+		checkUniqueEmailAddress : function(user_id, email, textBoxEmail) {
+			var errors = '';
+			var txtEmail = $("#" + textBoxEmail);
+			if (!txtEmail.hasClass('warning') && email.length > 0) {
+				if (!usersManage.isUniqueEmail(user_id, email)) {
+					errors += getLocale(gpmsUsersManagement,
+							"Please enter unique email id.")
+							+ " '"
+							+ email.trim()
+							+ "' "
+							+ getLocale(gpmsUsersManagement,
+									"has already been taken.");
+					txtEmail.addClass("error");
+					txtEmail.siblings('.cssClassRight').hide();
+					if (txtEmail.siblings('span.warning').exists()) {
+						txtEmail.siblings('span.warning').html(errors);
+					} else {
+						$(
+								'<span id="' + textBoxEmail
+										+ '-error" class="warning" for="'
+										+ textBoxEmail + '">' + errors
+										+ '</span>').insertAfter(txtEmail);
+					}
+
+					txtEmail.siblings('.warning').show();
+					txtEmail.focus();
+				} else {
+					txtEmail.removeClass("error");
+					txtEmail.siblings('.cssClassRight').show();
+					txtEmail.siblings('.warning').hide();
+					txtEmail.siblings('.warning').html('');
+				}
+			}
+			return errors;
+		},
+
+		isUniqueEmail : function(userId, newEmail) {
 			var userUniqueObj = {
 				UserID : userId,
 				NewEmail : newEmail
@@ -1102,7 +1172,48 @@ $(function() {
 			});
 			this.config.ajaxCallMode = 17;
 			this.ajaxCall(this.config);
-			return isUniqueEmail;
+			return emailIsUnique;
+		},
+
+		addPwdValidateRules : function() {
+			$("#txtPassword")
+					.rules(
+							"add",
+							{
+								required : true,
+								minlength : 6,
+								maxlength : 15,
+								messages : {
+									required : "Please provide a password",
+									minlength : "Your password must be between 6 and 15 characters",
+									maxlength : "Your password must be between 6 and 15 characters"
+								}
+							});
+			$("#txtConfirmPassword")
+					.rules(
+							"add",
+							{
+								required : true,
+								minlength : 6,
+								maxlength : 15,
+								equalTo : "#txtPassword",
+								messages : {
+									required : "Please confirm your password",
+									minlength : "Your password must be between 6 and 15 characters",
+									maxlength : "Your password must be between 6 and 15 characters",
+									equalTo : "Please enter the same password as above"
+								}
+							});
+		},
+
+		focusTabWithErrors : function(tabPanelName) {
+			$(tabPanelName).children('div.ui-tabs-panel:not("#fragment-4")')
+					.each(function(index) {
+						if ($(this).find("span.warning").text() != "") {
+							$(tabPanelName).tabs("option", "active", index);
+							return false;
+						}
+					});
 		},
 
 		AddUserInfo : function(info) {
@@ -1442,11 +1553,11 @@ $(function() {
 				break;
 
 			case 16:
-				isUniqueUserName = stringToBoolean(msg);
+				userNameIsUnique = stringToBoolean(msg);
 				break;
 
 			case 17:
-				isUniqueEmail = stringToBoolean(msg);
+				emailIsUnique = stringToBoolean(msg);
 				break;
 
 			case 18:
@@ -1624,13 +1735,13 @@ $(function() {
 
 			case 18:
 				if (editFlag > 0) {
-					csscody.info("<h2>"
+					csscody.error("<h2>"
 							+ getLocale(gpmsUsersManagement, 'Error Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsUsersManagement,
 									'Failed to update user!') + "</p>");
 				} else {
-					csscody.info("<h2>"
+					csscody.error("<h2>"
 							+ getLocale(gpmsUsersManagement, 'Error Message')
 							+ "</h2><p>"
 							+ getLocale(gpmsUsersManagement,
@@ -1786,6 +1897,8 @@ $(function() {
 					"click",
 					function() {
 						usersManage.ClearForm();
+						usersManage.addPwdValidateRules();
+
 						usersManage
 								.BindDepartmentDropDown($(
 										'select[name="ddlCollege"]').eq(0)
@@ -1811,166 +1924,59 @@ $(function() {
 										.val(), false);
 					});
 
-			$('#btnSaveUser').click(function() {
+			$('#btnSaveUser').click(function(e) {
+				$(this).disableWith('Saving...');
 				var user_id = $(this).prop("name");
 				if (user_id != '') {
 					editFlag = user_id;
-					usersManage.SaveUser(user_id, false);
+					usersManage.saveUser(user_id, false);
 				} else {
 					editFlag = 0;
-					usersManage.SaveUser("0", true);
+					usersManage.saveUser("0", true);
 				}
+				$(this).enable();
+				e.preventDefault();
+				return false;
 			});
 
-			$('#txtUserName').blur(
-					function() {
-						var errors = '';
-						var userName = $.trim($(this).val());
-						var user_id = $('#btnSaveUser').prop("name");
-						if (user_id == '') {
-							user_id = "0";
-						}
-						if (!userName) {
-							errors += getLocale(gpmsUsersManagement,
-									"Please enter a username.");
-						} else if (!usersManage.IsUniqueUserName(user_id,
-								userName)) {
-							errors += getLocale(gpmsUsersManagement,
-									"Please enter unique username.")
-									+ " '"
-									+ userName.trim()
-									+ "' "
-									+ getLocale(gpmsUsersManagement,
-											"already exists.");
-						}
+			$('#txtPassword').dblclick(function() {
+				$(this).val('');
+				usersManage.addPwdValidateRules();
+			});
 
-						if (errors) {
-							$(this).addClass("error");
-							$(this).next('.cssClassRight').hide();
-							$(this).siblings('.cssClassError').html(errors);
-							$(this).siblings('.cssClassError').show();
-							return false;
-						} else {
-							$(this).removeClass("error");
-							$(this).next('.cssClassRight').show();
-							$(this).siblings('.cssClassError').hide();
-							$(this).siblings('.cssClassError').html('');
-						}
-					});
+			$('#txtUserName').on("focus", function() {
+				$(this).siblings('.cssClassRight').hide();
+			});
 
-			// $('#txtWorkEmail').blur(
-			// function() {
-			// var errors = '';
-			// var email = $(this).val();
-			// var user_id = $('#btnSaveUser').prop("name");
-			// if (user_id == '') {
-			// user_id = 0;
-			// }
-			//
-			// if ($.trim(email) == "") {
-			// errors += getLocale(gpmsUsersManagement,
-			// "Please enter work email id.");
-			// } else if (!usersManage.IsUniqueEmail(user_id, email)) {
-			// errors += getLocale(gpmsUsersManagement,
-			// "Please enter unique work email id.")
-			// + " '"
-			// + email.trim()
-			// + "' "
-			// + getLocale(gpmsUsersManagement,
-			// "already exists.") + '<br/>';
-			// }
-			//
-			// if (errors) {
-			// $(this).next('.cssClassRight').hide();
-			// $(this).siblings('.cssClassError').show();
-			// $(this).siblings(".cssClassError").parent('div')
-			// .addClass("diverror");
-			// $(this).siblings('.cssClassError').prevAll(
-			// "input:first").addClass("error");
-			// $(this).siblings('.cssClassError').html(errors);
-			// return false;
-			// } else {
-			// $(this).parent("td").find("span.error").hide();
-			// $(this).next('.cssClassRight').show();
-			// $(this).siblings('.cssClassError').hide();
-			// $(this).siblings(".cssClassError").parent('div')
-			// .removeClass("diverror");
-			// $(this).siblings('.cssClassError').prevAll(
-			// "input:first").removeClass("error");
-			// }
-			// });
-			//
-			// $('#txtPersonalEmail')
-			// .blur(
-			// function() {
-			// var email = $(this).val();
-			// if ($.trim(email) != "") {
-			// var errors = '';
-			// var user_id = $('#btnSaveUser')
-			// .prop("name");
-			// if (user_id == '') {
-			// user_id = 0;
-			// }
-			//
-			// if (!usersManage.IsUniqueEmail(user_id,
-			// email)) {
-			// errors += getLocale(
-			// gpmsUsersManagement,
-			// "Please enter unique personal email id.")
-			// + " '"
-			// + email.trim()
-			// + "' "
-			// + getLocale(
-			// gpmsUsersManagement,
-			// "already exists.")
-			// + '<br/>';
-			// }
-			//
-			// if (errors) {
-			// $(this).next('.cssClassRight').hide();
-			// $(this).siblings('.cssClassError')
-			// .show();
-			// $(this).siblings(".cssClassError")
-			// .parent('div').addClass(
-			// "diverror");
-			// $(this).siblings('.cssClassError')
-			// .prevAll("input:first")
-			// .addClass("error");
-			// $(this).siblings('.cssClassError')
-			// .html(errors);
-			// return false;
-			// } else {
-			// $(this).parent("td").find("span.error")
-			// .hide();
-			// $(this).next('.cssClassRight').show();
-			// $(this).siblings('.cssClassError')
-			// .hide();
-			// $(this).siblings(".cssClassError")
-			// .parent('div').removeClass(
-			// "diverror");
-			// $(this).siblings('.cssClassError')
-			// .prevAll("input:first")
-			// .removeClass("error");
-			// }
-			// }
-			// });
+			$('#txtUserName').on("blur", function() {
+				var userName = $.trim($(this).val());
+				var user_id = $('#btnSaveUser').prop("name");
+				if (user_id == '') {
+					user_id = "0";
+				}
+				usersManage.checkUniqueUserName(user_id, userName, $(this));
+				return false;
+			});
+
+			$('#txtWorkEmail, #txtPersonalEmail').on("focus", function() {
+				$(this).siblings('.cssClassRight').hide();
+			});
+
+			$('#txtWorkEmail, #txtPersonalEmail').on("blur", function() {
+				var email = $.trim($(this).val());
+				var user_id = $('#btnSaveUser').prop("name");
+				if (user_id == '') {
+					user_id = "0";
+				}
+				usersManage.checkUniqueEmailAddress(user_id, email, this.id);
+				return false;
+			});
 
 			$(".delbutton").click(function() {
 				// var user_id = $(this).prop("id").replace(/[^0-9]/gi, '');
 				var user_id = $(this).prop("id");
 				usersManage.DeleteUserById(user_id);
 			});
-
-			// $("td.required input, td select").focusout(function() {
-			// $tdParent = $(this).parent();
-			// if ($tdParent.find('.cssClassRequired')) {
-			// if ($(this).val() != '' && $(this).val() != '0') {
-			// $tdParent.find('.cssClassRequired').hide();
-			// } else {
-			// $tdParent.find('.cssClassRequired').show();
-			// }
-			// }
-			// });
 
 			$("input[type=button].AddOption")
 					.on(
@@ -2054,7 +2060,8 @@ $(function() {
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
 				changeYear : true,
-				yearRange : "-100:+0"
+				yearRange : "-100:+0",
+				maxDate : 0
 			}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
@@ -2064,6 +2071,7 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
+						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtSearchActivityOnTo").datepicker("option",
 									"minDate", selectedDate);
@@ -2071,11 +2079,17 @@ $(function() {
 					}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
-			$("#txtSearchActivityOnTo").datepicker({
-				dateFormat : 'yy-mm-dd',
-				changeMonth : true,
-				changeYear : true
-			}).mask("9999-99-99", {
+			$("#txtSearchActivityOnTo").datepicker(
+					{
+						dateFormat : 'yy-mm-dd',
+						changeMonth : true,
+						changeYear : true,
+						maxDate : 0,
+						onSelect : function(selectedDate) {
+							$("#txtSearchActivityOnFrom").datepicker("option",
+									"maxDate", selectedDate);
+						}
+					}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});
 

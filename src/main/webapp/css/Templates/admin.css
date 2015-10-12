@@ -1887,7 +1887,7 @@ td.sfSelectleftright {
 	font-size: 11px;
 }
 
-.cssClassError, .error {
+.cssClassError, .error, .warning {
 	color: red;
 	display: block;
 	width: auto;
@@ -5598,7 +5598,7 @@ tr.sfTableRowBrd-btm td {
 	text-align: right;
 }
 
-input.error {
+input.error, input.warning, select.warning {
 	border: 1px dashed #F00 !important;
 	padding: 8px;
 }

@@ -239,6 +239,11 @@
 			<version>1.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.0</version>
+		</dependency>
 
 		<!-- Using com.google.code.morphia <dependency> <groupId>com.google.code.morphia</groupId> 
 			<artifactId>morphia</artifactId> <version>0.98</version> </dependency> -->

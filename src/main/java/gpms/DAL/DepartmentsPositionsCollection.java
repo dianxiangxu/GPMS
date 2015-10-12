@@ -2,11 +2,13 @@ package gpms.DAL;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 
 public class DepartmentsPositionsCollection {
-	private static final Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> ht = new Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>>();
+	private static final HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>> ht = new HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>>();
 
 	public DepartmentsPositionsCollection() {
 		ArrayList<String> tenuredTitles = new ArrayList<String>();
@@ -49,7 +51,7 @@ public class DepartmentsPositionsCollection {
 		administratorStaff.add("Research Administrator");
 		administratorStaff.add("University Research Director");
 
-		Hashtable<String, ArrayList<String>> TypeTitleHtCS = new Hashtable<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> TypeTitleHtCS = new HashMap<String, ArrayList<String>>();
 		TypeTitleHtCS.put("Tenured/tenure-track faculty", tenuredTitles);
 		TypeTitleHtCS
 				.put("Non-tenure-track research faculty", nonTenuredTitles);
@@ -58,7 +60,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtCS.put("Professional staff", professionalStaff);
 		TypeTitleHtCS.put("Administrator", administratorStaff);
 
-		Hashtable<String, ArrayList<String>> TypeTitleHtEE = new Hashtable<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> TypeTitleHtEE = new HashMap<String, ArrayList<String>>();
 		TypeTitleHtEE.put("Tenured/tenure-track faculty", tenuredTitles);
 		TypeTitleHtEE
 				.put("Non-tenure-track research faculty", nonTenuredTitles);
@@ -67,7 +69,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtEE.put("Professional staff", professionalStaff);
 		TypeTitleHtEE.put("Administrator", administratorStaff);
 
-		Hashtable<String, ArrayList<String>> TypeTitleHtCE = new Hashtable<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> TypeTitleHtCE = new HashMap<String, ArrayList<String>>();
 		TypeTitleHtCE.put("Tenured/tenure-track faculty", tenuredTitles);
 		TypeTitleHtCE
 				.put("Non-tenure-track research faculty", nonTenuredTitles);
@@ -76,7 +78,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtCE.put("Professional staff", professionalStaff);
 		TypeTitleHtCE.put("Administrator", administratorStaff);
 
-		Hashtable<String, ArrayList<String>> TypeTitleHtFis = new Hashtable<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> TypeTitleHtFis = new HashMap<String, ArrayList<String>>();
 		TypeTitleHtFis.put("Tenured/tenure-track faculty", tenuredTitles);
 		TypeTitleHtFis.put("Non-tenure-track research faculty",
 				nonTenuredTitles);
@@ -85,7 +87,7 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtFis.put("Professional staff", professionalStaff);
 		TypeTitleHtFis.put("Administrator", administratorStaff);
 
-		Hashtable<String, ArrayList<String>> TypeTitleHtChe = new Hashtable<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> TypeTitleHtChe = new HashMap<String, ArrayList<String>>();
 		TypeTitleHtChe.put("Tenured/tenure-track faculty", tenuredTitles);
 		TypeTitleHtChe.put("Non-tenure-track research faculty",
 				nonTenuredTitles);
@@ -94,12 +96,12 @@ public class DepartmentsPositionsCollection {
 		TypeTitleHtChe.put("Professional staff", professionalStaff);
 		TypeTitleHtChe.put("Administrator", administratorStaff);
 
-		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtEng = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
+		HashMap<String, HashMap<String, ArrayList<String>>> departmentTypeHtEng = new HashMap<String, HashMap<String, ArrayList<String>>>();
 		departmentTypeHtEng.put("Computer Science", TypeTitleHtCS);
 		departmentTypeHtEng.put("Electrical Engineering", TypeTitleHtEE);
 		departmentTypeHtEng.put("Computer Engineering", TypeTitleHtCE);
 
-		Hashtable<String, Hashtable<String, ArrayList<String>>> departmentTypeHtSci = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
+		HashMap<String, HashMap<String, ArrayList<String>>> departmentTypeHtSci = new HashMap<String, HashMap<String, ArrayList<String>>>();
 		departmentTypeHtSci.put("Physics", TypeTitleHtFis);
 		departmentTypeHtSci.put("Chemistry", TypeTitleHtChe);
 
@@ -107,20 +109,20 @@ public class DepartmentsPositionsCollection {
 		ht.put("Science", departmentTypeHtSci);
 	}
 
-	public Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> getAvailableDepartmentsAndPositions() {
+	public HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>> getAvailableDepartmentsAndPositions() {
 		return ht;
 	}
 
-	public List<String> getCollegeKeys() {
-		return Collections.list(ht.keys());
+	public Set<String> getCollegeKeys() {
+		return ht.keySet();
 	}
 
-	public List<String> getDepartmentKeys(String college) {
-		return Collections.list(ht.get(college).keys());
+	public Set<String> getDepartmentKeys(String college) {
+		return ht.get(college).keySet();
 	}
 
-	public List<String> getPositionType(String college, String department) {
-		return Collections.list(ht.get(college).get(department).keys());
+	public Set<String> getPositionType(String college, String department) {
+		return ht.get(college).get(department).keySet();
 	}
 
 	public List<String> getPositionTitle(String college, String department,
