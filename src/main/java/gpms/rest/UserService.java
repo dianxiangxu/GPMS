@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 
@@ -49,6 +48,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
@@ -147,12 +147,33 @@ public class UserService {
 
 	@POST
 	@Path("/GetAllUserList")
-	public List<InvestigatorUsersAndPositions> getAllCollegesForUsers()
+	public String getAllCollegesForUsers()
 			throws UnknownHostException, JsonProcessingException, IOException {
-		List<InvestigatorUsersAndPositions> usersPositions = userProfileDAO
-				.findAllUsersAndPositions();
 
-		return usersPositions;
+		// ObjectMapper mapper = new ObjectMapper();
+		// return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+		// usersPositions);
+
+		// Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		// return gson.toJson(userProfileDAO.findAllUsersAndPositions());
+
+		// final MultimapAdapter multimapAdapter = new MultimapAdapter();
+		// final Gson gson = new GsonBuilder().setPrettyPrinting()
+		// .registerTypeAdapter(HashMultimap.class, multimapAdapter)
+		// .create();
+
+		// return gson.toJson(userProfileDAO.findAllUsersAndPositions());
+
+		// ObjectMapper mapper = new ObjectMapper()
+		// .registerModule(new GuavaModule());
+
+		ObjectMapper mapper = new ObjectMapper();
+		// register module with object mapper
+		//mapper.registerModule(new GuavaModule());
+
+		return mapper.writeValueAsString(userProfileDAO
+				.findAllUsersAndPositions());
+
 	}
 
 	@POST

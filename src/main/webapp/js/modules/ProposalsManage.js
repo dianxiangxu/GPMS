@@ -408,6 +408,8 @@ $(function() {
 	var projectTitleIsUnique = false;
 	var signatureInfo = '';
 
+	var positionsDetails = "";
+
 	proposalsManage = {
 		config : {
 			isPostBack : false,
@@ -1936,7 +1938,7 @@ $(function() {
 			proposalsManage.config.data = JSON2.stringify({
 				proposalId : proposalId
 			});
-			proposalsManage.config.ajaxCallMode = 12;
+			proposalsManage.config.ajaxCallMode = 7;
 			proposalsManage.ajaxCall(proposalsManage.config);
 		},
 
@@ -2031,7 +2033,7 @@ $(function() {
 				proposalUniqueObj : proposalUniqueObj,
 				gpmsCommonObj : gpmsCommonInfo
 			});
-			this.config.ajaxCallMode = 11;
+			this.config.ajaxCallMode = 6;
 			this.ajaxCall(this.config);
 			return projectTitleIsUnique;
 		},
@@ -2341,7 +2343,7 @@ $(function() {
 				proposalInfo : info,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 13;
+			this.config.ajaxCallMode = 8;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -2350,6 +2352,15 @@ $(function() {
 			this.config.url = this.config.baseURL + "GetProposalStatusList";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
+			this.ajaxCall(this.config);
+			return false;
+		},
+
+		BindAllUsersAndPositions : function() {
+			// Used User REST API instead Proposal
+			this.config.url = this.config.rootURL + "users/" + "GetAllUserList";
+			this.config.data = "{}";
+			this.config.ajaxCallMode = 5;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -2364,70 +2375,138 @@ $(function() {
 			return false;
 		},
 
-		BindPositionsForUserDropDown : function(userId) {
-			// Used User REST API instead Proposal
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetAllPositionDetailsForAUser";
-			this.config.data = JSON2.stringify({
-				userId : userId
-			});
-			this.config.ajaxCallMode = 6000;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
 		BindUserMobileNo : function(userId) {
 			if (userId != null) {
-				this.config.url = this.config.rootURL + "users/"
-						+ "GetMobileNoForAUser";
-				this.config.data = JSON2.stringify({
-					userId : userId
+				$.each(positionsDetails, function(item, value) {
+					if (value.id == userId) {
+						// $('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+						$('input[name="txtPhoneNo"]').eq(rowIndex).val(
+								value.mobileNumber).mask("(999) 999-9999");
+					}
 				});
-				this.config.ajaxCallMode = 6;
-				this.ajaxCall(this.config);
-				$('input[name="txtPhoneNo"]').mask("(999) 999-9999");
 			}
 			return false;
 		},
 
 		BindCollegeDropDown : function(userId) {
 			if (userId != null) {
-				this.config.url = this.config.rootURL + "users/"
-						+ "GetCollegesForAUser";
-				this.config.data = JSON2.stringify({
-					userId : userId
-				});
-				this.config.ajaxCallMode = 7;
-				this.ajaxCall(this.config);
+				$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
+				$
+						.each(
+								positionsDetails,
+								function(item, value) {
+									if (value.id == userId) {
+										$
+												.each(
+														value.positions,
+														function(keyCollege,
+																valueCollege) {
+															$(
+																	'select[name="ddlCollege"]')
+																	.get(
+																			rowIndex).options[$(
+																	'select[name="ddlCollege"]')
+																	.get(
+																			rowIndex).options.length] = new Option(
+																	keyCollege,
+																	keyCollege);
+														});
+									}
+								});
 			}
 			return false;
 		},
 
 		BindDepartmentDropDown : function(userId, collegeName) {
 			if (userId != null && collegeName != null) {
-				this.config.url = this.config.rootURL + "users/"
-						+ "GetDepartmentsForAUser";
-				this.config.data = JSON2.stringify({
-					userId : userId,
-					college : collegeName
-				});
-				this.config.ajaxCallMode = 8;
-				this.ajaxCall(this.config);
+				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
+				$
+						.each(
+								positionsDetails,
+								function(item, value) {
+									if (value.id == userId) {
+										$
+												.each(
+														value.positions,
+														function(keyCollege,
+																valueCollege) {
+															if (keyCollege == collegeName) {
+																$
+																		.each(
+																				valueCollege,
+																				function(
+																						keyDepartment,
+																						valueDepartment) {
+																					$(
+																							'select[name="ddlDepartment"]')
+																							.get(
+																									rowIndex).options[$(
+																							'select[name="ddlDepartment"]')
+																							.get(
+																									rowIndex).options.length] = new Option(
+																							keyDepartment,
+																							keyDepartment);
+																				});
+															}
+														});
+									}
+								});
 			}
 			return false;
 		},
 
 		BindPositionTypeDropDown : function(userId, collegeName, departmentName) {
 			if (userId != null && collegeName != null && departmentName != null) {
-				this.config.url = this.config.rootURL + "users/"
-						+ "GetPositionTypeForAUser";
-				this.config.data = JSON2.stringify({
-					userId : userId,
-					college : collegeName,
-					department : departmentName
-				});
-				this.config.ajaxCallMode = 9;
-				this.ajaxCall(this.config);
+				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
+				$
+						.each(
+								positionsDetails,
+								function(item, value) {
+									if (value.id == userId) {
+										$
+												.each(
+														value.positions,
+														function(keyCollege,
+																valueCollege) {
+															if (keyCollege == collegeName) {
+																$
+																		.each(
+																				valueCollege,
+																				function(
+																						keyDepartment,
+																						valueDepartment) {
+																					if (keyDepartment == departmentName) {
+																						$
+																								.each(
+																										valueDepartment,
+																										function(
+																												keyPositionType,
+																												valuePositionType) {
+																											$(
+																													'select[name="ddlPositionType"]')
+																													.get(
+																															rowIndex).options[$(
+																													'select[name="ddlPositionType"]')
+																													.get(
+																															rowIndex).options.length] = new Option(
+																													keyPositionType,
+																													keyPositionType);
+																										});
+																					}
+																				});
+															}
+														});
+									}
+								});
 			}
 			return false;
 		},
@@ -2436,16 +2515,50 @@ $(function() {
 				departmentName, positionTypeName) {
 			if (userId != null && collegeName != null && departmentName != null
 					&& positionTypeName != null) {
-				this.config.url = this.config.rootURL + "users/"
-						+ "GetPositionTitleForAUser";
-				this.config.data = JSON2.stringify({
-					userId : userId,
-					college : collegeName,
-					department : departmentName,
-					positionType : positionTypeName
-				});
-				this.config.ajaxCallMode = 10;
-				this.ajaxCall(this.config);
+				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
+				$
+						.each(
+								positionsDetails,
+								function(item, value) {
+									if (value.id == userId) {
+										$
+												.each(
+														value.positions,
+														function(keyCollege,
+																valueCollege) {
+															if (keyCollege == collegeName) {
+																$
+																		.each(
+																				valueCollege,
+																				function(
+																						keyDepartment,
+																						valueDepartment) {
+																					if (keyDepartment == departmentName) {
+																						$
+																								.each(
+																										valueDepartment,
+																										function(
+																												keyPositionType,
+																												valuePositionType) {
+																											if (keyPositionType == positionTypeName) {
+																												$(
+																														'select[name="ddlPositionTitle"]')
+																														.get(
+																																rowIndex).options[$(
+																														'select[name="ddlPositionTitle"]')
+																														.get(
+																																rowIndex).options.length] = new Option(
+																														valuePositionType,
+																														valuePositionType);
+																											}
+																										});
+																					}
+																				});
+															}
+														});
+									}
+								});
 			}
 			return false;
 		},
@@ -2503,96 +2616,34 @@ $(function() {
 			break;
 
 		case 5: // Bind User List for Investigator Info
+			positionsDetails = msg;
+
 			$('select[name="ddlName"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 			$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+
 			$
 					.each(
 							msg,
-							function(index, item) {
+							function(item, value) {
 								$('select[name="ddlName"]').get(rowIndex).options[$(
 										'select[name="ddlName"]').get(rowIndex).options.length] = new Option(
-										item, index);
+										value.fullName, value.id);
+
+								// $('input[name="txtPhoneNo"]').eq(rowIndex).val(
+								// value.mobileNumber).mask(
+								// "(999) 999-9999");
 							});
 			break;
 
-		case 6: // Bind User Mobile No
-			$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
-			$('input[name="txtPhoneNo"]').eq(rowIndex).val(msg).mask(
-					"(999) 999-9999");
-			break;
-
-		case 7:// Bind User Colleges
-			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
-			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
-			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
-			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-
-			$
-					.each(
-							msg,
-							function(index, item) {
-								$('select[name="ddlCollege"]').get(rowIndex).options[$(
-										'select[name="ddlCollege"]').get(
-										rowIndex).options.length] = new Option(
-										item, item);
-							});
-			break;
-
-		case 8:// Bind User Departments
-			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
-			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
-			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-
-			$
-					.each(
-							msg,
-							function(index, item) {
-								$('select[name="ddlDepartment"]').get(rowIndex).options[$(
-										'select[name="ddlDepartment"]').get(
-										rowIndex).options.length] = new Option(
-										item, item);
-							});
-			break;
-
-		case 9:// Bind User Postition Types
-			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
-			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-
-			$
-					.each(msg,
-							function(index, item) {
-								$('select[name="ddlPositionType"]').get(
-										rowIndex).options[$(
-										'select[name="ddlPositionType"]').get(
-										rowIndex).options.length] = new Option(
-										item, item);
-							});
-			break;
-
-		case 10:// Bind User Postition Titles
-			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-
-			$
-					.each(msg,
-							function(index, item) {
-								$('select[name="ddlPositionTitle"]').get(
-										rowIndex).options[$(
-										'select[name="ddlPositionTitle"]').get(
-										rowIndex).options.length] = new Option(
-										item, item);
-							});
-
-			break;
-
-		case 11:// Unique Project Title Check
+		case 6:// Unique Project Title Check
 			projectTitleIsUnique = stringToBoolean(msg);
 			break;
 
-		case 12:
+		case 7:
 			$
 					.each(
 							msg,
@@ -2676,7 +2727,7 @@ $(function() {
 
 			break;
 
-		case 13:
+		case 8:
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
 			$('#divProposalGrid').show();
@@ -2744,50 +2795,8 @@ $(function() {
 						+ getLocale(gpmsProposalsManagement,
 								"Failed to load user list.") + '</p>');
 				break;
+
 			case 6:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to load user's Mobile No.") + '</p>');
-				break;
-			case 7:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to load user's colleges list.")
-						+ '</p>');
-				break;
-
-			case 8:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to load user's departments list.")
-						+ '</p>');
-				break;
-
-			case 9:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to load user's position types list.")
-						+ '</p>');
-				break;
-
-			case 10:
-				csscody.error('<h2>'
-						+ getLocale(gpmsProposalsManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsProposalsManagement,
-								"Failed to load user's position titles list.")
-						+ '</p>');
-				break;
-
-			case 11:
 				csscody.error("<h2>"
 						+ getLocale(gpmsProposalsManagement, 'Error Message')
 						+ "</h2><p>"
@@ -2796,7 +2805,7 @@ $(function() {
 						+ "</p>");
 				break;
 
-			case 12:
+			case 7:
 				csscody
 						.error("<h2>"
 								+ getLocale(gpmsProposalsManagement,
@@ -2807,7 +2816,7 @@ $(function() {
 								+ "</p>");
 				break;
 
-			case 13:
+			case 8:
 				csscody.error("<h2>"
 						+ getLocale(gpmsProposalsManagement, 'Error Message')
 						+ "</h2><p>"
@@ -2888,7 +2897,9 @@ $(function() {
 
 			proposalsManage.BindProposalStatus();
 
-			proposalsManage.BindUserDropDown();
+			proposalsManage.BindAllUsersAndPositions();
+
+			// proposalsManage.BindUserDropDown();
 
 			// Form Position details Drop downs
 			$('select[name="ddlName"]').on("change", function() {

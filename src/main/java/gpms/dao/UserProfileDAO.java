@@ -34,6 +34,8 @@ import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -960,12 +962,33 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 						"last name", "details", "mobile number");
 		List<UserProfile> userProfile = q.asList();
 
+		List<String> userColleges = new ArrayList<String>();
+		List<String> userDepartments = new ArrayList<String>();
+		List<String> userPositionTypes = new ArrayList<String>();
+		List<String> userPositionTitles = new ArrayList<String>();
+		// HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>>
 		for (UserProfile user : userProfile) {
+
 			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
 			userPosition.setId(user.getId().toString());
 			userPosition.setFullName(user.getFullName());
 			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
-			userPosition.setPositions(user.getDetails());
+
+			for (PositionDetails userDetails : user.getDetails()) {
+				// Multimap<String, String> mapTypeTitle = new
+				// ArrayListMultimap.create();
+				Multimap<String, String> mapTypeTitle = LinkedListMultimap
+						.create();
+				Multimap<String, Multimap<String, String>> mapDeptType = LinkedListMultimap
+						.create();
+
+				mapTypeTitle.put(userDetails.getPositionType(),
+						userDetails.getPositionTitle());
+				mapDeptType.put(userDetails.getDepartment(), mapTypeTitle);
+				// ht.put(userDetails.getCollege(), mapTypeTitle);
+				userPosition.getPositions().put(userDetails.getCollege(),
+						mapDeptType);
+			}
 			userPositions.add(userPosition);
 		}
 		return userPositions;
@@ -990,7 +1013,7 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			userPosition.setId(user.getId().toString());
 			userPosition.setFullName(user.getFullName());
 			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
-			userPosition.setPositions(user.getDetails());
+			// userPosition.setPositions(user.getDetails());
 			userPositions.add(userPosition);
 		}
 		return userPositions;

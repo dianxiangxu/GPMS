@@ -53,7 +53,8 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = '<%=session.getAttribute("userid")%>';
+	var userProfileId = "561a7f900b663240602924ef";
+
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";

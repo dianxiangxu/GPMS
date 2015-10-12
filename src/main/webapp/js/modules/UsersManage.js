@@ -152,6 +152,8 @@ $(function() {
 	var userNameIsUnique = false;
 	var emailIsUnique = false;
 
+	var positions = "";
+
 	usersManage = {
 		config : {
 			isPostBack : false,
@@ -446,7 +448,7 @@ $(function() {
 				usersManage.config.data = JSON2.stringify({
 					userId : argus[0]
 				});
-				usersManage.config.ajaxCallMode = 8;
+				usersManage.config.ajaxCallMode = 2;
 				usersManage.ajaxCall(usersManage.config);
 
 				usersManage.BindUserAuditLogGrid(argus[0], null, null, null,
@@ -850,7 +852,7 @@ $(function() {
 				userId : _userId,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 12;
+			this.config.ajaxCallMode = 3;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -869,7 +871,7 @@ $(function() {
 				userIds : _userIds,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 13;
+			this.config.ajaxCallMode = 4;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -883,9 +885,9 @@ $(function() {
 				isActive : _isActive
 			});
 			if (_isActive) {
-				this.config.ajaxCallMode = 14;
+				this.config.ajaxCallMode = 5;
 			} else {
-				this.config.ajaxCallMode = 15;
+				this.config.ajaxCallMode = 6;
 			}
 			this.ajaxCall(this.config);
 			return false;
@@ -1118,7 +1120,7 @@ $(function() {
 				userUniqueObj : userUniqueObj,
 				gpmsCommonObj : gpmsCommonInfo
 			});
-			this.config.ajaxCallMode = 16;
+			this.config.ajaxCallMode = 7;
 			this.ajaxCall(this.config);
 			return userNameIsUnique;
 		},
@@ -1170,7 +1172,7 @@ $(function() {
 				userUniqueObj : userUniqueObj,
 				gpmsCommonObj : gpmsCommonInfo
 			});
-			this.config.ajaxCallMode = 17;
+			this.config.ajaxCallMode = 8;
 			this.ajaxCall(this.config);
 			return emailIsUnique;
 		},
@@ -1222,196 +1224,180 @@ $(function() {
 				userInfo : info,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 18;
+			this.config.ajaxCallMode = 9;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
-		BindCollegeDropDown : function() {
-			this.config.url = this.config.baseURL + "GetCollegeList";
+		BindPositionDetailsHash : function() {
+			this.config.url = this.config.baseURL + "GetPositionDetailsHash";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
 			this.ajaxCall(this.config);
 			return false;
 		},
 
+		BindCollegeDropDown : function() {
+			$('#ddlSearchCollege').get(rowIndex).options.length = 1;
+			$('#ddlSearchDepartment').get(rowIndex).options.length = 1;
+			$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
+			$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
+
+			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+
+			$
+					.each(
+							positions,
+							function(keyCollege, valueCollege) {
+								$("#ddlSearchCollege").get(rowIndex).options[$(
+										"#ddlSearchCollege").get(rowIndex).options.length] = new Option(
+										keyCollege, keyCollege);
+
+								// For form Dropdown Binding
+								$('select[name="ddlCollege"]').get(rowIndex).options[$(
+										'select[name="ddlCollege"]').get(
+										rowIndex).options.length] = new Option(
+										keyCollege, keyCollege);
+							});
+			usersManage.BindDepartmentDropDown($(
+					'select[name="ddlCollege"] option:selected').eq(rowIndex)
+					.val(), false);
+			return false;
+		},
+
 		BindDepartmentDropDown : function(collegeName, flagSearch) {
-			this.config.url = this.config.baseURL + "GetDepartmentList";
-			this.config.data = JSON2.stringify({
-				college : collegeName
-			});
 			if (flagSearch) {
-				this.config.ajaxCallMode = 2;
-			} else {
-				this.config.ajaxCallMode = 3;
-			}
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTypeDropDown : function(collegeName, departmentName,
-				flagSearch) {
-			this.config.url = this.config.baseURL + "GetPositionTypeList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName
-			});
-			if (flagSearch) {
-				this.config.ajaxCallMode = 4;
-			} else {
-				this.config.ajaxCallMode = 5;
-			}
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTitleDropDown : function(collegeName, departmentName,
-				positionTypeName, flagSearch) {
-			this.config.url = this.config.baseURL + "GetPositionTitleList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName,
-				positionType : positionTypeName
-			});
-			if (flagSearch) {
-				this.config.ajaxCallMode = 6;
-			} else {
-				this.config.ajaxCallMode = 7;
-			}
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindDepartmentOnly : function(collegeName) {
-			this.config.url = this.config.baseURL + "GetDepartmentList";
-			this.config.data = JSON2.stringify({
-				college : collegeName
-			});
-			this.config.ajaxCallMode = 9;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTypeOnly : function(collegeName, departmentName) {
-			this.config.url = this.config.baseURL + "GetPositionTypeList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName
-			});
-			this.config.ajaxCallMode = 10;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		BindPositionTitleOnly : function(collegeName, departmentName,
-				positionTypeName) {
-			this.config.url = this.config.baseURL + "GetPositionTitleList";
-			this.config.data = JSON2.stringify({
-				college : collegeName,
-				department : departmentName,
-				positionType : positionTypeName
-			});
-			this.config.ajaxCallMode = 11;
-			this.ajaxCall(this.config);
-			return false;
-		},
-
-		ajaxSuccess : function(msg) {
-			switch (usersManage.config.ajaxCallMode) {
-			case 0:
-				break;
-			case 1: // For College Dropdown Binding for both form and search
-				$('#ddlSearchCollege').get(rowIndex).options.length = 1;
-				$('#ddlSearchDepartment').get(rowIndex).options.length = 1;
-				$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
-				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
-
-				$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
-				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
-				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
-				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchCollege").get(rowIndex).options[$(
-											"#ddlSearchCollege").get(rowIndex).options.length] = new Option(
-											item, item);
-
-									// For form Dropdown Binding
-									$('select[name="ddlCollege"]')
-											.get(rowIndex).options[$(
-											'select[name="ddlCollege"]').get(
-											rowIndex).options.length] = new Option(
-											item, item);
-								});
-				usersManage.BindDepartmentDropDown($(
-						'select[name="ddlCollege"] option:selected').eq(
-						rowIndex).val(), false);
-
-				break;
-
-			case 2:// For Search Department Dropdown Binding
 				$('#ddlSearchDepartment').get(rowIndex).options.length = 1;
 				$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
 				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
 				$
 						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchDepartment").get(0).options[$(
-											"#ddlSearchDepartment").get(0).options.length] = new Option(
-											item, item);
+								positions,
+								function(keyCollege, valueCollege) {
+									if (keyCollege == collegeName) {
+										$
+												.each(
+														valueCollege,
+														function(keyDepartment,
+																valueDepartment) {
+															$(
+																	"#ddlSearchDepartment")
+																	.get(0).options[$(
+																	"#ddlSearchDepartment")
+																	.get(0).options.length] = new Option(
+																	keyDepartment,
+																	keyDepartment);
+														});
+									}
 								});
-				break;
 
-			case 3:// For Form Department Dropdown Binding
+			} else {
 				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
 				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 				$
 						.each(
-								msg,
-								function(index, item) {
-									$('select[name="ddlDepartment"]').get(
-											rowIndex).options[$(
-											'select[name="ddlDepartment"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
+								positions,
+								function(keyCollege, valueCollege) {
+									if (keyCollege == collegeName) {
+										$
+												.each(
+														valueCollege,
+														function(keyDepartment,
+																valueDepartment) {
+															$(
+																	'select[name="ddlDepartment"]')
+																	.get(
+																			rowIndex).options[$(
+																	'select[name="ddlDepartment"]')
+																	.get(
+																			rowIndex).options.length] = new Option(
+																	keyDepartment,
+																	keyDepartment);
+														});
+									}
 								});
 				usersManage.BindPositionTypeDropDown($(
 						'select[name="ddlCollege"] option:selected').eq(
 						rowIndex).val(), $(
 						'select[name="ddlDepartment"] option:selected').eq(
 						rowIndex).val(), false);
-				break;
+			}
+			return false;
+		},
 
-			case 4: // For Search College Position Type Binding
+		BindPositionTypeDropDown : function(collegeName, departmentName,
+				flagSearch) {
+			if (flagSearch) {
 				$('#ddlSearchPositionType').get(rowIndex).options.length = 1;
 				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
 				$
 						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchPositionType").get(rowIndex).options[$(
-											"#ddlSearchPositionType").get(0).options.length] = new Option(
-											item, item);
+								positions,
+								function(keyCollege, valueCollege) {
+									if (keyCollege == collegeName) {
+										$
+												.each(
+														valueCollege,
+														function(keyDepartment,
+																valueDepartment) {
+															if (keyDepartment == departmentName) {
+																$
+																		.each(
+																				valueDepartment,
+																				function(
+																						keyPositionType,
+																						valuePositionType) {
+																					$(
+																							"#ddlSearchPositionType")
+																							.get(
+																									rowIndex).options[$(
+																							"#ddlSearchPositionType")
+																							.get(
+																									0).options.length] = new Option(
+																							keyPositionType,
+																							keyPositionType);
+																				});
+															}
+														});
+									}
 								});
-				break;
-
-			case 5: // For Form College Position Type Binding
+			} else {
 				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
 				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 				$
 						.each(
-								msg,
-								function(index, item) {
-									$('select[name="ddlPositionType"]').get(
-											rowIndex).options[$(
-											'select[name="ddlPositionType"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
+								positions,
+								function(keyCollege, valueCollege) {
+									if (keyCollege == collegeName) {
+										$
+												.each(
+														valueCollege,
+														function(keyDepartment,
+																valueDepartment) {
+															if (keyDepartment == departmentName) {
+																$
+																		.each(
+																				valueDepartment,
+																				function(
+																						keyPositionType,
+																						valuePositionType) {
+																					$(
+																							'select[name="ddlPositionType"]')
+																							.get(
+																									rowIndex).options[$(
+																							'select[name="ddlPositionType"]')
+																							.get(
+																									rowIndex).options.length] = new Option(
+																							keyPositionType,
+																							keyPositionType);
+																				});
+															}
+														});
+									}
 								});
 
 				usersManage.BindPositionTitleDropDown($(
@@ -1421,90 +1407,197 @@ $(function() {
 						rowIndex).val(), $(
 						'select[name="ddlPositionType"] option:selected').eq(
 						rowIndex).val(), false);
-				break;
+			}
+			return false;
+		},
 
-			case 6: // For Search College Position Title Binding
+		BindPositionTitleDropDown : function(collegeName, departmentName,
+				positionTypeName, flagSearch) {
+			if (flagSearch) {
 				$('#ddlSearchPositionTitle').get(rowIndex).options.length = 1;
 				$
 						.each(
-								msg,
-								function(index, item) {
-									$("#ddlSearchPositionTitle").get(rowIndex).options[$(
-											"#ddlSearchPositionTitle").get(
-											rowIndex).options.length] = new Option(
-											item, item);
-								});
-				break;
+								positions,
+								function(keyCollege, valueCollege) {
+									if (keyCollege == collegeName) {
+										$
+												.each(
+														valueCollege,
+														function(keyDepartment,
+																valueDepartment) {
+															if (keyDepartment == departmentName) {
+																$
+																		.each(
+																				valueDepartment,
+																				function(
+																						keyPositionType,
+																						valuePositionType) {
+																					if (keyPositionType == positionTypeName) {
+																						for ( var item in valuePositionType) {
+																							$(
+																									"#ddlSearchPositionTitle")
+																									.get(
+																											rowIndex).options[$(
+																									"#ddlSearchPositionTitle")
+																									.get(
+																											rowIndex).options.length] = new Option(
+																									valuePositionType[item],
+																									valuePositionType[item]);
+																						}
+																					}
+																				});
 
-			case 7: // For Form College Position Title Binding
+															}
+														});
+									}
+								});
+			} else {
 				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
 				$
 						.each(
-								msg,
-								function(index, item) {
-									$('select[name="ddlPositionTitle"]').get(
-											rowIndex).options[$(
-											'select[name="ddlPositionTitle"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
+								positions,
+								function(keyCollege, valueCollege) {
+									if (keyCollege == collegeName) {
+										$
+												.each(
+														valueCollege,
+														function(keyDepartment,
+																valueDepartment) {
+															if (keyDepartment == departmentName) {
+																$
+																		.each(
+																				valueDepartment,
+																				function(
+																						keyPositionType,
+																						valuePositionType) {
+																					if (keyPositionType == positionTypeName) {
+																						for ( var item in valuePositionType) {
+																							$(
+																									'select[name="ddlPositionTitle"]')
+																									.get(
+																											rowIndex).options[$(
+																									'select[name="ddlPositionTitle"]')
+																									.get(
+																											rowIndex).options.length] = new Option(
+																									valuePositionType[item],
+																									valuePositionType[item]);
+																						}
+																					}
+																				});
+															}
+														});
+									}
 								});
+			}
+			return false;
+		},
+
+		BindDepartmentOnly : function(collegeName) {
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$
+					.each(
+							positions,
+							function(keyCollege, valueCollege) {
+								if (keyCollege == collegeName) {
+									$
+											.each(
+													valueCollege,
+													function(keyDepartment,
+															valueDepartment) {
+														$(
+																'select[name="ddlDepartment"]')
+																.get(rowIndex).options[$(
+																'select[name="ddlDepartment"]')
+																.get(rowIndex).options.length] = new Option(
+																keyDepartment,
+																keyDepartment);
+													});
+								}
+							});
+			return false;
+		},
+
+		BindPositionTypeOnly : function(collegeName, departmentName) {
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$.each(positions, function(keyCollege, valueCollege) {
+				if (keyCollege == collegeName) {
+					$.each(valueCollege, function(keyDepartment,
+							valueDepartment) {
+						if (keyDepartment == departmentName) {
+							$.each(valueDepartment, function(keyPositionType,
+									valuePositionType) {
+								$('select[name="ddlPositionType"]').get(
+										rowIndex).options[$(
+										'select[name="ddlPositionType"]').get(
+										rowIndex).options.length] = new Option(
+										keyPositionType, keyPositionType);
+							});
+						}
+					});
+				}
+			});
+			return false;
+		},
+
+		BindPositionTitleOnly : function(collegeName, departmentName,
+				positionTypeName) {
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$
+					.each(
+							positions,
+							function(keyCollege, valueCollege) {
+								if (keyCollege == collegeName) {
+									$
+											.each(
+													valueCollege,
+													function(keyDepartment,
+															valueDepartment) {
+														if (keyDepartment == departmentName) {
+															$
+																	.each(
+																			valueDepartment,
+																			function(
+																					keyPositionType,
+																					valuePositionType) {
+																				if (keyPositionType == positionTypeName) {
+																					for ( var item in valuePositionType) {
+																						$(
+																								'select[name="ddlPositionTitle"]')
+																								.get(
+																										rowIndex).options[$(
+																								'select[name="ddlPositionTitle"]')
+																								.get(
+																										rowIndex).options.length] = new Option(
+																								valuePositionType[item],
+																								valuePositionType[item]);
+																					}
+																				}
+																			});
+														}
+													});
+								}
+							});
+			return false;
+		},
+
+		ajaxSuccess : function(msg) {
+			switch (usersManage.config.ajaxCallMode) {
+			case 0:
+				break;
+			case 1: // For Position Details Global Binding
+				positions = msg;
 				break;
 
-			case 8: // For User Edit Action
+			case 2:// For User Edit Action
 				usersManage.FillForm(msg);
 				$('#divUserGrid').hide();
 				$('#divUserForm').show();
 				break;
 
-			case 9: // For Binding Department Dropdown based on College
-				$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
-				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
-				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$('select[name="ddlDepartment"]').get(
-											rowIndex).options[$(
-											'select[name="ddlDepartment"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
-								});
-				break;
-
-			case 10: // For Binding PositionType Dropdown based on
-				// Department
-				$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
-				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$('select[name="ddlPositionType"]').get(
-											rowIndex).options[$(
-											'select[name="ddlPositionType"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
-								});
-
-				break;
-
-			case 11: // For Binding PositionTitle Dropdown based on
-				// PositionType
-				$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
-				$
-						.each(
-								msg,
-								function(index, item) {
-									$('select[name="ddlPositionTitle"]').get(
-											rowIndex).options[$(
-											'select[name="ddlPositionTitle"]')
-											.get(rowIndex).options.length] = new Option(
-											item, item);
-								});
-				break;
-
-			case 12:
+			case 3:// For Form Department Dropdown Binding
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody
 						.info("<h2>"
@@ -1519,7 +1612,7 @@ $(function() {
 				$('#divUserGrid').show();
 				break;
 
-			case 13:
+			case 4:
 				SageData.Get("gdvUsers").Arr.length = 0;
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody
@@ -1532,7 +1625,7 @@ $(function() {
 								+ "</p>");
 				break;
 
-			case 14:
+			case 5:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Successful Message')
@@ -1542,7 +1635,7 @@ $(function() {
 						+ "</p>");
 				break;
 
-			case 15:
+			case 6:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				csscody.info("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Successful Message')
@@ -1552,15 +1645,15 @@ $(function() {
 						+ "</p>");
 				break;
 
-			case 16:
+			case 7:
 				userNameIsUnique = stringToBoolean(msg);
 				break;
 
-			case 17:
+			case 8:
 				emailIsUnique = stringToBoolean(msg);
 				break;
 
-			case 18:
+			case 9:
 				usersManage.BindUserGrid(null, null, null, null, null, null);
 				$('#divUserGrid').show();
 				if (editFlag > 0) {
@@ -1600,97 +1693,16 @@ $(function() {
 			case 2:
 				csscody.error('<h2>'
 						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load departments list.") + '</p>');
-				break;
-			case 3:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load departments list.") + '</p>');
-				break;
-			case 4:
-				csscody
-						.error('<h2>'
-								+ getLocale(gpmsUsersManagement,
-										"Error Message")
-								+ '</h2><p>'
-								+ getLocale(gpmsUsersManagement,
-										"Failed to load position types list.")
-								+ '</p>');
-				break;
-			case 5:
-				csscody
-						.error('<h2>'
-								+ getLocale(gpmsUsersManagement,
-										"Error Message")
-								+ '</h2><p>'
-								+ getLocale(gpmsUsersManagement,
-										"Failed to load position types list.")
-								+ '</p>');
-				break;
-			case 6:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load position titles list.")
-						+ '</p>');
-				break;
-			case 7:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load position titles list.")
-						+ '</p>');
-				break;
-
-			case 8:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
 						+ '</h2><p>' + "Failed to load user details." + '</p>');
 				break;
-
-			case 9:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load departments list.") + '</p>');
-				break;
-
-			case 10:
-				csscody
-						.error('<h2>'
-								+ getLocale(gpmsUsersManagement,
-										"Error Message")
-								+ '</h2><p>'
-								+ getLocale(gpmsUsersManagement,
-										"Failed to load position types list.")
-								+ '</p>');
-				break;
-
-			case 11:
-				csscody.error('<h2>'
-						+ getLocale(gpmsUsersManagement, "Error Message")
-						+ '</h2><p>'
-						+ getLocale(gpmsUsersManagement,
-								"Failed to load position titles list.")
-						+ '</p>');
-				break;
-
-			case 12:
+			case 3:
 				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
 								'User cannot be deleted.') + "</p>");
 				break;
-
-			case 13:
+			case 4:
 				csscody
 						.error("<h2>"
 								+ getLocale(gpmsUsersManagement,
@@ -1700,24 +1712,21 @@ $(function() {
 										'Selected user(s) cannot be deleted.')
 								+ "</p>");
 				break;
-
-			case 14:
+			case 5:
 				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
 								'User cannot be activated.') + "</p>");
 				break;
-
-			case 15:
+			case 6:
 				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsUsersManagement,
 								'User cannot be deactivated.') + "</p>");
 				break;
-
-			case 16:
+			case 7:
 				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
@@ -1725,7 +1734,7 @@ $(function() {
 								'Cannot check for unique Username') + "</p>");
 				break;
 
-			case 17:
+			case 8:
 				csscody.error("<h2>"
 						+ getLocale(gpmsUsersManagement, 'Error Message')
 						+ "</h2><p>"
@@ -1733,7 +1742,7 @@ $(function() {
 								'Cannot check for unique Email') + "</p>");
 				break;
 
-			case 18:
+			case 9:
 				if (editFlag > 0) {
 					csscody.error("<h2>"
 							+ getLocale(gpmsUsersManagement, 'Error Message')
@@ -1751,11 +1760,12 @@ $(function() {
 			}
 		},
 
-		init : function(config) {
+		init : function() {
 			usersManage.LoadStaticImage();
 			usersManage.BindUserGrid(null, null, null, null, null, null);
 			$('#divUserForm').hide();
 			$('#divUserGrid').show();
+			usersManage.BindPositionDetailsHash();
 			usersManage.BindCollegeDropDown();
 
 			$("#ddlSearchCollege").bind("change", function() {

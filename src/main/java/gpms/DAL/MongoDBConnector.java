@@ -74,13 +74,13 @@ public class MongoDBConnector {
 				// mongodb://db1.example.net,db2.example.net:2500/?replicaSet=test
 				// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
 
-				mongo = new MongoClient(host, port);
-				logger.debug("New Mongo created with [" + host + "] and ["
-						+ port + "]");
+				// mongo = new MongoClient(host, port);
+				// logger.debug("New Mongo created with [" + host + "] and ["
+				// + port + "]");
 
-				// MongoClientURI uri = new MongoClientURI(
-				// "mongodb://milstein:milstein@ds042888.mongolab.com:42888/db_gpms");
-				// mongo = new MongoClient(uri);
+				MongoClientURI uri = new MongoClientURI(
+						"mongodb://milstein:milstein@ds042888.mongolab.com:42888/db_gpms");
+				mongo = new MongoClient(uri);
 
 			} catch (MongoException e) {
 				logger.error(e.getMessage());

@@ -1,24 +1,28 @@
 package gpms.rest;
 
-import gpms.model.PositionDetails;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.mongodb.morphia.annotations.Property;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+@JsonSerialize(as = InvestigatorUsersAndPositions.class)
+@JsonDeserialize(as = InvestigatorUsersAndPositions.class)
 public class InvestigatorUsersAndPositions {
-	@Property("id")
+	@JsonProperty
 	private String id;
-
-	@Property("full name")
+	@JsonProperty
 	private String fullName;
-
-	@Property("mobile number")
+	@JsonProperty
 	private String mobileNumber = new String();
-
-	@Property("positions")
-	private List<PositionDetails> positions = new ArrayList<PositionDetails>();
+	@JsonProperty
+	private Multimap<String, Multimap<String, Multimap<String, String>>> positions = LinkedListMultimap
+			.create();
 
 	public InvestigatorUsersAndPositions() {
 	}
@@ -47,12 +51,13 @@ public class InvestigatorUsersAndPositions {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public List<PositionDetails> getPositions() {
+	public Multimap<String, Multimap<String, Multimap<String, String>>> getPositions() {
 		return positions;
 	}
 
-	public void setPositions(List<PositionDetails> positions) {
-		this.positions = positions;
+	public void setPositions(
+			Multimap<String, Multimap<String, Multimap<String, String>>> ht) {
+		this.positions = ht;
 	}
 
 }

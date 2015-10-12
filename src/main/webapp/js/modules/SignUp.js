@@ -364,6 +364,7 @@ $(function() {
 								+ "</p>");
 
 				signUp.ClearForm();
+				break;
 			}
 		},
 
@@ -393,11 +394,10 @@ $(function() {
 						+ getLocale(gpmsSignUp, 'Failed to save user!')
 						+ "</p>");
 				break;
-			break;
-		}
-	},
+			}
+		},
 
-		init : function(config) {
+		init : function() {
 			signUp.LoadStaticImage();
 			signUp.ClearForm();
 
