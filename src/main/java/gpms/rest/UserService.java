@@ -130,6 +130,44 @@ public class UserService {
 	}
 
 	@POST
+	@Path("/GetAllUserList")
+	public String getAllUserList() throws UnknownHostException,
+			JsonProcessingException, IOException {
+
+		final MultimapAdapter multimapAdapter = new MultimapAdapter();
+		final Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(Multimap.class, multimapAdapter).create();
+
+		final String userPositions = gson.toJson(userProfileDAO
+				.findAllUsersAndPositions());
+		return userPositions;
+	}
+
+	@POST
+	@Path("/GetAllPositionDetailsForAUser")
+	public String getAllPositionDetailsForAUser(String message)
+			throws UnknownHostException, JsonProcessingException, IOException {
+		String userId = new String();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("userId")) {
+			userId = root.get("userId").getTextValue();
+		}
+
+		ObjectId id = new ObjectId(userId);
+
+		final MultimapAdapter multimapAdapter = new MultimapAdapter();
+		final Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(Multimap.class, multimapAdapter).create();
+
+		final String userPositions = gson.toJson(userProfileDAO
+				.findAllPositionDetailsForAUser(id));
+		return userPositions;
+	}
+
+	@POST
 	@Path("/GetMobileNoForAUser")
 	public String getMobileNoForAUser(String message)
 			throws UnknownHostException, JsonProcessingException, IOException {
@@ -148,73 +186,6 @@ public class UserService {
 		String response = JSONTansformer.ConvertToJSON(mobileNo);
 
 		return response;
-	}
-
-	@POST
-	@Path("/GetAllUserList")
-	public String getAllCollegesForUsers() throws UnknownHostException,
-			JsonProcessingException, IOException {
-
-		// ObjectMapper mapper = new ObjectMapper();
-		// return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
-		// usersPositions);
-
-		// Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		// return gson.toJson(userProfileDAO.findAllUsersAndPositions());
-
-		// final MultimapAdapter multimapAdapter = new MultimapAdapter();
-		// final Gson gson = new GsonBuilder().setPrettyPrinting()
-		// .registerTypeAdapter(HashMultimap.class, multimapAdapter)
-		// .create();
-
-		// return gson.toJson(userProfileDAO.findAllUsersAndPositions());
-
-		// ObjectMapper mapper = new ObjectMapper()
-		// .registerModule(new GuavaModule());
-
-		// ObjectMapper mapper = new ObjectMapper();
-		// .registerModule(new GuavaModule());
-		// register module with object mapper
-		// mapper.registerModule(new GuavaModule());
-
-		final MultimapAdapter multimapAdapter = new MultimapAdapter();
-		// final Type type = new TypeToken<HashMultimap<String,
-		// InvestigatorUsersAndPositions>>() {
-		// }.getType();
-
-		final Gson gson = new GsonBuilder().setPrettyPrinting()
-				.registerTypeAdapter(Multimap.class, multimapAdapter).create();
-
-		final String json = gson.toJson(userProfileDAO
-				.findAllUsersAndPositions());
-
-		// final HashMultimap<String, InvestigatorUsersAndPositions> multimap2 =
-		// gson.fromJson(json, type);
-
-		return json;
-
-	}
-
-	@POST
-	@Path("/GetAllPositionDetailsForAUser")
-	public List<InvestigatorUsersAndPositions> getAllPositionDetailsForAUser(
-			String message) throws UnknownHostException,
-			JsonProcessingException, IOException {
-		String userId = new String();
-
-		ObjectMapper mapper = new ObjectMapper();
-
-		JsonNode root = mapper.readTree(message);
-		if (root != null && root.has("userId")) {
-			userId = root.get("userId").getTextValue();
-		}
-
-		ObjectId id = new ObjectId(userId);
-
-		List<InvestigatorUsersAndPositions> userPositions = userProfileDAO
-				.findAllPositionDetailsForAUser(id);
-
-		return userPositions;
 	}
 
 	@POST

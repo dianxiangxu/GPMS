@@ -1720,6 +1720,9 @@ $(function() {
 
 		BindDefaultUserPosition : function(rowIndexVal) {
 			// For form Dropdown Binding
+			proposalsManage.BindAllPositionDetailsForAUser($(
+					'select[name="ddlName"]').eq(rowIndexVal).val());
+
 			proposalsManage.BindUserMobileNo($('select[name="ddlName"]').eq(
 					rowIndexVal).val());
 
@@ -1938,7 +1941,7 @@ $(function() {
 			proposalsManage.config.data = JSON2.stringify({
 				proposalId : proposalId
 			});
-			proposalsManage.config.ajaxCallMode = 7;
+			proposalsManage.config.ajaxCallMode = 8;
 			proposalsManage.ajaxCall(proposalsManage.config);
 		},
 
@@ -2033,7 +2036,7 @@ $(function() {
 				proposalUniqueObj : proposalUniqueObj,
 				gpmsCommonObj : gpmsCommonInfo
 			});
-			this.config.ajaxCallMode = 6;
+			this.config.ajaxCallMode = 7;
 			this.ajaxCall(this.config);
 			return projectTitleIsUnique;
 		},
@@ -2343,7 +2346,7 @@ $(function() {
 				proposalInfo : info,
 				gpmsCommonObj : gpmsCommonObj()
 			});
-			this.config.ajaxCallMode = 8;
+			this.config.ajaxCallMode = 9;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -2352,6 +2355,16 @@ $(function() {
 			this.config.url = this.config.baseURL + "GetProposalStatusList";
 			this.config.data = "{}";
 			this.config.ajaxCallMode = 1;
+			this.ajaxCall(this.config);
+			return false;
+		},
+
+		BindUserDropDown : function() {
+			// Used User REST API instead Proposal
+			this.config.url = this.config.rootURL + "users/"
+					+ "GetAllUserDropdown";
+			this.config.data = "{}";
+			this.config.ajaxCallMode = 5;
 			this.ajaxCall(this.config);
 			return false;
 		},
@@ -2365,13 +2378,16 @@ $(function() {
 			return false;
 		},
 
-		BindUserDropDown : function() {
-			// Used User REST API instead Proposal
-			this.config.url = this.config.rootURL + "users/"
-					+ "GetAllUserDropdown";
-			this.config.data = "{}";
-			this.config.ajaxCallMode = 5;
-			this.ajaxCall(this.config);
+		BindAllPositionDetailsForAUser : function(userId) {
+			if (userId != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetAllPositionDetailsForAUser";
+				this.config.data = JSON2.stringify({
+					userId : userId
+				});
+				this.config.ajaxCallMode = 6;
+				this.ajaxCall(this.config);
+			}
 			return false;
 		},
 
@@ -2679,8 +2695,6 @@ $(function() {
 			break;
 
 		case 5: // Bind User List for Investigator Info
-			positionsDetails = msg;
-
 			$('select[name="ddlName"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
@@ -2694,19 +2708,25 @@ $(function() {
 							function(item, value) {
 								$('select[name="ddlName"]').get(rowIndex).options[$(
 										'select[name="ddlName"]').get(rowIndex).options.length] = new Option(
-										value.fullName, value.id);
-
-								// $('input[name="txtPhoneNo"]').eq(rowIndex).val(
-								// value.mobileNumber).mask(
-								// "(999) 999-9999");
+								// value.fullName, value.id);
+								value, item);
 							});
 			break;
 
-		case 6:// Unique Project Title Check
+		case 6: // Bind User Position Details on dropdown selection change
+			positionsDetails = msg;
+			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
+			$('select[name="ddlPositionTitle"]').get(rowIndex).options.length = 0;
+			$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+			break;
+
+		case 7:// Unique Project Title Check
 			projectTitleIsUnique = stringToBoolean(msg);
 			break;
 
-		case 7:
+		case 8:
 			$
 					.each(
 							msg,
@@ -2790,7 +2810,7 @@ $(function() {
 
 			break;
 
-		case 8:
+		case 9:
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
 			$('#divProposalGrid').show();
@@ -2864,11 +2884,20 @@ $(function() {
 						+ getLocale(gpmsProposalsManagement, 'Error Message')
 						+ "</h2><p>"
 						+ getLocale(gpmsProposalsManagement,
-								'Cannot check for unique project title')
+								'Failed to load user\'s position details.')
 						+ "</p>");
 				break;
 
 			case 7:
+				csscody.error("<h2>"
+						+ getLocale(gpmsProposalsManagement, 'Error Message')
+						+ "</h2><p>"
+						+ getLocale(gpmsProposalsManagement,
+								'Cannot check for unique project title')
+						+ "</p>");
+				break;
+
+			case 8:
 				csscody
 						.error("<h2>"
 								+ getLocale(gpmsProposalsManagement,
@@ -2879,7 +2908,7 @@ $(function() {
 								+ "</p>");
 				break;
 
-			case 8:
+			case 9:
 				csscody.error("<h2>"
 						+ getLocale(gpmsProposalsManagement, 'Error Message')
 						+ "</h2><p>"
@@ -2960,9 +2989,9 @@ $(function() {
 
 			proposalsManage.BindProposalStatus();
 
-			proposalsManage.BindAllUsersAndPositions();
+			// proposalsManage.BindAllUsersAndPositions();
 
-			// proposalsManage.BindUserDropDown();
+			proposalsManage.BindUserDropDown();
 
 			// Form Position details Drop downs
 			$('select[name="ddlName"]').on("change", function() {

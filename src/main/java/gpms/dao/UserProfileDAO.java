@@ -942,32 +942,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	// return users;
 	// }
 
-	public String findMobileNoForAUser(ObjectId id) {
-		Datastore ds = getDatastore();
-		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
-
-		UserProfile q = profileQuery.field("_id").equal(id)
-				.retrievedFields(true, "mobile number").get();
-		return q.getMobileNumbers().get(0).toString();
-	}
-
 	public ArrayList<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
 		Datastore ds = getDatastore();
 		ArrayList<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
-
-		// Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
-		// UserProfile q1 = profileQuery.field("_id").equal(id).get();
 
 		Query<UserProfile> q = ds.createQuery(UserProfile.class)
 				.retrievedFields(true, "_id", "first name", "middle name",
 						"last name", "details", "mobile number");
 		List<UserProfile> userProfile = q.asList();
-
-		List<String> userColleges = new ArrayList<String>();
-		List<String> userDepartments = new ArrayList<String>();
-		List<String> userPositionTypes = new ArrayList<String>();
-		List<String> userPositionTitles = new ArrayList<String>();
-		// HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>>
 
 		for (UserProfile user : userProfile) {
 			Multimap<String, Object> htUser = ArrayListMultimap.create();
@@ -996,21 +978,14 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 				userPosition.setPositions(htUser);
 			}
 			userPositions.add(userPosition);
-			// ObjectMapper mapper = new ObjectMapper();
-			// List<InvestigatorUsersAndPositions> asList = mapper.readValues(
-			// userPosition,
-			// new TypeReference<List<InvestigatorUsersAndPositions>>() {
-			// });
 		}
-
 		return userPositions;
-
 	}
 
 	public List<InvestigatorUsersAndPositions> findAllPositionDetailsForAUser(
 			ObjectId id) {
 		Datastore ds = getDatastore();
-		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
+		ArrayList<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
 
 		Query<UserProfile> q = ds
 				.createQuery(UserProfile.class)
@@ -1021,14 +996,39 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		List<UserProfile> userProfile = q.asList();
 
 		for (UserProfile user : userProfile) {
+			Multimap<String, Object> htUser = ArrayListMultimap.create();
+
 			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
 			userPosition.setId(user.getId().toString());
 			userPosition.setFullName(user.getFullName());
 			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
-			// userPosition.setPositions(user.getDetails());
+
+			for (PositionDetails userDetails : user.getDetails()) {
+				Multimap<String, Object> mapTypeTitle = ArrayListMultimap
+						.create();
+				Multimap<String, Object> mapDeptType = ArrayListMultimap
+						.create();
+
+				mapTypeTitle.put(userDetails.getPositionType(),
+						userDetails.getPositionTitle());
+				mapDeptType.put(userDetails.getDepartment(),
+						mapTypeTitle.asMap());
+
+				htUser.put(userDetails.getCollege(), mapDeptType.asMap());
+				userPosition.setPositions(htUser);
+			}
 			userPositions.add(userPosition);
 		}
 		return userPositions;
+	}
+
+	public String findMobileNoForAUser(ObjectId id) {
+		Datastore ds = getDatastore();
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+
+		UserProfile q = profileQuery.field("_id").equal(id)
+				.retrievedFields(true, "mobile number").get();
+		return q.getMobileNumbers().get(0).toString();
 	}
 
 	public List<String> findCollegesForAUser(ObjectId id) {
