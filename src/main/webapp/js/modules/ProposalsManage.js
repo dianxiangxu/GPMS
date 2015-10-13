@@ -784,6 +784,16 @@ $(function() {
 											hide : true
 										},
 										{
+											display : 'All Involved Users',
+											name : 'all_users',
+											cssclass : '',
+											controlclass : '',
+											coltype : 'label',
+											align : 'left',
+											type : 'array',
+											hide : true
+										},
+										{
 											display : 'Is Deleted?',
 											name : 'is_deleted',
 											cssclass : 'cssClassHeadBoolean',
@@ -814,7 +824,7 @@ $(function() {
 											_event : 'click',
 											trigger : '1',
 											callMethod : 'proposalsManage.EditProposal',
-											arguments : '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22'
+											arguments : '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23'
 										},
 										{
 											display : getLocale(
@@ -825,7 +835,7 @@ $(function() {
 											_event : 'click',
 											trigger : '2',
 											callMethod : 'proposalsManage.DeleteProposal',
-											arguments : '22'
+											arguments : '23'
 										} ],
 								rp : perpage,
 								nomsg : getLocale(gpmsProposalsManagement,
@@ -837,7 +847,7 @@ $(function() {
 									0 : {
 										sorter : false
 									},
-									23 : {
+									24 : {
 										sorter : false
 									}
 								}
@@ -879,6 +889,9 @@ $(function() {
 				$("#btnReset").hide();
 
 				// Get all proposal details
+				// TODO: bind the user position list for a proposal
+				proposalsManage.BindUserPositionDetailsForAProposal(argus[22]);
+
 				proposalsManage.BindProposalDetailsByProposalId(argus[0]);
 
 				// Certification/ Signatures Info
@@ -900,14 +913,28 @@ $(function() {
 			}
 		},
 
+		BindUserPositionDetailsForAProposal : function(users) {
+			if (users != null) {
+				this.config.url = this.config.rootURL + "users/"
+						+ "GetUserPositionDetailsForAProposal";
+				this.config.data = JSON2.stringify({
+					userIds : users
+				});
+				this.config.ajaxCallMode = 6;
+				this.ajaxCall(this.config);
+			}
+			return false;
+		},
+
 		BindProposalDetailsByProposalId : function(proposalId) {
-			proposalsManage.config.url = proposalsManage.config.baseURL
+			this.config.url = this.config.baseURL
 					+ "GetProposalDetailsByProposalId";
-			proposalsManage.config.data = JSON2.stringify({
+			this.config.data = JSON2.stringify({
 				proposalId : proposalId
 			});
-			proposalsManage.config.ajaxCallMode = 4;
-			proposalsManage.ajaxCall(proposalsManage.config);
+			this.config.ajaxCallMode = 4;
+			this.ajaxCall(this.config);
+			return false;
 		},
 
 		FillForm : function(response) {
@@ -1440,6 +1467,14 @@ $(function() {
 								$(this).removeAttr('disabled');
 							}
 
+							// proposalsManage.BindAllPositionDetailsForAUser($(
+							// 'select[name="ddlName"]').eq(rowIndex)
+							// .val());
+
+							proposalsManage.BindUserMobileNo($(
+									'select[name="ddlName"]').eq(rowIndex)
+									.val());
+
 							proposalsManage.BindCollegeDropDown($(
 									'select[name="ddlName"]').eq(rowIndex)
 									.val());
@@ -1475,11 +1510,10 @@ $(function() {
 									'selected', 'selected');
 						}
 
-						$('input[name="txtPhoneNo"]').eq(rowIndex).val('');
-						$('input[name="txtPhoneNo"]').eq(rowIndex).val(
-								userDetails.userRef.mobileNumbers[0]).mask(
-								"(999) 999-9999");
-						;
+						// $('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+						// $('input[name="txtPhoneNo"]').eq(rowIndex).val(
+						// userDetails.userRef.mobileNumbers[0]).mask(
+						// "(999) 999-9999");
 					});
 
 			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("input").each(
@@ -2646,6 +2680,7 @@ $(function() {
 			switch (proposalsManage.config.ajaxCallMode) {
 			case 0:
 				break;
+
 			case 1: // For Proposal Status Dropdown Binding for both form and
 				// search
 				$('#ddlSearchProposalStatus option').length = 1;

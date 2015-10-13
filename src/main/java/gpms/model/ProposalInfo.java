@@ -44,6 +44,8 @@ public class ProposalInfo implements Comparable<ProposalInfo> {
 	private List<String> copiUsers = new ArrayList<String>();
 	private List<String> seniorUsers = new ArrayList<String>();
 
+	private List<String> allUsers = new ArrayList<String>();
+
 	private boolean isDeleted = false;
 
 	public ProposalInfo() {
@@ -232,6 +234,14 @@ public class ProposalInfo implements Comparable<ProposalInfo> {
 
 	public void setSeniorUsers(List<String> seniorUsers) {
 		this.seniorUsers = seniorUsers;
+	}
+
+	public List<String> getAllUsers() {
+		return allUsers;
+	}
+
+	public void setAllUsers(List<String> allUsers) {
+		this.allUsers = allUsers;
 	}
 
 	public boolean isDeleted() {

@@ -5,7 +5,6 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.gui.test.MultimapAdapterTest.Obj;
 import gpms.model.Address;
 import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
@@ -18,7 +17,6 @@ import gpms.model.UserProfile;
 import gpms.utils.MultimapAdapter;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -51,11 +49,9 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.mongodb.MongoClient;
 
 @Path("/users")
@@ -164,6 +160,35 @@ public class UserService {
 
 		final String userPositions = gson.toJson(userProfileDAO
 				.findAllPositionDetailsForAUser(id));
+		return userPositions;
+	}
+
+	@POST
+	@Path("/GetUserPositionDetailsForAProposal")
+	public String getUserPositionDetailsForAProposal(String message)
+			throws UnknownHostException, JsonProcessingException, IOException {
+		String profileIds = new String();
+		String profiles[] = new String[0];
+		List<ObjectId> userIds = new ArrayList<ObjectId>();
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode root = mapper.readTree(message);
+		if (root != null && root.has("userIds")) {
+			profileIds = root.get("userIds").getTextValue();
+			profiles = profileIds.split(", ");
+		}
+
+		for (String profile : profiles) {
+			ObjectId id = new ObjectId(profile);
+			userIds.add(id);
+		}
+		final MultimapAdapter multimapAdapter = new MultimapAdapter();
+		final Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(Multimap.class, multimapAdapter).create();
+
+		final String userPositions = gson.toJson(userProfileDAO
+				.findUserPositionDetailsForAProposal(userIds));
 		return userPositions;
 	}
 
