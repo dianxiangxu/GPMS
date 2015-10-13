@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -34,7 +35,7 @@ import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
-import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -950,9 +951,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return q.getMobileNumbers().get(0).toString();
 	}
 
-	public List<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
+	public ArrayList<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
 		Datastore ds = getDatastore();
-		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
+		ArrayList<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
 
 		// Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
 		// UserProfile q1 = profileQuery.field("_id").equal(id).get();
@@ -967,7 +968,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		List<String> userPositionTypes = new ArrayList<String>();
 		List<String> userPositionTitles = new ArrayList<String>();
 		// HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>>
+
 		for (UserProfile user : userProfile) {
+			Multimap<String, Object> htUser = ArrayListMultimap.create();
 
 			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
 			userPosition.setId(user.getId().toString());
@@ -977,20 +980,29 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 			for (PositionDetails userDetails : user.getDetails()) {
 				// Multimap<String, String> mapTypeTitle = new
 				// ArrayListMultimap.create();
-				Multimap<String, String> mapTypeTitle = LinkedListMultimap
+
+				Multimap<String, Object> mapTypeTitle = ArrayListMultimap
 						.create();
-				Multimap<String, Multimap<String, String>> mapDeptType = LinkedListMultimap
+				Multimap<String, Object> mapDeptType = ArrayListMultimap
 						.create();
 
 				mapTypeTitle.put(userDetails.getPositionType(),
 						userDetails.getPositionTitle());
-				mapDeptType.put(userDetails.getDepartment(), mapTypeTitle);
+				mapDeptType.put(userDetails.getDepartment(),
+						mapTypeTitle.asMap());
 				// ht.put(userDetails.getCollege(), mapTypeTitle);
-				userPosition.getPositions().put(userDetails.getCollege(),
-						mapDeptType);
+
+				htUser.put(userDetails.getCollege(), mapDeptType.asMap());
+				userPosition.setPositions(htUser);
 			}
 			userPositions.add(userPosition);
+			// ObjectMapper mapper = new ObjectMapper();
+			// List<InvestigatorUsersAndPositions> asList = mapper.readValues(
+			// userPosition,
+			// new TypeReference<List<InvestigatorUsersAndPositions>>() {
+			// });
 		}
+
 		return userPositions;
 
 	}

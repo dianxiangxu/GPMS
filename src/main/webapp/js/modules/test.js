@@ -111,11 +111,26 @@ $(function() {
 		},
 
 		secondMethod : function() {
-			alert(positionsDetails);
-			$.each(positionsDetails, function(item, value) {
-				console.log(value.id);
-				$.each(value.positions, function(keyCollege, valueCollege) {
-					console.log(keyCollege, valueCollege);
+			$.map(positionsDetails, function(item, value) {
+				console.log(item.id);
+				$.map(item.positions, function(keyCollege, valueCollege) {
+					console.log(valueCollege);
+					$.map(keyCollege, function(i, j) {
+						$.map(i, function(keyDepartment, valueDepartment) {
+							console.log(valueDepartment);
+							$.map(keyDepartment, function(k, l) {
+								$.map(k, function(keyPositionType,
+										valuePositionType) {
+									console.log(valuePositionType);
+									$.map(keyPositionType, function(
+											keyPositionTitle,
+											valuePositionTitle) {
+										console.log(keyPositionTitle);
+									});
+								});
+							});
+						});
+					});
 				});
 			});
 		},
@@ -127,3 +142,18 @@ $(function() {
 	};
 	testManage.init();
 });
+
+function removeDuplicates(inputArray) {
+	var i;
+	var len = inputArray.length;
+	var outputArray = [];
+	var temp = {};
+
+	for (i = 0; i < len; i++) {
+		temp[inputArray[i]] = 0;
+	}
+	for (i in temp) {
+		outputArray.push(i);
+	}
+	return outputArray;
+}

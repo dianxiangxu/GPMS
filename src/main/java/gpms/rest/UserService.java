@@ -5,6 +5,7 @@ import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
+import gpms.gui.test.MultimapAdapterTest.Obj;
 import gpms.model.Address;
 import gpms.model.AuditLogInfo;
 import gpms.model.GPMSCommonInfo;
@@ -14,8 +15,10 @@ import gpms.model.PositionDetails;
 import gpms.model.UserAccount;
 import gpms.model.UserInfo;
 import gpms.model.UserProfile;
+import gpms.utils.MultimapAdapter;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
@@ -48,9 +51,11 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.mongodb.MongoClient;
 
 @Path("/users")
@@ -147,8 +152,8 @@ public class UserService {
 
 	@POST
 	@Path("/GetAllUserList")
-	public String getAllCollegesForUsers()
-			throws UnknownHostException, JsonProcessingException, IOException {
+	public String getAllCollegesForUsers() throws UnknownHostException,
+			JsonProcessingException, IOException {
 
 		// ObjectMapper mapper = new ObjectMapper();
 		// return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
@@ -167,12 +172,26 @@ public class UserService {
 		// ObjectMapper mapper = new ObjectMapper()
 		// .registerModule(new GuavaModule());
 
-		ObjectMapper mapper = new ObjectMapper();
+		// ObjectMapper mapper = new ObjectMapper();
+		// .registerModule(new GuavaModule());
 		// register module with object mapper
-		//mapper.registerModule(new GuavaModule());
+		// mapper.registerModule(new GuavaModule());
 
-		return mapper.writeValueAsString(userProfileDAO
+		final MultimapAdapter multimapAdapter = new MultimapAdapter();
+		// final Type type = new TypeToken<HashMultimap<String,
+		// InvestigatorUsersAndPositions>>() {
+		// }.getType();
+
+		final Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(Multimap.class, multimapAdapter).create();
+
+		final String json = gson.toJson(userProfileDAO
 				.findAllUsersAndPositions());
+
+		// final HashMultimap<String, InvestigatorUsersAndPositions> multimap2 =
+		// gson.fromJson(json, type);
+
+		return json;
 
 	}
 
