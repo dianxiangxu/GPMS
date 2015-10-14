@@ -888,8 +888,6 @@ $(function() {
 
 				$("#btnReset").hide();
 
-				// Get all proposal details
-				// TODO: bind the user position list for a proposal
 				proposalsManage.BindUserPositionDetailsForAProposal(argus[22]);
 
 				proposalsManage.BindProposalDetailsByProposalId(argus[0]);
@@ -2095,7 +2093,7 @@ $(function() {
 						.checkUniqueProjectTitle(_proposalId, projectTitle,
 								$projectTitle);
 
-				if (!validateErrorMessage) {
+				if (validateErrorMessage == "") {
 					var investigatorInfo = '';
 					$('#dataTable > tbody  > tr')
 							.each(
@@ -2381,6 +2379,9 @@ $(function() {
 
 					// alert(proposalInfo);
 					proposalsManage.AddProposalInfo(proposalInfo);
+				} else {
+					// TODO : focus the first accordion with error
+					// proposalsManage.focusTabWithErrors("#container-7");
 				}
 			}
 		},
@@ -3239,9 +3240,7 @@ $(function() {
 
 			$('#txtProjectTitle').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
-			});
-
-			$('#txtProjectTitle').on(
+			}), $('#txtProjectTitle').on(
 					"blur",
 					function() {
 						var projectTitle = $.trim($(this).val());

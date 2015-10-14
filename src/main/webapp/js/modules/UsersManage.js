@@ -1001,18 +1001,23 @@ $(function() {
 				var userName = $.trim($username.val());
 				var validateErrorMessage = usersManage.checkUniqueUserName(
 						_userId, userName, $username);
+				if (validateErrorMessage == "") {
+					var $workEmail = $("#txtWorkEmail");
+					var workEmail = $.trim($workEmail.val());
+					validateErrorMessage += usersManage
+							.checkUniqueEmailAddress(_userId, workEmail,
+									"txtWorkEmail");
+				}
 
-				var $workEmail = $("#txtWorkEmail");
-				var workEmail = $.trim($workEmail.val());
-				validateErrorMessage += usersManage.checkUniqueEmailAddress(
-						_userId, workEmail, "txtWorkEmail");
+				if (validateErrorMessage == "") {
+					var $personalEmail = $("#txtPersonalEmail");
+					var personalEmail = $.trim($personalEmail.val());
+					validateErrorMessage += usersManage
+							.checkUniqueEmailAddress(_userId, personalEmail,
+									"txtPersonalEmail");
+				}
 
-				var $personalEmail = $("#txtPersonalEmail");
-				var personalEmail = $.trim($personalEmail.val());
-				validateErrorMessage += usersManage.checkUniqueEmailAddress(
-						_userId, personalEmail, "txtPersonalEmail");
-
-				if (!validateErrorMessage) {
+				if (validateErrorMessage == "") {
 					var _saveOptions = '';
 					$("#dataTable")
 							.find("tr select")
@@ -1956,9 +1961,7 @@ $(function() {
 
 			$('#txtUserName').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
-			});
-
-			$('#txtUserName').on("blur", function() {
+			}), $('#txtUserName').on("blur", function() {
 				var userName = $.trim($(this).val());
 				var user_id = $('#btnSaveUser').prop("name");
 				if (user_id == '') {
@@ -1970,9 +1973,7 @@ $(function() {
 
 			$('#txtWorkEmail, #txtPersonalEmail').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
-			});
-
-			$('#txtWorkEmail, #txtPersonalEmail').on("blur", function() {
+			}), $('#txtWorkEmail, #txtPersonalEmail').on("blur", function() {
 				var email = $.trim($(this).val());
 				var user_id = $('#btnSaveUser').prop("name");
 				if (user_id == '') {

@@ -135,8 +135,8 @@ $(function() {
 	signUp = {
 		config : {
 			isPostBack : false,
-			async : true,
-			cache : true,
+			async : false,
+			cache : false,
 			type : 'POST',
 			contentType : "application/json; charset=utf-8",
 			data : '{}',
@@ -198,7 +198,7 @@ $(function() {
 					}
 
 					textBoxUserName.siblings('.error').show();
-					textBoxUserName.focus();
+					// textBoxUserName.focus();
 				} else {
 					textBoxUserName.removeClass("error");
 					textBoxUserName.siblings('.cssClassRight').show();
@@ -249,7 +249,7 @@ $(function() {
 					}
 
 					txtEmail.siblings('.error').show();
-					txtEmail.focus();
+					// txtEmail.focus();
 				} else {
 					txtEmail.removeClass("error");
 					txtEmail.siblings('.cssClassRight').show();
@@ -284,12 +284,14 @@ $(function() {
 				var validateErrorMessage = signUp.checkUniqueUserName(user_id,
 						userName, $username);
 
-				var $workEmail = $("#txtWorkEmail");
-				var workEmail = $.trim($workEmail.val());
-				validateErrorMessage += signUp.checkUniqueEmailAddress(user_id,
-						workEmail, "txtWorkEmail");
+				if (validateErrorMessage == "") {
+					var $workEmail = $("#txtWorkEmail");
+					var workEmail = $.trim($workEmail.val());
+					validateErrorMessage += signUp.checkUniqueEmailAddress(
+							user_id, workEmail, "txtWorkEmail");
+				}
 
-				if (!validateErrorMessage) {
+				if (validateErrorMessage == "") {
 					var userInfo = {
 						UserID : user_id,
 						UserName : $.trim($('#txtUserName').val()),
@@ -309,6 +311,8 @@ $(function() {
 						MobileNumber : $('#txtMobileNumber').mask()
 					};
 					signUp.AddUserInfo(userInfo);
+				} else {
+					return false;
 				}
 			}
 		},
@@ -433,9 +437,7 @@ $(function() {
 
 			$('#txtWorkEmail').on("focus", function() {
 				$(this).siblings('.cssClassRight').hide();
-			});
-
-			$('#txtWorkEmail').on("blur", function() {
+			}), $('#txtWorkEmail').on("blur", function() {
 				var email = $.trim($(this).val());
 				var user_id = "0";
 				signUp.checkUniqueEmailAddress(user_id, email, this.id);

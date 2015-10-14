@@ -118,7 +118,7 @@ public class UserService {
 	@Path("/GetAllUserDropdown")
 	public HashMap<String, String> getAllUsers() throws UnknownHostException {
 		HashMap<String, String> users = new HashMap<String, String>();
-		List<UserProfile> userprofiles = userProfileDAO.findAll();
+		List<UserProfile> userprofiles = userProfileDAO.findAllActiveUsers();
 		for (UserProfile userProfile : userprofiles) {
 			users.put(userProfile.getId().toString(), userProfile.getFullName());
 		}

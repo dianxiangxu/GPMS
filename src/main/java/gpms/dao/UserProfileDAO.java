@@ -90,6 +90,24 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).asList();
 	}
 
+	public List<UserProfile> findAllActiveUsers() throws UnknownHostException {
+		Datastore ds = getDatastore();
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
+
+		accountQuery.and(accountQuery.criteria("is deleted").equal(false),
+				accountQuery.criteria("is active").equal(true));
+		profileQuery.and(
+				profileQuery.criteria("details").notEqual(null),
+				profileQuery.and(profileQuery.criteria("user id").in(
+						accountQuery.asKeyList())),
+				profileQuery.criteria("is deleted").equal(false));
+
+		return profileQuery.retrievedFields(true, "_id", "first name",
+				"middle name", "last name").asList();
+	}
+
 	/*
 	 * This is example format for grid Info object bind that is customized to
 	 * bind in grid
@@ -105,24 +123,27 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
 
 		if (userName != null) {
-			accountQuery.field("username").containsIgnoreCase(userName);
-			profileQuery.criteria("user id").in(accountQuery.asKeyList());
+			accountQuery.criteria("username").containsIgnoreCase(userName);
 		}
 
+		if (isActive != null) {
+			accountQuery.criteria("is active").equal(isActive);
+		}
+
+		profileQuery.criteria("user id").in(accountQuery.asKeyList());
+
 		if (college != null) {
-			profileQuery.field("details.college").equal(college);
+			profileQuery.criteria("details.college").equal(college);
 		}
 		if (department != null) {
-			profileQuery.field("details.department").equal(department);
+			profileQuery.criteria("details.department").equal(department);
 		}
 		if (positionType != null) {
-			profileQuery.field("details.position type").equal(positionType);
+			profileQuery.criteria("details.position type").equal(positionType);
 		}
 		if (positionTitle != null) {
-			profileQuery.field("details.position title").equal(positionTitle);
-		}
-		if (isActive != null) {
-			accountQuery.field("is active").equal(isActive);
+			profileQuery.criteria("details.position title")
+					.equal(positionTitle);
 		}
 
 		int rowTotal = profileQuery.asList().size();
