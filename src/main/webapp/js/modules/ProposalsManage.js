@@ -5,9 +5,9 @@ $(function() {
 		return this.length > 0;
 	}
 
-	// $.validator.setDefaults({
-	// ignore : ""
-	// });
+	$.validator.setDefaults({
+		ignore : ".ignore"
+	});
 
 	var gpmsCommonObj = function() {
 		var gpmsCommonInfo = {
@@ -408,7 +408,7 @@ $(function() {
 	var projectTitleIsUnique = false;
 	var signatureInfo = '';
 
-	var positionsDetails = "";
+	var positionsDetails = [];
 
 	proposalsManage = {
 		config : {
@@ -905,7 +905,18 @@ $(function() {
 				// Get Audit Logs
 				proposalsManage.BindProposalAuditLogGrid(argus[0], null, null,
 						null, null);
+
+				// OSP Section
 				$('#ui-id-23').show();
+				$("#ui-id-24").find('input:text, select, textarea').each(
+						function() {
+							$(this).removeClass("ignore");
+						});
+
+				// need to validate Proposal Status
+				$("#ddlProposalStatus").removeClass("ignore");
+
+				// Audit Log Section
 				$('#ui-id-25').show();
 				break;
 			default:
@@ -2414,13 +2425,23 @@ $(function() {
 
 		BindAllPositionDetailsForAUser : function(userId) {
 			if (userId != null) {
-				this.config.url = this.config.rootURL + "users/"
-						+ "GetAllPositionDetailsForAUser";
-				this.config.data = JSON2.stringify({
-					userId : userId
+				var doExists = false;
+				$.each(positionsDetails, function(item, value) {
+					if (value.id == userId) {
+						doExists = true;
+						return false;
+					}
 				});
-				this.config.ajaxCallMode = 6;
-				this.ajaxCall(this.config);
+
+				if (!doExists) {
+					this.config.url = this.config.rootURL + "users/"
+							+ "GetAllPositionDetailsForAUser";
+					this.config.data = JSON2.stringify({
+						userId : userId
+					});
+					this.config.ajaxCallMode = 6;
+					this.ajaxCall(this.config);
+				}
 			}
 			return false;
 		},
@@ -2432,6 +2453,7 @@ $(function() {
 						// $('input[name="txtPhoneNo"]').eq(rowIndex).val('');
 						$('input[name="txtPhoneNo"]').eq(rowIndex).val(
 								value.mobileNumber).mask("(999) 999-9999");
+						return false;
 					}
 				});
 			}
@@ -2749,7 +2771,7 @@ $(function() {
 			break;
 
 		case 6: // Bind User Position Details on dropdown selection change
-			positionsDetails = msg;
+			$.merge(positionsDetails, msg);
 			$('select[name="ddlCollege"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlDepartment"]').get(rowIndex).options.length = 0;
 			$('select[name="ddlPositionType"]').get(rowIndex).options.length = 0;
@@ -2960,7 +2982,6 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
-						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtSearchReceivedOnTo").datepicker("option",
 									"minDate", selectedDate);
@@ -2973,7 +2994,6 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
-						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtSearchReceivedOnFrom").datepicker("option",
 									"maxDate", selectedDate);
@@ -3000,7 +3020,6 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
-						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtProjectPeriodTo").datepicker("option",
 									"minDate", selectedDate);
@@ -3013,7 +3032,6 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
-						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtProjectPeriodFrom").datepicker("option",
 									"maxDate", selectedDate);
@@ -3177,6 +3195,15 @@ $(function() {
 						$("#trProposalStatus").hide();
 						$('#divProposalGrid').hide();
 						$('#divProposalForm').show();
+
+						// OSP Section remove validation
+						$("#ui-id-24").find('input:text, select, textarea')
+								.each(function() {
+									$(this).addClass("ignore");
+								});
+
+						// Don't validate Proposal Status
+						$("#ddlProposalStatus").addClass("ignore");
 					});
 
 			$('#btnBack').on("click", function() {
@@ -3317,18 +3344,23 @@ $(function() {
 
 			$("#ddlUseHumanSubjects").on("change", function() {
 				if ($("#ddlUseHumanSubjects").val() == "1") {
+					$("#ddlIRBOptions").removeClass("ignore");
 					$("#lblUseHumanSubjects").show();
 					// $("#ddlIRBOptions").prop("selectedIndex", 0);
 					$("#tdHumanSubjectsOption").show();
 					$("#tdIRBOption").show();
 					if ($("#ddlIRBOptions").val() == "1") {
 						// $("#txtIRB").val('');
+						$("#txtIRB").removeClass("ignore");
 						$("#tdIRBtxt").show();
 					} else {
 						// $("#txtIRB").val('');
+						$("#txtIRB").addClass("ignore");
 						$("#tdIRBtxt").hide();
 					}
 				} else {
+					$("#ddlIRBOptions").addClass("ignore");
+					$("#txtIRB").removeClass("ignore");
 					$("#lblUseHumanSubjects").hide();
 					// $("#ddlIRBOptions").prop("selectedIndex", 0);
 					$("#tdHumanSubjectsOption").hide();
@@ -3340,27 +3372,34 @@ $(function() {
 			$("#ddlIRBOptions").on("change", function() {
 				if ($("#ddlIRBOptions").val() == "1") {
 					// $("#txtIRB").val('');
+					$("#txtIRB").removeClass("ignore");
 					$("#tdIRBtxt").show();
 				} else {
 					// $("#txtIRB").val('');
+					$("#txtIRB").addClass("ignore");
 					$("#tdIRBtxt").hide();
 				}
 			});
 
 			$("#ddlUseVertebrateAnimals").on("change", function() {
 				if ($("#ddlUseVertebrateAnimals").val() == "1") {
+					$("#ddlIACUCOptions").removeClass("ignore");
 					$("#lblUseVertebrateAnimals").show();
 					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
 					$("#tdVertebrateAnimalsOption").show();
 					$("#tdIACUCOption").show();
 					if ($("#ddlIACUCOptions").val() == "1") {
 						// $("#txtIACUC").val('');
+						$("#txtIACUC").removeClass("ignore");
 						$("#tdIACUCtxt").show();
 					} else {
 						// $("#txtIACUC").val('');
+						$("#txtIACUC").addClass("ignore");
 						$("#tdIACUCtxt").hide();
 					}
 				} else {
+					$("#ddlIACUCOptions").addClass("ignore");
+					$("#txtIACUC").removeClass("ignore");
 					$("#lblUseVertebrateAnimals").hide();
 					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
 					$("#tdVertebrateAnimalsOption").hide();
@@ -3372,27 +3411,34 @@ $(function() {
 			$("#ddlIACUCOptions").on("change", function() {
 				if ($("#ddlIACUCOptions").val() == "1") {
 					// $("#txtIACUC").val('');
+					$("#txtIACUC").removeClass("ignore");
 					$("#tdIACUCtxt").show();
 				} else {
 					// $("#txtIACUC").val('');
+					$("#txtIACUC").addClass("ignore");
 					$("#tdIACUCtxt").hide();
 				}
 			});
 
 			$("#ddlInvovleBioSafety").on("change", function() {
 				if ($("#ddlInvovleBioSafety").val() == "1") {
+					$("#ddlIBCOptions").removeClass("ignore");
 					$("#lblHasBiosafetyConcerns").show();
 					// $("#ddlIBCOptions").prop("selectedIndex", 0);
 					$("#tdBiosafetyOption").show();
 					$("#tdIBCOption").show();
 					if ($("#ddlIBCOptions").val() == "1") {
 						// $("#txtIBC").val('');
+						$("#txtIBC").removeClass("ignore");
 						$("#tdIBCtxt").show();
 					} else {
 						// $("#txtIBC").val('');
+						$("#txtIBC").addClass("ignore");
 						$("#tdIBCtxt").hide();
 					}
 				} else {
+					$("#ddlIBCOptions").addClass("ignore");
+					$("#txtIBC").removeClass("ignore");
 					$("#lblHasBiosafetyConcerns").hide();
 					// $("#ddlIBCOptions").prop("selectedIndex", 0);
 					$("#tdBiosafetyOption").hide();
@@ -3404,18 +3450,22 @@ $(function() {
 			$("#ddlIBCOptions").on("change", function() {
 				if ($("#ddlIBCOptions").val() == "1") {
 					// $("#txtIBC").val('');
+					$("#txtIBC").removeClass("ignore");
 					$("#tdIBCtxt").show();
 				} else {
 					// $("#txtIBC").val('');
+					$("#txtIBC").addClass("ignore");
 					$("#tdIBCtxt").hide();
 				}
 			});
 
 			$("#ddlInvolveNonFundedCollabs").on("change", function() {
 				if ($("#ddlInvolveNonFundedCollabs").val() == "1") {
+					$("#txtCollaborators").removeClass("ignore");
 					$("#lblInvolveNonFundedCollabs").show();
 					$("#trInvolveNonFundedCollabs").show();
 				} else {
+					$("#txtCollaborators").addClass("ignore");
 					$("#lblInvolveNonFundedCollabs").hide();
 					$("#trInvolveNonFundedCollabs").hide();
 				}
@@ -3423,9 +3473,11 @@ $(function() {
 
 			$("#ddlProprietaryInformation").on("change", function() {
 				if ($("#ddlProprietaryInformation").val() == "1") {
+					$("#txtPagesWithProprietaryInfo").removeClass("ignore");
 					$("#tdPagesWithProprietaryInfo").show();
 					$("#trTypeOfProprietaryInfo").show();
 				} else {
+					$("#txtPagesWithProprietaryInfo").addClass("ignore");
 					$("#tdPagesWithProprietaryInfo").hide();
 					$("#trTypeOfProprietaryInfo").hide();
 				}
@@ -3441,8 +3493,10 @@ $(function() {
 
 			$("#ddlSubrecipients").on("change", function() {
 				if ($("#ddlSubrecipients").val() == "1") {
+					$("#txtNamesSubrecipients").removeClass("ignore");
 					$("#trSubrecipientsNames").show();
 				} else {
+					$("#txtNamesSubrecipients").addClass("ignore");
 					$("#trSubrecipientsNames").hide();
 				}
 			});
@@ -3460,6 +3514,7 @@ $(function() {
 						dateFormat : 'yy-mm-dd',
 						changeMonth : true,
 						changeYear : true,
+						maxDate : 0,
 						onSelect : function(selectedDate) {
 							$("#txtSearchActivityOnTo").datepicker("option",
 									"minDate", selectedDate);
@@ -3470,7 +3525,8 @@ $(function() {
 			$("#txtSearchActivityOnTo").datepicker({
 				dateFormat : 'yy-mm-dd',
 				changeMonth : true,
-				changeYear : true
+				changeYear : true,
+				maxDate : 0
 			}).mask("9999-99-99", {
 				placeholder : "yyyy-mm-dd"
 			});

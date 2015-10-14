@@ -152,7 +152,7 @@ $(function() {
 	var userNameIsUnique = false;
 	var emailIsUnique = false;
 
-	var positions = "";
+	var positions = [];
 
 	usersManage = {
 		config : {

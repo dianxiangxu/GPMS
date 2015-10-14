@@ -732,7 +732,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIRBOption"><select
-																	title="Choose IRB Option" class="sfListmenu"
+																	title="Choose IRB Option" class="sfListmenu ignore"
 																	style="width: 100px;" id="ddlIRBOptions"
 																	name="IRBOptions">
 																		<option value="">Select Option</option>
@@ -742,7 +742,7 @@
 
 																<td class="cssClassTableRightCol" id="tdIRBtxt"><span
 																	class="cssClassRequired">*</span> <input title="IRB #"
-																	type="text" class="sfTextBoxSmall" id="txtIRB"
+																	type="text" class="sfTextBoxSmall ignore" id="txtIRB"
 																	name="IRB" placeholder="IRB #" /></td>
 															</tr>
 
@@ -765,7 +765,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIACUCOption"><select
-																	title="Choose IACUC Option" class="sfListmenu"
+																	title="Choose IACUC Option" class="sfListmenu ignore"
 																	style="width: 100px;" id="ddlIACUCOptions"
 																	name="IACUCOptions">
 																		<option value="">Select Option</option>
@@ -775,7 +775,7 @@
 
 																<td class="cssClassTableRightCol" id="tdIACUCtxt"><span
 																	class="cssClassRequired">*</span> <input
-																	title="IACUC #" type="text" class="sfTextBoxSmall"
+																	title="IACUC #" type="text" class="sfTextBoxSmall ignore"
 																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /></td>
 															</tr>
 
@@ -798,7 +798,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIBCOption"><select
-																	title="Choose IBC Option" class="sfListmenu"
+																	title="Choose IBC Option" class="sfListmenu ignore"
 																	style="width: 100px;" id="ddlIBCOptions"
 																	name="IBCOptions">
 																		<option value="">Select Option</option>
@@ -808,7 +808,7 @@
 
 																<td class="cssClassTableRightCol" id="tdIBCtxt"><span
 																	class="cssClassRequired">*</span> <input title="IBC #"
-																	type="text" class="sfTextBoxSmall" id="txtIBC"
+																	type="text" class="sfTextBoxSmall ignore" id="txtIBC"
 																	name="IBC" placeholder="IBC #" /></td>
 															</tr>
 
@@ -905,9 +905,9 @@
 																<td><span class="cssClassLabel">Collaborators:</span>
 																	<span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	title="Collaborators" type="text" class="sfInputbox"
-																	id="txtCollaborators" name="collaborators"
-																	placeholder="Collaborators" /> <span
+																	title="Collaborators" type="text"
+																	class="sfInputbox ignore" id="txtCollaborators"
+																	name="collaborators" placeholder="Collaborators" /> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated names.</span></td>
 															</tr>
@@ -940,8 +940,8 @@
 																<td id="tdPagesWithProprietaryInfo"><span
 																	class="cssClassRequired">*</span> <input
 																	title="Pages With Proprietary/Confidential Information"
-																	type="text" class="sfInputbox" style="width: 210px;"
-																	id="txtPagesWithProprietaryInfo"
+																	type="text" class="sfInputbox ignore"
+																	style="width: 210px;" id="txtPagesWithProprietaryInfo"
 																	name="pagesWithProprietaryInfo"
 																	placeholder="Pages Containing the Information" /> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
