@@ -450,56 +450,6 @@ $(function() {
 					});
 		},
 
-		SelectFirstAccordion : function() {
-			var icons = $("#accordion").accordion("option", "icons");
-			$('#ui-id-1').removeClass('ui-corner-all').addClass(
-					'ui-accordion-header-active ui-state-active ui-corner-top')
-					.attr({
-						'aria-selected' : 'true',
-						'aria-expanded' : 'true',
-						'tabindex' : '0'
-					});
-			$('#ui-id-1 > .ui-accordion-header-icon').removeClass(icons.header)
-					.addClass(icons.activeHeader);
-			$('#ui-id-2').addClass('ui-accordion-content-active').attr({
-				'aria-hidden' : 'false'
-			}).show('blind');
-		},
-
-		ExpandAccordion : function() {
-			var icons = $("#accordion").accordion("option", "icons");
-			$('.ui-accordion-header').removeClass('ui-corner-all').addClass(
-					'ui-accordion-header-active ui-state-active ui-corner-top')
-					.attr({
-						'aria-selected' : 'true',
-						'aria-expanded' : 'true',
-						'tabindex' : '0'
-					});
-			$('.ui-accordion-header-icon').removeClass(icons.header).addClass(
-					icons.activeHeader);
-			$('.ui-accordion-content').addClass('ui-accordion-content-active')
-					.attr({
-						'aria-hidden' : 'false'
-					}).show('blind');
-		},
-
-		CollapseAccordion : function() {
-			var icons = $("#accordion").accordion("option", "icons");
-			$('.ui-accordion-header').removeClass(
-					'ui-accordion-header-active ui-state-active ui-corner-top')
-					.addClass('ui-corner-all').attr({
-						'aria-selected' : 'false',
-						'aria-expanded' : 'false',
-						'tabindex' : '-1'
-					});
-			$('.ui-accordion-header-icon').removeClass(icons.activeHeader)
-					.addClass(icons.header);
-			$('.ui-accordion-content').removeClass(
-					'ui-accordion-content-active').attr({
-				'aria-hidden' : 'true'
-			}).hide('blind');
-		},
-
 		LoadStaticImage : function() {
 			$('.cssClassSuccessImg').prop('src',
 					'' + GPMS.utils.GetGPMSRootPath() + 'images/right.jpg');
@@ -910,12 +860,15 @@ $(function() {
 						function() {
 							$(this).removeClass("ignore");
 						});
+				$("#txtNamesSubrecipients").addClass("ignore");
 
 				// need to validate Proposal Status
 				$("#ddlProposalStatus").removeClass("ignore");
 
 				// Audit Log Section
 				$('#ui-id-25').show();
+
+				proposalsManage.InitializeAccordion();
 				break;
 			default:
 				break;
@@ -1437,102 +1390,199 @@ $(function() {
 			$('#dataTable>tbody tr:first').remove();
 		},
 
+		ExpandAccordion : function() {
+			var icons = $("#accordion").accordion("option", "icons");
+			$('.ui-accordion-header').removeClass('ui-corner-all').addClass(
+					'ui-accordion-header-active ui-state-active ui-corner-top')
+					.attr({
+						'aria-selected' : 'true',
+						'aria-expanded' : 'true',
+						'tabindex' : '0'
+					});
+			$('.ui-accordion-header-icon').removeClass(icons.header).addClass(
+					icons.activeHeader);
+			$('.ui-accordion-content').addClass('ui-accordion-content-active')
+					.attr({
+						'aria-hidden' : 'false'
+					}).show('blind');
+		},
+
+		CollapseAccordion : function() {
+			var icons = $("#accordion").accordion("option", "icons");
+			$('.ui-accordion-header').removeClass(
+					'ui-accordion-header-active ui-state-active ui-corner-top')
+					.addClass('ui-corner-all').attr({
+						'aria-selected' : 'false',
+						'aria-expanded' : 'false',
+						'tabindex' : '-1'
+					});
+			$('.ui-accordion-header-icon').removeClass(icons.activeHeader)
+					.addClass(icons.header);
+			$('.ui-accordion-content').removeClass(
+					'ui-accordion-content-active').attr({
+				'aria-hidden' : 'true'
+			}).hide('blind');
+			// $("#accordion").accordion("option", "active", -1);
+		},
+
+		SelectFirstAccordion : function() {
+			proposalsManage.OpenAccordionTab($('#ui-id-2'));
+		},
+
+		focusTabWithErrors : function(tabPanelName) {
+			proposalsManage.CollapseAccordion();
+			$(tabPanelName).find('div.ui-tabs-panel').each(function() {
+				if ($(this).find("span.error").text() != "") {
+					proposalsManage.OpenAccordionTab($(this));
+					return false;
+				}
+			});
+		},
+
+		OpenAccordionTab : function(tabContentDiv) {
+			// TODO: alert("From validation");
+			var icons = $("#accordion").accordion("option", "icons");
+			$tabDiv = tabContentDiv.attr('aria-labelledby');
+			$('#' + $tabDiv).removeClass('ui-corner-all').addClass(
+					'ui-accordion-header-active ui-state-active ui-corner-top')
+					.attr({
+						'aria-selected' : 'true',
+						'aria-expanded' : 'true',
+						'tabindex' : '0'
+					});
+			$('#' + $tabDiv + ' > .ui-accordion-header-icon').removeClass(
+					icons.header).addClass(icons.activeHeader);
+			tabContentDiv.addClass('ui-accordion-content-active').attr({
+				'aria-hidden' : 'false'
+			}).show('blind');
+		},
+
 		BindUserToPositionDetails : function(userDetails, userType) {
-			var cloneRow = $('#dataTable tbody>tr:first').clone(true);
-			$(cloneRow).appendTo("#dataTable");
+			if (userDetails != undefined || userDetails != null) {
+				var cloneRow = $('#dataTable tbody>tr:first').clone(true);
+				$(cloneRow).appendTo("#dataTable");
 
-			rowIndex += 1;
-			var btnOption = "[+] Add";
-			var btnTitle = "Add More"
-			var btnName = "AddMore";
-			if (rowIndex > 1) {
-				btnOption = "Delete ";
-				btnTitle = "Delete";
-				btnName = "DeleteOption";
+				rowIndex += 1;
+				var btnOption = "[+] Add";
+				var btnTitle = "Add More"
+				var btnName = "AddMore";
+				if (rowIndex > 1) {
+					btnOption = "Delete ";
+					btnTitle = "Delete";
+					btnName = "DeleteOption";
+				}
+
+				$('#dataTable tbody>tr:eq(' + rowIndex + ')')
+						.find("select")
+						.each(
+								function(k) {
+									if (this.name == "ddlRole") {
+										if (userType == "PI") {
+											$(this).val(0).prop('selected',
+													'selected');
+											$(this)
+													.prop('disabled',
+															'disabled');
+										} else if (userType == "Co-PI") {
+											$(this).val(1).prop('selected',
+													'selected');
+											$(this).removeAttr('disabled');
+										} else if (userType == "Senior") {
+											$(this).val(2).prop('selected',
+													'selected');
+											$(this).removeAttr('disabled');
+										}
+									} else if (this.name == "ddlName") {
+										$(this).val(userDetails.userProfileId)
+												.prop('selected', 'selected');
+
+										if (userType == "PI") {
+											$(this)
+													.prop('disabled',
+															'disabled');
+										} else if (userType == "Co-PI") {
+											$(this).removeAttr('disabled');
+										} else if (userType == "Senior") {
+											$(this).removeAttr('disabled');
+										}
+
+										// proposalsManage.BindAllPositionDetailsForAUser($(
+										// 'select[name="ddlName"]').eq(rowIndex)
+										// .val());
+
+										proposalsManage.BindUserMobileNo($(
+												'select[name="ddlName"]').eq(
+												rowIndex).val());
+
+										proposalsManage.BindCollegeDropDown($(
+												'select[name="ddlName"]').eq(
+												rowIndex).val());
+									} else if (this.name == "ddlCollege") {
+										$(this).val(userDetails.college).prop(
+												'selected', 'selected');
+										proposalsManage.BindDepartmentDropDown(
+												$('select[name="ddlName"]').eq(
+														rowIndex).val(),
+												$('select[name="ddlCollege"]')
+														.eq(rowIndex).val());
+									} else if (this.name == "ddlDepartment") {
+										$(this).val(userDetails.department)
+												.prop('selected', 'selected');
+										proposalsManage
+												.BindPositionTypeDropDown(
+														$(
+																'select[name="ddlName"]')
+																.eq(rowIndex)
+																.val(),
+														$(
+																'select[name="ddlCollege"]')
+																.eq(rowIndex)
+																.val(),
+														$(
+																'select[name="ddlDepartment"]')
+																.eq(rowIndex)
+																.val());
+									} else if (this.name == "ddlPositionType") {
+										$(this).val(userDetails.positionType)
+												.prop('selected', 'selected');
+										proposalsManage
+												.BindPositionTitleDropDown(
+														$(
+																'select[name="ddlName"]')
+																.eq(rowIndex)
+																.val(),
+														$(
+																'select[name="ddlCollege"]')
+																.eq(rowIndex)
+																.val(),
+														$(
+																'select[name="ddlDepartment"]')
+																.eq(rowIndex)
+																.val(),
+														$(
+																'select[name="ddlPositionType"]')
+																.eq(rowIndex)
+																.val());
+									} else if (this.name == "ddlPositionTitle") {
+										$(this).val(userDetails.positionTitle)
+												.prop('selected', 'selected');
+									}
+
+									// $('input[name="txtPhoneNo"]').eq(rowIndex).val('');
+									// $('input[name="txtPhoneNo"]').eq(rowIndex).val(
+									// userDetails.userRef.mobileNumbers[0]).mask(
+									// "(999) 999-9999");
+								});
+
+				$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("input")
+						.each(function(l) {
+							if ($(this).is(".AddOption")) {
+								$(this).prop("name", btnName);
+								$(this).prop("value", btnOption);
+								$(this).prop("title", btnTitle);
+							}
+						});
 			}
-
-			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("select").each(
-					function(k) {
-						if (this.name == "ddlRole") {
-							if (userType == "PI") {
-								$(this).val(0).prop('selected', 'selected');
-								$(this).prop('disabled', 'disabled');
-							} else if (userType == "Co-PI") {
-								$(this).val(1).prop('selected', 'selected');
-								$(this).removeAttr('disabled');
-							} else if (userType == "Senior") {
-								$(this).val(2).prop('selected', 'selected');
-								$(this).removeAttr('disabled');
-							}
-						} else if (this.name == "ddlName") {
-							$(this).val(userDetails.userProfileId).prop(
-									'selected', 'selected');
-
-							if (userType == "PI") {
-								$(this).prop('disabled', 'disabled');
-							} else if (userType == "Co-PI") {
-								$(this).removeAttr('disabled');
-							} else if (userType == "Senior") {
-								$(this).removeAttr('disabled');
-							}
-
-							// proposalsManage.BindAllPositionDetailsForAUser($(
-							// 'select[name="ddlName"]').eq(rowIndex)
-							// .val());
-
-							proposalsManage.BindUserMobileNo($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
-
-							proposalsManage.BindCollegeDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val());
-						} else if (this.name == "ddlCollege") {
-							$(this).val(userDetails.college).prop('selected',
-									'selected');
-							proposalsManage.BindDepartmentDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val());
-						} else if (this.name == "ddlDepartment") {
-							$(this).val(userDetails.department).prop(
-									'selected', 'selected');
-							proposalsManage.BindPositionTypeDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val(), $(
-									'select[name="ddlDepartment"]')
-									.eq(rowIndex).val());
-						} else if (this.name == "ddlPositionType") {
-							$(this).val(userDetails.positionType).prop(
-									'selected', 'selected');
-							proposalsManage.BindPositionTitleDropDown($(
-									'select[name="ddlName"]').eq(rowIndex)
-									.val(), $('select[name="ddlCollege"]').eq(
-									rowIndex).val(), $(
-									'select[name="ddlDepartment"]')
-									.eq(rowIndex).val(), $(
-									'select[name="ddlPositionType"]').eq(
-									rowIndex).val());
-						} else if (this.name == "ddlPositionTitle") {
-							$(this).val(userDetails.positionTitle).prop(
-									'selected', 'selected');
-						}
-
-						// $('input[name="txtPhoneNo"]').eq(rowIndex).val('');
-						// $('input[name="txtPhoneNo"]').eq(rowIndex).val(
-						// userDetails.userRef.mobileNumbers[0]).mask(
-						// "(999) 999-9999");
-					});
-
-			$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("input").each(
-					function(l) {
-						if ($(this).is(".AddOption")) {
-							$(this).prop("name", btnName);
-							$(this).prop("value", btnOption);
-							$(this).prop("title", btnTitle);
-						}
-					});
 		},
 
 		SearchProposalAuditLogs : function() {
@@ -1722,7 +1772,6 @@ $(function() {
 				$(this).val($(this).find('option').first().val());
 			});
 
-			proposalsManage.SetFirstAccordionActive();
 			proposalsManage.onInit();
 			$('#lblFormHeading').html(
 					getLocale(gpmsProposalsManagement, "New Proposal Details"));
@@ -1834,7 +1883,7 @@ $(function() {
 			$("#gdvProposalsAuditLog_Pagination").remove();
 		},
 
-		SetFirstAccordionActive : function() {
+		InitializeAccordion : function() {
 			var icons = {
 				header : "ui-icon-circle-arrow-e",
 				activeHeader : "ui-icon-circle-arrow-s"
@@ -1847,134 +1896,144 @@ $(function() {
 								icons : icons,
 								collapsible : true,
 								beforeActivate : function(event, ui) {
-									// if (event.originalEvent != undefined) {
-									if ($(event.originalEvent.target)
-											.is('span')
-											&& $(event.originalEvent.target)
-													.parent('h3')
-													.is(
-															'.ui-accordion-header-active')) {
-										$(event.originalEvent.target)
-												.parent('h3')
-												.removeClass(
-														'ui-accordion-header-active ui-state-active ui-corner-top')
-												.addClass('ui-corner-all')
-												.attr({
-													'aria-selected' : 'false',
-													'aria-expanded' : 'false',
-													'tabindex' : '-1'
-												});
-										$(event.originalEvent.target)
-												.parent("h3")
-												.find("span:eq(0)")
-												.removeClass(icons.activeHeader)
-												.addClass(icons.header);
-										$(event.originalEvent.target).parent(
-												'h3').next('div').removeClass(
-												'ui-accordion-content-active')
-												.attr({
-													'aria-hidden' : 'true'
-												}).hide('blind');
-										return false;
-									} else if ($(event.originalEvent.target)
-											.is('h3')
-											&& $(event.originalEvent.target)
-													.is(
-															'.ui-accordion-header-active')) {
-										$(event.originalEvent.target)
-												.removeClass(
-														'ui-accordion-header-active ui-state-active ui-corner-top')
-												.addClass('ui-corner-all')
-												.attr({
-													'aria-selected' : 'false',
-													'aria-expanded' : 'false',
-													'tabindex' : '-1'
-												});
-										$(event.originalEvent.target).find(
-												"span:eq(0)").removeClass(
-												icons.activeHeader).addClass(
-												icons.header);
-										$(event.originalEvent.target).next(
-												'div').removeClass(
-												'ui-accordion-content-active')
-												.attr({
-													'aria-hidden' : 'true'
-												}).hide('blind');
-										return false;
-									} else {
-										proposalsManage.CollapseAccordion();
+									alert(ui.oldPanel.text() + ":::"
+											+ ui.newPanel.text());
+									if (event.originalEvent != undefined) {
 										if ($(event.originalEvent.target).is(
-												'span')) {
+												'span')
+												&& $(event.originalEvent.target)
+														.parent('h3')
+														.is(
+																'.ui-accordion-header-active')) {
 											$(event.originalEvent.target)
 													.parent('h3')
 													.removeClass(
-															'ui-corner-all')
-													.addClass(
 															'ui-accordion-header-active ui-state-active ui-corner-top')
+													.addClass('ui-corner-all')
 													.attr(
 															{
-																'aria-selected' : 'true',
-																'aria-expanded' : 'true',
-																'tabindex' : '0'
+																'aria-selected' : 'false',
+																'aria-expanded' : 'false',
+																'tabindex' : '-1'
 															});
 											$(event.originalEvent.target)
 													.parent("h3").find(
 															"span:eq(0)")
-													.removeClass(icons.header)
-													.addClass(
-															icons.activeHeader);
+													.removeClass(
+															icons.activeHeader)
+													.addClass(icons.header);
 											$(event.originalEvent.target)
 													.parent('h3')
 													.next('div')
-													.addClass(
+													.removeClass(
 															'ui-accordion-content-active')
 													.attr({
-														'aria-hidden' : 'false'
-													}).show('blind');
-										} else {
+														'aria-hidden' : 'true'
+													}).hide('blind');
+											return false;
+										} else if ($(event.originalEvent.target)
+												.is('h3')
+												&& $(event.originalEvent.target)
+														.is(
+																'.ui-accordion-header-active')) {
 											$(event.originalEvent.target)
 													.removeClass(
-															'ui-corner-all')
-													.addClass(
 															'ui-accordion-header-active ui-state-active ui-corner-top')
+													.addClass('ui-corner-all')
 													.attr(
 															{
-																'aria-selected' : 'true',
-																'aria-expanded' : 'true',
-																'tabindex' : '0'
+																'aria-selected' : 'false',
+																'aria-expanded' : 'false',
+																'tabindex' : '-1'
 															});
 											$(event.originalEvent.target).find(
 													"span:eq(0)").removeClass(
-													icons.header).addClass(
-													icons.activeHeader);
+													icons.activeHeader)
+													.addClass(icons.header);
 											$(event.originalEvent.target)
 													.next('div')
-													.addClass(
+													.removeClass(
 															'ui-accordion-content-active')
 													.attr({
-														'aria-hidden' : 'false'
-													}).show('blind');
+														'aria-hidden' : 'true'
+													}).hide('blind');
+											return false;
+										} else {
+											proposalsManage.CollapseAccordion();
+											// TODO: alert("Before Activate!");
+											if ($(event.originalEvent.target)
+													.is('span')) {
+												$(event.originalEvent.target)
+														.parent('h3')
+														.removeClass(
+																'ui-corner-all')
+														.addClass(
+																'ui-accordion-header-active ui-state-active ui-corner-top')
+														.attr(
+																{
+																	'aria-selected' : 'true',
+																	'aria-expanded' : 'true',
+																	'tabindex' : '0'
+																});
+												$(event.originalEvent.target)
+														.parent("h3")
+														.find("span:eq(0)")
+														.removeClass(
+																icons.header)
+														.addClass(
+																icons.activeHeader);
+												$(event.originalEvent.target)
+														.parent('h3')
+														.next('div')
+														.addClass(
+																'ui-accordion-content-active')
+														.attr(
+																{
+																	'aria-hidden' : 'false'
+																})
+														.show('blind');
+											} else {
+												$(event.originalEvent.target)
+														.removeClass(
+																'ui-corner-all')
+														.addClass(
+																'ui-accordion-header-active ui-state-active ui-corner-top')
+														.attr(
+																{
+																	'aria-selected' : 'true',
+																	'aria-expanded' : 'true',
+																	'tabindex' : '0'
+																});
+												$(event.originalEvent.target)
+														.find("span:eq(0)")
+														.removeClass(
+																icons.header)
+														.addClass(
+																icons.activeHeader);
+												$(event.originalEvent.target)
+														.next('div')
+														.addClass(
+																'ui-accordion-content-active')
+														.attr(
+																{
+																	'aria-hidden' : 'false'
+																})
+														.show('blind');
+											}
+											return false;
 										}
-										return false;
 									}
-									// return false;
-									// var fromIcon =
-									// $(event.originalEvent.target).is(
-									// '.ui-accordion-header > .ui-icon');
-									// return fromIcon;
-									// alert(expandLink.data('isAllOpen'));
-									// if (expandLink.data('isAllOpen')) {
-									// expandLink.text('Expand
-									// all').data('isAllOpen', false);
-									// }
-									// return false;
-									// $(event.originalEvent.target).removeClass();
-									// The accordion believes a panel is
-									// being
-									// opened
 								}
-							// }
-							});
+							}).on('accordionactivate', function(event, ui) {
+						alert('activate ' + ui.newHeader.text());
+					});
+
+			// $("#accordion").on("accordionbeforeactivate", function(event, ui)
+			// {
+			// alert("Before Activated!");
+			// });
+
+			proposalsManage.SelectFirstAccordion();
 			return false;
 		},
 
@@ -2085,7 +2144,7 @@ $(function() {
 		},
 
 		SaveProposal : function(_proposalId, _flag) {
-			$('#iferror').hide();
+			// $('#iferror').hide();
 			if (validator.form()) {
 				var $projectTitle = $('#txtProjectTitle');
 				var projectTitle = $.trim($projectTitle.val());
@@ -2377,12 +2436,10 @@ $(function() {
 						proposalInfo.OSPSectionInfo = OSPSection;
 					}
 
-					// alert(proposalInfo);
 					proposalsManage.AddProposalInfo(proposalInfo);
-				} else {
-					// TODO : focus the first accordion with error
-					// proposalsManage.focusTabWithErrors("#container-7");
 				}
+			} else {
+				proposalsManage.focusTabWithErrors("#accordion");
 			}
 		},
 
@@ -2891,8 +2948,8 @@ $(function() {
 			}
 			$('#divProposalForm').hide();
 			proposalsManage.ClearForm();
-			proposalsManage.CollapseAccordion();
-			proposalsManage.SelectFirstAccordion();
+			// proposalsManage.CollapseAccordion();
+			// proposalsManage.SelectFirstAccordion();
 			break;
 		}
 	},
@@ -3205,6 +3262,8 @@ $(function() {
 
 						// Don't validate Proposal Status
 						$("#ddlProposalStatus").addClass("ignore");
+
+						proposalsManage.InitializeAccordion();
 					});
 
 			$('#btnBack').on("click", function() {
@@ -3212,15 +3271,14 @@ $(function() {
 				$('#divProposalForm').hide();
 				proposalsManage.ClearForm();
 				proposalsManage.CollapseAccordion();
-				proposalsManage.SelectFirstAccordion();
 			});
 
-			$('#btnReset').bind("click", function() {
+			$('#btnReset').on("click", function() {
 				proposalsManage.ClearForm();
+				proposalsManage.CollapseAccordion();
+				proposalsManage.InitializeAccordion();
 				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();
-				proposalsManage.CollapseAccordion();
-				proposalsManage.SelectFirstAccordion();
 			});
 
 			$('#btnSaveProposal').click(function(e) {

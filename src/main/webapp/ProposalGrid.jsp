@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "561dd456a160240f989fd356";
+	var userProfileId = "561ec35a54ffd80f90cdeb8e";
 
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
@@ -344,7 +344,7 @@
 												<h3>
 													<span id="lblSection1">Investigator Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0"
 														id="dataTable">
 														<thead>
@@ -408,7 +408,7 @@
 												<h3>
 													<span id="lblSection2">Project Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -515,7 +515,7 @@
 													<span id="lblSection3">Sponsor And Budget
 														Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -566,7 +566,7 @@
 												<h3>
 													<span id="lblSection4">Cost Share Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -604,7 +604,7 @@
 												<h3>
 													<span id="lblSection5">University Commitments</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -656,7 +656,7 @@
 													<span id="lblSection6">Conflict of Interest And
 														Commitment Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -710,7 +710,7 @@
 												<h3>
 													<span id="lblSection7">Compliance Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -775,8 +775,9 @@
 
 																<td class="cssClassTableRightCol" id="tdIACUCtxt"><span
 																	class="cssClassRequired">*</span> <input
-																	title="IACUC #" type="text" class="sfTextBoxSmall ignore"
-																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /></td>
+																	title="IACUC #" type="text"
+																	class="sfTextBoxSmall ignore" id="txtIACUC"
+																	name="IACUC" placeholder="IACUC #" /></td>
 															</tr>
 
 															<tr>
@@ -832,7 +833,7 @@
 												<h3>
 													<span id="lblSection8">Additional Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -883,7 +884,7 @@
 												<h3>
 													<span id="lblSection9">Collaboration Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -919,7 +920,7 @@
 													<span id="lblSection10">Proprietary/Confidential
 														Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -989,7 +990,7 @@
 												<h3>
 													<span id="lblSection11">Certification/Signatures</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -1098,7 +1099,7 @@
 												<h3>
 													<span id="lblSection12">OSP Section</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<div class="cssClassHeader">
 														<span class="cssClassLabel">Office of Sponsored
 															Programs Administrative Use Only</span>

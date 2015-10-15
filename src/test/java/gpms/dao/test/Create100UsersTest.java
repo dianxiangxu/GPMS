@@ -33,8 +33,8 @@ public class Create100UsersTest {
 	UserProfileDAO newUserProfileDAO;
 	ProposalDAO newProposalDAO;
 	final int MAXIMUM_PROFILES = 10; // Adjust this to make more or less
-									// profiles
-									// with the generator.
+										// profiles
+										// with the generator.
 
 	@Before
 	public void initiate() {
@@ -66,6 +66,7 @@ public class Create100UsersTest {
 			newAccount.setPassword(userAccount);
 			// newUserAccountDAO.setPassword(newProfile, newAccount,
 			// userAccount);
+			newAccount.setActive(true);
 			newAccount.setAddedOn(new Date());
 
 			newProfile.setFirstName(firstName);

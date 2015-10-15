@@ -320,6 +320,34 @@ public class ProposalService {
 
 		proposal = proposalDAO.findProposalDetailsByProposalID(id);
 
+		InvestigatorRefAndPosition PI = proposal.getInvestigatorInfo().getPi();
+
+		if (PI.getUserRef().isDeleted()
+				|| !PI.getUserRef().getUserAccount().isActive()
+				|| PI.getUserRef().getUserAccount().isDeleted()) {
+			proposal.getInvestigatorInfo().setPi(null);
+		}
+
+		for (InvestigatorRefAndPosition coPIs : proposal.getInvestigatorInfo()
+				.getCo_pi()) {
+
+			if (coPIs.getUserRef().isDeleted()
+					|| !coPIs.getUserRef().getUserAccount().isActive()
+					|| coPIs.getUserRef().getUserAccount().isDeleted()) {
+				proposal.getInvestigatorInfo().getCo_pi().remove(coPIs);
+			}
+		}
+
+		for (InvestigatorRefAndPosition seniors : proposal
+				.getInvestigatorInfo().getSeniorPersonnel()) {
+			if (seniors.getUserRef().isDeleted()
+					|| !seniors.getUserRef().getUserAccount().isActive()
+					|| seniors.getUserRef().getUserAccount().isDeleted()) {
+				proposal.getInvestigatorInfo().getSeniorPersonnel()
+						.remove(seniors);
+			}
+		}
+
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")
 				.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
 				.create();

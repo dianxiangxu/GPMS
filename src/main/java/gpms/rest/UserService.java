@@ -119,6 +119,7 @@ public class UserService {
 	public HashMap<String, String> getAllUsers() throws UnknownHostException {
 		HashMap<String, String> users = new HashMap<String, String>();
 		List<UserProfile> userprofiles = userProfileDAO.findAllActiveUsers();
+		// List<UserProfile> userprofiles = userProfileDAO.findAll();
 		for (UserProfile userProfile : userprofiles) {
 			users.put(userProfile.getId().toString(), userProfile.getFullName());
 		}

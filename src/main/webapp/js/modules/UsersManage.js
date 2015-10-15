@@ -10,7 +10,11 @@ $(function() {
 	});
 
 	$.validator.addMethod('notequalto', function(value, element, param) {
-		return value != $(param).val();
+		if (value != "" && $(param).val() != "") {
+			return value != $(param).val();
+		} else {
+			return true;
+		}
 	}, 'Both emails looks same!');
 
 	var gpmsCommonObj = function() {
@@ -1030,8 +1034,7 @@ $(function() {
 													gpmsUsersManagement,
 													"Please select all position details for this user.")
 													+ "<br/>";
-											attributesManage
-													.SetFirstTabActive();
+											usersManage.SetFirstTabActive();
 											$(this).focus();
 										} else if (optionsText
 												&& $(this).prop("name") != "ddlPositionTitle") {
