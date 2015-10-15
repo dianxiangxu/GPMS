@@ -808,7 +808,8 @@ $(function() {
 			switch (tblID) {
 			case "gdvProposals":
 				proposalsManage.ClearForm();
-				$('#accordion-expand-holder').show();
+				// TODO
+				// $('#accordion-expand-holder').show();
 
 				$("#trProposalInfo").show();
 				$("#trProposalStatus").show();
@@ -1430,10 +1431,11 @@ $(function() {
 		},
 
 		focusTabWithErrors : function(tabPanelName) {
-			proposalsManage.CollapseAccordion();
-			$(tabPanelName).find('div.ui-tabs-panel').each(function() {
+			// proposalsManage.CollapseAccordion();
+			$(tabPanelName).find('div.ui-tabs-panel').each(function(index) {
 				if ($(this).find("span.error").text() != "") {
-					proposalsManage.OpenAccordionTab($(this));
+					// proposalsManage.OpenAccordionTab($(this));
+					$(tabPanelName).accordion("option", "active", index);
 					return false;
 				}
 			});
@@ -1761,7 +1763,7 @@ $(function() {
 			$('.class-text').removeClass('error').next('span').removeClass(
 					'error');
 
-			$('#accordion-expand-holder').hide();
+			// $('#accordion-expand-holder').hide();
 
 			var container = $("#accordion div:gt(0)");
 			var inputs = container.find('INPUT, SELECT, TEXTAREA');
@@ -1894,146 +1896,77 @@ $(function() {
 							{
 								heightStyle : "content",
 								icons : icons,
+								active : -1,
 								collapsible : true,
-								beforeActivate : function(event, ui) {
-									alert(ui.oldPanel.text() + ":::"
-											+ ui.newPanel.text());
-									if (event.originalEvent != undefined) {
-										if ($(event.originalEvent.target).is(
-												'span')
-												&& $(event.originalEvent.target)
-														.parent('h3')
-														.is(
-																'.ui-accordion-header-active')) {
-											$(event.originalEvent.target)
-													.parent('h3')
-													.removeClass(
-															'ui-accordion-header-active ui-state-active ui-corner-top')
-													.addClass('ui-corner-all')
-													.attr(
-															{
-																'aria-selected' : 'false',
-																'aria-expanded' : 'false',
-																'tabindex' : '-1'
-															});
-											$(event.originalEvent.target)
-													.parent("h3").find(
-															"span:eq(0)")
-													.removeClass(
-															icons.activeHeader)
-													.addClass(icons.header);
-											$(event.originalEvent.target)
-													.parent('h3')
-													.next('div')
-													.removeClass(
-															'ui-accordion-content-active')
-													.attr({
-														'aria-hidden' : 'true'
-													}).hide('blind');
-											return false;
-										} else if ($(event.originalEvent.target)
-												.is('h3')
-												&& $(event.originalEvent.target)
-														.is(
-																'.ui-accordion-header-active')) {
-											$(event.originalEvent.target)
-													.removeClass(
-															'ui-accordion-header-active ui-state-active ui-corner-top')
-													.addClass('ui-corner-all')
-													.attr(
-															{
-																'aria-selected' : 'false',
-																'aria-expanded' : 'false',
-																'tabindex' : '-1'
-															});
-											$(event.originalEvent.target).find(
-													"span:eq(0)").removeClass(
-													icons.activeHeader)
-													.addClass(icons.header);
-											$(event.originalEvent.target)
-													.next('div')
-													.removeClass(
-															'ui-accordion-content-active')
-													.attr({
-														'aria-hidden' : 'true'
-													}).hide('blind');
-											return false;
+								activate : function(event, ui) {
+									var proposal_id = $("#btnSaveProposal")
+											.prop("name");
+									if (proposal_id != ''
+											&& ui.newHeader.size() != 0
+											&& ui.newPanel.size() != 0
+											&& $.trim(ui.newHeader.text()) != "Audit Logs") {
+										alert("After Activated! GO to XACML to see if he is allowed to change this panel content");
+										var allowedToEdit = true;
+										if (allowedToEdit) {
+											alert("Allowed to EDIT this Panel");
+											// ui.newPanel
+											// .find("input, select")
+											// .each(
+											// function() {
+											// if ($(this)
+											// .hasClass(
+											// 'AddOption')) {
+											// $(this)
+											// .show();
+											// }
+											// $(this)
+											// .removeProp(
+											// "disabled");
+											// });
 										} else {
-											proposalsManage.CollapseAccordion();
-											// TODO: alert("Before Activate!");
-											if ($(event.originalEvent.target)
-													.is('span')) {
-												$(event.originalEvent.target)
-														.parent('h3')
-														.removeClass(
-																'ui-corner-all')
-														.addClass(
-																'ui-accordion-header-active ui-state-active ui-corner-top')
-														.attr(
-																{
-																	'aria-selected' : 'true',
-																	'aria-expanded' : 'true',
-																	'tabindex' : '0'
-																});
-												$(event.originalEvent.target)
-														.parent("h3")
-														.find("span:eq(0)")
-														.removeClass(
-																icons.header)
-														.addClass(
-																icons.activeHeader);
-												$(event.originalEvent.target)
-														.parent('h3')
-														.next('div')
-														.addClass(
-																'ui-accordion-content-active')
-														.attr(
-																{
-																	'aria-hidden' : 'false'
-																})
-														.show('blind');
-											} else {
-												$(event.originalEvent.target)
-														.removeClass(
-																'ui-corner-all')
-														.addClass(
-																'ui-accordion-header-active ui-state-active ui-corner-top')
-														.attr(
-																{
-																	'aria-selected' : 'true',
-																	'aria-expanded' : 'true',
-																	'tabindex' : '0'
-																});
-												$(event.originalEvent.target)
-														.find("span:eq(0)")
-														.removeClass(
-																icons.header)
-														.addClass(
-																icons.activeHeader);
-												$(event.originalEvent.target)
-														.next('div')
-														.addClass(
-																'ui-accordion-content-active')
-														.attr(
-																{
-																	'aria-hidden' : 'false'
-																})
-														.show('blind');
-											}
-											return false;
+											alert("You are not Allowed to EDIT this Panel");
+											ui.newPanel
+													.find("input, select")
+													.each(
+															function() {
+																if ($(this)
+																		.hasClass(
+																				'AddOption')) {
+																	$(this)
+																			.hide();
+																}
+																$(this)
+																		.prop(
+																				"disabled",
+																				"disabled");
+															});
+											event.preventDefault();
+										}
+									}
+								},
+								beforeActivate : function(event, ui) {
+									// Size = 0 --> collapsing
+									// Size = 1 --> Expanding
+									var proposal_id = $("#btnSaveProposal")
+											.prop("name");
+									if (proposal_id != ''
+											&& ui.newHeader.size() != 0
+											&& ui.newPanel.size() != 0
+											&& $.trim(ui.newHeader.text()) != "Audit Logs") {
+										alert("Before Activated! need to check XACML if the user is allowed to view this panel content");
+
+										var allowedToView = true;
+										if (allowedToView) {
+											alert("Allowed to VIEW this Panel");
+										} else {
+											alert("You are not Allowed to VIEW this Panel");
+											event.preventDefault();
 										}
 									}
 								}
-							}).on('accordionactivate', function(event, ui) {
-						alert('activate ' + ui.newHeader.text());
-					});
-
-			// $("#accordion").on("accordionbeforeactivate", function(event, ui)
-			// {
-			// alert("Before Activated!");
-			// });
-
-			proposalsManage.SelectFirstAccordion();
+							});
+			// proposalsManage.SelectFirstAccordion();
+			$("#accordion").accordion("option", "active", 0);
 			return false;
 		},
 
@@ -2171,10 +2104,6 @@ $(function() {
 																		gpmsProposalsManagement,
 																		"Please select all position details for this user.")
 																		+ "<br/>";
-																proposalsManage
-																		.CollapseAccordion();
-																proposalsManage
-																		.SelectFirstAccordion();
 																$(this).focus();
 															} else if (optionsText
 																	&& $(this)
@@ -3270,12 +3199,12 @@ $(function() {
 				$('#divProposalGrid').show();
 				$('#divProposalForm').hide();
 				proposalsManage.ClearForm();
-				proposalsManage.CollapseAccordion();
+				// proposalsManage.CollapseAccordion();
 			});
 
 			$('#btnReset').on("click", function() {
 				proposalsManage.ClearForm();
-				proposalsManage.CollapseAccordion();
+				// proposalsManage.CollapseAccordion();
 				proposalsManage.InitializeAccordion();
 				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();

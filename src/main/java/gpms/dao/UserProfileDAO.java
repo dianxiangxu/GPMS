@@ -90,6 +90,12 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).asList();
 	}
 
+	public List<UserProfile> findAllUsersWithPosition() throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserProfile.class).field("details")
+				.notEqual(null).asList();
+	}
+
 	public List<UserProfile> findAllActiveUsers() throws UnknownHostException {
 		Datastore ds = getDatastore();
 

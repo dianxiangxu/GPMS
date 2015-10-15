@@ -709,6 +709,9 @@ $(function() {
 									});
 								});
 				$('#dataTable>tbody tr:first').remove();
+			} else {
+				usersManage.BindDepartmentDropDown($(
+						'select[name="ddlCollege"]').eq(0).val(), false);
 			}
 		},
 
