@@ -807,7 +807,6 @@ $(function() {
 		EditProposal : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvProposals":
-				$("#accordion").accordion("option", "active", -1);
 
 				// TODO
 				// $('#accordion-expand-holder').show();
@@ -827,47 +826,43 @@ $(function() {
 				} else {
 					$('#tblLastAuditedInfo').hide();
 				}
-				// $('#txtProjectTitle').val(argus[2]);
-				// $('#txtProjectTitle').prop('disabled', 'disabled');
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
 
-				$("#btnReset").hide();
+				$("#accordion").accordion("option", "active", 0);
 
 				proposalsManage.ClearForm();
 
 				$("#btnSaveProposal").prop("name", argus[0]);
 				$("#txtNameOfGrantingAgency").val(argus[6]);
 
-				proposalsManage.BindUserPositionDetailsForAProposal(argus[22]);
+				$("#btnReset").hide();
+				$("#trSignChair").show();
+				$("#trSignDean").show();
+				$("#trSignBusinessManager").show();
+
+				// OSP Section
+				$('#ui-id-23').show();
+				// Audit Log Section
+				$('#ui-id-25').show();
 
 				$("#ui-id-24").find('input:text, select, textarea').each(
 						function() {
 							$(this).removeClass("ignore");
 						});
 
+				proposalsManage.BindUserPositionDetailsForAProposal(argus[22]);
+
 				proposalsManage.BindProposalDetailsByProposalId(argus[0]);
 
 				// Certification/ Signatures Info
 				proposalsManage.BindAllSignatureForAProposal(argus[0]);
-				$("#trSignChair").show();
-				$("#trSignDean").show();
-				$("#trSignBusinessManager").show();
 
 				// Delegation Info
 
 				// Get Audit Logs
 				proposalsManage.BindProposalAuditLogGrid(argus[0], null, null,
 						null, null);
-
-				// OSP Section
-				$('#ui-id-23').show();
-
-				// Audit Log Section
-				$('#ui-id-25').show();
-				$("#accordion").accordion("option", "active", 0);
-				// proposalsManage.ClearForm();
-				// proposalsManage.InitializeAccordion();
 				break;
 			default:
 				break;
@@ -1433,10 +1428,8 @@ $(function() {
 		},
 
 		focusTabWithErrors : function(tabPanelName) {
-			// proposalsManage.CollapseAccordion();
 			$(tabPanelName).find('div.ui-tabs-panel').each(function(index) {
 				if ($(this).find("span.error").text() != "") {
-					// proposalsManage.OpenAccordionTab($(this));
 					$(tabPanelName).accordion("option", "active", index);
 					return false;
 				}
@@ -1444,7 +1437,6 @@ $(function() {
 		},
 
 		OpenAccordionTab : function(tabContentDiv) {
-			// TODO: alert("From validation");
 			var icons = $("#accordion").accordion("option", "icons");
 			$tabDiv = tabContentDiv.attr('aria-labelledby');
 			$('#' + $tabDiv).removeClass('ui-corner-all').addClass(
@@ -1510,10 +1502,6 @@ $(function() {
 											$(this).removeAttr('disabled');
 										}
 
-										// proposalsManage.BindAllPositionDetailsForAUser($(
-										// 'select[name="ddlName"]').eq(rowIndex)
-										// .val());
-
 										proposalsManage.BindUserMobileNo($(
 												'select[name="ddlName"]').eq(
 												rowIndex).val());
@@ -1571,11 +1559,6 @@ $(function() {
 										$(this).val(userDetails.positionTitle)
 												.prop('selected', 'selected');
 									}
-
-									// $('input[name="txtPhoneNo"]').eq(rowIndex).val('');
-									// $('input[name="txtPhoneNo"]').eq(rowIndex).val(
-									// userDetails.userRef.mobileNumbers[0]).mask(
-									// "(999) 999-9999");
 								});
 
 				$('#dataTable tbody>tr:eq(' + rowIndex + ')').find("input")
@@ -1764,17 +1747,32 @@ $(function() {
 			validator.resetForm();
 			// $('#accordion-expand-holder').hide();
 
-			proposalsManage.onInit();
+			$('.cssClassRight').hide();
+			$('.cssClassError').hide();
 
-			$("#btnSaveProposal").removeAttr("name");
-
-			$('#txtProjectTitle').removeAttr('disabled');
-
-			rowIndex = 0;
-			$("#dataTable tbody>tr:gt(0)").remove();
-
-			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
-					.prop('disabled', 'disabled');
+			// Hide all instrcution information
+			$("#lblConfirmCommitment").hide();
+			$("#lblCommitmentsRequired").hide();
+			$("#lblDisclosureRequired").hide();
+			$("#lblMaterialChanged").hide();
+			$("#lblUseHumanSubjects").hide();
+			$("#tdHumanSubjectsOption").hide();
+			$("#tdIRBOption").hide();
+			$("#tdIRBtxt").hide();
+			$("#lblUseVertebrateAnimals").hide();
+			$("#tdVertebrateAnimalsOption").hide();
+			$("#tdIACUCOption").hide();
+			$("#tdIACUCtxt").hide();
+			$("#lblHasBiosafetyConcerns").hide();
+			$("#tdBiosafetyOption").hide();
+			$("#tdIBCOption").hide();
+			$("#tdIBCtxt").hide();
+			$("#lblInvolveNonFundedCollabs").hide();
+			$("#trInvolveNonFundedCollabs").hide();
+			$("#tdPagesWithProprietaryInfo").hide();
+			$("#trTypeOfProprietaryInfo").hide();
+			$("#lblPISalaryIncluded").hide();
+			$("#trSubrecipientsNames").hide();
 
 			// For Signature Section
 			$("#trSignChair").hide();
@@ -1786,10 +1784,21 @@ $(function() {
 			$("#trSignDean tbody").empty();
 			$("#trSignBusinessManager tbody").empty();
 
-			var container = $("#accordion > div").slice(0, 12);
+			$("#gdvProposalsAuditLog").empty();
+			$("#gdvProposalsAuditLog_Pagination").remove();
+
+			$("#btnSaveProposal").removeAttr("name");
+			$('#txtProjectTitle').removeAttr('disabled');
+
+			rowIndex = 0;
+			$("#dataTable tbody>tr:gt(0)").remove();
+
+			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
+					.prop('disabled', 'disabled');
+
+			var container = $("#accordion > div").slice(1, 12);
 			var inputs = container.find('INPUT, SELECT, TEXTAREA');
 			$.each(inputs, function(i, item) {
-				// rmErrorClass(item);
 				$(this).prop('checked', false);
 				$(this).val('');
 				$(this).val($(this).find('option').first().val());
@@ -1833,42 +1842,6 @@ $(function() {
 					+ '">'
 					+ '</td><td><input id="pi_signaturedate" name="signaturedate" title="Signed Date" class="sfInputbox" placeholder="Signed Date" type="text" required="true" readonly="true" onfocus="proposalsManage.BindCurrentDateTime(this);"></td></tr>';
 			$(cloneRow).appendTo("#trSignPICOPI tbody");
-		},
-
-		onInit : function() {
-			$('#btnReset').hide();
-			$('.cssClassRight').hide();
-			$('.cssClassError').hide();
-
-			// Hide all instrcution information
-			$("#lblConfirmCommitment").hide();
-			$("#lblCommitmentsRequired").hide();
-			$("#lblDisclosureRequired").hide();
-			$("#lblMaterialChanged").hide();
-			$("#lblUseHumanSubjects").hide();
-			$("#tdHumanSubjectsOption").hide();
-			$("#tdIRBOption").hide();
-			$("#tdIRBtxt").hide();
-			$("#lblUseVertebrateAnimals").hide();
-			$("#tdVertebrateAnimalsOption").hide();
-			$("#tdIACUCOption").hide();
-			$("#tdIACUCtxt").hide();
-			$("#lblHasBiosafetyConcerns").hide();
-			$("#tdBiosafetyOption").hide();
-			$("#tdIBCOption").hide();
-			$("#tdIBCtxt").hide();
-			$("#lblInvolveNonFundedCollabs").hide();
-			$("#trInvolveNonFundedCollabs").hide();
-			$("#txtCollaborators").val('');
-			$("#tdPagesWithProprietaryInfo").hide();
-			$("#trTypeOfProprietaryInfo").hide();
-			$("#txtPagesWithProprietaryInfo").val('');
-			$("#lblPISalaryIncluded").hide();
-			$("#trSubrecipientsNames").hide();
-			$("#txtNamesSubrecipients").val('');
-
-			$("#gdvProposalsAuditLog").empty();
-			$("#gdvProposalsAuditLog_Pagination").remove();
 		},
 
 		InitializeAccordion : function() {
@@ -1952,7 +1925,7 @@ $(function() {
 								}
 							});
 			// proposalsManage.SelectFirstAccordion();
-			$("#accordion").accordion("option", "active", 0);
+			// $("#accordion").accordion("option", "active", 0);
 			return false;
 		},
 
@@ -2063,7 +2036,6 @@ $(function() {
 		},
 
 		SaveProposal : function(_proposalId, _flag) {
-			// $('#iferror').hide();
 			if (validator.form()) {
 				var $projectTitle = $('#txtProjectTitle');
 				var projectTitle = $.trim($projectTitle.val());
@@ -2258,10 +2230,6 @@ $(function() {
 					}
 
 					if (!_flag) {
-						// proposalInfo.ProposalNo = $("#lblProposalNo").text();
-						// proposalInfo.ReceivedDate =
-						// $("#lblHiddenDateReceived")
-						// .text();
 						proposalInfo.ProposalStatus = $("#ddlProposalStatus")
 								.val();
 
@@ -2844,6 +2812,8 @@ $(function() {
 			proposalsManage.BindProposalGrid(null, null, null, null, null,
 					null, null);
 			$('#divProposalGrid').show();
+			$("#btnSaveProposal").removeAttr("name");
+			$("#accordion").accordion("option", "active", -1);
 			if (editFlag > 0) {
 				csscody.info("<h2>"
 						+ getLocale(gpmsProposalsManagement,
@@ -2862,7 +2832,6 @@ $(function() {
 						+ "</p>");
 			}
 			$('#divProposalForm').hide();
-			proposalsManage.ClearForm();
 			// proposalsManage.CollapseAccordion();
 			// proposalsManage.SelectFirstAccordion();
 			break;
@@ -3152,18 +3121,20 @@ $(function() {
 					"click",
 					function() {
 						// proposalsManage.InitializeAccordion();
+
 						$('#lblFormHeading').html(
 								getLocale(gpmsProposalsManagement,
 										"New Proposal Details"));
+
 						$("#btnReset").show();
 
 						$('#ui-id-23').hide();
 						$('#ui-id-25').hide();
 						$('#divProposalAuditGrid').hide();
 
-						$("#accordion").accordion("option", "active", 0);
-						$('#divProposalGrid').hide();
-						$('#divProposalForm').show();
+						$('select[name=ddlName]').eq(0).val(
+								GPMS.utils.GetUserProfileID()).prop('selected',
+								'selected').prop('disabled', 'disabled');
 
 						// OSP Section remove validation
 						$("#ui-id-24").find('input:text, select, textarea')
@@ -3172,27 +3143,26 @@ $(function() {
 								});
 
 						proposalsManage.ClearForm();
-
 						proposalsManage.BindDefaultUserPosition(0);
 						proposalsManage.BindPICoPISignatures();
 
-						$('select[name=ddlName]').eq(0).val(
-								GPMS.utils.GetUserProfileID()).prop('selected',
-								'selected').prop('disabled', 'disabled');
+						$('#divProposalGrid').hide();
+						$('#divProposalForm').show();
+						$("#accordion").accordion("option", "active", 0);
 					});
 
 			$('#btnBack').on("click", function() {
 				$('#divProposalGrid').show();
 				$('#divProposalForm').hide();
 				$("#btnSaveProposal").removeAttr("name");
-				$("#accordion").accordion("option", "active", 0);
+				$("#accordion").accordion("option", "active", -1);
 			});
 
 			$('#btnReset').on("click", function() {
+				proposalsManage.ClearForm();
 				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();
 				$("#accordion").accordion("option", "active", 0);
-				proposalsManage.ClearForm();
 			});
 
 			$('#btnSaveProposal').click(function(e) {
@@ -3517,8 +3487,8 @@ $(function() {
 				aDec : '.',
 				aSign : '$',
 				pSign : 'p',
-				aPad : true,
-				vMin : "1.00"
+				aPad : true
+			// vMin : "1.00"
 			});
 
 			$("#txtSearchTotalCostsTo").autoNumeric('init', {
@@ -3527,8 +3497,8 @@ $(function() {
 				aDec : '.',
 				aSign : '$',
 				pSign : 'p',
-				aPad : true,
-				vMin : "1.00"
+				aPad : true
+			// vMin : "1.00"
 			});
 
 			$("#txtDirectCosts").autoNumeric('init', {
