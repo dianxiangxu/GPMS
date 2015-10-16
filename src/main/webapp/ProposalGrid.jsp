@@ -53,7 +53,7 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = "561ec35a54ffd80f90cdeb8e";
+	var userProfileId = "5620378654ffd81cd86b9401";
 
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
@@ -485,27 +485,6 @@
 																	title="Project Period To" type="text"
 																	id="txtProjectPeriodTo" class="sfInputbox"
 																	name="projectPeriodTo" placeholder="To" /></td>
-															</tr>
-															<tr id="trProposalInfo">
-																<td><span class="cssClassLabel">Proposal No:</span></td>
-																<td class="cssClassTableRightCol"><span
-																	id="lblProposalNo" class="cssClassLabel"></span></td>
-																<td><span class="cssClassLabel">Proposal
-																		Date Received:</span></td>
-																<td class="cssClassTableRightCol"><span
-																	id="lblProposalDateReceived" class="cssClassLabel"></span>
-																	<span id="lblHiddenDateReceived" style="display: none;"></span></td>
-															</tr>
-
-															<tr id="trProposalStatus">
-																<td><span class="cssClassLabel"
-																	id="lblProposalStatus">Proposal Status:</span> <span
-																	class="cssClassRequired">*</span></td>
-																<td class="cssClassTableRightCol" colspan="3"><select
-																	title="Choose Proposal Status" name="proposalStatus"
-																	id="ddlProposalStatus">
-																		<option value="">Choose Proposal Status</option>
-																</select></td>
 															</tr>
 														</tbody>
 													</table>
@@ -979,12 +958,12 @@
 														</tbody>
 													</table>
 
-													<div class="cssClassFooter">
-														<span class="cssClassLabel"><strong>Note:</strong>
+													<span class="cssClassFooter"> <span
+														class="cssClassLabel"><strong>Note:</strong>
 															Contact the Office of Technology Transfer for additional
 															assistance on proprietary and patentable information at
 															208-426-5765.</span>
-													</div>
+													</span>
 												</div>
 
 												<h3>
@@ -1421,6 +1400,31 @@
 																		<option value="1">Yes</option>
 																		<option value="2">No</option>
 																		<option value="3">N/A</option>
+																</select></td>
+															</tr>
+
+															<tr>
+																<td><span class="cssClassLabel">Proposal No:</span></td>
+																<td class="cssClassTableRightCol"><span
+																	id="lblProposalNo" class="cssClassLabel"></span></td>
+															</tr>
+
+															<tr>
+																<td><span class="cssClassLabel">Proposal
+																		Date Received:</span></td>
+																<td class="cssClassTableRightCol"><span
+																	id="lblProposalDateReceived" class="cssClassLabel"></span>
+																	<span id="lblHiddenDateReceived" style="display: none;"></span></td>
+															</tr>
+
+															<tr>
+																<td><span class="cssClassLabel"
+																	id="lblProposalStatus">Proposal Status:</span> <span
+																	class="cssClassRequired">*</span></td>
+																<td class="cssClassTableRightCol" colspan="3"><select
+																	title="Choose Proposal Status" name="proposalStatus"
+																	id="ddlProposalStatus">
+																		<option value="">Choose Proposal Status</option>
 																</select></td>
 															</tr>
 

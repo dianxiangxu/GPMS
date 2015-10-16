@@ -334,15 +334,6 @@ $(function() {
 					align : 'left',
 					hide : true
 				}, {
-					display : getLocale(gpmsUsersManagement, 'Is Active?'),
-					name : 'is_active',
-					cssclass : 'cssClassHeadBoolean',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'boolean',
-					format : 'Yes/No'
-				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
 					name : 'is_deleted',
 					cssclass : 'cssClassHeadBoolean',
@@ -355,6 +346,15 @@ $(function() {
 				// default format (No Need to specify) is True/False
 				// you can define 'Yes/No'
 				// hide : true
+				}, {
+					display : getLocale(gpmsUsersManagement, 'Is Active?'),
+					name : 'is_active',
+					cssclass : 'cssClassHeadBoolean',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'boolean',
+					format : 'Yes/No'
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Actions'),
 					name : 'action',
@@ -378,7 +378,7 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '11'
+					arguments : '10'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
@@ -386,7 +386,7 @@ $(function() {
 					_event : 'click',
 					trigger : '3',
 					callMethod : 'usersManage.ActiveUser',
-					arguments : '10'
+					arguments : '11'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Deactivate"),
 					name : 'deactivate',
@@ -394,7 +394,7 @@ $(function() {
 					_event : 'click',
 					trigger : '4',
 					callMethod : 'usersManage.DeactiveUser',
-					arguments : '10'
+					arguments : '11'
 				} ],
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),

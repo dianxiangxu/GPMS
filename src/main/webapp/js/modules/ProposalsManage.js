@@ -807,12 +807,10 @@ $(function() {
 		EditProposal : function(tblID, argus) {
 			switch (tblID) {
 			case "gdvProposals":
-				proposalsManage.ClearForm();
+				$("#accordion").accordion("option", "active", -1);
+
 				// TODO
 				// $('#accordion-expand-holder').show();
-
-				$("#trProposalInfo").show();
-				$("#trProposalStatus").show();
 
 				$('#lblFormHeading').html(
 						getLocale(gpmsProposalsManagement,
@@ -820,8 +818,6 @@ $(function() {
 								+ argus[2]);
 
 				$("#lblProposalDateReceived").text(argus[11]);
-
-				$("#txtNameOfGrantingAgency").val(argus[6]);
 
 				if (argus[16] != null && argus[16] != "") {
 					$('#tblLastAuditedInfo').show();
@@ -835,11 +831,20 @@ $(function() {
 				// $('#txtProjectTitle').prop('disabled', 'disabled');
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
-				$("#btnSaveProposal").prop("name", argus[0]);
 
 				$("#btnReset").hide();
 
+				proposalsManage.ClearForm();
+
+				$("#btnSaveProposal").prop("name", argus[0]);
+				$("#txtNameOfGrantingAgency").val(argus[6]);
+
 				proposalsManage.BindUserPositionDetailsForAProposal(argus[22]);
+
+				$("#ui-id-24").find('input:text, select, textarea').each(
+						function() {
+							$(this).removeClass("ignore");
+						});
 
 				proposalsManage.BindProposalDetailsByProposalId(argus[0]);
 
@@ -857,19 +862,12 @@ $(function() {
 
 				// OSP Section
 				$('#ui-id-23').show();
-				$("#ui-id-24").find('input:text, select, textarea').each(
-						function() {
-							$(this).removeClass("ignore");
-						});
-				$("#txtNamesSubrecipients").addClass("ignore");
-
-				// need to validate Proposal Status
-				$("#ddlProposalStatus").removeClass("ignore");
 
 				// Audit Log Section
 				$('#ui-id-25').show();
-
-				proposalsManage.InitializeAccordion();
+				$("#accordion").accordion("option", "active", 0);
+				// proposalsManage.ClearForm();
+				// proposalsManage.InitializeAccordion();
 				break;
 			default:
 				break;
@@ -904,11 +902,12 @@ $(function() {
 			// Investigator Information
 			proposalsManage.BindInvestigatorInfo(response.investigatorInfo);
 
-			// Project Information
+			// Project Extra Information
 			$("#lblProposalNo").text(response.proposalNo);
 			$("#lblHiddenDateReceived").text(response.dateReceived);
 			$("#ddlProposalStatus").val(response.proposalStatus);
 
+			// Project Information
 			$("#txtProjectTitle").val(response.projectInfo.projectTitle).prop(
 					"disabled", "disabled");
 
@@ -1318,15 +1317,18 @@ $(function() {
 
 			if (response.oSPSectionInfo.isAnticipatedSubRecipients) {
 				$("#ddlSubrecipients").val(1);
+				$("#txtNamesSubrecipients").removeClass("ignore");
 				$("#txtNamesSubrecipients").val(
 						response.oSPSectionInfo.anticipatedSubRecipientsNames);
 				$("#trSubrecipientsNames").show();
 			} else if (!response.oSPSectionInfo.isAnticipatedSubRecipients) {
 				$("#ddlSubrecipients").val(2);
+				$("#txtNamesSubrecipients").addClass("ignore");
 				$("#trSubrecipientsNames").hide();
 				$("#txtNamesSubrecipients").val('');
 			} else {
 				$("#ddlSubrecipients").prop("selectedIndex", 0);
+				$("#txtNamesSubrecipients").addClass("ignore");
 				$("#trSubrecipientsNames").hide();
 				$("#txtNamesSubrecipients").val('');
 			}
@@ -1760,45 +1762,19 @@ $(function() {
 
 		ClearForm : function() {
 			validator.resetForm();
-			$('.class-text').removeClass('error').next('span').removeClass(
-					'error');
-
 			// $('#accordion-expand-holder').hide();
 
-			var container = $("#accordion div:gt(0)");
-			var inputs = container.find('INPUT, SELECT, TEXTAREA');
-			$.each(inputs, function(i, item) {
-				rmErrorClass(item);
-				$(this).prop('checked', false);
-				$(this).val('');
-				$(this).val($(this).find('option').first().val());
-			});
-
 			proposalsManage.onInit();
-			$('#lblFormHeading').html(
-					getLocale(gpmsProposalsManagement, "New Proposal Details"));
-			$("#btnSaveProposal").removeAttr("name");
-			$("#btnReset").show();
-			$(".required:enabled").each(function() {
-				if ($(this).parent("td").find("span.error").length == 1) {
-					$(this).removeClass("error").addClass("required");
-					$(this).parent("td").find("span.error").remove();
-				}
-			});
-			$('#txtProjectTitle').removeAttr('disabled');
 
-			$(".AddOption").val("[+] Add");
+			$("#btnSaveProposal").removeAttr("name");
+
+			$('#txtProjectTitle').removeAttr('disabled');
 
 			rowIndex = 0;
 			$("#dataTable tbody>tr:gt(0)").remove();
 
 			$('select[name=ddlRole]').eq(0).val(0).prop('selected', 'selected')
 					.prop('disabled', 'disabled');
-			// $("#dataTable
-			// tbody>tr:first").find("select").find('option').each(
-			// function(i) {
-			// $(this).removeAttr("selected");
-			// });
 
 			// For Signature Section
 			$("#trSignChair").hide();
@@ -1809,6 +1785,16 @@ $(function() {
 			$("#trSignChair tbody").empty();
 			$("#trSignDean tbody").empty();
 			$("#trSignBusinessManager tbody").empty();
+
+			var container = $("#accordion > div").slice(0, 12);
+			var inputs = container.find('INPUT, SELECT, TEXTAREA');
+			$.each(inputs, function(i, item) {
+				// rmErrorClass(item);
+				$(this).prop('checked', false);
+				$(this).val('');
+				$(this).val($(this).find('option').first().val());
+			});
+			$(".AddOption").val("[+] Add");
 			return false;
 		},
 
@@ -1920,7 +1906,7 @@ $(function() {
 											// .show();
 											// }
 											// $(this)
-											// .removeProp(
+											// .removeAttr(
 											// "disabled");
 											// });
 										} else {
@@ -2964,6 +2950,7 @@ $(function() {
 
 		init : function(config) {
 			proposalsManage.LoadStaticImage();
+			proposalsManage.InitializeAccordion();
 			$("#txtSearchReceivedOnFrom").datepicker(
 					{
 						dateFormat : 'yy-mm-dd',
@@ -3164,22 +3151,17 @@ $(function() {
 			$('#btnAddNew').on(
 					"click",
 					function() {
-						$('select[name=ddlName]').eq(0).val(
-								GPMS.utils.GetUserProfileID()).prop('selected',
-								'selected').prop('disabled', 'disabled');
-
-						proposalsManage.ClearForm();
-						proposalsManage.BindDefaultUserPosition(0);
-						proposalsManage.BindPICoPISignatures();
-
-						$("#trSignChair").hide();
-						$("#trSignDean").hide();
-						$("#trSignBusinessManager").hide();
+						// proposalsManage.InitializeAccordion();
+						$('#lblFormHeading').html(
+								getLocale(gpmsProposalsManagement,
+										"New Proposal Details"));
+						$("#btnReset").show();
 
 						$('#ui-id-23').hide();
 						$('#ui-id-25').hide();
-						$("#trProposalInfo").hide();
-						$("#trProposalStatus").hide();
+						$('#divProposalAuditGrid').hide();
+
+						$("#accordion").accordion("option", "active", 0);
 						$('#divProposalGrid').hide();
 						$('#divProposalForm').show();
 
@@ -3189,25 +3171,28 @@ $(function() {
 									$(this).addClass("ignore");
 								});
 
-						// Don't validate Proposal Status
-						$("#ddlProposalStatus").addClass("ignore");
+						proposalsManage.ClearForm();
 
-						proposalsManage.InitializeAccordion();
+						proposalsManage.BindDefaultUserPosition(0);
+						proposalsManage.BindPICoPISignatures();
+
+						$('select[name=ddlName]').eq(0).val(
+								GPMS.utils.GetUserProfileID()).prop('selected',
+								'selected').prop('disabled', 'disabled');
 					});
 
 			$('#btnBack').on("click", function() {
 				$('#divProposalGrid').show();
 				$('#divProposalForm').hide();
-				proposalsManage.ClearForm();
-				// proposalsManage.CollapseAccordion();
+				$("#btnSaveProposal").removeAttr("name");
+				$("#accordion").accordion("option", "active", 0);
 			});
 
 			$('#btnReset').on("click", function() {
-				proposalsManage.ClearForm();
-				// proposalsManage.CollapseAccordion();
-				proposalsManage.InitializeAccordion();
 				proposalsManage.BindDefaultUserPosition(0);
 				proposalsManage.BindPICoPISignatures();
+				$("#accordion").accordion("option", "active", 0);
+				proposalsManage.ClearForm();
 			});
 
 			$('#btnSaveProposal').click(function(e) {
@@ -3284,6 +3269,7 @@ $(function() {
 							proposalsManage.BindDefaultUserPosition(rowIndex);
 						}
 					});
+
 			$("#btnSearchProposal").on("click", function() {
 				if ($("#form1").valid()) {
 					proposalsManage.SearchProposals();
