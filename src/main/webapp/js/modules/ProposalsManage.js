@@ -829,8 +829,6 @@ $(function() {
 				$("input[name=AddMore]").removeAttr('disabled');
 				$("input[name=DeleteOption]").removeAttr('disabled');
 
-				$("#accordion").accordion("option", "active", 0);
-
 				proposalsManage.ClearForm();
 
 				$("#btnSaveProposal").prop("name", argus[0]);
@@ -845,11 +843,6 @@ $(function() {
 				$('#ui-id-23').show();
 				// Audit Log Section
 				$('#ui-id-25').show();
-
-				$("#ui-id-24").find('input:text, select, textarea').each(
-						function() {
-							$(this).removeClass("ignore");
-						});
 
 				proposalsManage.BindUserPositionDetailsForAProposal(argus[22]);
 
@@ -1867,7 +1860,18 @@ $(function() {
 										alert("After Activated! GO to XACML to see if he is allowed to change this panel content");
 										var allowedToEdit = true;
 										if (allowedToEdit) {
-											alert("Allowed to EDIT this Panel");
+											alert("Allowed to EDIT this Panel "
+													+ $.trim(ui.newHeader
+															.text()));
+											$("#ui-id-24")
+													.find(
+															'input:text, select, textarea')
+													.each(
+															function() {
+																$(this)
+																		.removeClass(
+																				"ignore");
+															});
 											// ui.newPanel
 											// .find("input, select")
 											// .each(
@@ -1883,7 +1887,9 @@ $(function() {
 											// "disabled");
 											// });
 										} else {
-											alert("You are not Allowed to EDIT this Panel");
+											alert("You are not Allowed to EDIT this Panel "
+													+ $.trim(ui.newHeader
+															.text()));
 											ui.newPanel
 													.find("input, select")
 													.each(
@@ -1898,6 +1904,15 @@ $(function() {
 																		.prop(
 																				"disabled",
 																				"disabled");
+															});
+											$("#ui-id-24")
+													.find(
+															'input:text, select, textarea')
+													.each(
+															function() {
+																$(this)
+																		.addClass(
+																				"ignore");
 															});
 											event.preventDefault();
 										}
@@ -2690,6 +2705,7 @@ $(function() {
 			proposalsManage.FillForm(msg);
 			$('#divProposalGrid').hide();
 			$('#divProposalForm').show();
+			$("#accordion").accordion("option", "active", 0);
 			break;
 
 		case 5: // Bind User List for Investigator Info
