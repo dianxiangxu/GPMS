@@ -3361,7 +3361,7 @@ $(function() {
 					}
 				} else {
 					$("#ddlIACUCOptions").addClass("ignore");
-					$("#txtIACUC").removeClass("ignore");
+					$("#txtIACUC").addClass("ignore");
 					$("#lblUseVertebrateAnimals").hide();
 					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
 					$("#tdVertebrateAnimalsOption").hide();
@@ -3400,7 +3400,7 @@ $(function() {
 					}
 				} else {
 					$("#ddlIBCOptions").addClass("ignore");
-					$("#txtIBC").removeClass("ignore");
+					$("#txtIBC").addClass("ignore");
 					$("#lblHasBiosafetyConcerns").hide();
 					// $("#ddlIBCOptions").prop("selectedIndex", 0);
 					$("#tdBiosafetyOption").hide();
