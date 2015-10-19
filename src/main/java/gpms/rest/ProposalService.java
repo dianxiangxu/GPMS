@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -319,6 +320,30 @@ public class ProposalService {
 		ObjectId id = new ObjectId(proposalId);
 
 		proposal = proposalDAO.findProposalDetailsByProposalID(id);
+
+		// InvestigatorRefAndPosition PI =
+		// proposal.getInvestigatorInfo().getPi();
+		//
+		// if (PI.getUserRef().getDetails() == null) {
+		// proposal.getInvestigatorInfo().setPi(null);
+		// }
+		//
+		// for (Iterator<InvestigatorRefAndPosition> it = proposal
+		// .getInvestigatorInfo().getCo_pi().iterator(); it.hasNext();) {
+		// InvestigatorRefAndPosition p = it.next();
+		// if (p.getUserRef().getDetails() == null) {
+		// it.remove();
+		// }
+		// }
+		//
+		// for (Iterator<InvestigatorRefAndPosition> it = proposal
+		// .getInvestigatorInfo().getSeniorPersonnel().iterator(); it
+		// .hasNext();) {
+		// InvestigatorRefAndPosition p = it.next();
+		// if (p.getUserRef().getDetails() == null) {
+		// it.remove();
+		// }
+		// }
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")
 				.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting()
@@ -1290,9 +1315,6 @@ public class ProposalService {
 										oSPSectionInfo.get("ListAgency")
 												.getTextValue());
 					}
-				} else {
-					newOSPSectionInfo.setListAgency(oSPSectionInfo.get(
-							"ListAgency").getTextValue());
 				}
 			}
 
@@ -1366,8 +1388,6 @@ public class ProposalService {
 					existingProposal.getoSPSectionInfo().setFundingSource(
 							newFundingSource);
 				}
-			} else {
-				newOSPSectionInfo.setFundingSource(newFundingSource);
 			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("CFDANo")) {
@@ -1379,9 +1399,6 @@ public class ProposalService {
 						existingProposal.getoSPSectionInfo().setCFDANo(
 								oSPSectionInfo.get("CFDANo").getTextValue());
 					}
-				} else {
-					newOSPSectionInfo.setCFDANo(oSPSectionInfo.get("CFDANo")
-							.getTextValue());
 				}
 			}
 
@@ -1395,9 +1412,6 @@ public class ProposalService {
 						existingProposal.getoSPSectionInfo().setProgramNo(
 								oSPSectionInfo.get("ProgramNo").getTextValue());
 					}
-				} else {
-					newOSPSectionInfo.setProgramNo(oSPSectionInfo.get(
-							"ProgramNo").getTextValue());
 				}
 			}
 
@@ -1412,9 +1426,6 @@ public class ProposalService {
 								oSPSectionInfo.get("ProgramTitle")
 										.getTextValue());
 					}
-				} else {
-					newOSPSectionInfo.setProgramTitle(oSPSectionInfo.get(
-							"ProgramTitle").getTextValue());
 				}
 
 				Recovery newRecovery = new Recovery();
@@ -1461,8 +1472,6 @@ public class ProposalService {
 						existingProposal.getoSPSectionInfo().setRecovery(
 								newRecovery);
 					}
-				} else {
-					newOSPSectionInfo.setRecovery(newRecovery);
 				}
 
 				BaseInfo newBaseInfo = new BaseInfo();
@@ -1497,8 +1506,6 @@ public class ProposalService {
 						existingProposal.getoSPSectionInfo().setBaseInfo(
 								newBaseInfo);
 					}
-				} else {
-					newOSPSectionInfo.setBaseInfo(newBaseInfo);
 				}
 
 				if (oSPSectionInfo != null
@@ -1535,10 +1542,6 @@ public class ProposalService {
 									Double.parseDouble(oSPSectionInfo.get(
 											"PISalary").getTextValue()));
 						}
-					} else {
-						newOSPSectionInfo.setPISalary(Double
-								.parseDouble(oSPSectionInfo.get("PISalary")
-										.getTextValue()));
 					}
 				}
 
@@ -1600,9 +1603,6 @@ public class ProposalService {
 					existingProposal.getoSPSectionInfo()
 							.setInstitutionalCostDocumented(newBaseOptions);
 				}
-			} else {
-				newOSPSectionInfo
-						.setInstitutionalCostDocumented(newBaseOptions);
 			}
 
 			newBaseOptions = new BaseOptions();
@@ -1629,8 +1629,6 @@ public class ProposalService {
 					existingProposal.getoSPSectionInfo()
 							.setThirdPartyCostDocumented(newBaseOptions);
 				}
-			} else {
-				newOSPSectionInfo.setThirdPartyCostDocumented(newBaseOptions);
 			}
 
 			if (oSPSectionInfo != null
@@ -1664,6 +1662,27 @@ public class ProposalService {
 							.setAnticipatedSubRecipients(
 									newOSPSectionInfo
 											.isAnticipatedSubRecipients());
+				}
+
+				if (existingProposal.getoSPSectionInfo()
+						.getAnticipatedSubRecipientsNames() != null) {
+					if (!existingProposal
+							.getoSPSectionInfo()
+							.getAnticipatedSubRecipientsNames()
+							.equals(newOSPSectionInfo
+									.getAnticipatedSubRecipientsNames())) {
+						existingProposal
+								.getoSPSectionInfo()
+								.setAnticipatedSubRecipientsNames(
+										newOSPSectionInfo
+												.getAnticipatedSubRecipientsNames());
+					}
+				} else {
+					existingProposal
+							.getoSPSectionInfo()
+							.setAnticipatedSubRecipientsNames(
+									newOSPSectionInfo
+											.getAnticipatedSubRecipientsNames());
 				}
 			}
 
@@ -1699,9 +1718,6 @@ public class ProposalService {
 							.getoSPSectionInfo()
 							.setPIEligibilityWaiver(newBasePIEligibilityOptions);
 				}
-			} else {
-				newOSPSectionInfo
-						.setPIEligibilityWaiver(newBasePIEligibilityOptions);
 			}
 
 			newBaseOptions = new BaseOptions();
@@ -1728,8 +1744,6 @@ public class ProposalService {
 					existingProposal.getoSPSectionInfo()
 							.setConflictOfInterestForms(newBaseOptions);
 				}
-			} else {
-				newOSPSectionInfo.setConflictOfInterestForms(newBaseOptions);
 			}
 
 			newBaseOptions = new BaseOptions();
@@ -1756,8 +1770,6 @@ public class ProposalService {
 					existingProposal.getoSPSectionInfo()
 							.setExcludedPartyListChecked(newBaseOptions);
 				}
-			} else {
-				newOSPSectionInfo.setExcludedPartyListChecked(newBaseOptions);
 			}
 
 			if (oSPSectionInfo != null && oSPSectionInfo.has("proposalNotes")) {
@@ -1771,9 +1783,6 @@ public class ProposalService {
 								oSPSectionInfo.get("proposalNotes")
 										.getTextValue());
 					}
-				} else {
-					newOSPSectionInfo.setProposalNotes(oSPSectionInfo.get(
-							"proposalNotes").getTextValue());
 				}
 			}
 
@@ -1800,15 +1809,7 @@ public class ProposalService {
 					existingProposal.getoSPSectionInfo()
 							.setResearchAdministrator(newResearchAdministrator);
 				}
-			} else {
-				newOSPSectionInfo
-						.setResearchAdministrator(newResearchAdministrator);
 			}
-		}
-		// OSPSection
-		if (proposalInfo != null && proposalInfo.has("OSPSectionInfo")
-				&& proposalID.equals("0")) {
-			newProposal.setoSPSectionInfo(newOSPSectionInfo);
 		}
 
 		if (proposalInfo != null && !proposalInfo.has("ProposalNo")

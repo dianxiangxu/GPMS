@@ -495,3 +495,18 @@ stringToBoolean = function(b) {
 		return Boolean(b);
 	}
 }
+
+function removeDuplicates(inputArray) {
+	var i;
+	var len = inputArray.length;
+	var outputArray = [];
+	var temp = {};
+
+	for (i = 0; i < len; i++) {
+		temp[inputArray[i]] = 0;
+	}
+	for (i in temp) {
+		outputArray.push(i);
+	}
+	return outputArray;
+}

@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,9 @@ import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import com.google.gson.JsonElement;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -86,6 +90,30 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		return ds.createQuery(UserProfile.class).asList();
 	}
 
+	public List<UserProfile> findAllUsersWithPosition() throws UnknownHostException {
+		Datastore ds = getDatastore();
+		return ds.createQuery(UserProfile.class).field("details")
+				.notEqual(null).asList();
+	}
+
+	public List<UserProfile> findAllActiveUsers() throws UnknownHostException {
+		Datastore ds = getDatastore();
+
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
+
+		accountQuery.and(accountQuery.criteria("is deleted").equal(false),
+				accountQuery.criteria("is active").equal(true));
+		profileQuery.and(
+				profileQuery.criteria("details").notEqual(null),
+				profileQuery.and(profileQuery.criteria("user id").in(
+						accountQuery.asKeyList())),
+				profileQuery.criteria("is deleted").equal(false));
+
+		return profileQuery.retrievedFields(true, "_id", "first name",
+				"middle name", "last name").asList();
+	}
+
 	/*
 	 * This is example format for grid Info object bind that is customized to
 	 * bind in grid
@@ -101,24 +129,27 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		Query<UserAccount> accountQuery = ds.createQuery(UserAccount.class);
 
 		if (userName != null) {
-			accountQuery.field("username").containsIgnoreCase(userName);
-			profileQuery.criteria("user id").in(accountQuery.asKeyList());
+			accountQuery.criteria("username").containsIgnoreCase(userName);
 		}
 
+		if (isActive != null) {
+			accountQuery.criteria("is active").equal(isActive);
+		}
+
+		profileQuery.criteria("user id").in(accountQuery.asKeyList());
+
 		if (college != null) {
-			profileQuery.field("details.college").equal(college);
+			profileQuery.criteria("details.college").equal(college);
 		}
 		if (department != null) {
-			profileQuery.field("details.department").equal(department);
+			profileQuery.criteria("details.department").equal(department);
 		}
 		if (positionType != null) {
-			profileQuery.field("details.position type").equal(positionType);
+			profileQuery.criteria("details.position type").equal(positionType);
 		}
 		if (positionTitle != null) {
-			profileQuery.field("details.position title").equal(positionTitle);
-		}
-		if (isActive != null) {
-			accountQuery.field("is active").equal(isActive);
+			profileQuery.criteria("details.position title")
+					.equal(positionTitle);
 		}
 
 		int rowTotal = profileQuery.asList().size();
@@ -939,21 +970,9 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 	// return users;
 	// }
 
-	public String findMobileNoForAUser(ObjectId id) {
+	public ArrayList<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
 		Datastore ds = getDatastore();
-		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
-
-		UserProfile q = profileQuery.field("_id").equal(id)
-				.retrievedFields(true, "mobile number").get();
-		return q.getMobileNumbers().get(0).toString();
-	}
-
-	public List<InvestigatorUsersAndPositions> findAllUsersAndPositions() {
-		Datastore ds = getDatastore();
-		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
-
-		// Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
-		// UserProfile q1 = profileQuery.field("_id").equal(id).get();
+		ArrayList<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
 
 		Query<UserProfile> q = ds.createQuery(UserProfile.class)
 				.retrievedFields(true, "_id", "first name", "middle name",
@@ -961,21 +980,40 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		List<UserProfile> userProfile = q.asList();
 
 		for (UserProfile user : userProfile) {
+			Multimap<String, Object> htUser = ArrayListMultimap.create();
+
 			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
 			userPosition.setId(user.getId().toString());
 			userPosition.setFullName(user.getFullName());
 			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
-			userPosition.setPositions(user.getDetails());
+
+			for (PositionDetails userDetails : user.getDetails()) {
+				// Multimap<String, String> mapTypeTitle = new
+				// ArrayListMultimap.create();
+
+				Multimap<String, Object> mapTypeTitle = ArrayListMultimap
+						.create();
+				Multimap<String, Object> mapDeptType = ArrayListMultimap
+						.create();
+
+				mapTypeTitle.put(userDetails.getPositionType(),
+						userDetails.getPositionTitle());
+				mapDeptType.put(userDetails.getDepartment(),
+						mapTypeTitle.asMap());
+				// ht.put(userDetails.getCollege(), mapTypeTitle);
+
+				htUser.put(userDetails.getCollege(), mapDeptType.asMap());
+				userPosition.setPositions(htUser);
+			}
 			userPositions.add(userPosition);
 		}
 		return userPositions;
-
 	}
 
 	public List<InvestigatorUsersAndPositions> findAllPositionDetailsForAUser(
 			ObjectId id) {
 		Datastore ds = getDatastore();
-		List<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
+		ArrayList<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
 
 		Query<UserProfile> q = ds
 				.createQuery(UserProfile.class)
@@ -986,14 +1024,79 @@ public class UserProfileDAO extends BasicDAO<UserProfile, String> {
 		List<UserProfile> userProfile = q.asList();
 
 		for (UserProfile user : userProfile) {
+			Multimap<String, Object> htUser = ArrayListMultimap.create();
+
 			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
 			userPosition.setId(user.getId().toString());
 			userPosition.setFullName(user.getFullName());
 			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
-			userPosition.setPositions(user.getDetails());
+
+			for (PositionDetails userDetails : user.getDetails()) {
+				Multimap<String, Object> mapTypeTitle = ArrayListMultimap
+						.create();
+				Multimap<String, Object> mapDeptType = ArrayListMultimap
+						.create();
+
+				mapTypeTitle.put(userDetails.getPositionType(),
+						userDetails.getPositionTitle());
+				mapDeptType.put(userDetails.getDepartment(),
+						mapTypeTitle.asMap());
+
+				htUser.put(userDetails.getCollege(), mapDeptType.asMap());
+				userPosition.setPositions(htUser);
+			}
 			userPositions.add(userPosition);
 		}
 		return userPositions;
+	}
+
+	public List<InvestigatorUsersAndPositions> findUserPositionDetailsForAProposal(
+			List<ObjectId> userIds) {
+		Datastore ds = getDatastore();
+		ArrayList<InvestigatorUsersAndPositions> userPositions = new ArrayList<InvestigatorUsersAndPositions>();
+
+		Query<UserProfile> q = ds
+				.createQuery(UserProfile.class)
+				.field("_id")
+				.in(userIds)
+				.retrievedFields(true, "_id", "first name", "middle name",
+						"last name", "details", "mobile number");
+		List<UserProfile> userProfile = q.asList();
+
+		for (UserProfile user : userProfile) {
+			Multimap<String, Object> htUser = ArrayListMultimap.create();
+
+			InvestigatorUsersAndPositions userPosition = new InvestigatorUsersAndPositions();
+			userPosition.setId(user.getId().toString());
+			userPosition.setFullName(user.getFullName());
+			userPosition.setMobileNumber(user.getMobileNumbers().get(0));
+
+			for (PositionDetails userDetails : user.getDetails()) {
+				Multimap<String, Object> mapTypeTitle = ArrayListMultimap
+						.create();
+				Multimap<String, Object> mapDeptType = ArrayListMultimap
+						.create();
+
+				mapTypeTitle.put(userDetails.getPositionType(),
+						userDetails.getPositionTitle());
+				mapDeptType.put(userDetails.getDepartment(),
+						mapTypeTitle.asMap());
+
+				htUser.put(userDetails.getCollege(), mapDeptType.asMap());
+				userPosition.setPositions(htUser);
+			}
+			userPositions.add(userPosition);
+		}
+		return userPositions;
+	}
+
+	public String findMobileNoForAUser(ObjectId id) {
+		Datastore ds = getDatastore();
+		Query<UserProfile> profileQuery = ds.createQuery(UserProfile.class);
+
+		UserProfile q = profileQuery.field("_id").equal(id)
+				.retrievedFields(true, "mobile number").get();
+		return q.getMobileNumbers().get(0).toString();
 	}
 
 	public List<String> findCollegesForAUser(ObjectId id) {

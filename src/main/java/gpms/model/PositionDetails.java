@@ -24,7 +24,7 @@ public class PositionDetails {
 
 	@Expose
 	@Property("college")
-	private String college = new String();;
+	private String college = new String();
 
 	public PositionDetails() {
 	}

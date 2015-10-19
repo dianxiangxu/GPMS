@@ -5598,9 +5598,14 @@ tr.sfTableRowBrd-btm td {
 	text-align: right;
 }
 
-input.error, input.warning, select.warning {
-	border: 1px dashed #F00 !important;
+input.error, input.warning{
 	padding: 8px;
+}
+
+select.error, select.warning {
+    border: 1px dashed #f00 !important;
+    color: red;
+    padding: 8px;
 }
 
 .cssClassTextArea.error {

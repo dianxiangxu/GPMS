@@ -53,7 +53,8 @@
 
 	var gpmsServicePath = "REST/";
 	var gpmsRootPath = "http://localhost:8181/GPMS/";
-	var userProfileId = '<%=session.getAttribute("userid")%>';
+	var userProfileId = "562525bdf191262660edca2d";
+
 	var sessionCode = "jxr30wycjzvpqd0jv3vkybx4";
 	var clientIPAddress = "::1";
 	var gpmsCountryName = "RESERVED";
@@ -332,7 +333,7 @@
 											<div>
 												<span class="cssClassRequired">*</span> <span
 													class="cssClassLabelTitle">indicates required fields</span>
-												<div id="accordion-expand-holder">
+												<div id="accordion-expand-holder" style="display: none;">
 													<button type="button" class="open sfBtn">Expand
 														all</button>
 													<button type="button" class="close sfBtn">Collapse
@@ -343,7 +344,7 @@
 												<h3>
 													<span id="lblSection1">Investigator Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0"
 														id="dataTable">
 														<thead>
@@ -407,7 +408,7 @@
 												<h3>
 													<span id="lblSection2">Project Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -485,27 +486,6 @@
 																	id="txtProjectPeriodTo" class="sfInputbox"
 																	name="projectPeriodTo" placeholder="To" /></td>
 															</tr>
-															<tr id="trProposalInfo">
-																<td><span class="cssClassLabel">Proposal No:</span></td>
-																<td class="cssClassTableRightCol"><span
-																	id="lblProposalNo" class="cssClassLabel"></span></td>
-																<td><span class="cssClassLabel">Proposal
-																		Date Received:</span></td>
-																<td class="cssClassTableRightCol"><span
-																	id="lblProposalDateReceived" class="cssClassLabel"></span>
-																	<span id="lblHiddenDateReceived" style="display: none;"></span></td>
-															</tr>
-
-															<tr id="trProposalStatus">
-																<td><span class="cssClassLabel"
-																	id="lblProposalStatus">Proposal Status:</span> <span
-																	class="cssClassRequired">*</span></td>
-																<td class="cssClassTableRightCol" colspan="3"><select
-																	title="Choose Proposal Status" name="proposalStatus"
-																	id="ddlProposalStatus">
-																		<option value="">Choose Proposal Status</option>
-																</select></td>
-															</tr>
 														</tbody>
 													</table>
 												</div>
@@ -514,7 +494,7 @@
 													<span id="lblSection3">Sponsor And Budget
 														Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -565,7 +545,7 @@
 												<h3>
 													<span id="lblSection4">Cost Share Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -603,7 +583,7 @@
 												<h3>
 													<span id="lblSection5">University Commitments</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -655,7 +635,7 @@
 													<span id="lblSection6">Conflict of Interest And
 														Commitment Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -709,7 +689,7 @@
 												<h3>
 													<span id="lblSection7">Compliance Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -731,7 +711,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIRBOption"><select
-																	title="Choose IRB Option" class="sfListmenu"
+																	title="Choose IRB Option" class="sfListmenu ignore"
 																	style="width: 100px;" id="ddlIRBOptions"
 																	name="IRBOptions">
 																		<option value="">Select Option</option>
@@ -741,7 +721,7 @@
 
 																<td class="cssClassTableRightCol" id="tdIRBtxt"><span
 																	class="cssClassRequired">*</span> <input title="IRB #"
-																	type="text" class="sfTextBoxSmall" id="txtIRB"
+																	type="text" class="sfTextBoxSmall ignore" id="txtIRB"
 																	name="IRB" placeholder="IRB #" /></td>
 															</tr>
 
@@ -764,7 +744,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIACUCOption"><select
-																	title="Choose IACUC Option" class="sfListmenu"
+																	title="Choose IACUC Option" class="sfListmenu ignore"
 																	style="width: 100px;" id="ddlIACUCOptions"
 																	name="IACUCOptions">
 																		<option value="">Select Option</option>
@@ -774,8 +754,9 @@
 
 																<td class="cssClassTableRightCol" id="tdIACUCtxt"><span
 																	class="cssClassRequired">*</span> <input
-																	title="IACUC #" type="text" class="sfTextBoxSmall"
-																	id="txtIACUC" name="IACUC" placeholder="IACUC #" /></td>
+																	title="IACUC #" type="text"
+																	class="sfTextBoxSmall ignore" id="txtIACUC"
+																	name="IACUC" placeholder="IACUC #" /></td>
 															</tr>
 
 															<tr>
@@ -797,7 +778,7 @@
 																	class="cssClassLabel">Choose Option?</span> <span
 																	class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol" id="tdIBCOption"><select
-																	title="Choose IBC Option" class="sfListmenu"
+																	title="Choose IBC Option" class="sfListmenu ignore"
 																	style="width: 100px;" id="ddlIBCOptions"
 																	name="IBCOptions">
 																		<option value="">Select Option</option>
@@ -807,7 +788,7 @@
 
 																<td class="cssClassTableRightCol" id="tdIBCtxt"><span
 																	class="cssClassRequired">*</span> <input title="IBC #"
-																	type="text" class="sfTextBoxSmall" id="txtIBC"
+																	type="text" class="sfTextBoxSmall ignore" id="txtIBC"
 																	name="IBC" placeholder="IBC #" /></td>
 															</tr>
 
@@ -831,7 +812,7 @@
 												<h3>
 													<span id="lblSection8">Additional Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -882,7 +863,7 @@
 												<h3>
 													<span id="lblSection9">Collaboration Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -904,9 +885,9 @@
 																<td><span class="cssClassLabel">Collaborators:</span>
 																	<span class="cssClassRequired">*</span></td>
 																<td class="cssClassTableRightCol"><input
-																	title="Collaborators" type="text" class="sfInputbox"
-																	id="txtCollaborators" name="collaborators"
-																	placeholder="Collaborators" /> <span
+																	title="Collaborators" type="text"
+																	class="sfInputbox ignore" id="txtCollaborators"
+																	name="collaborators" placeholder="Collaborators" /> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
 																		separated names.</span></td>
 															</tr>
@@ -918,7 +899,7 @@
 													<span id="lblSection10">Proprietary/Confidential
 														Information</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -939,8 +920,8 @@
 																<td id="tdPagesWithProprietaryInfo"><span
 																	class="cssClassRequired">*</span> <input
 																	title="Pages With Proprietary/Confidential Information"
-																	type="text" class="sfInputbox" style="width: 210px;"
-																	id="txtPagesWithProprietaryInfo"
+																	type="text" class="sfInputbox ignore"
+																	style="width: 210px;" id="txtPagesWithProprietaryInfo"
 																	name="pagesWithProprietaryInfo"
 																	placeholder="Pages Containing the Information" /> <span
 																	class="cssClassLabel cssClassInfo">Enter comma
@@ -977,18 +958,18 @@
 														</tbody>
 													</table>
 
-													<div class="cssClassFooter">
-														<span class="cssClassLabel"><strong>Note:</strong>
+													<span class="cssClassFooter"> <span
+														class="cssClassLabel"><strong>Note:</strong>
 															Contact the Office of Technology Transfer for additional
 															assistance on proprietary and patentable information at
 															208-426-5765.</span>
-													</div>
+													</span>
 												</div>
 
 												<h3>
 													<span id="lblSection11">Certification/Signatures</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<table cellspacing="0" cellpadding="0" border="0">
 														<tbody>
 															<tr>
@@ -1097,7 +1078,7 @@
 												<h3>
 													<span id="lblSection12">OSP Section</span>
 												</h3>
-												<div class="sfFormwrapper">
+												<div class="sfFormwrapper ui-tabs-panel">
 													<div class="cssClassHeader">
 														<span class="cssClassLabel">Office of Sponsored
 															Programs Administrative Use Only</span>
@@ -1419,6 +1400,31 @@
 																		<option value="1">Yes</option>
 																		<option value="2">No</option>
 																		<option value="3">N/A</option>
+																</select></td>
+															</tr>
+
+															<tr>
+																<td><span class="cssClassLabel">Proposal No:</span></td>
+																<td class="cssClassTableRightCol"><span
+																	id="lblProposalNo" class="cssClassLabel"></span></td>
+															</tr>
+
+															<tr>
+																<td><span class="cssClassLabel">Proposal
+																		Date Received:</span></td>
+																<td class="cssClassTableRightCol"><span
+																	id="lblProposalDateReceived" class="cssClassLabel"></span>
+																	<span id="lblHiddenDateReceived" style="display: none;"></span></td>
+															</tr>
+
+															<tr>
+																<td><span class="cssClassLabel"
+																	id="lblProposalStatus">Proposal Status:</span> <span
+																	class="cssClassRequired">*</span></td>
+																<td class="cssClassTableRightCol" colspan="3"><select
+																	title="Choose Proposal Status" name="proposalStatus"
+																	id="ddlProposalStatus">
+																		<option value="">Choose Proposal Status</option>
 																</select></td>
 															</tr>
 

@@ -39,6 +39,7 @@
 	"Failed to delete multiple proposals." : "Failed to delete multiple proposals.",
 	"Failed to load proposal details." : "Failed to load proposal details.",
 	"Failed to load user list." : "Failed to load user list.",
+	"Failed to load user's position details." : "Failed to load user's position details.",
 	"Failed to load user's Mobile No." : "Failed to load user's Mobile No.",
 	"Failed to load user's colleges list." : "Failed to load user's colleges list.",
 	"Failed to load user's departments list." : "Failed to load user's departments list.",

@@ -316,13 +316,17 @@ input[type="checkbox"] {
     padding: 10px;
 }
 
-input.error {
+input.error{
     border: 1px dashed #f00 !important;
 }
 
-.error {
+select.error {
+    border: 1px dashed #f00 !important;
     color: red;
-    display: block;
+}
+
+select > option {
+    color: #000;
 }
 
 label.error {
