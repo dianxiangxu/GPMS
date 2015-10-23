@@ -1868,9 +1868,13 @@ $(function() {
 															'input:text, select, textarea')
 													.each(
 															function() {
-																$(this)
-																		.removeClass(
-																				"ignore");
+																if ($(this)
+																		.attr(
+																				'id') != "txtNamesSubrecipients") {
+																	$(this)
+																			.removeClass(
+																					"ignore");
+																}
 															});
 											// ui.newPanel
 											// .find("input, select")
@@ -3318,7 +3322,7 @@ $(function() {
 					}
 				} else {
 					$("#ddlIRBOptions").addClass("ignore");
-					$("#txtIRB").removeClass("ignore");
+					$("#txtIRB").addClass("ignore");
 					$("#lblUseHumanSubjects").hide();
 					// $("#ddlIRBOptions").prop("selectedIndex", 0);
 					$("#tdHumanSubjectsOption").hide();
@@ -3357,7 +3361,7 @@ $(function() {
 					}
 				} else {
 					$("#ddlIACUCOptions").addClass("ignore");
-					$("#txtIACUC").removeClass("ignore");
+					$("#txtIACUC").addClass("ignore");
 					$("#lblUseVertebrateAnimals").hide();
 					// $("#ddlIACUCOptions").prop("selectedIndex", 0);
 					$("#tdVertebrateAnimalsOption").hide();
@@ -3396,7 +3400,7 @@ $(function() {
 					}
 				} else {
 					$("#ddlIBCOptions").addClass("ignore");
-					$("#txtIBC").removeClass("ignore");
+					$("#txtIBC").addClass("ignore");
 					$("#lblHasBiosafetyConcerns").hide();
 					// $("#ddlIBCOptions").prop("selectedIndex", 0);
 					$("#tdBiosafetyOption").hide();
