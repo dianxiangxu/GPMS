@@ -1,12 +1,9 @@
 package gpms.dao;
 
 import gpms.DAL.MongoDBConnector;
-import gpms.model.AuditLog;
 import gpms.model.Delegation;
-import gpms.model.Proposal;
 import gpms.model.SignatureInfo;
 import gpms.model.UserAccount;
-import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;

@@ -1,22 +1,15 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import gpms.dao.UserAccountDAO;
+import gpms.dao.UserProfileDAO;
+import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-
-
-
-
-
-
-import gpms.dao.UserAccountDAO;
-import gpms.dao.UserProfileDAO;
-import gpms.model.UserProfile;
-
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;

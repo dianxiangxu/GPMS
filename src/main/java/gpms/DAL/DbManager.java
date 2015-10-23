@@ -1,10 +1,10 @@
 package gpms.DAL;
 
+import java.net.UnknownHostException;
+
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
-
-import java.net.UnknownHostException;
 
 public class DbManager {
 

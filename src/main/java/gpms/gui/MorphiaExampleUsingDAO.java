@@ -6,11 +6,11 @@ import gpms.model.Address;
 import gpms.model.Family;
 import gpms.model.User;
 
+import java.util.List;
+
 import org.mongodb.morphia.Morphia;
 
 import com.mongodb.MongoClient;
-
-import java.util.List;
 
 public class MorphiaExampleUsingDAO {
 

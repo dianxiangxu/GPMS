@@ -1,11 +1,5 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.*;
-
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
@@ -14,6 +8,9 @@ import gpms.model.Proposal;
 import gpms.model.SimplePersonnelData;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
+
+import java.net.UnknownHostException;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.junit.Before;

@@ -1,15 +1,12 @@
 package gpms.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import gpms.model.PasswordHash;
+import gpms.model.UserAccount;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Scanner;
-
-import gpms.model.PasswordHash;
-import gpms.model.UserAccount;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * 
