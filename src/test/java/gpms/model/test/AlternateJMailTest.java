@@ -26,7 +26,7 @@ public class AlternateJMailTest
 	public static void main (String args[])
 	{
 		//Port is 465? 587?
-		String to = "DESTINATIONEMAILADDRESS";
+		String to = "DESTINATIONEMAILADDRESS"; //The address you are sending to
 		Properties props = new Properties();
 		//Start TTLS Lines added, required
 		props.put("mail.smtp.starttls.enable", "true");
@@ -41,13 +41,13 @@ public class AlternateJMailTest
 		Session session = Session.getDefaultInstance(props, 
 				new javax.mail.Authenticator(){
 			protected PasswordAuthentication getPasswordAuthentication(){
-				return new PasswordAuthentication("USERNAME", "PASSWORD");
+				return new PasswordAuthentication("USERNAME", "PASSWORD");  //Your actual email address and password
 			}
 		});
 		  session.setDebug(true);
 		try{
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("USERNAME"));
+			message.setFrom(new InternetAddress("USERNAME")); //your email address
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Hello");
 			message.setText("This is a test");
