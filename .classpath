@@ -34,7 +34,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Eclipse/plugins/edu.wm.flat3_0.2.4.jar"/>
 	<classpathentry kind="lib" path="C:/Eclipse/plugins/javax.mail.jar"/>
 	<classpathentry kind="lib" path="C:/Eclipse/plugins/dsn-1.5.4.jar"/>
 	<classpathentry kind="lib" path="C:/Eclipse/plugins/gimap-1.5.4.jar"/>
