@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+
 import com.mongodb.MongoClient;
 
 public class BandManagerTestCase extends TestCase {

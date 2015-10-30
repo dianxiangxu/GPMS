@@ -1,9 +1,9 @@
 package gpms.model;
 
+import java.util.List;
+
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-
-import java.util.List;
 
 @Entity("customer")
 public class Customer extends BaseEntity {

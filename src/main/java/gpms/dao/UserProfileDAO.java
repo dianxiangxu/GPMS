@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -37,7 +36,6 @@ import org.mongodb.morphia.query.Query;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.gson.JsonElement;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 

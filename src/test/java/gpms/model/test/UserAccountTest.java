@@ -1,11 +1,9 @@
 package gpms.model.test;
 
 import static org.junit.Assert.assertTrue;
+import gpms.model.UserAccount;
 
 import java.text.ParseException;
-
-import gpms.model.UserAccount;
-import gpms.model.UserProfile;
 
 import org.junit.Before;
 import org.junit.Test;

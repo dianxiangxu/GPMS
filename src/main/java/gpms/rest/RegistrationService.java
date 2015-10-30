@@ -2,18 +2,12 @@ package gpms.rest;
 
 import gpms.DAL.DataModel;
 import gpms.DAL.MongoDBConnector;
-import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
 import gpms.model.ActiveUser;
 import gpms.model.Address;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
-import gpms.queue.ProcessingFactory;
-import gpms.queue.TaskQueue;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

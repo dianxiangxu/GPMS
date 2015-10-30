@@ -1,28 +1,14 @@
 package gpms.dao.test;
 
-import static org.junit.Assert.assertTrue;
 import gpms.DAL.MongoDBConnector;
 import gpms.dao.ProposalDAO;
 import gpms.dao.UserAccountDAO;
 import gpms.dao.UserProfileDAO;
-import gpms.model.GPMSCommonInfo;
-import gpms.model.InvestigatorInfo;
-import gpms.model.InvestigatorRefAndPosition;
-import gpms.model.PositionDetails;
-import gpms.model.ProjectInfo;
-import gpms.model.ProjectPeriod;
-import gpms.model.ProjectType;
-import gpms.model.Proposal;
-import gpms.model.SponsorAndBudgetInfo;
-import gpms.model.Status;
-import gpms.model.TypeOfRequest;
 import gpms.model.UserAccount;
 import gpms.model.UserProfile;
 
 import java.net.UnknownHostException;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.junit.Before;
