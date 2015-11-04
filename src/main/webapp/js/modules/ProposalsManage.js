@@ -2054,6 +2054,9 @@ $(function() {
 			return projectTitleIsUnique;
 		},
 
+		/**
+		 * Save Proposal
+		 */
 		SaveProposal : function(_proposalId, _flag) {
 			if (validator.form()) {
 				var $projectTitle = $('#txtProjectTitle');
@@ -2335,10 +2338,30 @@ $(function() {
 									.trim($("#txtNamesSubrecipients").val());
 						}
 
+//						subjectInfo.OSPSEctionInfo = OSPSection;	
+						//Make another collection object here
 						proposalInfo.OSPSectionInfo = OSPSection;
 					}
-
+					/**TODO
+					 * 
+					 * This attribute info object needs to be built so that
+					 * the ProposalService.java class can parse it and 
+					 * get the info it needs
+					 * 
+					 */
+					var subjectArray =[];
+					var resourceArray = [];
+					var actionArray = [];
+					var environmentArray = [];
+					var AttributeInfo = {
+							subjectList: subjectArray, 
+							resourceList: resourceArray, 
+							actionList: actionArray, 
+							environmentList: environmentArray
+							};
+					//This is where the object is created and sent
 					proposalsManage.AddProposalInfo(proposalInfo);
+					
 				}
 			} else {
 				proposalsManage.focusTabWithErrors("#accordion");

@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -177,6 +178,9 @@ public class ProposalService {
 	public String deleteUserByProposalID(String message)
 			throws JsonProcessingException, IOException {
 
+		//I just have this here as an example of multimapping, hashmaps within hashmaps etc.
+//		Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> ht = new Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>>();
+		HashMap AttributesMap = new HashMap<String, HashMap<String, String>>();
 		
 		UserProfile user = new UserProfile();
 		String response = new String();
@@ -547,11 +551,19 @@ public class ProposalService {
 		Proposal existingProposal = new Proposal();
 
 		String response = new String();
+		
+		/**TODO
+		 * Setup the hashmap properties
+		 * It should be a String key that mapes to another hashmap, with a key pointing to an  array of strings
+		 */
+		HashMap AttributesMap = new HashMap<String, HashMap<String, String[]>>();
 
+	
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(message);
 
 		JsonNode commonObj = root.get("gpmsCommonObj");
+		
 		if (commonObj != null && commonObj.has("UserName")) {
 			userName = commonObj.get("UserName").getTextValue();
 		}
