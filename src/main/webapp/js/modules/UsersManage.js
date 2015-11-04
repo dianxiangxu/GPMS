@@ -257,7 +257,7 @@ $(function() {
 					cssclass : 'cssClassHeadCheckBox',
 					coltype : 'checkbox',
 					align : 'center',
-					checkFor : '10', // this is count from 0 column index
+					checkFor : '11', // this is count from 0 column index
 					elemClass : 'attrChkbox',
 					elemDefault : false,
 					controlclass : 'attribHeaderChkbox'
@@ -334,6 +334,15 @@ $(function() {
 					align : 'left',
 					hide : true
 				}, {
+					display : getLocale(gpmsUsersManagement, 'Is Active?'),
+					name : 'is_active',
+					cssclass : 'cssClassHeadBoolean',
+					controlclass : '',
+					coltype : 'label',
+					align : 'left',
+					type : 'boolean',
+					format : 'Yes/No'
+				}, {
 					display : getLocale(gpmsUsersManagement, 'Is Deleted?'),
 					name : 'is_deleted',
 					cssclass : 'cssClassHeadBoolean',
@@ -346,15 +355,6 @@ $(function() {
 				// default format (No Need to specify) is True/False
 				// you can define 'Yes/No'
 				// hide : true
-				}, {
-					display : getLocale(gpmsUsersManagement, 'Is Active?'),
-					name : 'is_active',
-					cssclass : 'cssClassHeadBoolean',
-					controlclass : '',
-					coltype : 'label',
-					align : 'left',
-					type : 'boolean',
-					format : 'Yes/No'
 				}, {
 					display : getLocale(gpmsUsersManagement, 'Actions'),
 					name : 'action',
@@ -378,7 +378,7 @@ $(function() {
 					_event : 'click',
 					trigger : '2',
 					callMethod : 'usersManage.DeleteUser',
-					arguments : '10'
+					arguments : '11'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Activate"),
 					name : 'activate',
@@ -386,7 +386,7 @@ $(function() {
 					_event : 'click',
 					trigger : '3',
 					callMethod : 'usersManage.ActiveUser',
-					arguments : '11'
+					arguments : '10'
 				}, {
 					display : getLocale(gpmsUsersManagement, "Deactivate"),
 					name : 'deactivate',
@@ -394,7 +394,7 @@ $(function() {
 					_event : 'click',
 					trigger : '4',
 					callMethod : 'usersManage.DeactiveUser',
-					arguments : '11'
+					arguments : '10'
 				} ],
 				rp : perpage,
 				nomsg : getLocale(gpmsUsersManagement, 'No Records Found!'),
