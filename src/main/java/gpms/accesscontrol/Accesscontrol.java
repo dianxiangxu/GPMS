@@ -128,7 +128,7 @@ public class Accesscontrol {
 				+ "</AttributeValue>\n"
 				+ "</Attribute>\n"
 				+ "</Attributes>\n"
-				+ "<Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\">\n"
+				+ "<Attributes Category=\"urn:oasis:names:tc:xacml:3.0:action-category:action\">\n"
 				+ "<Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" IncludeInResult=\"false\">\n"
 				+ "<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">"
 				+ action
@@ -253,21 +253,21 @@ public class Accesscontrol {
 		HashMap<String, Multimap<String, String>> attrMap = new HashMap<String, Multimap<String, String>>();
 
 		Multimap<String, String> subjectMap = ArrayListMultimap.create();
-		subjectMap.put("Position Type", "tenured/tenure track faculty");
+		subjectMap.put("position-type", "Non-tenure-track research faculty");
 		// subjectMap.put("Proposal Role", "PI");
 		attrMap.put("Subject", subjectMap);
 
 		Multimap<String, String> resourceMap = ArrayListMultimap.create();
-		resourceMap.put("Proposal Section", "wholeproposal");
+		resourceMap.put("proposal-section", "Whole Proposal");
 		attrMap.put("Resource", resourceMap);
 
 		Multimap<String, String> actionMap = ArrayListMultimap.create();
-		actionMap.put("Proposal Action", "create");
+		actionMap.put("proposal-action", "Create");
 		attrMap.put("Action", actionMap);
 
-		Multimap<String, String> environmentMap = ArrayListMultimap.create();
-		environmentMap.put("Device Type", "android device");
-		attrMap.put("Environment", environmentMap);
+		// Multimap<String, String> environmentMap = ArrayListMultimap.create();
+		// environmentMap.put("device-type", "Android Device");
+		// attrMap.put("Environment", environmentMap);
 
 		ac.getXACMLdecision(attrMap);
 	}
@@ -417,9 +417,9 @@ public class Accesscontrol {
 		}
 
 		return "<Request xmlns=\"urn:oasis:names:tc:xacml:3.0:core:schema:wd-17\" CombinedDecision=\"false\" ReturnPolicyIdList=\"false\">\n"
-				+ subjectAttr
 				+ resourceAttr
 				+ actionAttr
+				+ subjectAttr
 				+ environmentAttr
 				+ "</Request>";
 	}
