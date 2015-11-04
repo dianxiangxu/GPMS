@@ -25,7 +25,7 @@ public class AlternateJMailTest {
 
 	public static void main(String args[]) {
 		// Port is 465? 587?
-		String to = "DESTINATIONEMAILADDRESS"; // The address you are sending to
+		String to = "RECEIVEREMAILADDRESS"; // The address you are sending to
 		Properties props = new Properties();
 		// Start TTLS Lines added, required
 		props.put("mail.smtp.starttls.enable", "true");
@@ -35,22 +35,28 @@ public class AlternateJMailTest {
 		props.put("mail.smtop.socketFactory.port", "587");
 		props.put("mail.smtp.socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.fallback", "true");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
 
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("USERNAME",
-								"PASSWORD"); // Your actual email address and
+						return new PasswordAuthentication("YOURGMAILADDRESS",
+								"PASSWORD"); // Your
+												// actual
+												// email
+												// address
+												// and
 												// password
 					}
 				});
 		session.setDebug(true);
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("USERNAME")); // your email
-																// address
+			message.setFrom(new InternetAddress("SENDEREMAILADDRESS")); // your
+																		// email
+			// address
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					to));
 			message.setSubject("Hello");
