@@ -76,6 +76,7 @@ public class ProposalService {
 	UserProfileDAO userProfileDAO = null;
 	ProposalDAO proposalDAO = null;
 	DelegationDAO delegationDAO = null;
+	
 
 	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -175,6 +176,8 @@ public class ProposalService {
 	@Path("/DeleteProposalByProposalID")
 	public String deleteUserByProposalID(String message)
 			throws JsonProcessingException, IOException {
+
+		
 		UserProfile user = new UserProfile();
 		String response = new String();
 
@@ -203,6 +206,20 @@ public class ProposalService {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
 
+		/*TODO CheckXACMLPOLICY
+		 * Call the accesscontrol with the  
+		 * 
+		 * if this person is the PI, then String isPI = PI
+		 * if not then String isPI = NOT
+		 * policyEval(isPI, Proposal, Delete)
+		 * 
+		 * getPIname, getPIId, getProposalID, 
+		 * callPolicyMethod(PINAME, PIID, PROPOSALID)
+		 * if policy returns permit, continue
+		 * if policy returns deny do not continue
+		 *
+		 */
+		
 		// TODO : login set this session value
 		// FOr Testing I am using HardCoded UserProfileID
 		// userProfileID = "55b9225454ffd82dc052a32a";
@@ -223,6 +240,7 @@ public class ProposalService {
 
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");
+
 		return response;
 	}
 
