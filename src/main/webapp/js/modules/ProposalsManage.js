@@ -2338,30 +2338,51 @@ $(function() {
 									.trim($("#txtNamesSubrecipients").val());
 						}
 
-//						subjectInfo.OSPSEctionInfo = OSPSection;	
-						//Make another collection object here
+						// subjectInfo.OSPSEctionInfo = OSPSection;
+						// Make another collection object here
 						proposalInfo.OSPSectionInfo = OSPSection;
 					}
-					/**TODO
+					/**
+					 * TODO
 					 * 
-					 * This attribute info object needs to be built so that
-					 * the ProposalService.java class can parse it and 
-					 * get the info it needs
+					 * This attribute info object needs to be built so that the
+					 * ProposalService.java class can parse it and get the info
+					 * it needs
 					 * 
 					 */
-					var subjectArray =[];
-					var resourceArray = [];
-					var actionArray = [];
-					var environmentArray = [];
-					var AttributeInfo = {
-							subjectList: subjectArray, 
-							resourceList: resourceArray, 
-							actionList: actionArray, 
-							environmentList: environmentArray
-							};
-					//This is where the object is created and sent
+
+					// var costShareInfo = {
+					// InstitutionalCommitted : $(
+					// "#ddlInstitutionalCommitmentCost").val(),
+					// ThirdPartyCommitted : $("#ddlThirdPartyCommitmentCost")
+					// .val()
+					// };
+					// proposalInfo.ProposalStatus = $("#ddlProposalStatus")
+					// .val();
+					/**
+					 * TODO We can dynamically add to a javascript var object if
+					 * we have
+					 * 
+					 * var data = {'Prop1': 1, 'Prop2': 2};
+					 * 
+					 * then we can call
+					 * 
+					 * data["PropertyC"] = 3;
+					 * 
+					 * and this will add that property to the var object.
+					 */
+					var attributeArray = [];
+					attributeArray.push({
+						attributeType : "Subject",
+						attributeName : "position-type",
+						attributeValue : ""
+					}); // The last thing is the position type value
+					proposalInfo.attArray = attributeArray;
+					// Do these need to be global / static creations?
+
+					// This is where the object is created and sent
 					proposalsManage.AddProposalInfo(proposalInfo);
-					
+
 				}
 			} else {
 				proposalsManage.focusTabWithErrors("#accordion");

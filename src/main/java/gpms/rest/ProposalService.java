@@ -62,6 +62,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
+import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
@@ -544,7 +545,10 @@ public class ProposalService {
 		String userName = new String();
 		String userProfileID = new String();
 		String cultureName = new String();
-
+		String attributeType = new String();
+		String attributeValue = new String();
+		String attributeName = new String();
+		
 		String proposalID = new String();
 
 		Proposal newProposal = new Proposal();
@@ -556,7 +560,8 @@ public class ProposalService {
 		 * Setup the hashmap properties
 		 * It should be a String key that mapes to another hashmap, with a key pointing to an  array of strings
 		 */
-		HashMap AttributesMap = new HashMap<String, HashMap<String, String[]>>();
+		HashMap<String, Multimap<String, String>> attrMap = new HashMap<String, Multimap<String, String>>();
+//		HashMap AttributesMap = new HashMap<String, HashMap<String, String[]>>();
 
 	
 		ObjectMapper mapper = new ObjectMapper();
@@ -575,6 +580,21 @@ public class ProposalService {
 		if (commonObj != null && commonObj.has("CultureName")) {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
+		
+		//Not sure if this is the right way to parse these values out
+		if (commonObj != null && commonObj.has("attributeType")){
+			attributeType = commonObj.get("attributeType").getTextValue();
+		}
+		
+		if (commonObj != null && commonObj.has("attributeValue")){
+			attributeValue = commonObj.get("attributeValue").getTextValue();
+		}
+		
+		if (commonObj != null && commonObj.has("attributeName")){
+			attributeName = commonObj.get("attributeName").getTextValue();
+		}
+		
+		
 
 		JsonNode proposalInfo = root.get("proposalInfo");
 		if (proposalInfo != null && proposalInfo.has("ProposalID")) {
