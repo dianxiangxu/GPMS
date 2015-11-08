@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -61,6 +62,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mongodb.morphia.Morphia;
 
+import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mongodb.MongoClient;
@@ -76,6 +78,7 @@ public class ProposalService {
 	UserProfileDAO userProfileDAO = null;
 	ProposalDAO proposalDAO = null;
 	DelegationDAO delegationDAO = null;
+	
 
 	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -175,6 +178,11 @@ public class ProposalService {
 	@Path("/DeleteProposalByProposalID")
 	public String deleteUserByProposalID(String message)
 			throws JsonProcessingException, IOException {
+
+		//I just have this here as an example of multimapping, hashmaps within hashmaps etc.
+//		Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>> ht = new Hashtable<String, Hashtable<String, Hashtable<String, ArrayList<String>>>>();
+		HashMap AttributesMap = new HashMap<String, HashMap<String, String>>();
+		
 		UserProfile user = new UserProfile();
 		String response = new String();
 
@@ -203,6 +211,20 @@ public class ProposalService {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
 
+		/*TODO CheckXACMLPOLICY
+		 * Call the accesscontrol with the  
+		 * 
+		 * if this person is the PI, then String isPI = PI
+		 * if not then String isPI = NOT
+		 * policyEval(isPI, Proposal, Delete)
+		 * 
+		 * getPIname, getPIId, getProposalID, 
+		 * callPolicyMethod(PINAME, PIID, PROPOSALID)
+		 * if policy returns permit, continue
+		 * if policy returns deny do not continue
+		 *
+		 */
+		
 		// TODO : login set this session value
 		// FOr Testing I am using HardCoded UserProfileID
 		// userProfileID = "55b9225454ffd82dc052a32a";
@@ -223,6 +245,7 @@ public class ProposalService {
 
 		response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
 				"Success");
+
 		return response;
 	}
 
@@ -522,18 +545,30 @@ public class ProposalService {
 		String userName = new String();
 		String userProfileID = new String();
 		String cultureName = new String();
-
+		String attributeType = new String();
+		String attributeValue = new String();
+		String attributeName = new String();
+		
 		String proposalID = new String();
 
 		Proposal newProposal = new Proposal();
 		Proposal existingProposal = new Proposal();
 
 		String response = new String();
+		
+		/**TODO
+		 * Setup the hashmap properties
+		 * It should be a String key that mapes to another hashmap, with a key pointing to an  array of strings
+		 */
+		HashMap<String, Multimap<String, String>> attrMap = new HashMap<String, Multimap<String, String>>();
+//		HashMap AttributesMap = new HashMap<String, HashMap<String, String[]>>();
 
+	
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(message);
 
 		JsonNode commonObj = root.get("gpmsCommonObj");
+		
 		if (commonObj != null && commonObj.has("UserName")) {
 			userName = commonObj.get("UserName").getTextValue();
 		}
@@ -545,6 +580,21 @@ public class ProposalService {
 		if (commonObj != null && commonObj.has("CultureName")) {
 			cultureName = commonObj.get("CultureName").getTextValue();
 		}
+		
+		//Not sure if this is the right way to parse these values out
+		if (commonObj != null && commonObj.has("attributeType")){
+			attributeType = commonObj.get("attributeType").getTextValue();
+		}
+		
+		if (commonObj != null && commonObj.has("attributeValue")){
+			attributeValue = commonObj.get("attributeValue").getTextValue();
+		}
+		
+		if (commonObj != null && commonObj.has("attributeName")){
+			attributeName = commonObj.get("attributeName").getTextValue();
+		}
+		
+		
 
 		JsonNode proposalInfo = root.get("proposalInfo");
 		if (proposalInfo != null && proposalInfo.has("ProposalID")) {
