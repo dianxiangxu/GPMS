@@ -2371,17 +2371,26 @@ $(function() {
 					 * 
 					 * and this will add that property to the var object.
 					 */
+
+					var policyAttributeInfo = {};
+
 					var attributeArray = [];
 					attributeArray.push({
 						attributeType : "Subject",
 						attributeName : "position-type",
-						attributeValue : ""
-					}); // The last thing is the position type value
-					proposalInfo.attArray = attributeArray;
-					// Do these need to be global / static creations?
-
-					// This is where the object is created and sent
-					proposalsManage.AddProposalInfo(proposalInfo);
+						attributeValue : "" // TODO bind user position type
+					// dynamically here
+					});
+					
+					attributeArray.push({
+						attributeType : "Resource",
+						attributeName : "position-type",
+						attributeValue : "" // TODO bind user position type
+					// dynamically here
+					});
+					policyAttributeInfo = attributeArray;
+					proposalsManage.AddProposalInfo(proposalInfo,
+							policyAttributeInfo);
 
 				}
 			} else {
@@ -2389,10 +2398,11 @@ $(function() {
 			}
 		},
 
-		AddProposalInfo : function(info) {
+		AddProposalInfo : function(info, policyAttr) {
 			this.config.url = this.config.baseURL + "SaveUpdateProposal";
 			this.config.data = JSON2.stringify({
 				proposalInfo : info,
+				policyInfo : policyAttr,
 				gpmsCommonObj : gpmsCommonObj()
 			});
 			this.config.ajaxCallMode = 9;
