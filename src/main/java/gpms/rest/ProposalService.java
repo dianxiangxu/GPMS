@@ -539,10 +539,13 @@ public class ProposalService {
 		return signatures;
 	}
 
+	/**TODO the EXCEPTION has been added by adding the .getXACMLDecision() method
+	 * Will probably need to specify the exception
+	 */
 	@POST
 	@Path("/SaveUpdateProposal")
 	public String saveUpdateProposal(String message)
-			throws JsonProcessingException, IOException, ParseException {
+			throws Exception {
 		String userName = new String();
 		String userProfileID = new String();
 		String cultureName = new String();
@@ -642,7 +645,8 @@ public class ProposalService {
 
 		// TODO check with XACML and only if true then do the following thing
 		Accesscontrol ac = new Accesscontrol();
-		if (ac.getXACMLdecision(attrPolicyMap)) {
+	
+		if (ac.getXACMLdecision(attrPolicyMap).equals("Permit")) {
 			JsonNode proposalInfo = root.get("proposalInfo");
 			if (proposalInfo != null && proposalInfo.has("ProposalID")) {
 				proposalID = proposalInfo.get("ProposalID").getTextValue();

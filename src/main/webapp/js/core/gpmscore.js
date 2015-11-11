@@ -43,10 +43,15 @@ $(function() {
 			GetUserProfileID : function() {
 				return userProfileId;
 			},
+			GetUserPositionType : function() {
+				return userPositionType;
+			},
+			GetUserPositionTitle : function() {
+				return userPositionTitle;
+			},
 			GetCultureName : function() {
 				return gpmsCurrentCulture;
 			},
-
 			GetSessionCode : function() {
 				return sessionCode;
 			},
@@ -67,6 +72,8 @@ $(function() {
 			var gpmsCommonInfo = {
 				UserName : GPMS.utils.GetUserName(),
 				UserProfileID : GPMS.utils.GetUserProfileID(),
+				UserPositionType : GPMS.utils.GetUserPositionType(),
+				UserPositionTitle : GPMS.utils.GetUserPositionTitle(),
 				CultureName : GPMS.utils.GetCultureName(),
 				SessionCode : GPMS.utils.GetSessionCode()
 			};

@@ -272,7 +272,13 @@ public class Accesscontrol {
 		ac.getXACMLdecision(attrMap);
 	}
 
-	private String getXACMLdecision(
+/**
+ * I made this public so that it can be accessed by ProposalService.java
+ * -Tommy
+ * @param attrMap
+ * @return
+ */
+	public String getXACMLdecision(
 			HashMap<String, Multimap<String, String>> attrMap) {
 		String request = createXACMLRequest(attrMap);
 		ResponseCtx responseCtx = getResponse(request);
